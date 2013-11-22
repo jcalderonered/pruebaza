@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.Nna" table="nna" catalog="mimp_adopcion">
+        <id name="idnna" type="java.lang.Integer">
+            <column name="idnna" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="car" class="com.mimp.bean.Car" fetch="select">
+            <column name="idcar" not-null="true" />
+        </many-to-one>
+        <many-to-one name="juzgado" class="com.mimp.bean.Juzgado" fetch="select">
+            <column name="idjuzgado" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" />
+        </property>
+        <property name="apellidoP" type="string">
+            <column name="apellido_p" length="30" />
+        </property>
+        <property name="apellidoM" type="string">
+            <column name="apellido_m" length="30" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="20" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fecha_nacimiento" length="10" />
+        </property>
+        <property name="edadAnhos" type="java.lang.Byte">
+            <column name="edad_anhos" />
+        </property>
+        <property name="edadMeses" type="java.lang.Byte">
+            <column name="edad_meses" />
+        </property>
+        <property name="actaNacimiento" type="java.lang.Boolean">
+            <column name="acta_nacimiento" />
+        </property>
+        <property name="condicionSalud" type="string">
+            <column name="condicion_salud" length="45" />
+        </property>
+        <property name="departamentoNacimiento" type="string">
+            <column name="departamento_nacimiento" length="30" />
+        </property>
+        <property name="provinciaNacimiento" type="string">
+            <column name="provincia_nacimiento" length="100" />
+        </property>
+        <property name="distritoNacimiento" type="string">
+            <column name="distrito_nacimiento" length="100" />
+        </property>
+        <property name="lugarNac" type="string">
+            <column name="lugar_nac" length="500" />
+        </property>
+        <property name="fechaResolAbandono" type="date">
+            <column name="fecha_resol_abandono" length="10" />
+        </property>
+        <property name="fechaResolConsentida" type="date">
+            <column name="fecha_resol_consentida" length="10" />
+        </property>
+        <property name="clasificacion" type="string">
+            <column name="clasificacion" length="45" />
+        </property>
+        <property name="incesto" type="java.lang.Boolean">
+            <column name="incesto" />
+        </property>
+        <property name="mental" type="java.lang.Boolean">
+            <column name="mental" />
+        </property>
+        <property name="epilepsia" type="java.lang.Boolean">
+            <column name="epilepsia" />
+        </property>
+        <property name="abuso" type="java.lang.Boolean">
+            <column name="abuso" />
+        </property>
+        <property name="sifilis" type="java.lang.Boolean">
+            <column name="sifilis" />
+        </property>
+        <property name="seguiMedico" type="java.lang.Boolean">
+            <column name="segui_medico" />
+        </property>
+        <property name="operacion" type="java.lang.Boolean">
+            <column name="operacion" />
+        </property>
+        <property name="hiperactivo" type="java.lang.Boolean">
+            <column name="hiperactivo" />
+        </property>
+        <property name="especial" type="java.lang.Boolean">
+            <column name="especial" />
+        </property>
+        <property name="enfermo" type="java.lang.Boolean">
+            <column name="enfermo" />
+        </property>
+        <property name="mayor" type="java.lang.Boolean">
+            <column name="mayor" />
+        </property>
+        <property name="adolescente" type="java.lang.Boolean">
+            <column name="adolescente" />
+        </property>
+        <property name="hermano" type="java.lang.Boolean">
+            <column name="hermano" />
+        </property>
+        <set name="estudioCasos" table="estudio_caso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idnna" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.EstudioCaso" />
+        </set>
+        <set name="expedienteNnas" table="expediente_nna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idnna" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.ExpedienteNna" />
+        </set>
+        <set name="prioritarios" table="prioritario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idnna" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Prioritario" />
+        </set>
+        <set name="designacions" table="designacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idnna" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Designacion" />
+        </set>
+    </class>
+</hibernate-mapping>

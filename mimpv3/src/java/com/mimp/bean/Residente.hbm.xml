@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.Residente" table="residente" catalog="mimp_adopcion">
+        <id name="idresidente" type="java.lang.Integer">
+            <column name="idresidente" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="fichaSolicitudAdopcion" class="com.mimp.bean.FichaSolicitudAdopcion" fetch="select">
+            <column name="idficha_solicitud_adopcion" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" />
+        </property>
+        <property name="apellidoP" type="string">
+            <column name="apellido_p" length="30" />
+        </property>
+        <property name="apellidoM" type="string">
+            <column name="apellido_m" length="30" />
+        </property>
+        <property name="parentesco" type="string">
+            <column name="parentesco" length="15" />
+        </property>
+        <property name="edad" type="java.lang.Byte">
+            <column name="edad" />
+        </property>
+        <property name="ocupacion" type="string">
+            <column name="ocupacion" length="50" />
+        </property>
+        <property name="estadoSalud" type="string">
+            <column name="estado_salud" length="500" />
+        </property>
+    </class>
+</hibernate-mapping>

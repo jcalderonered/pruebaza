@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.EstudioCaso" table="estudio_caso" catalog="mimp_adopcion">
+        <id name="idestudioCaso" type="java.lang.Integer">
+            <column name="idestudio_caso" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="nna" class="com.mimp.bean.Nna" fetch="select">
+            <column name="idnna" not-null="true" />
+        </many-to-one>
+        <many-to-one name="expedienteFamilia" class="com.mimp.bean.ExpedienteFamilia" fetch="select">
+            <column name="idexpediente_familia" not-null="true" />
+        </many-to-one>
+        <property name="orden" type="string">
+            <column name="orden" length="40" />
+        </property>
+        <property name="fechaEstudio" type="date">
+            <column name="fecha_estudio" length="10" />
+        </property>
+        <property name="fechaSolAdop" type="date">
+            <column name="fecha_sol_adop" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

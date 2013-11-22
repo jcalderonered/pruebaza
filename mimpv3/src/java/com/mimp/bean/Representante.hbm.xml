@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.Representante" table="representante" catalog="mimp_adopcion">
+        <id name="idrepresentante" type="java.lang.Integer">
+            <column name="idrepresentante" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" />
+        </property>
+        <property name="apellidoP" type="string">
+            <column name="apellido_p" length="30" />
+        </property>
+        <property name="apelldoM" type="string">
+            <column name="apelldo_m" length="30" />
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="45" />
+        </property>
+        <property name="pass" type="string">
+            <column name="pass" length="45" />
+        </property>
+        <property name="fechaAuto" type="date">
+            <column name="fecha_auto" length="10" />
+        </property>
+        <property name="fechaRenov" type="date">
+            <column name="fecha_renov" length="10" />
+        </property>
+        <property name="fechaVencAuto" type="date">
+            <column name="fecha_venc_auto" length="10" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="40" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="200" />
+        </property>
+        <property name="celular" type="string">
+            <column name="celular" length="15" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="15" />
+        </property>
+        <property name="obs" type="string">
+            <column name="obs" length="200" />
+        </property>
+        <set name="organismos" table="organismo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idrepresentante" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Organismo" />
+        </set>
+    </class>
+</hibernate-mapping>

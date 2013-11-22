@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.Personal" table="personal" catalog="mimp_adopcion">
+        <id name="idpersonal" type="java.lang.Integer">
+            <column name="idpersonal" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="unidad" class="com.mimp.bean.Unidad" fetch="select">
+            <column name="idunidad" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" />
+        </property>
+        <property name="apellidoP" type="string">
+            <column name="apellido_p" length="30" />
+        </property>
+        <property name="apellidoM" type="string">
+            <column name="apellido_m" length="30" />
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="20" />
+        </property>
+        <property name="pass" type="string">
+            <column name="pass" length="20" />
+        </property>
+        <property name="correoTrabajo" type="string">
+            <column name="correo_trabajo" length="40" />
+        </property>
+        <property name="correoPersonal" type="string">
+            <column name="correo_personal" length="40" />
+        </property>
+        <property name="profesion" type="string">
+            <column name="profesion" length="50" />
+        </property>
+        <property name="gradoInstruccion" type="string">
+            <column name="grado_instruccion" length="30" />
+        </property>
+        <property name="cargo" type="string">
+            <column name="cargo" length="30" />
+        </property>
+        <property name="dni" type="java.lang.Integer">
+            <column name="dni" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fecha_nacimiento" length="10" />
+        </property>
+        <property name="regimen" type="string">
+            <column name="regimen" length="50" />
+        </property>
+        <property name="fechaIngreso" type="date">
+            <column name="fecha_ingreso" length="10" />
+        </property>
+        <property name="domicilio" type="string">
+            <column name="domicilio" length="200" />
+        </property>
+        <property name="rol" type="string">
+            <column name="rol" length="10" />
+        </property>
+        <set name="atencions" table="atencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idpersonal" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Atencion" />
+        </set>
+        <set name="logs" table="log" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idpersonal" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Log" />
+        </set>
+    </class>
+</hibernate-mapping>

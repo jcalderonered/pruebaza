@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.Reunion" table="reunion" catalog="mimp_adopcion">
+        <id name="idreunion" type="java.lang.Integer">
+            <column name="idreunion" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="turno2" class="com.mimp.bean.Turno2" fetch="select">
+            <column name="idturno2" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" />
+        </property>
+        <property name="hora" type="time">
+            <column name="hora" length="8" />
+        </property>
+        <property name="duracion" type="java.lang.Byte">
+            <column name="duracion" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="100" />
+        </property>
+        <property name="identificador" type="java.lang.Byte">
+            <column name="identificador" />
+        </property>
+        <property name="facilitador" type="string">
+            <column name="facilitador" length="1400" />
+        </property>
+        <property name="capacidad" type="java.lang.Byte">
+            <column name="capacidad" />
+        </property>
+        <property name="asistencia" type="java.lang.Byte">
+            <column name="asistencia" />
+        </property>
+        <set name="asistenciaFRs" table="asistencia_f_r" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idreunion" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.AsistenciaFR" />
+        </set>
+    </class>
+</hibernate-mapping>
