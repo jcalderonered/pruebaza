@@ -1,0 +1,60 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 21, 2013, 10:35:44 AM
+    Author     : john
+*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+ 
+}
+
+#cabecera{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 200px;
+}
+#contenedor1{
+    margin-top: 30px;
+    text-align: center;
+    
+}
+
+th {
+ text-align: center   
+}
+
+.input_width{
+    width: 80px;
+}
+
+
+thead tr:first-child th#el {
+    width: 20px;
+}
