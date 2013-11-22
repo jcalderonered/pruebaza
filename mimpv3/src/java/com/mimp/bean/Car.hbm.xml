@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.Car" table="car" catalog="mimp_adopcion">
+        <id name="idCar" type="java.lang.Integer">
+            <column name="idCAR" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="45" />
+        </property>
+        <property name="departamento" type="string">
+            <column name="departamento" length="30" />
+        </property>
+        <property name="provincia" type="string">
+            <column name="provincia" length="30" />
+        </property>
+        <property name="distrito" type="string">
+            <column name="distrito" length="30" />
+        </property>
+        <property name="director" type="string">
+            <column name="director" length="30" />
+        </property>
+        <property name="contacto" type="string">
+            <column name="contacto" length="45" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="30" />
+        </property>
+        <property name="fax" type="string">
+            <column name="fax" length="20" />
+        </property>
+        <property name="celular" type="string">
+            <column name="celular" length="20" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="20" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="200" />
+        </property>
+        <set name="nnas" table="nna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idcar" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Nna" />
+        </set>
+    </class>
+</hibernate-mapping>

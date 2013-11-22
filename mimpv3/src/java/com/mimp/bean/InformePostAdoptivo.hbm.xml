@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.InformePostAdoptivo" table="informe_post_adoptivo" catalog="mimp_adopcion">
+        <id name="idinformePostAdoptivo" type="java.lang.Integer">
+            <column name="idinforme_post_adoptivo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="postAdopcion" class="com.mimp.bean.PostAdopcion" fetch="select">
+            <column name="idpost_adopcion" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="30" />
+        </property>
+        <property name="numeroInforme" type="string">
+            <column name="numero_informe" length="40" />
+        </property>
+        <property name="fechaRecepcionProyectado" type="date">
+            <column name="fecha_recepcion_proyectado" length="10" />
+        </property>
+        <property name="fechaRecepcion" type="date">
+            <column name="fecha_recepcion" length="10" />
+        </property>
+        <property name="profesAsigNom" type="string">
+            <column name="profes_asig_nom" length="45" />
+        </property>
+        <property name="profesAsigP" type="string">
+            <column name="profes_asig_p" length="45" />
+        </property>
+        <property name="profesAsigM" type="string">
+            <column name="profes_asig_m" length="45" />
+        </property>
+        <property name="fechaInforme" type="date">
+            <column name="fecha_informe" length="10" />
+        </property>
+        <property name="fechaActa" type="date">
+            <column name="fecha_acta" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

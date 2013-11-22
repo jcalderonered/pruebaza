@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.HijoAct" table="hijo_act" catalog="mimp_adopcion">
+        <id name="idhijoAct" type="java.lang.Integer">
+            <column name="idhijo_act" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="infoFamilia" class="com.mimp.bean.InfoFamilia" fetch="select">
+            <column name="idinfo_familia" not-null="true" />
+        </many-to-one>
+        <property name="fechaNac" type="date">
+            <column name="fecha_nac" length="10" />
+        </property>
+        <property name="biologico" type="java.lang.Boolean">
+            <column name="biologico" />
+        </property>
+        <property name="fechaAdop" type="date">
+            <column name="fecha_adop" length="10" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" />
+        </property>
+        <property name="apellidoP" type="string">
+            <column name="apellido_p" length="30" />
+        </property>
+        <property name="apellidoM" type="string">
+            <column name="apellido_m" length="30" />
+        </property>
+        <property name="ocupacion" type="string">
+            <column name="ocupacion" length="50" />
+        </property>
+        <property name="estadoSalud" type="string">
+            <column name="estado_salud" length="100" />
+        </property>
+        <property name="reside" type="java.lang.Boolean">
+            <column name="reside" />
+        </property>
+    </class>
+</hibernate-mapping>

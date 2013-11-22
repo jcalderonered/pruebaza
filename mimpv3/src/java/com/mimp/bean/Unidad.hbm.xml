@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.Unidad" table="unidad" catalog="mimp_adopcion">
+        <id name="idunidad" type="java.lang.Integer">
+            <column name="idunidad" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="200" />
+        </property>
+        <property name="departamento" type="string">
+            <column name="departamento" length="20" />
+        </property>
+        <property name="provincia" type="string">
+            <column name="provincia" length="20" />
+        </property>
+        <property name="distrito" type="string">
+            <column name="distrito" length="20" />
+        </property>
+        <property name="competenciaRegional" type="string">
+            <column name="competencia_regional" length="30" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="40" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="15" />
+        </property>
+        <property name="celular" type="string">
+            <column name="celular" length="15" />
+        </property>
+        <property name="obs" type="string">
+            <column name="obs" length="200" />
+        </property>
+        <set name="expedienteNnas" table="expediente_nna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idunidad" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.ExpedienteNna" />
+        </set>
+        <set name="expedienteFamilias" table="expediente_familia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idunidad" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.ExpedienteFamilia" />
+        </set>
+        <set name="personals" table="personal" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idunidad" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Personal" />
+        </set>
+    </class>
+</hibernate-mapping>

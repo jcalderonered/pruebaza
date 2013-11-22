@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.Familia" table="familia" catalog="mimp_adopcion">
+        <id name="idfamilia" type="java.lang.Integer">
+            <column name="idfamilia" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="entidad" class="com.mimp.bean.Entidad" fetch="select">
+            <column name="identidad" not-null="true" />
+        </many-to-one>
+        <property name="user" type="string">
+            <column name="user" length="20" />
+        </property>
+        <property name="pass" type="string">
+            <column name="pass" length="25" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="50" />
+        </property>
+        <property name="habilitado" type="java.lang.Boolean">
+            <column name="habilitado" />
+        </property>
+        <property name="constancia" type="string">
+            <column name="constancia" length="50" />
+        </property>
+        <set name="expedienteFamilias" table="expediente_familia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idfamilia" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.ExpedienteFamilia" />
+        </set>
+        <set name="fichaSolicitudAdopcions" table="ficha_solicitud_adopcion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idfamilia" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.FichaSolicitudAdopcion" />
+        </set>
+        <set name="postAdopcions" table="post_adopcion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idfamilia" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.PostAdopcion" />
+        </set>
+        <set name="formularioSesions" table="formulario_sesion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idfamilia" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.FormularioSesion" />
+        </set>
+        <set name="atencions" table="atencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idfamilia" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Atencion" />
+        </set>
+        <set name="infoFamilias" table="info_familia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idfamilia" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.InfoFamilia" />
+        </set>
+        <set name="asistenciaFRs" table="asistencia_f_r" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idfamilia" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.AsistenciaFR" />
+        </set>
+    </class>
+</hibernate-mapping>

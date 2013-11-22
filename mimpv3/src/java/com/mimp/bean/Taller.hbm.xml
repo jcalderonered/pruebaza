@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.Taller" table="taller" catalog="mimp_adopcion">
+        <id name="idtaller" type="java.lang.Integer">
+            <column name="idtaller" />
+            <generator class="identity" />
+        </id>
+        <property name="tipoTaller" type="string">
+            <column name="tipo_taller" length="15" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="25" />
+        </property>
+        <property name="habilitado" type="java.lang.Boolean">
+            <column name="habilitado" />
+        </property>
+        <property name="NReunion" type="java.lang.Byte">
+            <column name="n_reunion" />
+        </property>
+        <set name="grupos" table="grupo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idtaller" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Grupo" />
+        </set>
+    </class>
+</hibernate-mapping>
