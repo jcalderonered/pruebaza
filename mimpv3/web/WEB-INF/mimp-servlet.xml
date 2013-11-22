@@ -5,9 +5,12 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.1.xsd
        http://www.springframework.org/schema/aop 
        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
        http://www.springframework.org/schema/tx 
@@ -17,6 +20,7 @@
         ">
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+    <mvc:annotation-driven />
     <mvc:resources mapping="/assets/**" location="/assets/" />
     <!--
     Most controllers will use the ControllerClassNameHandlerMapping above, but
@@ -24,24 +28,17 @@
     define an explicit mapping for it.
     -->
     
-    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="mappings">
-            <props>
-                <prop key="index">indexController</prop>
-            </props>
-        </property>
+    <context:annotation-config />
+    <context:component-scan base-package="com.mimp" />
+    
+    <bean id="jspViewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+                      value="org.springframework.web.servlet.view.JstlView" />
+        <property name="suffix" value=".jsp" />
+            
     </bean>
-
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/"
-          p:suffix=".jsp" />
-
-    <!--
-    The index controller.
-    -->
-    <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="login" />
+    
+    
 
 </beans>
