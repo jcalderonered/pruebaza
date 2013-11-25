@@ -52,7 +52,9 @@
         </div>
         
         <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
-        
+        <h3><strong>
+             ${test}
+            </strong></h3>
         <!--FIN DE CONTENIDO-->
         <br>
         <br>
