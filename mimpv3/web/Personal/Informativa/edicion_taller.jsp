@@ -97,6 +97,19 @@
                         </div>
                         <br>
                         <div class="control-group">
+                            <label class="control-label" for="selectbasic">Asociado a sesión: (Sólo en caso se trate de un Taller de Preparación)</label>
+                            <div class="controls">
+                                <select id="selectbasic" name="selectbasic" class="input-xlarge">
+                                    <option>Ninguno</option>
+                                    <option>01-2013</option>
+                                    <option>02-2013</option>
+                                    <option>03-2013</option>
+                                    <option>04-2013</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="control-group">
                             <label class="control-label" for="textinput">Descripción:</label>
                             <div class="controls">
                                 <textarea id="descripción" class="input-xlarge" name="message" placeholder="" rows="5" ></textarea>
