@@ -55,17 +55,17 @@
         <div id="contenedor1" class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-2">
-                <form role="form">
+                <form role="form" action="${pageContext.servletContext.contextPath}/login" method="post">
                     <p align="center"><img src="<%=request.getContextPath()%>/assets/img/logo.png" width="200" border="0"></p>
                     <h2>Iniciar sesión:</h2>
                     <br>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Usuario</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ingrese el usuario">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese el usuario">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
                     </div>
                     <div class="btn-toolbar">  
                         <button type="submit" class="btn btn-default">Ingresar</button>
