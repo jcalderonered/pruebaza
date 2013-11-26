@@ -84,38 +84,38 @@
                                 <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
                                 <br>
                                 <br>
-                                <h3 align="left"><strong>Detalles de la resolución</strong></h3>
+                                <h3 align="left"><strong>Detalles de estudio de caso</strong></h3>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">N° de resolución: 00128743</label>
+                                    <label class="control-label">Orden</label>
+                                    <div class="controls">
+                                        <input type="text" class="span2" value="" id="" >
+                                    </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Tipo de Resolución</label>
+                                    <label class="control-label">Fecha de estudio</label>
+                                    <div class="controls">
+                                        <input type="text" class="span2" value="" id="" >
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Fecha solicitud de adopción</label>
+                                    <div class="controls">
+                                        <input type="text" class="span2" value="" id="" >
+                                    </div>
+                                </div>
+                                <br>
+                                 <div class="control-group">
+                                    <label class="control-label">Resolución de informe técnico</label>
                                     <div class="controls">
                                         <select>
-                                            <option value="sia">Apto</option>
-                                            <option value="mia">Improcedente</option>
-                                            <option value="mia">Fin de procedimiento</option>
-                                            <option value="mia">Observado</option>
+                                            <option value="sia">Favorable</option>
+                                            <option value="sia">No favorable</option>
                                         </select>
-                                    </div>    
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha resolución</label>
-                                    <div class="controls">
-                                        <input type="text" class="span2" value="02-16-2012" id="dp3" >
                                     </div>
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha notificación</label>
-                                    <div class="controls">
-                                        <input type="text" class="span2" value="02-16-2012" id="dp3" >
-                                    </div>
-                                </div>
-                                <br>
                                 <br>
                                 <!-- Button -->
                                 <div class="control-group">
@@ -126,6 +126,7 @@
                                 <!--FIN DE CONTENIDO-->
                             </fieldset>
                         </form>
+                 
                     </div>
                 </div>
             </div>

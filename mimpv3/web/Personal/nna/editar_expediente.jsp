@@ -315,7 +315,24 @@
                                 <div class="control-group">
                                     <label class="control-label">Comentario</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <textarea id="full-name" name="full-name" type="text" class="input-xlarge"></textarea>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Resolución de consejo para adoptabilidad</label>
+                                    <div class="controls">
+                                        <select>
+                                            <option value="sia">Adoptable</option>
+                                            <option value="sia">No adoptable</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Fecha de resolución de consejo</label>
+                                    <div class="controls">
+                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
