@@ -87,8 +87,8 @@
                                                 <th>Expediente</th>
                                                 <th>Información</th>
                                                 <th>Estudio de caso</th>
-                                                <th>¿Listo?</th>
-                                                <th>Designación</th>
+                                                <th>Resultado</th>
+                                                <th>Designación Directa</th>
                                                 <th>N° designación</th>
                                                 <th>Evaluación Legal</th>
                                                 <th>¿Listo?</th>
@@ -98,41 +98,41 @@
                                             <tr>
                                                 <td>Alvarado-Gutierrez</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td><button href="#" class="btn btn-default">Editar</button></td>
+                                                <td>Favorable</td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td>001-2013</td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                                 <td>No</td>
                                             </tr>
                                             <tr>
                                                 <td>Rosa-Flores</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default">Editar</button></td>
+                                                <td>Desfavorable</td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>----</td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                                 <td>No</td>
                                             </tr>
                                             <tr>
                                                 <td>Durando-Iriarte</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default">Editar</button></td>
+                                                <td>Favorable</td>
+                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
+                                                <td>014-2013</td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                                 <td>No</td>
                                             </tr>
                                             <tr>
                                                 <td>Solano-Parco</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default">Editar</button></td>
+                                                <td></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>----</td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                                 <td>No</td>
                                             </tr>
                                         </tbody>
@@ -142,7 +142,7 @@
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Nueva Designación</button>
                                     </div>
                                 </div>
                             </fieldset>
