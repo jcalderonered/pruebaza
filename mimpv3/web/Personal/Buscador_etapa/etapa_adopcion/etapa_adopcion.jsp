@@ -68,14 +68,15 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
                         </ul>
                     </div>
-                    <div class="col-md-6 col-md-offset-1">
+                    <div class="col-md-6 ">
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="#" data-toggle="tab">Informativa</a></li>
                             <li><a href="#" data-toggle="tab">Evaluativa</a></li>
+                            <li ><a href="#" data-toggle="tab">Designación</a></li>
                             <li class="active"><a href="#" data-toggle="tab">Adopción</a></li>
-                            <li><a href="#" data-toggle="tab">Post Adopción</a></li>
+                            <li ><a href="#" data-toggle="tab">Post Adopción</a></li>
                         </ul>
                         <form class="form-horizontal">
                             <fieldset>
@@ -85,56 +86,87 @@
                                         <thead>
                                             <tr>
                                                 <th>Expediente</th>
-                                                <th>Información</th>
-                                                <th>Estudio de caso</th>
+                                                <th>Info</th>
+                                                <th>N° Propuesta</th>
+                                                <th>Prioridad</th>
+                                                <th>Info NNA</th>
+                                                <th>Informe de Empatía</th>
                                                 <th>Resultado</th>
-                                                <th>Designación Directa</th>
-                                                <th>N° designación</th>
-                                                <th>Evaluación Legal</th>
-                                                <th>¿Listo?</th>
+                                                <th>Resolución</th>
+                                                <th>Informe Colocación</th>
+                                                <th>Resultado</th>
+                                                <th>Resolución</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>Alvarado-Gutierrez</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Editar</button></td>
-                                                <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>001-2013</td>
+                                                <td>001-2010</td>
+                                                <td>1</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>Favorable</td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>Favorable</td>
+                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
                                             </tr>
                                             <tr>
                                                 <td>Rosa-Flores</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Editar</button></td>
+                                                <td>001-2012</td>
+                                                <td>3</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                                 <td>Desfavorable</td>
+                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
                                                 <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>----</td>
+                                                <td></td>
                                                 <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>No</td>
                                             </tr>
                                             <tr>
                                                 <td>Durando-Iriarte</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Editar</button></td>
+                                                <td>021-2012</td>
+                                                <td>2</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                                 <td>Favorable</td>
                                                 <td><button href="#" class="btn btn-default ">Registrar</button></td>
-                                                <td>014-2013</td>
                                                 <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>No</td>
+                                                <td></td>
+                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gallardo-Olivera</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td>011-2013</td>
+                                                <td>2</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>Favorable</td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td></td>
+                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
                                             </tr>
                                             <tr>
                                                 <td>Solano-Parco</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Editar</button></td>
+                                                <td>022-2012</td>
+                                                <td>3</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>Desfavorable</td>
+                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                                 <td></td>
                                                 <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>----</td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>No</td>
                                             </tr>
+                                            
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -142,7 +174,7 @@
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Nueva Designación</button>
+                                       
                                     </div>
                                 </div>
                             </fieldset>
