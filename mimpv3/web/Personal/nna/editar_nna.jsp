@@ -68,350 +68,344 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
+                        
                         </ul>
                     </div>
 
                     <div class="col-md-6 col-md-offset-1">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
+                      <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                         <h1 align="center"><strong>Editar NNA</strong></h1>
                         <br>
-                        <form class="form-horizontal">
+                         <form class="form-horizontal">
                             <fieldset>
                                 <!-- Text input-->
-                                <div class="checkbox">
-                                    <label for="checkboxes-0">
-                                        <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                        Registrar como NN (en caso no se tenga nombre y apellido)
-                                    </label>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Nombre</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                
+                                    <div class="control-group">
+                                         <label class="control-label">Nombre</label>
+                                            <div class="controls">
+                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Paterno</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    <br>
+                                    <div class="control-group">
+                                          <label class="control-label">Apellido Paterno</label>
+                                            <div class="controls">
+                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Materno</label>
-                                    <div class="controls">
-                                        <input  id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    <br>
+                                    <div class="control-group">
+                                         <label class="control-label">Apellido Materno</label>
+                                            <div class="controls">
+                                              <input  id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Sexo</label>
-                                    <div class="controls">
-                                        <select>
+                                    <br>
+                                    <div class="control-group">
+                                         <label class="control-label">Sexo</label>
+                                            <div class="controls">
+                                        <select  >
                                             <option value="sia">Masculino</option>
                                             <option value="mia">Femenino</option>
                                         </select>
                                     </div>    
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de nacimiento</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Edad </label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" placeholder="Años" class="input-xlarge">
-                                        &nbsp;
-                                        <input id="full-name" name="full-name" type="text" placeholder="Meses" class="input-xlarge">
+                                    <br>
+                                    <div class="control-group">
+                                          <label class="control-label">Fecha de nacimiento</label>
+                                            <div class="controls">
+                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Juzgado</label>
-                                    <div class="controls">
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Edad </label>
+                                            <div class="controls">
+                                                <input id="full-name" name="full-name" type="text" placeholder="Años" class="input-xlarge">
+                                                &nbsp;
+                                                <input id="full-name" name="full-name" type="text" placeholder="Meses" class="input-xlarge">
+                                            </div>
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                         <label class="control-label">Juzgado</label>
+                                            <div class="controls">
                                         <select>
                                             <option value="sia">Juzgado 1</option>
                                             <option value="mia">Juzgado 2</option>
                                         </select>
                                     </div>    
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Car</label>
-                                    <div class="controls">
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                         <label class="control-label">Car</label>
+                                            <div class="controls">
                                         <select  >
                                             <option value="sia">Car 1</option>
                                             <option value="mia">Car 2</option>
                                         </select>
                                     </div>    
-                                </div>
-                                <br>
-                                <h3><strong>Presenta acta de nacimiento</strong></h3>
-                                <br>
-                                <!-- Text input-->
-                                <div class="row">
-                                    <div class="col-md-2">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
-                                        </div>
-                                    </div>   
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">No</label>
-                                        </div>                            
-                                    </div>
-                                </div>  
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Condición de Salud</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Lugar de nacimiento</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" placeholder="Departamento" class="input-xlarge">
-                                        &nbsp;
-                                        <input id="full-name" name="full-name" type="text" placeholder="Provincia" class="input-xlarge">
-                                        &nbsp;
-                                        <input id="full-name" name="full-name" type="text" placeholder="Distrito" class="input-xlarge">
-                                        &nbsp;
                                     </div>
                                     <br>
-                                    <input id="full-name" name="full-name" type="text" placeholder="Dirección" class="input-xlarge">
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de resolución de abandono</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    <h3><strong>Presenta acta de nacimiento</strong></h3>
+                                    <br>
+                                    <!-- Text input-->
+                                       <div class="row">
+                                          <div class="col-md-2">  
+                                            <div class="radio">
+                                               <label>
+                                               <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
+                                            </div>
+                                           </div>   
+                                            <div class="col-md-3">   
+                                            <div class="radio">
+                                            <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">No</label>
+                                             </div>                            
+                                            </div>
+                                        </div>  
+                                        <br>
+                                    
+                                        <div class="control-group">
+                                            <label class="control-label">Condición de Salud</label>
+                                                <div class="controls">
+                                                  <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                </div>
+                                        </div>
+                                        <br>
+                                    <div class="control-group">
+                                         <label class="control-label">Lugar de nacimiento</label>
+                                            <div class="controls">
+                                              <input id="full-name" name="full-name" type="text" placeholder="Departamento" class="input-xlarge">
+                                              &nbsp;
+                                              <input id="full-name" name="full-name" type="text" placeholder="Provincia" class="input-xlarge">
+                                              &nbsp;
+                                              <input id="full-name" name="full-name" type="text" placeholder="Distrito" class="input-xlarge">
+                                              &nbsp;
+                                            </div>
+                                         <br>
+                                              <input id="full-name" name="full-name" type="text" placeholder="Dirección" class="input-xlarge">
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de resolución consentida</label>
-                                    <div class="controls">
-                                        <input  id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    <br>
+                                    <div class="control-group">
+                                         <label class="control-label">Fecha de resolución de abandono</label>
+                                            <div class="controls">
+                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div>
-                                    <label class="control-label">Clasificación</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia">Regular</option>
-                                            <option value="sia">Prioritario</option>
-                                            <option value="mia">Seguimiento</option>
-                                        </select>
-                                    </div>    
-                                </div>
-                                <br>
-                                <br>
-                                <h3><strong>Antecedentes, condiciones de salud y desarrollo del niño, niña o adolescente</strong></h3>
-                                <br> 
-
-                                <div class="row">
-                                    <div id="tabla_fam" class="table-responsive">
-                                        <table id="hijos" class="table table-bordered table-striped ">
-                                            <thead>
+                                    <br>
+                                    <div class="control-group">
+                                         <label class="control-label">Fecha de resolución consentida</label>
+                                            <div class="controls">
+                                              <input  id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            </div>
+                                    </div>
+                                    <br>
+                                         <div>
+                                         <label class="control-label">Clasificación</label>
+                                         <div class="controls">
+                                             <select  >
+                                                 <option value="sia">Prioritario</option>
+                                                 <option value="mia">Seguimiento</option>
+                                             </select>
+                                         </div>    
+                                         </div>
+                                    <br>
+                                    <br>
+                                    <h3><strong>Antecedentes, condiciones de salud y desarrollo del niño, niña o adolescente</strong></h3>
+                                    <br> 
+                               
+                                    <div class="row">
+                                       <div id="tabla_fam" class="table-responsive">
+                                         <table id="hijos" class="table table-bordered table-striped ">
+                                              <thead>
                                                 <tr>
                                                     <th>Antecedentes</th>
                                                     <th>Cumple</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Nacido(a) como consecuencia del incesto</h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Padres con enfermedad psiquiátrica (esquizofrenia, paranoia, etc</h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Padres con epilepsia</h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Niña, niño o adolescente víctima de abuso sexual</h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Niña, niño o adolescente adolescente actualmente sano, que al nacer fue 
+                                                 </tr>
+                                              </thead>
+                                         <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Nacido(a) como consecuencia del incesto</h4>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                                      <tr>
+                                                       <td>
+                                                            <h4>Padres con enfermedad psiquiátrica (esquizofrenia, paranoia, etc</h4>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                                      <tr>
+                                                         <td>
+                                                            <h4>Padres con epilepsia</h4>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                                     <tr>
+                                                         <td>
+                                                            <h4>Niña, niño o adolescente víctima de abuso sexual</h4>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                                     <tr>
+                                                         <td>
+                                                            <h4>Niña, niño o adolescente adolescente actualmente sano, que al nacer fue 
                                                             diagnosticado/a preliminarmente con sífilis congénita.</h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                          </tbody>
+                                      </table>
                                     </div>
-                                </div>
-
-                                <div class="row">
-                                    <div id="tabla_fam" class="table-responsive">
-                                        <table id="hijos" class="table table-bordered table-striped ">
-                                            <thead>
+                                 </div>
+                                 
+                               <div class="row">
+                                       <div id="tabla_fam" class="table-responsive">
+                                         <table id="hijos" class="table table-bordered table-striped ">
+                                              <thead>
                                                 <tr>
                                                     <th>Condiciones de salud y desarrollo</th>
                                                     <th>Acepta</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Salud  estable  que  requiere  seguimiento  médico  (soplo,  hipotiroidismo, 
-                                                            desnutrición crónica, etc.)</h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Condiciones  de  salud  que  requieran  intervención  quirúrgica  menor 
+                                                 </tr>
+                                              </thead>
+                                         <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Salud  estable  que  requiere  seguimiento  médico  (soplo,  hipotiroidismo, 
+                                                             desnutrición crónica, etc.)</h4>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                                      <tr>
+                                                       <td>
+                                                            <h4>Condiciones  de  salud  que  requieran  intervención  quirúrgica  menor 
                                                             (labio leporino, estrabismo, etc.)</h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Niña,  niño  o  adolescente  con  trastorno  de  déficit  de  atención  e 
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                                      <tr>
+                                                         <td>
+                                                            <h4>Niña,  niño  o  adolescente  con  trastorno  de  déficit  de  atención  e 
                                                             hiperactividad (TDAH)</h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                          </tbody>
+                                      </table>
                                     </div>
-                                </div>
-
+                                 </div>
+                                
                                 <div class="row">
-                                    <div id="tabla_fam" class="table-responsive">
-                                        <table id="hijos" class="table table-bordered table-striped ">
-                                            <thead>
+                                       <div id="tabla_fam" class="table-responsive">
+                                         <table id="hijos" class="table table-bordered table-striped ">
+                                              <thead>
                                                 <tr>
                                                     <th>Condiciones prioritarias</th>
                                                     <th>Acepta</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Niñas, niños y adolescentes con necesidades especiales</h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Niñas, niños y adolescentes con problemas de salud </h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Niñas y niños mayores (A partir de 09 años)</h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Adolescentes (De 12 años hasta 17 años 11 meses)</h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h4>Grupos de hermanos </h4>
-                                                    </td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                                 </tr>
+                                              </thead>
+                                         <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Niñas, niños y adolescentes con necesidades especiales</h4>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                                      <tr>
+                                                       <td>
+                                                            <h4>Niñas, niños y adolescentes con problemas de salud </h4>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                                      <tr>
+                                                         <td>
+                                                            <h4>Niñas y niños mayores (A partir de 09 años)</h4>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                                     <tr>
+                                                         <td>
+                                                            <h4>Adolescentes (De 12 años hasta 17 años 11 meses)</h4>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                                     <tr>
+                                                         <td>
+                                                            <h4>Grupos de hermanos </h4>
+                                                        </td>
+                                                        <td>
+                                                           <select>
+                                                             <option value="sia">SI</option>
+                                                             <option value="mia">NO</option>
+                                                           </select>
+                                                        </td>
+                                                     </tr>
+                                          </tbody>
+                                      </table>
                                     </div>
-                                </div>
+                                 </div>
                                 <!-- Button -->
                                 <br>
                                 <div class="control-group">
@@ -419,11 +413,13 @@
                                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
                                         &nbsp;
                                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Expediente</button>
+                                        &nbsp;
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Propuesta de Designación</button>
                                     </div>
                                 </div>
                             </fieldset>
                         </form>
-
+                        
                     </div>
                 </div>
             </div>

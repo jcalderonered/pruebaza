@@ -80,17 +80,12 @@
                     <br>
                     <h3><strong>Etapas del proceso por las que ha pasado la familia</strong></h3>
                     <br>
-                    <br>
-                    <form role="form">    
-                        <div class="row">
+                     <div class="row">
                             <div class="col-md-4">
                                 <h3><strong>Asistencia a sesion informativa</strong></h3>
                             </div> 
-                            <div class="col-xs-2">
-                            <select class="form-control">
-                                  <option value="sia" selected >SI</option>
-                                  <option value="mia" >NO</option>
-                            </select>
+                            <div class="col-md-3 has-success">
+                                <label class="control-label" > SI </label>
                             </div> 
                             <div class="col-md-3">
                             
@@ -102,11 +97,8 @@
                             <div class="col-md-4">
                                 <h3><strong>Completó talleres</strong></h3>
                             </div> 
-                            <div class="col-xs-2">
-                            <select class="form-control">
-                                  <option value="sia" selected >SI</option>
-                                  <option value="mia" >NO</option>
-                            </select>
+                            <div class="col-md-3 has-success">
+                            <label class="control-label" > SI </label>
                             </div> 
                             <div class="col-md-3">
                             
@@ -118,14 +110,11 @@
                             <div class="col-md-4">
                                 <h3><strong>Presentó ficha de inscripción para solicitantes de adopción</strong></h3>
                             </div> 
-                            <div class="col-xs-2">
-                                <select disabled class="form-control">
-                                  <option value="sia" >SI</option>
-                                  <option value="mia" selected>NO</option>
-                                </select>
+                            <div class="col-md-1 has-error">
+                             <label class="control-label"> NO </label>
                             </div> 
                             <div class="col-md-3">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-default">Ver ficha</button>
+                                <button id="singlebutton" name="singlebutton" class="btn btn-default disabled">Ver Ficha</button>
                             </div> 
                         </div>  
                         <br>
@@ -134,11 +123,8 @@
                             <div class="col-md-4">
                                 <h3><strong>Completó etapa de evaluación</strong></h3>
                             </div> 
-                            <div class="col-xs-2">
-                            <select class="form-control">
-                                  <option value="sia"  >SI</option>
-                                  <option value="mia" selected >NO</option>
-                            </select>
+                            <div class="col-md-3 has-error">
+                            <label class="control-label" > NO </label>
                             </div> 
                             <div class="col-md-3">
                             
@@ -150,11 +136,8 @@
                             <div class="col-md-4">
                                 <h3><strong>En lista de espera</strong></h3>
                             </div> 
-                            <div class="col-xs-2">
-                            <select class="form-control">
-                                  <option value="sia"  >SI</option>
-                                  <option value="mia" selected >NO</option>
-                            </select>
+                            <div class="col-md-3 has-error">
+                            <label class="control-label" > NO </label>
                             </div> 
                             <div class="col-md-3">
                             
@@ -166,11 +149,8 @@
                             <div class="col-md-4">
                                 <h3><strong>En proceso de adopción</strong></h3>
                             </div> 
-                            <div class="col-xs-2">
-                            <select class="form-control">
-                                  <option value="sia"  >SI</option>
-                                  <option value="mia" selected >NO</option>
-                            </select>
+                            <div class="col-md-3 has-error">
+                            <label class="control-label" > NO </label>
                             </div> 
                             <div class="col-md-3">
                             
@@ -182,11 +162,8 @@
                             <div class="col-md-4">
                                 <h3><strong>En etapa post-adopción</strong></h3>
                             </div> 
-                            <div class="col-xs-2">
-                            <select class="form-control">
-                                  <option value="sia"  >SI</option>
-                                  <option value="mia" selected >NO</option>
-                            </select>
+                            <div class="col-md-3 has-error">
+                            <label class="control-label" > NO </label>
                             </div> 
                             <div class="col-md-3">
                             
@@ -194,8 +171,6 @@
                         </div>  
                         <br>
                         <br>
-                        <button type="submit" class="btn btn-default">Confirmar cambios</button>
-                      </form>
                     </div>
                         
                     </div>
