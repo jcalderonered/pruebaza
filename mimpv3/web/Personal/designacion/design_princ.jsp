@@ -136,12 +136,45 @@
                                          <br>
                                          <h3><strong> Datos del proceso de designación</strong></h3>
                                          <br>  
+                                         
                                          <div class="control-group">
                                             <label class="control-label">Número de designación</label>
                                                 <div class="controls">
                                                   <input id="full-name" name="full-name" type="text" class="input-xlarge">
                                                 </div>
                                          </div>
+                                         <br>
+                                         <h3><strong> Familia Designada</strong></h3>
+                                         <br>  
+                                          <div class="table-responsive">
+                                                <table class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-sm-2 " colspan="3">El Adoptante</th>
+                                                            <th class="col-sm-2 " colspan="3">La Adoptante</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Nombres</th>
+                                                            <th>Apellido Paterno</th>
+                                                            <th>Apellido Materno</th>
+                                                            <th>Nombres</th>
+                                                            <th>Apellido Paterno</th>
+                                                            <th>Apellido Materno</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                            <tr>
+                                                                <td>Rodrigo </td>
+                                                                <td>Perez</td>
+                                                                <td>Segundo</td>
+                                                                <td>Gina</td>
+                                                                <td>Aragon</td>
+                                                                <td>Villanueva</td>
+                                                            </tr>
+                                                   </tbody>
+                                             </table>
+                                          </div>
                                          <br>
                                          <div class="control-group">
                                             <label class="control-label">Prioridad de la familia</label>

@@ -35,14 +35,23 @@ public class main {
     @RequestMapping (value = "/login", method = RequestMethod.POST)
     public ModelAndView login(ModelMap map, @RequestParam("email") String email,@RequestParam("password") String pass){
        
-         ArrayList<Object> temp = new ArrayList();
-               temp = Servicio.usuario(email, pass);
-        
+         
+        Personal per1 = new Personal();
+       per1 = (Personal) Servicio.usuario(email, pass);
         String mensaje = "Los datos ingresados son: email" + email + " y contraseña" + pass + "!";
         
-        map.addAttribute("test", mensaje);
-        map.addAttribute(temp.get(0));
-        return new ModelAndView ("contacto");
+        map.addAttribute("nombre", per1.getNombre());
+        map.addAttribute("personal",per1);
+        return new ModelAndView ("contacto",map);
         
     }
+    
+    @RequestMapping (value = "/lista", method = RequestMethod.GET)
+    public ModelAndView lista(ModelMap map){
+    
+        List<Personal> lista = Servicio.listaPersonal();
+        map.put("listap", lista);
+        return new ModelAndView("contacto",map);
+    }
+   
 }
