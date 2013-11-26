@@ -73,9 +73,9 @@
 
                         </ul>
                     </div>
-                    
+
                     <div class="col-md-6 col-md-offset-1">
-                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p> 
+                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p> 
                         <h1 align="center"><strong>Expediente del NNA</strong></h1>
                         <br>
                         <form class="form-horizontal">
@@ -159,7 +159,7 @@
                                 <h3><strong>Responsable Legal</strong></h3>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Nombre</label>
+                                    <label class="control-label">Nombre Completo</label>
                                     <div class="controls">
                                         <select>
                                             <option value="sia">Juan Luis</option>
@@ -168,30 +168,32 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Paterno</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia">Espinoza</option>
-                                            <option value="sia">Salgado</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Materno</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia">Salazar</option>
-                                            <option value="sia">Ruiz</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br>
+                                <!--
+                               <div class="control-group">
+                                   <label class="control-label">Apellido Paterno</label>
+                                   <div class="controls">
+                                       <select>
+                                           <option value="sia">Espinoza</option>
+                                           <option value="sia">Salgado</option>
+                                       </select>
+                                   </div>
+                               </div>
+                               <br>
+                               <div class="control-group">
+                                   <label class="control-label">Apellido Materno</label>
+                                   <div class="controls">
+                                       <select>
+                                           <option value="sia">Salazar</option>
+                                           <option value="sia">Ruiz</option>
+                                       </select>
+                                   </div>
+                               </div>
+                               <br>
+                                -->
                                 <h3><strong>Responsable Psicosocial</strong></h3>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Nombre</label>
+                                    <label class="control-label">Nombre Completo</label>
                                     <div class="controls">
                                         <select>
                                             <option value="sia">Juan Luis</option>
@@ -200,6 +202,7 @@
                                     </div>
                                 </div>
                                 <br>
+                                <!--
                                 <div class="control-group">
                                     <label class="control-label">Apellido Paterno</label>
                                     <div class="controls">
@@ -220,6 +223,7 @@
                                     </div>
                                 </div>
                                 <br>
+                                -->
                                 <div>
                                     <label class="control-label">Estado</label>
                                     <div class="controls">
@@ -239,7 +243,82 @@
                                         <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
-
+                                <br>
+                                <br>
+                                <h3><strong>Datos de NNA prioritario</strong></h3>
+                                <br>
+                                <div>
+                                    <label class="control-label">Grupo de referencia</label>
+                                    <div class="controls">
+                                        <select>
+                                            <option value="sia">Mayores</option>
+                                            <option value="sia">Adolescentes</option>
+                                            <option value="mia">Hermanos</option>
+                                            <option value="mia">Salud</option>
+                                            <option value="mia">Seguimiento</option>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Código Mayores</label>
+                                    <div class="controls">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Código Adolescente</label>
+                                    <div class="controls">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Código Hermano</label>
+                                    <div class="controls">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Código Salud</label>
+                                    <div class="controls">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Código Seguimiento</label>
+                                    <div class="controls">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Diagnóstico</label>
+                                    <div class="controls">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Profesional asociado</label>
+                                    <div class="controls">
+                                        <select>
+                                            <option value="sia">Juan Luis</option>
+                                            <option value="sia">Ronald</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Comentario</label>
+                                    <div class="controls">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
 
                                 <!-- Button -->
                                 <br>
@@ -267,15 +346,15 @@
             </div>
             <!-- Bootstrap core JavaScript
         ================================================== -->
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
-        <script type="text/javascript">
-           
-             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language":"es"});
-            
-        </script>
-        <!-- Placed at the end of the document so the pages load faster -->
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript">
+
+                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+            </script>
+            <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>
