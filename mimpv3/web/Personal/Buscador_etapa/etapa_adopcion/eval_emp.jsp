@@ -100,10 +100,10 @@
                                             </div>
                                     </div>
                                     <br>
-                                    <h3><strong>Responsables</strong></h3>
+                                    <h3><strong>Responsable</strong></h3>
                                     <br>
                                     <div>
-                                       <label class="control-label">Profesional N°1</label>
+                                       <label class="control-label">Profesional</label>
                                          <div class="controls">
                                              <select>
                                                  <option value="sia">Guillermo Ruiz</option>
@@ -112,6 +112,7 @@
                                          </div>    
                                     </div>
                                     <br>
+                                    <!--
                                     <div>
                                        <label class="control-label">Profesional N°2</label>
                                          <div class="controls">
@@ -122,7 +123,7 @@
                                          </div>    
                                     </div>
                                     <br>
-                                    
+                                    -->
                                     <br>
                                     <h3><strong>Evaluación</strong></h3>
                                     <br>

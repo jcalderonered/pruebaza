@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-       <!-- Datepicker -->
+        <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
 
@@ -113,7 +113,12 @@
                                     </div>
                                 </div>
                                 <br>
-                                
+                                <h3><strong>En caso de tener un Fin de Procedimiento</strong></h3>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Eliminar del Registro Nacional de Adoptantes para la Adopción
+                                    </label>
+                                </div>
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
@@ -137,15 +142,15 @@
             </div>
             <!-- Bootstrap core JavaScript
         ================================================== -->
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
-        <script type="text/javascript">
-           
-             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language":"es"});
-            
-        </script>
-        <!-- Placed at the end of the document so the pages load faster -->
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript">
+
+                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+            </script>
+            <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>
