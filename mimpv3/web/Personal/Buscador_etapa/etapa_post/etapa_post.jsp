@@ -71,7 +71,7 @@
                     <div class="col-md-6 ">
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
-                        <ul class="nav nav-tabs row" id="tabs" >
+                        <ul class="nav nav-tabs row" id="tabs">
                             <li><a href="#" data-toggle="tab">Informativa</a></li>
                             <li><a href="#" data-toggle="tab">Evaluativa</a></li>
                             <li><a href="#" data-toggle="tab">Designación</a></li>
@@ -87,95 +87,61 @@
                                             <tr>
                                                 <th>Expediente</th>
                                                 <th>Info</th>
-                                                <th>N° Propuesta</th>
-                                                <th>Prioridad</th>
-                                                <th>Info NNA</th>
-                                                <th>Informe de Empatía</th>
-                                                <th>Resultado</th>
-                                                <th>Resolución</th>
-                                                <th>Informe Colocación</th>
-                                                <th>Resultado</th>
-                                                <th>Resolución</th>
-                                                
+                                                <th>Expediente Post</th>
+                                                <th>N° Informes a presentar</th>
+                                                <th>Información de Informes</th>
+                                                <th>N° Informes presentados</th>
+                                                <th>Finalizar ev. Post Adpotiva</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>Alvarado-Gutierrez</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>001-2010</td>
-                                                <td>1</td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>8</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
+                                                <td>3</td>
+                                                <td><button href="#" class="btn btn-default disabled">Finalizar</button></td>
                                             </tr>
                                             <tr>
                                                 <td>Rosa-Flores</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>001-2012</td>
-                                                <td>3</td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>8</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>Desfavorable</td>
-                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>8</td>
+                                                <td><button href="#" class="btn btn-default">Finalizar</button></td>
                                             </tr>
                                             <tr>
                                                 <td>Durando-Iriarte</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>021-2012</td>
-                                                <td>2</td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>6</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td>5</td>
+                                                <td><button href="#" class="btn btn-default disabled">Finalizar</button></td>
                                             </tr>
                                             <tr>
                                                 <td>Gallardo-Olivera</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>011-2013</td>
-                                                <td>2</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
                                                 <td></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Ver</button></td>
+                                                <td></td>
+                                                <td><button href="#" class="btn btn-default disabled">Finalizar</button></td>
                                             </tr>
                                             <tr>
                                                 <td>Solano-Parco</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>022-2012</td>
-                                                <td>3</td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>8</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>Desfavorable</td>
-                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>0</td>
+                                                <td><button href="#" class="btn btn-default disabled">Finalizar</button></td>
                                             </tr>
-                                            
-                                            
                                         </tbody>
                                     </table>
-                                </div>
-                                <br>
-                                <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                       
-                                    </div>
                                 </div>
                             </fieldset>
                         </form>

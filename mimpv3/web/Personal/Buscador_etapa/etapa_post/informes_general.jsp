@@ -1,6 +1,6 @@
 <%-- 
-    Document   : inicio_personal
-    Created on : 28/10/2013, 09:54:29 AM
+    Document   : inscripcion_sesion1
+    Created on : 28/10/2013, 05:45:16 AM
     Author     : Ayner Pérez
 --%>
 
@@ -14,7 +14,8 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-        <script src="<%=request.getContextPath()%>/assets/js/bootstrap.js" type="text/javascript"></script>
+        <!-- Datepicker -->
+        <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -29,7 +30,6 @@
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -37,9 +37,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -50,7 +48,6 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div class="container">
                 <div class="row">
@@ -69,12 +66,10 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
                         </ul>
                     </div>
-
-                    <div class="col-md-6">
-                        <h1 align="center"><strong>Registro Post-adoptivo</strong></h1>
+                    <div class="col-md-6 ">
+                        <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" id="tabs">
                             <li><a href="#" data-toggle="tab">Informativa</a></li>
@@ -83,66 +78,68 @@
                             <li><a href="#" data-toggle="tab">Adopción</a></li>
                             <li class="active"><a href="#" data-toggle="tab">Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal"> 
+                        <form class="form-horizontal">
                             <fieldset>
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                                 <br>
                                 <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
                                 <br>
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label">Número</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Expediente</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Número de informes</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de resolución de adopción</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-
-
-                                <br>
-                                <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
-                                        &nbsp;
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Generar Informe</button>
-                                    </div>
+                                <div class="bs-example">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Informe 1</th>
+                                                <th>Informe 2</th>
+                                                <th>Informe 3</th>
+                                                <th>Informe 4</th>
+                                                <th>Informe 5</th>
+                                                <th>Informe 6</th>
+                                                <th>Informe 7</th>
+                                                <th>Informe 8</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </fieldset>
-                        </form>    
+                        </form>
+
                     </div>
                 </div>
             </div>
             <!--FIN DE CONTENIDO-->
             <br>
             <br>
-
-            <div id="footer">
-                <div id="ja-footer" class="wrap">
-                    <hr width=80% align="center">
-                    <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-                    <p align="right">Diseñado por RED<br>www.red.net.pe</p>
-                </div>
+        </div>   
+        <div id="footer">
+            <div id="ja-footer" class="wrap">
+                <hr width=80% align="center">
+                <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
+                <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+        <script type="text/javascript">
+
+            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+        </script>
+        <!-- Placed at the end of the document so the pages load faster -->        
     </body>
 </html>
