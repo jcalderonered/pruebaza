@@ -102,10 +102,10 @@
                                 <li><a href="#" data-toggle="tab">Composición familiar</a></li>
                                 <li><a href="#" data-toggle="tab">Vivienda</a></li>
                                 <li><a href="#" data-toggle="tab">Información del Expediente</a></li>
-                          <!--  <li><a href="#" data-toggle="tab">Proceso de adopción</a></li> -->
-                          <!--  <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li> -->
-                          <!--  <li><a href="#" data-toggle="tab">NNA asociado</a></li> -->
-                          <!--  <li><a href="#" data-toggle="tab">Atenciones</a></li> -->
+                                <li><a href="#" data-toggle="tab">Proceso de adopción</a></li>
+                                <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
+                                <li><a href="#" data-toggle="tab">NNA asociado</a></li>
+                                <li><a href="#" data-toggle="tab">Atenciones</a></li>
                             </ul>
                             <br>
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->

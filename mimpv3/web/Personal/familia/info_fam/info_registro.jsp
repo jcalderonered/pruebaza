@@ -104,10 +104,10 @@
                                 <li><a href="#" data-toggle="tab">Composición familiar</a></li>
                                 <li><a href="#" data-toggle="tab">Vivienda</a></li>
                                 <li class="active"><a href="#" data-toggle="tab">Información del Expediente</a></li>
-                          <!--  <li><a href="#" data-toggle="tab">Proceso de adopción</a></li> -->
-                          <!--  <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li> -->
-                          <!--  <li><a href="#" data-toggle="tab">NNA asociado</a></li> -->
-                          <!--  <li><a href="#" data-toggle="tab">Atenciones</a></li> -->
+                                <li><a href="#" data-toggle="tab">Proceso de adopción</a></li>
+                                <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
+                                <li><a href="#" data-toggle="tab">NNA asociado</a></li>
+                                <li><a href="#" data-toggle="tab">Atenciones</a></li>
                             </ul>
                             <br>
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
@@ -151,11 +151,11 @@
                             <div class="control-group">
                                 <label class="control-label">Estado</label>
                                 <div class="controls">
-                                   <select>
-                                  <option value="sia" selected >Evaluación</option>
-                                  <option value="mia" >Observado</option>
-                                  <option value="mia" >Culminado</option>
-                               </select>
+                                    <select>
+                                        <option value="sia" selected >Evaluación</option>
+                                        <option value="mia" >Observado</option>
+                                        <option value="mia" >Culminado</option>
+                                    </select>
                                 </div>
                             </div>
                             <br>

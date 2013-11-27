@@ -96,15 +96,15 @@
                             <br>
                             <br>
                             <ul class="nav nav-tabs row" id="tabs" >
-                           <!--     <li><a href="#" data-toggle="tab">La Solicitante</a></li> -->
-                            <!--    <li><a href="#" data-toggle="tab">El solicitante</a></li> -->
-                            <!--    <li><a href="#" data-toggle="tab">Composición familiar</a></li> -->
-                            <!--    <li><a href="#" data-toggle="tab">Vivienda</a></li> -->
-                             <!--   <li><a href="#" data-toggle="tab">Información del Expediente</a></li> -->
-                             <!--   <li><a href="#" data-toggle="tab">Proceso de adopción</a></li> -->
+                                <li><a href="#" data-toggle="tab">La Solicitante</a></li>
+                                <li><a href="#" data-toggle="tab">El solicitante</a></li>
+                                <li><a href="#" data-toggle="tab">Composición familiar</a></li>
+                                <li><a href="#" data-toggle="tab">Vivienda</a></li>
+                                <li><a href="#" data-toggle="tab">Información del Expediente</a></li>
+                                <li><a href="#" data-toggle="tab">Proceso de adopción</a></li>
                                 <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li> 
                                 <li class="active"><a href="#" data-toggle="tab">NNA asociado</a></li>
-                             <!--   <li><a href="#" data-toggle="tab">Atenciones</a></li> -->
+                                <li><a href="#" data-toggle="tab">Atenciones</a></li>
                             </ul>
                             <br>
                             <fieldset>
@@ -437,7 +437,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                 <div class="control-group">
+                                <div class="control-group">
                                     <div class="controls">
                                         <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
