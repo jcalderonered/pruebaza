@@ -73,25 +73,35 @@
                         </ul>
                     </div>
 
-                    <div class="col-md-6 col-md-offset-1">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <h1 align="center"><strong>Informe Post-Adoptivo</strong></h1>
+                    <div class="col-md-6">
+                        <h1 align="center"><strong>Informe Post-Adoptivo N° 4</strong></h1>
                         <br>
+                        <ul class="nav nav-tabs row" id="tabs">
+                            <li><a href="#" data-toggle="tab">Informativa</a></li>
+                            <li><a href="#" data-toggle="tab">Evaluativa</a></li>
+                            <li><a href="#" data-toggle="tab">Designación</a></li>
+                            <li><a href="#" data-toggle="tab">Adopción</a></li>
+                            <li class="active"><a href="#" data-toggle="tab">Post Adopción</a></li>
+                        </ul>
                         <form class="form-horizontal"> 
                             <fieldset>
+                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                                <br>
+                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                                <br>
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <label class="control-label">Estado</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                                        <select>
+                                            <option value="sia">Listo</option>
+                                            <option value="mia" selected>Inconcluso</option>
+                                        </select>
+                                    </div>    
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Número de informe</label>
-                                    <div class="controls">
-                                        <input disable id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                                    <label class="control-label">Número de informe: 4</label>
                                 </div>
                                 <br>
                                 <div class="control-group">
@@ -108,27 +118,16 @@
                                     </div>
                                 </div>
                                 <br>
-                                <h3><strong>Profesional asignado</strong></h3>
-                                <br>
                                 <div class="control-group">
-                                    <label class="control-label">Nombre</label>
+                                    <label class="control-label">Personal asignado</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Paterno</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Materno</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                                        <select>
+                                            <option value="sia">Juan Pérez</option>
+                                            <option value="mia">Raúl Robles</option>
+                                            <option value="mia">John Peña</option>
+                                            <option value="mia">Isaac Lamb</option>
+                                        </select>
+                                    </div>    
                                 </div>
                                 <br>
                                 <div class="control-group">
