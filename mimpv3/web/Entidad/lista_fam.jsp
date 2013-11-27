@@ -66,17 +66,17 @@
                                     <tr>
                                         <th class="col-sm-3 ">El Adoptante</th>
                                         <th class="col-sm-3 ">La Adoptante</th>
-                                        <th class="col-sm-3 ">País de Residencia</th>
+                                        <th class="col-sm-3 ">Número de expediente</th>
                                         <th class="col-sm-3 ">Correo principal</th>
                                         <th class="col-sm-2 ">Mas informacion</th>
-                                        <th class="col-sm-2 ">Estado de Adopción</th>                                          
+                                        <th class="col-sm-2 ">Estado de Trámite</th>                                          
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>El Adoptante 1</td>
                                         <td>La Adoptante 1</td>
-                                        <td>España</td>
+                                        <td>035-2012</td>
                                         <td>familia1@dominio.pe</td>
                                         <td><button href="#" class="btn btn-default">Info</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
@@ -84,7 +84,7 @@
                                     <tr>
                                         <td>El Adoptante 2</td>
                                         <td>La Adoptante 2</td>
-                                        <td>Inglaterra</td>
+                                        <td>046-2011</td>
                                         <td>familia2@dominio.pe</td>
                                         <td><button href="#" class="btn btn-default">Info</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
@@ -92,7 +92,7 @@
                                     <tr>
                                         <td>El Adoptante 1</td>
                                         <td>La Adoptante 1</td>
-                                        <td>Italia</td>
+                                        <td>126-2010</td>
                                         <td>familia1@dominio.pe</td>
                                         <td><button href="#" class="btn btn-default">Info</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>

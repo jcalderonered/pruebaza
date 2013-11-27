@@ -43,7 +43,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li class="active"><a href="#">Inicio</a></li>
-                            <li><a href="#">Actualizar Información</a></li>
+                            <li><a href="#">Ver Información</a></li>
                             <li><a href="#">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->

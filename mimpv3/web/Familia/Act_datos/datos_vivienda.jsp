@@ -42,7 +42,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li><a href="#">Inicio</a></li>
-                            <li class="active"><a href="#">Actualizar Información</a></li>
+                            <li class="active"><a href="#">Ver Información</a></li>
                             <li><a href="#">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -72,7 +72,7 @@
                         <form class="form-horizontal"> 
                             <fieldset>
                                 <br>
-                                <h3><strong>Vivienda <font style="color:red">(*)</font></strong></h3>
+                                <h3><strong>Vivienda </strong></h3>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-3">  
@@ -93,12 +93,12 @@
                                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
                                             <br>
 
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                         </div>                            
                                     </div>
                                 </div>
                                 <br>
-                                <h3><strong>Tipo <font style="color:red">(*)</font></strong></h3>
+                                <h3><strong>Tipo </strong></h3>
                                 <br>
                                 <!-- Text input-->
                                 <div class="row">
@@ -120,68 +120,68 @@
                                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros(especificar)</label>
                                             <br>
 
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                         </div>                            
                                     </div>
                                 </div>
                                 <br>
                                 <br>
-                                <h3><strong>Domicilio<font style="color:red">(*)</font></strong></h3>
+                                <h3><strong>Domicilio</strong></h3>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Dirección (Consignar dirección exacta)</label>
                                     <div class="controls">
-                                        <textarea id="domicilio" class="input-xlarge" name="message" placeholder="" rows="3" ></textarea>
+                                        <textarea id="domicilio" class="input-xlarge" name="message" placeholder="" rows="3" disabled></textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Departamento de Residencia</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">País de Residencia</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Teléfono</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <br>
-                                <h3><strong>Área de vivienda(en metros cuadrados)<font style="color:red">(*)</font></strong></h3>
+                                <h3><strong>Área de vivienda(en metros cuadrados)</strong></h3>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Total</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Construida</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Distribución de la vivienda</label>
                                     <div class="controls">
-                                        <textarea id="domicilio" class="input-xlarge" name="message" placeholder="" rows="3" ></textarea>
+                                        <textarea id="domicilio" class="input-xlarge" name="message" placeholder="" rows="3" disabled></textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <br>
-                                <h3><strong>Servicios <font style="color:red">(*)</font></strong></h3>
+                                <h3><strong>Servicios</strong></h3>
                                 <br>
 
                                 <div class="row">
@@ -207,13 +207,13 @@
                                         <div class="control-group">
                                             <label class="control-label">Otros servicios</label>
                                             <div class="controls">
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <h3><strong>Material de construcción <font style="color:red">(*)</font></strong></h3>
+                                <h3><strong>Material de construcción </strong></h3>
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="radio">
@@ -227,12 +227,12 @@
                                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
                                             <br>
 
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                         </div>                            
                                     </div>
                                 </div>
 
-                                <h3><strong>Paredes <font style="color:red">(*)</font></strong></h3>
+                                <h3><strong>Paredes </strong></h3>
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="radio">
@@ -246,12 +246,12 @@
                                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
                                             <br>
 
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                         </div>                            
                                     </div>
                                 </div>
 
-                                <h3><strong>Techo <font style="color:red">(*)</font></strong></h3>
+                                <h3><strong>Techo </strong></h3>
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="radio">
@@ -265,12 +265,12 @@
                                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
                                             <br>
 
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                         </div>                            
                                     </div>
                                 </div>
 
-                                <h3><strong>Piso <font style="color:red">(*)</font></strong></h3>
+                                <h3><strong>Piso </strong></h3>
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="radio">
@@ -284,24 +284,28 @@
                                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
                                             <br>
 
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                         </div>                            
                                     </div>
                                 </div>
                                 <br>
-                                <p style="color: red">(*)IMPORTANTE: NO SE PUEDEN DEJAR CAMPOS EN BLANCO</p> 
+                                <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUDA</p>
+                                <p style="color: red">EN MESA DE PARTES DE LA DGA</p>
                                 <br>
                                 <p>Según lo establecido en la Ley Nº29733 - Ley de protección de datos personales, la información proporcionada por 
                                     usted/ustedes será de uso exclusivo, con la reserva y confidencialidad del caso, para los fines concernientes al 
                                     procedimiento administrativo de adopción.
                                 </p>
+                                </div>
                                 <!-- Button -->
                                 <br>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                <!--
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        </div>
                                     </div>
-                                </div>
+                                -->
                             </fieldset>
                         </form>   
 

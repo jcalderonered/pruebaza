@@ -69,11 +69,12 @@
                         <br>
                         <div class="row">
                             <div class="col-md-4">
-                                <h3><strong>Completó etapa de evaluación</strong></h3>
+                                <h3><strong>Evaluación</strong></h3>
                             </div> 
-                            <div class="col-md-3">
-                            <label> NO </label>
+                            <div class="col-md-3 has-success">
+                                <label class="control-label" > SI </label>
                             </div> 
+                           
                             <div class="col-md-3">
                             
                             </div> 
@@ -84,9 +85,10 @@
                             <div class="col-md-4">
                                 <h3><strong>En lista de espera</strong></h3>
                             </div> 
-                            <div class="col-md-3">
-                            <label> NO </label>
+                            <div class="col-md-1 has-error">
+                             <label class="control-label"> NO </label>
                             </div> 
+                  
                             <div class="col-md-3">
                             
                             </div> 
@@ -95,11 +97,26 @@
                         <br>
                         <div class="row">
                             <div class="col-md-4">
-                                <h3><strong>En proceso de adopción</strong></h3>
+                                <h3><strong>Designado</strong></h3>
                             </div> 
+                            <div class="col-md-1 has-error">
+                             <label class="control-label"> NO </label>
+                            </div> 
+                     
                             <div class="col-md-3">
-                            <label> NO </label>
+                            
                             </div> 
+                        </div>   
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3><strong>Adopción</strong></h3>
+                            </div> 
+                            <div class="col-md-1 has-error">
+                             <label class="control-label"> NO </label>
+                            </div> 
+       
                             <div class="col-md-3">
                             
                             </div> 
@@ -108,11 +125,12 @@
                         <br>
                         <div class="row">
                             <div class="col-md-4">
-                                <h3><strong>En etapa post-adopción</strong></h3>
+                                <h3><strong>En seguimiento post-adopción</strong></h3>
                             </div> 
-                            <div class="col-md-3">
-                            <label> NO </label>
+                            <div class="col-md-1 has-error">
+                             <label class="control-label"> NO </label>
                             </div> 
+                        
                             <div class="col-md-3">
                             
                             </div> 

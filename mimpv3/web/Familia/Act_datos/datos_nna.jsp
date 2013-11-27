@@ -43,7 +43,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li><a href="#">Inicio</a></li>
-                            <li class="active"><a href="#">Actualizar Información</a></li>
+                            <li class="active"><a href="#">Ver Información</a></li>
                             <li><a href="#">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -297,13 +297,13 @@
                             <h3><strong>Espectativas</strong></h3>
                             <br>
                             <div class="control-group">
-                                <label class="control-label">¿Cuántos años podría tener el niño, niña o adolescente a adoptar?<font style="color:red">(*)</font></label>
+                                <label class="control-label">¿Cuántos años podría tener el niño, niña o adolescente a adoptar?</label>
                                 <div class="controls">
-                                    <input id="apellido_m" name="full-name" type="text" class="input-xlarge">
+                                    <input id="apellido_m" name="full-name" type="text" class="input-xlarge" disabled>
                                 </div>
                             </div>
                             <br>
-                            <p><strong>Género del niño, niña o adolescente a adoptar <font style="color:red">(*)</font></strong></p>
+                            <p><strong>Género del niño, niña o adolescente a adoptar </strong></p>
                             <div class="row">
                                 <div class="col-md-3">  
                                     <div class="radio">
@@ -326,18 +326,22 @@
                             </div>
                             <!-- Button -->
                             <br>
-                            <p style="color: red">(*)IMPORTANTE: NO SE PUEDEN DEJAR CAMPOS EN BLANCO</p> 
+                            <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUDA</p>
+                            <p style="color: red">EN MESA DE PARTES DE LA DGA</p>
                             <br>
                             <p>Según lo establecido en la Ley Nº29733 - Ley de protección de datos personales, la información proporcionada por 
                                 usted/ustedes será de uso exclusivo, con la reserva y confidencialidad del caso, para los fines concernientes al 
                                 procedimiento administrativo de adopción.
                             </p>
-                            <br>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
-                                </div>
-                            </div>
+                             <!-- Button -->
+                                <br>
+                                <!--
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        </div>
+                                    </div>
+                                -->
                         </form>
                     </div>
                 </div>
