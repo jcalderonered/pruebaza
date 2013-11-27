@@ -91,17 +91,11 @@
                                 <br>
                                 <!-- Text input-->
                                 <div class="control-group">
-                                    <label class="control-label">Número</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                                    <label class="control-label">Número: 00183711</label>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Expediente</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                                    <label class="control-label">Expediente: ApellidoP-ApellidoM</label>
                                 </div>
                                 <br>
                                 <div class="control-group">
