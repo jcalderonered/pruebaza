@@ -45,7 +45,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li><a href="#">Inicio</a></li>
-                            <li class="active"><a href="#">Actualizar Información</a></li>
+                            <li class="active"><a href="#">Ver Información</a></li>
                             <li><a href="#">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -99,53 +99,24 @@
 
                                         <tbody>
                                             <tr>
-                                                <td><input type="text" class="input_width"></td>
+                                                <td><input type="text" class="input_width" disabled></td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input disabled type="text" class="input_width">
+                                                    <input disabled type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input disabled type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
                                                     <select>
@@ -155,24 +126,53 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="input_width"></td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input disabled type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input disabled type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <select>
+                                                        <option value="sia">SI</option>
+                                                        <option value="mia">NO</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="input_width" disabled></td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input disabled type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
                                                     <select>
@@ -211,55 +211,25 @@
 
                                         <tbody>
                                             <tr>
-                                                <td><input type="text" class="input_width"></td>
-                                                <td><input type="text" class="input_width"></td>
+                                                <td><input type="text" class="input_width" disabled></td>
+                                                <td><input type="text" class="input_width" disabled></td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input disabled type="text" class="input_width">
+                                                    <input disabled type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="input_width"></td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input disabled type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
                                                     <select>
@@ -269,25 +239,55 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="input_width"></td>
-                                                <td><input type="text" class="input_width"></td>
+                                                <td><input type="text" class="input_width" disabled></td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input disabled type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input disabled type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <select>
+                                                        <option value="sia">SI</option>
+                                                        <option value="mia">NO</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="input_width" disabled></td>
+                                                <td><input type="text" class="input_width" disabled></td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input disabled type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
                                                     <select>
@@ -324,77 +324,80 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="input_width" disabled>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <br>
+                                <br>
+                                <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUDA</p>
+                                <p style="color: red">EN MESA DE PARTES DE LA DGA</p>
                                 <br>
                                 <p>Según lo establecido en la Ley Nº29733 - Ley de protección de datos personales, la información proporcionada por 
                                     usted/ustedes será de uso exclusivo, con la reserva y confidencialidad del caso, para los fines concernientes al 
@@ -403,11 +406,13 @@
                             </div>
                             <!-- Button -->
                             <br>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                            <!--
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                    </div>
                                 </div>
-                            </div>
+                                -->
 
                         </form>   
 

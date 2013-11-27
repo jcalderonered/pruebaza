@@ -159,18 +159,11 @@
                         </div>
                         <br>
                         <div class="control-group">
-                            <label class="control-label">Pertenece al RNSA: SI</label>
+                            <label class="control-label">Pertenece al Registro Nacional de Solicitantes para la Adopción: SI</label>
                         </div>
                         <br>
                         <div class="control-group">
-                            <label class="control-label">Pertenece al RNAA: SI</label>
-                        </div>
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label">Tipo de familia</label>
-                            <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="PP" type="text" class="input-xlarge">
-                            </div>
+                            <label class="control-label">Pertenece al Registro Nacional de Adoptantes para la Adopción: SI</label>
                         </div>
                         <br>
                         <div class="control-group">

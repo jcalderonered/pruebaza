@@ -42,7 +42,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li><a href="#">Inicio</a></li>
-                            <li class="active"><a href="#">Actualizar Información</a></li>
+                            <li class="active"><a href="#">Ver Información</a></li>
                             <li><a href="#">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -77,51 +77,51 @@
                                 <br>
                                 <!-- Text input-->
                                 <div class="control-group">
-                                    <label class="control-label">Nombre <font style="color:red">(*)</font></label>
+                                    <label class="control-label">Nombre </label>
                                     <div class="controls">
-                                        <input id="nombre" name="full-name" type="text" class="input-xlarge">
+                                        <input id="nombre" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Apellido Paterno <font style="color:red">(*)</font></label>
+                                    <label class="control-label">Apellido Paterno </label>
                                     <div class="controls">
-                                        <input id="apellido_p" name="full-name" type="text" class="input-xlarge">
+                                        <input id="apellido_p" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Apellido Materno <font style="color:red">(*)</font></label>
+                                    <label class="control-label">Apellido Materno </label>
                                     <div class="controls">
-                                        <input id="apellido_m" name="full-name" type="text" class="input-xlarge">
+                                        <input id="apellido_m" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Fecha de nacimiento <font style="color:red">(*)</font></label>
+                                    <label class="control-label">Fecha de nacimiento </label>
                                     <div class="controls">
-                                        <input id="fecha_nac" name="full-name" type="password" class="input-xlarge">
+                                        <input id="fecha_nac" name="full-name" type="password" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Lugar de nacimiento <font style="color:red">(*)</font></label>
+                                    <label class="control-label">Lugar de nacimiento </label>
                                     <div class="controls">
-                                        <input id="direccion" name="full-name" type="text" class="input-xlarge">
+                                        <input id="direccion" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Departamento de nacimiento <font style="color:red">(*)</font></label>
+                                    <label class="control-label">Departamento de nacimiento </label>
                                     <div class="controls">
-                                        <input id="departamento" name="full-name" type="text" class="input-xlarge">
+                                        <input id="departamento" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">País de nacimiento <font style="color:red">(*)</font></label>
+                                    <label class="control-label">País de nacimiento </label>
                                     <div class="controls">
-                                        <input id="pais" name="full-name" type="text" class="input-xlarge">
+                                        <input id="pais" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
@@ -142,22 +142,22 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <label class="control-label">N° de Documento <font style="color:red">(*)</font></label>
-                                        <input id="num_doc" placeholder="Número" type="text" class="input-xlarge">
+                                        <label class="control-label">N° de Documento </label>
+                                        <input id="num_doc" placeholder="Número" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Celular <font style="color:red">(*)</font></label>
+                                    <label class="control-label">Celular </label>
                                     <div class="controls">
-                                        <input id="celular" name="full-name" type="text" class="input-xlarge">
+                                        <input id="celular" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Correo Electrónico <font style="color:red">(*)</font></label>
+                                    <label class="control-label">Correo Electrónico </label>
                                     <div class="controls">
-                                        <input id="correo" name="full-name" type="text" class="input-xlarge">
+                                        <input id="correo" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
@@ -175,8 +175,8 @@
                                             <label>
                                                 <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casada</label>
                                             <br>
-                                            <label class="control-label">Fecha de matrimonio Civil <font style="color:red">(*)</font></label>
-                                            <input id="fecha_matrimonio" name="full-name" type="text" class="input-xlarge">
+                                            <label class="control-label">Fecha de matrimonio Civil </label>
+                                            <input id="fecha_matrimonio" name="full-name" type="text" class="input-xlarge" disabled>
                                         </div>                            
                                     </div>
                                     <div class="col-md-3">  
@@ -256,7 +256,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Profesión u Oficio </label>
                                     <div class="controls">
-                                        <input id="profesion" name="full-name" type="text" class="input-xlarge">
+                                        <input id="profesion" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
@@ -273,35 +273,35 @@
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="ocupacion" name="full-name" type="text" class="input-xlarge">
+                                        <input id="ocupacion" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Centro de Trabajo </label>
                                     <div class="controls">
-                                        <input id="trabajo" name="full-name" type="text" class="input-xlarge">
+                                        <input id="trabajo" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Dirección del centro de trabajo</label>
                                     <div class="controls">
-                                        <input id="direccion_trabajo" name="full-name" type="text" class="input-xlarge">
+                                        <input id="direccion_trabajo" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Teléfono del centro de trabajo </label>
                                     <div class="controls">
-                                        <input id="telefono_trabajo" name="full-name" type="text" class="input-xlarge">
+                                        <input id="telefono_trabajo" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable (sueldo bruto) </label>
                                     <div class="controls">
-                                        <input id="ingreso_depen" name="full-name" type="text" class="input-xlarge">
+                                        <input id="ingreso_depen" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
@@ -318,14 +318,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="ocupacion_indep" name="full-name" type="text" class="input-xlarge">
+                                        <input id="ocupacion_indep" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable</label>
                                     <div class="controls">
-                                        <input id="ingreso_indep" name="full-name" type="text" class="input-xlarge">
+                                        <input id="ingreso_indep" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
@@ -351,7 +351,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Seguro</label>
                                     <div class="controls">
-                                        <input id="tipo_seguro" name="full-name" type="text" class="input-xlarge">
+                                        <input id="tipo_seguro" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
@@ -390,24 +390,26 @@
                                 <div class="control-group">
                                     <label class="control-label">Estado de salud actual</label>
                                     <div class="controls">
-                                        <input id="estado_acutal" name="full-name" type="text" class="input-xlarge">
+                                        <input id="estado_acutal" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
-                                <p style="color: red">(*)IMPORTANTE: NO SE PUEDEN DEJAR CAMPOS EN BLANCO</p> 
-                                <p style="color: red">IMPORTANTE: SE HA DESHABILITADO LA VISTA DEBIDO AL ESTADO CIVIL MARCADO EN EL SOLICITANTE</p>
+                                 <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUDA</p>
+                                <p style="color: red">EN MESA DE PARTES DE LA DGA</p>
                                 <br>
                                 <p>Según lo establecido en la Ley Nº29733 - Ley de protección de datos personales, la información proporcionada por 
                                     usted/ustedes será de uso exclusivo, con la reserva y confidencialidad del caso, para los fines concernientes al 
                                     procedimiento administrativo de adopción.
-                                </p>
+                                </p>    
                                 <!-- Button -->
                                 <br>
+                                <!--
                                 <div class="control-group">
                                     <div class="controls">
                                         <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>
+                                -->
                             </fieldset>
                         </form>   
 

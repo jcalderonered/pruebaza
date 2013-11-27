@@ -300,34 +300,14 @@
                                 </table>
                             </div>
                         </div>
-                        <br>
-                        <h3><strong>Adopción fuera del lugar de residencia de los solicitantes</strong></h3>
-                        <br>
-                        <br>
-                        <h3>En caso de ser designado/a para la adopción de un NNA que resida en una ciudad diferente 
-                            a la suya, ¿tendría disponibilidad para viajar? </h3>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">  
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
-                                </div>
-                            </div> 
-                            <div class="col-md-3">  
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >No</label>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <br>
                         <h3><strong>Espectativas</strong></h3>
                         <br>
                         <div class="control-group">
                             <label class="control-label">¿Cuántos años podría tener el niño, niña o adolescente a adoptar?</label>
                             <div class="controls">
-                                <input id="apellido_m" name="full-name" type="text" class="input-xlarge">
+                                <input id="apellido_m" name="full-name" type="text" class="input-xlarge" disabled="">
                             </div>
                         </div>
                         <br>
@@ -348,7 +328,7 @@
                             <div class="col-md-3">  
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Indistinto</label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Indistinto</label>
                                 </div>
                             </div>
                         </div>                        
