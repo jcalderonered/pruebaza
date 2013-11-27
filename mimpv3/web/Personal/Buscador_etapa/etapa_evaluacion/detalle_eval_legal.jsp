@@ -97,8 +97,12 @@
                                 <div class="control-group">
                                     <label class="control-label">Responsable</label>
                                     <div class="controls">
-                                        <input id="responsable" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                                        <select>
+                                            <option value="sia">Gordon Freeman</option>
+                                            <option value="mia">Sofia Lamb</option>
+                                            <option value="mia" selected>Carlos Cornejo</option>
+                                        </select>
+                                    </div>    
                                 </div>
                                 <br>
                                 <div class="control-group">
