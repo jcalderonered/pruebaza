@@ -91,7 +91,6 @@
                                                 <th>N° Informes a presentar</th>
                                                 <th>Información de Informes</th>
                                                 <th>N° Informes presentados</th>
-                                                <th>Finalizar ev. Post Adpotiva</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -102,7 +101,6 @@
                                                 <td>8</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td>3</td>
-                                                <td><button href="#" class="btn btn-default disabled">Finalizar</button></td>
                                             </tr>
                                             <tr>
                                                 <td>Rosa-Flores</td>
@@ -110,8 +108,7 @@
                                                 <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                                 <td>8</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>8</td>
-                                                <td><button href="#" class="btn btn-default">Finalizar</button></td>
+                                                <td>7</td>
                                             </tr>
                                             <tr>
                                                 <td>Durando-Iriarte</td>
@@ -120,7 +117,6 @@
                                                 <td>6</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td>5</td>
-                                                <td><button href="#" class="btn btn-default disabled">Finalizar</button></td>
                                             </tr>
                                             <tr>
                                                 <td>Gallardo-Olivera</td>
@@ -129,7 +125,6 @@
                                                 <td></td>
                                                 <td><button href="#" class="btn btn-default disabled">Ver</button></td>
                                                 <td></td>
-                                                <td><button href="#" class="btn btn-default disabled">Finalizar</button></td>
                                             </tr>
                                             <tr>
                                                 <td>Solano-Parco</td>
@@ -138,7 +133,6 @@
                                                 <td>8</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td>0</td>
-                                                <td><button href="#" class="btn btn-default disabled">Finalizar</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
