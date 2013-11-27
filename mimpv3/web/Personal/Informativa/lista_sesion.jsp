@@ -78,11 +78,11 @@
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1>Sesión 001-012</h1>
                         <br>
-                        <p>Estado: Habilitado</p>
+                        <p>Estado: Deshabilitado</p>
                         <br>
                         <!-- Text input-->
                         <div class="control-group">
-                            <label class="control-label" for="textinput">Fecha de turno:</label>
+                            <label class="control-label" for="textinput">Fecha de Sesión Informativa:</label>
                             <div class="controls">
                                 <input id="textinput" name="textinput" type="text" placeholder="fecha" class="datepicker input-xlarge">
                             </div>
@@ -106,7 +106,7 @@
                         <br>
                         <!-- Text input-->
                         <div class="control-group">
-                            <label class="control-label" for="textinput">Dirección/Lugar del turno:</label>
+                            <label class="control-label" for="textinput">Dirección/Lugar de Sesión Informativa:</label>
                             <div class="controls">
                                 <input id="textinput" name="textinput" type="text" placeholder="direccion" class="input-xlarge">
                             </div>

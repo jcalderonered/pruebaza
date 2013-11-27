@@ -360,10 +360,10 @@
                                                         <h4>Niñas, niños y adolescentes con necesidades especiales</h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D"></label>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -371,10 +371,10 @@
                                                         <h4>Niñas, niños y adolescentes con problemas de salud </h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D"></label>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -382,10 +382,10 @@
                                                         <h4>Niñas y niños mayores (A partir de 09 años)</h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D"></label>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -393,10 +393,10 @@
                                                         <h4>Adolescentes (De 12 años hasta 17 años 11 meses)</h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D"></label>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -404,10 +404,10 @@
                                                         <h4>Grupos de hermanos </h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
-                                                        </select>
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D"></label>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
