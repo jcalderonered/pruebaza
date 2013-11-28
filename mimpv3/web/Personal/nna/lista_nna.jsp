@@ -85,6 +85,7 @@
                                         <th class="col-sm-2 ">Apellido Materno</th>
                                         <th class="col-sm-2 ">Sexo</th>
                                         <th class="col-sm-2 ">Clasificación</th>
+                                        <th class="col-sm-2 ">Proceso de adopción</th>
                                         <th class="col-sm-2 ">Detalles</th> 
                                         <th class="col-sm-2 ">Expediente</th> 
                                     </tr>
@@ -97,6 +98,7 @@
                                         <td>Apellidos 1</td>
                                         <td>Masculino</td>
                                         <td>Prioritario</td>
+                                        <td>Si</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                     </tr>
@@ -106,6 +108,7 @@
                                         <td>Apellidos 2</td>
                                         <td>Femenino</td>
                                         <td>En seguimiento</td>
+                                        <td>No</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                     </tr>
@@ -115,6 +118,7 @@
                                         <td>Apellidos 3</td>
                                         <td>Masculino</td>
                                         <td>Prioritario</td>
+                                        <td>No</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                     </tr>

@@ -123,11 +123,31 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="control-group">
-                                    <label class="control-label">Distrito Judicial</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                <label>Procedencia</label>
+                                <div class="row">
+                                    <div class="col-md-2">  
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="optionsRadios2" id="optionsRadios1" value="D" >Nacional</label>
+                                        </div>
+                                    </div>   
+                                    <div class="col-md-3">   
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="optionsRadios2" id="optionsRadios2" value="C">Internacional</label>
+                                        </div>                            
                                     </div>
+                                </div>  
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Juzgado</label>
+                                    <div>
+                                    <select>
+                                        <option value="sia">Nombre Juzgado 1 - Distrito Judicial 1</option>
+                                        <option value="sia">Nombre Juzgado 2 - Distrito Judicial 2</option>
+                                        
+                                    </select>
+                                    </div>     
                                 </div>
                                 <br>
                                 <br>

@@ -72,7 +72,8 @@
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="#" data-toggle="tab">Informativa</a></li>
                             <li><a href="#" data-toggle="tab">Evaluativa</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Adopción</a></li>
+                            <li class="active"><a href="#" data-toggle="tab">Designación</a></li>
+                            <li><a href="#" data-toggle="tab">Adopción</a></li>
                             <li><a href="#" data-toggle="tab">Post Adopción</a></li>
                         </ul>
                         <form role="form">
@@ -107,6 +108,17 @@
                                     <div class="controls">
                                         <input type="text" class="span2" value="" id="" >
                                     </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Resultado</label>
+                                    <div>
+                                    <select>
+                                        <option value="mia" selected></option>
+                                        <option value="sia">Favorable</option>
+                                        <option value="mia">Desfavorable</option>
+                                    </select>
+                                   </div>
                                 </div>
                                 <br>
                                 <h1 align="center"><strong>Filtrar Lista</strong></h1>
