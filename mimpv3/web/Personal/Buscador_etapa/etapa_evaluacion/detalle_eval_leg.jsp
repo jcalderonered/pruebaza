@@ -1,7 +1,7 @@
 <%-- 
-    Document   : inicio_personal
-    Created on : 28/10/2013, 09:54:29 AM
-    Author     : Ayner Pérez
+    Document   : detalle_evaluacion
+    Created on : 14/11/2013, 07:51:13 PM
+    Author     : User
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-        <script src="<%=request.getContextPath()%>/assets/js/bootstrap.js" type="text/javascript"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/bootstrap.js"></script>
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -29,7 +29,6 @@
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -37,9 +36,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -50,13 +47,11 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
-            <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
-                            <li class="active"><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+                            <li><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Sesiones/talleres</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNAs</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Juzgado</a></li>
@@ -68,69 +63,111 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
+                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>
                         </ul>
                     </div>
-
-                    <div class="col-md-6">
-                        <h1 align="center"><strong>Registro Post-adoptivo</strong></h1>
+                    <div class="col-md-6 col-md-offset-1">
+                        <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
-                        <ul class="nav nav-tabs row" id="tabs">
+                        <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="#" data-toggle="tab">Informativa</a></li>
-                            <li><a href="#" data-toggle="tab">Evaluativa</a></li>
-                            <li><a href="#" data-toggle="tab">Designación</a></li>
+                            <li class="active"><a href="#" data-toggle="tab">Evaluativa</a></li>
                             <li><a href="#" data-toggle="tab">Adopción</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Post Adopción</a></li>
+                            <li><a href="#" data-toggle="tab">Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal"> 
+                        <form role="form">
                             <fieldset>
-                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                                <br>
+                                <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
+                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                                 <br>
                                 <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
                                 <br>
-                                <!-- Text input-->
+                                <br>
+                                <h3 align="left"><strong>Detalles de la evaluación</strong></h3>
+                                <br>
                                 <div class="control-group">
-                                    <label class="control-label">Número: 00183711</label>
+                                    <label class="control-label">Tipo de Evaluación : Legal</label>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Expediente: ApellidoP-ApellidoM</label>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Número de informes</label>
+                                    <label class="control-label">Fecha asignación</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input type="text" class="span2" value="02-16-2012" id="dp3" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Fecha de resolución de adopción</label>
+                                    <label class="control-label">Responsable</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" placeholder="20/11/2013" disabled>
+                                        <select>
+                                            <option value="sia">Gordon Freeman</option>
+                                            <option value="mia">Sofia Lamb</option>
+                                            <option value="mia" selected>Carlos Cornejo</option>
+                                        </select>
+                                    </div>    
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Resultado</label>
+                                    <div class="controls">
+                                        <input id="resul" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
-
-
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Fecha del resultado</label>
+                                    <div class="controls">
+                                        <input id="fecha_resul" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <h3><strong>Resoluciones</strong></h3>
+                                <br>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Tipo Resolución</th>
+                                                <th>Número</th>
+                                                <th>Fecha de Resolución</th>
+                                                <th>Fecha de Notificación</th>
+                                                <th>Editar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Improcedencia</td>
+                                                <td>020273</td>
+                                                <td>11-Oct-13</td>
+                                                <td>11-Oct-13</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <br>
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
-                                        &nbsp;
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Generar Informe</button>
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar nueva resolución</button>
                                     </div>
                                 </div>
+                                <br>
+                                <!-- Button -->
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                    </div>
+                                </div>
+                                <!--FIN DE CONTENIDO-->
                             </fieldset>
-                        </form>    
+                        </form>
                     </div>
                 </div>
             </div>
-            <!--FIN DE CONTENIDO-->
             <br>
             <br>
-
             <div id="footer">
                 <div id="ja-footer" class="wrap">
                     <hr width=80% align="center">

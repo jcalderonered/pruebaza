@@ -169,7 +169,11 @@
                             <div class="control-group">
                                 <label class="control-label">Nacionalidad</label>
                                 <div class="controls">
-                                    <input id="full-name" name="full-name" value="Nacional" type="text" class="input-xlarge">
+                                    <select>
+                                        <option value="sia" selected >Nacional</option>
+                                        <option value="mia" >Internacional</option>
+                                        
+                                    </select>
                                 </div>
                             </div>
                             <br>
@@ -184,28 +188,43 @@
                             <div class="control-group">
                                 <label class="control-label">Tipo de familia</label>
                                 <div class="controls">
-                                    <input id="full-name" name="full-name" value="PP" type="text" class="input-xlarge">
+                                    <select>
+                                        <option value="sia" selected >PP</option>
+                                        <option value="mia" >PE</option>
+                                        <option value="mia" ></option>
+                                    </select>
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
-                                <label class="control-label">Tipo de lista de espera</label>
+                                <label class="control-label">En lista de espera</label>
                                 <div class="controls">
-                                    <input id="full-name" name="full-name" value="Nacionales" type="text" class="input-xlarge">
+                                    <select>
+                                        <option value="sia" selected >Si</option>
+                                        <option value="mia" >No</option>
+                                        
+                                    </select>
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Unidad de Adopción donde se realiza el trámite</label>
                                 <div class="controls">
-                                    <input id="full-name" name="full-name" value="LIMA" type="text" class="input-xlarge">
+                                    <select>
+                                        <option value="sia" selected >Lima</option>
+                                        <option value="mia" >Chiclayo</option>
+                                        <option value="mia" >Trujillo</option>
+                                    </select>
                                 </div>
-                            </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Organismo Acreditado y/o Autoridad Central asociado</label>
                                 <div class="controls">
-                                    <input id="full-name" name="full-name" value="ItalianBaby International" type="text" class="input-xlarge">
+                                    <select>
+                                        <option value="sia" selected >DGA</option>
+                                        <option value="mia" >España</option>
+                                        <option value="mia" ></option>
+                                    </select>
                                 </div>
                             </div>
                             <br>

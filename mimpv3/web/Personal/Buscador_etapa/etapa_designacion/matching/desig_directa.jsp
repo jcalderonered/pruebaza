@@ -72,7 +72,8 @@
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="#" data-toggle="tab">Informativa</a></li>
                             <li><a href="#" data-toggle="tab">Evaluativa</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Adopción</a></li>
+                            <li class="active"><a href="#" data-toggle="tab">Designación</a></li>
+                            <li><a href="#" data-toggle="tab">Adopción</a></li>
                             <li><a href="#" data-toggle="tab">Post Adopción</a></li>
                         </ul>
                         <form role="form">
