@@ -144,11 +144,22 @@
                        </div> 
                          <br>
                         <br>
+                        <div class="control-group">
+                              <label> Organismo Autorizado o Autoridad Central</label>
+                              <div class="controls">
+                               <select>
+                                  <option value="sia" selected >DGA</option>
+                                  <option value="mia" >Italia</option>
+                                  <option value="mia" ></option>
+                               </select>
+                             </div>   
+                        </div>
+                        <br>
                        <div class="control-group">
                              <div class="controls">
-                                 <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Editar</button>
-                                   &nbsp;
-                              <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar información de la familia</button>
+                                 <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Editar y Ver información de familia</button>
+                                 &nbsp;
+                                 <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Ver información de familia</button>
                            </div>
                         </div>
                       </form>

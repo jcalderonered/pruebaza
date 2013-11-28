@@ -14,8 +14,6 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-
-
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -30,7 +28,6 @@
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -38,9 +35,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -51,8 +46,6 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
-            <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 ">
@@ -69,31 +62,59 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>
                         </ul>
                     </div>
-
-                    <div class="col-md-9">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <br>
-                        <h1 align="center"><strong>Datos de la familia internacional</strong></h1>
-                        <br>                      
-                        <ul class="nav nav-tabs row" id="tabs" >
-                            <li><a href="#" data-toggle="tab">La Solicitante</a></li>
-                            <li><a href="#" data-toggle="tab">El solicitante</a></li>
-                            <!-- <li><a href="#" data-toggle="tab">Composición familiar</a></li> -->
-                           <!-- <li><a href="#" data-toggle="tab">Vivienda</a></li> -->
-                            <!--<li><a href="#" data-toggle="tab">Proceso de adopción</a></li> -->
-                            <li class="active"><a href="#" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
-                        </ul>
-
-                        <form class="form-horizontal"> 
+                    <div class="col-md-8 col-md-offset-1">
+                        <form role="form">
+                            <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
+                            <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            <br>
+                            <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                            <br>
+                            <br>
+                            <h3 align="left"><strong>Datos de la ficha</strong></h3>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="control-label">Número</label>
+                                    <div class="controls">
+                                        <input id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label">Fecha de ingreso</label>
+                                    <div class="controls">
+                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label">Hoja de ruta </label>
+                                    <div class="controls">
+                                        <input id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                            </div> 
+                            <br>
+                            <br>
+                            <ul class="nav nav-tabs row" id="tabs" >
+                                <li><a href="#" data-toggle="tab">La Solicitante</a></li>
+                                <li><a href="#" data-toggle="tab">El solicitante</a></li>
+                                <li><a href="#" data-toggle="tab">Composición familiar</a></li>
+                                <li><a href="#" data-toggle="tab">Vivienda</a></li>
+                                <li><a href="#" data-toggle="tab">Información del Expediente</a></li>
+                                <li><a href="#" data-toggle="tab">Proceso de adopción</a></li>
+                                <li class="active"><a href="#" data-toggle="tab">Antecedentes del NNA</a></li> 
+                                <li><a href="#" data-toggle="tab">NNA asociado</a></li> 
+                                <li><a href="#" data-toggle="tab">Atenciones</a></li>
+                            </ul>
+                            <br>
+                            <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                             <br>
                             <h3><strong>Antecedentes, condiciones de salud y desarrollo del niño, niña o adolescente a adoptar(NNA)</strong></h3>
                             <br>
-                            <p>Teniendo en cuenta la información recibida, la familia se 
-                                siente dispuesta para asumir la adopción de un NNA que presente lo/s siguiente/s: 
+                            <p>Teniendo en cuenta la información recibida en la sesión informativa y taller de preparación, se 
+                                siente/n dispuesto/a/s para asumir la adopción de un NNA que presente lo/s siguiente/s: 
                             </p>
                             <br>
                             <!-- Text input-->
@@ -289,9 +310,12 @@
                                     </table>
                                 </div>
                             </div>
-
                             <br>
-                            <h3><strong>Predisposición para viajar</strong></h3>
+                            <h3><strong>Adopción fuera del lugar de residencia de los solicitantes</strong></h3>
+                            <br>
+                            <br>
+                            <h3>En caso de ser designado/a para la adopción de un NNA que resida en una ciudad diferente 
+                                a la suya, ¿tendría disponibilidad para viajar? </h3>
                             <br>
                             <div class="row">
                                 <div class="col-md-3">  
@@ -307,34 +331,50 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <br>
+                            <h3><strong>Espectativas</strong></h3>
                             <br>
                             <div class="control-group">
-                                <label class="control-label">En caso su respuesta sea negativa, indicar por qué</label>
+                                <label class="control-label">¿Cuántos años podría tener el niño, niña o adolescente a adoptar?</label>
                                 <div class="controls">
-                                    <textarea class="input-xlarge" name="message" placeholder="" rows="5" ></textarea>
+                                    <input id="apellido_m" name="full-name" type="text" class="input-xlarge">
                                 </div>
-                            </div>     
-
-
-                            <!-- Button -->
+                            </div>
                             <br>
+                            <p><strong>Género del niño, niña o adolescente a adoptar</strong></p>
+                            <div class="row">
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Masculino</label>
+                                    </div>
+                                </div> 
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Femenino</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Indistinto</label>
+                                    </div>
+                                </div>
+                            </div>
                             <br>
                             <div class="control-group">
                                 <div class="controls">
                                     <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                 </div>
                             </div>
+                            <!--FIN DE CONTENIDO-->
                         </form>
-                        <br>
-                        
                     </div>
                 </div>
             </div>
-            <!--FIN DE CONTENIDO-->
             <br>
             <br>
-
             <div id="footer">
                 <div id="ja-footer" class="wrap">
                     <hr width=80% align="center">

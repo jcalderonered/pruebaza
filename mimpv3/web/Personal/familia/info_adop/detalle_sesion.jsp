@@ -1,7 +1,7 @@
 <%-- 
-    Document   : inicio_personal
-    Created on : 28/10/2013, 09:54:29 AM
-    Author     : Ayner Pérez
+    Document   : detalle_sesion
+    Created on : 14/11/2013, 07:50:49 PM
+    Author     : User
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,7 +14,6 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-        <script src="<%=request.getContextPath()%>/assets/js/bootstrap.js" type="text/javascript"></script>
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -29,34 +28,27 @@
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li class="active"><a href="#">Inicio</a></li>
-                            <li><a href="#">Actualizar Información</a></li>
                             <li><a href="#">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
-            <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 ">
+                    <div class="col-md-3 ">
                         <ul class="nav nav-list well">
-                            <li class="active"><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+                            <li><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Sesiones/talleres</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNAs</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Juzgado</a></li>
@@ -68,69 +60,103 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
+                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>
                         </ul>
                     </div>
 
-                    <div class="col-md-6">
-                        <h1 align="center"><strong>Registro Post-adoptivo</strong></h1>
-                        <br>
-                        <ul class="nav nav-tabs row" id="tabs">
-                            <li><a href="#" data-toggle="tab">Informativa</a></li>
-                            <li><a href="#" data-toggle="tab">Evaluativa</a></li>
-                            <li><a href="#" data-toggle="tab">Designación</a></li>
-                            <li><a href="#" data-toggle="tab">Adopción</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Post Adopción</a></li>
-                        </ul>
-                        <form class="form-horizontal"> 
+                    <div class="col-md-8 col-md-offset-1">
+                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <form role="form">
+                            
+                            <br>
+                            <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                            <br>
+                            <br>
+                            <h3 align="left"><strong>Datos de la ficha</strong></h3>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="control-label">Número</label>
+                                    <div class="controls">
+                                        <input id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label">Fecha de ingreso</label>
+                                    <div class="controls">
+                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label">Hoja de ruta </label>
+                                    <div class="controls">
+                                        <input id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                            </div> 
+                            <br>
+                            <br>
+                            <ul class="nav nav-tabs row" id="tabs" >
+                                <li><a href="#" data-toggle="tab">La Solicitante</a></li>
+                                <li><a href="#" data-toggle="tab">El solicitante</a></li>
+                                <li><a href="#" data-toggle="tab">Composición familiar</a></li>
+                                <li><a href="#" data-toggle="tab">Vivienda</a></li>
+                                <li><a href="#" data-toggle="tab">Información del Expediente</a></li>
+                                <li class="active"><a href="#" data-toggle="tab">Proceso de adopción</a></li>
+                                <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
+                                <li><a href="#" data-toggle="tab">NNA asociado</a></li>
+                                <li><a href="#" data-toggle="tab">Atenciones</a></li>
+                            </ul>
+                            <br>
                             <fieldset>
-                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                                <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
+                                
                                 <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                                <h3><strong>Detalles de la sesión</strong></h3>
                                 <br>
                                 <!-- Text input-->
                                 <div class="control-group">
-                                    <label class="control-label">Número: 00183711</label>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Expediente: ApellidoP-ApellidoM</label>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Número de informes</label>
+                                    <label class="control-label">Número de Sesión</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="nsesion" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Fecha de resolución de adopción</label>
+                                    <label class="control-label">Fecha y Hora</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" placeholder="20/11/2013" disabled>
+                                        <input id="fecha_hora" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
-
-
                                 <br>
-                                <!-- Button -->
                                 <div class="control-group">
+                                    <label class="control-label">Dirección</label>
                                     <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
-                                        &nbsp;
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Generar Expediente</button>
+                                        <input id="direccion" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Duración</label>
+                                    <div class="controls">
+                                        <input id="duracion" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Dirección</label>
+                                    <div class="controls">
+                                        <input id="fecha_hora" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <!--FIN DE CONTENIDO-->
                             </fieldset>
-                        </form>    
+                        </form>
                     </div>
                 </div>
             </div>
-            <!--FIN DE CONTENIDO-->
             <br>
             <br>
-
             <div id="footer">
                 <div id="ja-footer" class="wrap">
                     <hr width=80% align="center">

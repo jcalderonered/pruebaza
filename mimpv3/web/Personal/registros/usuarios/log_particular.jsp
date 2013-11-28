@@ -1,6 +1,6 @@
 <%-- 
-    Document   : inicio_personal
-    Created on : 28/10/2013, 09:54:29 AM
+    Document   : inscripcion_sesion1
+    Created on : 28/10/2013, 05:45:16 AM
     Author     : Ayner Pérez
 --%>
 
@@ -14,7 +14,6 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-        <script src="<%=request.getContextPath()%>/assets/js/bootstrap.js" type="text/javascript"></script>
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -67,76 +66,96 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Autoridad Central</a></li> 
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
+                        
                         </ul>
                     </div>
 
                     <div class="col-md-6">
-                        <h1 align="center"><strong>Registro Post-adoptivo</strong></h1>
+                        <h1 align="center"><strong>Lista de logs del Personal 1</strong></h1>
                         <br>
-                        <ul class="nav nav-tabs row" id="tabs">
-                            <li><a href="#" data-toggle="tab">Informativa</a></li>
-                            <li><a href="#" data-toggle="tab">Evaluativa</a></li>
-                            <li><a href="#" data-toggle="tab">Designación</a></li>
-                            <li><a href="#" data-toggle="tab">Adopción</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Post Adopción</a></li>
-                        </ul>
-                        <form class="form-horizontal"> 
-                            <fieldset>
-                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                                <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
-                                <br>
-                                <!-- Text input-->
+                        <h3><strong>Filtrar por fechas</strong></h3>
+                        <br>
+                        <form role="form">
+                        <div class="row">
+                            <div class="col-md-3">
                                 <div class="control-group">
-                                    <label class="control-label">Número: 00183711</label>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Expediente: ApellidoP-ApellidoM</label>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Número de informes</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <div class="controls">
+                                              <label class="control-label">Desde</label>
+                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            </div>
                                     </div>
-                                </div>
-                                <br>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="control-group">
-                                    <label class="control-label">Fecha de resolución de adopción</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" placeholder="20/11/2013" disabled>
+                                            <div class="controls">
+                                              <label class="control-label">Hasta</label>
+                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            </div>
                                     </div>
-                                </div>
-
-
-                                <br>
-                                <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
-                                        &nbsp;
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Generar Expediente</button>
-                                    </div>
-                                </div>
-                            </fieldset>
+                            </div>
+                        </div>
+                            <br>
+                            <button type="submit" class="btn btn-default">Filtrar</button>
                         </form>    
+                        <br>
+                        <br>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th class="col-sm-2 ">fecha</th>
+                                        
+                                        <th class="col-sm-2 ">Tipo de registro</th>
+                                        <th class="col-sm-2 ">Número del registro</th>
+                                        <th class="col-sm-2 ">Incidencia</th>                                          
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        
+                                        <td>20-Dic-2013</td>
+                                       
+                                        <td>Expediente familia</td>
+                                        <td>1-2013-MIMP-DGA-LIMA</td>
+                                        <td>Agregó resolución al expediente</td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td>20-Dic-2013</td>
+                                        
+                                        <td>Expediente NNA</td>
+                                        <td>012013MIMP</td>
+                                        <td>Cambio de estado</td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td>20-Dic-2013</td>
+                                        
+                                        <td>Informe post-adoptivo</td>
+                                        <td>001-MIMP</td>
+                                        <td>Cambio de profesional asignado</td>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
                     </div>
                 </div>
             </div>
             <!--FIN DE CONTENIDO-->
             <br>
             <br>
-
-            <div id="footer">
-                <div id="ja-footer" class="wrap">
-                    <hr width=80% align="center">
-                    <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-                    <p align="right">Diseñado por RED<br>www.red.net.pe</p>
-                </div>
+        </div>   
+        <div id="footer">
+            <div id="ja-footer" class="wrap">
+                <hr width=80% align="center">
+                <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
+                <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
+        </div>
+
     </body>
 </html>
