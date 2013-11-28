@@ -65,38 +65,12 @@
                         <br>
                         <h3 align="left"><strong>Datos del Expediente</strong></h3>
                         <br>
-                        <!--
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label class="control-label">Número</label>
-                                <div class="controls">
-                                    <input disabled id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="control-label">Fecha de ingreso</label>
-                                <div class="controls">
-                                    <input disabled id="nombre" name="full-name" value="11-Nov-13" type="text" class="input-xlarge">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="control-label">HT </label>
-                                <div class="controls">
-                                    <input disabled id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
-                                </div>
-                            </div>
-                        </div> 
-                        <br>
-                        -->
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
-                            <li ><a href="#" data-toggle="tab">La Solicitante</a></li>
-                            <li ><a href="#" data-toggle="tab">El solicitante</a></li>
-                         <!--   <li><a href="#" data-toggle="tab">Composición familiar</a></li> -->
-                         <!--   <li><a href="#" data-toggle="tab">Vivienda</a></li> -->
+                            <li><a href="#" data-toggle="tab">La Solicitante</a></li>
+                            <li><a href="#" data-toggle="tab">El solicitante</a></li>
                             <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
                             <li class="active"><a href="#" data-toggle="tab">Información del Expediente</a></li>
-                            
                         </ul>
                         <br>
                         <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
