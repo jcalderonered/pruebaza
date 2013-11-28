@@ -362,6 +362,8 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                        &nbsp;
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Propuesta de Designación</button>
                                     </div>
                                 </div>
                             </fieldset>

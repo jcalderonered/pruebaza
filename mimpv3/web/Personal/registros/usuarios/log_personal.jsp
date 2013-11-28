@@ -98,7 +98,9 @@
                         </div>
                             <br>
                             <button type="submit" class="btn btn-default">Filtrar</button>
-                        </form>    
+                        </form>   
+                        <br>
+                        
                         <br>
                         <br>
                         <div class="table-responsive">

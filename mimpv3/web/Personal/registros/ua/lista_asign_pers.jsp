@@ -1,6 +1,6 @@
 <%-- 
-    Document   : inicio_personal
-    Created on : 28/10/2013, 09:54:29 AM
+    Document   : inscripcion_sesion1
+    Created on : 28/10/2013, 05:45:16 AM
     Author     : Ayner Pérez
 --%>
 
@@ -14,7 +14,6 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-        <script src="<%=request.getContextPath()%>/assets/js/bootstrap.js" type="text/javascript"></script>
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -67,76 +66,73 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Autoridad Central</a></li> 
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
+                        
                         </ul>
                     </div>
 
-                    <div class="col-md-6">
-                        <h1 align="center"><strong>Registro Post-adoptivo</strong></h1>
+                    <div class="col-md-6 col-md-offset-1">
+                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <h1 align="center"><strong>Lista del Personal Asignable a UA Número 5</strong></h1>
                         <br>
-                        <ul class="nav nav-tabs row" id="tabs">
-                            <li><a href="#" data-toggle="tab">Informativa</a></li>
-                            <li><a href="#" data-toggle="tab">Evaluativa</a></li>
-                            <li><a href="#" data-toggle="tab">Designación</a></li>
-                            <li><a href="#" data-toggle="tab">Adopción</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Post Adopción</a></li>
-                        </ul>
-                        <form class="form-horizontal"> 
-                            <fieldset>
-                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                                <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
-                                <br>
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label">Número: 00183711</label>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Expediente: ApellidoP-ApellidoM</label>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Número de informes</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de resolución de adopción</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" placeholder="20/11/2013" disabled>
-                                    </div>
-                                </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="col-sm-2 ">Nombre</th>
+                                        <th class="col-sm-2 ">Apellido Paterno</th>
+                                        <th class="col-sm-2 ">Apellido Materno</th>
+                                        <th class="col-sm-2 ">Rol</th>
+                                        <th class="col-sm-2 ">UA</th>
+                                        <th class="col-sm-2 "></th>                                          
+                                    </tr>
+                                </thead>
 
-
-                                <br>
-                                <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
-                                        &nbsp;
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Generar Expediente</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>    
+                                <tbody>
+                                    <tr>
+                                        <td>Nombre 1</td>
+                                        <td>Apellido 1</td>
+                                        <td>Apellido 2</td>
+                                        <td>DEIA</td>
+                                        <td>UA Número 1</td>
+                                        <td><button href="#" class="btn btn-default">Asignar</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre 2</td>
+                                        <td>Apellido 1</td>
+                                        <td>Apellido 2</td>
+                                        <td>DEIA</td>
+                                        <td>UA Número 2</td>
+                                        <td><button href="#" class="btn btn-default">Asignar</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre 3</td>
+                                        <td>Apellido 1</td>
+                                        <td>Apellido 2</td>
+                                        <td>DEIA</td>
+                                        <td>UA Número 3</td>
+                                        <td><button href="#" class="btn btn-default">Asignar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        
                     </div>
                 </div>
             </div>
             <!--FIN DE CONTENIDO-->
             <br>
             <br>
-
-            <div id="footer">
-                <div id="ja-footer" class="wrap">
-                    <hr width=80% align="center">
-                    <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-                    <p align="right">Diseñado por RED<br>www.red.net.pe</p>
-                </div>
+        </div>   
+        <div id="footer">
+            <div id="ja-footer" class="wrap">
+                <hr width=80% align="center">
+                <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
+                <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
+        </div>
+
     </body>
 </html>

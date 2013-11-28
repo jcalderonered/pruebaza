@@ -84,6 +84,7 @@
                                         <th class="col-sm-2 ">Rol</th>
                                         <th class="col-sm-2 ">UA</th>
                                         <th class="col-sm-2 ">Correo</th>
+                                        <th class="col-sm-2 ">Log</th>
                                         <th class="col-sm-2 "></th>                                          
                                     </tr>
                                 </thead>
@@ -95,6 +96,7 @@
                                         <td>DEIA</td>
                                         <td>Lima</td>
                                         <td>napellido1@mimp.pe</td>
+                                        <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Editar</button></td>
                                     </tr>
                                     <tr>
@@ -103,6 +105,7 @@
                                         <td>DEIA</td>
                                         <td>Lima</td>
                                         <td>napellido2@mimp.pe</td>
+                                        <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Editar</button></td>
                                     </tr>
                                     <tr>
@@ -111,6 +114,7 @@
                                         <td>DEIA</td>
                                         <td>Lima</td>
                                         <td>napellido3@mimp.pe</td>
+                                        <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Editar</button></td>
                                     </tr>
                                 </tbody>
