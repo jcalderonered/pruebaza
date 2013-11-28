@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
     </head>
-
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -37,7 +36,6 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -56,7 +54,6 @@
                             <li class="active"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>               
                         </ul>
                     </div>
-
                     <div class="col-md-8 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <br>
@@ -65,38 +62,12 @@
                         <br>
                         <h3 align="left"><strong>Datos del Expediente</strong></h3>
                         <br>
-                        <!--
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label class="control-label">Número</label>
-                                <div class="controls">
-                                    <input disabled id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="control-label">Fecha de ingreso</label>
-                                <div class="controls">
-                                    <input disabled id="nombre" name="full-name" value="11-Nov-13" type="text" class="input-xlarge">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="control-label">HT </label>
-                                <div class="controls">
-                                    <input disabled id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
-                                </div>
-                            </div>
-                        </div> 
-                        <br>
-                        -->
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
-                            <li ><a href="#" data-toggle="tab">La Solicitante</a></li>
+                            <li><a href="#" data-toggle="tab">La Solicitante</a></li>
                             <li><a href="#" data-toggle="tab">El solicitante</a></li>
-                         <!--   <li><a href="#" data-toggle="tab">Composición familiar</a></li> -->
-                         <!--   <li><a href="#" data-toggle="tab">Vivienda</a></li> -->
                             <li class="active"><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
                             <li><a href="#" data-toggle="tab">Información del Expediente</a></li>
-                            
                         </ul>
                         <br>
                         <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
