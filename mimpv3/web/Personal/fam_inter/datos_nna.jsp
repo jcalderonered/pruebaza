@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html>
@@ -14,6 +15,9 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
+
+        <!-- Datepicker -->
+        <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
 
 
     </head>
@@ -70,7 +74,7 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+
                         </ul>
                     </div>
 
@@ -83,7 +87,7 @@
                             <li><a href="#" data-toggle="tab">La Solicitante</a></li>
                             <li><a href="#" data-toggle="tab">El solicitante</a></li>
                             <!-- <li><a href="#" data-toggle="tab">Composición familiar</a></li> -->
-                           <!-- <li><a href="#" data-toggle="tab">Vivienda</a></li> -->
+                            <!-- <li><a href="#" data-toggle="tab">Vivienda</a></li> -->
                             <!--<li><a href="#" data-toggle="tab">Proceso de adopción</a></li> -->
                             <li class="active"><a href="#" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
@@ -289,34 +293,6 @@
                                     </table>
                                 </div>
                             </div>
-
-                            <br>
-                            <h3><strong>Predisposición para viajar</strong></h3>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">  
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
-                                    </div>
-                                </div> 
-                                <div class="col-md-3">  
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >No</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">En caso su respuesta sea negativa, indicar por qué</label>
-                                <div class="controls">
-                                    <textarea class="input-xlarge" name="message" placeholder="" rows="5" ></textarea>
-                                </div>
-                            </div>     
-
-
                             <!-- Button -->
                             <br>
                             <br>
@@ -327,7 +303,7 @@
                             </div>
                         </form>
                         <br>
-                        
+
                     </div>
                 </div>
             </div>
@@ -342,5 +318,17 @@
                     <p align="right">Diseñado por RED<br>www.red.net.pe</p>
                 </div>
             </div>
+            <!-- core JavaScript
+        ================================================== -->
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript">
+
+                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+            </script>
+            <!-- Ubicar al final -->
     </body>
 </html>

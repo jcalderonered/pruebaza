@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html>
@@ -14,8 +15,9 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-        
-        
+        <!-- Datepicker -->
+        <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
+
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -70,114 +72,125 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+
                         </ul>
                     </div>
 
                     <div class="col-md-8 col-md-offset-1">
                         <!-- AQUI AGREGAR EL CONTENIDO QUE ESTARA AL COSTADO DEL MENU -->
-                     <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>   
-                    <br>
-                    <h3><strong>Datos generales del registro</strong></h3>
-                    <br>
-                    <br>
-                    <form role="form">    
-                        <div class="control-group">
-                                    <label class="control-label">Número </label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                        </div>
+                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>   
                         <br>
-                        <div class="control-group">
-                                    <label class="control-label">HT </label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                        </div>
+                        <h3><strong>Datos generales del registro</strong></h3>
                         <br>
-                        <div class="control-group">
-                                    <label class="control-label">Fecha de ingreso</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                        </div>
                         <br>
-                        <div class="control-group">
-                              <label> Estado</label>
-                              <div class="controls">
-                               <select>
-                                  <option value="sia" selected >Evaluación</option>
-                                  <option value="mia" >Observado</option>
-                                  <option value="mia" >Culminado</option>
-                               </select>
-                             </div>   
-                        </div>
-                        <br>
-                        <div class="control-group">
-                                    <label class="control-label">Tupa</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                        </div>
-                        <br>
-                        <div class="control-group">
-                              <label> Tipo de familia</label>
-                              <div class="controls">
-                               <select>
-                                  <option value="sia" selected >PP</option>
-                                  <option value="mia" >PE</option>
-                                  <option value="mia" >MP</option>
-                               </select>
-                             </div>   
-                        </div>
-                        <br>
-                       <div class="control-group">
-                          <label> Tipo lista de espera</label>
-                          <div class="controls">
-                            <select>
-                                  <option value="sia" selected >Nacionales</option>
-                                  <option value="mia" >Peruanos residentes en el extranjero</option>
-                                  <option value="mia" >Mixtos</option>
-                            </select>
-                         </div>    
-                       </div> 
-                         <br>
-                        <br>
-                        <div class="control-group">
-                              <label> Organismo Autorizado o Autoridad Central</label>
-                              <div class="controls">
-                               <select>
-                                  <option value="sia" selected >DGA</option>
-                                  <option value="mia" >Italia</option>
-                                  <option value="mia" ></option>
-                               </select>
-                             </div>   
-                        </div>
-                        <br>
-                       <div class="control-group">
-                             <div class="controls">
-                                 <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Editar y Ver información de familia</button>
-                                 &nbsp;
-                                 <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Ver información de familia</button>
-                           </div>
-                        </div>
-                      </form>
+                        <form role="form">    
+                            <div class="control-group">
+                                <label class="control-label">Número </label>
+                                <div class="controls">
+                                    <input id="nombre" name="full-name" type="text" class="input-xlarge">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">HT </label>
+                                <div class="controls">
+                                    <input id="nombre" name="full-name" type="text" class="input-xlarge">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Fecha de ingreso</label>
+                                <div class="controls">
+                                    <input id="nombre" name="full-name" type="text" class="datepicker input-xlarge">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label> Estado</label>
+                                <div class="controls">
+                                    <select>
+                                        <option value="sia" selected >Evaluación</option>
+                                        <option value="mia" >Observado</option>
+                                        <option value="mia" >Culminado</option>
+                                    </select>
+                                </div>   
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Tupa</label>
+                                <div class="controls">
+                                    <input id="nombre" name="full-name" type="text" class="input-xlarge">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label> Tipo de familia</label>
+                                <div class="controls">
+                                    <select>
+                                        <option value="sia" selected >PP</option>
+                                        <option value="mia" >PE</option>
+                                        <option value="mia" >MP</option>
+                                    </select>
+                                </div>   
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label> Tipo lista de espera</label>
+                                <div class="controls">
+                                    <select>
+                                        <option value="sia" selected >Nacionales</option>
+                                        <option value="mia" >Peruanos residentes en el extranjero</option>
+                                        <option value="mia" >Mixtos</option>
+                                    </select>
+                                </div>    
+                            </div> 
+                            <br>
+                            <br>
+                            <div class="control-group">
+                                <label> Organismo Autorizado o Autoridad Central</label>
+                                <div class="controls">
+                                    <select>
+                                        <option value="sia" selected >DGA</option>
+                                        <option value="mia" >Italia</option>
+                                        <option value="mia" ></option>
+                                    </select>
+                                </div>   
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Editar y Ver información de familia</button>
+                                    &nbsp;
+                                    <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Ver información de familia</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <!--FIN DE CONTENIDO-->
-            <br>
-            <br>
 
-            <div id="footer">
-                <div id="ja-footer" class="wrap">
-                    <hr width=80% align="center">
-                    <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-                    <p align="right">Diseñado por RED<br>www.red.net.pe</p>
                 </div>
             </div>
+        </div>
+        <!--FIN DE CONTENIDO-->
+        <br>
+        <br>
+
+        <div id="footer">
+            <div id="ja-footer" class="wrap">
+                <hr width=80% align="center">
+                <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
+                <p align="right">Diseñado por RED<br>www.red.net.pe</p>
+            </div>
+        </div><!-- core JavaScript
+    ================================================== -->
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+        <script type="text/javascript">
+
+            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+        </script>
+        <!-- Ubicar al final -->
     </body>
 </html>

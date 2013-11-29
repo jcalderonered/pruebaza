@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html>
@@ -14,6 +15,9 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
+        <!-- Datepicker -->
+        <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
+
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -86,7 +90,7 @@
                                 <div class="col-md-3">
                                     <label class="control-label">Fecha de ingreso</label>
                                     <div class="controls">
-                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="input-xlarge">
+                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -140,7 +144,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input id="fecha_nac" name="full-name" type="password" class="input-xlarge">
+                                        <input id="fecha_nac" name="full-name" type="password" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -216,7 +220,7 @@
                                                 <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casada</label>
                                             <br>
                                             <label class="control-label">Fecha de matrimonio Civil</label>
-                                            <input id="fecha_matrimonio" name="full-name" type="text" class="input-xlarge">
+                                            <input id="fecha_matrimonio" name="full-name" type="text" class="datepicker input-xlarge">
                                         </div>                            
                                     </div>
                                     <div class="col-md-3">  
@@ -456,5 +460,20 @@
                     <p align="right">Diseñado por RED<br>www.red.net.pe</p>
                 </div>
             </div>
+
+
+            <!-- core JavaScript
+                    ================================================== -->
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript">
+
+                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+            </script>
+            <!-- Ubicar al final -->
+
     </body>
 </html>

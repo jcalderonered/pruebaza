@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -74,7 +76,7 @@
                             <br>
                             LUGAR: Auditorio de la Institución Educativa “Juana Alarco de Dammert”  ubicado en Av. Alfredo Benavides 2315 - Miraflores.
                             <br>
-                            
+
                         </p>
                     </div>
                 </div>
@@ -90,6 +92,11 @@
                 <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
         </div>
+        <!-- core JavaScript
+================================================== -->
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
 
+        <!-- Ubicar al final -->
     </body>
 </html>
