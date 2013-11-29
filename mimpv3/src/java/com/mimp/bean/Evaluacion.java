@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -13,36 +13,37 @@ public class Evaluacion  implements java.io.Serializable {
 
 
      private Integer idevaluacion;
+     private Personal personal;
      private ExpedienteFamilia expedienteFamilia;
      private String tipo;
      private Date fechaAsignacion;
-     private String responsableNombre;
-     private String responsableApellidoP;
-     private String responsableApellidoM;
      private String resultado;
      private Date fechaResultado;
      private String observacion;
      private String sustento;
+     private String NDesignacion;
+     private Set<Resolucion> resolucions = new HashSet<Resolucion>(0);
      private Set<EvalLegal> evalLegals = new HashSet<EvalLegal>(0);
 
     public Evaluacion() {
     }
 
 	
-    public Evaluacion(ExpedienteFamilia expedienteFamilia) {
+    public Evaluacion(Personal personal, ExpedienteFamilia expedienteFamilia) {
+        this.personal = personal;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public Evaluacion(ExpedienteFamilia expedienteFamilia, String tipo, Date fechaAsignacion, String responsableNombre, String responsableApellidoP, String responsableApellidoM, String resultado, Date fechaResultado, String observacion, String sustento, Set<EvalLegal> evalLegals) {
+    public Evaluacion(Personal personal, ExpedienteFamilia expedienteFamilia, String tipo, Date fechaAsignacion, String resultado, Date fechaResultado, String observacion, String sustento, String NDesignacion, Set<Resolucion> resolucions, Set<EvalLegal> evalLegals) {
+       this.personal = personal;
        this.expedienteFamilia = expedienteFamilia;
        this.tipo = tipo;
        this.fechaAsignacion = fechaAsignacion;
-       this.responsableNombre = responsableNombre;
-       this.responsableApellidoP = responsableApellidoP;
-       this.responsableApellidoM = responsableApellidoM;
        this.resultado = resultado;
        this.fechaResultado = fechaResultado;
        this.observacion = observacion;
        this.sustento = sustento;
+       this.NDesignacion = NDesignacion;
+       this.resolucions = resolucions;
        this.evalLegals = evalLegals;
     }
    
@@ -52,6 +53,13 @@ public class Evaluacion  implements java.io.Serializable {
     
     public void setIdevaluacion(Integer idevaluacion) {
         this.idevaluacion = idevaluacion;
+    }
+    public Personal getPersonal() {
+        return this.personal;
+    }
+    
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
     }
     public ExpedienteFamilia getExpedienteFamilia() {
         return this.expedienteFamilia;
@@ -73,27 +81,6 @@ public class Evaluacion  implements java.io.Serializable {
     
     public void setFechaAsignacion(Date fechaAsignacion) {
         this.fechaAsignacion = fechaAsignacion;
-    }
-    public String getResponsableNombre() {
-        return this.responsableNombre;
-    }
-    
-    public void setResponsableNombre(String responsableNombre) {
-        this.responsableNombre = responsableNombre;
-    }
-    public String getResponsableApellidoP() {
-        return this.responsableApellidoP;
-    }
-    
-    public void setResponsableApellidoP(String responsableApellidoP) {
-        this.responsableApellidoP = responsableApellidoP;
-    }
-    public String getResponsableApellidoM() {
-        return this.responsableApellidoM;
-    }
-    
-    public void setResponsableApellidoM(String responsableApellidoM) {
-        this.responsableApellidoM = responsableApellidoM;
     }
     public String getResultado() {
         return this.resultado;
@@ -122,6 +109,20 @@ public class Evaluacion  implements java.io.Serializable {
     
     public void setSustento(String sustento) {
         this.sustento = sustento;
+    }
+    public String getNDesignacion() {
+        return this.NDesignacion;
+    }
+    
+    public void setNDesignacion(String NDesignacion) {
+        this.NDesignacion = NDesignacion;
+    }
+    public Set<Resolucion> getResolucions() {
+        return this.resolucions;
+    }
+    
+    public void setResolucions(Set<Resolucion> resolucions) {
+        this.resolucions = resolucions;
     }
     public Set<EvalLegal> getEvalLegals() {
         return this.evalLegals;

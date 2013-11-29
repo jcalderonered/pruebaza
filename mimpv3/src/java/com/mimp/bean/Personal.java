@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -32,6 +32,9 @@ public class Personal  implements java.io.Serializable {
      private String rol;
      private Set<Atencion> atencions = new HashSet<Atencion>(0);
      private Set<Log> logs = new HashSet<Log>(0);
+     private Set<InformePostAdoptivo> informePostAdoptivos = new HashSet<InformePostAdoptivo>(0);
+     private Set<Designacion> designacions = new HashSet<Designacion>(0);
+     private Set<Evaluacion> evaluacions = new HashSet<Evaluacion>(0);
 
     public Personal() {
     }
@@ -40,7 +43,7 @@ public class Personal  implements java.io.Serializable {
     public Personal(Unidad unidad) {
         this.unidad = unidad;
     }
-    public Personal(Unidad unidad, String nombre, String apellidoP, String apellidoM, String user, String pass, String correoTrabajo, String correoPersonal, String profesion, String gradoInstruccion, String cargo, Integer dni, Date fechaNacimiento, String regimen, Date fechaIngreso, String domicilio, String rol, Set<Atencion> atencions, Set<Log> logs) {
+    public Personal(Unidad unidad, String nombre, String apellidoP, String apellidoM, String user, String pass, String correoTrabajo, String correoPersonal, String profesion, String gradoInstruccion, String cargo, Integer dni, Date fechaNacimiento, String regimen, Date fechaIngreso, String domicilio, String rol, Set<Atencion> atencions, Set<Log> logs, Set<InformePostAdoptivo> informePostAdoptivos, Set<Designacion> designacions, Set<Evaluacion> evaluacions) {
        this.unidad = unidad;
        this.nombre = nombre;
        this.apellidoP = apellidoP;
@@ -60,6 +63,9 @@ public class Personal  implements java.io.Serializable {
        this.rol = rol;
        this.atencions = atencions;
        this.logs = logs;
+       this.informePostAdoptivos = informePostAdoptivos;
+       this.designacions = designacions;
+       this.evaluacions = evaluacions;
     }
    
     public Integer getIdpersonal() {
@@ -201,6 +207,27 @@ public class Personal  implements java.io.Serializable {
     
     public void setLogs(Set<Log> logs) {
         this.logs = logs;
+    }
+    public Set<InformePostAdoptivo> getInformePostAdoptivos() {
+        return this.informePostAdoptivos;
+    }
+    
+    public void setInformePostAdoptivos(Set<InformePostAdoptivo> informePostAdoptivos) {
+        this.informePostAdoptivos = informePostAdoptivos;
+    }
+    public Set<Designacion> getDesignacions() {
+        return this.designacions;
+    }
+    
+    public void setDesignacions(Set<Designacion> designacions) {
+        this.designacions = designacions;
+    }
+    public Set<Evaluacion> getEvaluacions() {
+        return this.evaluacions;
+    }
+    
+    public void setEvaluacions(Set<Evaluacion> evaluacions) {
+        this.evaluacions = evaluacions;
     }
 
 

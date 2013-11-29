@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class Entidad  implements java.io.Serializable {
 
 
-     private Integer idEntidad;
+     private Integer identidad;
      private String nombre;
      private String direccion;
      private String telefono;
@@ -46,12 +46,12 @@ public class Entidad  implements java.io.Serializable {
        this.autoridads = autoridads;
     }
    
-    public Integer getIdEntidad() {
-        return this.idEntidad;
+    public Integer getIdentidad() {
+        return this.identidad;
     }
     
-    public void setIdEntidad(Integer idEntidad) {
-        this.idEntidad = idEntidad;
+    public void setIdentidad(Integer identidad) {
+        this.identidad = identidad;
     }
     public String getNombre() {
         return this.nombre;

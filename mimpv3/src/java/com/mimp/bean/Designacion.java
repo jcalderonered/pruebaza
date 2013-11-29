@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -12,11 +12,13 @@ public class Designacion  implements java.io.Serializable {
 
      private Integer iddesignacion;
      private Nna nna;
+     private Personal personal;
      private ExpedienteFamilia expedienteFamilia;
      private String NDesignacion;
      private Integer prioridad;
      private Date fechaPropuesta;
      private Date fechaConsejo;
+     private Boolean aceptacionConsejo;
      private String tipoPropuesta;
      private String obs;
 
@@ -24,17 +26,20 @@ public class Designacion  implements java.io.Serializable {
     }
 
 	
-    public Designacion(Nna nna, ExpedienteFamilia expedienteFamilia) {
+    public Designacion(Nna nna, Personal personal, ExpedienteFamilia expedienteFamilia) {
         this.nna = nna;
+        this.personal = personal;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public Designacion(Nna nna, ExpedienteFamilia expedienteFamilia, String NDesignacion, Integer prioridad, Date fechaPropuesta, Date fechaConsejo, String tipoPropuesta, String obs) {
+    public Designacion(Nna nna, Personal personal, ExpedienteFamilia expedienteFamilia, String NDesignacion, Integer prioridad, Date fechaPropuesta, Date fechaConsejo, Boolean aceptacionConsejo, String tipoPropuesta, String obs) {
        this.nna = nna;
+       this.personal = personal;
        this.expedienteFamilia = expedienteFamilia;
        this.NDesignacion = NDesignacion;
        this.prioridad = prioridad;
        this.fechaPropuesta = fechaPropuesta;
        this.fechaConsejo = fechaConsejo;
+       this.aceptacionConsejo = aceptacionConsejo;
        this.tipoPropuesta = tipoPropuesta;
        this.obs = obs;
     }
@@ -52,6 +57,13 @@ public class Designacion  implements java.io.Serializable {
     
     public void setNna(Nna nna) {
         this.nna = nna;
+    }
+    public Personal getPersonal() {
+        return this.personal;
+    }
+    
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
     }
     public ExpedienteFamilia getExpedienteFamilia() {
         return this.expedienteFamilia;
@@ -87,6 +99,13 @@ public class Designacion  implements java.io.Serializable {
     
     public void setFechaConsejo(Date fechaConsejo) {
         this.fechaConsejo = fechaConsejo;
+    }
+    public Boolean getAceptacionConsejo() {
+        return this.aceptacionConsejo;
+    }
+    
+    public void setAceptacionConsejo(Boolean aceptacionConsejo) {
+        this.aceptacionConsejo = aceptacionConsejo;
     }
     public String getTipoPropuesta() {
         return this.tipoPropuesta;

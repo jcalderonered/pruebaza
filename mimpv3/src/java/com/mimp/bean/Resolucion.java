@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -11,7 +11,7 @@ public class Resolucion  implements java.io.Serializable {
 
 
      private Integer idresolucion;
-     private ExpedienteFamilia expedienteFamilia;
+     private Evaluacion evaluacion;
      private String tipo;
      private String numero;
      private Date fechaResol;
@@ -21,11 +21,11 @@ public class Resolucion  implements java.io.Serializable {
     }
 
 	
-    public Resolucion(ExpedienteFamilia expedienteFamilia) {
-        this.expedienteFamilia = expedienteFamilia;
+    public Resolucion(Evaluacion evaluacion) {
+        this.evaluacion = evaluacion;
     }
-    public Resolucion(ExpedienteFamilia expedienteFamilia, String tipo, String numero, Date fechaResol, Date fechaNotificacion) {
-       this.expedienteFamilia = expedienteFamilia;
+    public Resolucion(Evaluacion evaluacion, String tipo, String numero, Date fechaResol, Date fechaNotificacion) {
+       this.evaluacion = evaluacion;
        this.tipo = tipo;
        this.numero = numero;
        this.fechaResol = fechaResol;
@@ -39,12 +39,12 @@ public class Resolucion  implements java.io.Serializable {
     public void setIdresolucion(Integer idresolucion) {
         this.idresolucion = idresolucion;
     }
-    public ExpedienteFamilia getExpedienteFamilia() {
-        return this.expedienteFamilia;
+    public Evaluacion getEvaluacion() {
+        return this.evaluacion;
     }
     
-    public void setExpedienteFamilia(ExpedienteFamilia expedienteFamilia) {
-        this.expedienteFamilia = expedienteFamilia;
+    public void setEvaluacion(Evaluacion evaluacion) {
+        this.evaluacion = evaluacion;
     }
     public String getTipo() {
         return this.tipo;
