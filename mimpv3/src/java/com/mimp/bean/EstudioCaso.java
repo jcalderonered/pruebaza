@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -16,6 +16,7 @@ public class EstudioCaso  implements java.io.Serializable {
      private String orden;
      private Date fechaEstudio;
      private Date fechaSolAdop;
+     private Boolean resultado;
 
     public EstudioCaso() {
     }
@@ -25,12 +26,13 @@ public class EstudioCaso  implements java.io.Serializable {
         this.nna = nna;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public EstudioCaso(Nna nna, ExpedienteFamilia expedienteFamilia, String orden, Date fechaEstudio, Date fechaSolAdop) {
+    public EstudioCaso(Nna nna, ExpedienteFamilia expedienteFamilia, String orden, Date fechaEstudio, Date fechaSolAdop, Boolean resultado) {
        this.nna = nna;
        this.expedienteFamilia = expedienteFamilia;
        this.orden = orden;
        this.fechaEstudio = fechaEstudio;
        this.fechaSolAdop = fechaSolAdop;
+       this.resultado = resultado;
     }
    
     public Integer getIdestudioCaso() {
@@ -74,6 +76,13 @@ public class EstudioCaso  implements java.io.Serializable {
     
     public void setFechaSolAdop(Date fechaSolAdop) {
         this.fechaSolAdop = fechaSolAdop;
+    }
+    public Boolean getResultado() {
+        return this.resultado;
+    }
+    
+    public void setResultado(Boolean resultado) {
+        this.resultado = resultado;
     }
 
 

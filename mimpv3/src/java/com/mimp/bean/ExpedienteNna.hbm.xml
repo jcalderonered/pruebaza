@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 29/11/2013 03:12:07 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.ExpedienteNna" table="expediente_nna" catalog="mimp_adopcion">
         <id name="idexpedienteNna" type="java.lang.Integer">
@@ -58,6 +58,15 @@
         </property>
         <property name="fechaEstado" type="date">
             <column name="fecha_estado" length="10" />
+        </property>
+        <property name="adoptable" type="java.lang.Boolean">
+            <column name="adoptable" />
+        </property>
+        <property name="fechaResolCons" type="date">
+            <column name="fecha_resol_cons" length="10" />
+        </property>
+        <property name="nacional" type="java.lang.Boolean">
+            <column name="nacional" />
         </property>
     </class>
 </hibernate-mapping>

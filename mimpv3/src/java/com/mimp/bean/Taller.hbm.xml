@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 29/11/2013 03:12:07 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Taller" table="taller" catalog="mimp_adopcion">
         <id name="idtaller" type="java.lang.Integer">
             <column name="idtaller" />
             <generator class="identity" />
         </id>
+        <property name="NSesion" type="string">
+            <column name="n_sesion" length="10" />
+        </property>
         <property name="tipoTaller" type="string">
             <column name="tipo_taller" length="15" />
         </property>

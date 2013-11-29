@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 29/11/2013 03:12:07 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.ExpedienteFamilia" table="expediente_familia" catalog="mimp_adopcion">
         <id name="idexpedienteFamilia" type="java.lang.Integer">
@@ -50,12 +50,6 @@
         <property name="tipoListaEspera" type="string">
             <column name="tipo_lista_espera" length="30" />
         </property>
-        <set name="resolucions" table="resolucion" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idexpediente_familia" not-null="true" />
-            </key>
-            <one-to-many class="com.mimp.bean.Resolucion" />
-        </set>
         <set name="designacions" table="designacion" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="idexpediente_familia" not-null="true" />

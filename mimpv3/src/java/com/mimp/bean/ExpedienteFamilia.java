@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -27,7 +27,6 @@ public class ExpedienteFamilia  implements java.io.Serializable {
      private Boolean rnaa;
      private String tipoFamilia;
      private String tipoListaEspera;
-     private Set<Resolucion> resolucions = new HashSet<Resolucion>(0);
      private Set<Designacion> designacions = new HashSet<Designacion>(0);
      private Set<EstudioCaso> estudioCasos = new HashSet<EstudioCaso>(0);
      private Set<Evaluacion> evaluacions = new HashSet<Evaluacion>(0);
@@ -40,7 +39,7 @@ public class ExpedienteFamilia  implements java.io.Serializable {
         this.unidad = unidad;
         this.familia = familia;
     }
-    public ExpedienteFamilia(Unidad unidad, Familia familia, Integer numero, String expediente, String ht, String numeroExpediente, Date fechaIngresoDga, String estado, Date tupa, String nacionalidad, Boolean rnsa, Boolean rnaa, String tipoFamilia, String tipoListaEspera, Set<Resolucion> resolucions, Set<Designacion> designacions, Set<EstudioCaso> estudioCasos, Set<Evaluacion> evaluacions) {
+    public ExpedienteFamilia(Unidad unidad, Familia familia, Integer numero, String expediente, String ht, String numeroExpediente, Date fechaIngresoDga, String estado, Date tupa, String nacionalidad, Boolean rnsa, Boolean rnaa, String tipoFamilia, String tipoListaEspera, Set<Designacion> designacions, Set<EstudioCaso> estudioCasos, Set<Evaluacion> evaluacions) {
        this.unidad = unidad;
        this.familia = familia;
        this.numero = numero;
@@ -55,7 +54,6 @@ public class ExpedienteFamilia  implements java.io.Serializable {
        this.rnaa = rnaa;
        this.tipoFamilia = tipoFamilia;
        this.tipoListaEspera = tipoListaEspera;
-       this.resolucions = resolucions;
        this.designacions = designacions;
        this.estudioCasos = estudioCasos;
        this.evaluacions = evaluacions;
@@ -165,13 +163,6 @@ public class ExpedienteFamilia  implements java.io.Serializable {
     
     public void setTipoListaEspera(String tipoListaEspera) {
         this.tipoListaEspera = tipoListaEspera;
-    }
-    public Set<Resolucion> getResolucions() {
-        return this.resolucions;
-    }
-    
-    public void setResolucions(Set<Resolucion> resolucions) {
-        this.resolucions = resolucions;
     }
     public Set<Designacion> getDesignacions() {
         return this.designacions;

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 29/11/2013 03:12:07 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.InformePostAdoptivo" table="informe_post_adoptivo" catalog="mimp_adopcion">
         <id name="idinformePostAdoptivo" type="java.lang.Integer">
@@ -10,6 +10,9 @@
         </id>
         <many-to-one name="postAdopcion" class="com.mimp.bean.PostAdopcion" fetch="select">
             <column name="idpost_adopcion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personal" class="com.mimp.bean.Personal" fetch="select">
+            <column name="idpersonal" not-null="true" />
         </many-to-one>
         <property name="estado" type="string">
             <column name="estado" length="30" />
@@ -22,15 +25,6 @@
         </property>
         <property name="fechaRecepcion" type="date">
             <column name="fecha_recepcion" length="10" />
-        </property>
-        <property name="profesAsigNom" type="string">
-            <column name="profes_asig_nom" length="45" />
-        </property>
-        <property name="profesAsigP" type="string">
-            <column name="profes_asig_p" length="45" />
-        </property>
-        <property name="profesAsigM" type="string">
-            <column name="profes_asig_m" length="45" />
         </property>
         <property name="fechaInforme" type="date">
             <column name="fecha_informe" length="10" />

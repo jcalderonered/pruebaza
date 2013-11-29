@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 29/11/2013 03:12:07 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Designacion" table="designacion" catalog="mimp_adopcion">
         <id name="iddesignacion" type="java.lang.Integer">
@@ -10,6 +10,9 @@
         </id>
         <many-to-one name="nna" class="com.mimp.bean.Nna" fetch="select">
             <column name="idnna" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personal" class="com.mimp.bean.Personal" fetch="select">
+            <column name="idpersonal" not-null="true" />
         </many-to-one>
         <many-to-one name="expedienteFamilia" class="com.mimp.bean.ExpedienteFamilia" fetch="select">
             <column name="idexpediente_familia" not-null="true" />
@@ -25,6 +28,9 @@
         </property>
         <property name="fechaConsejo" type="date">
             <column name="fecha_consejo" length="10" />
+        </property>
+        <property name="aceptacionConsejo" type="java.lang.Boolean">
+            <column name="aceptacion_consejo" />
         </property>
         <property name="tipoPropuesta" type="string">
             <column name="tipo_propuesta" length="10" />

@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class Car  implements java.io.Serializable {
 
 
-     private Integer idCar;
+     private Integer idcar;
      private String nombre;
      private String direccion;
      private String departamento;
@@ -45,12 +45,12 @@ public class Car  implements java.io.Serializable {
        this.nnas = nnas;
     }
    
-    public Integer getIdCar() {
-        return this.idCar;
+    public Integer getIdcar() {
+        return this.idcar;
     }
     
-    public void setIdCar(Integer idCar) {
-        this.idCar = idCar;
+    public void setIdcar(Integer idcar) {
+        this.idcar = idcar;
     }
     public String getNombre() {
         return this.nombre;

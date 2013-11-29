@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -28,6 +28,9 @@ public class ExpedienteNna  implements java.io.Serializable {
      private String respPsicosocialM;
      private String estado;
      private Date fechaEstado;
+     private Boolean adoptable;
+     private Date fechaResolCons;
+     private Boolean nacional;
 
     public ExpedienteNna() {
     }
@@ -37,7 +40,7 @@ public class ExpedienteNna  implements java.io.Serializable {
         this.nna = nna;
         this.unidad = unidad;
     }
-    public ExpedienteNna(Nna nna, Unidad unidad, String numero, Date fechaIngreso, String ht, String NExpTutelar, String procTutelar, Boolean fichaIntegral, String comentarios, String respLegalNombre, String respLegalP, String respLegalM, String respPsicosocialNombre, String respPiscosocialP, String respPsicosocialM, String estado, Date fechaEstado) {
+    public ExpedienteNna(Nna nna, Unidad unidad, String numero, Date fechaIngreso, String ht, String NExpTutelar, String procTutelar, Boolean fichaIntegral, String comentarios, String respLegalNombre, String respLegalP, String respLegalM, String respPsicosocialNombre, String respPiscosocialP, String respPsicosocialM, String estado, Date fechaEstado, Boolean adoptable, Date fechaResolCons, Boolean nacional) {
        this.nna = nna;
        this.unidad = unidad;
        this.numero = numero;
@@ -55,6 +58,9 @@ public class ExpedienteNna  implements java.io.Serializable {
        this.respPsicosocialM = respPsicosocialM;
        this.estado = estado;
        this.fechaEstado = fechaEstado;
+       this.adoptable = adoptable;
+       this.fechaResolCons = fechaResolCons;
+       this.nacional = nacional;
     }
    
     public Integer getIdexpedienteNna() {
@@ -182,6 +188,27 @@ public class ExpedienteNna  implements java.io.Serializable {
     
     public void setFechaEstado(Date fechaEstado) {
         this.fechaEstado = fechaEstado;
+    }
+    public Boolean getAdoptable() {
+        return this.adoptable;
+    }
+    
+    public void setAdoptable(Boolean adoptable) {
+        this.adoptable = adoptable;
+    }
+    public Date getFechaResolCons() {
+        return this.fechaResolCons;
+    }
+    
+    public void setFechaResolCons(Date fechaResolCons) {
+        this.fechaResolCons = fechaResolCons;
+    }
+    public Boolean getNacional() {
+        return this.nacional;
+    }
+    
+    public void setNacional(Boolean nacional) {
+        this.nacional = nacional;
     }
 
 

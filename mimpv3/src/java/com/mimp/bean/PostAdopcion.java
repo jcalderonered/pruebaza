@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -14,8 +14,6 @@ public class PostAdopcion  implements java.io.Serializable {
 
      private Integer idpostAdopcion;
      private Familia familia;
-     private String numero;
-     private String expediente;
      private Integer numeroInformes;
      private Date fechaResolucion;
      private Set<InformePostAdoptivo> informePostAdoptivos = new HashSet<InformePostAdoptivo>(0);
@@ -27,10 +25,8 @@ public class PostAdopcion  implements java.io.Serializable {
     public PostAdopcion(Familia familia) {
         this.familia = familia;
     }
-    public PostAdopcion(Familia familia, String numero, String expediente, Integer numeroInformes, Date fechaResolucion, Set<InformePostAdoptivo> informePostAdoptivos) {
+    public PostAdopcion(Familia familia, Integer numeroInformes, Date fechaResolucion, Set<InformePostAdoptivo> informePostAdoptivos) {
        this.familia = familia;
-       this.numero = numero;
-       this.expediente = expediente;
        this.numeroInformes = numeroInformes;
        this.fechaResolucion = fechaResolucion;
        this.informePostAdoptivos = informePostAdoptivos;
@@ -49,20 +45,6 @@ public class PostAdopcion  implements java.io.Serializable {
     
     public void setFamilia(Familia familia) {
         this.familia = familia;
-    }
-    public String getNumero() {
-        return this.numero;
-    }
-    
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-    public String getExpediente() {
-        return this.expediente;
-    }
-    
-    public void setExpediente(String expediente) {
-        this.expediente = expediente;
     }
     public Integer getNumeroInformes() {
         return this.numeroInformes;

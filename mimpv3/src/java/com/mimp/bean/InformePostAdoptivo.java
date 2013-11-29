@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -12,13 +12,11 @@ public class InformePostAdoptivo  implements java.io.Serializable {
 
      private Integer idinformePostAdoptivo;
      private PostAdopcion postAdopcion;
+     private Personal personal;
      private String estado;
      private String numeroInforme;
      private Date fechaRecepcionProyectado;
      private Date fechaRecepcion;
-     private String profesAsigNom;
-     private String profesAsigP;
-     private String profesAsigM;
      private Date fechaInforme;
      private Date fechaActa;
 
@@ -26,18 +24,17 @@ public class InformePostAdoptivo  implements java.io.Serializable {
     }
 
 	
-    public InformePostAdoptivo(PostAdopcion postAdopcion) {
+    public InformePostAdoptivo(PostAdopcion postAdopcion, Personal personal) {
         this.postAdopcion = postAdopcion;
+        this.personal = personal;
     }
-    public InformePostAdoptivo(PostAdopcion postAdopcion, String estado, String numeroInforme, Date fechaRecepcionProyectado, Date fechaRecepcion, String profesAsigNom, String profesAsigP, String profesAsigM, Date fechaInforme, Date fechaActa) {
+    public InformePostAdoptivo(PostAdopcion postAdopcion, Personal personal, String estado, String numeroInforme, Date fechaRecepcionProyectado, Date fechaRecepcion, Date fechaInforme, Date fechaActa) {
        this.postAdopcion = postAdopcion;
+       this.personal = personal;
        this.estado = estado;
        this.numeroInforme = numeroInforme;
        this.fechaRecepcionProyectado = fechaRecepcionProyectado;
        this.fechaRecepcion = fechaRecepcion;
-       this.profesAsigNom = profesAsigNom;
-       this.profesAsigP = profesAsigP;
-       this.profesAsigM = profesAsigM;
        this.fechaInforme = fechaInforme;
        this.fechaActa = fechaActa;
     }
@@ -55,6 +52,13 @@ public class InformePostAdoptivo  implements java.io.Serializable {
     
     public void setPostAdopcion(PostAdopcion postAdopcion) {
         this.postAdopcion = postAdopcion;
+    }
+    public Personal getPersonal() {
+        return this.personal;
+    }
+    
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
     }
     public String getEstado() {
         return this.estado;
@@ -83,27 +87,6 @@ public class InformePostAdoptivo  implements java.io.Serializable {
     
     public void setFechaRecepcion(Date fechaRecepcion) {
         this.fechaRecepcion = fechaRecepcion;
-    }
-    public String getProfesAsigNom() {
-        return this.profesAsigNom;
-    }
-    
-    public void setProfesAsigNom(String profesAsigNom) {
-        this.profesAsigNom = profesAsigNom;
-    }
-    public String getProfesAsigP() {
-        return this.profesAsigP;
-    }
-    
-    public void setProfesAsigP(String profesAsigP) {
-        this.profesAsigP = profesAsigP;
-    }
-    public String getProfesAsigM() {
-        return this.profesAsigM;
-    }
-    
-    public void setProfesAsigM(String profesAsigM) {
-        this.profesAsigM = profesAsigM;
     }
     public Date getFechaInforme() {
         return this.fechaInforme;

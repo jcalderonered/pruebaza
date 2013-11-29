@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -12,6 +12,7 @@ public class Taller  implements java.io.Serializable {
 
 
      private Integer idtaller;
+     private String NSesion;
      private String tipoTaller;
      private String nombre;
      private Boolean habilitado;
@@ -21,7 +22,8 @@ public class Taller  implements java.io.Serializable {
     public Taller() {
     }
 
-    public Taller(String tipoTaller, String nombre, Boolean habilitado, Byte NReunion, Set<Grupo> grupos) {
+    public Taller(String NSesion, String tipoTaller, String nombre, Boolean habilitado, Byte NReunion, Set<Grupo> grupos) {
+       this.NSesion = NSesion;
        this.tipoTaller = tipoTaller;
        this.nombre = nombre;
        this.habilitado = habilitado;
@@ -35,6 +37,13 @@ public class Taller  implements java.io.Serializable {
     
     public void setIdtaller(Integer idtaller) {
         this.idtaller = idtaller;
+    }
+    public String getNSesion() {
+        return this.NSesion;
+    }
+    
+    public void setNSesion(String NSesion) {
+        this.NSesion = NSesion;
     }
     public String getTipoTaller() {
         return this.tipoTaller;

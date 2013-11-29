@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 29/11/2013 03:12:07 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Evaluacion" table="evaluacion" catalog="mimp_adopcion">
         <id name="idevaluacion" type="java.lang.Integer">
             <column name="idevaluacion" />
             <generator class="identity" />
         </id>
+        <many-to-one name="personal" class="com.mimp.bean.Personal" fetch="select">
+            <column name="idpersonal" not-null="true" />
+        </many-to-one>
         <many-to-one name="expedienteFamilia" class="com.mimp.bean.ExpedienteFamilia" fetch="select">
             <column name="idexpediente_familia" not-null="true" />
         </many-to-one>
@@ -16,15 +19,6 @@
         </property>
         <property name="fechaAsignacion" type="date">
             <column name="fecha_asignacion" length="10" />
-        </property>
-        <property name="responsableNombre" type="string">
-            <column name="responsable_nombre" length="50" />
-        </property>
-        <property name="responsableApellidoP" type="string">
-            <column name="responsable_apellido_p" length="50" />
-        </property>
-        <property name="responsableApellidoM" type="string">
-            <column name="responsable_apellido_m" length="50" />
         </property>
         <property name="resultado" type="string">
             <column name="resultado" length="30" />
@@ -38,6 +32,15 @@
         <property name="sustento" type="string">
             <column name="sustento" length="500" />
         </property>
+        <property name="NDesignacion" type="string">
+            <column name="n_designacion" length="20" />
+        </property>
+        <set name="resolucions" table="resolucion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idevaluacion" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Resolucion" />
+        </set>
         <set name="evalLegals" table="eval_legal" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="idevaluacion" not-null="true" />

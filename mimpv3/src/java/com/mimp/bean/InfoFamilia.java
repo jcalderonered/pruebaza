@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Nov 22, 2013 4:14:42 PM by Hibernate Tools 3.6.0
+// Generated 29/11/2013 03:12:05 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -15,8 +15,8 @@ public class InfoFamilia  implements java.io.Serializable {
      private Integer idinfoFamilia;
      private Familia familia;
      private String hojaReferencia;
-     private String paisRes;
      private String depRes;
+     private String paisRes;
      private String domicilio;
      private String propiedadVivienda;
      private String tipoVivienda;
@@ -65,11 +65,11 @@ public class InfoFamilia  implements java.io.Serializable {
     public InfoFamilia(Familia familia) {
         this.familia = familia;
     }
-    public InfoFamilia(Familia familia, String hojaReferencia, String paisRes, String depRes, String domicilio, String propiedadVivienda, String tipoVivienda, Integer areaVivTotal, Integer areaVivConst, String distVivienda, Boolean luz, Boolean agua, Boolean desague, String otrosServ, String materConst, String pared, String techo, String piso, Character nivelSocioeconomico, Byte expectativaEdad, String expectativaGenero, String origenHijos, Boolean puedeViajar, String predisposicionAp, String condicion, String antecedenteFamilia, Date fechaAntecedenteFamilia, String observaciones, Boolean nnaIncesto, Boolean nnaMental, Boolean nnaEpilepsia, Boolean nnaAbuso, Boolean nnaSifilis, Boolean nnaSeguiMedico, Boolean nnaOperacion, Boolean nnaHiperactivo, Boolean nnaEspecial, Boolean nnaEnfermo, Boolean nnaMayor, Boolean nnaAdolescente, Boolean nnaHermano, Set<Adoptante> adoptantes, Set<ResidenteAct> residenteActs, Set<HijoAct> hijoActs) {
+    public InfoFamilia(Familia familia, String hojaReferencia, String depRes, String paisRes, String domicilio, String propiedadVivienda, String tipoVivienda, Integer areaVivTotal, Integer areaVivConst, String distVivienda, Boolean luz, Boolean agua, Boolean desague, String otrosServ, String materConst, String pared, String techo, String piso, Character nivelSocioeconomico, Byte expectativaEdad, String expectativaGenero, String origenHijos, Boolean puedeViajar, String predisposicionAp, String condicion, String antecedenteFamilia, Date fechaAntecedenteFamilia, String observaciones, Boolean nnaIncesto, Boolean nnaMental, Boolean nnaEpilepsia, Boolean nnaAbuso, Boolean nnaSifilis, Boolean nnaSeguiMedico, Boolean nnaOperacion, Boolean nnaHiperactivo, Boolean nnaEspecial, Boolean nnaEnfermo, Boolean nnaMayor, Boolean nnaAdolescente, Boolean nnaHermano, Set<Adoptante> adoptantes, Set<ResidenteAct> residenteActs, Set<HijoAct> hijoActs) {
        this.familia = familia;
        this.hojaReferencia = hojaReferencia;
-       this.paisRes = paisRes;
        this.depRes = depRes;
+       this.paisRes = paisRes;
        this.domicilio = domicilio;
        this.propiedadVivienda = propiedadVivienda;
        this.tipoVivienda = tipoVivienda;
@@ -133,19 +133,19 @@ public class InfoFamilia  implements java.io.Serializable {
     public void setHojaReferencia(String hojaReferencia) {
         this.hojaReferencia = hojaReferencia;
     }
-    public String getPaisRes() {
-        return this.paisRes;
-    }
-    
-    public void setPaisRes(String paisRes) {
-        this.paisRes = paisRes;
-    }
     public String getDepRes() {
         return this.depRes;
     }
     
     public void setDepRes(String depRes) {
         this.depRes = depRes;
+    }
+    public String getPaisRes() {
+        return this.paisRes;
+    }
+    
+    public void setPaisRes(String paisRes) {
+        this.paisRes = paisRes;
     }
     public String getDomicilio() {
         return this.domicilio;

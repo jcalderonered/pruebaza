@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 22, 2013 4:14:44 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 29/11/2013 03:12:07 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.InfoFamilia" table="info_familia" catalog="mimp_adopcion">
         <id name="idinfoFamilia" type="java.lang.Integer">
@@ -14,11 +14,11 @@
         <property name="hojaReferencia" type="string">
             <column name="hoja_referencia" length="40" />
         </property>
-        <property name="paisRes" type="string">
-            <column name="pais_res" length="40" />
-        </property>
         <property name="depRes" type="string">
             <column name="dep_res" length="20" />
+        </property>
+        <property name="paisRes" type="string">
+            <column name="pais_res" length="40" />
         </property>
         <property name="domicilio" type="string">
             <column name="domicilio" length="50" />
