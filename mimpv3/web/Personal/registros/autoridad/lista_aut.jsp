@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html>
@@ -129,6 +130,11 @@
                 <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
         </div>
-
+                <!-- core JavaScript
+        ================================================== -->
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            
+            <!-- Ubicar al final -->
     </body>
 </html>

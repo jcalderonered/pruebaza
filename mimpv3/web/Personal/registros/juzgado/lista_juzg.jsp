@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html>
@@ -68,12 +69,12 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+
                         </ul>
                     </div>
 
                     <div class="col-md-6 col-md-offset-1">
-                     <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>   
+                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>   
                         <h1 align="center"><strong>Lista de Juzgados</strong></h1>
                         <br>
                         <div class="table-responsive">
@@ -104,7 +105,7 @@
                                         <td><button href="#" class="btn btn-default">Editar</button></td>
                                     </tr>
                                     <tr>
-                                       <td>Juzgado Número 3</td>
+                                        <td>Juzgado Número 3</td>
                                         <td>Amazonas</td>
                                         <td>Distrito Judicial #3</td>
                                         <td>juzgado3@mimp.pe</td>
@@ -114,7 +115,7 @@
                             </table>
                         </div>
                         <br>
-                       <button href="#" class="btn btn-default">Registrar Juzgado</button> 
+                        <button href="#" class="btn btn-default">Registrar Juzgado</button> 
                     </div>
                 </div>
             </div>
@@ -129,6 +130,11 @@
                 <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
         </div>
+        <!-- core JavaScript
+                ================================================== -->
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
 
+        <!-- Ubicar al final -->
     </body>
 </html>

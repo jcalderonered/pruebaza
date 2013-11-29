@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html>
@@ -68,7 +69,7 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Autoridad Central</a></li> 
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+
                         </ul>
                     </div>
 
@@ -122,9 +123,9 @@
                         </div>
                         <br>
                         <div class="control-group">
-                        <button href="#" class="btn btn-default">Registrar Personal</button> 
-                        &nbsp;
-                         <button href="#" class="btn btn-default">Ver log</button> 
+                            <button href="#" class="btn btn-default">Registrar Personal</button> 
+                            &nbsp;
+                            <button href="#" class="btn btn-default">Ver log</button> 
                         </div>
                     </div>
                 </div>
@@ -140,6 +141,11 @@
                 <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
         </div>
+        <!-- core JavaScript
+        ================================================== -->
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
 
+        <!-- Ubicar al final -->
     </body>
 </html>

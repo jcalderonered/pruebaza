@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -123,9 +125,12 @@
                                 
                                 <!-- Text input-->
                                 <div class="control-group">
-                                    <label class="control-label" for="textinput">Facilitadores(as)</label>
+                                    <label class="control-label" for="textinput">Facilitador</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Capacitador" class="input-xlarge">                                        
+                                        <select>
+                                            <option value="sia">Juan Luis Aragon</option>
+                                            <option value="sia">Ronald Quispe</option>
+                                        </select>
                                     </div>
                                 </div>
 

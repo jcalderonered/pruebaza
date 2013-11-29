@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -14,6 +16,8 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
+        <!-- Datepicker -->
+        <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -68,7 +72,7 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+
                         </ul>
                     </div>
 
@@ -80,8 +84,8 @@
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="#" data-toggle="tab">La Solicitante</a></li>
                             <li class="active"><a href="#" data-toggle="tab">El solicitante</a></li>
-                           <!-- <li><a href="#" data-toggle="tab">Composición familiar</a></li> -->
-                           <!-- <li><a href="#" data-toggle="tab">Vivienda</a></li> -->
+                            <!-- <li><a href="#" data-toggle="tab">Composición familiar</a></li> -->
+                            <!-- <li><a href="#" data-toggle="tab">Vivienda</a></li> -->
                             <!--<li><a href="#" data-toggle="tab">Proceso de adopción</a></li> -->
                             <li><a href="#" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
@@ -123,7 +127,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento <font style="color:red">(*)</font></label>
                                     <div class="controls">
-                                        <input id="fecha_nac" name="full-name" type="password" class="input-xlarge">
+                                        <input id="fecha_nac" name="full-name" type="password" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -206,7 +210,7 @@
                                                 <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casado</label>
                                             <br>
                                             <label class="control-label">Fecha de matrimonio Civil <font style="color:red">(*)</font></label>
-                                            <input id="fecha_matrimonio" name="full-name" type="text" class="input-xlarge">
+                                            <input id="fecha_matrimonio" name="full-name" type="text" class="datepicker input-xlarge">
                                         </div>                            
                                     </div>
                                     <div class="col-md-3">  
@@ -425,9 +429,9 @@
                                 </div>
                                 <br>
                                 <p style="color: red">(*)IMPORTANTE: ES OBLIGATORIO EL LLENADO DE TODOS LOS CAMPOS</p>
-                                
+
                                 <br>
-                                
+
                                 <!-- Button -->
                                 <br>
                                 <div class="control-group">
@@ -452,6 +456,19 @@
                     <p align="right">Diseñado por RED<br>www.red.net.pe</p>
                 </div>
             </div>
+
+            <!-- core JavaScript
+                    ================================================== -->
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript">
+
+                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+            </script>
+            <!-- Ubicar al final -->
     </body>
 </html>
 

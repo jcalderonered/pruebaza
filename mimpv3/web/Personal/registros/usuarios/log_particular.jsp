@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html>
@@ -14,6 +15,8 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
+        <!-- Datepicker -->
+        <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -68,7 +71,7 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Autoridad Central</a></li> 
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+
                         </ul>
                     </div>
 
@@ -78,24 +81,24 @@
                         <h3><strong>Filtrar por fechas</strong></h3>
                         <br>
                         <form role="form">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="control-group">
-                                            <div class="controls">
-                                              <label class="control-label">Desde</label>
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Desde</label>
+                                            <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        </div>
                                     </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="control-group">
-                                            <div class="controls">
-                                              <label class="control-label">Hasta</label>
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Hasta</label>
+                                            <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        </div>
                                     </div>
+                                </div>
                             </div>
-                        </div>
                             <br>
                             <button type="submit" class="btn btn-default">Filtrar</button>
                         </form>    
@@ -105,9 +108,9 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        
+
                                         <th class="col-sm-2 ">fecha</th>
-                                        
+
                                         <th class="col-sm-2 ">Tipo de registro</th>
                                         <th class="col-sm-2 ">Número del registro</th>
                                         <th class="col-sm-2 ">Incidencia</th>                                          
@@ -116,25 +119,25 @@
 
                                 <tbody>
                                     <tr>
-                                        
+
                                         <td>20-Dic-2013</td>
-                                       
+
                                         <td>Expediente familia</td>
                                         <td>1-2013-MIMP-DGA-LIMA</td>
                                         <td>Agregó resolución al expediente</td>
                                     </tr>
                                     <tr>
-                                        
+
                                         <td>20-Dic-2013</td>
-                                        
+
                                         <td>Expediente NNA</td>
                                         <td>012013MIMP</td>
                                         <td>Cambio de estado</td>
                                     </tr>
                                     <tr>
-                                        
+
                                         <td>20-Dic-2013</td>
-                                        
+
                                         <td>Informe post-adoptivo</td>
                                         <td>001-MIMP</td>
                                         <td>Cambio de profesional asignado</td>
@@ -156,6 +159,17 @@
                 <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
         </div>
+        <!-- core JavaScript
+                ================================================== -->
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+        <script type="text/javascript">
 
+            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+        </script>
+        <!-- Ubicar al final -->
     </body>
 </html>

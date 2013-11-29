@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -14,6 +16,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
+
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -100,9 +103,9 @@
                                             <td>14-Nov-2012</td>
                                             <td>
                                                 <select>
-                                                         <option value="mia" selected>1</option>
-                                                         <option value="sia">2</option>
-                                                         <option value="mia">3</option>
+                                                    <option value="mia" selected>1</option>
+                                                    <option value="sia">2</option>
+                                                    <option value="mia">3</option>
                                                 </select>
                                             </td>
                                             <td>
@@ -122,9 +125,9 @@
                                             <td>21-Agos-2011</td>
                                             <td>
                                                 <select>
-                                                         <option value="mia" selected>1</option>
-                                                         <option value="sia">2</option>
-                                                         <option value="mia">3</option>
+                                                    <option value="mia" selected>1</option>
+                                                    <option value="sia">2</option>
+                                                    <option value="mia">3</option>
                                                 </select>
                                             </td>
                                             <td>
@@ -187,28 +190,28 @@
                                 </table>
                             </div>
                             <br>
-                            
+
                             <br>
-                                <h3><strong>Responsable del equipo técnico</strong></h3>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Nombre Completo</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia">Juan Luis Izácope</option>
-                                            <option value="sia">Ronald Paulo Gonzales</option>
-                                        </select>
-                                    </div>
+                            <h3><strong>Responsable del equipo técnico</strong></h3>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Nombre Completo</label>
+                                <div class="controls">
+                                    <select>
+                                        <option value="sia">Juan Luis Izácope</option>
+                                        <option value="sia">Ronald Paulo Gonzales</option>
+                                    </select>
                                 </div>
-                                <br>
-                                 <div class="control-group">
-                                    <label class="control-label">Observaciones</label>
-                                    <div class="controls">
-                                        <textarea cols="25" rows="3"></textarea>
-                                    </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Observaciones</label>
+                                <div class="controls">
+                                    <textarea cols="25" rows="3"></textarea>
                                 </div>
-                                
-                            
+                            </div>
+
+
                             <br>
                             <div class="control-group">
                                 <div class="controls">
@@ -230,6 +233,11 @@
                 <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
         </div>
+        <!-- core JavaScript
+                ================================================== -->
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
 
+        <!-- Ubicar al final -->
     </body>
 </html>

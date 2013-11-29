@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -14,7 +16,9 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-        <script src="<%=request.getContextPath()%>/assets/js/bootstrap.js"></script>
+        <!-- Datepicker -->
+        <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
+
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -90,7 +94,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha consejo</label>
                                     <div class="controls">
-                                        <input type="text" class="span2" value="02-16-2012" id="dp3" >
+                                        <input type="text" class="datepicker span2" value="02-16-2012" id="dp3" >
                                     </div>
                                 </div>
                                 <br>
@@ -117,37 +121,37 @@
                                 <h3 align="left"><strong>Familias asignadas al mismo NNA</strong></h3>
                                 <br>
                                 <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-sm-2 " >Expediente</th>
-                                            <th class="col-sm-2 " >UA</th>
-                                            <th class="col-sm-2 " >Nivel sociec</th>
-                                            <th class="col-sm-2 " >Información</th>
-                                            <th class="col-sm-2 " >Resolución de aptitud</th>
-                                            <th class="col-sm-2 " >Prioridad</th>
-                                            
-                                        </tr>
-                                    </thead>
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-sm-2 " >Expediente</th>
+                                                <th class="col-sm-2 " >UA</th>
+                                                <th class="col-sm-2 " >Nivel sociec</th>
+                                                <th class="col-sm-2 " >Información</th>
+                                                <th class="col-sm-2 " >Resolución de aptitud</th>
+                                                <th class="col-sm-2 " >Prioridad</th>
 
-                                    <tbody>
-                                        <tr>
-                                            <td>Gutierrez-Huaman </td>
-                                            <td>Lima</td>
-                                            <td>C</td>
-                                            <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
-                                            <td>14-Nov-2012</td>
-                                            <td>1</tr>
-                                        <tr>
-                                            <td>Morales-Loza</td>
-                                            <td>Trujillo</td>
-                                            <td>B</td>
-                                            <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
-                                            <td>21-Agos-2011</td>
-                                            <td>2</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>Gutierrez-Huaman </td>
+                                                <td>Lima</td>
+                                                <td>C</td>
+                                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
+                                                <td>14-Nov-2012</td>
+                                                <td>1</tr>
+                                            <tr>
+                                                <td>Morales-Loza</td>
+                                                <td>Trujillo</td>
+                                                <td>B</td>
+                                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
+                                                <td>21-Agos-2011</td>
+                                                <td>2</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
@@ -169,5 +173,17 @@
                     <p align="right">Diseñado por RED<br>www.red.net.pe</p>
                 </div>
             </div>
+            <!-- core JavaScript
+        ================================================== -->
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript">
+
+                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+            </script>
+            <!-- Ubicar al final -->
     </body>
 </html>

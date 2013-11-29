@@ -37,7 +37,7 @@ public class Helper {
       
       
       
-        String hql = "FROM Personal P WHERE P.user = '" + login + "' and P.pass = '" + pass + "'";
+        String hql = "FROM Personal P WHERE P.user = '" + login + "' and P.pass = '" + pass + "'";//:=login
         Query query = session.createQuery(hql);
         Object queryResult = query.uniqueResult();  
         personal = (Personal) queryResult;

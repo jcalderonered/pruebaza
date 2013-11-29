@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html>
@@ -62,17 +63,50 @@
                     <br>
                     <br>
                 </div>
-                        <br>
-                        
-                        
-                        <a href="${pageContext.servletContext.contextPath}/lista"></a>
-                        <a class="btn" href="${pageContext.servletContext.contextPath}/lista">Link</a>
-                        <div class="row">
-                            <h3><strong>
-                                 ${listap.get(0).getNombre()}
-                                </strong></h3>
-                            
-                        </div>
+                <br>
+
+
+                
+                
+                <button onclick="window.location.href='${pageContext.servletContext.contextPath}/lista'" class="btn btn-default">Mostrar lista de personal</button>
+                <br>
+                <br>
+                <div class="row">
+                    <h3><strong>Lista de Personal</strong></h3> 
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="col-sm-2 ">id</th>
+                                    <th class="col-sm-2 ">Nombre</th>
+                                    <th class="col-sm-2 ">Apellido Paterno</th>
+                                    <th class="col-sm-2 ">Apellido Materno</th>
+                                    <th class="col-sm-2 ">Usuario</th>
+                                    <th class="col-sm-2 ">Información</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <c:forEach var="personal" items="${listap}">
+                                    <tr>
+                                        <td>${personal.getIdpersonal()}</td>
+                                        <td>${personal.getNombre()}</td>
+                                        <td>${personal.getApellidoP()}</td>
+                                        <td>${personal.getApellidoM()}</td>
+                                        <td>${personal.getUser()}</td>
+                                        <td>
+                                            <form action="${pageContext.servletContext.contextPath}/info" method="post">
+                                                <input hidden name="id" id="id" value="${personal.getIdpersonal()}">
+                                                <button type="submit" class="btn btn-default">Ver</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
 
             </div> 
             <div id="footer">

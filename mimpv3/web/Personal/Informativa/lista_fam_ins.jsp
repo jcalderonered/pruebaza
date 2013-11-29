@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -68,13 +70,13 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                                
+
                         </ul>
                     </div>
 
                     <div class="col-md-6 ">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                       <h1 align="center"><strong>Lista de familias Inscritas</strong></h1>
+                        <h1 align="center"><strong>Lista de familias Inscritas</strong></h1>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
@@ -95,7 +97,7 @@
                                         <th>Nombre</th>
                                         <th>Edad</th>
                                     </tr>
-                                    
+
                                 </thead>
 
                                 <tbody>
@@ -126,8 +128,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        
-                        
+
+
                     </div>
                 </div>
             </div>
@@ -142,5 +144,11 @@
                     <p align="right">Diseñado por RED<br>www.red.net.pe</p>
                 </div>
             </div>
+            <!-- core JavaScript
+        ================================================== -->
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+
+            <!-- Ubicar al final -->
     </body>
 </html>
