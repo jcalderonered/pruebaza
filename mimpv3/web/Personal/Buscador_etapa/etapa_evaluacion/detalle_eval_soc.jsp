@@ -91,7 +91,7 @@
                                 <h3 align="left"><strong>Detalles de la evaluación</strong></h3>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Tipo de Evaluación : Legal</label>
+                                    <label class="control-label">Tipo de Evaluación : Social</label>
                                 </div>
                                 <br>
                                 <div class="control-group">
