@@ -58,20 +58,20 @@
                 <div class="row">
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
-                            <li class="active"><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Sesiones/talleres</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNAs</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Juzgado</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/inf"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Sesiones/talleres</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nna"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNAs</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Juzgado</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
+                        
                         </ul>
                     </div>
 
@@ -79,22 +79,29 @@
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Editar Autoridad</strong></h1>
                         <br>
-                        <form class="form-horizontal"> 
+                        <c:if test="${autoridad.getIdautoridad() == null}">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editAut" method="post"> 
+                        </c:if>  
+                        <c:if test="${autoridad.getIdautoridad() != null}">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateAut" method="post"> 
+                             <input hidden name="id" id="id" value="${autoridad.getIdautoridad()}">
+                        </c:if>     
+                            
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <label class="control-label">Nombre</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="nombre" name="nombre" type="text" value="${autoridad.getEntidad().getNombre()}" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div>
                                     <label class="control-label">Tipo</label>
                                     <div class="controls">
-                                        <select  >
-                                            <option value="sia">SIA</option>
-                                            <option value="mia">MIA</option>
+                                        <select id="tipo" name="tipo" >
+                                            <option value="sia" ${autoridad.getTipo() == 'sia' ? 'selected' : ''}>SIA</option>
+                                            <option value="mia" ${autoridad.getTipo() == 'mia' ? 'selected' : ''}>MIA</option>
                                         </select>
                                     </div>    
                                 </div>
@@ -102,35 +109,35 @@
                                 <div class="control-group">
                                     <label class="control-label">País</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="pais" name="pais" value="${autoridad.getEntidad().getPais()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Dirección</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="direccion" name="direccion" value="${autoridad.getEntidad().getDireccion()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Teléfono</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="telefono" name="telefono" value="${autoridad.getEntidad().getTelefono()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Usuario</label>  
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="user" name="user" value="${autoridad.getUser()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Contraseña</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="password" class="input-xlarge">
+                                        <input id="pass" name="pass" type="password" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -138,7 +145,7 @@
                                     <label class="control-label">Resolución de </label>
                                     <label>autorización</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="resol_aut" name="resol_aut" type="text" value="${autoridad.getEntidad().getResolAuto()}" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -146,7 +153,7 @@
                                     <label class="control-label">Fecha de emisión de </label>
                                     <label>resolución</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input id="fecha_emis_resol" name="fecha_emis_resol" value="${fechaEmision}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -154,14 +161,14 @@
                                     <label class="control-label">Resolución de </label>
                                     <label>renovación</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="resol_renov" name="resol_renov" value="${autoridad.getEntidad().getResolRenov()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de renovación</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input id="fecha_renov" name="fecha_renov" type="text" value="${fechaRenov}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -169,14 +176,14 @@
                                     <label class="control-label">Fecha de vencimiento </label>
                                     <label>de autorización</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input id="fecha_venc_aut" name="fecha_venc_aut" type="text" value="${fechaVenc}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                         <textarea class="input-xlarge" name="message" placeholder="" rows="5" cols="25"></textarea>
+                                         <textarea class="input-xlarge" name="obs" id="obs" placeholder="" rows="5" cols="25">${autoridad.getEntidad().getObs()}</textarea>
                                     </div>
                                 </div>
                                 <br>
