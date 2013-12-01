@@ -35,7 +35,7 @@ public class HiberPersonal {
 
         session.save(aut);
 
-        // session.getTransaction().commit(); 
+        
     }
     
     public void UpdateAut(Entidad ent, Autoridad aut){
@@ -81,5 +81,73 @@ public class HiberPersonal {
         }
         return allAutoridades;
     }
+    
+    public void InsertOrg(Entidad ent, Representante rep, Organismo org) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        session.save(ent);
+        session.save(rep);
+        
+
+        org.setEntidad(ent);
+        org.setRepresentante(rep);
+        
+        ent.getOrganismos().add(org);
+        rep.getOrganismos().add(org);
+        
+        session.save(org);
+
+        
+    }
+    
+    public void UpdateOrg(Entidad ent, Representante rep, Organismo org){
+    Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        
+        session.update(ent);
+        session.update(rep);
+        session.update(org);
+    }
+    
+    
+    public ArrayList<Organismo> ListaOrganismos() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "FROM Organismo";
+        Query query = session.createQuery(hql);
+        List organismos = query.list();
+        ArrayList<Organismo> allOrganismos = new ArrayList();
+        for (Iterator iter = organismos.iterator(); iter.hasNext();) {
+            Organismo temp = (Organismo) iter.next();
+            Hibernate.initialize(temp.getEntidad());
+            Hibernate.initialize(temp.getRepresentante());
+            allOrganismos.add(temp);
+        }
+        return allOrganismos;
+    }
+    
+    public Organismo getOrganismo(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Organismo org = new Organismo();
+        
+        session.beginTransaction();
+        String hqlO = "FROM Organismo O WHERE O.id = :id";
+        Query queryO = session.createQuery(hqlO);
+        queryO.setInteger("id", id);
+        Object queryResultA = queryO.uniqueResult();
+        
+        org = (Organismo) queryResultA;
+        Hibernate.initialize(org.getEntidad());
+        Hibernate.initialize(org.getRepresentante());
+        return org;
+    }
+    
 
 }

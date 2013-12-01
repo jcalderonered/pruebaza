@@ -116,6 +116,7 @@ public class personal {
     
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
+        map.put("listaOrganismos",ServicioPersonal.ListaOrganismos());
         return new ModelAndView("/Personal/registros/organismo/lista_org",map);
     }
     
@@ -239,5 +240,185 @@ public class personal {
         map.put("listaAutoridades",ServicioPersonal.ListaAutoridades());
         return new ModelAndView("/Personal/registros/autoridad/lista_aut",map);
     }
+    /////////////////////////////////////////////////////////////////////////////////
+    
+    ////////////////////// REGISTRAR/EDITAR ORGANISMO ////////////////////////////////////
+    
+    @RequestMapping (value = "/irEditarOrg", method = RequestMethod.GET)
+    public ModelAndView IrEditarOrg(ModelMap map){
+    
+        
+        return new ModelAndView("/Personal/registros/organismo/editar_org",map);
+    }
+    
+    @RequestMapping (value = "/irEditarOrg2", method = RequestMethod.POST)
+    public ModelAndView IrEditarOrg2(ModelMap map,@RequestParam("id") int id){
+    
+        
+        Organismo temp = new Organismo();
+        temp = ServicioPersonal.getOrganismo(id);
+        String fechaEmision = format.dateToString(temp.getEntidad().getFechaResol());
+        String fechaRenov = format.dateToString(temp.getEntidad().getFechaRenov());
+        String fechaVenc = format.dateToString(temp.getEntidad().getFechaVenc());
+        
+        String fechaAutR = format.dateToString(temp.getRepresentante().getFechaAuto());
+        String fechaRenovR = format.dateToString(temp.getRepresentante().getFechaRenov());
+        String fechaVencR = format.dateToString(temp.getRepresentante().getFechaVencAuto());
+        
+        map.addAttribute("fechaEmision", fechaEmision);
+        map.addAttribute("fechaRenov", fechaRenov);
+        map.addAttribute("fechaVenc", fechaVenc);
+        map.addAttribute("fechaAutR", fechaAutR);
+        map.addAttribute("fechaRenovR", fechaRenovR);
+        map.addAttribute("fechaVencR", fechaVencR);
+        
+        map.put("organismo",temp);
+        
+        return new ModelAndView("/Personal/registros/organismo/editar_org",map);
+    }
+    
+    @RequestMapping (value = "/editOrg", method = RequestMethod.POST)
+    public ModelAndView EditarOrg(ModelMap map,
+                        //datos a ingresar en entidad
+                        @RequestParam("nombre") String nombre,
+                        @RequestParam("direccion") String direccion,
+                        @RequestParam("telefono") String telefono,
+                        @RequestParam("pais") String pais,
+                        @RequestParam("resol_aut") String resol_aut,
+                        @RequestParam("fecha_emis_resol") String fecha_emis_resol,
+                        @RequestParam("resol_renov") String resol_renov,
+                        @RequestParam("fecha_renov") String fecha_renov,
+                        @RequestParam("fecha_venc_aut") String fecha_venc_aut,
+                        @RequestParam("obs") String obs,
+                        //datos a ingresar en organismo
+                        @RequestParam("competencia") String competencia,
+                         //datos a ingresar en representante
+                        @RequestParam("nombreR") String nombreR,
+                        @RequestParam("apellidoP") String apellidoP,
+                        @RequestParam("apellidoM") String apellidoM,
+                        @RequestParam("user") String user,
+                        @RequestParam("pass") String pass,
+                        @RequestParam("fechaAutR") String fechaAutR,
+                        @RequestParam("fechaRenovR") String fechaRenovR,
+                        @RequestParam("fechaVencR") String fechaVencR,
+                        @RequestParam("correo") String correo,
+                        @RequestParam("celular") String celular,
+                        @RequestParam("direccionR") String direccionR,
+                        @RequestParam("obsR") String obsR
+                        ){
+        
+        Organismo org = new Organismo();
+        Representante rep = new Representante();
+        Entidad ent = new Entidad();
+        
+        org.setCompetencia(competencia);
+        
+        rep.setNombre(nombreR);
+        rep.setApellidoP(apellidoP);
+        rep.setApelldoM(apellidoM);
+        rep.setUser(user);
+        rep.setPass(pass);
+        rep.setFechaAuto(format.stringToDate(fechaAutR));
+        rep.setFechaRenov(format.stringToDate(fechaRenovR));
+        rep.setFechaVencAuto(format.stringToDate(fechaVencR));
+        rep.setCorreo(correo);
+        rep.setDireccion(direccionR);
+        rep.setCelular(celular);
+        rep.setObs(obsR);
+        
+        
+        ent.setNombre(nombre);
+        ent.setDireccion(direccion);
+        ent.setTelefono(telefono);
+        ent.setPais(pais);
+        ent.setResolAuto(resol_aut);
+        ent.setFechaResol(format.stringToDate(fecha_emis_resol));
+        ent.setResolRenov(resol_renov);
+        ent.setFechaRenov(format.stringToDate(fecha_renov));
+        ent.setFechaVenc(format.stringToDate(fecha_venc_aut));
+        ent.setObs(obs);
+        
+        
+        
+        ServicioPersonal.InsertOrg(ent, rep, org);
+        
+         map.put("listaOrganismos",ServicioPersonal.ListaOrganismos());
+        return new ModelAndView("/Personal/registros/organismo/lista_org",map);
+    }
+    
+    @RequestMapping (value = "/updateOrg", method = RequestMethod.POST)
+    public ModelAndView UpdateOrg(ModelMap map,
+                        @RequestParam("id") int id,
+                        //datos a ingresar en entidad
+                        @RequestParam("nombre") String nombre,
+                        @RequestParam("direccion") String direccion,
+                        @RequestParam("telefono") String telefono,
+                        @RequestParam("pais") String pais,
+                        @RequestParam("resol_aut") String resol_aut,
+                        @RequestParam("fecha_emis_resol") String fecha_emis_resol,
+                        @RequestParam("resol_renov") String resol_renov,
+                        @RequestParam("fecha_renov") String fecha_renov,
+                        @RequestParam("fecha_venc_aut") String fecha_venc_aut,
+                        @RequestParam("obs") String obs,
+                        //datos a ingresar en organismo
+                        @RequestParam("competencia") String competencia,
+                         //datos a ingresar en representante
+                        @RequestParam("nombreR") String nombreR,
+                        @RequestParam("apellidoP") String apellidoP,
+                        @RequestParam("apellidoM") String apellidoM,
+                        @RequestParam("user") String user,
+                        @RequestParam("pass") String pass,
+                        @RequestParam("fechaAutR") String fechaAutR,
+                        @RequestParam("fechaRenovR") String fechaRenovR,
+                        @RequestParam("fechaVencR") String fechaVencR,
+                        @RequestParam("correo") String correo,
+                        @RequestParam("celular") String celular,
+                        @RequestParam("direccionR") String direccionR,
+                        @RequestParam("obsR") String obsR
+                        ){
+        
+        Organismo org = new Organismo();
+        
+        
+        org = ServicioPersonal.getOrganismo(id);
+        
+        org.setCompetencia(competencia);
+        
+        org.getRepresentante().setNombre(nombreR);
+        org.getRepresentante().setApellidoP(apellidoP);
+        org.getRepresentante().setApelldoM(apellidoM);
+        org.getRepresentante().setUser(user);
+        org.getRepresentante().setPass(pass);
+        org.getRepresentante().setFechaAuto(format.stringToDate(fechaAutR));
+        org.getRepresentante().setFechaRenov(format.stringToDate(fechaRenovR));
+        org.getRepresentante().setFechaVencAuto(format.stringToDate(fechaVencR));
+        org.getRepresentante().setCorreo(correo);
+        org.getRepresentante().setDireccion(direccionR);
+        org.getRepresentante().setCelular(celular);
+        org.getRepresentante().setObs(obsR);
+        
+        
+        org.getEntidad().setNombre(nombre);
+        org.getEntidad().setDireccion(direccion);
+        org.getEntidad().setTelefono(telefono);
+        org.getEntidad().setPais(pais);
+        org.getEntidad().setResolAuto(resol_aut);
+        org.getEntidad().setFechaResol(format.stringToDate(fecha_emis_resol));
+        org.getEntidad().setResolRenov(resol_renov);
+        org.getEntidad().setFechaRenov(format.stringToDate(fecha_renov));
+        org.getEntidad().setFechaVenc(format.stringToDate(fecha_venc_aut));
+        org.getEntidad().setObs(obs);
+        
+        
+        
+        ServicioPersonal.UpdateOrg(org.getEntidad(), org.getRepresentante(), org);
+        
+        map.put("listaOrganismos",ServicioPersonal.ListaOrganismos());
+        return new ModelAndView("/Personal/registros/organismo/lista_org",map);
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////////
+    
+    
     
 }
