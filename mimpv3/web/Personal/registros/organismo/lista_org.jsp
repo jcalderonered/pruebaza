@@ -90,32 +90,26 @@
                                 </thead>
 
                                 <tbody>
+                                    <c:forEach var="organismo" items="${listaOrganismos}">
                                     <tr>
-                                        <td>Organismo Número 1</td>
-                                        <td>Argentina</td>
-                                        <td>(123)4657894</td>
-                                        <td>Representante Legal 1</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
+                                        <td>${organismo.getEntidad().getNombre()}</td>
+                                        <td>${organismo.getEntidad().getPais()}</td>
+                                        <td>${organismo.getEntidad().getTelefono()}</td>
+                                        <td>${organismo.getRepresentante().getNombre()}</td>
+                                        
+                                        <td>
+                                            <form action="${pageContext.servletContext.contextPath}/irEditarOrg2" method="post">
+                                                <input hidden name="id" id="id" value="${organismo.getIdorganismo()}">
+                                                <button type="submit" class="btn btn-default">Editar</button>
+                                            </form>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>Organismo Número 2</td>
-                                        <td>México</td>
-                                        <td>(123)4657894</td>
-                                        <td>Representante Legal 2</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Organismo Número 3</td>
-                                        <td>Brasil</td>
-                                        <td>(123)4657894</td>
-                                        <td>Representante Legal 3</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                         <br>
-                        <button href="#" class="btn btn-default">Registrar Organismo</button>
+                        <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/irEditarOrg'" class="btn btn-default">Registrar Organismo</button>
                     </div>
                 </div>
             </div>

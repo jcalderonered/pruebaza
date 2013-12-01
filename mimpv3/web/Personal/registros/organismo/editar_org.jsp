@@ -79,7 +79,13 @@
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Editar Organismo</strong></h1>
                         <br>
-                        <form class="form-horizontal">
+                        <c:if test="${organismo.getIdorganismo() == null}">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editOrg" method="post">
+                        </c:if>  
+                        <c:if test="${organismo.getIdorganismo() != null}">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateOrg" method="post"> 
+                             <input hidden name="id" id="id" value="${organismo.getIdorganismo()}">
+                        </c:if>  
                             <div class="row">
                                 <div class="col-md-3 col-md-offset-1">   
                                     <br>
@@ -89,35 +95,35 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Nombre</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="nombre" name="nombre" type="text" value="${organismo.getEntidad().getNombre()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Competencia</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="competencia" name="competencia" type="text" value="${organismo.getCompetencia()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">País</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="pais" name=pais type="text" value="${organismo.getEntidad().getPais()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Dirección</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="direccion" name="direccion" type="text" value="${organismo.getEntidad().getDireccion()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Teléfono</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="telefono" name="telefono" type="text" value="${organismo.getEntidad().getTelefono()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
@@ -125,7 +131,7 @@
                                             <div class="controls">
                                                 <label class="control-label">Resolución de </label>
                                                 <label>autorización</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="resol_aut" name="resol_aut" type="text" value="${organismo.getEntidad().getResolAuto()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
@@ -133,7 +139,7 @@
                                             <div class="controls">
                                                 <label class="control-label">Fecha de emisión de </label>
                                                 <label>resolución</label>
-                                                <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                                <input id="fecha_emis_resol" name="fecha_emis_resol" type="text" value="${fechaEmision}" class="datepicker input-xlarge">
                                             </div>
                                         </div>
                                         <br>
@@ -141,14 +147,14 @@
                                             <div class="controls">
                                                 <label class="control-label">Resolución de </label>
                                                 <label>renovación</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="resol_renov" name="resol_renov" type="text" value="${organismo.getEntidad().getResolRenov()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Fecha de renovación</label>
-                                                <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                                <input id="fecha_renov" name="fecha_renov" type="text" value="${fechaRenov}" class="datepicker input-xlarge">
                                             </div>
                                         </div>
                                         <br>
@@ -156,14 +162,14 @@
                                             <div class="controls">
                                                 <label class="control-label">Fecha de vencimiento </label>
                                                 <label>de autorización</label>
-                                                <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                                <input id="fecha_venc_aut" name="fecha_venc_aut" type="text" value="${fechaVenc}" class="datepicker input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Observaciones</label>
-                                                <textarea class="input-xlarge" name="message" placeholder="" rows="5" cols="25"></textarea>
+                                                <textarea class="input-xlarge" id="obs" name="obs" placeholder="" rows="5" cols="25">${organismo.getEntidad().getObs()}</textarea>
                                             </div>
                                         </div>
                                         <br>
@@ -183,49 +189,49 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Nombre</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="nombreR" name="nombreR" type="text" value="${organismo.getRepresentante().getNombre()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Apellido Paterno</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="apellidoP" name="apellidoP" type="text" value="${organismo.getRepresentante().getApellidoP()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Apellido Materno</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="apellidoM" name="apellidoM" type="text" value="${organismo.getRepresentante().getApelldoM()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Usuario</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="user" name="user" type="text" value="${organismo.getRepresentante().getUser()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Contraseña</label>
-                                                <input id="full-name" name="full-name" type="password" class="input-xlarge">
+                                                <input id="pass" name="pass" type="password" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Fecha de autorización</label>
-                                                <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                                <input id="fechaAut" name="fechaAutR" type="text" value="${fechaAutR}" class="datepicker input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Fecha de renovación</label>
-                                                <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                                <input id="fechaRenov" name="fechaRenovR" type="text" value="${fechaRenovR}" class="datepicker input-xlarge">
                                             </div>
                                         </div>
                                         <br>
@@ -233,35 +239,35 @@
                                             <div class="controls">
                                                 <label class="control-label">Fecha de vencimiento </label>
                                                 <label>de autorización</label>
-                                                <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                                <input id="fechaVenc" name="fechaVencR" type="text" value="${fechaVencR}" class="datepicker input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Correo</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="correo" name="correo" type="text" value="${organismo.getRepresentante().getCorreo()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Celular</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="celular" name="celular" type="text" value="${organismo.getRepresentante().getCelular()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Dirección</label>
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="direccionR" name="direccionR" type="text" value="${organismo.getRepresentante().getDireccion()}" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Observaciones</label>
-                                                 <textarea class="input-xlarge" name="message" placeholder="" rows="5" cols="25"></textarea>
+                                                 <textarea class="input-xlarge" name="obsR" id="obsR" placeholder="" rows="5" cols="25">${organismo.getRepresentante().getObs()}</textarea>
                                             </div>
                                         </div>
                                         <br>
@@ -269,12 +275,13 @@
                                     </fieldset>                              
                                 </div>
                             </div> 
-                        </form>
-                        <div class="control-group">
+                             <div class="control-group">
                             <div class="controls">
-                                <p align="center"><button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button></p>
+                                <p align="center"><button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button></p>
                             </div>
                         </div>
+                        </form>
+                       
                     </div>
                 </div>
             </div>
