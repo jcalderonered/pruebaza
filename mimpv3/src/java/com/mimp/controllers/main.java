@@ -8,7 +8,7 @@ package com.mimp.controllers;
 
 import java.util.*;
 import com.mimp.bean.*;
-import com.mimp.hibernate.Helper;
+import com.mimp.hibernate.HiberMain;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,8 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class main {
     
-    @Resource(name="Helper")
-    private Helper Servicio = new Helper();
+    @Resource(name="HiberMain")
+    private HiberMain ServicioMain = new HiberMain();
     
     @RequestMapping("/")
     public String hello() {
@@ -35,23 +35,24 @@ public class main {
     @RequestMapping (value = "/login", method = RequestMethod.POST)
     public ModelAndView login(ModelMap map, @RequestParam("email") String email,@RequestParam("password") String pass){
        
-         
-        Personal per1 = new Personal();
-       per1 = (Personal) Servicio.usuario(email, pass);
+         String pagina = "";
+        
+        ArrayList aux = ServicioMain.usuario(email, pass);
         String mensaje = "Los datos ingresados son: email" + email + " y contraseña" + pass + "!";
-        
-        map.addAttribute("nombre", per1.getNombre());
-        map.addAttribute("personal",per1);
-        return new ModelAndView ("contacto",map);
+        if (aux.get(0) == "personal"){
+            pagina = "/Personal/inicio_personal";
+        }else if (aux.get(0)=="familia"){
+            pagina = "/Familia/inicio_familia";
+        }else if (aux.get(0)=="representante" || aux.get(0)=="autoridad"){
+            pagina = "/Entidad/inicio_ent";
+        }else{
+            pagina = "contacto";
+        }
+        map.addAttribute("usuario", aux.get(1));
+        return new ModelAndView (pagina,map);
         
     }
     
-    @RequestMapping (value = "/lista", method = RequestMethod.GET)
-    public ModelAndView lista(ModelMap map){
     
-        List<Personal> lista = Servicio.listaPersonal();
-        map.put("listap", lista);
-        return new ModelAndView("contacto",map);
-    }
    
 }

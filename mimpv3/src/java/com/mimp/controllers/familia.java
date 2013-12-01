@@ -8,7 +8,7 @@ package com.mimp.controllers;
 
 import java.util.*;
 import com.mimp.bean.*;
-import com.mimp.hibernate.Helper;
+import com.mimp.hibernate.HiberMain;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
