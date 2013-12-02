@@ -32,6 +32,16 @@ public class main {
         return "login";
     }
     
+    @RequestMapping("/salir")
+    public String Salir() {
+        return "login";
+    }
+    
+    @RequestMapping("/inicio")
+    public String Inicio() {
+        return "login";
+    }
+    
     @RequestMapping (value = "/login", method = RequestMethod.POST)
     public ModelAndView login(ModelMap map, @RequestParam("email") String email,@RequestParam("password") String pass){
        
@@ -53,6 +63,32 @@ public class main {
         
     }
     
+    @RequestMapping("/SesionInfInicio")
+    public String SesionInfInicio() {
+        
+        return "/Inscripcion/inscripcion_inicio";
+    }
+    
+    @RequestMapping("/SesionInfElegirEstado")
+    public String SesionInfElegirEstado() {
+        
+        return "/Inscripcion/inscripcion_sesion2";
+    }
+    
+    @RequestMapping(value = "/SesionInfEstado2", method = RequestMethod.POST)
+    public String SesionInfElegirEstado2(@RequestParam("estado") String estado) {
+        
+        if(estado.equals("casados")){
+        
+            return "/Inscripcion/inscripcion_sesion3_gru";
+            
+        }else{
+            
+        return "/Inscripcion/inscripcion_sesion3_ind";
+        
+        }
+        
+    }
     
    
 }

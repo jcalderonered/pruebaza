@@ -86,7 +86,7 @@
                                         <td>09/03/14 17:00</td>
                                         <td>09/03/14 20:00</td>
                                         <td>60</td>
-                                        <td><button href="#" class="btn btn-default">Inscribirse</button>
+                                        <td><button onclick="window.location.href = '${pageContext.servletContext.contextPath}/SesionInfElegirEstado'" class="btn btn-default">Inscribirse</button>
                                         </td>
                                     </tr>
                                 </tbody>

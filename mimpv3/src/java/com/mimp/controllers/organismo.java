@@ -24,4 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class organismo {
     
+    @RequestMapping("/inicioEnt")
+    public String InicioEnt() {
+        return "/Entidad/inicio_ent";
+    }
+    
 }
