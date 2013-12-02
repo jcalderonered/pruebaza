@@ -57,7 +57,7 @@
         <div id="contenedor1" class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-4">
-                    <form role="form">
+                    <form role="form" action="${pageContext.servletContext.contextPath}/SesionInfEstado2" method="post">
                         <!-- Form Name -->
                         <legend>Estado Civil</legend>
                         <!-- Multiple Radios -->
@@ -66,24 +66,24 @@
                             <div class="control-group">
                                 <div class="controls">
                                     <label class="radio" for="radios-0">
-                                        <input type="radio" name="radios" id="radios-0" value="Casado" checked="checked">Casado</label>
+                                        <input type="radio" name="estado" id="radios-0" value="casados" checked="checked">Casados</label>
                                     <label class="radio" for="radios-1">
-                                        <input type="radio" name="radios" id="radios-1" value="Soltero">Soltero</label>
+                                        <input type="radio" name="estado" id="radios-1" value="soltero">Soltero</label>
                                     <label class="radio" for="radios-2">
-                                        <input type="radio" name="radios" id="radios-2" value="Solter">Soltera</label>
+                                        <input type="radio" name="estado" id="radios-2" value="soltera">Soltera</label>
                                     <label class="radio" for="radios-3">
-                                        <input type="radio" name="radios" id="radios-3" value="Viudo">Viudo</label>
+                                        <input type="radio" name="estado" id="radios-3" value="viudo">Viudo</label>
                                     <label class="radio" for="radios-4">
-                                        <input type="radio" name="radios" id="radios-4" value="Viuda">Viuda</label>
+                                        <input type="radio" name="estado" id="radios-4" value="viuda">Viuda</label>
                                     <label class="radio" for="radios-5">
-                                        <input type="radio" name="radios" id="radios-5" value="Divorciado">Divorciado</label>
+                                        <input type="radio" name="estado" id="radios-5" value="divorciado">Divorciado</label>
                                     <label class="radio" for="radios-6">
-                                        <input type="radio" name="radios" id="radios-6" value="Divorciada">Divorciada</label>
+                                        <input type="radio" name="estado" id="radios-6" value="divorciada">Divorciada</label>
                                 </div>
                             </div>
                             <br>
                             <div class="btn-toolbar">  
-                                <button href="#" class="btn btn-default">Continuar</button>
+                                <button type="submit" class="btn btn-default">Continuar</button>
                             </div>  
                         </div>
                         <div class="col-md-4"></div>

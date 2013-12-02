@@ -24,4 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class familia {
     
+    @RequestMapping("/inicioFam")
+    public String InicioFam() {
+        return "/Familia/inicio_familia";
+    }
 }
