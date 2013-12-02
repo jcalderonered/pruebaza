@@ -79,70 +79,76 @@
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Editar CAR</strong></h1>
                         <br>
-                         <form class="form-horizontal">
+                         <c:if test="${car.getIdcar() == null}">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editCar" method="post"> 
+                        </c:if>  
+                        <c:if test="${car.getIdcar() != null}">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateCar" method="post"> 
+                             <input hidden name="id" id="id" value="${car.getIdcar()}">
+                        </c:if>  
                             <fieldset>
                                 <!-- Text input-->
                                 
                                     <div class="control-group">
                                         <label class="control-label">Nombre</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="nombre" name="nombre" type="text" value="${car.getNombre()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                      <div class="control-group">
                                          <label class="control-label">Dirección</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="direccion" name="direccion" type="text" value="${car.getDireccion()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Departamento</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="departamento" name="departamento" type="text" value="${car.getDepartamento()}" class="input-xlarge">
                                             </div>
                                     </div>                                    
                                     <br>
                                      <div class="control-group">
                                           <label class="control-label">Provincia</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="provincia" name="provincia" type="text" value="${car.getProvincia()}" class="input-xlarge">
                                             </div>
                                     </div>                                    
                                     <br>
                                      <div class="control-group">
                                            <label class="control-label">Distrito</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="distrito" name="distrito" type="text" value="${car.getDistrito()}" class="input-xlarge">
                                             </div>
                                     </div>                                    
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Nombre del director</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="director" name="director" type="text" value="${car.getDirector()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Correo</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="correo" name="correo" type="text"  value="${car.getCorreo()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>                                    
                                     <div class="control-group">
                                         <label class="control-label">Fax</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="fax" name="fax" type="text" value="${car.getFax()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>                                   
                                     <div class="control-group">
                                         <label class="control-label">Celular</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="celular" name="celular" type="text" value="${car.getCelular()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>                                    
@@ -150,14 +156,14 @@
                                     <div class="control-group">
                                         <label class="control-label">Teléfono</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="telefono" name="telefono" type="text" value="${car.getTelefono()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                          <label class="control-label">Observaciones</label>
                                             <div class="controls">
-                                              <textarea class="input-xlarge" name="message" placeholder="Ingrese sus observaciones" rows="5" ></textarea>
+                                              <textarea class="input-xlarge" name="obs" id="obs" placeholder="Ingrese sus observaciones" rows="5" >${car.getObservaciones()}</textarea>
                                             </div>
                                     </div>                                    
                                 <br>
@@ -165,7 +171,7 @@
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
                                     </div>
                                 </div>
                             </fieldset>

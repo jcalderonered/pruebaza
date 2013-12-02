@@ -68,6 +68,7 @@ public class personal {
     
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
+        map.put("listaCar",ServicioPersonal.ListaCar());
         return new ModelAndView("/Personal/registros/car/lista_car",map);
     }
     
@@ -418,7 +419,101 @@ public class personal {
     }
     
     /////////////////////////////////////////////////////////////////////////////////
+    ////////////////////// REGISTRAR/EDITAR CAR ////////////////////////////////////
+    @RequestMapping (value = "/irEditarCar", method = RequestMethod.GET)
+    public ModelAndView IrEditarCar(ModelMap map){
     
+        
+        return new ModelAndView("/Personal/registros/car/editar_car",map);
+    }
+    
+    @RequestMapping (value = "/irEditarCar2", method = RequestMethod.POST)
+    public ModelAndView IrEditarCar2(ModelMap map,@RequestParam("id") int id){
+    
+        
+        Car temp = new Car();
+        temp = ServicioPersonal.getCar(id);
+        map.put("car",temp);
+        
+        return new ModelAndView("/Personal/registros/car/editar_car",map);
+    }
+    
+    @RequestMapping (value = "/editCar", method = RequestMethod.POST)
+    public ModelAndView EditarCar(ModelMap map,
+                        //datos a ingresar en CAR
+                        @RequestParam("nombre") String nombre,
+                        @RequestParam("direccion") String direccion,
+                        @RequestParam("departamento") String departamento,
+                        @RequestParam("provincia") String provincia,
+                        @RequestParam("distrito") String distrito,
+                        @RequestParam("director") String director,
+                        @RequestParam("correo") String correo,
+                        @RequestParam("fax") String fax,
+                        @RequestParam("celular") String celular,
+                        @RequestParam("telefono") String telefono,
+                        @RequestParam("obs") String obs
+                        
+                        ){
+        
+        Car car = new Car();
+        
+        car.setNombre(nombre);
+        car.setDireccion(direccion);
+        car.setDepartamento(departamento);
+        car.setProvincia(provincia);
+        car.setDistrito(distrito);
+        car.setDirector(director);
+        car.setCorreo(correo);
+        car.setFax(fax);
+        car.setCelular(celular);
+        car.setTelefono(telefono);
+        car.setObservaciones(obs);
+        
+        ServicioPersonal.InsertCar(car);
+        
+         map.put("listaCar",ServicioPersonal.ListaCar());
+        return new ModelAndView("/Personal/registros/car/lista_car",map);
+    }
+    
+    @RequestMapping (value = "/updateCar", method = RequestMethod.POST)
+    public ModelAndView UpdateCar(ModelMap map,
+                        //datos a ingresar en CAR
+                        @RequestParam("id") int id,
+                        @RequestParam("nombre") String nombre,
+                        @RequestParam("direccion") String direccion,
+                        @RequestParam("departamento") String departamento,
+                        @RequestParam("provincia") String provincia,
+                        @RequestParam("distrito") String distrito,
+                        @RequestParam("director") String director,
+                        @RequestParam("correo") String correo,
+                        @RequestParam("fax") String fax,
+                        @RequestParam("celular") String celular,
+                        @RequestParam("telefono") String telefono,
+                        @RequestParam("obs") String obs
+                        
+                        ){
+        
+        Car car = new Car();
+        car = ServicioPersonal.getCar(id);
+        car.setNombre(nombre);
+        car.setDireccion(direccion);
+        car.setDepartamento(departamento);
+        car.setProvincia(provincia);
+        car.setDistrito(distrito);
+        car.setDirector(director);
+        car.setCorreo(correo);
+        car.setFax(fax);
+        car.setCelular(celular);
+        car.setTelefono(telefono);
+        car.setObservaciones(obs);
+        
+        ServicioPersonal.UpdateCar(car);
+        
+         map.put("listaCar",ServicioPersonal.ListaCar());
+        return new ModelAndView("/Personal/registros/car/lista_car",map);
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////////
     
     
 }
