@@ -112,12 +112,16 @@
                                 <div class="control-group">
                                     <label class="control-label">Resultado</label>
                                     <div class="controls">
-                                        <input id="resul" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                                        <select>
+                                            <option value="sia">Favorable</option>
+                                            <option value="mia">Desfavorable</option>
+                                            <option value="mia" selected>Observado</option>
+                                        </select>
+                                    </div>  
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Fecha del resultado</label>
+                                    <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
                                         <input id="fecha_resul" name="full-name" type="text" class="datepicker input-xlarge">
                                     </div>
@@ -133,164 +137,11 @@
                                 <div class="control-group">
                                     <label class="control-label">Observaciones DGA</label>
                                     <div class="controls">
-                                        <input id="obs_dga" name="full-name" type="text" class="input-xlarge">
+                                        <textarea cols="25" rows="5" class="input-xlarge"> </textarea>
                                     </div>
                                 </div>
                                 <br>
-                                <div class="control-group">
-                                    <label class="control-label">¿Se realizó la Evaluación Social?</label>
-                                    <div class="controls">
-                                        <input id="eval_social" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones Eval. Social</label>
-                                    <div class="controls">
-                                        <input id="obs_social" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">¿Se realizó la Evaluación Psicológica?</label>
-                                    <div class="controls">
-                                        <input id="eval_psico" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones Eval. Psicológica</label>
-                                    <div class="controls">
-                                        <input id="obs_psico" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">¿Cuenta con Certificado domiciliario vigente?</label>
-                                    <div class="controls">
-                                        <input id="cert_dom" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones sobre el Certificado domiciliario</label>
-                                    <div class="controls">
-                                        <input id="obs_cert_dom" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">¿Se ha hecho presente la Partida de Matrimonio?</label>
-                                    <div class="controls">
-                                        <input id="part_mat" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones sobre la Partida de Matrimonio</label>
-                                    <div class="controls">
-                                        <input id="obs_part_mat" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">¿Se ha hecho presente la Sentencia de Divorcio?</label>
-                                    <div class="controls">
-                                        <input id="sent_divor" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones sobre la Sentencia de Divorcio</label>
-                                    <div class="controls">
-                                        <input id="obs_sent_divor" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">¿Se ha hecho presente la Partida de Defunción del Cónyuge?</label>
-                                    <div class="controls">
-                                        <input id="part_defun_cony" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones sobre la Partida de Defunción del Cónyuge</label>
-                                    <div class="controls">
-                                        <input id="obs_part_defun_cony" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">¿Se ha hecho presente la Partida de Nacimiento del Niño Biológico?</label>
-                                    <div class="controls">
-                                        <input id="part_nac_bio" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones sobre la Partida de Nacimiento del Niño Biológico</label>
-                                    <div class="controls">
-                                        <input id="obs_part_nac_bio" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">¿Se ha hecho presente la Partida de Nacimiento del Niño Adoptivo?</label>
-                                    <div class="controls">
-                                        <input id="part_nac_adop" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones sobre la Partida de Nacimiento del Niño Adoptivo</label>
-                                    <div class="controls">
-                                        <input id="obs_part_nac_adop" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">¿Presenta reportes de seguimiento post adoptivo que no hayan sido tramitadas por la DGA?</label>
-                                    <div class="controls">
-                                        <input id="post_dga" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones sobre los seguimientos post adoptivos</label>
-                                    <div class="controls">
-                                        <input id="obs_post_dga" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">¿Presenta fotografía familiar y su hogar?</label>
-                                    <div class="controls">
-                                        <input id="foto_fam" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones sobre las fotografias</label>
-                                    <div class="controls">
-                                        <input id="obs_foto_fam" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">¿Presenta compromiso de seguimiento post adoptivo?</label>
-                                    <div class="controls">
-                                        <input id="compromiso" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones sobre el compromiso de seguimiento</label>
-                                    <div class="controls">
-                                        <input id="obs_compromiso" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
+                                
                                 <h3><strong>Resoluciones</strong></h3>
                                 <br>
                                 <div class="table-responsive">

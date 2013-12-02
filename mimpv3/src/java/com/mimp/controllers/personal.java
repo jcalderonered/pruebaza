@@ -60,14 +60,14 @@ public class personal {
     
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
+        map.put("listaJuzgados",ServicioPersonal.ListaJuzgado());
         return new ModelAndView("/Personal/registros/juzgado/lista_juzg",map);
     }
     
     @RequestMapping (value = "/car", method = RequestMethod.GET)
     public ModelAndView Car(ModelMap map){
     
-        //List<Personal> lista = Servicio.listaPersonal();
-        //map.addAttribute("id", temp);
+        
         map.put("listaCar",ServicioPersonal.ListaCar());
         return new ModelAndView("/Personal/registros/car/lista_car",map);
     }
@@ -75,8 +75,7 @@ public class personal {
     @RequestMapping (value = "/ua", method = RequestMethod.GET)
     public ModelAndView Ua(ModelMap map){
     
-        //List<Personal> lista = Servicio.listaPersonal();
-        //map.addAttribute("id", temp);
+        map.put("listaUa",ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/registros/ua/lista_ua",map);
     }
     
@@ -109,6 +108,7 @@ public class personal {
     
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
+        map.put("listaPersonal",ServicioPersonal.ListaPersonal());
         return new ModelAndView("/Personal/registros/usuarios/lista_personal",map);
     }
     
@@ -512,8 +512,425 @@ public class personal {
          map.put("listaCar",ServicioPersonal.ListaCar());
         return new ModelAndView("/Personal/registros/car/lista_car",map);
     }
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////////////////// REGISTRAR/EDITAR JUZGADOS ////////////////////////////////////
+    
+    @RequestMapping (value = "/irEditarJuzgado", method = RequestMethod.GET)
+    public ModelAndView IrEditarJuzgado(ModelMap map){
+    
+        
+        return new ModelAndView("/Personal/registros/juzgado/editar_juzgado",map);
+    }
+    
+    @RequestMapping (value = "/irEditarJuzgado2", method = RequestMethod.POST)
+    public ModelAndView IrEditarJuzgado2(ModelMap map,@RequestParam("id") int id){
+    
+        
+        Juzgado temp = new Juzgado();
+        temp = ServicioPersonal.getJuzgado(id);
+        map.put("juzgado",temp);
+        
+        return new ModelAndView("/Personal/registros/juzgado/editar_juzgado",map);
+    }
+    
+    @RequestMapping (value = "/editJuzgado", method = RequestMethod.POST)
+    public ModelAndView EditarJuzgado(ModelMap map,
+                        //datos a ingresar en  Juzgado
+                        @RequestParam("nombre") String nombre,
+                        @RequestParam("denominacion") String denominacion,
+                        @RequestParam("especialidad") String especialidad,
+                        @RequestParam("direccion") String direccion,
+                        @RequestParam("departamento") String departamento,
+                        @RequestParam("corteS") String corteS,
+                        @RequestParam("distritoJ") String distritoJ,
+                        @RequestParam("nombreJ") String nombreJ,
+                        @RequestParam("telefono") String telefono,
+                        @RequestParam("correo") String correo,
+                        @RequestParam("obs") String obs
+                        
+                        ){
+        
+        Juzgado juzg = new Juzgado();
+        
+        juzg.setNombre(nombre);
+        juzg.setDenominacion(denominacion);
+        juzg.setEspecialidad(especialidad);
+        juzg.setDireccion(direccion);
+        juzg.setDepartamento(departamento);
+        juzg.setCorteSuperior(corteS);
+        juzg.setDistritoJudicial(distritoJ);
+        juzg.setNombreJuez(nombreJ);
+        juzg.setTelefono(telefono);
+        juzg.setCorreo(correo);
+        juzg.setObservaciones(obs);
+        
+        
+        ServicioPersonal.InsertJuzgado(juzg);
+        
+         map.put("listaJuzgados",ServicioPersonal.ListaJuzgado());
+        return new ModelAndView("/Personal/registros/juzgado/lista_juzg",map);
+    }
+    
+    @RequestMapping (value = "/updateJuzgado", method = RequestMethod.POST)
+    public ModelAndView UpdateJuzgado(ModelMap map,
+                        //datos a ingresar en Juzgado
+                        @RequestParam("id") int id,
+                        @RequestParam("nombre") String nombre,
+                        @RequestParam("denominacion") String denominacion,
+                        @RequestParam("especialidad") String especialidad,
+                        @RequestParam("direccion") String direccion,
+                        @RequestParam("departamento") String departamento,
+                        @RequestParam("corteS") String corteS,
+                        @RequestParam("distritoJ") String distritoJ,
+                        @RequestParam("nombreJ") String nombreJ,
+                        @RequestParam("telefono") String telefono,
+                        @RequestParam("correo") String correo,
+                        @RequestParam("obs") String obs
+                        
+                        ){
+        
+        Juzgado juzg = new Juzgado();
+        juzg = ServicioPersonal.getJuzgado(id);
+        juzg.setNombre(nombre);
+        juzg.setDenominacion(denominacion);
+        juzg.setEspecialidad(especialidad);
+        juzg.setDireccion(direccion);
+        juzg.setDepartamento(departamento);
+        juzg.setCorteSuperior(corteS);
+        juzg.setDistritoJudicial(distritoJ);
+        juzg.setNombreJuez(nombreJ);
+        juzg.setTelefono(telefono);
+        juzg.setCorreo(correo);
+        juzg.setObservaciones(obs);
+        
+        ServicioPersonal.UpdateJuzgado(juzg);
+        
+         map.put("listaJuzgados",ServicioPersonal.ListaJuzgado());
+        return new ModelAndView("/Personal/registros/juzgado/lista_juzg",map);
+    }
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////////////////// REGISTRAR/EDITAR UA ////////////////////////////////////
+    @RequestMapping (value = "/irEditarUa", method = RequestMethod.GET)
+    public ModelAndView IrEditarUa(ModelMap map){
+    
+        
+        return new ModelAndView("/Personal/registros/ua/editar_ua",map);
+    }
+    @RequestMapping (value = "/irEditarUa2", method = RequestMethod.POST)
+    public ModelAndView IrEditarUa2(ModelMap map,@RequestParam("id") int id){
+    
+        
+        Unidad temp = new Unidad();
+        temp = ServicioPersonal.getUa(id);
+        map.put("ua",temp);
+        
+        return new ModelAndView("/Personal/registros/ua/editar_ua",map);
+    }
+    @RequestMapping (value = "/editUa", method = RequestMethod.POST)
+    public ModelAndView EditarUa(ModelMap map,
+                        //datos a ingresar en UA
+                        @RequestParam("nombre") String nombre,
+                        @RequestParam("direccion") String direccion,
+                        @RequestParam("departamento") String departamento,
+                        @RequestParam("provincia") String provincia,
+                        @RequestParam("distrito") String distrito,
+                        @RequestParam("competenciaR") String competenciaR,
+                        @RequestParam("correo") String correo,
+                        @RequestParam("telefono") String telefono,
+                        @RequestParam("celular") String celular,
+                        @RequestParam("obs") String obs
+                        ){
+        
+        Unidad ua = new Unidad();
+        
+        ua.setNombre(nombre);
+        ua.setDireccion(direccion);
+        ua.setDepartamento(departamento);
+        ua.setProvincia(provincia);
+        ua.setDistrito(distrito);
+        ua.setCompetenciaRegional(competenciaR);
+        ua.setCorreo(correo);
+        ua.setTelefono(telefono);
+        ua.setCelular(celular);
+        ua.setObs(obs);
+        
+        ServicioPersonal.InsertUa(ua);
+        
+         map.put("listaUa",ServicioPersonal.ListaUa());
+        return new ModelAndView("/Personal/registros/ua/lista_ua",map);
+    }
+    
+    @RequestMapping (value = "/updateUa", method = RequestMethod.POST)
+    public ModelAndView UpdateUa(ModelMap map,
+                        //datos a ingresar en UA
+                        @RequestParam("id") int id,
+                        @RequestParam("nombre") String nombre,
+                        @RequestParam("direccion") String direccion,
+                        @RequestParam("departamento") String departamento,
+                        @RequestParam("provincia") String provincia,
+                        @RequestParam("distrito") String distrito,
+                        @RequestParam("competenciaR") String competenciaR,
+                        @RequestParam("correo") String correo,
+                        @RequestParam("telefono") String telefono,
+                        @RequestParam("celular") String celular,
+                        @RequestParam("obs") String obs
+                        
+                        ){
+        
+        Unidad ua = new Unidad();
+        ua = ServicioPersonal.getUa(id);
+        ua.setNombre(nombre);
+        ua.setDireccion(direccion);
+        ua.setDepartamento(departamento);
+        ua.setProvincia(provincia);
+        ua.setDistrito(distrito);
+        ua.setCompetenciaRegional(competenciaR);
+        ua.setCorreo(correo);
+        ua.setTelefono(telefono);
+        ua.setCelular(celular);
+        ua.setObs(obs);
+        
+        ServicioPersonal.UpdateUa(ua);
+        
+         map.put("listaUa",ServicioPersonal.ListaUa());
+        return new ModelAndView("/Personal/registros/ua/lista_ua",map);
+    }
     
     /////////////////////////////////////////////////////////////////////////////////
     
+     ///////////////PERSONAL DE UA ///////////////////////////////////////////
+    @RequestMapping (value = "/irListaPersonalUa", method = RequestMethod.POST)
+    public ModelAndView ListaPersonalUa(ModelMap map, @RequestParam("ïdUA") int idUa){
+    
+        map.put("ua",ServicioPersonal.getUa(idUa));
+        map.put("listaPersonalUa",ServicioPersonal.ListaPersonalUa(idUa));
+        return new ModelAndView("/Personal/registros/ua/lista_ua_personal",map);
+    }
+     /////////////////////////////////////////////////////////////////////////////////
+    ///////////////EDITAR PERSONAL UA ///////////////////////////////////////////
+    @RequestMapping (value = "/EditarPersonalUa", method = RequestMethod.POST)
+    public ModelAndView EditarPersonalUa(ModelMap map,@RequestParam("id") int id){
+    
+        
+        Personal temp = new Personal();
+        temp = ServicioPersonal.getPersonal(id);
+        String fechaNac = format.dateToString(temp.getFechaNacimiento());
+        String fechaIng = format.dateToString(temp.getFechaIngreso());
+        String noUa = "deshabilitar";
+        map.addAttribute("fechaNac", fechaNac);
+        map.addAttribute("fechaIng", fechaIng);
+        map.addAttribute("disabled",noUa );
+        map.put("personal",temp);
+        map.put("listaUa",ServicioPersonal.ListaUa());
+        return new ModelAndView("/Personal/registros/usuarios/editar_personal",map);
+    }
+    
+    @RequestMapping (value = "/updatePersonalUa", method = RequestMethod.POST)
+    public ModelAndView UpdatePersonalUa(ModelMap map,
+                        //datos a ingresar en Personal
+                        @RequestParam("idPers") int idPers,
+                        @RequestParam("nombre") String nombre,
+                        @RequestParam("apellidoP") String apellidoP,
+                        @RequestParam("apellidoM") String apellidoM,
+                        @RequestParam("user") String user,
+                        @RequestParam("pass") String pass,
+                        @RequestParam("correoT") String correoT,
+                        @RequestParam("correoP") String correoP,
+                        @RequestParam("profesion") String profesion,
+                        @RequestParam("grado") String grado,
+                        @RequestParam("cargo") String cargo,
+                        @RequestParam("dni") int dni,
+                        @RequestParam("fechaNac") String fechaNac,
+                        @RequestParam("regimen") String regimen,
+                        @RequestParam("fechaIng") String fechaIng,
+                        @RequestParam("domicilio") String domicilio,
+                        @RequestParam("rol") String rol
+                        //@RequestParam("ua") int ua
+                        ){
+        
+        Personal temp = new Personal();
+        temp = ServicioPersonal.getPersonal(idPers);
+        
+        temp.setNombre(nombre);
+        temp.setApellidoP(apellidoP);
+        temp.setApellidoM(apellidoM);
+        temp.setUser(user);
+        temp.setPass(pass);
+        temp.setCorreoTrabajo(correoT);
+        temp.setCorreoPersonal(correoP);
+        temp.setProfesion(profesion);
+        temp.setGradoInstruccion(grado);
+        temp.setCargo(cargo);
+        temp.setDni(dni);
+        temp.setFechaNacimiento(format.stringToDate(fechaNac));
+        temp.setRegimen(regimen);
+        temp.setFechaIngreso(format.stringToDate(fechaIng));
+        temp.setDomicilio(domicilio);
+        temp.setRol(rol);
+        
+        //Unidad temp2 = new Unidad();
+        //temp2 = ServicioPersonal.getUa(ua);
+        
+        //temp.setUnidad(temp2);
+        
+        ServicioPersonal.UpdatePersonal(temp);
+        map.put("ua",ServicioPersonal.getUa(temp.getUnidad().getIdunidad()));
+        map.put("listaPersonalUa",ServicioPersonal.ListaPersonalUa(temp.getUnidad().getIdunidad()));
+        return new ModelAndView("/Personal/registros/ua/lista_ua_personal",map);
+    }
+    /////////////////////////////////////////////////////////////////////////////////
+     ///////////////ASIGNAR PERSONAL PASO 1 ///////////////////////////////////////////
+    @RequestMapping (value = "/asignarPersonalUa", method = RequestMethod.POST)
+    public ModelAndView asignarPersonalUa(ModelMap map, @RequestParam("idUa") int idUa){
+    
+        map.put("ua",ServicioPersonal.getUa(idUa));
+        map.put("listaPersonalNoUa",ServicioPersonal.ListaPersonalNoUa(idUa));
+        return new ModelAndView("/Personal/registros/ua/lista_asign_pers",map);
+    }
+    /////////////////////////////////////////////////////////////////////////////////
+    ///////////////ASIGNAR PERSONAL PASO 2 ///////////////////////////////////////////
+    @RequestMapping (value = "/asignarPersonalUa2", method = RequestMethod.POST)
+    public ModelAndView asignarPersonalUa2(ModelMap map, @RequestParam("idUa") int idUa,@RequestParam("idPers") int idPers){
+    
+        Personal per = new Personal();
+        Unidad ua = new Unidad();
+        ua = ServicioPersonal.getUa(idUa);
+        per = ServicioPersonal.getPersonal(idPers);
+        
+        per.setUnidad(ua);
+        ServicioPersonal.UpdatePersonal(per);
+        map.put("ua",ServicioPersonal.getUa(idUa));
+        map.put("listaPersonalUa",ServicioPersonal.ListaPersonalUa(idUa));
+        return new ModelAndView("/Personal/registros/ua/lista_ua_personal",map);
+    }
+    
+     /////////////////////////////////////////////////////////////////////////////////
+     ////////////////////// REGISTRAR/EDITAR PERSONAL ////////////////////////////////////
+    @RequestMapping (value = "/irEditarPersonal", method = RequestMethod.GET)
+    public ModelAndView IrEditarPersonal(ModelMap map){
+    
+        map.put("listaUa",ServicioPersonal.ListaUa());
+        return new ModelAndView("/Personal/registros/usuarios/editar_personal",map);
+    }
+    @RequestMapping (value = "/irEditarPersonal2", method = RequestMethod.POST)
+    public ModelAndView IrEditarPersonal2(ModelMap map,@RequestParam("id") int id){
+    
+        
+        Personal temp = new Personal();
+        temp = ServicioPersonal.getPersonal(id);
+        String fechaNac = format.dateToString(temp.getFechaNacimiento());
+        String fechaIng = format.dateToString(temp.getFechaIngreso());
+        map.addAttribute("fechaNac", fechaNac);
+        map.addAttribute("fechaIng", fechaIng);
+        map.put("personal",temp);
+        map.put("listaUa",ServicioPersonal.ListaUa());
+        return new ModelAndView("/Personal/registros/usuarios/editar_personal",map);
+    }
+    
+    @RequestMapping (value = "/editPersonal", method = RequestMethod.POST)
+    public ModelAndView EditarPersonal(ModelMap map,
+                        //datos a ingresar en Personal
+                        @RequestParam("nombre") String nombre,
+                        @RequestParam("apellidoP") String apellidoP,
+                        @RequestParam("apellidoM") String apellidoM,
+                        @RequestParam("user") String user,
+                        @RequestParam("pass") String pass,
+                        @RequestParam("correoT") String correoT,
+                        @RequestParam("correoP") String correoP,
+                        @RequestParam("profesion") String profesion,
+                        @RequestParam("grado") String grado,
+                        @RequestParam("cargo") String cargo,
+                        @RequestParam("dni") int dni,
+                        @RequestParam("fechaNac") String fechaNac,
+                        @RequestParam("regimen") String regimen,
+                        @RequestParam("fechaIng") String fechaIng,
+                        @RequestParam("domicilio") String domicilio,
+                        @RequestParam("rol") String rol,
+                        @RequestParam("ua") int ua
+                        ){
+        
+        Personal temp = new Personal();
+        
+        temp.setNombre(nombre);
+        temp.setApellidoP(apellidoP);
+        temp.setApellidoM(apellidoM);
+        temp.setUser(user);
+        temp.setPass(pass);
+        temp.setCorreoTrabajo(correoT);
+        temp.setCorreoPersonal(correoP);
+        temp.setProfesion(profesion);
+        temp.setGradoInstruccion(grado);
+        temp.setCargo(cargo);
+        temp.setDni(dni);
+        temp.setFechaNacimiento(format.stringToDate(fechaNac));
+        temp.setRegimen(regimen);
+        temp.setFechaIngreso(format.stringToDate(fechaIng));
+        temp.setDomicilio(domicilio);
+        temp.setRol(rol);
+        
+        Unidad temp2 = new Unidad();
+        temp2 = ServicioPersonal.getUa(ua);
+        
+        temp.setUnidad(temp2);
+        
+        ServicioPersonal.InsertPersonal(temp);
+        
+         map.put("listaPersonal",ServicioPersonal.ListaPersonal());
+        return new ModelAndView("/Personal/registros/usuarios/lista_personal",map);
+    }
+    
+    @RequestMapping (value = "/updatePersonal", method = RequestMethod.POST)
+    public ModelAndView UpdatePersonal(ModelMap map,
+                        //datos a ingresar en Personal
+                        @RequestParam("idPers") int idPers,
+                        @RequestParam("nombre") String nombre,
+                        @RequestParam("apellidoP") String apellidoP,
+                        @RequestParam("apellidoM") String apellidoM,
+                        @RequestParam("user") String user,
+                        @RequestParam("pass") String pass,
+                        @RequestParam("correoT") String correoT,
+                        @RequestParam("correoP") String correoP,
+                        @RequestParam("profesion") String profesion,
+                        @RequestParam("grado") String grado,
+                        @RequestParam("cargo") String cargo,
+                        @RequestParam("dni") int dni,
+                        @RequestParam("fechaNac") String fechaNac,
+                        @RequestParam("regimen") String regimen,
+                        @RequestParam("fechaIng") String fechaIng,
+                        @RequestParam("domicilio") String domicilio,
+                        @RequestParam("rol") String rol,
+                        @RequestParam("ua") int ua
+                        ){
+        
+        Personal temp = new Personal();
+        temp = ServicioPersonal.getPersonal(idPers);
+        
+        temp.setNombre(nombre);
+        temp.setApellidoP(apellidoP);
+        temp.setApellidoM(apellidoM);
+        temp.setUser(user);
+        temp.setPass(pass);
+        temp.setCorreoTrabajo(correoT);
+        temp.setCorreoPersonal(correoP);
+        temp.setProfesion(profesion);
+        temp.setGradoInstruccion(grado);
+        temp.setCargo(cargo);
+        temp.setDni(dni);
+        temp.setFechaNacimiento(format.stringToDate(fechaNac));
+        temp.setRegimen(regimen);
+        temp.setFechaIngreso(format.stringToDate(fechaIng));
+        temp.setDomicilio(domicilio);
+        temp.setRol(rol);
+        
+        Unidad temp2 = new Unidad();
+        temp2 = ServicioPersonal.getUa(ua);
+        
+        temp.setUnidad(temp2);
+        
+        ServicioPersonal.UpdatePersonal(temp);
+        
+         map.put("listaPersonal",ServicioPersonal.ListaPersonal());
+        return new ModelAndView("/Personal/registros/usuarios/lista_personal",map);
+    }
     
 }

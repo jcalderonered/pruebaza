@@ -81,6 +81,7 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th> Item </th>
                                         <th class="col-sm-2 ">Nombre</th>
                                         <th class="col-sm-2 ">Tipo</th>
                                         <th class="col-sm-3 ">País</th>
@@ -90,8 +91,9 @@
                                 </thead>
 
                                 <tbody>
-                                    <c:forEach var="autoridad" items="${listaAutoridades}">
+                                    <c:forEach var="autoridad" items="${listaAutoridades}" varStatus="status">
                                     <tr>
+                                        <td>${status.index + 1}</td>
                                         <td>${autoridad.getEntidad().getNombre()}</td>
                                         <td>${autoridad.getTipo()}</td>
                                         <td>${autoridad.getEntidad().getPais()}</td>

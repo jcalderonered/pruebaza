@@ -75,51 +75,48 @@
 
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <h1 align="center"><strong>Lista del Personal UA Número 1</strong></h1>
+                        <h1 align="center"><strong>Lista del Personal UA : ${ua.getNombre()}</strong></h1>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th> Item </th>
                                         <th class="col-sm-2 ">Nombre</th>
                                         <th class="col-sm-2 ">Apellido Paterno</th>
                                         <th class="col-sm-2 ">Apellido Materno</th>
                                         <th class="col-sm-2 ">Rol</th>
-                                        <th class="col-sm-2 ">Correo</th>
+                                        <th class="col-sm-2 ">Correo Trabajo</th>
                                         <th class="col-sm-2 "></th>                                          
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>Nombre 1</td>
-                                        <td>Apellido 1</td>
-                                        <td>Apellido 2</td>
-                                        <td>DEIA</td>
-                                        <td>napellido1@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nombre 2</td>
-                                        <td>Apellido 1</td>
-                                        <td>Apellido 2</td>
-                                        <td>DEIA</td>
-                                        <td>napellido2@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nombre 3</td>
-                                        <td>Apellido 1</td>
-                                        <td>Apellido 2</td>
-                                        <td>DEIA</td>
-                                        <td>napellido3@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
+                                    <c:forEach var="personalUa" items="${listaPersonalUa}" varStatus="status">
+                                        <tr>
+                                            <td>${status.index + 1}</td>
+                                            <td>${personalUa.getNombre()}</td>
+                                            <td>${personalUa.getApellidoP()}</td>
+                                            <td>${personalUa.getApellidoM()}</td>
+                                            <td>${personalUa.getRol()}</td>
+                                            <td>${personalUa.getCorreoTrabajo()}</td>
+
+                                            <td>
+                                                <form action="${pageContext.servletContext.contextPath}/EditarPersonalUa" method="post">
+                                                    <input hidden name="id" id="id" value="${personalUa.getIdpersonal()}">
+                                                    <button type="submit" class="btn btn-default">Editar</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                         <br>
-                        <button href="#" class="btn btn-default">Registrar Personal</button>
+                        <form action="${pageContext.servletContext.contextPath}/asignarPersonalUa" method="post">
+                                                    <input hidden name="idUa" id="idUa" value="${ua.getIdunidad()}">
+                                                    <button type="submit" class="btn btn-default">Asignar Nuevo Personal</button>
+                                                </form>
                     </div>
                 </div>
             </div>

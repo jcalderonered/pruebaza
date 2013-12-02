@@ -75,12 +75,13 @@
 
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <h1 align="center"><strong>Lista del Personal Asignable a UA Número 5</strong></h1>
+                        <h1 align="center"><strong>Lista del Personal Asignable a UA: ${ua.getNombre()}</strong></h1>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th> Item </th>
                                         <th class="col-sm-2 ">Nombre</th>
                                         <th class="col-sm-2 ">Apellido Paterno</th>
                                         <th class="col-sm-2 ">Apellido Materno</th>
@@ -91,30 +92,24 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>Nombre 1</td>
-                                        <td>Apellido 1</td>
-                                        <td>Apellido 2</td>
-                                        <td>DEIA</td>
-                                        <td>UA Número 1</td>
-                                        <td><button href="#" class="btn btn-default">Asignar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nombre 2</td>
-                                        <td>Apellido 1</td>
-                                        <td>Apellido 2</td>
-                                        <td>DEIA</td>
-                                        <td>UA Número 2</td>
-                                        <td><button href="#" class="btn btn-default">Asignar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nombre 3</td>
-                                        <td>Apellido 1</td>
-                                        <td>Apellido 2</td>
-                                        <td>DEIA</td>
-                                        <td>UA Número 3</td>
-                                        <td><button href="#" class="btn btn-default">Asignar</button></td>
-                                    </tr>
+                                    <c:forEach var="personalNoUa" items="${listaPersonalNoUa}" varStatus="status">
+                                        <tr>
+                                            <td>${status.index + 1}</td>
+                                            <td>${personalNoUa.getNombre()}</td>
+                                            <td>${personalNoUa.getApellidoP()}</td>
+                                            <td>${personalNoUa.getApellidoM()}</td>
+                                            <td>${personalNoUa.getRol()}</td>
+                                            <td>${personalNoUa.getUnidad().getNombre()}</td>
+
+                                            <td>
+                                                <form action="${pageContext.servletContext.contextPath}/asignarPersonalUa2" method="post">
+                                                    <input hidden name="idPers" id="id" value="${personalNoUa.getIdpersonal()}">
+                                                    <input hidden name="idUa" id="id" value="${ua.getIdunidad()}">
+                                                    <button type="submit" class="btn btn-default">Asignar</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>

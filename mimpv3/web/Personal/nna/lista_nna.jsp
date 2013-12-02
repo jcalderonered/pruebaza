@@ -69,12 +69,22 @@
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+
                         </ul>
                     </div>
 
                     <div class="col-md-6 col-md-offset-1">
-                      <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
+                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
+                        <br>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button href="#" class="btn btn-default">Mostrar NNA Regulares</button> 
+                            </div>
+                            <div class="col-md-2 col-md-offset-2">
+                                <button href="#" class="btn btn-default">Mostrar NNA Prioritarios</button> 
+                            </div>
+                        </div>
+                        <br>    
                         <h1 align="center"><strong>Lista de NNA's</strong></h1>
                         <br>
                         <div class="table-responsive">
@@ -142,12 +152,12 @@
                 <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
         </div>
-                <!-- core JavaScript
-        ================================================== -->
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-            
-            
-            <!-- Ubicar al final -->
+        <!-- core JavaScript
+================================================== -->
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+
+
+        <!-- Ubicar al final -->
     </body>
 </html>

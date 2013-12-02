@@ -69,7 +69,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+
                         </ul>
                     </div>
 
@@ -80,6 +80,7 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th> Item </th>
                                         <th class="col-sm-2 ">Nombre</th>
                                         <th class="col-sm-2 ">Apellidos</th>
                                         <th class="col-sm-2 ">Rol</th>
@@ -91,42 +92,43 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>Nombre 1</td>
-                                        <td>Apellidos 1</td>
-                                        <td>DEIA</td>
-                                        <td>Lima</td>
-                                        <td>napellido1@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nombre 2</td>
-                                        <td>Apellidos 2</td>
-                                        <td>DEIA</td>
-                                        <td>Lima</td>
-                                        <td>napellido2@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nombre 3</td>
-                                        <td>Apellidos 3</td>
-                                        <td>DEIA</td>
-                                        <td>Lima</td>
-                                        <td>napellido3@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
+                                    <c:forEach var="personal" items="${listaPersonal}" varStatus="status">
+                                        <tr>
+                                            <td>${status.index + 1}</td>
+                                            <td>${personal.getNombre()}</td>
+                                            <td>${personal.getApellidoP()} ${personal.getApellidoM()}</td>
+                                            <td>${personal.getRol()}</td>
+                                            <td>${personal.getUnidad().getNombre()}</td>
+                                            <td>${personal.getCorreoTrabajo()}</td>
+                                            <td>
+                                                <form action="${pageContext.servletContext.contextPath}/" method="post">
+                                                    <input hidden name="id" id="id" value="${personal.getIdpersonal()}">
+                                                    <button type="submit" class="btn btn-default" disabled>Ver</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="${pageContext.servletContext.contextPath}/irEditarPersonal2" method="post">
+                                                    <input hidden name="id" id="id" value="${personal.getIdpersonal()}">
+                                                    <button type="submit" class="btn btn-default">Editar</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                         <br>
                         <div class="control-group">
-                            <button href="#" class="btn btn-default">Registrar Personal</button> 
-                            &nbsp;
-                            <button href="#" class="btn btn-default">Ver log</button> 
+                            <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/irEditarPersonal'" class="btn btn-default">Registrar Personal</button> 
+                            
                         </div>
+                            <br>
+                            <br>
+                            <form action="${pageContext.servletContext.contextPath}/" method="post">
+                                <input hidden name="id" id="id" value="${personal.getIdpersonal()}">
+                                <button type="submit" class="btn btn-default" disabled>Ver log</button>
+                            </form>
+                        
                     </div>
                 </div>
             </div>

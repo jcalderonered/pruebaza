@@ -81,6 +81,7 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th> Item </th>
                                         <th class="col-sm-2 ">Nombre</th>
                                         <th class="col-sm-2 ">Departamento</th>
                                         <th class="col-sm-2 ">Competencia Regional</th>
@@ -91,35 +92,32 @@
                                 </thead>
 
                                 <tbody>
+                                    <c:forEach var="ua" items="${listaUa}" varStatus="status">
                                     <tr>
-                                        <td>UA Número 1</td>
-                                        <td>Ancash</td>
-                                        <td>Competencia#1</td>
-                                        <td>ua1@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
+                                        <td>${status.index + 1}</td>
+                                        <td>${ua.getNombre()}</td>
+                                        <td>${ua.getDepartamento()}</td>
+                                        <td>${ua.getCompetenciaRegional()}</td>
+                                        <td>${ua.getCorreo()}</td>
+                                        <td>
+                                            <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post">
+                                                <input hidden name="ïdUA" id="ïdUA" value="${ua.getIdunidad()}">
+                                                <button type="submit" class="btn btn-default">Ver</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="${pageContext.servletContext.contextPath}/irEditarUa2" method="post">
+                                                <input hidden name="id" id="id" value="${ua.getIdunidad()}">
+                                                <button type="submit" class="btn btn-default">Ver</button>
+                                            </form>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>UA Número 2</td>
-                                        <td>La libertad</td>
-                                        <td>Competencia#2</td>
-                                        <td>ua2@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>UA Número 3</td>
-                                        <td>Amazonas</td>
-                                        <td>Competencia#3</td>
-                                        <td>ua3@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                         <br>
-                        <button href="#" class="btn btn-default">Registrar UA</button>
+                        <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/irEditarUa'" class="btn btn-default">Registrar UA</button>
                     </div>
                 </div>
             </div>

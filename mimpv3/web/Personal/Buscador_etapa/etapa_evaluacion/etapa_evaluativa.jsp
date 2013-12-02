@@ -70,7 +70,7 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
                         </ul>
                     </div>
-                    <div class="col-md-6 col-md-offset-1">
+                    <div class="col-md-6 ">
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
@@ -90,11 +90,12 @@
                                                 <th>Expediente</th>
                                                 <th>Información</th>
                                                 <th>Evaluación Psicológica</th>
-                                                <th>¿Listo?</th>
+                                                <th>Resultado</th>
                                                 <th>Evaluación Social</th>
-                                                <th>¿Listo?</th>
+                                                <th>Resultado</th>
                                                 <th>Evaluación Legal</th>
-                                                <th>¿Listo?</th>
+                                                <th>Fecha de Resolución</th>
+                                                <th>Tipo de Resolución</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -102,41 +103,45 @@
                                                 <td>Alvarado-Gutierrez</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>Pendiente</td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>Pendiente</td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>20/11/2013</td>
+                                                <td>Observación</td>
                                             </tr>
                                             <tr>
                                                 <td>Rosa-Flores</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>Pendiente</td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>Pendiente</td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>20/09/2011</td>
+                                                <td>Prórroga</td>
                                             </tr>
                                             <tr>
                                                 <td>Durando-Iriarte</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>Pendiente</td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>Pendiente</td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>20/09/2011</td>
+                                                <td>Prórroga</td>
                                             </tr>
                                             <tr>
                                                 <td>Solano-Parco</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>Pendiente</td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>Pendiente</td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>No</td>
+                                                <td>20/09/2011</td>
+                                                <td>Prórroga</td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -75,6 +75,7 @@
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="#" data-toggle="tab">Informativa</a></li>
                             <li class="active"><a href="#" data-toggle="tab">Evaluativa</a></li>
+                            <li><a href="#" data-toggle="tab">Designación</a></li>
                             <li><a href="#" data-toggle="tab">Adopción</a></li>
                             <li><a href="#" data-toggle="tab">Post Adopción</a></li>
                         </ul>
@@ -96,7 +97,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha asignación</label>
                                     <div class="controls">
-                                        <input type="text" class="datepicker span2" value="02-16-2012" id="dp3" >
+                                        <input type="text" class="datepicker span2" value="20/10/2013" id="dp3" >
                                     </div>
                                 </div>
                                 <br>
@@ -114,53 +115,32 @@
                                 <div class="control-group">
                                     <label class="control-label">Resultado</label>
                                     <div class="controls">
-                                        <input id="resul" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                                        <select>
+                                            <option value="sia">Favorable</option>
+                                            <option value="mia">Desfavorable</option>
+                                            <option value="mia" selected>Observado</option>
+                                        </select>
+                                    </div>  
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Fecha del resultado</label>
+                                    <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
                                         <input id="fecha_resul" name="full-name" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
-                                <h3><strong>Resoluciones</strong></h3>
-                                <br>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Tipo Resolución</th>
-                                                <th>Número</th>
-                                                <th>Fecha de Resolución</th>
-                                                <th>Fecha de Notificación</th>
-                                                <th>Editar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Improcedencia</td>
-                                                <td>020273</td>
-                                                <td>11-Oct-13</td>
-                                                <td>11-Oct-13</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <br>
-                                <!-- Button -->
                                 <div class="control-group">
+                                    <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar nueva resolución</button>
+                                        <textarea cols="25" rows="5" class="input-xlarge"> </textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>
                                 <!--FIN DE CONTENIDO-->

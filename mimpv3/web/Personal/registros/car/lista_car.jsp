@@ -81,6 +81,7 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th> Item </th>
                                         <th class="col-sm-2 ">Nombre</th>
                                         <th class="col-sm-2 ">Departamento</th>
                                         <th class="col-sm-2 ">Director</th>
@@ -90,8 +91,9 @@
                                 </thead>
 
                                 <tbody>
-                                    <c:forEach var="car" items="${listaCar}">
+                                    <c:forEach var="car" items="${listaCar}" varStatus="status">
                                     <tr>
+                                        <td>${status.index + 1}</td>
                                         <td>${car.getNombre()}</td>
                                         <td>${car.getDepartamento()}</td>
                                         <td>${car.getDirector()}</td>
