@@ -22,6 +22,7 @@ public class HiberPersonal {
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
 
+    //<----------AUTORIDAD---------->
     public void InsertAut(Entidad ent, Autoridad aut) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -35,30 +36,29 @@ public class HiberPersonal {
 
         session.save(aut);
 
-        
     }
-    
-    public void UpdateAut(Entidad ent, Autoridad aut){
-    Session session = sessionFactory.getCurrentSession();
+
+    public void UpdateAut(Entidad ent, Autoridad aut) {
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-        
+
         session.update(ent);
-        
+
         session.update(aut);
-    
-    
+
     }
+
     public Autoridad getAutoridad(int id) {
         Session session = sessionFactory.getCurrentSession();
         Autoridad aut = new Autoridad();
-        
+
         session.beginTransaction();
         String hqlA = "FROM Autoridad A WHERE A.id = :id";
         Query queryA = session.createQuery(hqlA);
         queryA.setInteger("id", id);
         Object queryResultA = queryA.uniqueResult();
-        
+
         aut = (Autoridad) queryResultA;
         Hibernate.initialize(aut.getEntidad());
         return aut;
@@ -81,7 +81,8 @@ public class HiberPersonal {
         }
         return allAutoridades;
     }
-    
+
+    //<----------ORGANISMO---------->
     public void InsertOrg(Entidad ent, Representante rep, Organismo org) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -90,30 +91,27 @@ public class HiberPersonal {
 
         session.save(ent);
         session.save(rep);
-        
 
         org.setEntidad(ent);
         org.setRepresentante(rep);
-        
+
         ent.getOrganismos().add(org);
         rep.getOrganismos().add(org);
-        
+
         session.save(org);
 
-        
     }
-    
-    public void UpdateOrg(Entidad ent, Representante rep, Organismo org){
-    Session session = sessionFactory.getCurrentSession();
+
+    public void UpdateOrg(Entidad ent, Representante rep, Organismo org) {
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-        
+
         session.update(ent);
         session.update(rep);
         session.update(org);
     }
-    
-    
+
     public ArrayList<Organismo> ListaOrganismos() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -132,22 +130,77 @@ public class HiberPersonal {
         }
         return allOrganismos;
     }
-    
+
     public Organismo getOrganismo(int id) {
         Session session = sessionFactory.getCurrentSession();
         Organismo org = new Organismo();
-        
+
         session.beginTransaction();
         String hqlO = "FROM Organismo O WHERE O.id = :id";
         Query queryO = session.createQuery(hqlO);
         queryO.setInteger("id", id);
         Object queryResultA = queryO.uniqueResult();
-        
+
         org = (Organismo) queryResultA;
         Hibernate.initialize(org.getEntidad());
         Hibernate.initialize(org.getRepresentante());
         return org;
     }
+
+    //<----------CAR---------->
     
+    public void InsertCar(Car car) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        session.save(car);
+        
+
+    }
+    
+    public void UpdateCar(Car car) {
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        session.update(car);
+    }
+
+    public ArrayList<Car> ListaCar() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "FROM Car";
+        Query query = session.createQuery(hql);
+        List car = query.list();
+        ArrayList<Car> allCar = new ArrayList();
+
+        for (Iterator iter = car.iterator(); iter.hasNext();) {
+            Car temp = (Car) iter.next();
+
+            allCar.add(temp);
+        }
+
+        return allCar;
+    }
+
+    public Car getCar(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Car car = new Car();
+
+        session.beginTransaction();
+        String hqlC = "FROM Car C WHERE C.id = :id";
+        Query queryC = session.createQuery(hqlC);
+        queryC.setInteger("id", id);
+        Object queryResultC = queryC.uniqueResult();
+
+        car = (Car) queryResultC;
+
+        return car;
+    }
 
 }

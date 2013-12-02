@@ -90,32 +90,26 @@
                                 </thead>
 
                                 <tbody>
+                                    <c:forEach var="car" items="${listaCar}">
                                     <tr>
-                                        <td>CAR Número 1</td>
-                                        <td>Ancash</td>
-                                        <td>Director CAR #1</td>
-                                        <td>car1@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
+                                        <td>${car.getNombre()}</td>
+                                        <td>${car.getDepartamento()}</td>
+                                        <td>${car.getDirector()}</td>
+                                        <td>${car.getCorreo()}</td>
+                                        
+                                        <td>
+                                            <form action="${pageContext.servletContext.contextPath}/irEditarCar2" method="post">
+                                                <input hidden name="id" id="id" value="${car.getIdcar()}">
+                                                <button type="submit" class="btn btn-default">Editar</button>
+                                            </form>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>CAR Número 2</td>
-                                        <td>La libertad</td>
-                                        <td>Director CAR #2</td>
-                                        <td>car2@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
-                                    <tr>
-                                       <td>CAR Número 3</td>
-                                        <td>Amazonas</td>
-                                        <td>Director CAR #3</td>
-                                        <td>car3@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                         <br>
-                        <button href="#" class="btn btn-default">Registrar CAR</button> 
+                        <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/irEditarCar'" class="btn btn-default">Registrar CAR</button> 
                     </div>
                 </div>
             </div>
