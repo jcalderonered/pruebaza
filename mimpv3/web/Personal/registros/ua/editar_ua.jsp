@@ -79,77 +79,83 @@
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Editar Unidad de Adopción</strong></h1>
                         <br>
-                         <form class="form-horizontal">
+                         <c:if test="${ua.getIdunidad() == null}">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editUa" method="post">
+                        </c:if>  
+                        <c:if test="${ua.getIdunidad() != null}">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateUa" method="post"> 
+                             <input hidden name="id" id="id" value="${ua.getIdunidad()}">
+                        </c:if>  
                             <fieldset>
                                 <!-- Text input-->
                                 
                                     <div class="control-group">
                                         <label class="control-label">Nombre</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="nombre" name="nombre" type="text" value="${ua.getNombre()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                      <div class="control-group">
                                           <label class="control-label">Dirección</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="direccion" name="direccion" type="text" value="${ua.getDireccion()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Departamento</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="departamento" name="departamento" type="text" value="${ua.getDepartamento()}" class="input-xlarge">
                                             </div>
                                     </div>                                    
                                     <br>
                                      <div class="control-group">
                                          <label class="control-label">Provincia</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="provincia" name="provincia" type="text" value="${ua.getProvincia()}" class="input-xlarge">
                                             </div>
                                     </div>                                    
                                     <br>
                                      <div class="control-group">
                                           <label class="control-label">Distrito</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="distrito" name="distrito" type="text" value="${ua.getDistrito()}" class="input-xlarge">
                                             </div>
                                     </div>                                    
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Competencia Regional</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="competenciaR" name="competenciaR" type="text" value="${ua.getCompetenciaRegional()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                            <label class="control-label">Correo</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="correo" name="correo" type="text" value="${ua.getCorreo()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>                                    
                                     <div class="control-group">
                                         <label class="control-label">Teléfono</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="telefono" name="telefono" type="text" value="${ua.getTelefono()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>                                   
                                     <div class="control-group">
                                          <label class="control-label">Celular</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="celular" name="celular" type="text" value="${ua.getCelular()}" class="input-xlarge">
                                             </div>
                                     </div>                                    
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Observaciones</label>
                                             <div class="controls">
-                                              <textarea class="input-xlarge" name="message" placeholder="Ingrese sus observaciones" rows="5" ></textarea>
+                                              <textarea class="input-xlarge" id="obs" name="obs" placeholder="Ingrese sus observaciones" rows="5" >${ua.getObs()}</textarea>
                                             </div>
                                     </div>                                    
                                 <br>
@@ -157,7 +163,7 @@
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
                                     </div>
                                 </div>
                             </fieldset>

@@ -79,84 +79,90 @@
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Editar juzgado</strong></h1>
                         <br>
-                         <form class="form-horizontal">
+                         <c:if test="${juzgado.getIdjuzgado() == null}">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editJuzgado" method="post"> 
+                        </c:if>  
+                        <c:if test="${juzgado.getIdjuzgado() != null}">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateJuzgado" method="post"> 
+                             <input hidden name="id" id="id" value="${juzgado.getIdjuzgado()}">
+                        </c:if>  
                             <fieldset>
                                 <!-- Text input-->
                                 
                                     <div class="control-group">
                                          <label class="control-label">Nombre</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="nombre" name="nombre" type="text" value="${juzgado.getNombre()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Denominación</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="denominacion" name="denominacion" type="text" value="${juzgado.getDenominacion()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                          <label class="control-label">Especialidad</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="especialidad" name="especialidad" type="text" value="${juzgado.getEspecialidad()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                          <label class="control-label">Dirección</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="direccion" name="direccion" type="text" value="${juzgado.getDireccion()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                      <div class="control-group">
                                           <label class="control-label">Departamento</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="departamento" name="departamento" type="text" value="${juzgado.getDepartamento()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                           <label class="control-label">Corte Superior</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="corteS" name="corteS" type="text" value="${juzgado.getCorteSuperior()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                          <label class="control-label">Distrito Judicial</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="distritoJ" name="distritoJ" type="text" value="${juzgado.getDistritoJudicial()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                          <label class="control-label">Nombre de Juez</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="nombre J" name="nombreJ" type="text" value="${juzgado.getNombreJuez()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                           <label class="control-label">Teléfono</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="telefono" name="telefono" type="text" value="${juzgado.getTelefono()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                          <label class="control-label">Correo</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                              <input id="correo" name="correo" type="text" value="${juzgado.getCorreo()}" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Observaciones</label>
                                             <div class="controls">
-                                               <textarea class="input-xlarge" name="message" placeholder="" rows="5" cols="25"></textarea>
+                                               <textarea class="input-xlarge" name="obs" id="obs" placeholder="" rows="5" cols="25">${juzgado.getObservaciones()}</textarea>
                                             </div>
                                     </div>
                                 <br>

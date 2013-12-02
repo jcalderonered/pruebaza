@@ -81,6 +81,7 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th> Item </th>
                                         <th class="col-sm-2 ">Nombre</th>
                                         <th class="col-sm-2 ">País</th>
                                         <th class="col-sm-3 ">Teléfono</th>
@@ -90,12 +91,13 @@
                                 </thead>
 
                                 <tbody>
-                                    <c:forEach var="organismo" items="${listaOrganismos}">
+                                    <c:forEach var="organismo" items="${listaOrganismos}" varStatus="status">
                                     <tr>
+                                        <td>${status.index + 1}</td>
                                         <td>${organismo.getEntidad().getNombre()}</td>
                                         <td>${organismo.getEntidad().getPais()}</td>
                                         <td>${organismo.getEntidad().getTelefono()}</td>
-                                        <td>${organismo.getRepresentante().getNombre()}</td>
+                                        <td>${organismo.getRepresentante().getNombre()} ${organismo.getRepresentante().getApellidoP()} ${organismo.getRepresentante().getApelldoM()}</td>
                                         
                                         <td>
                                             <form action="${pageContext.servletContext.contextPath}/irEditarOrg2" method="post">

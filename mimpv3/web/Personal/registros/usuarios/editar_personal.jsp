@@ -71,7 +71,7 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+
                         </ul>
                     </div>
 
@@ -79,163 +79,182 @@
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Editar Personal</strong></h1>
                         <br>
-                         <form class="form-horizontal">
-                            <fieldset>
-                                <!-- Text input-->
-                                    <div class="control-group">
-                                         <label class="control-label">Nombre</label>
+                        <c:if test="${personal.getIdpersonal() == null}">
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editPersonal" method="post"> 
+                            </c:if>  
+                            <c:if test="${personal.getIdpersonal() != null && disabled == 'deshabilitar'}">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonalUa" method="post">
+                                    <input hidden name="idPers" id="idPers" value="${personal.getIdpersonal()}">    
+                                </c:if> 
+                                <c:if test="${personal.getIdpersonal() != null}">
+                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonal" method="post"> 
+                                        <input hidden name="idPers" id="idPers" value="${personal.getIdpersonal()}">
+                                    </c:if>  
+
+                                    <fieldset>
+                                        <!-- Text input-->
+                                        <div class="control-group">
+                                            <label class="control-label">Nombre</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="nombre" name="nombre" type="text" value="${personal.getNombre()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                          <label class="control-label">Apellido Paterno</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Apellido Paterno</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="apellidoP" name="apellidoP" type="text" value="${personal.getApellidoP()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Apellido Materno</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Apellido Materno</label>
                                             <div class="controls">
-                                              <input  id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input  id="apellidoM" name="apellidoM" type="text" value="${personal.getApellidoM()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Usuario</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Usuario</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="user" name="user" type="text" value="${personal.getUser()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                     <div class="control-group">
-                                          <label class="control-label">Correo Trabajo</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Contraseña</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="pass" name="pass" type="password" value="${personal.getPass()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                        <label class="control-label">Correo Personal</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Correo Trabajo</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="correoT" name="correoT" type="text" value="${personal.getCorreoTrabajo()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                        <label class="control-label">Profesión</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Correo Personal</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="correoP" name="correoP" type="text" value="${personal.getCorreoPersonal()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Grado de instrucción</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Profesión</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="profesion" name="profesion" type="text" value="${personal.getProfesion()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Cargo</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Grado de instrucción</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="grado" name="grado" type="text" value="${personal.getGradoInstruccion()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">DNI</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Cargo</label>
                                             <div class="controls">
-                                              <input  id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="cargo" name="cargo" type="text" value="${personal.getCargo()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                        <label class="control-label">Fecha de nacimiento</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">DNI</label>
                                             <div class="controls">
-                                              <input  id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                                <input  id="dni" name="dni" type="text" value="${personal.getDni()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Regimen</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Fecha de nacimiento</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input  id="fechaNac" name="fechaNac" type="text" value="${fechaNac}" class="datepicker input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                        <label class="control-label">Fecha de ingreso</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Regimen</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                                <input id="regimen" name="regimen" type="text" value="${personal.getRegimen()}" class="input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Domicilio</label>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Fecha de ingreso</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="fechaIng" name="fechaIng" type="text" value="${fechaIng}" class="datepicker input-xlarge">
                                             </div>
-                                    </div>
-                                    <br>
-                                    <div>
-                                      <label class="control-label">Rol</label>
-                                           <div class="controls">
-                                            <select  >
-                                                <option value="sia">DEIA</option>
-                                                <option value="mia">DCRI</option>
-                                           </select>
-                                           </div>    
-                                    </div>
-                                    <br>
-                                    <div>
-                                      <label class="control-label">Unidad de adopción</label>
-                                           <div class="controls">
-                                            <select>
-                                                <option value="sia">Lima</option>
-                                                <option value="mia">Chiclayo</option>
-                                           </select>
-                                           </div>    
-                                    </div>
-                                    <br>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Domicilio</label>
+                                            <div class="controls">
+                                                <input id="domicilio" name="domicilio" type="text" value="${personal.getDomicilio()}" class="input-xlarge">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <label class="control-label">Rol</label>
+                                            <div class="controls">
+                                                <select  id="rol" name="rol">
+                                                    <option value="deia" ${personal.getRol() == 'deia' ? 'selected' : ''}>DEIA</option>
+                                                    <option value="dcri" ${personal.getRol() == 'dcri' ? 'selected' : ''}>DCRI</option>
+                                                </select>
+                                            </div>    
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <label class="control-label">Unidad de adopción</label>
+                                            <div class="controls">
+                                                <select id="ua" name="ua" ${disabled == 'deshabilitar' ? 'disabled' : ''}>
+                                                    <c:forEach var="ua" items="${listaUa}" varStatus="status"> 
+                                                        <option value="${ua.getIdunidad()}" ${ua.getIdunidad() == personal.getUnidad().getIdunidad() ? 'selected' : ''}>${ua.getNombre()}</option>
+                                                    </c:forEach> 
+                                                </select>
+                                            </div>    
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <!-- Button -->
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+
+                                </div>
+                                </div>
+                                </div>
+                                <!--FIN DE CONTENIDO-->
                                 <br>
                                 <br>
-                                <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+
+                                <div id="footer">
+                                    <div id="ja-footer" class="wrap">
+                                        <hr width=80% align="center">
+                                        <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
+                                        <p align="right">Diseñado por RED<br>www.red.net.pe</p>
                                     </div>
                                 </div>
-                            </fieldset>
-                        </form>
-                        
-                    </div>
-                </div>
-            </div>
-            <!--FIN DE CONTENIDO-->
-            <br>
-            <br>
+                                <!-- core JavaScript
+                            ================================================== -->
+                                <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+                                <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+                                <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+                                <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+                                <script type="text/javascript">
 
-            <div id="footer">
-                <div id="ja-footer" class="wrap">
-                    <hr width=80% align="center">
-                    <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-                    <p align="right">Diseñado por RED<br>www.red.net.pe</p>
-                </div>
-            </div>
-            <!-- core JavaScript
-        ================================================== -->
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
-            <script type="text/javascript">
+                                    $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-
-            </script>
-            <!-- Ubicar al final -->
-    </body>
-</html>
+                                </script>
+                                <!-- Ubicar al final -->
+                                </body>
+                                </html>

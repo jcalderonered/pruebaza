@@ -124,22 +124,6 @@
                                     </div>
                                 </div>
                                 <br>
-                                <label>Procedencia</label>
-                                <div class="row">
-                                    <div class="col-md-2">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios2" id="optionsRadios1" value="D" >Nacional</label>
-                                        </div>
-                                    </div>   
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios2" id="optionsRadios2" value="C">Internacional</label>
-                                        </div>                            
-                                    </div>
-                                </div>  
-                                <br>
                                 <div class="control-group">
                                     <label class="control-label">Juzgado</label>
                                     <div>

@@ -81,6 +81,7 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th> Item </th>
                                         <th class="col-sm-2 ">Nombre</th>
                                         <th class="col-sm-2 ">Departamento</th>
                                         <th class="col-sm-3 ">Distrito Judicial</th>
@@ -90,32 +91,26 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>Juzgado Número 1</td>
-                                        <td>Ancash</td>
-                                        <td>Distrito Judicial #1</td>
-                                        <td>juzgado1@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juzgado Número 2</td>
-                                        <td>La libertad</td>
-                                        <td>Distrito Judicial #2</td>
-                                        <td>juzgado2@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juzgado Número 3</td>
-                                        <td>Amazonas</td>
-                                        <td>Distrito Judicial #3</td>
-                                        <td>juzgado3@mimp.pe</td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
+                                    <c:forEach var="juzgado" items="${listaJuzgados}" varStatus="status">
+                                        <tr>
+                                            <td>${status.index + 1}</td>
+                                            <td>${juzgado.getNombre()}</td>
+                                            <td>${juzgado.getDepartamento()}</td>
+                                            <td>${juzgado.getDistritoJudicial()}</td>
+                                            <td>${juzgado.getCorreo()}</td>
+                                            <td>
+                                                <form action="${pageContext.servletContext.contextPath}/irEditarJuzgado2" method="post">
+                                                    <input hidden name="id" id="id" value="${juzgado.getIdjuzgado()}">
+                                                    <button type="submit" class="btn btn-default">Editar</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                         <br>
-                        <button href="#" class="btn btn-default">Registrar Juzgado</button> 
+                        <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/irEditarJuzgado'" class="btn btn-default">Registrar Juzgado</button> 
                     </div>
                 </div>
             </div>
