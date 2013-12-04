@@ -69,7 +69,6 @@
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
                         </ul>
                     </div>
 
@@ -78,9 +77,9 @@
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
-                            <li class="active"><a href="#" data-toggle="tab">NNA Regulares</a></li>
+                            <li><a href="#" data-toggle="tab">NNA Regulares</a></li>
                             <li><a href="#" data-toggle="tab">NNA Prioritarios</a></li>
-                            <li><a href="#" data-toggle="tab">NNA en Seguimiento</a></li>
+                            <li class="active"><a href="#" data-toggle="tab">NNA en Seguimiento</a></li>
                         </ul>
                         <br>
                         <br>
@@ -97,10 +96,8 @@
                                         <th class="col-sm-2 ">Proceso de adopción</th>
                                         <th class="col-sm-2 ">Detalles</th> 
                                         <th class="col-sm-2 ">Expediente</th>
-                                        <th class="col-sm-2 ">Registrar designación</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
                                     <tr>
                                         <td>Nombre 1</td>
@@ -110,7 +107,6 @@
                                         <td>Si</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Registrar</button></td>
                                     </tr>
                                     <tr>
                                         <td>Nombre 2</td>
@@ -120,7 +116,6 @@
                                         <td>No</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Registrar</button></td>
                                     </tr>
                                     <tr>
                                         <td>Nombre 3</td>
@@ -130,7 +125,6 @@
                                         <td>No</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Registrar</button></td>
                                     </tr>
                                 </tbody>
                             </table>

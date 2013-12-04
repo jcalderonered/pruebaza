@@ -71,10 +71,8 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
                         </ul>
                     </div>
-
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                         <h1 align="center"><strong>Editar NNA</strong></h1>
@@ -354,7 +352,6 @@
                                         </table>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div id="tabla_fam" class="table-responsive">
                                         <table id="hijos" class="table table-bordered table-striped ">
