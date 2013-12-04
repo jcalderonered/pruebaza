@@ -89,108 +89,55 @@
                                             <tr>
                                                 <th>Expediente</th>
                                                 <th>Información</th>
-                                                <th>Estudio de caso</th>
-                                                <th>Resultado</th>
-                                                <th>Designación Directa</th>
-                                                <th>N° Propuesta</th>
                                                 <th>Prioridad</th>
-                                                <th>Resol Consejo</th>
-                                                <th>Resultado</th>
                                                 <th>Nombre del NNA</th>
+                                                <th>Decisión de Consejo</th>
+                                                <th>Resultado</th>
                                                 <th>Iniciar Adopción</th>
-                                                
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>Alvarado-Gutierrez</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Editar</button></td>
-                                                <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>001-2013</td>
                                                 <td>1</td>
-                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
-                                                <td>Favorable</td>
                                                 <td>Jesús Rey</td>
-                                                <td><button href="#" class="btn btn-default ">Ir</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Rosa-Flores</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Editar</button></td>
-                                                <td>Desfavorable</td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>----</td>
-                                                <td></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>----</td>
-                                                <td>----</td>
-                                                <td><button href="#" class="btn btn-default disabled ">Ir</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Durando-Iriarte</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Editar</button></td>
-                                                <td></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td></td>
-                                                <td>----</td>
-                                                <td><button href="#" class="btn btn-default disabled">Ir</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gallardo-Olivera</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Editar</button></td>
-                                                <td>Desfavorable</td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>----</td>
-                                                <td></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>----</td>
-                                                <td></td>
-                                                <td><button href="#" class="btn btn-default disabled">Ir</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Solano-Parco</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Editar</button></td>
-                                                <td></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>002-2012</td>
-                                                <td>1</td>
                                                 <td><button href="#" class="btn btn-default ">Registrar</button></td>
                                                 <td>Favorable</td>
-                                                <td>Cristian Ku</td>
                                                 <td><button href="#" class="btn btn-default ">Ir</button></td>
-                                            </tr>
+                                            </tr>   
                                             <tr>
-                                                <td>Romano-Peraldo</td>
+                                                <td>Ramirez-Rojas</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Editar</button></td>
-                                                <td></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>002-2012</td>
-                                                <td>2</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>Favorable</td>
+                                                <td>1</td>
                                                 <td>Cristian Ku</td>
+                                                <td rowspan="2"><button href="#" class="btn btn-default ">Registrar</button></td>
+                                                <td>Favorable</td>
                                                 <td><button href="#" class="btn btn-default ">Ir</button></td>
-                                            </tr>
-                                            
+                                            </tr> 
+                                            <tr>
+                                                <td>Castillo-Sotomayor</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td>2</td>
+                                                <td>Cristian Ku</td>
+                                                
+                                                <td>Desfavorable</td>
+                                                <td><button href="#" class="btn btn-default disabled">Ir</button></td>
+                                            </tr> 
+                                            <tr>
+                                                <td>Cortéz-Saavedra</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td>1</td>
+                                                <td>Hernán Romano</td>
+                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
+                                                <td>Desfavorable</td>
+                                                <td><button href="#" class="btn btn-default " disabled>Ir</button></td>
+                                            </tr>   
                                         </tbody>
                                     </table>
                                 </div>
                                 <br>
                                 <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Nueva Designación</button>
-                                    </div>
-                                </div>
                             </fieldset>
                         </form>
 
