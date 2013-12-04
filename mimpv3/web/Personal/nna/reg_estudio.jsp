@@ -146,6 +146,9 @@
                         </div>
                         <br>
                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar Familia</button>
+                        <br>
+                        <br>
+                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
                     </div>
                 </div>
             </div>

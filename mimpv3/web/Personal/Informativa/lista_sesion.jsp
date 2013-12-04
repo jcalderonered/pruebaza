@@ -116,7 +116,7 @@
                         <br>
                         <!-- Text input-->
                         <div class="control-group">
-                            <label class="control-label" for="textinput">Capacitador:</label>
+                            <label class="control-label" for="textinput">Facilitador:</label>
                             <div class="controls">
                                 <input id="textinput" name="textinput" type="text" placeholder="capacitador" class="input-xlarge">
                             </div>
