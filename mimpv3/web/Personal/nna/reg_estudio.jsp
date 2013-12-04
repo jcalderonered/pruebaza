@@ -1,7 +1,7 @@
 <%-- 
-    Document   : inscripcion_sesion1
-    Created on : 28/10/2013, 05:45:16 AM
-    Author     : Ayner Pérez
+    Document   : reg_desig
+    Created on : 4/12/2013, 11:29:03 AM
+    Author     : User
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -68,73 +68,84 @@
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
+                            <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li> 
                         </ul>
                     </div>
 
                     <div class="col-md-6 col-md-offset-1">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Registrar NNA</button></p>
+                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
-                            <li class="active"><a href="#" data-toggle="tab">NNA Regulares</a></li>
-                            <li><a href="#" data-toggle="tab">NNA Prioritarios</a></li>
+                            <li><a href="#" data-toggle="tab">NNA Regulares</a></li>
+                            <li class="active"><a href="#" data-toggle="tab">NNA Prioritarios</a></li>
                             <li><a href="#" data-toggle="tab">NNA en Seguimiento</a></li>
                         </ul>
                         <br>
                         <br>
-                        <h1 align="center"><strong>Lista de NNA's</strong></h1>
+                        <h1 align="center"><strong>Familias que conforman el Estudio de Caso</strong></h1>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="col-sm-2 ">Nombre</th>
-                                        <th class="col-sm-2 ">Apellido Paterno</th>
-                                        <th class="col-sm-2 ">Apellido Materno</th>
-                                        <th class="col-sm-2 ">Sexo</th>
-                                        <th class="col-sm-2 ">Proceso de adopción</th>
-                                        <th class="col-sm-2 ">Detalles</th> 
-                                        <th class="col-sm-2 ">Expediente</th>
-                                        <th class="col-sm-2 ">Registrar designación</th>
+                                        <th class="col-sm-2 " >Expediente</th>
+                                        <th class="col-sm-2 " >UA</th>
+                                        <th class="col-sm-2 " >Nivel sociec</th>
+                                        <th class="col-sm-2 " >Información</th>
+                                        <th class="col-sm-2 " >Resolución de aptitud</th>
+                                        <th class="col-sm-2 " >Prioridad</th>
+                                        <th class="col-sm-2 " >Seleccionar</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
                                     <tr>
-                                        <td>Nombre 1</td>
-                                        <td>Apellidos 1</td>
-                                        <td>Apellidos 1</td>
-                                        <td>Masculino</td>
-                                        <td>Si</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                        <td>Gutierrez-Huaman </td>
+                                        <td>Lima</td>
+                                        <td>C</td>
+                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
+                                        <td>14-Nov-2012</td>
+                                        <td>
+                                            <select>
+                                                <option value="mia" selected>1</option>
+                                                <option value="sia">2</option>
+                                                <option value="mia">3</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> 
+                                                </label>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>Nombre 2</td>
-                                        <td>Apellidos 2</td>
-                                        <td>Apellidos 2</td>
-                                        <td>Femenino</td>
-                                        <td>No</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nombre 3</td>
-                                        <td>Apellidos 3</td>
-                                        <td>Apellidos 3</td>
-                                        <td>Masculino</td>
-                                        <td>No</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                        <td>Morales-Loza</td>
+                                        <td>Trujillo</td>
+                                        <td>B</td>
+                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
+                                        <td>21-Agos-2011</td>
+                                        <td>
+                                            <select>
+                                                <option value="mia" selected>1</option>
+                                                <option value="sia">2</option>
+                                                <option value="mia">3</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox">
+                                                </label>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+                        <br>
+                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar Familia</button>
                     </div>
                 </div>
             </div>
@@ -153,8 +164,6 @@
 ================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-
-
         <!-- Ubicar al final -->
     </body>
 </html>

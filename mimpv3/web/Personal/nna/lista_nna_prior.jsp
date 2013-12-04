@@ -78,8 +78,8 @@
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
-                            <li class="active"><a href="#" data-toggle="tab">NNA Regulares</a></li>
-                            <li><a href="#" data-toggle="tab">NNA Prioritarios</a></li>
+                            <li><a href="#" data-toggle="tab">NNA Regulares</a></li>
+                            <li class="active"><a href="#" data-toggle="tab">NNA Prioritarios</a></li>
                             <li><a href="#" data-toggle="tab">NNA en Seguimiento</a></li>
                         </ul>
                         <br>
@@ -94,10 +94,11 @@
                                         <th class="col-sm-2 ">Apellido Paterno</th>
                                         <th class="col-sm-2 ">Apellido Materno</th>
                                         <th class="col-sm-2 ">Sexo</th>
+                                        <th class="col-sm-2 ">Grupo ref.</th>
                                         <th class="col-sm-2 ">Proceso de adopción</th>
                                         <th class="col-sm-2 ">Detalles</th> 
                                         <th class="col-sm-2 ">Expediente</th>
-                                        <th class="col-sm-2 ">Registrar designación</th>
+                                        <th class="col-sm-2 ">Registrar estudio</th>
                                     </tr>
                                 </thead>
 
@@ -107,6 +108,7 @@
                                         <td>Apellidos 1</td>
                                         <td>Apellidos 1</td>
                                         <td>Masculino</td>
+                                        <td>Mayores</td>
                                         <td>Si</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
@@ -117,6 +119,7 @@
                                         <td>Apellidos 2</td>
                                         <td>Apellidos 2</td>
                                         <td>Femenino</td>
+                                        <td>Hermanos</td>
                                         <td>No</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
@@ -127,6 +130,7 @@
                                         <td>Apellidos 3</td>
                                         <td>Apellidos 3</td>
                                         <td>Masculino</td>
+                                        <td>Hermanos</td>
                                         <td>No</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
