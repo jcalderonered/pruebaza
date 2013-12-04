@@ -235,8 +235,7 @@
                                         <select>
                                             <option value="sia">Evaluación</option>
                                             <option value="sia">Designado</option>
-                                            <option value="sia">Prioritario</option>
-                                            <option value="mia">Seguimiento</option>
+                                            <option value="mia">Adoptado</option>
                                             <option value="sia">Archivado</option>
                                         </select>
                                     </div>    
@@ -247,6 +246,17 @@
                                     <div class="controls">
                                         <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
                                     </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <label class="control-label">Clasificación</label>
+                                    <div class="controls">
+                                        <select  >
+                                            <option value="sia">Prioritario</option>
+                                            <option value="mia">Seguimiento</option>
+                                            <option value="mia">Regular</option>
+                                        </select>
+                                    </div>    
                                 </div>
                                 <br>
                                 <br>
@@ -308,40 +318,12 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Profesional asociado</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia">Juan Luis</option>
-                                            <option value="sia">Ronald</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
                                     <label class="control-label">Comentario</label>
                                     <div class="controls">
                                         <textarea id="full-name" name="full-name" type="text" class="input-xlarge"></textarea>
                                     </div>
                                 </div>
                                 <br>
-                                <div class="control-group">
-                                    <label class="control-label">Resolución de consejo para adoptabilidad</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia">Adoptable</option>
-                                            <option value="sia">No adoptable</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de resolución de consejo</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-
                                 <!-- Button -->
                                 <br>
                                 <div class="control-group">

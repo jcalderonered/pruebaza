@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 29/11/2013 03:12:07 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 4, 2013 5:48:20 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Hijo" table="hijo" catalog="mimp_adopcion">
         <id name="idhijo" type="java.lang.Integer">
