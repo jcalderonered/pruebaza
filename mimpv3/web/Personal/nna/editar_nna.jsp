@@ -216,17 +216,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div>
-                                    <label class="control-label">Clasificación</label>
-                                    <div class="controls">
-                                        <select  >
-                                            <option value="sia">Prioritario</option>
-                                            <option value="mia">Seguimiento</option>
-                                            <option value="mia">Regular</option>
-                                        </select>
-                                    </div>    
-                                </div>
-                                <br>
+                                
                                 <br>
                                 <h3><strong>Antecedentes, condiciones de salud y desarrollo del niño, niña o adolescente</strong></h3>
                                 <br> 
