@@ -76,6 +76,7 @@
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="#" data-toggle="tab">Informativa</a></li>
                             <li class="active"><a href="#" data-toggle="tab">Evaluativa</a></li>
+                            <li><a href="#" data-toggle="tab">Designación</a></li>
                             <li><a href="#" data-toggle="tab">Adopción</a></li>
                             <li><a href="#" data-toggle="tab">Post Adopción</a></li>
                         </ul>
@@ -92,9 +93,16 @@
                                 <p>A continuación se presentará información detallada sobre la evaluación legal desarrollada</p>
                                 <br>
                                 <div class="control-group">
+                                    <label class="control-label">Número de expediente</label>
+                                    <div class="controls">
+                                        <input id="sol_dga" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
                                     <label class="control-label">Fecha asignación</label>
                                     <div class="controls">
-                                        <input type="text" class="datepicker span2" value="02-16-2012" id="dp3" >
+                                        <input type="text" class="datepicker span2" value="02/10/2012" id="dp3" >
                                     </div>
                                 </div>
                                 <br>
@@ -128,14 +136,7 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Solicitud DGA</label>
-                                    <div class="controls">
-                                        <input id="sol_dga" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones DGA</label>
+                                    <label class="control-label">Observaciones </label>
                                     <div class="controls">
                                         <textarea cols="25" rows="5" class="input-xlarge"> </textarea>
                                     </div>

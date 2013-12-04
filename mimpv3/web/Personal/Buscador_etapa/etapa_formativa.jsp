@@ -100,7 +100,7 @@
                                                 <th>Correo</th>
                                                 <th>Información</th>
                                                 <th>¿Culminó taller?</th>
-                                                <th>Constancia</th>
+                                                <th>Número de Constancia</th>
                                             </tr>
                                         </thead>
                                         <tbody>

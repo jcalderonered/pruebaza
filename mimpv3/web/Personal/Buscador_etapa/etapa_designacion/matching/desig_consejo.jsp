@@ -86,36 +86,17 @@
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                                 <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                                <h1 align="center"><strong>NNA "NOMBRE APELLIDOS"</strong></h1>
                                 <br>
                                 <br>
-                                <h3 align="left"><strong>Detalles de resolución de consejo</strong></h3>
+                                <h3 align="left"><strong>Detalles de decisión de consejo</strong></h3>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Fecha consejo</label>
+                                    <label class="control-label">Fecha </label>
                                     <div class="controls">
                                         <input type="text" class="datepicker span2" value="02-16-2012" id="dp3" >
                                     </div>
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Resultado</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia"></option>
-                                            <option value="mia">Favorable</option>
-                                            <option value="mia">Desfavorable</option>
-                                        </select>
-                                    </div>    
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observación</label>
-                                    <div class="controls">
-                                        <textarea type="text" class="span2" value="02-16-2012" id="dp3" ></textarea>
-                                    </div>
-                                </div>
-                                <br>
                                 <br>
                                 <br>
                                 <h3 align="left"><strong>Familias asignadas al mismo NNA</strong></h3>
@@ -130,6 +111,7 @@
                                                 <th class="col-sm-2 " >Información</th>
                                                 <th class="col-sm-2 " >Resolución de aptitud</th>
                                                 <th class="col-sm-2 " >Prioridad</th>
+                                                <th> Elegir </th>
 
                                             </tr>
                                         </thead>
@@ -141,17 +123,52 @@
                                                 <td>C</td>
                                                 <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
                                                 <td>14-Nov-2012</td>
-                                                <td>1</tr>
+                                                <td>1
+                                                <td>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="eleccion" id="" value="D"></label>
+                                                    </div>   
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td>Morales-Loza</td>
                                                 <td>Trujillo</td>
                                                 <td>B</td>
                                                 <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
                                                 <td>21-Agos-2011</td>
-                                                <td>2</td></tr>
+                                                <td>2</td>
+                                                <td>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="eleccion" id="" value="D"></label>
+                                                    </div>   
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="control-group">
+                                    <label class="control-label">Tipo de Propuesta</label>
+                                    <div class="controls">
+                                        <select>
+                                            <option value="sia"></option>
+                                            <option value="mia">Directa</option>
+                                            <option value="mia">Dupla</option>
+                                            <option value="mia">Terna</option>
+                                        </select>
+                                    </div>    
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Observaciones</label>
+                                    <div class="controls">
+                                        <textarea type="text" cols="25" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
