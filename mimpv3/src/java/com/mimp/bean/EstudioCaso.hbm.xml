@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 4, 2013 5:48:20 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 5/12/2013 05:37:53 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.EstudioCaso" table="estudio_caso" catalog="mimp_adopcion">
         <id name="idestudioCaso" type="java.lang.Integer">
@@ -23,8 +23,14 @@
         <property name="fechaSolAdop" type="date">
             <column name="fecha_sol_adop" length="10" />
         </property>
-        <property name="resultado" type="java.lang.Boolean">
-            <column name="resultado" />
+        <property name="resultado" type="string">
+            <column name="resultado" length="20" />
+        </property>
+        <property name="prioridad" type="java.lang.Integer">
+            <column name="prioridad" />
+        </property>
+        <property name="NSolicitud" type="java.lang.Long">
+            <column name="n_solicitud" />
         </property>
     </class>
 </hibernate-mapping>

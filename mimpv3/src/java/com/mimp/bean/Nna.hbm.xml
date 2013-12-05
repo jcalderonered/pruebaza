@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 4, 2013 5:48:20 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 5/12/2013 05:37:53 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Nna" table="nna" catalog="mimp_adopcion">
         <id name="idnna" type="java.lang.Integer">
@@ -103,6 +103,9 @@
         </property>
         <property name="hermano" type="java.lang.Boolean">
             <column name="hermano" />
+        </property>
+        <property name="nn" type="java.lang.Boolean">
+            <column name="nn" />
         </property>
         <set name="estudioCasos" table="estudio_caso" inverse="true" lazy="true" fetch="select">
             <key>

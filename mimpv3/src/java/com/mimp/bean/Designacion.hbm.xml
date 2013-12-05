@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 4, 2013 5:48:20 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 5/12/2013 05:37:53 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Designacion" table="designacion" catalog="mimp_adopcion">
         <id name="iddesignacion" type="java.lang.Integer">
@@ -17,8 +17,8 @@
         <many-to-one name="expedienteFamilia" class="com.mimp.bean.ExpedienteFamilia" fetch="select">
             <column name="idexpediente_familia" not-null="true" />
         </many-to-one>
-        <property name="NDesignacion" type="string">
-            <column name="n_designacion" length="20" />
+        <property name="NDesignacion" type="java.lang.Integer">
+            <column name="n_designacion" />
         </property>
         <property name="prioridad" type="java.lang.Integer">
             <column name="prioridad" />

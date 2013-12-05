@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 4, 2013 5:48:18 PM by Hibernate Tools 3.6.0
+// Generated 5/12/2013 05:37:51 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -45,6 +45,7 @@ public class Nna  implements java.io.Serializable {
      private Boolean mayor;
      private Boolean adolescente;
      private Boolean hermano;
+     private Boolean nn;
      private Set<EstudioCaso> estudioCasos = new HashSet<EstudioCaso>(0);
      private Set<ExpedienteNna> expedienteNnas = new HashSet<ExpedienteNna>(0);
      private Set<Prioritario> prioritarios = new HashSet<Prioritario>(0);
@@ -58,7 +59,7 @@ public class Nna  implements java.io.Serializable {
         this.car = car;
         this.juzgado = juzgado;
     }
-    public Nna(Car car, Juzgado juzgado, String nombre, String apellidoP, String apellidoM, String sexo, Date fechaNacimiento, Byte edadAnhos, Byte edadMeses, Boolean actaNacimiento, String condicionSalud, String departamentoNacimiento, String provinciaNacimiento, String distritoNacimiento, String paisNacimiento, String lugarNac, Date fechaResolAbandono, Date fechaResolConsentida, String clasificacion, Boolean incesto, Boolean mental, Boolean epilepsia, Boolean abuso, Boolean sifilis, Boolean seguiMedico, Boolean operacion, Boolean hiperactivo, Boolean especial, Boolean enfermo, Boolean mayor, Boolean adolescente, Boolean hermano, Set<EstudioCaso> estudioCasos, Set<ExpedienteNna> expedienteNnas, Set<Prioritario> prioritarios, Set<Designacion> designacions) {
+    public Nna(Car car, Juzgado juzgado, String nombre, String apellidoP, String apellidoM, String sexo, Date fechaNacimiento, Byte edadAnhos, Byte edadMeses, Boolean actaNacimiento, String condicionSalud, String departamentoNacimiento, String provinciaNacimiento, String distritoNacimiento, String paisNacimiento, String lugarNac, Date fechaResolAbandono, Date fechaResolConsentida, String clasificacion, Boolean incesto, Boolean mental, Boolean epilepsia, Boolean abuso, Boolean sifilis, Boolean seguiMedico, Boolean operacion, Boolean hiperactivo, Boolean especial, Boolean enfermo, Boolean mayor, Boolean adolescente, Boolean hermano, Boolean nn, Set<EstudioCaso> estudioCasos, Set<ExpedienteNna> expedienteNnas, Set<Prioritario> prioritarios, Set<Designacion> designacions) {
        this.car = car;
        this.juzgado = juzgado;
        this.nombre = nombre;
@@ -91,6 +92,7 @@ public class Nna  implements java.io.Serializable {
        this.mayor = mayor;
        this.adolescente = adolescente;
        this.hermano = hermano;
+       this.nn = nn;
        this.estudioCasos = estudioCasos;
        this.expedienteNnas = expedienteNnas;
        this.prioritarios = prioritarios;
@@ -327,6 +329,13 @@ public class Nna  implements java.io.Serializable {
     
     public void setHermano(Boolean hermano) {
         this.hermano = hermano;
+    }
+    public Boolean getNn() {
+        return this.nn;
+    }
+    
+    public void setNn(Boolean nn) {
+        this.nn = nn;
     }
     public Set<EstudioCaso> getEstudioCasos() {
         return this.estudioCasos;
