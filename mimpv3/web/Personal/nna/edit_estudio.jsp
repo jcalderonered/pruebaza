@@ -29,7 +29,6 @@
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -39,7 +38,6 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -82,14 +80,6 @@
                         </ul>
                         <br>
                         <br>
-                        <div class="control-group">
-                            <label class="control-label">Orden del Estudio de Caso</label>
-                            <div class="controls">
-                                <input type="text" value="" >
-                            </div>
-                        </div>
-                        <br>
-                        <br>
                         <h1 align="center"><strong>Familias que conforman el Estudio de Caso</strong></h1>
                         <br>
                         <div class="table-responsive">
@@ -101,9 +91,10 @@
                                         <th class="col-sm-2 " >Nivel sociec</th>
                                         <th class="col-sm-2 " >Información</th>
                                         <th class="col-sm-2 " >Resolución de aptitud</th>
+                                        <th class="col-sm-2 " >Estudio de Caso</th>
                                         <th class="col-sm-2 " >Prioridad</th>
-                                        <th class="col-sm-2 " >Fecha estudio caso</th>
-                                        <th class="col-sm-2 " >Seleccionar</th>
+                                        <th class="col-sm-2 " >Resultado</th>
+                                        <th class="col-sm-2 " >Registrar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -113,23 +104,10 @@
                                         <td>C</td>
                                         <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
                                         <td>14-Nov-2012</td>
-                                        <td>
-                                            <select>
-                                                <option value="mia" selected>1</option>
-                                                <option value="sia">2</option>
-                                                <option value="mia">3</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="datepicker" id="dp3">
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> 
-                                                </label>
-                                            </div>
-                                        </td>
+                                        <td>14-Dic-2012</td>
+                                        <td>1</td>
+                                        <td>No aceptado</td>
+                                        <td><button disabled id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button></td>
                                     </tr>
                                     <tr>
                                         <td>Morales-Loza</td>
@@ -137,46 +115,59 @@
                                         <td>B</td>
                                         <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
                                         <td>21-Agos-2011</td>
+                                        <td>21-Set-2011</td>
+                                        <td>2</td>
                                         <td>
                                             <select>
-                                                <option value="mia" selected>1</option>
-                                                <option value="sia">2</option>
-                                                <option value="mia">3</option>
+                                                <option value="sia">Aceptado</option>
+                                                <option value="mia">No aceptado</option>
+                                                <option value="sia" selected>Observado</option>
+                                                <option value="mia">No observado</option>
                                             </select>
                                         </td>
-                                        <td>
-                                            <input type="text" class="datepicker" id="dp3">
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox">
-                                                </label>
-                                            </div>
-                                        </td>
+                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cuadros-Iparraguirre</td>
+                                        <td>Lima</td>
+                                        <td>C</td>
+                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
+                                        <td>15-Ene-2012</td>
+                                        <td>15-Feb-2012</td>
+                                        <td>2</td>
+                                        <td>No observado</td>
+                                        <td><button disabled id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <br>
-                        <table border="0">
-                            <tr>
-                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar Familia</button></td>
-                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Eliminar Familia</button></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button></td>
-                                <td></td>
-                            </tr>
-                        </table>
+                        <h1>Información para la propuesta de adopción</h1>
+                        <p>En caso una familia presente una solicitud de adopción (el resultado sea "Aceptado"), llenar la siguiente información:</p>
+                        <br>
+                        <div class="control-group">
+                            <label class="control-label">Fecha de solicitud de adopción</label>
+                            <div class="controls">
+                                <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="control-group">
+                            <label class="control-label">N° de Designación</label>
+                            <div class="controls">
+                                <input type="text" class="span2" value="" id="designacion" >
+                            </div>
+                        </div>
+                        <br>
+                        <div class="control-group">
+                            <label class="control-label">Fecha de propuesta</label>
+                            <div class="controls">
+                                <input type="text" class="datepicker span2" value="02-16-2012" id="dp3" >
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Generar Propuesta Directa</button>
                     </div>
                 </div>
             </div>
@@ -191,8 +182,8 @@
                 <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
         </div>
-        <!-- core JavaScript
-        ================================================== -->
+        <!-- Bootstrap core JavaScript
+         ================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
@@ -202,6 +193,6 @@
             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
-        <!-- Ubicar al final -->
+        <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>

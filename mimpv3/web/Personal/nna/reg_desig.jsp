@@ -16,7 +16,6 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
     </head>
-
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -29,7 +28,6 @@
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -50,7 +48,6 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div class="container">
                 <div class="row">
@@ -71,7 +68,6 @@
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li> 
                         </ul>
                     </div>
-
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <br>
@@ -82,6 +78,20 @@
                             <li><a href="#" data-toggle="tab">NNA en Seguimiento</a></li>
                         </ul>
                         <br>
+                        <br>
+                        <div class="control-group">
+                            <label class="control-label">Fecha de propuesta</label>
+                            <div class="controls">
+                                <input type="text" class="datepicker span2" value="02-16-2012" id="dp3" >
+                            </div>
+                        </div>
+                        <br>
+                        <div class="control-group">
+                            <label class="control-label">N° de Designación</label>
+                            <div class="controls">
+                                <input type="text" class="span2" value="" id="designacion" >
+                            </div>
+                        </div>
                         <br>
                         <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
                         <br>
@@ -164,9 +174,16 @@
             </div>
         </div>
         <!-- core JavaScript
-================================================== -->
+        ================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+        <script type="text/javascript">
+
+            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+        </script>
         <!-- Ubicar al final -->
     </body>
 </html>

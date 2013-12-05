@@ -97,8 +97,7 @@
                                                 <th>Resolución</th>
                                                 <th>Informe Colocación</th>
                                                 <th>Resultado</th>
-                                                <th>Resolución</th>
-                                                
+                                                <th>Resolución</th>  
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -115,60 +114,54 @@
                                                 <td>Favorable</td>
                                                 <td><button href="#" class="btn btn-default ">Registrar</button></td>
                                             </tr>
-                                            <tr>
+                                            <tr style="background: #BDBDBD">
                                                 <td>Rosa-Flores</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>001-2012</td>
-                                                <td>3</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td rowspan="2" style="vertical-align: middle">001-2012</td>
+                                                <td>2</td>
+                                                <td rowspan="2" style="vertical-align: middle"><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td><button href="#" class="btn btn-default" disabled>Registrar</button></td>
                                                 <td>Desfavorable</td>
                                                 <td><button href="#" class="btn btn-default ">Registrar</button></td>
                                                 <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                                 <td></td>
                                                 <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                             </tr>
-                                            <tr>
+                                            <tr style="background: #BDBDBD">
                                                 <td>Durando-Iriarte</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>021-2012</td>
-                                                <td>2</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td>3</td>
+                                                <td><button href="#" class="btn btn-default" disabled>Registrar</button></td>
                                                 <td></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default" disabled>Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default" disabled>Registrar</button></td>
+                                                <td></td>
+                                                <td><button href="#" class="btn btn-default" disabled>Registrar</button></td>
                                             </tr>
                                             <tr>
                                                 <td>Gallardo-Olivera</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>011-2013</td>
-                                                <td>2</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td rowspan="2" style="vertical-align: middle">022-2016</td>
+                                                <td>1</td>
+                                                <td rowspan="2" style="vertical-align: middle"><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
                                                 <td></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                             </tr>
                                             <tr>
                                                 <td>Solano-Parco</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>022-2012</td>
-                                                <td>3</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>Desfavorable</td>
-                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
+                                                <td>2</td>
                                                 <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
                                                 <td></td>
                                                 <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                            </tr>
-                                            
-                                            
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                                <td></td>
+                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                            </tr> 
                                         </tbody>
                                     </table>
                                 </div>

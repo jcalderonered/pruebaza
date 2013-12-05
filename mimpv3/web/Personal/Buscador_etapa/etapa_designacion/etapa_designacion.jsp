@@ -92,8 +92,6 @@
                                                 <th>Prioridad</th>
                                                 <th>Nombre del NNA</th>
                                                 <th>Decisión de Consejo</th>
-                                                <th>Resultado</th>
-                                                <th>Iniciar Adopción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -103,36 +101,40 @@
                                                 <td>1</td>
                                                 <td>Jesús Rey</td>
                                                 <td><button href="#" class="btn btn-default ">Registrar</button></td>
-                                                <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default ">Ir</button></td>
                                             </tr>   
-                                            <tr>
+                                            <tr style="background: #BDBDBD">
                                                 <td>Ramirez-Rojas</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td>1</td>
-                                                <td>Cristian Ku</td>
-                                                <td rowspan="2"><button href="#" class="btn btn-default ">Registrar</button></td>
-                                                <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default ">Ir</button></td>
+                                                <td rowspan="2" style="vertical-align: middle">Cristian Ku</td>
+                                                <td rowspan="2" style="vertical-align: middle"><button href="#" class="btn btn-default ">Registrar</button></td>
                                             </tr> 
-                                            <tr>
+                                            <tr style="background: #BDBDBD">
                                                 <td>Castillo-Sotomayor</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td>2</td>
-                                                <td>Cristian Ku</td>
-                                                
-                                                <td>Desfavorable</td>
-                                                <td><button href="#" class="btn btn-default disabled">Ir</button></td>
                                             </tr> 
                                             <tr>
-                                                <td>Cortéz-Saavedra</td>
+                                                <td>Cortés-Saavedra</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td>1</td>
                                                 <td>Hernán Romano</td>
                                                 <td><button href="#" class="btn btn-default ">Registrar</button></td>
-                                                <td>Desfavorable</td>
-                                                <td><button href="#" class="btn btn-default " disabled>Ir</button></td>
-                                            </tr>   
+                                            </tr>
+                                            <tr style="background: #BDBDBD">
+                                                <td>Roldan-Cespedes</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><button disabled href="#" class="btn btn-default ">Registrar</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Galindo-Mevius</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><button disabled href="#" class="btn btn-default ">Registrar</button></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -140,7 +142,6 @@
                                 <!-- Button -->
                             </fieldset>
                         </form>
-
                     </div>
                 </div>
             </div>

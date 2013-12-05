@@ -1,7 +1,7 @@
 <%-- 
-    Document   : inicio_personal
-    Created on : 28/10/2013, 09:54:29 AM
-    Author     : Ayner Pérez
+    Document   : detalle_evaluacion
+    Created on : 14/11/2013, 07:51:13 PM
+    Author     : User
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,10 +16,8 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-
         <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
-
 
     </head>
 
@@ -35,7 +33,6 @@
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -43,9 +40,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -56,13 +51,11 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
-            <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
-                            <li class="active"><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+                            <li><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Sesiones/talleres</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNAs</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Juzgado</a></li>
@@ -74,104 +67,112 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
+                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>
                         </ul>
                     </div>
-
-                    <div class="col-md-6">
-                        <h1 align="center"><strong>Informe Post-Adoptivo N° 4</strong></h1>
+                    <div class="col-md-6 col-md-offset-1">
+                        <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
-                        <ul class="nav nav-tabs row" id="tabs">
+                        <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="#" data-toggle="tab">Informativa</a></li>
                             <li><a href="#" data-toggle="tab">Evaluativa</a></li>
-                            <li><a href="#" data-toggle="tab">Designación</a></li>
+                            <li class="active"><a href="#" data-toggle="tab">Designación</a></li>
                             <li><a href="#" data-toggle="tab">Adopción</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Post Adopción</a></li>
+                            <li><a href="#" data-toggle="tab">Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal"> 
+                        <form role="form">
                             <fieldset>
-                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                                 <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                                <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
+                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                                 <br>
-                                <!-- Text input-->
+                                <h1 align="center"><strong>NNA "NOMBRE APELLIDOS"</strong></h1>
+                                <br>
+                                <br>
+                                <h3 align="left"><strong>Detalles de decisión de consejo</strong></h3>
+                                <br>
                                 <div class="control-group">
-                                    <label class="control-label">Estado</label>
+                                    <label class="control-label">Fecha de reunión del consejo</label>
+                                    <div class="controls">
+                                        <input type="text" class="datepicker span2" value="02-16-2012" id="dp3" >
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <h3 align="left"><strong>Familias asignadas al mismo NNA</strong></h3>
+                                <br>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-sm-2 " >Expediente</th>
+                                                <th class="col-sm-2 " >UA</th>
+                                                <th class="col-sm-2 " >Nivel sociec</th>
+                                                <th class="col-sm-2 " >Información</th>
+                                                <th class="col-sm-2 " >Resolución de aptitud</th>
+                                                <th class="col-sm-2 " >Prioridad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Gutierrez-Huaman </td>
+                                                <td>Lima</td>
+                                                <td>C</td>
+                                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
+                                                <td>14-Nov-2012</td>
+                                                <td>1
+                                            </tr>
+                                            <tr>
+                                                <td>Morales-Loza</td>
+                                                <td>Trujillo</td>
+                                                <td>B</td>
+                                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
+                                                <td>21-Agos-2011</td>
+                                                <td>2</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Tipo de Propuesta</label>
                                     <div class="controls">
                                         <select>
-                                            <option value="sia">Listo</option>
-                                            <option value="mia" selected>Pendiente</option>
+                                            <option value="mia">Directa</option>
+                                            <option selected value="mia">Dupla</option>
+                                            <option value="mia">Terna</option>
                                         </select>
                                     </div>    
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Número de informe: 4</label>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de recepción proyectado</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de recepción</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Personal asignado</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia">Juan Pérez</option>
-                                            <option value="mia">Raúl Robles</option>
-                                            <option value="mia">John Peña</option>
-                                            <option value="mia">Isaac Lamb</option>
-                                        </select>
-                                    </div>    
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de informe</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de acta</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
-                                    </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <input id="obs" name="full-name" type="text" class="input-xlarge">
+                                        <textarea type="text" cols="25" rows="5"></textarea>
                                     </div>
                                 </div>
-                                <!-- Button -->
                                 <br>
+                                <br>
+                                <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Aceptar propuesta</button>
                                     </div>
                                 </div>
+                                <br>
+                                <!-- Button -->
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Desechar propuesta</button>
+                                    </div>
+                                </div>
+                                <!--FIN DE CONTENIDO-->
                             </fieldset>
-                        </form>    
+                        </form>
                     </div>
                 </div>
             </div>
-            <!--FIN DE CONTENIDO-->
             <br>
             <br>
-
             <div id="footer">
                 <div id="ja-footer" class="wrap">
                     <hr width=80% align="center">

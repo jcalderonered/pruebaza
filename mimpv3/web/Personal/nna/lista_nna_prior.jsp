@@ -29,7 +29,6 @@
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -39,7 +38,6 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -50,7 +48,6 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div class="container">
                 <div class="row">
@@ -69,10 +66,8 @@
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
                         </ul>
                     </div>
-
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Registrar NNA</button></p>
                         <br>
@@ -95,13 +90,14 @@
                                         <th class="col-sm-2 ">Apellido Materno</th>
                                         <th class="col-sm-2 ">Sexo</th>
                                         <th class="col-sm-2 ">Grupo ref.</th>
+                                        <th class="col-sm-2 ">Código</th>
                                         <th class="col-sm-2 ">Proceso de adopción</th>
                                         <th class="col-sm-2 ">Detalles</th> 
                                         <th class="col-sm-2 ">Expediente</th>
-                                        <th class="col-sm-2 ">Registrar estudio</th>
+                                        <th class="col-sm-2 ">Reg. estudio</th>
+                                        <th class="col-sm-2 ">Edit. estudio</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
                                     <tr>
                                         <td>Nombre 1</td>
@@ -109,10 +105,12 @@
                                         <td>Apellidos 1</td>
                                         <td>Masculino</td>
                                         <td>Mayores</td>
+                                        <td>M29383</td>
                                         <td>Si</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                        <td><button disabled href="#" class="btn btn-default">Registrar</button></td>
+                                        <td><button href="#" class="btn btn-default">Editar</button></td>
                                     </tr>
                                     <tr>
                                         <td>Nombre 2</td>
@@ -120,10 +118,12 @@
                                         <td>Apellidos 2</td>
                                         <td>Femenino</td>
                                         <td>Hermanos</td>
+                                        <td>H29371</td>
                                         <td>No</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                        <td><button disabled href="#" class="btn btn-default">Editar</button></td>
                                     </tr>
                                     <tr>
                                         <td>Nombre 3</td>
@@ -131,10 +131,12 @@
                                         <td>Apellidos 3</td>
                                         <td>Masculino</td>
                                         <td>Hermanos</td>
+                                        <td>H29371</td>
                                         <td>No</td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                        <td><button disabled href="#" class="btn btn-default">Editar</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -157,8 +159,6 @@
 ================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-
-
         <!-- Ubicar al final -->
     </body>
 </html>
