@@ -68,7 +68,7 @@ public class HiberMain {
         if (queryResultP != null){
             personal = (Personal) queryResultP;
             temp.add("personal");
-            temp.add(queryResultP);
+            temp.add(personal);
             return temp;
         }else if (queryResultF != null){
             familia = (Familia) queryResultF;
