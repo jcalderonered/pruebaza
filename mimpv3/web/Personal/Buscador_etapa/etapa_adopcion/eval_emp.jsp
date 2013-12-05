@@ -42,7 +42,6 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -72,7 +71,6 @@
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
                         </ul>
                     </div>
 
@@ -114,18 +112,6 @@
                                          </div>    
                                     </div>
                                     <br>
-                                    <!--
-                                    <div>
-                                       <label class="control-label">Profesional N°2</label>
-                                         <div class="controls">
-                                             <select>
-                                                 <option value="sia">Guillermo Ruiz</option>
-                                                 <option value="sia">Ana Morales</option>
-                                             </select>
-                                         </div>    
-                                    </div>
-                                    <br>
-                                    -->
                                     <br>
                                     <h3><strong>Evaluación</strong></h3>
                                     <br>
@@ -138,7 +124,6 @@
                                              </select>
                                          </div>    
                                     </div>
-                                  
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Fecha de evaluación</label>
@@ -153,9 +138,7 @@
                                               <textarea class="input-xlarge" name="message" placeholder="" rows="5" cols="50"></textarea>
                                             </div>
                                     </div>   
-                                    <br>
-                                    
-                                
+                                    <br>       
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">

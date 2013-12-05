@@ -173,28 +173,6 @@
                                     </div>
                                 </div>
                                 <br>
-                                <!--
-                               <div class="control-group">
-                                   <label class="control-label">Apellido Paterno</label>
-                                   <div class="controls">
-                                       <select>
-                                           <option value="sia">Espinoza</option>
-                                           <option value="sia">Salgado</option>
-                                       </select>
-                                   </div>
-                               </div>
-                               <br>
-                               <div class="control-group">
-                                   <label class="control-label">Apellido Materno</label>
-                                   <div class="controls">
-                                       <select>
-                                           <option value="sia">Salazar</option>
-                                           <option value="sia">Ruiz</option>
-                                       </select>
-                                   </div>
-                               </div>
-                               <br>
-                                -->
                                 <h3><strong>Responsable Psicosocial</strong></h3>
                                 <br>
                                 <div class="control-group">
@@ -207,28 +185,6 @@
                                     </div>
                                 </div>
                                 <br>
-                                <!--
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Paterno</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia">Espinoza</option>
-                                            <option value="sia">Salgado</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Materno</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia">Salazar</option>
-                                            <option value="sia">Ruiz</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br>
-                                -->
                                 <div>
                                     <label class="control-label">Estado</label>
                                     <div class="controls">
