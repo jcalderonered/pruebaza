@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 4, 2013 5:48:20 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 5/12/2013 05:37:53 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.ExpedienteNna" table="expediente_nna" catalog="mimp_adopcion">
         <id name="idexpedienteNna" type="java.lang.Integer">
@@ -67,6 +67,12 @@
         </property>
         <property name="nacional" type="java.lang.Boolean">
             <column name="nacional" />
+        </property>
+        <property name="diagnostico" type="string">
+            <column name="diagnostico" length="20" />
+        </property>
+        <property name="codigoReferencia" type="string">
+            <column name="codigo_referencia" length="45" />
         </property>
     </class>
 </hibernate-mapping>

@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 4, 2013 5:48:18 PM by Hibernate Tools 3.6.0
+// Generated 5/12/2013 05:37:51 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -19,6 +19,7 @@ public class InformePostAdoptivo  implements java.io.Serializable {
      private Date fechaRecepcion;
      private Date fechaInforme;
      private Date fechaActa;
+     private String obs;
 
     public InformePostAdoptivo() {
     }
@@ -28,7 +29,7 @@ public class InformePostAdoptivo  implements java.io.Serializable {
         this.postAdopcion = postAdopcion;
         this.personal = personal;
     }
-    public InformePostAdoptivo(PostAdopcion postAdopcion, Personal personal, String estado, String numeroInforme, Date fechaRecepcionProyectado, Date fechaRecepcion, Date fechaInforme, Date fechaActa) {
+    public InformePostAdoptivo(PostAdopcion postAdopcion, Personal personal, String estado, String numeroInforme, Date fechaRecepcionProyectado, Date fechaRecepcion, Date fechaInforme, Date fechaActa, String obs) {
        this.postAdopcion = postAdopcion;
        this.personal = personal;
        this.estado = estado;
@@ -37,6 +38,7 @@ public class InformePostAdoptivo  implements java.io.Serializable {
        this.fechaRecepcion = fechaRecepcion;
        this.fechaInforme = fechaInforme;
        this.fechaActa = fechaActa;
+       this.obs = obs;
     }
    
     public Integer getIdinformePostAdoptivo() {
@@ -101,6 +103,13 @@ public class InformePostAdoptivo  implements java.io.Serializable {
     
     public void setFechaActa(Date fechaActa) {
         this.fechaActa = fechaActa;
+    }
+    public String getObs() {
+        return this.obs;
+    }
+    
+    public void setObs(String obs) {
+        this.obs = obs;
     }
 
 

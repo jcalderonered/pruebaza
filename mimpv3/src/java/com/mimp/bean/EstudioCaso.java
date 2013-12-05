@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 4, 2013 5:48:18 PM by Hibernate Tools 3.6.0
+// Generated 5/12/2013 05:37:51 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -16,7 +16,9 @@ public class EstudioCaso  implements java.io.Serializable {
      private String orden;
      private Date fechaEstudio;
      private Date fechaSolAdop;
-     private Boolean resultado;
+     private String resultado;
+     private Integer prioridad;
+     private Long NSolicitud;
 
     public EstudioCaso() {
     }
@@ -26,13 +28,15 @@ public class EstudioCaso  implements java.io.Serializable {
         this.nna = nna;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public EstudioCaso(Nna nna, ExpedienteFamilia expedienteFamilia, String orden, Date fechaEstudio, Date fechaSolAdop, Boolean resultado) {
+    public EstudioCaso(Nna nna, ExpedienteFamilia expedienteFamilia, String orden, Date fechaEstudio, Date fechaSolAdop, String resultado, Integer prioridad, Long NSolicitud) {
        this.nna = nna;
        this.expedienteFamilia = expedienteFamilia;
        this.orden = orden;
        this.fechaEstudio = fechaEstudio;
        this.fechaSolAdop = fechaSolAdop;
        this.resultado = resultado;
+       this.prioridad = prioridad;
+       this.NSolicitud = NSolicitud;
     }
    
     public Integer getIdestudioCaso() {
@@ -77,12 +81,26 @@ public class EstudioCaso  implements java.io.Serializable {
     public void setFechaSolAdop(Date fechaSolAdop) {
         this.fechaSolAdop = fechaSolAdop;
     }
-    public Boolean getResultado() {
+    public String getResultado() {
         return this.resultado;
     }
     
-    public void setResultado(Boolean resultado) {
+    public void setResultado(String resultado) {
         this.resultado = resultado;
+    }
+    public Integer getPrioridad() {
+        return this.prioridad;
+    }
+    
+    public void setPrioridad(Integer prioridad) {
+        this.prioridad = prioridad;
+    }
+    public Long getNSolicitud() {
+        return this.NSolicitud;
+    }
+    
+    public void setNSolicitud(Long NSolicitud) {
+        this.NSolicitud = NSolicitud;
     }
 
 

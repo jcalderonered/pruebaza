@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 4, 2013 5:48:18 PM by Hibernate Tools 3.6.0
+// Generated 5/12/2013 05:37:51 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -31,6 +31,8 @@ public class ExpedienteNna  implements java.io.Serializable {
      private Boolean adoptable;
      private Date fechaResolCons;
      private Boolean nacional;
+     private String diagnostico;
+     private String codigoReferencia;
 
     public ExpedienteNna() {
     }
@@ -40,7 +42,7 @@ public class ExpedienteNna  implements java.io.Serializable {
         this.nna = nna;
         this.unidad = unidad;
     }
-    public ExpedienteNna(Nna nna, Unidad unidad, String numero, Date fechaIngreso, String ht, String NExpTutelar, String procTutelar, Boolean fichaIntegral, String comentarios, String respLegalNombre, String respLegalP, String respLegalM, String respPsicosocialNombre, String respPiscosocialP, String respPsicosocialM, String estado, Date fechaEstado, Boolean adoptable, Date fechaResolCons, Boolean nacional) {
+    public ExpedienteNna(Nna nna, Unidad unidad, String numero, Date fechaIngreso, String ht, String NExpTutelar, String procTutelar, Boolean fichaIntegral, String comentarios, String respLegalNombre, String respLegalP, String respLegalM, String respPsicosocialNombre, String respPiscosocialP, String respPsicosocialM, String estado, Date fechaEstado, Boolean adoptable, Date fechaResolCons, Boolean nacional, String diagnostico, String codigoReferencia) {
        this.nna = nna;
        this.unidad = unidad;
        this.numero = numero;
@@ -61,6 +63,8 @@ public class ExpedienteNna  implements java.io.Serializable {
        this.adoptable = adoptable;
        this.fechaResolCons = fechaResolCons;
        this.nacional = nacional;
+       this.diagnostico = diagnostico;
+       this.codigoReferencia = codigoReferencia;
     }
    
     public Integer getIdexpedienteNna() {
@@ -209,6 +213,20 @@ public class ExpedienteNna  implements java.io.Serializable {
     
     public void setNacional(Boolean nacional) {
         this.nacional = nacional;
+    }
+    public String getDiagnostico() {
+        return this.diagnostico;
+    }
+    
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+    public String getCodigoReferencia() {
+        return this.codigoReferencia;
+    }
+    
+    public void setCodigoReferencia(String codigoReferencia) {
+        this.codigoReferencia = codigoReferencia;
     }
 
 

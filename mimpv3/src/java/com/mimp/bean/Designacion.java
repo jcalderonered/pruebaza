@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 4, 2013 5:48:18 PM by Hibernate Tools 3.6.0
+// Generated 5/12/2013 05:37:51 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -14,7 +14,7 @@ public class Designacion  implements java.io.Serializable {
      private Nna nna;
      private Personal personal;
      private ExpedienteFamilia expedienteFamilia;
-     private String NDesignacion;
+     private Integer NDesignacion;
      private Integer prioridad;
      private Date fechaPropuesta;
      private Date fechaConsejo;
@@ -31,7 +31,7 @@ public class Designacion  implements java.io.Serializable {
         this.personal = personal;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public Designacion(Nna nna, Personal personal, ExpedienteFamilia expedienteFamilia, String NDesignacion, Integer prioridad, Date fechaPropuesta, Date fechaConsejo, Boolean aceptacionConsejo, String tipoPropuesta, String obs) {
+    public Designacion(Nna nna, Personal personal, ExpedienteFamilia expedienteFamilia, Integer NDesignacion, Integer prioridad, Date fechaPropuesta, Date fechaConsejo, Boolean aceptacionConsejo, String tipoPropuesta, String obs) {
        this.nna = nna;
        this.personal = personal;
        this.expedienteFamilia = expedienteFamilia;
@@ -72,11 +72,11 @@ public class Designacion  implements java.io.Serializable {
     public void setExpedienteFamilia(ExpedienteFamilia expedienteFamilia) {
         this.expedienteFamilia = expedienteFamilia;
     }
-    public String getNDesignacion() {
+    public Integer getNDesignacion() {
         return this.NDesignacion;
     }
     
-    public void setNDesignacion(String NDesignacion) {
+    public void setNDesignacion(Integer NDesignacion) {
         this.NDesignacion = NDesignacion;
     }
     public Integer getPrioridad() {
