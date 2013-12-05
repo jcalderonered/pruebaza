@@ -48,7 +48,7 @@ public class main {
          String pagina = "";
         
         ArrayList aux = ServicioMain.usuario(email, pass);
-        String mensaje = "Los datos ingresados son: email" + email + " y contraseña" + pass + "!";
+        String mensaje = "Los datos ingresados son: email" + email + " y contraseña" + pass + "!";        
         if (aux.get(0) == "personal"){
             pagina = "/Personal/inicio_personal";
         }else if (aux.get(0)=="familia"){
