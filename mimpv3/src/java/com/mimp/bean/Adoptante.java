@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 5/12/2013 05:37:51 PM by Hibernate Tools 3.6.0
+// Generated 6/12/2013 11:57:53 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -15,6 +15,7 @@ public class Adoptante  implements java.io.Serializable {
      private String nombre;
      private String apellidoP;
      private String apellidoM;
+     private Character sexo;
      private Date fechaNac;
      private String lugarNac;
      private String depaNac;
@@ -48,11 +49,12 @@ public class Adoptante  implements java.io.Serializable {
     public Adoptante(InfoFamilia infoFamilia) {
         this.infoFamilia = infoFamilia;
     }
-    public Adoptante(InfoFamilia infoFamilia, String nombre, String apellidoP, String apellidoM, Date fechaNac, String lugarNac, String depaNac, String paisNac, Character tipoDoc, String NDoc, String celular, String correo, String nivelInstruccion, Boolean culminoNivel, String profesion, Boolean trabajadorDepend, String ocupActualDep, String centroTrabajo, String direccionCentro, String telefonoCentro, Integer ingresoDep, Boolean trabajadorIndepend, String ocupActualInd, Integer ingresoIndep, Boolean seguroSalud, String tipoSeguro, Boolean seguroVida, Boolean sistPensiones, String saludActual) {
+    public Adoptante(InfoFamilia infoFamilia, String nombre, String apellidoP, String apellidoM, Character sexo, Date fechaNac, String lugarNac, String depaNac, String paisNac, Character tipoDoc, String NDoc, String celular, String correo, String nivelInstruccion, Boolean culminoNivel, String profesion, Boolean trabajadorDepend, String ocupActualDep, String centroTrabajo, String direccionCentro, String telefonoCentro, Integer ingresoDep, Boolean trabajadorIndepend, String ocupActualInd, Integer ingresoIndep, Boolean seguroSalud, String tipoSeguro, Boolean seguroVida, Boolean sistPensiones, String saludActual) {
        this.infoFamilia = infoFamilia;
        this.nombre = nombre;
        this.apellidoP = apellidoP;
        this.apellidoM = apellidoM;
+       this.sexo = sexo;
        this.fechaNac = fechaNac;
        this.lugarNac = lugarNac;
        this.depaNac = depaNac;
@@ -114,6 +116,13 @@ public class Adoptante  implements java.io.Serializable {
     
     public void setApellidoM(String apellidoM) {
         this.apellidoM = apellidoM;
+    }
+    public Character getSexo() {
+        return this.sexo;
+    }
+    
+    public void setSexo(Character sexo) {
+        this.sexo = sexo;
     }
     public Date getFechaNac() {
         return this.fechaNac;

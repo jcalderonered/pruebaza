@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 5/12/2013 05:37:53 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 6/12/2013 11:57:55 AM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Adoptante" table="adoptante" catalog="mimp_adopcion">
         <id name="idadoptante" type="java.lang.Integer">
@@ -19,6 +19,9 @@
         </property>
         <property name="apellidoM" type="string">
             <column name="apellido_m" length="30" />
+        </property>
+        <property name="sexo" type="java.lang.Character">
+            <column name="sexo" length="1" />
         </property>
         <property name="fechaNac" type="date">
             <column name="fecha_nac" length="10" />

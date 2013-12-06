@@ -2,7 +2,7 @@
     Document   : lista_charlas
     Created on : 28/10/2013, 03:17:53 PM
     Author     : Ayner Pérez
---%>
+--%>&
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
