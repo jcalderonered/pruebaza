@@ -58,9 +58,9 @@
                     <div class="col-md-8 col-md-offset-1">
                         <h1 align="center"><strong>Inscripción a la Sesión Informativa</strong></h1>
                         <br>
-                        <p><b>Próxima fecha:</b> 11-Mar-14</p>
-                        <p><b>Hora:</b> 17:30</p>
-                        <p><b>Direccion:</b> Auditorio de la Institución Educativa “Juana Alarco de Dammert” ubicado en Av. Alfredo Benavides 2315 - Miraflores”</p>
+                        <p><b>Próxima fecha:</b> ${ts.DateToString(listaTurnos.get(0).getSesion().getFecha())}</p>
+                        <p><b>Hora:</b> ${listaTurnos.get(0).getSesion().getHora()}</p>
+                        <p><b>Direccion:</b> ${listaTurnos.get(0).getSesion().getDireccion()}</p>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">

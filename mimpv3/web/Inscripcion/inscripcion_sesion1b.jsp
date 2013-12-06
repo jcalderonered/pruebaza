@@ -54,7 +54,7 @@
             </div>
 
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
-            <h2 align="center">Se hace una pausa en las inscripciones para la Sesión Informativa del <b>13-Nov-2013 17:30</b></h2>
+            <h2 align="center">Se hace una pausa en las inscripciones para la Sesión Informativa del <b>${ts.DateToString(listaTurnos.get(0).getSesion().getFecha())} a las ${listaTurnos.get(0).getSesion().getHora()}</b></h2>
             <br>
             <h2 align="center">Se le invita a inscribirse en los siguientes turnos hasta que se completen los cupos:</h2>
             <br>
@@ -73,27 +73,17 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <th>Turno 1</th>
-                                    <td>10-11-2013</td>
-                                    <td>09:00</td>
-                                    <td>12:00</td>
-                                    <td>90</td>
-                                </tr>
-                                <tr>
-                                    <th>Turno 2</th>
-                                    <td>10-11-2013</td>
-                                    <td>18:00</td>
-                                    <td>20:00</td>
-                                    <td>60</td>
-                                </tr>
-                                <tr>
-                                    <th>Turno 3</th>
-                                    <td>11-11-2013</td>
-                                    <td>09:00</td>
-                                    <td>12:00</td>
-                                    <td>30</td>
-                                </tr>
+                                <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
+                                    <tr>
+                                        <td>Turno </td>
+                                        <td>${ts.DateToString(turno.getInicioInscripcion())}</td>
+                                        <td>${ts.HourToString(turno.getInicioInscripcion())}</td>
+                                        <td>${ts.HourToString(turno.getFinInscripcion())}</td>
+                                        <td>${turno.getVacantes()}</td>
+
+
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>

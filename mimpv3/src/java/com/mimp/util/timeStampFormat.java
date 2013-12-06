@@ -43,13 +43,23 @@ public class timeStampFormat {
     }
     
     public String DateToString (Date temp){
-        SimpleDateFormat fromsql = new SimpleDateFormat("dd/MMM/yyyy",new Locale("ES"));
+        SimpleDateFormat fromsql = new SimpleDateFormat("dd-MMM-yyyy",new Locale("ES"));
         //SimpleDateFormat mystring = new SimpleDateFormat("dd/MM/yyyy");
         
         String fecha = fromsql.format(temp).toUpperCase();
     
         return fecha;
     }
+    
+    public String HourToString (Date temp){
+        SimpleDateFormat fromsql = new SimpleDateFormat("HH:mm",new Locale("ES"));
+        //SimpleDateFormat mystring = new SimpleDateFormat("dd/MM/yyyy");
+        
+        String fecha = fromsql.format(temp);
+    
+        return fecha;
+    }
+    
     
     
     

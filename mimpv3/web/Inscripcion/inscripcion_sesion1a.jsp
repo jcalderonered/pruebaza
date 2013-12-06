@@ -56,7 +56,7 @@
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <h2 align="center">Las inscripciones están cerradas, agradecemos su interés y le informamos que la próxima sesión informativa dará inicio el:</h2>
             <br>
-            <h2 align="center"><b>13-Nov-2013 17:30</b></h2>
+            <h2 align="center"><b>${ts.DateToString(listaSesiones.get(0).getFecha())} ${ts.HourToString(listaSesiones.get(0).getHora())}</b></h2>
             <br>
             <h2 align="center">Los turnos de inscripción para la próxima sesión informativa son según el siguiente cronograma</h2>
             <h2 align="center">Se le invita a inscribirse hasta que se completen las vacantes</h2>
@@ -74,29 +74,15 @@
                                     <th>Total de vacantes</th>
                                 </tr>
                             </thead>
-
                             <tbody>
-                                <tr>
-                                    <th>Turno 1</th>
-                                    <td>10-Nov-2013</td>
-                                    <td>09:00</td>
-                                    <td>12:00</td>
-                                    <td>90</td>
-                                </tr>
-                                <tr>
-                                    <th>Turno 2</th>
-                                    <td>10-Nov-2013</td>
-                                    <td>18:00</td>
-                                    <td>20:00</td>
-                                    <td>60</td>
-                                </tr>
-                                <tr>
-                                    <th>Turno 3</th>
-                                    <td>11-Nov-2013</td>
-                                    <td>09:00</td>
-                                    <td>12:00</td>
-                                    <td>30</td>
-                                </tr>
+                                <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
+                                    <tr>
+                                        <td>Turno ${status.index + 1} </td>
+                                        <td>${ts.DateToString(turno.getInicioInscripcion())}</td>
+                                        <td>${ts.HourToString(turno.getInicioInscripcion())}</td>
+                                        <td>${ts.HourToString(turno.getFinInscripcion())}</td>
+                                        <td>${turno.getVacantes()}</td> </tr>
+                                    </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -104,8 +90,18 @@
             </div>
             <h2 align="center">Las próximas sesiones informativas dentro del año son las siguientes:</h2>
             <br>
-            <h2 align="center"><b>20-Nov-2013 17:30</b></h2>
-            <h2 align="center"><b>15-Dic-2013 17:30</b></h2>
+            <div class ="container">
+            <c:choose>
+                <c:when test="${listaSesiones.size()==1}">
+                    <p><strong>No hay mas sesiones programadas</strong></p>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach begin="1" var="sesion" items="${listaSesiones}" varStatus="status">
+                        <p class="text-center"><strong>${ts.DateToString(sesion.getFecha())} ${ts.HourToString(sesion.getHora())}</strong></p>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+            </div>            
             <br>
             <!--FIN DE CONTENIDO-->
             <br>
@@ -118,8 +114,8 @@
                 <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
         </div>
-                <!-- core JavaScript
-        ================================================== -->
+        <!-- core JavaScript
+================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
 

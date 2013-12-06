@@ -64,6 +64,7 @@
                 <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesGrp" role="form" method="post">
                     <!-- Form Name -->
                     <input hidden id="idTurno" name="idTurno" value="${turno.getIdturno()}">
+                    <input hidden id="estado" name="estado" value="${estado}">
                     <div class="col-md-4 col-md-offset-2">
                         <p class="text-left"><legend>Información Personal <br>(EL)</legend></p>
                         <br>
@@ -246,14 +247,14 @@
                         <div class="control-group">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="docElla" id="optionsRadios1" value="D" checked>
+                                    <input type="radio" name="docElla" id="optionsRadios1" value="d" checked>
                                     DNI
                                 </label>
                             </div>
                             <br>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="docElla" id="optionsRadios2" value="C">
+                                    <input type="radio" name="docElla" id="optionsRadios2" value="c">
                                     Carnet de Extranjería
                                 </label>
                             </div>
@@ -304,30 +305,30 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <label for="pais">País <font style="color:red">(*)</font></label>
-                            <input id="pais" type="text" placeholder="Pais" class="input-xlarge">
+                            <input id="pais" name="pais" type="text" placeholder="Pais" class="input-xlarge">
                         </div>
                         <div class="col-lg-3">
                             <label for="dep">Departamento <font style="color:red">(*)</font></label> 
-                            <input id="dep" type="text" placeholder="Departamento" class="input-xlarge">
+                            <input id="dep" name="dep" type="text" placeholder="Departamento" class="input-xlarge">
                         </div>
                         <div class="col-lg-3">
                             <label for="prov">Provincia <font style="color:red">(*)</font></label> 
-                            <input id="prov" type="text" placeholder="Provincia" class="input-xlarge">
+                            <input id="prov" name="prov" type="text" placeholder="Provincia" class="input-xlarge">
                         </div>
                         <div class="col-lg-3">
                             <label for="dist">Distrito <font style="color:red">(*)</font></label> 
-                            <input id="dist" type="text" placeholder="Distrito" class="input-xlarge">
+                            <input id="dist" name="dist" type="text" placeholder="Distrito" class="input-xlarge">
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-lg-4">
                             <label for="dir">Dirección domiciliaria <font style="color:red">(*)</font></label> 
-                            <input id="dir" type="text" placeholder="Dirección Domiciliaria" class="input-xlarge">
+                            <input id="dir" name="dir" type="text" placeholder="Dirección Domiciliaria" class="input-xlarge">
                         </div>
                         <div class="col-lg-4">
                             <label for="telf">Teléfono fijo <font style="color:red">(*)</font></label> 
-                            <input id="telf" type="text" placeholder="Teléfono fijo" class="input-xlarge">
+                            <input id="telf" name="telf" type="text" placeholder="Teléfono fijo" class="input-xlarge">
                         </div>
                     </div>
                     <br>
