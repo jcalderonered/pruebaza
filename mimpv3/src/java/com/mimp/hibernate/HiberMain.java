@@ -193,5 +193,41 @@ public class HiberMain {
     
     
     }
+    
+    public ArrayList<Sesion> listaSesionesSiguientes (Date fecha){
+        
+    Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+         String hql = "From Sesion S where S.fecha > :fecha  order by S.fecha";
+        Query query = session.createQuery(hql);
+        query.setDate("fecha", fecha);
+        List asistentes = query.list();
+        ArrayList<Sesion> allSesiones = new ArrayList();
+        for (Iterator iter = asistentes.iterator(); iter.hasNext();) {
+            Sesion temp = (Sesion) iter.next();
+            allSesiones.add(temp);
+        }
+        return allSesiones;
+    
+    }
   
+    public ArrayList<Turno> turnosSesion (int idSesion){
+    
+    Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+         String hql = "From Turno T where T.sesion = :id";
+        Query query = session.createQuery(hql);
+        query.setInteger("id", idSesion);
+        List asistentes = query.list();
+        ArrayList<Turno> allTurnos = new ArrayList();
+        for (Iterator iter = asistentes.iterator(); iter.hasNext();) {
+            Turno temp = (Turno) iter.next();
+            
+            allTurnos.add(temp);
+        }
+        return allTurnos;
+    
+    }
 }
