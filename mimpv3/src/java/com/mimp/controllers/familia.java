@@ -28,4 +28,25 @@ public class familia {
     public String InicioFam() {
         return "/Familia/inicio_familia";
     }
+    
+    @RequestMapping("/FactDatos")
+    public String Act_datos() {
+        return "/Familia/Act_datos/datos_ella";
+    }
+    
+    @RequestMapping("/Finscripcion")
+    public String Finscripcion() {
+        //FALTA
+        return "/Familia/Act_datos/datos_ella";
+    }
+    
+    @RequestMapping("/Festado")
+    public String Festado() {
+        return "/Familia/estado_proc";
+    }
+    
+    @RequestMapping("/Fcontra")
+    public String Fcontra() {
+        return "/Familia/contra_familia";
+    }
 }
