@@ -82,6 +82,7 @@
                                 </div>
                             </div>
                             <br>
+                            <input hidden id="idTurno" name="idTurno" value="${idTurno}">
                             <div class="btn-toolbar">  
                                 <button type="submit" class="btn btn-default">Continuar</button>
                             </div>  

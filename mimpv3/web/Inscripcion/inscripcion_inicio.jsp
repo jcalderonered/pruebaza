@@ -74,23 +74,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th>Turno 1</th>
-                                        <td>09/03/14 09:00</td>
-                                        <td>09/03/14 12:00</td>
-                                        <td>90</td>
-                                        <td>Inscripción Terminada</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Turno 2</th>
-                                        <td>09/03/14 17:00</td>
-                                        <td>09/03/14 20:00</td>
-                                        <td>60</td>
-                                        <td><button onclick="window.location.href = '${pageContext.servletContext.contextPath}/SesionInfElegirEstado'" class="btn btn-default">Inscribirse</button>
-                                        </td>
-                                    </tr>
+                                    <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
+                                        <tr>
+                                            <td>Turno ${status.index + 1}</td>
+                                            <td>${ts.TimeToString(turno.getInicioInscripcion())}</td>
+                                            <td>${ts.TimeToString(turno.getFinInscripcion())}</td>
+                                            <td>${turno.getVacantes()}</td>
+
+
+                                            <td>
+                                                <c:set var="now" value="<%=new java.util.Date()%>" />
+                                                <c:choose>
+                                                    <c:when test="${turno.getVacantes() > turno.getAsistenciaFTs().size() && turno.getInicioInscripcion() < now && turno.getFinInscripcion() > now }">
+                                                        <form action="${pageContext.servletContext.contextPath}/SesionInfElegirEstado" method="post">
+                                                            <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
+                                                            <button type="submit" class="btn btn-default">Inscribirse</button>
+                                                        </form>
+                                                    </c:when>
+                                                    <c:when test="${turno.getVacantes() <= turno.getAsistenciaFTs().size() || turno.getFinInscripcion() < now }">
+                                                        
+                                                        <p><strong>Se termino la inscripción</strong></p>
+                                                        
+                                                    </c:when>    
+                                                    <c:otherwise>
+                                                         <p><strong>En espera</strong></p>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
+                            ${fecha}
                         </div>
                     </div>
                 </div>

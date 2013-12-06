@@ -61,8 +61,8 @@
             <br>
             <h2 align="center">Ud. se encuentra inscrito(a) en la Sesión Informativa del día:</h2>
             <br>
-            <h2 align="center">13-Nov-2013 a las 09:00 (Hora exacta)</h2>
-            <p align="center"><b>Dirección:</b> "Aquí se ingresa la dirección del local donde se brindará la charla"</p>
+            <h2 align="center">${ts.DateToString(turno.getSesion().getFecha())} a las ${turno.getSesion().getHora()} (Hora exacta)</h2>
+            <p align="center"><b>Dirección:</b> ${turno.getSesion().getDireccion()}</p>
             <br>
             <div class="col-md-3"></div>
             <div class="col-md-6">
