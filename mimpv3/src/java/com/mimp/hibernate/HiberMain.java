@@ -8,7 +8,9 @@ package com.mimp.hibernate;
 import java.util.*;
 import org.hibernate.Session;
 import com.mimp.bean.*;
+import com.mimp.util.*;
 import javax.annotation.Resource;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
@@ -94,5 +96,102 @@ public class HiberMain {
       
   }
   
+   public ArrayList<Turno> ListaTurnos (){
+       
+       Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+    
+    //Date now = new Date();
+    
+    
+    String queryTurnos = "FROM Turno as T WHERE cast(T.inicioInscripcion as date) = current_date() "
+                        + "and cast(T.finInscripcion as date) = current_date() order by T.inicioInscripcion";
+    Query query = session.createQuery(queryTurnos);
+    List lista = query.list();
+    ArrayList<Turno> Turnos = new ArrayList();
+    for (Iterator iter = lista.iterator(); iter.hasNext();) {
+            Turno temp = (Turno) iter.next();
+            Hibernate.initialize(temp.getSesion());
+            Hibernate.initialize(temp.getAsistenciaFTs());
+            Turnos.add(temp);
+        }
+    
+    
+    return Turnos;
+    
+    }
+   
+    public Turno getTurno (int id){
+    
+    Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        String queryTurno = "FROM Turno T WHERE T.id = :id ";
+        Query query = session.createQuery(queryTurno);
+        query.setInteger("id", id);
+        Object queryResult = query.uniqueResult();  
+        Turno temp = (Turno)queryResult;
+        Hibernate.initialize(temp.getSesion());
+        Hibernate.initialize(temp.getAsistenciaFTs());
+        return temp;
+    }
+  
+  public void InsertFormInd(Asistente asis, FormularioSesion fs, AsistenciaFT aft) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        
+        session.save(fs);
+        aft.setFormularioSesion(fs);
+        
+        asis.setFormularioSesion(fs);
+        fs.getAsistentes().add(asis);
+
+        session.save(asis);
+        session.save(aft);
+    }
+  
+  public void InsertFormGrp(Asistente asisEl, Asistente asisElla, FormularioSesion fs, AsistenciaFT aft) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        
+        session.save(fs);
+        aft.setFormularioSesion(fs);
+        
+        asisEl.setFormularioSesion(fs);
+        asisElla.setFormularioSesion(fs);
+        fs.getAsistentes().add(asisEl);
+        fs.getAsistentes().add(asisElla);
+
+        session.save(asisEl);
+        session.save(asisElla);
+        session.save(aft);
+    }
+  
+    public ArrayList<Asistente> listaAsistentes(int id){
+    
+    Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "FROM Asistente A where A.formularioSesion.sesion.idsesion = :id";
+        Query query = session.createQuery(hql);
+        query.setInteger("id", id);
+        List asistentes = query.list();
+        ArrayList<Asistente> allAsistentes = new ArrayList();
+        for (Iterator iter = asistentes.iterator(); iter.hasNext();) {
+            Asistente temp = (Asistente) iter.next();
+            Hibernate.initialize(temp.getFormularioSesion());
+            allAsistentes.add(temp);
+        }
+        return allAsistentes;
+    
+    
+    
+    }
   
 }

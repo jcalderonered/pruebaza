@@ -94,9 +94,9 @@
                             <fieldset>
                                 <!-- Text input-->
                                     <div class="control-group">
-                                           <label class="control-label">Fecha de asignación</label>
+                                           <label class="control-label">Número de evaluación</label>
                                             <div class="controls">
-                                              <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                              <input id="full-name" name="full-name" type="text" class="input-xlarge">
                                             </div>
                                     </div>
                                     <br>

@@ -58,14 +58,16 @@
 
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div id="contenedor1" class="container">
-                <p class="text-center"><legend>FORMULARIO DE INSCRIPCIÓN A SESIÓN INFORMATIVA SOBRE ADOPCIÓN   N° 001-019</legend></p>
+                <p class="text-center"><legend>FORMULARIO DE INSCRIPCIÓN A SESIÓN INFORMATIVA SOBRE ADOPCIÓN   ${turno.getSesion().getNSesion()}</legend></p>
                 <br>  
                 <br>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <form class="form-inline" role="form">
+                        <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesInd" role="form" method="post">
+                            <input hidden id="idTurno" name="idTurno" value="${turno.getIdturno()}">
+                            <input hidden id="estado" name="estado" value="${estado}">
                             <!-- Form Name -->
-
+                            
                             <p class="text-left"><legend>Información Personal</legend></p>
                             <br>
                             <!-- Text input-->
@@ -74,7 +76,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="textinput">Nombres <font style="color:red">(*)</font></label>
                                         <div class="controls">
-                                            <input id="textinput" name="textinput" type="text" placeholder="Nombres" class="input-xlarge">
+                                            <input id="nombre" name="nombre" type="text" placeholder="Nombres" class="input-xlarge">
                                         </div>
                                     </div>
                                 </div>    
@@ -83,7 +85,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="textinput">Apellido Paterno <font style="color:red">(*)</font></label>
                                         <div class="controls">
-                                            <input id="textinput" name="textinput" type="text" placeholder="Apellido Paterno" class="input-xlarge">
+                                            <input id="apellidoP" name="apellidoP" type="text" placeholder="Apellido Paterno" class="input-xlarge">
                                         </div>
                                     </div>
                                 </div>        
@@ -92,7 +94,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="textinput">Apellido Materno <font style="color:red">(*)</font></label>
                                         <div class="controls">
-                                            <input id="textinput" name="textinput" type="text" placeholder="Apellido Materno" class="input-xlarge">
+                                            <input id="apellidoM" name="apellidoM" type="text" placeholder="Apellido Materno" class="input-xlarge">
                                         </div>
                                     </div>
                                 </div>     
@@ -101,40 +103,40 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <label for="pa_nac">País de Nacimiento <font style="color:red">(*)</font></label> 
-                                    <input id="pa_nac" type="text" placeholder="Pais" class="input-xlarge">
+                                    <input id="paisNac" name="paisNac" type="text" placeholder="Pais" class="input-xlarge">
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="dep_nac">Departamento de Nacimiento <font style="color:red">(*)</font></label> 
-                                    <input id="dep_nac" type="text" placeholder="Departamento" class="input-xlarge">
+                                    <input id="depNac" name="depNac" type="text" placeholder="Departamento" class="input-xlarge">
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="dist_nac">Provincia de Nacimiento <font style="color:red">(*)</font></label> 
-                                    <input id="prov_nac" type="text" placeholder="Provincia" class="input-xlarge">
+                                    <input id="proNac" name="proNac" type="text" placeholder="Provincia" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <label for="fecha">Fecha de Nacimiento <font style="color:red">(*)</font></label> 
-                                    <input id="fecha" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
+                                    <input id="fecha" name="fechaNac" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="edad">Edad <font style="color:red">(*)</font></label> 
-                                    <input id="edad" type="text" placeholder="XY" class="input-xlarge">
+                                    <input id="edad" name="edad" type="text" placeholder="XY" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>
+                                        <input type="radio" name="doc" id="optionsRadios1" value="d" checked>
                                         DNI
                                     </label>
                                 </div>
                                 <br>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">
+                                        <input type="radio" name="doc" id="optionsRadios2" value="c">
                                         Carnet de Extranjería
                                     </label>
                                 </div>                            
@@ -144,7 +146,7 @@
                                 <div class="controls">
                                     <label class="control-label">N° de Documento <font style="color:red">(*)</font></label>
                                     <div class="controls">
-                                        <input id="n_doc" placeholder="Número" type="text" class="input-xlarge">
+                                        <input id="numDoc" name="numDoc" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>                            
@@ -153,9 +155,11 @@
                             <div class="control-group">
                                 <label class="control-label" for="selectbasic">Profesión/Ocupación <font style="color:red">(*)</font></label>
                                 <div class="controls">
-                                    <select id="selectbasic" name="selectbasic" class="input-xlarge">
-                                        <option>Ingeniero</option>
-                                        <option>Abogado</option>
+                                    <select id="profesion" name="profesion" class="input-xlarge">
+                                        <option value="ingeniero">Ingeniero(a)</option>
+                                        <option value="abogado">Abogado(a)</option>
+                                        <option value="psicologo">Psicólogo(a)</option>
+                                        <option value="otro">Otro</option>
                                     </select>
                                 </div>
                             </div>
@@ -164,7 +168,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="textinput">Celular <font style="color:red">(*)</font></label>
                                 <div class="controls">
-                                    <input id="textinput" name="textinput" type="text" placeholder="Celular" class="input-xlarge">
+                                    <input id="cel" name="cel" type="text" placeholder="Celular" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
@@ -172,7 +176,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="textinput">Correo Electrónico <font style="color:red">(*)</font></label>
                                 <div class="controls">
-                                    <input id="textinput" name="textinput" type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
+                                    <input id="correo" name="correo" type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
@@ -183,31 +187,31 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <label for="pais">País <font style="color:red">(*)</font></label>
-                                    <input id="pais" type="text" placeholder="Pais" class="input-xlarge">
+                                    <input id="pais" name="pais" type="text" placeholder="Pais" class="input-xlarge">
                                 </div>
                                 <div class="col-lg-3">
                                     <label for="dep">Departamento <font style="color:red">(*)</font></label> 
-                                    <input id="dep" type="text" placeholder="Departamento" class="input-xlarge">
+                                    <input id="dep" name="dep" type="text" placeholder="Departamento" class="input-xlarge">
                                 </div>
                                 <div class="col-lg-3">
                                     <label for="prov">Provincia <font style="color:red">(*)</font></label> 
-                                    <input id="prov" type="text" placeholder="Provincia" class="input-xlarge">
+                                    <input id="prov" name="prov" type="text" placeholder="Provincia" class="input-xlarge">
                                 </div>
                                 <div class="col-lg-3">
                                     <label for="dist">Distrito <font style="color:red">(*)</font></label> 
-                                    <input id="dist" type="text" placeholder="Distrito" class="input-xlarge">
+                                    <input id="dist" name="dist" type="text" placeholder="Distrito" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <label for="dir">Dirección domiciliaria <font style="color:red">(*)</font></label> 
-                                    <input id="dir" type="text" placeholder="Dirección Domiciliaria" class="input-xlarge">
+                                    <input id="dir" name="dir" type="text" placeholder="Dirección Domiciliaria" class="input-xlarge">
                                 </div>
 
                                 <div class="col-lg-4">
                                     <label for="telf">Teléfono fijo <font style="color:red">(*)</font></label> 
-                                    <input id="telf" type="text" placeholder="Teléfono fijo" class="input-xlarge">
+                                    <input id="telf" name="telf" type="text" placeholder="Teléfono fijo" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
