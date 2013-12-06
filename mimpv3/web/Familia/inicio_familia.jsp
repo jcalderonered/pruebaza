@@ -15,9 +15,7 @@
         <title>Sistema de Adopciones</title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-        
-        
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">    
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -32,7 +30,6 @@
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -40,14 +37,12 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioFam">Inicio</a></li>
-                            <li><a href="#">Ver Información</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/FactDatos">Ver Información</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -59,15 +54,33 @@
                 <div class="row">
                     <div class="col-md-3 ">
                         <ul class="nav nav-list well">
-                            <li><a href="${pageContext.servletContext.contextPath}/inicioFam"><span class="glyphicon glyphicon-home"></span>  Inicio</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Inscripción a talleres</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Estado del proceso de Adopción</a></li>
-                            <li class="active"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>               
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioFam"><span class="glyphicon glyphicon-home"></span>Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Finscripcion"><span class="glyphicon glyphicon-chevron-right"></span> Inscripción a talleres</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Festado"><span class="glyphicon glyphicon-chevron-right"></span> Estado del proceso de Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fcontra"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>               
                         </ul>
                     </div>
-
                     <div class="col-md-8 col-md-offset-1">
-                        <h1 align="center">Bienvenido(a) APELLIDO_SEÑOR - APELLIDO_SEÑORA</h1>
+                        <c:forEach items="${familia.getInfoFamilias().getAdoptantes()}" varStatus="status" var="item">
+                            <c:choose>
+                                <c:when test="${item.getSexo() == 'M'}">
+                                    <c:set var='apellido_h' value='${item.getApellidoP()}'/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:set var='apellido_m' value='${item.getApellidoM()}'/>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                        <c:set var='mensaje' value='${apellido_h} - ${apellido_m}'/>
+                        <c:choose>
+                            <c:when test="${apellido_h == ''}">
+                                <c:set var='mensaje' value='${apellido_m}'/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var='mensaje' value='${apellido_h}'/>
+                            </c:otherwise>
+                        </c:choose>
+                        <h1 align="center">Bienvenido(a) ${mensaje}</h1>
                         <br>
                         <p align="center"><img src="<%=request.getContextPath()%>/assets/img/logo.png" width="400" border="0"></p>
                         <br>
@@ -79,7 +92,6 @@
             <!--FIN DE CONTENIDO-->
             <br>
             <br>
-
             <div id="footer">
                 <div id="ja-footer" class="wrap">
                     <hr width=80% align="center">
