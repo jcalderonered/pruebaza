@@ -28,13 +28,13 @@
     <mapping resource="com/mimp/bean/EstudioCaso.hbm.xml"/>
     <mapping resource="com/mimp/bean/Log.hbm.xml"/>
     <mapping resource="com/mimp/bean/EvalLegal.hbm.xml"/>
-    <mapping resource="com/mimp/bean/Hijo.hbm.xml"/>
     <mapping resource="com/mimp/bean/Adoptante.hbm.xml"/>
+    <mapping resource="com/mimp/bean/Hijo.hbm.xml"/>
     <mapping resource="com/mimp/bean/AsistenciaFR.hbm.xml"/>
     <mapping resource="com/mimp/bean/ExpedienteFamilia.hbm.xml"/>
     <mapping resource="com/mimp/bean/Entidad.hbm.xml"/>
-    <mapping resource="com/mimp/bean/HijoAct.hbm.xml"/>
     <mapping resource="com/mimp/bean/InformePostAdoptivo.hbm.xml"/>
+    <mapping resource="com/mimp/bean/HijoAct.hbm.xml"/>
     <mapping resource="com/mimp/bean/Reunion.hbm.xml"/>
     <mapping resource="com/mimp/bean/Representante.hbm.xml"/>
     <mapping resource="com/mimp/bean/Familia.hbm.xml"/>
@@ -46,8 +46,8 @@
     <mapping resource="com/mimp/bean/Designacion.hbm.xml"/>
     <mapping resource="com/mimp/bean/Personal.hbm.xml"/>
     <mapping resource="com/mimp/bean/Organismo.hbm.xml"/>
-    <mapping resource="com/mimp/bean/AsistenciaFT.hbm.xml"/>
     <mapping resource="com/mimp/bean/Atencion.hbm.xml"/>
+    <mapping resource="com/mimp/bean/AsistenciaFT.hbm.xml"/>
     <mapping resource="com/mimp/bean/InfoFamilia.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
