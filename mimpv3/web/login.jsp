@@ -16,7 +16,6 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
     </head>
-
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -29,7 +28,6 @@
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -39,7 +37,6 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
@@ -51,7 +48,6 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div id="contenedor1" class="container">
                 <div class="row">
@@ -79,7 +75,6 @@
             <!--FIN DE CONTENIDO-->
             <br>
             <br>
-
             <div id="footer">
                 <div id="ja-footer" class="wrap">
                     <hr width=80% align="center">
@@ -91,7 +86,6 @@
     ================================================== -->
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
             <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-
             <!-- Ubicar al final -->
     </body>
 </html>
