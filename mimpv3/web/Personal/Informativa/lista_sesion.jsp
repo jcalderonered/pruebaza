@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-         <!-- Datepicker -->
+        <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
 
@@ -72,21 +72,28 @@
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+
                         </ul>
                     </div>
 
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <h1>Sesión 001-012</h1>
+                        <h1>Sesión ${sesion.getNSesion()}</h1>
                         <br>
-                        <p>Estado: Deshabilitado</p>
+                        <c:choose>
+                            <c:when test="${ sesion != null && sesion.getHabilitado() == true}">
+                                <p>Estado: Habilitado</p>
+                            </c:when>
+                            <c:otherwise>
+                                <p>Estado: Deshabilitado</p>
+                            </c:otherwise>
+                        </c:choose>
                         <br>
                         <!-- Text input-->
                         <div class="control-group">
                             <label class="control-label" for="textinput">Fecha de Sesión Informativa:</label>
                             <div class="controls">
-                                <input id="textinput" name="textinput" type="text" placeholder="fecha" class="datepicker input-xlarge">
+                                <input id="textinput" value= "${fecha}" name="textinput" type="text" placeholder="fecha" class="datepicker input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -94,7 +101,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Hora de inicio:</label>
                             <div class="controls">
-                                <input id="textinput" name="textinput" type="text" placeholder="hora" class="input-xlarge">
+                                <input id="textinput" value="${hora}" name="textinput" type="text" placeholder="hora" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -102,7 +109,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Duración:</label>
                             <div class="controls">
-                                <input id="textinput" name="textinput" type="text" placeholder="duracion" class="input-xlarge">
+                                <input id="textinput" value="${sesion.getDuracion()}" name="textinput" type="text" placeholder="duracion" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -110,16 +117,18 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Dirección/Lugar de Sesión Informativa:</label>
                             <div class="controls">
-                                <input id="textinput" name="textinput" type="text" placeholder="direccion" class="input-xlarge">
+                                <input id="textinput" value="${sesion.getDireccion()}" name="textinput" type="text" placeholder="direccion" class="input-xlarge">
                             </div>
                         </div>
                         <br>
                         <!-- Text input-->
                         <div class="control-group">
                             <label class="control-label" for="textinput">Facilitador:</label>
-                            <div class="controls">
-                                <input id="textinput" name="textinput" type="text" placeholder="capacitador" class="input-xlarge">
-                            </div>
+                            <select id="capacitador" name="capacitador">
+                                <c:forEach var="personal" items="${listaPersonal}" varStatus="status">
+                                    <option value="${personal.getIdpersonal()}" ${sesion.getFacilitador() == personal.getIdpersonal() ? 'selected' : ''}> ${personal.getApellidoP()} ${personal.getApellidoM()} ${personal.getNombre()}</option> 
+                                </c:forEach>
+                            </select>
                         </div>
                         <br>
                         <div class="table-responsive">
@@ -134,27 +143,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th>Turno 1</th>
-                                        <td>09/10/2013 - 09:00</td>
-                                        <td>09/10/2013 - 12:00</td>
-                                        <td>90</td>
-                                        <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Turno 2</th>
-                                        <td>09/10/2013 - 18:00</td>
-                                        <td>09/10/2013 - 20:00</td>
-                                        <td>60</td>
-                                        <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                    </tr>
+                                    <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
+                                        <tr>
+                                            <td>Turno ${status.index + 1} </td>
+                                            <td>${ts.DateToString(turno.getInicioInscripcion())} ${ts.HourToString(turno.getInicioInscripcion())}</td>
+                                            <td>${ts.DateToString(turno.getFinInscripcion())} ${ts.HourToString(turno.getFinInscripcion())}</td>
+                                            <td>${turno.getVacantes()}</td>
+                                            <td>
+                                                <form action="${pageContext.servletContext.contextPath}/" method="post">
+                                                    <input hidden name="idSesion" id="idSesion" value="${turno.getIdturno()}">
+                                                    <button type="submit" class="btn btn-default">Modificar</button>
+                                                </form>    
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                         <br>
                         <br>
                         <button href="#" class="btn btn-default">Agregar nuevo turno</button>
-                        <button href="#" class="btn btn-default">Habilitar sesión</button>
+                        <button href="#" ${sesion != null && sesion.getHabilitado() == true ? 'disabled' : ''} class="btn btn-default">Habilitar sesión</button>
                         <br>
                         <br>
                         <button href="#" class="btn btn-default">Guardar Cambios</button>
@@ -175,17 +184,17 @@
                     <p align="right">Diseñado por RED<br>www.red.net.pe</p>
                 </div>
             </div>
-             <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
-        <script type="text/javascript">
-           
-             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language":"es"});
-            
-        </script>
-        <!-- Placed at the end of the document so the pages load faster -->
+            <!-- Bootstrap core JavaScript
+       ================================================== -->
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript">
+
+                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+            </script>
+            <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>

@@ -89,25 +89,31 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>001-012</td>
-                                        <td>Si</td>
-                                        <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                        <td><button href="#" class="btn btn-default">Inscritos</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>001-013</td>
-                                        <td>Si</td>
-                                        <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                        <td><button href="#" class="btn btn-default">Inscritos</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>001-014</td>
-                                        <td>Si</td>
-                                        <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                        <td><button href="#" class="btn btn-default">Inscritos</button></td>
-                                    </tr>
-                                </tbody>
+                                    <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
+                                       <tr>
+                                       <td>${sesion.getNSesion()}</td>
+                                        <c:if test="${sesion.getHabilitado() == true}">
+                                            <td>Si</td> 
+                                        </c:if>  
+                                        <c:if test="${sesion.getHabilitado() == false}">
+                                            <td>No</td> 
+                                        </c:if>     
+                                        <td>
+                                            <form action="${pageContext.servletContext.contextPath}/PersonalEditarSesion" method="post">
+                                                <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                <button type="submit" class="btn btn-default">Modificar</button>
+                                            </form>
+                                        </td>
+
+                                        <td>
+                                            <form action="${pageContext.servletContext.contextPath}/PersonalFamiliaSesion" method="post">
+                                                <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                <button type="submit" class="btn btn-default">Inscritos</button>
+                                            </form>
+                                        </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
                             </table>
                         </div>
                         <button href="#" class="btn btn-default">Agregar nueva Sesión</button>

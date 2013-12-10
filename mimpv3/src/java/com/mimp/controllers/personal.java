@@ -9,6 +9,7 @@ package com.mimp.controllers;
 import com.mimp.util.*;
 import com.mimp.bean.*;
 import com.mimp.hibernate.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
@@ -27,9 +28,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class personal {
     
     dateFormat format = new dateFormat();
+    timeStampFormat ts = new timeStampFormat();
     
     @Resource(name="HiberPersonal")
     private HiberPersonal ServicioPersonal = new HiberPersonal();
+    @Resource(name="HiberMain")
+    private HiberMain ServicioMain = new HiberMain();
     //////////////////////// NAVEGACION ///////////////
     @RequestMapping (value = "/inicioper", method = RequestMethod.GET)
     public ModelAndView InicioPer(ModelMap map){
@@ -44,7 +48,9 @@ public class personal {
     
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
-        return new ModelAndView("/Personal/Informativa/lista_sesion",map);
+        
+        map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        return new ModelAndView("/Personal/Informativa/lista_charlas",map);
     }
     
     @RequestMapping (value = "/nna", method = RequestMethod.GET)
@@ -932,5 +938,33 @@ public class personal {
          map.put("listaPersonal",ServicioPersonal.ListaPersonal());
         return new ModelAndView("/Personal/registros/usuarios/lista_personal",map);
     }
+    
+    //// EDITAR SESION INFORMATIVA //////////////
+    @RequestMapping (value = "/PersonalEditarSesion", method = RequestMethod.POST)
+    public ModelAndView PersonalEditarSesion(ModelMap map,@RequestParam("idSesion") int id){
+    
+        
+        Sesion temp = new Sesion();
+        ArrayList<Personal> allPersonal = new ArrayList();
+        ArrayList<Turno> allTurnos = new ArrayList();
+        allTurnos = ServicioMain.turnosSesion(id);
+        temp = ServicioPersonal.getSesion(id);
+        allPersonal = ServicioPersonal.ListaPersonal();
+        String fecha = format.dateToString(temp.getFecha());
+        String hora = ts.HourToString(temp.getHora());
+        
+        
+        map.put("listaTurnos", allTurnos);
+        map.put("sesion",temp);
+        map.put("listaPersonal",allPersonal);
+        map.addAttribute("ts", ts);
+        map.addAttribute("fecha", fecha);
+        map.addAttribute("hora", hora);
+        return new ModelAndView("/Personal/Informativa/lista_sesion",map);
+    }
+    
+    
+    
+    
     
 }

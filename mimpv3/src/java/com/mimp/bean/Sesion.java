@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 6/12/2013 11:57:53 AM by Hibernate Tools 3.6.0
+// Generated Dec 10, 2013 11:15:19 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -19,7 +19,7 @@ public class Sesion  implements java.io.Serializable {
      private Date hora;
      private String direccion;
      private Byte duracion;
-     private String capacitador;
+     private Integer facilitador;
      private Byte asistencia;
      private Set<Turno> turnos = new HashSet<Turno>(0);
      private Set<FormularioSesion> formularioSesions = new HashSet<FormularioSesion>(0);
@@ -27,14 +27,14 @@ public class Sesion  implements java.io.Serializable {
     public Sesion() {
     }
 
-    public Sesion(String NSesion, Boolean habilitado, Date fecha, Date hora, String direccion, Byte duracion, String capacitador, Byte asistencia, Set<Turno> turnos, Set<FormularioSesion> formularioSesions) {
+    public Sesion(String NSesion, Boolean habilitado, Date fecha, Date hora, String direccion, Byte duracion, Integer facilitador, Byte asistencia, Set<Turno> turnos, Set<FormularioSesion> formularioSesions) {
        this.NSesion = NSesion;
        this.habilitado = habilitado;
        this.fecha = fecha;
        this.hora = hora;
        this.direccion = direccion;
        this.duracion = duracion;
-       this.capacitador = capacitador;
+       this.facilitador = facilitador;
        this.asistencia = asistencia;
        this.turnos = turnos;
        this.formularioSesions = formularioSesions;
@@ -89,12 +89,12 @@ public class Sesion  implements java.io.Serializable {
     public void setDuracion(Byte duracion) {
         this.duracion = duracion;
     }
-    public String getCapacitador() {
-        return this.capacitador;
+    public Integer getFacilitador() {
+        return this.facilitador;
     }
     
-    public void setCapacitador(String capacitador) {
-        this.capacitador = capacitador;
+    public void setFacilitador(Integer facilitador) {
+        this.facilitador = facilitador;
     }
     public Byte getAsistencia() {
         return this.asistencia;

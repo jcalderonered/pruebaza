@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 6/12/2013 11:57:53 AM by Hibernate Tools 3.6.0
+// Generated Dec 10, 2013 11:15:19 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -19,7 +19,7 @@ public class Reunion  implements java.io.Serializable {
      private Byte duracion;
      private String direccion;
      private Byte identificador;
-     private String facilitador;
+     private Integer facilitador;
      private Byte capacidad;
      private Byte asistencia;
      private Set<AsistenciaFR> asistenciaFRs = new HashSet<AsistenciaFR>(0);
@@ -31,7 +31,7 @@ public class Reunion  implements java.io.Serializable {
     public Reunion(Turno2 turno2) {
         this.turno2 = turno2;
     }
-    public Reunion(Turno2 turno2, Date fecha, Date hora, Byte duracion, String direccion, Byte identificador, String facilitador, Byte capacidad, Byte asistencia, Set<AsistenciaFR> asistenciaFRs) {
+    public Reunion(Turno2 turno2, Date fecha, Date hora, Byte duracion, String direccion, Byte identificador, Integer facilitador, Byte capacidad, Byte asistencia, Set<AsistenciaFR> asistenciaFRs) {
        this.turno2 = turno2;
        this.fecha = fecha;
        this.hora = hora;
@@ -93,11 +93,11 @@ public class Reunion  implements java.io.Serializable {
     public void setIdentificador(Byte identificador) {
         this.identificador = identificador;
     }
-    public String getFacilitador() {
+    public Integer getFacilitador() {
         return this.facilitador;
     }
     
-    public void setFacilitador(String facilitador) {
+    public void setFacilitador(Integer facilitador) {
         this.facilitador = facilitador;
     }
     public Byte getCapacidad() {

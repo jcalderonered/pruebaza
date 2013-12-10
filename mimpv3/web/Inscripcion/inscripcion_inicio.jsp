@@ -106,7 +106,7 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
-                            ${fecha}
+                            
                         </div>
                     </div>
                 </div>
