@@ -67,7 +67,9 @@
                             <div class="btn-toolbar">  
                                 <button type="submit" class="btn btn-default">Ingresar</button>
                                 <button href="#" class="btn btn-default">Recordar contraseña</button>
-                            </div>  
+                            </div>
+                            <br>
+                            <p style="color: red">${mensaje}</p>
                         </form>
                     </div>
                 </div>
