@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 10, 2013 11:15:19 AM by Hibernate Tools 3.6.0
+// Generated 10/12/2013 02:25:47 PM by Hibernate Tools 3.6.0
 
 
 
@@ -12,8 +12,6 @@ public class Autoridad  implements java.io.Serializable {
      private Integer idautoridad;
      private Entidad entidad;
      private String tipo;
-     private String user;
-     private String pass;
 
     public Autoridad() {
     }
@@ -22,11 +20,9 @@ public class Autoridad  implements java.io.Serializable {
     public Autoridad(Entidad entidad) {
         this.entidad = entidad;
     }
-    public Autoridad(Entidad entidad, String tipo, String user, String pass) {
+    public Autoridad(Entidad entidad, String tipo) {
        this.entidad = entidad;
        this.tipo = tipo;
-       this.user = user;
-       this.pass = pass;
     }
    
     public Integer getIdautoridad() {
@@ -49,20 +45,6 @@ public class Autoridad  implements java.io.Serializable {
     
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-    public String getUser() {
-        return this.user;
-    }
-    
-    public void setUser(String user) {
-        this.user = user;
-    }
-    public String getPass() {
-        return this.pass;
-    }
-    
-    public void setPass(String pass) {
-        this.pass = pass;
     }
 
 
