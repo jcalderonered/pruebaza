@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 10, 2013 11:15:19 AM by Hibernate Tools 3.6.0
+// Generated 10/12/2013 02:25:47 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -14,6 +14,8 @@ public class Entidad  implements java.io.Serializable {
 
      private Integer identidad;
      private String nombre;
+     private String user;
+     private String pass;
      private String direccion;
      private String telefono;
      private String pais;
@@ -30,8 +32,10 @@ public class Entidad  implements java.io.Serializable {
     public Entidad() {
     }
 
-    public Entidad(String nombre, String direccion, String telefono, String pais, String resolAuto, Date fechaResol, String resolRenov, Date fechaRenov, Date fechaVenc, String obs, Set<Familia> familias, Set<Organismo> organismos, Set<Autoridad> autoridads) {
+    public Entidad(String nombre, String user, String pass, String direccion, String telefono, String pais, String resolAuto, Date fechaResol, String resolRenov, Date fechaRenov, Date fechaVenc, String obs, Set<Familia> familias, Set<Organismo> organismos, Set<Autoridad> autoridads) {
        this.nombre = nombre;
+       this.user = user;
+       this.pass = pass;
        this.direccion = direccion;
        this.telefono = telefono;
        this.pais = pais;
@@ -59,6 +63,20 @@ public class Entidad  implements java.io.Serializable {
     
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    public String getUser() {
+        return this.user;
+    }
+    
+    public void setUser(String user) {
+        this.user = user;
+    }
+    public String getPass() {
+        return this.pass;
+    }
+    
+    public void setPass(String pass) {
+        this.pass = pass;
     }
     public String getDireccion() {
         return this.direccion;

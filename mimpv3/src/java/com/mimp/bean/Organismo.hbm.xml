@@ -1,21 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 10, 2013 11:15:21 AM by Hibernate Tools 3.6.0 -->
+<!-- Generated 10/12/2013 02:25:49 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Organismo" table="organismo" catalog="mimp_adopcion">
         <id name="idorganismo" type="java.lang.Integer">
             <column name="idorganismo" />
             <generator class="identity" />
         </id>
-        <many-to-one name="representante" class="com.mimp.bean.Representante" fetch="select">
-            <column name="idrepresentante" not-null="true" />
-        </many-to-one>
         <many-to-one name="entidad" class="com.mimp.bean.Entidad" fetch="select">
             <column name="identidad" not-null="true" />
         </many-to-one>
         <property name="competencia" type="string">
             <column name="competencia" length="30" />
         </property>
+        <set name="representantes" table="representante" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idorganismo" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Representante" />
+        </set>
     </class>
 </hibernate-mapping>

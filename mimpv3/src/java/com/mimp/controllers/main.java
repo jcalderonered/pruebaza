@@ -10,6 +10,7 @@ import com.mimp.bean.*;
 import com.mimp.util.*;
 import com.mimp.hibernate.HiberMain;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +36,10 @@ public class main {
     }
 
     @RequestMapping("/salir")
-    public String Salir() {
-        return "login";
+    public ModelAndView Salir(ModelMap map, HttpSession session) {
+        session.invalidate();
+        String pagina = "login";
+        return new ModelAndView(pagina, map);
     }
 
     @RequestMapping("/inicio")
@@ -45,24 +48,38 @@ public class main {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(ModelMap map, @RequestParam("email") String email, @RequestParam("password") String pass) {
+    public ModelAndView login(ModelMap map, @RequestParam("email") String email, @RequestParam("password") String pass, HttpSession session) {
 
         String pagina = "";
+        String mensaje = "El usuario se encuentra Deshabilitado. Favor contactar a la Direeción General de Adopciones para más información";
 
         ArrayList aux = ServicioMain.usuario(email, pass);
-        String mensaje = "Los datos ingresados son: email" + email + " y contraseña" + pass + "!";
         if (aux.get(0) == "personal") {
-            pagina = "/Personal/inicio_personal";
+            Personal personal = (Personal) aux.get(1);
+            if (!personal.getRol().equals("Inactivo")) {
+                session.setAttribute("usuario", personal);
+                pagina = "/Personal/inicio_personal";
+            } else {
+                map.addAttribute("mensaje", mensaje);
+                pagina = "login";
+            }
         } else if (aux.get(0) == "familia") {
-            pagina = "/Familia/inicio_familia";
+            Familia familia = (Familia) aux.get(1);
+            if (!familia.getHabilitado() == true) {
+                session.setAttribute("usuario", familia);
+                pagina = "/Personal/inicio_familia";
+            } else {
+                map.addAttribute("mensaje", mensaje);
+                pagina = "login";
+            }
         } else if (aux.get(0) == "representante" || aux.get(0) == "autoridad") {
+            //falta
+            Entidad entidad = (Entidad) aux.get(1);
+            session.setAttribute("usuario", aux.get(1));
             pagina = "/Entidad/inicio_ent";
-        } else {
-            pagina = "contacto";
         }
-        map.addAttribute("usuario", aux.get(1));
+        
         return new ModelAndView(pagina, map);
-
     }
 
     @RequestMapping("/SesionInfInicio")
@@ -74,56 +91,55 @@ public class main {
         temp = ServicioMain.ListaTurnos();
         String pagina = "";
         //String fecha = ts.TimeToString(temp.get(0).getInicioInscripcion());
-        if (temp.isEmpty()){
+        if (temp.isEmpty()) {
             pagina = "/Inscripcion/no_sesion_prog";
             return new ModelAndView(pagina);
-        }
-        else{
-        for (int i = 0; i < temp.size(); i++) {
-            if (temp.get(i).getInicioInscripcion().before(now) && now.before(temp.get(i).getFinInscripcion())){
-                if (i == temp.size() - 1 && temp.get(i).getAsistenciaFTs().size() >= temp.get(i).getVacantes() ){
-                    ArrayList<Sesion> tempSesiones = new ArrayList<>();
-                    tempSesiones = ServicioMain.listaSesionesSiguientes(temp.get(i).getSesion().getFecha());
-                    if (tempSesiones.isEmpty()){
+        } else {
+            for (int i = 0; i < temp.size(); i++) {
+                if (temp.get(i).getInicioInscripcion().before(now) && now.before(temp.get(i).getFinInscripcion())) {
+                    if (i == temp.size() - 1 && temp.get(i).getAsistenciaFTs().size() >= temp.get(i).getVacantes()) {
+                        ArrayList<Sesion> tempSesiones = new ArrayList<>();
+                        tempSesiones = ServicioMain.listaSesionesSiguientes(temp.get(i).getSesion().getFecha());
+                        if (tempSesiones.isEmpty()) {
                             pagina = "/Inscripcion/no_sesion_prog";
                             return new ModelAndView(pagina);
-                    }else{
-                    ArrayList<Turno> tempTurnos = new ArrayList<>();
-                    tempTurnos = ServicioMain.turnosSesion(tempSesiones.get(0).getIdsesion());
-                        if(tempTurnos.isEmpty()){
-                            pagina = "/Inscripcion/no_sesion_prog";
-                            return new ModelAndView(pagina);
-                        }else{
-                            map.put("ts", ts);
-                            map.put("listaSesiones",tempSesiones);
-                            map.put("listaTurnos",tempTurnos);
-                            pagina = "/Inscripcion/inscripcion_sesion1a";
-                            return new ModelAndView(pagina,map);  
-                        
+                        } else {
+                            ArrayList<Turno> tempTurnos = new ArrayList<>();
+                            tempTurnos = ServicioMain.turnosSesion(tempSesiones.get(0).getIdsesion());
+                            if (tempTurnos.isEmpty()) {
+                                pagina = "/Inscripcion/no_sesion_prog";
+                                return new ModelAndView(pagina);
+                            } else {
+                                map.put("ts", ts);
+                                map.put("listaSesiones", tempSesiones);
+                                map.put("listaTurnos", tempTurnos);
+                                pagina = "/Inscripcion/inscripcion_sesion1a";
+                                return new ModelAndView(pagina, map);
+
+                            }
+
                         }
-                    
+
+                    } else if (temp.get(i).getAsistenciaFTs().size() >= temp.get(i).getVacantes()) {
+                        for (int j = i + 1; j < temp.size(); j++) {
+                            temp2.add(temp.get(j));
+                        }
+                        pagina = "/Inscripcion/inscripcion_sesion1b";
+                        map.put("ts", ts);
+                        map.put("listaTurnos", temp2);
+                        return new ModelAndView(pagina, map);
                     }
-                    
-                }else if(temp.get(i).getAsistenciaFTs().size() >= temp.get(i).getVacantes()){ 
-                    for (int j = i + 1; j < temp.size(); j++) {
-                        temp2.add(temp.get(j));
-                    }
-                    pagina = "/Inscripcion/inscripcion_sesion1b";
-                    map.put("ts", ts);
-                    map.put("listaTurnos", temp2);
-                    return new ModelAndView(pagina,map); 
-                } 
+                }
             }
-        }
         }
         if (temp.get(0).getSesion().getHabilitado() == true) {
             pagina = "/Inscripcion/inscripcion_inicio";
             map.put("ts", ts);
             map.put("listaTurnos", temp);
             return new ModelAndView(pagina, map);
-        } 
+        }
         pagina = "/Inscripcion/no_sesion_prog";
-            return new ModelAndView(pagina);
+        return new ModelAndView(pagina);
     }
 
     @RequestMapping(value = "/SesionInfElegirEstado", method = RequestMethod.POST)
@@ -224,7 +240,7 @@ public class main {
             map.put("turno", temp);
             ServicioMain.InsertFormInd(asis, fs, aft);
             return new ModelAndView("/Inscripcion/inscripcion_sesion4", map);
-        }else {
+        } else {
             map.put("ts", ts);
             map.put("turno", temp);
             ServicioMain.InsertFormInd(asis, fs, aft);

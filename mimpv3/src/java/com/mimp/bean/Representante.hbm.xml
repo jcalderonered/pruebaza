@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 10, 2013 11:15:21 AM by Hibernate Tools 3.6.0 -->
+<!-- Generated 10/12/2013 02:25:49 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Representante" table="representante" catalog="mimp_adopcion">
         <id name="idrepresentante" type="java.lang.Integer">
             <column name="idrepresentante" />
             <generator class="identity" />
         </id>
+        <many-to-one name="organismo" class="com.mimp.bean.Organismo" fetch="select">
+            <column name="idorganismo" not-null="true" />
+        </many-to-one>
         <property name="nombre" type="string">
             <column name="nombre" length="30" />
         </property>
@@ -16,12 +19,6 @@
         </property>
         <property name="apelldoM" type="string">
             <column name="apelldo_m" length="30" />
-        </property>
-        <property name="user" type="string">
-            <column name="user" length="45" />
-        </property>
-        <property name="pass" type="string">
-            <column name="pass" length="45" />
         </property>
         <property name="fechaAuto" type="date">
             <column name="fecha_auto" length="10" />
@@ -47,11 +44,5 @@
         <property name="obs" type="string">
             <column name="obs" length="200" />
         </property>
-        <set name="organismos" table="organismo" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idrepresentante" not-null="true" />
-            </key>
-            <one-to-many class="com.mimp.bean.Organismo" />
-        </set>
     </class>
 </hibernate-mapping>
