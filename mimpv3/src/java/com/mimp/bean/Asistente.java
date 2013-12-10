@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 02:25:47 PM by Hibernate Tools 3.6.0
+// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -15,6 +15,7 @@ public class Asistente  implements java.io.Serializable {
      private String nombre;
      private String apellidoP;
      private String apellidoM;
+     private Character sexo;
      private String paisNac;
      private String depNac;
      private String provNac;
@@ -33,11 +34,12 @@ public class Asistente  implements java.io.Serializable {
     public Asistente(FormularioSesion formularioSesion) {
         this.formularioSesion = formularioSesion;
     }
-    public Asistente(FormularioSesion formularioSesion, String nombre, String apellidoP, String apellidoM, String paisNac, String depNac, String provNac, Byte edad, Date fechaNac, Character tipoDoc, String NDoc, String profesion, String celular, String correo) {
+    public Asistente(FormularioSesion formularioSesion, String nombre, String apellidoP, String apellidoM, Character sexo, String paisNac, String depNac, String provNac, Byte edad, Date fechaNac, Character tipoDoc, String NDoc, String profesion, String celular, String correo) {
        this.formularioSesion = formularioSesion;
        this.nombre = nombre;
        this.apellidoP = apellidoP;
        this.apellidoM = apellidoM;
+       this.sexo = sexo;
        this.paisNac = paisNac;
        this.depNac = depNac;
        this.provNac = provNac;
@@ -84,6 +86,13 @@ public class Asistente  implements java.io.Serializable {
     
     public void setApellidoM(String apellidoM) {
         this.apellidoM = apellidoM;
+    }
+    public Character getSexo() {
+        return this.sexo;
+    }
+    
+    public void setSexo(Character sexo) {
+        this.sexo = sexo;
     }
     public String getPaisNac() {
         return this.paisNac;

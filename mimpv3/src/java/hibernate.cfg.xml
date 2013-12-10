@@ -10,8 +10,8 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
     <mapping resource="com/mimp/bean/Car.hbm.xml"/>
-    <mapping resource="com/mimp/bean/Juzgado.hbm.xml"/>
     <mapping resource="com/mimp/bean/Resolucion.hbm.xml"/>
+    <mapping resource="com/mimp/bean/Juzgado.hbm.xml"/>
     <mapping resource="com/mimp/bean/Solicitante.hbm.xml"/>
     <mapping resource="com/mimp/bean/ResidenteAct.hbm.xml"/>
     <mapping resource="com/mimp/bean/FormularioSesion.hbm.xml"/>
@@ -33,8 +33,8 @@
     <mapping resource="com/mimp/bean/AsistenciaFR.hbm.xml"/>
     <mapping resource="com/mimp/bean/ExpedienteFamilia.hbm.xml"/>
     <mapping resource="com/mimp/bean/Entidad.hbm.xml"/>
-    <mapping resource="com/mimp/bean/HijoAct.hbm.xml"/>
     <mapping resource="com/mimp/bean/InformePostAdoptivo.hbm.xml"/>
+    <mapping resource="com/mimp/bean/HijoAct.hbm.xml"/>
     <mapping resource="com/mimp/bean/Reunion.hbm.xml"/>
     <mapping resource="com/mimp/bean/Representante.hbm.xml"/>
     <mapping resource="com/mimp/bean/Familia.hbm.xml"/>
@@ -46,8 +46,8 @@
     <mapping resource="com/mimp/bean/Designacion.hbm.xml"/>
     <mapping resource="com/mimp/bean/Personal.hbm.xml"/>
     <mapping resource="com/mimp/bean/Organismo.hbm.xml"/>
-    <mapping resource="com/mimp/bean/AsistenciaFT.hbm.xml"/>
     <mapping resource="com/mimp/bean/Atencion.hbm.xml"/>
+    <mapping resource="com/mimp/bean/AsistenciaFT.hbm.xml"/>
     <mapping resource="com/mimp/bean/InfoFamilia.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
