@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 02:25:47 PM by Hibernate Tools 3.6.0
+// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -15,6 +15,7 @@ public class Solicitante  implements java.io.Serializable {
      private String nombre;
      private String apellidoP;
      private String apellidoM;
+     private Character sexo;
      private Byte edad;
      private Date fechaNac;
      private String lugarNac;
@@ -49,11 +50,12 @@ public class Solicitante  implements java.io.Serializable {
     public Solicitante(FichaSolicitudAdopcion fichaSolicitudAdopcion) {
         this.fichaSolicitudAdopcion = fichaSolicitudAdopcion;
     }
-    public Solicitante(FichaSolicitudAdopcion fichaSolicitudAdopcion, String nombre, String apellidoP, String apellidoM, Byte edad, Date fechaNac, String lugarNac, String depaNac, String paisNac, Character tipoDoc, String NDoc, String celular, String correo, String nivelInstruccion, Boolean culminoNivel, String profesion, Boolean trabajadorDepend, String ocupActualDep, String centroTrabajo, String direccionCentro, String telefonoCentro, Integer ingresoDep, Boolean trabajadorIndepend, String ocupActualInd, Integer ingresoIndep, Boolean seguroSalud, String tipoSeguro, Boolean seguroVida, Boolean sistPensiones, String saludActual) {
+    public Solicitante(FichaSolicitudAdopcion fichaSolicitudAdopcion, String nombre, String apellidoP, String apellidoM, Character sexo, Byte edad, Date fechaNac, String lugarNac, String depaNac, String paisNac, Character tipoDoc, String NDoc, String celular, String correo, String nivelInstruccion, Boolean culminoNivel, String profesion, Boolean trabajadorDepend, String ocupActualDep, String centroTrabajo, String direccionCentro, String telefonoCentro, Integer ingresoDep, Boolean trabajadorIndepend, String ocupActualInd, Integer ingresoIndep, Boolean seguroSalud, String tipoSeguro, Boolean seguroVida, Boolean sistPensiones, String saludActual) {
        this.fichaSolicitudAdopcion = fichaSolicitudAdopcion;
        this.nombre = nombre;
        this.apellidoP = apellidoP;
        this.apellidoM = apellidoM;
+       this.sexo = sexo;
        this.edad = edad;
        this.fechaNac = fechaNac;
        this.lugarNac = lugarNac;
@@ -116,6 +118,13 @@ public class Solicitante  implements java.io.Serializable {
     
     public void setApellidoM(String apellidoM) {
         this.apellidoM = apellidoM;
+    }
+    public Character getSexo() {
+        return this.sexo;
+    }
+    
+    public void setSexo(Character sexo) {
+        this.sexo = sexo;
     }
     public Byte getEdad() {
         return this.edad;

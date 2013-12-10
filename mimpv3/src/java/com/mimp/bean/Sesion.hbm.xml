@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 02:25:49 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Sesion" table="sesion" catalog="mimp_adopcion">
         <id name="idsesion" type="java.lang.Integer">
