@@ -200,10 +200,10 @@ public class personal {
         ent.setFechaRenov(format.stringToDate(fecha_renov));
         ent.setFechaVenc(format.stringToDate(fecha_venc_aut));
         ent.setObs(obs);
-        
+        ent.setUser(user);
+        ent.setPass(pass);
         aut.setTipo(tipo);
-        aut.setUser(user);
-        aut.setPass(pass);
+        
         
         ServicioPersonal.InsertAut(ent, aut);
         
@@ -231,10 +231,11 @@ public class personal {
         Autoridad temp = new Autoridad();
         temp = ServicioPersonal.getAutoridad(id);
         temp.setTipo(tipo);
-        temp.setUser(user);
-        temp.setPass(pass);
+        
         temp.getEntidad().setNombre(nombre);
         temp.getEntidad().setPais(pais);
+        temp.getEntidad().setUser(user);
+        temp.getEntidad().setPass(pass);
         temp.getEntidad().setDireccion(direccion);
         temp.getEntidad().setTelefono(telefono);
         temp.getEntidad().setResolAuto(resol_aut);
@@ -268,9 +269,9 @@ public class personal {
         String fechaRenov = format.dateToString(temp.getEntidad().getFechaRenov());
         String fechaVenc = format.dateToString(temp.getEntidad().getFechaVenc());
         
-        String fechaAutR = format.dateToString(temp.getRepresentante().getFechaAuto());
-        String fechaRenovR = format.dateToString(temp.getRepresentante().getFechaRenov());
-        String fechaVencR = format.dateToString(temp.getRepresentante().getFechaVencAuto());
+        String fechaAutR = format.dateToString(temp.getRepresentantes().iterator().next().getFechaAuto());
+        String fechaRenovR = format.dateToString(temp.getRepresentantes().iterator().next().getFechaRenov());
+        String fechaVencR = format.dateToString(temp.getRepresentantes().iterator().next().getFechaVencAuto());
         
         map.addAttribute("fechaEmision", fechaEmision);
         map.addAttribute("fechaRenov", fechaRenov);
@@ -323,8 +324,6 @@ public class personal {
         rep.setNombre(nombreR);
         rep.setApellidoP(apellidoP);
         rep.setApelldoM(apellidoM);
-        rep.setUser(user);
-        rep.setPass(pass);
         rep.setFechaAuto(format.stringToDate(fechaAutR));
         rep.setFechaRenov(format.stringToDate(fechaRenovR));
         rep.setFechaVencAuto(format.stringToDate(fechaVencR));
@@ -338,6 +337,8 @@ public class personal {
         ent.setDireccion(direccion);
         ent.setTelefono(telefono);
         ent.setPais(pais);
+        ent.setUser(user);
+        ent.setPass(pass);
         ent.setResolAuto(resol_aut);
         ent.setFechaResol(format.stringToDate(fecha_emis_resol));
         ent.setResolRenov(resol_renov);
@@ -391,21 +392,22 @@ public class personal {
         
         org.setCompetencia(competencia);
         
-        org.getRepresentante().setNombre(nombreR);
-        org.getRepresentante().setApellidoP(apellidoP);
-        org.getRepresentante().setApelldoM(apellidoM);
-        org.getRepresentante().setUser(user);
-        org.getRepresentante().setPass(pass);
-        org.getRepresentante().setFechaAuto(format.stringToDate(fechaAutR));
-        org.getRepresentante().setFechaRenov(format.stringToDate(fechaRenovR));
-        org.getRepresentante().setFechaVencAuto(format.stringToDate(fechaVencR));
-        org.getRepresentante().setCorreo(correo);
-        org.getRepresentante().setDireccion(direccionR);
-        org.getRepresentante().setCelular(celular);
-        org.getRepresentante().setObs(obsR);
+        org.getRepresentantes().iterator().next().setNombre(nombreR);
+        org.getRepresentantes().iterator().next().setApellidoP(apellidoP);
+        org.getRepresentantes().iterator().next().setApelldoM(apellidoM);
+        
+        org.getRepresentantes().iterator().next().setFechaAuto(format.stringToDate(fechaAutR));
+        org.getRepresentantes().iterator().next().setFechaRenov(format.stringToDate(fechaRenovR));
+        org.getRepresentantes().iterator().next().setFechaVencAuto(format.stringToDate(fechaVencR));
+        org.getRepresentantes().iterator().next().setCorreo(correo);
+        org.getRepresentantes().iterator().next().setDireccion(direccionR);
+        org.getRepresentantes().iterator().next().setCelular(celular);
+        org.getRepresentantes().iterator().next().setObs(obsR);
         
         
         org.getEntidad().setNombre(nombre);
+        org.getEntidad().setUser(user);
+        org.getEntidad().setPass(pass);
         org.getEntidad().setDireccion(direccion);
         org.getEntidad().setTelefono(telefono);
         org.getEntidad().setPais(pais);
@@ -418,7 +420,7 @@ public class personal {
         
         
         
-        ServicioPersonal.UpdateOrg(org.getEntidad(), org.getRepresentante(), org);
+        ServicioPersonal.UpdateOrg(org.getEntidad(), org.getRepresentantes().iterator().next(), org);
         
         map.put("listaOrganismos",ServicioPersonal.ListaOrganismos());
         return new ModelAndView("/Personal/registros/organismo/lista_org",map);
