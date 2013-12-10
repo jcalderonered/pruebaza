@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 6/12/2013 11:57:53 AM by Hibernate Tools 3.6.0
+// Generated Dec 10, 2013 11:15:19 AM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -29,10 +29,6 @@ public class Familia  implements java.io.Serializable {
     public Familia() {
     }
 
-	
-    public Familia(Entidad entidad) {
-        this.entidad = entidad;
-    }
     public Familia(Entidad entidad, String user, String pass, String correo, Boolean habilitado, String constancia, Set<ExpedienteFamilia> expedienteFamilias, Set<FichaSolicitudAdopcion> fichaSolicitudAdopcions, Set<PostAdopcion> postAdopcions, Set<FormularioSesion> formularioSesions, Set<Atencion> atencions, Set<InfoFamilia> infoFamilias, Set<AsistenciaFR> asistenciaFRs) {
        this.entidad = entidad;
        this.user = user;

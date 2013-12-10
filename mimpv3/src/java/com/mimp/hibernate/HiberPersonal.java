@@ -407,4 +407,44 @@ public class HiberPersonal {
         return pers;
     }
     
+    public ArrayList<Sesion> listaSesiones (){
+        
+    Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+         String hql = "From Sesion S ";
+        Query query = session.createQuery(hql);
+        List sesiones = query.list();
+        ArrayList<Sesion> allSesiones = new ArrayList();
+        for (Iterator iter = sesiones.iterator(); iter.hasNext();) {
+            Sesion temp = (Sesion) iter.next();
+            
+            allSesiones.add(temp);
+            
+        }
+        return allSesiones;
+    
+    }
+    
+    public Sesion getSesion (int id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        Sesion sesion = new Sesion();
+
+        session.beginTransaction();
+        String hql = "From Sesion S where S.id = :id";
+        Query query = session.createQuery(hql);
+        query.setInteger("id", id);
+        Object queryResultU = query.uniqueResult();
+
+        sesion = (Sesion) queryResultU;
+        Hibernate.initialize(sesion.getTurnos());
+        return sesion;
+    
+    
+    
+    
+    }
+    
+    
 }

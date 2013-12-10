@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 6/12/2013 11:57:53 AM by Hibernate Tools 3.6.0
+// Generated Dec 10, 2013 11:15:19 AM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;

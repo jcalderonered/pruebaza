@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 6/12/2013 11:57:55 AM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 10, 2013 11:15:21 AM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Unidad" table="unidad" catalog="mimp_adopcion">
         <id name="idunidad" type="java.lang.Integer">
@@ -24,7 +24,7 @@
             <column name="distrito" length="20" />
         </property>
         <property name="competenciaRegional" type="string">
-            <column name="competencia_regional" length="30" />
+            <column name="competencia_regional" length="100" />
         </property>
         <property name="correo" type="string">
             <column name="correo" length="40" />
