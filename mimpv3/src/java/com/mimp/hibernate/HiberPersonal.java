@@ -89,17 +89,16 @@ public class HiberPersonal {
 
         session.beginTransaction();
 
-        session.save(ent);
-        session.save(rep);
-
         org.setEntidad(ent);
-        org.setRepresentante(rep);
+        org.getRepresentantes().add(rep);
 
         ent.getOrganismos().add(org);
-        rep.getOrganismos().add(org);
+        rep.setOrganismo(org);
 
+        
+        session.save(ent);
         session.save(org);
-
+        session.save(rep);
     }
 
     public void UpdateOrg(Entidad ent, Representante rep, Organismo org) {
@@ -125,7 +124,7 @@ public class HiberPersonal {
         for (Iterator iter = organismos.iterator(); iter.hasNext();) {
             Organismo temp = (Organismo) iter.next();
             Hibernate.initialize(temp.getEntidad());
-            Hibernate.initialize(temp.getRepresentante());
+            Hibernate.initialize(temp.getRepresentantes());
             allOrganismos.add(temp);
         }
         return allOrganismos;
@@ -143,7 +142,7 @@ public class HiberPersonal {
 
         org = (Organismo) queryResultA;
         Hibernate.initialize(org.getEntidad());
-        Hibernate.initialize(org.getRepresentante());
+        Hibernate.initialize(org.getRepresentantes());
         return org;
     }
 

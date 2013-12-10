@@ -97,14 +97,16 @@
                                         <td>${organismo.getEntidad().getNombre()}</td>
                                         <td>${organismo.getEntidad().getPais()}</td>
                                         <td>${organismo.getEntidad().getTelefono()}</td>
-                                        <td>${organismo.getRepresentante().getNombre()} ${organismo.getRepresentante().getApellidoP()} ${organismo.getRepresentante().getApelldoM()}</td>
-                                        
                                         <td>
+                                            ${organismo.getRepresentantes().value.getNombre()} 
+                                            
+                                         </td>
+                                         <td>
                                             <form action="${pageContext.servletContext.contextPath}/irEditarOrg2" method="post">
                                                 <input hidden name="id" id="id" value="${organismo.getIdorganismo()}">
                                                 <button type="submit" class="btn btn-default">Editar</button>
                                             </form>
-                                        </td>
+                                         </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
