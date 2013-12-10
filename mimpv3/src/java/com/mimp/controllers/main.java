@@ -50,7 +50,7 @@ public class main {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(ModelMap map, @RequestParam("email") String email, @RequestParam("password") String pass, HttpSession session) {
 
-        String pagina = "";
+        String pagina;
         String mensaje = "El usuario se encuentra Deshabilitado. Favor contactar a la Direeción General de Adopciones para más información";
 
         ArrayList aux = ServicioMain.usuario(email, pass);
@@ -75,10 +75,13 @@ public class main {
         } else if (aux.get(0) == "representante" || aux.get(0) == "autoridad") {
             //falta
             Entidad entidad = (Entidad) aux.get(1);
-            session.setAttribute("usuario", aux.get(1));
+            session.setAttribute("usuario", entidad);
             pagina = "/Entidad/inicio_ent";
+        } else {
+            mensaje = "Usuario y/o contraseña incorrectos";
+            map.addAttribute("mensaje", mensaje);
+            pagina = "login";
         }
-        
         return new ModelAndView(pagina, map);
     }
 

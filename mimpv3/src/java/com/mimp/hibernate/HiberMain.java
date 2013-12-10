@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mimp.hibernate;
+
 import java.util.*;
 import org.hibernate.Session;
 import com.mimp.bean.*;
@@ -23,145 +23,130 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("HiberMain")
 @Transactional
 public class HiberMain {
-    
-    @Resource(name="sessionFactory")
+
+    @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
-    
-  public ArrayList<Object> usuario (String user, String pass){
-      
-      Session session = sessionFactory.getCurrentSession();
-      session.beginTransaction();  
-      Personal personal = new Personal();
-      Representante representante = new Representante();
-      Autoridad autoridad = new Autoridad();
-      Familia familia = new Familia();
-      
+
+    public ArrayList<Object> usuario(String user, String pass) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Personal personal;
+        Entidad entidad;
+        Familia familia;
+
         ArrayList<Object> temp = new ArrayList<Object>();
-      
-      
-      
+
         String hqlP = "FROM Personal P WHERE P.user = :usuario and P.pass = :password ";//:=login
         String hqlF = "FROM Familia F WHERE F.user = :usuario and F.pass = :password ";
-        String hqlR = "FROM Representante R WHERE R.user = :usuario and R.pass = :password ";
-        String hqlA = "FROM Autoridad A WHERE A.user = :usuario and A.pass = :password ";
-        
+        String hqlE = "FROM Entidad R WHERE R.user = :usuario and R.pass = :password ";
+
         Query queryP = session.createQuery(hqlP);
         queryP.setString("usuario", user);
         queryP.setString("password", pass);
-        Object queryResultP = queryP.uniqueResult();  
-        
+        Object queryResultP = queryP.uniqueResult();
+
         Query queryF = session.createQuery(hqlF);
         queryF.setString("usuario", user);
         queryF.setString("password", pass);
-        Object queryResultF = queryF.uniqueResult();  
-        
-        Query queryR = session.createQuery(hqlR);
-        queryR.setString("usuario", user);
-        queryR.setString("password", pass);
-        Object queryResultR = queryR.uniqueResult();  
-        
-        Query queryA = session.createQuery(hqlA);
-        queryA.setString("usuario", user);
-        queryA.setString("password", pass);
-        Object queryResultA = queryA.uniqueResult();  
-        
+        Object queryResultF = queryF.uniqueResult();
+
+        Query queryE = session.createQuery(hqlE);
+        queryE.setString("usuario", user);
+        queryE.setString("password", pass);
+        Object queryResultE = queryE.uniqueResult();
+
         //session.getTransaction().commit(); 
-        
-        if (queryResultP != null){
+        if (queryResultP != null) {
             personal = (Personal) queryResultP;
             temp.add("personal");
             temp.add(personal);
             return temp;
-        }else if (queryResultF != null){
+        } else if (queryResultF != null) {
             familia = (Familia) queryResultF;
             temp.add("familia");
-            temp.add(queryResultF);
+            temp.add(familia);
             return temp;
-        }else if (queryResultR != null){
-            representante = (Representante) queryResultR;
-            temp.add("representante");
-            temp.add(queryResultR);
+        } else if (queryResultE != null) {
+            entidad = (Entidad) queryResultE;
+            if (entidad.getAutoridads().isEmpty()) {
+                temp.add("representante");
+            } else {
+                temp.add("autoridad");
+            }
+
+            temp.add(entidad);
             return temp;
-        }else if (queryResultA != null){
-            autoridad = (Autoridad) queryResultA;
-            temp.add("autoridad");
-            temp.add(queryResultA);
-            return temp;
-        }else {
-            
+        } else {
             temp.add("none");
             return temp;
         }
-        //temp.add(results);
-      
-  }
-  
-   public ArrayList<Turno> ListaTurnos (){
-       
-       Session session = sessionFactory.getCurrentSession();
+
+    }
+
+    public ArrayList<Turno> ListaTurnos() {
+
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-    
+
     //Date now = new Date();
-    
-    
-    String queryTurnos = "FROM Turno as T WHERE cast(T.inicioInscripcion as date) = current_date() "
-                        + "and cast(T.finInscripcion as date) = current_date() order by T.inicioInscripcion";
-    Query query = session.createQuery(queryTurnos);
-    List lista = query.list();
-    ArrayList<Turno> Turnos = new ArrayList();
-    for (Iterator iter = lista.iterator(); iter.hasNext();) {
+        String queryTurnos = "FROM Turno as T WHERE cast(T.inicioInscripcion as date) = current_date() "
+                + "and cast(T.finInscripcion as date) = current_date() order by T.inicioInscripcion";
+        Query query = session.createQuery(queryTurnos);
+        List lista = query.list();
+        ArrayList<Turno> Turnos = new ArrayList();
+        for (Iterator iter = lista.iterator(); iter.hasNext();) {
             Turno temp = (Turno) iter.next();
             Hibernate.initialize(temp.getSesion());
             Hibernate.initialize(temp.getAsistenciaFTs());
             Turnos.add(temp);
         }
-    
-    
-    return Turnos;
-    
+
+        return Turnos;
+
     }
-   
-    public Turno getTurno (int id){
-    
-    Session session = sessionFactory.getCurrentSession();
+
+    public Turno getTurno(int id) {
+
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
         String queryTurno = "FROM Turno T WHERE T.id = :id ";
         Query query = session.createQuery(queryTurno);
         query.setInteger("id", id);
-        Object queryResult = query.uniqueResult();  
-        Turno temp = (Turno)queryResult;
+        Object queryResult = query.uniqueResult();
+        Turno temp = (Turno) queryResult;
         Hibernate.initialize(temp.getSesion());
         Hibernate.initialize(temp.getAsistenciaFTs());
         return temp;
     }
-  
-  public void InsertFormInd(Asistente asis, FormularioSesion fs, AsistenciaFT aft) {
+
+    public void InsertFormInd(Asistente asis, FormularioSesion fs, AsistenciaFT aft) {
 
         Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-        
+
         session.save(fs);
         aft.setFormularioSesion(fs);
-        
+
         asis.setFormularioSesion(fs);
         fs.getAsistentes().add(asis);
 
         session.save(asis);
         session.save(aft);
     }
-  
-  public void InsertFormGrp(Asistente asisEl, Asistente asisElla, FormularioSesion fs, AsistenciaFT aft) {
+
+    public void InsertFormGrp(Asistente asisEl, Asistente asisElla, FormularioSesion fs, AsistenciaFT aft) {
 
         Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-        
+
         session.save(fs);
         aft.setFormularioSesion(fs);
-        
+
         asisEl.setFormularioSesion(fs);
         asisElla.setFormularioSesion(fs);
         fs.getAsistentes().add(asisEl);
@@ -171,10 +156,10 @@ public class HiberMain {
         session.save(asisElla);
         session.save(aft);
     }
-  
-    public ArrayList<Asistente> listaAsistentes(int id){
-    
-    Session session = sessionFactory.getCurrentSession();
+
+    public ArrayList<Asistente> listaAsistentes(int id) {
+
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
 
@@ -189,17 +174,15 @@ public class HiberMain {
             allAsistentes.add(temp);
         }
         return allAsistentes;
-    
-    
-    
+
     }
-    
-    public ArrayList<Sesion> listaSesionesSiguientes (Date fecha){
-        
-    Session session = sessionFactory.getCurrentSession();
+
+    public ArrayList<Sesion> listaSesionesSiguientes(Date fecha) {
+
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-         String hql = "From Sesion S where S.fecha > :fecha  order by S.fecha";
+        String hql = "From Sesion S where S.fecha > :fecha  order by S.fecha";
         Query query = session.createQuery(hql);
         query.setDate("fecha", fecha);
         List asistentes = query.list();
@@ -209,25 +192,25 @@ public class HiberMain {
             allSesiones.add(temp);
         }
         return allSesiones;
-    
+
     }
-  
-    public ArrayList<Turno> turnosSesion (int idSesion){
-    
-    Session session = sessionFactory.getCurrentSession();
+
+    public ArrayList<Turno> turnosSesion(int idSesion) {
+
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-         String hql = "From Turno T where T.sesion = :id";
+        String hql = "From Turno T where T.sesion = :id";
         Query query = session.createQuery(hql);
         query.setInteger("id", idSesion);
         List asistentes = query.list();
         ArrayList<Turno> allTurnos = new ArrayList();
         for (Iterator iter = asistentes.iterator(); iter.hasNext();) {
             Turno temp = (Turno) iter.next();
-            
+
             allTurnos.add(temp);
         }
         return allTurnos;
-    
+
     }
 }
