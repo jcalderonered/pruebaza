@@ -76,7 +76,7 @@ public class HiberMain {
             entidad = (Entidad) queryResultE;
             Hibernate.initialize(entidad.getAutoridads());
             Hibernate.initialize(entidad.getOrganismos());
-            //Mejorar este punto
+            //Mejorar este punto (no deberia ser un FOR para solo un parametro
             for (Iterator iter = entidad.getOrganismos().iterator(); iter.hasNext();) {
                 Organismo org = (Organismo) iter.next();
                 Hibernate.initialize(org.getRepresentantes());
