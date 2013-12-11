@@ -62,9 +62,27 @@
                             <li class="active"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>               
                         </ul>
                     </div>
-
                     <div class="col-md-8 col-md-offset-1">
-                        <h1 align="center"><strong>Bienvenido "Nombre del Organismo/Autoridad"</strong></h1>
+                        <c:choose>
+                            <c:when test="${!usuario.getOrganismos().isEmpty()}">
+                                <c:forEach items="${usuario.getOrganismos()}" varStatus="status" var="org">
+                                    <c:choose>
+                                        <c:when test="${!org.getRepresentantes().isEmpty()}">
+                                            <c:forEach items="${org.getRepresentantes()}" varStatus="status" var="item">
+                                                <c:set var='mensaje' value='${item.getNombre()} ${item.getApellidoP()}'/>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:set var='mensaje' value='${usuario.getNombre()}'/>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var='mensaje' value='${usuario.getNombre()}'/>
+                            </c:otherwise>
+                        </c:choose>
+                        <h1 align="center"><strong>Bienvenido ${mensaje}</strong></h1>
                         <br>
                         <p align="center"><img src="<%=request.getContextPath()%>/assets/img/logo.png" width="400" border="0"></p>
                         <br>
