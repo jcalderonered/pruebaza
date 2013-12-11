@@ -61,7 +61,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8 col-md-offset-1">
-                        <c:forEach items="${familia.getInfoFamilias().getAdoptantes()}" varStatus="status" var="item">
+                        <c:forEach items="${usuario.getInfoFamilias().toArray().get(0).getAdoptantes()}" varStatus="status" var="item">
                             <c:choose>
                                 <c:when test="${item.getSexo() == 'M'}">
                                     <c:set var='apellido_h' value='${item.getApellidoP()}'/>

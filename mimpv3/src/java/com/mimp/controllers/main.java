@@ -65,15 +65,14 @@ public class main {
             }
         } else if (aux.get(0) == "familia") {
             Familia familia = (Familia) aux.get(1);
-            if (!familia.getHabilitado() == true) {
+            if (familia.getHabilitado() == true) {
                 session.setAttribute("usuario", familia);
-                pagina = "/Personal/inicio_familia";
+                pagina = "/Familia/inicio_familia";
             } else {
                 map.addAttribute("mensaje", mensaje);
                 pagina = "login";
             }
         } else if (aux.get(0) == "representante" || aux.get(0) == "autoridad") {
-            //falta
             Entidad entidad = (Entidad) aux.get(1);
             session.setAttribute("usuario", entidad);
             pagina = "/Entidad/inicio_ent";
