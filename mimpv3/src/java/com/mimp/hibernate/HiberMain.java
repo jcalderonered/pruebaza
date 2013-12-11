@@ -56,7 +56,6 @@ public class HiberMain {
         queryE.setString("password", pass);
         Object queryResultE = queryE.uniqueResult();
 
-        //session.getTransaction().commit(); 
         if (queryResultP != null) {
             personal = (Personal) queryResultP;
             temp.add("personal");
@@ -64,6 +63,12 @@ public class HiberMain {
             return temp;
         } else if (queryResultF != null) {
             familia = (Familia) queryResultF;
+            Set<InfoFamilia> listainfofamilia = familia.getInfoFamilias();
+            InfoFamilia infofamilia = (InfoFamilia) listainfofamilia.toArray()[0];
+            List<Adoptante> listaadoptante = (List<Adoptante>) infofamilia.getAdoptantes();
+            for (Adoptante adop : listaadoptante) {
+                Hibernate.initialize(adop);
+            }
             temp.add("familia");
             temp.add(familia);
             return temp;
@@ -74,7 +79,6 @@ public class HiberMain {
             } else {
                 temp.add("autoridad");
             }
-
             temp.add(entidad);
             return temp;
         } else {
@@ -90,7 +94,7 @@ public class HiberMain {
 
         session.beginTransaction();
 
-    //Date now = new Date();
+        //Date now = new Date();
         String queryTurnos = "FROM Turno as T WHERE cast(T.inicioInscripcion as date) = current_date() "
                 + "and cast(T.finInscripcion as date) = current_date() order by T.inicioInscripcion";
         Query query = session.createQuery(queryTurnos);
