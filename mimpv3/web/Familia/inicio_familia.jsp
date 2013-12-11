@@ -61,15 +61,17 @@
                         </ul>
                     </div>
                     <div class="col-md-8 col-md-offset-1">
-                        <c:forEach items="${usuario.getInfoFamilias().toArray().get(0).getAdoptantes()}" varStatus="status" var="item">
-                            <c:choose>
-                                <c:when test="${item.getSexo() == 'M'}">
-                                    <c:set var='apellido_h' value='${item.getApellidoP()}'/>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:set var='apellido_m' value='${item.getApellidoM()}'/>
-                                </c:otherwise>
-                            </c:choose>
+                        <c:forEach items="${usuario.getInfoFamilias()}" varStatus="status" var="infofam">
+                            <c:forEach items="${infofam.getAdoptantes()}" varStatus="status" var="item">
+                                <c:choose>
+                                    <c:when test="${item.getSexo() == 'M'}">
+                                        <c:set var='apellido_h' value='${item.getApellidoP()}'/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:set var='apellido_m' value='${item.getApellidoM()}'/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
                         </c:forEach>
                         <c:set var='mensaje' value='${apellido_h} - ${apellido_m}'/>
                         <c:choose>
@@ -77,7 +79,9 @@
                                 <c:set var='mensaje' value='${apellido_m}'/>
                             </c:when>
                             <c:otherwise>
-                                <c:set var='mensaje' value='${apellido_h}'/>
+                                <c:if test="${apellido_m == ''}">
+                                    <c:set var='mensaje' value='${apellido_h}'/>
+                                </c:if>
                             </c:otherwise>
                         </c:choose>
                         <h1 align="center">Bienvenido(a) ${mensaje}</h1>

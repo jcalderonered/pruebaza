@@ -103,7 +103,7 @@
                                         <select>
                                             <option value="mia" selected></option>
                                             <option value="sia">Resolución de adopción</option>
-                                            <option value="mia">Fin de Procedimiento</option>
+                                            <option value="mia">Resolución que revoca la colocación familiar</option>
                                         </select>
                                     </div>    
                                 </div>

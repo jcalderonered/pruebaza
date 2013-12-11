@@ -63,17 +63,24 @@ public class HiberMain {
             return temp;
         } else if (queryResultF != null) {
             familia = (Familia) queryResultF;
-            Set<InfoFamilia> listainfofamilia = familia.getInfoFamilias();
-            InfoFamilia infofamilia = (InfoFamilia) listainfofamilia.toArray()[0];
-            List<Adoptante> listaadoptante = (List<Adoptante>) infofamilia.getAdoptantes();
-            for (Adoptante adop : listaadoptante) {
-                Hibernate.initialize(adop);
+            Hibernate.initialize(familia.getInfoFamilias());
+            //Mejorar
+            for (Iterator iter = familia.getInfoFamilias().iterator(); iter.hasNext();) {
+                InfoFamilia ifa = (InfoFamilia) iter.next();
+                Hibernate.initialize(ifa.getAdoptantes());
             }
             temp.add("familia");
             temp.add(familia);
             return temp;
         } else if (queryResultE != null) {
             entidad = (Entidad) queryResultE;
+            Hibernate.initialize(entidad.getAutoridads());
+            Hibernate.initialize(entidad.getOrganismos());
+            //Mejorar este punto
+            for (Iterator iter = entidad.getOrganismos().iterator(); iter.hasNext();) {
+                Organismo org = (Organismo) iter.next();
+                Hibernate.initialize(org.getRepresentantes());
+            }
             if (entidad.getAutoridads().isEmpty()) {
                 temp.add("representante");
             } else {
