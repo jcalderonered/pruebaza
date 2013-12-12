@@ -43,9 +43,9 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li class="active"><a href="#">Inicio</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper">Inicio</a></li>
                             <li><a href="#">Actualizar Información</a></li>
-                            <li><a href="#">Salir</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -69,7 +69,6 @@
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
                         </ul>
                     </div>
 

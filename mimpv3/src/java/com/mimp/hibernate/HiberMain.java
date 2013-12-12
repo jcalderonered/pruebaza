@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import com.mimp.bean.*;
 import com.mimp.util.*;
 import javax.annotation.Resource;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -34,6 +35,8 @@ public class HiberMain {
         Personal personal;
         Entidad entidad;
         Familia familia;
+        
+        pass = DigestUtils.md5Hex(pass);
 
         ArrayList<Object> temp = new ArrayList<Object>();
 
@@ -76,7 +79,7 @@ public class HiberMain {
             entidad = (Entidad) queryResultE;
             Hibernate.initialize(entidad.getAutoridads());
             Hibernate.initialize(entidad.getOrganismos());
-            //Mejorar este punto (no deberia ser un FOR para solo un parametro
+            //Mejorar este punto (no deberia ser un FOR para solo un parametro)
             for (Iterator iter = entidad.getOrganismos().iterator(); iter.hasNext();) {
                 Organismo org = (Organismo) iter.next();
                 Hibernate.initialize(org.getRepresentantes());
