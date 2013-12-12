@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class Organismo  implements java.io.Serializable {
 
 
-     private Integer idorganismo;
+     private long idorganismo;
      private Entidad entidad;
      private String competencia;
      private Set<Representante> representantes = new HashSet<Representante>(0);
@@ -20,20 +20,22 @@ public class Organismo  implements java.io.Serializable {
     }
 
 	
-    public Organismo(Entidad entidad) {
+    public Organismo(long idorganismo, Entidad entidad) {
+        this.idorganismo = idorganismo;
         this.entidad = entidad;
     }
-    public Organismo(Entidad entidad, String competencia, Set<Representante> representantes) {
+    public Organismo(long idorganismo, Entidad entidad, String competencia, Set<Representante> representantes) {
+       this.idorganismo = idorganismo;
        this.entidad = entidad;
        this.competencia = competencia;
        this.representantes = representantes;
     }
    
-    public Integer getIdorganismo() {
+    public long getIdorganismo() {
         return this.idorganismo;
     }
     
-    public void setIdorganismo(Integer idorganismo) {
+    public void setIdorganismo(long idorganismo) {
         this.idorganismo = idorganismo;
     }
     public Entidad getEntidad() {

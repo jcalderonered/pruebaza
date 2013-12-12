@@ -1,7 +1,8 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,22 +13,27 @@ import java.util.Set;
 public class Sesion  implements java.io.Serializable {
 
 
-     private Integer idsesion;
+     private long idsesion;
      private String NSesion;
-     private Boolean habilitado;
+     private Short habilitado;
      private Date fecha;
-     private Date hora;
+     private Serializable hora;
      private String direccion;
-     private Byte duracion;
-     private Integer facilitador;
-     private Byte asistencia;
-     private Set<Turno> turnos = new HashSet<Turno>(0);
+     private Short duracion;
+     private Long facilitador;
+     private Short asistencia;
      private Set<FormularioSesion> formularioSesions = new HashSet<FormularioSesion>(0);
+     private Set<Turno> turnos = new HashSet<Turno>(0);
 
     public Sesion() {
     }
 
-    public Sesion(String NSesion, Boolean habilitado, Date fecha, Date hora, String direccion, Byte duracion, Integer facilitador, Byte asistencia, Set<Turno> turnos, Set<FormularioSesion> formularioSesions) {
+	
+    public Sesion(long idsesion) {
+        this.idsesion = idsesion;
+    }
+    public Sesion(long idsesion, String NSesion, Short habilitado, Date fecha, Serializable hora, String direccion, Short duracion, Long facilitador, Short asistencia, Set<FormularioSesion> formularioSesions, Set<Turno> turnos) {
+       this.idsesion = idsesion;
        this.NSesion = NSesion;
        this.habilitado = habilitado;
        this.fecha = fecha;
@@ -36,15 +42,15 @@ public class Sesion  implements java.io.Serializable {
        this.duracion = duracion;
        this.facilitador = facilitador;
        this.asistencia = asistencia;
-       this.turnos = turnos;
        this.formularioSesions = formularioSesions;
+       this.turnos = turnos;
     }
    
-    public Integer getIdsesion() {
+    public long getIdsesion() {
         return this.idsesion;
     }
     
-    public void setIdsesion(Integer idsesion) {
+    public void setIdsesion(long idsesion) {
         this.idsesion = idsesion;
     }
     public String getNSesion() {
@@ -54,11 +60,11 @@ public class Sesion  implements java.io.Serializable {
     public void setNSesion(String NSesion) {
         this.NSesion = NSesion;
     }
-    public Boolean getHabilitado() {
+    public Short getHabilitado() {
         return this.habilitado;
     }
     
-    public void setHabilitado(Boolean habilitado) {
+    public void setHabilitado(Short habilitado) {
         this.habilitado = habilitado;
     }
     public Date getFecha() {
@@ -68,11 +74,11 @@ public class Sesion  implements java.io.Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public Date getHora() {
+    public Serializable getHora() {
         return this.hora;
     }
     
-    public void setHora(Date hora) {
+    public void setHora(Serializable hora) {
         this.hora = hora;
     }
     public String getDireccion() {
@@ -82,33 +88,26 @@ public class Sesion  implements java.io.Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    public Byte getDuracion() {
+    public Short getDuracion() {
         return this.duracion;
     }
     
-    public void setDuracion(Byte duracion) {
+    public void setDuracion(Short duracion) {
         this.duracion = duracion;
     }
-    public Integer getFacilitador() {
+    public Long getFacilitador() {
         return this.facilitador;
     }
     
-    public void setFacilitador(Integer facilitador) {
+    public void setFacilitador(Long facilitador) {
         this.facilitador = facilitador;
     }
-    public Byte getAsistencia() {
+    public Short getAsistencia() {
         return this.asistencia;
     }
     
-    public void setAsistencia(Byte asistencia) {
+    public void setAsistencia(Short asistencia) {
         this.asistencia = asistencia;
-    }
-    public Set<Turno> getTurnos() {
-        return this.turnos;
-    }
-    
-    public void setTurnos(Set<Turno> turnos) {
-        this.turnos = turnos;
     }
     public Set<FormularioSesion> getFormularioSesions() {
         return this.formularioSesions;
@@ -116,6 +115,13 @@ public class Sesion  implements java.io.Serializable {
     
     public void setFormularioSesions(Set<FormularioSesion> formularioSesions) {
         this.formularioSesions = formularioSesions;
+    }
+    public Set<Turno> getTurnos() {
+        return this.turnos;
+    }
+    
+    public void setTurnos(Set<Turno> turnos) {
+        this.turnos = turnos;
     }
 
 

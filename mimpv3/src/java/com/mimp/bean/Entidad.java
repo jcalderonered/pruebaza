@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class Entidad  implements java.io.Serializable {
 
 
-     private Integer identidad;
+     private long identidad;
      private String nombre;
      private String user;
      private String pass;
@@ -25,14 +25,19 @@ public class Entidad  implements java.io.Serializable {
      private Date fechaRenov;
      private Date fechaVenc;
      private String obs;
-     private Set<Familia> familias = new HashSet<Familia>(0);
      private Set<Organismo> organismos = new HashSet<Organismo>(0);
      private Set<Autoridad> autoridads = new HashSet<Autoridad>(0);
+     private Set<Familia> familias = new HashSet<Familia>(0);
 
     public Entidad() {
     }
 
-    public Entidad(String nombre, String user, String pass, String direccion, String telefono, String pais, String resolAuto, Date fechaResol, String resolRenov, Date fechaRenov, Date fechaVenc, String obs, Set<Familia> familias, Set<Organismo> organismos, Set<Autoridad> autoridads) {
+	
+    public Entidad(long identidad) {
+        this.identidad = identidad;
+    }
+    public Entidad(long identidad, String nombre, String user, String pass, String direccion, String telefono, String pais, String resolAuto, Date fechaResol, String resolRenov, Date fechaRenov, Date fechaVenc, String obs, Set<Organismo> organismos, Set<Autoridad> autoridads, Set<Familia> familias) {
+       this.identidad = identidad;
        this.nombre = nombre;
        this.user = user;
        this.pass = pass;
@@ -45,16 +50,16 @@ public class Entidad  implements java.io.Serializable {
        this.fechaRenov = fechaRenov;
        this.fechaVenc = fechaVenc;
        this.obs = obs;
-       this.familias = familias;
        this.organismos = organismos;
        this.autoridads = autoridads;
+       this.familias = familias;
     }
    
-    public Integer getIdentidad() {
+    public long getIdentidad() {
         return this.identidad;
     }
     
-    public void setIdentidad(Integer identidad) {
+    public void setIdentidad(long identidad) {
         this.identidad = identidad;
     }
     public String getNombre() {
@@ -141,13 +146,6 @@ public class Entidad  implements java.io.Serializable {
     public void setObs(String obs) {
         this.obs = obs;
     }
-    public Set<Familia> getFamilias() {
-        return this.familias;
-    }
-    
-    public void setFamilias(Set<Familia> familias) {
-        this.familias = familias;
-    }
     public Set<Organismo> getOrganismos() {
         return this.organismos;
     }
@@ -161,6 +159,13 @@ public class Entidad  implements java.io.Serializable {
     
     public void setAutoridads(Set<Autoridad> autoridads) {
         this.autoridads = autoridads;
+    }
+    public Set<Familia> getFamilias() {
+        return this.familias;
+    }
+    
+    public void setFamilias(Set<Familia> familias) {
+        this.familias = familias;
     }
 
 

@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -11,25 +11,30 @@ import java.util.Set;
 public class Familia  implements java.io.Serializable {
 
 
-     private Integer idfamilia;
+     private long idfamilia;
      private Entidad entidad;
      private String user;
      private String pass;
      private String correo;
-     private Boolean habilitado;
+     private Short habilitado;
      private String constancia;
      private Set<ExpedienteFamilia> expedienteFamilias = new HashSet<ExpedienteFamilia>(0);
-     private Set<FichaSolicitudAdopcion> fichaSolicitudAdopcions = new HashSet<FichaSolicitudAdopcion>(0);
-     private Set<PostAdopcion> postAdopcions = new HashSet<PostAdopcion>(0);
-     private Set<FormularioSesion> formularioSesions = new HashSet<FormularioSesion>(0);
-     private Set<Atencion> atencions = new HashSet<Atencion>(0);
-     private Set<InfoFamilia> infoFamilias = new HashSet<InfoFamilia>(0);
      private Set<AsistenciaFR> asistenciaFRs = new HashSet<AsistenciaFR>(0);
+     private Set<Atencion> atencions = new HashSet<Atencion>(0);
+     private Set<FormularioSesion> formularioSesions = new HashSet<FormularioSesion>(0);
+     private Set<FichaSolicitudAdopcion> fichaSolicitudAdopcions = new HashSet<FichaSolicitudAdopcion>(0);
+     private Set<InfoFamilia> infoFamilias = new HashSet<InfoFamilia>(0);
+     private Set<PostAdopcion> postAdopcions = new HashSet<PostAdopcion>(0);
 
     public Familia() {
     }
 
-    public Familia(Entidad entidad, String user, String pass, String correo, Boolean habilitado, String constancia, Set<ExpedienteFamilia> expedienteFamilias, Set<FichaSolicitudAdopcion> fichaSolicitudAdopcions, Set<PostAdopcion> postAdopcions, Set<FormularioSesion> formularioSesions, Set<Atencion> atencions, Set<InfoFamilia> infoFamilias, Set<AsistenciaFR> asistenciaFRs) {
+	
+    public Familia(long idfamilia) {
+        this.idfamilia = idfamilia;
+    }
+    public Familia(long idfamilia, Entidad entidad, String user, String pass, String correo, Short habilitado, String constancia, Set<ExpedienteFamilia> expedienteFamilias, Set<AsistenciaFR> asistenciaFRs, Set<Atencion> atencions, Set<FormularioSesion> formularioSesions, Set<FichaSolicitudAdopcion> fichaSolicitudAdopcions, Set<InfoFamilia> infoFamilias, Set<PostAdopcion> postAdopcions) {
+       this.idfamilia = idfamilia;
        this.entidad = entidad;
        this.user = user;
        this.pass = pass;
@@ -37,19 +42,19 @@ public class Familia  implements java.io.Serializable {
        this.habilitado = habilitado;
        this.constancia = constancia;
        this.expedienteFamilias = expedienteFamilias;
-       this.fichaSolicitudAdopcions = fichaSolicitudAdopcions;
-       this.postAdopcions = postAdopcions;
-       this.formularioSesions = formularioSesions;
-       this.atencions = atencions;
-       this.infoFamilias = infoFamilias;
        this.asistenciaFRs = asistenciaFRs;
+       this.atencions = atencions;
+       this.formularioSesions = formularioSesions;
+       this.fichaSolicitudAdopcions = fichaSolicitudAdopcions;
+       this.infoFamilias = infoFamilias;
+       this.postAdopcions = postAdopcions;
     }
    
-    public Integer getIdfamilia() {
+    public long getIdfamilia() {
         return this.idfamilia;
     }
     
-    public void setIdfamilia(Integer idfamilia) {
+    public void setIdfamilia(long idfamilia) {
         this.idfamilia = idfamilia;
     }
     public Entidad getEntidad() {
@@ -80,11 +85,11 @@ public class Familia  implements java.io.Serializable {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    public Boolean getHabilitado() {
+    public Short getHabilitado() {
         return this.habilitado;
     }
     
-    public void setHabilitado(Boolean habilitado) {
+    public void setHabilitado(Short habilitado) {
         this.habilitado = habilitado;
     }
     public String getConstancia() {
@@ -101,26 +106,12 @@ public class Familia  implements java.io.Serializable {
     public void setExpedienteFamilias(Set<ExpedienteFamilia> expedienteFamilias) {
         this.expedienteFamilias = expedienteFamilias;
     }
-    public Set<FichaSolicitudAdopcion> getFichaSolicitudAdopcions() {
-        return this.fichaSolicitudAdopcions;
+    public Set<AsistenciaFR> getAsistenciaFRs() {
+        return this.asistenciaFRs;
     }
     
-    public void setFichaSolicitudAdopcions(Set<FichaSolicitudAdopcion> fichaSolicitudAdopcions) {
-        this.fichaSolicitudAdopcions = fichaSolicitudAdopcions;
-    }
-    public Set<PostAdopcion> getPostAdopcions() {
-        return this.postAdopcions;
-    }
-    
-    public void setPostAdopcions(Set<PostAdopcion> postAdopcions) {
-        this.postAdopcions = postAdopcions;
-    }
-    public Set<FormularioSesion> getFormularioSesions() {
-        return this.formularioSesions;
-    }
-    
-    public void setFormularioSesions(Set<FormularioSesion> formularioSesions) {
-        this.formularioSesions = formularioSesions;
+    public void setAsistenciaFRs(Set<AsistenciaFR> asistenciaFRs) {
+        this.asistenciaFRs = asistenciaFRs;
     }
     public Set<Atencion> getAtencions() {
         return this.atencions;
@@ -129,6 +120,20 @@ public class Familia  implements java.io.Serializable {
     public void setAtencions(Set<Atencion> atencions) {
         this.atencions = atencions;
     }
+    public Set<FormularioSesion> getFormularioSesions() {
+        return this.formularioSesions;
+    }
+    
+    public void setFormularioSesions(Set<FormularioSesion> formularioSesions) {
+        this.formularioSesions = formularioSesions;
+    }
+    public Set<FichaSolicitudAdopcion> getFichaSolicitudAdopcions() {
+        return this.fichaSolicitudAdopcions;
+    }
+    
+    public void setFichaSolicitudAdopcions(Set<FichaSolicitudAdopcion> fichaSolicitudAdopcions) {
+        this.fichaSolicitudAdopcions = fichaSolicitudAdopcions;
+    }
     public Set<InfoFamilia> getInfoFamilias() {
         return this.infoFamilias;
     }
@@ -136,12 +141,12 @@ public class Familia  implements java.io.Serializable {
     public void setInfoFamilias(Set<InfoFamilia> infoFamilias) {
         this.infoFamilias = infoFamilias;
     }
-    public Set<AsistenciaFR> getAsistenciaFRs() {
-        return this.asistenciaFRs;
+    public Set<PostAdopcion> getPostAdopcions() {
+        return this.postAdopcions;
     }
     
-    public void setAsistenciaFRs(Set<AsistenciaFR> asistenciaFRs) {
-        this.asistenciaFRs = asistenciaFRs;
+    public void setPostAdopcions(Set<PostAdopcion> postAdopcions) {
+        this.postAdopcions = postAdopcions;
     }
 
 

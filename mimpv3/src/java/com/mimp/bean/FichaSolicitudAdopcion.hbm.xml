@@ -1,153 +1,153 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.FichaSolicitudAdopcion" table="ficha_solicitud_adopcion" catalog="mimp_adopcion">
-        <id name="idfichaSolicitudAdopcion" type="java.lang.Integer">
-            <column name="idficha_solicitud_adopcion" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.FichaSolicitudAdopcion" table="FICHA_SOLICITUD_ADOPCION" schema="MIMP_ADOPCION">
+        <id name="idfichaSolicitudAdopcion" type="long">
+            <column name="IDFICHA_SOLICITUD_ADOPCION" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="familia" class="com.mimp.bean.Familia" fetch="select">
-            <column name="idfamilia" not-null="true" />
+            <column name="IDFAMILIA" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="numeroFicha" type="string">
-            <column name="numero_ficha" length="20" />
+            <column name="NUMERO_FICHA" length="20" />
         </property>
         <property name="hojaRuta" type="string">
-            <column name="hoja_ruta" length="20" />
+            <column name="HOJA_RUTA" length="20" />
         </property>
         <property name="estadoCivil" type="string">
-            <column name="estado_civil" length="20" />
+            <column name="ESTADO_CIVIL" length="20" />
         </property>
         <property name="fechaIngreso" type="date">
-            <column name="fecha_ingreso" length="10" />
+            <column name="FECHA_INGRESO" length="7" />
         </property>
         <property name="fijo" type="string">
-            <column name="fijo" length="15" />
+            <column name="FIJO" length="15" />
         </property>
         <property name="domicilio" type="string">
-            <column name="domicilio" length="200" />
+            <column name="DOMICILIO" length="200" />
         </property>
         <property name="depRes" type="string">
-            <column name="dep_res" length="20" />
+            <column name="DEP_RES" length="20" />
         </property>
         <property name="propiedadVivienda" type="string">
-            <column name="propiedad_vivienda" length="20" />
+            <column name="PROPIEDAD_VIVIENDA" length="20" />
         </property>
         <property name="tipoVivienda" type="string">
-            <column name="tipo_vivienda" length="20" />
+            <column name="TIPO_VIVIENDA" length="20" />
         </property>
-        <property name="areaVivTotal" type="java.lang.Integer">
-            <column name="area_viv_total" />
+        <property name="areaVivTotal" type="java.lang.Long">
+            <column name="AREA_VIV_TOTAL" precision="10" scale="0" />
         </property>
-        <property name="areaVivConst" type="java.lang.Integer">
-            <column name="area_viv_const" />
+        <property name="areaVivConst" type="java.lang.Long">
+            <column name="AREA_VIV_CONST" precision="10" scale="0" />
         </property>
         <property name="distVivenda" type="string">
-            <column name="dist_vivenda" length="400" />
+            <column name="DIST_VIVENDA" length="400" />
         </property>
-        <property name="luz" type="java.lang.Boolean">
-            <column name="luz" />
+        <property name="luz" type="java.lang.Short">
+            <column name="LUZ" precision="3" scale="0" />
         </property>
-        <property name="agua" type="java.lang.Boolean">
-            <column name="agua" />
+        <property name="agua" type="java.lang.Short">
+            <column name="AGUA" precision="3" scale="0" />
         </property>
-        <property name="desague" type="java.lang.Boolean">
-            <column name="desague" />
+        <property name="desague" type="java.lang.Short">
+            <column name="DESAGUE" precision="3" scale="0" />
         </property>
         <property name="otrosServ" type="string">
-            <column name="otros_serv" length="150" />
+            <column name="OTROS_SERV" length="150" />
         </property>
         <property name="materConst" type="string">
-            <column name="mater_const" length="50" />
+            <column name="MATER_CONST" length="50" />
         </property>
         <property name="pared" type="string">
-            <column name="pared" length="50" />
+            <column name="PARED" length="50" />
         </property>
         <property name="techo" type="string">
-            <column name="techo" length="50" />
+            <column name="TECHO" length="50" />
         </property>
         <property name="piso" type="string">
-            <column name="piso" length="50" />
+            <column name="PISO" length="50" />
         </property>
-        <property name="NProcAdopPrev" type="java.lang.Byte">
-            <column name="n_proc_adop_prev" />
+        <property name="NProcAdopPrev" type="java.lang.Short">
+            <column name="N_PROC_ADOP_PREV" precision="3" scale="0" />
         </property>
         <property name="anhoProceso" type="string">
-            <column name="anho_proceso" length="50" />
+            <column name="ANHO_PROCESO" length="50" />
         </property>
-        <property name="procesoPrep" type="java.lang.Boolean">
-            <column name="proceso_prep" />
+        <property name="procesoPrep" type="java.lang.Short">
+            <column name="PROCESO_PREP" precision="3" scale="0" />
         </property>
-        <property name="procesoEval" type="java.lang.Boolean">
-            <column name="proceso_eval" />
+        <property name="procesoEval" type="java.lang.Short">
+            <column name="PROCESO_EVAL" precision="3" scale="0" />
         </property>
         <property name="motivoAdopcion" type="string">
-            <column name="motivo_adopcion" length="500" />
+            <column name="MOTIVO_ADOPCION" length="500" />
         </property>
-        <property name="nnaIncesto" type="java.lang.Boolean">
-            <column name="nna_incesto" />
+        <property name="nnaIncesto" type="java.lang.Short">
+            <column name="NNA_INCESTO" precision="3" scale="0" />
         </property>
-        <property name="nnaMental" type="java.lang.Boolean">
-            <column name="nna_mental" />
+        <property name="nnaMental" type="java.lang.Short">
+            <column name="NNA_MENTAL" precision="3" scale="0" />
         </property>
-        <property name="nnaEpilepsia" type="java.lang.Boolean">
-            <column name="nna_epilepsia" />
+        <property name="nnaEpilepsia" type="java.lang.Short">
+            <column name="NNA_EPILEPSIA" precision="3" scale="0" />
         </property>
-        <property name="nnaAbuso" type="java.lang.Boolean">
-            <column name="nna_abuso" />
+        <property name="nnaAbuso" type="java.lang.Short">
+            <column name="NNA_ABUSO" precision="3" scale="0" />
         </property>
-        <property name="nnaSifilis" type="java.lang.Boolean">
-            <column name="nna_sifilis" />
+        <property name="nnaSifilis" type="java.lang.Short">
+            <column name="NNA_SIFILIS" precision="3" scale="0" />
         </property>
-        <property name="nnaSeguiMedico" type="java.lang.Boolean">
-            <column name="nna_segui_medico" />
+        <property name="nnaSeguiMedico" type="java.lang.Short">
+            <column name="NNA_SEGUI_MEDICO" precision="3" scale="0" />
         </property>
-        <property name="nnaOperacion" type="java.lang.Boolean">
-            <column name="nna_operacion" />
+        <property name="nnaOperacion" type="java.lang.Short">
+            <column name="NNA_OPERACION" precision="3" scale="0" />
         </property>
-        <property name="nnaHiperactivo" type="java.lang.Boolean">
-            <column name="nna_hiperactivo" />
+        <property name="nnaHiperactivo" type="java.lang.Short">
+            <column name="NNA_HIPERACTIVO" precision="3" scale="0" />
         </property>
-        <property name="nnaEspecial" type="java.lang.Boolean">
-            <column name="nna_especial" />
+        <property name="nnaEspecial" type="java.lang.Short">
+            <column name="NNA_ESPECIAL" precision="3" scale="0" />
         </property>
-        <property name="nnaEnfermo" type="java.lang.Boolean">
-            <column name="nna_enfermo" />
+        <property name="nnaEnfermo" type="java.lang.Short">
+            <column name="NNA_ENFERMO" precision="3" scale="0" />
         </property>
-        <property name="nnaMayor" type="java.lang.Boolean">
-            <column name="nna_mayor" />
+        <property name="nnaMayor" type="java.lang.Short">
+            <column name="NNA_MAYOR" precision="3" scale="0" />
         </property>
-        <property name="nnaAdolescente" type="java.lang.Boolean">
-            <column name="nna_adolescente" />
+        <property name="nnaAdolescente" type="java.lang.Short">
+            <column name="NNA_ADOLESCENTE" precision="3" scale="0" />
         </property>
-        <property name="nnaHermano" type="java.lang.Boolean">
-            <column name="nna_hermano" />
+        <property name="nnaHermano" type="java.lang.Short">
+            <column name="NNA_HERMANO" precision="3" scale="0" />
         </property>
-        <property name="nnaForaneo" type="java.lang.Boolean">
-            <column name="nna_foraneo" />
+        <property name="nnaForaneo" type="java.lang.Short">
+            <column name="NNA_FORANEO" precision="3" scale="0" />
         </property>
         <property name="rptaForaneo" type="string">
-            <column name="rpta_foraneo" length="500" />
+            <column name="RPTA_FORANEO" length="500" />
         </property>
-        <set name="solicitantes" table="solicitante" inverse="true" lazy="true" fetch="select">
+        <set name="solicitantes" table="SOLICITANTE" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idficha_solicitud_adopcion" not-null="true" />
+                <column name="IDFICHA_SOLICITUD_ADOPCION" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.Solicitante" />
         </set>
-        <set name="hijos" table="hijo" inverse="true" lazy="true" fetch="select">
+        <set name="residentes" table="RESIDENTE" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idficha_solicitud_adopcion" not-null="true" />
-            </key>
-            <one-to-many class="com.mimp.bean.Hijo" />
-        </set>
-        <set name="residentes" table="residente" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idficha_solicitud_adopcion" not-null="true" />
+                <column name="IDFICHA_SOLICITUD_ADOPCION" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.Residente" />
+        </set>
+        <set name="hijos" table="HIJO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDFICHA_SOLICITUD_ADOPCION" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Hijo" />
         </set>
     </class>
 </hibernate-mapping>

@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 
@@ -9,32 +9,34 @@ package com.mimp.bean;
 public class AsistenciaFT  implements java.io.Serializable {
 
 
-     private Integer idasistenciaFT;
+     private long idasistenciaFT;
      private FormularioSesion formularioSesion;
      private Turno turno;
      private Character asistencia;
-     private Boolean inasJus;
+     private Short inasJus;
 
     public AsistenciaFT() {
     }
 
 	
-    public AsistenciaFT(FormularioSesion formularioSesion, Turno turno) {
+    public AsistenciaFT(long idasistenciaFT, FormularioSesion formularioSesion, Turno turno) {
+        this.idasistenciaFT = idasistenciaFT;
         this.formularioSesion = formularioSesion;
         this.turno = turno;
     }
-    public AsistenciaFT(FormularioSesion formularioSesion, Turno turno, Character asistencia, Boolean inasJus) {
+    public AsistenciaFT(long idasistenciaFT, FormularioSesion formularioSesion, Turno turno, Character asistencia, Short inasJus) {
+       this.idasistenciaFT = idasistenciaFT;
        this.formularioSesion = formularioSesion;
        this.turno = turno;
        this.asistencia = asistencia;
        this.inasJus = inasJus;
     }
    
-    public Integer getIdasistenciaFT() {
+    public long getIdasistenciaFT() {
         return this.idasistenciaFT;
     }
     
-    public void setIdasistenciaFT(Integer idasistenciaFT) {
+    public void setIdasistenciaFT(long idasistenciaFT) {
         this.idasistenciaFT = idasistenciaFT;
     }
     public FormularioSesion getFormularioSesion() {
@@ -58,11 +60,11 @@ public class AsistenciaFT  implements java.io.Serializable {
     public void setAsistencia(Character asistencia) {
         this.asistencia = asistencia;
     }
-    public Boolean getInasJus() {
+    public Short getInasJus() {
         return this.inasJus;
     }
     
-    public void setInasJus(Boolean inasJus) {
+    public void setInasJus(Short inasJus) {
         this.inasJus = inasJus;
     }
 

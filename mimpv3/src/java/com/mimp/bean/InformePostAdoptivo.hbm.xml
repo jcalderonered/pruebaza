@@ -1,39 +1,39 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.InformePostAdoptivo" table="informe_post_adoptivo" catalog="mimp_adopcion">
-        <id name="idinformePostAdoptivo" type="java.lang.Integer">
-            <column name="idinforme_post_adoptivo" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.InformePostAdoptivo" table="INFORME_POST_ADOPTIVO" schema="MIMP_ADOPCION">
+        <id name="idinformePostAdoptivo" type="long">
+            <column name="IDINFORME_POST_ADOPTIVO" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="postAdopcion" class="com.mimp.bean.PostAdopcion" fetch="select">
-            <column name="idpost_adopcion" not-null="true" />
+            <column name="IDPOST_ADOPCION" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <many-to-one name="personal" class="com.mimp.bean.Personal" fetch="select">
-            <column name="idpersonal" not-null="true" />
+            <column name="IDPERSONAL" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="estado" type="string">
-            <column name="estado" length="30" />
+            <column name="ESTADO" length="30" />
         </property>
         <property name="numeroInforme" type="string">
-            <column name="numero_informe" length="40" />
+            <column name="NUMERO_INFORME" length="40" />
         </property>
         <property name="fechaRecepcionProyectado" type="date">
-            <column name="fecha_recepcion_proyectado" length="10" />
+            <column name="FECHA_RECEPCION_PROYECTADO" length="7" />
         </property>
         <property name="fechaRecepcion" type="date">
-            <column name="fecha_recepcion" length="10" />
+            <column name="FECHA_RECEPCION" length="7" />
         </property>
         <property name="fechaInforme" type="date">
-            <column name="fecha_informe" length="10" />
+            <column name="FECHA_INFORME" length="7" />
         </property>
         <property name="fechaActa" type="date">
-            <column name="fecha_acta" length="10" />
+            <column name="FECHA_ACTA" length="7" />
         </property>
         <property name="obs" type="string">
-            <column name="obs" length="2000" />
+            <column name="OBS" length="2000" />
         </property>
     </class>
 </hibernate-mapping>

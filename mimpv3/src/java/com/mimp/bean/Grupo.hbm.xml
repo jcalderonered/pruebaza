@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Grupo" table="grupo" catalog="mimp_adopcion">
-        <id name="idgrupo" type="java.lang.Integer">
-            <column name="idgrupo" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Grupo" table="GRUPO" schema="MIMP_ADOPCION">
+        <id name="idgrupo" type="long">
+            <column name="IDGRUPO" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="taller" class="com.mimp.bean.Taller" fetch="select">
-            <column name="idtaller" not-null="true" />
+            <column name="IDTALLER" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="nombre" type="string">
-            <column name="nombre" length="25" />
+            <column name="NOMBRE" length="25" />
         </property>
-        <set name="turno2s" table="turno2" inverse="true" lazy="true" fetch="select">
+        <set name="turno2s" table="TURNO2" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idgrupo" not-null="true" />
+                <column name="IDGRUPO" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.Turno2" />
         </set>

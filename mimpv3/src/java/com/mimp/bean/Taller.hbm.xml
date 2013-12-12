@@ -1,31 +1,31 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Taller" table="taller" catalog="mimp_adopcion">
-        <id name="idtaller" type="java.lang.Integer">
-            <column name="idtaller" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Taller" table="TALLER" schema="MIMP_ADOPCION">
+        <id name="idtaller" type="long">
+            <column name="IDTALLER" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <property name="NSesion" type="string">
-            <column name="n_sesion" length="10" />
+            <column name="N_SESION" length="10" />
         </property>
         <property name="tipoTaller" type="string">
-            <column name="tipo_taller" length="15" />
+            <column name="TIPO_TALLER" length="15" />
         </property>
         <property name="nombre" type="string">
-            <column name="nombre" length="25" />
+            <column name="NOMBRE" length="25" />
         </property>
-        <property name="habilitado" type="java.lang.Boolean">
-            <column name="habilitado" />
+        <property name="habilitado" type="java.lang.Short">
+            <column name="HABILITADO" precision="3" scale="0" />
         </property>
-        <property name="NReunion" type="java.lang.Byte">
-            <column name="n_reunion" />
+        <property name="NReunion" type="java.lang.Short">
+            <column name="N_REUNION" precision="3" scale="0" />
         </property>
-        <set name="grupos" table="grupo" inverse="true" lazy="true" fetch="select">
+        <set name="grupos" table="GRUPO" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idtaller" not-null="true" />
+                <column name="IDTALLER" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.Grupo" />
         </set>

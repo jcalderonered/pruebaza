@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class Nna  implements java.io.Serializable {
 
 
-     private Integer idnna;
+     private long idnna;
      private Car car;
      private Juzgado juzgado;
      private String nombre;
@@ -20,9 +20,9 @@ public class Nna  implements java.io.Serializable {
      private String apellidoM;
      private String sexo;
      private Date fechaNacimiento;
-     private Byte edadAnhos;
-     private Byte edadMeses;
-     private Boolean actaNacimiento;
+     private Short edadAnhos;
+     private Short edadMeses;
+     private Short actaNacimiento;
      private String condicionSalud;
      private String departamentoNacimiento;
      private String provinciaNacimiento;
@@ -32,34 +32,36 @@ public class Nna  implements java.io.Serializable {
      private Date fechaResolAbandono;
      private Date fechaResolConsentida;
      private String clasificacion;
-     private Boolean incesto;
-     private Boolean mental;
-     private Boolean epilepsia;
-     private Boolean abuso;
-     private Boolean sifilis;
-     private Boolean seguiMedico;
-     private Boolean operacion;
-     private Boolean hiperactivo;
-     private Boolean especial;
-     private Boolean enfermo;
-     private Boolean mayor;
-     private Boolean adolescente;
-     private Boolean hermano;
-     private Boolean nn;
-     private Set<EstudioCaso> estudioCasos = new HashSet<EstudioCaso>(0);
-     private Set<ExpedienteNna> expedienteNnas = new HashSet<ExpedienteNna>(0);
-     private Set<Prioritario> prioritarios = new HashSet<Prioritario>(0);
+     private Short incesto;
+     private Short mental;
+     private Short epilepsia;
+     private Short abuso;
+     private Short sifilis;
+     private Short seguiMedico;
+     private Short operacion;
+     private Short hiperactivo;
+     private Short especial;
+     private Short enfermo;
+     private Short mayor;
+     private Short adolescente;
+     private Short hermano;
+     private Short nn;
      private Set<Designacion> designacions = new HashSet<Designacion>(0);
+     private Set<Prioritario> prioritarios = new HashSet<Prioritario>(0);
+     private Set<ExpedienteNna> expedienteNnas = new HashSet<ExpedienteNna>(0);
+     private Set<EstudioCaso> estudioCasos = new HashSet<EstudioCaso>(0);
 
     public Nna() {
     }
 
 	
-    public Nna(Car car, Juzgado juzgado) {
+    public Nna(long idnna, Car car, Juzgado juzgado) {
+        this.idnna = idnna;
         this.car = car;
         this.juzgado = juzgado;
     }
-    public Nna(Car car, Juzgado juzgado, String nombre, String apellidoP, String apellidoM, String sexo, Date fechaNacimiento, Byte edadAnhos, Byte edadMeses, Boolean actaNacimiento, String condicionSalud, String departamentoNacimiento, String provinciaNacimiento, String distritoNacimiento, String paisNacimiento, String lugarNac, Date fechaResolAbandono, Date fechaResolConsentida, String clasificacion, Boolean incesto, Boolean mental, Boolean epilepsia, Boolean abuso, Boolean sifilis, Boolean seguiMedico, Boolean operacion, Boolean hiperactivo, Boolean especial, Boolean enfermo, Boolean mayor, Boolean adolescente, Boolean hermano, Boolean nn, Set<EstudioCaso> estudioCasos, Set<ExpedienteNna> expedienteNnas, Set<Prioritario> prioritarios, Set<Designacion> designacions) {
+    public Nna(long idnna, Car car, Juzgado juzgado, String nombre, String apellidoP, String apellidoM, String sexo, Date fechaNacimiento, Short edadAnhos, Short edadMeses, Short actaNacimiento, String condicionSalud, String departamentoNacimiento, String provinciaNacimiento, String distritoNacimiento, String paisNacimiento, String lugarNac, Date fechaResolAbandono, Date fechaResolConsentida, String clasificacion, Short incesto, Short mental, Short epilepsia, Short abuso, Short sifilis, Short seguiMedico, Short operacion, Short hiperactivo, Short especial, Short enfermo, Short mayor, Short adolescente, Short hermano, Short nn, Set<Designacion> designacions, Set<Prioritario> prioritarios, Set<ExpedienteNna> expedienteNnas, Set<EstudioCaso> estudioCasos) {
+       this.idnna = idnna;
        this.car = car;
        this.juzgado = juzgado;
        this.nombre = nombre;
@@ -93,17 +95,17 @@ public class Nna  implements java.io.Serializable {
        this.adolescente = adolescente;
        this.hermano = hermano;
        this.nn = nn;
-       this.estudioCasos = estudioCasos;
-       this.expedienteNnas = expedienteNnas;
-       this.prioritarios = prioritarios;
        this.designacions = designacions;
+       this.prioritarios = prioritarios;
+       this.expedienteNnas = expedienteNnas;
+       this.estudioCasos = estudioCasos;
     }
    
-    public Integer getIdnna() {
+    public long getIdnna() {
         return this.idnna;
     }
     
-    public void setIdnna(Integer idnna) {
+    public void setIdnna(long idnna) {
         this.idnna = idnna;
     }
     public Car getCar() {
@@ -155,25 +157,25 @@ public class Nna  implements java.io.Serializable {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    public Byte getEdadAnhos() {
+    public Short getEdadAnhos() {
         return this.edadAnhos;
     }
     
-    public void setEdadAnhos(Byte edadAnhos) {
+    public void setEdadAnhos(Short edadAnhos) {
         this.edadAnhos = edadAnhos;
     }
-    public Byte getEdadMeses() {
+    public Short getEdadMeses() {
         return this.edadMeses;
     }
     
-    public void setEdadMeses(Byte edadMeses) {
+    public void setEdadMeses(Short edadMeses) {
         this.edadMeses = edadMeses;
     }
-    public Boolean getActaNacimiento() {
+    public Short getActaNacimiento() {
         return this.actaNacimiento;
     }
     
-    public void setActaNacimiento(Boolean actaNacimiento) {
+    public void setActaNacimiento(Short actaNacimiento) {
         this.actaNacimiento = actaNacimiento;
     }
     public String getCondicionSalud() {
@@ -239,117 +241,110 @@ public class Nna  implements java.io.Serializable {
     public void setClasificacion(String clasificacion) {
         this.clasificacion = clasificacion;
     }
-    public Boolean getIncesto() {
+    public Short getIncesto() {
         return this.incesto;
     }
     
-    public void setIncesto(Boolean incesto) {
+    public void setIncesto(Short incesto) {
         this.incesto = incesto;
     }
-    public Boolean getMental() {
+    public Short getMental() {
         return this.mental;
     }
     
-    public void setMental(Boolean mental) {
+    public void setMental(Short mental) {
         this.mental = mental;
     }
-    public Boolean getEpilepsia() {
+    public Short getEpilepsia() {
         return this.epilepsia;
     }
     
-    public void setEpilepsia(Boolean epilepsia) {
+    public void setEpilepsia(Short epilepsia) {
         this.epilepsia = epilepsia;
     }
-    public Boolean getAbuso() {
+    public Short getAbuso() {
         return this.abuso;
     }
     
-    public void setAbuso(Boolean abuso) {
+    public void setAbuso(Short abuso) {
         this.abuso = abuso;
     }
-    public Boolean getSifilis() {
+    public Short getSifilis() {
         return this.sifilis;
     }
     
-    public void setSifilis(Boolean sifilis) {
+    public void setSifilis(Short sifilis) {
         this.sifilis = sifilis;
     }
-    public Boolean getSeguiMedico() {
+    public Short getSeguiMedico() {
         return this.seguiMedico;
     }
     
-    public void setSeguiMedico(Boolean seguiMedico) {
+    public void setSeguiMedico(Short seguiMedico) {
         this.seguiMedico = seguiMedico;
     }
-    public Boolean getOperacion() {
+    public Short getOperacion() {
         return this.operacion;
     }
     
-    public void setOperacion(Boolean operacion) {
+    public void setOperacion(Short operacion) {
         this.operacion = operacion;
     }
-    public Boolean getHiperactivo() {
+    public Short getHiperactivo() {
         return this.hiperactivo;
     }
     
-    public void setHiperactivo(Boolean hiperactivo) {
+    public void setHiperactivo(Short hiperactivo) {
         this.hiperactivo = hiperactivo;
     }
-    public Boolean getEspecial() {
+    public Short getEspecial() {
         return this.especial;
     }
     
-    public void setEspecial(Boolean especial) {
+    public void setEspecial(Short especial) {
         this.especial = especial;
     }
-    public Boolean getEnfermo() {
+    public Short getEnfermo() {
         return this.enfermo;
     }
     
-    public void setEnfermo(Boolean enfermo) {
+    public void setEnfermo(Short enfermo) {
         this.enfermo = enfermo;
     }
-    public Boolean getMayor() {
+    public Short getMayor() {
         return this.mayor;
     }
     
-    public void setMayor(Boolean mayor) {
+    public void setMayor(Short mayor) {
         this.mayor = mayor;
     }
-    public Boolean getAdolescente() {
+    public Short getAdolescente() {
         return this.adolescente;
     }
     
-    public void setAdolescente(Boolean adolescente) {
+    public void setAdolescente(Short adolescente) {
         this.adolescente = adolescente;
     }
-    public Boolean getHermano() {
+    public Short getHermano() {
         return this.hermano;
     }
     
-    public void setHermano(Boolean hermano) {
+    public void setHermano(Short hermano) {
         this.hermano = hermano;
     }
-    public Boolean getNn() {
+    public Short getNn() {
         return this.nn;
     }
     
-    public void setNn(Boolean nn) {
+    public void setNn(Short nn) {
         this.nn = nn;
     }
-    public Set<EstudioCaso> getEstudioCasos() {
-        return this.estudioCasos;
+    public Set<Designacion> getDesignacions() {
+        return this.designacions;
     }
     
-    public void setEstudioCasos(Set<EstudioCaso> estudioCasos) {
-        this.estudioCasos = estudioCasos;
-    }
-    public Set<ExpedienteNna> getExpedienteNnas() {
-        return this.expedienteNnas;
-    }
-    
-    public void setExpedienteNnas(Set<ExpedienteNna> expedienteNnas) {
-        this.expedienteNnas = expedienteNnas;
+    public void setDesignacions(Set<Designacion> designacions) {
+        this.designacions = designacions;
     }
     public Set<Prioritario> getPrioritarios() {
         return this.prioritarios;
@@ -358,12 +353,19 @@ public class Nna  implements java.io.Serializable {
     public void setPrioritarios(Set<Prioritario> prioritarios) {
         this.prioritarios = prioritarios;
     }
-    public Set<Designacion> getDesignacions() {
-        return this.designacions;
+    public Set<ExpedienteNna> getExpedienteNnas() {
+        return this.expedienteNnas;
     }
     
-    public void setDesignacions(Set<Designacion> designacions) {
-        this.designacions = designacions;
+    public void setExpedienteNnas(Set<ExpedienteNna> expedienteNnas) {
+        this.expedienteNnas = expedienteNnas;
+    }
+    public Set<EstudioCaso> getEstudioCasos() {
+        return this.estudioCasos;
+    }
+    
+    public void setEstudioCasos(Set<EstudioCaso> estudioCasos) {
+        this.estudioCasos = estudioCasos;
     }
 
 

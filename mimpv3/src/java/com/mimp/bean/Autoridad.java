@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 
@@ -9,7 +9,7 @@ package com.mimp.bean;
 public class Autoridad  implements java.io.Serializable {
 
 
-     private Integer idautoridad;
+     private long idautoridad;
      private Entidad entidad;
      private String tipo;
 
@@ -17,19 +17,21 @@ public class Autoridad  implements java.io.Serializable {
     }
 
 	
-    public Autoridad(Entidad entidad) {
+    public Autoridad(long idautoridad, Entidad entidad) {
+        this.idautoridad = idautoridad;
         this.entidad = entidad;
     }
-    public Autoridad(Entidad entidad, String tipo) {
+    public Autoridad(long idautoridad, Entidad entidad, String tipo) {
+       this.idautoridad = idautoridad;
        this.entidad = entidad;
        this.tipo = tipo;
     }
    
-    public Integer getIdautoridad() {
+    public long getIdautoridad() {
         return this.idautoridad;
     }
     
-    public void setIdautoridad(Integer idautoridad) {
+    public void setIdautoridad(long idautoridad) {
         this.idautoridad = idautoridad;
     }
     public Entidad getEntidad() {

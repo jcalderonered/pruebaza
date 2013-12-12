@@ -1,36 +1,36 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.ResidenteAct" table="residente_act" catalog="mimp_adopcion">
-        <id name="idresidenteAct" type="java.lang.Integer">
-            <column name="idresidente_act" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.ResidenteAct" table="RESIDENTE_ACT" schema="MIMP_ADOPCION">
+        <id name="idresidenteAct" type="long">
+            <column name="IDRESIDENTE_ACT" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="infoFamilia" class="com.mimp.bean.InfoFamilia" fetch="select">
-            <column name="idinfo_familia" not-null="true" />
+            <column name="IDINFO_FAMILIA" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="nombre" type="string">
-            <column name="nombre" length="30" />
+            <column name="NOMBRE" length="30" />
         </property>
         <property name="apellidoP" type="string">
-            <column name="apellido_p" length="30" />
+            <column name="APELLIDO_P" length="30" />
         </property>
         <property name="apellidoM" type="string">
-            <column name="apellido_m" length="30" />
+            <column name="APELLIDO_M" length="30" />
         </property>
         <property name="parentesco" type="string">
-            <column name="parentesco" length="15" />
+            <column name="PARENTESCO" length="15" />
         </property>
-        <property name="edad" type="java.lang.Byte">
-            <column name="edad" />
+        <property name="edad" type="java.lang.Short">
+            <column name="EDAD" precision="3" scale="0" />
         </property>
         <property name="ocupacion" type="string">
-            <column name="ocupacion" length="50" />
+            <column name="OCUPACION" length="50" />
         </property>
         <property name="estadoSalud" type="string">
-            <column name="estado_salud" length="500" />
+            <column name="ESTADO_SALUD" length="500" />
         </property>
     </class>
 </hibernate-mapping>

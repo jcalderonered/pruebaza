@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class InfoFamilia  implements java.io.Serializable {
 
 
-     private Integer idinfoFamilia;
+     private long idinfoFamilia;
      private Familia familia;
      private String hojaReferencia;
      private String depRes;
@@ -20,52 +20,54 @@ public class InfoFamilia  implements java.io.Serializable {
      private String domicilio;
      private String propiedadVivienda;
      private String tipoVivienda;
-     private Integer areaVivTotal;
-     private Integer areaVivConst;
+     private Long areaVivTotal;
+     private Long areaVivConst;
      private String distVivienda;
-     private Boolean luz;
-     private Boolean agua;
-     private Boolean desague;
+     private Short luz;
+     private Short agua;
+     private Short desague;
      private String otrosServ;
      private String materConst;
      private String pared;
      private String techo;
      private String piso;
      private Character nivelSocioeconomico;
-     private Byte expectativaEdad;
+     private Short expectativaEdad;
      private String expectativaGenero;
      private String origenHijos;
-     private Boolean puedeViajar;
+     private Short puedeViajar;
      private String predisposicionAp;
      private String condicion;
      private String antecedenteFamilia;
      private Date fechaAntecedenteFamilia;
      private String observaciones;
-     private Boolean nnaIncesto;
-     private Boolean nnaMental;
-     private Boolean nnaEpilepsia;
-     private Boolean nnaAbuso;
-     private Boolean nnaSifilis;
-     private Boolean nnaSeguiMedico;
-     private Boolean nnaOperacion;
-     private Boolean nnaHiperactivo;
-     private Boolean nnaEspecial;
-     private Boolean nnaEnfermo;
-     private Boolean nnaMayor;
-     private Boolean nnaAdolescente;
-     private Boolean nnaHermano;
-     private Set<Adoptante> adoptantes = new HashSet<Adoptante>(0);
+     private Short nnaIncesto;
+     private Short nnaMental;
+     private Short nnaEpilepsia;
+     private Short nnaAbuso;
+     private Short nnaSifilis;
+     private Short nnaSeguiMedico;
+     private Short nnaOperacion;
+     private Short nnaHiperactivo;
+     private Short nnaEspecial;
+     private Short nnaEnfermo;
+     private Short nnaMayor;
+     private Short nnaAdolescente;
+     private Short nnaHermano;
      private Set<ResidenteAct> residenteActs = new HashSet<ResidenteAct>(0);
      private Set<HijoAct> hijoActs = new HashSet<HijoAct>(0);
+     private Set<Adoptante> adoptantes = new HashSet<Adoptante>(0);
 
     public InfoFamilia() {
     }
 
 	
-    public InfoFamilia(Familia familia) {
+    public InfoFamilia(long idinfoFamilia, Familia familia) {
+        this.idinfoFamilia = idinfoFamilia;
         this.familia = familia;
     }
-    public InfoFamilia(Familia familia, String hojaReferencia, String depRes, String paisRes, String domicilio, String propiedadVivienda, String tipoVivienda, Integer areaVivTotal, Integer areaVivConst, String distVivienda, Boolean luz, Boolean agua, Boolean desague, String otrosServ, String materConst, String pared, String techo, String piso, Character nivelSocioeconomico, Byte expectativaEdad, String expectativaGenero, String origenHijos, Boolean puedeViajar, String predisposicionAp, String condicion, String antecedenteFamilia, Date fechaAntecedenteFamilia, String observaciones, Boolean nnaIncesto, Boolean nnaMental, Boolean nnaEpilepsia, Boolean nnaAbuso, Boolean nnaSifilis, Boolean nnaSeguiMedico, Boolean nnaOperacion, Boolean nnaHiperactivo, Boolean nnaEspecial, Boolean nnaEnfermo, Boolean nnaMayor, Boolean nnaAdolescente, Boolean nnaHermano, Set<Adoptante> adoptantes, Set<ResidenteAct> residenteActs, Set<HijoAct> hijoActs) {
+    public InfoFamilia(long idinfoFamilia, Familia familia, String hojaReferencia, String depRes, String paisRes, String domicilio, String propiedadVivienda, String tipoVivienda, Long areaVivTotal, Long areaVivConst, String distVivienda, Short luz, Short agua, Short desague, String otrosServ, String materConst, String pared, String techo, String piso, Character nivelSocioeconomico, Short expectativaEdad, String expectativaGenero, String origenHijos, Short puedeViajar, String predisposicionAp, String condicion, String antecedenteFamilia, Date fechaAntecedenteFamilia, String observaciones, Short nnaIncesto, Short nnaMental, Short nnaEpilepsia, Short nnaAbuso, Short nnaSifilis, Short nnaSeguiMedico, Short nnaOperacion, Short nnaHiperactivo, Short nnaEspecial, Short nnaEnfermo, Short nnaMayor, Short nnaAdolescente, Short nnaHermano, Set<ResidenteAct> residenteActs, Set<HijoAct> hijoActs, Set<Adoptante> adoptantes) {
+       this.idinfoFamilia = idinfoFamilia;
        this.familia = familia;
        this.hojaReferencia = hojaReferencia;
        this.depRes = depRes;
@@ -107,16 +109,16 @@ public class InfoFamilia  implements java.io.Serializable {
        this.nnaMayor = nnaMayor;
        this.nnaAdolescente = nnaAdolescente;
        this.nnaHermano = nnaHermano;
-       this.adoptantes = adoptantes;
        this.residenteActs = residenteActs;
        this.hijoActs = hijoActs;
+       this.adoptantes = adoptantes;
     }
    
-    public Integer getIdinfoFamilia() {
+    public long getIdinfoFamilia() {
         return this.idinfoFamilia;
     }
     
-    public void setIdinfoFamilia(Integer idinfoFamilia) {
+    public void setIdinfoFamilia(long idinfoFamilia) {
         this.idinfoFamilia = idinfoFamilia;
     }
     public Familia getFamilia() {
@@ -168,18 +170,18 @@ public class InfoFamilia  implements java.io.Serializable {
     public void setTipoVivienda(String tipoVivienda) {
         this.tipoVivienda = tipoVivienda;
     }
-    public Integer getAreaVivTotal() {
+    public Long getAreaVivTotal() {
         return this.areaVivTotal;
     }
     
-    public void setAreaVivTotal(Integer areaVivTotal) {
+    public void setAreaVivTotal(Long areaVivTotal) {
         this.areaVivTotal = areaVivTotal;
     }
-    public Integer getAreaVivConst() {
+    public Long getAreaVivConst() {
         return this.areaVivConst;
     }
     
-    public void setAreaVivConst(Integer areaVivConst) {
+    public void setAreaVivConst(Long areaVivConst) {
         this.areaVivConst = areaVivConst;
     }
     public String getDistVivienda() {
@@ -189,25 +191,25 @@ public class InfoFamilia  implements java.io.Serializable {
     public void setDistVivienda(String distVivienda) {
         this.distVivienda = distVivienda;
     }
-    public Boolean getLuz() {
+    public Short getLuz() {
         return this.luz;
     }
     
-    public void setLuz(Boolean luz) {
+    public void setLuz(Short luz) {
         this.luz = luz;
     }
-    public Boolean getAgua() {
+    public Short getAgua() {
         return this.agua;
     }
     
-    public void setAgua(Boolean agua) {
+    public void setAgua(Short agua) {
         this.agua = agua;
     }
-    public Boolean getDesague() {
+    public Short getDesague() {
         return this.desague;
     }
     
-    public void setDesague(Boolean desague) {
+    public void setDesague(Short desague) {
         this.desague = desague;
     }
     public String getOtrosServ() {
@@ -252,11 +254,11 @@ public class InfoFamilia  implements java.io.Serializable {
     public void setNivelSocioeconomico(Character nivelSocioeconomico) {
         this.nivelSocioeconomico = nivelSocioeconomico;
     }
-    public Byte getExpectativaEdad() {
+    public Short getExpectativaEdad() {
         return this.expectativaEdad;
     }
     
-    public void setExpectativaEdad(Byte expectativaEdad) {
+    public void setExpectativaEdad(Short expectativaEdad) {
         this.expectativaEdad = expectativaEdad;
     }
     public String getExpectativaGenero() {
@@ -273,11 +275,11 @@ public class InfoFamilia  implements java.io.Serializable {
     public void setOrigenHijos(String origenHijos) {
         this.origenHijos = origenHijos;
     }
-    public Boolean getPuedeViajar() {
+    public Short getPuedeViajar() {
         return this.puedeViajar;
     }
     
-    public void setPuedeViajar(Boolean puedeViajar) {
+    public void setPuedeViajar(Short puedeViajar) {
         this.puedeViajar = puedeViajar;
     }
     public String getPredisposicionAp() {
@@ -315,103 +317,96 @@ public class InfoFamilia  implements java.io.Serializable {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    public Boolean getNnaIncesto() {
+    public Short getNnaIncesto() {
         return this.nnaIncesto;
     }
     
-    public void setNnaIncesto(Boolean nnaIncesto) {
+    public void setNnaIncesto(Short nnaIncesto) {
         this.nnaIncesto = nnaIncesto;
     }
-    public Boolean getNnaMental() {
+    public Short getNnaMental() {
         return this.nnaMental;
     }
     
-    public void setNnaMental(Boolean nnaMental) {
+    public void setNnaMental(Short nnaMental) {
         this.nnaMental = nnaMental;
     }
-    public Boolean getNnaEpilepsia() {
+    public Short getNnaEpilepsia() {
         return this.nnaEpilepsia;
     }
     
-    public void setNnaEpilepsia(Boolean nnaEpilepsia) {
+    public void setNnaEpilepsia(Short nnaEpilepsia) {
         this.nnaEpilepsia = nnaEpilepsia;
     }
-    public Boolean getNnaAbuso() {
+    public Short getNnaAbuso() {
         return this.nnaAbuso;
     }
     
-    public void setNnaAbuso(Boolean nnaAbuso) {
+    public void setNnaAbuso(Short nnaAbuso) {
         this.nnaAbuso = nnaAbuso;
     }
-    public Boolean getNnaSifilis() {
+    public Short getNnaSifilis() {
         return this.nnaSifilis;
     }
     
-    public void setNnaSifilis(Boolean nnaSifilis) {
+    public void setNnaSifilis(Short nnaSifilis) {
         this.nnaSifilis = nnaSifilis;
     }
-    public Boolean getNnaSeguiMedico() {
+    public Short getNnaSeguiMedico() {
         return this.nnaSeguiMedico;
     }
     
-    public void setNnaSeguiMedico(Boolean nnaSeguiMedico) {
+    public void setNnaSeguiMedico(Short nnaSeguiMedico) {
         this.nnaSeguiMedico = nnaSeguiMedico;
     }
-    public Boolean getNnaOperacion() {
+    public Short getNnaOperacion() {
         return this.nnaOperacion;
     }
     
-    public void setNnaOperacion(Boolean nnaOperacion) {
+    public void setNnaOperacion(Short nnaOperacion) {
         this.nnaOperacion = nnaOperacion;
     }
-    public Boolean getNnaHiperactivo() {
+    public Short getNnaHiperactivo() {
         return this.nnaHiperactivo;
     }
     
-    public void setNnaHiperactivo(Boolean nnaHiperactivo) {
+    public void setNnaHiperactivo(Short nnaHiperactivo) {
         this.nnaHiperactivo = nnaHiperactivo;
     }
-    public Boolean getNnaEspecial() {
+    public Short getNnaEspecial() {
         return this.nnaEspecial;
     }
     
-    public void setNnaEspecial(Boolean nnaEspecial) {
+    public void setNnaEspecial(Short nnaEspecial) {
         this.nnaEspecial = nnaEspecial;
     }
-    public Boolean getNnaEnfermo() {
+    public Short getNnaEnfermo() {
         return this.nnaEnfermo;
     }
     
-    public void setNnaEnfermo(Boolean nnaEnfermo) {
+    public void setNnaEnfermo(Short nnaEnfermo) {
         this.nnaEnfermo = nnaEnfermo;
     }
-    public Boolean getNnaMayor() {
+    public Short getNnaMayor() {
         return this.nnaMayor;
     }
     
-    public void setNnaMayor(Boolean nnaMayor) {
+    public void setNnaMayor(Short nnaMayor) {
         this.nnaMayor = nnaMayor;
     }
-    public Boolean getNnaAdolescente() {
+    public Short getNnaAdolescente() {
         return this.nnaAdolescente;
     }
     
-    public void setNnaAdolescente(Boolean nnaAdolescente) {
+    public void setNnaAdolescente(Short nnaAdolescente) {
         this.nnaAdolescente = nnaAdolescente;
     }
-    public Boolean getNnaHermano() {
+    public Short getNnaHermano() {
         return this.nnaHermano;
     }
     
-    public void setNnaHermano(Boolean nnaHermano) {
+    public void setNnaHermano(Short nnaHermano) {
         this.nnaHermano = nnaHermano;
-    }
-    public Set<Adoptante> getAdoptantes() {
-        return this.adoptantes;
-    }
-    
-    public void setAdoptantes(Set<Adoptante> adoptantes) {
-        this.adoptantes = adoptantes;
     }
     public Set<ResidenteAct> getResidenteActs() {
         return this.residenteActs;
@@ -426,6 +421,13 @@ public class InfoFamilia  implements java.io.Serializable {
     
     public void setHijoActs(Set<HijoAct> hijoActs) {
         this.hijoActs = hijoActs;
+    }
+    public Set<Adoptante> getAdoptantes() {
+        return this.adoptantes;
+    }
+    
+    public void setAdoptantes(Set<Adoptante> adoptantes) {
+        this.adoptantes = adoptantes;
     }
 
 

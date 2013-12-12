@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -11,18 +11,23 @@ import java.util.Set;
 public class Taller  implements java.io.Serializable {
 
 
-     private Integer idtaller;
+     private long idtaller;
      private String NSesion;
      private String tipoTaller;
      private String nombre;
-     private Boolean habilitado;
-     private Byte NReunion;
+     private Short habilitado;
+     private Short NReunion;
      private Set<Grupo> grupos = new HashSet<Grupo>(0);
 
     public Taller() {
     }
 
-    public Taller(String NSesion, String tipoTaller, String nombre, Boolean habilitado, Byte NReunion, Set<Grupo> grupos) {
+	
+    public Taller(long idtaller) {
+        this.idtaller = idtaller;
+    }
+    public Taller(long idtaller, String NSesion, String tipoTaller, String nombre, Short habilitado, Short NReunion, Set<Grupo> grupos) {
+       this.idtaller = idtaller;
        this.NSesion = NSesion;
        this.tipoTaller = tipoTaller;
        this.nombre = nombre;
@@ -31,11 +36,11 @@ public class Taller  implements java.io.Serializable {
        this.grupos = grupos;
     }
    
-    public Integer getIdtaller() {
+    public long getIdtaller() {
         return this.idtaller;
     }
     
-    public void setIdtaller(Integer idtaller) {
+    public void setIdtaller(long idtaller) {
         this.idtaller = idtaller;
     }
     public String getNSesion() {
@@ -59,18 +64,18 @@ public class Taller  implements java.io.Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public Boolean getHabilitado() {
+    public Short getHabilitado() {
         return this.habilitado;
     }
     
-    public void setHabilitado(Boolean habilitado) {
+    public void setHabilitado(Short habilitado) {
         this.habilitado = habilitado;
     }
-    public Byte getNReunion() {
+    public Short getNReunion() {
         return this.NReunion;
     }
     
-    public void setNReunion(Byte NReunion) {
+    public void setNReunion(Short NReunion) {
         this.NReunion = NReunion;
     }
     public Set<Grupo> getGrupos() {

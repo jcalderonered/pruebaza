@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 
@@ -9,13 +9,13 @@ package com.mimp.bean;
 public class ResidenteAct  implements java.io.Serializable {
 
 
-     private Integer idresidenteAct;
+     private long idresidenteAct;
      private InfoFamilia infoFamilia;
      private String nombre;
      private String apellidoP;
      private String apellidoM;
      private String parentesco;
-     private Byte edad;
+     private Short edad;
      private String ocupacion;
      private String estadoSalud;
 
@@ -23,10 +23,12 @@ public class ResidenteAct  implements java.io.Serializable {
     }
 
 	
-    public ResidenteAct(InfoFamilia infoFamilia) {
+    public ResidenteAct(long idresidenteAct, InfoFamilia infoFamilia) {
+        this.idresidenteAct = idresidenteAct;
         this.infoFamilia = infoFamilia;
     }
-    public ResidenteAct(InfoFamilia infoFamilia, String nombre, String apellidoP, String apellidoM, String parentesco, Byte edad, String ocupacion, String estadoSalud) {
+    public ResidenteAct(long idresidenteAct, InfoFamilia infoFamilia, String nombre, String apellidoP, String apellidoM, String parentesco, Short edad, String ocupacion, String estadoSalud) {
+       this.idresidenteAct = idresidenteAct;
        this.infoFamilia = infoFamilia;
        this.nombre = nombre;
        this.apellidoP = apellidoP;
@@ -37,11 +39,11 @@ public class ResidenteAct  implements java.io.Serializable {
        this.estadoSalud = estadoSalud;
     }
    
-    public Integer getIdresidenteAct() {
+    public long getIdresidenteAct() {
         return this.idresidenteAct;
     }
     
-    public void setIdresidenteAct(Integer idresidenteAct) {
+    public void setIdresidenteAct(long idresidenteAct) {
         this.idresidenteAct = idresidenteAct;
     }
     public InfoFamilia getInfoFamilia() {
@@ -79,11 +81,11 @@ public class ResidenteAct  implements java.io.Serializable {
     public void setParentesco(String parentesco) {
         this.parentesco = parentesco;
     }
-    public Byte getEdad() {
+    public Short getEdad() {
         return this.edad;
     }
     
-    public void setEdad(Byte edad) {
+    public void setEdad(Short edad) {
         this.edad = edad;
     }
     public String getOcupacion() {

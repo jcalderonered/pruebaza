@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.AsistenciaFT" table="asistencia_f_t" catalog="mimp_adopcion">
-        <id name="idasistenciaFT" type="java.lang.Integer">
-            <column name="idasistencia_f_t" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.AsistenciaFT" table="ASISTENCIA_F_T" schema="MIMP_ADOPCION">
+        <id name="idasistenciaFT" type="long">
+            <column name="IDASISTENCIA_F_T" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="formularioSesion" class="com.mimp.bean.FormularioSesion" fetch="select">
-            <column name="idformulario_sesion" not-null="true" />
+            <column name="IDFORMULARIO_SESION" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <many-to-one name="turno" class="com.mimp.bean.Turno" fetch="select">
-            <column name="idturno" not-null="true" />
+            <column name="IDTURNO" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="asistencia" type="java.lang.Character">
-            <column name="asistencia" length="1" />
+            <column name="ASISTENCIA" length="1" />
         </property>
-        <property name="inasJus" type="java.lang.Boolean">
-            <column name="inas_jus" />
+        <property name="inasJus" type="java.lang.Short">
+            <column name="INAS_JUS" precision="3" scale="0" />
         </property>
     </class>
 </hibernate-mapping>

@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 
@@ -9,41 +9,43 @@ package com.mimp.bean;
 public class EvalLegal  implements java.io.Serializable {
 
 
-     private Integer idevalLegal;
+     private long idevalLegal;
      private Evaluacion evaluacion;
-     private Boolean solicitudDga;
+     private Short solicitudDga;
      private String solicitudDgaObs;
-     private Boolean evalSocial;
+     private Short evalSocial;
      private String evalSocialObs;
-     private Boolean evalPsicologica;
+     private Short evalPsicologica;
      private String evalPsicologicaObs;
-     private Boolean certDomiciliario;
+     private Short certDomiciliario;
      private String certDomiciliarioObs;
-     private Boolean partidaMatrimonio;
+     private Short partidaMatrimonio;
      private String partidaMatrimonioObs;
-     private Boolean sentenciaDivorcio;
+     private Short sentenciaDivorcio;
      private String sentenciaDivorcioObs;
-     private Boolean partDefuncCony;
+     private Short partDefuncCony;
      private String partDefuncConyObs;
-     private Boolean partNacHijBio;
+     private Short partNacHijBio;
      private String partNacHijBioObs;
-     private Boolean partNacHijAdop;
+     private Short partNacHijAdop;
      private String partNacHijAdopObs;
-     private Boolean reportSegPostAdopDga;
+     private Short reportSegPostAdopDga;
      private String reportSegPostAdopDgaObs;
-     private Boolean fotografiaAdopHogar;
+     private Short fotografiaAdopHogar;
      private String fotografiaAdopHogarObs;
-     private Boolean compromisoPostAdop;
+     private Short compromisoPostAdop;
      private String compromisoPostAdopObs;
 
     public EvalLegal() {
     }
 
 	
-    public EvalLegal(Evaluacion evaluacion) {
+    public EvalLegal(long idevalLegal, Evaluacion evaluacion) {
+        this.idevalLegal = idevalLegal;
         this.evaluacion = evaluacion;
     }
-    public EvalLegal(Evaluacion evaluacion, Boolean solicitudDga, String solicitudDgaObs, Boolean evalSocial, String evalSocialObs, Boolean evalPsicologica, String evalPsicologicaObs, Boolean certDomiciliario, String certDomiciliarioObs, Boolean partidaMatrimonio, String partidaMatrimonioObs, Boolean sentenciaDivorcio, String sentenciaDivorcioObs, Boolean partDefuncCony, String partDefuncConyObs, Boolean partNacHijBio, String partNacHijBioObs, Boolean partNacHijAdop, String partNacHijAdopObs, Boolean reportSegPostAdopDga, String reportSegPostAdopDgaObs, Boolean fotografiaAdopHogar, String fotografiaAdopHogarObs, Boolean compromisoPostAdop, String compromisoPostAdopObs) {
+    public EvalLegal(long idevalLegal, Evaluacion evaluacion, Short solicitudDga, String solicitudDgaObs, Short evalSocial, String evalSocialObs, Short evalPsicologica, String evalPsicologicaObs, Short certDomiciliario, String certDomiciliarioObs, Short partidaMatrimonio, String partidaMatrimonioObs, Short sentenciaDivorcio, String sentenciaDivorcioObs, Short partDefuncCony, String partDefuncConyObs, Short partNacHijBio, String partNacHijBioObs, Short partNacHijAdop, String partNacHijAdopObs, Short reportSegPostAdopDga, String reportSegPostAdopDgaObs, Short fotografiaAdopHogar, String fotografiaAdopHogarObs, Short compromisoPostAdop, String compromisoPostAdopObs) {
+       this.idevalLegal = idevalLegal;
        this.evaluacion = evaluacion;
        this.solicitudDga = solicitudDga;
        this.solicitudDgaObs = solicitudDgaObs;
@@ -71,11 +73,11 @@ public class EvalLegal  implements java.io.Serializable {
        this.compromisoPostAdopObs = compromisoPostAdopObs;
     }
    
-    public Integer getIdevalLegal() {
+    public long getIdevalLegal() {
         return this.idevalLegal;
     }
     
-    public void setIdevalLegal(Integer idevalLegal) {
+    public void setIdevalLegal(long idevalLegal) {
         this.idevalLegal = idevalLegal;
     }
     public Evaluacion getEvaluacion() {
@@ -85,11 +87,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setEvaluacion(Evaluacion evaluacion) {
         this.evaluacion = evaluacion;
     }
-    public Boolean getSolicitudDga() {
+    public Short getSolicitudDga() {
         return this.solicitudDga;
     }
     
-    public void setSolicitudDga(Boolean solicitudDga) {
+    public void setSolicitudDga(Short solicitudDga) {
         this.solicitudDga = solicitudDga;
     }
     public String getSolicitudDgaObs() {
@@ -99,11 +101,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setSolicitudDgaObs(String solicitudDgaObs) {
         this.solicitudDgaObs = solicitudDgaObs;
     }
-    public Boolean getEvalSocial() {
+    public Short getEvalSocial() {
         return this.evalSocial;
     }
     
-    public void setEvalSocial(Boolean evalSocial) {
+    public void setEvalSocial(Short evalSocial) {
         this.evalSocial = evalSocial;
     }
     public String getEvalSocialObs() {
@@ -113,11 +115,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setEvalSocialObs(String evalSocialObs) {
         this.evalSocialObs = evalSocialObs;
     }
-    public Boolean getEvalPsicologica() {
+    public Short getEvalPsicologica() {
         return this.evalPsicologica;
     }
     
-    public void setEvalPsicologica(Boolean evalPsicologica) {
+    public void setEvalPsicologica(Short evalPsicologica) {
         this.evalPsicologica = evalPsicologica;
     }
     public String getEvalPsicologicaObs() {
@@ -127,11 +129,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setEvalPsicologicaObs(String evalPsicologicaObs) {
         this.evalPsicologicaObs = evalPsicologicaObs;
     }
-    public Boolean getCertDomiciliario() {
+    public Short getCertDomiciliario() {
         return this.certDomiciliario;
     }
     
-    public void setCertDomiciliario(Boolean certDomiciliario) {
+    public void setCertDomiciliario(Short certDomiciliario) {
         this.certDomiciliario = certDomiciliario;
     }
     public String getCertDomiciliarioObs() {
@@ -141,11 +143,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setCertDomiciliarioObs(String certDomiciliarioObs) {
         this.certDomiciliarioObs = certDomiciliarioObs;
     }
-    public Boolean getPartidaMatrimonio() {
+    public Short getPartidaMatrimonio() {
         return this.partidaMatrimonio;
     }
     
-    public void setPartidaMatrimonio(Boolean partidaMatrimonio) {
+    public void setPartidaMatrimonio(Short partidaMatrimonio) {
         this.partidaMatrimonio = partidaMatrimonio;
     }
     public String getPartidaMatrimonioObs() {
@@ -155,11 +157,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setPartidaMatrimonioObs(String partidaMatrimonioObs) {
         this.partidaMatrimonioObs = partidaMatrimonioObs;
     }
-    public Boolean getSentenciaDivorcio() {
+    public Short getSentenciaDivorcio() {
         return this.sentenciaDivorcio;
     }
     
-    public void setSentenciaDivorcio(Boolean sentenciaDivorcio) {
+    public void setSentenciaDivorcio(Short sentenciaDivorcio) {
         this.sentenciaDivorcio = sentenciaDivorcio;
     }
     public String getSentenciaDivorcioObs() {
@@ -169,11 +171,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setSentenciaDivorcioObs(String sentenciaDivorcioObs) {
         this.sentenciaDivorcioObs = sentenciaDivorcioObs;
     }
-    public Boolean getPartDefuncCony() {
+    public Short getPartDefuncCony() {
         return this.partDefuncCony;
     }
     
-    public void setPartDefuncCony(Boolean partDefuncCony) {
+    public void setPartDefuncCony(Short partDefuncCony) {
         this.partDefuncCony = partDefuncCony;
     }
     public String getPartDefuncConyObs() {
@@ -183,11 +185,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setPartDefuncConyObs(String partDefuncConyObs) {
         this.partDefuncConyObs = partDefuncConyObs;
     }
-    public Boolean getPartNacHijBio() {
+    public Short getPartNacHijBio() {
         return this.partNacHijBio;
     }
     
-    public void setPartNacHijBio(Boolean partNacHijBio) {
+    public void setPartNacHijBio(Short partNacHijBio) {
         this.partNacHijBio = partNacHijBio;
     }
     public String getPartNacHijBioObs() {
@@ -197,11 +199,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setPartNacHijBioObs(String partNacHijBioObs) {
         this.partNacHijBioObs = partNacHijBioObs;
     }
-    public Boolean getPartNacHijAdop() {
+    public Short getPartNacHijAdop() {
         return this.partNacHijAdop;
     }
     
-    public void setPartNacHijAdop(Boolean partNacHijAdop) {
+    public void setPartNacHijAdop(Short partNacHijAdop) {
         this.partNacHijAdop = partNacHijAdop;
     }
     public String getPartNacHijAdopObs() {
@@ -211,11 +213,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setPartNacHijAdopObs(String partNacHijAdopObs) {
         this.partNacHijAdopObs = partNacHijAdopObs;
     }
-    public Boolean getReportSegPostAdopDga() {
+    public Short getReportSegPostAdopDga() {
         return this.reportSegPostAdopDga;
     }
     
-    public void setReportSegPostAdopDga(Boolean reportSegPostAdopDga) {
+    public void setReportSegPostAdopDga(Short reportSegPostAdopDga) {
         this.reportSegPostAdopDga = reportSegPostAdopDga;
     }
     public String getReportSegPostAdopDgaObs() {
@@ -225,11 +227,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setReportSegPostAdopDgaObs(String reportSegPostAdopDgaObs) {
         this.reportSegPostAdopDgaObs = reportSegPostAdopDgaObs;
     }
-    public Boolean getFotografiaAdopHogar() {
+    public Short getFotografiaAdopHogar() {
         return this.fotografiaAdopHogar;
     }
     
-    public void setFotografiaAdopHogar(Boolean fotografiaAdopHogar) {
+    public void setFotografiaAdopHogar(Short fotografiaAdopHogar) {
         this.fotografiaAdopHogar = fotografiaAdopHogar;
     }
     public String getFotografiaAdopHogarObs() {
@@ -239,11 +241,11 @@ public class EvalLegal  implements java.io.Serializable {
     public void setFotografiaAdopHogarObs(String fotografiaAdopHogarObs) {
         this.fotografiaAdopHogarObs = fotografiaAdopHogarObs;
     }
-    public Boolean getCompromisoPostAdop() {
+    public Short getCompromisoPostAdop() {
         return this.compromisoPostAdop;
     }
     
-    public void setCompromisoPostAdop(Boolean compromisoPostAdop) {
+    public void setCompromisoPostAdop(Short compromisoPostAdop) {
         this.compromisoPostAdop = compromisoPostAdop;
     }
     public String getCompromisoPostAdopObs() {

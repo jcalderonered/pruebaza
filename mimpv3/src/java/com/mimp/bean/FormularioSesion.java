@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class FormularioSesion  implements java.io.Serializable {
 
 
-     private Integer idformularioSesion;
+     private long idformularioSesion;
      private Familia familia;
      private Sesion sesion;
      private Date fechaSol;
@@ -23,18 +23,20 @@ public class FormularioSesion  implements java.io.Serializable {
      private String direccionRes;
      private String estadoCivil;
      private String telefono;
-     private Set<AsistenciaFT> asistenciaFTs = new HashSet<AsistenciaFT>(0);
      private Set<Asistente> asistentes = new HashSet<Asistente>(0);
+     private Set<AsistenciaFT> asistenciaFTs = new HashSet<AsistenciaFT>(0);
 
     public FormularioSesion() {
     }
 
 	
-    public FormularioSesion(Familia familia, Sesion sesion) {
+    public FormularioSesion(long idformularioSesion, Familia familia, Sesion sesion) {
+        this.idformularioSesion = idformularioSesion;
         this.familia = familia;
         this.sesion = sesion;
     }
-    public FormularioSesion(Familia familia, Sesion sesion, Date fechaSol, String paisRes, String depRes, String provRes, String distritoRes, String direccionRes, String estadoCivil, String telefono, Set<AsistenciaFT> asistenciaFTs, Set<Asistente> asistentes) {
+    public FormularioSesion(long idformularioSesion, Familia familia, Sesion sesion, Date fechaSol, String paisRes, String depRes, String provRes, String distritoRes, String direccionRes, String estadoCivil, String telefono, Set<Asistente> asistentes, Set<AsistenciaFT> asistenciaFTs) {
+       this.idformularioSesion = idformularioSesion;
        this.familia = familia;
        this.sesion = sesion;
        this.fechaSol = fechaSol;
@@ -45,15 +47,15 @@ public class FormularioSesion  implements java.io.Serializable {
        this.direccionRes = direccionRes;
        this.estadoCivil = estadoCivil;
        this.telefono = telefono;
-       this.asistenciaFTs = asistenciaFTs;
        this.asistentes = asistentes;
+       this.asistenciaFTs = asistenciaFTs;
     }
    
-    public Integer getIdformularioSesion() {
+    public long getIdformularioSesion() {
         return this.idformularioSesion;
     }
     
-    public void setIdformularioSesion(Integer idformularioSesion) {
+    public void setIdformularioSesion(long idformularioSesion) {
         this.idformularioSesion = idformularioSesion;
     }
     public Familia getFamilia() {
@@ -126,19 +128,19 @@ public class FormularioSesion  implements java.io.Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    public Set<AsistenciaFT> getAsistenciaFTs() {
-        return this.asistenciaFTs;
-    }
-    
-    public void setAsistenciaFTs(Set<AsistenciaFT> asistenciaFTs) {
-        this.asistenciaFTs = asistenciaFTs;
-    }
     public Set<Asistente> getAsistentes() {
         return this.asistentes;
     }
     
     public void setAsistentes(Set<Asistente> asistentes) {
         this.asistentes = asistentes;
+    }
+    public Set<AsistenciaFT> getAsistenciaFTs() {
+        return this.asistenciaFTs;
+    }
+    
+    public void setAsistenciaFTs(Set<AsistenciaFT> asistenciaFTs) {
+        this.asistenciaFTs = asistenciaFTs;
     }
 
 

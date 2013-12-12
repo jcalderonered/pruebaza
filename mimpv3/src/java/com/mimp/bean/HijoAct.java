@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -10,26 +10,28 @@ import java.util.Date;
 public class HijoAct  implements java.io.Serializable {
 
 
-     private Integer idhijoAct;
+     private long idhijoAct;
      private InfoFamilia infoFamilia;
      private Date fechaNac;
-     private Boolean biologico;
+     private Short biologico;
      private Date fechaAdop;
      private String nombre;
      private String apellidoP;
      private String apellidoM;
      private String ocupacion;
      private String estadoSalud;
-     private Boolean reside;
+     private Short reside;
 
     public HijoAct() {
     }
 
 	
-    public HijoAct(InfoFamilia infoFamilia) {
+    public HijoAct(long idhijoAct, InfoFamilia infoFamilia) {
+        this.idhijoAct = idhijoAct;
         this.infoFamilia = infoFamilia;
     }
-    public HijoAct(InfoFamilia infoFamilia, Date fechaNac, Boolean biologico, Date fechaAdop, String nombre, String apellidoP, String apellidoM, String ocupacion, String estadoSalud, Boolean reside) {
+    public HijoAct(long idhijoAct, InfoFamilia infoFamilia, Date fechaNac, Short biologico, Date fechaAdop, String nombre, String apellidoP, String apellidoM, String ocupacion, String estadoSalud, Short reside) {
+       this.idhijoAct = idhijoAct;
        this.infoFamilia = infoFamilia;
        this.fechaNac = fechaNac;
        this.biologico = biologico;
@@ -42,11 +44,11 @@ public class HijoAct  implements java.io.Serializable {
        this.reside = reside;
     }
    
-    public Integer getIdhijoAct() {
+    public long getIdhijoAct() {
         return this.idhijoAct;
     }
     
-    public void setIdhijoAct(Integer idhijoAct) {
+    public void setIdhijoAct(long idhijoAct) {
         this.idhijoAct = idhijoAct;
     }
     public InfoFamilia getInfoFamilia() {
@@ -63,11 +65,11 @@ public class HijoAct  implements java.io.Serializable {
     public void setFechaNac(Date fechaNac) {
         this.fechaNac = fechaNac;
     }
-    public Boolean getBiologico() {
+    public Short getBiologico() {
         return this.biologico;
     }
     
-    public void setBiologico(Boolean biologico) {
+    public void setBiologico(Short biologico) {
         this.biologico = biologico;
     }
     public Date getFechaAdop() {
@@ -112,11 +114,11 @@ public class HijoAct  implements java.io.Serializable {
     public void setEstadoSalud(String estadoSalud) {
         this.estadoSalud = estadoSalud;
     }
-    public Boolean getReside() {
+    public Short getReside() {
         return this.reside;
     }
     
-    public void setReside(Boolean reside) {
+    public void setReside(Short reside) {
         this.reside = reside;
     }
 

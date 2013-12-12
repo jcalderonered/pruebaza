@@ -1,33 +1,33 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Atencion" table="atencion" catalog="mimp_adopcion">
-        <id name="idatencion" type="java.lang.Integer">
-            <column name="idatencion" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Atencion" table="ATENCION" schema="MIMP_ADOPCION">
+        <id name="idatencion" type="long">
+            <column name="IDATENCION" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="personal" class="com.mimp.bean.Personal" fetch="select">
-            <column name="idpersonal" not-null="true" />
+            <column name="IDPERSONAL" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <many-to-one name="familia" class="com.mimp.bean.Familia" fetch="select">
-            <column name="idfamilia" not-null="true" />
+            <column name="IDFAMILIA" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="fecha" type="date">
-            <column name="fecha" length="10" />
+            <column name="FECHA" length="7" />
         </property>
-        <property name="hora" type="time">
-            <column name="hora" length="8" />
+        <property name="hora" type="serializable">
+            <column name="HORA" />
         </property>
         <property name="tipoAtencion" type="string">
-            <column name="tipo_atencion" length="30" />
+            <column name="TIPO_ATENCION" length="30" />
         </property>
         <property name="detalle" type="string">
-            <column name="detalle" length="200" />
+            <column name="DETALLE" length="200" />
         </property>
         <property name="observacion" type="string">
-            <column name="observacion" length="200" />
+            <column name="OBSERVACION" length="200" />
         </property>
     </class>
 </hibernate-mapping>

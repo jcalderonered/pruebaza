@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 
@@ -9,7 +9,7 @@ package com.mimp.bean;
 public class Prioritario  implements java.io.Serializable {
 
 
-     private Integer idprioritario;
+     private long idprioritario;
      private Nna nna;
      private String codMayor;
      private String codAdolescente;
@@ -25,10 +25,12 @@ public class Prioritario  implements java.io.Serializable {
     }
 
 	
-    public Prioritario(Nna nna) {
+    public Prioritario(long idprioritario, Nna nna) {
+        this.idprioritario = idprioritario;
         this.nna = nna;
     }
-    public Prioritario(Nna nna, String codMayor, String codAdolescente, String codHermano, String codSalud, String codSeguimiento, String diagnostico, String grupoReferencia, String profesional, String comentario) {
+    public Prioritario(long idprioritario, Nna nna, String codMayor, String codAdolescente, String codHermano, String codSalud, String codSeguimiento, String diagnostico, String grupoReferencia, String profesional, String comentario) {
+       this.idprioritario = idprioritario;
        this.nna = nna;
        this.codMayor = codMayor;
        this.codAdolescente = codAdolescente;
@@ -41,11 +43,11 @@ public class Prioritario  implements java.io.Serializable {
        this.comentario = comentario;
     }
    
-    public Integer getIdprioritario() {
+    public long getIdprioritario() {
         return this.idprioritario;
     }
     
-    public void setIdprioritario(Integer idprioritario) {
+    public void setIdprioritario(long idprioritario) {
         this.idprioritario = idprioritario;
     }
     public Nna getNna() {

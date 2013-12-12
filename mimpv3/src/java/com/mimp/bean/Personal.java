@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class Personal  implements java.io.Serializable {
 
 
-     private Integer idpersonal;
+     private long idpersonal;
      private Unidad unidad;
      private String nombre;
      private String apellidoP;
@@ -24,26 +24,28 @@ public class Personal  implements java.io.Serializable {
      private String profesion;
      private String gradoInstruccion;
      private String cargo;
-     private Integer dni;
+     private Long dni;
      private Date fechaNacimiento;
      private String regimen;
      private Date fechaIngreso;
      private String domicilio;
      private String rol;
-     private Set<Atencion> atencions = new HashSet<Atencion>(0);
-     private Set<Log> logs = new HashSet<Log>(0);
      private Set<InformePostAdoptivo> informePostAdoptivos = new HashSet<InformePostAdoptivo>(0);
      private Set<Designacion> designacions = new HashSet<Designacion>(0);
      private Set<Evaluacion> evaluacions = new HashSet<Evaluacion>(0);
+     private Set<Atencion> atencions = new HashSet<Atencion>(0);
+     private Set<Log> logs = new HashSet<Log>(0);
 
     public Personal() {
     }
 
 	
-    public Personal(Unidad unidad) {
+    public Personal(long idpersonal, Unidad unidad) {
+        this.idpersonal = idpersonal;
         this.unidad = unidad;
     }
-    public Personal(Unidad unidad, String nombre, String apellidoP, String apellidoM, String user, String pass, String correoTrabajo, String correoPersonal, String profesion, String gradoInstruccion, String cargo, Integer dni, Date fechaNacimiento, String regimen, Date fechaIngreso, String domicilio, String rol, Set<Atencion> atencions, Set<Log> logs, Set<InformePostAdoptivo> informePostAdoptivos, Set<Designacion> designacions, Set<Evaluacion> evaluacions) {
+    public Personal(long idpersonal, Unidad unidad, String nombre, String apellidoP, String apellidoM, String user, String pass, String correoTrabajo, String correoPersonal, String profesion, String gradoInstruccion, String cargo, Long dni, Date fechaNacimiento, String regimen, Date fechaIngreso, String domicilio, String rol, Set<InformePostAdoptivo> informePostAdoptivos, Set<Designacion> designacions, Set<Evaluacion> evaluacions, Set<Atencion> atencions, Set<Log> logs) {
+       this.idpersonal = idpersonal;
        this.unidad = unidad;
        this.nombre = nombre;
        this.apellidoP = apellidoP;
@@ -61,18 +63,18 @@ public class Personal  implements java.io.Serializable {
        this.fechaIngreso = fechaIngreso;
        this.domicilio = domicilio;
        this.rol = rol;
-       this.atencions = atencions;
-       this.logs = logs;
        this.informePostAdoptivos = informePostAdoptivos;
        this.designacions = designacions;
        this.evaluacions = evaluacions;
+       this.atencions = atencions;
+       this.logs = logs;
     }
    
-    public Integer getIdpersonal() {
+    public long getIdpersonal() {
         return this.idpersonal;
     }
     
-    public void setIdpersonal(Integer idpersonal) {
+    public void setIdpersonal(long idpersonal) {
         this.idpersonal = idpersonal;
     }
     public Unidad getUnidad() {
@@ -152,11 +154,11 @@ public class Personal  implements java.io.Serializable {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-    public Integer getDni() {
+    public Long getDni() {
         return this.dni;
     }
     
-    public void setDni(Integer dni) {
+    public void setDni(Long dni) {
         this.dni = dni;
     }
     public Date getFechaNacimiento() {
@@ -194,20 +196,6 @@ public class Personal  implements java.io.Serializable {
     public void setRol(String rol) {
         this.rol = rol;
     }
-    public Set<Atencion> getAtencions() {
-        return this.atencions;
-    }
-    
-    public void setAtencions(Set<Atencion> atencions) {
-        this.atencions = atencions;
-    }
-    public Set<Log> getLogs() {
-        return this.logs;
-    }
-    
-    public void setLogs(Set<Log> logs) {
-        this.logs = logs;
-    }
     public Set<InformePostAdoptivo> getInformePostAdoptivos() {
         return this.informePostAdoptivos;
     }
@@ -228,6 +216,20 @@ public class Personal  implements java.io.Serializable {
     
     public void setEvaluacions(Set<Evaluacion> evaluacions) {
         this.evaluacions = evaluacions;
+    }
+    public Set<Atencion> getAtencions() {
+        return this.atencions;
+    }
+    
+    public void setAtencions(Set<Atencion> atencions) {
+        this.atencions = atencions;
+    }
+    public Set<Log> getLogs() {
+        return this.logs;
+    }
+    
+    public void setLogs(Set<Log> logs) {
+        this.logs = logs;
     }
 
 

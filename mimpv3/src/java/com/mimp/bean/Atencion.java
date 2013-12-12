@@ -1,7 +1,8 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,11 +11,11 @@ import java.util.Date;
 public class Atencion  implements java.io.Serializable {
 
 
-     private Integer idatencion;
+     private long idatencion;
      private Personal personal;
      private Familia familia;
      private Date fecha;
-     private Date hora;
+     private Serializable hora;
      private String tipoAtencion;
      private String detalle;
      private String observacion;
@@ -23,11 +24,13 @@ public class Atencion  implements java.io.Serializable {
     }
 
 	
-    public Atencion(Personal personal, Familia familia) {
+    public Atencion(long idatencion, Personal personal, Familia familia) {
+        this.idatencion = idatencion;
         this.personal = personal;
         this.familia = familia;
     }
-    public Atencion(Personal personal, Familia familia, Date fecha, Date hora, String tipoAtencion, String detalle, String observacion) {
+    public Atencion(long idatencion, Personal personal, Familia familia, Date fecha, Serializable hora, String tipoAtencion, String detalle, String observacion) {
+       this.idatencion = idatencion;
        this.personal = personal;
        this.familia = familia;
        this.fecha = fecha;
@@ -37,11 +40,11 @@ public class Atencion  implements java.io.Serializable {
        this.observacion = observacion;
     }
    
-    public Integer getIdatencion() {
+    public long getIdatencion() {
         return this.idatencion;
     }
     
-    public void setIdatencion(Integer idatencion) {
+    public void setIdatencion(long idatencion) {
         this.idatencion = idatencion;
     }
     public Personal getPersonal() {
@@ -65,11 +68,11 @@ public class Atencion  implements java.io.Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public Date getHora() {
+    public Serializable getHora() {
         return this.hora;
     }
     
-    public void setHora(Date hora) {
+    public void setHora(Serializable hora) {
         this.hora = hora;
     }
     public String getTipoAtencion() {

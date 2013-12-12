@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -12,9 +12,9 @@ import java.util.Set;
 public class PostAdopcion  implements java.io.Serializable {
 
 
-     private Integer idpostAdopcion;
+     private long idpostAdopcion;
      private Familia familia;
-     private Integer numeroInformes;
+     private Long numeroInformes;
      private Date fechaResolucion;
      private Set<InformePostAdoptivo> informePostAdoptivos = new HashSet<InformePostAdoptivo>(0);
 
@@ -22,21 +22,23 @@ public class PostAdopcion  implements java.io.Serializable {
     }
 
 	
-    public PostAdopcion(Familia familia) {
+    public PostAdopcion(long idpostAdopcion, Familia familia) {
+        this.idpostAdopcion = idpostAdopcion;
         this.familia = familia;
     }
-    public PostAdopcion(Familia familia, Integer numeroInformes, Date fechaResolucion, Set<InformePostAdoptivo> informePostAdoptivos) {
+    public PostAdopcion(long idpostAdopcion, Familia familia, Long numeroInformes, Date fechaResolucion, Set<InformePostAdoptivo> informePostAdoptivos) {
+       this.idpostAdopcion = idpostAdopcion;
        this.familia = familia;
        this.numeroInformes = numeroInformes;
        this.fechaResolucion = fechaResolucion;
        this.informePostAdoptivos = informePostAdoptivos;
     }
    
-    public Integer getIdpostAdopcion() {
+    public long getIdpostAdopcion() {
         return this.idpostAdopcion;
     }
     
-    public void setIdpostAdopcion(Integer idpostAdopcion) {
+    public void setIdpostAdopcion(long idpostAdopcion) {
         this.idpostAdopcion = idpostAdopcion;
     }
     public Familia getFamilia() {
@@ -46,11 +48,11 @@ public class PostAdopcion  implements java.io.Serializable {
     public void setFamilia(Familia familia) {
         this.familia = familia;
     }
-    public Integer getNumeroInformes() {
+    public Long getNumeroInformes() {
         return this.numeroInformes;
     }
     
-    public void setNumeroInformes(Integer numeroInformes) {
+    public void setNumeroInformes(Long numeroInformes) {
         this.numeroInformes = numeroInformes;
     }
     public Date getFechaResolucion() {

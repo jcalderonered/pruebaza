@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -10,27 +10,29 @@ import java.util.Date;
 public class Hijo  implements java.io.Serializable {
 
 
-     private Integer idhijo;
+     private long idhijo;
      private FichaSolicitudAdopcion fichaSolicitudAdopcion;
      private Date fechaNac;
-     private Boolean biologico;
+     private Short biologico;
      private Date fechaAdop;
-     private Byte edad;
+     private Short edad;
      private String nombre;
      private String apellidoP;
      private String apellidoM;
      private String ocupacion;
      private String estadoSalud;
-     private Boolean reside;
+     private Short reside;
 
     public Hijo() {
     }
 
 	
-    public Hijo(FichaSolicitudAdopcion fichaSolicitudAdopcion) {
+    public Hijo(long idhijo, FichaSolicitudAdopcion fichaSolicitudAdopcion) {
+        this.idhijo = idhijo;
         this.fichaSolicitudAdopcion = fichaSolicitudAdopcion;
     }
-    public Hijo(FichaSolicitudAdopcion fichaSolicitudAdopcion, Date fechaNac, Boolean biologico, Date fechaAdop, Byte edad, String nombre, String apellidoP, String apellidoM, String ocupacion, String estadoSalud, Boolean reside) {
+    public Hijo(long idhijo, FichaSolicitudAdopcion fichaSolicitudAdopcion, Date fechaNac, Short biologico, Date fechaAdop, Short edad, String nombre, String apellidoP, String apellidoM, String ocupacion, String estadoSalud, Short reside) {
+       this.idhijo = idhijo;
        this.fichaSolicitudAdopcion = fichaSolicitudAdopcion;
        this.fechaNac = fechaNac;
        this.biologico = biologico;
@@ -44,11 +46,11 @@ public class Hijo  implements java.io.Serializable {
        this.reside = reside;
     }
    
-    public Integer getIdhijo() {
+    public long getIdhijo() {
         return this.idhijo;
     }
     
-    public void setIdhijo(Integer idhijo) {
+    public void setIdhijo(long idhijo) {
         this.idhijo = idhijo;
     }
     public FichaSolicitudAdopcion getFichaSolicitudAdopcion() {
@@ -65,11 +67,11 @@ public class Hijo  implements java.io.Serializable {
     public void setFechaNac(Date fechaNac) {
         this.fechaNac = fechaNac;
     }
-    public Boolean getBiologico() {
+    public Short getBiologico() {
         return this.biologico;
     }
     
-    public void setBiologico(Boolean biologico) {
+    public void setBiologico(Short biologico) {
         this.biologico = biologico;
     }
     public Date getFechaAdop() {
@@ -79,11 +81,11 @@ public class Hijo  implements java.io.Serializable {
     public void setFechaAdop(Date fechaAdop) {
         this.fechaAdop = fechaAdop;
     }
-    public Byte getEdad() {
+    public Short getEdad() {
         return this.edad;
     }
     
-    public void setEdad(Byte edad) {
+    public void setEdad(Short edad) {
         this.edad = edad;
     }
     public String getNombre() {
@@ -121,11 +123,11 @@ public class Hijo  implements java.io.Serializable {
     public void setEstadoSalud(String estadoSalud) {
         this.estadoSalud = estadoSalud;
     }
-    public Boolean getReside() {
+    public Short getReside() {
         return this.reside;
     }
     
-    public void setReside(Boolean reside) {
+    public void setReside(Short reside) {
         this.reside = reside;
     }
 

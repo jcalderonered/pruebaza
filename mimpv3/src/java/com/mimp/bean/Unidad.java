@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class Unidad  implements java.io.Serializable {
 
 
-     private Integer idunidad;
+     private long idunidad;
      private String nombre;
      private String direccion;
      private String departamento;
@@ -22,14 +22,19 @@ public class Unidad  implements java.io.Serializable {
      private String telefono;
      private String celular;
      private String obs;
-     private Set<ExpedienteNna> expedienteNnas = new HashSet<ExpedienteNna>(0);
-     private Set<ExpedienteFamilia> expedienteFamilias = new HashSet<ExpedienteFamilia>(0);
      private Set<Personal> personals = new HashSet<Personal>(0);
+     private Set<ExpedienteFamilia> expedienteFamilias = new HashSet<ExpedienteFamilia>(0);
+     private Set<ExpedienteNna> expedienteNnas = new HashSet<ExpedienteNna>(0);
 
     public Unidad() {
     }
 
-    public Unidad(String nombre, String direccion, String departamento, String provincia, String distrito, String competenciaRegional, String correo, String telefono, String celular, String obs, Set<ExpedienteNna> expedienteNnas, Set<ExpedienteFamilia> expedienteFamilias, Set<Personal> personals) {
+	
+    public Unidad(long idunidad) {
+        this.idunidad = idunidad;
+    }
+    public Unidad(long idunidad, String nombre, String direccion, String departamento, String provincia, String distrito, String competenciaRegional, String correo, String telefono, String celular, String obs, Set<Personal> personals, Set<ExpedienteFamilia> expedienteFamilias, Set<ExpedienteNna> expedienteNnas) {
+       this.idunidad = idunidad;
        this.nombre = nombre;
        this.direccion = direccion;
        this.departamento = departamento;
@@ -40,16 +45,16 @@ public class Unidad  implements java.io.Serializable {
        this.telefono = telefono;
        this.celular = celular;
        this.obs = obs;
-       this.expedienteNnas = expedienteNnas;
-       this.expedienteFamilias = expedienteFamilias;
        this.personals = personals;
+       this.expedienteFamilias = expedienteFamilias;
+       this.expedienteNnas = expedienteNnas;
     }
    
-    public Integer getIdunidad() {
+    public long getIdunidad() {
         return this.idunidad;
     }
     
-    public void setIdunidad(Integer idunidad) {
+    public void setIdunidad(long idunidad) {
         this.idunidad = idunidad;
     }
     public String getNombre() {
@@ -122,12 +127,12 @@ public class Unidad  implements java.io.Serializable {
     public void setObs(String obs) {
         this.obs = obs;
     }
-    public Set<ExpedienteNna> getExpedienteNnas() {
-        return this.expedienteNnas;
+    public Set<Personal> getPersonals() {
+        return this.personals;
     }
     
-    public void setExpedienteNnas(Set<ExpedienteNna> expedienteNnas) {
-        this.expedienteNnas = expedienteNnas;
+    public void setPersonals(Set<Personal> personals) {
+        this.personals = personals;
     }
     public Set<ExpedienteFamilia> getExpedienteFamilias() {
         return this.expedienteFamilias;
@@ -136,12 +141,12 @@ public class Unidad  implements java.io.Serializable {
     public void setExpedienteFamilias(Set<ExpedienteFamilia> expedienteFamilias) {
         this.expedienteFamilias = expedienteFamilias;
     }
-    public Set<Personal> getPersonals() {
-        return this.personals;
+    public Set<ExpedienteNna> getExpedienteNnas() {
+        return this.expedienteNnas;
     }
     
-    public void setPersonals(Set<Personal> personals) {
-        this.personals = personals;
+    public void setExpedienteNnas(Set<ExpedienteNna> expedienteNnas) {
+        this.expedienteNnas = expedienteNnas;
     }
 
 

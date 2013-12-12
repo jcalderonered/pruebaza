@@ -1,102 +1,102 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Adoptante" table="adoptante" catalog="mimp_adopcion">
-        <id name="idadoptante" type="java.lang.Integer">
-            <column name="idadoptante" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Adoptante" table="ADOPTANTE" schema="MIMP_ADOPCION">
+        <id name="idadoptante" type="long">
+            <column name="IDADOPTANTE" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="infoFamilia" class="com.mimp.bean.InfoFamilia" fetch="select">
-            <column name="idinfo_familia" not-null="true" />
+            <column name="IDINFO_FAMILIA" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="nombre" type="string">
-            <column name="nombre" length="30" />
+            <column name="NOMBRE" length="30" />
         </property>
         <property name="apellidoP" type="string">
-            <column name="apellido_p" length="30" />
+            <column name="APELLIDO_P" length="30" />
         </property>
         <property name="apellidoM" type="string">
-            <column name="apellido_m" length="30" />
+            <column name="APELLIDO_M" length="30" />
         </property>
         <property name="sexo" type="java.lang.Character">
-            <column name="sexo" length="1" />
+            <column name="SEXO" length="1" />
         </property>
         <property name="fechaNac" type="date">
-            <column name="fecha_nac" length="10" />
+            <column name="FECHA_NAC" length="7" />
         </property>
         <property name="lugarNac" type="string">
-            <column name="lugar_nac" length="50" />
+            <column name="LUGAR_NAC" length="50" />
         </property>
         <property name="depaNac" type="string">
-            <column name="depa_nac" length="20" />
+            <column name="DEPA_NAC" length="20" />
         </property>
         <property name="paisNac" type="string">
-            <column name="pais_nac" length="20" />
+            <column name="PAIS_NAC" length="20" />
         </property>
         <property name="tipoDoc" type="java.lang.Character">
-            <column name="tipo_doc" length="1" />
+            <column name="TIPO_DOC" length="1" />
         </property>
         <property name="NDoc" type="string">
-            <column name="n_doc" length="15" />
+            <column name="N_DOC" length="15" />
         </property>
         <property name="celular" type="string">
-            <column name="celular" length="15" />
+            <column name="CELULAR" length="15" />
         </property>
         <property name="correo" type="string">
-            <column name="correo" length="50" />
+            <column name="CORREO" length="50" />
         </property>
         <property name="nivelInstruccion" type="string">
-            <column name="nivel_instruccion" length="20" />
+            <column name="NIVEL_INSTRUCCION" length="20" />
         </property>
-        <property name="culminoNivel" type="java.lang.Boolean">
-            <column name="culmino_nivel" />
+        <property name="culminoNivel" type="java.lang.Short">
+            <column name="CULMINO_NIVEL" precision="3" scale="0" />
         </property>
         <property name="profesion" type="string">
-            <column name="profesion" length="50" />
+            <column name="PROFESION" length="50" />
         </property>
-        <property name="trabajadorDepend" type="java.lang.Boolean">
-            <column name="trabajador_depend" />
+        <property name="trabajadorDepend" type="java.lang.Short">
+            <column name="TRABAJADOR_DEPEND" precision="3" scale="0" />
         </property>
         <property name="ocupActualDep" type="string">
-            <column name="ocup_actual_dep" length="50" />
+            <column name="OCUP_ACTUAL_DEP" length="50" />
         </property>
         <property name="centroTrabajo" type="string">
-            <column name="centro_trabajo" length="100" />
+            <column name="CENTRO_TRABAJO" length="100" />
         </property>
         <property name="direccionCentro" type="string">
-            <column name="direccion_centro" length="200" />
+            <column name="DIRECCION_CENTRO" length="200" />
         </property>
         <property name="telefonoCentro" type="string">
-            <column name="telefono_centro" length="30" />
+            <column name="TELEFONO_CENTRO" length="30" />
         </property>
-        <property name="ingresoDep" type="java.lang.Integer">
-            <column name="ingreso_dep" />
+        <property name="ingresoDep" type="java.lang.Long">
+            <column name="INGRESO_DEP" precision="10" scale="0" />
         </property>
-        <property name="trabajadorIndepend" type="java.lang.Boolean">
-            <column name="trabajador_independ" />
+        <property name="trabajadorIndepend" type="java.lang.Short">
+            <column name="TRABAJADOR_INDEPEND" precision="3" scale="0" />
         </property>
         <property name="ocupActualInd" type="string">
-            <column name="ocup_actual_ind" length="45" />
+            <column name="OCUP_ACTUAL_IND" length="45" />
         </property>
-        <property name="ingresoIndep" type="java.lang.Integer">
-            <column name="ingreso_indep" />
+        <property name="ingresoIndep" type="java.lang.Long">
+            <column name="INGRESO_INDEP" precision="10" scale="0" />
         </property>
-        <property name="seguroSalud" type="java.lang.Boolean">
-            <column name="seguro_salud" />
+        <property name="seguroSalud" type="java.lang.Short">
+            <column name="SEGURO_SALUD" precision="3" scale="0" />
         </property>
         <property name="tipoSeguro" type="string">
-            <column name="tipo_seguro" length="30" />
+            <column name="TIPO_SEGURO" length="30" />
         </property>
-        <property name="seguroVida" type="java.lang.Boolean">
-            <column name="seguro_vida" />
+        <property name="seguroVida" type="java.lang.Short">
+            <column name="SEGURO_VIDA" precision="3" scale="0" />
         </property>
-        <property name="sistPensiones" type="java.lang.Boolean">
-            <column name="sist_pensiones" />
+        <property name="sistPensiones" type="java.lang.Short">
+            <column name="SIST_PENSIONES" precision="3" scale="0" />
         </property>
         <property name="saludActual" type="string">
-            <column name="salud_actual" length="45" />
+            <column name="SALUD_ACTUAL" length="45" />
         </property>
     </class>
 </hibernate-mapping>

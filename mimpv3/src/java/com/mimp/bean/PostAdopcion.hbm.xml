@@ -1,25 +1,25 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.PostAdopcion" table="post_adopcion" catalog="mimp_adopcion">
-        <id name="idpostAdopcion" type="java.lang.Integer">
-            <column name="idpost_adopcion" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.PostAdopcion" table="POST_ADOPCION" schema="MIMP_ADOPCION">
+        <id name="idpostAdopcion" type="long">
+            <column name="IDPOST_ADOPCION" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="familia" class="com.mimp.bean.Familia" fetch="select">
-            <column name="idfamilia" not-null="true" />
+            <column name="IDFAMILIA" precision="10" scale="0" not-null="true" />
         </many-to-one>
-        <property name="numeroInformes" type="java.lang.Integer">
-            <column name="numero_informes" />
+        <property name="numeroInformes" type="java.lang.Long">
+            <column name="NUMERO_INFORMES" precision="10" scale="0" />
         </property>
         <property name="fechaResolucion" type="date">
-            <column name="fecha_resolucion" length="10" />
+            <column name="FECHA_RESOLUCION" length="7" />
         </property>
-        <set name="informePostAdoptivos" table="informe_post_adoptivo" inverse="true" lazy="true" fetch="select">
+        <set name="informePostAdoptivos" table="INFORME_POST_ADOPTIVO" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idpost_adopcion" not-null="true" />
+                <column name="IDPOST_ADOPCION" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.InformePostAdoptivo" />
         </set>

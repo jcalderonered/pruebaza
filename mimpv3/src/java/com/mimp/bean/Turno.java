@@ -1,8 +1,8 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
-import java.util.Date;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,21 +12,23 @@ import java.util.Set;
 public class Turno  implements java.io.Serializable {
 
 
-     private Integer idturno;
+     private long idturno;
      private Sesion sesion;
-     private Date inicioInscripcion;
-     private Date finInscripcion;
-     private Byte vacantes;
+     private Serializable inicioInscripcion;
+     private Serializable finInscripcion;
+     private Short vacantes;
      private Set<AsistenciaFT> asistenciaFTs = new HashSet<AsistenciaFT>(0);
 
     public Turno() {
     }
 
 	
-    public Turno(Sesion sesion) {
+    public Turno(long idturno, Sesion sesion) {
+        this.idturno = idturno;
         this.sesion = sesion;
     }
-    public Turno(Sesion sesion, Date inicioInscripcion, Date finInscripcion, Byte vacantes, Set<AsistenciaFT> asistenciaFTs) {
+    public Turno(long idturno, Sesion sesion, Serializable inicioInscripcion, Serializable finInscripcion, Short vacantes, Set<AsistenciaFT> asistenciaFTs) {
+       this.idturno = idturno;
        this.sesion = sesion;
        this.inicioInscripcion = inicioInscripcion;
        this.finInscripcion = finInscripcion;
@@ -34,11 +36,11 @@ public class Turno  implements java.io.Serializable {
        this.asistenciaFTs = asistenciaFTs;
     }
    
-    public Integer getIdturno() {
+    public long getIdturno() {
         return this.idturno;
     }
     
-    public void setIdturno(Integer idturno) {
+    public void setIdturno(long idturno) {
         this.idturno = idturno;
     }
     public Sesion getSesion() {
@@ -48,25 +50,25 @@ public class Turno  implements java.io.Serializable {
     public void setSesion(Sesion sesion) {
         this.sesion = sesion;
     }
-    public Date getInicioInscripcion() {
+    public Serializable getInicioInscripcion() {
         return this.inicioInscripcion;
     }
     
-    public void setInicioInscripcion(Date inicioInscripcion) {
+    public void setInicioInscripcion(Serializable inicioInscripcion) {
         this.inicioInscripcion = inicioInscripcion;
     }
-    public Date getFinInscripcion() {
+    public Serializable getFinInscripcion() {
         return this.finInscripcion;
     }
     
-    public void setFinInscripcion(Date finInscripcion) {
+    public void setFinInscripcion(Serializable finInscripcion) {
         this.finInscripcion = finInscripcion;
     }
-    public Byte getVacantes() {
+    public Short getVacantes() {
         return this.vacantes;
     }
     
-    public void setVacantes(Byte vacantes) {
+    public void setVacantes(Short vacantes) {
         this.vacantes = vacantes;
     }
     public Set<AsistenciaFT> getAsistenciaFTs() {

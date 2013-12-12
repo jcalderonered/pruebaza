@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Resolucion" table="resolucion" catalog="mimp_adopcion">
-        <id name="idresolucion" type="java.lang.Integer">
-            <column name="idresolucion" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Resolucion" table="RESOLUCION" schema="MIMP_ADOPCION">
+        <id name="idresolucion" type="long">
+            <column name="IDRESOLUCION" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="evaluacion" class="com.mimp.bean.Evaluacion" fetch="select">
-            <column name="idevaluacion" not-null="true" />
+            <column name="IDEVALUACION" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="tipo" type="string">
-            <column name="tipo" length="45" />
+            <column name="TIPO" length="45" />
         </property>
         <property name="numero" type="string">
-            <column name="numero" length="45" />
+            <column name="NUMERO" length="45" />
         </property>
         <property name="fechaResol" type="date">
-            <column name="fecha_resol" length="10" />
+            <column name="FECHA_RESOL" length="7" />
         </property>
         <property name="fechaNotificacion" type="date">
-            <column name="fecha_notificacion" length="10" />
+            <column name="FECHA_NOTIFICACION" length="7" />
         </property>
     </class>
 </hibernate-mapping>

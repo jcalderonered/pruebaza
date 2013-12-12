@@ -1,7 +1,8 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,26 +13,28 @@ import java.util.Set;
 public class Reunion  implements java.io.Serializable {
 
 
-     private Integer idreunion;
+     private long idreunion;
      private Turno2 turno2;
      private Date fecha;
-     private Date hora;
-     private Byte duracion;
+     private Serializable hora;
+     private Short duracion;
      private String direccion;
-     private Byte identificador;
-     private Integer facilitador;
-     private Byte capacidad;
-     private Byte asistencia;
+     private Short identificador;
+     private Long facilitador;
+     private Short capacidad;
+     private Short asistencia;
      private Set<AsistenciaFR> asistenciaFRs = new HashSet<AsistenciaFR>(0);
 
     public Reunion() {
     }
 
 	
-    public Reunion(Turno2 turno2) {
+    public Reunion(long idreunion, Turno2 turno2) {
+        this.idreunion = idreunion;
         this.turno2 = turno2;
     }
-    public Reunion(Turno2 turno2, Date fecha, Date hora, Byte duracion, String direccion, Byte identificador, Integer facilitador, Byte capacidad, Byte asistencia, Set<AsistenciaFR> asistenciaFRs) {
+    public Reunion(long idreunion, Turno2 turno2, Date fecha, Serializable hora, Short duracion, String direccion, Short identificador, Long facilitador, Short capacidad, Short asistencia, Set<AsistenciaFR> asistenciaFRs) {
+       this.idreunion = idreunion;
        this.turno2 = turno2;
        this.fecha = fecha;
        this.hora = hora;
@@ -44,11 +47,11 @@ public class Reunion  implements java.io.Serializable {
        this.asistenciaFRs = asistenciaFRs;
     }
    
-    public Integer getIdreunion() {
+    public long getIdreunion() {
         return this.idreunion;
     }
     
-    public void setIdreunion(Integer idreunion) {
+    public void setIdreunion(long idreunion) {
         this.idreunion = idreunion;
     }
     public Turno2 getTurno2() {
@@ -65,18 +68,18 @@ public class Reunion  implements java.io.Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public Date getHora() {
+    public Serializable getHora() {
         return this.hora;
     }
     
-    public void setHora(Date hora) {
+    public void setHora(Serializable hora) {
         this.hora = hora;
     }
-    public Byte getDuracion() {
+    public Short getDuracion() {
         return this.duracion;
     }
     
-    public void setDuracion(Byte duracion) {
+    public void setDuracion(Short duracion) {
         this.duracion = duracion;
     }
     public String getDireccion() {
@@ -86,32 +89,32 @@ public class Reunion  implements java.io.Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    public Byte getIdentificador() {
+    public Short getIdentificador() {
         return this.identificador;
     }
     
-    public void setIdentificador(Byte identificador) {
+    public void setIdentificador(Short identificador) {
         this.identificador = identificador;
     }
-    public Integer getFacilitador() {
+    public Long getFacilitador() {
         return this.facilitador;
     }
     
-    public void setFacilitador(Integer facilitador) {
+    public void setFacilitador(Long facilitador) {
         this.facilitador = facilitador;
     }
-    public Byte getCapacidad() {
+    public Short getCapacidad() {
         return this.capacidad;
     }
     
-    public void setCapacidad(Byte capacidad) {
+    public void setCapacidad(Short capacidad) {
         this.capacidad = capacidad;
     }
-    public Byte getAsistencia() {
+    public Short getAsistencia() {
         return this.asistencia;
     }
     
-    public void setAsistencia(Byte asistencia) {
+    public void setAsistencia(Short asistencia) {
         this.asistencia = asistencia;
     }
     public Set<AsistenciaFR> getAsistenciaFRs() {

@@ -1,48 +1,48 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Representante" table="representante" catalog="mimp_adopcion">
-        <id name="idrepresentante" type="java.lang.Integer">
-            <column name="idrepresentante" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Representante" table="REPRESENTANTE" schema="MIMP_ADOPCION">
+        <id name="idrepresentante" type="long">
+            <column name="IDREPRESENTANTE" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="organismo" class="com.mimp.bean.Organismo" fetch="select">
-            <column name="idorganismo" not-null="true" />
+            <column name="IDORGANISMO" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="nombre" type="string">
-            <column name="nombre" length="30" />
+            <column name="NOMBRE" length="30" />
         </property>
         <property name="apellidoP" type="string">
-            <column name="apellido_p" length="30" />
+            <column name="APELLIDO_P" length="30" />
         </property>
         <property name="apelldoM" type="string">
-            <column name="apelldo_m" length="30" />
+            <column name="APELLDO_M" length="30" />
         </property>
         <property name="fechaAuto" type="date">
-            <column name="fecha_auto" length="10" />
+            <column name="FECHA_AUTO" length="7" />
         </property>
         <property name="fechaRenov" type="date">
-            <column name="fecha_renov" length="10" />
+            <column name="FECHA_RENOV" length="7" />
         </property>
         <property name="fechaVencAuto" type="date">
-            <column name="fecha_venc_auto" length="10" />
+            <column name="FECHA_VENC_AUTO" length="7" />
         </property>
         <property name="correo" type="string">
-            <column name="correo" length="40" />
+            <column name="CORREO" length="40" />
         </property>
         <property name="direccion" type="string">
-            <column name="direccion" length="200" />
+            <column name="DIRECCION" length="200" />
         </property>
         <property name="celular" type="string">
-            <column name="celular" length="15" />
+            <column name="CELULAR" length="15" />
         </property>
         <property name="telefono" type="string">
-            <column name="telefono" length="15" />
+            <column name="TELEFONO" length="15" />
         </property>
         <property name="obs" type="string">
-            <column name="obs" length="200" />
+            <column name="OBS" length="200" />
         </property>
     </class>
 </hibernate-mapping>

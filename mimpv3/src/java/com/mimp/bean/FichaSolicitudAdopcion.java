@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class FichaSolicitudAdopcion  implements java.io.Serializable {
 
 
-     private Integer idfichaSolicitudAdopcion;
+     private long idfichaSolicitudAdopcion;
      private Familia familia;
      private String numeroFicha;
      private String hojaRuta;
@@ -23,49 +23,51 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
      private String depRes;
      private String propiedadVivienda;
      private String tipoVivienda;
-     private Integer areaVivTotal;
-     private Integer areaVivConst;
+     private Long areaVivTotal;
+     private Long areaVivConst;
      private String distVivenda;
-     private Boolean luz;
-     private Boolean agua;
-     private Boolean desague;
+     private Short luz;
+     private Short agua;
+     private Short desague;
      private String otrosServ;
      private String materConst;
      private String pared;
      private String techo;
      private String piso;
-     private Byte NProcAdopPrev;
+     private Short NProcAdopPrev;
      private String anhoProceso;
-     private Boolean procesoPrep;
-     private Boolean procesoEval;
+     private Short procesoPrep;
+     private Short procesoEval;
      private String motivoAdopcion;
-     private Boolean nnaIncesto;
-     private Boolean nnaMental;
-     private Boolean nnaEpilepsia;
-     private Boolean nnaAbuso;
-     private Boolean nnaSifilis;
-     private Boolean nnaSeguiMedico;
-     private Boolean nnaOperacion;
-     private Boolean nnaHiperactivo;
-     private Boolean nnaEspecial;
-     private Boolean nnaEnfermo;
-     private Boolean nnaMayor;
-     private Boolean nnaAdolescente;
-     private Boolean nnaHermano;
-     private Boolean nnaForaneo;
+     private Short nnaIncesto;
+     private Short nnaMental;
+     private Short nnaEpilepsia;
+     private Short nnaAbuso;
+     private Short nnaSifilis;
+     private Short nnaSeguiMedico;
+     private Short nnaOperacion;
+     private Short nnaHiperactivo;
+     private Short nnaEspecial;
+     private Short nnaEnfermo;
+     private Short nnaMayor;
+     private Short nnaAdolescente;
+     private Short nnaHermano;
+     private Short nnaForaneo;
      private String rptaForaneo;
      private Set<Solicitante> solicitantes = new HashSet<Solicitante>(0);
-     private Set<Hijo> hijos = new HashSet<Hijo>(0);
      private Set<Residente> residentes = new HashSet<Residente>(0);
+     private Set<Hijo> hijos = new HashSet<Hijo>(0);
 
     public FichaSolicitudAdopcion() {
     }
 
 	
-    public FichaSolicitudAdopcion(Familia familia) {
+    public FichaSolicitudAdopcion(long idfichaSolicitudAdopcion, Familia familia) {
+        this.idfichaSolicitudAdopcion = idfichaSolicitudAdopcion;
         this.familia = familia;
     }
-    public FichaSolicitudAdopcion(Familia familia, String numeroFicha, String hojaRuta, String estadoCivil, Date fechaIngreso, String fijo, String domicilio, String depRes, String propiedadVivienda, String tipoVivienda, Integer areaVivTotal, Integer areaVivConst, String distVivenda, Boolean luz, Boolean agua, Boolean desague, String otrosServ, String materConst, String pared, String techo, String piso, Byte NProcAdopPrev, String anhoProceso, Boolean procesoPrep, Boolean procesoEval, String motivoAdopcion, Boolean nnaIncesto, Boolean nnaMental, Boolean nnaEpilepsia, Boolean nnaAbuso, Boolean nnaSifilis, Boolean nnaSeguiMedico, Boolean nnaOperacion, Boolean nnaHiperactivo, Boolean nnaEspecial, Boolean nnaEnfermo, Boolean nnaMayor, Boolean nnaAdolescente, Boolean nnaHermano, Boolean nnaForaneo, String rptaForaneo, Set<Solicitante> solicitantes, Set<Hijo> hijos, Set<Residente> residentes) {
+    public FichaSolicitudAdopcion(long idfichaSolicitudAdopcion, Familia familia, String numeroFicha, String hojaRuta, String estadoCivil, Date fechaIngreso, String fijo, String domicilio, String depRes, String propiedadVivienda, String tipoVivienda, Long areaVivTotal, Long areaVivConst, String distVivenda, Short luz, Short agua, Short desague, String otrosServ, String materConst, String pared, String techo, String piso, Short NProcAdopPrev, String anhoProceso, Short procesoPrep, Short procesoEval, String motivoAdopcion, Short nnaIncesto, Short nnaMental, Short nnaEpilepsia, Short nnaAbuso, Short nnaSifilis, Short nnaSeguiMedico, Short nnaOperacion, Short nnaHiperactivo, Short nnaEspecial, Short nnaEnfermo, Short nnaMayor, Short nnaAdolescente, Short nnaHermano, Short nnaForaneo, String rptaForaneo, Set<Solicitante> solicitantes, Set<Residente> residentes, Set<Hijo> hijos) {
+       this.idfichaSolicitudAdopcion = idfichaSolicitudAdopcion;
        this.familia = familia;
        this.numeroFicha = numeroFicha;
        this.hojaRuta = hojaRuta;
@@ -108,15 +110,15 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
        this.nnaForaneo = nnaForaneo;
        this.rptaForaneo = rptaForaneo;
        this.solicitantes = solicitantes;
-       this.hijos = hijos;
        this.residentes = residentes;
+       this.hijos = hijos;
     }
    
-    public Integer getIdfichaSolicitudAdopcion() {
+    public long getIdfichaSolicitudAdopcion() {
         return this.idfichaSolicitudAdopcion;
     }
     
-    public void setIdfichaSolicitudAdopcion(Integer idfichaSolicitudAdopcion) {
+    public void setIdfichaSolicitudAdopcion(long idfichaSolicitudAdopcion) {
         this.idfichaSolicitudAdopcion = idfichaSolicitudAdopcion;
     }
     public Familia getFamilia() {
@@ -189,18 +191,18 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
     public void setTipoVivienda(String tipoVivienda) {
         this.tipoVivienda = tipoVivienda;
     }
-    public Integer getAreaVivTotal() {
+    public Long getAreaVivTotal() {
         return this.areaVivTotal;
     }
     
-    public void setAreaVivTotal(Integer areaVivTotal) {
+    public void setAreaVivTotal(Long areaVivTotal) {
         this.areaVivTotal = areaVivTotal;
     }
-    public Integer getAreaVivConst() {
+    public Long getAreaVivConst() {
         return this.areaVivConst;
     }
     
-    public void setAreaVivConst(Integer areaVivConst) {
+    public void setAreaVivConst(Long areaVivConst) {
         this.areaVivConst = areaVivConst;
     }
     public String getDistVivenda() {
@@ -210,25 +212,25 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
     public void setDistVivenda(String distVivenda) {
         this.distVivenda = distVivenda;
     }
-    public Boolean getLuz() {
+    public Short getLuz() {
         return this.luz;
     }
     
-    public void setLuz(Boolean luz) {
+    public void setLuz(Short luz) {
         this.luz = luz;
     }
-    public Boolean getAgua() {
+    public Short getAgua() {
         return this.agua;
     }
     
-    public void setAgua(Boolean agua) {
+    public void setAgua(Short agua) {
         this.agua = agua;
     }
-    public Boolean getDesague() {
+    public Short getDesague() {
         return this.desague;
     }
     
-    public void setDesague(Boolean desague) {
+    public void setDesague(Short desague) {
         this.desague = desague;
     }
     public String getOtrosServ() {
@@ -266,11 +268,11 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
     public void setPiso(String piso) {
         this.piso = piso;
     }
-    public Byte getNProcAdopPrev() {
+    public Short getNProcAdopPrev() {
         return this.NProcAdopPrev;
     }
     
-    public void setNProcAdopPrev(Byte NProcAdopPrev) {
+    public void setNProcAdopPrev(Short NProcAdopPrev) {
         this.NProcAdopPrev = NProcAdopPrev;
     }
     public String getAnhoProceso() {
@@ -280,18 +282,18 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
     public void setAnhoProceso(String anhoProceso) {
         this.anhoProceso = anhoProceso;
     }
-    public Boolean getProcesoPrep() {
+    public Short getProcesoPrep() {
         return this.procesoPrep;
     }
     
-    public void setProcesoPrep(Boolean procesoPrep) {
+    public void setProcesoPrep(Short procesoPrep) {
         this.procesoPrep = procesoPrep;
     }
-    public Boolean getProcesoEval() {
+    public Short getProcesoEval() {
         return this.procesoEval;
     }
     
-    public void setProcesoEval(Boolean procesoEval) {
+    public void setProcesoEval(Short procesoEval) {
         this.procesoEval = procesoEval;
     }
     public String getMotivoAdopcion() {
@@ -301,102 +303,102 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
     public void setMotivoAdopcion(String motivoAdopcion) {
         this.motivoAdopcion = motivoAdopcion;
     }
-    public Boolean getNnaIncesto() {
+    public Short getNnaIncesto() {
         return this.nnaIncesto;
     }
     
-    public void setNnaIncesto(Boolean nnaIncesto) {
+    public void setNnaIncesto(Short nnaIncesto) {
         this.nnaIncesto = nnaIncesto;
     }
-    public Boolean getNnaMental() {
+    public Short getNnaMental() {
         return this.nnaMental;
     }
     
-    public void setNnaMental(Boolean nnaMental) {
+    public void setNnaMental(Short nnaMental) {
         this.nnaMental = nnaMental;
     }
-    public Boolean getNnaEpilepsia() {
+    public Short getNnaEpilepsia() {
         return this.nnaEpilepsia;
     }
     
-    public void setNnaEpilepsia(Boolean nnaEpilepsia) {
+    public void setNnaEpilepsia(Short nnaEpilepsia) {
         this.nnaEpilepsia = nnaEpilepsia;
     }
-    public Boolean getNnaAbuso() {
+    public Short getNnaAbuso() {
         return this.nnaAbuso;
     }
     
-    public void setNnaAbuso(Boolean nnaAbuso) {
+    public void setNnaAbuso(Short nnaAbuso) {
         this.nnaAbuso = nnaAbuso;
     }
-    public Boolean getNnaSifilis() {
+    public Short getNnaSifilis() {
         return this.nnaSifilis;
     }
     
-    public void setNnaSifilis(Boolean nnaSifilis) {
+    public void setNnaSifilis(Short nnaSifilis) {
         this.nnaSifilis = nnaSifilis;
     }
-    public Boolean getNnaSeguiMedico() {
+    public Short getNnaSeguiMedico() {
         return this.nnaSeguiMedico;
     }
     
-    public void setNnaSeguiMedico(Boolean nnaSeguiMedico) {
+    public void setNnaSeguiMedico(Short nnaSeguiMedico) {
         this.nnaSeguiMedico = nnaSeguiMedico;
     }
-    public Boolean getNnaOperacion() {
+    public Short getNnaOperacion() {
         return this.nnaOperacion;
     }
     
-    public void setNnaOperacion(Boolean nnaOperacion) {
+    public void setNnaOperacion(Short nnaOperacion) {
         this.nnaOperacion = nnaOperacion;
     }
-    public Boolean getNnaHiperactivo() {
+    public Short getNnaHiperactivo() {
         return this.nnaHiperactivo;
     }
     
-    public void setNnaHiperactivo(Boolean nnaHiperactivo) {
+    public void setNnaHiperactivo(Short nnaHiperactivo) {
         this.nnaHiperactivo = nnaHiperactivo;
     }
-    public Boolean getNnaEspecial() {
+    public Short getNnaEspecial() {
         return this.nnaEspecial;
     }
     
-    public void setNnaEspecial(Boolean nnaEspecial) {
+    public void setNnaEspecial(Short nnaEspecial) {
         this.nnaEspecial = nnaEspecial;
     }
-    public Boolean getNnaEnfermo() {
+    public Short getNnaEnfermo() {
         return this.nnaEnfermo;
     }
     
-    public void setNnaEnfermo(Boolean nnaEnfermo) {
+    public void setNnaEnfermo(Short nnaEnfermo) {
         this.nnaEnfermo = nnaEnfermo;
     }
-    public Boolean getNnaMayor() {
+    public Short getNnaMayor() {
         return this.nnaMayor;
     }
     
-    public void setNnaMayor(Boolean nnaMayor) {
+    public void setNnaMayor(Short nnaMayor) {
         this.nnaMayor = nnaMayor;
     }
-    public Boolean getNnaAdolescente() {
+    public Short getNnaAdolescente() {
         return this.nnaAdolescente;
     }
     
-    public void setNnaAdolescente(Boolean nnaAdolescente) {
+    public void setNnaAdolescente(Short nnaAdolescente) {
         this.nnaAdolescente = nnaAdolescente;
     }
-    public Boolean getNnaHermano() {
+    public Short getNnaHermano() {
         return this.nnaHermano;
     }
     
-    public void setNnaHermano(Boolean nnaHermano) {
+    public void setNnaHermano(Short nnaHermano) {
         this.nnaHermano = nnaHermano;
     }
-    public Boolean getNnaForaneo() {
+    public Short getNnaForaneo() {
         return this.nnaForaneo;
     }
     
-    public void setNnaForaneo(Boolean nnaForaneo) {
+    public void setNnaForaneo(Short nnaForaneo) {
         this.nnaForaneo = nnaForaneo;
     }
     public String getRptaForaneo() {
@@ -413,19 +415,19 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
     public void setSolicitantes(Set<Solicitante> solicitantes) {
         this.solicitantes = solicitantes;
     }
-    public Set<Hijo> getHijos() {
-        return this.hijos;
-    }
-    
-    public void setHijos(Set<Hijo> hijos) {
-        this.hijos = hijos;
-    }
     public Set<Residente> getResidentes() {
         return this.residentes;
     }
     
     public void setResidentes(Set<Residente> residentes) {
         this.residentes = residentes;
+    }
+    public Set<Hijo> getHijos() {
+        return this.hijos;
+    }
+    
+    public void setHijos(Set<Hijo> hijos) {
+        this.hijos = hijos;
     }
 
 

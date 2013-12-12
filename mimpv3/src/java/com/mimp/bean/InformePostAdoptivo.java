@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.Date;
 public class InformePostAdoptivo  implements java.io.Serializable {
 
 
-     private Integer idinformePostAdoptivo;
+     private long idinformePostAdoptivo;
      private PostAdopcion postAdopcion;
      private Personal personal;
      private String estado;
@@ -25,11 +25,13 @@ public class InformePostAdoptivo  implements java.io.Serializable {
     }
 
 	
-    public InformePostAdoptivo(PostAdopcion postAdopcion, Personal personal) {
+    public InformePostAdoptivo(long idinformePostAdoptivo, PostAdopcion postAdopcion, Personal personal) {
+        this.idinformePostAdoptivo = idinformePostAdoptivo;
         this.postAdopcion = postAdopcion;
         this.personal = personal;
     }
-    public InformePostAdoptivo(PostAdopcion postAdopcion, Personal personal, String estado, String numeroInforme, Date fechaRecepcionProyectado, Date fechaRecepcion, Date fechaInforme, Date fechaActa, String obs) {
+    public InformePostAdoptivo(long idinformePostAdoptivo, PostAdopcion postAdopcion, Personal personal, String estado, String numeroInforme, Date fechaRecepcionProyectado, Date fechaRecepcion, Date fechaInforme, Date fechaActa, String obs) {
+       this.idinformePostAdoptivo = idinformePostAdoptivo;
        this.postAdopcion = postAdopcion;
        this.personal = personal;
        this.estado = estado;
@@ -41,11 +43,11 @@ public class InformePostAdoptivo  implements java.io.Serializable {
        this.obs = obs;
     }
    
-    public Integer getIdinformePostAdoptivo() {
+    public long getIdinformePostAdoptivo() {
         return this.idinformePostAdoptivo;
     }
     
-    public void setIdinformePostAdoptivo(Integer idinformePostAdoptivo) {
+    public void setIdinformePostAdoptivo(long idinformePostAdoptivo) {
         this.idinformePostAdoptivo = idinformePostAdoptivo;
     }
     public PostAdopcion getPostAdopcion() {
