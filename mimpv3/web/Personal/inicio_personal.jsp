@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="col-md-6 col-md-offset-1">
-                        <h1 align="center">Bienvenido(a) ${usuario.getNombre()}</h1>
+                        <h1 align="center">Bienvenido(a) ${usuario.getNombre()} ${usuario.getApellidoP()}</h1>
                         <br>
                         <p align="center"><img src="<%=request.getContextPath()%>/assets/img/logo.png" width="400" border="0"></p>
                         <br>
