@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.Date;
 public class Adoptante  implements java.io.Serializable {
 
 
-     private Integer idadoptante;
+     private long idadoptante;
      private InfoFamilia infoFamilia;
      private String nombre;
      private String apellidoP;
@@ -25,31 +25,33 @@ public class Adoptante  implements java.io.Serializable {
      private String celular;
      private String correo;
      private String nivelInstruccion;
-     private Boolean culminoNivel;
+     private Short culminoNivel;
      private String profesion;
-     private Boolean trabajadorDepend;
+     private Short trabajadorDepend;
      private String ocupActualDep;
      private String centroTrabajo;
      private String direccionCentro;
      private String telefonoCentro;
-     private Integer ingresoDep;
-     private Boolean trabajadorIndepend;
+     private Long ingresoDep;
+     private Short trabajadorIndepend;
      private String ocupActualInd;
-     private Integer ingresoIndep;
-     private Boolean seguroSalud;
+     private Long ingresoIndep;
+     private Short seguroSalud;
      private String tipoSeguro;
-     private Boolean seguroVida;
-     private Boolean sistPensiones;
+     private Short seguroVida;
+     private Short sistPensiones;
      private String saludActual;
 
     public Adoptante() {
     }
 
 	
-    public Adoptante(InfoFamilia infoFamilia) {
+    public Adoptante(long idadoptante, InfoFamilia infoFamilia) {
+        this.idadoptante = idadoptante;
         this.infoFamilia = infoFamilia;
     }
-    public Adoptante(InfoFamilia infoFamilia, String nombre, String apellidoP, String apellidoM, Character sexo, Date fechaNac, String lugarNac, String depaNac, String paisNac, Character tipoDoc, String NDoc, String celular, String correo, String nivelInstruccion, Boolean culminoNivel, String profesion, Boolean trabajadorDepend, String ocupActualDep, String centroTrabajo, String direccionCentro, String telefonoCentro, Integer ingresoDep, Boolean trabajadorIndepend, String ocupActualInd, Integer ingresoIndep, Boolean seguroSalud, String tipoSeguro, Boolean seguroVida, Boolean sistPensiones, String saludActual) {
+    public Adoptante(long idadoptante, InfoFamilia infoFamilia, String nombre, String apellidoP, String apellidoM, Character sexo, Date fechaNac, String lugarNac, String depaNac, String paisNac, Character tipoDoc, String NDoc, String celular, String correo, String nivelInstruccion, Short culminoNivel, String profesion, Short trabajadorDepend, String ocupActualDep, String centroTrabajo, String direccionCentro, String telefonoCentro, Long ingresoDep, Short trabajadorIndepend, String ocupActualInd, Long ingresoIndep, Short seguroSalud, String tipoSeguro, Short seguroVida, Short sistPensiones, String saludActual) {
+       this.idadoptante = idadoptante;
        this.infoFamilia = infoFamilia;
        this.nombre = nombre;
        this.apellidoP = apellidoP;
@@ -82,11 +84,11 @@ public class Adoptante  implements java.io.Serializable {
        this.saludActual = saludActual;
     }
    
-    public Integer getIdadoptante() {
+    public long getIdadoptante() {
         return this.idadoptante;
     }
     
-    public void setIdadoptante(Integer idadoptante) {
+    public void setIdadoptante(long idadoptante) {
         this.idadoptante = idadoptante;
     }
     public InfoFamilia getInfoFamilia() {
@@ -187,11 +189,11 @@ public class Adoptante  implements java.io.Serializable {
     public void setNivelInstruccion(String nivelInstruccion) {
         this.nivelInstruccion = nivelInstruccion;
     }
-    public Boolean getCulminoNivel() {
+    public Short getCulminoNivel() {
         return this.culminoNivel;
     }
     
-    public void setCulminoNivel(Boolean culminoNivel) {
+    public void setCulminoNivel(Short culminoNivel) {
         this.culminoNivel = culminoNivel;
     }
     public String getProfesion() {
@@ -201,11 +203,11 @@ public class Adoptante  implements java.io.Serializable {
     public void setProfesion(String profesion) {
         this.profesion = profesion;
     }
-    public Boolean getTrabajadorDepend() {
+    public Short getTrabajadorDepend() {
         return this.trabajadorDepend;
     }
     
-    public void setTrabajadorDepend(Boolean trabajadorDepend) {
+    public void setTrabajadorDepend(Short trabajadorDepend) {
         this.trabajadorDepend = trabajadorDepend;
     }
     public String getOcupActualDep() {
@@ -236,18 +238,18 @@ public class Adoptante  implements java.io.Serializable {
     public void setTelefonoCentro(String telefonoCentro) {
         this.telefonoCentro = telefonoCentro;
     }
-    public Integer getIngresoDep() {
+    public Long getIngresoDep() {
         return this.ingresoDep;
     }
     
-    public void setIngresoDep(Integer ingresoDep) {
+    public void setIngresoDep(Long ingresoDep) {
         this.ingresoDep = ingresoDep;
     }
-    public Boolean getTrabajadorIndepend() {
+    public Short getTrabajadorIndepend() {
         return this.trabajadorIndepend;
     }
     
-    public void setTrabajadorIndepend(Boolean trabajadorIndepend) {
+    public void setTrabajadorIndepend(Short trabajadorIndepend) {
         this.trabajadorIndepend = trabajadorIndepend;
     }
     public String getOcupActualInd() {
@@ -257,18 +259,18 @@ public class Adoptante  implements java.io.Serializable {
     public void setOcupActualInd(String ocupActualInd) {
         this.ocupActualInd = ocupActualInd;
     }
-    public Integer getIngresoIndep() {
+    public Long getIngresoIndep() {
         return this.ingresoIndep;
     }
     
-    public void setIngresoIndep(Integer ingresoIndep) {
+    public void setIngresoIndep(Long ingresoIndep) {
         this.ingresoIndep = ingresoIndep;
     }
-    public Boolean getSeguroSalud() {
+    public Short getSeguroSalud() {
         return this.seguroSalud;
     }
     
-    public void setSeguroSalud(Boolean seguroSalud) {
+    public void setSeguroSalud(Short seguroSalud) {
         this.seguroSalud = seguroSalud;
     }
     public String getTipoSeguro() {
@@ -278,18 +280,18 @@ public class Adoptante  implements java.io.Serializable {
     public void setTipoSeguro(String tipoSeguro) {
         this.tipoSeguro = tipoSeguro;
     }
-    public Boolean getSeguroVida() {
+    public Short getSeguroVida() {
         return this.seguroVida;
     }
     
-    public void setSeguroVida(Boolean seguroVida) {
+    public void setSeguroVida(Short seguroVida) {
         this.seguroVida = seguroVida;
     }
-    public Boolean getSistPensiones() {
+    public Short getSistPensiones() {
         return this.sistPensiones;
     }
     
-    public void setSistPensiones(Boolean sistPensiones) {
+    public void setSistPensiones(Short sistPensiones) {
         this.sistPensiones = sistPensiones;
     }
     public String getSaludActual() {

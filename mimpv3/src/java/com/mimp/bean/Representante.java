@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.Date;
 public class Representante  implements java.io.Serializable {
 
 
-     private Integer idrepresentante;
+     private long idrepresentante;
      private Organismo organismo;
      private String nombre;
      private String apellidoP;
@@ -28,10 +28,12 @@ public class Representante  implements java.io.Serializable {
     }
 
 	
-    public Representante(Organismo organismo) {
+    public Representante(long idrepresentante, Organismo organismo) {
+        this.idrepresentante = idrepresentante;
         this.organismo = organismo;
     }
-    public Representante(Organismo organismo, String nombre, String apellidoP, String apelldoM, Date fechaAuto, Date fechaRenov, Date fechaVencAuto, String correo, String direccion, String celular, String telefono, String obs) {
+    public Representante(long idrepresentante, Organismo organismo, String nombre, String apellidoP, String apelldoM, Date fechaAuto, Date fechaRenov, Date fechaVencAuto, String correo, String direccion, String celular, String telefono, String obs) {
+       this.idrepresentante = idrepresentante;
        this.organismo = organismo;
        this.nombre = nombre;
        this.apellidoP = apellidoP;
@@ -46,11 +48,11 @@ public class Representante  implements java.io.Serializable {
        this.obs = obs;
     }
    
-    public Integer getIdrepresentante() {
+    public long getIdrepresentante() {
         return this.idrepresentante;
     }
     
-    public void setIdrepresentante(Integer idrepresentante) {
+    public void setIdrepresentante(long idrepresentante) {
         this.idrepresentante = idrepresentante;
     }
     public Organismo getOrganismo() {

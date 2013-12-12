@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -10,15 +10,15 @@ import java.util.Date;
 public class Designacion  implements java.io.Serializable {
 
 
-     private Integer iddesignacion;
+     private long iddesignacion;
      private Nna nna;
      private Personal personal;
      private ExpedienteFamilia expedienteFamilia;
-     private Integer NDesignacion;
-     private Integer prioridad;
+     private Long NDesignacion;
+     private Long prioridad;
      private Date fechaPropuesta;
      private Date fechaConsejo;
-     private Boolean aceptacionConsejo;
+     private Short aceptacionConsejo;
      private String tipoPropuesta;
      private String obs;
 
@@ -26,12 +26,14 @@ public class Designacion  implements java.io.Serializable {
     }
 
 	
-    public Designacion(Nna nna, Personal personal, ExpedienteFamilia expedienteFamilia) {
+    public Designacion(long iddesignacion, Nna nna, Personal personal, ExpedienteFamilia expedienteFamilia) {
+        this.iddesignacion = iddesignacion;
         this.nna = nna;
         this.personal = personal;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public Designacion(Nna nna, Personal personal, ExpedienteFamilia expedienteFamilia, Integer NDesignacion, Integer prioridad, Date fechaPropuesta, Date fechaConsejo, Boolean aceptacionConsejo, String tipoPropuesta, String obs) {
+    public Designacion(long iddesignacion, Nna nna, Personal personal, ExpedienteFamilia expedienteFamilia, Long NDesignacion, Long prioridad, Date fechaPropuesta, Date fechaConsejo, Short aceptacionConsejo, String tipoPropuesta, String obs) {
+       this.iddesignacion = iddesignacion;
        this.nna = nna;
        this.personal = personal;
        this.expedienteFamilia = expedienteFamilia;
@@ -44,11 +46,11 @@ public class Designacion  implements java.io.Serializable {
        this.obs = obs;
     }
    
-    public Integer getIddesignacion() {
+    public long getIddesignacion() {
         return this.iddesignacion;
     }
     
-    public void setIddesignacion(Integer iddesignacion) {
+    public void setIddesignacion(long iddesignacion) {
         this.iddesignacion = iddesignacion;
     }
     public Nna getNna() {
@@ -72,18 +74,18 @@ public class Designacion  implements java.io.Serializable {
     public void setExpedienteFamilia(ExpedienteFamilia expedienteFamilia) {
         this.expedienteFamilia = expedienteFamilia;
     }
-    public Integer getNDesignacion() {
+    public Long getNDesignacion() {
         return this.NDesignacion;
     }
     
-    public void setNDesignacion(Integer NDesignacion) {
+    public void setNDesignacion(Long NDesignacion) {
         this.NDesignacion = NDesignacion;
     }
-    public Integer getPrioridad() {
+    public Long getPrioridad() {
         return this.prioridad;
     }
     
-    public void setPrioridad(Integer prioridad) {
+    public void setPrioridad(Long prioridad) {
         this.prioridad = prioridad;
     }
     public Date getFechaPropuesta() {
@@ -100,11 +102,11 @@ public class Designacion  implements java.io.Serializable {
     public void setFechaConsejo(Date fechaConsejo) {
         this.fechaConsejo = fechaConsejo;
     }
-    public Boolean getAceptacionConsejo() {
+    public Short getAceptacionConsejo() {
         return this.aceptacionConsejo;
     }
     
-    public void setAceptacionConsejo(Boolean aceptacionConsejo) {
+    public void setAceptacionConsejo(Short aceptacionConsejo) {
         this.aceptacionConsejo = aceptacionConsejo;
     }
     public String getTipoPropuesta() {

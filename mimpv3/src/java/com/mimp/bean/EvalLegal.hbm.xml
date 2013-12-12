@@ -1,87 +1,87 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.EvalLegal" table="eval_legal" catalog="mimp_adopcion">
-        <id name="idevalLegal" type="java.lang.Integer">
-            <column name="ideval_legal" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.EvalLegal" table="EVAL_LEGAL" schema="MIMP_ADOPCION">
+        <id name="idevalLegal" type="long">
+            <column name="IDEVAL_LEGAL" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="evaluacion" class="com.mimp.bean.Evaluacion" fetch="select">
-            <column name="idevaluacion" not-null="true" />
+            <column name="IDEVALUACION" precision="10" scale="0" not-null="true" />
         </many-to-one>
-        <property name="solicitudDga" type="java.lang.Boolean">
-            <column name="solicitud_dga" />
+        <property name="solicitudDga" type="java.lang.Short">
+            <column name="SOLICITUD_DGA" precision="3" scale="0" />
         </property>
         <property name="solicitudDgaObs" type="string">
-            <column name="solicitud_dga_obs" length="200" />
+            <column name="SOLICITUD_DGA_OBS" length="200" />
         </property>
-        <property name="evalSocial" type="java.lang.Boolean">
-            <column name="eval_social" />
+        <property name="evalSocial" type="java.lang.Short">
+            <column name="EVAL_SOCIAL" precision="3" scale="0" />
         </property>
         <property name="evalSocialObs" type="string">
-            <column name="eval_social_obs" length="200" />
+            <column name="EVAL_SOCIAL_OBS" length="200" />
         </property>
-        <property name="evalPsicologica" type="java.lang.Boolean">
-            <column name="eval_psicologica" />
+        <property name="evalPsicologica" type="java.lang.Short">
+            <column name="EVAL_PSICOLOGICA" precision="3" scale="0" />
         </property>
         <property name="evalPsicologicaObs" type="string">
-            <column name="eval_psicologica_obs" length="200" />
+            <column name="EVAL_PSICOLOGICA_OBS" length="200" />
         </property>
-        <property name="certDomiciliario" type="java.lang.Boolean">
-            <column name="cert_domiciliario" />
+        <property name="certDomiciliario" type="java.lang.Short">
+            <column name="CERT_DOMICILIARIO" precision="3" scale="0" />
         </property>
         <property name="certDomiciliarioObs" type="string">
-            <column name="cert_domiciliario_obs" length="200" />
+            <column name="CERT_DOMICILIARIO_OBS" length="200" />
         </property>
-        <property name="partidaMatrimonio" type="java.lang.Boolean">
-            <column name="partida_matrimonio" />
+        <property name="partidaMatrimonio" type="java.lang.Short">
+            <column name="PARTIDA_MATRIMONIO" precision="3" scale="0" />
         </property>
         <property name="partidaMatrimonioObs" type="string">
-            <column name="partida_matrimonio_obs" length="200" />
+            <column name="PARTIDA_MATRIMONIO_OBS" length="200" />
         </property>
-        <property name="sentenciaDivorcio" type="java.lang.Boolean">
-            <column name="sentencia_divorcio" />
+        <property name="sentenciaDivorcio" type="java.lang.Short">
+            <column name="SENTENCIA_DIVORCIO" precision="3" scale="0" />
         </property>
         <property name="sentenciaDivorcioObs" type="string">
-            <column name="sentencia_divorcio_obs" length="200" />
+            <column name="SENTENCIA_DIVORCIO_OBS" length="200" />
         </property>
-        <property name="partDefuncCony" type="java.lang.Boolean">
-            <column name="part_defunc_cony" />
+        <property name="partDefuncCony" type="java.lang.Short">
+            <column name="PART_DEFUNC_CONY" precision="3" scale="0" />
         </property>
         <property name="partDefuncConyObs" type="string">
-            <column name="part_defunc_cony_obs" length="200" />
+            <column name="PART_DEFUNC_CONY_OBS" length="200" />
         </property>
-        <property name="partNacHijBio" type="java.lang.Boolean">
-            <column name="part_nac_hij_bio" />
+        <property name="partNacHijBio" type="java.lang.Short">
+            <column name="PART_NAC_HIJ_BIO" precision="3" scale="0" />
         </property>
         <property name="partNacHijBioObs" type="string">
-            <column name="part_nac_hij_bio_obs" length="200" />
+            <column name="PART_NAC_HIJ_BIO_OBS" length="200" />
         </property>
-        <property name="partNacHijAdop" type="java.lang.Boolean">
-            <column name="part_nac_hij_adop" />
+        <property name="partNacHijAdop" type="java.lang.Short">
+            <column name="PART_NAC_HIJ_ADOP" precision="3" scale="0" />
         </property>
         <property name="partNacHijAdopObs" type="string">
-            <column name="part_nac_hij_adop_obs" length="200" />
+            <column name="PART_NAC_HIJ_ADOP_OBS" length="200" />
         </property>
-        <property name="reportSegPostAdopDga" type="java.lang.Boolean">
-            <column name="report_seg_post_adop_dga" />
+        <property name="reportSegPostAdopDga" type="java.lang.Short">
+            <column name="REPORT_SEG_POST_ADOP_DGA" precision="3" scale="0" />
         </property>
         <property name="reportSegPostAdopDgaObs" type="string">
-            <column name="report_seg_post_adop_dga_obs" length="200" />
+            <column name="REPORT_SEG_POST_ADOP_DGA_OBS" length="200" />
         </property>
-        <property name="fotografiaAdopHogar" type="java.lang.Boolean">
-            <column name="fotografia_adop_hogar" />
+        <property name="fotografiaAdopHogar" type="java.lang.Short">
+            <column name="FOTOGRAFIA_ADOP_HOGAR" precision="3" scale="0" />
         </property>
         <property name="fotografiaAdopHogarObs" type="string">
-            <column name="fotografia_adop_hogar_obs" length="200" />
+            <column name="FOTOGRAFIA_ADOP_HOGAR_OBS" length="200" />
         </property>
-        <property name="compromisoPostAdop" type="java.lang.Boolean">
-            <column name="compromiso_post_adop" />
+        <property name="compromisoPostAdop" type="java.lang.Short">
+            <column name="COMPROMISO_POST_ADOP" precision="3" scale="0" />
         </property>
         <property name="compromisoPostAdopObs" type="string">
-            <column name="compromiso_post_adop_obs" length="200" />
+            <column name="COMPROMISO_POST_ADOP_OBS" length="200" />
         </property>
     </class>
 </hibernate-mapping>

@@ -1,72 +1,72 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.ExpedienteFamilia" table="expediente_familia" catalog="mimp_adopcion">
-        <id name="idexpedienteFamilia" type="java.lang.Integer">
-            <column name="idexpediente_familia" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.ExpedienteFamilia" table="EXPEDIENTE_FAMILIA" schema="MIMP_ADOPCION">
+        <id name="idexpedienteFamilia" type="long">
+            <column name="IDEXPEDIENTE_FAMILIA" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="unidad" class="com.mimp.bean.Unidad" fetch="select">
-            <column name="idunidad" not-null="true" />
+            <column name="IDUNIDAD" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <many-to-one name="familia" class="com.mimp.bean.Familia" fetch="select">
-            <column name="idfamilia" not-null="true" />
+            <column name="IDFAMILIA" precision="10" scale="0" not-null="true" />
         </many-to-one>
-        <property name="numero" type="java.lang.Integer">
-            <column name="numero" />
+        <property name="numero" type="java.lang.Long">
+            <column name="NUMERO" precision="10" scale="0" />
         </property>
         <property name="expediente" type="string">
-            <column name="expediente" length="20" />
+            <column name="EXPEDIENTE" length="20" />
         </property>
         <property name="ht" type="string">
-            <column name="ht" length="40" />
+            <column name="HT" length="40" />
         </property>
         <property name="numeroExpediente" type="string">
-            <column name="numero_expediente" length="40" />
+            <column name="NUMERO_EXPEDIENTE" length="40" />
         </property>
         <property name="fechaIngresoDga" type="date">
-            <column name="fecha_ingreso_dga" length="10" />
+            <column name="FECHA_INGRESO_DGA" length="7" />
         </property>
         <property name="estado" type="string">
-            <column name="estado" length="40" />
+            <column name="ESTADO" length="40" />
         </property>
         <property name="tupa" type="date">
-            <column name="tupa" length="10" />
+            <column name="TUPA" length="7" />
         </property>
         <property name="nacionalidad" type="string">
-            <column name="nacionalidad" length="20" />
+            <column name="NACIONALIDAD" length="20" />
         </property>
-        <property name="rnsa" type="java.lang.Boolean">
-            <column name="rnsa" />
+        <property name="rnsa" type="java.lang.Short">
+            <column name="RNSA" precision="3" scale="0" />
         </property>
-        <property name="rnaa" type="java.lang.Boolean">
-            <column name="rnaa" />
+        <property name="rnaa" type="java.lang.Short">
+            <column name="RNAA" precision="3" scale="0" />
         </property>
         <property name="tipoFamilia" type="string">
-            <column name="tipo_familia" length="2" />
+            <column name="TIPO_FAMILIA" length="2" />
         </property>
         <property name="tipoListaEspera" type="string">
-            <column name="tipo_lista_espera" length="30" />
+            <column name="TIPO_LISTA_ESPERA" length="30" />
         </property>
-        <set name="designacions" table="designacion" inverse="true" lazy="true" fetch="select">
+        <set name="designacions" table="DESIGNACION" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idexpediente_familia" not-null="true" />
+                <column name="IDEXPEDIENTE_FAMILIA" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.Designacion" />
         </set>
-        <set name="estudioCasos" table="estudio_caso" inverse="true" lazy="true" fetch="select">
+        <set name="evaluacions" table="EVALUACION" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idexpediente_familia" not-null="true" />
-            </key>
-            <one-to-many class="com.mimp.bean.EstudioCaso" />
-        </set>
-        <set name="evaluacions" table="evaluacion" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idexpediente_familia" not-null="true" />
+                <column name="IDEXPEDIENTE_FAMILIA" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.Evaluacion" />
+        </set>
+        <set name="estudioCasos" table="ESTUDIO_CASO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDEXPEDIENTE_FAMILIA" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.EstudioCaso" />
         </set>
     </class>
 </hibernate-mapping>

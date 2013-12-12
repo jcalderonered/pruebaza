@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 
@@ -9,32 +9,34 @@ package com.mimp.bean;
 public class AsistenciaFR  implements java.io.Serializable {
 
 
-     private Integer idasistenciaFR;
+     private long idasistenciaFR;
      private Familia familia;
      private Reunion reunion;
      private Character asistencia;
-     private Boolean inasJus;
+     private Short inasJus;
 
     public AsistenciaFR() {
     }
 
 	
-    public AsistenciaFR(Familia familia, Reunion reunion) {
+    public AsistenciaFR(long idasistenciaFR, Familia familia, Reunion reunion) {
+        this.idasistenciaFR = idasistenciaFR;
         this.familia = familia;
         this.reunion = reunion;
     }
-    public AsistenciaFR(Familia familia, Reunion reunion, Character asistencia, Boolean inasJus) {
+    public AsistenciaFR(long idasistenciaFR, Familia familia, Reunion reunion, Character asistencia, Short inasJus) {
+       this.idasistenciaFR = idasistenciaFR;
        this.familia = familia;
        this.reunion = reunion;
        this.asistencia = asistencia;
        this.inasJus = inasJus;
     }
    
-    public Integer getIdasistenciaFR() {
+    public long getIdasistenciaFR() {
         return this.idasistenciaFR;
     }
     
-    public void setIdasistenciaFR(Integer idasistenciaFR) {
+    public void setIdasistenciaFR(long idasistenciaFR) {
         this.idasistenciaFR = idasistenciaFR;
     }
     public Familia getFamilia() {
@@ -58,11 +60,11 @@ public class AsistenciaFR  implements java.io.Serializable {
     public void setAsistencia(Character asistencia) {
         this.asistencia = asistencia;
     }
-    public Boolean getInasJus() {
+    public Short getInasJus() {
         return this.inasJus;
     }
     
-    public void setInasJus(Boolean inasJus) {
+    public void setInasJus(Short inasJus) {
         this.inasJus = inasJus;
     }
 

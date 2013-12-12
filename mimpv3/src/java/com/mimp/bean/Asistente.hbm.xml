@@ -1,57 +1,57 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Asistente" table="asistente" catalog="mimp_adopcion">
-        <id name="idasistente" type="java.lang.Integer">
-            <column name="idasistente" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Asistente" table="ASISTENTE" schema="MIMP_ADOPCION">
+        <id name="idasistente" type="long">
+            <column name="IDASISTENTE" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="formularioSesion" class="com.mimp.bean.FormularioSesion" fetch="select">
-            <column name="idformulario_sesion" not-null="true" />
+            <column name="IDFORMULARIO_SESION" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="nombre" type="string">
-            <column name="nombre" length="30" />
+            <column name="NOMBRE" length="30" />
         </property>
         <property name="apellidoP" type="string">
-            <column name="apellido_p" length="20" />
+            <column name="APELLIDO_P" length="20" />
         </property>
         <property name="apellidoM" type="string">
-            <column name="apellido_m" length="20" />
+            <column name="APELLIDO_M" length="20" />
         </property>
         <property name="sexo" type="java.lang.Character">
-            <column name="sexo" length="1" />
+            <column name="SEXO" length="1" />
         </property>
         <property name="paisNac" type="string">
-            <column name="pais_nac" length="25" />
+            <column name="PAIS_NAC" length="25" />
         </property>
         <property name="depNac" type="string">
-            <column name="dep_nac" length="25" />
+            <column name="DEP_NAC" length="25" />
         </property>
         <property name="provNac" type="string">
-            <column name="prov_nac" length="25" />
+            <column name="PROV_NAC" length="25" />
         </property>
-        <property name="edad" type="java.lang.Byte">
-            <column name="edad" />
+        <property name="edad" type="java.lang.Short">
+            <column name="EDAD" precision="3" scale="0" />
         </property>
         <property name="fechaNac" type="date">
-            <column name="fecha_nac" length="10" />
+            <column name="FECHA_NAC" length="7" />
         </property>
         <property name="tipoDoc" type="java.lang.Character">
-            <column name="tipo_doc" length="1" />
+            <column name="TIPO_DOC" length="1" />
         </property>
         <property name="NDoc" type="string">
-            <column name="n_doc" length="15" />
+            <column name="N_DOC" length="15" />
         </property>
         <property name="profesion" type="string">
-            <column name="profesion" length="50" />
+            <column name="PROFESION" length="50" />
         </property>
         <property name="celular" type="string">
-            <column name="celular" length="15" />
+            <column name="CELULAR" length="15" />
         </property>
         <property name="correo" type="string">
-            <column name="correo" length="50" />
+            <column name="CORREO" length="50" />
         </property>
     </class>
 </hibernate-mapping>

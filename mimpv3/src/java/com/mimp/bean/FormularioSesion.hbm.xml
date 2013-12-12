@@ -1,54 +1,54 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.FormularioSesion" table="formulario_sesion" catalog="mimp_adopcion">
-        <id name="idformularioSesion" type="java.lang.Integer">
-            <column name="idformulario_sesion" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.FormularioSesion" table="FORMULARIO_SESION" schema="MIMP_ADOPCION">
+        <id name="idformularioSesion" type="long">
+            <column name="IDFORMULARIO_SESION" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="familia" class="com.mimp.bean.Familia" fetch="select">
-            <column name="idfamilia" not-null="true" />
+            <column name="IDFAMILIA" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <many-to-one name="sesion" class="com.mimp.bean.Sesion" fetch="select">
-            <column name="idsesion" not-null="true" />
+            <column name="IDSESION" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="fechaSol" type="date">
-            <column name="fecha_sol" length="10" />
+            <column name="FECHA_SOL" length="7" />
         </property>
         <property name="paisRes" type="string">
-            <column name="pais_res" length="20" />
+            <column name="PAIS_RES" length="20" />
         </property>
         <property name="depRes" type="string">
-            <column name="dep_res" length="20" />
+            <column name="DEP_RES" length="20" />
         </property>
         <property name="provRes" type="string">
-            <column name="prov_res" length="20" />
+            <column name="PROV_RES" length="20" />
         </property>
         <property name="distritoRes" type="string">
-            <column name="distrito_res" length="20" />
+            <column name="DISTRITO_RES" length="20" />
         </property>
         <property name="direccionRes" type="string">
-            <column name="direccion_res" length="200" />
+            <column name="DIRECCION_RES" length="200" />
         </property>
         <property name="estadoCivil" type="string">
-            <column name="estado_civil" length="15" />
+            <column name="ESTADO_CIVIL" length="15" />
         </property>
         <property name="telefono" type="string">
-            <column name="telefono" length="15" />
+            <column name="TELEFONO" length="15" />
         </property>
-        <set name="asistenciaFTs" table="asistencia_f_t" inverse="true" lazy="true" fetch="select">
+        <set name="asistentes" table="ASISTENTE" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idformulario_sesion" not-null="true" />
-            </key>
-            <one-to-many class="com.mimp.bean.AsistenciaFT" />
-        </set>
-        <set name="asistentes" table="asistente" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idformulario_sesion" not-null="true" />
+                <column name="IDFORMULARIO_SESION" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.Asistente" />
+        </set>
+        <set name="asistenciaFTs" table="ASISTENCIA_F_T" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDFORMULARIO_SESION" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.AsistenciaFT" />
         </set>
     </class>
 </hibernate-mapping>

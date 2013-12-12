@@ -1,36 +1,36 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.EstudioCaso" table="estudio_caso" catalog="mimp_adopcion">
-        <id name="idestudioCaso" type="java.lang.Integer">
-            <column name="idestudio_caso" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.EstudioCaso" table="ESTUDIO_CASO" schema="MIMP_ADOPCION">
+        <id name="idestudioCaso" type="long">
+            <column name="IDESTUDIO_CASO" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="nna" class="com.mimp.bean.Nna" fetch="select">
-            <column name="idnna" not-null="true" />
+            <column name="IDNNA" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <many-to-one name="expedienteFamilia" class="com.mimp.bean.ExpedienteFamilia" fetch="select">
-            <column name="idexpediente_familia" not-null="true" />
+            <column name="IDEXPEDIENTE_FAMILIA" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="orden" type="string">
-            <column name="orden" length="40" />
+            <column name="ORDEN" length="40" />
         </property>
         <property name="fechaEstudio" type="date">
-            <column name="fecha_estudio" length="10" />
+            <column name="FECHA_ESTUDIO" length="7" />
         </property>
         <property name="fechaSolAdop" type="date">
-            <column name="fecha_sol_adop" length="10" />
+            <column name="FECHA_SOL_ADOP" length="7" />
         </property>
         <property name="resultado" type="string">
-            <column name="resultado" length="20" />
+            <column name="RESULTADO" length="20" />
         </property>
-        <property name="prioridad" type="java.lang.Integer">
-            <column name="prioridad" />
+        <property name="prioridad" type="java.lang.Long">
+            <column name="PRIORIDAD" precision="10" scale="0" />
         </property>
-        <property name="NSolicitud" type="java.lang.Long">
-            <column name="n_solicitud" />
+        <property name="NSolicitud" type="big_decimal">
+            <column name="N_SOLICITUD" precision="24" scale="0" />
         </property>
     </class>
 </hibernate-mapping>

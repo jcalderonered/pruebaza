@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.Date;
 public class ExpedienteNna  implements java.io.Serializable {
 
 
-     private Integer idexpedienteNna;
+     private long idexpedienteNna;
      private Nna nna;
      private Unidad unidad;
      private String numero;
@@ -18,7 +18,7 @@ public class ExpedienteNna  implements java.io.Serializable {
      private String ht;
      private String NExpTutelar;
      private String procTutelar;
-     private Boolean fichaIntegral;
+     private Short fichaIntegral;
      private String comentarios;
      private String respLegalNombre;
      private String respLegalP;
@@ -28,9 +28,9 @@ public class ExpedienteNna  implements java.io.Serializable {
      private String respPsicosocialM;
      private String estado;
      private Date fechaEstado;
-     private Boolean adoptable;
+     private Short adoptable;
      private Date fechaResolCons;
-     private Boolean nacional;
+     private Short nacional;
      private String diagnostico;
      private String codigoReferencia;
 
@@ -38,11 +38,13 @@ public class ExpedienteNna  implements java.io.Serializable {
     }
 
 	
-    public ExpedienteNna(Nna nna, Unidad unidad) {
+    public ExpedienteNna(long idexpedienteNna, Nna nna, Unidad unidad) {
+        this.idexpedienteNna = idexpedienteNna;
         this.nna = nna;
         this.unidad = unidad;
     }
-    public ExpedienteNna(Nna nna, Unidad unidad, String numero, Date fechaIngreso, String ht, String NExpTutelar, String procTutelar, Boolean fichaIntegral, String comentarios, String respLegalNombre, String respLegalP, String respLegalM, String respPsicosocialNombre, String respPiscosocialP, String respPsicosocialM, String estado, Date fechaEstado, Boolean adoptable, Date fechaResolCons, Boolean nacional, String diagnostico, String codigoReferencia) {
+    public ExpedienteNna(long idexpedienteNna, Nna nna, Unidad unidad, String numero, Date fechaIngreso, String ht, String NExpTutelar, String procTutelar, Short fichaIntegral, String comentarios, String respLegalNombre, String respLegalP, String respLegalM, String respPsicosocialNombre, String respPiscosocialP, String respPsicosocialM, String estado, Date fechaEstado, Short adoptable, Date fechaResolCons, Short nacional, String diagnostico, String codigoReferencia) {
+       this.idexpedienteNna = idexpedienteNna;
        this.nna = nna;
        this.unidad = unidad;
        this.numero = numero;
@@ -67,11 +69,11 @@ public class ExpedienteNna  implements java.io.Serializable {
        this.codigoReferencia = codigoReferencia;
     }
    
-    public Integer getIdexpedienteNna() {
+    public long getIdexpedienteNna() {
         return this.idexpedienteNna;
     }
     
-    public void setIdexpedienteNna(Integer idexpedienteNna) {
+    public void setIdexpedienteNna(long idexpedienteNna) {
         this.idexpedienteNna = idexpedienteNna;
     }
     public Nna getNna() {
@@ -123,11 +125,11 @@ public class ExpedienteNna  implements java.io.Serializable {
     public void setProcTutelar(String procTutelar) {
         this.procTutelar = procTutelar;
     }
-    public Boolean getFichaIntegral() {
+    public Short getFichaIntegral() {
         return this.fichaIntegral;
     }
     
-    public void setFichaIntegral(Boolean fichaIntegral) {
+    public void setFichaIntegral(Short fichaIntegral) {
         this.fichaIntegral = fichaIntegral;
     }
     public String getComentarios() {
@@ -193,11 +195,11 @@ public class ExpedienteNna  implements java.io.Serializable {
     public void setFechaEstado(Date fechaEstado) {
         this.fechaEstado = fechaEstado;
     }
-    public Boolean getAdoptable() {
+    public Short getAdoptable() {
         return this.adoptable;
     }
     
-    public void setAdoptable(Boolean adoptable) {
+    public void setAdoptable(Short adoptable) {
         this.adoptable = adoptable;
     }
     public Date getFechaResolCons() {
@@ -207,11 +209,11 @@ public class ExpedienteNna  implements java.io.Serializable {
     public void setFechaResolCons(Date fechaResolCons) {
         this.fechaResolCons = fechaResolCons;
     }
-    public Boolean getNacional() {
+    public Short getNacional() {
         return this.nacional;
     }
     
-    public void setNacional(Boolean nacional) {
+    public void setNacional(Short nacional) {
         this.nacional = nacional;
     }
     public String getDiagnostico() {

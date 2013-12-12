@@ -1,66 +1,66 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Entidad" table="entidad" catalog="mimp_adopcion">
-        <id name="identidad" type="java.lang.Integer">
-            <column name="identidad" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Entidad" table="ENTIDAD" schema="MIMP_ADOPCION">
+        <id name="identidad" type="long">
+            <column name="IDENTIDAD" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <property name="nombre" type="string">
-            <column name="nombre" length="40" />
+            <column name="NOMBRE" length="40" />
         </property>
         <property name="user" type="string">
-            <column name="user" length="45" />
+            <column name="USER_" length="45" />
         </property>
         <property name="pass" type="string">
-            <column name="pass" length="45" />
+            <column name="PASS" length="50" />
         </property>
         <property name="direccion" type="string">
-            <column name="direccion" length="200" />
+            <column name="DIRECCION" length="200" />
         </property>
         <property name="telefono" type="string">
-            <column name="telefono" length="15" />
+            <column name="TELEFONO" length="15" />
         </property>
         <property name="pais" type="string">
-            <column name="pais" length="15" />
+            <column name="PAIS" length="15" />
         </property>
         <property name="resolAuto" type="string">
-            <column name="resol_auto" length="30" />
+            <column name="RESOL_AUTO" length="30" />
         </property>
         <property name="fechaResol" type="date">
-            <column name="fecha_resol" length="10" />
+            <column name="FECHA_RESOL" length="7" />
         </property>
         <property name="resolRenov" type="string">
-            <column name="resol_renov" length="30" />
+            <column name="RESOL_RENOV" length="30" />
         </property>
         <property name="fechaRenov" type="date">
-            <column name="fecha_renov" length="10" />
+            <column name="FECHA_RENOV" length="7" />
         </property>
         <property name="fechaVenc" type="date">
-            <column name="fecha_venc" length="10" />
+            <column name="FECHA_VENC" length="7" />
         </property>
         <property name="obs" type="string">
-            <column name="obs" length="200" />
+            <column name="OBS" length="200" />
         </property>
-        <set name="familias" table="familia" inverse="true" lazy="true" fetch="select">
+        <set name="organismos" table="ORGANISMO" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="identidad" />
-            </key>
-            <one-to-many class="com.mimp.bean.Familia" />
-        </set>
-        <set name="organismos" table="organismo" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="identidad" not-null="true" />
+                <column name="IDENTIDAD" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.Organismo" />
         </set>
-        <set name="autoridads" table="autoridad" inverse="true" lazy="true" fetch="select">
+        <set name="autoridads" table="AUTORIDAD" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="identidad" not-null="true" />
+                <column name="IDENTIDAD" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.Autoridad" />
+        </set>
+        <set name="familias" table="FAMILIA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDENTIDAD" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.mimp.bean.Familia" />
         </set>
     </class>
 </hibernate-mapping>

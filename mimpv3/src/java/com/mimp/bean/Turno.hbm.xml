@@ -1,28 +1,28 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Turno" table="turno" catalog="mimp_adopcion">
-        <id name="idturno" type="java.lang.Integer">
-            <column name="idturno" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Turno" table="TURNO" schema="MIMP_ADOPCION">
+        <id name="idturno" type="long">
+            <column name="IDTURNO" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="sesion" class="com.mimp.bean.Sesion" fetch="select">
-            <column name="idsesion" not-null="true" />
+            <column name="IDSESION" precision="10" scale="0" not-null="true" />
         </many-to-one>
-        <property name="inicioInscripcion" type="timestamp">
-            <column name="inicio_inscripcion" length="19" />
+        <property name="inicioInscripcion" type="serializable">
+            <column name="INICIO_INSCRIPCION" />
         </property>
-        <property name="finInscripcion" type="timestamp">
-            <column name="fin_inscripcion" length="19" />
+        <property name="finInscripcion" type="serializable">
+            <column name="FIN_INSCRIPCION" />
         </property>
-        <property name="vacantes" type="java.lang.Byte">
-            <column name="vacantes" />
+        <property name="vacantes" type="java.lang.Short">
+            <column name="VACANTES" precision="3" scale="0" />
         </property>
-        <set name="asistenciaFTs" table="asistencia_f_t" inverse="true" lazy="true" fetch="select">
+        <set name="asistenciaFTs" table="ASISTENCIA_F_T" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idturno" not-null="true" />
+                <column name="IDTURNO" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.AsistenciaFT" />
         </set>

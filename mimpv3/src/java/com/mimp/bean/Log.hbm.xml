@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Log" table="log" catalog="mimp_adopcion">
-        <id name="idlog" type="java.lang.Integer">
-            <column name="idlog" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Log" table="LOG" schema="MIMP_ADOPCION">
+        <id name="idlog" type="long">
+            <column name="IDLOG" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="personal" class="com.mimp.bean.Personal" fetch="select">
-            <column name="idpersonal" not-null="true" />
+            <column name="IDPERSONAL" precision="10" scale="0" not-null="true" />
         </many-to-one>
-        <property name="fecha" type="timestamp">
-            <column name="fecha" length="19" />
+        <property name="fecha" type="serializable">
+            <column name="FECHA" />
         </property>
         <property name="tipoReg" type="string">
-            <column name="tipo_reg" length="10" />
+            <column name="TIPO_REG" length="10" />
         </property>
         <property name="NReg" type="string">
-            <column name="n_reg" length="50" />
+            <column name="N_REG" length="50" />
         </property>
         <property name="incidencia" type="string">
-            <column name="incidencia" length="200" />
+            <column name="INCIDENCIA" length="200" />
         </property>
     </class>
 </hibernate-mapping>

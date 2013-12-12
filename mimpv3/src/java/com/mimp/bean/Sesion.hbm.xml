@@ -1,48 +1,48 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Sesion" table="sesion" catalog="mimp_adopcion">
-        <id name="idsesion" type="java.lang.Integer">
-            <column name="idsesion" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Sesion" table="SESION" schema="MIMP_ADOPCION">
+        <id name="idsesion" type="long">
+            <column name="IDSESION" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <property name="NSesion" type="string">
-            <column name="n_sesion" length="10" />
+            <column name="N_SESION" length="10" />
         </property>
-        <property name="habilitado" type="java.lang.Boolean">
-            <column name="habilitado" />
+        <property name="habilitado" type="java.lang.Short">
+            <column name="HABILITADO" precision="3" scale="0" />
         </property>
         <property name="fecha" type="date">
-            <column name="fecha" length="10" />
+            <column name="FECHA" length="7" />
         </property>
-        <property name="hora" type="time">
-            <column name="hora" length="8" />
+        <property name="hora" type="serializable">
+            <column name="HORA" />
         </property>
         <property name="direccion" type="string">
-            <column name="direccion" length="200" />
+            <column name="DIRECCION" length="200" />
         </property>
-        <property name="duracion" type="java.lang.Byte">
-            <column name="duracion" />
+        <property name="duracion" type="java.lang.Short">
+            <column name="DURACION" precision="3" scale="0" />
         </property>
-        <property name="facilitador" type="java.lang.Integer">
-            <column name="facilitador" />
+        <property name="facilitador" type="java.lang.Long">
+            <column name="FACILITADOR" precision="10" scale="0" />
         </property>
-        <property name="asistencia" type="java.lang.Byte">
-            <column name="asistencia" />
+        <property name="asistencia" type="java.lang.Short">
+            <column name="ASISTENCIA" precision="3" scale="0" />
         </property>
-        <set name="turnos" table="turno" inverse="true" lazy="true" fetch="select">
+        <set name="formularioSesions" table="FORMULARIO_SESION" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idsesion" not-null="true" />
-            </key>
-            <one-to-many class="com.mimp.bean.Turno" />
-        </set>
-        <set name="formularioSesions" table="formulario_sesion" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idsesion" not-null="true" />
+                <column name="IDSESION" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.FormularioSesion" />
+        </set>
+        <set name="turnos" table="TURNO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDSESION" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Turno" />
         </set>
     </class>
 </hibernate-mapping>

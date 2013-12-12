@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class Evaluacion  implements java.io.Serializable {
 
 
-     private Integer idevaluacion;
+     private long idevaluacion;
      private Personal personal;
      private ExpedienteFamilia expedienteFamilia;
      private String tipo;
@@ -22,18 +22,20 @@ public class Evaluacion  implements java.io.Serializable {
      private String observacion;
      private String sustento;
      private String NDesignacion;
-     private Set<Resolucion> resolucions = new HashSet<Resolucion>(0);
      private Set<EvalLegal> evalLegals = new HashSet<EvalLegal>(0);
+     private Set<Resolucion> resolucions = new HashSet<Resolucion>(0);
 
     public Evaluacion() {
     }
 
 	
-    public Evaluacion(Personal personal, ExpedienteFamilia expedienteFamilia) {
+    public Evaluacion(long idevaluacion, Personal personal, ExpedienteFamilia expedienteFamilia) {
+        this.idevaluacion = idevaluacion;
         this.personal = personal;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public Evaluacion(Personal personal, ExpedienteFamilia expedienteFamilia, String tipo, Date fechaAsignacion, String resultado, Date fechaResultado, String observacion, String sustento, String NDesignacion, Set<Resolucion> resolucions, Set<EvalLegal> evalLegals) {
+    public Evaluacion(long idevaluacion, Personal personal, ExpedienteFamilia expedienteFamilia, String tipo, Date fechaAsignacion, String resultado, Date fechaResultado, String observacion, String sustento, String NDesignacion, Set<EvalLegal> evalLegals, Set<Resolucion> resolucions) {
+       this.idevaluacion = idevaluacion;
        this.personal = personal;
        this.expedienteFamilia = expedienteFamilia;
        this.tipo = tipo;
@@ -43,15 +45,15 @@ public class Evaluacion  implements java.io.Serializable {
        this.observacion = observacion;
        this.sustento = sustento;
        this.NDesignacion = NDesignacion;
-       this.resolucions = resolucions;
        this.evalLegals = evalLegals;
+       this.resolucions = resolucions;
     }
    
-    public Integer getIdevaluacion() {
+    public long getIdevaluacion() {
         return this.idevaluacion;
     }
     
-    public void setIdevaluacion(Integer idevaluacion) {
+    public void setIdevaluacion(long idevaluacion) {
         this.idevaluacion = idevaluacion;
     }
     public Personal getPersonal() {
@@ -117,19 +119,19 @@ public class Evaluacion  implements java.io.Serializable {
     public void setNDesignacion(String NDesignacion) {
         this.NDesignacion = NDesignacion;
     }
-    public Set<Resolucion> getResolucions() {
-        return this.resolucions;
-    }
-    
-    public void setResolucions(Set<Resolucion> resolucions) {
-        this.resolucions = resolucions;
-    }
     public Set<EvalLegal> getEvalLegals() {
         return this.evalLegals;
     }
     
     public void setEvalLegals(Set<EvalLegal> evalLegals) {
         this.evalLegals = evalLegals;
+    }
+    public Set<Resolucion> getResolucions() {
+        return this.resolucions;
+    }
+    
+    public void setResolucions(Set<Resolucion> resolucions) {
+        this.resolucions = resolucions;
     }
 
 

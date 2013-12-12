@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class Grupo  implements java.io.Serializable {
 
 
-     private Integer idgrupo;
+     private long idgrupo;
      private Taller taller;
      private String nombre;
      private Set<Turno2> turno2s = new HashSet<Turno2>(0);
@@ -20,20 +20,22 @@ public class Grupo  implements java.io.Serializable {
     }
 
 	
-    public Grupo(Taller taller) {
+    public Grupo(long idgrupo, Taller taller) {
+        this.idgrupo = idgrupo;
         this.taller = taller;
     }
-    public Grupo(Taller taller, String nombre, Set<Turno2> turno2s) {
+    public Grupo(long idgrupo, Taller taller, String nombre, Set<Turno2> turno2s) {
+       this.idgrupo = idgrupo;
        this.taller = taller;
        this.nombre = nombre;
        this.turno2s = turno2s;
     }
    
-    public Integer getIdgrupo() {
+    public long getIdgrupo() {
         return this.idgrupo;
     }
     
-    public void setIdgrupo(Integer idgrupo) {
+    public void setIdgrupo(long idgrupo) {
         this.idgrupo = idgrupo;
     }
     public Taller getTaller() {

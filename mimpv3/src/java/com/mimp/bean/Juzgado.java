@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class Juzgado  implements java.io.Serializable {
 
 
-     private Integer idjuzgado;
+     private long idjuzgado;
      private String nombre;
      private String denominacion;
      private String especialidad;
@@ -28,7 +28,12 @@ public class Juzgado  implements java.io.Serializable {
     public Juzgado() {
     }
 
-    public Juzgado(String nombre, String denominacion, String especialidad, String direccion, String departamento, String corteSuperior, String distritoJudicial, String nombreJuez, String telefono, String correo, String observaciones, Set<Nna> nnas) {
+	
+    public Juzgado(long idjuzgado) {
+        this.idjuzgado = idjuzgado;
+    }
+    public Juzgado(long idjuzgado, String nombre, String denominacion, String especialidad, String direccion, String departamento, String corteSuperior, String distritoJudicial, String nombreJuez, String telefono, String correo, String observaciones, Set<Nna> nnas) {
+       this.idjuzgado = idjuzgado;
        this.nombre = nombre;
        this.denominacion = denominacion;
        this.especialidad = especialidad;
@@ -43,11 +48,11 @@ public class Juzgado  implements java.io.Serializable {
        this.nnas = nnas;
     }
    
-    public Integer getIdjuzgado() {
+    public long getIdjuzgado() {
         return this.idjuzgado;
     }
     
-    public void setIdjuzgado(Integer idjuzgado) {
+    public void setIdjuzgado(long idjuzgado) {
         this.idjuzgado = idjuzgado;
     }
     public String getNombre() {

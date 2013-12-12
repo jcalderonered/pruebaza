@@ -1,42 +1,42 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.Prioritario" table="prioritario" catalog="mimp_adopcion">
-        <id name="idprioritario" type="java.lang.Integer">
-            <column name="idprioritario" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.Prioritario" table="PRIORITARIO" schema="MIMP_ADOPCION">
+        <id name="idprioritario" type="long">
+            <column name="IDPRIORITARIO" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="nna" class="com.mimp.bean.Nna" fetch="select">
-            <column name="idnna" not-null="true" />
+            <column name="IDNNA" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="codMayor" type="string">
-            <column name="cod_mayor" length="20" />
+            <column name="COD_MAYOR" length="20" />
         </property>
         <property name="codAdolescente" type="string">
-            <column name="cod_adolescente" length="20" />
+            <column name="COD_ADOLESCENTE" length="20" />
         </property>
         <property name="codHermano" type="string">
-            <column name="cod_hermano" length="20" />
+            <column name="COD_HERMANO" length="20" />
         </property>
         <property name="codSalud" type="string">
-            <column name="cod_salud" length="20" />
+            <column name="COD_SALUD" length="20" />
         </property>
         <property name="codSeguimiento" type="string">
-            <column name="cod_seguimiento" length="20" />
+            <column name="COD_SEGUIMIENTO" length="20" />
         </property>
         <property name="diagnostico" type="string">
-            <column name="diagnostico" length="1400" />
+            <column name="DIAGNOSTICO" length="1400" />
         </property>
         <property name="grupoReferencia" type="string">
-            <column name="grupo_referencia" length="40" />
+            <column name="GRUPO_REFERENCIA" length="40" />
         </property>
         <property name="profesional" type="string">
-            <column name="profesional" length="40" />
+            <column name="PROFESIONAL" length="40" />
         </property>
         <property name="comentario" type="string">
-            <column name="comentario" length="1400" />
+            <column name="COMENTARIO" length="1400" />
         </property>
     </class>
 </hibernate-mapping>

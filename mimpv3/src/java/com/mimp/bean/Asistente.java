@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.Date;
 public class Asistente  implements java.io.Serializable {
 
 
-     private Integer idasistente;
+     private long idasistente;
      private FormularioSesion formularioSesion;
      private String nombre;
      private String apellidoP;
@@ -19,7 +19,7 @@ public class Asistente  implements java.io.Serializable {
      private String paisNac;
      private String depNac;
      private String provNac;
-     private Byte edad;
+     private Short edad;
      private Date fechaNac;
      private Character tipoDoc;
      private String NDoc;
@@ -31,10 +31,12 @@ public class Asistente  implements java.io.Serializable {
     }
 
 	
-    public Asistente(FormularioSesion formularioSesion) {
+    public Asistente(long idasistente, FormularioSesion formularioSesion) {
+        this.idasistente = idasistente;
         this.formularioSesion = formularioSesion;
     }
-    public Asistente(FormularioSesion formularioSesion, String nombre, String apellidoP, String apellidoM, Character sexo, String paisNac, String depNac, String provNac, Byte edad, Date fechaNac, Character tipoDoc, String NDoc, String profesion, String celular, String correo) {
+    public Asistente(long idasistente, FormularioSesion formularioSesion, String nombre, String apellidoP, String apellidoM, Character sexo, String paisNac, String depNac, String provNac, Short edad, Date fechaNac, Character tipoDoc, String NDoc, String profesion, String celular, String correo) {
+       this.idasistente = idasistente;
        this.formularioSesion = formularioSesion;
        this.nombre = nombre;
        this.apellidoP = apellidoP;
@@ -52,11 +54,11 @@ public class Asistente  implements java.io.Serializable {
        this.correo = correo;
     }
    
-    public Integer getIdasistente() {
+    public long getIdasistente() {
         return this.idasistente;
     }
     
-    public void setIdasistente(Integer idasistente) {
+    public void setIdasistente(long idasistente) {
         this.idasistente = idasistente;
     }
     public FormularioSesion getFormularioSesion() {
@@ -115,11 +117,11 @@ public class Asistente  implements java.io.Serializable {
     public void setProvNac(String provNac) {
         this.provNac = provNac;
     }
-    public Byte getEdad() {
+    public Short getEdad() {
         return this.edad;
     }
     
-    public void setEdad(Byte edad) {
+    public void setEdad(Short edad) {
         this.edad = edad;
     }
     public Date getFechaNac() {

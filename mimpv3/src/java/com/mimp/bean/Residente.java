@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
 
@@ -9,13 +9,13 @@ package com.mimp.bean;
 public class Residente  implements java.io.Serializable {
 
 
-     private Integer idresidente;
+     private long idresidente;
      private FichaSolicitudAdopcion fichaSolicitudAdopcion;
      private String nombre;
      private String apellidoP;
      private String apellidoM;
      private String parentesco;
-     private Byte edad;
+     private Short edad;
      private String ocupacion;
      private String estadoSalud;
 
@@ -23,10 +23,12 @@ public class Residente  implements java.io.Serializable {
     }
 
 	
-    public Residente(FichaSolicitudAdopcion fichaSolicitudAdopcion) {
+    public Residente(long idresidente, FichaSolicitudAdopcion fichaSolicitudAdopcion) {
+        this.idresidente = idresidente;
         this.fichaSolicitudAdopcion = fichaSolicitudAdopcion;
     }
-    public Residente(FichaSolicitudAdopcion fichaSolicitudAdopcion, String nombre, String apellidoP, String apellidoM, String parentesco, Byte edad, String ocupacion, String estadoSalud) {
+    public Residente(long idresidente, FichaSolicitudAdopcion fichaSolicitudAdopcion, String nombre, String apellidoP, String apellidoM, String parentesco, Short edad, String ocupacion, String estadoSalud) {
+       this.idresidente = idresidente;
        this.fichaSolicitudAdopcion = fichaSolicitudAdopcion;
        this.nombre = nombre;
        this.apellidoP = apellidoP;
@@ -37,11 +39,11 @@ public class Residente  implements java.io.Serializable {
        this.estadoSalud = estadoSalud;
     }
    
-    public Integer getIdresidente() {
+    public long getIdresidente() {
         return this.idresidente;
     }
     
-    public void setIdresidente(Integer idresidente) {
+    public void setIdresidente(long idresidente) {
         this.idresidente = idresidente;
     }
     public FichaSolicitudAdopcion getFichaSolicitudAdopcion() {
@@ -79,11 +81,11 @@ public class Residente  implements java.io.Serializable {
     public void setParentesco(String parentesco) {
         this.parentesco = parentesco;
     }
-    public Byte getEdad() {
+    public Short getEdad() {
         return this.edad;
     }
     
-    public void setEdad(Byte edad) {
+    public void setEdad(Short edad) {
         this.edad = edad;
     }
     public String getOcupacion() {

@@ -1,78 +1,78 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2013 03:07:36 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 12, 2013 4:23:09 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.ExpedienteNna" table="expediente_nna" catalog="mimp_adopcion">
-        <id name="idexpedienteNna" type="java.lang.Integer">
-            <column name="idexpediente_nna" />
-            <generator class="identity" />
+    <class name="com.mimp.bean.ExpedienteNna" table="EXPEDIENTE_NNA" schema="MIMP_ADOPCION">
+        <id name="idexpedienteNna" type="long">
+            <column name="IDEXPEDIENTE_NNA" precision="10" scale="0" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="nna" class="com.mimp.bean.Nna" fetch="select">
-            <column name="idnna" not-null="true" />
+            <column name="IDNNA" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <many-to-one name="unidad" class="com.mimp.bean.Unidad" fetch="select">
-            <column name="idunidad" not-null="true" />
+            <column name="IDUNIDAD" precision="10" scale="0" not-null="true" />
         </many-to-one>
         <property name="numero" type="string">
-            <column name="numero" length="45" />
+            <column name="NUMERO" length="45" />
         </property>
         <property name="fechaIngreso" type="date">
-            <column name="fecha_ingreso" length="10" />
+            <column name="FECHA_INGRESO" length="7" />
         </property>
         <property name="ht" type="string">
-            <column name="ht" length="45" />
+            <column name="HT" length="45" />
         </property>
         <property name="NExpTutelar" type="string">
-            <column name="n_exp_tutelar" length="45" />
+            <column name="N_EXP_TUTELAR" length="45" />
         </property>
         <property name="procTutelar" type="string">
-            <column name="proc_tutelar" length="200" />
+            <column name="PROC_TUTELAR" length="200" />
         </property>
-        <property name="fichaIntegral" type="java.lang.Boolean">
-            <column name="ficha_integral" />
+        <property name="fichaIntegral" type="java.lang.Short">
+            <column name="FICHA_INTEGRAL" precision="3" scale="0" />
         </property>
         <property name="comentarios" type="string">
-            <column name="comentarios" length="1400" />
+            <column name="COMENTARIOS" length="1400" />
         </property>
         <property name="respLegalNombre" type="string">
-            <column name="resp_legal_nombre" length="45" />
+            <column name="RESP_LEGAL_NOMBRE" length="45" />
         </property>
         <property name="respLegalP" type="string">
-            <column name="resp_legal_p" length="45" />
+            <column name="RESP_LEGAL_P" length="45" />
         </property>
         <property name="respLegalM" type="string">
-            <column name="resp_legal_m" length="45" />
+            <column name="RESP_LEGAL_M" length="45" />
         </property>
         <property name="respPsicosocialNombre" type="string">
-            <column name="resp_psicosocial_nombre" length="45" />
+            <column name="RESP_PSICOSOCIAL_NOMBRE" length="45" />
         </property>
         <property name="respPiscosocialP" type="string">
-            <column name="resp_piscosocial_p" length="45" />
+            <column name="RESP_PISCOSOCIAL_P" length="45" />
         </property>
         <property name="respPsicosocialM" type="string">
-            <column name="resp_psicosocial_m" length="45" />
+            <column name="RESP_PSICOSOCIAL_M" length="45" />
         </property>
         <property name="estado" type="string">
-            <column name="estado" length="45" />
+            <column name="ESTADO" length="45" />
         </property>
         <property name="fechaEstado" type="date">
-            <column name="fecha_estado" length="10" />
+            <column name="FECHA_ESTADO" length="7" />
         </property>
-        <property name="adoptable" type="java.lang.Boolean">
-            <column name="adoptable" />
+        <property name="adoptable" type="java.lang.Short">
+            <column name="ADOPTABLE" precision="3" scale="0" />
         </property>
         <property name="fechaResolCons" type="date">
-            <column name="fecha_resol_cons" length="10" />
+            <column name="FECHA_RESOL_CONS" length="7" />
         </property>
-        <property name="nacional" type="java.lang.Boolean">
-            <column name="nacional" />
+        <property name="nacional" type="java.lang.Short">
+            <column name="NACIONAL" precision="3" scale="0" />
         </property>
         <property name="diagnostico" type="string">
-            <column name="diagnostico" length="20" />
+            <column name="DIAGNOSTICO" length="20" />
         </property>
         <property name="codigoReferencia" type="string">
-            <column name="codigo_referencia" length="45" />
+            <column name="CODIGO_REFERENCIA" length="45" />
         </property>
     </class>
 </hibernate-mapping>

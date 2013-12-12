@@ -1,7 +1,8 @@
 package com.mimp.bean;
-// Generated 10/12/2013 03:07:34 PM by Hibernate Tools 3.6.0
+// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -10,25 +11,27 @@ import java.util.Date;
 public class EstudioCaso  implements java.io.Serializable {
 
 
-     private Integer idestudioCaso;
+     private long idestudioCaso;
      private Nna nna;
      private ExpedienteFamilia expedienteFamilia;
      private String orden;
      private Date fechaEstudio;
      private Date fechaSolAdop;
      private String resultado;
-     private Integer prioridad;
-     private Long NSolicitud;
+     private Long prioridad;
+     private BigDecimal NSolicitud;
 
     public EstudioCaso() {
     }
 
 	
-    public EstudioCaso(Nna nna, ExpedienteFamilia expedienteFamilia) {
+    public EstudioCaso(long idestudioCaso, Nna nna, ExpedienteFamilia expedienteFamilia) {
+        this.idestudioCaso = idestudioCaso;
         this.nna = nna;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public EstudioCaso(Nna nna, ExpedienteFamilia expedienteFamilia, String orden, Date fechaEstudio, Date fechaSolAdop, String resultado, Integer prioridad, Long NSolicitud) {
+    public EstudioCaso(long idestudioCaso, Nna nna, ExpedienteFamilia expedienteFamilia, String orden, Date fechaEstudio, Date fechaSolAdop, String resultado, Long prioridad, BigDecimal NSolicitud) {
+       this.idestudioCaso = idestudioCaso;
        this.nna = nna;
        this.expedienteFamilia = expedienteFamilia;
        this.orden = orden;
@@ -39,11 +42,11 @@ public class EstudioCaso  implements java.io.Serializable {
        this.NSolicitud = NSolicitud;
     }
    
-    public Integer getIdestudioCaso() {
+    public long getIdestudioCaso() {
         return this.idestudioCaso;
     }
     
-    public void setIdestudioCaso(Integer idestudioCaso) {
+    public void setIdestudioCaso(long idestudioCaso) {
         this.idestudioCaso = idestudioCaso;
     }
     public Nna getNna() {
@@ -88,18 +91,18 @@ public class EstudioCaso  implements java.io.Serializable {
     public void setResultado(String resultado) {
         this.resultado = resultado;
     }
-    public Integer getPrioridad() {
+    public Long getPrioridad() {
         return this.prioridad;
     }
     
-    public void setPrioridad(Integer prioridad) {
+    public void setPrioridad(Long prioridad) {
         this.prioridad = prioridad;
     }
-    public Long getNSolicitud() {
+    public BigDecimal getNSolicitud() {
         return this.NSolicitud;
     }
     
-    public void setNSolicitud(Long NSolicitud) {
+    public void setNSolicitud(BigDecimal NSolicitud) {
         this.NSolicitud = NSolicitud;
     }
 
