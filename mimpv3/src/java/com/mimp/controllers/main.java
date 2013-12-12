@@ -117,11 +117,8 @@ public class main {
                                 map.put("listaTurnos", tempTurnos);
                                 pagina = "/Inscripcion/inscripcion_sesion1a";
                                 return new ModelAndView(pagina, map);
-
                             }
-
                         }
-
                     } else if (temp.get(i).getAsistenciaFTs().size() >= temp.get(i).getVacantes()) {
                         for (int j = i + 1; j < temp.size(); j++) {
                             temp2.add(temp.get(j));

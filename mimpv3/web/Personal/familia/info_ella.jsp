@@ -4,6 +4,18 @@
     Author     : Ayner Pérez
 --%>
 
+<%@page import="com.mimp.bean.Personal"%>
+<%
+response.setHeader( "Pragma", "no-cache" );
+response.addHeader( "Cache-Control", "must-revalidate" );
+response.addHeader( "Cache-Control", "no-cache" );
+response.addHeader( "Cache-Control", "no-store" );
+response.setDateHeader("Expires", 0);
+Personal u=(Personal)request.getSession().getAttribute("usuario");
+if (u==null){
+%>
+<jsp:forward page="/salir"/>
+<% } %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
