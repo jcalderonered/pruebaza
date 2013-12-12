@@ -98,8 +98,9 @@
                                         <td>${organismo.getEntidad().getPais()}</td>
                                         <td>${organismo.getEntidad().getTelefono()}</td>
                                         <td>
-                                            ${organismo.getRepresentantes().value.getNombre()} 
-                                            
+                                            <c:forEach var="representante" items="${organismo.getRepresentantes()}" >
+                                                ${representante.getNombre()} ${representante.getApellidoP()} ${representante.getApelldoM()} 
+                                            </c:forEach>
                                          </td>
                                          <td>
                                             <form action="${pageContext.servletContext.contextPath}/irEditarOrg2" method="post">
