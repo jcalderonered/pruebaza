@@ -130,7 +130,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Usuario</label>  
                                     <div class="controls">
-                                        <input id="user" name="user" value="${autoridad.getUser()}" type="text" class="input-xlarge">
+                                        <input id="user" name="user" value="${autoridad.getEntidad().getUser()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
