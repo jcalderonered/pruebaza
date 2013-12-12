@@ -49,14 +49,14 @@ public class HiberPersonal {
 
     }
 
-    public Autoridad getAutoridad(int id) {
+    public Autoridad getAutoridad(long id) {
         Session session = sessionFactory.getCurrentSession();
         Autoridad aut = new Autoridad();
 
         session.beginTransaction();
         String hqlA = "FROM Autoridad A WHERE A.id = :id";
         Query queryA = session.createQuery(hqlA);
-        queryA.setInteger("id", id);
+        queryA.setLong("id", id);
         Object queryResultA = queryA.uniqueResult();
 
         aut = (Autoridad) queryResultA;
@@ -130,14 +130,14 @@ public class HiberPersonal {
         return allOrganismos;
     }
 
-    public Organismo getOrganismo(int id) {
+    public Organismo getOrganismo(long id) {
         Session session = sessionFactory.getCurrentSession();
         Organismo org = new Organismo();
 
         session.beginTransaction();
         String hqlO = "FROM Organismo O WHERE O.id = :id";
         Query queryO = session.createQuery(hqlO);
-        queryO.setInteger("id", id);
+        queryO.setLong("id", id);
         Object queryResultA = queryO.uniqueResult();
 
         org = (Organismo) queryResultA;
@@ -187,14 +187,14 @@ public class HiberPersonal {
         return allCar;
     }
 
-    public Car getCar(int id) {
+    public Car getCar(long id) {
         Session session = sessionFactory.getCurrentSession();
         Car car = new Car();
 
         session.beginTransaction();
         String hqlC = "FROM Car C WHERE C.id = :id";
         Query queryC = session.createQuery(hqlC);
-        queryC.setInteger("id", id);
+        queryC.setLong("id", id);
         Object queryResultC = queryC.uniqueResult();
 
         car = (Car) queryResultC;
@@ -239,14 +239,14 @@ public class HiberPersonal {
 
         return allJuzgado;
     }
-    public Juzgado getJuzgado(int id) {
+    public Juzgado getJuzgado(long id) {
         Session session = sessionFactory.getCurrentSession();
         Juzgado juzg = new Juzgado();
 
         session.beginTransaction();
         String hqlJ = "FROM Juzgado J WHERE J.id = :id";
         Query queryJ = session.createQuery(hqlJ);
-        queryJ.setInteger("id", id);
+        queryJ.setLong("id", id);
         Object queryResultJ = queryJ.uniqueResult();
 
         juzg = (Juzgado) queryResultJ;
@@ -296,14 +296,14 @@ public class HiberPersonal {
         return allUa;
     }
     
-    public Unidad getUa(int id) {
+    public Unidad getUa(long id) {
         Session session = sessionFactory.getCurrentSession();
         Unidad ua = new Unidad();
 
         session.beginTransaction();
         String hqlU = "FROM Unidad U WHERE U.id = :id";
         Query queryU = session.createQuery(hqlU);
-        queryU.setInteger("id", id);
+        queryU.setLong("id", id);
         Object queryResultU = queryU.uniqueResult();
 
         ua = (Unidad) queryResultU;
@@ -311,7 +311,7 @@ public class HiberPersonal {
         return ua;
     }
     
-    public ArrayList<Personal> ListaPersonalUa(int idUa) {
+    public ArrayList<Personal> ListaPersonalUa(long idUa) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -319,7 +319,7 @@ public class HiberPersonal {
 
         String hql = "FROM Personal P where P.unidad = :id";
         Query query = session.createQuery(hql);
-        query.setInteger("id", idUa);
+        query.setLong("id", idUa);
         List pers = query.list();
         ArrayList<Personal> allPersonal = new ArrayList();
 
@@ -332,7 +332,7 @@ public class HiberPersonal {
         return allPersonal;
     }
     
-    public ArrayList<Personal> ListaPersonalNoUa(int idUa) {
+    public ArrayList<Personal> ListaPersonalNoUa(long idUa) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -340,7 +340,7 @@ public class HiberPersonal {
 
         String hql = "FROM Personal P where not P.unidad = :id";
         Query query = session.createQuery(hql);
-        query.setInteger("id", idUa);
+        query.setLong("id", idUa);
         List pers = query.list();
         ArrayList<Personal> allPersonal = new ArrayList();
 
@@ -391,14 +391,14 @@ public class HiberPersonal {
         return allPersonal;
     }
     
-    public Personal getPersonal(int idPers) {
+    public Personal getPersonal(long idPers) {
         Session session = sessionFactory.getCurrentSession();
         Personal pers = new Personal();
 
         session.beginTransaction();
         String hqlU = "FROM Personal P WHERE P.id = :id";
         Query queryU = session.createQuery(hqlU);
-        queryU.setInteger("id", idPers);
+        queryU.setLong("id", idPers);
         Object queryResultU = queryU.uniqueResult();
 
         pers = (Personal) queryResultU;
@@ -425,7 +425,7 @@ public class HiberPersonal {
     
     }
     
-    public Sesion getSesion (int id){
+    public Sesion getSesion (long id){
     
         Session session = sessionFactory.getCurrentSession();
         Sesion sesion = new Sesion();
@@ -433,7 +433,7 @@ public class HiberPersonal {
         session.beginTransaction();
         String hql = "From Sesion S where S.id = :id";
         Query query = session.createQuery(hql);
-        query.setInteger("id", id);
+        query.setLong("id", id);
         Object queryResultU = query.uniqueResult();
 
         sesion = (Sesion) queryResultU;

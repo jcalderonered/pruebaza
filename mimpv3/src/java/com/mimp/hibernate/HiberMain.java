@@ -121,14 +121,14 @@ public class HiberMain {
 
     }
 
-    public Turno getTurno(int id) {
+    public Turno getTurno(long id) {
 
         Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
         String queryTurno = "FROM Turno T WHERE T.id = :id ";
         Query query = session.createQuery(queryTurno);
-        query.setInteger("id", id);
+        query.setLong("id", id);
         Object queryResult = query.uniqueResult();
         Turno temp = (Turno) queryResult;
         Hibernate.initialize(temp.getSesion());
@@ -171,7 +171,7 @@ public class HiberMain {
         session.save(aft);
     }
 
-    public ArrayList<Asistente> listaAsistentes(int id) {
+    public ArrayList<Asistente> listaAsistentes(long id) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -179,7 +179,7 @@ public class HiberMain {
 
         String hql = "FROM Asistente A where A.formularioSesion.sesion.idsesion = :id";
         Query query = session.createQuery(hql);
-        query.setInteger("id", id);
+        query.setLong("id", id);
         List asistentes = query.list();
         ArrayList<Asistente> allAsistentes = new ArrayList();
         for (Iterator iter = asistentes.iterator(); iter.hasNext();) {
@@ -209,14 +209,14 @@ public class HiberMain {
 
     }
 
-    public ArrayList<Turno> turnosSesion(int idSesion) {
+    public ArrayList<Turno> turnosSesion(long idSesion) {
 
         Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
         String hql = "From Turno T where T.sesion = :id";
         Query query = session.createQuery(hql);
-        query.setInteger("id", idSesion);
+        query.setLong("id", idSesion);
         List asistentes = query.list();
         ArrayList<Turno> allTurnos = new ArrayList();
         for (Iterator iter = asistentes.iterator(); iter.hasNext();) {
