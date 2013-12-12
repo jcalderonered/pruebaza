@@ -65,7 +65,7 @@ public class main {
             }
         } else if (aux.get(0) == "familia") {
             Familia familia = (Familia) aux.get(1);
-            if (familia.getHabilitado() == true) {
+            if (familia.getHabilitado() == 0) {
                 session.setAttribute("usuario", familia);
                 pagina = "/Familia/inicio_familia";
             } else {
