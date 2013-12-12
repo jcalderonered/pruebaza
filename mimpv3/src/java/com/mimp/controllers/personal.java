@@ -719,7 +719,7 @@ public class personal {
     @RequestMapping(value = "/updatePersonalUa", method = RequestMethod.POST)
     public ModelAndView UpdatePersonalUa(ModelMap map,
             //datos a ingresar en Personal
-            @RequestParam("idPers") int idPers,
+            @RequestParam("idPers") long idPers,
             @RequestParam("nombre") String nombre,
             @RequestParam("apellidoP") String apellidoP,
             @RequestParam("apellidoM") String apellidoM,
@@ -730,7 +730,7 @@ public class personal {
             @RequestParam("profesion") String profesion,
             @RequestParam("grado") String grado,
             @RequestParam("cargo") String cargo,
-            @RequestParam("dni") int dni,
+            @RequestParam("dni") long dni,
             @RequestParam("fechaNac") String fechaNac,
             @RequestParam("regimen") String regimen,
             @RequestParam("fechaIng") String fechaIng,
@@ -771,7 +771,7 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////ASIGNAR PERSONAL PASO 1 ///////////////////////////////////////////
     @RequestMapping(value = "/asignarPersonalUa", method = RequestMethod.POST)
-    public ModelAndView asignarPersonalUa(ModelMap map, @RequestParam("idUa") int idUa) {
+    public ModelAndView asignarPersonalUa(ModelMap map, @RequestParam("idUa") long idUa) {
 
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalNoUa", ServicioPersonal.ListaPersonalNoUa(idUa));
@@ -781,7 +781,7 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////ASIGNAR PERSONAL PASO 2 ///////////////////////////////////////////
     @RequestMapping(value = "/asignarPersonalUa2", method = RequestMethod.POST)
-    public ModelAndView asignarPersonalUa2(ModelMap map, @RequestParam("idUa") int idUa, @RequestParam("idPers") int idPers) {
+    public ModelAndView asignarPersonalUa2(ModelMap map, @RequestParam("idUa") long idUa, @RequestParam("idPers") long idPers) {
 
         Personal per = new Personal();
         Unidad ua = new Unidad();
@@ -805,7 +805,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/irEditarPersonal2", method = RequestMethod.POST)
-    public ModelAndView IrEditarPersonal2(ModelMap map, @RequestParam("id") int id) {
+    public ModelAndView IrEditarPersonal2(ModelMap map, @RequestParam("id") long id) {
 
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(id);
@@ -837,13 +837,13 @@ public class personal {
             @RequestParam("profesion") String profesion,
             @RequestParam("grado") String grado,
             @RequestParam("cargo") String cargo,
-            @RequestParam("dni") int dni,
+            @RequestParam("dni") long dni,
             @RequestParam("fechaNac") String fechaNac,
             @RequestParam("regimen") String regimen,
             @RequestParam("fechaIng") String fechaIng,
             @RequestParam("domicilio") String domicilio,
             @RequestParam("rol") String rol,
-            @RequestParam("ua") int ua,
+            @RequestParam("ua") long ua,
             HttpSession session
     ) {
 
@@ -887,7 +887,7 @@ public class personal {
     @RequestMapping(value = "/updatePersonal", method = RequestMethod.POST)
     public ModelAndView UpdatePersonal(ModelMap map,
             //datos a ingresar en Personal
-            @RequestParam("idPers") int idPers,
+            @RequestParam("idPers") long idPers,
             @RequestParam("nombre") String nombre,
             @RequestParam("apellidoP") String apellidoP,
             @RequestParam("apellidoM") String apellidoM,
@@ -898,13 +898,13 @@ public class personal {
             @RequestParam("profesion") String profesion,
             @RequestParam("grado") String grado,
             @RequestParam("cargo") String cargo,
-            @RequestParam("dni") int dni,
+            @RequestParam("dni") long dni,
             @RequestParam("fechaNac") String fechaNac,
             @RequestParam("regimen") String regimen,
             @RequestParam("fechaIng") String fechaIng,
             @RequestParam("domicilio") String domicilio,
             @RequestParam("rol") String rol,
-            @RequestParam("ua") int ua,
+            @RequestParam("ua") long ua,
             HttpSession session
     ) {
 
@@ -950,7 +950,7 @@ public class personal {
 
     //// EDITAR SESION INFORMATIVA //////////////
     @RequestMapping(value = "/PersonalEditarSesion", method = RequestMethod.POST)
-    public ModelAndView PersonalEditarSesion(ModelMap map, @RequestParam("idSesion") int id) {
+    public ModelAndView PersonalEditarSesion(ModelMap map, @RequestParam("idSesion") long id) {
 
         Sesion temp = new Sesion();
         ArrayList<Personal> allPersonal = new ArrayList();

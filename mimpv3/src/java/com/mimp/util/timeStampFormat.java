@@ -6,6 +6,7 @@
 
 package com.mimp.util;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,7 +52,7 @@ public class timeStampFormat {
         return fecha;
     }
     
-    public String HourToString (Date temp){
+    public String HourToString (Serializable temp){
         SimpleDateFormat fromsql = new SimpleDateFormat("HH:mm",new Locale("ES"));
         //SimpleDateFormat mystring = new SimpleDateFormat("dd/MM/yyyy");
         
