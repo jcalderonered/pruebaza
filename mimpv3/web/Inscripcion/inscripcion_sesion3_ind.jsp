@@ -220,7 +220,7 @@
 
                             <div class="row">
                                 <div class="btn-toolbar">  
-                                    <button href="#" class="btn btn-default">Cancelar</button>
+                                    <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/inicio'" class="btn btn-default">Cancelar</button>
 
                                     <button type="submit" class="btn btn-default">Inscribirse</button>
                                 </div> 
