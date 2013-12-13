@@ -10,6 +10,7 @@ import java.util.*;
 import com.mimp.bean.*;
 import com.mimp.hibernate.HiberMain;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,28 +26,64 @@ import org.springframework.web.servlet.ModelAndView;
 public class familia {
     
     @RequestMapping("/inicioFam")
-    public String InicioFam() {
-        return "/Familia/inicio_familia";
+    public ModelAndView InicioFam(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if(usuario == null){
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        String pagina = "/Familia/inicio_familia";
+        return new ModelAndView(pagina, map);
     }
     
     @RequestMapping("/FactDatos")
-    public String Act_datos() {
-        return "/Familia/Act_datos/datos_ella";
+    public ModelAndView Act_datos(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if(usuario == null){
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        String pagina = "/Familia/Act_datos/datos_ella";
+        return new ModelAndView(pagina, map);
     }
     
     @RequestMapping("/Finscripcion")
-    public String Finscripcion() {
+    public ModelAndView Finscripcion(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if(usuario == null){
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //FALTA
-        return "/Familia/Act_datos/datos_ella";
+        String pagina = "/Familia/Act_datos/datos_ella";
+        return new ModelAndView(pagina, map);
     }
     
     @RequestMapping("/Festado")
-    public String Festado() {
-        return "/Familia/estado_proc";
+    public ModelAndView Festado(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if(usuario == null){
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //FALTA
+        String pagina = "/Familia/estado_proc";
+        return new ModelAndView(pagina, map);
     }
     
     @RequestMapping("/Fcontra")
-    public String Fcontra() {
-        return "/Familia/contra_familia";
+    public ModelAndView Fcontra(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if(usuario == null){
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        String pagina = "/Familia/contra_familia";
+        return new ModelAndView(pagina, map);
     }
 }

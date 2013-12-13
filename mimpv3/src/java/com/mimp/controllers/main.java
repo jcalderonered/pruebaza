@@ -51,7 +51,7 @@ public class main {
     public ModelAndView login(ModelMap map, @RequestParam("email") String email, @RequestParam("password") String pass, HttpSession session) {
 
         String pagina;
-        String mensaje = "El usuario se encuentra Deshabilitado. Favor contactar a la Direeción General de Adopciones para más información";
+        String mensaje = "El usuario se encuentra Deshabilitado. Favor contactar a la Dirección General de Adopciones para más información";
 
         ArrayList aux = ServicioMain.usuario(email, pass);
         if (aux.get(0) == "personal") {
@@ -65,7 +65,7 @@ public class main {
             }
         } else if (aux.get(0) == "familia") {
             Familia familia = (Familia) aux.get(1);
-            if (familia.getHabilitado() == 0) {
+            if (familia.getHabilitado() == 1) {
                 session.setAttribute("usuario", familia);
                 pagina = "/Familia/inicio_familia";
             } else {

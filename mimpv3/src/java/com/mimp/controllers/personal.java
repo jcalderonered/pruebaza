@@ -38,16 +38,26 @@ public class personal {
 
     //////////////////////// NAVEGACION ///////////////
     @RequestMapping(value = "/inicioper", method = RequestMethod.GET)
-    public ModelAndView InicioPer(ModelMap map) {
-
+    public ModelAndView InicioPer(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         return new ModelAndView("/Personal/inicio_personal", map);
     }
 
     @RequestMapping(value = "/inf", method = RequestMethod.GET)
-    public ModelAndView Inf(ModelMap map) {
-
+    public ModelAndView Inf(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
@@ -55,16 +65,26 @@ public class personal {
     }
 
     @RequestMapping(value = "/nna", method = RequestMethod.GET)
-    public ModelAndView Nna(ModelMap map) {
-
+    public ModelAndView Nna(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         // map.addAttribute("id", temp);
         return new ModelAndView("/Personal/nna/lista_nna", map);
     }
 
     @RequestMapping(value = "/juzgado", method = RequestMethod.GET)
-    public ModelAndView Juzgado(ModelMap map) {
-
+    public ModelAndView Juzgado(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
@@ -72,46 +92,76 @@ public class personal {
     }
 
     @RequestMapping(value = "/car", method = RequestMethod.GET)
-    public ModelAndView Car(ModelMap map) {
-
+    public ModelAndView Car(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         map.put("listaCar", ServicioPersonal.ListaCar());
         return new ModelAndView("/Personal/registros/car/lista_car", map);
     }
 
     @RequestMapping(value = "/ua", method = RequestMethod.GET)
-    public ModelAndView Ua(ModelMap map) {
-
+    public ModelAndView Ua(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         map.put("listaUa", ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/registros/ua/lista_ua", map);
     }
 
     @RequestMapping(value = "/famint", method = RequestMethod.GET)
-    public ModelAndView FamInt(ModelMap map) {
-
+    public ModelAndView FamInt(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         return new ModelAndView("/Personal/fam_inter/lista_fam_int", map);
     }
 
     @RequestMapping(value = "/fametap", method = RequestMethod.GET)
-    public ModelAndView FamEtap(ModelMap map) {
-
+    public ModelAndView FamEtap(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         return new ModelAndView("/Personal/Buscador_etapa/etapa_formativa", map);
     }
 
     @RequestMapping(value = "/reg", method = RequestMethod.GET)
-    public ModelAndView Registros(ModelMap map) {
-
+    public ModelAndView Registros(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         return new ModelAndView("/Personal/inicio_personal", map);
     }
 
     @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
-    public ModelAndView Usuarios(ModelMap map) {
-
+    public ModelAndView Usuarios(ModelMap map,HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
@@ -119,8 +169,13 @@ public class personal {
     }
 
     @RequestMapping(value = "/organismo", method = RequestMethod.GET)
-    public ModelAndView Organismo(ModelMap map) {
-
+    public ModelAndView Organismo(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());
@@ -128,8 +183,13 @@ public class personal {
     }
 
     @RequestMapping(value = "/autoridad", method = RequestMethod.GET)
-    public ModelAndView Autoridad(ModelMap map) {
-
+    public ModelAndView Autoridad(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
@@ -137,8 +197,13 @@ public class personal {
     }
 
     @RequestMapping(value = "/password", method = RequestMethod.GET)
-    public ModelAndView Password(ModelMap map) {
-
+    public ModelAndView Password(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         return new ModelAndView("/Personal/actualizar_pass", map);
@@ -146,16 +211,26 @@ public class personal {
 
     ////////////////////// REGISTRAR/EDITAR AUTORIDAD ////////////////////////////////////
     @RequestMapping(value = "/irEditarAut", method = RequestMethod.GET)
-    public ModelAndView IrEditarAut(ModelMap map) {
-
+    public ModelAndView IrEditarAut(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         return new ModelAndView("/Personal/registros/autoridad/editar_aut", map);
     }
 
     @RequestMapping(value = "/irEditarAut2", method = RequestMethod.POST)
-    public ModelAndView IrEditarAut2(ModelMap map, @RequestParam("id") int id) {
-
+    public ModelAndView IrEditarAut2(ModelMap map, @RequestParam("id") int id, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         Autoridad temp = new Autoridad();
@@ -184,8 +259,14 @@ public class personal {
             @RequestParam("resol_renov") String resol_renov,
             @RequestParam("fecha_renov") String fecha_renov,
             @RequestParam("fecha_venc_aut") String fecha_venc_aut,
-            @RequestParam("obs") String obs) {
-
+            @RequestParam("obs") String obs,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Autoridad aut = new Autoridad();
         Entidad ent = new Entidad();
 
@@ -228,7 +309,7 @@ public class personal {
             HttpSession session) {
 
         Personal usuario = (Personal) session.getAttribute("usuario");
-        if(usuario == null){
+        if (usuario == null) {
             return new ModelAndView("login", map);
         }
         Autoridad temp = new Autoridad();
@@ -255,14 +336,24 @@ public class personal {
 
     ////////////////////// REGISTRAR/EDITAR ORGANISMO ////////////////////////////////////
     @RequestMapping(value = "/irEditarOrg", method = RequestMethod.GET)
-    public ModelAndView IrEditarOrg(ModelMap map) {
-
+    public ModelAndView IrEditarOrg(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         return new ModelAndView("/Personal/registros/organismo/editar_org", map);
     }
 
     @RequestMapping(value = "/irEditarOrg2", method = RequestMethod.POST)
-    public ModelAndView IrEditarOrg2(ModelMap map, @RequestParam("id") int id) {
-
+    public ModelAndView IrEditarOrg2(ModelMap map, @RequestParam("id") int id,HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Organismo temp = new Organismo();
         temp = ServicioPersonal.getOrganismo(id);
         String fechaEmision = format.dateToString(temp.getEntidad().getFechaResol());
@@ -312,9 +403,16 @@ public class personal {
             @RequestParam("correo") String correo,
             @RequestParam("celular") String celular,
             @RequestParam("direccionR") String direccionR,
-            @RequestParam("obsR") String obsR
+            @RequestParam("obsR") String obsR,
+            HttpSession session
     ) {
 
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Organismo org = new Organismo();
         Representante rep = new Representante();
         Entidad ent = new Entidad();
@@ -379,9 +477,16 @@ public class personal {
             @RequestParam("correo") String correo,
             @RequestParam("celular") String celular,
             @RequestParam("direccionR") String direccionR,
-            @RequestParam("obsR") String obsR
+            @RequestParam("obsR") String obsR,
+            HttpSession session
     ) {
 
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Organismo org = new Organismo();
 
         org = ServicioPersonal.getOrganismo(id);
@@ -422,14 +527,24 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ////////////////////// REGISTRAR/EDITAR CAR ////////////////////////////////////
     @RequestMapping(value = "/irEditarCar", method = RequestMethod.GET)
-    public ModelAndView IrEditarCar(ModelMap map) {
-
+    public ModelAndView IrEditarCar(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         return new ModelAndView("/Personal/registros/car/editar_car", map);
     }
 
     @RequestMapping(value = "/irEditarCar2", method = RequestMethod.POST)
-    public ModelAndView IrEditarCar2(ModelMap map, @RequestParam("id") int id) {
-
+    public ModelAndView IrEditarCar2(ModelMap map, @RequestParam("id") int id, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Car temp = new Car();
         temp = ServicioPersonal.getCar(id);
         map.put("car", temp);
@@ -450,9 +565,16 @@ public class personal {
             @RequestParam("fax") String fax,
             @RequestParam("celular") String celular,
             @RequestParam("telefono") String telefono,
-            @RequestParam("obs") String obs
+            @RequestParam("obs") String obs,
+            HttpSession session
     ) {
-
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
         Car car = new Car();
 
         car.setNombre(nombre);
@@ -487,9 +609,16 @@ public class personal {
             @RequestParam("fax") String fax,
             @RequestParam("celular") String celular,
             @RequestParam("telefono") String telefono,
-            @RequestParam("obs") String obs
+            @RequestParam("obs") String obs,
+            HttpSession session
     ) {
 
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Car car = new Car();
         car = ServicioPersonal.getCar(id);
         car.setNombre(nombre);
@@ -513,14 +642,24 @@ public class personal {
     ////////////////////// REGISTRAR/EDITAR JUZGADOS ////////////////////////////////////
 
     @RequestMapping(value = "/irEditarJuzgado", method = RequestMethod.GET)
-    public ModelAndView IrEditarJuzgado(ModelMap map) {
-
+    public ModelAndView IrEditarJuzgado(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         return new ModelAndView("/Personal/registros/juzgado/editar_juzgado", map);
     }
 
     @RequestMapping(value = "/irEditarJuzgado2", method = RequestMethod.POST)
-    public ModelAndView IrEditarJuzgado2(ModelMap map, @RequestParam("id") int id) {
-
+    public ModelAndView IrEditarJuzgado2(ModelMap map, @RequestParam("id") int id,HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Juzgado temp = new Juzgado();
         temp = ServicioPersonal.getJuzgado(id);
         map.put("juzgado", temp);
@@ -541,9 +680,16 @@ public class personal {
             @RequestParam("nombreJ") String nombreJ,
             @RequestParam("telefono") String telefono,
             @RequestParam("correo") String correo,
-            @RequestParam("obs") String obs
+            @RequestParam("obs") String obs,
+            HttpSession session
     ) {
 
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Juzgado juzg = new Juzgado();
 
         juzg.setNombre(nombre);
@@ -578,9 +724,16 @@ public class personal {
             @RequestParam("nombreJ") String nombreJ,
             @RequestParam("telefono") String telefono,
             @RequestParam("correo") String correo,
-            @RequestParam("obs") String obs
+            @RequestParam("obs") String obs,
+            HttpSession session
     ) {
 
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Juzgado juzg = new Juzgado();
         juzg = ServicioPersonal.getJuzgado(id);
         juzg.setNombre(nombre);
@@ -604,14 +757,24 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ////////////////////// REGISTRAR/EDITAR UA ////////////////////////////////////
     @RequestMapping(value = "/irEditarUa", method = RequestMethod.GET)
-    public ModelAndView IrEditarUa(ModelMap map) {
-
+    public ModelAndView IrEditarUa(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         return new ModelAndView("/Personal/registros/ua/editar_ua", map);
     }
 
     @RequestMapping(value = "/irEditarUa2", method = RequestMethod.POST)
-    public ModelAndView IrEditarUa2(ModelMap map, @RequestParam("id") int id) {
-
+    public ModelAndView IrEditarUa2(ModelMap map, @RequestParam("id") int id,HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Unidad temp = new Unidad();
         temp = ServicioPersonal.getUa(id);
         map.put("ua", temp);
@@ -631,9 +794,15 @@ public class personal {
             @RequestParam("correo") String correo,
             @RequestParam("telefono") String telefono,
             @RequestParam("celular") String celular,
-            @RequestParam("obs") String obs
+            @RequestParam("obs") String obs,
+            HttpSession session
     ) {
-
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Unidad ua = new Unidad();
 
         ua.setNombre(nombre);
@@ -666,9 +835,16 @@ public class personal {
             @RequestParam("correo") String correo,
             @RequestParam("telefono") String telefono,
             @RequestParam("celular") String celular,
-            @RequestParam("obs") String obs
+            @RequestParam("obs") String obs,
+            HttpSession session
     ) {
 
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Unidad ua = new Unidad();
         ua = ServicioPersonal.getUa(id);
         ua.setNombre(nombre);
@@ -691,8 +867,13 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////PERSONAL DE UA ///////////////////////////////////////////
     @RequestMapping(value = "/irListaPersonalUa", method = RequestMethod.POST)
-    public ModelAndView ListaPersonalUa(ModelMap map, @RequestParam("ïdUA") int idUa) {
-
+    public ModelAndView ListaPersonalUa(ModelMap map, @RequestParam("ïdUA") int idUa,HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(idUa));
         return new ModelAndView("/Personal/registros/ua/lista_ua_personal", map);
@@ -701,8 +882,13 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////EDITAR PERSONAL UA ///////////////////////////////////////////
     @RequestMapping(value = "/EditarPersonalUa", method = RequestMethod.POST)
-    public ModelAndView EditarPersonalUa(ModelMap map, @RequestParam("id") int id) {
-
+    public ModelAndView EditarPersonalUa(ModelMap map, @RequestParam("id") int id, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(id);
         String fechaNac = format.dateToString(temp.getFechaNacimiento());
@@ -735,10 +921,16 @@ public class personal {
             @RequestParam("regimen") String regimen,
             @RequestParam("fechaIng") String fechaIng,
             @RequestParam("domicilio") String domicilio,
-            @RequestParam("rol") String rol
+            @RequestParam("rol") String rol,
+            HttpSession session
     //@RequestParam("ua") int ua
     ) {
-
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(idPers);
 
@@ -771,8 +963,13 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////ASIGNAR PERSONAL PASO 1 ///////////////////////////////////////////
     @RequestMapping(value = "/asignarPersonalUa", method = RequestMethod.POST)
-    public ModelAndView asignarPersonalUa(ModelMap map, @RequestParam("idUa") long idUa) {
-
+    public ModelAndView asignarPersonalUa(ModelMap map, @RequestParam("idUa") long idUa, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalNoUa", ServicioPersonal.ListaPersonalNoUa(idUa));
         return new ModelAndView("/Personal/registros/ua/lista_asign_pers", map);
@@ -781,8 +978,14 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////ASIGNAR PERSONAL PASO 2 ///////////////////////////////////////////
     @RequestMapping(value = "/asignarPersonalUa2", method = RequestMethod.POST)
-    public ModelAndView asignarPersonalUa2(ModelMap map, @RequestParam("idUa") long idUa, @RequestParam("idPers") long idPers) {
+    public ModelAndView asignarPersonalUa2(ModelMap map, @RequestParam("idUa") long idUa, @RequestParam("idPers") long idPers, HttpSession session) {
 
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Personal per = new Personal();
         Unidad ua = new Unidad();
         ua = ServicioPersonal.getUa(idUa);
@@ -798,15 +1001,25 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ////////////////////// REGISTRAR/EDITAR PERSONAL ////////////////////////////////////
     @RequestMapping(value = "/irEditarPersonal", method = RequestMethod.GET)
-    public ModelAndView IrEditarPersonal(ModelMap map) {
-
+    public ModelAndView IrEditarPersonal(ModelMap map,HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         map.put("listaUa", ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/registros/usuarios/editar_personal", map);
     }
 
     @RequestMapping(value = "/irEditarPersonal2", method = RequestMethod.POST)
-    public ModelAndView IrEditarPersonal2(ModelMap map, @RequestParam("id") long id) {
-
+    public ModelAndView IrEditarPersonal2(ModelMap map, @RequestParam("id") long id, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(id);
         String fechaNac = "";
@@ -848,7 +1061,7 @@ public class personal {
     ) {
 
         Personal usuario = (Personal) session.getAttribute("usuario");
-        if(usuario == null){
+        if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
@@ -909,7 +1122,7 @@ public class personal {
     ) {
 
         Personal usuario = (Personal) session.getAttribute("usuario");
-        if(usuario == null){
+        if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
@@ -950,8 +1163,13 @@ public class personal {
 
     //// EDITAR SESION INFORMATIVA //////////////
     @RequestMapping(value = "/PersonalEditarSesion", method = RequestMethod.POST)
-    public ModelAndView PersonalEditarSesion(ModelMap map, @RequestParam("idSesion") long id) {
-
+    public ModelAndView PersonalEditarSesion(ModelMap map, @RequestParam("idSesion") long id, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Sesion temp = new Sesion();
         ArrayList<Personal> allPersonal = new ArrayList();
         ArrayList<Turno> allTurnos = new ArrayList();

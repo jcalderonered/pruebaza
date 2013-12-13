@@ -10,6 +10,7 @@ import java.util.*;
 import com.mimp.bean.*;
 import com.mimp.hibernate.HiberMain;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,5 +29,15 @@ public class organismo {
     public String InicioEnt() {
         return "/Entidad/inicio_ent";
     }
-    
+    @RequestMapping("/inicioEnt")
+    public ModelAndView InicioEnt(ModelMap map, HttpSession session) {
+        Entidad usuario = (Entidad) session.getAttribute("usuario");
+        if(usuario == null){
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        String pagina = "/Entidad/inicio_ent";
+        return new ModelAndView(pagina, map);
+    }
 }
