@@ -41,8 +41,8 @@
         <property name="cargo" type="string">
             <column name="CARGO" length="30" />
         </property>
-        <property name="dni" type="java.lang.Long">
-            <column name="DNI" precision="10" scale="0" />
+        <property name="dni" type="string">
+            <column name="DNI" length="8" />
         </property>
         <property name="fechaNacimiento" type="date">
             <column name="FECHA_NACIMIENTO" length="7" />

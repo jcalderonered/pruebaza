@@ -24,7 +24,7 @@ public class Personal  implements java.io.Serializable {
      private String profesion;
      private String gradoInstruccion;
      private String cargo;
-     private Long dni;
+     private String dni;
      private Date fechaNacimiento;
      private String regimen;
      private Date fechaIngreso;
@@ -44,7 +44,7 @@ public class Personal  implements java.io.Serializable {
         this.idpersonal = idpersonal;
         this.unidad = unidad;
     }
-    public Personal(long idpersonal, Unidad unidad, String nombre, String apellidoP, String apellidoM, String user, String pass, String correoTrabajo, String correoPersonal, String profesion, String gradoInstruccion, String cargo, Long dni, Date fechaNacimiento, String regimen, Date fechaIngreso, String domicilio, String rol, Set<InformePostAdoptivo> informePostAdoptivos, Set<Designacion> designacions, Set<Evaluacion> evaluacions, Set<Atencion> atencions, Set<Log> logs) {
+    public Personal(long idpersonal, Unidad unidad, String nombre, String apellidoP, String apellidoM, String user, String pass, String correoTrabajo, String correoPersonal, String profesion, String gradoInstruccion, String cargo, String dni, Date fechaNacimiento, String regimen, Date fechaIngreso, String domicilio, String rol, Set<InformePostAdoptivo> informePostAdoptivos, Set<Designacion> designacions, Set<Evaluacion> evaluacions, Set<Atencion> atencions, Set<Log> logs) {
        this.idpersonal = idpersonal;
        this.unidad = unidad;
        this.nombre = nombre;
@@ -154,11 +154,11 @@ public class Personal  implements java.io.Serializable {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-    public Long getDni() {
+    public String getDni() {
         return this.dni;
     }
     
-    public void setDni(Long dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
     public Date getFechaNacimiento() {
