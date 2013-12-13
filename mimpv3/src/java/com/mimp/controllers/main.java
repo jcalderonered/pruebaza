@@ -98,7 +98,7 @@ public class main {
             return new ModelAndView(pagina);
         } else {
             for (int i = 0; i < temp.size(); i++) {
-                if (temp.get(i).getInicioInscripcion().before(now) && now.before(temp.get(i).getFinInscripcion())) {
+                if (now.after((Date) temp.get(i).getInicioInscripcion()) && now.before((Date) temp.get(i).getFinInscripcion())) {
                     if (i == temp.size() - 1 && temp.get(i).getAsistenciaFTs().size() >= temp.get(i).getVacantes()) {
                         ArrayList<Sesion> tempSesiones = new ArrayList<>();
                         tempSesiones = ServicioMain.listaSesionesSiguientes(temp.get(i).getSesion().getFecha());
@@ -131,7 +131,7 @@ public class main {
                 }
             }
         }
-        if (temp.get(0).getSesion().getHabilitado() == true) {
+        if (temp.get(0).getSesion().getHabilitado() == 0) {
             pagina = "/Inscripcion/inscripcion_inicio";
             map.put("ts", ts);
             map.put("listaTurnos", temp);
@@ -216,7 +216,7 @@ public class main {
         asis.setPaisNac(paisNac);
         asis.setDepNac(depNac);
         asis.setProvNac(proNac);
-        byte b = Byte.valueOf(edad);
+        short b = Byte.valueOf(edad);
         asis.setEdad(b);
         asis.setFechaNac(df.stringToDate(fechaNac));
         char c = doc.charAt(0);
@@ -310,7 +310,7 @@ public class main {
         asisEl.setPaisNac(paisNacEl);
         asisEl.setDepNac(depNacEl);
         asisEl.setProvNac(proNacEl);
-        byte bEl = Byte.valueOf(edadEl);
+        short bEl = Byte.valueOf(edadEl);
         asisEl.setEdad(bEl);
         asisEl.setFechaNac(df.stringToDate(fechaNacEl));
         char cEl = docEl.charAt(0);
@@ -326,7 +326,7 @@ public class main {
         asisElla.setPaisNac(paisNacElla);
         asisElla.setDepNac(depNacElla);
         asisElla.setProvNac(proNacElla);
-        byte bElla = Byte.valueOf(edadElla);
+        short bElla = Byte.valueOf(edadElla);
         asisElla.setEdad(bElla);
         asisElla.setFechaNac(df.stringToDate(fechaNacElla));
         char cElla = docElla.charAt(0);
