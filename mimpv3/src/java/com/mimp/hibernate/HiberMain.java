@@ -105,8 +105,8 @@ public class HiberMain {
         session.beginTransaction();
 
         //Date now = new Date();
-        String queryTurnos = "FROM Turno as T WHERE cast(T.inicioInscripcion as date) = current_date() "
-                + "and cast(T.finInscripcion as date) = current_date() order by T.inicioInscripcion";
+        String queryTurnos = "FROM Turno T WHERE trunc(T.inicioInscripcion) = TO_DATE(current_date) "
+                + "and trunc(T.finInscripcion) = TO_DATE(current_date) order by T.inicioInscripcion";
         Query query = session.createQuery(queryTurnos);
         List lista = query.list();
         ArrayList<Turno> Turnos = new ArrayList();
