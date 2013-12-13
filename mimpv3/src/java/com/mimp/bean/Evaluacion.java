@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
+// Generated Dec 13, 2013 9:53:43 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;

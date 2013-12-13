@@ -1,8 +1,7 @@
 package com.mimp.bean;
-// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
+// Generated Dec 13, 2013 9:53:43 AM by Hibernate Tools 3.6.0
 
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +15,7 @@ public class Reunion  implements java.io.Serializable {
      private long idreunion;
      private Turno2 turno2;
      private Date fecha;
-     private Serializable hora;
+     private String hora;
      private Short duracion;
      private String direccion;
      private Short identificador;
@@ -33,7 +32,7 @@ public class Reunion  implements java.io.Serializable {
         this.idreunion = idreunion;
         this.turno2 = turno2;
     }
-    public Reunion(long idreunion, Turno2 turno2, Date fecha, Serializable hora, Short duracion, String direccion, Short identificador, Long facilitador, Short capacidad, Short asistencia, Set<AsistenciaFR> asistenciaFRs) {
+    public Reunion(long idreunion, Turno2 turno2, Date fecha, String hora, Short duracion, String direccion, Short identificador, Long facilitador, Short capacidad, Short asistencia, Set<AsistenciaFR> asistenciaFRs) {
        this.idreunion = idreunion;
        this.turno2 = turno2;
        this.fecha = fecha;
@@ -68,11 +67,11 @@ public class Reunion  implements java.io.Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public Serializable getHora() {
+    public String getHora() {
         return this.hora;
     }
     
-    public void setHora(Serializable hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
     public Short getDuracion() {
