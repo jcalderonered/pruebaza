@@ -11,10 +11,10 @@
         <many-to-one name="sesion" class="com.mimp.bean.Sesion" fetch="select">
             <column name="IDSESION" precision="10" scale="0" not-null="true" />
         </many-to-one>
-        <property name="inicioInscripcion" type="serializable">
+        <property name="inicioInscripcion" type="java.sql.Timestamp">
             <column name="INICIO_INSCRIPCION" />
         </property>
-        <property name="finInscripcion" type="serializable">
+        <property name="finInscripcion" type="java.sql.Timestamp">
             <column name="FIN_INSCRIPCION" />
         </property>
         <property name="vacantes" type="java.lang.Short">
