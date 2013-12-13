@@ -1,8 +1,7 @@
 package com.mimp.bean;
-// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
+// Generated Dec 13, 2013 9:53:43 AM by Hibernate Tools 3.6.0
 
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,7 +14,7 @@ public class Atencion  implements java.io.Serializable {
      private Personal personal;
      private Familia familia;
      private Date fecha;
-     private Serializable hora;
+     private String hora;
      private String tipoAtencion;
      private String detalle;
      private String observacion;
@@ -29,7 +28,7 @@ public class Atencion  implements java.io.Serializable {
         this.personal = personal;
         this.familia = familia;
     }
-    public Atencion(long idatencion, Personal personal, Familia familia, Date fecha, Serializable hora, String tipoAtencion, String detalle, String observacion) {
+    public Atencion(long idatencion, Personal personal, Familia familia, Date fecha, String hora, String tipoAtencion, String detalle, String observacion) {
        this.idatencion = idatencion;
        this.personal = personal;
        this.familia = familia;
@@ -68,11 +67,11 @@ public class Atencion  implements java.io.Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public Serializable getHora() {
+    public String getHora() {
         return this.hora;
     }
     
-    public void setHora(Serializable hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
     public String getTipoAtencion() {

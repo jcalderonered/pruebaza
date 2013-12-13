@@ -1,8 +1,9 @@
 package com.mimp.bean;
-// Generated Dec 12, 2013 4:23:07 PM by Hibernate Tools 3.6.0
+// Generated Dec 13, 2013 9:53:43 AM by Hibernate Tools 3.6.0
 
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,8 +15,8 @@ public class Turno  implements java.io.Serializable {
 
      private long idturno;
      private Sesion sesion;
-     private Serializable inicioInscripcion;
-     private Serializable finInscripcion;
+     private Timestamp inicioInscripcion;
+     private Timestamp finInscripcion;
      private Short vacantes;
      private Set<AsistenciaFT> asistenciaFTs = new HashSet<AsistenciaFT>(0);
 
@@ -27,7 +28,7 @@ public class Turno  implements java.io.Serializable {
         this.idturno = idturno;
         this.sesion = sesion;
     }
-    public Turno(long idturno, Sesion sesion, Serializable inicioInscripcion, Serializable finInscripcion, Short vacantes, Set<AsistenciaFT> asistenciaFTs) {
+    public Turno(long idturno, Sesion sesion, Timestamp inicioInscripcion, Timestamp finInscripcion, Short vacantes, Set<AsistenciaFT> asistenciaFTs) {
        this.idturno = idturno;
        this.sesion = sesion;
        this.inicioInscripcion = inicioInscripcion;
@@ -54,14 +55,14 @@ public class Turno  implements java.io.Serializable {
         return this.inicioInscripcion;
     }
     
-    public void setInicioInscripcion(Serializable inicioInscripcion) {
+    public void setInicioInscripcion(Timestamp inicioInscripcion) {
         this.inicioInscripcion = inicioInscripcion;
     }
     public Serializable getFinInscripcion() {
         return this.finInscripcion;
     }
     
-    public void setFinInscripcion(Serializable finInscripcion) {
+    public void setFinInscripcion(Timestamp finInscripcion) {
         this.finInscripcion = finInscripcion;
     }
     public Short getVacantes() {
