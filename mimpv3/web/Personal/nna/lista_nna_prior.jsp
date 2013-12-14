@@ -6,16 +6,16 @@
 
 <%@page import="com.mimp.bean.Personal"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
-response.setDateHeader("Expires", 0);
-Personal u=(Personal)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    Personal u = (Personal) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -48,14 +48,13 @@ if (u==null){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
                         </button>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li class="active"><a href="#">Inicio</a></li>
-                            <li><a href="#">Actualizar Información</a></li>
-                            <li><a href="#">Salir</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper">Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/act_info">Actualizar Información</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -66,17 +65,29 @@ if (u==null){
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/inf"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Sesiones/talleres</a></li>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/nna"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNAs</a></li>
+                                <%if (u.getRol().equals("admin")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
+                                <%}
+                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
+                                <%}
+                                if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
+                                <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
+                                <%}
+                                if (u.getRol().equals("admin")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
                         </ul>
                     </div>

@@ -24,12 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class organismo {
-    // REVISAR MAPEO
     @RequestMapping("/inicioEnt")
-    public String InicioEnt() {
-        return "/Entidad/inicio_ent";
-    }
-    @RequestMapping("/inicioEnt2")
     public ModelAndView InicioEnt(ModelMap map, HttpSession session) {
         Entidad usuario = (Entidad) session.getAttribute("usuario");
         if(usuario == null){

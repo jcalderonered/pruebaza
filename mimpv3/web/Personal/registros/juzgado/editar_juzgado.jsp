@@ -6,16 +6,16 @@
 
 <%@page import="com.mimp.bean.Personal"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
-response.setDateHeader("Expires", 0);
-Personal u=(Personal)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    Personal u = (Personal) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -43,7 +43,6 @@ if (u==null){
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -51,143 +50,150 @@ if (u==null){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li class="active"><a href="#">Inicio</a></li>
-                            <li><a href="#">Actualizar Información</a></li>
-                            <li><a href="#">Salir</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper">Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/act_info">Actualizar Información</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
-                            <li class="active"><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Sesiones/talleres</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNAs</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Juzgado</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-                        
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/inf"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Sesiones/talleres</a></li>
+                                <%}%>
+                            <li><a href="${pageContext.servletContext.contextPath}/nna"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNAs</a></li>
+                                <%if (u.getRol().equals("admin")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Juzgado</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
+                                <%}
+                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
+                                <%}
+                                if (!u.getRol().equals("mpartes")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
+                                <%}%>
+                            <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
+                                <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
+                                <%}
+                                if (u.getRol().equals("admin")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
+                                <%}%>
+                            <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
                         </ul>
                     </div>
-
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Editar juzgado</strong></h1>
                         <br>
-                         <c:if test="${juzgado.getIdjuzgado() == null}">
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editJuzgado" method="post"> 
-                        </c:if>  
-                        <c:if test="${juzgado.getIdjuzgado() != null}">
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateJuzgado" method="post"> 
-                             <input hidden name="id" id="id" value="${juzgado.getIdjuzgado()}">
-                        </c:if>  
-                            <fieldset>
-                                <!-- Text input-->
-                                
+                        <c:if test="${juzgado.getIdjuzgado() == null}">
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editJuzgado" method="post"> 
+                            </c:if>  
+                            <c:if test="${juzgado.getIdjuzgado() != null}">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateJuzgado" method="post"> 
+                                    <input hidden name="id" id="id" value="${juzgado.getIdjuzgado()}">
+                                </c:if>  
+                                <fieldset>
+                                    <!-- Text input-->
+
                                     <div class="control-group">
-                                         <label class="control-label">Nombre</label>
-                                            <div class="controls">
-                                              <input id="nombre" name="nombre" type="text" value="${juzgado.getNombre()}" class="input-xlarge">
-                                            </div>
+                                        <label class="control-label">Nombre</label>
+                                        <div class="controls">
+                                            <input id="nombre" name="nombre" type="text" value="${juzgado.getNombre()}" class="input-xlarge">
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Denominación</label>
-                                            <div class="controls">
-                                              <input id="denominacion" name="denominacion" type="text" value="${juzgado.getDenominacion()}" class="input-xlarge">
-                                            </div>
+                                        <div class="controls">
+                                            <input id="denominacion" name="denominacion" type="text" value="${juzgado.getDenominacion()}" class="input-xlarge">
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
-                                         <label class="control-label">Especialidad</label>
-                                            <div class="controls">
-                                              <input id="especialidad" name="especialidad" type="text" value="${juzgado.getEspecialidad()}" class="input-xlarge">
-                                            </div>
+                                        <label class="control-label">Especialidad</label>
+                                        <div class="controls">
+                                            <input id="especialidad" name="especialidad" type="text" value="${juzgado.getEspecialidad()}" class="input-xlarge">
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
-                                         <label class="control-label">Dirección</label>
-                                            <div class="controls">
-                                              <input id="direccion" name="direccion" type="text" value="${juzgado.getDireccion()}" class="input-xlarge">
-                                            </div>
-                                    </div>
-                                    <br>
-                                     <div class="control-group">
-                                          <label class="control-label">Departamento</label>
-                                            <div class="controls">
-                                              <input id="departamento" name="departamento" type="text" value="${juzgado.getDepartamento()}" class="input-xlarge">
-                                            </div>
+                                        <label class="control-label">Dirección</label>
+                                        <div class="controls">
+                                            <input id="direccion" name="direccion" type="text" value="${juzgado.getDireccion()}" class="input-xlarge">
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
-                                          <label class="control-label">Corte Superior</label>
-                                            <div class="controls">
-                                              <input id="corteS" name="corteS" type="text" value="${juzgado.getCorteSuperior()}" class="input-xlarge">
-                                            </div>
+                                        <label class="control-label">Departamento</label>
+                                        <div class="controls">
+                                            <input id="departamento" name="departamento" type="text" value="${juzgado.getDepartamento()}" class="input-xlarge">
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
-                                         <label class="control-label">Distrito Judicial</label>
-                                            <div class="controls">
-                                              <input id="distritoJ" name="distritoJ" type="text" value="${juzgado.getDistritoJudicial()}" class="input-xlarge">
-                                            </div>
+                                        <label class="control-label">Corte Superior</label>
+                                        <div class="controls">
+                                            <input id="corteS" name="corteS" type="text" value="${juzgado.getCorteSuperior()}" class="input-xlarge">
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
-                                         <label class="control-label">Nombre de Juez</label>
-                                            <div class="controls">
-                                              <input id="nombre J" name="nombreJ" type="text" value="${juzgado.getNombreJuez()}" class="input-xlarge">
-                                            </div>
+                                        <label class="control-label">Distrito Judicial</label>
+                                        <div class="controls">
+                                            <input id="distritoJ" name="distritoJ" type="text" value="${juzgado.getDistritoJudicial()}" class="input-xlarge">
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
-                                          <label class="control-label">Teléfono</label>
-                                            <div class="controls">
-                                              <input id="telefono" name="telefono" type="text" value="${juzgado.getTelefono()}" class="input-xlarge">
-                                            </div>
+                                        <label class="control-label">Nombre de Juez</label>
+                                        <div class="controls">
+                                            <input id="nombre J" name="nombreJ" type="text" value="${juzgado.getNombreJuez()}" class="input-xlarge">
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
-                                         <label class="control-label">Correo</label>
-                                            <div class="controls">
-                                              <input id="correo" name="correo" type="text" value="${juzgado.getCorreo()}" class="input-xlarge">
-                                            </div>
+                                        <label class="control-label">Teléfono</label>
+                                        <div class="controls">
+                                            <input id="telefono" name="telefono" type="text" value="${juzgado.getTelefono()}" class="input-xlarge">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Correo</label>
+                                        <div class="controls">
+                                            <input id="correo" name="correo" type="text" value="${juzgado.getCorreo()}" class="input-xlarge">
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Observaciones</label>
-                                            <div class="controls">
-                                               <textarea class="input-xlarge" name="obs" id="obs" placeholder="" rows="5" cols="25">${juzgado.getObservaciones()}</textarea>
-                                            </div>
+                                        <div class="controls">
+                                            <textarea class="input-xlarge" name="obs" id="obs" placeholder="" rows="5" cols="25">${juzgado.getObservaciones()}</textarea>
+                                        </div>
                                     </div>
-                                <br>
-                                <br>
-                                <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                    <br>
+                                    <br>
+                                    <!-- Button -->
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </fieldset>
-                        </form>
-                        
+                                </fieldset>
+                            </form>
+
                     </div>
                 </div>
             </div>
@@ -202,8 +208,8 @@ if (u==null){
                     <p align="right">Diseñado por RED<br>www.red.net.pe</p>
                 </div>
             </div>
-             <!-- core JavaScript
-        ================================================== -->
+            <!-- core JavaScript
+       ================================================== -->
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
             <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>

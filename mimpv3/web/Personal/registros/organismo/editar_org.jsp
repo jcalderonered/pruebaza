@@ -6,16 +6,16 @@
 
 <%@page import="com.mimp.bean.Personal"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
-response.setDateHeader("Expires", 0);
-Personal u=(Personal)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    Personal u = (Personal) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -43,7 +43,6 @@ if (u==null){
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -51,345 +50,352 @@ if (u==null){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li class="active"><a href="#">Inicio</a></li>
-                            <li><a href="#">Actualizar Información</a></li>
-                            <li><a href="#">Salir</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper">Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/act_info">Actualizar Información</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
-                            <li class="active"><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Sesiones/talleres</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNAs</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Juzgado</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
-
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/inf"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Sesiones/talleres</a></li>
+                                <%}%>
+                            <li><a href="${pageContext.servletContext.contextPath}/nna"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNAs</a></li>
+                                <%if (u.getRol().equals("admin")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Juzgado</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
+                                <%}
+                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
+                                <%}
+                                if (!u.getRol().equals("mpartes")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
+                                <%}%>
+                            <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
+                                <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
+                                <%}
+                                if (u.getRol().equals("admin")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
+                                <%}%>
+                            <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
                         </ul>
                     </div>
-
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Editar Organismo</strong></h1>
                         <br>
                         <c:if test="${organismo.getIdorganismo() == null}">
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editOrg" method="post">
-                        </c:if>  
-                        <c:if test="${organismo.getIdorganismo() != null}">
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateOrg" method="post"> 
-                             <input hidden name="id" id="id" value="${organismo.getIdorganismo()}">
-                        </c:if>  
-                            <div class="row">
-                                <div class="col-md-3 col-md-offset-1">   
-                                    <br>
-                                    <fieldset>
-                                        <!-- Text input-->
-
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Nombre</label>
-                                                <input id="nombre" name="nombre" type="text" value="${organismo.getEntidad().getNombre()}" class="input-xlarge">
-                                            </div>
-                                        </div>
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editOrg" method="post">
+                            </c:if>  
+                            <c:if test="${organismo.getIdorganismo() != null}">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateOrg" method="post"> 
+                                    <input hidden name="id" id="id" value="${organismo.getIdorganismo()}">
+                                </c:if>  
+                                <div class="row">
+                                    <div class="col-md-3 col-md-offset-1">   
                                         <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Competencia</label>
-                                                <input id="competencia" name="competencia" type="text" value="${organismo.getCompetencia()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">País</label>
-                                                <input id="pais" name=pais type="text" value="${organismo.getEntidad().getPais()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Dirección</label>
-                                                <input id="direccion" name="direccion" type="text" value="${organismo.getEntidad().getDireccion()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Teléfono</label>
-                                                <input id="telefono" name="telefono" type="text" value="${organismo.getEntidad().getTelefono()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Resolución de </label>
-                                                <label>autorización</label>
-                                                <input id="resol_aut" name="resol_aut" type="text" value="${organismo.getEntidad().getResolAuto()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Fecha de emisión de </label>
-                                                <label>resolución</label>
-                                                <input id="fecha_emis_resol" name="fecha_emis_resol" type="text" value="${fechaEmision}" class="datepicker input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Resolución de </label>
-                                                <label>renovación</label>
-                                                <input id="resol_renov" name="resol_renov" type="text" value="${organismo.getEntidad().getResolRenov()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Fecha de renovación</label>
-                                                <input id="fecha_renov" name="fecha_renov" type="text" value="${fechaRenov}" class="datepicker input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Fecha de vencimiento </label>
-                                                <label>de autorización</label>
-                                                <input id="fecha_venc_aut" name="fecha_venc_aut" type="text" value="${fechaVenc}" class="datepicker input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Observaciones</label>
-                                                <textarea class="input-xlarge" id="obs" name="obs" placeholder="" rows="5" cols="25">${organismo.getEntidad().getObs()}</textarea>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <!-- Button -->
-
-                                    </fieldset>
-
-                                </div>
-                                <div class="col-md-4 col-md-offset-3">
-                                    <h3 align="center"><strong>Representante Legal</strong></h3>
-                                    <c:if test="${organismo.getIdorganismo() != null}">
-                                    <c:forEach var="representante" items="${organismo.getRepresentantes()}" >
-                                    
-                                    <fieldset>
-                                        <!-- Text input-->
-
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Nombre</label>
-                                                <input id="nombreR" name="nombreR" type="text" value="${representante.getNombre()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Apellido Paterno</label>
-                                                <input id="apellidoP" name="apellidoP" type="text" value="${representante.getApellidoP()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Apellido Materno</label>
-                                                <input id="apellidoM" name="apellidoM" type="text" value="${representante.getApelldoM()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Usuario</label>
-                                                <input id="user" name="user" type="text" value="${organismo.getEntidad().getUser()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Contraseña</label>
-                                                <input id="pass" name="pass" type="password" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Fecha de autorización</label>
-                                                <input id="fechaAut" name="fechaAutR" type="text" value="${fechaAutR}" class="datepicker input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Fecha de renovación</label>
-                                                <input id="fechaRenov" name="fechaRenovR" type="text" value="${fechaRenovR}" class="datepicker input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Fecha de vencimiento </label>
-                                                <label>de autorización</label>
-                                                <input id="fechaVenc" name="fechaVencR" type="text" value="${fechaVencR}" class="datepicker input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Correo</label>
-                                                <input id="correo" name="correo" type="text" value="${representante.getCorreo()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Celular</label>
-                                                <input id="celular" name="celular" type="text" value="${representante.getCelular()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Dirección</label>
-                                                <input id="direccionR" name="direccionR" type="text" value="${representante.getDireccion()}" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Observaciones</label>
-                                                 <textarea class="input-xlarge" name="obsR" id="obsR" placeholder="" rows="5" cols="25">${representante.getObs()}</textarea>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-                                    </fieldset>
-                                  </c:forEach>
-                                 </c:if>
-                                    <c:if test="${organismo.getIdorganismo() == null}">
                                         <fieldset>
-                                        <!-- Text input-->
+                                            <!-- Text input-->
 
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Nombre</label>
-                                                <input id="nombreR" name="nombreR" type="text" value="${representante.getNombre()}" class="input-xlarge">
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Nombre</label>
+                                                    <input id="nombre" name="nombre" type="text" value="${organismo.getEntidad().getNombre()}" class="input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Apellido Paterno</label>
-                                                <input id="apellidoP" name="apellidoP" type="text" value="${representante.getApellidoP()}" class="input-xlarge">
+                                            <br>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Competencia</label>
+                                                    <input id="competencia" name="competencia" type="text" value="${organismo.getCompetencia()}" class="input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Apellido Materno</label>
-                                                <input id="apellidoM" name="apellidoM" type="text" value="${representante.getApelldoM()}" class="input-xlarge">
+                                            <br>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">País</label>
+                                                    <input id="pais" name=pais type="text" value="${organismo.getEntidad().getPais()}" class="input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Usuario</label>
-                                                <input id="user" name="user" type="text" value="${representante.getUser()}" class="input-xlarge">
+                                            <br>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Dirección</label>
+                                                    <input id="direccion" name="direccion" type="text" value="${organismo.getEntidad().getDireccion()}" class="input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Contraseña</label>
-                                                <input id="pass" name="pass" type="password" class="input-xlarge">
+                                            <br>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Teléfono</label>
+                                                    <input id="telefono" name="telefono" type="text" value="${organismo.getEntidad().getTelefono()}" class="input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Fecha de autorización</label>
-                                                <input id="fechaAut" name="fechaAutR" type="text" value="${fechaAutR}" class="datepicker input-xlarge">
+                                            <br>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Resolución de </label>
+                                                    <label>autorización</label>
+                                                    <input id="resol_aut" name="resol_aut" type="text" value="${organismo.getEntidad().getResolAuto()}" class="input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Fecha de renovación</label>
-                                                <input id="fechaRenov" name="fechaRenovR" type="text" value="${fechaRenovR}" class="datepicker input-xlarge">
+                                            <br>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Fecha de emisión de </label>
+                                                    <label>resolución</label>
+                                                    <input id="fecha_emis_resol" name="fecha_emis_resol" type="text" value="${fechaEmision}" class="datepicker input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Fecha de vencimiento </label>
-                                                <label>de autorización</label>
-                                                <input id="fechaVenc" name="fechaVencR" type="text" value="${fechaVencR}" class="datepicker input-xlarge">
+                                            <br>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Resolución de </label>
+                                                    <label>renovación</label>
+                                                    <input id="resol_renov" name="resol_renov" type="text" value="${organismo.getEntidad().getResolRenov()}" class="input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Correo</label>
-                                                <input id="correo" name="correo" type="text" value="${representante.getCorreo()}" class="input-xlarge">
+                                            <br>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Fecha de renovación</label>
+                                                    <input id="fecha_renov" name="fecha_renov" type="text" value="${fechaRenov}" class="datepicker input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Celular</label>
-                                                <input id="celular" name="celular" type="text" value="${representante.getCelular()}" class="input-xlarge">
+                                            <br>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Fecha de vencimiento </label>
+                                                    <label>de autorización</label>
+                                                    <input id="fecha_venc_aut" name="fecha_venc_aut" type="text" value="${fechaVenc}" class="datepicker input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Dirección</label>
-                                                <input id="direccionR" name="direccionR" type="text" value="${representante.getDireccion()}" class="input-xlarge">
+                                            <br>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Observaciones</label>
+                                                    <textarea class="input-xlarge" id="obs" name="obs" placeholder="" rows="5" cols="25">${organismo.getEntidad().getObs()}</textarea>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Observaciones</label>
-                                                 <textarea class="input-xlarge" name="obsR" id="obsR" placeholder="" rows="5" cols="25">${representante.getObs()}</textarea>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-                                    </fieldset>
-                                        
-                                    </c:if>
+                                            <br>
+                                            <br>
+                                            <!-- Button -->
+
+                                        </fieldset>
+
+                                    </div>
+                                    <div class="col-md-4 col-md-offset-3">
+                                        <h3 align="center"><strong>Representante Legal</strong></h3>
+                                        <c:if test="${organismo.getIdorganismo() != null}">
+                                            <c:forEach var="representante" items="${organismo.getRepresentantes()}" >
+
+                                                <fieldset>
+                                                    <!-- Text input-->
+
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Nombre</label>
+                                                            <input id="nombreR" name="nombreR" type="text" value="${representante.getNombre()}" class="input-xlarge">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Apellido Paterno</label>
+                                                            <input id="apellidoP" name="apellidoP" type="text" value="${representante.getApellidoP()}" class="input-xlarge">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Apellido Materno</label>
+                                                            <input id="apellidoM" name="apellidoM" type="text" value="${representante.getApelldoM()}" class="input-xlarge">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Usuario</label>
+                                                            <input id="user" name="user" type="text" value="${organismo.getEntidad().getUser()}" class="input-xlarge">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Contraseña</label>
+                                                            <input id="pass" name="pass" type="password" class="input-xlarge">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Fecha de autorización</label>
+                                                            <input id="fechaAut" name="fechaAutR" type="text" value="${fechaAutR}" class="datepicker input-xlarge">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Fecha de renovación</label>
+                                                            <input id="fechaRenov" name="fechaRenovR" type="text" value="${fechaRenovR}" class="datepicker input-xlarge">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Fecha de vencimiento </label>
+                                                            <label>de autorización</label>
+                                                            <input id="fechaVenc" name="fechaVencR" type="text" value="${fechaVencR}" class="datepicker input-xlarge">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Correo</label>
+                                                            <input id="correo" name="correo" type="text" value="${representante.getCorreo()}" class="input-xlarge">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Celular</label>
+                                                            <input id="celular" name="celular" type="text" value="${representante.getCelular()}" class="input-xlarge">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Dirección</label>
+                                                            <input id="direccionR" name="direccionR" type="text" value="${representante.getDireccion()}" class="input-xlarge">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Observaciones</label>
+                                                            <textarea class="input-xlarge" name="obsR" id="obsR" placeholder="" rows="5" cols="25">${representante.getObs()}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <br>
+                                                </fieldset>
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${organismo.getIdorganismo() == null}">
+                                            <fieldset>
+                                                <!-- Text input-->
+
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Nombre</label>
+                                                        <input id="nombreR" name="nombreR" type="text" value="${representante.getNombre()}" class="input-xlarge">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Apellido Paterno</label>
+                                                        <input id="apellidoP" name="apellidoP" type="text" value="${representante.getApellidoP()}" class="input-xlarge">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Apellido Materno</label>
+                                                        <input id="apellidoM" name="apellidoM" type="text" value="${representante.getApelldoM()}" class="input-xlarge">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Usuario</label>
+                                                        <input id="user" name="user" type="text" value="${representante.getUser()}" class="input-xlarge">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Contraseña</label>
+                                                        <input id="pass" name="pass" type="password" class="input-xlarge">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Fecha de autorización</label>
+                                                        <input id="fechaAut" name="fechaAutR" type="text" value="${fechaAutR}" class="datepicker input-xlarge">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Fecha de renovación</label>
+                                                        <input id="fechaRenov" name="fechaRenovR" type="text" value="${fechaRenovR}" class="datepicker input-xlarge">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Fecha de vencimiento </label>
+                                                        <label>de autorización</label>
+                                                        <input id="fechaVenc" name="fechaVencR" type="text" value="${fechaVencR}" class="datepicker input-xlarge">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Correo</label>
+                                                        <input id="correo" name="correo" type="text" value="${representante.getCorreo()}" class="input-xlarge">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Celular</label>
+                                                        <input id="celular" name="celular" type="text" value="${representante.getCelular()}" class="input-xlarge">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Dirección</label>
+                                                        <input id="direccionR" name="direccionR" type="text" value="${representante.getDireccion()}" class="input-xlarge">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">Observaciones</label>
+                                                        <textarea class="input-xlarge" name="obsR" id="obsR" placeholder="" rows="5" cols="25">${representante.getObs()}</textarea>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <br>
+                                            </fieldset>
+
+                                        </c:if>
+                                    </div>
+                                </div> 
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <p align="center"><button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button></p>
+                                    </div>
                                 </div>
-                            </div> 
-                             <div class="control-group">
-                            <div class="controls">
-                                <p align="center"><button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button></p>
-                            </div>
-                        </div>
-                        </form>
-                       
+                            </form>
+
                     </div>
                 </div>
             </div>
