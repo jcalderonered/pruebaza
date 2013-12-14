@@ -6,10 +6,10 @@
     <class name="com.mimp.bean.FormularioSesion" table="FORMULARIO_SESION" schema="MIMP_ADOPCION">
         <id name="idformularioSesion" type="long">
             <column name="IDFORMULARIO_SESION" precision="10" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="familia" class="com.mimp.bean.Familia" fetch="select">
-            <column name="IDFAMILIA" precision="10" scale="0" not-null="true" />
+            <column name="IDFAMILIA" precision="10" scale="0" not-null="false" />
         </many-to-one>
         <many-to-one name="sesion" class="com.mimp.bean.Sesion" fetch="select">
             <column name="IDSESION" precision="10" scale="0" not-null="true" />

@@ -6,7 +6,7 @@
     <class name="com.mimp.bean.HijoAct" table="HIJO_ACT" schema="MIMP_ADOPCION">
         <id name="idhijoAct" type="long">
             <column name="IDHIJO_ACT" precision="10" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="infoFamilia" class="com.mimp.bean.InfoFamilia" fetch="select">
             <column name="IDINFO_FAMILIA" precision="10" scale="0" not-null="true" />

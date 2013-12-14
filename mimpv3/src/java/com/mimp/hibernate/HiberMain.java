@@ -158,17 +158,21 @@ public class HiberMain {
 
         session.beginTransaction();
 
-        session.save(fs);
-        aft.setFormularioSesion(fs);
-
         asisEl.setFormularioSesion(fs);
-        asisElla.setFormularioSesion(fs);
         fs.getAsistentes().add(asisEl);
+        
+        asisElla.setFormularioSesion(fs);
         fs.getAsistentes().add(asisElla);
-
+        
+        aft.setFormularioSesion(fs);
+        fs.getAsistenciaFTs().add(aft);
+        
+        session.save(fs);
         session.save(asisEl);
         session.save(asisElla);
         session.save(aft);
+        
+        
     }
 
     public ArrayList<Asistente> listaAsistentes(long id) {

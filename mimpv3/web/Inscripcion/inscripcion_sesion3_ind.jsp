@@ -66,6 +66,7 @@
                         <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesInd" role="form" method="post">
                             <input hidden id="idTurno" name="idTurno" value="${turno.getIdturno()}">
                             <input hidden id="estado" name="estado" value="${estado}">
+                            
                             <!-- Form Name -->
                             
                             <p class="text-left"><legend>Información Personal</legend></p>

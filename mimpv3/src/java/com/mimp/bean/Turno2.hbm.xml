@@ -6,7 +6,7 @@
     <class name="com.mimp.bean.Turno2" table="TURNO2" schema="MIMP_ADOPCION">
         <id name="idturno2" type="long">
             <column name="IDTURNO2" precision="10" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="grupo" class="com.mimp.bean.Grupo" fetch="select">
             <column name="IDGRUPO" precision="10" scale="0" not-null="true" />

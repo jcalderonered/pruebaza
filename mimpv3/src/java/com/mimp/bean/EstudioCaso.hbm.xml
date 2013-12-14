@@ -6,7 +6,7 @@
     <class name="com.mimp.bean.EstudioCaso" table="ESTUDIO_CASO" schema="MIMP_ADOPCION">
         <id name="idestudioCaso" type="long">
             <column name="IDESTUDIO_CASO" precision="10" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="nna" class="com.mimp.bean.Nna" fetch="select">
             <column name="IDNNA" precision="10" scale="0" not-null="true" />
