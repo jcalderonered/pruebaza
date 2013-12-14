@@ -196,6 +196,18 @@ public class personal {
         return new ModelAndView("/Personal/registros/autoridad/lista_aut", map);
     }
 
+    @RequestMapping(value = "/act_info", method = RequestMethod.GET)
+    public ModelAndView Act_info(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //FALTA
+        return new ModelAndView("/Personal/actualizar_info", map);
+    }
+    
     @RequestMapping(value = "/password", method = RequestMethod.GET)
     public ModelAndView Password(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
