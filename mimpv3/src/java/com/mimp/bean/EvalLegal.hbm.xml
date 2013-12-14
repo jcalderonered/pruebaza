@@ -6,7 +6,7 @@
     <class name="com.mimp.bean.EvalLegal" table="EVAL_LEGAL" schema="MIMP_ADOPCION">
         <id name="idevalLegal" type="long">
             <column name="IDEVAL_LEGAL" precision="10" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="evaluacion" class="com.mimp.bean.Evaluacion" fetch="select">
             <column name="IDEVALUACION" precision="10" scale="0" not-null="true" />

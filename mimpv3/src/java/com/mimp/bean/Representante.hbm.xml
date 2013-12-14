@@ -6,7 +6,7 @@
     <class name="com.mimp.bean.Representante" table="REPRESENTANTE" schema="MIMP_ADOPCION">
         <id name="idrepresentante" type="long">
             <column name="IDREPRESENTANTE" precision="10" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="organismo" class="com.mimp.bean.Organismo" fetch="select">
             <column name="IDORGANISMO" precision="10" scale="0" not-null="true" />

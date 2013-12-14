@@ -6,7 +6,7 @@
     <class name="com.mimp.bean.Asistente" table="ASISTENTE" schema="MIMP_ADOPCION">
         <id name="idasistente" type="long">
             <column name="IDASISTENTE" precision="10" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="formularioSesion" class="com.mimp.bean.FormularioSesion" fetch="select">
             <column name="IDFORMULARIO_SESION" precision="10" scale="0" not-null="true" />

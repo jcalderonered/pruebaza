@@ -6,7 +6,7 @@
     <class name="com.mimp.bean.Entidad" table="ENTIDAD" schema="MIMP_ADOPCION">
         <id name="identidad" type="long">
             <column name="IDENTIDAD" precision="10" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="nombre" type="string">
             <column name="NOMBRE" length="40" />

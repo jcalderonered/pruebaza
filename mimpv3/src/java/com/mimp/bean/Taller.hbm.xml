@@ -6,7 +6,7 @@
     <class name="com.mimp.bean.Taller" table="TALLER" schema="MIMP_ADOPCION">
         <id name="idtaller" type="long">
             <column name="IDTALLER" precision="10" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="NSesion" type="string">
             <column name="N_SESION" length="10" />

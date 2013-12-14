@@ -152,6 +152,7 @@ public class main {
     @RequestMapping(value = "/SesionInfEstado2", method = RequestMethod.POST)
     public ModelAndView SesionInfElegirEstado2(ModelMap map, @RequestParam("estado") String estado, @RequestParam("idTurno") int turno) {
         Turno temp = ServicioMain.getTurno(turno);
+        
         if (estado.equals("casados")) {
             map.addAttribute("idTurno", turno);
             map.put("estado", estado);
@@ -159,6 +160,8 @@ public class main {
             return new ModelAndView("/Inscripcion/inscripcion_sesion3_gru", map);
 
         } else {
+            
+           
             map.addAttribute("idTurno", turno);
             map.put("estado", estado);
             map.put("turno", temp);
@@ -209,7 +212,11 @@ public class main {
         fs.setDireccionRes(dir);
         fs.setTelefono(telf);
         fs.setEstadoCivil(estado);
-
+        String sexo = "";
+        if (estado.equals("soltero") || estado.equals("viudo") || estado.equals("divorciado")) sexo = "m";
+        if (estado.equals("soltera") || estado.equals("viuda") || estado.equals("divorciada")) sexo = "f";
+        char s = sexo.charAt(0);
+        asis.setSexo(s);
         asis.setNombre(nombre);
         asis.setApellidoP(apellidoP);
         asis.setApellidoM(apellidoM);
@@ -286,6 +293,8 @@ public class main {
             @RequestParam("idTurno") int turno
     ) {
 
+        String m = "m";
+        String f = "f";
         Turno temp = ServicioMain.getTurno(turno);
         FormularioSesion fs = new FormularioSesion();
         Asistente asisEl = new Asistente();
@@ -315,6 +324,8 @@ public class main {
         asisEl.setFechaNac(df.stringToDate(fechaNacEl));
         char cEl = docEl.charAt(0);
         asisEl.setTipoDoc(cEl);
+        char sexoEl = m.charAt(0);
+        asisEl.setSexo(sexoEl);
         asisEl.setNDoc(numDocEl);
         asisEl.setProfesion(profesionEl);
         asisEl.setCelular(celEl);
@@ -331,6 +342,8 @@ public class main {
         asisElla.setFechaNac(df.stringToDate(fechaNacElla));
         char cElla = docElla.charAt(0);
         asisElla.setTipoDoc(cElla);
+        char sexoElla = f.charAt(0);
+        asisElla.setSexo(sexoElla);
         asisElla.setNDoc(numDocElla);
         asisElla.setProfesion(profesionElla);
         asisElla.setCelular(celElla);
