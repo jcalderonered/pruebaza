@@ -28,22 +28,10 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-
-
     </head>
-
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
-        <div id="wrap">
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-5"><p align="left"><img src="<%=request.getContextPath()%>/assets/img/pastillasDGA.jpg" width="600" border="0"></p></div>
-                <div class="col-md-5"><p align="right"><img src="<%=request.getContextPath()%>/assets/img/logoperu1.png" width="165" border="0"></p></div>
-                <div class="col-md-1"></div>
-            </div>
-            <br>
-            <br>
             <div id="wrap">
                 <div class="row">
                     <div class="col-md-1"></div>

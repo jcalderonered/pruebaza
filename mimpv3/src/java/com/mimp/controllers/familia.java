@@ -58,7 +58,7 @@ public class familia {
             return new ModelAndView("login", map);
         }
         Date fechaactual = new Date();
-        Date ultfecha = new Date(1910, 01, 01);
+        Date ultfecha = new Date(10, 0, 01);
         for (Iterator iter = usuario.getFormularioSesions().iterator(); iter.hasNext();) {
             FormularioSesion form = (FormularioSesion) iter.next();
             if (ultfecha.before(form.getFechaSol())) {
