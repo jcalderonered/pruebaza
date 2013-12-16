@@ -36,7 +36,7 @@ public class HiberMain {
         Entidad entidad;
         Familia familia;
         
-        //pass = DigestUtils.md5Hex(pass);
+        pass = DigestUtils.md5Hex(pass);
 
         ArrayList<Object> temp = new ArrayList<Object>();
 
@@ -67,6 +67,7 @@ public class HiberMain {
         } else if (queryResultF != null) {
             familia = (Familia) queryResultF;
             Hibernate.initialize(familia.getInfoFamilias());
+            Hibernate.initialize(familia.getFormularioSesions());
             //Mejorar
             for (Iterator iter = familia.getInfoFamilias().iterator(); iter.hasNext();) {
                 InfoFamilia ifa = (InfoFamilia) iter.next();
