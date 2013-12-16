@@ -30,6 +30,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
         <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/jquery.timepicker.css" rel="stylesheet">
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -77,17 +78,17 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin")) {%>
+                                    if (u.getRol().equals("admin")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                                 <%}%>
@@ -96,98 +97,154 @@
                     </div>
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <h1>Sesión ${sesion.getNSesion()}</h1>
-                        <br>
                         <c:choose>
-                            <c:when test="${ sesion != null && sesion.getHabilitado() == true}">
-                                <p>Estado: Habilitado</p>
-                            </c:when>
-                            <c:otherwise>
-                                <p>Estado: Deshabilitado</p>
-                            </c:otherwise>
-                        </c:choose>
-                        <br>
-                        <!-- Text input-->
-                        <div class="control-group">
-                            <label class="control-label" for="textinput">Fecha de Sesión Informativa:</label>
-                            <div class="controls">
-                                <input id="textinput" value= "${fecha}" name="textinput" type="text" placeholder="fecha" class="datepicker input-xlarge">
-                            </div>
-                        </div>
-                        <br>
-                        <!-- Text input-->
-                        <div class="control-group">
-                            <label class="control-label" for="textinput">Hora de inicio:</label>
-                            <div class="controls">
-                                <input id="textinput" value="${hora}" name="textinput" type="text" placeholder="hora" class="input-xlarge">
-                            </div>
-                        </div>
-                        <br>
-                        <!-- Text input-->
-                        <div class="control-group">
-                            <label class="control-label" for="textinput">Duración:</label>
-                            <div class="controls">
-                                <input id="textinput" value="${sesion.getDuracion()}" name="textinput" type="text" placeholder="duracion" class="input-xlarge">
-                            </div>
-                        </div>
-                        <br>
-                        <!-- Text input-->
-                        <div class="control-group">
-                            <label class="control-label" for="textinput">Dirección/Lugar de Sesión Informativa:</label>
-                            <div class="controls">
-                                <input id="textinput" value="${sesion.getDireccion()}" name="textinput" type="text" placeholder="direccion" class="input-xlarge">
-                            </div>
-                        </div>
-                        <br>
-                        <!-- Text input-->
-                        <div class="control-group">
-                            <label class="control-label" for="textinput">Facilitador:</label>
-                            <select id="capacitador" name="capacitador">
-                                <c:forEach var="personal" items="${listaPersonal}" varStatus="status">
-                                    <option value="${personal.getIdpersonal()}" ${sesion.getFacilitador() == personal.getIdpersonal() ? 'selected' : ''}> ${personal.getApellidoP()} ${personal.getApellidoM()} ${personal.getNombre()}</option> 
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <br>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Inicio Inscripción</th>
-                                        <th>Fin Inscripción</th>
-                                        <th>Vacantes</th>
-                                        <th>Modificar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
-                                        <tr>
-                                            <td>Turno ${status.index + 1} </td>
-                                            <td>${ts.DateToString(turno.getInicioInscripcion())} ${ts.HourToString(turno.getInicioInscripcion())}</td>
-                                            <td>${ts.DateToString(turno.getFinInscripcion())} ${ts.HourToString(turno.getFinInscripcion())}</td>
-                                            <td>${turno.getVacantes()}</td>
-                                            <td>
-                                                <form action="${pageContext.servletContext.contextPath}/" method="post">
-                                                    <input hidden name="idSesion" id="idSesion" value="${turno.getIdturno()}">
-                                                    <button type="submit" class="btn btn-default">Modificar</button>
-                                                </form>    
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                        <br>
-                        <br>
-                        <button href="#" class="btn btn-default">Agregar nuevo turno</button>
-                        <button href="#" ${sesion != null && sesion.getHabilitado() == true ? 'disabled' : ''} class="btn btn-default">Habilitar sesión</button>
-                        <br>
-                        <br>
-                        <button href="#" class="btn btn-default">Guardar Cambios</button>
-                        <br>
-                        <br>
-                        <p>IMPORTANTE: Una vez iniciado el Turno 1 de Inscripción, no es posible Deshabilitar la sesión debido a los inscritos</p>
+                            <c:when test="${ sesion == null }">
+                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearSesion" method="post">
+                                </c:when>
+                                <c:otherwise>
+                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateSesion" method="post">
+                                        <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">  
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="textinput"><h1>Sesión Informativa</h1></label>
+                                    <div class="controls">
+                                        <input id="numSesion" name="numSesion" value= "${sesion.getNSesion()}" type="text" placeholder="número de sesión" class="input-xlarge">
+                                    </div>
+                                </div>
+
+                                <br>
+                                <c:choose>
+                                    <c:when test="${ sesion != null && sesion.getHabilitado() == 0}">
+                                        <p>Estado: Habilitado</p>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <p>Estado: Deshabilitado</p>
+                                    </c:otherwise>
+                                </c:choose>
+                                <br>
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="textinput">Fecha de Sesión Informativa:</label>
+                                    <div class="controls">
+                                        <input id="fecha" value= "${fecha}" name="fecha" type="text" placeholder="fecha" class="datepicker input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="textinput">Hora de inicio:</label>
+                                    <div class="controls">
+                                        <input id="hora" value="${hora}" name="hora" type="text" placeholder="hora" class="timepicker input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="textinput">Duración:</label>
+                                    <div class="controls">
+                                        <input id="duracion" value="${sesion.getDuracion()}" name="duracion" type="text" placeholder="duracion" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="textinput">Dirección/Lugar de Sesión Informativa:</label>
+                                    <div class="controls">
+                                        <input id="direccion" value="${sesion.getDireccion()}" name="direccion" type="text" placeholder="direccion" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="textinput">Facilitador:</label>
+                                    <div>
+                                        <select id="capacitador" name="capacitador">
+                                            <c:forEach var="personal" items="${listaPersonal}" varStatus="status">
+                                                <option value="${personal.getIdpersonal()}" ${sesion.getFacilitador() == personal.getIdpersonal() ? 'selected' : ''}> ${personal.getApellidoP()} ${personal.getApellidoM()} ${personal.getNombre()}</option> 
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                
+                                <button type="submit" class="btn btn-default">Guardar Cambios</button>
+                                </form>
+                                <br>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Inicio Inscripción</th>
+                                                <th>Fin Inscripción</th>
+                                                <th>Vacantes</th>
+                                                <th>Modificar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
+                                                <tr>
+                                                    <td>Turno ${status.index + 1} </td>
+                                                    <td>${ts.DateToString(turno.getInicioInscripcion())} ${ts.HourToString(turno.getInicioInscripcion())}</td>
+                                                    <td>${ts.DateToString(turno.getFinInscripcion())} ${ts.HourToString(turno.getFinInscripcion())}</td>
+                                                    <td>${turno.getVacantes()}</td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno2" method="post">
+                                                            <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
+                                                            <input hidden name="index" id="index" value="${status.index + 1}">
+                                                            <button type="submit" class="btn btn-default">Modificar</button>
+                                                        </form>    
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <br>
+                                <br>
+                                <c:choose>
+                                    <c:when test="${sesion != null && listaTurnos != null }">
+                                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno" method="post">
+                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                            <input hidden name="index" id="index" value="${listaTurnos.size() + 1}">
+                                            <button type="submit" class="btn btn-default">Agregar nuevo turno</button>
+                                        </form>    
+                                    </c:when>           
+                                    <c:when test="${sesion != null && listaTurnos == null }">
+                                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno" method="post">
+                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                            <input hidden name="index" id="index" value="1">
+                                            <button type="submit" class="btn btn-default">Agregar nuevo turno</button>
+                                        </form>   
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3><strong>Debe crear una Sesión Informativa para luego insertar los turnos</strong></h3>
+                                    </c:otherwise>
+                                </c:choose>
+                                <br>        
+                                <br>
+                                <c:choose>
+                                    <c:when test="${sesion != null}">
+                                        <form action="${pageContext.servletContext.contextPath}/PersonalHabilitarSesion" method="post">
+                                             <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                            <button type="submit" ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} class="btn btn-default">Habilitar sesión</button>
+                                        </form>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3><strong>Luego de crear la sesión informativa podrá habilitarla</strong></h3>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <br>
+                                <br>
+                                
+                                <br>
+                                <br>
+                                <p>IMPORTANTE: Una vez iniciado el Turno 1 de Inscripción, no es posible Deshabilitar la sesión debido a los inscritos</p>
+
+                           
                     </div>
                 </div>
             </div>
@@ -208,10 +265,11 @@
             <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery.timepicker.js"></script>
             <script type="text/javascript">
 
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-
+                $('.timepicker').timepicker({'timeFormat': 'H:i'});
             </script>
             <!-- Placed at the end of the document so the pages load faster -->
     </body>

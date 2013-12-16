@@ -75,17 +75,17 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin")) {%>
+                                    if (u.getRol().equals("admin")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                                 <%}%>
@@ -117,34 +117,95 @@
                                     </tr>
 
                                 </thead>
+                                <c:if test="${listaFormularios != null}">
+                                    <tbody>
+                                        <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
+                                            <tr>
+                                                <c:choose>
+                                                    <c:when test="${formulario.getAsistentes().size() == 2}">     
+                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                    <c:set var="el" value="${asistente}" scope="page" />
+                                                                    
+                                                                </c:when>
+                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                    <c:set var="ella" value="${asistente}" scope="page" />
+                                                                </c:when> 
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                                    
+                                                                    <td>${el.getApellidoP()}</td>
+                                                                    <td>${el.getApellidoM()}</td>
+                                                                    <td>${el.getNombre()}</td>
+                                                                    <td>${el.getEdad()}</td>
+                                                                    <td>${ella.getApellidoP()}</td>
+                                                                    <td>${ella.getApellidoM()}</td>
+                                                                    <td>${ella.getNombre()}</td>
+                                                                    <td>${ella.getEdad()}</td>
 
-                                <tbody>
-                                    <tr>
-                                        <td>Apellido P 1</td>
-                                        <td>Apellido M 1</td>
-                                        <td>Nombre 1</td>
-                                        <td>Edad 1</td>
-                                        <td>Apellido P 2</td>
-                                        <td>Apellido M 2</td>
-                                        <td>Nombre 2</td>
-                                        <td>Edad 2</td>
-                                        <td>correoprincipal@dominio.pe</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Apellido P 1</td>
-                                        <td>Apellido M 1</td>
-                                        <td>Nombre 1</td>
-                                        <td>Edad 1</td>
-                                        <td>Apellido P 2</td>
-                                        <td>Apellido M 2</td>
-                                        <td>Nombre 2</td>
-                                        <td>Edad 2</td>
-                                        <td>correoprincipal@dominio.pe</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                    </tr>
-                                </tbody>
+                                                                    <td>${ella.getCorreo()}</td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                    </c:when>
+                                                    <c:when test="${formulario.getAsistentes().size() == 1}">
+                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                    <td>${asistente.getApellidoP()}</td>
+                                                                    <td>${asistente.getApellidoM()}</td>
+                                                                    <td>${asistente.getNombre()}</td>
+                                                                    <td>${asistente.getEdad()}</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>${asistente.getCorreo()}</td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                </c:when>
+                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>${asistente.getApellidoP()}</td>
+                                                                    <td>${asistente.getApellidoM()}</td>
+                                                                    <td>${asistente.getNombre()}</td>
+                                                                    <td>${asistente.getEdad()}</td>
+
+                                                                    <td>${asistente.getCorreo()}</td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                </c:when>    
+
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </c:when>    
+                                                    <c:otherwise>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </c:if>
+                                <c:if test="${listaFormularios == null}">
+                                    <h3><strong>Aún no hay personas inscritas</strong></h3>
+                                </c:if>
                             </table>
+
                         </div>
 
 

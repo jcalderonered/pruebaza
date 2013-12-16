@@ -94,69 +94,89 @@
                     </div>
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <h1>Edición del turno "NOMBRE DEL TURNO"</h1>
+                        <c:choose>
+                            <c:when test="${ turno2 == null }">
+                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearTurno2" method="post">
+                                <input hidden name="idGrupo" id="idGrupo" value="${idGrupo}">      
+                            </c:when>
+                            <c:otherwise>
+                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateTurno2" method="post">
+                                    <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">  
+                            </c:otherwise>
+                        </c:choose>
+                        
+                        <h1>Edición de Turno</h1>
                         <br>
-                        <form class="form-horizontal">
+                        
                             <fieldset>
 
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Nombre del Turno</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="nombre" class="input-xlarge">
+                                        <input id="nombreTurno2" name="nombreTurno2" value="${turno2.getNombre()}" type="text" placeholder="nombre" class="input-xlarge">
                                     </div>
                                 </div>
-                                <br>
-                                <h1>Listado de Reuniones</h1>
-                                <br>
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Turno</th>
-                                            <th>Fecha</th>
-                                            <th>Hora</th>
-                                            <th>Facilitadores(as)</th>
-                                            <th>Capacidad</th>
-                                            <th>Modificar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Mañana</td>
-                                            <td>24/10/2013</td>
-                                            <td>20:00</td>
-                                            <td>John Pérez</td>
-                                            <td>25</td>
-                                            <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tarde</td>
-                                            <td>25/10/2013</td>
-                                            <td>20:00</td>
-                                            <td>Carlos Borgia</td>
-                                            <td>25</td>
-                                            <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Noche</td>
-                                            <td>28/10/2013</td>
-                                            <td>20:00</td>
-                                            <td>John Pérez</td>
-                                            <td>25</td>
-                                            <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>                                
-
-                                <!-- Button -->
-                                <br>
-                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar nueva reunión</button>
-                                <br>
                                 <br>
                                 <button id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
 
                             </fieldset>
                         </form>
+                        <br>            
+                                <h1>Listado de Reuniones</h1>
+                                <br>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Hora</th>
+                                            <th>Facilitador</th>
+                                            <th>Capacidad</th>
+                                            <th>Modificar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:if test="${turno2 != null}">  
+                                          <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
+                                             <tr>
+                                             <td>${formato.dateToString(reunion.getFecha())}  </td>
+                                             <td>${reunion.getHora()}</td>
+                                             <td>
+                                                 <c:forEach var="personal" items="${listaPersonal}" varStatus="status">
+                                                  <c:if test="${reunion.getFacilitador() == personal.getIdpersonal()}">   
+                                                  ${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()} 
+                                                  </c:if> 
+                                                 </c:forEach>
+                                             </td>
+                                             <td>
+                                                 ${reunion.getCapacidad()}
+                                             </td>
+                                             <td>
+                                                 <form action="${pageContext.servletContext.contextPath}/PersonalEditarReunion" method="post">
+                                                 <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                 <button type="submit" class="btn btn-default">Modificar</button>
+                                                 </form>
+                                             </td>
+                                             </tr>   
+                                          </c:forEach>
+                                        </c:if>  
+                                    </tbody>
+                                </table>                                
+                                 <c:if test="${turno2 == null}"> 
+                                    <h3><strong>Debe crear un Turno antes de poder agregar las Reuniones</strong></h3>    
+                                 </c:if> 
+                                <!-- Button -->
+                                <br>
+                                 <c:if test="${turno2 != null}">  
+                                    <form action="${pageContext.servletContext.contextPath}/PersonalAgregarReunion" method="post">
+                                      <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">
+                                     <button id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar nueva reunión</button>
+                                  </form>                
+                                 </c:if>
+                                
+                                <br>
+                                <br>
+                                
                     </div>
                 </div>
             </div>

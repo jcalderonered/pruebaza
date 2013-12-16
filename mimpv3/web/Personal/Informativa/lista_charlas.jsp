@@ -75,17 +75,17 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin")) {%>
+                                    if (u.getRol().equals("admin")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                                 <%}%>
@@ -110,10 +110,10 @@
                                     <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
                                         <tr>
                                             <td>${sesion.getNSesion()}</td>
-                                            <c:if test="${sesion.getHabilitado() == true}">
+                                            <c:if test="${sesion.getHabilitado() == 0}">
                                                 <td>Si</td> 
                                             </c:if>  
-                                            <c:if test="${sesion.getHabilitado() == false}">
+                                            <c:if test="${sesion.getHabilitado() == 1}">
                                                 <td>No</td> 
                                             </c:if>     
                                             <td>
@@ -124,7 +124,7 @@
                                             </td>
 
                                             <td>
-                                                <form action="${pageContext.servletContext.contextPath}/PersonalFamiliaSesion" method="post">
+                                                <form action="${pageContext.servletContext.contextPath}/PersonalInscritosSesion" method="post">
                                                     <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
                                                     <button type="submit" class="btn btn-default">Inscritos</button>
                                                 </form>
@@ -134,7 +134,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button href="#" class="btn btn-default">Agregar nueva Sesión</button>
+                        <br>
+                        <form action="${pageContext.servletContext.contextPath}/PersonalAgregarSesion" method="post">     
+                            <button href="#" class="btn btn-default">Agregar nueva Sesión</button>
+                        </form>
                         <br>
                         <br>
                         <h1>Listado de talleres</h1>
@@ -152,34 +155,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Preparación</td>
-                                        <td>Taller de capacitacion 2</td>
-                                        <td>5</td>
-                                        <td>Si</td>
-                                        <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                        <td><button href="#" class="btn btn-default">Inscritos</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Preparación</td>
-                                        <td>Taller de Capacitación 3</td>
-                                        <td>4</td>
-                                        <td>Si</td>
-                                        <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                        <td><button href="#" class="btn btn-default">Inscritos</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Pre Adopción</td>
-                                        <td>Atenciones especiales para niños especiales</td>
-                                        <td>3</td>
-                                        <td>Si</td>
-                                        <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                        <td><button href="#" class="btn btn-default">Inscritos</button></td>
-                                    </tr>
+                                    <c:forEach var="taller" items="${listaTalleres}" varStatus="status">
+                                        <tr>
+                                            <td>${taller.getTipoTaller()}</td>
+                                            <td>${taller.getNombre()}</td> 
+                                            <td>${taller.getNReunion()}</td> 
+                                            <c:if test="${taller.getHabilitado() == 0}">
+                                                <td>Si</td> 
+                                            </c:if>  
+                                            <c:if test="${taller.getHabilitado() == 1}">
+                                                <td>No</td> 
+                                            </c:if>  
+                                            <td>
+                                                <form action="${pageContext.servletContext.contextPath}/PersonalEditarTaller" method="post">
+                                                    <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
+                                                    <button type="submit" class="btn btn-default">Modificar</button>
+                                                </form>
+                                            </td>
+
+                                            <td>
+                                                <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTaller" method="post">
+                                                    <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
+                                                    <button type="submit" class="btn btn-default">Inscritos</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
-                        <button href="#" class="btn btn-default">Agregar nuevo Taller</button>
+                        <form action="${pageContext.servletContext.contextPath}/PersonalAgregarTaller" method="post">     
+                            <button href="#" class="btn btn-default">Agregar nuevo Taller</button>
+                        </form>
                         <br>
                         <br>
                         <h1>Talleres / Charlas Pasados o en Curso</h1>

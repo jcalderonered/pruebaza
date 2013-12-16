@@ -99,15 +99,27 @@
                         <br>
                         <form class="form-inline" role="form">
                             <!-- Form Name -->
+                            <c:forEach var="asistente" items="${listaAsistentes}" varStatus="status">
+                                <c:choose>
+                                    <c:when test="${asistente.getSexo() == 'm'}">
+                                        <c:set var="el" value="${asistente}" scope="page" />
 
+                                    </c:when>
+                                    <c:when test="${asistente.getSexo() == 'f'}">
+                                        <c:set var="ella" value="${asistente}" scope="page" />
+                                    </c:when> 
+                                </c:choose>
+                            </c:forEach>
+                            <c:if test="${el != null}"> 
                             <div class="col-md-4 col-md-offset-2">
+                                 
                                 <p class="text-left"><legend>Información Personal <br>(EL)</legend></p>
                                 <br>
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Nombres</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Nombres" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${el.getNombre()}" type="text" placeholder="Nombres" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -115,7 +127,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Apellido Paterno</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Apellido Paterno" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${el.getApellidoP()}" type="text" placeholder="Apellido Paterno" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -123,55 +135,55 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Apellido Materno</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Apellido Materno" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${el.getApellidoM()}" type="text" placeholder="Apellido Materno" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">País de Nacimiento</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="País " class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${el.getPaisNac()}" type="text" placeholder="País " class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Departamento de nacimiento</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Departamento" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${el.getDepNac()}" type="text" placeholder="Departamento" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Provincia de nacimiento</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Provincia" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${el.getProvNac()}" type="text" placeholder="Provincia" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="dd/mm/yyyy" class=" datepicker input-xlarge">
+                                        <input id="textinput" name="textinput" value="${formato.dateToString(el.getFechaNac())}" type="text" placeholder="dd/mm/yyyy" class=" datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Edad</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="XY" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${el.getEdad()}" type="text" placeholder="XY" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" checked>
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios1" value="d" ${el.getTipoDoc() == 'd' ? 'checked' : ''}>
                                             DNI
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios1" id="optionsRadios2" value="C">
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios2" value="c" ${el.getTipoDoc() == 'c' ? 'checked' : ''}>
                                             Carnet de Extranjería
                                         </label>
                                     </div>
@@ -181,7 +193,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">N° documento</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Numero Documento" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${el.getNDoc()}" type="text" placeholder="Numero Documento" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -190,8 +202,8 @@
                                     <label class="control-label" for="selectbasic">Profesión/Ocupación</label>
                                     <div class="controls">
                                         <select id="selectbasic" name="selectbasic" class="input-xlarge">
-                                            <option>Ingeniero</option>
-                                            <option>Abogado</option>
+                                            <option ${el.getProfesion() == 'ingeniero' ? 'selected' : ''}>Ingeniero</option>
+                                            <option ${el.getProfesion() == 'abogado' ? 'selected' : ''}>Abogado</option>
                                         </select>
                                     </div>
                                 </div>
@@ -200,7 +212,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Celular</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Celular" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${el.getCelular()}" type="text" placeholder="Celular" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -208,13 +220,15 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Correo Electrónico</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${el.getCorreo()}" type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <br>  
                             </div>
-
+                            </c:if>  
+                            
+                            <c:if test="${ella != null}"> 
                             <div class="col-md-4 col-md-offset-1">
                                 <p class="text-left"><legend>Información Personal <br> (ELLA) </legend></p>
                                 <br>
@@ -222,7 +236,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Nombres</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Nombres" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${ella.getNombre()}" type="text" placeholder="Nombres" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -230,7 +244,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Apellido Paterno</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Apellido Paterno" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${ella.getApellidoP()}" type="text" placeholder="Apellido Paterno" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -238,56 +252,56 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Apellido Materno</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Apellido Materno" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${ella.getApellidoM()}" type="text" placeholder="Apellido Materno" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">País de Nacimiento</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="País " class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${ella.getPaisNac()}" type="text" placeholder="País " class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Departamento de nacimiento</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Departamento" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${ella.getDepNac()}" type="text" placeholder="Departamento" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Provincia de nacimiento</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Provincia" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${ella.getProvNac()}" type="text" placeholder="Provincia" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="dd/mm/yyyy" class=" datepicker input-xlarge">
+                                        <input id="textinput" name="textinput" value="${formato.dateToString(ella.getFechaNac())}" type="text" placeholder="dd/mm/yyyy" class=" datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Edad</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="XY" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${ella.getEdad()}" type="text" placeholder="XY" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios2" id="optionsRadios1" value="D" checked>
+                                            <input type="radio" name="optionsRadios2" id="optionsRadios1" value="d" ${ella.getTipoDoc() == 'd' ? 'checked' : ''}>
                                             DNI
                                         </label>
                                     </div>
                                     <br>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios2" id="optionsRadios2" value="C">
+                                            <input type="radio" name="optionsRadios2" id="optionsRadios2" value="c" ${el.getTipoDoc() == 'c' ? 'checked' : ''}>
                                             Carnet de Extranjería
                                         </label>
                                     </div>
@@ -297,7 +311,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">N° documento</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Numero Documento" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${ella.getNDoc()}" type="text" placeholder="Numero Documento" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -306,8 +320,8 @@
                                     <label class="control-label" for="selectbasic">Profesión/Ocupación</label>
                                     <div class="controls">
                                         <select id="selectbasic" name="selectbasic" class="input-xlarge">
-                                            <option>Ingeniero</option>
-                                            <option>Abogado</option>
+                                            <option ${ella.getProfesion() == 'ingeniero' ? 'selected' : ''}>Ingeniero</option>
+                                            <option ${ella.getProfesion() == 'abogado' ? 'selected' : ''}>Abogado</option>
                                         </select>
                                     </div>
                                 </div>
@@ -316,7 +330,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Celular</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="Celular" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${ella.getCelular()}" type="text" placeholder="Celular" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -324,12 +338,13 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Correo Electrónico</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
+                                        <input id="textinput" name="textinput" value="${ella.getCorreo()}" type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <br>  
                             </div>
+                            </c:if>
                             <br>
                             <br>  
 
@@ -338,35 +353,35 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <label for="pais">País</label>
-                                    <input id="pais" type="text" placeholder="Pais" class="input-xlarge">
+                                    <input id="pais" value="${formulario.getPaisRes()}" type="text" placeholder="Pais" class="input-xlarge">
                                 </div>
                                 <div class="col-lg-3">
                                     <label for="dep">Departamento</label> 
-                                    <input id="dep" type="text" placeholder="Departamento" class="input-xlarge">
+                                    <input id="dep" value="${formulario.getDepRes()}" type="text" placeholder="Departamento" class="input-xlarge">
                                 </div>
                                 <div class="col-lg-3">
                                     <label for="prov">Provincia</label> 
-                                    <input id="prov" type="text" placeholder="Provincia" class="input-xlarge">
+                                    <input id="prov" value="${formulario.getProvRes()}" type="text" placeholder="Provincia" class="input-xlarge">
                                 </div>
                                 <div class="col-lg-3">
                                     <label for="dist">Distrito</label> 
-                                    <input id="dist" type="text" placeholder="Distrito" class="input-xlarge">
+                                    <input id="dist" value="${formulario.getDistritoRes()}" type="text" placeholder="Distrito" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <label for="dir">Dirección domiciliaria</label> 
-                                    <input id="dir" type="text" placeholder="Dirección Domiciliaria" class="input-xlarge">
+                                    <input id="dir" value="${formulario.getDireccionRes()}" type="text" placeholder="Dirección Domiciliaria" class="input-xlarge">
                                 </div>
 
                                 <div class="col-lg-4">
                                     <label for="telf">Teléfono fijo</label> 
-                                    <input id="telf" type="text" placeholder="Teléfono fijo" class="input-xlarge">
+                                    <input id="telf" value="${formulario.getTelefono()}" type="text" placeholder="Teléfono fijo" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
-                            <p align="center"><button href="#" class="btn btn-default">Volver</button></p>
+                            
                     </div>
                 </div>
                 <!--FIN DE CONTENIDO-->
