@@ -94,6 +94,15 @@
                     </div>
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <c:choose>
+                            <c:when test="${ taller == null }">
+                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearTaller" method="post">
+                            </c:when>
+                            <c:otherwise>
+                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateTaller" method="post">
+                                    <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">  
+                            </c:otherwise>
+                        </c:choose>
                         <h1>Edición de taller</h1>
                         <br>
                         <!-- Select Basic -->
@@ -101,17 +110,17 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Nombre del taller:</label>
                             <div class="controls">
-                                <input id="textinput" name="textinput" type="text" placeholder="Nombre" class="input-xlarge">
+                                <input id="nombre" name="nombre" value="${taller.getNombre()}" type="text" placeholder="Nombre" class="input-xlarge">
                             </div>
                         </div>
                         <br>
                         <div class="control-group">
                             <label class="control-label" for="selectbasic">Tipo de Taller</label>
                             <div class="controls">
-                                <select id="selectbasic" name="selectbasic" class="input-xlarge">
-                                    <option>Preparación</option>
-                                    <option>Lista de espera</option>
-                                    <option>Post Adopción</option>
+                                <select id="tipo" name="tipo" class="input-xlarge">
+                                    <option ${taller.getTipoTaller() == 'preparacion' ? 'selected' : ''} value="preparacion" >Preparación</option>
+                                    <option ${taller.getTipoTaller() == 'lista' ? 'selected' : ''} value="lista"  >Lista de espera</option>
+                                    <option ${taller.getTipoTaller() == 'post' ? 'selected' : ''} value="post" >Post Adopción</option>
                                 </select>
                             </div>
                         </div>
@@ -119,20 +128,12 @@
                         <div class="control-group">
                             <label class="control-label" for="selectbasic">Asociado a sesión: (Sólo en caso se trate de un Taller de Preparación)</label>
                             <div class="controls">
-                                <select id="selectbasic" name="selectbasic" class="input-xlarge">
-                                    <option>Ninguno</option>
-                                    <option>01-2013</option>
-                                    <option>02-2013</option>
-                                    <option>03-2013</option>
-                                    <option>04-2013</option>
+                                <select id="numSesion" name="numSesion" class="input-xlarge">
+                                     <option value="ninguno" selected >Ninguno</option>
+                                     <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
+                                     <option value="${sesion.getNSesion()}" ${taller.getNSesion() == sesion.getNSesion() ? 'selected' : ''}> ${sesion.getNSesion()}</option> 
+                                     </c:forEach>
                                 </select>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label" for="textinput">Descripción:</label>
-                            <div class="controls">
-                                <textarea id="descripción" class="input-xlarge" name="message" placeholder="" rows="5" ></textarea>
                             </div>
                         </div>
                         <br>
@@ -141,15 +142,18 @@
                             <label class="control-label" for="radios">Habilitado para inscripción:</label>
                             <div class="controls">
                                 <label class="radio inline" for="radios-0">
-                                    <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+                                    <input type="radio" name="habilitado" id="radios-0" value="0" ${taller.getHabilitado() == 0 ? 'checked' : ''}>
                                     Si
                                 </label>
                                 <label class="radio inline" for="radios-1">
-                                    <input type="radio" name="radios" id="radios-1" value="2">
+                                    <input type="radio" name="habilitado" id="radios-1" value="1" ${taller.getHabilitado() == 1 ? 'checked' : ''}>
                                     No
                                 </label>
                             </div>
                         </div>
+                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
+                        </form>
+                        
                         <br>
                         <h1>Listado de Grupos</h1>
                         <br>
@@ -163,31 +167,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>001-012-001</td>
-                                    <td>Grupo 1</td>
-                                    <td>2</td>
-                                    <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                </tr>
-                                <tr>
-                                    <td>001-012-002</td>
-                                    <td>Grupo 2</td>
-                                    <td>1</td>
-                                    <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                </tr>
-                                <tr>
-                                    <td>001-012-003</td>
-                                    <td>Grupo 3</td>
-                                    <td>2</td>
-                                    <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                </tr>
+                              <c:if test="${taller != null}">   
+                                  <c:forEach var="grupo" items="${taller.getGrupos()}" varStatus="status">
+                                  <tr>
+                                  <td>${status.index + 1}  </td>
+                                  <td>${grupo.getNombre()}  </td>
+                                  <td>${grupo.getTurno2s().size()}  </td>
+                                  <td>
+                                     <form action="${pageContext.servletContext.contextPath}/PersonalEditarGrupo" method="post">
+                                            <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
+                                            <button type="submit" class="btn btn-default">Modificar</button>
+                                     </form>
+                                  </td>
+                                  </tr>   
+                                  </c:forEach>
+                              </c:if>    
                             </tbody>
+                            
+                             
                         </table>
+                        <c:if test="${taller == null}"> 
+                                <h3><strong>Debe crear un Taller antes de poder agregar los Grupos</strong></h3>    
+                            </c:if>   
                         <br>
-                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar Grupo</button>
+                        <c:if test="${taller != null}">  
+                         <form action="${pageContext.servletContext.contextPath}/PersonalAgregarGrupo" method="post">
+                                <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar Grupo</button>
+                         </form>                
+                        </c:if>
                         <br>
                         <br>
-                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
+                        
                     </div>
                 </div>
             </div>

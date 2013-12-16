@@ -36,7 +36,7 @@ public class HiberMain {
         Entidad entidad;
         Familia familia;
         
-        pass = DigestUtils.md5Hex(pass);
+        //pass = DigestUtils.md5Hex(pass);
 
         ArrayList<Object> temp = new ArrayList<Object>();
 

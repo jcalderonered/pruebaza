@@ -30,6 +30,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
         <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/jquery.timepicker.css" rel="stylesheet">
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -96,9 +97,20 @@
                     </div>
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <c:choose>
+                            <c:when test="${ reunion == null }">
+                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearReunion" method="post">
+                                <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">      
+                            </c:when>
+                            <c:otherwise>
+                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateReunion" method="post">
+                                    <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">  
+                            </c:otherwise>
+                        </c:choose>
                         <h1>Agregar / Editar Reunión</h1>
                         <br>
-                        <form class="form-horizontal">
+                        
+                        
                             <fieldset>
 
                                 <!-- Form Name -->
@@ -106,14 +118,14 @@
 
                                 <!-- Select Basic -->
                                 <div class="control-group">
-                                    <label class="control-label" for="selectbasic">Asociado a grupo: Grupo 1 - Turno Mañana</label>
+                                    <label class="control-label" for="selectbasic">Asociado a grupo: ${turno2.getGrupo().getNombre()} - Turno ${turno2.getNombre()}</label>
                                 </div>
 
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Fecha y Hora</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text"  class="datepicker"> &nbsp;<input id="textinput" name="textinput" type="text" value="20:00" class="input-xlarge"> 
+                                        <input id="fecha" name="fecha" value="${fecha}" type="text"  class="datepicker"> &nbsp;<input id="hora" name="hora" type="text" value="${reunion.getHora()}" class="timepicker input-xlarge"> 
                                     </div>
                                 </div>
 
@@ -121,7 +133,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Duracion</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" value="2 horas" class="input-xlarge">                                        
+                                        <input id="duracion" name="duracion" value="${reunion.getDuracion()}" type="text" class="input-xlarge">                                        
                                     </div>
                                 </div>
 
@@ -129,7 +141,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Direccion</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" value="Instalaciones del MIMP" class="input-xlarge">                                        
+                                        <input id="direccion" name="direccion" value="${reunion.getDireccion()}" type="text" value="Instalaciones del MIMP" class="input-xlarge">                                        
                                     </div>
                                 </div>       
 
@@ -137,7 +149,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Capacidad Maxima</label>
                                     <div class="controls">
-                                        <input id="textinput" name="textinput" type="text" value="25" class="input-xlarge">                                        
+                                        <input id="capacidad" name="capacidad" value="${reunion.getCapacidad()}" type="text" value="25" class="input-xlarge">                                        
                                     </div>
                                 </div>
 
@@ -145,9 +157,10 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Facilitador</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Juan Luis Aragon</option>
-                                            <option value="sia">Ronald Quispe</option>
+                                        <select id="facilitador" name="facilitador" >
+                                            <c:forEach var="personal" items="${listaPersonal}" varStatus="status">
+                                                <option value="${personal.getIdpersonal()}" ${reunion.getFacilitador() == personal.getIdpersonal() ? 'selected' : ''}> ${personal.getApellidoP()} ${personal.getApellidoM()} ${personal.getNombre()}</option> 
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -175,13 +188,14 @@
             <!-- Bootstrap core JavaScript
         ================================================== -->
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery.timepicker.js"></script>
             <script type="text/javascript">
 
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-
+                $('.timepicker').timepicker({'timeFormat': 'H:i'});
             </script>
             <!-- Placed at the end of the document so the pages load faster -->
     </body>

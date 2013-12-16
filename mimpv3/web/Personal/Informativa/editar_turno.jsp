@@ -30,6 +30,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
         <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/jquery.timepicker.css" rel="stylesheet">
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -77,17 +78,17 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin")) {%>
+                                    if (u.getRol().equals("admin")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                                 <%}%>
@@ -96,33 +97,54 @@
                     </div>
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <h1>Sesión 001-012 - Turno 2</h1>
-                        <br>
-                        <!-- Text input-->
-                        <div class="control-group">
-                            <label class="control-label" for="textinput">Fecha y hora de Inicio de Inscripciones al turno:</label>
-                            <div class="controls">
-                                <input id="textinput" name="textinput" type="text" placeholder="fecha_inicio" class=" datepicker input-xlarge"> &nbsp; <input id="textinput" name="textinput" type="text" placeholder="hora_inicio" class="input-xlarge">
+                        <c:choose>
+                            <c:when test="${turno != null }">
+                                <form action="${pageContext.servletContext.contextPath}/PersonalUpdateTurno" method="post">   
+                            </c:when>
+                            <c:otherwise>
+                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearTurno" method="post"> 
+                                <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">    
+                            </c:otherwise>        
+                        </c:choose>
+                         
+                        
+                            <c:choose>
+                                <c:when test="${turno != null }">
+                                    <h1>    ${turno.getSesion().getNSesion()} - Turno ${index} </h1>
+                                    <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
+                                </c:when>  
+                                <c:otherwise>
+                                    <h1> ${sesion.getNSesion()} - Turno ${index} </h1>
+                                </c:otherwise>
+
+                            </c:choose>
+                            <br>
+                            <!-- Text input-->
+                            <div class="control-group">
+                                <label class="control-label" for="textinput">Fecha y hora de Inicio de Inscripciones al turno:</label>
+                                <div class="controls">
+                                    <input id="fechaInicio" name="fechaInicio" type="text" value="${ts.DateToString(turno.getInicioInscripcion())}" placeholder="fecha_inicio" class=" datepicker input-xlarge"> &nbsp; <input id="horaInicio" name="horaInicio" value="${ts.HourToString(turno.getInicioInscripcion())}" type="text" placeholder="hora_inicio" class="timepicker input-xlarge">
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <!-- Text input-->
-                        <div class="control-group">
-                            <label class="control-label" for="textinput">Fecha y hora de Fin de Inscripciones al turno:</label>
-                            <div class="controls">
-                                <input id="textinput" name="textinput" type="text" placeholder="fecha_fin" class="datepicker input-xlarge"> &nbsp; <input id="textinput" name="textinput" type="text" placeholder="hora_fin" class="input-xlarge">
+                            <br>
+                            <!-- Text input-->
+                            <div class="control-group">
+                                <label class="control-label" for="textinput">Fecha y hora de Fin de Inscripciones al turno:</label>
+                                <div class="controls">
+                                    <input id="fechaFin" name="fechaFin" type="text" value="${ts.DateToString(turno.getFinInscripcion())}" placeholder="fecha_fin" class="datepicker input-xlarge"> &nbsp; <input id="horaFin"  name="horaFin" value="${ts.HourToString(turno.getFinInscripcion())}" type="text" placeholder="hora_fin" class="timepicker input-xlarge">
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <!-- Text input-->
-                        <div class="control-group">
-                            <label class="control-label" for="textinput">N° máximo de inscritos:</label>
-                            <div class="controls">
-                                <input id="textinput" name="textinput" type="text" placeholder="capacidad" class="input-xlarge">
+                            <br>
+                            <!-- Text input-->
+                            <div class="control-group">
+                                <label class="control-label" for="textinput">N° máximo de inscritos:</label>
+                                <div class="controls">
+                                    <input id="vacantes" name="vacantes" value="${turno.getVacantes()}" type="text" placeholder="capacidad" class="input-xlarge">
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <button href="#" class="btn btn-default">Crear / Editar Turno</button>
+                            <br>
+                            <button type="submit" class="btn btn-default">Crear / Editar Turno</button>
+                        </form> 
                     </div>
                 </div>
             </div>
@@ -143,10 +165,11 @@
             <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery.timepicker.js"></script>
             <script type="text/javascript">
 
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-
+                $('.timepicker').timepicker({'timeFormat': 'H:i'});
             </script>
             <!-- Placed at the end of the document so the pages load faster -->
     </body>

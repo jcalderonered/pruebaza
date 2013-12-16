@@ -94,6 +94,16 @@
                     </div>
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <c:choose>
+                            <c:when test="${ grupo == null }">
+                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearGrupo" method="post">
+                                <input hidden name="idTaller" id="idTaller" value="${idTaller}">      
+                            </c:when>
+                            <c:otherwise>
+                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateGrupo" method="post">
+                                    <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">  
+                            </c:otherwise>
+                        </c:choose>
                         <h1>Edición de grupo</h1>
                         <br>
                         <!-- Select Basic -->
@@ -101,12 +111,16 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Nombre del grupo:</label>
                             <div class="controls">
-                                <input id="textinput" name="textinput" type="text" placeholder="Nombre" class="input-xlarge">
+                                <input id="nombreGrupo" name="nombreGrupo" value="${grupo.getNombre()}" type="text" placeholder="Nombre" class="input-xlarge">
                             </div>
                         </div>
+                        <br>    
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
+                        </form>
                         <br>
                         <h1>Listado de Turnos</h1>
                         <br>
+                        
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -116,28 +130,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Mañana</td>
-                                    <td>5 Reuniones</td>
-                                    <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Tarde</td>
-                                    <td>4 Reuniones</td>
-                                    <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Noche</td>
-                                    <td>5 Reuniones</td>
-                                    <td><button href="#" class="btn btn-default">Modificar</button></td>
-                                </tr>
+                                <c:if test="${grupo != null}">  
+                                <c:forEach var="turno" items="${grupo.getTurno2s()}" varStatus="status">
+                                  <tr>
+                                  <td>${turno.getNombre()}  </td>
+                                  <td>${turno.getReunions().size()}  </td>
+                                  <td>
+                                     <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurnoGrupo" method="post">
+                                            <input hidden name="idTurno2" id="idTurno2" value="${turno.getIdturno2()}">
+                                            <button type="submit" class="btn btn-default">Modificar</button>
+                                     </form>
+                                  </td>
+                                  </tr>   
+                                  </c:forEach>
+                                </c:if>  
                             </tbody>
                         </table>
+                        <c:if test="${grupo == null}"> 
+                            <h3><strong>Debe crear un Grupo antes de poder agregar los Turnos de Reuniones</strong></h3>    
+                        </c:if>   
                         <br>
-                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar Turno</button>
+                        <c:if test="${grupo != null}">  
+                         <form action="${pageContext.servletContext.contextPath}/PersonalAgregarTurnoGrupo" method="post">
+                                <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar Turno</button>
+                         </form>                
+                        </c:if>
+                        
                         <br>
                         <br>
-                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
+                        
                     </div>
                 </div>
             </div>
