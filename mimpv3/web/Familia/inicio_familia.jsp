@@ -60,7 +60,6 @@ if (u==null){
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <div class="container">
                 <div class="row">
