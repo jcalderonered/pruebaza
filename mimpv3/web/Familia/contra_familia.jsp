@@ -71,26 +71,26 @@ if (u==null){
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/Fcambiarcontra" method="post">
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Contraseña Actual</label>
-                                    <input id="textinput" name="textinput" type="password" placeholder="" class="input-xlarge">
+                                    <input id="oldpass" name="oldpass" type="password" placeholder="" class="input-xlarge">
                                     <br>
                                     <label class="control-label" for="textinput">Nueva Contraseña</label>
-                                    <input id="textinput" name="textinput" type="password" placeholder="" class="input-xlarge">
+                                    <input id="newpass" name="newpass" type="password" placeholder="" class="input-xlarge">
                                     <br>
                                     <label class="control-label" for="textinput">Reescribir nueva contraseña</label>
-                                    <input id="textinput" name="textinput" type="password" placeholder="" class="input-xlarge">
+                                    <input id="newpassconf" name="newpassconf" type="password" placeholder="" class="input-xlarge">
                                 </div>
                                 <br>
-                                <p style="color: red">La contraseña se ha cambiado con éxito</p>
+                                <p style="color: red">${mensaje}</p>
                                 <br>
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Cambiar Contraseña</button>
+                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Cambiar Contraseña</button>
                                     </div>
                                 </div>
                             </fieldset>

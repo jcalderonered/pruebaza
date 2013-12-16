@@ -7,9 +7,10 @@ package com.mimp.controllers;
 
 import java.util.*;
 import com.mimp.bean.*;
-import com.mimp.hibernate.HiberMain;
+import com.mimp.hibernate.HiberFamilia;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +26,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class familia {
 
+    @Resource(name = "HiberFamilia")
+    private HiberFamilia ServicioFamilia = new HiberFamilia();
+    
     @RequestMapping("/inicioFam")
     public ModelAndView InicioFam(ModelMap map, HttpSession session) {
         Familia usuario = (Familia) session.getAttribute("usuario");
@@ -96,6 +100,35 @@ public class familia {
             return new ModelAndView("login", map);
         }
         String pagina = "/Familia/contra_familia";
+        return new ModelAndView(pagina, map);
+    }
+    
+    @RequestMapping("/Fcambiarcontra")
+    public ModelAndView Fcambiarcontra(ModelMap map, HttpSession session, @RequestParam("oldpass") String oldpass, @RequestParam("newpass") String newpass, @RequestParam("newpassconf") String newpassconf) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        String mensaje = "";
+        if (usuario == null) {
+            mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        } else {
+            oldpass = DigestUtils.md5Hex(oldpass);
+            if(usuario.getPass().equals(oldpass)){
+                if(newpass.equals(newpassconf)){
+                    newpass = DigestUtils.md5Hex(newpass);
+                    usuario.setPass(newpass);
+                    ServicioFamilia.CambiaPass(usuario);
+                    mensaje = "La contraseña se ha cambiado con exito.";
+                } else {
+                    mensaje = "Las contraseñas no coinciden. Favor de reescribir la nueva contraseña.";
+                }
+            } else {
+                mensaje = "Contraseña de usuario incorrecta. Ingrese nuevamente.";
+            }
+        }
+        
+        String pagina = "/Familia/contra_familia";
+        map.addAttribute("mensaje", mensaje);
         return new ModelAndView(pagina, map);
     }
 }

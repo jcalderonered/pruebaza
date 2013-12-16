@@ -21,5 +21,10 @@ public class HiberFamilia {
     
     @Resource(name="sessionFactory")
     private SessionFactory sessionFactory;
-    
+    //<----------USUARIO---------->
+    public void CambiaPass(Familia familia) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.update(familia);
+    }
 }
