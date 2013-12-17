@@ -57,7 +57,7 @@ if (u==null){
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li><a href="${pageContext.servletContext.contextPath}/inicioFam">Inicio</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/FactDatos">Ver Información</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/FactDatos/opc1">Ver Información</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -76,11 +76,11 @@ if (u==null){
                     </div>
                     <div class="col-md-9">
                         <ul class="nav nav-tabs row" id="tabs" >
-                            <li><a href="#" data-toggle="tab">La Solicitante</a></li>
-                            <li><a href="#" data-toggle="tab">El solicitante</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Composición familiar</a></li>
-                            <li><a href="#" data-toggle="tab">Vivienda</a></li>
-                            <li><a href="#" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc1" data-toggle="tab">La Solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc2" data-toggle="tab">El solicitante</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/FactDatos/opc3" data-toggle="tab">Composición familiar</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc4" data-toggle="tab">Vivienda</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc5" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
 
                         <form class="form-horizontal"> 

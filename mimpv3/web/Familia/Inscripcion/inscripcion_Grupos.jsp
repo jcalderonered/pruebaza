@@ -54,7 +54,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioFam">Inicio</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/FactDatos">Ver Información</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc1">Ver Información</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
