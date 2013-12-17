@@ -99,7 +99,7 @@
 
                         <div class="controls">
                             <label class="control-label" for="textinput">Nombre de evento&nbsp</label>
-                            <input id="textinput" name="textinput" disabled type="text" placeholder="Taller Primera adopción" class="input-xlarge">
+                            <input id="textinput" name="textinput" value="${nombre}" disabled type="text" placeholder="Taller Primera adopción" class="input-xlarge">
                         </div>
                         <br>
                         <div class="controls">
@@ -109,28 +109,28 @@
                         <br>
                         <div class="controls">
                             <label class="control-label" for="textinput">Grupo &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  </label>
-                            <input id="textinput" name="textinput" disabled type="text" placeholder="1" class="input-xlarge">
+                            <input id="textinput" name="textinput" value="${grupo}" disabled type="text" placeholder="1" class="input-xlarge">
                         </div>
                         <br>
                         <div class="controls">
                             <label class="control-label" for="textinput">Turno &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  </label>
-                            <input id="textinput" name="textinput" disabled type="text" placeholder="Mañana" class="input-xlarge">
+                            <input id="textinput" name="textinput" value="${turno}" disabled type="text" placeholder="Mañana" class="input-xlarge">
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-4">
                                 <label class="control-label" for="textinput">Fecha &nbsp</label>
-                                <input id="textinput" name="textinput" disabled type="text" placeholder="28/10/2013" class="input-xlarge">
+                                <input id="textinput" name="textinput" value="${formato.dateToString(reunion.getFecha())}" disabled type="text" placeholder="28/10/2013" class="input-xlarge">
                             </div>
                             <div class="col-md-4">
                                 <label class="control-label" for="textinput">Hora &nbsp</label>
-                                <input id="textinput" name="textinput" disabled type="text" placeholder="16:30" class="input-xlarge">
+                                <input id="textinput" name="textinput" value="${reunion.getHora()}" disabled type="text" placeholder="16:30" class="input-xlarge">
                             </div>
 
                         </div>
                         <br>
                         <br>
-
+                        
                         <div class="bs-example">
                             <table class="table table-bordered">
                                 <thead>
@@ -145,117 +145,199 @@
                                         <th>Inasistencia Justificada</th>
                                     </tr>
                                 </thead>
+                                <c:if test="${listaFormularios != null}">
                                 <tbody>
-                                    <tr>
-                                        <td>Juan Alvarado Perez</td>
-                                        <td>40</td>
-                                        <td>María Gutierrez Espinoza</td>
-                                        <td>43</td>
-                                        <td>correo@dominio.com</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Asistió
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Justificado
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Miguel Rosa Flores</td>
-                                        <td>35</td>
-                                        <td>Marta Gadea Chávez</td>
-                                        <td>40</td>
-                                        <td>correo@dominio.com</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Asistió
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Justificado
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Marco Durando Miriarte</td>
-                                        <td>53</td>
-                                        <td>Rosa Miroquezada Cabello</td>
-                                        <td>50</td>
-                                        <td>correo@dominio.com</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Asistió
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Justificado
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gabriel Solano Parco </td>
-                                        <td>20</td>
-                                        <td>Gina Torre Rojas</td>
-                                        <td>18</td>
-                                        <td>correo@dominio.com</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Asistió
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Justificado
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
+                                            <tr>
+                                                <c:choose>
+                                                    <c:when test="${formulario.getAsistentes().size() == 2}">     
+                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                    <c:set var="el" value="${asistente}" scope="page" />
+                                                                    
+                                                                </c:when>
+                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                    <c:set var="ella" value="${asistente}" scope="page" />
+                                                                </c:when> 
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                                    <td>
+                                                                        ${el.getNombre()}
+                                                                        ${el.getApellidoP()}
+                                                                        ${el.getApellidoM()}
+                                                                    </td>
+                                                                    <td>
+                                                                        ${el.getEdad()}
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        ${ella.getNombre()}
+                                                                        ${ella.getApellidoP()}
+                                                                        ${ella.getApellidoM()}
+                                                                    </td>
+                                                                    <td>
+                                                                        ${ella.getEdad()}
+                                                                    </td>
+
+                                                                    <td>${ella.getCorreo()}</td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalAsistenciaReunion" method="post">
+                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                            <input hidden name="asistencia" id="asistencia" value="A"> 
+                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+                                                                                        <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                                                     <button ${AFR.getAsistencia() == 'A' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
+                                                                                        </c:if>                 
+                                                                                    </c:forEach>   
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInasistenciaReunion" method="post">
+                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                            <input hidden name="justificado" id="user" value="0"> 
+                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+                                                                                        <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                                                     <button ${AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
+                                                                                        </c:if>                
+                                                                                    </c:forEach>   
+                                                                        </form>
+                                                                    </td>
+                                                                    <input hidden type="text" name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                    </c:when>
+                                                    <c:when test="${formulario.getAsistentes().size() == 1}">
+                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                    <td>
+                                                                    ${asistente.getNombre()}    
+                                                                    ${asistente.getApellidoP()}
+                                                                    ${asistente.getApellidoM()}
+                                                                    </td>
+                                                                    <td>${asistente.getEdad()}</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>${asistente.getCorreo()}</td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalAsistenciaReunion" method="post">
+                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                            <input hidden name="asistencia" id="user" value="A"> 
+                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+                                         
+                                                                                               <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                                                     <button ${AFR.getAsistencia() == 'A' ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
+                                                                                                </c:if>      
+                                                                                            
+                                                                                    </c:forEach>   
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInasistenciaReunion" method="post">
+                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                            <input hidden name="justificado" id="user" value="0"> 
+                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+                                                                                            <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                                                     <button ${AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
+                                                                                        </c:if>   
+                                                                                    </c:forEach>   
+                                                                        </form>
+                                                                    </td>
+                                                                </c:when>
+                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>
+                                                                    ${asistente.getNombre()}
+                                                                    ${asistente.getApellidoP()}
+                                                                    ${asistente.getApellidoM()}
+                                                                    </td>
+                                                                    <td>${asistente.getEdad()}</td>
+                                                                    <td>${asistente.getCorreo()}</td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalAsistenciaReunion" method="post">
+                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                            <input hidden name="asistencia" id="user" value="A"> 
+                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+                                                                                            <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                                                     <button ${AFR.getAsistencia() == 'A' ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
+                                                                                         </c:if>  
+                                                                                    </c:forEach>   
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInasistenciaReunion" method="post">
+                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                            <input hidden name="justificado" id="user" value="0"> 
+                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+                                                                                            <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                                                     <button ${AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
+                                                                                        </c:if>   
+                                                                                    </c:forEach>   
+                                                                        </form>
+                                                                    </td>
+                                                                </c:when>    
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </c:when>    
+                                                  <c:otherwise>
+                                                 </c:otherwise>
+                                               </c:choose>
+                                            </tr>
+                                        </c:forEach>
                                 </tbody>
+                               </c:if> 
+                                
                             </table>
+                            <c:if test="${listaFormularios.size() == 0}">
+                                    <h3><strong>Aún no hay personas inscritas</strong></h3>
+                                </c:if>
                         </div><!-- /example -->
                         <br>
                         <p>IMPORTANTE: Una vez guardado, no se podrán hacer cambios</p>
                         <br>
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-5" > 
-                                <div class="btn-toolbar">
-                                    <button href="#" class="btn btn-default">Guardar cambios</button>
-                                </div> 
-                                <br>   
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

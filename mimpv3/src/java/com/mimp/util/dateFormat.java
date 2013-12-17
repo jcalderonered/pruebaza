@@ -37,7 +37,7 @@ public class dateFormat {
     }
     
     public String dateToString (Date temp){
-        SimpleDateFormat fromsql = new SimpleDateFormat("dd/MM/yyyy",new Locale("ES"));
+        SimpleDateFormat fromsql = new SimpleDateFormat("dd/MMM/yyyy",new Locale("ES"));
         //SimpleDateFormat mystring = new SimpleDateFormat("dd/MM/yyyy");
         
         String fecha = fromsql.format(temp);

@@ -197,32 +197,63 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Tipo taller</th>
+                                        <th>Tipo </th>
                                         <th>Nombre / N° sesión</th>
-                                        <th>Terminado</th>
+                                        <th>Grupo / Turno / Día</th>
                                         <th>Toma de asistencia</th>
                                     </tr>
                                 </thead>
+                                
                                 <tbody>
-                                    <tr>
-                                        <td>---</td>
-                                        <td>001-009</td>
-                                        <td>Si</td>
-                                        <td><button href="#" class="btn btn-default">Asistencia</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>---</td>
-                                        <td>001-010</td>
-                                        <td>Si</td>
-                                        <td><button href="#" class="btn btn-default">Asistencia</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Capacitación</td>
-                                        <td>Taller de Capacitacion 1</td>
-                                        <td>No</td>
-                                        <td><button href="#" class="btn btn-default">Asistencia</button></td>
-                                    </tr>
+                                <c:set var="now" value="<%=new java.util.Date()%>" /> 
+                                  <c:if test="${listaSesiones != null}"> 
+                                    <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
+                                        <c:if test="${now > sesion.getFecha()}"> 
+                                        <tr>
+                                            <td>Sesion</td>
+                                            <td>${sesion.getNSesion()}</td>
+                                            <td> ---- </td> 
+                                            <td>
+                                                <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia2" method="post">
+                                                    <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                    <button type="submit" class="btn btn-default">Asistencia</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                       </c:if> 
+                                    </c:forEach>
+                                  </c:if> 
+                                  <c:if test="${listaTalleres != null}">       
+                                       <c:forEach var="taller" items="${listaTalleres}" varStatus="status">
+                                           <c:forEach var="grupo" items="${taller.getGrupos()}" varStatus="status">
+                                                    <c:forEach var="turno2" items="${grupo.getTurno2s()}" varStatus="status">
+                                                            <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
+                                                                    <c:if test="${ reunion.getFecha() != null && now > reunion.getFecha() }">
+                                                                        <tr>
+                                                                            <td>Taller</td>
+                                                                            <td>${taller.getNombre()}</td>
+                                                                            <td>${grupo.getNombre()} / ${turno2.getNombre()} /
+                                                                                ${formato.dateToString(reunion.getFecha())}
+                                                                                
+                                                                            </td>
+                                                                            <td>
+                                                                                <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia" method="post">
+                                                                                <input hidden name="nombre" id="idReunion" value="${taller.getNombre()}">
+                                                                                <input hidden name="grupo" id="grupo" value="${grupo.getNombre()}">
+                                                                                <input hidden name="turno" id="turno" value="${turno2.getNombre()}">
+                                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                                <button type="submit" class="btn btn-default">Asistencia</button>
+                                                                                </form>
+                                                                            </td>
+                                                                        </tr>  
+                                                                    </c:if>
+                                                            </c:forEach>
+                                                    </c:forEach>
+                                           </c:forEach>
+                                      </c:forEach>
+                                 </c:if>      
                                 </tbody>
+                                
                             </table>
                         </div>
                     </div>
