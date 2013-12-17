@@ -486,6 +486,8 @@ public class HiberPersonal {
         for (Iterator iter = formularios.iterator(); iter.hasNext();) {
             FormularioSesion temp = (FormularioSesion) iter.next();
             Hibernate.initialize(temp.getAsistentes());
+            Hibernate.initialize(temp.getAsistenciaFTs());
+            Hibernate.initialize(temp.getFamilia());
             allFormularios.add(temp);
             
         } 
@@ -584,17 +586,27 @@ public class HiberPersonal {
         Query query = session.createQuery(hql);
         List talleres = query.list();
         ArrayList<Taller> allTalleres = new ArrayList();
+        
+        
+        
+        
+         
         for (Iterator iter = talleres.iterator(); iter.hasNext();) {
-            Taller temp = (Taller) iter.next();
-            Hibernate.initialize(temp.getGrupos());
+                Taller temp = (Taller) iter.next();
+                    Hibernate.initialize(temp.getGrupos());
+                  Set<Grupo> allGrp = new HashSet<Grupo>(0);  
             for (Grupo grp : temp.getGrupos()) {
-                    Hibernate.initialize(grp.getTurno2s());
+                         Hibernate.initialize(grp.getTurno2s());
+                  Set<Turno2> allT2 = new HashSet<Turno2>(0);       
                 for (Turno2 t2 : grp.getTurno2s()) {
-                        Hibernate.initialize(t2.getReunions());
-                        cont = cont + t2.getReunions().size();
+                            Hibernate.initialize(t2.getReunions());
+                                 cont = cont + t2.getReunions().size();
+                           allT2.add(t2);
                 }
-                    
+                grp.setTurno2s(allT2);
+                allGrp.add(grp);
             }
+            temp.setGrupos(allGrp);
             size = String.valueOf(cont);
             numReun = Short.parseShort(size);
             temp.setNReunion(numReun);
@@ -694,6 +706,152 @@ public class HiberPersonal {
         reun.setTurno2(temp);
         return reun;
     
+    }
+    
+    public ArrayList<FormularioSesion> InscritosTaller (long idTaller) {
+        
+         Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         ArrayList<FormularioSesion> allFormularios = new ArrayList();
+         Taller tempTaller = new Taller();
+         String hql = "From Taller T where T.id = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idTaller);
+        Object queryResult = query.uniqueResult();
+        
+        tempTaller = (Taller)queryResult;
+        Hibernate.initialize(tempTaller.getGrupos());
+         
+        for (Grupo grp : tempTaller.getGrupos()) {
+                Hibernate.initialize(grp.getTurno2s());
+                
+                for (Turno2 T2 : grp.getTurno2s()) {
+                    Hibernate.initialize(T2.getReunions());
+                    
+                    for (Reunion reun : T2.getReunions()) {
+                            Hibernate.initialize(reun.getAsistenciaFRs());
+                            
+                            for (AsistenciaFR afr : reun.getAsistenciaFRs()){
+                                    Hibernate.initialize(afr.getFamilia().getFormularioSesions());
+                                    
+                                    for (FormularioSesion formularioSesion : afr.getFamilia().getFormularioSesions()) {
+                                        Hibernate.initialize(formularioSesion.getAsistentes());
+                                        
+                                        allFormularios.add(formularioSesion);
+                                }
+                                    
+                            }
+                    }
+            }
+            
+        }
+    
+        return allFormularios;
+    
+    }
+    
+    
+    public ArrayList<FormularioSesion> formulariosReunion (long idReunion) {
+        
+         Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         
+        String hql = "FROM Reunion R where R.id = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idReunion);
+        Object queryResult = query.uniqueResult();
+        Reunion tempReun = (Reunion) queryResult;
+        ArrayList<FormularioSesion> allFormularios = new ArrayList();
+        Hibernate.initialize(tempReun.getAsistenciaFRs());
+        for (AsistenciaFR afr : tempReun.getAsistenciaFRs()){
+                   Hibernate.initialize(afr.getFamilia().getFormularioSesions());
+              
+                   for (FormularioSesion formularioSesion : afr.getFamilia().getFormularioSesions()) {
+                                        Hibernate.initialize(formularioSesion.getAsistentes());
+                                        Hibernate.initialize(formularioSesion.getFamilia());
+                                        Familia fam = formularioSesion.getFamilia();
+                                        Hibernate.initialize(fam.getAsistenciaFRs());
+                                        formularioSesion.setFamilia(fam);
+                                        allFormularios.add(formularioSesion);
+                                }
+                                    
+                 }
+        
+        return allFormularios;
+    
+    }
+    
+    public FormularioSesion getFormulario (long idFormulario){
+    
+         Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         
+        String hql = "FROM FormularioSesion F where F.id = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFormulario);
+        Object queryResult = query.uniqueResult();
+        FormularioSesion tempFs = (FormularioSesion) queryResult;
+       
+        return tempFs;
+    }
+    
+    public Turno getTurno (long idTurno){
+    
+         Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         
+        String hql = "FROM Turno T where T.id = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idTurno);
+        Object queryResult = query.uniqueResult();
+        Turno tempTurno = (Turno) queryResult;
+       
+        return tempTurno;
+    }
+    
+    public void marcarAsistenciaSesion (AsistenciaFT aft){
+    
+    Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         
+         session.save(aft);
+    
+    }
+    
+    
+    public void crearCuentaFamilia (Familia fam,FormularioSesion fs){
+    
+    Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         
+         fam.getFormularioSesions().add(fs);
+         fs.setFamilia(fam);
+    
+         session.save(fam);
+         session.update(fs);
+    }
+    
+    public void updateAsistenciaFR (AsistenciaFR afr){
+    
+    Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         
+         
+         session.update(afr);
+    }
+    
+    public AsistenciaFR getAsistFR (long idFamilia, long idReunion){
+    
+        Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         String hql = "From AsistenciaFR AFR where AFR.familia = :idFamilia and AFR.reunion = :idReunion";
+        Query query = session.createQuery(hql);
+        query.setLong("idFamilia", idFamilia);
+        query.setLong("idReunion", idReunion);
+        Object queryResult = query.uniqueResult();
+        AsistenciaFR tempAFR = (AsistenciaFR) queryResult;
+    
+        return tempAFR;
     }
     /*  */
 }

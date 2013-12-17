@@ -62,6 +62,7 @@ public class personal {
         //map.addAttribute("id", temp);
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres",ServicioPersonal.listaTalleres());
+        map.put("formato",format);
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
 
@@ -1440,6 +1441,21 @@ public class personal {
         return new ModelAndView("/Personal/Informativa/lista_fam_ins", map);
     }
     
+    @RequestMapping(value = "/PersonalInscritosTaller", method = RequestMethod.POST)
+    public ModelAndView PersonalInscritosTaller(ModelMap map, @RequestParam("idTaller") long idTaller, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        ArrayList<FormularioSesion> allFormularios = new ArrayList();
+        allFormularios = ServicioPersonal.InscritosTaller(idTaller);
+        
+        map.put("listaFormularios", allFormularios);
+        return new ModelAndView("/Personal/Informativa/lista_fam_ins", map);
+    }
+    
     @RequestMapping(value = "/PersonalDetalleFamiliaInscritaSesion", method = RequestMethod.POST)
     public ModelAndView PersonalDetalleFamiliaInscritaSesion(ModelMap map, @RequestParam("idFormulario") long idFormulario, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1837,7 +1853,218 @@ public class personal {
         return new ModelAndView("/Personal/Informativa/edicion_turno2", map);
     }      
         
+    @RequestMapping(value = "/PersonalTomaAsistencia", method = RequestMethod.POST)
+    public ModelAndView PersonalTomaAsistencia(ModelMap map, 
+                                               @RequestParam("idReunion") long idReunion, 
+                                               @RequestParam("nombre") String nombre,
+                                               @RequestParam("grupo") String grupo,
+                                               @RequestParam("turno") String turno,
+                                               HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         
+        Reunion tempReun = new Reunion();
+        ArrayList<FormularioSesion> allFormularios = new ArrayList();
+        allFormularios = ServicioPersonal.formulariosReunion(idReunion);
+        tempReun = ServicioPersonal.getReunion(idReunion);
+        
+        map.addAttribute("nombre", nombre);
+        map.addAttribute("grupo", grupo);
+        map.addAttribute("turno", turno);
+        map.addAttribute("formato", format);
+        map.put("listaFormularios", allFormularios);
+        map.put("reunion", tempReun);
+        return new ModelAndView("/Personal/Informativa/toma_asistencia", map);
+    }      
+    
+    @RequestMapping(value = "/PersonalTomaAsistencia2", method = RequestMethod.POST)
+    public ModelAndView PersonalTomaAsistencia2(ModelMap map, 
+                                               @RequestParam("idSesion") long idSesion, 
+                                               HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        Sesion tempSesion = new Sesion();
+        ArrayList<FormularioSesion> allFormularios = new ArrayList();
+        String fecha = "";
+        tempSesion = ServicioPersonal.getSesion(idSesion);
+        if (tempSesion.getFecha() != null){
+             fecha = format.dateToString(tempSesion.getFecha());
+        }
+        allFormularios = ServicioPersonal.InscritosSesion(idSesion);
+        
+        map.addAttribute("fecha", fecha);
+        map.put("sesion",tempSesion );
+        map.put("listaFormularios", allFormularios);
+        return new ModelAndView("/Personal/Informativa/toma_asistencia2", map);
+    }  
+    
+    @RequestMapping(value = "/PersonalAsistioSesion", method = RequestMethod.POST)
+    public ModelAndView PersonalAsistioSesion(ModelMap map, 
+                                               @RequestParam("idSesion") long idSesion,
+                                               @RequestParam("idFormulario") long idFormulario,
+                                               HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        AsistenciaFT aft = new AsistenciaFT();
+        FormularioSesion fs = new FormularioSesion();
+        fs = ServicioPersonal.getFormulario(idFormulario);
+        Sesion tempSesion = new Sesion();
+        Turno tempTurno = new Turno();
+        
+        ArrayList<FormularioSesion> allFormularios = new ArrayList();
+        String fecha = "";
+        tempSesion = ServicioPersonal.getSesion(idSesion);
+        if (tempSesion.getFecha() != null){
+             fecha = format.dateToString(tempSesion.getFecha());
+        }
+        
+        tempTurno = ServicioPersonal.getTurno(tempSesion.getTurnos().iterator().next().getIdturno());
+       
+        aft.setFormularioSesion(fs);
+        aft.setTurno(tempTurno);
+        String asistencia = "A";
+        char c = asistencia.charAt(0);
+        aft.setAsistencia(c);
+        ServicioPersonal.marcarAsistenciaSesion(aft);
+        
+        allFormularios = ServicioPersonal.InscritosSesion(idSesion);
+        
+        map.addAttribute("fecha", fecha);
+        map.put("sesion",tempSesion );
+        map.put("listaFormularios", allFormularios);
+        return new ModelAndView("/Personal/Informativa/toma_asistencia2", map);
+    }  
+    
+    @RequestMapping(value = "/PersonalCrearUsuarioFamilia", method = RequestMethod.POST)
+    public ModelAndView PersonalCrearUsuarioFamilia(ModelMap map, 
+                                               @RequestParam("idSesion") long idSesion,
+                                               @RequestParam("idFormulario") long idFormulario,
+                                               @RequestParam("user") String user,
+                                               HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        Familia fam = new Familia();
+        FormularioSesion fs = new FormularioSesion();
+        fs = ServicioPersonal.getFormulario(idFormulario);
+        Sesion tempSesion = new Sesion();
+        
+        
+        ArrayList<FormularioSesion> allFormularios = new ArrayList();
+        String fecha = "";
+        tempSesion = ServicioPersonal.getSesion(idSesion);
+        if (tempSesion.getFecha() != null){
+             fecha = format.dateToString(tempSesion.getFecha());
+        }
+        
+        fam.setUser(user);
+        fam.setPass("12345");
+        fam.setCorreo(user);
+        Short habilitado = Short.parseShort("0");
+        
+        ServicioPersonal.crearCuentaFamilia(fam, fs);
+        
+        allFormularios = ServicioPersonal.InscritosSesion(idSesion);
+        
+        map.addAttribute("fecha", fecha);
+        map.put("sesion",tempSesion );
+        map.put("listaFormularios", allFormularios);
+        return new ModelAndView("/Personal/Informativa/toma_asistencia2", map);
+    }  
+    
+    @RequestMapping(value = "/PersonalAsistenciaReunion", method = RequestMethod.POST)
+    public ModelAndView PersonalAsistenciaReunion(ModelMap map, 
+                                               @RequestParam("idReunion") long idReunion, 
+                                               @RequestParam("idFamilia") long idFamilia,
+                                               @RequestParam("asistencia") String asistencia,
+                                               
+                                               @RequestParam("nombre") String nombre,
+                                               @RequestParam("grupo") String grupo,
+                                               @RequestParam("turno") String turno,
+                                               
+                                               HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        AsistenciaFR afr = new AsistenciaFR();
+        Reunion tempReun = new Reunion();
+        ArrayList<FormularioSesion> allFormularios = new ArrayList();
+        
+        tempReun = ServicioPersonal.getReunion(idReunion);
+        
+        afr = ServicioPersonal.getAsistFR(idFamilia, idReunion);
+        char c = asistencia.charAt(0);
+        afr.setAsistencia(c);
+        
+        ServicioPersonal.updateAsistenciaFR(afr);
+        allFormularios = ServicioPersonal.formulariosReunion(idReunion);
+        map.addAttribute("nombre", nombre);
+        map.addAttribute("grupo", grupo);
+        map.addAttribute("turno", turno);
+        map.addAttribute("formato", format);
+        map.put("listaFormularios", allFormularios);
+        map.put("reunion", tempReun);
+        return new ModelAndView("/Personal/Informativa/toma_asistencia", map);
+    } 
+    
+    @RequestMapping(value = "/PersonalInasistenciaReunion", method = RequestMethod.POST)
+    public ModelAndView PersonalInasistenciaReunion(ModelMap map, 
+                                               @RequestParam("idReunion") long idReunion, 
+                                               @RequestParam("idFamilia") long idFamilia,
+                                               @RequestParam("justificado") String justificado,
+                                               
+                                               @RequestParam("nombre") String nombre,
+                                               @RequestParam("grupo") String grupo,
+                                               @RequestParam("turno") String turno,
+                                               
+                                               HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        AsistenciaFR afr = new AsistenciaFR();
+        Reunion tempReun = new Reunion();
+        ArrayList<FormularioSesion> allFormularios = new ArrayList();
+        
+        tempReun = ServicioPersonal.getReunion(idReunion);
+        
+        afr = ServicioPersonal.getAsistFR(idFamilia, idReunion);
+        Short sh = Short.valueOf(justificado);
+        afr.setInasJus(sh);
+        
+        ServicioPersonal.updateAsistenciaFR(afr);
+        allFormularios = ServicioPersonal.formulariosReunion(idReunion);
+        map.addAttribute("nombre", nombre);
+        map.addAttribute("grupo", grupo);
+        map.addAttribute("turno", turno);
+        map.addAttribute("formato", format);
+        map.put("listaFormularios", allFormularios);
+        map.put("reunion", tempReun);
+        return new ModelAndView("/Personal/Informativa/toma_asistencia", map);
+    }     
         
     /*    FIN DE SESIONES Y TALLERES                      */
 }

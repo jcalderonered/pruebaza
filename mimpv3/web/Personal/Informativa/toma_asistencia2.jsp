@@ -97,30 +97,32 @@
                         <p class="text-left"><h1><strong> Listado de Asistentes</strong> </h1></p>
                         <br>
 
-                        <div class="controls">
-                            <label class="control-label" for="textinput">Nombre de evento&nbsp</label>
-                            <input id="textinput" name="textinput" disabled type="text" placeholder="Sesión Informativa 2013-2" class="input-xlarge">
-                        </div>
                         <br>
                         <div class="controls">
                             <label class="control-label" for="textinput">Tipo de evento &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  </label>
                             <input id="textinput" name="textinput" disabled type="text" placeholder="Sesión Informativa" class="input-xlarge">
                         </div>
                         <br>
+                        
+                        <div class="controls">
+                            <label class="control-label" for="textinput">Número de evento&nbsp</label>
+                            <input id="textinput" name="textinput" value="${sesion.getNSesion()}" disabled type="text" placeholder="Sesión Informativa 2013-2" class="input-xlarge">
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-md-4">
                                 <label class="control-label" for="textinput">Fecha &nbsp</label>
-                                <input id="textinput" name="textinput" disabled type="text" placeholder="28/10/2013" class="input-xlarge">
+                                <input id="textinput" name="textinput" value="${fecha}" disabled type="text" placeholder="28/10/2013" class="input-xlarge">
                             </div>
                             <div class="col-md-4">
                                 <label class="control-label" for="textinput">Hora &nbsp</label>
-                                <input id="textinput" name="textinput" disabled type="text" placeholder="16:30" class="input-xlarge">
+                                <input id="textinput" name="textinput" value="${sesion.getHora()}" disabled type="text" placeholder="16:30" class="input-xlarge">
                             </div>
 
                         </div>
                         <br>
                         <br>
-
+                        
                         <div class="bs-example">
                             <table class="table table-bordered mytable">
                                 <thead>
@@ -136,121 +138,154 @@
                                         <th>Crear usuario</th>
                                     </tr>
                                 </thead>
+                                <c:if test="${listaFormularios != null}">
                                 <tbody>
-                                    <tr>
-                                        <td>Juan Alvarado Perez</td>
-                                        <td>40</td>
-                                        <td>jalvarado@dominio.com</td>
-                                        <td>María Gutierrez Espinoza</td>
-                                        <td>43</td>
-                                        <td>mgutierrez@dominio.com</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Asistió
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Crear
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Miguel Rosa Flores</td>
-                                        <td>35</td>
-                                        <td>mrosa@dominio.com</td>
-                                        <td>Marta Gadea Chávez</td>
-                                        <td>40</td>
-                                        <td>mgadea@dominio.com</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Asistió
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Crear
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Marco Durando Miriarte</td>
-                                        <td>53</td>
-                                        <td>mdurando@dominio.com</td>
-                                        <td>Rosa Miroquezada Cabello</td>
-                                        <td>50</td>
-                                        <td>rmiroquezada@dominio.com</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Asistió
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Crear
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gabriel Solano Parco </td>
-                                        <td>20</td>
-                                        <td>gsolano@dominio.com</td>
-                                        <td>Gina Torre Rojas</td>
-                                        <td>18</td>
-                                        <td>gtorre@dominio.com</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Asistió
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                                    Crear
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
+                                            <tr>
+                                                <c:choose>
+                                                    <c:when test="${formulario.getAsistentes().size() == 2}">     
+                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                    <c:set var="el" value="${asistente}" scope="page" />
+                                                                    
+                                                                </c:when>
+                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                    <c:set var="ella" value="${asistente}" scope="page" />
+                                                                </c:when> 
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                                    <td>
+                                                                        ${el.getNombre()}
+                                                                        ${el.getApellidoP()}
+                                                                        ${el.getApellidoM()}
+                                                                    </td>
+                                                                    <td>
+                                                                        ${el.getEdad()}
+                                                                    </td>
+                                                                    <td>${el.getCorreo()}</td>
+                                                                    <td>
+                                                                        ${ella.getNombre()}
+                                                                        ${ella.getApellidoP()}
+                                                                        ${ella.getApellidoM()}
+                                                                    </td>
+                                                                    <td>
+                                                                        ${ella.getEdad()}
+                                                                    </td>
+
+                                                                    <td>${ella.getCorreo()}</td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalAsistioSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                            <button ${formulario.getAsistenciaFTs().size() != 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalCrearUsuarioFamilia" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                            <input hidden name="user" id="user" value="${ella.getCorreo()}"> 
+                                                                            <button ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    
+                                                    </c:when>
+                                                    <c:when test="${formulario.getAsistentes().size() == 1}">
+                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                    <td>
+                                                                    ${asistente.getNombre()}    
+                                                                    ${asistente.getApellidoP()}
+                                                                    ${asistente.getApellidoM()}
+                                                                    </td>
+                                                                    <td>${asistente.getEdad()}</td>
+                                                                    <td>${asistente.getCorreo()}</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalAsistioSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <input hidden type="text" name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                            <button ${formulario.getAsistenciaFTs().size() != 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalCrearUsuarioFamilia" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                            <input hidden name="user" id="user" value="${asistente.getCorreo()}"> 
+                                                                            <button ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
+                                                                        </form>
+                                                                    </td>
+                                                                </c:when>
+                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>
+                                                                    ${asistente.getNombre()}
+                                                                    ${asistente.getApellidoP()}
+                                                                    ${asistente.getApellidoM()}
+                                                                    </td>
+                                                                    <td>${asistente.getEdad()}</td>
+                                                                    <td>${asistente.getCorreo()}</td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalAsistioSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <input hidden type="text" name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                            
+                                                                            <button ${formulario.getAsistenciaFTs().size() != 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalCrearUsuarioFamilia" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                            <input hidden name="user" id="user" value="${asistente.getCorreo()}"> 
+                                                                            <button ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
+                                                                        </form>
+                                                                    </td>   
+                                                                </c:when>    
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </c:when>    
+                                                  <c:otherwise>
+                                                 </c:otherwise>
+                                               </c:choose>
+                                            </tr>
+                                        </c:forEach>
                                 </tbody>
+                                </c:if>
                             </table>
+                            <c:if test="${listaFormularios.size() == 0}">
+                               <h3><strong>Aún no hay personas inscritas</strong></h3>
+                            </c:if>
                         </div><!-- /example -->
                         <br>
                         <p>IMPORTANTE: Una vez guardado, no se podrán hacer cambios</p>
                         <br>
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-5" > 
-                                <div class="btn-toolbar">
-                                    <button href="#" class="btn btn-default">Guardar cambios</button>
-                                </div> 
-                                <br>   
-                            </div>
-                        </div>
+                                 
                     </div>
                 </div>
             </div>
