@@ -8,6 +8,7 @@ package com.mimp.controllers;
 import java.util.*;
 import com.mimp.bean.*;
 import com.mimp.hibernate.HiberFamilia;
+import com.mimp.util.dateFormat;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -38,18 +39,6 @@ public class familia {
             return new ModelAndView("login", map);
         }
         String pagina = "/Familia/inicio_familia";
-        return new ModelAndView(pagina, map);
-    }
-
-    @RequestMapping("/FactDatos")
-    public ModelAndView Act_datos(ModelMap map, HttpSession session) {
-        Familia usuario = (Familia) session.getAttribute("usuario");
-        if (usuario == null) {
-            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
-            map.addAttribute("mensaje", mensaje);
-            return new ModelAndView("login", map);
-        }
-        String pagina = "/Familia/Act_datos/datos_ella";
         return new ModelAndView(pagina, map);
     }
 
@@ -129,6 +118,80 @@ public class familia {
         
         String pagina = "/Familia/contra_familia";
         map.addAttribute("mensaje", mensaje);
+        return new ModelAndView(pagina, map);
+    }
+    
+    @RequestMapping("/FactDatos/opc1")
+    public ModelAndView FactDatos1(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        dateFormat format = new dateFormat();
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        } else {
+            for (Iterator iter = usuario.getInfoFamilias().iterator(); iter.hasNext();) {
+                InfoFamilia ifa = (InfoFamilia) iter.next();
+                for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
+                    Adoptante adop = (Adoptante) iter2.next();
+                    if(adop.getSexo() == 'F'){
+                        map.put("adop", adop);
+                        String fechanac = format.dateToString(adop.getFechaNac());
+                        
+                        map.addAttribute("fechanac", fechanac);
+                    }
+                }
+            }
+        }
+        String pagina = "/Familia/Act_datos/datos_ella";
+        return new ModelAndView(pagina, map);
+    }
+    
+    @RequestMapping("/FactDatos/opc2")
+    public ModelAndView FactDatos2(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        String pagina = "/Familia/Act_datos/datos_el";
+        return new ModelAndView(pagina, map);
+    }
+    
+    @RequestMapping("/FactDatos/opc3")
+    public ModelAndView FactDatos3(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        String pagina = "/Familia/Act_datos/datos_fam";
+        return new ModelAndView(pagina, map);
+    }
+    
+    @RequestMapping("/FactDatos/opc4")
+    public ModelAndView FactDatos4(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        String pagina = "/Familia/Act_datos/datos_vivienda";
+        return new ModelAndView(pagina, map);
+    }
+    
+    @RequestMapping("/FactDatos/opc5")
+    public ModelAndView FactDatos5(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        String pagina = "/Familia/Act_datos/datos_nna";
         return new ModelAndView(pagina, map);
     }
 }

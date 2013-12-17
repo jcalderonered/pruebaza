@@ -72,6 +72,8 @@ public class HiberMain {
             for (Iterator iter = familia.getInfoFamilias().iterator(); iter.hasNext();) {
                 InfoFamilia ifa = (InfoFamilia) iter.next();
                 Hibernate.initialize(ifa.getAdoptantes());
+                Hibernate.initialize(ifa.getHijoActs());
+                Hibernate.initialize(ifa.getResidenteActs());
             }
             temp.add("familia");
             temp.add(familia);
