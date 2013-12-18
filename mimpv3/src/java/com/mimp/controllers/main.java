@@ -202,6 +202,13 @@ public class main {
         AsistenciaFT aft = new AsistenciaFT();
         fs.setSesion(temp.getSesion());
         aft.setTurno(temp);
+        String asistencia = "F";
+        char asist = asistencia.charAt(0);
+        aft.setAsistencia(asist);
+        String inajust = "1";
+        Short i = Short.valueOf(inajust);
+        aft.setInasJus(i);
+        
         Date today = new Date();
 
         fs.setFechaSol(today);
@@ -249,7 +256,7 @@ public class main {
         } else {
             map.put("ts", ts);
             map.put("turno", temp);
-            ServicioMain.InsertFormInd(asis, fs, aft);
+            //ServicioMain.InsertFormInd(asis, fs, aft);
             return new ModelAndView("/Inscripcion/inscripcion_sesion1b", map);
         }
         //return new ModelAndView("contacto", map);
@@ -302,6 +309,14 @@ public class main {
         AsistenciaFT aft = new AsistenciaFT();
         fs.setSesion(temp.getSesion());
         aft.setTurno(temp);
+        
+        String asistencia = "F";
+        char asist = asistencia.charAt(0);
+        aft.setAsistencia(asist);
+        String inajust = "1";
+        Short i = Short.valueOf(inajust);
+        aft.setInasJus(i);
+        
         Date today = new Date();
 
         fs.setFechaSol(today);

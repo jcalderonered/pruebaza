@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 13, 2013 9:53:43 AM by Hibernate Tools 3.6.0
+// Generated Dec 18, 2013 9:57:16 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -16,10 +16,10 @@ public class Reunion  implements java.io.Serializable {
      private Turno2 turno2;
      private Date fecha;
      private String hora;
-     private Short duracion;
+     private String duracion;
      private String direccion;
      private Short identificador;
-     private Long facilitador;
+     private String facilitador;
      private Short capacidad;
      private Short asistencia;
      private Set<AsistenciaFR> asistenciaFRs = new HashSet<AsistenciaFR>(0);
@@ -32,7 +32,7 @@ public class Reunion  implements java.io.Serializable {
         this.idreunion = idreunion;
         this.turno2 = turno2;
     }
-    public Reunion(long idreunion, Turno2 turno2, Date fecha, String hora, Short duracion, String direccion, Short identificador, Long facilitador, Short capacidad, Short asistencia, Set<AsistenciaFR> asistenciaFRs) {
+    public Reunion(long idreunion, Turno2 turno2, Date fecha, String hora, String duracion, String direccion, Short identificador, String facilitador, Short capacidad, Short asistencia, Set<AsistenciaFR> asistenciaFRs) {
        this.idreunion = idreunion;
        this.turno2 = turno2;
        this.fecha = fecha;
@@ -74,11 +74,11 @@ public class Reunion  implements java.io.Serializable {
     public void setHora(String hora) {
         this.hora = hora;
     }
-    public Short getDuracion() {
+    public String getDuracion() {
         return this.duracion;
     }
     
-    public void setDuracion(Short duracion) {
+    public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
     public String getDireccion() {
@@ -95,11 +95,11 @@ public class Reunion  implements java.io.Serializable {
     public void setIdentificador(Short identificador) {
         this.identificador = identificador;
     }
-    public Long getFacilitador() {
+    public String getFacilitador() {
         return this.facilitador;
     }
     
-    public void setFacilitador(Long facilitador) {
+    public void setFacilitador(String facilitador) {
         this.facilitador = facilitador;
     }
     public Short getCapacidad() {

@@ -1184,9 +1184,9 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        ArrayList<Personal> allPersonal = new ArrayList();
-        allPersonal = ServicioPersonal.ListaPersonal();
-        map.put("listaPersonal", allPersonal);
+        //ArrayList<Personal> allPersonal = new ArrayList();
+        //allPersonal = ServicioPersonal.ListaPersonal();
+        //map.put("listaPersonal", allPersonal);
         return new ModelAndView("/Personal/Informativa/lista_sesion", map);
     }
 
@@ -1197,7 +1197,7 @@ public class personal {
             @RequestParam("hora") String hora,
             @RequestParam("duracion") String duracion,
             @RequestParam("direccion") String direccion,
-            @RequestParam("capacitador") long capacitador,
+            @RequestParam("capacitador") String capacitador,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1210,10 +1210,10 @@ public class personal {
         tempSesion.setNSesion(numSesion);
         tempSesion.setFecha(format.stringToDate(fecha));
         tempSesion.setHora(hora);
-        short s = Byte.valueOf(duracion);
+        
         short habilitado = Byte.valueOf("1");
         short inscritos = Byte.valueOf("0");
-        tempSesion.setDuracion(s);
+        tempSesion.setDuracion(duracion);
         tempSesion.setHabilitado(habilitado);
         tempSesion.setDireccion(direccion);
         tempSesion.setFacilitador(capacitador);
@@ -1222,6 +1222,8 @@ public class personal {
         ServicioPersonal.PersonalCrearSesion(tempSesion);
 
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        map.put("listaTalleres",ServicioPersonal.listaTalleres());
+        map.put("formato",format);
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
 
@@ -1232,7 +1234,7 @@ public class personal {
             @RequestParam("hora") String hora,
             @RequestParam("duracion") String duracion,
             @RequestParam("direccion") String direccion,
-            @RequestParam("capacitador") long capacitador,
+            @RequestParam("capacitador") String capacitador,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1252,6 +1254,8 @@ public class personal {
         ServicioPersonal.PersonalUpdateSesion(tempSesion);
 
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        map.put("listaTalleres",ServicioPersonal.listaTalleres());
+        map.put("formato",format);
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
     
@@ -1287,17 +1291,17 @@ public class personal {
             return new ModelAndView("login", map);
         }
         Sesion temp = new Sesion();
-        ArrayList<Personal> allPersonal = new ArrayList();
+        //ArrayList<Personal> allPersonal = new ArrayList();
         ArrayList<Turno> allTurnos = new ArrayList();
         allTurnos = ServicioMain.turnosSesion(id);
         temp = ServicioPersonal.getSesion(id);
-        allPersonal = ServicioPersonal.ListaPersonal();
+        //allPersonal = ServicioPersonal.ListaPersonal();
         String fecha = format.dateToString(temp.getFecha());
         String hora = temp.getHora();
 
         map.put("listaTurnos", allTurnos);
         map.put("sesion", temp);
-        map.put("listaPersonal", allPersonal);
+        //map.put("listaPersonal", allPersonal);
         map.addAttribute("ts", ts);
         map.addAttribute("fecha", fecha);
         map.addAttribute("hora", hora);
@@ -1347,17 +1351,17 @@ public class personal {
         ServicioPersonal.PersonalCrearTurno(temp);
 
         Sesion temp2 = new Sesion();
-        ArrayList<Personal> allPersonal = new ArrayList();
+        //ArrayList<Personal> allPersonal = new ArrayList();
         ArrayList<Turno> allTurnos = new ArrayList();
         allTurnos = ServicioMain.turnosSesion(idSesion);
         temp2 = ServicioPersonal.getSesion(idSesion);
-        allPersonal = ServicioPersonal.ListaPersonal();
+        //allPersonal = ServicioPersonal.ListaPersonal();
         String fecha = format.dateToString(temp2.getFecha());
         String hora = temp2.getHora();
 
         map.put("listaTurnos", allTurnos);
         map.put("sesion", temp2);
-        map.put("listaPersonal", allPersonal);
+        //map.put("listaPersonal", allPersonal);
         map.addAttribute("ts", ts);
         map.addAttribute("fecha", fecha);
         map.addAttribute("hora", hora);
@@ -1409,17 +1413,17 @@ public class personal {
         ServicioPersonal.PersonalUpdateTurno(temp);
 
         Sesion temp2 = new Sesion();
-        ArrayList<Personal> allPersonal = new ArrayList();
+        //ArrayList<Personal> allPersonal = new ArrayList();
         ArrayList<Turno> allTurnos = new ArrayList();
         allTurnos = ServicioMain.turnosSesion(temp.getSesion().getIdsesion());
         temp2 = ServicioPersonal.getSesion(temp.getSesion().getIdsesion());
-        allPersonal = ServicioPersonal.ListaPersonal();
+        //allPersonal = ServicioPersonal.ListaPersonal();
         String fecha = format.dateToString(temp2.getFecha());
         String hora = temp2.getHora();
 
         map.put("listaTurnos", allTurnos);
         map.put("sesion", temp2);
-        map.put("listaPersonal", allPersonal);
+        //map.put("listaPersonal", allPersonal);
         map.addAttribute("ts", ts);
         map.addAttribute("fecha", fecha);
         map.addAttribute("hora", hora);
@@ -1516,6 +1520,7 @@ public class personal {
         
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres",ServicioPersonal.listaTalleres());
+        map.put("formato",format);
         
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
@@ -1562,6 +1567,7 @@ public class personal {
         
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres",ServicioPersonal.listaTalleres());
+        map.put("formato",format);
         
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
@@ -1778,7 +1784,7 @@ public class personal {
                                              @RequestParam("duracion") String duracion,
                                              @RequestParam("direccion") String direccion,
                                              @RequestParam("capacidad") String capacidad,
-                                             @RequestParam("facilitador") long facilitador,
+                                             @RequestParam("facilitador") String facilitador,
                                              HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1791,14 +1797,14 @@ public class personal {
         tempTurno = ServicioPersonal.getTurno2(idTurno2);
         Short asistencia = Short.parseShort("0");
         Short identificador = Short.parseShort("0");
-        Short durac = Short.parseShort(duracion);
+        
         Short capac = Short.parseShort(capacidad);
         
         Reunion tempReun = new Reunion();
         tempReun.setTurno2(tempTurno);
         tempReun.setFecha(format.stringToDate(fecha));
         tempReun.setHora(hora);
-        tempReun.setDuracion(durac);
+        tempReun.setDuracion(duracion);
         tempReun.setDireccion(direccion);
         tempReun.setIdentificador(identificador);
         tempReun.setFacilitador(facilitador);
@@ -1823,7 +1829,7 @@ public class personal {
                                              @RequestParam("duracion") String duracion,
                                              @RequestParam("direccion") String direccion,
                                              @RequestParam("capacidad") String capacidad,
-                                             @RequestParam("facilitador") long facilitador,
+                                             @RequestParam("facilitador") String facilitador,
                                              HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1834,11 +1840,11 @@ public class personal {
         
         Reunion tempReun = new Reunion();
         tempReun = ServicioPersonal.getReunion(idReunion);
-        Short durac = Short.parseShort(duracion);
+        
         Short capac = Short.parseShort(capacidad);
         tempReun.setFecha(format.stringToDate(fecha));
         tempReun.setHora(hora);
-        tempReun.setDuracion(durac);
+        tempReun.setDuracion(duracion);
         tempReun.setDireccion(direccion);
         tempReun.setFacilitador(facilitador);
         tempReun.setCapacidad(capac);
@@ -1934,8 +1940,7 @@ public class personal {
         
         tempTurno = ServicioPersonal.getTurno(tempSesion.getTurnos().iterator().next().getIdturno());
        
-        aft.setFormularioSesion(fs);
-        aft.setTurno(tempTurno);
+        aft = ServicioPersonal.getAFT(idFormulario);
         String asistencia = "A";
         char c = asistencia.charAt(0);
         aft.setAsistencia(c);
@@ -1979,7 +1984,7 @@ public class personal {
         fam.setPass("12345");
         fam.setCorreo(user);
         Short habilitado = Short.parseShort("0");
-        
+        fam.setHabilitado(habilitado);
         ServicioPersonal.crearCuentaFamilia(fam, fs);
         
         allFormularios = ServicioPersonal.InscritosSesion(idSesion);

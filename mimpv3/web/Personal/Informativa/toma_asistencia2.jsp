@@ -184,7 +184,10 @@
                                                                         <form action="${pageContext.servletContext.contextPath}/PersonalAsistioSesion" method="post">
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
                                                                             <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                                            <button ${formulario.getAsistenciaFTs().size() != 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                            <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">        
+                                                                                                     <button ${AFT.getAsistencia() == 'A' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                            </c:forEach>   
+                                                                            
                                                                         </form>
                                                                     </td>
                                                                     <td>
@@ -221,7 +224,9 @@
                                                                         <form action="${pageContext.servletContext.contextPath}/PersonalAsistioSesion" method="post">
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
                                                                             <input hidden type="text" name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                                            <button ${formulario.getAsistenciaFTs().size() != 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                            <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">        
+                                                                                                     <button ${AFT.getAsistencia() == 'A' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                            </c:forEach>
                                                                         </form>
                                                                     </td>
                                                                     <td>
@@ -254,8 +259,10 @@
                                                                         <form action="${pageContext.servletContext.contextPath}/PersonalAsistioSesion" method="post">
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
                                                                             <input hidden type="text" name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                            <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">        
+                                                                                                     <button ${AFT.getAsistencia() == 'A' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                            </c:forEach>
                                                                             
-                                                                            <button ${formulario.getAsistenciaFTs().size() != 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
                                                                         </form>
                                                                     </td>
                                                                     <td>

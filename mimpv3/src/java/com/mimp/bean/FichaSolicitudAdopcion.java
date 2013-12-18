@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 13, 2013 9:53:43 AM by Hibernate Tools 3.6.0
+// Generated Dec 18, 2013 9:57:16 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -54,6 +54,7 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
      private Short nnaHermano;
      private Short nnaForaneo;
      private String rptaForaneo;
+     private Date fechaMatrimonio;
      private Set<Solicitante> solicitantes = new HashSet<Solicitante>(0);
      private Set<Residente> residentes = new HashSet<Residente>(0);
      private Set<Hijo> hijos = new HashSet<Hijo>(0);
@@ -66,7 +67,7 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
         this.idfichaSolicitudAdopcion = idfichaSolicitudAdopcion;
         this.familia = familia;
     }
-    public FichaSolicitudAdopcion(long idfichaSolicitudAdopcion, Familia familia, String numeroFicha, String hojaRuta, String estadoCivil, Date fechaIngreso, String fijo, String domicilio, String depRes, String propiedadVivienda, String tipoVivienda, Long areaVivTotal, Long areaVivConst, String distVivenda, Short luz, Short agua, Short desague, String otrosServ, String materConst, String pared, String techo, String piso, Short NProcAdopPrev, String anhoProceso, Short procesoPrep, Short procesoEval, String motivoAdopcion, Short nnaIncesto, Short nnaMental, Short nnaEpilepsia, Short nnaAbuso, Short nnaSifilis, Short nnaSeguiMedico, Short nnaOperacion, Short nnaHiperactivo, Short nnaEspecial, Short nnaEnfermo, Short nnaMayor, Short nnaAdolescente, Short nnaHermano, Short nnaForaneo, String rptaForaneo, Set<Solicitante> solicitantes, Set<Residente> residentes, Set<Hijo> hijos) {
+    public FichaSolicitudAdopcion(long idfichaSolicitudAdopcion, Familia familia, String numeroFicha, String hojaRuta, String estadoCivil, Date fechaIngreso, String fijo, String domicilio, String depRes, String propiedadVivienda, String tipoVivienda, Long areaVivTotal, Long areaVivConst, String distVivenda, Short luz, Short agua, Short desague, String otrosServ, String materConst, String pared, String techo, String piso, Short NProcAdopPrev, String anhoProceso, Short procesoPrep, Short procesoEval, String motivoAdopcion, Short nnaIncesto, Short nnaMental, Short nnaEpilepsia, Short nnaAbuso, Short nnaSifilis, Short nnaSeguiMedico, Short nnaOperacion, Short nnaHiperactivo, Short nnaEspecial, Short nnaEnfermo, Short nnaMayor, Short nnaAdolescente, Short nnaHermano, Short nnaForaneo, String rptaForaneo, Date fechaMatrimonio, Set<Solicitante> solicitantes, Set<Residente> residentes, Set<Hijo> hijos) {
        this.idfichaSolicitudAdopcion = idfichaSolicitudAdopcion;
        this.familia = familia;
        this.numeroFicha = numeroFicha;
@@ -109,6 +110,7 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
        this.nnaHermano = nnaHermano;
        this.nnaForaneo = nnaForaneo;
        this.rptaForaneo = rptaForaneo;
+       this.fechaMatrimonio = fechaMatrimonio;
        this.solicitantes = solicitantes;
        this.residentes = residentes;
        this.hijos = hijos;
@@ -407,6 +409,13 @@ public class FichaSolicitudAdopcion  implements java.io.Serializable {
     
     public void setRptaForaneo(String rptaForaneo) {
         this.rptaForaneo = rptaForaneo;
+    }
+    public Date getFechaMatrimonio() {
+        return this.fechaMatrimonio;
+    }
+    
+    public void setFechaMatrimonio(Date fechaMatrimonio) {
+        this.fechaMatrimonio = fechaMatrimonio;
     }
     public Set<Solicitante> getSolicitantes() {
         return this.solicitantes;

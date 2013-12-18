@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 13, 2013 9:53:43 AM by Hibernate Tools 3.6.0
+// Generated Dec 18, 2013 9:57:16 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -11,8 +11,8 @@ public class Atencion  implements java.io.Serializable {
 
 
      private long idatencion;
-     private Personal personal;
      private Familia familia;
+     private Personal personal;
      private Date fecha;
      private String hora;
      private String tipoAtencion;
@@ -23,15 +23,15 @@ public class Atencion  implements java.io.Serializable {
     }
 
 	
-    public Atencion(long idatencion, Personal personal, Familia familia) {
+    public Atencion(long idatencion, Familia familia, Personal personal) {
         this.idatencion = idatencion;
-        this.personal = personal;
         this.familia = familia;
+        this.personal = personal;
     }
-    public Atencion(long idatencion, Personal personal, Familia familia, Date fecha, String hora, String tipoAtencion, String detalle, String observacion) {
+    public Atencion(long idatencion, Familia familia, Personal personal, Date fecha, String hora, String tipoAtencion, String detalle, String observacion) {
        this.idatencion = idatencion;
-       this.personal = personal;
        this.familia = familia;
+       this.personal = personal;
        this.fecha = fecha;
        this.hora = hora;
        this.tipoAtencion = tipoAtencion;
@@ -46,19 +46,19 @@ public class Atencion  implements java.io.Serializable {
     public void setIdatencion(long idatencion) {
         this.idatencion = idatencion;
     }
-    public Personal getPersonal() {
-        return this.personal;
-    }
-    
-    public void setPersonal(Personal personal) {
-        this.personal = personal;
-    }
     public Familia getFamilia() {
         return this.familia;
     }
     
     public void setFamilia(Familia familia) {
         this.familia = familia;
+    }
+    public Personal getPersonal() {
+        return this.personal;
+    }
+    
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
     }
     public Date getFecha() {
         return this.fecha;

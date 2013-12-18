@@ -301,7 +301,7 @@
                                     <br>
                                     <div class="radio">
                                         <label>
-                                            <input disabled type="radio" name="optionsRadios2" id="optionsRadios2" value="c" ${el.getTipoDoc() == 'c' ? 'checked' : ''}>
+                                            <input disabled type="radio" name="optionsRadios2" id="optionsRadios2" value="c" ${ella.getTipoDoc() == 'c' ? 'checked' : ''}>
                                             Carnet de Extranjería
                                         </label>
                                     </div>
