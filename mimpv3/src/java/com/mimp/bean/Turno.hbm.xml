@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 13, 2013 9:53:44 AM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 18, 2013 9:57:16 AM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Turno" table="TURNO" schema="MIMP_ADOPCION">
         <id name="idturno" type="long">
@@ -11,10 +11,10 @@
         <many-to-one name="sesion" class="com.mimp.bean.Sesion" fetch="select">
             <column name="IDSESION" precision="10" scale="0" not-null="true" />
         </many-to-one>
-        <property name="inicioInscripcion" type="java.sql.Timestamp">
+        <property name="inicioInscripcion" type="serializable">
             <column name="INICIO_INSCRIPCION" />
         </property>
-        <property name="finInscripcion" type="java.sql.Timestamp">
+        <property name="finInscripcion" type="serializable">
             <column name="FIN_INSCRIPCION" />
         </property>
         <property name="vacantes" type="java.lang.Short">

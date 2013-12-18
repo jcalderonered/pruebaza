@@ -814,10 +814,24 @@ public class HiberPersonal {
     Session session = sessionFactory.getCurrentSession();
          session.beginTransaction();
          
-         session.save(aft);
+         session.update(aft);
     
     }
     
+    public AsistenciaFT getAFT (long idFormulario){
+    
+         Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         
+        String hql = "FROM AsistenciaFT A where A.formularioSesion = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFormulario);
+        Object queryResult = query.uniqueResult();
+        AsistenciaFT tempAFT = (AsistenciaFT) queryResult;
+       
+        return tempAFT;
+         
+    }
     
     public void crearCuentaFamilia (Familia fam,FormularioSesion fs){
     

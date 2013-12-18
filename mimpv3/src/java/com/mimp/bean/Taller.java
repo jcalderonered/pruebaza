@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 13, 2013 9:53:43 AM by Hibernate Tools 3.6.0
+// Generated Dec 18, 2013 9:57:16 AM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -17,6 +17,7 @@ public class Taller  implements java.io.Serializable {
      private String nombre;
      private Short habilitado;
      private Short NReunion;
+     private String unidad;
      private Set<Grupo> grupos = new HashSet<Grupo>(0);
 
     public Taller() {
@@ -26,13 +27,14 @@ public class Taller  implements java.io.Serializable {
     public Taller(long idtaller) {
         this.idtaller = idtaller;
     }
-    public Taller(long idtaller, String NSesion, String tipoTaller, String nombre, Short habilitado, Short NReunion, Set<Grupo> grupos) {
+    public Taller(long idtaller, String NSesion, String tipoTaller, String nombre, Short habilitado, Short NReunion, String unidad, Set<Grupo> grupos) {
        this.idtaller = idtaller;
        this.NSesion = NSesion;
        this.tipoTaller = tipoTaller;
        this.nombre = nombre;
        this.habilitado = habilitado;
        this.NReunion = NReunion;
+       this.unidad = unidad;
        this.grupos = grupos;
     }
    
@@ -77,6 +79,13 @@ public class Taller  implements java.io.Serializable {
     
     public void setNReunion(Short NReunion) {
         this.NReunion = NReunion;
+    }
+    public String getUnidad() {
+        return this.unidad;
+    }
+    
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
     }
     public Set<Grupo> getGrupos() {
         return this.grupos;

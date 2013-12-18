@@ -157,11 +157,9 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Facilitador</label>
                                     <div class="controls">
-                                        <select id="facilitador" name="facilitador" >
-                                            <c:forEach var="personal" items="${listaPersonal}" varStatus="status">
-                                                <option value="${personal.getIdpersonal()}" ${reunion.getFacilitador() == personal.getIdpersonal() ? 'selected' : ''}> ${personal.getApellidoP()} ${personal.getApellidoM()} ${personal.getNombre()}</option> 
-                                            </c:forEach>
-                                        </select>
+                                        <textarea id="facilitador" name="facilitador" cols="20" rows="5">
+                                            ${reunion.getFacilitador()}
+                                        </textarea>
                                     </div>
                                 </div>
 

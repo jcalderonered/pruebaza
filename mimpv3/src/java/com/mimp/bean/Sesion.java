@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 13, 2013 9:53:43 AM by Hibernate Tools 3.6.0
+// Generated Dec 18, 2013 9:57:16 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -18,9 +18,10 @@ public class Sesion  implements java.io.Serializable {
      private Date fecha;
      private String hora;
      private String direccion;
-     private Short duracion;
-     private Long facilitador;
+     private String duracion;
+     private String facilitador;
      private Short asistencia;
+     private String unidad;
      private Set<FormularioSesion> formularioSesions = new HashSet<FormularioSesion>(0);
      private Set<Turno> turnos = new HashSet<Turno>(0);
 
@@ -31,7 +32,7 @@ public class Sesion  implements java.io.Serializable {
     public Sesion(long idsesion) {
         this.idsesion = idsesion;
     }
-    public Sesion(long idsesion, String NSesion, Short habilitado, Date fecha, String hora, String direccion, Short duracion, Long facilitador, Short asistencia, Set<FormularioSesion> formularioSesions, Set<Turno> turnos) {
+    public Sesion(long idsesion, String NSesion, Short habilitado, Date fecha, String hora, String direccion, String duracion, String facilitador, Short asistencia, String unidad, Set<FormularioSesion> formularioSesions, Set<Turno> turnos) {
        this.idsesion = idsesion;
        this.NSesion = NSesion;
        this.habilitado = habilitado;
@@ -41,6 +42,7 @@ public class Sesion  implements java.io.Serializable {
        this.duracion = duracion;
        this.facilitador = facilitador;
        this.asistencia = asistencia;
+       this.unidad = unidad;
        this.formularioSesions = formularioSesions;
        this.turnos = turnos;
     }
@@ -87,18 +89,18 @@ public class Sesion  implements java.io.Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    public Short getDuracion() {
+    public String getDuracion() {
         return this.duracion;
     }
     
-    public void setDuracion(Short duracion) {
+    public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
-    public Long getFacilitador() {
+    public String getFacilitador() {
         return this.facilitador;
     }
     
-    public void setFacilitador(Long facilitador) {
+    public void setFacilitador(String facilitador) {
         this.facilitador = facilitador;
     }
     public Short getAsistencia() {
@@ -107,6 +109,13 @@ public class Sesion  implements java.io.Serializable {
     
     public void setAsistencia(Short asistencia) {
         this.asistencia = asistencia;
+    }
+    public String getUnidad() {
+        return this.unidad;
+    }
+    
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
     }
     public Set<FormularioSesion> getFormularioSesions() {
         return this.formularioSesions;

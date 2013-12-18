@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 13, 2013 9:53:44 AM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 18, 2013 9:57:16 AM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Residente" table="RESIDENTE" schema="MIMP_ADOPCION">
         <id name="idresidente" type="long">

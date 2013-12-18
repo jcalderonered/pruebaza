@@ -160,11 +160,9 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Facilitador:</label>
                                     <div>
-                                        <select id="capacitador" name="capacitador">
-                                            <c:forEach var="personal" items="${listaPersonal}" varStatus="status">
-                                                <option value="${personal.getIdpersonal()}" ${sesion.getFacilitador() == personal.getIdpersonal() ? 'selected' : ''}> ${personal.getApellidoP()} ${personal.getApellidoM()} ${personal.getNombre()}</option> 
-                                            </c:forEach>
-                                        </select>
+                                        <textarea id="capacitador" name="capacitador" cols="20" rows="5">
+                                            ${sesion.getFacilitador()}
+                                        </textarea>
                                     </div>
                                 </div>
                                 <br>
