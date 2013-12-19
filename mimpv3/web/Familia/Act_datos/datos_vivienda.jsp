@@ -6,16 +6,16 @@
 
 <%@page import="com.mimp.bean.Familia"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
-response.setDateHeader("Expires", 0);
-Familia u=(Familia)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    Familia u = (Familia) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -82,89 +82,51 @@ if (u==null){
                         <form class="form-horizontal"> 
                             <fieldset>
                                 <br>
-                                <h3><strong>Vivienda </strong></h3>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Propia</label>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Alquilada</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
-                                            <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
-                                        </div>                            
+                                <div class="control-group">
+                                    <label class="control-label">Vivienda</label>
+                                    <div class="controls">
+                                        <input id="propvivienda" value="${ifa.getPropiedadVivienda()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
-                                <h3><strong>Tipo </strong></h3>
-                                <br>
-                                <!-- Text input-->
-                                <div class="row">
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Casa</label>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Departamento</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros(especificar)</label>
-                                            <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
-                                        </div>                            
+                                <div class="control-group">
+                                    <label class="control-label">Tipo</label>
+                                    <div class="controls">
+                                        <input id="propvivienda" value="${ifa.getTipoVivienda()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
-                                <br>
                                 <br>
                                 <h3><strong>Domicilio</strong></h3>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Dirección (Consignar dirección exacta)</label>
+                                    <label class="control-label">Dirección</label>
                                     <div class="controls">
-                                        <textarea id="domicilio" class="input-xlarge" name="message" placeholder="" rows="3" disabled></textarea>
+                                        <textarea id="domicilio" class="input-xlarge" name="message" placeholder="" rows="3" disabled>${ifa.getDomicilio()}</textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Departamento de Residencia</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="full-name" value="${ifa.getDepRes()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">País de Residencia</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="full-name" value="${ifa.getPaisRes()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Teléfono</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
-                                    </div>
+                                <!--
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Teléfono</label>
+                                <div class="controls">
+                                    <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
                                 </div>
+                            </div>
+                                -->
                                 <br>
                                 <br>
                                 <h3><strong>Área de vivienda(en metros cuadrados)</strong></h3>
@@ -172,134 +134,106 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Total</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="full-name" value="${ifa.getAreaVivTotal()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Construida</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="full-name" value="${ifa.getAreaVivConst()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Distribución de la vivienda</label>
                                     <div class="controls">
-                                        <textarea id="domicilio" class="input-xlarge" name="message" placeholder="" rows="3" disabled></textarea>
+                                        <textarea id="domicilio" class="input-xlarge" name="message" placeholder="" rows="3" disabled>${ifa.getDistVivienda()}</textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <br>
                                 <h3><strong>Servicios</strong></h3>
                                 <br>
-
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D" >Energía Eléctrica</label>
+                                                <c:choose>
+                                                    <c:when test="${ifa.getLuz() == 1}">
+                                                        <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D" checked>Energía Eléctrica</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D">Energía Eléctrica</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">    
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D" >Agua Potable</label>
+                                                <c:choose>
+                                                    <c:when test="${ifa.getAgua() == 1}">
+                                                        <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D" checked>Agua Potable</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D" >Agua Potable</label>
+                                                </c:otherwise>
+                                            </c:choose> 
                                         </div>
                                     </div>
                                     <div class="col-md-3">    
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D" >Desague</label>
+                                                <c:choose>
+                                                    <c:when test="${ifa.getDesague() == 1}">
+                                                        <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D" checked>Desague</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D" >Desague</label>
+                                                </c:otherwise>
+                                            </c:choose>  
                                         </div>
                                     </div>
                                     <div class="col-md-3">   
                                         <div class="control-group">
                                             <label class="control-label">Otros servicios</label>
                                             <div class="controls">
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
+                                                <input id="full-name" value="${ifa.getOtrosServ()}" name="full-name" type="text" class="input-xlarge" disabled>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <h3><strong>Material de construcción </strong></h3>
-                                <div class="row">
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Noble</label>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
-                                            <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
-                                        </div>                            
-                                    </div>
-                                </div>
-
-                                <h3><strong>Paredes </strong></h3>
-                                <div class="row">
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Ladrillo</label>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
-                                            <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
-                                        </div>                            
-                                    </div>
-                                </div>
-
-                                <h3><strong>Techo </strong></h3>
-                                <div class="row">
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Concreto</label>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
-                                            <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
-                                        </div>                            
-                                    </div>
-                                </div>
-
-                                <h3><strong>Piso </strong></h3>
-                                <div class="row">
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Cemento</label>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
-                                            <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge" disabled>
-                                        </div>                            
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Material de construcción</label>
+                                    <div class="controls">
+                                        <input id="full-name" value="${ifa.getMaterConst()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
-                                <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUDA</p>
+                                <div class="control-group">
+                                    <label class="control-label">Paredes</label>
+                                    <div class="controls">
+                                        <input id="full-name" value="${ifa.getPared()}" name="full-name" type="text" class="input-xlarge" disabled>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Techo</label>
+                                    <div class="controls">
+                                        <input id="full-name" value="${ifa.getTecho()}" name="full-name" type="text" class="input-xlarge" disabled>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Piso</label>
+                                    <div class="controls">
+                                        <input id="full-name" value="${ifa.getPiso()}" name="full-name" type="text" class="input-xlarge" disabled>
+                                    </div>
+                                </div>
+                                <br>
+                                <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUD</p>
                                 <p style="color: red">EN MESA DE PARTES DE LA DGA</p>
                                 <br>
                                 <p>Según lo establecido en la Ley Nº29733 - Ley de protección de datos personales, la información proporcionada por 

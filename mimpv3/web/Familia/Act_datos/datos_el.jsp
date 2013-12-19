@@ -6,16 +6,16 @@
 
 <%@page import="com.mimp.bean.Familia"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
-response.setDateHeader("Expires", 0);
-Familia u=(Familia)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    Familia u = (Familia) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -87,56 +87,49 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Nombre </label>
                                     <div class="controls">
-                                        <input id="nombre" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="nombre" name="full-name" type="text" value="${adop.getNombre()}" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Paterno </label>
                                     <div class="controls">
-                                        <input id="apellido_p" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="apellido_p" name="full-name" type="text" value="${adop.getApellidoP()}" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Materno </label>
                                     <div class="controls">
-                                        <input id="apellido_m" name="full-name" type="text" class="input-xlarge" disabled>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Edad </label>  
-                                    <div class="controls">
-                                        <input id="edad" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="apellido_m" name="full-name" type="text" value="${adop.getApellidoM()}" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento </label>
                                     <div class="controls">
-                                        <input id="fecha_nac" name="full-name" type="password" class="input-xlarge" disabled>
+                                        <input id="fecha_nac" name="full-name" value="${fechanac}" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Lugar de nacimiento </label>
                                     <div class="controls">
-                                        <input id="direccion" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="direccion" name="full-name" value="${adop.getLugarNac()}" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Departamento de nacimiento </label>
                                     <div class="controls">
-                                        <input id="departamento" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="departamento" name="full-name" value="${adop.getDepaNac()}" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">País de nacimiento </label>
                                     <div class="controls">
-                                        <input id="pais" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="pais" name="full-name" value="${adop.getPaisNac()}" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
@@ -144,13 +137,27 @@ if (u==null){
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" checked>DNI</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getTipoDoc() == 'D'}">
+                                                        <input type="radio" name="optionsRadios1" id="optionsRadios1" checked>DNI</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios1" id="optionsRadios1">DNI</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="C">Carnet de Extranjería</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getTipoDoc() == 'C'}">
+                                                        <input type="radio" name="optionsRadios1" id="optionsRadios2" checked>Carnet de Extranjería</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios1" id="optionsRadios2">Carnet de Extranjería</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>                            
                                     </div>
                                 </div>    
@@ -158,129 +165,148 @@ if (u==null){
                                 <div class="control-group">
                                     <div class="controls">
                                         <label class="control-label">N° de Documento </label>
-                                        <input id="num_doc" placeholder="Número" type="text" class="input-xlarge" disabled>
+                                        <input id="num_doc" value="${adop.getNDoc()}" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Celular </label>
                                     <div class="controls">
-                                        <input id="celular" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="celular" value="${adop.getCelular()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Correo Electrónico </label>
                                     <div class="controls">
-                                        <input id="correo" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="correo" value="${adop.getCorreo()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <h3>Estado Civil</h3>
-                                <div class="row">
-
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios2" id="soltero" value="D">Soltero</label>
-                                        </div>
-                                    </div>   
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casado</label>
-                                            <br>
-                                            <label class="control-label">Fecha de matrimonio Civil </label>
-                                            <input id="fecha_matrimonio" name="full-name" type="text" class="input-xlarge" disabled>
-                                        </div>                            
+                            <div class="row">
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <c:choose>
+                                                    <c:when test="${estCivil == 'S'}">
+                                                        <input type="radio" name="optionsRadios2" id="soltero" value="D" checked>Soltero</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios2" id="soltero" value="D">Soltero</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                     </div>
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios2" id="viudo" value="D">Viudo</label>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios2" id="divorciado" value="D">Divorciado</label>
-                                        </div>
-                                    </div> 
-                                </div>    
+                                </div>   
+                                <div class="col-md-3">   
+                                    <div class="radio">
+                                        <label>
+                                            <c:choose>
+                                                    <c:when test="${estCivil == 'C'}">
+                                                        <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casado</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios2" id="casado" value="C">Casado</label>
+                                                </c:otherwise>
+                                            </c:choose>
+                                    </div>                            
+                                </div>
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <c:choose>
+                                                    <c:when test="${estCivil == 'V'}">
+                                                        <input type="radio" name="optionsRadios2" id="viudo" value="D" checked>Viudo</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios2" id="viudo" value="D">Viudo</label>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            
+                                    </div>
+                                </div> 
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <c:choose>
+                                                    <c:when test="${estCivil == 'D'}">
+                                                        <input type="radio" name="optionsRadios2" id="divorciado" value="D" checked>Divorciado</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios2" id="divorciado" value="D">Divorciado</label>
+                                                </c:otherwise>
+                                            </c:choose>
+                                    </div>
+                                </div> 
+                            </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Fecha de matrimonio Civil </label>
+                                    <div class="controls">
+                                        <input id="fecha_matrimonio" value="${fechaMatri}" name="full-name" type="text" class="input-xlarge" disabled>
+                                    </div>
+                                </div>
                                 <br>
                                 <h3><strong>Educación, Ocupación e Ingresos Económicos</strong></h3>
                                 <br>
-                                <h3>Nivel de instrucción alcanzado</h3>
-                                <div class="row">
-
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios3" id="ninguno" value="D" checked>Ninguno</label>
-                                        </div>
-                                    </div>   
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios3" id="primaria" value="D">Primaria</label>
-                                        </div>
-                                    </div>   
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios3" id="secundaria" value="D">Secundaria</label>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios3" id="tecnico" value="D">Técnico</label>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios3" id="superior" value="D">Superior</label>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios3" id="otros" value="D">Otros</label>
-                                        </div>
-                                    </div>   
-                                </div> 
+                                <div class="control-group">
+                                    <label class="control-label">Nivel de instrucción alcanzado</label>
+                                    <div class="controls">
+                                        <input id="profesion" value="${adop.getNivelInstruccion()}" name="full-name" type="text" class="input-xlarge" disabled>
+                                    </div>
+                                </div>
                                 <br>
                                 <h3>Culminó el nivel de instrucción señalado</h3>
                                 <div class="row">
-
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios4" id="si" value="D" checked>Si</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getCulminoNivel() == 1}">
+                                                        <input type="radio" name="optionsRadios4" id="si" value="D" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios4" id="si" value="D">Si</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios4" id="no" value="D" >No</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getCulminoNivel() == 0}">
+                                                        <input type="radio" name="optionsRadios4" id="no" value="D" checked>No</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios4" id="no" value="D">No</label>
+                                                </c:otherwise>
+                                            </c:choose>
+
                                         </div>
                                     </div>  
-                                </div> 
+                                </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Profesión u Oficio </label>
                                     <div class="controls">
-                                        <input id="profesion" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="profesion" value="${adop.getProfesion()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
-                                <h3>Trabajador dependiente (Elegir solo si corresponde)</h3>
+                                <h3>Trabajador dependiente</h3>
                                 <div class="row"> 
                                     <div class="col-md-3">  
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="checkbox1" id="checkbox1" value="D" >Si</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getTrabajadorDepend() == 1}">
+                                                        <input type="checkbox" name="checkbox1" id="checkbox1" value="D" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="checkbox" name="checkbox1" id="checkbox1" value="D" >Si</label>
+                                                </c:otherwise>
+                                            </c:choose>                                 
                                         </div>
                                     </div>  
                                 </div> 
@@ -288,59 +314,66 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="ocupacion" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="ocupacion" value="${adop.getOcupActualDep()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Centro de Trabajo </label>
                                     <div class="controls">
-                                        <input id="trabajo" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="trabajo" value="${adop.getCentroTrabajo()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Dirección del centro de trabajo</label>
                                     <div class="controls">
-                                        <input id="direccion_trabajo" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="direccion_trabajo" value="${adop.getDireccionCentro()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Teléfono del centro de trabajo </label>
                                     <div class="controls">
-                                        <input id="telefono_trabajo" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="telefono_trabajo" value="${adop.getTelefonoCentro()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable (sueldo bruto) </label>
                                     <div class="controls">
-                                        <input id="ingreso_depen" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="ingreso_depen" value="${adop.getIngresoDep()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
-                                <h3>Trabajador independiente (Elegir solo si corresponde)</h3>
+                                <h3>Trabajador independiente</h3>
                                 <div class="row"> 
                                     <div class="col-md-3">  
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="checkbox2" id="checkbox2" value="D">Si</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getTrabajadorIndepend() == 1}">
+                                                        <input type="checkbox" name="checkbox2" id="checkbox2" value="D" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="checkbox" name="checkbox2" id="checkbox2" value="D">Si</label>
+                                                </c:otherwise>
+                                            </c:choose>    
                                         </div>
                                     </div>  
-                                </div> 
+                                </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="ocupacion_indep" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="ocupacion_indep" value="${adop.getOcupActualInd()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable</label>
                                     <div class="controls">
-                                        <input id="ingreso_indep" name="full-name" type="text" class="input-xlarge" disabled>
+                                        <input id="ingreso_indep" value="${adop.getIngresoIndep()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
@@ -352,21 +385,35 @@ if (u==null){
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios5" id="seguro_si" value="D">Si</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getSeguroSalud() == 1}">
+                                                        <input type="radio" name="optionsRadios5" id="seguro_si" value="D" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios5" id="seguro_si" value="D">Si</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>  
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios5" id="seguro_no" value="D" checked>No</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getSeguroSalud() == 0}">
+                                                        <input type="radio" name="optionsRadios5" id="seguro_no" value="D" checked>No</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios5" id="seguro_no" value="D">No</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Seguro</label>
                                     <div class="controls">
-                                        <input id="tipo_seguro" name="full-name" type="text" class="input-xlarge">
+                                        <input id="tipo_seguro" value="${adop.getTipoSeguro()}" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -375,13 +422,28 @@ if (u==null){
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D">Si</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getSeguroVida() == 1}">
+                                                        <input type="radio" name="optionsRadios6" id="vida_si" value="D" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios6" id="vida_si" value="D">Si</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>  
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios6" id="vida_no" value="D" checked>No</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getSeguroVida() == 0}">
+                                                        <input type="radio" name="optionsRadios6" id="vida_no" value="D" checked>No</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios6" id="vida_no" value="D">No</label>
+                                                </c:otherwise>
+                                            </c:choose>
+
                                         </div>
                                     </div>
                                 </div> 
@@ -391,26 +453,40 @@ if (u==null){
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios7" id="afiliado_si" value="D">Si</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getSistPensiones() == 1}">
+                                                        <input type="radio" name="optionsRadios7" id="afiliado_si" value="D" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios7" id="afiliado_si" value="D">Si</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>  
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios7" id="afiliado_no" value="D" checked>No</label>
+                                                <c:choose>
+                                                    <c:when test="${adop.getSistPensiones() == 0}">
+                                                        <input type="radio" name="optionsRadios7" id="afiliado_no" value="D" checked>No</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios7" id="afiliado_no" value="D">No</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Estado de salud actual</label>
                                     <div class="controls">
-                                        <input id="estado_acutal" name="full-name" type="text" class="input-xlarge">
+                                        <input id="estado_acutal" value="${adop.getSaludActual()}" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
-                                
-                                <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUDA</p>
+
+                                <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUD</p>
                                 <p style="color: red">EN MESA DE PARTES DE LA DGA</p>
                                 <br>
                                 <p>Según lo establecido en la Ley Nº29733 - Ley de protección de datos personales, la información proporcionada por 

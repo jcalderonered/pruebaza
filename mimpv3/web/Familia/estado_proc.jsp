@@ -84,7 +84,7 @@
                                 <h3><strong>Asistencia a sesion informativa</strong></h3>
                             </div> 
                             <div class="col-md-3 has-success">
-                                <label class="control-label" > SI </label>
+                                <label class="control-label" > ${sesion} </label>
                             </div> 
                             <div class="col-md-3">
 
@@ -97,7 +97,7 @@
                                 <h3><strong>Completó talleres</strong></h3>
                             </div> 
                             <div class="col-md-3 has-success">
-                                <label class="control-label" > SI </label>
+                                <label class="control-label" > ${taller} </label>
                             </div> 
                             <div class="col-md-3">
 
@@ -110,10 +110,17 @@
                                 <h3><strong>Presentó ficha de inscripción para solicitantes de adopción</strong></h3>
                             </div> 
                             <div class="col-md-1 has-error">
-                                <label class="control-label"> NO </label>
+                                <label class="control-label"> ${ficha} </label>
                             </div> 
                             <div class="col-md-3">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-default">Llenar ficha</button>
+                                <c:choose>
+                                    <c:when test="${boton == 1}">
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Llenar ficha</button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default" disabled>Llenar ficha</button>
+                                    </c:otherwise>
+                                </c:choose>
                             </div> 
                         </div>  
                         <br>
@@ -123,7 +130,7 @@
                                 <h3><strong>Completó etapa de evaluación</strong></h3>
                             </div> 
                             <div class="col-md-3 has-error">
-                                <label class="control-label" > NO </label>
+                                <label class="control-label" > ${eval} </label>
                             </div> 
                             <div class="col-md-3">
 
@@ -136,7 +143,7 @@
                                 <h3><strong>En lista de espera</strong></h3>
                             </div> 
                             <div class="col-md-3 has-error">
-                                <label class="control-label" > NO </label>
+                                <label class="control-label" > ${espera} </label>
                             </div> 
                             <div class="col-md-3">
 
@@ -149,7 +156,7 @@
                                 <h3><strong>En proceso de adopción</strong></h3>
                             </div> 
                             <div class="col-md-3 has-error">
-                                <label class="control-label" > NO </label>
+                                <label class="control-label" > ${adop} </label>
                             </div> 
                             <div class="col-md-3">
 
@@ -162,7 +169,7 @@
                                 <h3><strong>En etapa post-adopción</strong></h3>
                             </div> 
                             <div class="col-md-3 has-error">
-                                <label class="control-label" > NO </label>
+                                <label class="control-label" > ${postadop} </label>
                             </div> 
                             <div class="col-md-3">
 
