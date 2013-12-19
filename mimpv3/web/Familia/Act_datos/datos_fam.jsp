@@ -406,7 +406,7 @@ if (u==null){
                                 </div>
                                 <br>
                                 <br>
-                                <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUDA</p>
+                                <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUD</p>
                                 <p style="color: red">EN MESA DE PARTES DE LA DGA</p>
                                 <br>
                                 <p>Según lo establecido en la Ley Nº29733 - Ley de protección de datos personales, la información proporcionada por 
@@ -414,18 +414,7 @@ if (u==null){
                                     procedimiento administrativo de adopción.
                                 </p>
                             </div>
-                            <!-- Button -->
-                            <br>
-                            <!--
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
-                                    </div>
-                                </div>
-                                -->
-
                         </form>   
-
                     </div>
                 </div>
             </div>

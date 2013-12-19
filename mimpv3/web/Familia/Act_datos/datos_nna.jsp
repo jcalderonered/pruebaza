@@ -6,16 +6,16 @@
 
 <%@page import="com.mimp.bean.Familia"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
-response.setDateHeader("Expires", 0);
-Familia u=(Familia)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    Familia u = (Familia) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -107,8 +107,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaIncesto() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -118,8 +126,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaMental() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -129,8 +145,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaEpilepsia() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -140,8 +164,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaAbuso() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -152,8 +184,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaSifilis() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -179,8 +219,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaSeguiMedico() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -191,8 +239,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaOperacion() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -203,8 +259,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaHiperactivo() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -230,8 +294,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaEspecial() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -241,8 +313,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaEnfermo() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -252,8 +332,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaMayor() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -263,8 +351,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaAdolescente() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -274,8 +370,16 @@ if (u==null){
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                            <c:when test="${ifa.getNnaHermano() == 1}">
+                                                                <option value="sia" selected>SI</option>
+                                                                <option value="mia">NO</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="sia">SI</option>
+                                                                <option value="mia" selected>NO</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -294,13 +398,27 @@ if (u==null){
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
+                                            <c:choose>
+                                                <c:when test="${ifa.getPuedeViajar() == 1}">
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Si</label>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div> 
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >No</label>
+                                            <c:choose>
+                                                <c:when test="${ifa.getPuedeViajar() == 0}">
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="D" checked>No</label>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="D" >No</label>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                             </div>
@@ -310,7 +428,7 @@ if (u==null){
                             <div class="control-group">
                                 <label class="control-label">¿Cuántos años podría tener el niño, niña o adolescente a adoptar?</label>
                                 <div class="controls">
-                                    <input id="apellido_m" name="full-name" type="text" class="input-xlarge" disabled>
+                                    <input id="apellido_m" value="${ifa.getExpectativaEdad()}" name="full-name" type="text" class="input-xlarge" disabled>
                                 </div>
                             </div>
                             <br>
@@ -319,41 +437,53 @@ if (u==null){
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Masculino</label>
+                                            <c:choose>
+                                                <c:when test="${ifa.getExpectativaGenero().charAt(0) == 'M'}">
+                                                    <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" checked>Masculino</label>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" >Masculino</label>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div> 
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Femenino</label>
+                                            <c:choose>
+                                                <c:when test="${ifa.getExpectativaGenero().charAt(0) == 'F'}">
+                                                    <input type="radio" name="optionsRadios1" id="optionsRadios2" value="D" checked>Femenino</label>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="D" >Femenino</label>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Indistinto</label>
+                                            <c:choose>
+                                                <c:when test="${ifa.getExpectativaGenero().charAt(0) == 'I'}">
+                                                    <input type="radio" name="optionsRadios1" id="optionsRadios3" value="D" checked>Indistinto</label>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <input type="radio" name="optionsRadios1" id="optionsRadios3" value="D" >Indistinto</label>
+                                            </c:otherwise>
+                                        </c:choose>
+                                            
                                     </div>
                                 </div>
                             </div>
                             <!-- Button -->
                             <br>
-                            <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUDA</p>
+                            <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUD</p>
                             <p style="color: red">EN MESA DE PARTES DE LA DGA</p>
                             <br>
                             <p>Según lo establecido en la Ley Nº29733 - Ley de protección de datos personales, la información proporcionada por 
                                 usted/ustedes será de uso exclusivo, con la reserva y confidencialidad del caso, para los fines concernientes al 
                                 procedimiento administrativo de adopción.
                             </p>
-                             <!-- Button -->
-                                <br>
-                                <!--
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
-                                        </div>
-                                    </div>
-                                -->
-                        </form>
                     </div>
                 </div>
             </div>
