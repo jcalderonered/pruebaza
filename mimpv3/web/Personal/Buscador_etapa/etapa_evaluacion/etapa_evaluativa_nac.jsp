@@ -97,13 +97,19 @@
                     <div class="col-md-6 ">
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
-                        <ul class="nav nav-tabs row" id="tabs" >
-                            <li><a href="#" data-toggle="tab">Informativa</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Evaluativa</a></li>
-                            <li><a href="#" data-toggle="tab">Designación</a></li>
-                            <li><a href="#" data-toggle="tab">Adopción</a></li>
-                            <li><a href="#" data-toggle="tab">Post Adopción</a></li>
+                        <ul class="nav nav-tabs row" >
+                            <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li><a href="#" >Designación</a></li>
+                            <li><a href="#" >Adopción</a></li>
+                            <li><a href="#" >Post Adopción</a></li>
                         </ul>
+                        <br>
+                        <ul class="nav nav-tabs row" >
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Familias Nacionales</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalInter" >Familias Internacionales</a></li>
+                        </ul>    
+                            
                         <form class="form-horizontal">
                             <fieldset>
                                 <br>
@@ -122,9 +128,11 @@
                                                 <th>Tipo de Resolución</th>
                                             </tr>
                                         </thead>
+                                       <c:if test="${ListaExpedientes != null}">   
                                         <tbody>
-                                            <tr>
-                                                <td>Alvarado-Gutierrez</td>
+                                            <c:forEach var="expediente" items="${ListaExpedientes}" varStatus="status">
+                                                <tr>
+                                                <td>${expediente.getExpediente()}</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
                                                 <td>Pendiente</td>
@@ -133,42 +141,16 @@
                                                 <td><button href="#" class="btn btn-default">Registrar</button></td>
                                                 <td>20/11/2013</td>
                                                 <td>Observación</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Rosa-Flores</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>Pendiente</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>Pendiente</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>20/09/2011</td>
-                                                <td>Prórroga</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Durando-Iriarte</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>Pendiente</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>Pendiente</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>20/09/2011</td>
-                                                <td>Prórroga</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Solano-Parco</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>Pendiente</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>Pendiente</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>20/09/2011</td>
-                                                <td>Prórroga</td>
-                                            </tr>
-                                        </tbody>
+                                                </tr>
+                                                
+                                            </c:forEach>
+                                        </c:if> 
+                                    </tbody>
+                                 <c:if test="${ListaExpedientes == null}">
+                                    <h3><strong>No existen familias en esta etapa</strong></h3>
+                                </c:if> 
                                     </table>
+                                  
                                 </div>
                             </fieldset>
                         </form>

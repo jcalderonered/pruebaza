@@ -97,13 +97,13 @@
                     <div class="col-md-6 col-md-offset-1">
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
-                        <ul class="nav nav-tabs row" id="tabs" >
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/fametap" data-toggle="tab">Informativa</a></li>
-                            <li><a href="#" data-toggle="tab">Evaluativa</a></li>
-                            <li><a href="#" data-toggle="tab">Designación</a></li>
-                            <li><a href="#" data-toggle="tab">Adopción</a></li>
-                            <li><a href="#" data-toggle="tab">Post Adopción</a></li>
-                        </ul>
+                        <ul class="nav nav-tabs row" >
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac">Evaluación</a></li>
+                            <li><a href="#" >Designación</a></li>
+                            <li><a href="#" >Adopción</a></li>
+                            <li><a href="#" >Post Adopción</a></li>
+                        </ul>    
                         <form class="form-horizontal">
                             <fieldset>
                                 <br>
@@ -304,6 +304,8 @@
                                 </c:if>
                                </table>
                                 </div>
+                                <br>
+                                <h4><strong>Luego de guardar la constancia no se podrán realizar cambios</strong></h4>
                                 <br>
                                 <!-- Button -->
                                 

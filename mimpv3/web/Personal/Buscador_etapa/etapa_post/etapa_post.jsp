@@ -97,12 +97,12 @@
                     <div class="col-md-6 ">
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
-                        <ul class="nav nav-tabs row" id="tabs">
-                            <li><a href="#" data-toggle="tab">Informativa</a></li>
-                            <li><a href="#" data-toggle="tab">Evaluativa</a></li>
-                            <li><a href="#" data-toggle="tab">Designación</a></li>
-                            <li><a href="#" data-toggle="tab">Adopción</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Post Adopción</a></li>
+                        <ul class="nav nav-tabs row" >
+                            <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li><a href="#" >Designación</a></li>
+                            <li><a href="#" >Adopción</a></li>
+                            <li><a href="#" >Post Adopción</a></li>
                         </ul>
                         <form class="form-horizontal">
                             <fieldset>
