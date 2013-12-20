@@ -83,9 +83,18 @@
                             <div class="col-md-4">
                                 <h3><strong>Asistencia a sesion informativa</strong></h3>
                             </div> 
-                            <div class="col-md-3 has-success">
-                                <label class="control-label" > ${sesion} </label>
-                            </div> 
+                            <c:choose>
+                                <c:when test="${sesion == 'SI'}">
+                                    <div class="col-md-3 has-success">
+                                        <label class="control-label" > ${sesion} </label>
+                                    </div> 
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-md-3 has-error">
+                                        <label class="control-label" > ${sesion} </label>
+                                    </div> 
+                                </c:otherwise>
+                            </c:choose>
                             <div class="col-md-3">
 
                             </div> 
@@ -95,10 +104,19 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <h3><strong>Completó talleres</strong></h3>
-                            </div> 
-                            <div class="col-md-3 has-success">
-                                <label class="control-label" > ${taller} </label>
-                            </div> 
+                            </div>
+                            <c:choose>
+                                <c:when test="${taller == 'SI'}">
+                                    <div class="col-md-3 has-success">
+                                        <label class="control-label" > ${taller} </label>
+                                    </div> 
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-md-3 has-error">
+                                        <label class="control-label" > ${taller} </label>
+                                    </div> 
+                                </c:otherwise>
+                            </c:choose>
                             <div class="col-md-3">
 
                             </div> 
@@ -109,13 +127,22 @@
                             <div class="col-md-4">
                                 <h3><strong>Presentó ficha de inscripción para solicitantes de adopción</strong></h3>
                             </div> 
-                            <div class="col-md-1 has-error">
-                                <label class="control-label"> ${ficha} </label>
-                            </div> 
+                            <c:choose>
+                                <c:when test="${ficha == 'SI'}">
+                                    <div class="col-md-1 has-success">
+                                        <label class="control-label" > ${ficha} </label>
+                                    </div> 
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-md-1 has-error">
+                                        <label class="control-label" > ${ficha} </label>
+                                    </div> 
+                                </c:otherwise>
+                            </c:choose>
                             <div class="col-md-3">
                                 <c:choose>
                                     <c:when test="${boton == 1}">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Llenar ficha</button>
+                                        <button onclick="location.href = '${pageContext.servletContext.contextPath}/Fficha/opc1'" id="singlebutton" name="singlebutton" class="btn btn-default">Llenar ficha</button>
                                     </c:when>
                                     <c:otherwise>
                                         <button id="singlebutton" name="singlebutton" class="btn btn-default" disabled>Llenar ficha</button>
@@ -129,9 +156,18 @@
                             <div class="col-md-4">
                                 <h3><strong>Completó etapa de evaluación</strong></h3>
                             </div> 
-                            <div class="col-md-3 has-error">
+                            <c:choose>
+                                <c:when test="${eval == 'SI'}">
+                            <div class="col-md-3 has-success">
                                 <label class="control-label" > ${eval} </label>
                             </div> 
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-md-3 has-error">
+                                <label class="control-label" > ${eval} </label>
+                            </div> 
+                                </c:otherwise>
+                            </c:choose>
                             <div class="col-md-3">
 
                             </div> 
@@ -142,9 +178,18 @@
                             <div class="col-md-4">
                                 <h3><strong>En lista de espera</strong></h3>
                             </div> 
-                            <div class="col-md-3 has-error">
+                             <c:choose>
+                                <c:when test="${espera == 'SI'}">
+                            <div class="col-md-3 has-success">
                                 <label class="control-label" > ${espera} </label>
                             </div> 
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-md-3 has-error">
+                                <label class="control-label" > ${espera} </label>
+                            </div> 
+                                </c:otherwise>
+                            </c:choose>
                             <div class="col-md-3">
 
                             </div> 
@@ -155,9 +200,18 @@
                             <div class="col-md-4">
                                 <h3><strong>En proceso de adopción</strong></h3>
                             </div> 
-                            <div class="col-md-3 has-error">
+                             <c:choose>
+                                <c:when test="${adop == 'SI'}">
+                            <div class="col-md-3 has-success">
                                 <label class="control-label" > ${adop} </label>
                             </div> 
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-md-3 has-error">
+                                <label class="control-label" > ${adop} </label>
+                            </div> 
+                                </c:otherwise>
+                            </c:choose>
                             <div class="col-md-3">
 
                             </div> 
@@ -168,24 +222,30 @@
                             <div class="col-md-4">
                                 <h3><strong>En etapa post-adopción</strong></h3>
                             </div> 
-                            <div class="col-md-3 has-error">
+                             <c:choose>
+                                <c:when test="${postadop == 'SI'}">
+                            <div class="col-md-3 has-success">
                                 <label class="control-label" > ${postadop} </label>
                             </div> 
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-md-3 has-error">
+                                <label class="control-label" > ${postadop} </label>
+                            </div> 
+                                </c:otherwise>
+                            </c:choose>
                             <div class="col-md-3">
-
                             </div> 
                         </div>  
                         <br>
                         <br>
                     </div>
-
                 </div>
             </div>
         </div>
         <!--FIN DE CONTENIDO-->
         <br>
         <br>
-
         <div id="footer">
             <div id="ja-footer" class="wrap">
                 <hr width=80% align="center">

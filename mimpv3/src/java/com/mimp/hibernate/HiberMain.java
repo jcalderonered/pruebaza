@@ -36,7 +36,7 @@ public class HiberMain {
         Entidad entidad;
         Familia familia;
         
-        pass = DigestUtils.md5Hex(pass);
+        pass = DigestUtils.sha512Hex(pass);
 
         ArrayList<Object> temp = new ArrayList<Object>();
 
@@ -82,7 +82,6 @@ public class HiberMain {
             entidad = (Entidad) queryResultE;
             Hibernate.initialize(entidad.getAutoridads());
             Hibernate.initialize(entidad.getOrganismos());
-            //Mejorar este punto (no deberia ser un FOR para solo un parametro)
             for (Iterator iter = entidad.getOrganismos().iterator(); iter.hasNext();) {
                 Organismo org = (Organismo) iter.next();
                 Hibernate.initialize(org.getRepresentantes());
