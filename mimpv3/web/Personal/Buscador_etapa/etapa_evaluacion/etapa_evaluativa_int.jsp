@@ -1,7 +1,7 @@
 <%-- 
-    Document   : detalle_evaluacion
-    Created on : 14/11/2013, 07:51:13 PM
-    Author     : User
+    Document   : inscripcion_sesion1
+    Created on : 28/10/2013, 05:45:16 AM
+    Author     : Ayner Pérez
 --%>
 
 <%@page import="com.mimp.bean.Personal"%>
@@ -30,7 +30,6 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
         <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
-
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -95,106 +94,85 @@
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
                         </ul>
                     </div>
-                    <div class="col-md-6 col-md-offset-1">
+                    <div class="col-md-6 ">
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
-                        <ul class="nav nav-tabs row" >
-                            <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                        <ul class="nav nav-tabs row">
+                            <li><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" data-toggle="tab">Evaluación</a></li>
                             <li><a href="#" >Designación</a></li>
                             <li><a href="#" >Adopción</a></li>
                             <li><a href="#" >Post Adopción</a></li>
                         </ul>
-                        <form role="form">
-                            <fieldset>
+                        <br>
+                        <ul class="nav nav-tabs row">
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Familias Nacionales</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalInter" >Familias Internacionales</a></li>
+                        </ul>    
                                 <br>
-                                <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
-                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
-                                <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
-                                <br>
-                                <br>
-                                <h3 align="left"><strong>Detalles de la evaluación</strong></h3>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Tipo de Evaluación : Social</label>
+                                <div class="bs-example">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Expediente</th>
+                                                <th>Información</th>
+                                                <th>Evaluación Psicológica</th>
+                                                <th>Resultado</th>
+                                                <th>Evaluación Social</th>
+                                                <th>Resultado</th>
+                                                <th>Evaluación Legal</th>
+                                                <th>Fecha de Resolución</th>
+                                                <th>Tipo de Resolución</th>
+                                            </tr>
+                                        </thead>
+                                         <c:if test="${ListaExpedientes != null}">   
+                                        <tbody>
+                                            <c:forEach var="expediente" items="${ListaExpedientes}" varStatus="status">
+                                                <tr>
+                                                <td>${expediente.getExpediente()}</td>
+                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td>Pendiente</td>
+                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td>Pendiente</td>
+                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                                <td>20/11/2013</td>
+                                                <td>Observación</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if> 
+                                    </tbody>
+                                 <c:if test="${ListaExpedientes == null}">
+                                    <h3><strong>No existen familias en esta etapa</strong></h3>
+                                </c:if> 
+                                    </table>
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha asignación</label>
-                                    <div class="controls">
-                                        <input type="text" class="datepicker span2" value="16/02/2012" id="dp3" >
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Responsable</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia">Gordon Freeman</option>
-                                            <option value="mia">Sofia Lamb</option>
-                                            <option value="mia" selected>Carlos Cornejo</option>
-                                        </select>
-                                    </div>    
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Resultado</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="sia">Favorable</option>
-                                            <option value="mia">Desfavorable</option>
-                                            <option value="mia" selected>Observado</option>
-                                        </select>
-                                    </div>  
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de informe</label>
-                                    <div class="controls">
-                                        <input id="fecha_resul" name="full-name" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones</label>
-                                    <div class="controls">
-                                        <textarea cols="25" rows="5" class="input-xlarge"> </textarea>
-                                    </div>
-                                </div>
-                                <br>
-                                <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
-                                    </div>
-                                </div>
-                                <!--FIN DE CONTENIDO-->
-                            </fieldset>
-                        </form>
+                           
                     </div>
                 </div>
             </div>
+            <!--FIN DE CONTENIDO-->
             <br>
             <br>
-            <div id="footer">
-                <div id="ja-footer" class="wrap">
-                    <hr width=80% align="center">
-                    <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-                    <p align="right">Diseñado por RED<br>www.red.net.pe</p>
-                </div>
+        </div>   
+        <div id="footer">
+            <div id="ja-footer" class="wrap">
+                <hr width=80% align="center">
+                <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
+                <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
-            <!-- core JavaScript
+        </div>
+        <!-- Bootstrap core JavaScript
         ================================================== -->
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
-            <script type="text/javascript">
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+        <script type="text/javascript">
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
-            </script>
-            <!-- Ubicar al final -->
+        </script>
+        <!-- Placed at the end of the document so the pages load faster -->        
     </body>
 </html>

@@ -59,5 +59,49 @@ public ArrayList<Familia> getListaFamilias () {
     
     }
     
+    public Familia getFamilia(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Familia fam = new Familia();
+
+        session.beginTransaction();
+        String hqlA = "FROM Familia F WHERE F.id = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        fam = (Familia) queryResultA;
+        
+        return fam;
+    }
     
+    public void UpdateFamilia (Familia temp){
+            
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.update(temp);
+    
+    }
+    
+     public ArrayList<ExpedienteFamilia> ListaExpedientes(String nacionalidad,String estado) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "from ExpedienteFamilia EF where EF.nacionalidad = :nacionalidad and EF.estado = :estado";
+        Query query = session.createQuery(hql);
+        query.setString("nacionalidad", nacionalidad);
+        query.setString("estado", estado);
+        List autoridades = query.list();
+        ArrayList<ExpedienteFamilia> allExpedienteFamilia = new ArrayList();
+        for (Iterator iter = autoridades.iterator(); iter.hasNext();) {
+            ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+            Hibernate.initialize(temp.getEvaluacions());
+            allExpedienteFamilia.add(temp);
+        }
+        return allExpedienteFamilia;
+    }
+
 }
