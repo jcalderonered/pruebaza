@@ -127,6 +127,7 @@
                             <table class="table table-bordered mytable">
                                 <thead>
                                     <tr>
+                                        <th>Item</th>
                                         <th>El asistente</th>
                                         <th>Edad</th>
                                         <th id="el">Correo</th>
@@ -139,12 +140,14 @@
                                     </tr>
                                 </thead>
                                 <c:if test="${listaFormularios != null}">
+                                <c:set var="contador" value="0" scope="page" />    
                                 <tbody>
                                     <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
                                             <tr>
                                                 <c:choose>
-                                                    <c:when test="${formulario.getAsistentes().size() == 2}">     
-                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                    <c:when test="${formulario.getAsistentes().size() == 2}"> 
+                                                        <c:set var="contador" value="${contador + 2}" scope="page"/>
+                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status2">
                                                             <c:choose>
                                                                 <c:when test="${asistente.getSexo() == 'm'}">
                                                                     <c:set var="el" value="${asistente}" scope="page" />
@@ -155,6 +158,7 @@
                                                                 </c:when> 
                                                             </c:choose>
                                                         </c:forEach>
+                                                                    <td>${status.index + 1}</td>
                                                                     <td>
                                                                         ${el.getNombre()}
                                                                         ${el.getApellidoP()}
@@ -201,9 +205,11 @@
                                                                     
                                                     </c:when>
                                                     <c:when test="${formulario.getAsistentes().size() == 1}">
-                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                        <c:set var="contador" value="${contador + 1}" scope="page"/>
+                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status3">
                                                             <c:choose>
                                                                 <c:when test="${asistente.getSexo() == 'm'}">
+                                                                    <td>${status.index + 1}</td>
                                                                     <td>
                                                                     ${asistente.getNombre()}    
                                                                     ${asistente.getApellidoP()}
@@ -239,6 +245,7 @@
                                                                     </td>
                                                                 </c:when>
                                                                 <c:when test="${asistente.getSexo() == 'f'}">
+                                                                    <td>${status.index + 1}</td>
                                                                     <td></td>
                                                                     <td></td>
                                                                     <td></td>
@@ -283,7 +290,9 @@
                                             </tr>
                                         </c:forEach>
                                 </tbody>
+                                
                                 </c:if>
+                                <h3><strong>Número de inscritos : ${contador}</strong></h3>
                             </table>
                             <c:if test="${listaFormularios.size() == 0}">
                                <h3><strong>Aún no hay personas inscritas</strong></h3>

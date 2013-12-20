@@ -60,6 +60,15 @@ public class timeStampFormat {
         return fecha;
     }
     
+    public String FechaTurno (Date temp){
+        SimpleDateFormat fromsql = new SimpleDateFormat("dd/MM/yyyy");
+        //SimpleDateFormat mystring = new SimpleDateFormat("dd/MM/yyyy");
+        
+        String fecha = fromsql.format(temp);
+    
+        return fecha;
+    }
+    
     public String DateToString (Date temp){
         SimpleDateFormat fromsql = new SimpleDateFormat("dd-MMM-yyyy",new Locale("ES"));
         //SimpleDateFormat mystring = new SimpleDateFormat("dd/MM/yyyy");
