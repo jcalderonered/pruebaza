@@ -123,7 +123,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="textinput">Fecha y hora de Inicio de Inscripciones al turno:</label>
                                 <div class="controls">
-                                    <input id="fechaInicio" name="fechaInicio" type="text" value="${ts.DateToString(turno.getInicioInscripcion())}" placeholder="fecha_inicio" class=" datepicker input-xlarge"> &nbsp; <input id="horaInicio" name="horaInicio" value="${ts.HourToString(turno.getInicioInscripcion())}" type="text" placeholder="hora_inicio" class="timepicker input-xlarge">
+                                    <input id="fechaInicio" name="fechaInicio" type="text" value="${ts.FechaTurno(turno.getInicioInscripcion())}" placeholder="fecha_inicio" class=" datepicker input-xlarge"> &nbsp; <input id="horaInicio" name="horaInicio" value="${ts.HourToString(turno.getInicioInscripcion())}" type="text" placeholder="hora_inicio" class="timepicker input-xlarge">
                                 </div>
                             </div>
                             <br>
@@ -131,7 +131,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="textinput">Fecha y hora de Fin de Inscripciones al turno:</label>
                                 <div class="controls">
-                                    <input id="fechaFin" name="fechaFin" type="text" value="${ts.DateToString(turno.getFinInscripcion())}" placeholder="fecha_fin" class="datepicker input-xlarge"> &nbsp; <input id="horaFin"  name="horaFin" value="${ts.HourToString(turno.getFinInscripcion())}" type="text" placeholder="hora_fin" class="timepicker input-xlarge">
+                                    <input id="fechaFin" name="fechaFin" type="text" value="${ts.FechaTurno(turno.getFinInscripcion())}" placeholder="fecha_fin" class="datepicker input-xlarge"> &nbsp; <input id="horaFin"  name="horaFin" value="${ts.HourToString(turno.getFinInscripcion())}" type="text" placeholder="hora_fin" class="timepicker input-xlarge">
                                 </div>
                             </div>
                             <br>

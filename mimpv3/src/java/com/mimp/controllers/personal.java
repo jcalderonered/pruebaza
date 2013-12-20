@@ -130,18 +130,7 @@ public class personal {
         return new ModelAndView("/Personal/fam_inter/lista_fam_int", map);
     }
 
-    @RequestMapping(value = "/fametap", method = RequestMethod.GET)
-    public ModelAndView FamEtap(ModelMap map, HttpSession session) {
-        Personal usuario = (Personal) session.getAttribute("usuario");
-        if (usuario == null) {
-            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
-            map.addAttribute("mensaje", mensaje);
-            return new ModelAndView("login", map);
-        }
-        //List<Personal> lista = Servicio.listaPersonal();
-        //map.addAttribute("id", temp);
-        return new ModelAndView("/Personal/Buscador_etapa/etapa_formativa", map);
-    }
+    
 
     @RequestMapping(value = "/reg", method = RequestMethod.GET)
     public ModelAndView Registros(ModelMap map, HttpSession session) {
@@ -306,7 +295,7 @@ public class personal {
 
     @RequestMapping(value = "/updateAut", method = RequestMethod.POST)
     public ModelAndView UpdateAut(ModelMap map,
-            @RequestParam("id") int id,
+            @RequestParam("id") long id,
             @RequestParam("nombre") String nombre,
             @RequestParam("tipo") String tipo,
             @RequestParam("pais") String pais,
@@ -1247,7 +1236,7 @@ public class personal {
         tempSesion.setNSesion(numSesion);
         tempSesion.setFecha(format.stringToDate(fecha));
         tempSesion.setHora(hora);
-        short s = Byte.valueOf(duracion);
+        tempSesion.setDuracion(duracion);
         tempSesion.setDireccion(direccion);
         tempSesion.setFacilitador(capacitador);
 

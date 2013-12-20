@@ -11,7 +11,7 @@
         <many-to-one name="personal" class="com.mimp.bean.Personal" fetch="select">
             <column name="IDPERSONAL" precision="10" scale="0" not-null="true" />
         </many-to-one>
-        <property name="fecha" type="serializable">
+        <property name="fecha" type="java.sql.Timestamp">
             <column name="FECHA" />
         </property>
         <property name="tipoReg" type="string">

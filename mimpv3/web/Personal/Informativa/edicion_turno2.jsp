@@ -130,7 +130,7 @@
                                         <tr>
                                             <th>Fecha</th>
                                             <th>Hora</th>
-                                            <th>Facilitador</th>
+                                            <th>Facilitador(es)</th>
                                             <th>Capacidad</th>
                                             <th>Modificar</th>
                                         </tr>
@@ -142,11 +142,7 @@
                                              <td>${formato.dateToString(reunion.getFecha())}  </td>
                                              <td>${reunion.getHora()}</td>
                                              <td>
-                                                 <c:forEach var="personal" items="${listaPersonal}" varStatus="status">
-                                                  <c:if test="${reunion.getFacilitador() == personal.getIdpersonal()}">   
-                                                  ${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()} 
-                                                  </c:if> 
-                                                 </c:forEach>
+                                                 ${reunion.getFacilitador()}
                                              </td>
                                              <td>
                                                  ${reunion.getCapacidad()}

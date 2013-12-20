@@ -98,7 +98,7 @@
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
-                            <li class="active"><a href="#" data-toggle="tab">Informativa</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/fametap" data-toggle="tab">Informativa</a></li>
                             <li><a href="#" data-toggle="tab">Evaluativa</a></li>
                             <li><a href="#" data-toggle="tab">Designación</a></li>
                             <li><a href="#" data-toggle="tab">Adopción</a></li>
@@ -119,59 +119,194 @@
                                                 <th>Información</th>
                                                 <th>¿Culminó taller?</th>
                                                 <th>Número de Constancia</th>
+                                                
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                   <c:if test="${listaFamilias != null}">
+                                    <tbody>
+                                      <c:forEach var="familia" items="${listaFamilias}" varStatus="status"> 
+                                        <c:forEach var="formulario" items="${familia.getFormularioSesions()}" varStatus="status">
                                             <tr>
-                                                <td>Juan Alvarado Perez</td>
-                                                <td>40</td>
-                                                <td>María Gutierrez Espinoza</td>
-                                                <td>43</td>
-                                                <td>correo@dominio.com</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>No</td>
-                                                <td></td>
+                                                <c:choose>
+                                                    <c:when test="${formulario.getAsistentes().size() == 2}">     
+                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                    <c:set var="el" value="${asistente}" scope="page" />
+                                                                    
+                                                                </c:when>
+                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                    <c:set var="ella" value="${asistente}" scope="page" />
+                                                                </c:when> 
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                                    
+                                                                    <td>
+                                                                    ${el.getNombre()}
+                                                                    ${el.getApellidoP()}
+                                                                    ${el.getApellidoM()}
+                                                                    </td>
+                                                                    <td>${el.getEdad()}</td>
+                                                                    <td>
+                                                                        ${ella.getNombre()}
+                                                                        ${ella.getApellidoP()}
+                                                                        ${ella.getApellidoM()}
+                                                                    </td>
+                                                                    <td>${ella.getEdad()}</td>
+
+                                                                    <td>${ella.getCorreo()}</td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <c:set var="flag" value="0" scope="page" />
+                                                                        <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
+                                                                            <c:choose>
+                                                                                <c:when test="${AFR.getAsistencia() != 'A' && AFR.getInasJus() == 1}">
+                                                                                    <c:set var="flag" value="1" scope="page" />
+                                                                                </c:when>
+                                                                            </c:choose>
+                                                                        </c:forEach>
+                                                                        <c:choose>
+                                                                        <c:when test="${flag == 0}">
+                                                                                    SI
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                                   NO
+                                                                        </c:otherwise>
+                                                                        </c:choose>    
+                                                                    </td>
+                                                                       
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
+                                                                        <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
+                                                                        <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
+                                                                        <br>
+                                                                        <br>
+                                                                        <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    
+                                                    </c:when>
+                                                    <c:when test="${formulario.getAsistentes().size() == 1}">
+                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                    <td>
+                                                                    ${asistente.getNombre()}
+                                                                    ${asistente.getApellidoP()}
+                                                                    ${asistente.getApellidoM()}
+                                                                    </td>
+                                                                    <td>${asistente.getEdad()}</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>${asistente.getCorreo()}</td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <c:set var="flag" value="0" scope="page" />
+                                                                        <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
+                                                                            <c:choose>
+                                                                                <c:when test="${AFR.getAsistencia() != 'A' && AFR.getInasJus() == 1}">
+                                                                                    <c:set var="flag" value="1" scope="page" />
+                                                                                </c:when>
+                                                                            </c:choose>
+                                                                        </c:forEach>
+                                                                        <c:choose>
+                                                                        <c:when test="${flag == 0}">
+                                                                                    SI
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                                   NO
+                                                                        </c:otherwise>
+                                                                        </c:choose>    
+                                                                    </td>
+                                                                 
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
+                                                                        <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
+                                                                        <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
+                                                                        <br>
+                                                                        <br>
+                                                                        <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    
+                                                                </c:when>
+                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>
+                                                                        ${asistente.getNombre()}
+                                                                        ${asistente.getApellidoP()}
+                                                                        ${asistente.getApellidoM()}
+                                                                    </td>
+                                                                    <td>${asistente.getEdad()}</td>
+
+                                                                    <td>${asistente.getCorreo()}</td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <c:set var="flag" value="0" scope="page"/>
+                                                                        <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
+                                                                            <c:choose>
+                                                                                <c:when test="${AFR.getAsistencia() != 'A' && AFR.getInasJus() == 1}">
+                                                                                    <c:set var="flag" value="1" scope="page" />
+                                                                                </c:when>
+                                                                            </c:choose>
+                                                                        </c:forEach>
+                                                                        <c:choose>
+                                                                        <c:when test="${flag == 0}">
+                                                                                    SI
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                                   NO
+                                                                        </c:otherwise>
+                                                                        </c:choose>    
+                                                                    </td>
+                                                                     
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
+                                                                        <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
+                                                                        <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
+                                                                        <br>
+                                                                        <br>
+                                                                        <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    
+                                                                </c:when>    
+
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </c:when>    
+                                                    <c:otherwise>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </tr>
-                                            <tr>
-                                                <td>Miguel Rosa Flores</td>
-                                                <td>35</td>
-                                                <td>Marta Gadea Chávez</td>
-                                                <td>40</td>
-                                                <td>correo@dominio.com</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>Si</td>
-                                                <td><input type="text" class="input_width"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Marco Durando Miriarte</td>
-                                                <td>53</td>
-                                                <td>Rosa Miroquezada Cabello</td>
-                                                <td>50</td>
-                                                <td>correo@dominio.com</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>No</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gabriel Solano Parco </td>
-                                                <td>20</td>
-                                                <td>Gina Torre Rojas</td>
-                                                <td>18</td>
-                                                <td>correo@dominio.com</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>No</td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                        </c:forEach>
+                                       </c:forEach>      
+                                    </tbody>
+                                </c:if>
+                                <c:if test="${listaFamilias == null}">
+                                    <h3><strong>No existen familias habilitadas</strong></h3>
+                                </c:if>
+                               </table>
                                 </div>
                                 <br>
                                 <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
-                                    </div>
-                                </div>
+                                
                             </fieldset>
                         </form>
 
