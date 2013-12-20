@@ -1075,7 +1075,7 @@ public class personal {
         temp.setApellidoP(apellidoP);
         temp.setApellidoM(apellidoM);
         temp.setUser(user);
-        pass = DigestUtils.md5Hex(pass);
+        pass = DigestUtils.sha512Hex(pass);
         temp.setPass(pass);
         temp.setCorreoTrabajo(correoT);
         temp.setCorreoPersonal(correoP);
@@ -1138,7 +1138,7 @@ public class personal {
         temp.setApellidoM(apellidoM);
         temp.setUser(user);
         if (!pass.equals("")) {
-            pass = DigestUtils.md5Hex(pass);
+            pass = DigestUtils.sha512Hex(pass);
             temp.setPass(pass);
         }
         temp.setCorreoTrabajo(correoT);

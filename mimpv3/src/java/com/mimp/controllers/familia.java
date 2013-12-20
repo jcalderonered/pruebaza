@@ -142,14 +142,14 @@ public class familia {
                                                 Boolean flag2 = false;
                                                 for (Iterator iter6 = exp.getEvaluacions().iterator(); iter6.hasNext();) {
                                                     Evaluacion eval = (Evaluacion) iter6.next();
-                                                    for(Iterator iter7 = eval.getResolucions().iterator(); iter7.hasNext();){
+                                                    for (Iterator iter7 = eval.getResolucions().iterator(); iter7.hasNext();) {
                                                         Resolucion resol = (Resolucion) iter7.next();
-                                                        if(resol.getTipo().equals("Adopción")){
+                                                        if (resol.getTipo().equals("Adopción")) {
                                                             flag2 = true;
                                                         }
                                                     }
                                                 }
-                                                if(flag2){
+                                                if (flag2) {
                                                     map.addAttribute("postadop", si);
                                                 } else {
                                                     map.addAttribute("postadop", no);
@@ -197,10 +197,10 @@ public class familia {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         } else {
-            oldpass = DigestUtils.md5Hex(oldpass);
+            oldpass = DigestUtils.sha512Hex(oldpass);
             if (usuario.getPass().equals(oldpass)) {
                 if (newpass.equals(newpassconf)) {
-                    newpass = DigestUtils.md5Hex(newpass);
+                    newpass = DigestUtils.sha512Hex(newpass);
                     usuario.setPass(newpass);
                     ServicioFamilia.CambiaPass(usuario);
                     mensaje = "La contraseña se ha cambiado con exito.";
@@ -219,8 +219,17 @@ public class familia {
 
     //Ver informacion actual de la familia
     @RequestMapping("/FactDatos/opc1")
-    public ModelAndView FactDatos1(ModelMap map, HttpSession session) {
+    public ModelAndView FactDatos1(ModelMap map, HttpSession session, FichaSolicitudAdopcion fichasol) {
         Familia usuario = (Familia) session.getAttribute("usuario");
+        //En el caso no tengamos una ficha de Solicitud adopción, debemos crear una nueva exportando información previa
+        if (fichasol == null) {
+            FichaSolicitudAdopcion ficha = new FichaSolicitudAdopcion();
+            Solicitante sol;
+            Hijo hijo;
+            Residente res;
+            
+            
+        }
         dateFormat format = new dateFormat();
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -282,6 +291,7 @@ public class familia {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        //FALTA
         String pagina = "/Familia/Act_datos/datos_fam";
         return new ModelAndView(pagina, map);
     }
@@ -319,4 +329,103 @@ public class familia {
         String pagina = "/Familia/Act_datos/datos_nna";
         return new ModelAndView(pagina, map);
     }
+
+    //Ficha de inscripcion de solicitantes para la adopción
+    @RequestMapping("/Fficha/opc1")
+    public ModelAndView Fficha1(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        dateFormat format = new dateFormat();
+        Date factual = new Date();
+        String fechaactual = format.dateToString(factual);
+        map.addAttribute("hoy", fechaactual);
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        } else {
+            //REVISAR A PARTIR DE AQUI
+            for (Iterator iter = usuario.getInfoFamilias().iterator(); iter.hasNext();) {
+                InfoFamilia ifa = (InfoFamilia) iter.next();
+                String fechaMatri = format.dateToString(ifa.getFechaMatrimonio());
+                map.addAttribute("fechaMatri", fechaMatri);
+                map.addAttribute("estCivil", ifa.getEstadoCivil().charAt(0));
+                for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
+                    Adoptante adop = (Adoptante) iter2.next();
+                    if (adop.getSexo() == 'F') {
+                        map.put("adop", adop);
+                        String fechanac = format.dateToString(adop.getFechaNac());
+                        map.addAttribute("fechanac", fechanac);
+                    }
+                }
+            }
+        }
+        String pagina = "/Familia/Ficha/ficha_inscripcion_ella";
+        return new ModelAndView(pagina, map);
+    }
+
+    @RequestMapping("/Fficha/opc2")
+    public ModelAndView Fficha2(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //FALTA
+        String pagina = "/Familia/Ficha/ficha_inscripcion_el";
+        return new ModelAndView(pagina, map);
+    }
+
+    @RequestMapping("/Fficha/opc3")
+    public ModelAndView Fficha3(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //FALTA
+        String pagina = "/Familia/Ficha/ficha_inscripcion_fam";
+        return new ModelAndView(pagina, map);
+    }
+
+    @RequestMapping("/Fficha/opc4")
+    public ModelAndView Fficha4(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //FALTA
+        String pagina = "/Familia/Ficha/ficha_inscripcion_vivienda";
+        return new ModelAndView(pagina, map);
+    }
+
+    @RequestMapping("/Fficha/opc5")
+    public ModelAndView Fficha5(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //FALTA
+        String pagina = "/Familia/Ficha/ficha_inscripcion_adopcion";
+        return new ModelAndView(pagina, map);
+    }
+
+    @RequestMapping("/Fficha/opc6")
+    public ModelAndView Fficha6(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //FALTA
+        String pagina = "/Familia/Ficha/ficha_inscripcion_nna";
+        return new ModelAndView(pagina, map);
+    }
+
 }

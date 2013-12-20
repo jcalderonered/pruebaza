@@ -83,7 +83,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha</label>
                                     <div class="controls">
-                                        <input disabled placeholder="10/11/2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled value="${factual}" id="full-name" name="fecha_ingreso" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
@@ -91,21 +91,20 @@
                                 <div class="control-group">
                                     <label class="control-label">Número</label>
                                     <div class="controls">
-                                        <input disabled placeholder="001-2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled value="" id="full-name" name="numero" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <br>
                         <br>
-
                         <ul class="nav nav-tabs row" id="tabs" >
-                            <li class="active"><a href="#" data-toggle="tab">La Solicitante</a></li>
-                            <li><a href="#" data-toggle="tab">El solicitante</a></li>
-                            <li><a href="#" data-toggle="tab">Composición familiar</a></li>
-                            <li><a href="#" data-toggle="tab">Vivienda</a></li>
-                            <li><a href="#" data-toggle="tab">Proceso de adopción</a></li>
-                            <li><a href="#" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/Fficha/opc1" data-toggle="tab">La Solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc2" data-toggle="tab">El solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc3" data-toggle="tab">Composición familiar</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc4" data-toggle="tab">Vivienda</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc5" data-toggle="tab">Proceso de adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc6" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
 
                         <form class="form-horizontal"> 
@@ -117,56 +116,56 @@
                                 <div class="control-group">
                                     <label class="control-label">Nombre</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${adop.getNombre()}" name="nombre_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Paterno</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${adop.getApellidoP()}" name="apellido_p_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Materno</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${adop.getApellidoM()}" name="apellido_m_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Edad</label>  
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="edad_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="password" class="datepicker input-xlarge">
+                                        <input id="full-name" value="${fechanac}" name="fecha_nac_ella" type="text" class="datepicker input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Dirección de nacimiento</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${adop.getLugarNac()}" name="lugar_nac_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Departamento de nacimiento</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="depa_nac_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">País de nacimiento</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="pais_nac_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -174,13 +173,13 @@
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>DNI</label>
+                                                <input type="radio" name="tipo_doc_ella" id="optionsRadios1" value="D" checked>DNI</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Carnet de Extranjería</label>
+                                                <input type="radio" name="tipo_doc_ella" id="optionsRadios2" value="C">Carnet de Extranjería</label>
                                         </div>                            
                                     </div>
                                 </div>    
@@ -188,35 +187,35 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <label class="control-label">N° de Documento</label>
-                                        <input id="n_doc" placeholder="Número" type="text" class="input-xlarge">
+                                        <input id="n_doc" name="n_doc_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>                            
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Domicilio (Consignar dirección exacta)</label>
                                     <div class="controls">
-                                        <textarea class="input-xlarge" name="message" placeholder="" rows="3" ></textarea>
+                                        <textarea class="input-xlarge" name="domicilio_ella" placeholder="" rows="3" ></textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Teléfono </label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="telefono_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Celular</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="celular_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Correo Electrónico</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="correo_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -226,13 +225,13 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Soltera</label>
+                                                <input type="radio" name="est_civil_ella" id="optionsRadios1" value="D" checked>Soltera</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Casada</label>
+                                                <input type="radio" name="est_civil_ella" id="optionsRadios2" value="C">Casada</label>
                                             <br>
                                             <label class="control-label">Fecha de matrimonio Civil</label>
                                             <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
@@ -241,13 +240,13 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Viuda</label>
+                                                <input type="radio" name="est_civil_ella" id="optionsRadios1" value="D" checked>Viuda</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Divorciada</label>
+                                                <input type="radio" name="est_civil_ella" id="optionsRadios1" value="D" checked>Divorciada</label>
                                         </div>
                                     </div> 
                                 </div>    
@@ -260,37 +259,37 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Ninguno</label>
+                                                <input type="radio" name="nivel_inst_ella" id="optionsRadios1" value="D" checked>Ninguno</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Primaria</label>
+                                                <input type="radio" name="nivel_inst_ella" id="optionsRadios1" value="D" checked>Primaria</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Secundaria</label>
+                                                <input type="radio" name="nivel_inst_ella" id="optionsRadios1" value="D" checked>Secundaria</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Técnico</label>
+                                                <input type="radio" name="nivel_inst_ella" id="optionsRadios1" value="D" checked>Técnico</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Superior</label>
+                                                <input type="radio" name="nivel_inst_ella" id="optionsRadios1" value="D" checked>Superior</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Otros</label>
+                                                <input type="radio" name="nivel_inst_ella" id="optionsRadios1" value="D" checked>Otros</label>
                                         </div>
                                     </div>   
                                 </div> 
@@ -301,13 +300,13 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
+                                                <input type="radio" name="culm_nivel_ella" id="optionsRadios1" value="D" >Si</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >No</label>
+                                                <input type="radio" name="culm_nivel_ella" id="optionsRadios1" value="D" >No</label>
                                         </div>
                                     </div>  
                                 </div> 
@@ -315,7 +314,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Profesión u Oficio </label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="prof_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -332,35 +331,35 @@
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="ocup_act_dep_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Centro de Trabajo </label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="centro_trabajo_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Dirección del centro de trabajo</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="dir_centro_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Teléfono del centro de trabajo </label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="tel_centro_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable (sueldo bruto) </label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="ingreso_dep_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -377,14 +376,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="ocup_act_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="ingreso_ind_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -396,13 +395,13 @@
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D">Si</label>
+                                                <input type="radio" name="seguro_salud_ella" id="optionsRadios1" value="D">Si</label>
                                         </div>
                                     </div>  
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D">No</label>
+                                                <input type="radio" name="seguro_salud_ella" id="optionsRadios1" value="D">No</label>
                                         </div>
                                     </div>
                                 </div> 
@@ -410,7 +409,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Seguro</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="tipo_seguro" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -419,13 +418,13 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D">Si</label>
+                                                <input type="radio" name="seguro_vida_ella" id="optionsRadios1" value="D">Si</label>
                                         </div>
                                     </div>  
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D">No</label>
+                                                <input type="radio" name="seguro_vida_ella" id="optionsRadios1" value="D">No</label>
                                         </div>
                                     </div>
                                 </div> 
@@ -435,13 +434,13 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D">Si</label>
+                                                <input type="radio" name="sist_pen_ella" id="optionsRadios1" value="D">Si</label>
                                         </div>
                                     </div>  
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D">No</label>
+                                                <input type="radio" name="sist_pen_ella" id="optionsRadios1" value="D">No</label>
                                         </div>
                                     </div>
                                 </div> 
@@ -449,7 +448,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Estado de salud actual</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="est_salud_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
