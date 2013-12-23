@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 23, 2013 10:39:28 AM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 23, 2013 3:56:23 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Nna" table="NNA" schema="MIMP_ADOPCION">
         <id name="idnna" type="long">
@@ -108,7 +108,13 @@
             <column name="NN" precision="3" scale="0" />
         </property>
         <property name="observaciones" type="string">
-            <column name="OBSERVACIONES" length="800" />
+            <column name="OBSERVACIONES" length="500" />
+        </property>
+        <property name="NResolAband" type="string">
+            <column name="N_RESOL_ABAND" length="20" />
+        </property>
+        <property name="NResolCons" type="string">
+            <column name="N_RESOL_CONS" length="20" />
         </property>
         <set name="designacions" table="DESIGNACION" inverse="true" lazy="true" fetch="select">
             <key>
@@ -121,6 +127,12 @@
                 <column name="IDNNA" precision="10" scale="0" not-null="true" />
             </key>
             <one-to-many class="com.mimp.bean.Prioritario" />
+        </set>
+        <set name="expedienteNnas" table="EXPEDIENTE_NNA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDNNA" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.ExpedienteNna" />
         </set>
         <set name="estudioCasos" table="ESTUDIO_CASO" inverse="true" lazy="true" fetch="select">
             <key>

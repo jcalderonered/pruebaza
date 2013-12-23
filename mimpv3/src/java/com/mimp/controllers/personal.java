@@ -66,18 +66,7 @@ public class personal {
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
 
-    @RequestMapping(value = "/nna", method = RequestMethod.GET)
-    public ModelAndView Nna(ModelMap map, HttpSession session) {
-        Personal usuario = (Personal) session.getAttribute("usuario");
-        if (usuario == null) {
-            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
-            map.addAttribute("mensaje", mensaje);
-            return new ModelAndView("login", map);
-        }
-        //List<Personal> lista = Servicio.listaPersonal();
-        // map.addAttribute("id", temp);
-        return new ModelAndView("/Personal/nna/lista_nna", map);
-    }
+    
 
     @RequestMapping(value = "/juzgado", method = RequestMethod.GET)
     public ModelAndView Juzgado(ModelMap map, HttpSession session) {

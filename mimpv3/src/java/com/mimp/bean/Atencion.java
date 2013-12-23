@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 23, 2013 10:39:27 AM by Hibernate Tools 3.6.0
+// Generated Dec 23, 2013 3:56:21 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -11,8 +11,8 @@ public class Atencion  implements java.io.Serializable {
 
 
      private long idatencion;
-     private Familia familia;
      private Personal personal;
+     private Familia familia;
      private Date fecha;
      private String hora;
      private String tipoAtencion;
@@ -23,15 +23,15 @@ public class Atencion  implements java.io.Serializable {
     }
 
 	
-    public Atencion(long idatencion, Familia familia, Personal personal) {
+    public Atencion(long idatencion, Personal personal, Familia familia) {
         this.idatencion = idatencion;
-        this.familia = familia;
         this.personal = personal;
+        this.familia = familia;
     }
-    public Atencion(long idatencion, Familia familia, Personal personal, Date fecha, String hora, String tipoAtencion, String detalle, String observacion) {
+    public Atencion(long idatencion, Personal personal, Familia familia, Date fecha, String hora, String tipoAtencion, String detalle, String observacion) {
        this.idatencion = idatencion;
-       this.familia = familia;
        this.personal = personal;
+       this.familia = familia;
        this.fecha = fecha;
        this.hora = hora;
        this.tipoAtencion = tipoAtencion;
@@ -46,19 +46,19 @@ public class Atencion  implements java.io.Serializable {
     public void setIdatencion(long idatencion) {
         this.idatencion = idatencion;
     }
-    public Familia getFamilia() {
-        return this.familia;
-    }
-    
-    public void setFamilia(Familia familia) {
-        this.familia = familia;
-    }
     public Personal getPersonal() {
         return this.personal;
     }
     
     public void setPersonal(Personal personal) {
         this.personal = personal;
+    }
+    public Familia getFamilia() {
+        return this.familia;
+    }
+    
+    public void setFamilia(Familia familia) {
+        this.familia = familia;
     }
     public Date getFecha() {
         return this.fecha;

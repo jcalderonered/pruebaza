@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 23, 2013 10:39:27 AM by Hibernate Tools 3.6.0
+// Generated Dec 23, 2013 3:56:21 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -47,8 +47,11 @@ public class Nna  implements java.io.Serializable {
      private Short hermano;
      private Short nn;
      private String observaciones;
+     private String NResolAband;
+     private String NResolCons;
      private Set<Designacion> designacions = new HashSet<Designacion>(0);
      private Set<Prioritario> prioritarios = new HashSet<Prioritario>(0);
+     private Set<ExpedienteNna> expedienteNnas = new HashSet<ExpedienteNna>(0);
      private Set<EstudioCaso> estudioCasos = new HashSet<EstudioCaso>(0);
 
     public Nna() {
@@ -60,7 +63,7 @@ public class Nna  implements java.io.Serializable {
         this.car = car;
         this.juzgado = juzgado;
     }
-    public Nna(long idnna, Car car, Juzgado juzgado, String nombre, String apellidoP, String apellidoM, String sexo, Date fechaNacimiento, Short edadAnhos, Short edadMeses, Short actaNacimiento, String condicionSalud, String departamentoNacimiento, String provinciaNacimiento, String distritoNacimiento, String paisNacimiento, String lugarNac, Date fechaResolAbandono, Date fechaResolConsentida, String clasificacion, Short incesto, Short mental, Short epilepsia, Short abuso, Short sifilis, Short seguiMedico, Short operacion, Short hiperactivo, Short especial, Short enfermo, Short mayor, Short adolescente, Short hermano, Short nn, String observaciones, Set<Designacion> designacions, Set<Prioritario> prioritarios, Set<EstudioCaso> estudioCasos) {
+    public Nna(long idnna, Car car, Juzgado juzgado, String nombre, String apellidoP, String apellidoM, String sexo, Date fechaNacimiento, Short edadAnhos, Short edadMeses, Short actaNacimiento, String condicionSalud, String departamentoNacimiento, String provinciaNacimiento, String distritoNacimiento, String paisNacimiento, String lugarNac, Date fechaResolAbandono, Date fechaResolConsentida, String clasificacion, Short incesto, Short mental, Short epilepsia, Short abuso, Short sifilis, Short seguiMedico, Short operacion, Short hiperactivo, Short especial, Short enfermo, Short mayor, Short adolescente, Short hermano, Short nn, String observaciones, String NResolAband, String NResolCons, Set<Designacion> designacions, Set<Prioritario> prioritarios, Set<ExpedienteNna> expedienteNnas, Set<EstudioCaso> estudioCasos) {
        this.idnna = idnna;
        this.car = car;
        this.juzgado = juzgado;
@@ -96,8 +99,11 @@ public class Nna  implements java.io.Serializable {
        this.hermano = hermano;
        this.nn = nn;
        this.observaciones = observaciones;
+       this.NResolAband = NResolAband;
+       this.NResolCons = NResolCons;
        this.designacions = designacions;
        this.prioritarios = prioritarios;
+       this.expedienteNnas = expedienteNnas;
        this.estudioCasos = estudioCasos;
     }
    
@@ -346,6 +352,20 @@ public class Nna  implements java.io.Serializable {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
+    public String getNResolAband() {
+        return this.NResolAband;
+    }
+    
+    public void setNResolAband(String NResolAband) {
+        this.NResolAband = NResolAband;
+    }
+    public String getNResolCons() {
+        return this.NResolCons;
+    }
+    
+    public void setNResolCons(String NResolCons) {
+        this.NResolCons = NResolCons;
+    }
     public Set<Designacion> getDesignacions() {
         return this.designacions;
     }
@@ -359,6 +379,13 @@ public class Nna  implements java.io.Serializable {
     
     public void setPrioritarios(Set<Prioritario> prioritarios) {
         this.prioritarios = prioritarios;
+    }
+    public Set<ExpedienteNna> getExpedienteNnas() {
+        return this.expedienteNnas;
+    }
+    
+    public void setExpedienteNnas(Set<ExpedienteNna> expedienteNnas) {
+        this.expedienteNnas = expedienteNnas;
     }
     public Set<EstudioCaso> getEstudioCasos() {
         return this.estudioCasos;
