@@ -105,39 +105,39 @@
                             <li><a href="#" >Adopción</a></li>
                             <li><a href="#" >Post Adopción</a></li>
                         </ul>
-                        <form role="form">
+                        <c:if test="${legal == null}">
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalCrearEvalLegalNac" method="post"> 
+                                <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
+                                <input hidden name="origen" id="origen" value="${origen}">
+                            </c:if>  
+                            <c:if test="${legal != null}">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalUpdateEvalLegalNac" method="post"> 
+                                    <input hidden name="idEvalLegal" id="idEvalLegal" value="${legal.getIdevaluacion()}">
+                                    <input hidden name="origen" id="origen" value="${origen}">
+                                </c:if>  
                             <fieldset>
                                 <br>
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                                 <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
                                 <br>
-                                <br>
-                                <h3 align="left"><strong>Detalles de la evaluación legal</strong></h3>
-                                <p>A continuación se presentará información detallada sobre la evaluación legal desarrollada</p>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Número de expediente</label>
-                                    <div class="controls">
-                                        <input id="sol_dga" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
+                                <h3><strong>Tipo de Evaluación : Legal</strong></h3>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha asignación</label>
                                     <div class="controls">
-                                        <input type="text" class="datepicker span2" value="02/10/2012" id="dp3" >
+                                        <input id="fechaAsig" name="fechaAsig" type="text" class="datepicker span2" value="${legal.getFechaAsignacion() != null ? df.dateToString(legal.getFechaAsignacion()) : ''}" id="dp3" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Responsable</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Gordon Freeman</option>
-                                            <option value="mia">Sofia Lamb</option>
-                                            <option value="mia" selected>Carlos Cornejo</option>
+                                        <select id="personal" name="personal" class="input-xlarge">
+                                            <c:forEach var="personal" items="${listaPersonal}" > 
+                                                <option value="${personal.getIdpersonal()}" ${legal.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>    
                                 </div>
@@ -145,10 +145,10 @@
                                 <div class="control-group">
                                     <label class="control-label">Resultado</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Favorable</option>
-                                            <option value="mia">Desfavorable</option>
-                                            <option value="mia" selected>Observado</option>
+                                        <select id="resultado" name="resultado" > 
+                                            <option value="favorable" ${legal.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
+                                            <option value="desfavorable" ${legal.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
+                                            <option value="observado" ${legal.getResultado() == 'observado' ? 'selected' : ''}>Observado</option>
                                         </select>
                                     </div>  
                                 </div>
@@ -156,18 +156,25 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
-                                        <input id="fecha_resul" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaResul" name="fechaResul" type="text" value="${legal.getFechaResultado() != null ? df.dateToString(legal.getFechaResultado()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Observaciones </label>
                                     <div class="controls">
-                                        <textarea cols="25" rows="5" class="input-xlarge"> </textarea>
+                                       <textarea id="obs" name="obs" cols="25" rows="5" class="input-xlarge"> ${legal.getObservacion()}</textarea>
                                     </div>
                                 </div>
                                 <br>
-
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                    </div>
+                                </div>
+                                <!--FIN DE CONTENIDO-->
+                                 </fieldset>
+                              </form>
                                 <h3><strong>Resoluciones</strong></h3>
                                 <br>
                                 <div class="table-responsive">
@@ -181,34 +188,45 @@
                                                 <th>Editar</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Observado</td>
-                                                <td>020273</td>
-                                                <td>11-Oct-13</td>
-                                                <td>11-Oct-13</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                            </tr>
-                                        </tbody>
+                                         <c:if test="${legal != null}">    
+                                             <tbody>
+                                                <c:if test="${!legal.getResolucions().isEmpty()}">
+                                                     <c:forEach var="resolucion" items="${legal.getResolucions()}" varStatus="status">
+                                                         <tr>
+                                                             <td>${resolucion.getTipo()}</td>
+                                                             <td>${resolucion.getNumero()}</td>
+                                                             <td>${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}</td>
+                                                             <td>${resolucion.getFechaNotificacion() != null ? df.dateToString(resolucion.getFechaNotificacion()) : ''}</td>
+                                                             <td>
+                                                                 <form action="${pageContext.servletContext.contextPath}/PersonalEditarResolucionEvaluacion" method="post">
+                                                                        <input hidden name="idResol" id="idResol" value="${resolucion.getIdresolucion()}">
+                                                                        <input hidden name="familia" id="familia" value="${familia}">
+                                                                        <input hidden name="origen" id="origen" value="${origen}">
+                                                                        <button type="submit" class="btn btn-default">Ver</button>
+                                                                 </form>
+                                                             </td>
+                                                         </tr>
+                                                     </c:forEach>
+                                                </c:if>   
+                                            </tbody>
+                                         </c:if>
+                                         <c:if test="${legal == null}">
+                                                 <h3><strong>Debe registrar la evaluación antes de generar las resoluciones</strong></h3>
+                                         </c:if> 
                                     </table>
                                 </div>
                                 <br>
                                 <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar nueva resolución</button>
-                                    </div>
-                                </div>
+                                <c:if test="${legal != null}">
+                                <form action="${pageContext.servletContext.contextPath}/PersonalRegistrarResolucionEvaluacion" method="post">
+                                      <input hidden name="idLegal" id="idLegal" value="${legal.getIdevaluacion()}">
+                                      <input hidden name="familia" id="familia" value="${familia}">
+                                      <input hidden name="origen" id="origen" value="${origen}">
+                                      <button type="submit" class="btn btn-default">Registrar nueva resolución</button>
+                                </form>
+                                </c:if>      
                                 <br>
                                 <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
-                                    </div>
-                                </div>
-                                <!--FIN DE CONTENIDO-->
-                            </fieldset>
-                        </form>
                     </div>
                 </div>
             </div>

@@ -104,35 +104,46 @@
                             <li><a href="#" >Adopción</a></li>
                             <li><a href="#" >Post Adopción</a></li>
                         </ul>
-                        <form role="form">
+                            
+                        <c:if test="${psicologica == null}">
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalCrearEvalPsicologicaNac" method="post"> 
+                                <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
+                                <input hidden name="origen" id="origen" value="${origen}">
+                            </c:if>  
+                            <c:if test="${psicologica != null}">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalUpdateEvalPsicologicaNac" method="post"> 
+                                    <input hidden name="idEvalPsicologica" id="idEvalPsicologica" value="${psicologica.getIdevaluacion()}">
+                                    <input hidden name="origen" id="origen" value="${origen}">
+                                </c:if>  
+                            
                             <fieldset>
                                 <br>
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                                 <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
                                 <br>
                                 <br>
                                 <h3 align="left"><strong>Detalles de la evaluación</strong></h3>
                                 <br>
-                                <div class="control-group">
-                                    <label class="control-label">Tipo de Evaluación : Psicológica</label>
-                                </div>
+                                
+                                <h3><strong>Tipo de Evaluación : Psicológica</strong></h3>
+                                
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha asignación</label>
                                     <div class="controls">
-                                        <input type="text" class="datepicker span2" value="20/10/2013" id="dp3" >
+                                        <input id="fechaAsig" name="fechaAsig" type="text" class="datepicker span2" value="${psicologica.getFechaAsignacion() != null ? df.dateToString(psicologica.getFechaAsignacion()) : ''}" id="dp3" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Responsable</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Gordon Freeman</option>
-                                            <option value="mia">Sofia Lamb</option>
-                                            <option value="mia" selected>Carlos Cornejo</option>
+                                        <select id="personal" name="personal" class="input-xlarge">
+                                            <c:forEach var="personal" items="${listaPersonal}" > 
+                                                <option value="${personal.getIdpersonal()}" ${psicologica.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>    
                                 </div>
@@ -140,10 +151,10 @@
                                 <div class="control-group">
                                     <label class="control-label">Resultado</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Favorable</option>
-                                            <option value="mia">Desfavorable</option>
-                                            <option value="mia" selected>Observado</option>
+                                        <select id="resultado" name="resultado" > 
+                                            <option value="favorable" ${psicologica.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
+                                            <option value="desfavorable" ${psicologica.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
+                                            <option value="observado" ${psicologica.getResultado() == 'observado' ? 'selected' : ''}>Observado</option>
                                         </select>
                                     </div>  
                                 </div>
@@ -151,14 +162,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
-                                        <input id="fecha_resul" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaResul" name="fechaResul" type="text" value="${psicologica.getFechaResultado() != null ? df.dateToString(psicologica.getFechaResultado()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <textarea cols="25" rows="5" class="input-xlarge"> </textarea>
+                                        <textarea id="obs" name="obs" cols="25" rows="5" class="input-xlarge"> ${psicologica.getObservacion()}</textarea>
                                     </div>
                                 </div>
                                 <br>

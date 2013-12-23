@@ -104,29 +104,42 @@
                             <li><a href="#" >Adopción</a></li>
                             <li><a href="#" >Post Adopción</a></li>
                         </ul>
-                        <form role="form">
+                        <c:if test="${resolucion == null}">
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalCrearResolEvaluacion" method="post"> 
+                                <input hidden name="idLegal" id="idLegal" value="${idLegal}">
+                                <input hidden name="origen" id="origen" value="${origen}">
+                            </c:if>  
+                            <c:if test="${resolucion != null}">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalUpdateResolEvaluacion" method="post"> 
+                                    <input hidden name="idResolucion" id="idResolucion" value="${resolucion.getIdresolucion()}">
+                                    <input hidden name="origen" id="origen" value="${origen}">
+                                </c:if>  
                             <fieldset>
                                 <br>
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                                 <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
+                                <input hidden name="familia" id="familia" value="${familia}">
                                 <br>
                                 <br>
                                 <h3 align="left"><strong>Detalles de la resolución</strong></h3>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">N° de resolución: 00128743</label>
+                                    <label class="control-label">N° de resolución</label>
+                                    <div class="controls">
+                                            <input id="numResol" name="numResol" type="text" value="${resolucion.getNumero()}" class="input-xlarge">
+                                        </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Resolución</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Apto</option>
-                                            <option value="mia">Improcedente</option>
-                                            <option value="mia">Fin de procedimiento</option>
-                                            <option value="mia">Observado</option>
+                                        <select id="tipo" name="tipo">
+                                            <option value="apto" ${resolucion.getTipo() == 'apto' ? 'selected' : ''}>Apto</option>
+                                            <option value="improcedente" ${resolucion.getTipo() == 'improcedente' ? 'selected' : ''}>Improcedente</option>
+                                            <option value="fin" ${resolucion.getTipo() == 'fin' ? 'selected' : ''}>Fin de procedimiento</option>
+                                            <option value="observado" ${resolucion.getTipo() == 'observado' ? 'selected' : ''}>Observado</option>
                                         </select>
                                     </div>    
                                 </div>
@@ -134,14 +147,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha resolución</label>
                                     <div class="controls">
-                                        <input type="text" class="datepicker span2" value="02-16-2012" id="dp3" >
+                                        <input id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha notificación</label>
                                     <div class="controls">
-                                        <input type="text" class="datepicker span2" value="02-16-2012" id="dp3" >
+                                        <input id="fechaResul" name="fechaNot" type="text" value="${resolucion.getFechaNotificacion() != null ? df.dateToString(resolucion.getFechaNotificacion()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>

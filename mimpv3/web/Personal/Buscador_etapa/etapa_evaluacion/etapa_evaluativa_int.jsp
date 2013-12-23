@@ -99,7 +99,7 @@
                         <br>
                         <ul class="nav nav-tabs row">
                             <li><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" data-toggle="tab">Evaluación</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac">Evaluación</a></li>
                             <li><a href="#" >Designación</a></li>
                             <li><a href="#" >Adopción</a></li>
                             <li><a href="#" >Post Adopción</a></li>
@@ -116,11 +116,12 @@
                                             <tr>
                                                 <th>Expediente</th>
                                                 <th>Información</th>
+                                                <th>Evaluación Legal</th>
+                                                <th>Resultado</th>
                                                 <th>Evaluación Psicológica</th>
                                                 <th>Resultado</th>
                                                 <th>Evaluación Social</th>
                                                 <th>Resultado</th>
-                                                <th>Evaluación Legal</th>
                                                 <th>Fecha de Resolución</th>
                                                 <th>Tipo de Resolución</th>
                                             </tr>
@@ -128,16 +129,104 @@
                                          <c:if test="${ListaExpedientes != null}">   
                                         <tbody>
                                             <c:forEach var="expediente" items="${ListaExpedientes}" varStatus="status">
+                                                 <c:forEach var="evaluacion" items="${expediente.getEvaluacions()}" >
+                                                            <c:choose>
+                                                                <c:when test="${evaluacion.getTipo() == 'psicologica'}">
+                                                                    <c:set var="psicologica" value="${evaluacion}" scope="page" />
+                                                                </c:when>
+                                                                <c:when test="${evaluacion.getTipo() == 'social'}">
+                                                                    <c:set var="social" value="${evaluacion}" scope="page" />
+                                                                </c:when> 
+                                                                <c:when test="${evaluacion.getTipo() == 'legal'}">
+                                                                    <c:set var="legal" value="${evaluacion}" scope="page" />
+                                                                </c:when> 
+                                                            </c:choose>
+                                                </c:forEach>
                                                 <tr>
                                                 <td>${expediente.getExpediente()}</td>
                                                 <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>Pendiente</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>Pendiente</td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td>20/11/2013</td>
-                                                <td>Observación</td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/PersonalAgregarEvalLegal" method="post">
+                                                          <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                          <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
+                                                          <input hidden name="idLegal" id="idLegal" value="${legal.getIdevaluacion()}">
+                                                          <input hidden name="origen" id="origen" value="internacional">
+                                                          <button type="submit" class="btn btn-default">Registrar</button>
+                                                    </form> 
+                                                </td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${legal != null}">
+                                                            ${legal.getResultado()}
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            Pendiente
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/PersonalAgregarEvalPsicologica" method="post">
+                                                          <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                          <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
+                                                          <input hidden name="idPsicologica" id="idPsicologica" value="${psicologica.getIdevaluacion()}">
+                                                          <input hidden name="origen" id="origen" value="internacional">
+                                                          <button type="submit" class="btn btn-default">Registrar</button>
+                                                    </form>  
+                                                </td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${psicologica != null}">
+                                                            ${psicologica.getResultado()}
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            Pendiente
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/PersonalAgregarEvalSocial" method="post">
+                                                          <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                          <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
+                                                          <input hidden name="idSocial" id="idSocial" value="${social.getIdevaluacion()}">
+                                                          <input hidden name="origen" id="origen" value="internacional">
+                                                          <button type="submit" class="btn btn-default">Registrar</button>
+                                                    </form> 
+                                                </td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${social != null}">
+                                                            ${social.getResultado()}
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            Pendiente
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <c:if test="${!legal.getResolucions().isEmpty()}">
+                                                <c:forEach var="resolucion" items="${legal.getResolucions()}" varStatus="status">
+                                                 <c:choose>
+                                                        <c:when test="${status.index == 0}">
+                                                            <td>
+                                                            ${df.dateToString(resolucion.getFechaResol())}
+                                                            </td>
+                                                            <td>
+                                                            ${resolucion.getTipo()}
+                                                            </td>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                               </c:forEach>
+                                                </c:if>
+                                               <c:if test="${legal.getResolucions().isEmpty()}">
+                                                   <td>
+                                                       Pendiente
+                                                   </td>
+                                                   <td>
+                                                       Pendiente
+                                                   </td>
+                                              </c:if>
                                                 </tr>
                                             </c:forEach>
                                         </c:if> 
