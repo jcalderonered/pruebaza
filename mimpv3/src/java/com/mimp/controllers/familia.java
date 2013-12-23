@@ -343,7 +343,109 @@ public class familia {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         } else {
-            //REVISAR A PARTIR DE AQUI
+            //Verificamos si es la primera vez que llena la ficha
+            FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
+            if(ficha == null){
+                ficha = new FichaSolicitudAdopcion();
+                Solicitante sol;
+                Hijo hijo;
+                Residente res = new Residente();
+                
+                //En caso haya ficha, se crea una nueva ficha ingresando toda la información
+                for (Iterator iter = usuario.getInfoFamilias().iterator(); iter.hasNext();) {
+                    InfoFamilia ifa = (InfoFamilia) iter.next();
+                    
+                    ficha.setEstadoCivil(ifa.getEstadoCivil());
+                    //FALTA TELEFONO
+                    ficha.setDomicilio(ifa.getDomicilio());
+                    ficha.setDepRes(ifa.getDepRes());
+                    ficha.setPropiedadVivienda(ifa.getPropiedadVivienda());
+                    ficha.setTipoVivienda(ifa.getTipoVivienda());
+                    ficha.setAreaVivTotal(ifa.getAreaVivTotal());
+                    ficha.setAreaVivConst(ifa.getAreaVivConst());
+                    ficha.setDistVivenda(ifa.getDistVivienda());
+                    ficha.setLuz(ifa.getLuz());
+                    ficha.setAgua(ifa.getAgua());
+                    ficha.setDesague(ifa.getDesague());
+                    ficha.setOtrosServ(ifa.getOtrosServ());
+                    ficha.setMaterConst(ifa.getMaterConst());
+                    ficha.setPared(ifa.getPared());
+                    ficha.setTecho(ifa.getTecho());
+                    ficha.setPiso(ifa.getPiso());
+                    //no se está agregando: n_proc_adop_prev, anho_proceso, proceso_prep, proceso_eval
+                    ficha.setNnaIncesto(ifa.getNnaIncesto());
+                    ficha.setNnaMental(ifa.getNnaMental());
+                    ficha.setNnaEpilepsia(ifa.getNnaEpilepsia());
+                    ficha.setNnaAbuso(ifa.getNnaAbuso());
+                    ficha.setNnaSifilis(ifa.getNnaSifilis());
+                    ficha.setNnaSeguiMedico(ifa.getNnaSeguiMedico());
+                    ficha.setNnaOperacion(ifa.getNnaOperacion());
+                    ficha.setNnaHiperactivo(ifa.getNnaHiperactivo());
+                    ficha.setNnaEspecial(ifa.getNnaEspecial());
+                    ficha.setNnaEnfermo(ifa.getNnaEnfermo());
+                    ficha.setNnaMayor(ifa.getNnaMayor());
+                    ficha.setNnaAdolescente(ifa.getNnaAdolescente());
+                    ficha.setNnaHermano(ifa.getNnaHermano());
+                    //no se está agregando: nna_foraneo y rpta_foraneo
+                    for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
+                        Adoptante adp = (Adoptante) iter2.next();
+                        sol = new Solicitante();
+                        sol.setNombre(adp.getNombre());
+                        sol.setApellidoP(adp.getApellidoP());
+                        sol.setApellidoM(adp.getApellidoM());
+                        //no se está agregando: edad
+                        sol.setFechaNac(adp.getFechaNac());
+                        sol.setLugarNac(adp.getLugarNac());
+                        sol.setDepaNac(adp.getDepaNac());
+                        sol.setPaisNac(adp.getPaisNac());
+                        sol.setTipoDoc(adp.getTipoDoc());
+                        sol.setNDoc(adp.getNDoc());
+                        sol.setCelular(adp.getCelular());
+                        sol.setCorreo(adp.getCorreo());
+                        sol.setNivelInstruccion(adp.getNivelInstruccion());
+                        sol.setCulminoNivel(adp.getCulminoNivel());
+                        sol.setProfesion(adp.getProfesion());
+                        sol.setTrabajadorDepend(adp.getTrabajadorDepend());
+                        sol.setOcupActualDep(adp.getOcupActualDep());
+                        sol.setCentroTrabajo(adp.getCentroTrabajo());
+                        sol.setDireccionCentro(adp.getDireccionCentro());
+                        sol.setTelefonoCentro(adp.getTelefonoCentro());
+                        sol.setIngresoDep(adp.getIngresoDep());
+                        sol.setTrabajadorIndepend(adp.getTrabajadorIndepend());
+                        sol.setOcupActualInd(adp.getOcupActualInd());
+                        sol.setIngresoIndep(adp.getIngresoIndep());
+                        sol.setSeguroSalud(adp.getSeguroSalud());
+                        sol.setTipoSeguro(adp.getTipoSeguro());
+                        sol.setSeguroVida(adp.getSeguroVida());
+                        sol.setSistPensiones(adp.getSistPensiones());
+                        sol.setSaludActual(adp.getSaludActual());
+                        ficha.getSolicitantes().add(sol);
+                    }
+                    for (Iterator iter3 = ifa.getHijoActs().iterator(); iter3.hasNext();) {
+                        HijoAct ha = (HijoAct) iter3.next();
+                        hijo = new Hijo();
+                        hijo.setFechaNac(ha.getFechaNac());
+                        hijo.setBiologico(ha.getBiologico());
+                        hijo.setFechaAdop(ha.getFechaAdop());
+                        //no se esta agregando: edad
+                        hijo.setNombre(ha.getNombre());
+                        hijo.setApellidoP(ha.getApellidoP());
+                        hijo.setApellidoM(ha.getApellidoM());
+                        hijo.setOcupacion(ha.getOcupacion());
+                        hijo.setEstadoSalud(ha.getEstadoSalud());
+                        hijo.setReside(ha.getReside());
+                        ficha.getHijos().add(hijo);
+                    }
+                    for (Iterator iter4 = ifa.getResidenteActs().iterator(); iter4.hasNext();) {
+                        //SEGUIR A PARTIR DE AQUI
+                    }
+                }                
+            }
+            
+            
+            
+            
+            
             for (Iterator iter = usuario.getInfoFamilias().iterator(); iter.hasNext();) {
                 InfoFamilia ifa = (InfoFamilia) iter.next();
                 String fechaMatri = format.dateToString(ifa.getFechaMatrimonio());
