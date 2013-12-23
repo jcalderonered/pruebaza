@@ -12,9 +12,9 @@
     <mapping resource="com/mimp/bean/Familia.hbm.xml"/>
     <mapping resource="com/mimp/bean/Designacion.hbm.xml"/>
     <mapping resource="com/mimp/bean/AsistenciaFR.hbm.xml"/>
-    <mapping resource="com/mimp/bean/Car.hbm.xml"/>
     <mapping resource="com/mimp/bean/Sesion.hbm.xml"/>
     <mapping resource="com/mimp/bean/Adoptante.hbm.xml"/>
+    <mapping resource="com/mimp/bean/Car.hbm.xml"/>
     <mapping resource="com/mimp/bean/Solicitante.hbm.xml"/>
     <mapping resource="com/mimp/bean/EstudioCaso.hbm.xml"/>
     <mapping resource="com/mimp/bean/Reunion.hbm.xml"/>
@@ -22,7 +22,6 @@
     <mapping resource="com/mimp/bean/Juzgado.hbm.xml"/>
     <mapping resource="com/mimp/bean/Turno2.hbm.xml"/>
     <mapping resource="com/mimp/bean/AsistenciaFT.hbm.xml"/>
-    <mapping resource="com/mimp/bean/ExpedienteNna.hbm.xml"/>
     <mapping resource="com/mimp/bean/Asistente.hbm.xml"/>
     <mapping resource="com/mimp/bean/Grupo.hbm.xml"/>
     <mapping resource="com/mimp/bean/ExpedienteFamilia.hbm.xml"/>
@@ -31,8 +30,8 @@
     <mapping resource="com/mimp/bean/Prioritario.hbm.xml"/>
     <mapping resource="com/mimp/bean/Residente.hbm.xml"/>
     <mapping resource="com/mimp/bean/FormularioSesion.hbm.xml"/>
-    <mapping resource="com/mimp/bean/Representante.hbm.xml"/>
     <mapping resource="com/mimp/bean/Hijo.hbm.xml"/>
+    <mapping resource="com/mimp/bean/Representante.hbm.xml"/>
     <mapping resource="com/mimp/bean/Turno.hbm.xml"/>
     <mapping resource="com/mimp/bean/Entidad.hbm.xml"/>
     <mapping resource="com/mimp/bean/EvalLegal.hbm.xml"/>

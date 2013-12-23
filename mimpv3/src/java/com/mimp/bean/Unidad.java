@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 18, 2013 9:57:16 AM by Hibernate Tools 3.6.0
+// Generated Dec 23, 2013 10:39:27 AM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -24,7 +24,6 @@ public class Unidad  implements java.io.Serializable {
      private String obs;
      private Set<Personal> personals = new HashSet<Personal>(0);
      private Set<ExpedienteFamilia> expedienteFamilias = new HashSet<ExpedienteFamilia>(0);
-     private Set<ExpedienteNna> expedienteNnas = new HashSet<ExpedienteNna>(0);
 
     public Unidad() {
     }
@@ -33,7 +32,7 @@ public class Unidad  implements java.io.Serializable {
     public Unidad(long idunidad) {
         this.idunidad = idunidad;
     }
-    public Unidad(long idunidad, String nombre, String direccion, String departamento, String provincia, String distrito, String competenciaRegional, String correo, String telefono, String celular, String obs, Set<Personal> personals, Set<ExpedienteFamilia> expedienteFamilias, Set<ExpedienteNna> expedienteNnas) {
+    public Unidad(long idunidad, String nombre, String direccion, String departamento, String provincia, String distrito, String competenciaRegional, String correo, String telefono, String celular, String obs, Set<Personal> personals, Set<ExpedienteFamilia> expedienteFamilias) {
        this.idunidad = idunidad;
        this.nombre = nombre;
        this.direccion = direccion;
@@ -47,7 +46,6 @@ public class Unidad  implements java.io.Serializable {
        this.obs = obs;
        this.personals = personals;
        this.expedienteFamilias = expedienteFamilias;
-       this.expedienteNnas = expedienteNnas;
     }
    
     public long getIdunidad() {
@@ -140,13 +138,6 @@ public class Unidad  implements java.io.Serializable {
     
     public void setExpedienteFamilias(Set<ExpedienteFamilia> expedienteFamilias) {
         this.expedienteFamilias = expedienteFamilias;
-    }
-    public Set<ExpedienteNna> getExpedienteNnas() {
-        return this.expedienteNnas;
-    }
-    
-    public void setExpedienteNnas(Set<ExpedienteNna> expedienteNnas) {
-        this.expedienteNnas = expedienteNnas;
     }
 
 
