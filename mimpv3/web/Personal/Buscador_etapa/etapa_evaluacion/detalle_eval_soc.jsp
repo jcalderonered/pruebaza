@@ -105,35 +105,44 @@
                             <li><a href="#" >Adopción</a></li>
                             <li><a href="#" >Post Adopción</a></li>
                         </ul>
-                        <form role="form">
+                        <c:if test="${social == null}">
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalCrearEvalSocialNac" method="post"> 
+                                <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
+                                <input hidden name="origen" id="origen" value="${origen}">
+                            </c:if>  
+                            <c:if test="${social != null}">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalUpdateEvalSocialNac" method="post"> 
+                                    <input hidden name="idEvalSocial" id="idEvalSocial" value="${social.getIdevaluacion()}">
+                                    <input hidden name="origen" id="origen" value="${origen}">
+                                </c:if>  
                             <fieldset>
                                 <br>
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                                 <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
                                 <br>
                                 <br>
                                 <h3 align="left"><strong>Detalles de la evaluación</strong></h3>
                                 <br>
-                                <div class="control-group">
-                                    <label class="control-label">Tipo de Evaluación : Social</label>
-                                </div>
+                                
+                                <h3><strong>Tipo de Evaluación : Social</strong></h3>
+                                
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha asignación</label>
                                     <div class="controls">
-                                        <input type="text" class="datepicker span2" value="16/02/2012" id="dp3" >
+                                        <input id="fechaAsig" name="fechaAsig" type="text" class="datepicker span2" value="${social.getFechaAsignacion() != null ? df.dateToString(social.getFechaAsignacion()) : ''}" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Responsable</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Gordon Freeman</option>
-                                            <option value="mia">Sofia Lamb</option>
-                                            <option value="mia" selected>Carlos Cornejo</option>
+                                        <select id="personal" name="personal" class="input-xlarge">
+                                            <c:forEach var="personal" items="${listaPersonal}" > 
+                                                <option value="${personal.getIdpersonal()}" ${social.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>    
                                 </div>
@@ -141,10 +150,10 @@
                                 <div class="control-group">
                                     <label class="control-label">Resultado</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Favorable</option>
-                                            <option value="mia">Desfavorable</option>
-                                            <option value="mia" selected>Observado</option>
+                                        <select id="resultado" name="resultado" > 
+                                            <option value="favorable" ${social.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
+                                            <option value="desfavorable" ${social.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
+                                            <option value="observado" ${social.getResultado() == 'observado' ? 'selected' : ''}>Observado</option>
                                         </select>
                                     </div>  
                                 </div>
@@ -152,14 +161,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
-                                        <input id="fecha_resul" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaResul" name="fechaResul" type="text" value="${social.getFechaResultado() != null ? df.dateToString(social.getFechaResultado()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <textarea cols="25" rows="5" class="input-xlarge"> </textarea>
+                                        <textarea id="obs" name="obs" cols="25" rows="5" class="input-xlarge"> ${social.getObservacion()}</textarea>
                                     </div>
                                 </div>
                                 <br>

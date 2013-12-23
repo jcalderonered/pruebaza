@@ -84,6 +84,85 @@ public ArrayList<Familia> getListaFamilias () {
     
     }
     
+    public ExpedienteFamilia getExpedienteFamilia(long id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ExpedienteFamilia expFamilia = new ExpedienteFamilia();
+        String hqlA = "FROM ExpedienteFamilia EF WHERE EF.id = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        expFamilia = (ExpedienteFamilia) queryResultA;
+        
+        return expFamilia;
+        
+    }
+    
+    public Evaluacion getEvaluacion(long id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Evaluacion tempEval = new Evaluacion();
+        
+        String hqlA = "FROM Evaluacion E WHERE E.id = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        tempEval = (Evaluacion) queryResultA;
+        
+        return tempEval;
+        
+    }
+    
+    public Resolucion getResolucion(long id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Resolucion tempResol = new Resolucion();
+        
+        String hqlA = "FROM Resolucion R WHERE R.id = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        tempResol = (Resolucion) queryResultA;
+        
+        return tempResol;
+        
+    }
+    
+    public Evaluacion getLegal(long id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Evaluacion tempEval = new Evaluacion();
+        
+        String hqlA = "FROM Evaluacion E WHERE E.id = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        tempEval = (Evaluacion) queryResultA;
+        
+        String hql2 = "from Resolucion R where R.evaluacion = :idEvaluacion ORDER BY R.fechaResol DESC";
+                        Query query2 = session.createQuery(hql2);
+                        query2.setLong("idEvaluacion", tempEval.getIdevaluacion());
+                        List resoluciones = query2.list();
+                        Set<Resolucion> tempResoluciones = new HashSet<Resolucion>(0);
+                            for (Iterator iter2 = resoluciones.iterator(); iter2.hasNext();) {
+                                    Resolucion resolTemp = (Resolucion) iter2.next();
+                                    tempResoluciones.add(resolTemp);
+                            }
+                        tempEval.setResolucions(tempResoluciones);
+        
+        
+        return tempEval;
+        
+    }
+    
      public ArrayList<ExpedienteFamilia> ListaExpedientes(String nacionalidad,String estado) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -94,14 +173,71 @@ public ArrayList<Familia> getListaFamilias () {
         Query query = session.createQuery(hql);
         query.setString("nacionalidad", nacionalidad);
         query.setString("estado", estado);
-        List autoridades = query.list();
+        List expedientes = query.list();
         ArrayList<ExpedienteFamilia> allExpedienteFamilia = new ArrayList();
-        for (Iterator iter = autoridades.iterator(); iter.hasNext();) {
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
             ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
             Hibernate.initialize(temp.getEvaluacions());
+            Set<Evaluacion> tempEvaluaciones = new HashSet<Evaluacion>(0);
+            for (Evaluacion eval : temp.getEvaluacions() ){
+                    if(eval.getTipo().equals("legal")){
+                        String hql2 = "from Resolucion R where R.evaluacion = :idEvaluacion ORDER BY R.fechaResol DESC";
+                        Query query2 = session.createQuery(hql2);
+                        query2.setLong("idEvaluacion", eval.getIdevaluacion());
+                        List resoluciones = query2.list();
+                        Set<Resolucion> tempResoluciones = new HashSet<Resolucion>(0);
+                            for (Iterator iter2 = resoluciones.iterator(); iter2.hasNext();) {
+                                    Resolucion resolTemp = (Resolucion) iter2.next();
+                                    tempResoluciones.add(resolTemp);
+                                    System.out.print(resolTemp);
+                            }
+                        eval.setResolucions(tempResoluciones);
+                        tempEvaluaciones.add(eval);
+                    }else{
+                        tempEvaluaciones.add(eval);
+                    }
+                    
+            }
+            temp.setEvaluacions(tempEvaluaciones);
             allExpedienteFamilia.add(temp);
         }
         return allExpedienteFamilia;
     }
+     
+    public void crearEvaluacion(Evaluacion temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.save(temp);
+    
+    } 
+    
+    public void updateEvaluacion(Evaluacion temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.update(temp);
+    
+    } 
+    
+    public void crearResolEvaluacion(Resolucion temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.save(temp);
+    
+    } 
+    
+    public void updateResolEvaluacion(Resolucion temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.update(temp);
+    
+    } 
 
 }
