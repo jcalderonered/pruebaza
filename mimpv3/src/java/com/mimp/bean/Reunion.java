@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 18, 2013 9:57:16 AM by Hibernate Tools 3.6.0
+// Generated Dec 23, 2013 10:39:27 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -22,6 +22,7 @@ public class Reunion  implements java.io.Serializable {
      private String facilitador;
      private Short capacidad;
      private Short asistencia;
+     private String unidad;
      private Set<AsistenciaFR> asistenciaFRs = new HashSet<AsistenciaFR>(0);
 
     public Reunion() {
@@ -32,7 +33,7 @@ public class Reunion  implements java.io.Serializable {
         this.idreunion = idreunion;
         this.turno2 = turno2;
     }
-    public Reunion(long idreunion, Turno2 turno2, Date fecha, String hora, String duracion, String direccion, Short identificador, String facilitador, Short capacidad, Short asistencia, Set<AsistenciaFR> asistenciaFRs) {
+    public Reunion(long idreunion, Turno2 turno2, Date fecha, String hora, String duracion, String direccion, Short identificador, String facilitador, Short capacidad, Short asistencia, String unidad, Set<AsistenciaFR> asistenciaFRs) {
        this.idreunion = idreunion;
        this.turno2 = turno2;
        this.fecha = fecha;
@@ -43,6 +44,7 @@ public class Reunion  implements java.io.Serializable {
        this.facilitador = facilitador;
        this.capacidad = capacidad;
        this.asistencia = asistencia;
+       this.unidad = unidad;
        this.asistenciaFRs = asistenciaFRs;
     }
    
@@ -115,6 +117,13 @@ public class Reunion  implements java.io.Serializable {
     
     public void setAsistencia(Short asistencia) {
         this.asistencia = asistencia;
+    }
+    public String getUnidad() {
+        return this.unidad;
+    }
+    
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
     }
     public Set<AsistenciaFR> getAsistenciaFRs() {
         return this.asistenciaFRs;

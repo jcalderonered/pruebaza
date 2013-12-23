@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 18, 2013 9:57:16 AM by Hibernate Tools 3.6.0 -->
+<!-- Generated Dec 23, 2013 10:39:28 AM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mimp.bean.Taller" table="TALLER" schema="MIMP_ADOPCION">
         <id name="idtaller" type="long">
@@ -24,7 +24,7 @@
             <column name="N_REUNION" precision="3" scale="0" />
         </property>
         <property name="unidad" type="string">
-            <column name="UNIDAD" length="20" />
+            <column name="UNIDAD" length="500" />
         </property>
         <set name="grupos" table="GRUPO" inverse="true" lazy="true" fetch="select">
             <key>

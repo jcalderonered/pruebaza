@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 18, 2013 9:57:16 AM by Hibernate Tools 3.6.0
+// Generated Dec 23, 2013 10:39:27 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -46,9 +46,9 @@ public class Nna  implements java.io.Serializable {
      private Short adolescente;
      private Short hermano;
      private Short nn;
+     private String observaciones;
      private Set<Designacion> designacions = new HashSet<Designacion>(0);
      private Set<Prioritario> prioritarios = new HashSet<Prioritario>(0);
-     private Set<ExpedienteNna> expedienteNnas = new HashSet<ExpedienteNna>(0);
      private Set<EstudioCaso> estudioCasos = new HashSet<EstudioCaso>(0);
 
     public Nna() {
@@ -60,7 +60,7 @@ public class Nna  implements java.io.Serializable {
         this.car = car;
         this.juzgado = juzgado;
     }
-    public Nna(long idnna, Car car, Juzgado juzgado, String nombre, String apellidoP, String apellidoM, String sexo, Date fechaNacimiento, Short edadAnhos, Short edadMeses, Short actaNacimiento, String condicionSalud, String departamentoNacimiento, String provinciaNacimiento, String distritoNacimiento, String paisNacimiento, String lugarNac, Date fechaResolAbandono, Date fechaResolConsentida, String clasificacion, Short incesto, Short mental, Short epilepsia, Short abuso, Short sifilis, Short seguiMedico, Short operacion, Short hiperactivo, Short especial, Short enfermo, Short mayor, Short adolescente, Short hermano, Short nn, Set<Designacion> designacions, Set<Prioritario> prioritarios, Set<ExpedienteNna> expedienteNnas, Set<EstudioCaso> estudioCasos) {
+    public Nna(long idnna, Car car, Juzgado juzgado, String nombre, String apellidoP, String apellidoM, String sexo, Date fechaNacimiento, Short edadAnhos, Short edadMeses, Short actaNacimiento, String condicionSalud, String departamentoNacimiento, String provinciaNacimiento, String distritoNacimiento, String paisNacimiento, String lugarNac, Date fechaResolAbandono, Date fechaResolConsentida, String clasificacion, Short incesto, Short mental, Short epilepsia, Short abuso, Short sifilis, Short seguiMedico, Short operacion, Short hiperactivo, Short especial, Short enfermo, Short mayor, Short adolescente, Short hermano, Short nn, String observaciones, Set<Designacion> designacions, Set<Prioritario> prioritarios, Set<EstudioCaso> estudioCasos) {
        this.idnna = idnna;
        this.car = car;
        this.juzgado = juzgado;
@@ -95,9 +95,9 @@ public class Nna  implements java.io.Serializable {
        this.adolescente = adolescente;
        this.hermano = hermano;
        this.nn = nn;
+       this.observaciones = observaciones;
        this.designacions = designacions;
        this.prioritarios = prioritarios;
-       this.expedienteNnas = expedienteNnas;
        this.estudioCasos = estudioCasos;
     }
    
@@ -339,6 +339,13 @@ public class Nna  implements java.io.Serializable {
     public void setNn(Short nn) {
         this.nn = nn;
     }
+    public String getObservaciones() {
+        return this.observaciones;
+    }
+    
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
     public Set<Designacion> getDesignacions() {
         return this.designacions;
     }
@@ -352,13 +359,6 @@ public class Nna  implements java.io.Serializable {
     
     public void setPrioritarios(Set<Prioritario> prioritarios) {
         this.prioritarios = prioritarios;
-    }
-    public Set<ExpedienteNna> getExpedienteNnas() {
-        return this.expedienteNnas;
-    }
-    
-    public void setExpedienteNnas(Set<ExpedienteNna> expedienteNnas) {
-        this.expedienteNnas = expedienteNnas;
     }
     public Set<EstudioCaso> getEstudioCasos() {
         return this.estudioCasos;
