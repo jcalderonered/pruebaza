@@ -92,13 +92,13 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Registrar NNA</button></p>
+                        <p align="right"><button onclick="window.location.href = '${pageContext.servletContext.contextPath}/agregarNna'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Registrar NNA</button></p>
                         <br>
                         <br>
-                        <ul class="nav nav-tabs row" id="tabs" >
-                            <li class="active"><a href="#" data-toggle="tab">NNA Regulares</a></li>
-                            <li><a href="#" data-toggle="tab">NNA Prioritarios</a></li>
-                            <li><a href="#" data-toggle="tab">NNA en Seguimiento</a></li>
+                        <ul class="nav nav-tabs row" >
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
                         </ul>
                         <br>
                         <br>

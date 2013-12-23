@@ -1,5 +1,5 @@
 package com.mimp.bean;
-// Generated Dec 23, 2013 10:39:27 AM by Hibernate Tools 3.6.0
+// Generated Dec 23, 2013 3:56:21 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -30,8 +30,9 @@ public class FormularioSesion  implements java.io.Serializable {
     }
 
 	
-    public FormularioSesion(long idformularioSesion, Sesion sesion) {
+    public FormularioSesion(long idformularioSesion, Familia familia, Sesion sesion) {
         this.idformularioSesion = idformularioSesion;
+        this.familia = familia;
         this.sesion = sesion;
     }
     public FormularioSesion(long idformularioSesion, Familia familia, Sesion sesion, Date fechaSol, String paisRes, String depRes, String provRes, String distritoRes, String direccionRes, String estadoCivil, String telefono, Set<Asistente> asistentes, Set<AsistenciaFT> asistenciaFTs) {

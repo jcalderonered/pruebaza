@@ -103,7 +103,7 @@
                                 <div class="control-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"> Registrar como NN
+                                            <input id="nn" name="nn" value="0" type="checkbox"> Registrar como NN
                                         </label>
                                     </div>
                                 </div>
@@ -111,30 +111,30 @@
                                 <div class="control-group">
                                     <label class="control-label">Nombre</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="nombre" name="nombre" value="${nna.getNombre()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Paterno</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="apellidoP" name="apellidoP" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Materno</label>
                                     <div class="controls">
-                                        <input  id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="apellidoM" name="apellidoM" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Sexo</label>
                                     <div class="controls">
-                                        <select  >
-                                            <option value="sia">Masculino</option>
-                                            <option value="mia">Femenino</option>
+                                        <select id="sexo" name="sexo">
+                                            <option value="masculino">Masculino</option>
+                                            <option value="femenino">Femenino</option>
                                         </select>
                                     </div>    
                                 </div>
@@ -142,16 +142,16 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaNac" name="fechaNac" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Edad </label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" placeholder="Años" class="input-xlarge">
+                                        <input id="edad" name="edad" type="text" placeholder="Años" class="input-xlarge">
                                         &nbsp;
-                                        <input id="full-name" name="full-name" type="text" placeholder="Meses" class="input-xlarge">
+                                        <input id="meses" name="meses" type="text" placeholder="Meses" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -182,32 +182,26 @@
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
+                                                <input type="radio" name="actaNac" id="optionsRadios1" value="s" >Si</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">No</label>
+                                                <input type="radio" name="actaNac" id="optionsRadios2" value="n">No</label>
                                         </div>                            
                                     </div>
                                 </div>  
                                 <br>
-
-                                <div class="control-group">
-                                    <label class="control-label">Condición de Salud</label>
-                                    <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
+                                <!--
                                 <div class="control-group">
                                     <label class="control-label">País de Nacimiento</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="paisNac" name="paisNac" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
+                                -->
                                 <div class="control-group">
                                     <label class="control-label">Lugar de nacimiento</label>
                                     <div class="controls">
@@ -223,9 +217,23 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
+                                    <label class="control-label">Número de resolución de abandono</label>
+                                    <div class="controls">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
                                     <label class="control-label">Fecha de resolución de abandono</label>
                                     <div class="controls">
                                         <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Número de resolución consentida</label>
+                                    <div class="controls">
+                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -256,9 +264,9 @@
                                                         <h4>Nacido(a) como consecuencia del incesto</h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
+                                                        <select id="incesto" name="incesto" >
+                                                            <option value="si">SI</option>
+                                                            <option value="no" selected >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -267,9 +275,9 @@
                                                         <h4>Padres con enfermedad psiquiátrica (esquizofrenia, paranoia, etc</h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
+                                                        <select id="psiquiatrica" name="psiquiatrica" >
+                                                            <option value="si">SI</option>
+                                                            <option value="no" selected >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -278,9 +286,9 @@
                                                         <h4>Padres con epilepsia</h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
+                                                        <select id="epilepsia" name="epilepsia" >
+                                                            <option value="si">SI</option>
+                                                            <option value="no" selected >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -289,9 +297,9 @@
                                                         <h4>Niña, niño o adolescente víctima de abuso sexual</h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
+                                                        <select id="abuso" name="abuso" >
+                                                            <option value="si">SI</option>
+                                                            <option value="no" selected >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -301,9 +309,9 @@
                                                             diagnosticado/a preliminarmente con sífilis congénita.</h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
+                                                        <select id="sano" name="sano" >
+                                                            <option value="si">SI</option>
+                                                            <option value="no" selected >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -328,9 +336,9 @@
                                                             desnutrición crónica, etc.)</h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
+                                                        <select id="estable" name="estable" >
+                                                            <option value="si">SI</option>
+                                                            <option value="no" selected >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -340,9 +348,9 @@
                                                             (labio leporino, estrabismo, etc.)</h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
+                                                        <select id="intervencion" name="intervencion" >
+                                                            <option value="si">SI</option>
+                                                            <option value="no" selected >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -352,9 +360,9 @@
                                                             hiperactividad (TDAH)</h4>
                                                     </td>
                                                     <td>
-                                                        <select>
-                                                            <option value="sia">SI</option>
-                                                            <option value="mia">NO</option>
+                                                        <select id="trastorno" name="trastorno">
+                                                            <option value="si">SI</option>
+                                                            <option value="no" selected >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -379,7 +387,7 @@
                                                     <td>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D"></label>
+                                                                <input type="radio" name="prioritarios" id="nna1" value="e"></label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -390,7 +398,7 @@
                                                     <td>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D"></label>
+                                                                <input type="radio" name="prioritarios" id="nna2" value="s"></label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -401,7 +409,7 @@
                                                     <td>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D"></label>
+                                                                <input type="radio" name="prioritarios" id="nna3" value="m"></label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -412,7 +420,7 @@
                                                     <td>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D"></label>
+                                                                <input type="radio" name="prioritarios" id="nna4" value="a"></label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -423,7 +431,7 @@
                                                     <td>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D"></label>
+                                                                <input type="radio" name="prioritarios" id="nna5" value="h"></label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -431,21 +439,27 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="control-group">
+                                    <label class="control-label">Observaciones</label>
+                                    <div class="controls">
+                                        <textarea id="salud" name="salud" cols="25" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <br>
                                 <!-- Button -->
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
                                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
-                                        &nbsp;
+                                      </div>
+                                 </div>   
+                                  </fieldset>
+                                </form>       
+                                <br>        
                                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Expediente</button>
                                         &nbsp;
                                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Propuesta de Designación</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
-
-                    </div>
+                        </div>
                 </div>
             </div>
             <!--FIN DE CONTENIDO-->
@@ -466,8 +480,44 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
+              $(document).ready(function(){  
+                $('.datepicker').datepicker({
+                    "format": "dd/mm/yyyy", 
+                    "weekStart": 1, 
+                    "autoclose": true, 
+                    "language": "es"
+                });  
+                  
+                $('#fechaNac').datepicker({
+                    "format": "dd/mm/yyyy", 
+                    "weekStart": 1, 
+                    "autoclose": true, 
+                    "language": "es"
+                }).on('changeDate', function (ev) {
+                    
+                    var nac =  document.getElementById("fechaNac").value;
+                    var edad =  document.getElementById("edad");
+                    var meses =  document.getElementById("meses");
+                    
+                    var today = new Date();
+                    var curr_date = today.getDate();
+                    var curr_month = today.getMonth() + 1;
+                    var curr_year = today.getFullYear();
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                    var pieces = nac.split('/');
+                    var birth_date = pieces[0];
+                    var birth_month = pieces[1];
+                    var birth_year = pieces[2];
+                    
+                    if (curr_year != birth_year && birth_month >= curr_month  ) edad.value = curr_year - birth_year - 1;
+                    if (curr_year != birth_year && birth_month == curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year == birth_year) edad.value = 0;
+                    if (curr_month == birth_month) meses.value = 0;
+                    if (curr_month != birth_month && curr_month > birth_month ) meses.value = curr_month - birth_month;
+                    if (curr_month != birth_month && curr_month <= birth_month ) meses.value = curr_month;
+                     
+                        });
+              });
 
             </script>
             <!-- Ubicar al final -->
