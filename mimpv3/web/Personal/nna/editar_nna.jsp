@@ -97,13 +97,19 @@
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                         <h1 align="center"><strong>Editar NNA</strong></h1>
                         <br>
-                        <form class="form-horizontal">
+                        <c:if test="${nna == null}">
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearNna" method="post"> 
+                            </c:if>  
+                            <c:if test="${nna != null}">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateNna" method="post"> 
+                                    <input hidden name="id" id="id" value="${nna.getIdnna()}">
+                                </c:if>     
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input id="nn" name="nn" value="0" type="checkbox"> Registrar como NN
+                                            <input id="nn" name="nn" value="0" ${nna.getNn() == 0 ? 'checked' : ''} type="checkbox"> Registrar como NN
                                         </label>
                                     </div>
                                 </div>
@@ -118,14 +124,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Apellido Paterno</label>
                                     <div class="controls">
-                                        <input id="apellidoP" name="apellidoP" type="text" class="input-xlarge">
+                                        <input id="apellidoP" value="${nna.getApellidoP()}" name="apellidoP" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Materno</label>
                                     <div class="controls">
-                                        <input id="apellidoM" name="apellidoM" type="text" class="input-xlarge">
+                                        <input id="apellidoM" value="${nna.getApellidoM()}" name="apellidoM" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -133,8 +139,8 @@
                                     <label class="control-label">Sexo</label>
                                     <div class="controls">
                                         <select id="sexo" name="sexo">
-                                            <option value="masculino">Masculino</option>
-                                            <option value="femenino">Femenino</option>
+                                            <option value="masculino" ${nna.getSexo() == 'masculino' ? 'selected' : ''} >Masculino</option>
+                                            <option value="femenino"  ${nna.getSexo() == 'femenino' ? 'selected' : ''}>Femenino</option>
                                         </select>
                                     </div>    
                                 </div>
@@ -142,35 +148,37 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input id="fechaNac" name="fechaNac" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaNac" value="${nna.getFechaNacimiento() != null ? df.dateToString(nna.getFechaNacimiento()) : ''}" name="fechaNac" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Edad </label>
                                     <div class="controls">
-                                        <input id="edad" name="edad" type="text" placeholder="Años" class="input-xlarge">
+                                        <input id="edad" name="edad" type="text" value="${nna.getEdadAnhos()}" placeholder="Años" class="input-xlarge">
                                         &nbsp;
-                                        <input id="meses" name="meses" type="text" placeholder="Meses" class="input-xlarge">
+                                        <input id="meses" name="meses" type="text" value="${nna.getEdadMeses()}" placeholder="Meses" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Juzgado</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Juzgado 1</option>
-                                            <option value="mia">Juzgado 2</option>
+                                        <select id="idJuzgado" name="idJuzgado" >
+                                            <c:forEach var="juzgado" items="${listaJuzgados}" > 
+                                                <option value="${juzgado.getIdjuzgado()}" ${nna.getJuzgado().getIdjuzgado() == juzgado.getIdjuzgado() ? 'selected' : ''}>${juzgado.getNombre()} ${juzgado.getDepartamento()}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>    
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Car</label>
+                                    <label class="control-label">CAR</label>
                                     <div class="controls">
-                                        <select  >
-                                            <option value="sia">Car 1</option>
-                                            <option value="mia">Car 2</option>
+                                        <select id="idCar" name="idCar" >
+                                            <c:forEach var="car" items="${listaCar}" > 
+                                                <option value="${car.getIdcar()}" ${nna.getCar().getIdcar() == car.getIdcar() ? 'selected' : ''}>${car.getNombre()} ${car.getDepartamento()}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>    
                                 </div>
@@ -182,13 +190,13 @@
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="actaNac" id="optionsRadios1" value="s" >Si</label>
+                                                <input type="radio" name="actaNac" id="optionsRadios1" value="s" ${nna.getActaNacimiento() == 0 ? 'checked' : ''} >Si</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="actaNac" id="optionsRadios2" value="n">No</label>
+                                                <input type="radio" name="actaNac" id="optionsRadios2" value="n" ${nna.getActaNacimiento() != 0 ? 'checked' : ''}>No</label>
                                         </div>                            
                                     </div>
                                 </div>  
@@ -205,42 +213,42 @@
                                 <div class="control-group">
                                     <label class="control-label">Lugar de nacimiento</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" placeholder="Departamento" class="input-xlarge">
+                                        <input id="dep" name="dep" type="text" placeholder="Departamento" value="${nna.getDepartamentoNacimiento()}" class="input-xlarge">
                                         &nbsp;
-                                        <input id="full-name" name="full-name" type="text" placeholder="Provincia" class="input-xlarge">
+                                        <input id="prov" name="prov" type="text" placeholder="Provincia" value="${nna.getProvinciaNacimiento()}" class="input-xlarge">
                                         &nbsp;
-                                        <input id="full-name" name="full-name" type="text" placeholder="Distrito" class="input-xlarge">
+                                        <input id="dist" name="dist" type="text" placeholder="Distrito" value="${nna.getDistritoNacimiento()}"  class="input-xlarge">
                                         &nbsp;
                                     </div>
                                     <br>
-                                    <input id="full-name" name="full-name" type="text" placeholder="Dirección" class="input-xlarge">
+                                    <input id="direccion" name="direccion" type="text" value="${nna.getLugarNac()}" placeholder="Dirección" class="input-xlarge">
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Número de resolución de abandono</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="numResolAband" name="numResolAband" value="${nna.getNResolAband()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de resolución de abandono</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaResolAband" name="fechaResolAband" value="${nna.getFechaResolAbandono() != null ? df.dateToString(nna.getFechaResolAbandono()) : ''}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Número de resolución consentida</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="numResolConsen" name="numResolConsen" value="${nna.getNResolAband()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de resolución consentida</label>
                                     <div class="controls">
-                                        <input  id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input  id="fechaResolConsen" name="fechaResolConsen" value="${nna.getFechaResolConsentida() != null ? df.dateToString(nna.getFechaResolConsentida()) : ''}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -265,8 +273,8 @@
                                                     </td>
                                                     <td>
                                                         <select id="incesto" name="incesto" >
-                                                            <option value="si">SI</option>
-                                                            <option value="no" selected >NO</option>
+                                                            <option value="0" ${nna.getIncesto() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${nna.getIncesto() != 0 ? 'selected' : ''} >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -276,8 +284,8 @@
                                                     </td>
                                                     <td>
                                                         <select id="psiquiatrica" name="psiquiatrica" >
-                                                            <option value="si">SI</option>
-                                                            <option value="no" selected >NO</option>
+                                                            <option value="0" ${nna.getMental() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${nna.getMental() != 0 ? 'selected' : ''} >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -287,8 +295,8 @@
                                                     </td>
                                                     <td>
                                                         <select id="epilepsia" name="epilepsia" >
-                                                            <option value="si">SI</option>
-                                                            <option value="no" selected >NO</option>
+                                                            <option value="0" ${nna.getEpilepsia() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${nna.getEpilepsia() != 0 ? 'selected' : ''} >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -298,8 +306,8 @@
                                                     </td>
                                                     <td>
                                                         <select id="abuso" name="abuso" >
-                                                            <option value="si">SI</option>
-                                                            <option value="no" selected >NO</option>
+                                                            <option value="0" ${nna.getAbuso() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${nna.getAbuso() != 0 ? 'selected' : ''} >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -309,9 +317,9 @@
                                                             diagnosticado/a preliminarmente con sífilis congénita.</h4>
                                                     </td>
                                                     <td>
-                                                        <select id="sano" name="sano" >
-                                                            <option value="si">SI</option>
-                                                            <option value="no" selected >NO</option>
+                                                        <select id="sifilis" name="sifilis" >
+                                                            <option value="0" ${nna.getSifilis() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${nna.getSifilis() != 0 ? 'selected' : ''} >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -337,8 +345,8 @@
                                                     </td>
                                                     <td>
                                                         <select id="estable" name="estable" >
-                                                            <option value="si">SI</option>
-                                                            <option value="no" selected >NO</option>
+                                                            <option value="0" ${nna.getSeguiMedico() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${nna.getSeguiMedico() != 0 ? 'selected' : ''} >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -349,8 +357,8 @@
                                                     </td>
                                                     <td>
                                                         <select id="intervencion" name="intervencion" >
-                                                            <option value="si">SI</option>
-                                                            <option value="no" selected >NO</option>
+                                                            <option value="0" ${nna.getOperacion() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${nna.getOperacion() != 0 ? 'selected' : ''} >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -361,8 +369,8 @@
                                                     </td>
                                                     <td>
                                                         <select id="trastorno" name="trastorno">
-                                                            <option value="si">SI</option>
-                                                            <option value="no" selected >NO</option>
+                                                            <option value="0" ${nna.getHiperactivo() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${nna.getHiperactivo() != 0 ? 'selected' : ''} >NO</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -387,7 +395,7 @@
                                                     <td>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="prioritarios" id="nna1" value="e"></label>
+                                                                <input type="radio" name="prioritarios" id="nna1" value="e" ${nna.getEspecial() == 0 ? 'checked' : ''}></label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -398,7 +406,7 @@
                                                     <td>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="prioritarios" id="nna2" value="s"></label>
+                                                                <input type="radio" name="prioritarios" id="nna2" value="s" ${nna.getEnfermo() == 0 ? 'checked' : ''}></label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -409,7 +417,7 @@
                                                     <td>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="prioritarios" id="nna3" value="m"></label>
+                                                                <input type="radio" name="prioritarios" id="nna3" value="m" ${nna.getMayor() == 0 ? 'checked' : ''}></label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -420,7 +428,7 @@
                                                     <td>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="prioritarios" id="nna4" value="a"></label>
+                                                                <input type="radio" name="prioritarios" id="nna4" value="a" ${nna.getAdolescente() == 0 ? 'checked' : ''}></label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -431,7 +439,7 @@
                                                     <td>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="prioritarios" id="nna5" value="h"></label>
+                                                                <input type="radio" name="prioritarios" id="nna5" value="h" ${nna.getHermano() == 0 ? 'checked' : ''}></label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -442,7 +450,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <textarea id="salud" name="salud" cols="25" rows="5"></textarea>
+                                        <textarea id="obs" name="obs" cols="25" rows="5">${nna.getObservaciones()}</textarea>
                                     </div>
                                 </div>
                                 <br>
@@ -456,9 +464,9 @@
                                   </fieldset>
                                 </form>       
                                 <br>        
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Expediente</button>
+                                        <button ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Expediente</button>
                                         &nbsp;
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Propuesta de Designación</button>
+                                        <button ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Propuesta de Designación</button>
                         </div>
                 </div>
             </div>

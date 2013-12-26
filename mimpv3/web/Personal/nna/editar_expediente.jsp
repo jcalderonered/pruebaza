@@ -110,7 +110,28 @@
                                 <div class="control-group">
                                     <label class="control-label">Número</label>
                                     <div class="controls">
-                                        <input  id="full-name" name="full-name" type="text" placeholder="LIMA-001-2013" class="input-xlarge" disabled >
+                                        <input  id="full-name" name="full-name" type="text" placeholder="" class="input-xlarge" >
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Nombre Actual</label>
+                                    <div class="controls">
+                                        <input  id="full-name" name="full-name" type="text" placeholder="" class="input-xlarge" >
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Apellido Paterno Actual</label>
+                                    <div class="controls">
+                                        <input  id="full-name" name="full-name" type="text" placeholder="" class="input-xlarge" >
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Apellido Materno Actual</label>
+                                    <div class="controls">
+                                        <input  id="full-name" name="full-name" type="text" placeholder="" class="input-xlarge" >
                                     </div>
                                 </div>
                                 <br>
@@ -129,9 +150,16 @@
                                 </div>                                                                    
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Número de expediente tutelar</label>
+                                    <label class="control-label">Número de investigación tutelar</label>
                                     <div class="controls">
                                         <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Fecha de investigación tutelar</label>
+                                    <div class="controls">
+                                        <input id="fechaNac" name="fechaNac" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>

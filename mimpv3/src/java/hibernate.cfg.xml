@@ -3,10 +3,7 @@
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
-    <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-    <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:XE</property>
-    <property name="hibernate.connection.username">MIMP_ADOPCION</property>
-    <property name="hibernate.connection.password">mimp_adopcion</property>
+    <property name="hibernate.connection.datasource">java:comp/env/jdbc/OracleMimp_adopcion</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
     <mapping resource="com/mimp/bean/Familia.hbm.xml"/>
