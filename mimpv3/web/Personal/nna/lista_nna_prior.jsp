@@ -112,7 +112,6 @@
                                         <th class="col-sm-2 ">Apellido Paterno</th>
                                         <th class="col-sm-2 ">Apellido Materno</th>
                                         <th class="col-sm-2 ">Sexo</th>
-                                        <th class="col-sm-2 ">Grupo ref.</th>
                                         <th class="col-sm-2 ">Código</th>
                                         <th class="col-sm-2 ">Proceso de adopción</th>
                                         <th class="col-sm-2 ">Detalles</th> 
@@ -121,47 +120,39 @@
                                         <th class="col-sm-2 ">Edit. estudio</th>
                                     </tr>
                                 </thead>
+                                <c:if test="${!listaNna.isEmpty()}"> 
                                 <tbody>
+                                    <c:forEach var="nna" items="${listaNna}" varStatus="status">
                                     <tr>
-                                        <td>Nombre 1</td>
-                                        <td>Apellidos 1</td>
-                                        <td>Apellidos 1</td>
-                                        <td>Masculino</td>
-                                        <td>Mayores</td>
-                                        <td>M29383</td>
-                                        <td>Si</td>
+                                        <td>${nna.getNombre()}</td>
+                                        <td>${nna.getApellidoP()}</td>
+                                        <td>${nna.getApellidoM()}</td>
+                                        <td>${nna.getSexo()}</td>
+                                        <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">
+                                        <td>
+                                            ${expediente.getCodigoReferencia()}
+                                        </td>
+                                        </c:forEach>
+                                        <td>
+                                            <c:if test="${!nna.getDesignacions().isEmpty()}">
+                                                Si
+                                            </c:if>  
+                                            <c:if test="${nna.getDesignacions().isEmpty()}">
+                                                No
+                                            </c:if>   
+                                        </td>
+                                        
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button href="#" class="btn btn-default">Ver</button></td>
                                         <td><button disabled href="#" class="btn btn-default">Registrar</button></td>
                                         <td><button href="#" class="btn btn-default">Editar</button></td>
                                     </tr>
-                                    <tr>
-                                        <td>Nombre 2</td>
-                                        <td>Apellidos 2</td>
-                                        <td>Apellidos 2</td>
-                                        <td>Femenino</td>
-                                        <td>Hermanos</td>
-                                        <td>H29371</td>
-                                        <td>No</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                        <td><button disabled href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nombre 3</td>
-                                        <td>Apellidos 3</td>
-                                        <td>Apellidos 3</td>
-                                        <td>Masculino</td>
-                                        <td>Hermanos</td>
-                                        <td>H29371</td>
-                                        <td>No</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                        <td><button disabled href="#" class="btn btn-default">Editar</button></td>
-                                    </tr>
+                                    </c:forEach>  
                                 </tbody>
+                                </c:if>
+                                <c:if test="${listaNna.isEmpty()}">
+                                    <h3><strong>No existen Nna en esta clasificación</strong></h3>
+                                </c:if>  
                             </table>
                         </div>
                     </div>
