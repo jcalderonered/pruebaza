@@ -97,88 +97,84 @@
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p> 
                         <h1 align="center"><strong>Expediente del NNA</strong></h1>
                         <br>
-                        <form class="form-horizontal">
+                        <c:if test="${expediente == null}">
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearExpedienteNna" method="post">
+                                <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">  
+                               </c:if>  
+                                  <c:if test="${expediente != null}">
+                                       <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateExpedienteNna" method="post">
+                                       <input hidden name="idExp" id="idExp" value="${expediente.getNna().getIdnna()}">    
+                                 </c:if>   
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <label class="control-label">Unidad de adopción</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" placeholder="LIMA" class="input-xlarge" disabled >
+                                        <input id="unidad" name="unidad" value="${u.getUnidad().getNombre()}" type="text" placeholder="LIMA" class="input-xlarge" disabled >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Número</label>
                                     <div class="controls">
-                                        <input  id="full-name" name="full-name" type="text" placeholder="" class="input-xlarge" >
+                                        <input  id="numero" name="numero" type="text" value="${expediente.getNumero()}" placeholder="" class="input-xlarge" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Nombre Actual</label>
                                     <div class="controls">
-                                        <input  id="full-name" name="full-name" type="text" placeholder="" class="input-xlarge" >
+                                        <input  id="nombreActual" name="nombreActual" value="${expediente.getNActual()}" type="text" placeholder="" class="input-xlarge" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Paterno Actual</label>
                                     <div class="controls">
-                                        <input  id="full-name" name="full-name" type="text" placeholder="" class="input-xlarge" >
+                                        <input  id="apellidoPActual" name="apellidoPActual" value="${expediente.getApellidopActual()}" type="text" placeholder="" class="input-xlarge" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Materno Actual</label>
                                     <div class="controls">
-                                        <input  id="full-name" name="full-name" type="text" placeholder="" class="input-xlarge" >
+                                        <input  id="apellidoMActual" name="apellidoMActual" value="${expediente.getApellidomActual()}" type="text" placeholder="" class="input-xlarge" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de ingreso</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaIngreso" name="fechaIngreso" value="${expediente.getFechaIngreso() != null ? df.dateToString(expediente.getFechaIngreso()) : ''}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">HT</label>
                                     <div class="controls">
-                                        <input  id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input  id="ht" name="ht" value="${expediente.getHt()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>                                                                    
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Número de investigación tutelar</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="nInvTutelar" name="nInvTutelar" value="${expediente.getNExpTutelar()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de investigación tutelar</label>
                                     <div class="controls">
-                                        <input id="fechaNac" name="fechaNac" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaInvTutelar" name="fechaInvTutelar" value="${expediente.getFechaInvTutelar() != null ? df.dateToString(expediente.getFechaInvTutelar()) : ''}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Procedencia tutelar</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="procTutelar" name="procTutelar" value="${expediente.getProcTutelar()}" type="text" class="input-xlarge">
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Juzgado</label>
-                                    <div>
-                                        <select>
-                                            <option value="sia">Nombre Juzgado 1 - Distrito Judicial 1</option>
-                                            <option value="sia">Nombre Juzgado 2 - Distrito Judicial 2</option>
-
-                                        </select>
-                                    </div>     
                                 </div>
                                 <br>
                                 <br>
@@ -189,32 +185,26 @@
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Ingreso</label>
+                                                <input type="radio" name="fichaInt" id="optionsRadios1" value="0" ${expediente.getFichaIntegral() == 0 ? 'checked' : ''} >Ingreso</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Solicitado</label>
+                                                <input type="radio" name="fichaInt" id="optionsRadios2" value="1" ${expediente.getFichaIntegral() == 1 ? 'checked' : ''} >Solicitado</label>
                                         </div>                            
                                     </div>
                                 </div>  
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Comentarios</label>
-                                    <div class="controls">
-                                        <textarea class="input-xlarge" name="message" placeholder="" rows="5" ></textarea>
-                                    </div>
-                                </div>
                                 <br>
                                 <h3><strong>Responsable Legal</strong></h3>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Nombre Completo</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Juan Luis</option>
-                                            <option value="sia">Ronald</option>
+                                        <select id="respLegal" name="respLegal" >
+                                            <c:forEach var="personal" items="${listaPersonal}" > 
+                                                <option value="${personal.getDni()}" ${expediente.getRespLegalNombre().equals(personal.getDni()) ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -224,9 +214,10 @@
                                 <div class="control-group">
                                     <label class="control-label">Nombre Completo</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Juan Luis</option>
-                                            <option value="sia">Ronald</option>
+                                        <select id="respPsico" name="respPsico" >
+                                            <c:forEach var="personal" items="${listaPersonal}" > 
+                                                <option value="${personal.getDni()}" ${expediente.getRespPsicosocialNombre().equals(personal.getDni()) ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -234,11 +225,11 @@
                                 <div>
                                     <label class="control-label">Estado</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Evaluación</option>
-                                            <option value="sia">Designado</option>
-                                            <option value="mia">Adoptado</option>
-                                            <option value="sia">Archivado</option>
+                                        <select id="estado" name="estado">
+                                            <option value="eval" ${expediente.getEstado().equals("eval") ? 'selected' : ''} >Evaluación</option>
+                                            <option value="desig" ${expediente.getEstado().equals("desig") ? 'selected' : ''} >Designado</option>
+                                            <option value="adop" ${expediente.getEstado().equals("adop") ? 'selected' : ''} >Adoptado</option>
+                                            <option value="arch" ${expediente.getEstado().equals("arch") ? 'selected' : ''} >Archivado</option>
                                         </select>
                                     </div>    
                                 </div>
@@ -246,97 +237,166 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha del estado</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaEstado" name="fechaEstado" value="${expediente.getFechaEstado() != null ? df.dateToString(expediente.getFechaEstado()) : ''}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div>
                                     <label class="control-label">Clasificación</label>
                                     <div class="controls">
-                                        <select  >
-                                            <option value="sia">Prioritario</option>
-                                            <option value="mia">Seguimiento</option>
-                                            <option value="mia">Regular</option>
+                                        <select onchange="clasif(this.value)" name="clasificacion" id="clasificacion" >
+                                            <option value="prioritario" ${expediente.getNna().getClasificacion().equals("prioritario") || nna.getClasificacion().equals("prioritario") ? 'selected' : ''} >Prioritario</option>
+                                            <option value="seguimiento" ${expediente.getNna().getClasificacion().equals("seguimiento") || nna.getClasificacion().equals("seguimiento") ? 'selected' : ''} >Seguimiento</option>
+                                            <option value="regular" ${expediente.getNna().getClasificacion().equals("regular") || nna.getClasificacion().equals("regular") ? 'selected' : ''} >Regular</option>
                                         </select>
                                     </div>    
                                 </div>
                                 <br>
                                 <br>
+                                
                                 <h3><strong>Datos de NNA prioritario</strong></h3>
                                 <br>
                                 <div>
                                     <label class="control-label">Grupo de referencia</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Mayores</option>
-                                            <option value="sia">Adolescentes</option>
-                                            <option value="mia">Hermanos</option>
-                                            <option value="mia">Salud</option>
-                                            <option value="mia">Seguimiento</option>
+                                        <select onchange="prioritarios(this.value)" id="grpRef" name="grpRef" ${expediente.getNna().getClasificacion().equals("prioritario") || nna.getClasificacion().equals("prioritario") ? '' : 'disabled'}>
+                                            <option></option>
+                                            <option value="m" ${expediente.getNna().getMayor() == 0 || nna.getMayor() == 0 ? 'selected' : ''} >Mayores</option>
+                                            <option value="a" ${expediente.getNna().getAdolescente() == 0 || nna.getAdolescente() == 0 ? 'selected' : ''} >Adolescentes</option>
+                                            <option value="h" ${expediente.getNna().getHermano() == 0 || nna.getHermano() == 0 ? 'selected' : ''} >Hermanos</option>
+                                            <option value="s" ${expediente.getNna().getEnfermo() == 0 || nna.getEnfermo() == 0 ? 'selected' : ''} >Salud</option>
+                                            <option value="e" ${expediente.getNna().getEspecial() == 0 || nna.getEspecial() == 0 ? 'selected' : ''} >Necesidades especiales</option>
                                         </select>
                                     </div>  
                                 </div>
                                 <br>
                                 <div class="control-group">
+                                    <label class="control-label">Historial de código de mayores</label>
+                                    <div class="controls">
+                                        <select id="histMayores" name="histMayores" ${expediente.getNna().getMayor() == 0 || nna.getMayor() == 0 ? '' : 'disabled'}>
+                                            <option> </option>
+                                            <c:forEach var="tempExp" items="${listaExpedientes}" > 
+                                                <c:if test="${!tempExp.getCodigoReferencia() != null && (tempExp.getCodigoReferencia().contains('M') || tempExp.getCodigoReferencia().contains('m'))}">
+                                                <option>${tempExp.getCodigoReferencia()}</option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>        
+                                <br>
+                                <div class="control-group">
                                     <label class="control-label">Código Mayores</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="codMayor" name="codMayor" ${expediente.getNna().getMayor() == 0 || nna.getMayor() == 0 ? '' : 'disabled'}  value="${expediente.getNna().getMayor() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Historial de código de Adolescentes</label>
+                                    <div class="controls">
+                                        <select id="histAdolescente" name="histAdolescente" ${expediente.getNna().getAdolescente() == 0 || nna.getAdolescente() == 0 ? '' : 'disabled'}>
+                                            <option> </option>
+                                            <c:forEach var="tempExp" items="${listaExpedientes}" > 
+                                                <c:if test="${!tempExp.getCodigoReferencia() != null && (tempExp.getCodigoReferencia().contains('A') || tempExp.getCodigoReferencia().contains('a'))}">
+                                                <option>${tempExp.getCodigoReferencia()}</option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>        
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Código Adolescente</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="codAdoles" name="codAdoles" ${expediente.getNna().getAdolescente() == 0 || nna.getAdolescente() == 0 ? '' : 'disabled'} value="${expediente.getNna().getAdolescente() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Historial de código de Hermanos</label>
+                                    <div class="controls">
+                                        <select id="histHermano" name="histHermano" ${expediente.getNna().getHermano() == 0 || nna.getHermano() == 0 ? '' : 'disabled'} >
+                                            <option> </option>
+                                            <c:forEach var="tempExp" items="${listaExpedientes}" > 
+                                                <c:if test="${!tempExp.getCodigoReferencia() != null && (tempExp.getCodigoReferencia().contains('H') || tempExp.getCodigoReferencia().contains('h'))}">
+                                                <option>${tempExp.getCodigoReferencia()}</option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>        
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Código Hermano</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="codHermano" name="codHermano" ${expediente.getNna().getHermano() == 0 || nna.getHermano() == 0 ? '' : 'disabled'} value="${expediente.getNna().getHermano() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Código Salud</label>
+                                    <label class="control-label">Historial de código de Problemas de salud</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <select id="histSalud" name="histSalud" ${expediente.getNna().getEnfermo() == 0 || nna.getEnfermo() == 0 ? '' : 'disabled'} >
+                                            <option> </option>
+                                            <c:forEach var="tempExp" items="${listaExpedientes}" > 
+                                                <c:if test="${!tempExp.getCodigoReferencia() != null && (tempExp.getCodigoReferencia().contains('S') || tempExp.getCodigoReferencia().contains('s'))}">
+                                                <option>${tempExp.getCodigoReferencia()}</option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </select>
                                     </div>
-                                </div>
+                                </div>        
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Código Seguimiento</label>
+                                    <label class="control-label">Código Problemas de Salud</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="codSalud" name="codSalud" ${expediente.getNna().getEnfermo() == 0 || nna.getEnfermo() == 0 ? '' : 'disabled'} value="${expediente.getNna().getEnfermo() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Historial de código de Necesidades Especiales</label>
+                                    <div class="controls">
+                                        <select id="histEspeciales" name="histEspeciales" ${expediente.getNna().getEspecial() == 0 || nna.getEspecial() == 0 ? '' : 'disabled'} >
+                                            <option> </option>
+                                            <c:forEach var="tempExp" items="${listaExpedientes}" > 
+                                                <c:if test="${!tempExp.getCodigoReferencia() != null && (tempExp.getCodigoReferencia().contains('NE') || tempExp.getCodigoReferencia().contains('ne'))}">
+                                                <option>${tempExp.getCodigoReferencia()}</option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>    
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Código Necesidades Especiales</label>
+                                    <div class="controls">
+                                        <input id="codEspeciales" name="codEspeciales" ${expediente.getNna().getEspecial() == 0 || nna.getEspecial() == 0 ? '' : 'disabled'} value="${expediente.getNna().getEspecial() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Diagnóstico</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <textarea id="diagnostico" name="diagnostico" value="${expediente.getDiagnostico()}" type="text" class="input-xlarge"></textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Comentario</label>
                                     <div class="controls">
-                                        <textarea id="full-name" name="full-name" type="text" class="input-xlarge"></textarea>
+                                        <textarea id="comentario" name="comentario" value="${expediente.getObservaciones()}" type="text" class="input-xlarge"></textarea>
                                     </div>
                                 </div>
                                 <br>
-                                <!-- Button -->
-                                <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
-                                        &nbsp;
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Propuesta de Designación</button>
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>     
                                     </div>
                                 </div>
                             </fieldset>
                         </form>
+                                    <br>
+                                     <button id="singlebutton" name="singlebutton" class="btn btn-default">Propuesta de Designación</button>
 
                     </div>
                 </div>
@@ -359,9 +419,117 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
-
+             
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-
+            
+            </script>
+            <script>
+                function clasif(value)
+                    {
+                        var op = document.getElementById("grpRef");
+                        var histMayores = document.getElementById("histMayores");
+                        var mayores = document.getElementById("codMayor");
+                        var histAdolescente = document.getElementById("histAdolescente");
+                        var adolescentes = document.getElementById("codAdoles");
+                        var histHermano = document.getElementById("histHermano");
+                        var hermanos = document.getElementById("codHermano");
+                        var histSalud = document.getElementById("histSalud");
+                        var salud = document.getElementById("codSalud");
+                        var histEspeciales = document.getElementById("histEspeciales");
+                        var especiales = document.getElementById("codEspeciales");
+                        //you can get the value from arguments itself
+                        //alert(value);
+                        if (value == 'regular' || value == 'seguimiento'){
+                            op.value = '';
+                            op.disabled = true;
+                            mayores.disabled = true;
+                            adolescentes.disabled = true;
+                            hermanos.disabled = true;
+                            salud.disabled = true;
+                            especiales.disabled = true;
+                            histMayores.value = '';
+                            histMayores.disabled = true;
+                            histAdolescente.value = '';
+                            histAdolescente.disabled = true;
+                            histHermano.value = '';
+                            histHermano.disabled = true;
+                            histSalud.value = '';
+                            histSalud.disabled = true;
+                            histEspeciales.value = '';
+                            histEspeciales.disabled = true;
+                            mayores.value = '';
+                            adolescentes.value = '';
+                            hermanos.value = '';
+                            salud.value = '';
+                            especiales.value = '';
+                        }
+                        if (value == 'prioritario'){
+                            op.disabled = false;
+                        }
+                    }
+            </script>
+            <script>
+                function prioritarios(value)
+                    {
+                        var histMayores = document.getElementById("histMayores");
+                        var mayores = document.getElementById("codMayor");
+                        var histAdolescente = document.getElementById("histAdolescente");
+                        var adolescentes = document.getElementById("codAdoles");
+                        var histHermano = document.getElementById("histHermano");
+                        var hermanos = document.getElementById("codHermano");
+                        var histSalud = document.getElementById("histSalud");
+                        var salud = document.getElementById("codSalud");
+                        var histEspeciales = document.getElementById("histEspeciales");
+                        var especiales = document.getElementById("codEspeciales");
+                        
+                        //you can get the value from arguments itself
+                        //alert(value);
+                        if (value == 'm'){
+                            histMayores.disabled = false;
+                            mayores.disabled = false;
+                            adolescentes.disabled = true;
+                            hermanos.disabled = true;
+                            salud.disabled = true;
+                            especiales.disabled = true;
+                            
+                        }
+                        if (value == 'a'){
+                            mayores.disabled = true;
+                            histAdolescente.disabled = false;
+                            adolescentes.disabled = false;
+                            hermanos.disabled = true;
+                            salud.disabled = true;
+                            especiales.disabled = true;
+                            
+                        }
+                        if (value == 'h'){
+                            mayores.disabled = true;
+                            adolescentes.disabled = true;
+                            histHermano.disabled = false;
+                            hermanos.disabled = false;
+                            salud.disabled = true;
+                            especiales.disabled = true;
+                            
+                        }
+                        if (value == 's'){
+                            mayores.disabled = true;
+                            adolescentes.disabled = true;
+                            hermanos.disabled = true;
+                            histSalud.disabled = false;
+                            salud.disabled = false;
+                            especiales.disabled = true;
+                            
+                        }
+                        if (value == 'e'){
+                            mayores.disabled = true;
+                            adolescentes.disabled = true;
+                            hermanos.disabled = true;
+                            salud.disabled = true;
+                            histEspeciales.disabled = false;
+                            especiales.disabled = false;
+                            
+                        }
+                    }
             </script>
             <!-- Placed at the end of the document so the pages load faster -->
     </body>

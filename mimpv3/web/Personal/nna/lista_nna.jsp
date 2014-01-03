@@ -134,9 +134,24 @@
                                                 No
                                             </c:if>      
                                         </td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Registrar</button></td>
+                                        <td>
+                                            <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
+                                                <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
+                                                <button type="submit" class="btn btn-default">Ver</button>
+                                            </form>
+                                        </td>        
+                                        <td>
+                                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editarExpedienteNna" method="post">
+                                                    <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
+                                                    <button ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Ver</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/registrarDesignacion" method="post">
+                                                    <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
+                                                    <button ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Registrar</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                   </c:forEach>  
                                 </tbody>

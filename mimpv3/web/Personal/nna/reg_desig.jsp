@@ -104,7 +104,7 @@
                         <div class="control-group">
                             <label class="control-label">Fecha de propuesta</label>
                             <div class="controls">
-                                <input type="text" class="datepicker span2" value="02-16-2012" id="dp3" >
+                                <input type="text" class="datepicker span2" id="dp3" >
                             </div>
                         </div>
                         <br>
@@ -115,72 +115,60 @@
                             </div>
                         </div>
                         <br>
+                        <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/agregarExp'" id="singlebutton" name="singlebutton" class="btn btn-default">Agregar Familia</button>
+                        <br>
                         <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
                         <br>
+                        <form>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th class="col-sm-2 " >Expediente</th>
-                                        <th class="col-sm-2 " >UA</th>
                                         <th class="col-sm-2 " >Nivel sociec</th>
                                         <th class="col-sm-2 " >Información</th>
                                         <th class="col-sm-2 " >Resolución de aptitud</th>
-                                        <th class="col-sm-2 " >Prioridad</th>
                                         <th class="col-sm-2 " >Seleccionar</th>
                                     </tr>
                                 </thead>
+                               <c:if test="${!listaMatching.isEmpty()}">   
                                 <tbody>
+                                  <c:forEach var="familia" items="${listaMatching}" varStatus="status">   
                                     <tr>
-                                        <td>Gutierrez-Huaman </td>
-                                        <td>Lima</td>
-                                        <td>C</td>
-                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
-                                        <td>14-Nov-2012</td>
+                                        <td>${familia.getExpediente()}</td>
                                         <td>
-                                            <select>
-                                                <option value="mia" selected>1</option>
-                                                <option value="sia">2</option>
-                                                <option value="mia">3</option>
-                                            </select>
+                                            <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
+                                                ${info.getNivelSocioeconomico()}
+                                            </c:forEach>
+                                        </td>
+                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
+                                        <td>
+                                            <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
+                                                    <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
+                                                        ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
+                                                    </c:forEach>
+                                            </c:forEach>
                                         </td>
                                         <td>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox"> 
+                                                    <input value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
                                                 </label>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>Morales-Loza</td>
-                                        <td>Trujillo</td>
-                                        <td>B</td>
-                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
-                                        <td>21-Agos-2011</td>
-                                        <td>
-                                            <select>
-                                                <option value="mia" selected>1</option>
-                                                <option value="sia">2</option>
-                                                <option value="mia">3</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox">
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                   </c:forEach>  
                                 </tbody>
+                                </c:if> 
+                               <c:if test="${listaMatching.isEmpty()}">
+                                    <h3><strong>No existen Familias propuestas</strong></h3>
+                                </c:if>  
                             </table>
                         </div>
                         <br>
-                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar Familia</button>
-                        <br>
                         <br>
                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
+                        </form>
                     </div>
                 </div>
             </div>
