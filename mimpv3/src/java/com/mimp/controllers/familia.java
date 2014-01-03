@@ -27,6 +27,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class familia {
 
+    dateFormat format = new dateFormat();
+
     @Resource(name = "HiberFamilia")
     private HiberFamilia ServicioFamilia = new HiberFamilia();
 
@@ -78,6 +80,16 @@ public class familia {
             String si = "SI";
             String no = "NO";
 
+            //Inicialmente seteamos todos los valores en no
+            map.addAttribute("sesion", no);
+            map.addAttribute("taller", no);
+            map.addAttribute("ficha", no);
+            map.addAttribute("boton", 0);
+            map.addAttribute("eval", no);
+            map.addAttribute("espera", no);
+            map.addAttribute("adop", no);
+            map.addAttribute("postadop", no);
+
             Date fechaactual = new Date();
             Date ultfecha = new Date(10, 0, 01);
             for (Iterator iter = usuario.getFormularioSesions().iterator(); iter.hasNext();) {
@@ -107,67 +119,76 @@ public class familia {
                     map.addAttribute("postadop", no);
                 } else {
                     map.addAttribute("taller", si);
-                    for (Iterator iter2 = usuario.getFichaSolicitudAdopcions().iterator(); iter2.hasNext();) {
-                        FichaSolicitudAdopcion form = (FichaSolicitudAdopcion) iter2.next();
-                        if (form == null) {
-                            map.addAttribute("ficha", no);
-                            map.addAttribute("boton", 1);
-                            map.addAttribute("eval", no);
-                            map.addAttribute("espera", no);
-                            map.addAttribute("adop", no);
-                            map.addAttribute("postadop", no);
-                        } else {
-                            map.addAttribute("ficha", si);
-                            map.addAttribute("boton", 0);
-                            for (Iterator iter3 = usuario.getExpedienteFamilias().iterator(); iter3.hasNext();) {
-                                ExpedienteFamilia exp = (ExpedienteFamilia) iter3.next();
-                                Boolean flag = false;
-                                for (Iterator iter4 = exp.getEvaluacions().iterator(); iter4.hasNext();) {
-                                    Evaluacion eval = (Evaluacion) iter4.next();
-                                    if (!eval.getEvalLegals().isEmpty()) {
-                                        flag = true;
+                    if (!usuario.getFichaSolicitudAdopcions().isEmpty()) {
+                        for (Iterator iter2 = usuario.getFichaSolicitudAdopcions().iterator(); iter2.hasNext();) {
+                            FichaSolicitudAdopcion form = (FichaSolicitudAdopcion) iter2.next();
+                            if (form == null) {
+                                map.addAttribute("ficha", no);
+                                map.addAttribute("boton", 1);
+                                map.addAttribute("eval", no);
+                                map.addAttribute("espera", no);
+                                map.addAttribute("adop", no);
+                                map.addAttribute("postadop", no);
+                            } else {
+                                map.addAttribute("ficha", si);
+                                map.addAttribute("boton", 0);
+                                for (Iterator iter3 = usuario.getExpedienteFamilias().iterator(); iter3.hasNext();) {
+                                    ExpedienteFamilia exp = (ExpedienteFamilia) iter3.next();
+                                    Boolean flag = false;
+                                    for (Iterator iter4 = exp.getEvaluacions().iterator(); iter4.hasNext();) {
+                                        Evaluacion eval = (Evaluacion) iter4.next();
+                                        if (!eval.getEvalLegals().isEmpty()) {
+                                            flag = true;
+                                        }
                                     }
-                                }
-                                if (exp.getEstado().equals("Apto") || flag) {
-                                    map.addAttribute("eval", si);
-                                    map.addAttribute("espera", si);
-                                    if (!exp.getDesignacions().isEmpty()) {
-                                        for (Iterator iter5 = exp.getDesignacions().iterator(); iter5.hasNext();) {
-                                            Designacion deg = (Designacion) iter5.next();
-                                            if (deg.getAceptacionConsejo() == 0) {
-                                                map.addAttribute("adop", no);
-                                                map.addAttribute("postadop", no);
-                                            } else {
-                                                map.addAttribute("adop", si);
-                                                Boolean flag2 = false;
-                                                for (Iterator iter6 = exp.getEvaluacions().iterator(); iter6.hasNext();) {
-                                                    Evaluacion eval = (Evaluacion) iter6.next();
-                                                    for (Iterator iter7 = eval.getResolucions().iterator(); iter7.hasNext();) {
-                                                        Resolucion resol = (Resolucion) iter7.next();
-                                                        if (resol.getTipo().equals("Adopción")) {
-                                                            flag2 = true;
+                                    if (exp.getEstado().equals("Apto") || flag) {
+                                        map.addAttribute("eval", si);
+                                        map.addAttribute("espera", si);
+                                        if (!exp.getDesignacions().isEmpty()) {
+                                            for (Iterator iter5 = exp.getDesignacions().iterator(); iter5.hasNext();) {
+                                                Designacion deg = (Designacion) iter5.next();
+                                                if (deg.getAceptacionConsejo() == 0) {
+                                                    map.addAttribute("adop", no);
+                                                    map.addAttribute("postadop", no);
+                                                } else {
+                                                    map.addAttribute("adop", si);
+                                                    Boolean flag2 = false;
+                                                    for (Iterator iter6 = exp.getEvaluacions().iterator(); iter6.hasNext();) {
+                                                        Evaluacion eval = (Evaluacion) iter6.next();
+                                                        for (Iterator iter7 = eval.getResolucions().iterator(); iter7.hasNext();) {
+                                                            Resolucion resol = (Resolucion) iter7.next();
+                                                            if (resol.getTipo().equals("Adopción")) {
+                                                                flag2 = true;
+                                                            }
                                                         }
                                                     }
-                                                }
-                                                if (flag2) {
-                                                    map.addAttribute("postadop", si);
-                                                } else {
-                                                    map.addAttribute("postadop", no);
+                                                    if (flag2) {
+                                                        map.addAttribute("postadop", si);
+                                                    } else {
+                                                        map.addAttribute("postadop", no);
+                                                    }
                                                 }
                                             }
+                                        } else {
+                                            map.addAttribute("adop", no);
+                                            map.addAttribute("postadop", no);
                                         }
                                     } else {
+                                        map.addAttribute("eval", no);
+                                        map.addAttribute("espera", no);
                                         map.addAttribute("adop", no);
                                         map.addAttribute("postadop", no);
                                     }
-                                } else {
-                                    map.addAttribute("eval", no);
-                                    map.addAttribute("espera", no);
-                                    map.addAttribute("adop", no);
-                                    map.addAttribute("postadop", no);
                                 }
                             }
                         }
+                    } else {
+                        map.addAttribute("ficha", no);
+                        map.addAttribute("boton", 1);
+                        map.addAttribute("eval", no);
+                        map.addAttribute("espera", no);
+                        map.addAttribute("adop", no);
+                        map.addAttribute("postadop", no);
                     }
                 }
             }
@@ -211,7 +232,6 @@ public class familia {
                 mensaje = "Contraseña de usuario incorrecta. Ingrese nuevamente.";
             }
         }
-
         String pagina = "/Familia/contra_familia";
         map.addAttribute("mensaje", mensaje);
         return new ModelAndView(pagina, map);
@@ -221,15 +241,6 @@ public class familia {
     @RequestMapping("/FactDatos/opc1")
     public ModelAndView FactDatos1(ModelMap map, HttpSession session, FichaSolicitudAdopcion fichasol) {
         Familia usuario = (Familia) session.getAttribute("usuario");
-        //En el caso no tengamos una ficha de Solicitud adopción, debemos crear una nueva exportando información previa
-        if (fichasol == null) {
-            FichaSolicitudAdopcion ficha = new FichaSolicitudAdopcion();
-            Solicitante sol;
-            Hijo hijo;
-            Residente res;
-            
-            
-        }
         dateFormat format = new dateFormat();
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -345,16 +356,14 @@ public class familia {
         } else {
             //Verificamos si es la primera vez que llena la ficha
             FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
-            if(ficha == null){
+            if (ficha == null) {
                 ficha = new FichaSolicitudAdopcion();
                 Solicitante sol;
                 Hijo hijo;
                 Residente res = new Residente();
-                
                 //En caso haya ficha, se crea una nueva ficha ingresando toda la información
                 for (Iterator iter = usuario.getInfoFamilias().iterator(); iter.hasNext();) {
                     InfoFamilia ifa = (InfoFamilia) iter.next();
-                    
                     ficha.setEstadoCivil(ifa.getEstadoCivil());
                     //FALTA TELEFONO
                     ficha.setDomicilio(ifa.getDomicilio());
@@ -437,27 +446,41 @@ public class familia {
                         ficha.getHijos().add(hijo);
                     }
                     for (Iterator iter4 = ifa.getResidenteActs().iterator(); iter4.hasNext();) {
-                        //SEGUIR A PARTIR DE AQUI
+                        ResidenteAct ra = (ResidenteAct) iter4.next();
+                        res = new Residente();
+                        res.setNombre(ra.getNombre());
+                        res.setApellidoP(ra.getApellidoP());
+                        res.setApellidoM(ra.getApellidoM());
+                        res.setParentesco(ra.getParentesco());
+                        res.setEdad(ra.getEdad());
+                        res.setOcupacion(ra.getOcupacion());
+                        res.setEstadoSalud(ra.getEstadoSalud());
+                        ficha.getResidentes().add(res);
                     }
-                }                
+                }
+                session.setAttribute("ficha", ficha);
             }
-            
-            
-            
-            
-            
-            for (Iterator iter = usuario.getInfoFamilias().iterator(); iter.hasNext();) {
-                InfoFamilia ifa = (InfoFamilia) iter.next();
-                String fechaMatri = format.dateToString(ifa.getFechaMatrimonio());
-                map.addAttribute("fechaMatri", fechaMatri);
-                map.addAttribute("estCivil", ifa.getEstadoCivil().charAt(0));
-                for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
-                    Adoptante adop = (Adoptante) iter2.next();
-                    if (adop.getSexo() == 'F') {
-                        map.put("adop", adop);
-                        String fechanac = format.dateToString(adop.getFechaNac());
-                        map.addAttribute("fechanac", fechanac);
-                    }
+            String fechaMatri = "";
+            try {
+                fechaMatri = format.dateToString(ficha.getFechaMatrimonio());
+            } catch (Exception e) {
+            }
+            map.addAttribute("fechaMatri", fechaMatri);
+            char estCiv = 'N';
+            try {
+                estCiv = ficha.getEstadoCivil().charAt(0);
+            } catch (Exception e) {
+            }
+            map.addAttribute("estCivil", estCiv);
+            map.addAttribute("domicilio", ficha.getDomicilio());
+            map.addAttribute("fijo", ficha.getFijo());
+            Solicitante sol;
+            for (Iterator iter5 = ficha.getSolicitantes().iterator(); iter5.hasNext();) {
+                sol = (Solicitante) iter5.next();
+                if (sol.getSexo() == 'F') {
+                    map.put("sol", sol);
+                    String fechanac = format.dateToString(sol.getFechaNac());
+                    map.addAttribute("fechanac", fechanac);
                 }
             }
         }
@@ -473,7 +496,30 @@ public class familia {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        //FALTA
+        FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
+        String fechaMatri = "";
+        try {
+            fechaMatri = format.dateToString(ficha.getFechaMatrimonio());
+        } catch (Exception e) {
+        }
+        map.addAttribute("fechaMatri", fechaMatri);
+        char estCiv = 'N';
+        try {
+            estCiv = ficha.getEstadoCivil().charAt(0);
+        } catch (Exception e) {
+        }
+        map.addAttribute("estCivil", estCiv);
+        map.addAttribute("domicilio", ficha.getDomicilio());
+        map.addAttribute("fijo", ficha.getFijo());
+        Solicitante sol;
+        for (Iterator iter5 = ficha.getSolicitantes().iterator(); iter5.hasNext();) {
+            sol = (Solicitante) iter5.next();
+            if (sol.getSexo() == 'M') {
+                map.put("sol", sol);
+                String fechanac = format.dateToString(sol.getFechaNac());
+                map.addAttribute("fechanac", fechanac);
+            }
+        }
         String pagina = "/Familia/Ficha/ficha_inscripcion_el";
         return new ModelAndView(pagina, map);
     }
@@ -530,4 +576,107 @@ public class familia {
         return new ModelAndView(pagina, map);
     }
 
+    @RequestMapping("/FfichaGuardar/opc1")
+    public ModelAndView FfichaGuardarElla(ModelMap map,
+            @RequestParam("nombre_ella") String nombre,
+            @RequestParam("apellido_p_ella") String apellido_p,
+            @RequestParam("apellido_m_ella") String apellido_m,
+            @RequestParam("edad_ella") String edad,
+            @RequestParam("lugar_nac_ella") String lugar_nac,
+            @RequestParam("depa_nac_ella") String depa_nac,
+            @RequestParam("pais_nac_ella") String pais_nac,
+            @RequestParam("TipoDoc") String tipo_doc,
+            @RequestParam("n_doc_ella") String n_doc,
+            @RequestParam("domicilio") String domicilio,
+            @RequestParam("telefono") String telefono,
+            @RequestParam("celular_ella") String celular,
+            @RequestParam("correo_ella") String correo,
+            @RequestParam("estCivil") String est_civil,
+            @RequestParam("fechaMatri") String fecha_matri,
+            @RequestParam("nivel_inst_ella") String nivel_inst,
+            @RequestParam("culm_nivel_ella") String culm_nivel,
+            @RequestParam("prof_ella") String prof,
+            @RequestParam("Trabajador_Depend_ella") String trab_depend,
+            @RequestParam("ocup_act_dep_ella") String ocup_actual,
+            @RequestParam("centro_trabajo_ella") String centro_trabajo,
+            @RequestParam("dir_centro_ella") String dir_centro,
+            @RequestParam("tel_centro_ella") String tel_centro,
+            @RequestParam("ingreso_dep_ella") String ingreso_dep,
+            @RequestParam("Trabajador_Indep_ella") String trab_indep,
+            @RequestParam("ocup_act_indep_ella") String ocup_act_indep,
+            @RequestParam("ingreso_ind_ella") String ingreso_ind,
+            @RequestParam("seguro_salud_ella") String seguro_salud,
+            @RequestParam("tipo_seguro") String tipo_seguro,
+            @RequestParam("seguro_vida_ella") String seguro_vida,
+            @RequestParam("sist_pen_ella") String sist_pen,
+            @RequestParam("est_salud_ella") String est_salud,
+            HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
+        Solicitante sol = new Solicitante();
+        for (Iterator iter2 = ficha.getSolicitantes().iterator(); iter2.hasNext();) {
+            sol = (Solicitante) iter2.next();
+            if (sol.getSexo() == 'F') {
+                ficha.getSolicitantes().remove(sol);
+                break;
+            }
+        }
+
+        sol.setNombre(nombre);
+        sol.setApellidoP(apellido_p);
+        sol.setApellidoM(apellido_m);
+        try {
+            sol.setEdad(Short.parseShort(edad));
+        } catch (Exception ex) {
+            String mensaje_edad = "ERROR: El campo Edad contiene parámetros inválidos";
+            map.addAttribute("mensaje_edad", mensaje_edad);
+        }
+        sol.setLugarNac(lugar_nac);
+        sol.setDepaNac(depa_nac);
+        sol.setPaisNac(pais_nac);
+        sol.setTipoDoc(tipo_doc.charAt(0));
+        sol.setNDoc(n_doc);
+        ficha.setDomicilio(domicilio);
+        ficha.setFijo(telefono);
+        sol.setCelular(celular);
+        sol.setCorreo(correo);
+        ficha.setEstadoCivil(est_civil);
+        ficha.setFechaMatrimonio(format.stringToDate(fecha_matri));
+        sol.setNivelInstruccion(nivel_inst);
+        sol.setCulminoNivel(Short.valueOf(culm_nivel));
+        sol.setProfesion(prof);
+        sol.setTrabajadorDepend(Short.valueOf(trab_depend));
+        sol.setOcupActualDep(ocup_actual);
+        sol.setCentroTrabajo(centro_trabajo);
+        sol.setDireccionCentro(dir_centro);
+        sol.setTelefonoCentro(tel_centro);
+        try {
+            sol.setIngresoDep(Long.valueOf(ingreso_dep));
+        } catch (Exception ex) {
+            String mensaje_ingreso_dep = "ERROR: La información contenida en este campo contiene parámetros inválidos";
+            map.addAttribute("mensaje_ing_dep", mensaje_ingreso_dep);
+        }
+        sol.setTrabajadorIndepend(Short.valueOf(trab_indep));
+        sol.setOcupActualInd(ocup_act_indep);
+        try {
+            sol.setIngresoIndep(Long.valueOf(ingreso_ind));
+        } catch (Exception ex) {
+            String mensaje_ingreso_indep = "ERROR: La información contenida en este campo contiene parámetros inválidos";
+            map.addAttribute("mensaje_ing_indep", mensaje_ingreso_indep);
+        }
+        sol.setSeguroSalud(Short.valueOf(seguro_salud));
+        sol.setTipoSeguro(tipo_seguro);
+        sol.setSeguroVida(Short.valueOf(seguro_vida));
+        sol.setSistPensiones(Short.valueOf(sist_pen));
+        sol.setSaludActual(est_salud);
+        ficha.getSolicitantes().add(sol);
+
+        String pagina = "/Familia/Ficha/ficha_inscripcion_ella";
+        return new ModelAndView(pagina, map);
+    }
 }
