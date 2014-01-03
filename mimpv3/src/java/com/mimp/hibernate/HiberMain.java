@@ -68,12 +68,18 @@ public class HiberMain {
             familia = (Familia) queryResultF;
             Hibernate.initialize(familia.getInfoFamilias());
             Hibernate.initialize(familia.getFormularioSesions());
-            //Mejorar
+            Hibernate.initialize(familia.getFichaSolicitudAdopcions());
             for (Iterator iter = familia.getInfoFamilias().iterator(); iter.hasNext();) {
                 InfoFamilia ifa = (InfoFamilia) iter.next();
                 Hibernate.initialize(ifa.getAdoptantes());
                 Hibernate.initialize(ifa.getHijoActs());
                 Hibernate.initialize(ifa.getResidenteActs());
+            }
+            for (Iterator iter2 = familia.getFichaSolicitudAdopcions().iterator(); iter2.hasNext();) {
+                FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) iter2.next();
+                Hibernate.initialize(ficha.getSolicitantes());
+                Hibernate.initialize(ficha.getHijos());
+                Hibernate.initialize(ficha.getResidentes());
             }
             temp.add("familia");
             temp.add(familia);

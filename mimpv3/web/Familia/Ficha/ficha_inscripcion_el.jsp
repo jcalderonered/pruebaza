@@ -83,7 +83,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha</label>
                                     <div class="controls">
-                                        <input disabled placeholder="10/11/2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled value="${factual}" id="full-name" name="fecha_ingreso" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
@@ -91,14 +91,13 @@
                                 <div class="control-group">
                                     <label class="control-label">Número</label>
                                     <div class="controls">
-                                        <input disabled placeholder="001-2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled value="" id="full-name" name="numero" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <br>
                         <br>
-
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc1" data-toggle="tab">La Solicitante</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/Fficha/opc2" data-toggle="tab">El solicitante</a></li>
@@ -107,8 +106,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc5" data-toggle="tab">Proceso de adopción</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc6" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
-
-                        <form class="form-horizontal"> 
+                        <form role="form" action="${pageContext.servletContext.contextPath}/FfichaGuardar/opc2" method="post"> 
                             <fieldset>
                                 <br>
                                 <h3><strong>Generales</strong></h3>
@@ -117,56 +115,57 @@
                                 <div class="control-group">
                                     <label class="control-label">Nombre</label>
                                     <div class="controls">
-                                        <input id="nombre" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getNombre()}" name="nombre_el" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Paterno</label>
                                     <div class="controls">
-                                        <input id="apellido_p" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getApellidoP()}" name="apellido_p_el" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Materno</label>
                                     <div class="controls">
-                                        <input id="apellido_m" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getApellidoM()}" name="apellido_m_el" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Edad</label>  
                                     <div class="controls">
-                                        <input id="edad" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getEdad()}" name="edad_el" type="text" class="input-xlarge">
                                     </div>
                                 </div>
+                                <p style="color: red">${mensaje_edad}</p>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input id="fecha_nac" name="full-name" type="password" class="datepicker input-xlarge">
+                                        <input id="full-name" value="${fechanac}" name="fecha_nac_el" type="text" class="datepicker input-xlarge" disabled>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Dirección de nacimiento</label>
                                     <div class="controls">
-                                        <input id="direccion" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getLugarNac()}" name="lugar_nac_el" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Departamento de nacimiento</label>
                                     <div class="controls">
-                                        <input id="departamento" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getDepaNac()}" name="depa_nac_el" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">País de nacimiento</label>
                                     <div class="controls">
-                                        <input id="pais" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getPaisNac()}" name="pais_nac_el" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -174,140 +173,241 @@
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>DNI</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getTipoDoc() == 'D'}">
+                                                        <input type="radio" name="TipoDoc" id="optionsRadios1" value="D" checked>DNI</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="TipoDoc" id="optionsRadios1" value="D">DNI</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Carnet de Extranjería</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getTipoDoc() == 'C'}">
+                                                        <input type="radio" name="TipoDoc" id="optionsRadios2" value="C" checked>Carnet de Extranjería</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="TipoDoc" id="optionsRadios2" value="C">Carnet de Extranjería</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>                            
                                     </div>
-                                </div>    
+                                </div>   
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
                                         <label class="control-label">N° de Documento</label>
-                                        <input id="num_doc" placeholder="Número" type="text" class="input-xlarge">
+                                        <input id="n_doc" value="${sol.getNDoc()}" name="n_doc_el" type="text" class="input-xlarge">
                                     </div>
                                 </div>                            
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Domicilio (Consignar dirección exacta)</label>
                                     <div class="controls">
-                                        <textarea id="domicilio" class="input-xlarge" name="message" placeholder="" rows="3" ></textarea>
+                                        <textarea class="input-xlarge" name="domicilio" rows="3">${domicilio}</textarea>
                                     </div>
                                 </div>
+                                <p>*En caso de parejas, consignar el domicilio de residencia de ambos</p>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Teléfono </label>
                                     <div class="controls">
-                                        <input id="telefono" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${fijo}" name="telefono" type="text" class="input-xlarge">
                                     </div>
                                 </div>
+                                <p>*En caso de parejas, consignar el telefono fijo de ambos</p>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Celular</label>
                                     <div class="controls">
-                                        <input id="celular" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getCelular()}" name="celular_el" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Correo Electrónico</label>
                                     <div class="controls">
-                                        <input id="correo" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getCorreo()}" name="correo_el" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <h3>Estado Civil</h3>
                                 <div class="row">
-
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="soltero" value="D" checked>Soltero</label>
+                                                <c:choose>
+                                                    <c:when test="${estCivil == 'S'}">
+                                                        <input type="radio" name="estCivil" id="soltero" value="Soltero" checked>Soltero</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="estCivil" id="soltero" value="Soltero">Soltero</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="casado" value="C">Casado</label>
-                                            <br>
-                                            <label class="control-label">Fecha de matrimonio Civil</label>
-                                            <input id="fecha_matrimonio" name="full-name" type="text" class="datepicker input-xlarge">
+                                                <c:choose>
+                                                    <c:when test="${estCivil == 'C'}">
+                                                        <input type="radio" name="estCivil" id="casado" value="Casado" checked>Casado</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="estCivil" id="casado" value="Casado">Casado</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>                            
                                     </div>
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="viudo" value="D" checked>Viudo</label>
+                                                <c:choose>
+                                                    <c:when test="${estCivil == 'V'}">
+                                                        <input type="radio" name="estCivil" id="viudo" value="Viudo" checked>Viudo</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="estCivil" id="viudo" value="Viudo">Viudo</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="divorciado" value="D" checked>Divorciado</label>
+                                                <c:choose>
+                                                    <c:when test="${estCivil == 'D'}">
+                                                        <input type="radio" name="estCivil" id="divorciado" value="Divorciado" checked>Divorciado</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="estCivil" id="divorciado" value="Divorciado">Divorciado</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div> 
-                                </div>    
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Fecha de matrimonio Civil </label>
+                                    <div class="controls">
+                                        <input id="fecha_matrimonio" value="${fechaMatri}" name="fechaMatri" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
                                 <br>
                                 <h3><strong>Educación, Ocupación e Ingresos Económicos</strong></h3>
                                 <br>
                                 <h3>Nivel de instrucción alcanzado</h3>
                                 <div class="row">
-
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="ninguno" value="D" checked>Ninguno</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getNivelInstruccion() == 'Ninguno'}">
+                                                        <input type="radio" name="nivel_inst_ella" id="optionsRadios1" value="Ninguno" checked>Ninguno</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="nivel_inst_ella" id="optionsRadios1" value="Ninguno">Ninguno</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="primaria" value="D" checked>Primaria</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getNivelInstruccion() == 'Primaria'}">
+                                                        <input type="radio" name="nivel_inst_ella" id="optionsRadios2" value="Primaria" checked>Primaria</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="nivel_inst_ella" id="optionsRadios2" value="Primaria">Primaria</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="secundaria" value="D" checked>Secundaria</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getNivelInstruccion() == 'Secundaria'}">
+                                                        <input type="radio" name="nivel_inst_ella" id="optionsRadios3" value="Secundaria" checked>Secundaria</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="nivel_inst_ella" id="optionsRadios3" value="Secundaria">Secundaria</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="tecnico" value="D" checked>Técnico</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getNivelInstruccion() == 'Tecnico'}">
+                                                        <input type="radio" name="nivel_inst_ella" id="optionsRadios4" value="Tecnico" checked>Técnico</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="nivel_inst_ella" id="optionsRadios4" value="Tecnico">Técnico</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="superior" value="D" checked>Superior</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getNivelInstruccion() == 'Superior'}">
+                                                        <input type="radio" name="nivel_inst_ella" id="optionsRadios5" value="Superior" checked>Superior</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="nivel_inst_ella" id="optionsRadios5" value="Superior">Superior</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="otros" value="D" checked>Otros</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getNivelInstruccion() == 'Otros'}">
+                                                        <input type="radio" name="nivel_inst_ella" id="optionsRadios6" value="Otros" checked>Otros</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="nivel_inst_ella" id="optionsRadios6" value="Otros">Otros</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>   
                                 </div> 
                                 <br>
                                 <h3>Culminó el nivel de instrucción señalado</h3>
                                 <div class="row">
-
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="si" value="D" >Si</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getCulminoNivel() == '1'}">
+                                                        <input type="radio" name="culm_nivel_el" id="optionsRadios1" value="1" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="culm_nivel_el" id="optionsRadios1" value="1">Si</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="no" value="D" >No</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getCulminoNivel() == '0'}">
+                                                        <input type="radio" name="culm_nivel_el" id="optionsRadios2" value="0" checked>No</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="culm_nivel_el" id="optionsRadios2" value="0">No</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>  
                                 </div> 
@@ -315,7 +415,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Profesión u Oficio </label>
                                     <div class="controls">
-                                        <input id="profesion" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getProfesion()}" name="prof_el" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -324,85 +424,141 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="si_depen" value="D" >Si</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getTrabajadorDepend() == '1'}">
+                                                        <input type="radio" name="Trabajador_Depend_el" id="optionsRadios1" value="1" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="Trabajador_Depend_el" id="optionsRadios1" value="1">Si</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
-                                    </div>  
+                                    </div>
+                                    <div class="col-md-3">  
+                                        <div class="radio">
+                                            <label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getTrabajadorDepend() == '0'}">
+                                                        <input type="radio" name="Trabajador_Depend_ella" id="optionsRadios2" value="0" checked>No</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="Trabajador_Depend_ella" id="optionsRadios2" value="0">No</label>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div>
                                 </div> 
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="ocupacion" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getOcupActualDep()}" name="ocup_act_dep_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Centro de Trabajo </label>
                                     <div class="controls">
-                                        <input id="trabajo" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getCentroTrabajo()}" name="centro_trabajo_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Dirección del centro de trabajo</label>
                                     <div class="controls">
-                                        <input id="direccion_trabajo" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getDireccionCentro()}" name="dir_centro_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Teléfono del centro de trabajo </label>
                                     <div class="controls">
-                                        <input id="telefono_trabajo" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getTelefonoCentro()}" name="tel_centro_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable (sueldo bruto) </label>
                                     <div class="controls">
-                                        <input id="ingreso_depen" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getIngresoDep()}" name="ingreso_dep_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
+                                <p style="color: red">${mensaje_ing_dep}</p>
                                 <br>
-                                <h3>Trabajador independiente (Elegir solo si corresponde)</h3>
+                                <h3>Trabajadora independiente (Elegir solo si corresponde)</h3>
                                 <div class="row"> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="si_indep" value="D">Si</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getTrabajadorIndepend() == '1'}">
+                                                        <input type="radio" name="Trabajador_Indep_ella" id="optionsRadios1" value="1" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="Trabajador_Indep_ella" id="optionsRadios1" value="1">Si</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
-                                    </div>  
+                                    </div>
+                                    <div class="col-md-3">  
+                                        <div class="radio">
+                                            <label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getTrabajadorIndepend() == '0'}">
+                                                        <input type="radio" name="Trabajador_Indep_ella" id="optionsRadios2" value="0" checked>No</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="Trabajador_Indep_ella" id="optionsRadios2" value="0">No</label>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div>
                                 </div> 
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="ocupacion_indep" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getOcupActualInd()}" name="ocup_act_indep_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable</label>
                                     <div class="controls">
-                                        <input id="ingreso_indep" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getIngresoIndep()}" name="ingreso_ind_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
+                                <p style="color: red">${mensaje_ing_indep}</p>
                                 <br>
                                 <br>
                                 <h3><strong>Salud y Previsión</strong></h3>
                                 <br>
                                 <h3>Seguro de salud</h3>
                                 <div class="row"> 
-                                    <div class="col-md-2">  
+                                    <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="seguro_si" value="D">Si</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getgetSeguroSalud() == '1'}">
+                                                        <input type="radio" name="seguro_salud_ella" id="optionsRadios1" value="1" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="seguro_salud_ella" id="optionsRadios1" value="1">Si</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
-                                    </div>  
-                                    <div class="col-md-2">  
+                                    </div>
+                                    <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="seguro_no" value="D">No</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getgetSeguroSalud() == '0'}">
+                                                        <input type="radio" name="seguro_salud_ella" id="optionsRadios2" value="0" checked>No</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="seguro_salud_ella" id="optionsRadios2" value="0">No</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </div> 
@@ -410,7 +566,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Seguro</label>
                                     <div class="controls">
-                                        <input id="tipo_seguro" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getTipoSeguro()}" name="tipo_seguro" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -419,29 +575,57 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="vida_si" value="D">Si</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getSeguroVida() == '1'}">
+                                                        <input type="radio" name="seguro_vida_ella" id="optionsRadios1" value="1" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="seguro_vida_ella" id="optionsRadios1" value="1">Si</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="vida_no" value="D">No</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getSeguroVida() == '0'}">
+                                                        <input type="radio" name="seguro_vida_ella" id="optionsRadios2" value="0" checked>No</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="seguro_vida_ella" id="optionsRadios2" value="0">No</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </div> 
                                 <br>
-                                <h3>Afiliado al sistema de pensiones</h3>
+                                <h3>Afiliada al sistema de pensiones</h3>
                                 <div class="row"> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="afiliado_si" value="D">Si</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getSistPensiones() == '1'}">
+                                                        <input type="radio" name="sist_pen_ella" id="optionsRadios1" value="1" checked>Si</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="sist_pen_ella" id="optionsRadios1" value="1">Si</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="afiliado_no" value="D">No</label>
+                                                <c:choose>
+                                                    <c:when test="${sol.getSistPensiones() == '0'}">
+                                                        <input type="radio" name="sist_pen_ella" id="optionsRadios2" value="0" checked>No</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="sist_pen_ella" id="optionsRadios2" value="0">No</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </div> 
@@ -449,7 +633,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Estado de salud actual</label>
                                     <div class="controls">
-                                        <input id="estado_acutal" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" value="${sol.getSaludActual()}" name="est_salud_ella" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -463,7 +647,7 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">confirmar</button>
+                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar Cambios</button>
                                     </div>
                                 </div>
                             </fieldset>
