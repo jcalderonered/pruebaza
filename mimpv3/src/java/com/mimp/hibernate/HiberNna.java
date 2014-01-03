@@ -42,7 +42,7 @@ public class HiberNna {
         Object queryResultA = queryA.uniqueResult();
 
         tempNna = (Nna) queryResultA;
-        
+        Hibernate.initialize(tempNna.getExpedienteNnas());
         return tempNna;
     }
     
@@ -80,9 +80,61 @@ public class HiberNna {
             Nna temp = (Nna) iter.next();
             Hibernate.initialize(temp.getDesignacions());
             Hibernate.initialize(temp.getExpedienteNnas());
+            if(clasificacion.equals("prioritario")){
+                Hibernate.initialize(temp.getEstudioCasos());
+            }
             allNna.add(temp);
         }
         return allNna;
     }
     
+    public ExpedienteNna getExpNna(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ExpedienteNna tempExpNna = new ExpedienteNna();
+
+        session.beginTransaction();
+        String hql = "FROM ExpedienteNna E WHERE E.nna = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", id);
+        Object queryResult = query.uniqueResult();
+
+        tempExpNna = (ExpedienteNna) queryResult;
+        Hibernate.initialize(tempExpNna.getNna());
+        return tempExpNna;
+    }
+    
+    public ArrayList<ExpedienteNna> listaExpNna() {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String hql = "FROM ExpedienteNna";
+        Query query = session.createQuery(hql);
+        List listaExpNna = query.list();
+        ArrayList<ExpedienteNna> allExpNna = new ArrayList();
+        for (Iterator iter = listaExpNna.iterator(); iter.hasNext();) {
+            ExpedienteNna temp = (ExpedienteNna) iter.next();
+
+            allExpNna.add(temp);
+        }
+        return allExpNna;
+    }
+    
+    public void crearExpNna (ExpedienteNna temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.save(temp);
+    
+    }
+    
+    public void updateExpNna (ExpedienteNna temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.update(temp);
+    
+    }
 }

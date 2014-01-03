@@ -124,8 +124,18 @@
                                         <td>${nna.getApellidoP()}</td>
                                         <td>${nna.getApellidoM()}</td>
                                         <td>${nna.getSexo()}</td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
+                                        <td>
+                                            <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
+                                                <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
+                                                <button type="submit" class="btn btn-default">Ver</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editarExpedienteNna" method="post">
+                                                    <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
+                                                    <button ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Ver</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                    </c:forEach> 
                                 </tbody>

@@ -104,12 +104,13 @@
                         <br>
                         <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
                         <br>
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/buscarExpediente" method="post">
                             <fieldset>
                                 <div class="control-group">
-                                    <label class="control-label">Expediente</label>
+                                    <label class="control-label">Expediente (ApellidoEl-ApellidoElla)</label>
+                                    <br>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="exp" name="exp" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -119,52 +120,66 @@
                         <br>
                         <h1 align="center"><strong>Expedientes encontrados</strong></h1>
                         <br>
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarExpediente" method="post">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th class="col-sm-2 " >Expediente</th>
-                                        <th class="col-sm-2 " >UA</th>
                                         <th class="col-sm-2 " >Nivel sociec</th>
                                         <th class="col-sm-2 " >Información</th>
                                         <th class="col-sm-2 " >Resolución de aptitud</th>
                                         <th class="col-sm-2 " >Seleccionar</th>
                                     </tr>
                                 </thead>
+                                <c:if test="${!listaBusqueda.isEmpty()}"> 
                                 <tbody>
-                                    <tr>
-                                        <td>Gutierrez-Huaman </td>
-                                        <td>Lima</td>
-                                        <td>C</td>
-                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
-                                        <td>14-Nov-2012</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> 
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Morales-Loza</td>
-                                        <td>Trujillo</td>
-                                        <td>B</td>
-                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
-                                        <td>21-Agos-2011</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox">
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <c:forEach var="familia" items="${listaBusqueda}" varStatus="status">
+                                        <c:set var="agregado" value="1" />
+                                            <tr>
+                                                <td>${familia.getExpediente()}</td>
+                                                <td>
+                                                    <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
+                                                        ${info.getNivelSocioeconomico()}
+                                                    </c:forEach>
+                                                </td>
+                                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
+                                                <td>
+                                                    <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
+                                                    <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
+                                                        ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
+                                                    </c:forEach>
+                                                    </c:forEach>
+                                                </td>
+                                                <td>
+                                                    <c:if test="${!listaMatching.isEmpty()}">
+                                                        <c:forEach var="familia2" items="${listaMatching}" varStatus="status">
+                                                            <c:if test="${familia.getIdexpedienteFamilia() == familia2.getIdexpedienteFamilia()}">
+                                                                <c:set var="agregado" value="0" />
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </c:if> 
+                                                    <div class="checkbox">
+                                                    <label>
+                                                        <input ${agregado == 0 ? 'disabled' : ''} ${agregado == 0 ? 'checked' : ''} name="idExpediente" value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
+                                                    </label>
+                                                        <c:if test="${agregado == 0}">
+                                                            <h4><strong>Expediente ya agregado</strong></h4>
+                                                        </c:if>
+                                                    </div>
+                                                </td>
+                                             </tr>
+                                  </c:forEach>  
                                 </tbody>
+                              </c:if> 
+                               <c:if test="${listaBusqueda.isEmpty()}">
+                                    <h3><strong>No se encontraron expedientes</strong></h3>
+                                </c:if>  
                             </table>
                         </div>
                         <br>
                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar</button>
+                        </form>
                     </div>
                 </div>
             </div>

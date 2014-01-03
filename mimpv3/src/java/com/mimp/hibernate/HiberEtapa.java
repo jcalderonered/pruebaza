@@ -129,7 +129,7 @@ public ArrayList<Familia> getListaFamilias () {
         Object queryResultA = queryA.uniqueResult();
 
         tempResol = (Resolucion) queryResultA;
-        
+        Hibernate.initialize(tempResol.getEvaluacion().getExpedienteFamilia());
         return tempResol;
         
     }
@@ -204,6 +204,15 @@ public ArrayList<Familia> getListaFamilias () {
         return allExpedienteFamilia;
     }
      
+    public void updateExpedienteFamilia(ExpedienteFamilia temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.update(temp);
+    
+    } 
+    
     public void crearEvaluacion(Evaluacion temp){
         
         Session session = sessionFactory.getCurrentSession();
@@ -239,5 +248,152 @@ public ArrayList<Familia> getListaFamilias () {
         session.update(temp);
     
     } 
+    
+    public ArrayList<ExpedienteFamilia> listaInfoFamilias(){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        String hql = "from ExpedienteFamilia EF where EF.estado = :estado";
+        Query query = session.createQuery(hql);
+        query.setString("estado", "espera");
+        List expedientes = query.list();
+        ArrayList<ExpedienteFamilia> allInfoFam = new ArrayList();
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+        ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+            Hibernate.initialize(temp.getFamilia());
+            Hibernate.initialize(temp.getEvaluacions());
+            Set<Evaluacion> tempEvaluaciones = new HashSet<Evaluacion>(0);
+            for (Evaluacion eval : temp.getEvaluacions()){
+                if(eval.getTipo().equals("legal")){
+                        String hql2 = "from Resolucion R where R.evaluacion = :idEvaluacion and R.tipo = :tipo ORDER BY R.fechaResol DESC";
+                        Query query2 = session.createQuery(hql2);
+                        query2.setLong("idEvaluacion", eval.getIdevaluacion());
+                        query2.setString("tipo", "apto");
+                        query2.setMaxResults(1);
+                        Object queryResult = query2.uniqueResult();
+                        Resolucion tempResol = (Resolucion) queryResult;
+                        Set<Resolucion> tempResoluciones = new HashSet<Resolucion>(0);
+                        tempResoluciones.add(tempResol);
+                        eval.setResolucions(tempResoluciones);
+                        tempEvaluaciones.add(eval);
+                        
+                    }
+                
+            }
+            temp.setEvaluacions(tempEvaluaciones);
+            String hql2 = "from InfoFamilia IF where IF.familia = :id ORDER BY IF.idinfoFamilia DESC";
+            Query query2 = session.createQuery(hql2);
+            query2.setLong("id", temp.getFamilia().getIdfamilia());
+            query2.setMaxResults(1);
+            Object queryResult = query2.uniqueResult();
+            InfoFamilia tempIf = (InfoFamilia) queryResult;
+            Set<InfoFamilia> tempInfFam = new HashSet<InfoFamilia>(0);
+            tempInfFam.add(tempIf);
+            temp.getFamilia().setInfoFamilias(tempInfFam);
+            allInfoFam.add(temp);
+        }
+        
+        return  allInfoFam;
+    
+    }
 
+    public ArrayList<ExpedienteFamilia> listaInfoFamilias(String exp){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        String hql = "from ExpedienteFamilia EF where EF.estado = :estado and EF.expediente like :exp";
+        Query query = session.createQuery(hql);
+        query.setString("estado", "espera");
+        query.setString("exp",'%' + exp + '%');
+        List expedientes = query.list();
+        ArrayList<ExpedienteFamilia> allInfoFam = new ArrayList();
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+        ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+            Hibernate.initialize(temp.getFamilia());
+            Hibernate.initialize(temp.getEvaluacions());
+            Set<Evaluacion> tempEvaluaciones = new HashSet<Evaluacion>(0);
+            for (Evaluacion eval : temp.getEvaluacions()){
+                if(eval.getTipo().equals("legal")){
+                        String hql2 = "from Resolucion R where R.evaluacion = :idEvaluacion and R.tipo = :tipo ORDER BY R.fechaResol DESC";
+                        Query query2 = session.createQuery(hql2);
+                        query2.setLong("idEvaluacion", eval.getIdevaluacion());
+                        query2.setString("tipo", "apto");
+                        query2.setMaxResults(1);
+                        Object queryResult = query2.uniqueResult();
+                        Resolucion tempResol = (Resolucion) queryResult;
+                        Set<Resolucion> tempResoluciones = new HashSet<Resolucion>(0);
+                        tempResoluciones.add(tempResol);
+                        eval.setResolucions(tempResoluciones);
+                        tempEvaluaciones.add(eval);
+                        
+                    }
+                
+            }
+            temp.setEvaluacions(tempEvaluaciones);
+            String hql2 = "from InfoFamilia IF where IF.familia = :id ORDER BY IF.idinfoFamilia DESC";
+            Query query2 = session.createQuery(hql2);
+            query2.setLong("id", temp.getFamilia().getIdfamilia());
+            query2.setMaxResults(1);
+            Object queryResult = query2.uniqueResult();
+            InfoFamilia tempIf = (InfoFamilia) queryResult;
+            Set<InfoFamilia> tempInfFam = new HashSet<InfoFamilia>(0);
+            tempInfFam.add(tempIf);
+            temp.getFamilia().setInfoFamilias(tempInfFam);
+            allInfoFam.add(temp);
+        }
+        
+        return  allInfoFam;
+    
+    }
+    
+    public ExpedienteFamilia getInfoFamilia(long id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ExpedienteFamilia expFamilia = new ExpedienteFamilia();
+        String hqlA = "FROM ExpedienteFamilia EF WHERE EF.id = :id";
+        
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        expFamilia = (ExpedienteFamilia) queryResultA;
+        Hibernate.initialize(expFamilia.getFamilia());
+        Hibernate.initialize(expFamilia.getEvaluacions());
+        Set<Evaluacion> tempEvaluaciones = new HashSet<Evaluacion>(0);
+            for (Evaluacion eval : expFamilia.getEvaluacions()){
+                if(eval.getTipo().equals("legal")){
+                        String hql2 = "from Resolucion R where R.evaluacion = :idEvaluacion and R.tipo = :tipo ORDER BY R.fechaResol DESC";
+                        Query query2 = session.createQuery(hql2);
+                        query2.setLong("idEvaluacion", eval.getIdevaluacion());
+                        query2.setString("tipo", "apto");
+                        query2.setMaxResults(1);
+                        Object queryResult = query2.uniqueResult();
+                        Resolucion tempResol = (Resolucion) queryResult;
+                        Set<Resolucion> tempResoluciones = new HashSet<Resolucion>(0);
+                        tempResoluciones.add(tempResol);
+                        eval.setResolucions(tempResoluciones);
+                        tempEvaluaciones.add(eval);
+                        
+                    }
+                
+            }
+            expFamilia.setEvaluacions(tempEvaluaciones);
+            String hql2 = "from InfoFamilia IF where IF.familia = :id ORDER BY IF.idinfoFamilia DESC";
+            Query query2 = session.createQuery(hql2);
+            query2.setLong("id", expFamilia.getFamilia().getIdfamilia());
+            query2.setMaxResults(1);
+            Object queryResult = query2.uniqueResult();
+            InfoFamilia tempIf = (InfoFamilia) queryResult;
+            Set<InfoFamilia> tempInfFam = new HashSet<InfoFamilia>(0);
+            tempInfFam.add(tempIf);
+            expFamilia.getFamilia().setInfoFamilias(tempInfFam);
+        
+        
+        return expFamilia;
+        
+    }
+    
 }

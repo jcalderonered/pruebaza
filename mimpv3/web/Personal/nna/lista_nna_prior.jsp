@@ -128,24 +128,47 @@
                                         <td>${nna.getApellidoP()}</td>
                                         <td>${nna.getApellidoM()}</td>
                                         <td>${nna.getSexo()}</td>
+                                        <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
                                         <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">
                                         <td>
+                                            
                                             ${expediente.getCodigoReferencia()}
                                         </td>
                                         </c:forEach>
+                                        </c:if>
+                                        <c:if test="${nna.getExpedienteNnas().isEmpty()}">
+                                            <td>
+                                                No
+                                            </td>   
+                                        </c:if>
                                         <td>
                                             <c:if test="${!nna.getDesignacions().isEmpty()}">
-                                                Si
+                                                <c:forEach var="designacion" items="${nna.getDesignacions()}" varStatus="status">
+                                                    <c:choose>
+                                                        <c:when test="${designacion.getAceptacionConsejo() == 1}">
+                                                                    Si
+                                                        </c:when> 
+                                                    </c:choose>
+                                                </c:forEach>   
                                             </c:if>  
                                             <c:if test="${nna.getDesignacions().isEmpty()}">
                                                 No
                                             </c:if>   
                                         </td>
-                                        
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                        <td><button disabled href="#" class="btn btn-default">Registrar</button></td>
-                                        <td><button href="#" class="btn btn-default">Editar</button></td>
+                                        <td>
+                                            <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
+                                                <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
+                                                <button type="submit" class="btn btn-default">Ver</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editarExpedienteNna" method="post">
+                                                    <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
+                                                    <button ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Ver</button>
+                                            </form>
+                                        </td>
+                                        <td><button class="btn btn-default">Registrar</button></td>
+                                        <td><button ${nna.getEstudioCasos().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Editar</button></td>
                                     </tr>
                                     </c:forEach>  
                                 </tbody>

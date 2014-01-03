@@ -30,9 +30,11 @@ public class mainEtapas {
     private HiberEtapa servicioEtapa = new HiberEtapa();
     @Resource(name = "HiberPersonal")
     private HiberPersonal ServicioPersonal = new HiberPersonal();
+    @Resource(name = "HiberNna")
+    private HiberNna ServicioNna = new HiberNna();
     dateFormat df = new dateFormat();
     timeStampFormat ts = new timeStampFormat();
-
+    ArrayList<ExpedienteFamilia> listaMatching = new ArrayList();
     
     @RequestMapping(value = "/fametap", method = RequestMethod.GET)
     public ModelAndView FamEtap(ModelMap map, HttpSession session) {
@@ -558,6 +560,12 @@ public class mainEtapas {
         
         servicioEtapa.crearResolEvaluacion(tempResol);
         tempEval = servicioEtapa.getLegal(idLegal);
+        if(tipo != null && tipo.equals("apto")){
+        ExpedienteFamilia tempFam = new ExpedienteFamilia();
+        tempFam = tempEval.getExpedienteFamilia();
+        tempFam.setEstado("espera");
+        servicioEtapa.updateExpedienteFamilia(tempFam);
+        }
         map.put("familia",familia);
         map.put("legal",tempEval);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal()); 
@@ -596,6 +604,12 @@ public class mainEtapas {
         
         servicioEtapa.updateResolEvaluacion(tempResol);
         tempResol = servicioEtapa.getResolucion(idResolucion);
+        if(tipo != null && tipo.equals("apto")){
+        ExpedienteFamilia tempFam = new ExpedienteFamilia();
+        tempFam = tempResol.getEvaluacion().getExpedienteFamilia();
+        tempFam.setEstado("espera");
+        servicioEtapa.updateExpedienteFamilia(tempFam);
+        }
         map.put("familia",familia);
         map.put("legal",servicioEtapa.getLegal(tempResol.getEvaluacion().getIdevaluacion()));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());   
@@ -605,7 +619,125 @@ public class mainEtapas {
         
     }
     
+    /*------- REGISTRAR DESIGNACIÓN ---------*/
     
+    @RequestMapping(value = "/registrarDesignacion", method = RequestMethod.POST)
+    public ModelAndView registrarDesignacion(ModelMap map, HttpSession session,
+                                                       @RequestParam("idNna") long idNna
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        listaMatching.clear();
+        Nna tempNna = new Nna();
+        ArrayList<ExpedienteFamilia> allExp = new ArrayList();
+        
+        tempNna = ServicioNna.getNna(idNna);
+        allExp = servicioEtapa.listaInfoFamilias();
+        
+        for (ExpedienteFamilia expedienteFamilia : allExp) {
+            for (InfoFamilia infoFamilia : expedienteFamilia.getFamilia().getInfoFamilias()) {
+                 if(tempNna.getEdadAnhos() >= infoFamilia.getExpectativaEdadMin() && 
+                         tempNna.getEdadAnhos() >= infoFamilia.getExpectativaEdadMin() &&
+                         tempNna.getSexo().equals(infoFamilia.getExpectativaGenero())) {
+                     
+                     if( tempNna.getIncesto() == infoFamilia.getNnaIncesto() &&
+                         tempNna.getMental() == infoFamilia.getNnaMental() &&
+                         tempNna.getEpilepsia() == infoFamilia.getNnaEpilepsia() &&
+                         tempNna.getAbuso() == infoFamilia.getNnaAbuso() &&
+                         tempNna.getSifilis() == infoFamilia.getNnaSifilis() &&
+                         tempNna.getSeguiMedico() == infoFamilia.getNnaSeguiMedico() &&
+                         tempNna.getOperacion() == infoFamilia.getNnaHiperactivo() &&
+                         tempNna.getHiperactivo() == infoFamilia.getNnaHiperactivo() ){
+                         
+                         listaMatching.add(expedienteFamilia);
+                     }
+                 }
+            }
+        }
+        
+        map.put("listaMatching",listaMatching);
+        map.put("df",df);
+        return new ModelAndView("/Personal/nna/reg_desig", map);
+        
+    } 
+    
+    @RequestMapping(value = "/agregarExp", method = RequestMethod.GET)
+    public ModelAndView agregarExp(ModelMap map, HttpSession session
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        map.put("df",df);
+        return new ModelAndView("/Personal/nna/agregar_exp", map);
+        
+    } 
+    
+    @RequestMapping(value = "/buscarExpediente", method = RequestMethod.POST)
+    public ModelAndView buscarExpediente(ModelMap map, HttpSession session,
+                                                       @RequestParam("exp") String exp
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        ArrayList<ExpedienteFamilia> listaBusqueda = new ArrayList();
+        listaBusqueda = servicioEtapa.listaInfoFamilias(exp);
+        
+        /*
+        if(!listaBusqueda.isEmpty()){
+            for (ExpedienteFamilia EF : listaBusqueda) {
+                if(!listaMatching.isEmpty()){
+                        for (ExpedienteFamilia EF2 : listaMatching) {
+                            if(EF.getIdexpedienteFamilia() == EF2.getIdexpedienteFamilia()){
+                                    listaBusqueda.remove(EF);
+                            }
+                            
+                        }
+                
+                }
+                
+           }
+        
+        
+        }
+            */
+        map.put("df",df);
+        map.put("listaMatching",listaMatching);
+        map.put("listaBusqueda",listaBusqueda);
+        return new ModelAndView("/Personal/nna/agregar_exp", map);
+        
+    } 
+    
+    @RequestMapping(value = "/agregarExpediente", method = RequestMethod.POST)
+    public ModelAndView agregarExpediente(ModelMap map, HttpSession session, long[] idExpediente
+            
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        for (long l : idExpediente) {
+            ExpedienteFamilia tempExp = servicioEtapa.getInfoFamilia(l);
+            listaMatching.add(tempExp);
+        }
+        
+        map.put("listaMatching",listaMatching);
+        map.put("df",df);
+        return new ModelAndView("/Personal/nna/reg_desig", map);
+        
+    } 
     
     
 }

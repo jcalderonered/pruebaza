@@ -102,7 +102,7 @@
                             </c:if>  
                             <c:if test="${nna != null}">
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateNna" method="post"> 
-                                    <input hidden name="id" id="id" value="${nna.getIdnna()}">
+                                    <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
                                 </c:if>     
                             <fieldset>
                                 <!-- Text input-->
@@ -464,9 +464,24 @@
                                   </fieldset>
                                 </form>       
                                 <br>        
-                                        <button ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Expediente</button>
+                                    
+                                
+                                       <c:if test="${nna.getExpedienteNnas().isEmpty()}">
+                                         <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarExpedienteNna" method="post"> 
+                                             <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">   
+                                            </c:if>  
+                                                <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editarExpedienteNna" method="post">
+                                                    <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
+                                                </c:if>                                                   
+                                                <button ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Expediente</button>
+                                       </form>  
                                         &nbsp;
-                                        <button ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Propuesta de Designación</button>
+                                       <form action="${pageContext.servletContext.contextPath}/listaDesignacionesNna" method="post">
+                                                <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
+                                                <button ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Propuesta de Designación</button>
+                                       </form>  
+                                        
                         </div>
                 </div>
             </div>
@@ -517,14 +532,33 @@
                     var birth_month = pieces[1];
                     var birth_year = pieces[2];
                     
-                    if (curr_year != birth_year && birth_month >= curr_month  ) edad.value = curr_year - birth_year - 1;
+                    
+                    if (curr_year != birth_year && birth_month > curr_month  ) edad.value = curr_year - birth_year - 1;
                     if (curr_year != birth_year && birth_month == curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year != birth_year && birth_month < curr_month  ) edad.value = curr_year - birth_year;
                     if (curr_year == birth_year) edad.value = 0;
                     if (curr_month == birth_month) meses.value = 0;
                     if (curr_month != birth_month && curr_month > birth_month ) meses.value = curr_month - birth_month;
                     if (curr_month != birth_month && curr_month <= birth_month ) meses.value = curr_month;
                      
                         });
+                        
+                    $("input[type='radio']").click(function()
+                     {
+                        var previousValue = $(this).attr('previousValue');
+                        var name = $(this).attr('name');
+
+                        if (previousValue == 'checked')
+                        {
+                        $(this).removeAttr('checked');
+                        $(this).attr('previousValue', false);
+                        }
+                        else
+                        {
+                        $("input[name="+name+"]:radio").attr('previousValue', false);
+                        $(this).attr('previousValue', 'checked');
+                        }
+                     });   
               });
 
             </script>
