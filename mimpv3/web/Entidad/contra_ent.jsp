@@ -6,16 +6,16 @@
 
 <%@page import="com.mimp.bean.Entidad"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
-response.setDateHeader("Expires", 0);
-Entidad u=(Entidad)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    Entidad u = (Entidad) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -56,8 +56,8 @@ if (u==null){
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li class="active"><a href="#">Inicio</a></li>
-                            <li><a href="#">Salir</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioEnt">Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -68,7 +68,7 @@ if (u==null){
                 <div class="row">
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
-                            <li><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/inicioEnt"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Listado de familias</a></li>
                             <!--<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Estado del proceso de Adopción</a></li>-->
                             <li class="active"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>               
@@ -79,27 +79,27 @@ if (u==null){
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Cambio de contraseña</strong></h1>
                         <br>
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/Orgcambiarcontra" method="post">
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <label class="control-label" for="pass_actual">Contraseña Actual</label>
                                     <div>
-                                        <input id="pass_actual" name="pass_actual" type="password" placeholder="" class="input-xlarge">
+                                        <input id="oldpass" name="oldpass" type="password" placeholder="" class="input-xlarge">
                                     </div>
                                     <br>
                                     <label class="control-label" for="pass_nuevo">Nueva Contraseña</label>
                                     <div>
-                                        <input id="pass_nuevo" name="pass_nuevo" type="password" placeholder="" class="input-xlarge">
+                                        <input id="newpass" name="newpass" type="password" placeholder="" class="input-xlarge">
                                     </div>
                                     <br>
                                     <label class="control-label" for="pass_nuevo2">Reescribir nueva contraseña</label>
                                     <div>
-                                        <input id="pass_nuevo2" name="pass_nuevo2" type="password" placeholder="" class="input-xlarge">
+                                        <input id="newpassconf" name="newpassconf" type="password" placeholder="" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
-                                <p style="color: red">La contraseña se ha cambiado con éxito</p>
+                                <p style="color: red">${mensaje}</p>
                                 <br>
                                 <!-- Button -->
                                 <div class="control-group">

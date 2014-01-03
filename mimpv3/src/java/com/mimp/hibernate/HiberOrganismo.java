@@ -22,5 +22,10 @@ public class HiberOrganismo {
     @Resource(name="sessionFactory")
     private SessionFactory sessionFactory;
     
+    public void CambiaPass(Entidad entidad) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.update(entidad);
+    }
     
 }
