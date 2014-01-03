@@ -8,9 +8,12 @@ package com.mimp.controllers;
 
 import java.util.*;
 import com.mimp.bean.*;
+import com.mimp.hibernate.HiberFamilia;
 import com.mimp.hibernate.HiberMain;
+import com.mimp.hibernate.HiberOrganismo;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,10 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class organismo {
+    
+    @Resource(name = "HiberOrganismo")
+    private HiberOrganismo ServicioOrganismo = new HiberOrganismo();
+    
     @RequestMapping("/inicioEnt")
     public ModelAndView InicioEnt(ModelMap map, HttpSession session) {
         Entidad usuario = (Entidad) session.getAttribute("usuario");
@@ -35,4 +42,60 @@ public class organismo {
         String pagina = "/Entidad/inicio_ent";
         return new ModelAndView(pagina, map);
     }
+    
+    @RequestMapping(value = "/contraEnt", method = RequestMethod.GET)
+    public ModelAndView ContraEnt(ModelMap map, HttpSession session) {
+        Entidad usuario = (Entidad) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //List<Personal> lista = Servicio.listaPersonal();
+        //map.addAttribute("id", temp);
+        return new ModelAndView("/Entidad/contra_ent", map);
+    }
+    
+    //////////////////////// NAVEGACION ///////////////
+    @RequestMapping(value = "/inicioEnt", method = RequestMethod.GET)
+    public ModelAndView inicioEnt(ModelMap map, HttpSession session) {
+        Entidad usuario = (Entidad) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //List<Personal> lista = Servicio.listaPersonal();
+        //map.addAttribute("id", temp);
+        return new ModelAndView("/Entidad/inicio_ent", map);
+    }
+    
+    @RequestMapping("/Orgcambiarcontra")
+    public ModelAndView Orgcambiarcontra(ModelMap map, HttpSession session, @RequestParam("oldpass") String oldpass, @RequestParam("newpass") String newpass, @RequestParam("newpassconf") String newpassconf) {
+        Entidad usuario = (Entidad) session.getAttribute("usuario");
+        String mensaje = "";
+        if (usuario == null) {
+            mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        } else {
+            oldpass = DigestUtils.sha512Hex(oldpass);
+            if (usuario.getPass().equals(oldpass)) {
+                if (newpass.equals(newpassconf)) {
+                    newpass = DigestUtils.sha512Hex(newpass);
+                    usuario.setPass(newpass);
+                    ServicioOrganismo.CambiaPass(usuario);
+                    mensaje = "La contraseña se ha cambiado con exito.";
+                } else {
+                    mensaje = "Las contraseñas no coinciden. Favor de reescribir la nueva contraseña.";
+                }
+            } else {
+                mensaje = "Contraseña de usuario incorrecta. Ingrese nuevamente.";
+            }
+        }
+        String pagina = "/Entidad/contra_ent";
+        map.addAttribute("mensaje", mensaje);
+        return new ModelAndView(pagina, map);
+    }
+    
 }
