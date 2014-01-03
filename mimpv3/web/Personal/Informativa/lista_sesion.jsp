@@ -96,7 +96,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inf'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <c:choose>
                             <c:when test="${ sesion == null }">
                                 <form action="${pageContext.servletContext.contextPath}/PersonalCrearSesion" method="post">
@@ -106,14 +106,12 @@
                                         <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">  
                                     </c:otherwise>
                                 </c:choose>
-
                                 <div class="control-group">
                                     <label class="control-label" for="textinput"><h1>Sesión Informativa</h1></label>
                                     <div class="controls">
                                         <input id="numSesion" name="numSesion" value= "${sesion.getNSesion()}" type="text" placeholder="número de sesión" class="input-xlarge">
                                     </div>
                                 </div>
-
                                 <br>
                                 <c:choose>
                                     <c:when test="${ sesion != null && sesion.getHabilitado() == 0}">
@@ -164,83 +162,78 @@
                                     </div>
                                 </div>
                                 <br>
-                                
                                 <button type="submit" class="btn btn-default">Guardar Cambios</button>
-                                </form>
-                                <br>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
+                            </form>
+                            <br>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Inicio Inscripción</th>
+                                            <th>Fin Inscripción</th>
+                                            <th>Vacantes</th>
+                                            <th>Modificar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
                                             <tr>
-                                                <th></th>
-                                                <th>Inicio Inscripción</th>
-                                                <th>Fin Inscripción</th>
-                                                <th>Vacantes</th>
-                                                <th>Modificar</th>
+                                                <td>Turno ${status.index + 1} </td>
+                                                <td>${ts.DateToString(turno.getInicioInscripcion())} ${ts.HourToString(turno.getInicioInscripcion())}</td>
+                                                <td>${ts.DateToString(turno.getFinInscripcion())} ${ts.HourToString(turno.getFinInscripcion())}</td>
+                                                <td>${turno.getVacantes()}</td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno2" method="post">
+                                                        <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
+                                                        <input hidden name="index" id="index" value="${status.index + 1}">
+                                                        <button type="submit" class="btn btn-default">Modificar</button>
+                                                    </form>    
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
-                                                <tr>
-                                                    <td>Turno ${status.index + 1} </td>
-                                                    <td>${ts.DateToString(turno.getInicioInscripcion())} ${ts.HourToString(turno.getInicioInscripcion())}</td>
-                                                    <td>${ts.DateToString(turno.getFinInscripcion())} ${ts.HourToString(turno.getFinInscripcion())}</td>
-                                                    <td>${turno.getVacantes()}</td>
-                                                    <td>
-                                                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno2" method="post">
-                                                            <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
-                                                            <input hidden name="index" id="index" value="${status.index + 1}">
-                                                            <button type="submit" class="btn btn-default">Modificar</button>
-                                                        </form>    
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <br>
-                                <br>
-                                <c:choose>
-                                    <c:when test="${sesion != null && listaTurnos != null }">
-                                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno" method="post">
-                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                            <input hidden name="index" id="index" value="${listaTurnos.size() + 1}">
-                                            <button type="submit" class="btn btn-default">Agregar nuevo turno</button>
-                                        </form>    
-                                    </c:when>           
-                                    <c:when test="${sesion != null && listaTurnos == null }">
-                                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno" method="post">
-                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                            <input hidden name="index" id="index" value="1">
-                                            <button type="submit" class="btn btn-default">Agregar nuevo turno</button>
-                                        </form>   
-                                    </c:when>
-                                    <c:otherwise>
-                                        <h3><strong>Debe crear una Sesión Informativa para luego insertar los turnos</strong></h3>
-                                    </c:otherwise>
-                                </c:choose>
-                                <br>        
-                                <br>
-                                <c:choose>
-                                    <c:when test="${sesion != null}">
-                                        <form action="${pageContext.servletContext.contextPath}/PersonalHabilitarSesion" method="post">
-                                             <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                            <button type="submit" ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} class="btn btn-default">Habilitar sesión</button>
-                                        </form>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <h3><strong>Luego de crear la sesión informativa podrá habilitarla</strong></h3>
-                                    </c:otherwise>
-                                </c:choose>
-
-                                <br>
-                                <br>
-                                
-                                <br>
-                                <br>
-                                <p>IMPORTANTE: Una vez iniciado el Turno 1 de Inscripción, no es posible Deshabilitar la sesión debido a los inscritos</p>
-
-                           
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
+                            <br>
+                            <c:choose>
+                                <c:when test="${sesion != null && listaTurnos != null }">
+                                    <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno" method="post">
+                                        <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                        <input hidden name="index" id="index" value="${listaTurnos.size() + 1}">
+                                        <button type="submit" class="btn btn-default">Agregar nuevo turno</button>
+                                    </form>    
+                                </c:when>           
+                                <c:when test="${sesion != null && listaTurnos == null }">
+                                    <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno" method="post">
+                                        <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                        <input hidden name="index" id="index" value="1">
+                                        <button type="submit" class="btn btn-default">Agregar nuevo turno</button>
+                                    </form>   
+                                </c:when>
+                                <c:otherwise>
+                                    <h3><strong>Debe crear una Sesión Informativa para luego insertar los turnos</strong></h3>
+                                </c:otherwise>
+                            </c:choose>
+                            <br>        
+                            <br>
+                            <c:choose>
+                                <c:when test="${sesion != null}">
+                                    <form action="${pageContext.servletContext.contextPath}/PersonalHabilitarSesion" method="post">
+                                        <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                        <button type="submit" ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} class="btn btn-default">Habilitar sesión</button>
+                                    </form>
+                                </c:when>
+                                <c:otherwise>
+                                    <h3><strong>Luego de crear la sesión informativa podrá habilitarla</strong></h3>
+                                </c:otherwise>
+                            </c:choose>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <p>IMPORTANTE: Una vez iniciado el Turno 1 de Inscripción, no es posible Deshabilitar la sesión debido a los inscritos</p>
                     </div>
                 </div>
             </div>
@@ -264,8 +257,8 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery.timepicker.js"></script>
             <script type="text/javascript">
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-                $('.timepicker').timepicker({'timeFormat': 'H:i'});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.timepicker').timepicker({'timeFormat': 'H:i'});
             </script>
             <!-- Placed at the end of the document so the pages load faster -->
     </body>
