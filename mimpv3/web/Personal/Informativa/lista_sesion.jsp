@@ -160,9 +160,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Facilitador:</label>
                                     <div>
-                                        <textarea id="capacitador" name="capacitador" cols="20" rows="5">
-                                            ${sesion.getFacilitador()}
-                                        </textarea>
+                                        <textarea id="capacitador" name="capacitador" cols="20" rows="5">${sesion.getFacilitador()}</textarea>
                                     </div>
                                 </div>
                                 <br>
