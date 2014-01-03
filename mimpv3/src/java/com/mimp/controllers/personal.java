@@ -9,6 +9,7 @@ import com.mimp.util.*;
 import com.mimp.bean.*;
 import com.mimp.hibernate.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -1220,10 +1221,16 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        Sesion tempSesion = new Sesion();
-        tempSesion = ServicioPersonal.getSesion(id);
+        Sesion tempSesion = ServicioPersonal.getSesion(id);
         tempSesion.setNSesion(numSesion);
-        tempSesion.setFecha(format.stringToDate(fecha));
+        Date tempfecha = tempSesion.getFecha();
+        if(fecha.contains("ene") || fecha.contains("feb") || fecha.contains("mar") || fecha.contains("abr") ||
+                fecha.contains("may") || fecha.contains("jun") || fecha.contains("jul") || fecha.contains("ago") 
+                || fecha.contains("set") || fecha.contains("oct") || fecha.contains("nov") || fecha.contains("dic")){
+            tempSesion.setFecha(tempfecha);
+        } else {
+            tempSesion.setFecha(format.stringToDate(fecha));
+        }
         tempSesion.setHora(hora);
         tempSesion.setDuracion(duracion);
         tempSesion.setDireccion(direccion);

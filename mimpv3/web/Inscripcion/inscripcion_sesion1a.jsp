@@ -44,8 +44,8 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li><a href="#">Inicio</a></li>
-                            <li class="active"><a href="#">Inscripción a Sesión Informativa</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/inicio">Inicio</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/SesionInfInicio">Inscripción a Sesión Informativa</a></li>
                             <li><a href="#">Información Adicional</a></li>
                             <li><a href="#">Contacto</a></li>
                         </ul>
