@@ -87,12 +87,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="Adop" items="${listaFam}" varStatus="status">
-                                        <tr>                                            
+                                    <c:forEach var="fam" items="${listaFam}" varStatus="status">
+                                        <tr> 
+                                            <c:forEach var="Adop" items="${listaAdop}" varStatus="status">
+                                                <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() || Adop.getSexo() == 'M' }"  >
                                             <td>${Adop.getNombre()}</td>
-                                            <td>${Adop.getCelular()}</td>
-                                            <td>${Adop.getCelular()}</td>
-                                            <td>${Adop.getInfoFamilia().getFamilia().getCorreo()}</td>
+                                               </c:if>
+                                            <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() || Adop.getSexo() == 'F' }"  >
+                                            <td>${Adop.getNombre()}</td>
+                                               </c:if>
+                                            </c:forEach>
+                                            <td>${fam.getCorreo()}</td>
+                                            <td>${fam.getCorreo()}</td>
                                             <td>
                                                 <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post">
                                                     <input hidden name="ïdUA" id="ïdUA" value="${Adop.getCelular()}">
