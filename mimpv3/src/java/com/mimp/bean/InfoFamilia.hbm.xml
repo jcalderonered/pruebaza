@@ -67,7 +67,7 @@
         </property>
         <property name="expectativaEdadMin" type="java.lang.Short">
             <column name="EXPECTATIVA_EDAD_MIN" precision="3" scale="0" />
-        </property>
+        </property> 
         <property name="expectativaGenero" type="string">
             <column name="EXPECTATIVA_GENERO" length="10" />
         </property>
@@ -140,9 +140,9 @@
         <property name="telefono" type="string">
             <column name="TELEFONO" length="15" />
         </property>
-        <property name="expectativaEdadMax" type="java.lang.Short">
+       <property name="expectativaEdadMax" type="java.lang.Short">
             <column name="EXPECTATIVA_EDAD_MAX" precision="3" scale="0" />
-        </property>
+        </property> 
         <set name="residenteActs" table="RESIDENTE_ACT" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="IDINFO_FAMILIA" precision="10" scale="0" not-null="true" />

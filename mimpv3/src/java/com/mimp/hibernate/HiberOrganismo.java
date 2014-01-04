@@ -29,7 +29,7 @@ public class HiberOrganismo {
         session.update(entidad);
     }
     
-    public ArrayList<Familia> ListaFam(long idFam) {
+    public ArrayList<Familia> ListaFam(long idEnt) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -37,7 +37,7 @@ public class HiberOrganismo {
 
         String hql = "FROM Familia F WHERE F.entidad = :id";
         Query query = session.createQuery(hql);
-        query.setLong("id", idFam);
+        query.setLong("id", idEnt);
         List fam = query.list();
         ArrayList<Familia> allFam = new ArrayList();
 
@@ -45,11 +45,33 @@ public class HiberOrganismo {
             Familia temp = (Familia) iter.next();
             Hibernate.initialize(temp.getEntidad());
             allFam.add(temp);
-            Adoptante temp2 = (Adoptante) iter.next();
-            temp2.getInfoFamilia().getFamilia().getEntidad().getIdentidad();
         }
         
 
         return allFam;
     }
+    
+    public ArrayList<Adoptante> ListaAdopPorEnt(long idEnt) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "FROM Adoptante";
+        Query query = session.createQuery(hql);       
+        List Adop = query.list();
+        ArrayList<Adoptante> allAdop = new ArrayList();
+
+        for (Iterator iter = Adop.iterator(); iter.hasNext();) {
+            Adoptante temp = (Adoptante) iter.next();                     
+            Hibernate.initialize(temp.getInfoFamilia());
+            
+            if (temp.getInfoFamilia().getFamilia().getEntidad().getIdentidad() == idEnt){
+            Hibernate.initialize(temp.getInfoFamilia().getFamilia().getEntidad());
+            allAdop.add(temp);
+            }
+        }        
+        return allAdop;
+    }
+    
 }
