@@ -6,16 +6,16 @@
 
 <%@page import="com.mimp.bean.Entidad"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
-response.setDateHeader("Expires", 0);
-Entidad u=(Entidad)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    Entidad u = (Entidad) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -64,9 +64,9 @@ if (u==null){
                 <div class="row">
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
-                            <li><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Listado de familias</a></li>
-                            <li class="active"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/inicioEnt"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/listaFam"><span class="glyphicon glyphicon-chevron-right"></span> Listado de familias</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/contraEnt"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>
                         </ul>
                     </div>
 
@@ -87,30 +87,26 @@ if (u==null){
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>El Adoptante 1</td>
-                                        <td>La Adoptante 1</td>
-                                        <td>035-2012</td>
-                                        <td>familia1@dominio.pe</td>
-                                        <td><button href="#" class="btn btn-default">Info</button></td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>El Adoptante 2</td>
-                                        <td>La Adoptante 2</td>
-                                        <td>046-2011</td>
-                                        <td>familia2@dominio.pe</td>
-                                        <td><button href="#" class="btn btn-default">Info</button></td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>El Adoptante 1</td>
-                                        <td>La Adoptante 1</td>
-                                        <td>126-2010</td>
-                                        <td>familia1@dominio.pe</td>
-                                        <td><button href="#" class="btn btn-default">Info</button></td>
-                                        <td><button href="#" class="btn btn-default">Ver</button></td>
-                                    </tr>
+                                    <c:forEach var="fam" items="${listaFam}" varStatus="status">
+                                        <tr>                                            
+                                            <td>${fam.getCorreo()}</td>
+                                            <td>${fam.getCorreo()}</td>
+                                            <td>${fam.getCorreo()}</td>
+                                            <td>${fam.getCorreo()}</td>
+                                            <td>
+                                                <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post">
+                                                    <input hidden name="ïdUA" id="ïdUA" value="${fam.getIdfamilia()}">
+                                                    <button type="submit" class="btn btn-default">Info</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="${pageContext.servletContext.contextPath}/irEditarUa2" method="post">
+                                                    <input hidden name="id" id="id" value="${fam.getIdfamilia()}">
+                                                    <button type="submit" class="btn btn-default">Ver</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
