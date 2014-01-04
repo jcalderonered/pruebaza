@@ -44,6 +44,7 @@ public class HiberOrganismo {
         for (Iterator iter = fam.iterator(); iter.hasNext();) {
             Familia temp = (Familia) iter.next();
             Hibernate.initialize(temp.getEntidad());
+            
             allFam.add(temp);
         }
         
@@ -64,8 +65,7 @@ public class HiberOrganismo {
 
         for (Iterator iter = Adop.iterator(); iter.hasNext();) {
             Adoptante temp = (Adoptante) iter.next();                     
-            Hibernate.initialize(temp.getInfoFamilia());
-            
+            Hibernate.initialize(temp.getInfoFamilia());            
             if (temp.getInfoFamilia().getFamilia().getEntidad().getIdentidad() == idEnt){
             Hibernate.initialize(temp.getInfoFamilia().getFamilia().getEntidad());
             allAdop.add(temp);

@@ -107,8 +107,8 @@ public class organismo {
             return new ModelAndView("login", map);
         }      
         
-        //map.put("listaFam", ServicioOrganismo.ListaFam(usuario.getIdentidad()));
-        map.put("listaFam", ServicioOrganismo.ListaAdopPorEnt(usuario.getIdentidad()));
+        map.put("listaFam", ServicioOrganismo.ListaFam(usuario.getIdentidad()));
+        map.put("listaAdop", ServicioOrganismo.ListaAdopPorEnt(usuario.getIdentidad()));
         return new ModelAndView("/Entidad/lista_fam", map);
     }
     
