@@ -52,8 +52,8 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li class="active"><a href="#">Inicio</a></li>
-                            <li><a href="#">Salir</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioEnt">Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -87,21 +87,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="fam" items="${listaFam}" varStatus="status">
+                                    <c:forEach var="Adop" items="${listaFam}" varStatus="status">
                                         <tr>                                            
-                                            <td>${fam.getCorreo()}</td>
-                                            <td>${fam.getCorreo()}</td>
-                                            <td>${fam.getCorreo()}</td>
-                                            <td>${fam.getCorreo()}</td>
+                                            <td>${Adop.getNombre()}</td>
+                                            <td>${Adop.getCelular()}</td>
+                                            <td>${Adop.getCelular()}</td>
+                                            <td>${Adop.getInfoFamilia().getFamilia().getCorreo()}</td>
                                             <td>
                                                 <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post">
-                                                    <input hidden name="ïdUA" id="ïdUA" value="${fam.getIdfamilia()}">
+                                                    <input hidden name="ïdUA" id="ïdUA" value="${Adop.getCelular()}">
                                                     <button type="submit" class="btn btn-default">Info</button>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form action="${pageContext.servletContext.contextPath}/irEditarUa2" method="post">
-                                                    <input hidden name="id" id="id" value="${fam.getIdfamilia()}">
+                                                    <input hidden name="id" id="id" value="${Adop.getCelular()}">
                                                     <button type="submit" class="btn btn-default">Ver</button>
                                                 </form>
                                             </td>
