@@ -27,6 +27,8 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
+        <!-- Datepicker -->
+        <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
     <body id="bd" class="bd fs3 com_content">
         <br>
@@ -101,25 +103,28 @@
                         </ul>
                         <br>
                         <br>
+                        <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/agregarExp'" id="singlebutton" name="singlebutton" class="btn btn-default">Agregar Familia</button>
+                        <br>
+                        <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
+                        <br>
+                        <h3><strong>${mensaje}</strong></h3>
+                        <br>
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarDesignación" method="post">
+                        <br>
                         <div class="control-group">
                             <label class="control-label">Fecha de propuesta</label>
                             <div class="controls">
-                                <input type="text" class="datepicker span2" id="dp3" >
+                                <input type="text" class="datepicker" id="fecha" name="fecha" >
                             </div>
                         </div>
                         <br>
                         <div class="control-group">
                             <label class="control-label">N° de Designación</label>
                             <div class="controls">
-                                <input type="text" class="span2" value="" id="designacion" >
+                                <input type="text" class="span2" value="" id="numDesig" name="numDesig" >
                             </div>
                         </div>
                         <br>
-                        <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/agregarExp'" id="singlebutton" name="singlebutton" class="btn btn-default">Agregar Familia</button>
-                        <br>
-                        <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
-                        <br>
-                        <form>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
@@ -152,7 +157,7 @@
                                         <td>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
+                                                    <input name="idExpediente" value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
                                                 </label>
                                             </div>
                                         </td>
@@ -166,7 +171,7 @@
                             </table>
                         </div>
                         <br>
-                        <br>
+                        <br> 
                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
                         </form>
                     </div>

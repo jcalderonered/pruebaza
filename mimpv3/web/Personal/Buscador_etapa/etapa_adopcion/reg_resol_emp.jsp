@@ -97,18 +97,26 @@ if (u==null){
                         <br>
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
-                            <li><a href="#" >Designación</a></li>
-                            <li><a href="#" >Adopción</a></li>
+                            <li ><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
                             <li><a href="#" >Post Adopción</a></li>
                         </ul>
-                        <form role="form">
+                        <c:if test="${resolucion == null}">
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearResolEmpatia" method="post"> 
+                                <input hidden name="idEmpatia" id="idEmpatia" value="${idEmpatia}">
+                                <input hidden name="idNna" id="idNna" value="${idNna}">
+                            </c:if>  
+                            <c:if test="${resolucion != null}">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateResolEmpatia" method="post"> 
+                                    <input hidden name="idResolucion" id="idResolucion" value="${resolucion.getIdresolucion()}">
+                                </c:if> 
                             <fieldset>
                                 <br>
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                                 <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
                                 <br>
                                 <br>
                                 <h3 align="left"><strong>Detalles de la resolución</strong></h3>
@@ -116,16 +124,16 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">N° de resolución</label>
                                     <div class="controls">
-                                        <input type="text" class="span2" value="" id="" >
+                                        <input id="numResol" name="numResol" type="text" value="${resolucion.getNumero()}" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Resolución</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Colocación Familiar</option>
-                                            <option value="mia">Deja sin efecto la designación</option>
+                                        <select id="tipo" name="tipo">
+                                            <option value="colfam" ${resolucion.getTipo() == 'colfam' ? 'selected' : ''}>Colocación Familiar</option>
+                                            <option value="sinefecto" ${resolucion.getTipo() == 'sinefecto' ? 'selected' : ''}>Deja sin efecto la designación</option>
                                         </select>
                                     </div>    
                                 </div>
@@ -133,15 +141,21 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Fecha resolución</label>
                                     <div class="controls">
-                                        <input type="text" class="datepicker span2" value="" id="dp3" >
+                                        <input id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
-                                
+                                <h3><strong>En caso de tener un Fin de Procedimiento</strong></h3>
+                                <div class="checkbox">
+                                    <label>
+                                        <input value="eliminar" id="eliminar" name="eliminar" type="checkbox"> Eliminar del Registro Nacional de Adoptantes para la Adopción
+                                    </label>
+                                </div>
+                                <br>
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        <button ${resolucion != null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>
                                 <!--FIN DE CONTENIDO-->

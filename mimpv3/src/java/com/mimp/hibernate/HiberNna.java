@@ -88,7 +88,7 @@ public class HiberNna {
         return allNna;
     }
     
-    public ExpedienteNna getExpNna(long id) {
+    public ExpedienteNna getExpNna(long idNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         ExpedienteNna tempExpNna = new ExpedienteNna();
@@ -96,7 +96,7 @@ public class HiberNna {
         session.beginTransaction();
         String hql = "FROM ExpedienteNna E WHERE E.nna = :id";
         Query query = session.createQuery(hql);
-        query.setLong("id", id);
+        query.setLong("id", idNna);
         Object queryResult = query.uniqueResult();
 
         tempExpNna = (ExpedienteNna) queryResult;
