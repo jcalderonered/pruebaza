@@ -117,7 +117,25 @@ public ArrayList<Familia> getListaFamilias () {
         
     }
     
-    public Resolucion getResolucion(long id){
+    public Evaluacion getEvaluacion2(long id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Evaluacion tempEval = new Evaluacion();
+        
+        String hqlA = "FROM Evaluacion E WHERE E.id = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        tempEval = (Evaluacion) queryResultA;
+        Hibernate.initialize(tempEval.getExpedienteFamilia().getFamilia());
+        
+        return tempEval;
+        
+    }
+    
+    public Resolucion getResolucion(long idResolucion){
     
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -125,11 +143,27 @@ public ArrayList<Familia> getListaFamilias () {
         
         String hqlA = "FROM Resolucion R WHERE R.id = :id";
         Query queryA = session.createQuery(hqlA);
-        queryA.setLong("id", id);
+        queryA.setLong("id", idResolucion);
         Object queryResultA = queryA.uniqueResult();
 
         tempResol = (Resolucion) queryResultA;
         Hibernate.initialize(tempResol.getEvaluacion().getExpedienteFamilia());
+        return tempResol;
+        
+    }
+    
+    public Resolucion getResolucion2(long idEval){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Resolucion tempResol = new Resolucion();
+        
+        String hqlA = "FROM Resolucion R WHERE R.evaluacion = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", idEval);
+        Object queryResultA = queryA.uniqueResult();
+
+        tempResol = (Resolucion) queryResultA;
         return tempResol;
         
     }
@@ -393,6 +427,151 @@ public ArrayList<Familia> getListaFamilias () {
         
         
         return expFamilia;
+        
+    }
+    
+    public void crearDesignacion(Designacion temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.save(temp);
+    
+    } 
+    
+    public void updateDesignacion(Designacion temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.update(temp);
+    
+    } 
+    
+    public ArrayList<Designacion> getListaDesignaciones(){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<Designacion> allDesig = new ArrayList();
+        String hql = "FROM Designacion D WHERE D.aceptacionConsejo = :aceptacionConsejo ORDER BY D.fechaPropuesta DESC";
+        Query query = session.createQuery(hql);
+        query.setShort("aceptacionConsejo", Short.parseShort("1"));
+        List expedientes = query.list();
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+        Designacion temp = (Designacion) iter.next();
+            Hibernate.initialize(temp.getExpedienteFamilia());
+            Hibernate.initialize(temp.getNna());
+            allDesig.add(temp);
+        }
+        return allDesig;
+    }
+    
+    public ArrayList<Designacion> getListaDesignaciones(long idNna){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<Designacion> allDesig = new ArrayList();
+        String hql = "FROM Designacion D WHERE D.aceptacionConsejo = :aceptacionConsejo and D.nna = :id ORDER BY D.fechaPropuesta DESC";
+        Query query = session.createQuery(hql);
+        query.setShort("aceptacionConsejo", Short.parseShort("1"));
+        query.setLong("id", idNna);
+        List expedientes = query.list();
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+        Designacion temp = (Designacion) iter.next();
+            Hibernate.initialize(temp.getExpedienteFamilia());
+            Hibernate.initialize(temp.getNna().getExpedienteNnas());
+            allDesig.add(temp);
+        }
+        return allDesig;
+    }
+    public ArrayList<Designacion> getListaDesignaciones2(long idNna){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<Designacion> allDesig = new ArrayList();
+        String hql = "FROM Designacion D WHERE D.aceptacionConsejo = :aceptacionConsejo and D.nna = :id ORDER BY D.fechaPropuesta DESC";
+        Query query = session.createQuery(hql);
+        query.setShort("aceptacionConsejo", Short.parseShort("0"));
+        query.setLong("id", idNna);
+        List expedientes = query.list();
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+        Designacion temp = (Designacion) iter.next();
+            Hibernate.initialize(temp.getExpedienteFamilia());
+            Hibernate.initialize(temp.getNna().getExpedienteNnas());
+            allDesig.add(temp);
+        }
+        return allDesig;
+    }
+    
+    public ArrayList<Designacion> getListaAdopciones(){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<Designacion> allDesig = new ArrayList();
+        String hql = "FROM Designacion D WHERE D.aceptacionConsejo = :aceptacionConsejo ORDER BY D.fechaConsejo ASC";
+        Query query = session.createQuery(hql);
+        query.setShort("aceptacionConsejo", Short.parseShort("0"));
+        List expedientes = query.list();
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+        Designacion temp = (Designacion) iter.next();
+            Hibernate.initialize(temp.getExpedienteFamilia().getEvaluacions());
+            Set<Evaluacion> tempEvaluaciones = new HashSet<Evaluacion>(0);
+            for (Evaluacion eval : temp.getExpedienteFamilia().getEvaluacions()){
+                if(eval.getTipo().equals("empatia") || eval.getTipo().equals("informe")){
+                        String hql2 = "from Resolucion R where R.evaluacion = :idEvaluacion ORDER BY R.fechaResol ASC";
+                        Query query2 = session.createQuery(hql2);
+                        query2.setLong("idEvaluacion", eval.getIdevaluacion());
+                        query2.setMaxResults(1);
+                        Object queryResult = query2.uniqueResult();
+                        Resolucion tempResol = (Resolucion) queryResult;
+                        Set<Resolucion> tempResoluciones = new HashSet<Resolucion>(0);
+                        tempResoluciones.add(tempResol);
+                        eval.setResolucions(tempResoluciones);
+                        tempEvaluaciones.add(eval);
+                        
+                    }
+                
+            }
+            temp.getExpedienteFamilia().setEvaluacions(tempEvaluaciones);
+            Hibernate.initialize(temp.getNna());
+            allDesig.add(temp);
+        }
+        return allDesig;
+    }
+    
+    public void deleteResolucion(Resolucion temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.delete(temp);
+    
+    } 
+    
+    public void deleteEvaluacion(Evaluacion temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.delete(temp);
+    
+    } 
+    
+    public Designacion getDesignacion(long idExpFamilia, long idNna){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        Designacion tempDesig = new Designacion();
+        
+        String hqlA = "FROM Designacion D WHERE D.expedienteFamilia = :idExpFamilia and D.nna = :idNna";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("idExpFamilia", idExpFamilia);
+        queryA.setLong("idNna", idNna);
+        Object queryResultA = queryA.uniqueResult();
+
+        tempDesig = (Designacion) queryResultA;
+        return tempDesig;
         
     }
     

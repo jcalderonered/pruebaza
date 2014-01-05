@@ -99,9 +99,9 @@
                         <br>
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
-                            <li><a href="#" >Designación</a></li>
-                            <li><a href="#" >Adopción</a></li>
+                            <li ><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
                             <li><a href="#" >Post Adopción</a></li>
                         </ul>
                         <br>
@@ -110,24 +110,28 @@
                         <br>
                         <div class="row">
                             <div class="col-md-2 col-md-offset-2">
-                                <form class="form-horizontal"> 
+                            <c:if test="${empatia == null}">
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearEvalEmpatia" method="post"> 
+                                <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
+                            </c:if>  
+                            <c:if test="${empatia != null}">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateEvalEmpatia" method="post"> 
+                                    <input hidden name="idEmpatia" id="idEmpatia" value="${empatia.getIdevaluacion()}">
+                                </c:if>  
                                     <fieldset>
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                            <label class="control-label">Número de evaluación</label>
-                                            <div class="controls">
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                            </div>
-                                        </div>
+                                        <br>
+                                        <h1 align="center"><strong>Familia "${familia}"</strong></h1>
+                                        ${idExpediente}
                                         <br>
                                         <h3><strong>Responsable</strong></h3>
                                         <br>
                                         <div>
                                             <label class="control-label">Profesional</label>
                                             <div class="controls">
-                                                <select>
-                                                    <option value="sia">Guillermo Ruiz</option>
-                                                    <option value="sia">Ana Morales</option>
+                                                <select id="personal" name="personal" class="input-xlarge">
+                                                    <c:forEach var="personal" items="${listaPersonal}" > 
+                                                        <option value="${personal.getIdpersonal()}" ${empatia.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
+                                                    </c:forEach>
                                                 </select>
                                             </div>    
                                         </div>
@@ -138,9 +142,9 @@
                                         <div>
                                             <label class="control-label">Resultado</label>
                                             <div class="controls">
-                                                <select>
-                                                    <option value="sia">Favorable</option>
-                                                    <option value="sia">Desfavorable</option>
+                                                <select id="resultado" name="resultado" > 
+                                                    <option value="favorable" ${empatia.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
+                                                    <option value="desfavorable" ${empatia.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
                                                 </select>
                                             </div>    
                                         </div>
@@ -148,21 +152,23 @@
                                         <div class="control-group">
                                             <label class="control-label">Fecha de evaluación</label>
                                             <div class="controls">
-                                                <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                               <input id="fechaEval" name="fechaEval" type="text" value="${empatia.getFechaResultado() != null ? df.dateToString(empatia.getFechaResultado()) : ''}" class="datepicker input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Comentarios</label>
-                                                <textarea class="input-xlarge" name="message" placeholder="" rows="5" cols="50"></textarea>
+                                                <div class="controls">
+                                                    <textarea id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${empatia.getObservacion()}</textarea>
+                                                </div>
                                             </div>
                                         </div>   
                                         <br>       
                                         <!-- Button -->
                                         <div class="control-group">
                                             <div class="controls">
-                                                <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                                <button ${empatia != null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
                                             </div>
                                         </div>
                                     </fieldset>

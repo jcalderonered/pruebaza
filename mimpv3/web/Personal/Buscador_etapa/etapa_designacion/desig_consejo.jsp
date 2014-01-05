@@ -100,26 +100,27 @@
                         <br>
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
-                            <li><a href="#" >Designación</a></li>
-                            <li><a href="#" >Adopción</a></li>
+                            <li ><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
                             <li><a href="#" >Post Adopción</a></li>
                         </ul>
-                        <form role="form">
+                        <form role="form" action="${pageContext.servletContext.contextPath}/aceptacionConsejo" method="post">
                             <fieldset>
                                 <br>
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                                 <br>
-                                <h1 align="center"><strong>NNA "NOMBRE APELLIDOS"</strong></h1>
+                                <h1 align="center"><strong>NNA "${nna.getNombre()} ${nna.getApellidoP()} ${nna.getApellidoM()}"</strong></h1>
                                 <br>
+                                <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
                                 <br>
                                 <h3 align="left"><strong>Detalles de decisión de consejo</strong></h3>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de reunión del consejo</label>
                                     <div class="controls">
-                                        <input type="text" class="datepicker span2" value="02-16-2012" id="dp3" >
+                                        <input type="text" class="datepicker" value="" name="fechaConsejo" id="fechaConsejo" >
                                     </div>
                                 </div>
                                 <br>
@@ -131,48 +132,37 @@
                                         <thead>
                                             <tr>
                                                 <th class="col-sm-2 " >Expediente</th>
-                                                <th class="col-sm-2 " >UA</th>
-                                                <th class="col-sm-2 " >Nivel sociec</th>
                                                 <th class="col-sm-2 " >Información</th>
-                                                <th class="col-sm-2 " >Resolución de aptitud</th>
                                                 <th class="col-sm-2 " >Prioridad</th>
                                             </tr>
                                         </thead>
+                                        <c:if test="${!listaDesignaciones.isEmpty()}">
                                         <tbody>
+                                            <c:forEach var="designacion" items="${listaDesignaciones}" varStatus="status">
                                             <tr>
-                                                <td>Gutierrez-Huaman </td>
-                                                <td>Lima</td>
-                                                <td>C</td>
+                                                <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
                                                 <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
-                                                <td>14-Nov-2012</td>
-                                                <td>1
+                                                <td><select id="prioridad" name="prioridad">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
+                                                </td>
                                             </tr>
-                                            <tr>
-                                                <td>Morales-Loza</td>
-                                                <td>Trujillo</td>
-                                                <td>B</td>
-                                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
-                                                <td>21-Agos-2011</td>
-                                                <td>2</td>
-                                            </tr>
+                                            </c:forEach> 
                                         </tbody>
+                                        </c:if>
                                     </table>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Propuesta</label>
-                                    <div class="controls">
-                                        <select>
-                                            <option value="mia">Directa</option>
-                                            <option selected value="mia">Dupla</option>
-                                            <option value="mia">Terna</option>
-                                        </select>
-                                    </div>    
+                                    ${propuesta}
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <textarea type="text" cols="25" rows="5"></textarea>
+                                        <textarea type="text" name="obs" id="obs" cols="25" rows="5"></textarea>
                                     </div>
                                 </div>
                                 <br>
@@ -180,19 +170,20 @@
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Aceptar propuesta</button>
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Aceptar </button>
                                     </div>
                                 </div>
                                 <br>
                                 <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Desechar propuesta</button>
-                                    </div>
-                                </div>
+                                
                                 <!--FIN DE CONTENIDO-->
                             </fieldset>
                         </form>
+                        <div class="control-group">
+                            <div class="controls">
+                                <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/EtapaDesig'" id="singlebutton" name="singlebutton" class="btn btn-default">Cancelar </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

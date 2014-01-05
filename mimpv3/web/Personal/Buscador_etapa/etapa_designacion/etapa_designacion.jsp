@@ -99,13 +99,11 @@
                         <br>
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
-                            <li><a href="#" >Designación</a></li>
-                            <li><a href="#" >Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li  class="active"><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
                             <li><a href="#" >Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal">
-                            <fieldset>
                                 <br>
                                 <div class="bs-example">
                                     <table class="table table-bordered">
@@ -113,59 +111,50 @@
                                             <tr>
                                                 <th>Expediente</th>
                                                 <th>Información</th>
-                                                <th>Prioridad</th>
                                                 <th>Nombre del NNA</th>
                                                 <th>Decisión de Consejo</th>
                                             </tr>
                                         </thead>
+                                        <c:if test="${!listaDesignaciones.isEmpty()}">
+                                            <c:set var="token" value="0"/>
                                         <tbody>
-                                            <tr>
-                                                <td>Alvarado-Gutierrez</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>1</td>
-                                                <td>Jesús Rey</td>
-                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
-                                            </tr>   
-                                            <tr style="background: #BDBDBD">
-                                                <td>Ramirez-Rojas</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>1</td>
-                                                <td rowspan="2" style="vertical-align: middle">Cristian Ku</td>
-                                                <td rowspan="2" style="vertical-align: middle"><button href="#" class="btn btn-default ">Registrar</button></td>
-                                            </tr> 
-                                            <tr style="background: #BDBDBD">
-                                                <td>Castillo-Sotomayor</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>2</td>
-                                            </tr> 
-                                            <tr>
-                                                <td>Cortés-Saavedra</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>1</td>
-                                                <td>Hernán Romano</td>
-                                                <td><button href="#" class="btn btn-default ">Registrar</button></td>
-                                            </tr>
-                                            <tr style="background: #BDBDBD">
-                                                <td>Roldan-Cespedes</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button disabled href="#" class="btn btn-default ">Registrar</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Galindo-Mevius</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button disabled href="#" class="btn btn-default ">Registrar</button></td>
-                                            </tr>
+                                            <c:forEach var="designacion" items="${listaDesignaciones}" varStatus="status">
+                                                <c:choose>
+                                                    <c:when test="${token != designacion.getNna().getIdnna()}">
+                                                        <c:set var="token" value="${designacion.getNna().getIdnna()}"/>
+                                                        <tr>
+                                                            <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
+                                                            <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                            <td ${designacion.getTipoPropuesta() == 'dupla' ? 'rowspan="2"' : ''} ${designacion.getTipoPropuesta() == 'terna' ? 'rowspan="3"' : ''} style="vertical-align:middle" >                                                    
+                                                                ${designacion.getNna().getNombre()}
+                                                                ${designacion.getNna().getApellidoP()}
+                                                            </td>
+                                                            <td ${designacion.getTipoPropuesta() == 'dupla' ? 'rowspan="2"' : ''} ${designacion.getTipoPropuesta() == 'terna' ? 'rowspan="3"' : ''} style="vertical-align:middle" >
+                                                                 <form action="${pageContext.servletContext.contextPath}/designacionConsejo" method="post">
+                                                                    <input hidden name="idNna" id="idNna" value="${designacion.getNna().getIdnna()}">
+                                                                    <button type="submit" class="btn btn-default">Registrar</button>
+                                                                 </form>   
+                                                            </td>
+                                                        </tr>   
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                         <tr>
+                                                             <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
+                                                             <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                         </tr>  
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
                                         </tbody>
+                                        </c:if>
+                                        <c:if test="${listaDesignaciones.isEmpty()}">
+                                           <h3><strong>No existen Familias propuestas</strong></h3>
+                                        </c:if> 
                                     </table>
+                                    
                                 </div>
                                 <br>
                                 <!-- Button -->
-                            </fieldset>
-                        </form>
                     </div>
                 </div>
             </div>
