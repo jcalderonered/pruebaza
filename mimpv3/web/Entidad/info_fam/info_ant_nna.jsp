@@ -53,8 +53,8 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li class="active"><a href="#">Inicio</a></li>
-                            <li><a href="#">Salir</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioEnt">Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -78,10 +78,10 @@
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
-                            <li><a href="#" data-toggle="tab">La Solicitante</a></li>
-                            <li><a href="#" data-toggle="tab">El solicitante</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
-                            <li><a href="#" data-toggle="tab">Información del Expediente</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ElaAdop?idInfo=${idInfo}" data-toggle="tab">La Solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ElAdop?idInfo=${idInfo}" data-toggle="tab">El solicitante</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/infoNNA?idInfo=${idInfo}" data-toggle="tab">Antecedentes del NNA</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/infoExp?idInfo=${LaAdop.getInfoFamilia().getIdinfoFamilia()}" data-toggle="tab">Información del Expediente</a></li>
                         </ul>
                         <br>
                         <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
@@ -108,9 +108,13 @@
                                                 <h4>Nacido(a) como consecuencia del incesto</h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaIncesto() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaIncesto() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -119,9 +123,13 @@
                                                 <h4>Padres con enfermedad psiquiátrica (esquizofrenia, paranoia, etc</h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaMental() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaMental() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -130,9 +138,13 @@
                                                 <h4>Padres con epilepsia</h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaEpilepsia() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaEpilepsia() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -141,9 +153,13 @@
                                                 <h4>Niña, niño o adolescente víctima de abuso sexual</h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaAbuso() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaAbuso() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -153,9 +169,13 @@
                                                     diagnosticado/a preliminarmente con sífilis congénita.</h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaSifilis() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaSifilis() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -180,9 +200,13 @@
                                                     desnutrición crónica, etc.)</h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaSeguiMedico() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaSeguiMedico() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -192,9 +216,13 @@
                                                     (labio leporino, estrabismo, etc.)</h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaOperacion() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaOperacion() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -204,9 +232,13 @@
                                                     hiperactividad (TDAH)</h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaHiperactivo() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaHiperactivo() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -231,9 +263,13 @@
                                                 <h4>Niñas, niños y adolescentes con necesidades especiales</h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaEspecial() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaEspecial() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -242,9 +278,13 @@
                                                 <h4>Niñas, niños y adolescentes con problemas de salud </h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaEnfermo() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaEnfermo() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -253,9 +293,13 @@
                                                 <h4>Niñas y niños mayores (A partir de 09 años)</h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaMayor() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaMayor() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -264,9 +308,13 @@
                                                 <h4>Adolescentes (De 12 años hasta 17 años 11 meses)</h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaAdolescente() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaAdolescente() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -275,9 +323,13 @@
                                                 <h4>Grupos de hermanos </h4>
                                             </td>
                                             <td>
-                                                <select>
-                                                    <option value="sia">SI</option>
-                                                    <option value="mia">NO</option>
+                                                <select disabled>
+                                                    <c:if test="${InfoNNA.getNnaHermano() == '1' }"  >
+                                                    <option  value="sia">SI</option>
+                                                    </c:if>
+                                                    <c:if test="${InfoNNA.getNnaHermano() == '0' }"  >
+                                                    <option  value="mia">NO</option>
+                                                    </c:if>
                                                 </select>
                                             </td>
                                         </tr>
@@ -292,7 +344,7 @@
                         <div class="control-group">
                             <label class="control-label">¿Cuántos años podría tener el niño, niña o adolescente a adoptar?</label>
                             <div class="controls">
-                                <input id="apellido_m" name="full-name" type="text" class="input-xlarge" disabled="">
+                                <input id="apellido_m" name="full-name" type="text" class="input-xlarge" disabled value='Entre ${InfoNNA.getExpectativaEdadMin()} y ${InfoNNA.getExpectativaEdadMax()} años de edad '>
                             </div>
                         </div>
                         <br>

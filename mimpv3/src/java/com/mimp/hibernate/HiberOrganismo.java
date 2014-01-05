@@ -113,4 +113,36 @@ public class HiberOrganismo {
         return AdopPorIdFamPorSex;
     }
     
+     public InfoFamilia InfoFamilia(long idInfo) {
+
+        Session session = sessionFactory.getCurrentSession();
+        InfoFamilia InfoFamilia = new InfoFamilia();
+
+        session.beginTransaction();
+        String hqlO = "FROM InfoFamilia I WHERE I.id = :id";
+        Query queryO = session.createQuery(hqlO);
+        queryO.setLong("id", idInfo);        
+        Object queryResultA = queryO.uniqueResult();
+
+        InfoFamilia = (InfoFamilia) queryResultA;
+        //Hibernate.initialize(LaAdop.getInfoFamilia());        
+        return InfoFamilia;
+    }
+     
+      public ExpedienteFamilia ExpPorIDFamilia(long idFam) {
+
+        Session session = sessionFactory.getCurrentSession();
+        ExpedienteFamilia expedienteFamilia = new ExpedienteFamilia();
+
+        session.beginTransaction();
+        String hqlO = "FROM ExpedienteFamilia E WHERE E.familia = :id";
+        Query queryO = session.createQuery(hqlO);
+        queryO.setLong("id", idFam);        
+        Object queryResultA = queryO.uniqueResult();
+
+        expedienteFamilia = (ExpedienteFamilia) queryResultA;
+        //Hibernate.initialize(LaAdop.getInfoFamilia());        
+        return expedienteFamilia;
+    }
+    
 }

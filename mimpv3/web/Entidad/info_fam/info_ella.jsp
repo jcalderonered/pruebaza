@@ -55,8 +55,8 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li class="active"><a href="#">Inicio</a></li>
-                            <li><a href="#">Salir</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioEnt">Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -83,8 +83,8 @@
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li class="active"><a href="#" data-toggle="tab">La Solicitante</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ElAdop?idInfo=${LaAdop.getInfoFamilia().getIdinfoFamilia()}"  data-toggle="tab">El solicitante</a></li>
-                            <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
-                            <li><a href="#" data-toggle="tab">Información del Expediente</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/infoNNA?idInfo=${LaAdop.getInfoFamilia().getIdinfoFamilia()}" data-toggle="tab">Antecedentes del NNA</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/infoExp?idInfo=${LaAdop.getInfoFamilia().getIdinfoFamilia()}" data-toggle="tab">Información del Expediente</a></li>
 
                         </ul>
                         <br>

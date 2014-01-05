@@ -55,8 +55,8 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li class="active"><a href="#">Inicio</a></li>
-                            <li><a href="#">Salir</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioEnt">Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -81,10 +81,10 @@
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
-                            <li><a href="#" data-toggle="tab">La Solicitante</a></li>
-                            <li><a href="#" data-toggle="tab">El solicitante</a></li>
-                            <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">Información del Expediente</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ElaAdop?idInfo=${idInfo}" data-toggle="tab">La Solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ElAdop?idInfo=${idInfo}" data-toggle="tab">El solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/infoNNA?idInfo=${idInfo}" data-toggle="tab">Antecedentes del NNA</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/infoExp?idInfo=${LaAdop.getInfoFamilia().getIdinfoFamilia()}" data-toggle="tab">Información del Expediente</a></li>
                         </ul>
                         <br>
                         <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
@@ -93,7 +93,7 @@
                         <div class="control-group">
                             <label class="control-label">Número</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="00198" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${InfoExp.getNumero()}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -107,14 +107,14 @@
                         <div class="control-group">
                             <label class="control-label">HT</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="AIEDGLA-097" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${InfoExp.getHt()}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <br>
                         <div class="control-group">
                             <label class="control-label">Número de Expediente</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="1-2013-MIMP-DGA-LIMA" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${InfoExp.getNumeroExpediente()}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -128,7 +128,7 @@
                         <div class="control-group">
                             <label class="control-label">Estado</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="En evaluación" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${InfoExp.getEstado()}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <br>
