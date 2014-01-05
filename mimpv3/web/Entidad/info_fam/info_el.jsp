@@ -96,56 +96,50 @@ if (u==null){
                             <div class="control-group">
                                 <label class="control-label">Nombre</label>
                                 <div class="controls">
-                                    <input id="nombre" name="full-name" type="text" class="input-xlarge">
+                                    <input disabled id="nombre" name="full-name" type="text" class="input-xlarge" value ="${ElAdop.getNombre()}">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Apellido Paterno</label>
                                 <div class="controls">
-                                    <input id="apellido_p" name="full-name" type="text" class="input-xlarge">
+                                    <input disabled id="apellido_p" name="full-name" type="text" class="input-xlarge" value ="${ElAdop.getApellidoP()}">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Apellido Materno</label>
                                 <div class="controls">
-                                    <input id="apellido_m" name="full-name" type="text" class="input-xlarge">
+                                    <input disabled id="apellido_m" name="full-name" type="text" class="input-xlarge" value ="${ElAdop.getApellidoM()}">
                                 </div>
                             </div>
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">Edad</label>  
-                                <div class="controls">
-                                    <input id="edad" name="full-name" type="text" class="input-xlarge">
-                                </div>
-                            </div>
+                            <br>                            
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Fecha de nacimiento</label>
                                 <div class="controls">
-                                    <input id="fecha_nac" name="full-name" type="password" class="input-xlarge">
+                                    <input disabled id="fecha_nac" name="full-name" type="password" class="input-xlarge" value ="${ElAdop.getFechaNac()}" >
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Lugar de nacimiento</label>
                                 <div class="controls">
-                                    <input id="direccion" name="full-name" type="text" class="input-xlarge">
+                                    <input disabled id="direccion" name="full-name" type="text" class="input-xlarge" value ="${ElAdop.getLugarNac()}" >
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Departamento de nacimiento</label>
                                 <div class="controls">
-                                    <input id="departamento" name="full-name" type="text" class="input-xlarge">
+                                    <input disabled id="departamento" name="full-name" type="text" class="input-xlarge" value ="${ElAdop.getDepaNac()}">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">País de nacimiento</label>
                                 <div class="controls">
-                                    <input id="pais" name="full-name" type="text" class="input-xlarge">
+                                    <input disabled id="pais" name="full-name" type="text" class="input-xlarge" value ="${ElAdop.getPaisNac()}">
                                 </div>
                             </div>
                             <br>
@@ -167,21 +161,21 @@ if (u==null){
                             <div class="control-group">
                                 <div class="controls">
                                     <label class="control-label">N° de Documento</label>
-                                    <input id="num_doc" placeholder="Número" type="text" class="input-xlarge">
+                                    <input disabled id="num_doc" placeholder="Número" type="text" class="input-xlarge" value ="${ElAdop.getNDoc()}">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Celular</label>
                                 <div class="controls">
-                                    <input id="celular" name="full-name" type="text" class="input-xlarge">
+                                    <input disabled id="celular" name="full-name" type="text" class="input-xlarge" value ="${ElAdop.getCelular()}">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Correo Electrónico</label>
                                 <div class="controls">
-                                    <input id="correo" name="full-name" type="text" class="input-xlarge">
+                                    <input disabled id="correo" name="full-name" type="text" class="input-xlarge" value ="${ElAdop.getCorreo()}">
                                 </div>
                             </div>
                             <br>

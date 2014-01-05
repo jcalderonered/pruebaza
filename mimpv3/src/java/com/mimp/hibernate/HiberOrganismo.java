@@ -96,20 +96,21 @@ public class HiberOrganismo {
         return allExp;
     }
     
-    public Adoptante LaAdopPorIdFam(long idInfo) {
+    public Adoptante AdopPorIdFamPorSex(long idInfo, String sexo) {
 
         Session session = sessionFactory.getCurrentSession();
-        Adoptante LaAdop = new Adoptante();
+        Adoptante AdopPorIdFamPorSex = new Adoptante();
 
         session.beginTransaction();
-        String hqlO = "FROM Adoptante A WHERE A.infoFamilia = :id and A.sexo = 'F'";
+        String hqlO = "FROM Adoptante A WHERE A.infoFamilia = :id and A.sexo = :sexo";
         Query queryO = session.createQuery(hqlO);
         queryO.setLong("id", idInfo);
+        queryO.setString("sexo", sexo);
         Object queryResultA = queryO.uniqueResult();
 
-        LaAdop = (Adoptante) queryResultA;
+        AdopPorIdFamPorSex = (Adoptante) queryResultA;
         //Hibernate.initialize(LaAdop.getInfoFamilia());        
-        return LaAdop;
+        return AdopPorIdFamPorSex;
     }
     
 }
