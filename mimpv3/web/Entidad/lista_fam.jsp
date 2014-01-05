@@ -90,29 +90,38 @@
                                     <c:forEach var="fam" items="${listaFam}" varStatus="status">
                                         <tr> 
                                             <c:forEach var="Adop" items="${listaAdop}" varStatus="status">
-                                                <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() || Adop.getSexo() == 'M' }"  >
-                                            <td>${Adop.getNombre()}</td>
-                                               </c:if>
-                                            <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() || Adop.getSexo() == 'F' }"  >
-                                            <td>${Adop.getNombre()}</td>
-                                               </c:if>
-                                            </c:forEach>
-                                            <td>${fam.getCorreo()}</td>
-                                            <td>${fam.getCorreo()}</td>
-                                            <td>
-                                                <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post">
-                                                    <input hidden name="ïdUA" id="ïdUA" value="${Adop.getCelular()}">
-                                                    <button type="submit" class="btn btn-default">Info</button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="${pageContext.servletContext.contextPath}/irEditarUa2" method="post">
-                                                    <input hidden name="id" id="id" value="${Adop.getCelular()}">
-                                                    <button type="submit" class="btn btn-default">Ver</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                                <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() && Adop.getSexo() == 'M' }"  >
+                                                    <td>${Adop.getNombre()}</td>
+                                                </c:if>
+                                        <form action="${pageContext.servletContext.contextPath}/Einfo" method="post">
+
+                                            <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() && Adop.getSexo() == 'F' }"  >
+                                                <td>${Adop.getNombre()}</td>
+                                                <input hidden name="idInfo" id="idInfo" value="${Adop.getInfoFamilia().getIdinfoFamilia()}">
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:forEach var="Exp" items="${listaExp}" varStatus="status">
+                                            <c:if test="${Exp.getFamilia().getIdfamilia() == fam.getIdfamilia()}"  >
+                                                <td>${Exp.getNumeroExpediente()}</td>
+                                            </c:if>
+
+                                        </c:forEach>
+                                        <td>${fam.getCorreo()}</td>
+                                        <td>
+
+                                            <input hidden name="idfam" id="idfam" value="${fam.getIdfamilia()}">
+
+                                            <button type="submit" class="btn btn-default">Info</button>
+                                    </form>
+                                    </td>
+                                    <td>
+                                        <form action="${pageContext.servletContext.contextPath}/irEditarUa2" method="post">
+                                            <input hidden name="id" id="id" value="${Adop.getCelular()}">
+                                            <button type="submit" class="btn btn-default">Ver</button>
+                                        </form>
+                                    </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

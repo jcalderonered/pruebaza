@@ -6,16 +6,16 @@
 
 <%@page import="com.mimp.bean.Entidad"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
-response.setDateHeader("Expires", 0);
-Entidad u=(Entidad)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    Entidad u = (Entidad) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -65,9 +65,9 @@ if (u==null){
                 <div class="row">
                     <div class="col-md-3 ">
                         <ul class="nav nav-list well">
-                            <li><a href=""><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Listado de familias</a></li>
-                            <li class="active"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>               
+                            <li><a href="${pageContext.servletContext.contextPath}/inicioEnt"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/listaFam"><span class="glyphicon glyphicon-chevron-right"></span> Listado de familias</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/contraEnt"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>               
                         </ul>
                     </div>
 
@@ -85,135 +85,135 @@ if (u==null){
                             <li><a href="#" data-toggle="tab">El solicitante</a></li>
                             <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
                             <li><a href="#" data-toggle="tab">Información del Expediente</a></li>
-                            
+
                         </ul>
                         <br>
                         <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
-                            <fieldset>
-                                <br>
-                                <h3><strong>Generales</strong></h3>
-                                <br>
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label">Nombre</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                        <fieldset>
+                            <br>
+                            <h3><strong>Generales</strong></h3>
+                            <br>
+                            <!-- Text input-->
+                            <div class="control-group">
+                                <label class="control-label">Nombre</label>
+                                <div class="controls">
+                                    <input disabled id="nombre" name="full-name" type="text" class="input-xlarge" value ="${LaAdop.getNombre()}">
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Paterno</label>
-                                    <div class="controls">
-                                        <input id="apellido_p" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Apellido Paterno</label>
+                                <div class="controls">
+                                    <input disabled id="apellido_p" name="full-name" type="text" class="input-xlarge" value ="${LaAdop.getApellidoP()}">
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Materno</label>
-                                    <div class="controls">
-                                        <input id="apellido_m" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Apellido Materno</label>
+                                <div class="controls">
+                                    <input disabled id="apellido_m" name="full-name" type="text" class="input-xlarge" value ="${LaAdop.getApellidoM()}">
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de nacimiento</label>
-                                    <div class="controls">
-                                        <input id="fecha_nac" name="full-name" type="password" class="input-xlarge">
-                                    </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Fecha de nacimiento</label>
+                                <div class="controls">
+                                    <input disabled id="fecha_nac" name="full-name" type="password" class="input-xlarge" value ="${LaAdop.getFechaNac()}" >
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Lugar de nacimiento</label>
-                                    <div class="controls">
-                                        <input id="direccion" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Lugar de nacimiento</label>
+                                <div class="controls">
+                                    <input disabled id="direccion" name="full-name" type="text" class="input-xlarge" value ="${LaAdop.getLugarNac()}" >
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Departamento de nacimiento</label>
-                                    <div class="controls">
-                                        <input id="departamento" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Departamento de nacimiento</label>
+                                <div class="controls">
+                                    <input disabled id="departamento" name="full-name" type="text" class="input-xlarge" value ="${LaAdop.getDepaNac()}">
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">País de nacimiento</label>
-                                    <div class="controls">
-                                        <input id="pais" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">País de nacimiento</label>
+                                <div class="controls">
+                                    <input disabled id="pais" name="full-name" type="text" class="input-xlarge" value ="${LaAdop.getPaisNac()}">
                                 </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-2">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" checked>DNI</label>
-                                        </div>
-                                    </div>   
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="C">Carnet de Extranjería</label>
-                                        </div>                            
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-2">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" checked>DNI</label>
                                     </div>
-                                </div>    
-                                <br>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <label class="control-label">N° de Documento</label>
-                                        <input id="num_doc" placeholder="Número" type="text" class="input-xlarge">
-                                    </div>
+                                </div>   
+                                <div class="col-md-3">   
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios1" id="optionsRadios2" value="C">Carnet de Extranjería</label>
+                                    </div>                            
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Celular</label>
-                                    <div class="controls">
-                                        <input id="celular" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                            </div>    
+                            <br>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <label class="control-label">N° de Documento</label>
+                                    <input disabled id="num_doc" placeholder="Número" type="text" class="input-xlarge" value ="${LaAdop.getNDoc()}">
                                 </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Correo Electrónico</label>
-                                    <div class="controls">
-                                        <input id="correo" name="full-name" type="text" class="input-xlarge">
-                                    </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Celular</label>
+                                <div class="controls">
+                                    <input disabled id="celular" name="full-name" type="text" class="input-xlarge" value ="${LaAdop.getCelular()}">
                                 </div>
-                                <br>
-                                <h3>Estado Civil</h3>
-                                <div class="row">
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Correo Electrónico</label>
+                                <div class="controls">
+                                    <input disabled id="correo" name="full-name" type="text" class="input-xlarge" value ="${LaAdop.getCorreo()}">
+                                </div>
+                            </div>
+                            <br>
+                            <h3>Estado Civil</h3>
+                            <div class="row">
 
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios2" id="soltero" value="D">Soltera</label>
-                                        </div>
-                                    </div>   
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casada</label>
-                                            <br>
-                                            <label class="control-label">Fecha de matrimonio Civil</label>
-                                            <input id="fecha_matrimonio" name="full-name" type="text" class="input-xlarge">
-                                        </div>                            
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios2" id="soltero" value="D">Soltera</label>
                                     </div>
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios2" id="viudo" value="D">Viuda</label>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="optionsRadios2" id="divorciado" value="D">Divorciada</label>
-                                        </div>
-                                    </div> 
-                                </div>    
-                                
-                                <br>
-                                <!--<p style="color: red">IMPORTANTE: SE HA DESHABILITADO LA VISTA DEBIDO AL ESTADO CIVIL MARCADO EN EL SOLICITANTE</p>-->
-                            </fieldset>
+                                </div>   
+                                <div class="col-md-3">   
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casada</label>
+                                        <br>
+                                        <label class="control-label">Fecha de matrimonio Civil</label>
+                                        <input id="fecha_matrimonio" name="full-name" type="text" class="input-xlarge">
+                                    </div>                            
+                                </div>
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios2" id="viudo" value="D">Viuda</label>
+                                    </div>
+                                </div> 
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios2" id="divorciado" value="D">Divorciada</label>
+                                    </div>
+                                </div> 
+                            </div>    
+
+                            <br>
+                            <!--<p style="color: red">IMPORTANTE: SE HA DESHABILITADO LA VISTA DEBIDO AL ESTADO CIVIL MARCADO EN EL SOLICITANTE</p>-->
+                        </fieldset>
                         <!--FIN DE CONTENIDO-->
                     </div>
                 </div>

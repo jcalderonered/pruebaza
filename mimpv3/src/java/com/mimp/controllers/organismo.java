@@ -109,7 +109,22 @@ public class organismo {
         
         map.put("listaFam", ServicioOrganismo.ListaFam(usuario.getIdentidad()));
         map.put("listaAdop", ServicioOrganismo.ListaAdopPorEnt(usuario.getIdentidad()));
+        map.put("listaExp", ServicioOrganismo.ListaExpFamPorEnt(usuario.getIdentidad()));
         return new ModelAndView("/Entidad/lista_fam", map);
+    }
+    
+    @RequestMapping(value = "/Einfo", method = RequestMethod.POST)
+    public ModelAndView Einfo(ModelMap map, HttpSession session, @RequestParam("idInfo") int idInfo) {
+        Entidad usuario = (Entidad) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }      
+        
+        map.put("LaAdop", ServicioOrganismo.LaAdopPorIdFam(idInfo));
+        map.put("idfam", idInfo);
+        return new ModelAndView("/Entidad/info_fam/info_ella", map);
     }
     
 }
