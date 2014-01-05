@@ -122,9 +122,25 @@ public class organismo {
             return new ModelAndView("login", map);
         }      
         
-        map.put("LaAdop", ServicioOrganismo.LaAdopPorIdFam(idInfo));
-        map.put("idfam", idInfo);
+        map.put("LaAdop", ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "F"));
+        map.put("ElAdop", ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "M"));
+        map.put("idInfo", idInfo);
         return new ModelAndView("/Entidad/info_fam/info_ella", map);
+    }
+    
+        @RequestMapping(value = "/ElAdop", method = RequestMethod.GET)
+    public ModelAndView ElAdop(ModelMap map, HttpSession session, @RequestParam("idInfo") int idInfo) {
+        Entidad usuario = (Entidad) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }      
+        
+        map.put("LaAdop", ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "F"));
+        map.put("ElAdop", ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "M"));
+        map.put("idInfo", idInfo);
+        return new ModelAndView("/Entidad/info_fam/info_el", map);
     }
     
 }

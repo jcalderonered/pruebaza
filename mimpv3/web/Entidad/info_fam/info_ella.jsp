@@ -82,7 +82,7 @@
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li class="active"><a href="#" data-toggle="tab">La Solicitante</a></li>
-                            <li><a href="#" data-toggle="tab">El solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ElAdop?idInfo=${LaAdop.getInfoFamilia().getIdinfoFamilia()}"  data-toggle="tab">El solicitante</a></li>
                             <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
                             <li><a href="#" data-toggle="tab">Información del Expediente</a></li>
 
