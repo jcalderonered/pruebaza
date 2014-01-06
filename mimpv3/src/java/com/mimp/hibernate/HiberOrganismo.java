@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mimp.hibernate;
 
 import java.util.*;
@@ -19,16 +18,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("HiberOrganismo")
 @Transactional
 public class HiberOrganismo {
-    
-    @Resource(name="sessionFactory")
+
+    @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
-    
+
     public void CambiaPass(Entidad entidad) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.update(entidad);
     }
-    
+
     public ArrayList<Familia> ListaFam(long idEnt) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -43,14 +42,13 @@ public class HiberOrganismo {
 
         for (Iterator iter = fam.iterator(); iter.hasNext();) {
             Familia temp = (Familia) iter.next();
-            Hibernate.initialize(temp.getEntidad());            
+            Hibernate.initialize(temp.getEntidad());
             allFam.add(temp);
         }
-        
 
         return allFam;
     }
-    
+
     public ArrayList<Adoptante> ListaAdopPorEnt(long idEnt) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -58,21 +56,21 @@ public class HiberOrganismo {
         session.beginTransaction();
 
         String hql = "FROM Adoptante";
-        Query query = session.createQuery(hql);       
+        Query query = session.createQuery(hql);
         List Adop = query.list();
         ArrayList<Adoptante> allAdop = new ArrayList();
 
         for (Iterator iter = Adop.iterator(); iter.hasNext();) {
-            Adoptante temp = (Adoptante) iter.next();                     
-            Hibernate.initialize(temp.getInfoFamilia());            
-            if (temp.getInfoFamilia().getFamilia().getEntidad().getIdentidad() == idEnt){
-            Hibernate.initialize(temp.getInfoFamilia().getFamilia().getEntidad());
-            allAdop.add(temp);
+            Adoptante temp = (Adoptante) iter.next();
+            Hibernate.initialize(temp.getInfoFamilia());
+            if (temp.getInfoFamilia().getFamilia().getEntidad().getIdentidad() == idEnt) {
+                Hibernate.initialize(temp.getInfoFamilia().getFamilia().getEntidad());
+                allAdop.add(temp);
             }
-        }        
+        }
         return allAdop;
     }
-    
+
     public ArrayList<ExpedienteFamilia> ListaExpFamPorEnt(long idEnt) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -80,22 +78,22 @@ public class HiberOrganismo {
         session.beginTransaction();
 
         String hql = "FROM ExpedienteFamilia";
-        Query query = session.createQuery(hql);       
+        Query query = session.createQuery(hql);
         List Exp = query.list();
         ArrayList<ExpedienteFamilia> allExp = new ArrayList();
 
         for (Iterator iter = Exp.iterator(); iter.hasNext();) {
-            ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();                     
-            Hibernate.initialize(temp.getFamilia());            
-            if (temp.getFamilia().getEntidad().getIdentidad() == idEnt){
-            Hibernate.initialize(temp.getFamilia().getEntidad());
-            allExp.add(temp);
-            
+            ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+            Hibernate.initialize(temp.getFamilia());
+            if (temp.getFamilia().getEntidad().getIdentidad() == idEnt) {
+                Hibernate.initialize(temp.getFamilia().getEntidad());
+                allExp.add(temp);
+
             }
-        }        
+        }
         return allExp;
     }
-    
+
     public Adoptante AdopPorIdFamPorSex(long idInfo, String sexo) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -112,8 +110,8 @@ public class HiberOrganismo {
         //Hibernate.initialize(LaAdop.getInfoFamilia());        
         return AdopPorIdFamPorSex;
     }
-    
-     public InfoFamilia InfoFamilia(long idInfo) {
+
+    public InfoFamilia InfoFamilia(long idInfo) {
 
         Session session = sessionFactory.getCurrentSession();
         InfoFamilia InfoFamilia = new InfoFamilia();
@@ -121,15 +119,15 @@ public class HiberOrganismo {
         session.beginTransaction();
         String hqlO = "FROM InfoFamilia I WHERE I.id = :id";
         Query queryO = session.createQuery(hqlO);
-        queryO.setLong("id", idInfo);        
+        queryO.setLong("id", idInfo);
         Object queryResultA = queryO.uniqueResult();
 
         InfoFamilia = (InfoFamilia) queryResultA;
         //Hibernate.initialize(LaAdop.getInfoFamilia());        
         return InfoFamilia;
     }
-     
-      public ExpedienteFamilia ExpPorIDFamilia(long idFam) {
+
+    public ExpedienteFamilia ExpPorIDFamilia(long idFam) {
 
         Session session = sessionFactory.getCurrentSession();
         ExpedienteFamilia expedienteFamilia = new ExpedienteFamilia();
@@ -137,14 +135,53 @@ public class HiberOrganismo {
         session.beginTransaction();
         String hqlO = "FROM ExpedienteFamilia E WHERE E.familia = :id";
         Query queryO = session.createQuery(hqlO);
-        queryO.setLong("id", idFam);        
+        queryO.setLong("id", idFam);
         Object queryResultA = queryO.uniqueResult();
 
         expedienteFamilia = (ExpedienteFamilia) queryResultA;
-        Hibernate.initialize(expedienteFamilia.getFamilia());  
-        Hibernate.initialize(expedienteFamilia.getUnidad().getNombre()); 
-        Hibernate.initialize(expedienteFamilia.getFamilia().getEntidad().getNombre()); 
+        Hibernate.initialize(expedienteFamilia.getFamilia());
+        Hibernate.initialize(expedienteFamilia.getUnidad().getNombre());
+        Hibernate.initialize(expedienteFamilia.getFamilia().getEntidad().getNombre());
+        Hibernate.initialize(expedienteFamilia.getEvaluacions());
+        Hibernate.initialize(expedienteFamilia.getDesignacions());
         return expedienteFamilia;
     }
+
+    public Familia FamiliaPorID(long idFam) {
+
+        Session session = sessionFactory.getCurrentSession();
+        Familia familia = new Familia();
+
+        session.beginTransaction();
+        String hqlO = "FROM Familia F WHERE F.id = :id";
+        Query queryO = session.createQuery(hqlO);
+        queryO.setLong("id", idFam);
+        Object queryResultA = queryO.uniqueResult();
+
+        familia = (Familia) queryResultA;
+        Hibernate.initialize(familia.getEntidad());
+        Hibernate.initialize(familia.getExpedienteFamilias());
+        
+
+        return familia;
+    }
     
+    public Evaluacion EvalPorIDEval(long idEval) {
+
+        Session session = sessionFactory.getCurrentSession();
+        Evaluacion eval = new Evaluacion();
+
+        session.beginTransaction();
+        String hqlO = "FROM Evaluacion E WHERE E.id = :id";
+        Query queryO = session.createQuery(hqlO);
+        queryO.setLong("id", idEval);
+        Object queryResultA = queryO.uniqueResult();
+
+        eval = (Evaluacion) queryResultA;
+        Hibernate.initialize(eval.getEvalLegals());
+        Hibernate.initialize(eval.getResolucions());
+        
+        return eval;
+    }
+
 }
