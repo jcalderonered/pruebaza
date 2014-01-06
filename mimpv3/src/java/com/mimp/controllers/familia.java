@@ -679,4 +679,108 @@ public class familia {
         String pagina = "/Familia/Ficha/ficha_inscripcion_ella";
         return new ModelAndView(pagina, map);
     }
+    
+    @RequestMapping("/FfichaGuardar/opc2")
+    public ModelAndView FfichaGuardarEl(ModelMap map,
+            @RequestParam("nombre_el") String nombre,
+            @RequestParam("apellido_p_el") String apellido_p,
+            @RequestParam("apellido_m_el") String apellido_m,
+            @RequestParam("edad_el") String edad,
+            @RequestParam("lugar_nac_el") String lugar_nac,
+            @RequestParam("depa_nac_el") String depa_nac,
+            @RequestParam("pais_nac_el") String pais_nac,
+            @RequestParam("TipoDoc") String tipo_doc,
+            @RequestParam("n_doc_el") String n_doc,
+            @RequestParam("domicilio") String domicilio,
+            @RequestParam("telefono") String telefono,
+            @RequestParam("celular_el") String celular,
+            @RequestParam("correo_el") String correo,
+            @RequestParam("estCivil") String est_civil,
+            @RequestParam("fechaMatri") String fecha_matri,
+            @RequestParam("nivel_inst_el") String nivel_inst,
+            @RequestParam("culm_nivel_el") String culm_nivel,
+            @RequestParam("prof_el") String prof,
+            @RequestParam("Trabajador_Depend_el") String trab_depend,
+            @RequestParam("ocup_act_dep_el") String ocup_actual,
+            @RequestParam("centro_trabajo_el") String centro_trabajo,
+            @RequestParam("dir_centro_el") String dir_centro,
+            @RequestParam("tel_centro_el") String tel_centro,
+            @RequestParam("ingreso_dep_el") String ingreso_dep,
+            @RequestParam("Trabajador_Indep_el") String trab_indep,
+            @RequestParam("ocup_act_indep_el") String ocup_act_indep,
+            @RequestParam("ingreso_ind_el") String ingreso_ind,
+            @RequestParam("seguro_salud_el") String seguro_salud,
+            @RequestParam("tipo_seguro") String tipo_seguro,
+            @RequestParam("seguro_vida_el") String seguro_vida,
+            @RequestParam("sist_pen_el") String sist_pen,
+            @RequestParam("est_salud_el") String est_salud,
+            HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
+        Solicitante sol = new Solicitante();
+        for (Iterator iter2 = ficha.getSolicitantes().iterator(); iter2.hasNext();) {
+            sol = (Solicitante) iter2.next();
+            if (sol.getSexo() == 'M') {
+                ficha.getSolicitantes().remove(sol);
+                break;
+            }
+        }
+
+        sol.setNombre(nombre);
+        sol.setApellidoP(apellido_p);
+        sol.setApellidoM(apellido_m);
+        try {
+            sol.setEdad(Short.parseShort(edad));
+        } catch (Exception ex) {
+            String mensaje_edad = "ERROR: El campo Edad contiene parámetros inválidos";
+            map.addAttribute("mensaje_edad", mensaje_edad);
+        }
+        sol.setLugarNac(lugar_nac);
+        sol.setDepaNac(depa_nac);
+        sol.setPaisNac(pais_nac);
+        sol.setTipoDoc(tipo_doc.charAt(0));
+        sol.setNDoc(n_doc);
+        ficha.setDomicilio(domicilio);
+        ficha.setFijo(telefono);
+        sol.setCelular(celular);
+        sol.setCorreo(correo);
+        ficha.setEstadoCivil(est_civil);
+        ficha.setFechaMatrimonio(format.stringToDate(fecha_matri));
+        sol.setNivelInstruccion(nivel_inst);
+        sol.setCulminoNivel(Short.valueOf(culm_nivel));
+        sol.setProfesion(prof);
+        sol.setTrabajadorDepend(Short.valueOf(trab_depend));
+        sol.setOcupActualDep(ocup_actual);
+        sol.setCentroTrabajo(centro_trabajo);
+        sol.setDireccionCentro(dir_centro);
+        sol.setTelefonoCentro(tel_centro);
+        try {
+            sol.setIngresoDep(Long.valueOf(ingreso_dep));
+        } catch (Exception ex) {
+            String mensaje_ingreso_dep = "ERROR: La información contenida en este campo contiene parámetros inválidos";
+            map.addAttribute("mensaje_ing_dep", mensaje_ingreso_dep);
+        }
+        sol.setTrabajadorIndepend(Short.valueOf(trab_indep));
+        sol.setOcupActualInd(ocup_act_indep);
+        try {
+            sol.setIngresoIndep(Long.valueOf(ingreso_ind));
+        } catch (Exception ex) {
+            String mensaje_ingreso_indep = "ERROR: La información contenida en este campo contiene parámetros inválidos";
+            map.addAttribute("mensaje_ing_indep", mensaje_ingreso_indep);
+        }
+        sol.setSeguroSalud(Short.valueOf(seguro_salud));
+        sol.setTipoSeguro(tipo_seguro);
+        sol.setSeguroVida(Short.valueOf(seguro_vida));
+        sol.setSistPensiones(Short.valueOf(sist_pen));
+        sol.setSaludActual(est_salud);
+        ficha.getSolicitantes().add(sol);
+
+        String pagina = "/Familia/Ficha/ficha_inscripcion_ella";
+        return new ModelAndView(pagina, map);
+    }
 }

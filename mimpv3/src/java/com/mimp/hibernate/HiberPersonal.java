@@ -840,7 +840,42 @@ public class HiberPersonal {
          
          fam.getFormularioSesions().add(fs);
          fs.setFamilia(fam);
-    
+         
+         //A partir de aqui pasamos los datos que ya tenemos a InfoFamilia
+         InfoFamilia infofam = new InfoFamilia();
+         infofam.setFamilia(fam);
+         infofam.setDepRes(fs.getDepRes());
+         infofam.setPaisRes(fs.getPaisRes());
+         infofam.setDomicilio(fs.getDireccionRes());
+         infofam.setEstadoCivil(fs.getEstadoCivil());
+         infofam.setTelefono(fs.getTelefono());
+         
+         for (Iterator iter = fs.getAsistentes().iterator(); iter.hasNext();) {
+                Asistente as = (Asistente) iter.next();
+                Adoptante ad = new Adoptante();
+                
+                ad.setNombre(as.getNombre());
+                ad.setApellidoP(as.getApellidoP());
+                ad.setApellidoM(as.getApellidoM());
+                ad.setSexo(as.getSexo());
+                ad.setPaisNac(as.getPaisNac());
+                ad.setDepaNac(as.getDepNac());
+                ad.setFechaNac(as.getFechaNac());
+                ad.setTipoDoc(as.getTipoDoc());
+                ad.setNDoc(as.getNDoc());
+                ad.setProfesion(as.getProfesion());
+                ad.setCelular(as.getCelular());
+                ad.setCorreo(as.getCorreo());
+                
+                infofam.getAdoptantes().add(ad);
+         }
+         
+         session.save(infofam);
+         for (Iterator iter2 = infofam.getAdoptantes().iterator(); iter2.hasNext();) {
+             Adoptante ad = (Adoptante) iter2.next();
+             
+             session.save(ad);
+         }
          session.save(fam);
          session.update(fs);
     }
