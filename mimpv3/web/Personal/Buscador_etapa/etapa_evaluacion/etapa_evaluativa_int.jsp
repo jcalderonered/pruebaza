@@ -219,7 +219,7 @@
                                                     </c:choose>
                                                </c:forEach>
                                                 </c:if>
-                                               <c:if test="${legal.getResolucions().isEmpty()}">
+                                               <c:if test="${legal.getResolucions() == null}">
                                                    <td>
                                                        Pendiente
                                                    </td>
