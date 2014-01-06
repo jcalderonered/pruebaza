@@ -791,7 +791,7 @@ public class HiberPersonal {
         query.setLong("id", idFormulario);
         Object queryResult = query.uniqueResult();
         FormularioSesion tempFs = (FormularioSesion) queryResult;
-       
+       Hibernate.initialize(tempFs.getAsistentes());
         return tempFs;
     }
     
