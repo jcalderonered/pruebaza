@@ -115,8 +115,8 @@
                                     </form>
                                     </td>
                                     <td>
-                                        <form action="${pageContext.servletContext.contextPath}/irEditarUa2" method="post">
-                                            <input hidden name="id" id="id" value="${Adop.getCelular()}">
+                                        <form action="${pageContext.servletContext.contextPath}/estadoProc" method="post">
+                                            <input hidden name="idfam" id="idfam" value="${fam.getIdfamilia()}">
                                             <button type="submit" class="btn btn-default">Ver</button>
                                         </form>
                                     </td>
