@@ -156,7 +156,7 @@ public class organismo {
         map.put("idInfo", idInfo);
         return new ModelAndView("/Entidad/info_fam/info_ella", map);
     }
-    
+
     @RequestMapping(value = "/infoNNA", method = RequestMethod.GET)
     public ModelAndView infoNNA(ModelMap map, HttpSession session, @RequestParam("idInfo") int idInfo) {
         Entidad usuario = (Entidad) session.getAttribute("usuario");
@@ -172,7 +172,7 @@ public class organismo {
         map.put("idInfo", idInfo);
         return new ModelAndView("/Entidad/info_fam/info_ant_nna", map);
     }
-    
+
     @RequestMapping(value = "/infoExp", method = RequestMethod.GET)
     public ModelAndView infoExp(ModelMap map, HttpSession session, @RequestParam("idInfo") int idInfo) {
         Entidad usuario = (Entidad) session.getAttribute("usuario");
@@ -190,4 +190,17 @@ public class organismo {
         return new ModelAndView("/Entidad/info_fam/info_registro", map);
     }
 
+    @RequestMapping(value = "/estadoProc", method = RequestMethod.POST)
+    public ModelAndView estadoProc(ModelMap map, HttpSession session, @RequestParam("idfam") int idFam) {
+        Entidad usuario = (Entidad) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        
+        map.put("idInfo", idFam);
+        return new ModelAndView("/Entidad/estado_proc", map);
+    }
 }
