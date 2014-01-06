@@ -147,7 +147,7 @@ public class familia {
                                         if (!exp.getDesignacions().isEmpty()) {
                                             for (Iterator iter5 = exp.getDesignacions().iterator(); iter5.hasNext();) {
                                                 Designacion deg = (Designacion) iter5.next();
-                                                if (deg.getAceptacionConsejo() == 0) {
+                                                if (deg.getAceptacionConsejo() == 1) {
                                                     map.addAttribute("adop", no);
                                                     map.addAttribute("postadop", no);
                                                 } else {
