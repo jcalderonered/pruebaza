@@ -141,7 +141,9 @@ public class HiberOrganismo {
         Object queryResultA = queryO.uniqueResult();
 
         expedienteFamilia = (ExpedienteFamilia) queryResultA;
-        //Hibernate.initialize(LaAdop.getInfoFamilia());        
+        Hibernate.initialize(expedienteFamilia.getFamilia());  
+        Hibernate.initialize(expedienteFamilia.getUnidad().getNombre()); 
+        Hibernate.initialize(expedienteFamilia.getFamilia().getEntidad().getNombre()); 
         return expedienteFamilia;
     }
     
