@@ -76,6 +76,10 @@ public class main {
             Entidad entidad = (Entidad) aux.get(1);
             session.setAttribute("usuario", entidad);
             pagina = "/Entidad/inicio_ent";
+        } else if (email.equals("") || pass.equals("")){
+            mensaje = "Por favor llenar ambos campos";
+            map.addAttribute("mensaje", mensaje);
+            pagina = "login";
         } else {
             mensaje = "Usuario y/o contraseña incorrectos";
             map.addAttribute("mensaje", mensaje);
