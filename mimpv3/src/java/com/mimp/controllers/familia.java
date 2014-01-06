@@ -98,7 +98,7 @@ public class familia {
                     ultfecha = form.getFechaSol();
                 }
             }
-            if (ultfecha.getYear() < fechaactual.getYear()) {
+            if ((ultfecha.getYear() < fechaactual.getYear()) && (usuario.getConstancia() == null)) {
                 map.addAttribute("sesion", no);
                 map.addAttribute("taller", no);
                 map.addAttribute("ficha", no);
@@ -109,7 +109,7 @@ public class familia {
                 map.addAttribute("postadop", no);
             } else {
                 map.addAttribute("sesion", si);
-                if (usuario.getConstancia().equals("")) {
+                if (usuario.getConstancia() == null) {
                     map.addAttribute("taller", no);
                     map.addAttribute("ficha", no);
                     map.addAttribute("boton", 0);

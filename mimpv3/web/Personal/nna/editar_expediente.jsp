@@ -103,7 +103,7 @@
                                </c:if>  
                                   <c:if test="${expediente != null}">
                                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateExpedienteNna" method="post">
-                                       <input hidden name="idExp" id="idExp" value="${expediente.getNna().getIdnna()}">    
+                                       <input hidden name="idNna" id="idNna" value="${expediente.getNna().getIdnna()}">    
                                  </c:if>   
                             <fieldset>
                                 <!-- Text input-->
