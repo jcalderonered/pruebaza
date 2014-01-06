@@ -100,7 +100,7 @@
                         <div class="control-group">
                             <label class="control-label">Expediente</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="ApellidoP-ApellidoM" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${ElAdop.getApellidoP()}  ${LaAdop.getApellidoP()}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -121,7 +121,7 @@
                         <div class="control-group">
                             <label class="control-label">Fecha ingreso a DGA</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="11-Nov-2013" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${InfoExp.getFechaIngresoDga()}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -135,14 +135,14 @@
                         <div class="control-group">
                             <label class="control-label">TUPA</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="24-Dic-13" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${InfoExp.getTupa()}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <br>
                         <div class="control-group">
                             <label class="control-label">Nacionalidad</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="Nacional" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${InfoExp.getNacionalidad()}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -157,21 +157,21 @@
                         <div class="control-group">
                             <label class="control-label">Tipo de lista de espera</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="Nacionales" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${InfoExp.getTipoListaEspera()}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <br>
                         <div class="control-group">
                             <label class="control-label">Unidad de Adopción donde se realiza el trámite</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="LIMA" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${InfoExp.getUnidad().getNombre()}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <br>
                         <div class="control-group">
                             <label class="control-label">Organismo Acreditado y/o Autoridad Central asociado</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="ItalianBaby International" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${InfoExp.getFamilia().getEntidad().getNombre()}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <!--FIN DE CONTENIDO-->
