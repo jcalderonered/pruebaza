@@ -99,48 +99,53 @@
                         <br>
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
                             <li><a href="#" >Designación</a></li>
                             <li><a href="#" >Adopción</a></li>
-                            <li><a href="#" >Post Adopción</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal">
-                            <fieldset>
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                                 <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
                                 <br>
                                 <div class="bs-example">
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Informe 1</th>
-                                                <th>Informe 2</th>
-                                                <th>Informe 3</th>
-                                                <th>Informe 4</th>
-                                                <th>Informe 5</th>
-                                                <th>Informe 6</th>
-                                                <th>Informe 7</th>
-                                                <th>Informe 8</th>
+                                                <c:forEach var="temp" items="${listaInformes}" >
+                                                    <th>Informe ${status.count}</th>
+                                                </c:forEach> 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
+                                            <c:forEach var="informe" items="${listaInformes}" varStatus="status">
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${informe.getEstado() != null && informe.getEstado() == 'listo'}">
+                                                                Estado : Listo
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Estado : Pendiente
+                                                            </c:otherwise>    
+                                                        </c:choose>
+                                                    <form action="${pageContext.servletContext.contextPath}/EditarInforme" method="post">
+                                                          <input hidden name="idInforme" id="idInforme" value="${informe.getIdinformePostAdoptivo()}">
+                                                          <input hidden name="familia" id="familia" value="${familia}">
+                                                          <input hidden name="num" id="num" value="${status.count}">
+                                                          <input hidden name="idPost" id="idPost" value="${idPost}">
+                                                          <input hidden name="numInformes" id="numInformes" value="${numInformes}">
+                                                          <c:if test="${status.last}">
+                                                              <input hidden name="ultimo" id="ultimo" value="ultimo">
+                                                          </c:if>
+                                                          <button type="submit" class="btn btn-default">Registrar</button>
+                                                    </form> 
+                                                    </td>
+                                            </c:forEach> 
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                            </fieldset>
-                        </form>
-
                     </div>
                 </div>
             </div>

@@ -35,9 +35,11 @@ public class mainEtapas {
     dateFormat df = new dateFormat();
     timeStampFormat ts = new timeStampFormat();
     long tempIdNnaRegular;
+    long nnaEditarEstudioCaso;
     ArrayList<ExpedienteFamilia> listaMatching = new ArrayList();
+    ArrayList<ExpedienteFamilia> listaEstudioCaso = new ArrayList();
     ArrayList<Designacion> allDesig = new ArrayList();
-    
+    Nna nnaPrioritario = new Nna();
     @RequestMapping(value = "/fametap", method = RequestMethod.GET)
     public ModelAndView FamEtap(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -788,6 +790,270 @@ public class mainEtapas {
     
     /*------- REGISTRAR DESIGNACIÓN PRIORITARIOS---------*/
     
+    @RequestMapping(value = "/agregarEstudio", method = RequestMethod.POST)
+    public ModelAndView agregarEstudio(ModelMap map, HttpSession session,
+                                                       @RequestParam("idNna") long idNna
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        nnaPrioritario = ServicioNna.getNna(idNna);
+        listaEstudioCaso.clear();
+        return new ModelAndView("/Personal/nna/reg_estudio", map);
+    }
+    
+    @RequestMapping(value = "/insertarEstudio", method = RequestMethod.POST)
+    public ModelAndView insertarEstudio(ModelMap map, HttpSession session,
+                                                       @RequestParam( value = "orden", required = false) String orden,
+                                                       @RequestParam( value = "agregar", required = false) String agregar,
+                                                       @RequestParam( value = "eliminar", required = false) String eliminar,
+                                                       @RequestParam( value = "registrar", required = false) String registrar,
+                                                       int[] delete,
+                                                       Long[] prioridad,
+                                                       String[] fecha
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        if (agregar != null) {
+            map.put("df",df);
+            return new ModelAndView("/Personal/nna/agregar_exp_prioritario", map);
+        }
+        if (eliminar != null && delete != null) {
+            for (int i : delete) {
+                listaEstudioCaso.remove(i);
+            }
+               
+                map.put("df",df);
+                map.put("listaEstudioCaso",listaEstudioCaso);
+                return new ModelAndView("/Personal/nna/reg_estudio", map);
+        }
+        if (registrar != null) {
+            for (int i = 0;i<listaEstudioCaso.size() ; i++) {
+                EstudioCaso tempEst = new EstudioCaso();
+                tempEst.setNna(nnaPrioritario);
+                tempEst.setExpedienteFamilia(listaEstudioCaso.get(i));
+                ExpedienteFamilia expFam1 = listaEstudioCaso.get(i);
+                expFam1.setEstado("estudio");
+                servicioEtapa.updateExpedienteFamilia(expFam1);
+                tempEst.setOrden(orden);
+                tempEst.setFechaEstudio(df.stringToDate(fecha[i]));
+                tempEst.setPrioridad(prioridad[i]);
+                
+                servicioEtapa.crearEstudioCaso(tempEst);
+                
+                
+            }
+            map.put("listaEstudios",servicioEtapa.getListaEstudioCaso(nnaPrioritario.getIdnna()));
+            return new ModelAndView("/Personal/nna/lista_estudios", map);
+        }
+        
+        return new ModelAndView("/Personal/nna/reg_estudio", map);
+    }
+    
+    @RequestMapping(value = "/buscarExpedientePrioritario", method = RequestMethod.POST)
+    public ModelAndView buscarExpedientePrioritario(ModelMap map, HttpSession session,
+                                                       @RequestParam("exp") String exp
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        ArrayList<ExpedienteFamilia> listaBusqueda = new ArrayList();
+        listaBusqueda = servicioEtapa.listaInfoFamilias(exp);
+        
+        map.put("df",df);
+        map.put("listaEstudioCaso",listaEstudioCaso);
+        map.put("listaBusqueda",listaBusqueda);
+        return new ModelAndView("/Personal/nna/agregar_exp_prioritario", map);
+        
+    } 
+    
+    @RequestMapping(value = "/agregarExpedientePrioritario", method = RequestMethod.POST)
+    public ModelAndView agregarExpedientePrioritario(ModelMap map, HttpSession session, long[] idExpediente
+            
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        if(idExpediente != null){
+        for (long l : idExpediente) {
+            ExpedienteFamilia tempExp = servicioEtapa.getInfoFamilia(l);
+            listaEstudioCaso.add(tempExp);
+        }
+        }
+        map.put("listaEstudioCaso",listaEstudioCaso);
+        map.put("df",df);
+        return new ModelAndView("/Personal/nna/reg_estudio", map);
+        
+    } 
+    
+    @RequestMapping(value = "/verEstudios", method = RequestMethod.POST)
+    public ModelAndView verEstudios(ModelMap map, HttpSession session,
+                                                       @RequestParam("idNna") long idNna
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        nnaEditarEstudioCaso = idNna;
+        map.put("listaEstudios",servicioEtapa.getListaEstudioCaso(idNna));
+        return new ModelAndView("/Personal/nna/lista_estudios", map);
+        
+    } 
+    
+    @RequestMapping(value = "/EditarEstudio", method = RequestMethod.POST)
+    public ModelAndView EditarEstudio(ModelMap map, HttpSession session,
+                                                       @RequestParam("orden") String orden
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        map.put("df",df);
+        map.put("nna",nnaEditarEstudioCaso);
+        map.put("listaEstudios",servicioEtapa.getListaEstudioCasoOrden(orden));
+        return new ModelAndView("/Personal/nna/edit_estudio", map);
+        
+    } 
+    
+    @RequestMapping(value = "/ActualizarEstudio", method = RequestMethod.POST)
+    public ModelAndView ActualizarEstudio(ModelMap map, HttpSession session,
+                                                       @RequestParam("orden") String orden,
+                                                       @RequestParam("idEstudio") long idEstudio,
+                                                       @RequestParam("resultado") String resultado
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        if(resultado.equals("acep")){
+            ArrayList<EstudioCaso> allEstudioCaso = new ArrayList();
+            EstudioCaso tempEst = servicioEtapa.getEstudioCaso(idEstudio);
+            tempEst.setResultado(resultado);
+            servicioEtapa.updateEstudioCaso(tempEst);
+            allEstudioCaso = servicioEtapa.getListaEstudioCasoOrden(orden);
+            for (EstudioCaso estudioCaso : allEstudioCaso) {
+                if(estudioCaso.getResultado() == null){
+                estudioCaso.setResultado("noobs");
+                servicioEtapa.updateEstudioCaso(estudioCaso);
+                ExpedienteFamilia tempExp = tempEst.getExpedienteFamilia();
+                tempExp = estudioCaso.getExpedienteFamilia();
+                tempExp.setEstado("espera");
+                servicioEtapa.updateExpedienteFamilia(tempExp);
+                }
+            }
+            map.put("df",df);
+            map.put("nna",nnaEditarEstudioCaso);
+            map.put("listaEstudios",servicioEtapa.getListaEstudioCasoOrden(orden));
+            return new ModelAndView("/Personal/nna/edit_estudio", map);
+        }else if(resultado.equals("noacep")){
+            EstudioCaso tempEst = servicioEtapa.getEstudioCaso(idEstudio);
+            tempEst.setResultado(resultado);
+            servicioEtapa.updateEstudioCaso(tempEst);
+            ExpedienteFamilia tempExp = tempEst.getExpedienteFamilia();
+            tempExp = tempEst.getExpedienteFamilia();
+            tempExp.setEstado("espera");
+            servicioEtapa.updateExpedienteFamilia(tempExp);
+            map.put("df",df);
+            map.put("nna",nnaEditarEstudioCaso);
+            map.put("listaEstudios",servicioEtapa.getListaEstudioCasoOrden(orden));
+            return new ModelAndView("/Personal/nna/edit_estudio", map);
+        }else if(resultado.equals("noobs")){
+            EstudioCaso tempEst = servicioEtapa.getEstudioCaso(idEstudio);
+            tempEst.setResultado(resultado);
+            servicioEtapa.updateEstudioCaso(tempEst);
+            ExpedienteFamilia tempExp = tempEst.getExpedienteFamilia();
+            tempExp = tempEst.getExpedienteFamilia();
+            tempExp.setEstado("espera");
+            servicioEtapa.updateExpedienteFamilia(tempExp);
+            map.put("df",df);
+            map.put("nna",nnaEditarEstudioCaso);
+            map.put("listaEstudios",servicioEtapa.getListaEstudioCasoOrden(orden));
+            return new ModelAndView("/Personal/nna/edit_estudio", map);
+        }else{
+        
+        EstudioCaso tempEst = servicioEtapa.getEstudioCaso(idEstudio);
+        tempEst.setResultado(resultado);
+        servicioEtapa.updateEstudioCaso(tempEst);
+        
+        map.put("df",df);
+        map.put("nna",nnaEditarEstudioCaso);
+        map.put("listaEstudios",servicioEtapa.getListaEstudioCasoOrden(orden));
+        return new ModelAndView("/Personal/nna/edit_estudio", map);
+        }
+    } 
+    
+    @RequestMapping(value = "/generarDesignacionPrioritario", method = RequestMethod.POST)
+    public ModelAndView generarDesignacionPrioritario(ModelMap map, HttpSession session,
+                                                       @RequestParam("orden") String orden,
+                                                       @RequestParam("fechaSolicitud") String fechaSolicitud,
+                                                       @RequestParam("numDesig") String numDesig,
+                                                       @RequestParam("idEstudio") long idEstudio,
+                                                       @RequestParam("fechaPropuesta") String fechaPropuesta
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        if( numDesig == null || fechaSolicitud == null || fechaPropuesta == null){
+            
+            map.put("mensaje","Debe llenar los datos correctamente");
+            map.put("df",df);
+            map.put("listaEstudios",servicioEtapa.getListaEstudioCasoOrden(orden));
+        
+        }
+        
+        EstudioCaso tempEst = servicioEtapa.getEstudioCaso(idEstudio);
+        tempEst.setFechaSolAdop(df.stringToDate(fechaSolicitud));
+        servicioEtapa.updateEstudioCaso(tempEst);
+        
+            ExpedienteFamilia tempExp = tempEst.getExpedienteFamilia();
+            Nna tempNna = ServicioNna.getNna(nnaEditarEstudioCaso);
+            Designacion tempDesign = new Designacion();
+            tempDesign.setExpedienteFamilia(tempExp);
+            tempDesign.setNna(tempNna);
+            tempDesign.setPersonal(usuario);
+            tempDesign.setFechaPropuesta(df.stringToDate(fechaPropuesta));
+            tempDesign.setNDesignacion(Long.parseLong(numDesig));
+            tempDesign.setTipoPropuesta("directa");
+            tempDesign.setAceptacionConsejo(Short.parseShort("1"));
+            servicioEtapa.crearDesignacion(tempDesign);
+            tempExp.setEstado("designado");
+            servicioEtapa.updateExpedienteFamilia(tempExp);
+            ExpedienteNna tempExpNna = ServicioNna.getExpNna(tempNna.getIdnna());
+            tempExpNna.setEstado("desig");
+            Date ahora = new Date();
+            tempExpNna.setFechaEstado(ahora);
+            ServicioNna.updateExpNna(tempExpNna);
+            
+        map.put("listaDesignaciones",servicioEtapa.getListaDesignaciones());
+        return new ModelAndView("/Personal/Buscador_etapa/etapa_designacion/etapa_designacion", map);    
+        
+        
+    } 
+    
     
     
     /*------- ETAPA DESIGNACION---------*/
@@ -1275,6 +1541,10 @@ public class mainEtapas {
                 tempDesig.setAceptacionConsejo(Short.parseShort("2"));
                 servicioEtapa.updateExpedienteFamilia(tempExpFam);
                 servicioEtapa.updateDesignacion(tempDesig);
+                PostAdopcion tempPost = new PostAdopcion();
+                tempPost.setFamilia(tempEval.getExpedienteFamilia().getFamilia());
+                tempPost.setFechaResolucion(df.stringToDate(fechaResol));
+                servicioEtapa.crearPostAdopcion(tempPost);
                 ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
                 ExpNna.setEstado("arch");
                 Date ahora = new Date();
@@ -1290,7 +1560,7 @@ public class mainEtapas {
                          servicioEtapa.updateDesignacion(designacion);
                 }
                 
-                //map.put("listaAdopciones",servicioEtapa.getListaAdopciones());
+                map.put("listaPost",servicioEtapa.getListaPostAdopcion());
                 return new ModelAndView("/Personal/Buscador_etapa/etapa_post/etapa_post", map);
             }
         
@@ -1300,4 +1570,270 @@ public class mainEtapas {
         return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/etapa_adopcion", map);
         
     }
+    
+    /*  ETAPA  POST ADOPCION */
+    @RequestMapping(value = "/EtapaPostAdopcion", method = RequestMethod.GET)
+    public ModelAndView EtapaPostAdopcion(ModelMap map, HttpSession session
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+       
+        map.put("listaPost",servicioEtapa.getListaPostAdopcion());
+        return new ModelAndView("/Personal/Buscador_etapa/etapa_post/etapa_post", map);
+        
+    } 
+    
+    @RequestMapping(value = "/UpdatePostAdopcion", method = RequestMethod.POST)
+    public ModelAndView UpdatePostAdopcion(ModelMap map, HttpSession session,
+                                           @RequestParam("idPost") long idPost,
+                                           @RequestParam("familia") String familia
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+       
+        PostAdopcion newPost = servicioEtapa.getPostAdopcion(idPost);
+        map.put("df",df);
+        map.put("post",newPost);
+        map.put("familia",familia);
+        return new ModelAndView("/Personal/Buscador_etapa/etapa_post/expediente_post", map);
+        
+    } 
+    
+    @RequestMapping(value = "/EditarExpedientePost", method = RequestMethod.POST)
+    public ModelAndView EditarExpedientePost(ModelMap map, HttpSession session,
+                                           @RequestParam("idPost") long idPost,
+                                           @RequestParam("numInformes") Long numInformes
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+       
+        PostAdopcion newPost = servicioEtapa.getPostAdopcion(idPost);
+        newPost.setNumeroInformes(numInformes);
+        servicioEtapa.updatePostAdopcion(newPost);
+        
+        map.put("listaPost",servicioEtapa.getListaPostAdopcion());
+        return new ModelAndView("/Personal/Buscador_etapa/etapa_post/etapa_post", map);
+        
+    } 
+    
+    @RequestMapping(value = "/verInformesPost", method = RequestMethod.POST)
+    public ModelAndView verInformesPost(ModelMap map, HttpSession session,
+                                           @RequestParam("idPost") long idPost,
+                                           @RequestParam("familia") String familia,
+                                           @RequestParam("numInformes") int numInformes
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+       
+        ArrayList<InformePostAdoptivo> allInformePostAdoptivo = new ArrayList<InformePostAdoptivo>(numInformes);
+        ArrayList<InformePostAdoptivo> informesTabla = new ArrayList();
+        informesTabla = servicioEtapa.getListaInformesPost(idPost);
+        
+        if(informesTabla.isEmpty()){
+            for (int i = 0 ; i < numInformes ; i++){
+                    InformePostAdoptivo temp = new InformePostAdoptivo();
+                    allInformePostAdoptivo.add(temp);
+            }
+            map.put("listaInformes",allInformePostAdoptivo);
+        }else{
+            for (InformePostAdoptivo informePostAdoptivo : informesTabla) {
+                int temp = Integer.parseInt(informePostAdoptivo.getNumeroInforme()) - 1;
+                if(temp > allInformePostAdoptivo.size()){
+                    for (int i = allInformePostAdoptivo.size(); i <= temp ; i++){
+                        InformePostAdoptivo tempIP = new InformePostAdoptivo();
+                        if (i == temp){
+                            allInformePostAdoptivo.add(informePostAdoptivo);
+                        }
+                        else{
+                        allInformePostAdoptivo.add(i,tempIP);
+                        }
+                  }
+                }else{
+                allInformePostAdoptivo.add(temp,informePostAdoptivo);
+                }
+            }
+            /*
+            if (informesTabla.size() < numInformes){
+                for (int i = 0 ; i < numInformes ; i++){
+                    if(allInformePostAdoptivo.get(i) == null){
+                    InformePostAdoptivo temp = new InformePostAdoptivo();
+                    allInformePostAdoptivo.add(i,temp);
+                    }
+            }
+            }
+            */
+            map.put("listaInformes",allInformePostAdoptivo);
+        }
+        map.put("familia",familia);
+        map.put("idPost",idPost);
+        map.put("numInformes",numInformes);
+        return new ModelAndView("/Personal/Buscador_etapa/etapa_post/informes_general", map);
+        
+    } 
+    
+    @RequestMapping(value = "/EditarInforme", method = RequestMethod.POST)
+    public ModelAndView EditarInforme(ModelMap map, HttpSession session,
+                                           @RequestParam("idInforme") String idInforme,
+                                           @RequestParam(value = "ultimo" , required = false) String ultimo,
+                                           @RequestParam("familia") String familia,
+                                           @RequestParam("num") String num,
+                                           @RequestParam("idPost") long idPost,
+                                           @RequestParam("numInformes") int numInformes
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+       
+        if (!idInforme.equals("")){
+             long id = Long.parseLong(idInforme);
+             InformePostAdoptivo temp = servicioEtapa.getInformePost(id);
+             map.put("informe", temp);
+             map.put("ultimo",ultimo);
+             map.put("familia",familia);
+             map.put("num",num);
+             map.put("df",df);
+             map.put("listaPersonal", ServicioPersonal.ListaPersonal());
+             map.put("idPost",idPost);
+             map.put("numInformes",numInformes);
+        }else{
+             map.put("familia",familia);
+             map.put("ultimo",ultimo);
+             map.put("num",num);
+             map.put("df",df);
+             map.put("listaPersonal", ServicioPersonal.ListaPersonal());
+             map.put("idPost",idPost);
+             map.put("numInformes",numInformes);
+        }
+        
+        map.put("listaPost",servicioEtapa.getListaPostAdopcion());
+        return new ModelAndView("/Personal/Buscador_etapa/etapa_post/informe_post", map);
+        
+    } 
+    
+    @RequestMapping(value = "/InsertarInforme", method = RequestMethod.POST)
+    public ModelAndView InsertarInforme(ModelMap map, HttpSession session,
+                                           @RequestParam("idInforme") String idInforme,
+                                           @RequestParam("num") String num,
+                                           @RequestParam(value = "estado", required = false) String estado,
+                                           @RequestParam(value = "fechaProyectado", required = false) String fechaProyectado, 
+                                           @RequestParam(value = "fechaRecepcion", required = false) String fechaRecepcion,
+                                           @RequestParam(value = "personal", required = false) long personal,
+                                           @RequestParam(value = "fechaInforme", required = false) String fechaInforme,
+                                           @RequestParam(value = "fechaActa", required = false) String fechaActa,
+                                           @RequestParam(value = "obs", required = false) String obs,
+                                           @RequestParam("idPost") long idPost,
+                                           @RequestParam("familia") String familia,
+                                           @RequestParam("numInformes") int numInformes
+                                                       ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+       
+        if (!idInforme.equals("")){
+             long id = Long.parseLong(idInforme);
+             InformePostAdoptivo temp = servicioEtapa.getInformePost(id);
+             temp.setNumeroInforme(num);
+            temp.setEstado(estado);
+            if (fechaProyectado != null) temp.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
+            if (fechaProyectado == null) temp.setFechaRecepcionProyectado(null);
+            if (fechaRecepcion != null) temp.setFechaRecepcion(df.stringToDate(fechaRecepcion));
+            if (fechaRecepcion == null) temp.setFechaRecepcionProyectado(null);
+            if (fechaInforme != null) temp.setFechaInforme(df.stringToDate(fechaInforme));
+            if (fechaInforme == null) temp.setFechaInforme(null);
+            if (fechaActa != null) temp.setFechaActa(df.stringToDate(fechaActa));
+            if (fechaActa == null) temp.setFechaActa(null);
+            Personal pers = ServicioPersonal.getPersonal(personal);
+            temp.setPersonal(pers);
+            temp.setObs(obs);
+            servicioEtapa.updateInformePost(temp);
+             
+        }else{
+            InformePostAdoptivo tempPost = new InformePostAdoptivo();
+            tempPost.setNumeroInforme(num);
+            tempPost.setEstado(estado);
+            if (fechaProyectado != null) tempPost.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
+            if (fechaProyectado == null) tempPost.setFechaRecepcionProyectado(null);
+            if (fechaRecepcion != null) tempPost.setFechaRecepcion(df.stringToDate(fechaRecepcion));
+            if (fechaRecepcion == null) tempPost.setFechaRecepcionProyectado(null);
+            if (fechaInforme != null) tempPost.setFechaInforme(df.stringToDate(fechaInforme));
+            if (fechaInforme == null) tempPost.setFechaInforme(null);
+            if (fechaActa != null) tempPost.setFechaActa(df.stringToDate(fechaActa));
+            if (fechaActa == null) tempPost.setFechaActa(null);
+            Personal pers = ServicioPersonal.getPersonal(personal);
+            tempPost.setPersonal(pers);
+            tempPost.setObs(obs);
+            PostAdopcion tempPostAdopcion = new PostAdopcion();
+            tempPostAdopcion = servicioEtapa.getPostAdopcion(idPost);
+            tempPost.setPostAdopcion(tempPostAdopcion);
+            servicioEtapa.crearInformePost(tempPost);
+        }
+        
+        ArrayList<InformePostAdoptivo> allInformePostAdoptivo = new ArrayList<InformePostAdoptivo>(numInformes);
+        ArrayList<InformePostAdoptivo> informesTabla = new ArrayList();
+        informesTabla = servicioEtapa.getListaInformesPost(idPost);
+        
+        if(informesTabla.isEmpty()){
+            for (int i = 0 ; i < numInformes ; i++){
+                    InformePostAdoptivo temp = new InformePostAdoptivo();
+                    allInformePostAdoptivo.add(temp);
+            }
+            map.put("listaInformes",allInformePostAdoptivo);
+        }else{
+            for (InformePostAdoptivo informePostAdoptivo : informesTabla) {
+                int temp = Integer.parseInt(informePostAdoptivo.getNumeroInforme()) - 1;
+                if(temp > allInformePostAdoptivo.size()){
+                    for (int i = allInformePostAdoptivo.size(); i <= temp ; i++){
+                        InformePostAdoptivo tempIP = new InformePostAdoptivo();
+                        if (i == temp){
+                            allInformePostAdoptivo.add(informePostAdoptivo);
+                        }
+                        else{
+                        allInformePostAdoptivo.add(i,tempIP);
+                        }
+                  }
+                }else{
+                allInformePostAdoptivo.add(temp,informePostAdoptivo);
+                }
+            }
+            /*
+            if (informesTabla.size() < numInformes){
+                for (int i = 0 ; i < numInformes ; i++){
+                    if(allInformePostAdoptivo.get(i) == null){
+                    InformePostAdoptivo temp = new InformePostAdoptivo();
+                    allInformePostAdoptivo.add(i,temp);
+                    }
+            }
+            }
+            */
+            map.put("listaInformes",allInformePostAdoptivo);
+        }
+        map.put("familia",familia);
+        map.put("idPost",idPost);
+        map.put("numInformes",numInformes);
+        return new ModelAndView("/Personal/Buscador_etapa/etapa_post/informes_general", map);
+        
+    } 
+    
 }

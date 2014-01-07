@@ -205,7 +205,7 @@
                                                 <c:if test="${!legal.getResolucions().isEmpty()}">
                                                 <c:forEach var="resolucion" items="${legal.getResolucions()}" varStatus="status">
                                                  <c:choose>
-                                                        <c:when test="${status.index == 0}">
+                                                        <c:when test="${status.index == '0'}">
                                                             <td>
                                                             ${df.dateToString(resolucion.getFechaResol())}
                                                             </td>

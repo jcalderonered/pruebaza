@@ -575,4 +575,202 @@ public ArrayList<Familia> getListaFamilias () {
         
     }
     
+    public void crearEstudioCaso(EstudioCaso temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.save(temp);
+    
+    } 
+    
+    public void updateEstudioCaso(EstudioCaso temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.update(temp);
+    
+    } 
+    
+    public ArrayList<EstudioCaso> getListaEstudioCaso(long idNna){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<EstudioCaso> allEstudioCaso = new ArrayList();
+        String hql = "FROM EstudioCaso EC WHERE EC.nna = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idNna);
+        List expedientes = query.list();
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+        EstudioCaso temp = (EstudioCaso) iter.next();
+            allEstudioCaso.add(temp);
+        }
+        return allEstudioCaso;
+    }
+    
+    public ArrayList<EstudioCaso> getListaEstudioCasoOrden(String orden){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<EstudioCaso> allEstudioCaso = new ArrayList();
+        String hql = "FROM EstudioCaso EC WHERE EC.orden = :orden ORDER BY EC.prioridad ASC";
+        Query query = session.createQuery(hql);
+        query.setString("orden", orden);
+        List expedientes = query.list();
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+        EstudioCaso temp = (EstudioCaso) iter.next();
+            Hibernate.initialize(temp.getExpedienteFamilia());
+            allEstudioCaso.add(temp);
+        }
+        return allEstudioCaso;
+    }
+    
+    public EstudioCaso getEstudioCaso(long idEstudio){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        EstudioCaso tempEstudio = new EstudioCaso();
+        
+        String hql = "FROM EstudioCaso EC WHERE EC.id = :idEstudio";
+        Query query = session.createQuery(hql);
+        query.setLong("idEstudio", idEstudio);
+        Object queryResultA = query.uniqueResult();
+
+        tempEstudio = (EstudioCaso) queryResultA;
+        Hibernate.initialize(tempEstudio.getExpedienteFamilia());
+        return tempEstudio;
+        
+    }
+    
+    public void crearPostAdopcion(PostAdopcion temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.save(temp);
+    
+    } 
+    
+    public void updatePostAdopcion(PostAdopcion temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.update(temp);
+    
+    } 
+    
+    public void crearInformePost(InformePostAdoptivo temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.save(temp);
+    
+    } 
+    
+    public void updateInformePost(InformePostAdoptivo temp){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.update(temp);
+    
+    } 
+    
+    public ArrayList<PostAdopcion> getListaPostAdopcion(){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<PostAdopcion> allPostAdopcion = new ArrayList();
+        ArrayList<Resolucion> allResoluciones = new ArrayList();
+        
+        String hql1 = "FROM Resolucion R WHERE R.tipo = :tipo";
+        Query query1 = session.createQuery(hql1);
+        query1.setString("tipo", "adopcion");
+        List tempResoluciones = query1.list();
+        
+        for (Iterator iter = tempResoluciones.iterator(); iter.hasNext();) {
+        Resolucion temp = (Resolucion) iter.next();
+            Hibernate.initialize(temp.getEvaluacion().getExpedienteFamilia());
+            allResoluciones.add(temp);
+        }
+        
+        String hql2 = "FROM PostAdopcion PA ORDER BY PA.idpostAdopcion ASC";
+        Query query2 = session.createQuery(hql2);
+        List tempPost = query2.list();
+        
+        for (Iterator iter = tempPost.iterator(); iter.hasNext();) {
+        PostAdopcion temp2 = (PostAdopcion) iter.next();
+                for (Resolucion resol : allResoluciones) {
+                    if(resol.getFechaResol().equals(temp2.getFechaResolucion())){
+                        Set<ExpedienteFamilia> tempExpediente = new HashSet<ExpedienteFamilia>(0);                        
+                        tempExpediente.add(resol.getEvaluacion().getExpedienteFamilia());
+                        Hibernate.initialize(temp2.getFamilia());
+                        Hibernate.initialize(temp2.getInformePostAdoptivos());
+                        temp2.getFamilia().setExpedienteFamilias(tempExpediente);
+                    }
+            }
+           allPostAdopcion.add(temp2);
+        }
+        return allPostAdopcion;
+    }
+    
+    public PostAdopcion getPostAdopcion(long idPost){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        PostAdopcion tempPost = new PostAdopcion();
+        
+        String hql = "FROM PostAdopcion PA WHERE PA.id = :idPost";
+        Query query = session.createQuery(hql);
+        query.setLong("idPost", idPost);
+        Object queryResultA = query.uniqueResult();
+
+        tempPost = (PostAdopcion) queryResultA;
+        
+        return tempPost;
+        
+    }
+    
+    public ArrayList<InformePostAdoptivo> getListaInformesPost(long idPost){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<InformePostAdoptivo> allInformePostAdoptivo = new ArrayList();
+        
+        String hql = "FROM InformePostAdoptivo IP WHERE IP.postAdopcion = :idPost ORDER BY IP.numeroInforme ASC";
+        Query query = session.createQuery(hql);
+        query.setLong("idPost", idPost);
+        List informes = query.list();
+        
+        for (Iterator iter = informes.iterator(); iter.hasNext();) {
+            InformePostAdoptivo temp = (InformePostAdoptivo) iter.next();
+            Hibernate.initialize(temp.getPersonal());
+            allInformePostAdoptivo.add(temp);
+        }
+        return allInformePostAdoptivo;
+    }
+    
+    public InformePostAdoptivo getInformePost(long idInforme){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        InformePostAdoptivo tempPost = new InformePostAdoptivo();
+        
+        String hql = "FROM InformePostAdoptivo IP WHERE IP.id = :idPost";
+        Query query = session.createQuery(hql);
+        query.setLong("idPost", idInforme);
+        Object queryResultA = query.uniqueResult();
+
+        tempPost = (InformePostAdoptivo) queryResultA;
+        
+        return tempPost;
+        
+    }
+    
 }

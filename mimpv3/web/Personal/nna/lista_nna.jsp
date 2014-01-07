@@ -128,11 +128,23 @@
                                         <td>${nna.getSexo()}</td>
                                         <td>
                                             <c:if test="${!nna.getDesignacions().isEmpty()}">
-                                                Si
+                                               <c:forEach var="designacion" items="${nna.getDesignacions()}" varStatus="status">
+                                                    <c:choose>
+                                                        <c:when test="${designacion.getAceptacionConsejo() == 0 || designacion.getAceptacionConsejo() == 1 || designacion.getAceptacionConsejo() == 2}">
+                                                            <c:set var="tokenAdopcion" value="0" ></c:set>
+                                                        </c:when> 
+                                                        <c:otherwise> No </c:otherwise>            
+                                                    </c:choose>
+                                                </c:forEach>  
+                                                ${tokenAdopcion == 0 ? 'Si' : 'No' }        
                                             </c:if>  
+                                                
                                             <c:if test="${nna.getDesignacions().isEmpty()}">
+                                                
                                                 No
+                                            
                                             </c:if>      
+                                                                                               
                                         </td>
                                         <td>
                                             <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
@@ -149,7 +161,7 @@
                                         <td>
                                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/registrarDesignacion" method="post">
                                                     <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
-                                                    <button ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Registrar</button>
+                                                    <button ${tokenAdopcion == 0 ? 'disabled' : ''} ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Registrar</button>
                                             </form>
                                         </td>
                                     </tr>

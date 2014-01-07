@@ -102,10 +102,12 @@
                         </ul>
                         <br>
                         <br>
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarEstudio" method="post">
+                        <br>
                         <div class="control-group">
                             <label class="control-label">Orden del Estudio de Caso</label>
                             <div class="controls">
-                                <input type="text" value="" >
+                                <input id="orden" name="orden" type="text" value="" >
                             </div>
                         </div>
                         <br>
@@ -117,86 +119,70 @@
                                 <thead>
                                     <tr>
                                         <th class="col-sm-2 " >Expediente</th>
-                                        <th class="col-sm-2 " >UA</th>
                                         <th class="col-sm-2 " >Nivel sociec</th>
                                         <th class="col-sm-2 " >Información</th>
                                         <th class="col-sm-2 " >Resolución de aptitud</th>
                                         <th class="col-sm-2 " >Prioridad</th>
                                         <th class="col-sm-2 " >Fecha estudio caso</th>
-                                        <th class="col-sm-2 " >Seleccionar</th>
+                                        <th class="col-sm-2 " >Eliminar</th>
                                     </tr>
                                 </thead>
+                                <c:if test="${!listaEstudioCaso.isEmpty()}">
                                 <tbody>
+                                    <c:forEach var="familia" items="${listaEstudioCaso}" varStatus="indexFam">
                                     <tr>
-                                        <td>Gutierrez-Huaman </td>
-                                        <td>Lima</td>
-                                        <td>C</td>
-                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
-                                        <td>14-Nov-2012</td>
+                                        <td>${familia.getExpediente()}</td>
                                         <td>
-                                            <select>
-                                                <option value="mia" selected>1</option>
-                                                <option value="sia">2</option>
-                                                <option value="mia">3</option>
+                                            <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
+                                                ${info.getNivelSocioeconomico()}
+                                            </c:forEach>
+                                        </td>
+                                        <td>
+                                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button>
+                                        </td>
+                                        <td>
+                                            <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
+                                                    <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
+                                                        ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
+                                                    </c:forEach>
+                                            </c:forEach>
+                                        </td>
+                                        <td>
+                                            <select id="prioridad" name="prioridad">
+                                                <c:forEach var="familia2" items="${listaEstudioCaso}" varStatus="indexPrioridad">
+                                                    <option ${indexFam.count == indexPrioridad.count ? 'selected' : ''} value="${indexPrioridad.count}" >${indexPrioridad.count}</option>
+                                                </c:forEach>
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" class="datepicker" id="dp3">
+                                            <input id="fecha" name="fecha" type="text" class="datepicker" >
                                         </td>
                                         <td>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox"> 
+                                                    <input id="delete" name="delete" value="${indexFam.index}" type="checkbox"> 
                                                 </label>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>Morales-Loza</td>
-                                        <td>Trujillo</td>
-                                        <td>B</td>
-                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
-                                        <td>21-Agos-2011</td>
-                                        <td>
-                                            <select>
-                                                <option value="mia" selected>1</option>
-                                                <option value="sia">2</option>
-                                                <option value="mia">3</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="datepicker" id="dp3">
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox">
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    </c:forEach>
                                 </tbody>
+                                </c:if> 
+                               <c:if test="${listaEstudioCaso.isEmpty()}">
+                                    <h3><strong>No existen Familias propuestas</strong></h3>
+                                </c:if>  
                             </table>
                         </div>
                         <br>
-                        <table border="0">
-                            <tr>
-                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar Familia</button></td>
-                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Eliminar Familia</button></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button></td>
-                                <td></td>
-                            </tr>
-                        </table>
+                        <br>
+                        <input type="submit" id="agregar" name="agregar" value="Agregar Familia" class="btn btn-default">
+                        
+                        <input type="submit" id="eliminar" name="eliminar" value="Eliminar Familia" class="btn btn-default">
+                        <br>
+                        <br>
+                        <input type="submit" id="registrar" name="registrar" value="Registrar" class="btn btn-default">
+                        
+                        </form>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : reg_desig
-    Created on : 4/12/2013, 11:29:03 AM
+    Document   : agregar_exp
+    Created on : 4/12/2013, 11:38:32 AM
     Author     : User
 --%>
 
@@ -96,100 +96,89 @@
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" id="tabs" >
-                            <li><a href="#" data-toggle="tab">NNA Regulares</a></li>
-                            <li class="active"><a href="#" data-toggle="tab">NNA Prioritarios</a></li>
+                            <li class="active"><a href="#" data-toggle="tab">NNA Regulares</a></li>
+                            <li><a href="#" data-toggle="tab">NNA Prioritarios</a></li>
                             <li><a href="#" data-toggle="tab">NNA en Seguimiento</a></li>
                         </ul>
                         <br>
                         <br>
-                        <h1 align="center"><strong>Familias que conforman el Estudio de Caso</strong></h1>
+                        <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
                         <br>
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/buscarExpedientePrioritario" method="post">
+                            <fieldset>
+                                <div class="control-group">
+                                    <label class="control-label">Expediente (ApellidoEl-ApellidoElla)</label>
+                                    <br>
+                                    <div class="controls">
+                                        <input id="exp" name="exp" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <button id="singlebutton" name="singlebutton" class="btn btn-default">Buscar</button>
+                            </fieldset>
+                        </form>
+                        <br>
+                        <h1 align="center"><strong>Expedientes encontrados</strong></h1>
+                        <br>
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarExpedientePrioritario" method="post">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th class="col-sm-2 " >Expediente</th>
+                                        <th class="col-sm-2 " >Nivel sociec</th>
                                         <th class="col-sm-2 " >Información</th>
-                                        <th class="col-sm-2 " >Estudio de Caso</th>
-                                        <th class="col-sm-2 " >Prioridad</th>
-                                        <th class="col-sm-2 " >Resultado</th>
-                                        <th class="col-sm-2 " >Registrar</th>
+                                        <th class="col-sm-2 " >Resolución de aptitud</th>
+                                        <th class="col-sm-2 " >Seleccionar</th>
                                     </tr>
                                 </thead>
-                                <c:if test="${!listaEstudios.isEmpty()}">
+                                <c:if test="${!listaBusqueda.isEmpty()}"> 
                                 <tbody>
-                                    <c:forEach var="estudio" items="${listaEstudios}" varStatus="status">
-                                        <c:if test="${estudio.getResultado() == 'acep'}">
-                                            <c:set var="token" value="aceptado"/>
-                                            <c:set var="idEstudio" value="${estudio.getIdestudioCaso()}"/>
-                                            <c:set var="orden" value="${estudio.getOrden()}"/>
-                                        </c:if> 
-                                        <c:if test="${estudio.getResultado() == 'acep' && estudio.getFechaSolAdop() != null}">
-                                            <c:set var="tokenDesig" value="designado"/>
-                                        </c:if> 
-                                        <tr>
-                                        <td>${estudio.getExpedienteFamilia().getExpediente()}</td>
-                                        <td>
-                                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button>
-                                        </td>
-                                        <td>${estudio.getFechaEstudio() != null ? df.dateToString(estudio.getFechaEstudio()) : ''}</td>
-                                        <td>${estudio.getPrioridad()}</td>
-                                        <td>
-                                            <select onchange="resultado(this.value)" ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} id="result" name="result">
-                                                <option ${estudio.getResultado() == 'obs' ? 'selected' : ''} ${estudio.getResultado() == null ? 'selected' : ''} value="obs">Observado</option>
-                                                <option ${estudio.getResultado() == 'noobs' ? 'selected' : ''} value="noobs">No observado</option>
-                                                <option ${estudio.getResultado() == 'acep' ? 'selected' : ''} value="acep">Aceptado</option>
-                                                <option ${estudio.getResultado() == 'noacep' ? 'selected' : ''} value="noacep">No aceptado</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                          <form action="${pageContext.servletContext.contextPath}/ActualizarEstudio" method="post">
-                                               <input hidden ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'name=""' : 'name="resultado"' }  ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'id=""' : 'id="resul"' }  value="obs" >
-                                               <input hidden name="idEstudio" id="idEstudio" value="${estudio.getIdestudioCaso()}">
-                                               <input hidden name="orden" id="orden" value="${estudio.getOrden()}">  
-                                               <button ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
-                                          </form>
-                                        </td>
-                                    </tr>
-                                    </c:forEach> 
+                                    <c:forEach var="familia" items="${listaBusqueda}" varStatus="status">
+                                        <c:set var="agregado" value="1" />
+                                            <tr>
+                                                <td>${familia.getExpediente()}</td>
+                                                <td>
+                                                    <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
+                                                        ${info.getNivelSocioeconomico()}
+                                                    </c:forEach>
+                                                </td>
+                                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
+                                                <td>
+                                                    <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
+                                                    <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
+                                                        ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
+                                                    </c:forEach>
+                                                    </c:forEach>
+                                                </td>
+                                                <td>
+                                                    <c:if test="${!listaEstudioCaso.isEmpty()}">
+                                                        <c:forEach var="familia2" items="${listaEstudioCaso}" varStatus="status">
+                                                            <c:if test="${familia.getIdexpedienteFamilia() == familia2.getIdexpedienteFamilia()}">
+                                                                <c:set var="agregado" value="0" />
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </c:if> 
+                                                    <div class="checkbox">
+                                                    <label>
+                                                        <input ${agregado == 0 ? 'disabled' : ''} ${agregado == 0 ? 'checked' : ''} name="idExpediente" value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
+                                                    </label>
+                                                        <c:if test="${agregado == 0}">
+                                                            <h4><strong>Expediente ya agregado</strong></h4>
+                                                        </c:if>
+                                                    </div>
+                                                </td>
+                                             </tr>
+                                  </c:forEach>  
                                 </tbody>
-                                </c:if>
-                                   <c:if test="${listaEstudios.isEmpty()}">
-                                     <h3><strong>No existen Estudios de Caso</strong></h3>
-                               </c:if> 
+                              </c:if> 
+                               <c:if test="${listaBusqueda.isEmpty()}">
+                                    <h3><strong>No se encontraron expedientes</strong></h3>
+                                </c:if>  
                             </table>
                         </div>
                         <br>
-                        <h1>Información para la propuesta de adopción</h1>
-                        <p>En caso una familia presente una solicitud de adopción (el resultado sea "Aceptado"), llenar la siguiente información:</p>
-                        <br>
-                        <h3><strong>${nna}</strong></h3>
-                        <form action="${pageContext.servletContext.contextPath}/generarDesignacionPrioritario" method="post">
-                        <div class="control-group">
-                            <label class="control-label">Fecha de solicitud de adopción</label>
-                            <div class="controls">
-                                <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="fechaSolicitud" name="fechaSolicitud" type="text" class="datepicker input-xlarge">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label">N° de Designación</label>
-                            <div class="controls">
-                                <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="numDesig" name="numDesig" type="text" class="span2" value="" id="designacion" >
-                            </div>
-                        </div>
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label">Fecha de propuesta</label>
-                            <div class="controls">
-                                <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="fechaPropuesta" name="fechaPropuesta" type="text" class="datepicker span2" >
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <input hidden name="orden" id="orden" value="${orden}">
-                        <input hidden name="idEstudio" id="idEstudio" value="${idEstudio}">
-                        <button ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="singlebutton" name="singlebutton" class="btn btn-default">Generar Propuesta Directa</button>
+                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar</button>
                         </form>
                     </div>
                 </div>
@@ -205,28 +194,10 @@
                 <p align="right">Diseñado por RED<br>www.red.net.pe</p>
             </div>
         </div>
-        <!-- Bootstrap core JavaScript
-         ================================================== -->
+        <!-- core JavaScript
+================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
-        <script type="text/javascript">
-
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-            
-
-        </script>
-        <script>
-                function resultado(value)
-                    {
-                        var resul = document.getElementById("resul");
-                        //you can get the value from arguments itself
-                        //alert(value);
-                        resul.value = value;
-                        //alert(resul.value);
-                    }
-            </script>
-        <!-- Placed at the end of the document so the pages load faster -->
+        <!-- Ubicar al final -->
     </body>
 </html>
