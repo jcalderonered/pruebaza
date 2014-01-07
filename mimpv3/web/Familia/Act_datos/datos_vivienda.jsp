@@ -241,25 +241,15 @@
                                     procedimiento administrativo de adopción.
                                 </p>
                                 </div>
-                                <!-- Button -->
                                 <br>
-                                <!--
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
-                                        </div>
-                                    </div>
-                                -->
                             </fieldset>
-                        </form>   
-
+                        </form>
                     </div>
                 </div>
             </div>
             <!--FIN DE CONTENIDO-->
             <br>
             <br>
-
             <div id="footer">
                 <div id="ja-footer" class="wrap">
                     <hr width=80% align="center">

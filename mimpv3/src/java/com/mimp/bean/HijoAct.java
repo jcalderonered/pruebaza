@@ -21,6 +21,9 @@ public class HijoAct  implements java.io.Serializable {
      private String ocupacion;
      private String estadoSalud;
      private Short reside;
+     private int edad;
+     private String fechaNacString;
+     private String fechaAdopString;
 
     public HijoAct() {
     }
@@ -120,6 +123,48 @@ public class HijoAct  implements java.io.Serializable {
     
     public void setReside(Short reside) {
         this.reside = reside;
+    }
+
+    /**
+     * @return the edad
+     */
+    public int getEdad() {
+        return edad;
+    }
+
+    /**
+     * @param edad the edad to set
+     */
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    /**
+     * @return the fechaNacString
+     */
+    public String getFechaNacString() {
+        return fechaNacString;
+    }
+
+    /**
+     * @param fechaNacString the fechaNacString to set
+     */
+    public void setFechaNacString(String fechaNacString) {
+        this.fechaNacString = fechaNacString;
+    }
+
+    /**
+     * @return the fechaAdopString
+     */
+    public String getFechaAdopString() {
+        return fechaAdopString;
+    }
+
+    /**
+     * @param fechaAdopString the fechaAdopString to set
+     */
+    public void setFechaAdopString(String fechaAdopString) {
+        this.fechaAdopString = fechaAdopString;
     }
 
 

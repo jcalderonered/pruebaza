@@ -132,6 +132,7 @@ public class familia {
                             } else {
                                 map.addAttribute("ficha", si);
                                 map.addAttribute("boton", 0);
+                                map.addAttribute("eval", si);
                                 for (Iterator iter3 = usuario.getExpedienteFamilias().iterator(); iter3.hasNext();) {
                                     ExpedienteFamilia exp = (ExpedienteFamilia) iter3.next();
                                     Boolean flag = false;
@@ -142,7 +143,6 @@ public class familia {
                                         }
                                     }
                                     if (exp.getEstado().equals("Apto") || flag) {
-                                        map.addAttribute("eval", si);
                                         map.addAttribute("espera", si);
                                         if (!exp.getDesignacions().isEmpty()) {
                                             for (Iterator iter5 = exp.getDesignacions().iterator(); iter5.hasNext();) {
@@ -174,7 +174,6 @@ public class familia {
                                             map.addAttribute("postadop", no);
                                         }
                                     } else {
-                                        map.addAttribute("eval", no);
                                         map.addAttribute("espera", no);
                                         map.addAttribute("adop", no);
                                         map.addAttribute("postadop", no);
@@ -297,18 +296,52 @@ public class familia {
     @RequestMapping("/FactDatos/opc3")
     public ModelAndView FactDatos3(ModelMap map, HttpSession session) {
         Familia usuario = (Familia) session.getAttribute("usuario");
+        Date fechaAct = new Date();
+        int añoAct = fechaAct.getYear();
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        //FALTA
+        ArrayList<HijoAct> listaHijos = new ArrayList();
+        ArrayList<HijoAct> listaHijosAdop = new ArrayList();
+        ArrayList<ResidenteAct> listaRes = new ArrayList();
+        for (Iterator iter = usuario.getInfoFamilias().iterator(); iter.hasNext();) {
+            InfoFamilia ifa = (InfoFamilia) iter.next();
+            for (Iterator iter2 = ifa.getHijoActs().iterator(); iter2.hasNext();) {
+                HijoAct h = (HijoAct) iter2.next();
+                int edad = añoAct - h.getFechaNac().getYear();
+                if ((h.getFechaNac().getMonth() - fechaAct.getMonth()) > 0) {
+                    edad--;
+                } else if ((h.getFechaNac().getMonth() - fechaAct.getMonth()) == 0) {
+                    if ((h.getFechaNac().getDate() - fechaAct.getDate()) > 0) {
+                        edad--;
+                    }
+                }
+                h.setEdad(edad);
+                h.setFechaNacString(format.dateToString(h.getFechaNac()));
+                if (h.getBiologico() == 0) {
+                    listaHijos.add(h);
+                } else {
+                    h.setFechaAdopString(format.dateToString(h.getFechaAdop()));
+                    listaHijosAdop.add(h);
+                }
+            }
+            for (Iterator iter3 = ifa.getHijoActs().iterator(); iter3.hasNext();) {
+                ResidenteAct r = (ResidenteAct) iter3.next();
+                listaRes.add(r);
+            }
+            map.put("listaHijos", listaHijos);
+            map.put("listaHijosAdop", listaHijosAdop);
+            map.put("listaRes", listaRes);
+        }
         String pagina = "/Familia/Act_datos/datos_fam";
         return new ModelAndView(pagina, map);
     }
 
     @RequestMapping("/FactDatos/opc4")
-    public ModelAndView FactDatos4(ModelMap map, HttpSession session) {
+    public ModelAndView FactDatos4(ModelMap map, HttpSession session
+    ) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -325,7 +358,8 @@ public class familia {
     }
 
     @RequestMapping("/FactDatos/opc5")
-    public ModelAndView FactDatos5(ModelMap map, HttpSession session) {
+    public ModelAndView FactDatos5(ModelMap map, HttpSession session
+    ) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -343,7 +377,8 @@ public class familia {
 
     //Ficha de inscripcion de solicitantes para la adopción
     @RequestMapping("/Fficha/opc1")
-    public ModelAndView Fficha1(ModelMap map, HttpSession session) {
+    public ModelAndView Fficha1(ModelMap map, HttpSession session
+    ) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         dateFormat format = new dateFormat();
         Date factual = new Date();
@@ -489,7 +524,8 @@ public class familia {
     }
 
     @RequestMapping("/Fficha/opc2")
-    public ModelAndView Fficha2(ModelMap map, HttpSession session) {
+    public ModelAndView Fficha2(ModelMap map, HttpSession session
+    ) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -525,7 +561,8 @@ public class familia {
     }
 
     @RequestMapping("/Fficha/opc3")
-    public ModelAndView Fficha3(ModelMap map, HttpSession session) {
+    public ModelAndView Fficha3(ModelMap map, HttpSession session
+    ) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -538,7 +575,8 @@ public class familia {
     }
 
     @RequestMapping("/Fficha/opc4")
-    public ModelAndView Fficha4(ModelMap map, HttpSession session) {
+    public ModelAndView Fficha4(ModelMap map, HttpSession session
+    ) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -551,7 +589,8 @@ public class familia {
     }
 
     @RequestMapping("/Fficha/opc5")
-    public ModelAndView Fficha5(ModelMap map, HttpSession session) {
+    public ModelAndView Fficha5(ModelMap map, HttpSession session
+    ) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -564,7 +603,8 @@ public class familia {
     }
 
     @RequestMapping("/Fficha/opc6")
-    public ModelAndView Fficha6(ModelMap map, HttpSession session) {
+    public ModelAndView Fficha6(ModelMap map, HttpSession session
+    ) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -610,7 +650,8 @@ public class familia {
             @RequestParam("seguro_vida_ella") String seguro_vida,
             @RequestParam("sist_pen_ella") String sist_pen,
             @RequestParam("est_salud_ella") String est_salud,
-            HttpSession session) {
+            HttpSession session
+    ) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -679,7 +720,7 @@ public class familia {
         String pagina = "/Familia/Ficha/ficha_inscripcion_ella";
         return new ModelAndView(pagina, map);
     }
-    
+
     @RequestMapping("/FfichaGuardar/opc2")
     public ModelAndView FfichaGuardarEl(ModelMap map,
             @RequestParam("nombre_el") String nombre,
@@ -714,7 +755,8 @@ public class familia {
             @RequestParam("seguro_vida_el") String seguro_vida,
             @RequestParam("sist_pen_el") String sist_pen,
             @RequestParam("est_salud_el") String est_salud,
-            HttpSession session) {
+            HttpSession session
+    ) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";

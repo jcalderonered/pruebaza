@@ -105,7 +105,6 @@
                                         <th>Ver Inscritos</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
                                     <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
                                         <tr>
