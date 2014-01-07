@@ -485,33 +485,22 @@
                                     </div>
                                 </div>
                                 <br>
-
                                 <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUD</p>
                                 <p style="color: red">EN MESA DE PARTES DE LA DGA</p>
                                 <br>
                                 <p>Según lo establecido en la Ley Nº29733 - Ley de protección de datos personales, la información proporcionada por 
                                     usted/ustedes será de uso exclusivo, con la reserva y confidencialidad del caso, para los fines concernientes al 
                                     procedimiento administrativo de adopción.
-                                </p>    
-                                <!-- Button -->
+                                </p>
                                 <br>
-                                <!--
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
-                                    </div>
-                                </div>
-                                -->
                             </fieldset>
-                        </form>   
-
+                        </form>
                     </div>
                 </div>
             </div>
             <!--FIN DE CONTENIDO-->
             <br>
             <br>
-
             <div id="footer">
                 <div id="ja-footer" class="wrap">
                     <hr width=80% align="center">

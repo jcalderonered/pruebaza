@@ -6,16 +6,16 @@
 
 <%@page import="com.mimp.bean.Familia"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
-response.setDateHeader("Expires", 0);
-Familia u=(Familia)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    Familia u = (Familia) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -106,91 +106,42 @@ if (u==null){
                                                 <th>Fecha de nacimiento</th>                                          
                                             </tr>
                                         </thead>
-
                                         <tbody>
-                                            <tr>
-                                                <td><input type="text" class="input_width" disabled></td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input disabled type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input disabled type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="input_width" disabled></td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input disabled type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
+                                            <c:forEach var="hijo" items="${listaHijos}" varStatus="status">
+                                                <tr>
+                                                    <td><input type="text" class="input_width" value="${hijo.getApellidoP()}" disabled></td>
+                                                    <td>
+                                                        <input type="text" class="input_width" value="${hijo.getApellidoM()}" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="input_width" value="${hijo.getNombre()}" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="input_width" value="${hijo.getEdad()}" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="input_width" value="${hijo.getFechaNacString()}" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="input_width" value="${hijo.getOcupacion()}" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="input_width" value="${hijo.getEstadoSalud()}" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <select>
+                                                            <c:choose>
+                                                                <c:when test="${hijo.getReside() == 0}">
+                                                                    <option value="0">SI</option>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <option value="1">NO</option>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -218,94 +169,44 @@ if (u==null){
                                                 <th>Fecha de nacimiento</th>                                          
                                             </tr>
                                         </thead>
-
                                         <tbody>
+                                            <c:forEach var="hijoadop" items="${listaHijosAdop}" varStatus="status">
                                             <tr>
-                                                <td><input type="text" class="input_width" disabled></td>
-                                                <td><input type="text" class="input_width" disabled></td>
+                                                <td><input type="text" class="input_width" value="${hijoadop.getApellidoP()}" disabled></td>
+                                                <td><input type="text" class="input_width" value="${hijoadop.getApellidoM()}" disabled></td>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${hijoadop.getNombre()}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${hijoadop.getFechaAdopString()}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input disabled type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${hijoadop.getEdad()}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${hijoadop.getFechaNacString()}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${hijoadop.getOcupacion()}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${hijoadop.getEstadoSalud()}" disabled>
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <c:choose>
+                                                                <c:when test="${hijoadop.getReside() == 0}">
+                                                                    <option value="0">SI</option>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <option value="1">NO</option>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </select>
                                                     </select>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td><input type="text" class="input_width" disabled></td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input disabled type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="input_width" disabled></td>
-                                                <td><input type="text" class="input_width" disabled></td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input disabled type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -330,8 +231,8 @@ if (u==null){
                                                 <th>Nombre</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
+                                            <c:forEach var="res" items="${listaRes}" varStatus="status">
                                             <tr>
                                                 <td>
                                                     <input type="text" class="input_width" disabled>
@@ -355,52 +256,7 @@ if (u==null){
                                                     <input type="text" class="input_width" disabled>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width" disabled>
-                                                </td>
-                                            </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
