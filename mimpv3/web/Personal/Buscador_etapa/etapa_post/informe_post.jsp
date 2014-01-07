@@ -98,58 +98,67 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h1 align="center"><strong>Informe Post-Adoptivo N° 4</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
                             <li><a href="#" >Designación</a></li>
                             <li><a href="#" >Adopción</a></li>
-                            <li><a href="#" >Post Adopción</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal"> 
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/InsertarInforme" method="post" > 
                             <fieldset>
+                                <input hidden name="idInforme" id="idInforme" value="${informe.getIdinformePostAdoptivo()}">
+                                <input hidden name="num" id="num" value="${num}">
+                                <input hidden name="idPost" id="idPost" value="${idPost}">
+                                <input hidden name="numInformes" id="numInformes" value="${numInformes}">
+                                <input hidden name="familia" id="familia" value="${familia}">
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                                 <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
+                                <br>
+                                <c:choose>
+                                    <c:when test="${informe.getNumeroInforme() != null}">
+                                        <h3><strong>Número de informe: ${informe.getNumeroInforme()}</strong></h3>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3><strong>Número de informe: ${num}</strong></h3>
+                                    </c:otherwise>
+                                </c:choose>
+                                
                                 <br>
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <label class="control-label">Estado</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Listo</option>
-                                            <option value="mia" selected>Pendiente</option>
+                                        <select ${informe.getEstado() == 'listo' ? 'disabled' : ''} id="estado" name="estado">
+                                            <option ${informe.getEstado() == 'listo' ? 'selected' : ''} value="listo">Listo</option>
+                                            <option ${informe.getEstado() == 'inconcluso' || informe.getEstado() == null ? 'selected' : ''} value="inconcluso" >Inconcluso</option>
                                         </select>
                                     </div>    
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Número de informe: 4</label>
-                                </div>
-                                <br>
-                                <div class="control-group">
                                     <label class="control-label">Fecha de recepción proyectado</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input ${informe.getEstado() == 'listo' ? 'disabled' : ''} value="${informe.getFechaRecepcionProyectado() != null ? df.dateToString(informe.getFechaRecepcionProyectado()) : ''}" id="fechaProyectado" name="fechaProyectado" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de recepción</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input ${informe.getEstado() == 'listo' ? 'disabled' : ''} value="${informe.getFechaRecepcion() != null ? df.dateToString(informe.getFechaRecepcion()) : ''}" id="fechaRecepcion" name="fechaRecepcion" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Personal asignado</label>
                                     <div class="controls">
-                                        <select>
-                                            <option value="sia">Juan Pérez</option>
-                                            <option value="mia">Raúl Robles</option>
-                                            <option value="mia">John Peña</option>
-                                            <option value="mia">Isaac Lamb</option>
+                                        <select ${informe.getEstado() == 'listo' ? 'disabled' : ''} id="personal" name="personal" class="input-xlarge">
+                                            <c:forEach var="personal" items="${listaPersonal}" > 
+                                                <option value="${personal.getIdpersonal()}" ${informe.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>    
                                 </div>
@@ -157,28 +166,30 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input ${informe.getEstado() == 'listo' ? 'disabled' : ''} id="fechaInforme" name="fechaInforme" value="${informe.getFechaInforme() != null ? df.dateToString(informe.getFechaInforme()) : ''}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
+                                <c:if test="${ultimo != null}">
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de acta</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input ${informe.getEstado() == 'listo' ? 'disabled' : ''} value="${informe.getFechaActa() != null ? df.dateToString(informe.getFechaActa()) : ''}" id="fechaActa" name="fechaActa" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
+                                </c:if>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <input id="obs" name="full-name" type="text" class="input-xlarge">
+                                        <textarea cols="25" rows="5" ${informe.getEstado() == 'listo' ? 'disabled' : ''} name="obs" type="text" class="input-xlarge" >${informe.getObs()}</textarea>
                                     </div>
                                 </div>
                                 <!-- Button -->
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                        <button ${informe.getEstado() == 'listo' ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
                                     </div>
                                 </div>
                             </fieldset>

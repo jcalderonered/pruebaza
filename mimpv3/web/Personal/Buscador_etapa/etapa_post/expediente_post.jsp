@@ -99,48 +99,36 @@
                         <br>
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
                             <li><a href="#" >Designación</a></li>
                             <li><a href="#" >Adopción</a></li>
-                            <li><a href="#" >Post Adopción</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal"> 
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/EditarExpedientePost" method="post"> 
                             <fieldset>
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                                 <br>
-                                <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
-                                <br>
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label">Número: 00183711</label>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Expediente: ApellidoP-ApellidoM</label>
-                                </div>
+                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Número de informes</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${post.getNumeroInformes()}" id="numInformes" name="numInformes" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de resolución de adopción</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge" placeholder="20/11/2013" disabled>
+                                        <input value="${post.getFechaResolucion() != null ? df.dateToString(post.getFechaResolucion()) : ''}" id="full-name" name="full-name" type="text" class="datepicker input-xlarge" disabled>
                                     </div>
                                 </div>
-
-
+                                    <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
                                 <br>
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
-                                        &nbsp;
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Generar Expediente</button>
+                                        <button ${post.getNumeroInformes() != null ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
                                     </div>
                                 </div>
                             </fieldset>

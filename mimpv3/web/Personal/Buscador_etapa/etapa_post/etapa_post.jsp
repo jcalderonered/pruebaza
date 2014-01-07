@@ -99,13 +99,11 @@
                         <br>
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li ><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
                             <li><a href="#" >Designación</a></li>
                             <li><a href="#" >Adopción</a></li>
-                            <li><a href="#" >Post Adopción</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal">
-                            <fieldset>
                                 <br>
                                 <div class="bs-example">
                                     <table class="table table-bordered">
@@ -116,56 +114,67 @@
                                                 <th>Expediente Post</th>
                                                 <th>N° Informes a presentar</th>
                                                 <th>Información de Informes</th>
-                                                <th>N° Informes presentados</th>
+                                                <th>N° Informes presentados (estado : Listo)</th>
                                             </tr>
                                         </thead>
+                                        <c:if test="${listaPost != null}">   
                                         <tbody>
-                                            <tr>
-                                                <td>Alvarado-Gutierrez</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>8</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Rosa-Flores</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>8</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>7</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Durando-Iriarte</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>6</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>5</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gallardo-Olivera</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default">Registrar</button></td>
-                                                <td></td>
-                                                <td><button href="#" class="btn btn-default disabled">Ver</button></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Solano-Parco</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td><button href="#" class="btn btn-default disabled">Registrar</button></td>
-                                                <td>8</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                <td>0</td>
-                                            </tr>
+                                            <c:forEach var="post" items="${listaPost}" varStatus="status">
+                                                <c:set var="contador" value="0" />
+                                                <tr>
+                                                <td>
+                                                    <c:forEach var="expediente" items="${post.getFamilia().getExpedienteFamilias()}" varStatus="temp">
+                                                        <c:if test="${temp.index == '0'}">
+                                                            <c:set var="exp" value="${expediente}" />
+                                                        </c:if>
+                                                    ${exp.getExpediente()}
+                                                    </c:forEach>
+                                                </td>
+                                                <td>
+                                                    <button href="#" class="btn btn-default">Ver</button>
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/UpdatePostAdopcion" method="post">
+                                                          <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
+                                                          <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
+                                                          <button type="submit" class="btn btn-default">Registrar</button>
+                                                    </form>  
+                                                </td>
+                                                <td>
+                                                    ${post.getNumeroInformes()}
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/verInformesPost" method="post">
+                                                          <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
+                                                          <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
+                                                          <input hidden name="numInformes" id="numInformes" value="${post.getNumeroInformes()}">
+                                                          <button ${post.getNumeroInformes() == null ? 'disabled' : ''} type="submit" class="btn btn-default">Ver</button>
+                                                    </form> 
+                                                </td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${!post.getInformePostAdoptivos().isEmpty()}">
+                                                            <c:forEach var="informe" items="${post.getInformePostAdoptivos()}">
+                                                               <c:if test="${informe.getEstado() == 'listo'}">  
+                                                                <c:set var="contador" value="${contador + 1}"/>
+                                                               </c:if>
+                                                            </c:forEach>
+                                                            ${contador} 
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            0
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
+                                        </c:if> 
+                                      <c:if test="${listaPost == null}">
+                                        <h3><strong>No existen familias en esta etapa</strong></h3>
+                                      </c:if> 
                                     </table>
                                 </div>
-                            </fieldset>
-                        </form>
-
                     </div>
                 </div>
             </div>

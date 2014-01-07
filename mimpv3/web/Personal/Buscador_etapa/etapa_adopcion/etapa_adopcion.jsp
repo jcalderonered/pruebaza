@@ -104,8 +104,6 @@
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
                             <li><a href="#" >Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal">
-                            <fieldset>
                                 <br>
                                 <div class="bs-example">
                                     <table class="table table-bordered">
@@ -310,14 +308,6 @@
                                 </div>
                                 <br>
                                 <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
-
                     </div>
                 </div>
             </div>
