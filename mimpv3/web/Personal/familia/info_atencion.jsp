@@ -99,10 +99,10 @@
                             <br>
                             <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
                             <br>
+                            <c:if test="${estado != 'formativa'}">
                             <br>
                             <h3 align="left"><strong>Datos de la ficha</strong></h3>
                             <br>
-                            <c:if test="${estado != 'formativa'}">
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="control-label">Número</label>
