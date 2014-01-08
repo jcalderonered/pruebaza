@@ -140,7 +140,8 @@
                                                 <th colspan="2">Edad y Fecha de nacimiento</th>
                                                 <th rowspan="2">Ocupación</th>
                                                 <th rowspan="2">Estado de Salud</th>
-                                                <th rowspan="2">Reside con usted?</th>                                          
+                                                <th rowspan="2">¿Reside con usted?</th>
+                                                <th rowspan="2">Editar</th> 
                                             </tr>
                                             <tr>
                                                 <th>Apellido Paterno</th>
@@ -152,8 +153,11 @@
                                         </thead>
                                         <tbody>
                                             <c:forEach var="hijo" items="${listaHijos}" varStatus="status">
+                                            <form action="${pageContext.servletContext.contextPath}/FEditarHijo" method="post">
                                                 <tr>
-                                                    <td><input name="apellido_p" type="text" class="input_width" value="${hijo.getApellidoP()}"></td>
+                                                    <td>
+                                                        <input name="apellido_p" type="text" class="input_width" value="${hijo.getApellidoP()}">
+                                                    </td>
                                                     <td>
                                                         <input name="apellido_m" type="text" class="input_width" value="${hijo.getApellidoM()}">
                                                     </td>
@@ -173,7 +177,7 @@
                                                         <input name="estado_salud" type="text" class="input_width" value="${hijo.getEstadoSalud()}">
                                                     </td>
                                                     <td>
-                                                        <select>
+                                                        <select name="reside">
                                                             <c:choose>
                                                                 <c:when test="${hijo.getReside() == 0}">
                                                                     <option value="0">SI</option>
@@ -184,97 +188,52 @@
                                                             </c:choose>
                                                         </select>
                                                     </td>
+                                                    <td>
+                                                        <input hidden name="idHijo" id="idSesion" value="${hijo.getIdHijo()}">
+                                                        <button type="submit" class="btn btn-default">Editar</button>
+                                                    </td>
                                                 </tr>
-                                            </c:forEach>
-                                            <tr>
-                                                <td><input type="text" class="input_width"></td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="input_width"></td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
+                                            </form>
+                                        </c:forEach>
+                                        <tr>
+                                        <form action="${pageContext.servletContext.contextPath}/FEditarHijo" method="post">
+                                            <td>
+                                                <input name="apellido_p" type="text" class="input_width">
+                                            </td>
+                                            <td>
+                                                <input name="apellido_m" type="text" class="input_width">
+                                            </td>
+                                            <td>
+                                                <input name="nombre" type="text" class="input_width">
+                                            </td>
+                                            <td>
+                                                <input name="edad" type="text" class="input_width">
+                                            </td>
+                                            <td>
+                                                <input name="fecha_nac" type="text" class="input_width">
+                                            </td>
+                                            <td>
+                                                <input name="ocupacion" name="ocupación" type="text" class="input_width">
+                                            </td>
+                                            <td>
+                                                <input name="estado_salud" name="estado_salud" type="text" class="input_width">
+                                            </td>
+                                            <td>
+                                                <select name="reside">
+                                                    <option value="0">SI</option>
+                                                    <option value="1">NO</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input hidden name="idHijo" id="idHijo" value="0">
+                                                <button type="submit" class="btn btn-default">Editar</button>
+                                            </td>
+                                        </form>
+                                        </tr>                                       
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
-
                             <br>
                             <h3><strong>Hijo/a/s adoptivo/a/s</strong></h3>
                             <br>    
@@ -307,7 +266,6 @@
                                 </div>
                             </div>
                             <br>
-
                             <div class="row">
                                 <div id="tabla_fam" class="table-responsive">
                                     <table id="hijos" class="table table-bordered table-striped ">
@@ -327,7 +285,6 @@
                                                 <th>Fecha de nacimiento</th>                                          
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             <tr>
                                                 <td><input type="text" class="input_width"></td>
@@ -360,33 +317,6 @@
                                                 <td>
                                                     <input type="text" class="input_width">
                                                 </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="input_width"></td>
                                                 <td>
                                                     <input type="text" class="input_width">
                                                 </td>
@@ -415,12 +345,10 @@
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                             <br>
                             <h3><strong>Otras personas que residan con usted/es en la vivienda</strong></h3>
                             <br> 
-
                             <div class="row">
                                 <div id="tabla_fam" class="table-responsive">
                                     <table id="hijos" class="table table-bordered table-striped ">
@@ -438,31 +366,7 @@
                                                 <th>Nombre</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                            </tr>
                                             <tr>
                                                 <td>
                                                     <input type="text" class="input_width">
