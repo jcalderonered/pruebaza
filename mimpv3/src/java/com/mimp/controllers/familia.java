@@ -327,7 +327,7 @@ public class familia {
                     listaHijosAdop.add(h);
                 }
             }
-            for (Iterator iter3 = ifa.getHijoActs().iterator(); iter3.hasNext();) {
+            for (Iterator iter3 = ifa.getResidenteActs().iterator(); iter3.hasNext();) {
                 ResidenteAct r = (ResidenteAct) iter3.next();
                 listaRes.add(r);
             }
@@ -569,7 +569,29 @@ public class familia {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        //FALTA
+        Date fechaAct = new Date();
+        int añoAct = fechaAct.getYear();
+        ArrayList<Hijo> listaHijos = new ArrayList();
+        ArrayList<Hijo> listaHijosAdop = new ArrayList();
+        ArrayList<Residente> listaRes = new ArrayList();
+        FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
+        for (Iterator iter = ficha.getHijos().iterator(); iter.hasNext();) {
+            Hijo h = (Hijo) iter.next();
+            h.setFechaNacString(format.dateToString(h.getFechaNac()));
+            if (h.getBiologico() == 0) {
+                listaHijos.add(h);
+            } else {
+                h.setFechaAdopString(format.dateToString(h.getFechaAdop()));
+                listaHijosAdop.add(h);
+            }
+        }
+        for (Iterator iter3 = ficha.getResidentes().iterator(); iter3.hasNext();) {
+            Residente r = (Residente) iter3.next();
+            listaRes.add(r);
+        }
+        map.put("listaHijos", listaHijos);
+        map.put("listaHijosAdop", listaHijosAdop);
+        map.put("listaRes", listaRes);
         String pagina = "/Familia/Ficha/ficha_inscripcion_fam";
         return new ModelAndView(pagina, map);
     }
@@ -667,7 +689,6 @@ public class familia {
                 break;
             }
         }
-
         sol.setNombre(nombre);
         sol.setApellidoP(apellido_p);
         sol.setApellidoM(apellido_m);
@@ -772,7 +793,6 @@ public class familia {
                 break;
             }
         }
-
         sol.setNombre(nombre);
         sol.setApellidoP(apellido_p);
         sol.setApellidoM(apellido_m);

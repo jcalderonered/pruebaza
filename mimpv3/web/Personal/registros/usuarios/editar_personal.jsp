@@ -220,8 +220,15 @@
                                             <label class="control-label">Rol</label>
                                             <div class="controls">
                                                 <select  id="rol" name="rol">
-                                                    <option value="deia" ${personal.getRol() == 'deia' ? 'selected' : ''}>DEIA</option>
-                                                    <option value="dcri" ${personal.getRol() == 'dcri' ? 'selected' : ''}>DCRI</option>
+                                                    <option value="DEIA" ${personal.getRol() == 'DEIA' ? 'selected' : ''}>DEIA</option>
+                                                    <option value="DCRI" ${personal.getRol() == 'DCRI' ? 'selected' : ''}>DCRI</option>
+                                                    <option value="DAPA" ${personal.getRol() == 'DAPA' ? 'selected' : ''}>DAPA</option>
+                                                    <option value="DGA" ${personal.getRol() == 'DGA' ? 'selected' : ''}>DGA</option>
+                                                    <option value="DEIA Prio" ${personal.getRol() == 'DEIA Prio' ? 'selected' : ''}>DEIA Prioritario</option>
+                                                    <option value="MATCH" ${personal.getRol() == 'MATCH' ? 'selected' : ''}>MATCH</option>
+                                                    <option value="mpartes" ${personal.getRol() == 'mpartes' ? 'selected' : ''}>Mesa de Partes</option>
+                                                    <option value="UA" ${personal.getRol() == 'UA' ? 'selected' : ''}>UA</option>
+                                                    <option value="admin" ${personal.getRol() == 'admin' ? 'selected' : ''}>admin</option>
                                                 </select>
                                             </div>    
                                         </div>
