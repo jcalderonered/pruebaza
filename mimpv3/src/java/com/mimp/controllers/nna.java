@@ -159,7 +159,8 @@ public class nna {
         tempNna.setApellidoM(apellidoM);
         tempNna.setSexo(sexo);
         
-        tempNna.setFechaNacimiento(df.stringToDate(fechaNac));
+        if(fechaNac != null && !fechaNac.equals("")) tempNna.setFechaNacimiento(df.stringToDate(fechaNac));
+        if(fechaNac == null || fechaNac.equals("")) tempNna.setFechaNacimiento(null);
         short edadtemp = Byte.valueOf(edad);
         short mesestemp = Byte.valueOf(meses);
         tempNna.setEdadAnhos(edadtemp);
@@ -181,9 +182,11 @@ public class nna {
         tempNna.setDistritoNacimiento(dist);
         tempNna.setDistritoNacimiento(direccion);
         tempNna.setNResolAband(numResolAband);
-        tempNna.setFechaResolAbandono(df.stringToDate(fechaResolAband));
+        if(fechaResolAband != null && !fechaResolAband.equals("")) tempNna.setFechaResolAbandono(df.stringToDate(fechaResolAband));
+        if(fechaResolAband == null || fechaResolAband.equals("")) tempNna.setFechaResolAbandono(null);
         tempNna.setNResolCons(numResolConsen);
-        tempNna.setFechaResolConsentida(df.stringToDate(fechaResolConsen));
+        if(fechaResolAband != null && !fechaResolAband.equals("")) tempNna.setFechaResolConsentida(df.stringToDate(fechaResolConsen));
+        if(fechaResolAband == null || fechaResolAband.equals("")) tempNna.setFechaResolConsentida(null);
         
         if (incesto == null) incesto = "1";
         short shIncesto = Byte.valueOf(incesto);
@@ -311,7 +314,8 @@ public class nna {
         tempNna.setApellidoM(apellidoM);
         tempNna.setSexo(sexo);
         
-        tempNna.setFechaNacimiento(df.stringToDate(fechaNac));
+        if(fechaNac != null && !fechaNac.equals("")) tempNna.setFechaNacimiento(df.stringToDate(fechaNac));
+        if(fechaNac == null || fechaNac.equals("")) tempNna.setFechaNacimiento(null);
         short edadtemp = Byte.valueOf(edad);
         short mesestemp = Byte.valueOf(meses);
         tempNna.setEdadAnhos(edadtemp);
@@ -333,9 +337,11 @@ public class nna {
         tempNna.setDistritoNacimiento(dist);
         tempNna.setDistritoNacimiento(direccion);
         tempNna.setNResolAband(numResolAband);
-        tempNna.setFechaResolAbandono(df.stringToDate(fechaResolAband));
+        if(fechaResolAband != null && !fechaResolAband.equals("")) tempNna.setFechaResolAbandono(df.stringToDate(fechaResolAband));
+        if(fechaResolAband == null || fechaResolAband.equals("")) tempNna.setFechaResolAbandono(null);
         tempNna.setNResolCons(numResolConsen);
-        tempNna.setFechaResolConsentida(df.stringToDate(fechaResolConsen));
+        if(fechaResolAband != null && !fechaResolAband.equals("")) tempNna.setFechaResolConsentida(df.stringToDate(fechaResolConsen));
+        if(fechaResolAband == null || fechaResolAband.equals("")) tempNna.setFechaResolConsentida(null);
         
         short shIncesto = Byte.valueOf(incesto);
         short shPsiquiatrica = Byte.valueOf(psiquiatrica);
@@ -474,17 +480,21 @@ public class nna {
         tempExp.setNActual(nombreActual);
         tempExp.setApellidopActual(apellidoPActual);
         tempExp.setApellidomActual(apellidoMActual);
-        tempExp.setFechaIngreso(df.stringToDate(fechaIngreso));
+        if(fechaIngreso != null && !fechaIngreso.equals("")) tempExp.setFechaIngreso(df.stringToDate(fechaIngreso));
+        if(fechaIngreso == null || fechaIngreso.equals("")) tempExp.setFechaIngreso(null);
         tempExp.setHt(ht);
         tempExp.setNExpTutelar(nInvTutelar);
-        tempExp.setFechaInvTutelar(df.stringToDate(fechaInvTutelar));
+        if(fechaInvTutelar != null && !fechaInvTutelar.equals("")) tempExp.setFechaInvTutelar(df.stringToDate(fechaInvTutelar));
+        if(fechaInvTutelar == null || fechaInvTutelar.equals("")) tempExp.setFechaInvTutelar(null);
+        
         tempExp.setProcTutelar(procTutelar);
         if(fichaInt == null) fichaInt = "2"; 
         tempExp.setFichaIntegral(Short.parseShort(fichaInt));
         tempExp.setRespLegalNombre(respLegal);
         tempExp.setRespPsicosocialNombre(respPsico);
         tempExp.setEstado(estado);
-        tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+        if(fechaEstado != null && !fechaEstado.equals("")) tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+        if(fechaEstado == null || fechaEstado.equals("")) tempExp.setFechaEstado(null);
         tempNna.setClasificacion(clasificacion);
         tempExp.setDiagnostico(diagnostico);
         tempExp.setComentarios(comentario);
@@ -556,15 +566,18 @@ public class nna {
         tempExp.setNActual(estado);
         tempExp.setApellidopActual(apellidoPActual);
         tempExp.setApellidomActual(apellidoMActual);
-        tempExp.setFechaIngreso(df.stringToDate(fechaIngreso));
+        if(fechaIngreso != null && !fechaIngreso.equals("")) tempExp.setFechaIngreso(df.stringToDate(fechaIngreso));
+        if(fechaIngreso == null || fechaIngreso.equals("")) tempExp.setFechaIngreso(null);
         tempExp.setHt(ht);
         tempExp.setNExpTutelar(nInvTutelar);
-        tempExp.setFechaInvTutelar(df.stringToDate(fechaInvTutelar));
+        if(fechaInvTutelar != null && !fechaInvTutelar.equals("")) tempExp.setFechaInvTutelar(df.stringToDate(fechaInvTutelar));
+        if(fechaInvTutelar == null || fechaInvTutelar.equals("")) tempExp.setFechaInvTutelar(null);
         tempExp.setProcTutelar(procTutelar);
         tempExp.setRespLegalNombre(respLegal);
         tempExp.setRespPsicosocialNombre(respPsico);
         tempExp.setEstado(estado);
-        tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+        if(fechaEstado != null && !fechaEstado.equals("")) tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+        if(fechaEstado == null || fechaEstado.equals("")) tempExp.setFechaEstado(null);
         tempNna.setClasificacion(clasificacion);
         tempExp.setDiagnostico(diagnostico);
         tempExp.setComentarios(comentario);

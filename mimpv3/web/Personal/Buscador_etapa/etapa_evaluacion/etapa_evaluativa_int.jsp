@@ -100,9 +100,10 @@
                         <ul class="nav nav-tabs row">
                             <li><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac">Evaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
-                            <li><a href="#" >Post Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <br>
                         <ul class="nav nav-tabs row">
@@ -144,7 +145,12 @@
                                                 </c:forEach>
                                                 <tr>
                                                 <td>${expediente.getExpediente()}</td>
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                        <input hidden name="estado" id="estado" value="evaluacion">
+                                                        <button type="submit" class="btn btn-default">Ver</button>
+                                                    </form>
+                                                </td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/PersonalAgregarEvalLegal" method="post">
                                                           <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">

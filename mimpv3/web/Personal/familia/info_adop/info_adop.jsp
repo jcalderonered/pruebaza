@@ -93,16 +93,16 @@
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
                         </ul>
                     </div>
-                    <div class="col-md-8 col-md-offset-1">
+                    <div class="col-md-8">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <form role="form">
-
+                        
                             <br>
                             <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
                             <br>
                             <br>
                             <h3 align="left"><strong>Datos de la ficha</strong></h3>
                             <br>
+                            <c:if test="${estado != 'formativa'}">
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="control-label">Número</label>
@@ -123,18 +123,19 @@
                                     </div>
                                 </div>
                             </div> 
+                            </c:if>
                             <br>
                             <br>
-                            <ul class="nav nav-tabs row" id="tabs" >
-                                <li><a href="#" data-toggle="tab">La Solicitante</a></li>
-                                <li><a href="#" data-toggle="tab">El solicitante</a></li>
-                                <li><a href="#" data-toggle="tab">Composición familiar</a></li>
-                                <li><a href="#" data-toggle="tab">Vivienda</a></li>
-                                <li><a href="#" data-toggle="tab">Información del Expediente</a></li>
-                                <li class="active"><a href="#" data-toggle="tab">Proceso de adopción</a></li>
-                                <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
-                                <li><a href="#" data-toggle="tab">NNA asociado</a></li>
-                                <li><a href="#" data-toggle="tab">Atenciones</a></li>
+                            <ul class="nav nav-tabs row">
+                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante">La Solicitante</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/elSolicitante" >El solicitante</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/compFamiliar" >Composición familiar</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/vivienda" >Vivienda</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/infoExpediente" >Información del Expediente</a></li>
+                                <li class="active"><a href="${pageContext.servletContext.contextPath}/procesoAdopcion" >Proceso de adopción</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna" >Antecedentes del NNA</a></li>
+                                <li ${estado == 'formativa' || estado == 'evaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado" >NNA asociado</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/atenciones" >Atenciones</a></li>
                             </ul>
                             <br>
                             <fieldset>
@@ -156,12 +157,20 @@
                                             <tr>
                                                 <td>001-012</td>
                                                 <td>17-Mar-12</td>
-                                                <td><button href="#" class="btn btn-default">Detalles</button></td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleSesion" method="post">
+                                                    <button class="btn btn-default">Detalles</button>
+                                                    </form>
+                                               </td>
                                             </tr>
                                             <tr>
                                                 <td>003-013</td>
                                                 <td>15-Jul-13</td>
-                                                <td><button href="#" class="btn btn-default">Detalles</button></td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleSesion" method="post">
+                                                    <button class="btn btn-default">Detalles</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -186,19 +195,28 @@
                                                 <td>Taller de capacitacion 2</td>
                                                 <td>5</td>
                                                 <td>Grupo Lunes - Turno Mañana</td>
-                                                <td><button href="#" class="btn btn-default">Detalles</button></td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleTaller" method="post">
+                                                    <button class="btn btn-default">Detalles</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Pre Adopción</td>
                                                 <td>Atenciones especiales para niños especiales</td>
                                                 <td>3</td>
                                                 <td>Grupo Lunes - Turno Mañana</td>
-                                                <td><button href="#" class="btn btn-default">Detalles</button></td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleTaller" method="post">
+                                                    <button class="btn btn-default">Detalles</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <br>
+                                <c:if test="${estado != 'formativa'}">
                                 <h3><strong>Evaluaciones asociadas</strong></h3>
                                 <br>
                                 <div class="table-responsive">
@@ -216,13 +234,21 @@
                                                 <td>Socioeconomica</td>
                                                 <td>11-Oct-13</td>
                                                 <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default">Detalles</button></td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleEvaluacion" method="post">
+                                                    <button class="btn btn-default">Detalles</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Legal</td>
                                                 <td>18-Oct-13</td>
                                                 <td>Favorable</td>
-                                                <td><button href="#" class="btn btn-default">Detalles</button></td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleEvaluacion" method="post">
+                                                    <button class="btn btn-default">Detalles</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -320,9 +346,9 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                </c:if>      
                                 <!--FIN DE CONTENIDO-->
                             </fieldset>
-                        </form>
                     </div>
                 </div>
             </div>

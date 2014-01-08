@@ -93,7 +93,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
                         </ul>
                     </div>
-                    <div class="col-md-8 col-md-offset-1">
+                    <div class="col-md-8">
                         <form role="form">
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <br>
@@ -102,6 +102,7 @@
                             <br>
                             <h3 align="left"><strong>Datos de la ficha</strong></h3>
                             <br>
+                            <c:if test="${estado != 'formativa'}">
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="control-label">Número</label>
@@ -122,18 +123,19 @@
                                     </div>
                                 </div>
                             </div> 
+                            </c:if>
                             <br>
                             <br>
-                            <ul class="nav nav-tabs row" id="tabs" >
-                                <li><a href="#" data-toggle="tab">La Solicitante</a></li>
-                                <li><a href="#" data-toggle="tab">El solicitante</a></li>
-                                <li><a href="#" data-toggle="tab">Composición familiar</a></li>
-                                <li><a href="#" data-toggle="tab">Vivienda</a></li>
-                                <li class="active"><a href="#" data-toggle="tab">Información del Expediente</a></li>
-                                <li><a href="#" data-toggle="tab">Proceso de adopción</a></li>
-                                <li><a href="#" data-toggle="tab">Antecedentes del NNA</a></li>
-                                <li><a href="#" data-toggle="tab">NNA asociado</a></li>
-                                <li><a href="#" data-toggle="tab">Atenciones</a></li>
+                            <ul class="nav nav-tabs row">
+                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante" >La Solicitante</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/elSolicitante" >El solicitante</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/compFamiliar" >Composición familiar</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/vivienda" >Vivienda</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : 'class="active"'} ><a href="${pageContext.servletContext.contextPath}/infoExpediente" >Información del Expediente</a></li>
+                                <li ><a href="${pageContext.servletContext.contextPath}/procesoAdopcion" >Proceso de adopción</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna" >Antecedentes del NNA</a></li>
+                                <li ${estado == 'formativa' || estado == 'evaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado" >NNA asociado</a></li>
+                                <li ><a href="${pageContext.servletContext.contextPath}/atenciones" >Atenciones</a></li>
                             </ul>
                             <br>
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
@@ -180,8 +182,11 @@
                                 <div class="controls">
                                     <select>
                                         <option value="sia" selected >Evaluación</option>
-                                        <option value="mia" >Observado</option>
-                                        <option value="mia" >Culminado</option>
+                                        <option value="mia" >Lista de espera</option>
+                                        <option value="mia" >Estudio de caso</option>
+                                        <option value="mia" >Designado</option>
+                                        <option value="mia" >Adopción</option>
+                                        <option value="mia" >Post Adopción</option>
                                     </select>
                                 </div>
                             </div>
@@ -199,17 +204,24 @@
                                     <select>
                                         <option value="sia" selected >Nacional</option>
                                         <option value="mia" >Internacional</option>
-
                                     </select>
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
-                                <label class="control-label">Pertenece al RNSA: SI</label>
+                                <label class="control-label">Pertenece al RNSA:</label>
+                                <select>
+                                        <option value="sia" selected >Si</option>
+                                        <option value="mia" >No</option>
+                                </select>
                             </div>
                             <br>
                             <div class="control-group">
-                                <label class="control-label">Pertenece al RNAA: SI</label>
+                                <label class="control-label">Pertenece al RNAA:</label>
+                                <select>
+                                        <option value="sia" selected >Si</option>
+                                        <option value="mia" >No</option>
+                                </select>
                             </div>
                             <br>
                             <div class="control-group">
@@ -218,18 +230,22 @@
                                     <select>
                                         <option value="sia" selected >PP</option>
                                         <option value="mia" >PE</option>
-                                        <option value="mia" ></option>
+                                        <option value="mia" >MP</option>
+                                        <option value="mia" >ME</option>
+                                        <option value="mia" >EP</option>
+                                        <option value="mia" >EE</option>
                                     </select>
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
-                                <label class="control-label">En lista de espera</label>
+                                <label class="control-label">Tipo de Lista de Espera</label>
                                 <div class="controls">
                                     <select>
-                                        <option value="sia" selected >Si</option>
-                                        <option value="mia" >No</option>
-
+                                        <option value="sia" selected >Nacionales</option>
+                                        <option value="mia" >Peruanos Residentes en el Extranjero</option>
+                                        <option value="mia" >Mixtos</option>
+                                        <option value="mia" >Extranjeros</option>
                                     </select>
                                 </div>
                             </div>

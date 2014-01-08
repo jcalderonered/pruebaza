@@ -40,6 +40,7 @@ public class mainEtapas {
     ArrayList<ExpedienteFamilia> listaEstudioCaso = new ArrayList();
     ArrayList<Designacion> allDesig = new ArrayList();
     Nna nnaPrioritario = new Nna();
+    
     @RequestMapping(value = "/fametap", method = RequestMethod.GET)
     public ModelAndView FamEtap(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -50,9 +51,9 @@ public class mainEtapas {
         }
         
         
-        ArrayList<Familia> allFamilias = new ArrayList();
-        allFamilias = servicioEtapa.getListaFamilias();
-        map.put("listaFamilias",allFamilias);
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("listaFamilias",servicioEtapa.getListaFamilias());
         return new ModelAndView("/Personal/Buscador_etapa/etapa_formativa", map);
     }
     
@@ -163,10 +164,12 @@ public class mainEtapas {
         
         Evaluacion tempEval = new Evaluacion();
         tempEval.setExpedienteFamilia(servicioEtapa.getExpedienteFamilia(idExpediente));
-        tempEval.setFechaAsignacion(df.stringToDate(fechaAsig));
+        if(fechaAsig != null && !fechaAsig.equals("")) tempEval.setFechaAsignacion(df.stringToDate(fechaAsig));
+        if(fechaAsig == null || fechaAsig.equals("")) tempEval.setFechaAsignacion(null);
         tempEval.setPersonal(ServicioPersonal.getPersonal(personal));
         tempEval.setResultado(resultado);
-        tempEval.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul != null && !fechaResul.equals("")) tempEval.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul == null || fechaResul.equals("")) tempEval.setFechaResultado(null);
         tempEval.setObservacion(obs);
         tempEval.setTipo("psicologica");
         
@@ -213,10 +216,13 @@ public class mainEtapas {
         Evaluacion evalPsicologica = new Evaluacion();
         evalPsicologica = servicioEtapa.getEvaluacion(idEvalPsicologica);
         
-        evalPsicologica.setFechaAsignacion(df.stringToDate(fechaAsig));
+        if(fechaAsig != null && !fechaAsig.equals("")) evalPsicologica.setFechaAsignacion(df.stringToDate(fechaAsig));
+        if(fechaAsig == null || fechaAsig.equals("")) evalPsicologica.setFechaAsignacion(null);
         evalPsicologica.setPersonal(ServicioPersonal.getPersonal(personal));
         evalPsicologica.setResultado(resultado);
-        evalPsicologica.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul != null && !fechaResul.equals("")) evalPsicologica.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul == null || fechaResul.equals("")) evalPsicologica.setFechaResultado(null);
+        
         evalPsicologica.setObservacion(obs);
         
         servicioEtapa.updateEvaluacion(evalPsicologica);
@@ -291,10 +297,12 @@ public class mainEtapas {
         
         Evaluacion tempEval = new Evaluacion();
         tempEval.setExpedienteFamilia(servicioEtapa.getExpedienteFamilia(idExpediente));
-        tempEval.setFechaAsignacion(df.stringToDate(fechaAsig));
+        if(fechaAsig != null && !fechaAsig.equals("")) tempEval.setFechaAsignacion(df.stringToDate(fechaAsig));
+        if(fechaAsig == null || fechaAsig.equals("")) tempEval.setFechaAsignacion(null);
         tempEval.setPersonal(ServicioPersonal.getPersonal(personal));
         tempEval.setResultado(resultado);
-        tempEval.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul != null && !fechaResul.equals("")) tempEval.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul == null || fechaResul.equals("")) tempEval.setFechaResultado(null);
         tempEval.setObservacion(obs);
         tempEval.setTipo("social");
         
@@ -338,11 +346,12 @@ public class mainEtapas {
         
         Evaluacion evalSocial = new Evaluacion();
         evalSocial = servicioEtapa.getEvaluacion(idEvalSocial);
-        
-        evalSocial.setFechaAsignacion(df.stringToDate(fechaAsig));
+        if(fechaAsig != null && !fechaAsig.equals("")) evalSocial.setFechaAsignacion(df.stringToDate(fechaAsig));
+        if(fechaAsig == null || fechaAsig.equals("")) evalSocial.setFechaAsignacion(null);
         evalSocial.setPersonal(ServicioPersonal.getPersonal(personal));
         evalSocial.setResultado(resultado);
-        evalSocial.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul != null && !fechaResul.equals("")) evalSocial.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul == null || fechaResul.equals("")) evalSocial.setFechaResultado(null);
         evalSocial.setObservacion(obs);
         
         servicioEtapa.updateEvaluacion(evalSocial);
@@ -417,10 +426,13 @@ public class mainEtapas {
         
         Evaluacion tempEval = new Evaluacion();
         tempEval.setExpedienteFamilia(servicioEtapa.getExpedienteFamilia(idExpediente));
+        if(fechaAsig != null && !fechaAsig.equals("")) tempEval.setFechaAsignacion(df.stringToDate(fechaAsig));
+        if(fechaAsig == null || fechaAsig.equals("")) tempEval.setFechaAsignacion(null);
         tempEval.setFechaAsignacion(df.stringToDate(fechaAsig));
         tempEval.setPersonal(ServicioPersonal.getPersonal(personal));
         tempEval.setResultado(resultado);
-        tempEval.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul != null && !fechaResul.equals("")) tempEval.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul == null || fechaResul.equals("")) tempEval.setFechaResultado(null);
         tempEval.setObservacion(obs);
         tempEval.setTipo("legal");
         
@@ -465,11 +477,13 @@ public class mainEtapas {
         
         Evaluacion evalLegal = new Evaluacion();
         evalLegal = servicioEtapa.getEvaluacion(idEvalLegal);
-        
+        if(fechaAsig != null && !fechaAsig.equals("")) evalLegal.setFechaAsignacion(df.stringToDate(fechaAsig));
+        if(fechaAsig == null || fechaAsig.equals("")) evalLegal.setFechaAsignacion(null);
         evalLegal.setFechaAsignacion(df.stringToDate(fechaAsig));
         evalLegal.setPersonal(ServicioPersonal.getPersonal(personal));
         evalLegal.setResultado(resultado);
-        evalLegal.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul != null && !fechaResul.equals("")) evalLegal.setFechaResultado(df.stringToDate(fechaResul));
+        if(fechaResul == null || fechaResul.equals("")) evalLegal.setFechaResultado(null);
         evalLegal.setObservacion(obs);
         
         servicioEtapa.updateEvaluacion(evalLegal);
@@ -559,8 +573,10 @@ public class mainEtapas {
         tempResol.setEvaluacion(tempEval);
         tempResol.setNumero(numResol);
         tempResol.setTipo(tipo);
-        tempResol.setFechaResol(df.stringToDate(fechaResol));
-        tempResol.setFechaNotificacion(df.stringToDate(fechaNot));
+        if(fechaResol != null && !fechaResol.equals("")) tempResol.setFechaResol(df.stringToDate(fechaResol));
+        if(fechaResol == null || fechaResol.equals("")) tempResol.setFechaResol(null);
+        if(fechaNot != null && !fechaNot.equals("")) tempResol.setFechaNotificacion(df.stringToDate(fechaNot));
+        if(fechaNot == null || fechaNot.equals("")) tempResol.setFechaNotificacion(null);
         
         servicioEtapa.crearResolEvaluacion(tempResol);
         tempEval = servicioEtapa.getLegal(idLegal);
@@ -603,8 +619,10 @@ public class mainEtapas {
         tempResol = servicioEtapa.getResolucion(idResolucion);
         tempResol.setNumero(numResol);
         tempResol.setTipo(tipo);
-        tempResol.setFechaResol(df.stringToDate(fechaResol));
-        tempResol.setFechaNotificacion(df.stringToDate(fechaNot));
+        if(fechaResol != null && !fechaResol.equals("")) tempResol.setFechaResol(df.stringToDate(fechaResol));
+        if(fechaResol == null || fechaResol.equals("")) tempResol.setFechaResol(null);
+        if(fechaNot != null && !fechaNot.equals("")) tempResol.setFechaNotificacion(df.stringToDate(fechaNot));
+        if(fechaNot == null || fechaNot.equals("")) tempResol.setFechaNotificacion(null);
         
         servicioEtapa.updateResolEvaluacion(tempResol);
         tempResol = servicioEtapa.getResolucion(idResolucion);
@@ -746,7 +764,8 @@ public class mainEtapas {
             tempDesign.setExpedienteFamilia(tempExp);
             tempDesign.setNna(tempNna);
             tempDesign.setPersonal(usuario);
-            tempDesign.setFechaPropuesta(df.stringToDate(fecha));
+            if(fecha != null && !fecha.equals("")) tempDesign.setFechaPropuesta(df.stringToDate(fecha));
+            if(fecha == null || fecha.equals("")) tempDesign.setFechaPropuesta(null);
             tempDesign.setNDesignacion(Long.parseLong(numDesig));
             if(idExpediente.length == 1) tempDesign.setTipoPropuesta("directa");
             if(idExpediente.length == 2) tempDesign.setTipoPropuesta("dupla");
@@ -765,7 +784,7 @@ public class mainEtapas {
         map.put("listaDesignaciones",servicioEtapa.getListaDesignaciones());
         return new ModelAndView("/Personal/Buscador_etapa/etapa_designacion/etapa_designacion", map);
         
-        }else if(fecha == null || numDesig == null){
+        }else if(fecha == null || fecha.equals("") || numDesig == null){
             map.put("mensaje","Debe colocar una fecha y un número");
             map.put("listaMatching",listaMatching);
             map.put("df",df);
@@ -843,7 +862,8 @@ public class mainEtapas {
                 expFam1.setEstado("estudio");
                 servicioEtapa.updateExpedienteFamilia(expFam1);
                 tempEst.setOrden(orden);
-                tempEst.setFechaEstudio(df.stringToDate(fecha[i]));
+                if(fecha[i] != null && !fecha[i].equals("")) tempEst.setFechaEstudio(df.stringToDate(fecha[i]));
+                if(fecha[i] == null || fecha[i].equals("")) tempEst.setFechaEstudio(null);
                 tempEst.setPrioridad(prioridad[i]);
                 
                 servicioEtapa.crearEstudioCaso(tempEst);
@@ -1026,7 +1046,9 @@ public class mainEtapas {
         }
         
         EstudioCaso tempEst = servicioEtapa.getEstudioCaso(idEstudio);
-        tempEst.setFechaSolAdop(df.stringToDate(fechaSolicitud));
+        if(fechaSolicitud != null && !fechaSolicitud.equals("")) tempEst.setFechaSolAdop(df.stringToDate(fechaSolicitud));
+        if(fechaSolicitud == null || fechaSolicitud.equals("")) tempEst.setFechaSolAdop(null);
+        
         servicioEtapa.updateEstudioCaso(tempEst);
         
             ExpedienteFamilia tempExp = tempEst.getExpedienteFamilia();
@@ -1035,7 +1057,8 @@ public class mainEtapas {
             tempDesign.setExpedienteFamilia(tempExp);
             tempDesign.setNna(tempNna);
             tempDesign.setPersonal(usuario);
-            tempDesign.setFechaPropuesta(df.stringToDate(fechaPropuesta));
+            if(fechaPropuesta != null && !fechaPropuesta.equals("")) tempDesign.setFechaPropuesta(df.stringToDate(fechaPropuesta));
+            if(fechaPropuesta == null || fechaPropuesta.equals("")) tempDesign.setFechaPropuesta(null);
             tempDesign.setNDesignacion(Long.parseLong(numDesig));
             tempDesign.setTipoPropuesta("directa");
             tempDesign.setAceptacionConsejo(Short.parseShort("1"));
@@ -1117,7 +1140,9 @@ public class mainEtapas {
             ServicioNna.updateExpNna(tempExpNna);
             for (int i = 0; i < prioridad.length; i++) {
                 Designacion tempDesg = allDesig.get(i);
-                tempDesg.setFechaConsejo(df.stringToDate(fechaConsejo));
+                if(fechaConsejo != null && !fechaConsejo.equals("")) tempDesg.setFechaConsejo(df.stringToDate(fechaConsejo));
+                if(fechaConsejo == null || fechaConsejo.equals("")) tempDesg.setFechaConsejo(null);
+                
                 tempDesg.setAceptacionConsejo(Short.parseShort("0"));
                 tempDesg.setObs(obs);
                 tempDesg.setPrioridad(prioridad[i]);
@@ -1205,7 +1230,8 @@ public class mainEtapas {
         tempEval.setPersonal(tempP);
         tempEval.setTipo("empatia");
         tempEval.setResultado(resultado);
-        tempEval.setFechaResultado(df.stringToDate(fechaEval));
+        if (fechaEval != null && !fechaEval.equals("")) tempEval.setFechaResultado(df.stringToDate(fechaEval));
+        if (fechaEval == null || fechaEval.equals("")) tempEval.setFechaResultado(null);
         tempEval.setObservacion(obs);
         
         servicioEtapa.crearEvaluacion(tempEval);
@@ -1333,7 +1359,8 @@ public class mainEtapas {
                 tempResol.setEvaluacion(tempEval);
                 tempResol.setNumero(numResol);
                 tempResol.setTipo(tipo);
-                tempResol.setFechaResol(df.stringToDate(fechaResol));
+                if(fechaResol != null && !fechaResol.equals("")) tempResol.setFechaResol(df.stringToDate(fechaResol));
+                if(fechaResol == null || fechaResol.equals("")) tempResol.setFechaResol(null);
                 servicioEtapa.crearResolEvaluacion(tempResol);
             
             }
@@ -1398,7 +1425,8 @@ public class mainEtapas {
         tempEval.setPersonal(tempP);
         tempEval.setTipo("informe");
         tempEval.setResultado(resultado);
-        tempEval.setFechaResultado(df.stringToDate(fechaEval));
+        if(fechaEval != null && !fechaEval.equals("")) tempEval.setFechaResultado(df.stringToDate(fechaEval));
+        if(fechaEval == null || fechaEval.equals("")) tempEval.setFechaResultado(null);
         tempEval.setObservacion(obs);
         
         servicioEtapa.crearEvaluacion(tempEval);
@@ -1534,7 +1562,8 @@ public class mainEtapas {
                 tempResol.setEvaluacion(tempEval);
                 tempResol.setNumero(numResol);
                 tempResol.setTipo(tipo);
-                tempResol.setFechaResol(df.stringToDate(fechaResol));
+                if(fechaResol != null && !fechaResol.equals("")) tempResol.setFechaResol(df.stringToDate(fechaResol));
+                if(fechaResol == null || fechaResol.equals("")) tempResol.setFechaResol(null);
                 servicioEtapa.crearResolEvaluacion(tempResol);
                 ExpedienteFamilia tempExpFam = tempEval.getExpedienteFamilia();
                 tempExpFam.setEstado("post");
@@ -1543,7 +1572,8 @@ public class mainEtapas {
                 servicioEtapa.updateDesignacion(tempDesig);
                 PostAdopcion tempPost = new PostAdopcion();
                 tempPost.setFamilia(tempEval.getExpedienteFamilia().getFamilia());
-                tempPost.setFechaResolucion(df.stringToDate(fechaResol));
+                if(fechaResol != null && !fechaResol.equals("")) tempPost.setFechaResolucion(df.stringToDate(fechaResol));
+                if(fechaResol == null || fechaResol.equals("")) tempPost.setFechaResolucion(null);
                 servicioEtapa.crearPostAdopcion(tempPost);
                 ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
                 ExpNna.setEstado("arch");
@@ -1756,14 +1786,14 @@ public class mainEtapas {
              InformePostAdoptivo temp = servicioEtapa.getInformePost(id);
              temp.setNumeroInforme(num);
             temp.setEstado(estado);
-            if (fechaProyectado != null) temp.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
-            if (fechaProyectado == null) temp.setFechaRecepcionProyectado(null);
-            if (fechaRecepcion != null) temp.setFechaRecepcion(df.stringToDate(fechaRecepcion));
-            if (fechaRecepcion == null) temp.setFechaRecepcionProyectado(null);
-            if (fechaInforme != null) temp.setFechaInforme(df.stringToDate(fechaInforme));
-            if (fechaInforme == null) temp.setFechaInforme(null);
-            if (fechaActa != null) temp.setFechaActa(df.stringToDate(fechaActa));
-            if (fechaActa == null) temp.setFechaActa(null);
+            if (fechaProyectado != null && !fechaProyectado.equals("")) temp.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
+            if (fechaProyectado == null || fechaProyectado.equals("")) temp.setFechaRecepcionProyectado(null);
+            if (fechaRecepcion != null && !fechaRecepcion.equals("")) temp.setFechaRecepcion(df.stringToDate(fechaRecepcion));
+            if (fechaRecepcion == null || fechaRecepcion.equals("")) temp.setFechaRecepcionProyectado(null);
+            if (fechaInforme != null && !fechaInforme.equals("")) temp.setFechaInforme(df.stringToDate(fechaInforme));
+            if (fechaInforme == null || fechaInforme.equals("")) temp.setFechaInforme(null);
+            if (fechaActa != null && !fechaActa.equals("")) temp.setFechaActa(df.stringToDate(fechaActa));
+            if (fechaActa == null || fechaActa.equals("")) temp.setFechaActa(null);
             Personal pers = ServicioPersonal.getPersonal(personal);
             temp.setPersonal(pers);
             temp.setObs(obs);
@@ -1773,14 +1803,14 @@ public class mainEtapas {
             InformePostAdoptivo tempPost = new InformePostAdoptivo();
             tempPost.setNumeroInforme(num);
             tempPost.setEstado(estado);
-            if (fechaProyectado != null) tempPost.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
-            if (fechaProyectado == null) tempPost.setFechaRecepcionProyectado(null);
-            if (fechaRecepcion != null) tempPost.setFechaRecepcion(df.stringToDate(fechaRecepcion));
-            if (fechaRecepcion == null) tempPost.setFechaRecepcionProyectado(null);
-            if (fechaInforme != null) tempPost.setFechaInforme(df.stringToDate(fechaInforme));
-            if (fechaInforme == null) tempPost.setFechaInforme(null);
-            if (fechaActa != null) tempPost.setFechaActa(df.stringToDate(fechaActa));
-            if (fechaActa == null) tempPost.setFechaActa(null);
+            if (fechaProyectado != null && !fechaProyectado.equals("")) tempPost.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
+            if (fechaProyectado == null && fechaProyectado.equals("")) tempPost.setFechaRecepcionProyectado(null);
+            if (fechaRecepcion != null && !fechaRecepcion.equals("")) tempPost.setFechaRecepcion(df.stringToDate(fechaRecepcion));
+            if (fechaRecepcion == null && fechaRecepcion.equals("")) tempPost.setFechaRecepcionProyectado(null);
+            if (fechaInforme != null && !fechaInforme.equals("")) tempPost.setFechaInforme(df.stringToDate(fechaInforme));
+            if (fechaInforme == null && fechaInforme.equals("")) tempPost.setFechaInforme(null);
+            if (fechaActa != null && !fechaActa.equals("")) tempPost.setFechaActa(df.stringToDate(fechaActa));
+            if (fechaActa == null && fechaActa.equals("")) tempPost.setFechaActa(null);
             Personal pers = ServicioPersonal.getPersonal(personal);
             tempPost.setPersonal(pers);
             tempPost.setObs(obs);
@@ -1835,5 +1865,22 @@ public class mainEtapas {
         return new ModelAndView("/Personal/Buscador_etapa/etapa_post/informes_general", map);
         
     } 
+    
+    @RequestMapping(value = "/ListaEspera", method = RequestMethod.GET)
+    public ModelAndView ListaEspera(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
+        map.put("listaEspera",servicioEtapa.getListaEspera());
+        return new ModelAndView("/Personal/Buscador_etapa/lista_espera", map);
+    }
     
 }

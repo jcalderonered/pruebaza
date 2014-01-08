@@ -30,6 +30,8 @@ public class main {
     dateFormat df = new dateFormat();
     timeStampFormat ts = new timeStampFormat();
 
+    String etapaOrigen;
+    
     @RequestMapping("/")
     public String hello() {
         return "login";
@@ -385,4 +387,232 @@ public class main {
         return new ModelAndView("contacto", map);
     }
 
+/** ESTA SECCION ES USADA PARA ACTUALIZAR LOS DATOS DE LA FAMILIA POR PARTE DEL PERSONAL**/   
+
+@RequestMapping(value = "/IrPersonalFamilia", method = RequestMethod.POST)
+    public ModelAndView IrPersonalFamilia(ModelMap map, HttpSession session, @RequestParam(value="estado", required = false) String estado) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        etapaOrigen = estado;
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_ella", map);
+}     
+    
+@RequestMapping(value = "/elSolicitante", method = RequestMethod.GET)
+    public ModelAndView elSolicitante(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_el", map);
+} 
+
+@RequestMapping(value = "/laSolicitante", method = RequestMethod.GET)
+    public ModelAndView laSolicitante(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_ella", map);
+}   
+
+@RequestMapping(value = "/compFamiliar", method = RequestMethod.GET)
+    public ModelAndView compFamiliar(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_fam", map);
+}       
+ 
+@RequestMapping(value = "/vivienda", method = RequestMethod.GET)
+    public ModelAndView vivienda(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_vivienda", map);
+}      
+
+@RequestMapping(value = "/infoExpediente", method = RequestMethod.GET)
+    public ModelAndView infoExpediente(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_registro", map);
+}      
+
+@RequestMapping(value = "/procesoAdopcion", method = RequestMethod.GET)
+    public ModelAndView procesoAdopcion(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_adop/info_adop", map);
+}     
+
+@RequestMapping(value = "/antNna", method = RequestMethod.GET)
+    public ModelAndView antNna(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_ant_nna", map);
+}
+  
+@RequestMapping(value = "/nnaAsociado", method = RequestMethod.GET)
+    public ModelAndView nnaAsociado(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_nna", map);
+}
+ 
+@RequestMapping(value = "/atenciones", method = RequestMethod.GET)
+    public ModelAndView atenciones(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_atencion", map);
+}
+    
+@RequestMapping(value = "/DetalleSesion", method = RequestMethod.POST)
+    public ModelAndView DetalleSesion(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_adop/detalle_sesion", map);
+}   
+ 
+@RequestMapping(value = "/DetalleTaller", method = RequestMethod.POST)
+    public ModelAndView DetalleTaller(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_adop/detalle_taller", map);
+}       
+ 
+@RequestMapping(value = "/DetalleEvaluacion", method = RequestMethod.POST)
+    public ModelAndView DetalleEvaluacion(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_adop/detalle_evaluacion", map);
+}
+ 
+@RequestMapping(value = "/DetalleAtencion", method = RequestMethod.POST)
+    public ModelAndView DetalleAtencion(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("estado",etapaOrigen);
+        return new ModelAndView("/Personal/familia/info_atencion_edit", map);
+}    
+    
+    
 }

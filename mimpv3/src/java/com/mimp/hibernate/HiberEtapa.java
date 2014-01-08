@@ -47,12 +47,17 @@ public ArrayList<Familia> getListaFamilias () {
             query2.setLong("idFamilia", temp.getIdfamilia());
             query2.setMaxResults(1);
             Object queryResult = query2.uniqueResult();
+            if (queryResult != null){
             FormularioSesion tempFs = (FormularioSesion) queryResult;
             Hibernate.initialize(tempFs.getAsistentes());
             Set<FormularioSesion> listFs = new HashSet<FormularioSesion>();
             listFs.add(tempFs);
-            temp.setFormularioSesions(listFs);
+            temp.setFormularioSesions(listFs); 
+            }else{
+            temp.setFormularioSesions(null);
+            }
             allFamilias.add(temp);
+            
         } 
     
         return allFamilias;
@@ -771,6 +776,22 @@ public ArrayList<Familia> getListaFamilias () {
         
         return tempPost;
         
+    }
+    
+    public ArrayList<ExpedienteFamilia> getListaEspera(){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<ExpedienteFamilia> allEspera = new ArrayList();
+        String hql = "from ExpedienteFamilia EF where EF.estado = :estado";
+        Query query = session.createQuery(hql);
+        query.setString("estado", "espera");
+        List expedientes = query.list();
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+        ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+            allEspera.add(temp);
+        }
+        return allEspera;
     }
     
 }

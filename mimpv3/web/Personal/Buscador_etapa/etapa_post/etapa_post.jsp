@@ -100,8 +100,9 @@
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
                             <li ><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
-                            <li><a href="#" >Designación</a></li>
-                            <li><a href="#" >Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                                 <br>
@@ -131,7 +132,10 @@
                                                     </c:forEach>
                                                 </td>
                                                 <td>
-                                                    <button href="#" class="btn btn-default">Ver</button>
+                                                    <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                        <input hidden name="estado" id="estado" value="post">
+                                                        <button type="submit" class="btn btn-default">Ver</button>
+                                                    </form>
                                                 </td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/UpdatePostAdopcion" method="post">
