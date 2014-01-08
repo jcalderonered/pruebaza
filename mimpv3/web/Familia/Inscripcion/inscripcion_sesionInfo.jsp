@@ -74,9 +74,9 @@
                     <div class="col-md-8 col-md-offset-1">
                         <h1 align="center"><strong>Inscripción a la Sesión Informativa</strong></h1>
                         <br>
-                        <p><b>Próxima fecha:</b> 11/03/14</p>
-                        <p><b>Hora:</b> 17:30</p>
-                        <p><b>Direccion:</b> Auditorio de la Institución Educativa “Juana Alarco de Dammert” ubicado en Av. Alfredo Benavides 2315 - Miraflores”</p>
+                        <p><b>Próxima fecha:</b> ${fecha}</p>
+                        <p><b>Hora:</b> ${hora}</p>
+                        <p><b>Direccion:</b> ${sesion.getDireccion()}</p>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
@@ -90,21 +90,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
                                     <tr>
-                                        <th>Turno 1</th>
-                                        <td>09/03/14 09:00</td>
-                                        <td>09/03/14 12:00</td>
-                                        <td>90</td>
-                                        <td>Inscripción Terminada</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Turno 2</th>
-                                        <td>09/03/14 17:00</td>
-                                        <td>09/03/14 20:00</td>
-                                        <td>60</td>
-                                        <td><button href="#" class="btn btn-default">Inscribirse</button>
-                                        </td>
-                                    </tr>
+                                                <td>Turno ${status.index + 1} </td>
+                                                <td>${ts.DateToString(turno.getInicioInscripcion())} ${ts.HourToString(turno.getInicioInscripcion())}</td>
+                                                <td>${ts.DateToString(turno.getFinInscripcion())} ${ts.HourToString(turno.getFinInscripcion())}</td>
+                                                <td>${turno.getVacantes()}</td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/FamiliaInscripcion" method="post">
+                                                        <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
+                                                        <input hidden name="index" id="index" value="${status.index + 1}">
+                                                        <button type="submit" class="btn btn-default">Registrar</button>
+                                                    </form>    
+                                                </td>
+                                            </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>

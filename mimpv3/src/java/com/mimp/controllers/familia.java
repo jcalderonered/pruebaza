@@ -8,7 +8,9 @@ package com.mimp.controllers;
 import java.util.*;
 import com.mimp.bean.*;
 import com.mimp.hibernate.HiberFamilia;
+import com.mimp.hibernate.HiberMain;
 import com.mimp.util.dateFormat;
+import com.mimp.util.timeStampFormat;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -28,9 +30,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class familia {
 
     dateFormat format = new dateFormat();
+    timeStampFormat ts = new timeStampFormat();
 
     @Resource(name = "HiberFamilia")
     private HiberFamilia ServicioFamilia = new HiberFamilia();
+    @Resource(name = "HiberMain")
+    private HiberMain ServicioMain = new HiberMain();
 
     @RequestMapping("/inicioFam")
     public ModelAndView InicioFam(ModelMap map, HttpSession session) {
@@ -62,8 +67,33 @@ public class familia {
         }
         String pagina;
         if (ultfecha.getYear() < fechaactual.getYear()) {
+
+            Sesion sesionMasProx = new Sesion();
+            //ArrayList<Personal> allPersonal = new ArrayList();
+            ArrayList<Turno> allTurnos = new ArrayList();                       
+            sesionMasProx = ServicioFamilia.sesionMasProx(fechaactual);
+            
+            allTurnos = ServicioMain.turnosSesion(sesionMasProx.getIdsesion());
+            
+            //allPersonal = ServicioPersonal.ListaPersonal();
+            String fecha = format.dateToString(sesionMasProx.getFecha());
+            String hora = sesionMasProx.getHora();
+
+            map.put("listaTurnos", allTurnos);
+            map.put("sesion", sesionMasProx);
+            //map.put("listaPersonal", allPersonal);
+            map.addAttribute("ts", ts);
+            map.addAttribute("fecha", fecha);
+            map.addAttribute("hora", hora);            
+
+            map.put("formato", format);
+
             pagina = "/Familia/Inscripcion/inscripcion_sesionInfo";
         } else {
+
+            map.put("listaTalleres", ServicioFamilia.listaTalleres());
+            map.put("formato", format);
+
             pagina = "/Familia/Inscripcion/inscripcion_Talleres";
         }
         return new ModelAndView(pagina, map);
