@@ -235,25 +235,25 @@
                                             <c:forEach var="res" items="${listaRes}" varStatus="status">
                                             <tr>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${res.getApellidoP()}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${res.getApellidoM()}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${res.getNombre()}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${res.getParentesco()}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${res.getEdad()}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${res.getOcupacion()}" disabled>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width" disabled>
+                                                    <input type="text" class="input_width" value="${res.getEstadoSalud()}" disabled>
                                                 </td>
                                             </tr>
                                             </c:forEach>
