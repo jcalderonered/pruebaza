@@ -100,9 +100,10 @@
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li  class="active"><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
-                            <li><a href="#" >Post Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                                 <br>
                                 <div class="bs-example">
@@ -124,7 +125,12 @@
                                                         <c:set var="token" value="${designacion.getNna().getIdnna()}"/>
                                                         <tr>
                                                             <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
-                                                            <td><button href="#" class="btn btn-default">Ver</button></td>
+                                                            <td>
+                                                              <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                                  <input hidden name="estado" id="estado" value="designacion">
+                                                                  <button type="submit" class="btn btn-default">Ver</button>
+                                                              </form>
+                                                            </td>
                                                             <td ${designacion.getTipoPropuesta() == 'dupla' ? 'rowspan="2"' : ''} ${designacion.getTipoPropuesta() == 'terna' ? 'rowspan="3"' : ''} style="vertical-align:middle" >                                                    
                                                                 ${designacion.getNna().getNombre()}
                                                                 ${designacion.getNna().getApellidoP()}

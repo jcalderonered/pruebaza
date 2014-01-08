@@ -100,12 +100,11 @@
                         <ul class="nav nav-tabs row" >
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac">Evaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
-                            <li><a href="#" >Post Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>    
-                        <form class="form-horizontal">
-                            <fieldset>
                                 <br>
                                 <div class="bs-example">
                                     <table class="table table-bordered">
@@ -122,9 +121,10 @@
                                                 
                                             </tr>
                                         </thead>
-                                   <c:if test="${listaFamilias != null}">
+                                   <c:if test="${!listaFamilias.isEmpty()}">
                                     <tbody>
                                       <c:forEach var="familia" items="${listaFamilias}" varStatus="status"> 
+                                       <c:if test="${!familia.getFormularioSesions().isEmpty()}">
                                         <c:forEach var="formulario" items="${familia.getFormularioSesions()}" varStatus="status">
                                             <tr>
                                                 <c:choose>
@@ -156,8 +156,8 @@
 
                                                                     <td>${ella.getCorreo()}</td>
                                                                     <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
-                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                        <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                                            <input hidden name="estado" id="estado" value="formativa">
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>
@@ -205,8 +205,8 @@
                                                                     <td></td>
                                                                     <td>${asistente.getCorreo()}</td>
                                                                     <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
-                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                        <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                                            <input hidden name="estado" id="estado" value="formativa">
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>
@@ -252,8 +252,8 @@
 
                                                                     <td>${asistente.getCorreo()}</td>
                                                                     <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
-                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                        <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                                            <input hidden name="estado" id="estado" value="formativa">
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>
@@ -296,22 +296,25 @@
                                                 </c:choose>
                                             </tr>
                                         </c:forEach>
+                                      </c:if>
+                                        <c:if test="${familia.getFormularioSesions() == null}">
+                                            <c:set var="faltaInfo" value="falta" scope="page" />
+                                        </c:if>
                                        </c:forEach>      
                                     </tbody>
                                 </c:if>
                                 <c:if test="${listaFamilias == null}">
                                     <h3><strong>No existen familias habilitadas</strong></h3>
                                 </c:if>
+                                <c:if test="${faltaInfo == 'falta'}">
+                                    <h3><strong>Algunas Familias no han sido mostradas debido a que no tienen un Formulario asociado</strong></h3>
+                                </c:if>  
                                </table>
                                 </div>
                                 <br>
                                 <h4><strong>Luego de guardar la constancia no se podrán realizar cambios</strong></h4>
                                 <br>
                                 <!-- Button -->
-                                
-                            </fieldset>
-                        </form>
-
                     </div>
                 </div>
             </div>
