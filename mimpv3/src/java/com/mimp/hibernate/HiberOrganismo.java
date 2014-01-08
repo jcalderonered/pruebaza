@@ -107,7 +107,7 @@ public class HiberOrganismo {
         Object queryResultA = queryO.uniqueResult();
 
         AdopPorIdFamPorSex = (Adoptante) queryResultA;
-        //Hibernate.initialize(LaAdop.getInfoFamilia());        
+        Hibernate.initialize(AdopPorIdFamPorSex.getInfoFamilia());        
         return AdopPorIdFamPorSex;
     }
 

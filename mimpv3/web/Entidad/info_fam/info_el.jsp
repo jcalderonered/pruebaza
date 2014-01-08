@@ -144,16 +144,34 @@ if (u==null){
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-2">  
+                                <div class="col-md-3">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" checked>DNI</label>
+                                            <c:choose>
+                                                <c:when test="${doc == 'D'}">
+                                                    <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" checked>DNI
+                                                </label>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D">DNI</label>
+                                            </c:otherwise>
+                                        </c:choose>                                                                                                              
                                     </div>
                                 </div>   
                                 <div class="col-md-3">   
                                     <div class="radio">
+
                                         <label>
-                                            <input type="radio" name="optionsRadios1" id="optionsRadios2" value="C">Carnet de Extranjería</label>
+                                            <c:choose>
+                                                <c:when test="${doc == 'C'}">
+                                                    <input type="radio" name="optionsRadios1" id="optionsRadios2" value="C" checked>Carnet de Extranjería
+                                                </label>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="C">Carnet de Extranjería</label>
+                                            </c:otherwise>
+                                        </c:choose>
+
                                     </div>                            
                                 </div>
                             </div>    
@@ -183,32 +201,58 @@ if (u==null){
                             <div class="row">
 
                                 <div class="col-md-3">  
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios2" id="soltero" value="D">Soltero</label>
+                                        <div class="radio">
+                                            <label>
+                                                <c:choose>
+                                                    <c:when test="${estCivil == 'S'}">
+                                                        <input type="radio" name="optionsRadios2" id="soltero" value="D" checked>Soltero
+                                            </label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios2" id="soltero" value="D">Soltero</label>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div>   
+                                    <div class="col-md-3">   
+                                        <div class="radio">
+                                            <label>
+                                                <c:choose>
+                                                    <c:when test="${estCivil == 'C'}">
+                                                        <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casado</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios2" id="casado" value="C">Casado</label>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>                            
                                     </div>
-                                </div>   
-                                <div class="col-md-3">   
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casado</label>
-                                        <br>
-                                        <label class="control-label">Fecha de matrimonio Civil</label>
-                                        <input id="fecha_matrimonio" name="full-name" type="text" class="input-xlarge">
-                                    </div>                            
-                                </div>
-                                <div class="col-md-3">  
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios2" id="viudo" value="D">Viudo</label>
-                                    </div>
-                                </div> 
-                                <div class="col-md-3">  
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios2" id="divorciado" value="D">Divorciado</label>
-                                    </div>
-                                </div> 
+                                    <div class="col-md-3">  
+                                        <div class="radio">
+                                            <label>
+                                                <c:choose>
+                                                    <c:when test="${estCivil == 'V'}">
+                                                        <input type="radio" name="optionsRadios2" id="viudo" value="D" checked>Viudo</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios2" id="viudo" value="D">Viudo</label>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-3">  
+                                        <div class="radio">
+                                            <label>
+                                                <c:choose>
+                                                    <c:when test="${estCivil == 'D'}">
+                                                        <input type="radio" name="optionsRadios2" id="divorciado" value="D" checked>Divorciado</label>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" name="optionsRadios2" id="divorciado" value="D">Divorciado</label>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div> 
                             </div>    
                             
                             <br>

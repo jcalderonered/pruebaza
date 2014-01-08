@@ -192,7 +192,8 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${estCivil == 'S'}">
-                                                        <input type="radio" name="optionsRadios2" id="soltero" value="D" checked>Soltera</label>
+                                                        <input type="radio" name="optionsRadios2" id="soltero" value="D" checked>Soltera
+                                            </label>
                                                     </c:when>
                                                     <c:otherwise>
                                                     <input type="radio" name="optionsRadios2" id="soltero" value="D">Soltera</label>
