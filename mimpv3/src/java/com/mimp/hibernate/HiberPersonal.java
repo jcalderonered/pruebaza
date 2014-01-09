@@ -841,6 +841,8 @@ public class HiberPersonal {
          fam.getFormularioSesions().add(fs);
          fs.setFamilia(fam);
          
+         session.save(fam);
+         session.update(fs);
          //A partir de aqui pasamos los datos que ya tenemos a InfoFamilia
          InfoFamilia infofam = new InfoFamilia();
          infofam.setFamilia(fam);
@@ -873,11 +875,10 @@ public class HiberPersonal {
          session.save(infofam);
          for (Iterator iter2 = infofam.getAdoptantes().iterator(); iter2.hasNext();) {
              Adoptante ad = (Adoptante) iter2.next();
-             
+             ad.setInfoFamilia(infofam);
              session.save(ad);
          }
-         session.save(fam);
-         session.update(fs);
+         
     }
     
     public void updateAsistenciaFR (AsistenciaFR afr){
