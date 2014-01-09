@@ -388,7 +388,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getCulminoNivel() == '1'}">
+                                                    <c:when test="${sol.getCulminoNivel() == 1}">
                                                         <input type="radio" name="culm_nivel_ella" id="optionsRadios1" value="1" checked>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -401,7 +401,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getCulminoNivel() == '0'}">
+                                                    <c:when test="${sol.getCulminoNivel() == 0}">
                                                         <input type="radio" name="culm_nivel_ella" id="optionsRadios2" value="0" checked>No</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -425,7 +425,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getTrabajadorDepend() == '1'}">
+                                                    <c:when test="${sol.getTrabajadorDepend() == 1}">
                                                         <input type="radio" name="Trabajador_Depend_ella" id="optionsRadios1" value="1" checked>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -438,7 +438,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getTrabajadorDepend() == '0'}">
+                                                    <c:when test="${sol.getTrabajadorDepend() == 0}">
                                                         <input type="radio" name="Trabajador_Depend_ella" id="optionsRadios2" value="0" checked>No</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -491,7 +491,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getTrabajadorIndepend() == '1'}">
+                                                    <c:when test="${sol.getTrabajadorIndepend() == 1}">
                                                         <input type="radio" name="Trabajador_Indep_ella" id="optionsRadios1" value="1" checked>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -504,7 +504,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getTrabajadorIndepend() == '0'}">
+                                                    <c:when test="${sol.getTrabajadorIndepend() == 0}">
                                                         <input type="radio" name="Trabajador_Indep_ella" id="optionsRadios2" value="0" checked>No</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -539,7 +539,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getgetSeguroSalud() == '1'}">
+                                                    <c:when test="${sol.getgetSeguroSalud() == 1}">
                                                         <input type="radio" name="seguro_salud_ella" id="optionsRadios1" value="1" checked>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -552,7 +552,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getgetSeguroSalud() == '0'}">
+                                                    <c:when test="${sol.getgetSeguroSalud() == 0}">
                                                         <input type="radio" name="seguro_salud_ella" id="optionsRadios2" value="0" checked>No</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -576,7 +576,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getSeguroVida() == '1'}">
+                                                    <c:when test="${sol.getSeguroVida() == 1}">
                                                         <input type="radio" name="seguro_vida_ella" id="optionsRadios1" value="1" checked>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -589,7 +589,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getSeguroVida() == '0'}">
+                                                    <c:when test="${sol.getSeguroVida() == 0}">
                                                         <input type="radio" name="seguro_vida_ella" id="optionsRadios2" value="0" checked>No</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -606,7 +606,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getSistPensiones() == '1'}">
+                                                    <c:when test="${sol.getSistPensiones() == 1}">
                                                         <input type="radio" name="sist_pen_ella" id="optionsRadios1" value="1" checked>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -619,7 +619,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${sol.getSistPensiones() == '0'}">
+                                                    <c:when test="${sol.getSistPensiones() == 0}">
                                                         <input type="radio" name="sist_pen_ella" id="optionsRadios2" value="0" checked>No</label>
                                                     </c:when>
                                                     <c:otherwise>
