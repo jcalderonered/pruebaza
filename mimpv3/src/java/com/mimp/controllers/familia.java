@@ -875,4 +875,53 @@ public class familia {
         String pagina = "/Familia/Ficha/ficha_inscripcion_ella";
         return new ModelAndView(pagina, map);
     }
+    
+    @RequestMapping("/FFicha/EditarHijo")
+    public ModelAndView FfichaHijo(ModelMap map,
+            @RequestParam("apellido_p") String apellidoP,
+            @RequestParam("apellido_m") String apellidoM,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("edad") String edad,
+            @RequestParam("fecha_nac") String fecha_nac,
+            @RequestParam("fecha_adop") String fecha_adop,
+            @RequestParam("ocupacion") String ocupacion,
+            @RequestParam("estado_salud") String estado_salud,
+            @RequestParam("reside") String reside,
+            @RequestParam("biologico") String biologico,
+            @RequestParam("idhijo") String idhijo,
+            HttpSession session
+    ) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //FALTA
+        String pagina = "/Familia/Ficha/ficha_inscripcion_adopcion";
+        return new ModelAndView(pagina, map);
+    }
+    
+    @RequestMapping("/FFicha/EditarRes")
+    public ModelAndView FfichaRes(ModelMap map,
+            @RequestParam("apellido_p") String apellidoP,
+            @RequestParam("apellido_m") String apellidoM,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("parentesco") String parentesco,
+            @RequestParam("edad") String edad,
+            @RequestParam("ocupacion") String ocupacion,
+            @RequestParam("estado_salud") String estado_salud,
+            @RequestParam("idresidente") String reside,
+            HttpSession session
+    ) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //FALTA
+        String pagina = "/Familia/Ficha/ficha_inscripcion_adopcion";
+        return new ModelAndView(pagina, map);
+    }
 }

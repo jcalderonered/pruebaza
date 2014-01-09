@@ -94,7 +94,6 @@
                         </div>
                         <br>
                         <br>
-
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc1" data-toggle="tab">La Solicitante</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc2" data-toggle="tab">El solicitante</a></li>
@@ -103,33 +102,10 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc5" data-toggle="tab">Proceso de adopción</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc6" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
-
                         <form class="form-horizontal"> 
                             <br>
                             <h3><strong>Hijo/a/s biológico/a/s</strong></h3>
                             <br>
-                            <!-- Text input-->
-                            <div class="row">
-                                <div class="col-md-2">  
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
-                                    </div>
-                                </div>   
-                                <div class="col-md-3">   
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">No</label>
-                                    </div>                            
-                                </div>
-                            </div>  
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">Cuántos?</label>
-                                <div class="controls">
-                                    <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                </div>
-                            </div>
                             <br>
                             <div class="row">
                                 <div id="tabla_fam" class="table-responsive">
@@ -141,7 +117,7 @@
                                                 <th rowspan="2">Ocupación</th>
                                                 <th rowspan="2">Estado de Salud</th>
                                                 <th rowspan="2">¿Reside con usted?</th>
-                                                <th rowspan="2">Editar</th> 
+                                                <th rowspan="2">Edición</th>
                                             </tr>
                                             <tr>
                                                 <th>Apellido Paterno</th>
@@ -153,7 +129,7 @@
                                         </thead>
                                         <tbody>
                                             <c:forEach var="hijo" items="${listaHijos}" varStatus="status">
-                                            <form action="${pageContext.servletContext.contextPath}/FEditarHijo" method="post">
+                                            <form action="${pageContext.servletContext.contextPath}/FFicha/EditarHijo" method="post">
                                                 <tr>
                                                     <td>
                                                         <input name="apellido_p" type="text" class="input_width" value="${hijo.getApellidoP()}">
@@ -189,82 +165,56 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input hidden name="idHijo" id="idSesion" value="${hijo.getIdHijo()}">
+                                                        <input hidden name="idHijo" id="idHijo" value="${hijo.getIdHijo()}">
+                                                        <input hidden name="biologico" id="biologico" value="${hijo.getBiologico()}">
                                                         <button type="submit" class="btn btn-default">Editar</button>
                                                     </td>
                                                 </tr>
                                             </form>
                                         </c:forEach>
-                                        <tr>
-                                        <form action="${pageContext.servletContext.contextPath}/FEditarHijo" method="post">
-                                            <td>
-                                                <input name="apellido_p" type="text" class="input_width">
-                                            </td>
-                                            <td>
-                                                <input name="apellido_m" type="text" class="input_width">
-                                            </td>
-                                            <td>
-                                                <input name="nombre" type="text" class="input_width">
-                                            </td>
-                                            <td>
-                                                <input name="edad" type="text" class="input_width">
-                                            </td>
-                                            <td>
-                                                <input name="fecha_nac" type="text" class="input_width">
-                                            </td>
-                                            <td>
-                                                <input name="ocupacion" name="ocupación" type="text" class="input_width">
-                                            </td>
-                                            <td>
-                                                <input name="estado_salud" name="estado_salud" type="text" class="input_width">
-                                            </td>
-                                            <td>
-                                                <select name="reside">
-                                                    <option value="0">SI</option>
-                                                    <option value="1">NO</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input hidden name="idHijo" id="idHijo" value="0">
-                                                <button type="submit" class="btn btn-default">Editar</button>
-                                            </td>
-                                        </form>
-                                        </tr>                                       
+                                        <form action="${pageContext.servletContext.contextPath}/FFicha/EditarHijo" method="post">
+                                            <tr>
+                                                <td>
+                                                    <input name="apellido_p" type="text" class="input_width">
+                                                </td>
+                                                <td>
+                                                    <input name="apellido_m" type="text" class="input_width">
+                                                </td>
+                                                <td>
+                                                    <input name="nombre" type="text" class="input_width">
+                                                </td>
+                                                <td>
+                                                    <input name="edad" type="text" class="input_width">
+                                                </td>
+                                                <td>
+                                                    <input name="fecha_nac" type="text" class="input_width">
+                                                </td>
+                                                <td>
+                                                    <input name="ocupacion" name="ocupación" type="text" class="input_width">
+                                                </td>
+                                                <td>
+                                                    <input name="estado_salud" name="estado_salud" type="text" class="input_width">
+                                                </td>
+                                                <td>
+                                                    <select name="reside">
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input hidden name="idHijo" id="idHijo" value="0">
+                                                    <input hidden name="biologico" id="biologico" value="0">
+                                                    <button type="submit" class="btn btn-default">Agregar</button>
+                                                </td>
+                                            </tr>  
+                                        </form>                          
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <br>
                             <h3><strong>Hijo/a/s adoptivo/a/s</strong></h3>
-                            <br>    
-                            <div class="row">
-                                <div class="col-md-2">  
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
-                                    </div>
-                                </div>   
-                                <div class="col-md-3">   
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">No</label>
-                                    </div>                            
-                                </div>
-                            </div>  
                             <br>
-                            <div class="control-group">
-                                <label class="control-label">Cuántos?</label>
-                                <div class="controls">
-                                    <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                </div>
-                            </div>
-                            <br>   
-                            <div class="control-group">
-                                <label class="control-label">Fecha de Adopción</label>
-                                <div class="controls">
-                                    <input id="full-name" name="full-name" type="text" class="input-xlarge">
-                                </div>
-                            </div>
                             <br>
                             <div class="row">
                                 <div id="tabla_fam" class="table-responsive">
@@ -273,9 +223,11 @@
                                             <tr>
                                                 <th colspan="3">Nombres y Apellidos</th>
                                                 <th colspan="2">Edad y Fecha de nacimiento</th>
+                                                <th rowspan="2">Fecha de Adopción</th>
                                                 <th rowspan="2">Ocupación</th>
                                                 <th rowspan="2">Estado de Salud</th>
-                                                <th rowspan="2">Reside con usted?</th>                                          
+                                                <th rowspan="2">Reside con usted?</th>
+                                                <th rowspan="2">Edición</th>
                                             </tr>
                                             <tr>
                                                 <th>Apellido Paterno</th>
@@ -286,62 +238,92 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <c:forEach var="hijo" items="${listaHijosAdop}" varStatus="status">
+                                            <form action="${pageContext.servletContext.contextPath}/FFicha/EditarHijo" method="post">
+                                                <tr>
+                                                    <td>
+                                                        <input name="apellido_p" type="text" class="input_width" value="${hijo.getApellidoP()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="apellido_m" type="text" class="input_width" value="${hijo.getApellidoM()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="nombre" type="text" class="input_width" value="${hijo.getNombre()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="edad" type="text" class="input_width" value="${hijo.getEdad()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="fecha_nac" type="text" class="datepicker input-xlarge" value="${hijo.getFechaNacString()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="fecha_adop" type="text" class="datepicker input-xlarge" value="${hijo.getFechaAdopString()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="ocupacion" type="text" class="input_width" value="${hijo.getOcupacion()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="estado_salud" type="text" class="input_width" value="${hijo.getEstadoSalud()}">
+                                                    </td>
+                                                    <td>
+                                                        <select name="reside">
+                                                            <c:choose>
+                                                                <c:when test="${hijo.getReside() == 0}">
+                                                                    <option value="0">SI</option>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <option value="1">NO</option>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input hidden name="idHijo" id="idHijo" value="${hijo.getIdHijo()}">
+                                                        <input hidden name="biologico" id="biologico" value="${hijo.getBiologico()}">
+                                                        <button type="submit" class="btn btn-default">Editar</button>
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                        </c:forEach>
+                                        <form action="${pageContext.servletContext.contextPath}/FFicha/EditarHijo" method="post">
                                             <tr>
-                                                <td><input type="text" class="input_width"></td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input name="apellido_p" type="text" class="input_width" value="">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input name="apellido_m" type="text" class="input_width" value="">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input name="nombre" type="text" class="input_width" value="">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input name="edad" type="text" class="input_width" value="">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input name="fecha_nac" type="text" class="datepicker input-xlarge" value="">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <input name="fecha_adop" type="text" class="datepicker input-xlarge" value="">
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <input name="ocupacion" type="text" class="input_width" value="">
+                                                </td>
+                                                <td>
+                                                    <input name="estado_salud" type="text" class="input_width" value="">
+                                                </td>
+                                                <td>
+                                                    <select name="reside">
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
-                                            </tr>
-                                            <tr>
                                                 <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
+                                                    <input hidden name="idHijo" id="idHijo" value="0">
+                                                    <input hidden name="biologico" id="biologico" value="1">
+                                                    <button type="submit" class="btn btn-default">Agregar</button>
                                                 </td>
                                             </tr>
+                                        </form>
                                         </tbody>
                                     </table>
                                 </div>
@@ -358,7 +340,8 @@
                                                 <th rowspan="2">Parentesco/Relación</th>
                                                 <th rowspan="2">Edad</th>      
                                                 <th rowspan="2">Ocupación</th>
-                                                <th rowspan="2">Estado de Salud</th>                    
+                                                <th rowspan="2">Estado de Salud</th>
+                                                <th rowspan="2">Edición</th>
                                             </tr>
                                             <tr>
                                                 <th>Apellido Paterno</th>
@@ -367,52 +350,66 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <c:forEach var="res" items="${listaRes}" varStatus="status">
+                                            <form action="${pageContext.servletContext.contextPath}/FFicha/EditarRes" method="post">
+                                                <tr>
+                                                    <td>
+                                                        <input name="apellido_p" type="text" class="input_width" value="${res.getApellidoP()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="apellido_m" type="text" class="input_width" value="${res.getApellidoM()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="nombre" type="text" class="input_width" value="${res.getNombre()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="parentesco" type="text" class="input_width" value="${res.getParentesco()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="edad" type="text" class="input_width" value="${res.getEdad()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="ocupacion" type="text" class="input_width" value="${res.getOcupacion()}">
+                                                    </td>
+                                                    <td>
+                                                        <input name="estado_salud" type="text" class="input_width" value="${res.getEstadoSalud()}">
+                                                    </td>
+                                                    <td>
+                                                        <input hidden name="idResidente" id="idResidente" value="${res.getIdresidente()}">
+                                                        <button type="submit" class="btn btn-default">Editar</button>
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                        </c:forEach>
+                                        <form action="${pageContext.servletContext.contextPath}/FFicha/EditarRes" method="post">
                                             <tr>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <inputt name="apellido_p" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <inputt name="apellido_m" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <inputt name="nombre" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <inputt name="parentesco" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <inputt name="edad" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <inputt name="ocupacion" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="input_width">
+                                                    <inputt name="estado_salud" type="text" class="input_width">
+                                                </td>
+                                                <td>
+                                                    <input hidden name="idresidente" id="idresidente" value="0">
+                                                    <button type="submit" class="btn btn-default">Agregar</button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="input_width">
-                                                </td>
-                                            </tr>
+                                        </form>
                                         </tbody>
                                     </table>
                                 </div>
@@ -423,7 +420,6 @@
                                     usted/ustedes será de uso exclusivo, con la reserva y confidencialidad del caso, para los fines concernientes al 
                                     procedimiento administrativo de adopción.
                                 </p>
-
                             </div>
                             <!-- Button -->
                             <br>
