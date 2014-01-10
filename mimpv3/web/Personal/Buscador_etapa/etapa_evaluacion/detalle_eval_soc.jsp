@@ -160,6 +160,13 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
+                                    <label class="control-label">Número de informe</label>
+                                    <div class="controls">
+                                        <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${social.getNumEval()}" >
+                                    </div>
+                                </div>
+                                <br>    
+                                <div class="control-group">
                                     <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
                                         <input id="fechaResul" name="fechaResul" type="text" value="${social.getFechaResultado() != null ? df.dateToString(social.getFechaResultado()) : ''}" class="datepicker input-xlarge">
