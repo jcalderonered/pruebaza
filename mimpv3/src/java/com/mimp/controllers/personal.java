@@ -1966,7 +1966,8 @@ public class personal {
         }
         
         fam.setUser(user);
-        fam.setPass("12345");
+        String pass = DigestUtils.sha512Hex("12345");
+        fam.setPass(pass);
         fam.setCorreo(user);
         Short habilitado = Short.parseShort("0");
         fam.setHabilitado(habilitado);

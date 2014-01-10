@@ -103,6 +103,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
@@ -124,17 +125,21 @@
                                                     <td>
                                                         <c:choose>
                                                             <c:when test="${informe.getEstado() != null && informe.getEstado() == 'listo'}">
-                                                                Estado : Listo
+                                                                <h4><strong>Estado:</strong></h4>  Listo
                                                             </c:when>
                                                             <c:otherwise>
-                                                                Estado : Pendiente
+                                                                <h4><strong>Estado:</strong></h4>  Pendiente
                                                             </c:otherwise>    
                                                         </c:choose>
+                                                                <br>
+                                                                <h4><strong>Fecha Aproximada de recepción:</strong></h4> ${listaFechas.get(status.index)}
+                                                                
                                                     <form action="${pageContext.servletContext.contextPath}/EditarInforme" method="post">
                                                           <input hidden name="idInforme" id="idInforme" value="${informe.getIdinformePostAdoptivo()}">
                                                           <input hidden name="familia" id="familia" value="${familia}">
                                                           <input hidden name="num" id="num" value="${status.count}">
                                                           <input hidden name="idPost" id="idPost" value="${idPost}">
+                                                          <input hidden name="fechaAdopcion" id="fechaAdopcion" value="${fechaAdopcion}">
                                                           <input hidden name="numInformes" id="numInformes" value="${numInformes}">
                                                           <c:if test="${status.last}">
                                                               <input hidden name="ultimo" id="ultimo" value="ultimo">
@@ -172,6 +177,7 @@
             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
+        
         <!-- Placed at the end of the document so the pages load faster -->        
     </body>
 </html>

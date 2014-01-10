@@ -96,10 +96,11 @@
                     <div class="col-md-8">
                         <form role="form">
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            <c:if test="${estado != 'formativa'}">
                             <br>
                             <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
                             <br>
-                           <c:if test="${estado != 'formativa'}">
+                           
                             <br>
                             <h3 align="left"><strong>Datos de la ficha</strong></h3>
                             <br>

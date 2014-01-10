@@ -95,11 +95,11 @@
                     </div>
                     <div class="col-md-8">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        
+                            <c:if test="${estado != 'formativa'}">
                             <br>
                             <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
                             <br>
-                            <c:if test="${estado != 'formativa'}">
+                            
                             <br>
                             <h3 align="left"><strong>Datos de la ficha</strong></h3>
                             <br>
@@ -153,26 +153,24 @@
                                                 <th>Detalles de sesion</th>
                                             </tr>
                                         </thead>
+                                        <c:if test="${!listaSesiones.isEmpty()}">
                                         <tbody>
+                                            <c:forEach var="sesion" items="${listaSesiones}" varStatus="status"> 
                                             <tr>
-                                                <td>001-012</td>
-                                                <td>17-Mar-12</td>
+                                                <td>${sesion.getNSesion()}</td>
+                                                <td>${sesion.getFecha() != null ? df.dateToString(sesion.getFecha()) : ''}</td>
                                                 <td>
                                                     <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleSesion" method="post">
                                                     <button class="btn btn-default">Detalles</button>
                                                     </form>
                                                </td>
                                             </tr>
-                                            <tr>
-                                                <td>003-013</td>
-                                                <td>15-Jul-13</td>
-                                                <td>
-                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleSesion" method="post">
-                                                    <button class="btn btn-default">Detalles</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                           </c:forEach>
                                         </tbody>
+                                        </c:if>   
+                                        <c:if test="${listaSesiones.isEmpty()}">
+                                            <h3><strong>No exiten sesiones relacionadas</strong></h3>
+                                        </c:if>
                                     </table>
                                 </div>
                                 <br>
@@ -189,30 +187,26 @@
                                                 <th>Detalles</th>
                                             </tr>
                                         </thead>
+                                        <c:if test="${!listaAsistenciaReuniones.isEmpty()}">
                                         <tbody>
+                                            <c:forEach var="reunion" items="${listaAsistenciaReuniones}" varStatus="status">
                                             <tr>
-                                                <td>Preparacion</td>
-                                                <td>Taller de capacitacion 2</td>
+                                                <td>${reunion.getReunion().getTurno2().getGrupo().getTaller().getTipoTaller()}</td>
+                                                <td>${reunion.getReunion().getTurno2().getGrupo().getTaller().getNombre()}</td>
                                                 <td>5</td>
-                                                <td>Grupo Lunes - Turno Mañana</td>
+                                                <td>${reunion.getReunion().getTurno2().getGrupo().getNombre()} - ${reunion.getReunion().getTurno2().getNombre()}</td>
                                                 <td>
                                                     <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleTaller" method="post">
                                                     <button class="btn btn-default">Detalles</button>
                                                     </form>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>Pre Adopción</td>
-                                                <td>Atenciones especiales para niños especiales</td>
-                                                <td>3</td>
-                                                <td>Grupo Lunes - Turno Mañana</td>
-                                                <td>
-                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleTaller" method="post">
-                                                    <button class="btn btn-default">Detalles</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            </c:forEach> 
                                         </tbody>
+                                        </c:if>   
+                                        <c:if test="${listaAsistenciaReuniones.isEmpty()}">
+                                            <h3><strong>No exiten reuniones relacionadas</strong></h3>
+                                        </c:if>
                                     </table>
                                 </div>
                                 <br>

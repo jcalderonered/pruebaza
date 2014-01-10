@@ -103,6 +103,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <br>
@@ -122,14 +123,14 @@
                                     <fieldset>
                                         <br>
                                         <h1 align="center"><strong>Familia "${familia}"</strong></h1>
-                                        ${idExpediente}
+                                        
                                         <br>
                                         <h3><strong>Responsable</strong></h3>
                                         <br>
                                         <div>
                                             <label class="control-label">Profesional</label>
                                             <div class="controls">
-                                                <select id="personal" name="personal" class="input-xlarge">
+                                                <select ${empatia != null ? 'disabled' : ''} id="personal" name="personal" class="input-xlarge">
                                                     <c:forEach var="personal" items="${listaPersonal}" > 
                                                         <option value="${personal.getIdpersonal()}" ${empatia.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
                                                     </c:forEach>
@@ -143,7 +144,7 @@
                                         <div>
                                             <label class="control-label">Resultado</label>
                                             <div class="controls">
-                                                <select id="resultado" name="resultado" > 
+                                                <select ${empatia != null ? 'disabled' : ''} id="resultado" name="resultado" > 
                                                     <option value="favorable" ${empatia.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
                                                     <option value="desfavorable" ${empatia.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
                                                 </select>
@@ -151,9 +152,16 @@
                                         </div>
                                         <br>
                                         <div class="control-group">
+                                          <label class="control-label">Número de informe</label>
+                                            <div class="controls">
+                                              <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${empatia.getNumEval()}" >
+                                           </div>
+                                        </div>
+                                        <br> 
+                                        <div class="control-group">
                                             <label class="control-label">Fecha de evaluación</label>
                                             <div class="controls">
-                                               <input id="fechaEval" name="fechaEval" type="text" value="${empatia.getFechaResultado() != null ? df.dateToString(empatia.getFechaResultado()) : ''}" class="datepicker input-xlarge">
+                                               <input ${empatia != null ? 'disabled' : ''} id="fechaEval" name="fechaEval" type="text" value="${empatia.getFechaResultado() != null ? df.dateToString(empatia.getFechaResultado()) : ''}" class="datepicker input-xlarge">
                                             </div>
                                         </div>
                                         <br>
@@ -161,7 +169,7 @@
                                             <div class="controls">
                                                 <label class="control-label">Comentarios</label>
                                                 <div class="controls">
-                                                    <textarea id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${empatia.getObservacion()}</textarea>
+                                                    <textarea ${empatia != null ? 'disabled' : ''} id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${empatia.getObservacion()}</textarea>
                                                 </div>
                                             </div>
                                         </div>   

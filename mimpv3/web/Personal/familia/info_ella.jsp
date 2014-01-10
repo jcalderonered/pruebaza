@@ -94,10 +94,11 @@
                     <div class="col-md-8">
                         <form role="form">
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            <c:if test="${estado != 'formativa'}">
                             <br>
                             <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
                             <br>
-                           <c:if test="${estado != 'formativa'}">
+                            
                             <br>
                             <h3 align="left"><strong>Datos de la ficha</strong></h3>
                             <br>
@@ -139,55 +140,62 @@
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                             <fieldset>
                                 <br>
-                                <h3><strong>Generales</strong></h3>
+                                <h3><strong>Generales</strong></h3> 
                                 <br>
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <label class="control-label">Nombre</label>
                                     <div class="controls">
-                                        <input id="nombre" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getNombre()}" id="nombre" name="nombre" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Paterno</label>
                                     <div class="controls">
-                                        <input id="apellido_p" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getApellidoP()}" id="apellidoP" name="apellidoP" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Materno</label>
                                     <div class="controls">
-                                        <input id="apellido_m" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getApellidoM()}" id="apellidoM" name="apellidoM" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input id="fecha_nac" name="full-name" type="password" class="datepicker input-xlarge">
+                                        <input value="${Ella.getFechaNac() != null ? df.dateToString(Ella.getFechaNac()) : ''}" id="fechaNac" name="fechaNac" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Edad</label>  
+                                    <div class="controls">
+                                        <input id="edad" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Lugar de nacimiento</label>
                                     <div class="controls">
-                                        <input id="direccion" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getLugarNac()}" id="lugarNac" name="lugarNac" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Departamento de nacimiento</label>
                                     <div class="controls">
-                                        <input id="departamento" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getDepaNac()}" id="depNac" name="depNac" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">País de nacimiento</label>
                                     <div class="controls">
-                                        <input id="pais" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getPaisNac()}" id="paisNac" name="paisNac" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -195,13 +203,13 @@
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" checked>DNI</label>
+                                                <input type="radio" name="doc" id="optionsRadios1" value="d" ${Ella.getTipoDoc() == 'd' ? 'checked' : ''}>DNI</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="C">Carnet de Extranjería</label>
+                                                <input type="radio" name="doc" id="optionsRadios2" value="c" ${Ella.getTipoDoc() == 'c' ? 'checked' : ''}>Carnet de Extranjería</label>
                                         </div>                            
                                     </div>
                                 </div>    
@@ -209,21 +217,21 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <label class="control-label">N° de Documento</label>
-                                        <input id="num_doc" placeholder="Número" type="text" class="input-xlarge">
+                                        <input value="${Ella.getNDoc()}" id="numDoc" name="numDoc" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Celular</label>
                                     <div class="controls">
-                                        <input id="celular" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getCelular()}" id="numCel" name="numCel" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Correo Electrónico</label>
                                     <div class="controls">
-                                        <input id="correo" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getCorreo()}" id="correo" name="correo" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -233,28 +241,28 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios2" id="soltero" value="D">Soltera</label>
+                                                <input type="radio" name="estadoCivil" id="soltera" value="soltera" ${infoFam.getEstadoCivil() == 'soltera' ? 'checked' : ''}>Soltera</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casada</label>
+                                                <input type="radio" name="estadoCivil" id="casada" value="casados" ${infoFam.getEstadoCivil() == 'casados' ? 'checked' : ''}>Casada</label>
                                             <br>
                                             <label class="control-label">Fecha de matrimonio Civil</label>
-                                            <input id="fecha_matrimonio" name="full-name" type="text" class="datepicker input-xlarge">
+                                            <input value="${infoFam.getFechaMatrimonio() != null ? df.dateToString(infoFam.getFechaMatrimonio()) : ''}" id="fechaMat" name="fechaMat" type="text" class="datepicker input-xlarge">
                                         </div>                            
                                     </div>
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios2" id="viudo" value="D">Viuda</label>
+                                                <input type="radio" name="estadoCivil" id="viuda" value="viuda" ${infoFam.getEstadoCivil() == 'viuda' ? 'checked' : ''}>Viuda</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios2" id="divorciado" value="D">Divorciada</label>
+                                                <input type="radio" name="estadoCivil" id="divorciada" value="divorciada" ${infoFam.getEstadoCivil() == 'divorciada' ? 'checked' : ''}>Divorciada</label>
                                         </div>
                                     </div> 
                                 </div>    
@@ -267,37 +275,37 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios3" id="ninguno" value="D" checked>Ninguno</label>
+                                                <input type="radio" name="nivelInstruccion" id="ninguno" value="Ninguno" ${Ella.getNivelInstruccion() == 'Ninguno' ? 'checked' : ''}>Ninguno</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios3" id="primaria" value="D">Primaria</label>
+                                                <input type="radio" name="nivelInstruccion" id="primaria" value="Primaria" ${Ella.getNivelInstruccion() == 'Primaria' ? 'checked' : ''}>Primaria</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios3" id="secundaria" value="D">Secundaria</label>
+                                                <input type="radio" name="nivelInstruccion" id="secundaria" value="Secundaria" ${Ella.getNivelInstruccion() == 'Secundaria' ? 'checked' : ''}>Secundaria</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios3" id="tecnico" value="D">Técnico</label>
+                                                <input type="radio" name="nivelInstruccion" id="tecnico" value="Tecnico" ${Ella.getNivelInstruccion() == 'Tecnico' ? 'checked' : ''}>Técnico</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios3" id="superior" value="D">Superior</label>
+                                                <input type="radio" name="nivelInstruccion" id="superior" value="Superior" ${Ella.getNivelInstruccion() == 'Superior' ? 'checked' : ''}>Superior</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios3" id="otros" value="D">Otros</label>
+                                                <input type="radio" name="nivelInstruccion" id="otros" value="Otros" ${Ella.getNivelInstruccion() == 'Otros' ? 'checked' : ''}>Otros</label>
                                         </div>
                                     </div>   
                                 </div> 
@@ -308,13 +316,13 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios4" id="si" value="D" checked>Si</label>
+                                                <input type="radio" name="culminoNivel" id="si" value="0" ${Ella.getCulminoNivel() == 0 ? 'checked' : ''}>Si</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios4" id="no" value="D" >No</label>
+                                                <input type="radio" name="culminoNivel" id="no" value="1" ${Ella.getCulminoNivel() == 1 ? 'checked' : ''}>No</label>
                                         </div>
                                     </div>  
                                 </div> 
@@ -322,7 +330,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Profesión u Oficio </label>
                                     <div class="controls">
-                                        <input id="profesion" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getProfesion()}" id="profesion" name="profesion" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -331,7 +339,7 @@
                                     <div class="col-md-3">  
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="checkbox1" id="checkbox1" value="D" >Si</label>
+                                                <input type="checkbox" name="trabDep" id="checkbox1" value="0" ${Ella.getTrabajadorDepend() == 0 ? 'checked' : ''}>Si</label>
                                         </div>
                                     </div>  
                                 </div> 
@@ -339,35 +347,35 @@
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="ocupacion" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getOcupActualDep()}" id="ocupacionDep" name="ocupacion" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Centro de Trabajo </label>
                                     <div class="controls">
-                                        <input id="trabajo" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getCentroTrabajo()}" id="centroTrabajo" name="centroTrabajo" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Dirección del centro de trabajo</label>
                                     <div class="controls">
-                                        <input id="direccion_trabajo" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getDireccionCentro()}" id="direccionTrabajo" name="direccionTrabajo" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Teléfono del centro de trabajo </label>
                                     <div class="controls">
-                                        <input id="telefono_trabajo" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getTelefonoCentro()}" id="telefonoTrabajo" name="telefonoTrabajo" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable (sueldo bruto) </label>
                                     <div class="controls">
-                                        <input id="ingreso_depen" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getIngresoDep()}" id="ingresoDep" name="ingresoDep" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -376,7 +384,7 @@
                                     <div class="col-md-3">  
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="checkbox2" id="checkbox2" value="D">Si</label>
+                                                <input type="checkbox" name="trabIndep" id="checkbox1" value="0" ${Ella.getTrabajadorIndepend() == 0 ? 'checked' : ''}>Si</label>
                                         </div>
                                     </div>  
                                 </div> 
@@ -384,14 +392,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="ocupacion_indep" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getOcupActualInd()}" id="ocupacionInd" name="ocupacionInd" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable</label>
                                     <div class="controls">
-                                        <input id="ingreso_indep" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getIngresoIndep()}" id="ingresoInd" name="ingresoInd" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -403,13 +411,13 @@
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios5" id="seguro_si" value="D">Si</label>
+                                                <input type="checkbox" name="seguroSalud" id="checkbox1" value="0" ${Ella.getSeguroSalud() == 0 ? 'checked' : ''}>Si</label>
                                         </div>
                                     </div>  
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios5" id="seguro_no" value="D" checked>No</label>
+                                                <input type="radio" name="seguroSalud" id="seguro_no" value="1" ${Ella.getSeguroSalud() == 1 ? 'checked' : ''}>No</label>
                                         </div>
                                     </div>
                                 </div> 
@@ -417,7 +425,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Seguro</label>
                                     <div class="controls">
-                                        <input id="tipo_seguro" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getTipoSeguro()}" id="tipoSeguro" name="tipoSeguro" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -426,13 +434,13 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios6" id="vida_si" value="D">Si</label>
+                                                <input type="radio" name="seguroVida" id="vida_si" value="0" ${Ella.getSeguroVida() == 0 ? 'checked' : ''}>Si</label>
                                         </div>
                                     </div>  
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios6" id="vida_no" value="D" checked>No</label>
+                                                <input type="radio" name="seguroVida" id="vida_no" value="1" ${Ella.getSeguroVida() == 1 ? 'checked' : ''}>No</label>
                                         </div>
                                     </div>
                                 </div> 
@@ -442,13 +450,13 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios7" id="afiliado_si" value="D">Si</label>
+                                                <input type="radio" name="sisPensiones" id="afiliado_si" value="0" ${Ella.getSistPensiones() == 0 ? 'checked' : ''}>Si</label>
                                         </div>
                                     </div>  
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios7" id="afiliado_no" value="D" checked>No</label>
+                                                <input type="radio" name="sisPensiones" id="afiliado_no" value="1" ${Ella.getSistPensiones() == 1 ? 'checked' : ''}>No</label>
                                         </div>
                                     </div>
                                 </div> 
@@ -456,7 +464,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Estado de salud actual</label>
                                     <div class="controls">
-                                        <input id="estado_acutal" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${Ella.getSaludActual()}" id="estadoActual" name="estadoActual" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -493,6 +501,30 @@
 
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function(){ 
+                    
+                    var nac =  document.getElementById("fechaNac").value;
+                    var edad =  document.getElementById("edad");
+                    
+                    var today = new Date();
+                    var curr_date = today.getDate();
+                    var curr_month = today.getMonth() + 1;
+                    var curr_year = today.getFullYear();
+
+                    var pieces = nac.split('/');
+                    var birth_date = pieces[0];
+                    var birth_month = pieces[1];
+                    var birth_year = pieces[2];
+                    
+                    if (curr_year != birth_year && birth_month > curr_month  ) edad.value = curr_year - birth_year - 1;
+                    if (curr_year != birth_year && birth_month == curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year != birth_year && birth_month < curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year == birth_year) edad.value = 0;
+    
+    
+                });
             </script>
             <!-- Ubicar al final -->
 

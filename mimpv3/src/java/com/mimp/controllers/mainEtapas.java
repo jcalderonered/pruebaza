@@ -1223,6 +1223,7 @@ public class mainEtapas {
                                                        @RequestParam("personal") long personal,
                                                        @RequestParam("resultado") String resultado,
                                                        @RequestParam("fechaEval") String fechaEval,
+                                                       @RequestParam("numEval") String numEval,
                                                        @RequestParam("obs") String obs
                                                        ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1243,6 +1244,7 @@ public class mainEtapas {
         tempEval.setResultado(resultado);
         if (fechaEval != null && !fechaEval.equals("")) tempEval.setFechaResultado(df.stringToDate(fechaEval));
         if (fechaEval == null || fechaEval.equals("")) tempEval.setFechaResultado(null);
+        tempEval.setNumEval(numEval);
         tempEval.setObservacion(obs);
         
         servicioEtapa.crearEvaluacion(tempEval);
@@ -1269,7 +1271,7 @@ public class mainEtapas {
         if (!idEmpatia.equals("")){
             long temp = Long.parseLong(idEmpatia);
             if (servicioEtapa.getResolucion2(temp) != null ) {
-            Resolucion tempResol = servicioEtapa.getResolucion(temp);
+            Resolucion tempResol = servicioEtapa.getResolucion2(temp);
             map.put("resolucion",tempResol);
             }
         }
@@ -1340,7 +1342,7 @@ public class mainEtapas {
             if(tipo.equals("sinefecto")){
                 servicioEtapa.deleteEvaluacion(tempEval);
                 ExpedienteFamilia tempExpFam = tempEval.getExpedienteFamilia();
-                tempExpFam.setEstado("espera");
+                tempExpFam.setEstado("reevaluacion");
                 servicioEtapa.updateExpedienteFamilia(tempExpFam);
                 tempDesig.setAceptacionConsejo(Short.parseShort("3"));
                 servicioEtapa.updateDesignacion(tempDesig);
@@ -1418,6 +1420,7 @@ public class mainEtapas {
                                                        @RequestParam("personal") long personal,
                                                        @RequestParam("resultado") String resultado,
                                                        @RequestParam("fechaEval") String fechaEval,
+                                                       @RequestParam("numEval") String numEval,
                                                        @RequestParam("obs") String obs
                                                        ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1438,6 +1441,7 @@ public class mainEtapas {
         tempEval.setResultado(resultado);
         if(fechaEval != null && !fechaEval.equals("")) tempEval.setFechaResultado(df.stringToDate(fechaEval));
         if(fechaEval == null || fechaEval.equals("")) tempEval.setFechaResultado(null);
+        tempEval.setNumEval(numEval);
         tempEval.setObservacion(obs);
         
         servicioEtapa.crearEvaluacion(tempEval);
@@ -1542,7 +1546,7 @@ public class mainEtapas {
                 servicioEtapa.deleteEvaluacion(tempEmpatia);
                 ExpedienteFamilia tempExpFam = tempEval.getExpedienteFamilia();
                 servicioEtapa.deleteEvaluacion(tempEval);
-                tempExpFam.setEstado("espera");
+                tempExpFam.setEstado("reevaluacion");
                 servicioEtapa.updateExpedienteFamilia(tempExpFam);
                 tempDesig.setAceptacionConsejo(Short.parseShort("3"));
                 servicioEtapa.updateDesignacion(tempDesig);
@@ -1664,6 +1668,7 @@ public class mainEtapas {
         newPost.setNumeroInformes(numInformes);
         servicioEtapa.updatePostAdopcion(newPost);
         
+        
         map.put("listaPost",servicioEtapa.getListaPostAdopcion());
         return new ModelAndView("/Personal/Buscador_etapa/etapa_post/etapa_post", map);
         
@@ -1673,7 +1678,8 @@ public class mainEtapas {
     public ModelAndView verInformesPost(ModelMap map, HttpSession session,
                                            @RequestParam("idPost") long idPost,
                                            @RequestParam("familia") String familia,
-                                           @RequestParam("numInformes") int numInformes
+                                           @RequestParam("numInformes") int numInformes,
+                                           @RequestParam("fechaAdopcion") String fechaAdopcion
                                                        ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1685,7 +1691,7 @@ public class mainEtapas {
         ArrayList<InformePostAdoptivo> allInformePostAdoptivo = new ArrayList<InformePostAdoptivo>(numInformes);
         ArrayList<InformePostAdoptivo> informesTabla = new ArrayList();
         informesTabla = servicioEtapa.getListaInformesPost(idPost);
-        
+        int continuacion = 0;
         if(informesTabla.isEmpty()){
             for (int i = 0 ; i < numInformes ; i++){
                     InformePostAdoptivo temp = new InformePostAdoptivo();
@@ -1695,6 +1701,7 @@ public class mainEtapas {
         }else{
             for (InformePostAdoptivo informePostAdoptivo : informesTabla) {
                 int temp = Integer.parseInt(informePostAdoptivo.getNumeroInforme()) - 1;
+                continuacion = temp;
                 if(temp > allInformePostAdoptivo.size()){
                     for (int i = allInformePostAdoptivo.size(); i <= temp ; i++){
                         InformePostAdoptivo tempIP = new InformePostAdoptivo();
@@ -1709,18 +1716,110 @@ public class mainEtapas {
                 allInformePostAdoptivo.add(temp,informePostAdoptivo);
                 }
             }
-            /*
+            
             if (informesTabla.size() < numInformes){
-                for (int i = 0 ; i < numInformes ; i++){
-                    if(allInformePostAdoptivo.get(i) == null){
+                for (int i = continuacion + 1 ; i < numInformes ; i++){
+                   
                     InformePostAdoptivo temp = new InformePostAdoptivo();
                     allInformePostAdoptivo.add(i,temp);
-                    }
+                    
             }
             }
-            */
             map.put("listaInformes",allInformePostAdoptivo);
         }
+        String[] parts = fechaAdopcion.split("-");
+        int anho = Integer.parseInt(parts[0]);
+        int mes = Integer.parseInt(parts[1]); 
+        int dia = Integer.parseInt(parts[2]); 
+        String fechaEntrega;
+        ArrayList<String> listaFechas = new ArrayList<>();
+        for(int i = 0; i < numInformes ; i++){
+            int contadorMes = mes + 6;
+            if(contadorMes > 12){
+                mes = contadorMes - 12;
+                anho = anho + 1;
+                switch(mes){
+                    case 1: 
+                        fechaEntrega = "Ene" + "/" + anho;
+                        break;
+                    case 2: 
+                        fechaEntrega = "Feb" + "/" + anho;
+                        break;
+                    case 3: 
+                        fechaEntrega = "Mar" + "/" + anho;
+                        break;
+                    case 4: 
+                        fechaEntrega = "Abr" + "/" + anho;  
+                        break;
+                    case 5: 
+                        fechaEntrega = "May" + "/" + anho;
+                        break;
+                    case 6: 
+                        fechaEntrega = "Jun" + "/" + anho;
+                        break;
+                    case 7: 
+                        fechaEntrega = "Jul" + "/" + anho;
+                        break;
+                    case 8: 
+                        fechaEntrega = "Ago" + "/" + anho;
+                        break;
+                    case 9: 
+                        fechaEntrega = "Sep" + "/" + anho;
+                        break;
+                    case 10: 
+                        fechaEntrega = "Oct" + "/" + anho; 
+                        break;
+                    case 11: 
+                        fechaEntrega = "Nov" + "/" + anho;
+                        break;
+                    default: fechaEntrega = "Dec" + "/" + anho;
+                }
+                listaFechas.add(i, fechaEntrega);
+            }else{
+                mes = mes + 6 ;
+                fechaEntrega = mes + "/" + anho;
+                switch(mes){
+                    case 1: 
+                        fechaEntrega = "Ene" + "/" + anho;
+                        break;
+                    case 2: 
+                        fechaEntrega = "Feb" + "/" + anho;
+                        break;
+                    case 3: 
+                        fechaEntrega = "Mar" + "/" + anho;
+                        break;
+                    case 4: 
+                        fechaEntrega = "Abr" + "/" + anho;  
+                        break;
+                    case 5: 
+                        fechaEntrega = "May" + "/" + anho;
+                        break;
+                    case 6: 
+                        fechaEntrega = "Jun" + "/" + anho;
+                        break;
+                    case 7: 
+                        fechaEntrega = "Jul" + "/" + anho;
+                        break;
+                    case 8: 
+                        fechaEntrega = "Ago" + "/" + anho;
+                        break;
+                    case 9: 
+                        fechaEntrega = "Sep" + "/" + anho;
+                        break;
+                    case 10: 
+                        fechaEntrega = "Oct" + "/" + anho; 
+                        break;
+                    case 11: 
+                        fechaEntrega = "Nov" + "/" + anho;
+                        break;
+                    default: fechaEntrega = "Dec" + "/" + anho;
+                }
+                listaFechas.add(i, fechaEntrega);
+            }
+        }
+        
+        map.put("listaFechas",listaFechas);
+        map.put("fechaAdopcion",fechaAdopcion);
         map.put("familia",familia);
         map.put("idPost",idPost);
         map.put("numInformes",numInformes);
@@ -1735,7 +1834,8 @@ public class mainEtapas {
                                            @RequestParam("familia") String familia,
                                            @RequestParam("num") String num,
                                            @RequestParam("idPost") long idPost,
-                                           @RequestParam("numInformes") int numInformes
+                                           @RequestParam("numInformes") int numInformes,
+                                           @RequestParam("fechaAdopcion") String fechaAdopcion
                                                        ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1755,6 +1855,7 @@ public class mainEtapas {
              map.put("listaPersonal", ServicioPersonal.ListaPersonal());
              map.put("idPost",idPost);
              map.put("numInformes",numInformes);
+             map.put("fechaAdopcion",fechaAdopcion);
         }else{
              map.put("familia",familia);
              map.put("ultimo",ultimo);
@@ -1763,6 +1864,7 @@ public class mainEtapas {
              map.put("listaPersonal", ServicioPersonal.ListaPersonal());
              map.put("idPost",idPost);
              map.put("numInformes",numInformes);
+             map.put("fechaAdopcion",fechaAdopcion);
         }
         
         map.put("listaPost",servicioEtapa.getListaPostAdopcion());
@@ -1783,7 +1885,8 @@ public class mainEtapas {
                                            @RequestParam(value = "obs", required = false) String obs,
                                            @RequestParam("idPost") long idPost,
                                            @RequestParam("familia") String familia,
-                                           @RequestParam("numInformes") int numInformes
+                                           @RequestParam("numInformes") int numInformes,
+                                           @RequestParam("fechaAdopcion") String fechaAdopcion
                                                        ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1797,10 +1900,11 @@ public class mainEtapas {
              InformePostAdoptivo temp = servicioEtapa.getInformePost(id);
              temp.setNumeroInforme(num);
             temp.setEstado(estado);
+            //System.out.print("Actualizar" + fechaProyectado);
             if (fechaProyectado != null && !fechaProyectado.equals("")) temp.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
             if (fechaProyectado == null || fechaProyectado.equals("")) temp.setFechaRecepcionProyectado(null);
             if (fechaRecepcion != null && !fechaRecepcion.equals("")) temp.setFechaRecepcion(df.stringToDate(fechaRecepcion));
-            if (fechaRecepcion == null || fechaRecepcion.equals("")) temp.setFechaRecepcionProyectado(null);
+            if (fechaRecepcion == null || fechaRecepcion.equals("")) temp.setFechaRecepcion(null);
             if (fechaInforme != null && !fechaInforme.equals("")) temp.setFechaInforme(df.stringToDate(fechaInforme));
             if (fechaInforme == null || fechaInforme.equals("")) temp.setFechaInforme(null);
             if (fechaActa != null && !fechaActa.equals("")) temp.setFechaActa(df.stringToDate(fechaActa));
@@ -1814,14 +1918,15 @@ public class mainEtapas {
             InformePostAdoptivo tempPost = new InformePostAdoptivo();
             tempPost.setNumeroInforme(num);
             tempPost.setEstado(estado);
+            //System.out.print("crear" + fechaProyectado);
             if (fechaProyectado != null && !fechaProyectado.equals("")) tempPost.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
-            if (fechaProyectado == null && fechaProyectado.equals("")) tempPost.setFechaRecepcionProyectado(null);
+            if (fechaProyectado == null || fechaProyectado.equals("")) tempPost.setFechaRecepcionProyectado(null);
             if (fechaRecepcion != null && !fechaRecepcion.equals("")) tempPost.setFechaRecepcion(df.stringToDate(fechaRecepcion));
-            if (fechaRecepcion == null && fechaRecepcion.equals("")) tempPost.setFechaRecepcionProyectado(null);
+            if (fechaRecepcion == null || fechaRecepcion.equals("")) tempPost.setFechaRecepcion(null);
             if (fechaInforme != null && !fechaInforme.equals("")) tempPost.setFechaInforme(df.stringToDate(fechaInforme));
-            if (fechaInforme == null && fechaInforme.equals("")) tempPost.setFechaInforme(null);
+            if (fechaInforme == null || fechaInforme.equals("")) tempPost.setFechaInforme(null);
             if (fechaActa != null && !fechaActa.equals("")) tempPost.setFechaActa(df.stringToDate(fechaActa));
-            if (fechaActa == null && fechaActa.equals("")) tempPost.setFechaActa(null);
+            if (fechaActa == null || fechaActa.equals("")) tempPost.setFechaActa(null);
             Personal pers = ServicioPersonal.getPersonal(personal);
             tempPost.setPersonal(pers);
             tempPost.setObs(obs);
@@ -1834,7 +1939,7 @@ public class mainEtapas {
         ArrayList<InformePostAdoptivo> allInformePostAdoptivo = new ArrayList<InformePostAdoptivo>(numInformes);
         ArrayList<InformePostAdoptivo> informesTabla = new ArrayList();
         informesTabla = servicioEtapa.getListaInformesPost(idPost);
-        
+        int continuacion = 0;
         if(informesTabla.isEmpty()){
             for (int i = 0 ; i < numInformes ; i++){
                     InformePostAdoptivo temp = new InformePostAdoptivo();
@@ -1844,6 +1949,7 @@ public class mainEtapas {
         }else{
             for (InformePostAdoptivo informePostAdoptivo : informesTabla) {
                 int temp = Integer.parseInt(informePostAdoptivo.getNumeroInforme()) - 1;
+                continuacion = temp;
                 if(temp > allInformePostAdoptivo.size()){
                     for (int i = allInformePostAdoptivo.size(); i <= temp ; i++){
                         InformePostAdoptivo tempIP = new InformePostAdoptivo();
@@ -1858,18 +1964,109 @@ public class mainEtapas {
                 allInformePostAdoptivo.add(temp,informePostAdoptivo);
                 }
             }
-            /*
-            if (informesTabla.size() < numInformes){
-                for (int i = 0 ; i < numInformes ; i++){
-                    if(allInformePostAdoptivo.get(i) == null){
+            if (informesTabla.size() < numInformes && allInformePostAdoptivo.size() < numInformes){
+                for (int i = continuacion + 1 ; i < numInformes ; i++){
+                   
                     InformePostAdoptivo temp = new InformePostAdoptivo();
                     allInformePostAdoptivo.add(i,temp);
-                    }
+                    
             }
             }
-            */
             map.put("listaInformes",allInformePostAdoptivo);
         }
+        
+        String[] parts = fechaAdopcion.split("-");
+        int anho = Integer.parseInt(parts[0]);
+        int mes = Integer.parseInt(parts[1]); 
+        int dia = Integer.parseInt(parts[2]); 
+        String fechaEntrega;
+        ArrayList<String> listaFechas = new ArrayList<>();
+        for(int i = 0; i < numInformes ; i++){
+            int contadorMes = mes + 6;
+            if(contadorMes > 12){
+                mes = contadorMes - 12;
+                anho = anho + 1;
+                switch(mes){
+                    case 1: 
+                        fechaEntrega = "Ene" + "/" + anho;
+                        break;
+                    case 2: 
+                        fechaEntrega = "Feb" + "/" + anho;
+                        break;
+                    case 3: 
+                        fechaEntrega = "Mar" + "/" + anho;
+                        break;
+                    case 4: 
+                        fechaEntrega = "Abr" + "/" + anho;  
+                        break;
+                    case 5: 
+                        fechaEntrega = "May" + "/" + anho;
+                        break;
+                    case 6: 
+                        fechaEntrega = "Jun" + "/" + anho;
+                        break;
+                    case 7: 
+                        fechaEntrega = "Jul" + "/" + anho;
+                        break;
+                    case 8: 
+                        fechaEntrega = "Ago" + "/" + anho;
+                        break;
+                    case 9: 
+                        fechaEntrega = "Sep" + "/" + anho;
+                        break;
+                    case 10: 
+                        fechaEntrega = "Oct" + "/" + anho; 
+                        break;
+                    case 11: 
+                        fechaEntrega = "Nov" + "/" + anho;
+                        break;
+                    default: fechaEntrega = "Dec" + "/" + anho;
+                }
+                listaFechas.add(i, fechaEntrega);
+            }else{
+                mes = mes + 6 ;
+                fechaEntrega = mes + "/" + anho;
+                switch(mes){
+                    case 1: 
+                        fechaEntrega = "Ene" + "/" + anho;
+                        break;
+                    case 2: 
+                        fechaEntrega = "Feb" + "/" + anho;
+                        break;
+                    case 3: 
+                        fechaEntrega = "Mar" + "/" + anho;
+                        break;
+                    case 4: 
+                        fechaEntrega = "Abr" + "/" + anho;  
+                        break;
+                    case 5: 
+                        fechaEntrega = "May" + "/" + anho;
+                        break;
+                    case 6: 
+                        fechaEntrega = "Jun" + "/" + anho;
+                        break;
+                    case 7: 
+                        fechaEntrega = "Jul" + "/" + anho;
+                        break;
+                    case 8: 
+                        fechaEntrega = "Ago" + "/" + anho;
+                        break;
+                    case 9: 
+                        fechaEntrega = "Sep" + "/" + anho;
+                        break;
+                    case 10: 
+                        fechaEntrega = "Oct" + "/" + anho; 
+                        break;
+                    case 11: 
+                        fechaEntrega = "Nov" + "/" + anho;
+                        break;
+                    default: fechaEntrega = "Dec" + "/" + anho;
+                }
+                listaFechas.add(i, fechaEntrega);
+            }
+        }
+        map.put("fechaAdopcion",fechaAdopcion);
+        map.put("listaFechas",listaFechas);
         map.put("familia",familia);
         map.put("idPost",idPost);
         map.put("numInformes",numInformes);
@@ -1893,5 +2090,66 @@ public class mainEtapas {
         map.put("listaEspera",servicioEtapa.getListaEspera());
         return new ModelAndView("/Personal/Buscador_etapa/lista_espera", map);
     }
+    
+    @RequestMapping(value = "/Reevaluación", method = RequestMethod.GET)
+    public ModelAndView Reevaluación(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
+        map.put("listaReevaluacion",servicioEtapa.getListaReevaluación());
+        return new ModelAndView("/Personal/Buscador_etapa/lista_reevaluacion", map);
+    }
+    
+    @RequestMapping(value = "/RegresarListaEspera", method = RequestMethod.POST)
+    public ModelAndView RegresarListaEspera(ModelMap map, HttpSession session,
+                                            @RequestParam("idExpediente") long idExpediente
+                                            ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        ExpedienteFamilia tempExp = new ExpedienteFamilia();
+        tempExp = servicioEtapa.getExpedienteFamilia(idExpediente);
+        tempExp.setEstado("espera");
+        servicioEtapa.updateExpedienteFamilia(tempExp);
+        map.put("df",df);
+        map.put("listaReevaluacion",servicioEtapa.getListaReevaluación());
+        return new ModelAndView("/Personal/Buscador_etapa/lista_reevaluacion", map);
+    }
+    
+    @RequestMapping(value = "/EliminarRegistro", method = RequestMethod.POST)
+    public ModelAndView EliminarRegistro(ModelMap map, HttpSession session,
+                                        @RequestParam("idExpediente") long idExpediente
+                                        ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+         ExpedienteFamilia tempExp = new ExpedienteFamilia();
+        tempExp = servicioEtapa.getExpedienteFamilia(idExpediente);
+        tempExp.setEstado("eliminado");
+        servicioEtapa.updateExpedienteFamilia(tempExp);
+        map.put("df",df);
+        map.put("listaReevaluacion",servicioEtapa.getListaReevaluación());
+        map.put("df",df);
+        map.put("listaReevaluacion",servicioEtapa.getListaReevaluación());
+        return new ModelAndView("/Personal/Buscador_etapa/lista_reevaluacion", map);
+    }
+    
     
 }
