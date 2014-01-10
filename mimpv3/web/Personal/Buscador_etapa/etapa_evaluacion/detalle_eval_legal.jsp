@@ -121,7 +121,7 @@
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                                 <br>
-                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
+                                <h1 align="center"><strong>Familia "${familia}"</strong></h1> ${origen}
                                 <br>
                                 <h3><strong>Tipo de Evaluación : Legal</strong></h3>
                                 <br>
@@ -155,6 +155,13 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
+                                    <label class="control-label">Número de informe</label>
+                                    <div class="controls">
+                                        <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${legal.getNumEval()}" >
+                                    </div>
+                                </div>
+                                <br>   
+                                <div class="control-group">
                                     <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
                                         <input id="fechaResul" name="fechaResul" type="text" value="${legal.getFechaResultado() != null ? df.dateToString(legal.getFechaResultado()) : ''}" class="datepicker input-xlarge">
@@ -175,6 +182,7 @@
                                 </div>
                                 <!--FIN DE CONTENIDO-->
                                  </fieldset>
+                                    <br>
                               </form>
                                 <h3><strong>Resoluciones</strong></h3>
                                 <br>

@@ -151,6 +151,7 @@ public class mainEtapas {
                                                        @RequestParam(value = "fechaAsig", required = false) String fechaAsig,
                                                        @RequestParam(value = "personal", required = false) long personal,
                                                        @RequestParam(value = "resultado", required = false) String resultado,
+                                                       @RequestParam(value = "numEval", required = false) String numEval,
                                                        @RequestParam(value = "fechaResul", required = false) String fechaResul,
                                                        @RequestParam(value = "obs", required = false) String obs,
                                                        @RequestParam("origen") String origen
@@ -170,6 +171,7 @@ public class mainEtapas {
         tempEval.setResultado(resultado);
         if(fechaResul != null && !fechaResul.equals("")) tempEval.setFechaResultado(df.stringToDate(fechaResul));
         if(fechaResul == null || fechaResul.equals("")) tempEval.setFechaResultado(null);
+        tempEval.setNumEval(numEval);
         tempEval.setObservacion(obs);
         tempEval.setTipo("psicologica");
         
@@ -202,6 +204,7 @@ public class mainEtapas {
                                                        @RequestParam(value = "fechaAsig", required = false) String fechaAsig,
                                                        @RequestParam(value = "personal", required = false) long personal,
                                                        @RequestParam(value = "resultado", required = false) String resultado,
+                                                       @RequestParam(value = "numEval", required = false) String numEval,
                                                        @RequestParam(value = "fechaResul", required = false) String fechaResul,
                                                        @RequestParam(value = "obs", required = false) String obs,
                                                        @RequestParam("origen") String origen
@@ -222,7 +225,7 @@ public class mainEtapas {
         evalPsicologica.setResultado(resultado);
         if(fechaResul != null && !fechaResul.equals("")) evalPsicologica.setFechaResultado(df.stringToDate(fechaResul));
         if(fechaResul == null || fechaResul.equals("")) evalPsicologica.setFechaResultado(null);
-        
+        evalPsicologica.setNumEval(numEval);
         evalPsicologica.setObservacion(obs);
         
         servicioEtapa.updateEvaluacion(evalPsicologica);
@@ -285,6 +288,7 @@ public class mainEtapas {
                                                        @RequestParam(value = "personal", required = false) long personal,
                                                        @RequestParam(value = "resultado", required = false) String resultado,
                                                        @RequestParam(value = "fechaResul", required = false) String fechaResul,
+                                                       @RequestParam(value = "numEval", required = false) String numEval,
                                                        @RequestParam(value = "obs", required = false) String obs
                                                        
                                                        ) {
@@ -303,6 +307,7 @@ public class mainEtapas {
         tempEval.setResultado(resultado);
         if(fechaResul != null && !fechaResul.equals("")) tempEval.setFechaResultado(df.stringToDate(fechaResul));
         if(fechaResul == null || fechaResul.equals("")) tempEval.setFechaResultado(null);
+        tempEval.setNumEval(numEval);
         tempEval.setObservacion(obs);
         tempEval.setTipo("social");
         
@@ -334,6 +339,7 @@ public class mainEtapas {
                                                        @RequestParam(value = "personal", required = false) long personal,
                                                        @RequestParam(value = "resultado", required = false) String resultado,
                                                        @RequestParam(value = "fechaResul", required = false) String fechaResul,
+                                                       @RequestParam(value = "numEval", required = false) String numEval,
                                                        @RequestParam(value = "obs", required = false) String obs
                                                        
                                                        ) {
@@ -352,6 +358,7 @@ public class mainEtapas {
         evalSocial.setResultado(resultado);
         if(fechaResul != null && !fechaResul.equals("")) evalSocial.setFechaResultado(df.stringToDate(fechaResul));
         if(fechaResul == null || fechaResul.equals("")) evalSocial.setFechaResultado(null);
+        evalSocial.setNumEval(numEval);
         evalSocial.setObservacion(obs);
         
         servicioEtapa.updateEvaluacion(evalSocial);
@@ -398,7 +405,7 @@ public class mainEtapas {
         
         map.put("idExpediente",idExpediente);
         map.put("familia",familia);
-       
+       map.put("origen",origen);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());   
         
         map.put("df",df);
@@ -413,6 +420,7 @@ public class mainEtapas {
                                                        @RequestParam(value = "fechaAsig", required = false) String fechaAsig,
                                                        @RequestParam(value = "personal", required = false) long personal,
                                                        @RequestParam(value = "resultado", required = false) String resultado,
+                                                       @RequestParam(value = "numEval", required = false) String numEval,
                                                        @RequestParam(value = "fechaResul", required = false) String fechaResul,
                                                        @RequestParam(value = "obs", required = false) String obs
                                                        
@@ -433,6 +441,7 @@ public class mainEtapas {
         tempEval.setResultado(resultado);
         if(fechaResul != null && !fechaResul.equals("")) tempEval.setFechaResultado(df.stringToDate(fechaResul));
         if(fechaResul == null || fechaResul.equals("")) tempEval.setFechaResultado(null);
+        tempEval.setNumEval(numEval);
         tempEval.setObservacion(obs);
         tempEval.setTipo("legal");
         
@@ -464,6 +473,7 @@ public class mainEtapas {
                                                        @RequestParam(value = "fechaAsig", required = false) String fechaAsig,
                                                        @RequestParam(value = "personal", required = false) long personal,
                                                        @RequestParam(value = "resultado", required = false) String resultado,
+                                                       @RequestParam(value = "numEval", required = false) String numEval,
                                                        @RequestParam(value = "fechaResul", required = false) String fechaResul,
                                                        @RequestParam(value = "obs", required = false) String obs
                                                        
@@ -484,6 +494,7 @@ public class mainEtapas {
         evalLegal.setResultado(resultado);
         if(fechaResul != null && !fechaResul.equals("")) evalLegal.setFechaResultado(df.stringToDate(fechaResul));
         if(fechaResul == null || fechaResul.equals("")) evalLegal.setFechaResultado(null);
+        evalLegal.setNumEval(numEval);
         evalLegal.setObservacion(obs);
         
         servicioEtapa.updateEvaluacion(evalLegal);

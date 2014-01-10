@@ -161,6 +161,13 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
+                                    <label class="control-label">Número de informe</label>
+                                    <div class="controls">
+                                        <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${psicologica.getNumEval()}" >
+                                    </div>
+                                </div>
+                                <br>    
+                                <div class="control-group">
                                     <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
                                         <input id="fechaResul" name="fechaResul" type="text" value="${psicologica.getFechaResultado() != null ? df.dateToString(psicologica.getFechaResultado()) : ''}" class="datepicker input-xlarge">

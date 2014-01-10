@@ -209,10 +209,10 @@
                                                     </c:choose>
                                                 </td>
                                                 <c:if test="${!legal.getResolucions().isEmpty()}">
-                                                <c:forEach var="resolucion" items="${legal.getResolucions()}" varStatus="status">
+                                                <c:forEach var="resolucion" items="${legal.getResolucions()}" varStatus="statusResol">
                                                  <c:choose>
-                                                        <c:when test="${status.index == '0'}">
-                                                            <td>
+                                                        <c:when test="${statusResol.index == 0}">
+                                                            <td> 
                                                             ${df.dateToString(resolucion.getFechaResol())}
                                                             </td>
                                                             <td>
@@ -225,7 +225,7 @@
                                                     </c:choose>
                                                </c:forEach>
                                                 </c:if>
-                                               <c:if test="${legal.getResolucions() == null}">
+                                               <c:if test="${legal.getResolucions().isEmpty()}">
                                                    <td>
                                                        Pendiente
                                                    </td>

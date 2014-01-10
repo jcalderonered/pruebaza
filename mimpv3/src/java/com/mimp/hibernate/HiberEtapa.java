@@ -223,12 +223,13 @@ public ArrayList<Familia> getListaFamilias () {
                         String hql2 = "from Resolucion R where R.evaluacion = :idEvaluacion ORDER BY R.fechaResol DESC";
                         Query query2 = session.createQuery(hql2);
                         query2.setLong("idEvaluacion", eval.getIdevaluacion());
+                        query2.setMaxResults(1);
                         List resoluciones = query2.list();
                         Set<Resolucion> tempResoluciones = new HashSet<Resolucion>(0);
                             for (Iterator iter2 = resoluciones.iterator(); iter2.hasNext();) {
                                     Resolucion resolTemp = (Resolucion) iter2.next();
                                     tempResoluciones.add(resolTemp);
-                                    System.out.print(resolTemp);
+                                    System.out.print(resolTemp.getFechaResol());
                             }
                         eval.setResolucions(tempResoluciones);
                         tempEvaluaciones.add(eval);
