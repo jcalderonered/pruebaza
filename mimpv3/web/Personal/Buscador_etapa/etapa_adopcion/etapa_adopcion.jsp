@@ -103,6 +103,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                                 <br>
@@ -118,7 +119,7 @@
                                                 <th>Informe de Empatía</th>
                                                 <th>Resultado</th>
                                                 <th>Resolución</th>
-                                                <th>Informe Colocación</th>
+                                                <th>Informe Integración</th>
                                                 <th>Resultado</th>
                                                 <th>Resolución</th>  
                                             </tr>
@@ -195,8 +196,6 @@
                                                                 </form> 
                                                             </td>
                                                             <td>
-                                                                ${tokenRes}
-                                                                ${empatia.getResolucions().size()}
                                                                 <form action="${pageContext.servletContext.contextPath}/evalInforme" method="post">
                                                                      <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                                                                      <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">

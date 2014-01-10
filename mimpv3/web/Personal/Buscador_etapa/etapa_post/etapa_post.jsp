@@ -103,6 +103,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                                 <br>
@@ -152,6 +153,7 @@
                                                           <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
                                                           <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
                                                           <input hidden name="numInformes" id="numInformes" value="${post.getNumeroInformes()}">
+                                                          <input hidden name="fechaAdopcion" id="fechaAdopcion" value="${post.getFechaResolucion()}">
                                                           <button ${post.getNumeroInformes() == null ? 'disabled' : ''} type="submit" class="btn btn-default">Ver</button>
                                                     </form> 
                                                 </td>

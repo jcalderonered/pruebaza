@@ -101,6 +101,7 @@ if (u==null){
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <c:if test="${resolucion == null}">
@@ -125,15 +126,15 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">N° de resolución</label>
                                     <div class="controls">
-                                        <input id="numResol" name="numResol" type="text" value="${resolucion.getNumero()}" class="input-xlarge">
+                                        <input ${resolucion != null ? 'disabled' : ''} id="numResol" name="numResol" type="text" value="${resolucion.getNumero()}" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Resolución</label>
                                     <div class="controls">
-                                        <select id="tipo" name="tipo">
-                                            <option value="colfam" ${resolucion.getTipo() == 'colfam' ? 'selected' : ''}>Colocación Familiar</option>
+                                        <select ${resolucion != null ? 'disabled' : ''} id="tipo" name="tipo">
+                                            <option value="colfam" ${resolucion.getTipo() == 'colfam' ? 'selected' : ''}>Integración Familiar</option>
                                             <option value="sinefecto" ${resolucion.getTipo() == 'sinefecto' ? 'selected' : ''}>Deja sin efecto la designación</option>
                                         </select>
                                     </div>    
@@ -142,14 +143,14 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Fecha resolución</label>
                                     <div class="controls">
-                                        <input id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
+                                        <input ${resolucion != null ? 'disabled' : ''} id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <h3><strong>En caso de tener un Fin de Procedimiento</strong></h3>
                                 <div class="checkbox">
                                     <label>
-                                        <input value="eliminar" id="eliminar" name="eliminar" type="checkbox"> Eliminar del Registro Nacional de Adoptantes para la Adopción
+                                        <input onclick="confirmar()" ${resolucion != null ? 'disabled' : ''} value="eliminar" id="eliminar" name="eliminar" type="checkbox"> Eliminar del Registro Nacional de Adoptantes para la Adopción
                                     </label>
                                 </div>
                                 <br>
@@ -185,6 +186,18 @@ if (u==null){
              $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language":"es"});
             
         </script>
+        <script>
+                function confirmar()
+                    {
+                        if (document.getElementById('eliminar').checked) {
+                            
+                            alert("Al seleccionar esta opción el expediente será retirado del sistema")
+                       } else {
+                            //alert("checked");
+                       }
+                       // alert("Al seleccionar esta opción el expediente será retirado del sistema");
+                    }
+        </script>            
         <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>

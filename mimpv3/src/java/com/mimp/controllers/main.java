@@ -7,8 +7,11 @@ package com.mimp.controllers;
 
 import java.util.*;
 import com.mimp.bean.*;
+import com.mimp.hibernate.HiberEtapa;
 import com.mimp.util.*;
 import com.mimp.hibernate.HiberMain;
+import com.mimp.hibernate.HiberNna;
+import com.mimp.hibernate.HiberPersonal;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -25,13 +28,28 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class main {
 
+    @Resource(name = "HiberPersonal")
+    private HiberPersonal ServicioPersonal = new HiberPersonal();
     @Resource(name = "HiberMain")
     private HiberMain ServicioMain = new HiberMain();
+    @Resource(name = "HiberNna")
+    private HiberNna ServicioNna = new HiberNna();
+    @Resource(name = "HiberEtapa")
+    private HiberEtapa servicioEtapa = new HiberEtapa();
     dateFormat df = new dateFormat();
     timeStampFormat ts = new timeStampFormat();
 
-    String etapaOrigen;
     
+    /* PARAMETROS A PASAR A FAMILIA DENTRO DE PERSONAL */
+    String etapaOrigen;
+    Adoptante El = new Adoptante();
+    Adoptante Ella = new Adoptante();
+    ArrayList<Sesion> listaSesiones = new ArrayList();
+    ArrayList<AsistenciaFR> listaAsistenciaReuniones = new ArrayList();
+    ArrayList<Atencion> listaAtenciones = new ArrayList();
+    InfoFamilia infoFam = new InfoFamilia();
+    
+    /*      */
     @RequestMapping("/")
     public String hello() {
         return "login";
@@ -390,7 +408,11 @@ public class main {
 /** ESTA SECCION ES USADA PARA ACTUALIZAR LOS DATOS DE LA FAMILIA POR PARTE DEL PERSONAL**/   
 
 @RequestMapping(value = "/IrPersonalFamilia", method = RequestMethod.POST)
-    public ModelAndView IrPersonalFamilia(ModelMap map, HttpSession session, @RequestParam(value="estado", required = false) String estado) {
+    public ModelAndView IrPersonalFamilia(ModelMap map, HttpSession session, 
+                                          @RequestParam(value="estado", required = false) String estado,
+                                          @RequestParam(value="idFamilia", required = false) String idFamilia
+            
+                                          ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -398,11 +420,25 @@ public class main {
             return new ModelAndView("login", map);
         }
         
-        
+        if(estado.equals("formativa")){
+            Long idFam = Long.parseLong(idFamilia);
+            infoFam = ServicioMain.getInfoFamPorIdFamilia(idFam);
+            for (Adoptante adop : infoFam.getAdoptantes()) {
+                if(adop.getSexo() == 'f') Ella = adop;
+                if(adop.getSexo() == 'm') El = adop;
+            }
+            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(idFam);
+            listaSesiones = ServicioMain.getListaSesionesPorFamilia(idFam);
+            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(idFam);
+        }
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
         etapaOrigen = estado;
+        map.put("df",df);
+        map.put("infoFam",infoFam);
         map.put("estado",etapaOrigen);
+        //map.put("nombre",Ella.getNombre());
+        map.put("Ella",Ella);
         return new ModelAndView("/Personal/familia/info_ella", map);
 }     
     
@@ -418,7 +454,10 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
+        map.put("infoFam",infoFam);
         map.put("estado",etapaOrigen);
+        map.put("El",El);
         return new ModelAndView("/Personal/familia/info_el", map);
 } 
 
@@ -434,7 +473,10 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
+        map.put("infoFam",infoFam);
         map.put("estado",etapaOrigen);
+        map.put("Ella",Ella);
         return new ModelAndView("/Personal/familia/info_ella", map);
 }   
 
@@ -450,6 +492,7 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
         map.put("estado",etapaOrigen);
         return new ModelAndView("/Personal/familia/info_fam", map);
 }       
@@ -466,6 +509,7 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
         map.put("estado",etapaOrigen);
         return new ModelAndView("/Personal/familia/info_vivienda", map);
 }      
@@ -482,6 +526,7 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
         map.put("estado",etapaOrigen);
         return new ModelAndView("/Personal/familia/info_registro", map);
 }      
@@ -498,7 +543,10 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
         map.put("estado",etapaOrigen);
+        map.put("listaSesiones",listaSesiones);
+        map.put("listaAsistenciaReuniones",listaAsistenciaReuniones);
         return new ModelAndView("/Personal/familia/info_adop/info_adop", map);
 }     
 
@@ -514,6 +562,7 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
         map.put("estado",etapaOrigen);
         return new ModelAndView("/Personal/familia/info_ant_nna", map);
 }
@@ -530,6 +579,7 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
         map.put("estado",etapaOrigen);
         return new ModelAndView("/Personal/familia/info_nna", map);
 }
@@ -546,7 +596,9 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
         map.put("estado",etapaOrigen);
+        map.put("listaAtenciones",listaAtenciones);
         return new ModelAndView("/Personal/familia/info_atencion", map);
 }
     
@@ -562,6 +614,7 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
         map.put("estado",etapaOrigen);
         return new ModelAndView("/Personal/familia/info_adop/detalle_sesion", map);
 }   
@@ -578,6 +631,7 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
         map.put("estado",etapaOrigen);
         return new ModelAndView("/Personal/familia/info_adop/detalle_taller", map);
 }       
@@ -594,6 +648,7 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
         map.put("estado",etapaOrigen);
         return new ModelAndView("/Personal/familia/info_adop/detalle_evaluacion", map);
 }
@@ -610,6 +665,7 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df",df);
         map.put("estado",etapaOrigen);
         return new ModelAndView("/Personal/familia/info_atencion_edit", map);
 }    

@@ -103,6 +103,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>    
                                 <br>
@@ -158,6 +159,7 @@
                                                                     <td>
                                                                         <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
                                                                             <input hidden name="estado" id="estado" value="formativa">
+                                                                            <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}">
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>
@@ -171,7 +173,7 @@
                                                                             </c:choose>
                                                                         </c:forEach>
                                                                         <c:choose>
-                                                                        <c:when test="${flag == 0}">
+                                                                        <c:when test="${flag == '0' && !familia.getAsistenciaFRs().isEmpty()}">
                                                                                     SI
                                                                         </c:when>
                                                                         <c:otherwise>
@@ -207,6 +209,7 @@
                                                                     <td>
                                                                         <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
                                                                             <input hidden name="estado" id="estado" value="formativa">
+                                                                            <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}">
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>
@@ -220,7 +223,7 @@
                                                                             </c:choose>
                                                                         </c:forEach>
                                                                         <c:choose>
-                                                                        <c:when test="${flag == 0}">
+                                                                        <c:when test="${flag == 0 && !familia.getAsistenciaFRs().isEmpty()}">
                                                                                     SI
                                                                         </c:when>
                                                                         <c:otherwise>
@@ -254,6 +257,7 @@
                                                                     <td>
                                                                         <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
                                                                             <input hidden name="estado" id="estado" value="formativa">
+                                                                            <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}">
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>
@@ -267,7 +271,7 @@
                                                                             </c:choose>
                                                                         </c:forEach>
                                                                         <c:choose>
-                                                                        <c:when test="${flag == 0}">
+                                                                        <c:when test="${flag == 0 && !familia.getAsistenciaFRs().isEmpty()}">
                                                                                     SI
                                                                         </c:when>
                                                                         <c:otherwise>

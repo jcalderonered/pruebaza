@@ -239,4 +239,83 @@ public class HiberMain {
         return allTurnos;
 
     }
+    
+    public InfoFamilia getInfoFamPorIdFamilia(long idFamilia){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        InfoFamilia temp = new InfoFamilia();
+        
+        String hql = "from InfoFamilia IF where IF.familia = :id ORDER BY IF.idinfoFamilia DESC";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFamilia);
+        query.setMaxResults(1);
+        Object queryResult = query.uniqueResult();
+        temp = (InfoFamilia) queryResult;
+        Hibernate.initialize(temp.getAdoptantes());
+        
+        return temp;
+    }
+    
+    public ArrayList<Atencion> getListaAtencionesPorFamilia(long idFam) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        String hql = "From Atencion A where A.familia = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFam);
+        List atenciones = query.list();
+        ArrayList<Atencion> allAtenciones = new ArrayList();
+        for (Iterator iter = atenciones.iterator(); iter.hasNext();) {
+            Atencion temp = (Atencion) iter.next();
+            Hibernate.initialize(temp.getPersonal());
+            allAtenciones.add(temp);
+        }
+        return allAtenciones;
+
+    }
+    
+    public ArrayList<Sesion> getListaSesionesPorFamilia(long idFam) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        String hql = "From FormularioSesion FS where FS.familia = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFam);
+        List formularios = query.list();
+        ArrayList<Sesion> allSesiones = new ArrayList();
+        
+        for (Iterator iter = formularios.iterator(); iter.hasNext();) {
+            FormularioSesion temp = (FormularioSesion) iter.next();
+            Hibernate.initialize(temp.getSesion());
+            allSesiones.add(temp.getSesion());
+        }
+        
+        return allSesiones;
+
+    }
+    
+    public ArrayList<AsistenciaFR> getListaAsistenciaFRPorFamilia(long idFam) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        String hql = "From AsistenciaFR AFR where AFR.familia = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFam);
+        List asistencia = query.list();
+        ArrayList<AsistenciaFR> allAsistenciaFR = new ArrayList();
+        
+        for (Iterator iter = asistencia.iterator(); iter.hasNext();) {
+            AsistenciaFR temp = (AsistenciaFR) iter.next();
+            Hibernate.initialize(temp.getReunion().getTurno2().getGrupo().getTaller());
+            allAsistenciaFR.add(temp);
+        }
+        
+        return allAsistenciaFR;
+
+    }
+    
 }

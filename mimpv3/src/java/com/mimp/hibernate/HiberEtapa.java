@@ -795,4 +795,20 @@ public ArrayList<Familia> getListaFamilias () {
         return allEspera;
     }
     
+    public ArrayList<ExpedienteFamilia> getListaReevaluación(){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<ExpedienteFamilia> allReevaluacion = new ArrayList();
+        String hql = "from ExpedienteFamilia EF where EF.estado = :estado";
+        Query query = session.createQuery(hql);
+        query.setString("estado", "reevaluacion");
+        List expedientes = query.list();
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+        ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+            allReevaluacion.add(temp);
+        }
+        return allReevaluacion;
+    }
+    
 }

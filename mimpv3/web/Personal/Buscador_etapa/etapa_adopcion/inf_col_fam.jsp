@@ -103,6 +103,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
@@ -128,7 +129,7 @@
                                         <div>
                                             <label class="control-label">Profesional</label>
                                             <div class="controls">
-                                                <select id="personal" name="personal" class="input-xlarge">
+                                                <select ${informe != null ? 'disabled' : ''} id="personal" name="personal" class="input-xlarge">
                                                     <c:forEach var="personal" items="${listaPersonal}" > 
                                                         <option value="${personal.getIdpersonal()}" ${informe.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
                                                     </c:forEach>
@@ -138,10 +139,17 @@
                                         <br>
                                         <h3><strong>Evaluación</strong></h3>
                                         <br>
+                                        <div class="control-group">
+                                          <label class="control-label">Número de informe</label>
+                                            <div class="controls">
+                                              <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${informe.getNumEval()}" >
+                                           </div>
+                                        </div>
+                                        <br> 
                                         <div>
                                             <label class="control-label">Resultado</label>
                                             <div class="controls">
-                                                <select id="resultado" name="resultado" >
+                                                <select ${informe != null ? 'disabled' : ''} id="resultado" name="resultado" >
                                                     <option value="favorable" ${informe.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
                                                     <option value="desfavorable" ${informe.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
                                                 </select>
@@ -152,14 +160,14 @@
                                         <div class="control-group">
                                             <label class="control-label">Fecha de evaluación</label>
                                             <div class="controls">
-                                                <input id="fechaEval" name="fechaEval" type="text" value="${informe.getFechaResultado() != null ? df.dateToString(informe.getFechaResultado()) : ''}" class="datepicker input-xlarge">
+                                                <input ${informe != null ? 'disabled' : ''} id="fechaEval" name="fechaEval" type="text" value="${informe.getFechaResultado() != null ? df.dateToString(informe.getFechaResultado()) : ''}" class="datepicker input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Comentarios</label>
-                                                <textarea id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${informe.getObservacion()}</textarea>
+                                                <textarea ${informe != null ? 'disabled' : ''} id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${informe.getObservacion()}</textarea>
                                             </div>
                                         </div>   
                                         <br>

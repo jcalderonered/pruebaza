@@ -99,11 +99,11 @@
                         <br>
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
-                            <li  class="active"><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
+                            <li ><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
+                            <li ><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                                 <br>
@@ -112,56 +112,67 @@
                                         <thead>
                                             <tr>
                                                 <th>Expediente</th>
-                                                <th>Información</th>
-                                                <th>Nombre del NNA</th>
-                                                <th>Decisión de Consejo</th>
+                                                <th>HT</th>
+                                                <th>Número de Expediente</th>
+                                                <th>Fecha de ingreso a DGA</th>
+                                                <th>Tipo de Familia</th>
+                                                <th>Tipo</th>
+                                                <th>Detalles</th>
+                                                <th>Regresar a lista de Espera</th>
+                                                <th>Eliminar</th>
                                             </tr>
                                         </thead>
-                                        <c:if test="${!listaDesignaciones.isEmpty()}">
-                                            <c:set var="token" value="0"/>
+                                        <c:if test="${listaReevaluacion != null}">   
                                         <tbody>
-                                            <c:forEach var="designacion" items="${listaDesignaciones}" varStatus="status">
-                                                <c:choose>
-                                                    <c:when test="${token != designacion.getNna().getIdnna()}">
-                                                        <c:set var="token" value="${designacion.getNna().getIdnna()}"/>
-                                                        <tr>
-                                                            <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
-                                                            <td>
-                                                              <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
-                                                                  <input hidden name="estado" id="estado" value="designacion">
-                                                                  <button type="submit" class="btn btn-default">Ver</button>
-                                                              </form>
-                                                            </td>
-                                                            <td ${designacion.getTipoPropuesta() == 'dupla' ? 'rowspan="2"' : ''} ${designacion.getTipoPropuesta() == 'terna' ? 'rowspan="3"' : ''} style="vertical-align:middle" >                                                    
-                                                                ${designacion.getNna().getNombre()}
-                                                                ${designacion.getNna().getApellidoP()}
-                                                            </td>
-                                                            <td ${designacion.getTipoPropuesta() == 'dupla' ? 'rowspan="2"' : ''} ${designacion.getTipoPropuesta() == 'terna' ? 'rowspan="3"' : ''} style="vertical-align:middle" >
-                                                                 <form action="${pageContext.servletContext.contextPath}/designacionConsejo" method="post">
-                                                                    <input hidden name="idNna" id="idNna" value="${designacion.getNna().getIdnna()}">
-                                                                    <button type="submit" class="btn btn-default">Registrar</button>
-                                                                 </form>   
-                                                            </td>
-                                                        </tr>   
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                         <tr>
-                                                             <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
-                                                             <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                         </tr>  
-                                                    </c:otherwise>
-                                                </c:choose>
+                                            <c:forEach var="expediente" items="${listaReevaluacion}" varStatus="status">
+                                                <tr>
+                                                <td>
+                                                    ${expediente.getExpediente()}
+                                                </td>
+                                                <td>
+                                                    ${expediente.getHt()}
+                                                </td>
+                                                <td>
+                                                    ${expediente.getNumeroExpediente()}
+                                                </td>
+                                                <td>
+                                                    <c:if test="${expediente.getFechaIngresoDga() != null}">
+                                                    ${df.dateToString(expediente.getFechaIngresoDga())}
+                                                    </c:if>
+                                                </td>
+                                                <td>
+                                                    ${expediente.getTipoFamilia()}
+                                                </td>
+                                                <td>
+                                                    ${expediente.getNacionalidad() == 'nacional' ? 'N' : 'I' }
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                        <input hidden name="estado" id="estado" value="reevaluacion">
+                                                       <button type="submit" class="btn btn-default">Ver</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/RegresarListaEspera" method="post">
+                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                       <button type="submit" class="btn btn-default">Regresar</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/EliminarRegistro" method="post">
+                                                       <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                       <button type="submit" class="btn btn-default">Eliminar</button>
+                                                    </form>
+                                                </td>
+                                                </tr>
                                             </c:forEach>
                                         </tbody>
-                                        </c:if>
-                                        <c:if test="${listaDesignaciones.isEmpty()}">
-                                           <h3><strong>No existen Familias propuestas</strong></h3>
                                         </c:if> 
+                                      <c:if test="${listaReevaluacion == null}">
+                                        <h3><strong>No existen familias en esta etapa</strong></h3>
+                                      </c:if> 
                                     </table>
-                                    
                                 </div>
-                                <br>
-                                <!-- Button -->
                     </div>
                 </div>
             </div>
