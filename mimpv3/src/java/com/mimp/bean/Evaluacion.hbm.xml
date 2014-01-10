@@ -35,6 +35,9 @@
         <property name="NDesignacion" type="string">
             <column name="N_DESIGNACION" length="20" />
         </property>
+        <property name="numEval" type="string">
+            <column name="NUM_EVAL" length="20" />
+        </property>
         <set name="evalLegals" table="EVAL_LEGAL" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="IDEVALUACION" precision="10" scale="0" not-null="true" />

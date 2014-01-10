@@ -22,6 +22,7 @@ public class Evaluacion  implements java.io.Serializable {
      private String observacion;
      private String sustento;
      private String NDesignacion;
+     private String numEval;
      private Set<EvalLegal> evalLegals = new HashSet<EvalLegal>(0);
      private Set<Resolucion> resolucions = new HashSet<Resolucion>(0);
 
@@ -118,6 +119,13 @@ public class Evaluacion  implements java.io.Serializable {
     
     public void setNDesignacion(String NDesignacion) {
         this.NDesignacion = NDesignacion;
+    }
+    public String getNumEval() {
+        return this.numEval;
+    }
+    
+    public void setNumEval(String numEval) {
+        this.numEval = numEval;
     }
     public Set<EvalLegal> getEvalLegals() {
         return this.evalLegals;
