@@ -32,7 +32,7 @@
 
     </head>
 
-    <body id="bd" class="bd fs3 com_content">
+    <body onload="funct()" id="bd" class="bd fs3 com_content">
         <br>
         <br>
         <div id="wrap">
@@ -92,41 +92,18 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <form role="form">
+                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post">
+                            <input hidden id="adoptante" name="adoptante" value="ella">
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <c:if test="${estado != 'formativa'}">
                             <br>
-                            <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
                             <br>
-                            
-                            <br>
-                            <h3 align="left"><strong>Datos de la ficha</strong></h3>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="control-label">Número</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Fecha de ingreso</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Hoja de ruta </label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                            </div> 
                             </c:if>
                             <br>
                             <br>
                             <ul class="nav nav-tabs row">
-                                <li class="active"><a href="${pageContext.servletContext.contextPath}/laSolicitante" >La Solicitante</a></li>
+                                <li class="active"><a href="${pageContext.servletContext.contextPath}/laSolicitante">La Solicitante</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/elSolicitante" >El solicitante</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/compFamiliar" >Composición familiar</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/vivienda" >Vivienda</a></li>
@@ -167,14 +144,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input value="${Ella.getFechaNac() != null ? df.dateToString(Ella.getFechaNac()) : ''}" id="fechaNac" name="fechaNac" type="text" class="input-xlarge">
+                                        <input value="${Ella.getFechaNac() != null ? df.dateToString(Ella.getFechaNac()) : ''}" id="fechaNac" name="fechaNac" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Edad</label>  
                                     <div class="controls">
-                                        <input id="edad" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled id="edad" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -250,7 +227,7 @@
                                                 <input type="radio" name="estadoCivil" id="casada" value="casados" ${infoFam.getEstadoCivil() == 'casados' ? 'checked' : ''}>Casada</label>
                                             <br>
                                             <label class="control-label">Fecha de matrimonio Civil</label>
-                                            <input value="${infoFam.getFechaMatrimonio() != null ? df.dateToString(infoFam.getFechaMatrimonio()) : ''}" id="fechaMat" name="fechaMat" type="text" class="datepicker input-xlarge">
+                                            <input ${infoFam.getEstadoCivil() == 'casados' ? '' : 'disabled'} value="${infoFam.getFechaMatrimonio() != null ? df.dateToString(infoFam.getFechaMatrimonio()) : ''}" id="fechaMat" name="fechaMat" type="text" class="datepicker input-xlarge">
                                         </div>                            
                                     </div>
                                     <div class="col-md-3">  
@@ -347,7 +324,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input value="${Ella.getOcupActualDep()}" id="ocupacionDep" name="ocupacion" type="text" class="input-xlarge">
+                                        <input value="${Ella.getOcupActualDep()}" id="ocupacionDep" name="ocupacionDep" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -471,7 +448,7 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        <button ${Ella.getIdadoptante() == null || Ella.getIdadoptante() == 0 ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>
                             </fieldset>
@@ -497,13 +474,10 @@
             <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
-            <script type="text/javascript">
-
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-
-            </script>
-            <script type="text/javascript">
-                $(document).ready(function(){ 
+            <script type="text/javascript"> 
+                $('.datepicker').datepicker({"format": "dd/mm/yyyy","weekStart": 1,"autoclose": true,"language": "es"});  
+                  
+                $('#fechaNac').on('changeDate', function (ev) {
                     
                     var nac =  document.getElementById("fechaNac").value;
                     var edad =  document.getElementById("edad");
@@ -518,14 +492,54 @@
                     var birth_month = pieces[1];
                     var birth_year = pieces[2];
                     
+                    
                     if (curr_year != birth_year && birth_month > curr_month  ) edad.value = curr_year - birth_year - 1;
                     if (curr_year != birth_year && birth_month == curr_month  ) edad.value = curr_year - birth_year;
                     if (curr_year != birth_year && birth_month < curr_month  ) edad.value = curr_year - birth_year;
                     if (curr_year == birth_year) edad.value = 0;
-    
-    
-                });
+                     
+                        });
+                        
+
             </script>
+            <script type="text/javascript">
+              function funct(){
+                    var nac =  document.getElementById("fechaNac").value;
+                    var edad =  document.getElementById("edad");
+                    
+                    var today = new Date();
+                    var curr_date = today.getDate();
+                    var curr_month = today.getMonth() + 1;
+                    var curr_year = today.getFullYear();
+
+                    var pieces = nac.split('/');
+                    var birth_date = pieces[0];
+                    var birth_month = pieces[1];
+                    if (birth_month == 'ene') birth_month = 1;
+                    if (birth_month == 'feb') birth_month = 2;
+                    if (birth_month == 'mar') birth_month = 3;
+                    if (birth_month == 'abr') birth_month = 4;
+                    if (birth_month == 'may') birth_month = 5;
+                    if (birth_month == 'jun') birth_month = 6;
+                    if (birth_month == 'jul') birth_month = 7;
+                    if (birth_month == 'ago') birth_month = 8;
+                    if (birth_month == 'sep') birth_month = 9;
+                    if (birth_month == 'oct') birth_month = 10;
+                    if (birth_month == 'nov') birth_month = 11;
+                    if (birth_month == 'dic') birth_month = 12;
+                    
+                    var birth_year = pieces[2];
+                    
+                    if (curr_year != birth_year && birth_month > curr_month  ) edad.value = curr_year - birth_year - 1;
+                    if (curr_year != birth_year && birth_month == curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year != birth_year && birth_month < curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year == birth_year) edad.value = 0;
+                     
+                    
+                }
+                
+            </script>
+            
             <!-- Ubicar al final -->
 
     </body>

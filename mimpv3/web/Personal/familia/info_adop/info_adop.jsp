@@ -97,32 +97,8 @@
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <c:if test="${estado != 'formativa'}">
                             <br>
-                            <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
                             <br>
-                            
-                            <br>
-                            <h3 align="left"><strong>Datos de la ficha</strong></h3>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="control-label">Número</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Fecha de ingreso</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Hoja de ruta </label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                            </div> 
                             </c:if>
                             <br>
                             <br>
@@ -161,6 +137,7 @@
                                                 <td>${sesion.getFecha() != null ? df.dateToString(sesion.getFecha()) : ''}</td>
                                                 <td>
                                                     <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleSesion" method="post">
+                                                    <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}" >
                                                     <button class="btn btn-default">Detalles</button>
                                                     </form>
                                                </td>
@@ -169,7 +146,7 @@
                                         </tbody>
                                         </c:if>   
                                         <c:if test="${listaSesiones.isEmpty()}">
-                                            <h3><strong>No exiten sesiones relacionadas</strong></h3>
+                                            <h3><strong>No existen sesiones relacionadas</strong></h3>
                                         </c:if>
                                     </table>
                                 </div>
@@ -182,30 +159,44 @@
                                             <tr>
                                                 <th>Tipo taller</th>
                                                 <th>Nombre</th>
-                                                <th>N° de reuniones</th>
-                                                <th>Grupo y Turno asistido</th>
+                                                <th>Grupo</th>
+                                                <th>Turno asistido</th>
                                                 <th>Detalles</th>
                                             </tr>
                                         </thead>
                                         <c:if test="${!listaAsistenciaReuniones.isEmpty()}">
+                                            <c:set var="grupo" value="0" />
+                                            <c:set var="turno" value="0" />
                                         <tbody>
                                             <c:forEach var="reunion" items="${listaAsistenciaReuniones}" varStatus="status">
-                                            <tr>
+                                                <c:if test="${grupo == reunion.getReunion().getTurno2().getGrupo().getIdgrupo() && turno == reunion.getReunion().getTurno2().getIdturno2()}">
+                                                    
+                                                </c:if>
+                                                <c:if test="${grupo != reunion.getReunion().getTurno2().getGrupo().getIdgrupo() || turno != reunion.getReunion().getTurno2().getIdturno2()}">
+                                                <tr>
                                                 <td>${reunion.getReunion().getTurno2().getGrupo().getTaller().getTipoTaller()}</td>
                                                 <td>${reunion.getReunion().getTurno2().getGrupo().getTaller().getNombre()}</td>
-                                                <td>5</td>
-                                                <td>${reunion.getReunion().getTurno2().getGrupo().getNombre()} - ${reunion.getReunion().getTurno2().getNombre()}</td>
+                                                <td>${reunion.getReunion().getTurno2().getGrupo().getNombre()}</td>
+                                                <td>${reunion.getReunion().getTurno2().getNombre()}</td>
                                                 <td>
                                                     <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleTaller" method="post">
+                                                      <input hidden name="tipoTaller" id="tipoTaller" value="${reunion.getReunion().getTurno2().getGrupo().getTaller().getTipoTaller()}" >    
+                                                      <input hidden name="nombreTaller" id="nombreTaller" value="${reunion.getReunion().getTurno2().getGrupo().getTaller().getNombre()}" > 
+                                                      <input hidden name="nombreGrupo" id="nombreGrupo" value="${reunion.getReunion().getTurno2().getGrupo().getNombre()}" > 
+                                                      <input hidden name="nombreTurno" id="nombreTurno" value="${reunion.getReunion().getTurno2().getNombre()}" >
+                                                      <input hidden name="idTurno" id="idTurno" value="${reunion.getReunion().getTurno2().getIdturno2()}" >
                                                     <button class="btn btn-default">Detalles</button>
                                                     </form>
                                                 </td>
-                                            </tr>
+                                                 <c:set var="grupo" value="${reunion.getReunion().getTurno2().getGrupo().getIdgrupo()}" />
+                                                 <c:set var="turno" value="${reunion.getReunion().getTurno2().getIdturno2()}" />
+                                                </tr>
+                                                </c:if>
                                             </c:forEach> 
                                         </tbody>
                                         </c:if>   
                                         <c:if test="${listaAsistenciaReuniones.isEmpty()}">
-                                            <h3><strong>No exiten reuniones relacionadas</strong></h3>
+                                            <h3><strong>No existen reuniones relacionadas</strong></h3>
                                         </c:if>
                                     </table>
                                 </div>
@@ -218,33 +209,33 @@
                                         <thead>
                                             <tr>
                                                 <th>Tipo Evaluacion</th>
-                                                <th>Fecha asignacion</th>
+                                                <th>Número</th>
+                                                <th>Fecha Asignacion</th>
                                                 <th>Resultado</th>
                                                 <th>Detalles</th>
                                             </tr>
                                         </thead>
+                                        <c:if test="${!listaEvaluaciones.isEmpty()}">
                                         <tbody>
+                                            <c:forEach var="evaluacion" items="${listaEvaluaciones}" varStatus="status">
                                             <tr>
-                                                <td>Socioeconomica</td>
-                                                <td>11-Oct-13</td>
-                                                <td>Favorable</td>
+                                                <td>${evaluacion.getTipo() == 'informe' ? 'integracion familiar' : evaluacion.getTipo()}</td>
+                                                <td>${evaluacion.getNumEval()}</td>
+                                                <td>${evaluacion.getFechaAsignacion() != null ? df.dateToString(evaluacion.getFechaAsignacion()) : ''}</td>
+                                                <td>${evaluacion.getResultado()}</td>
                                                 <td>
                                                     <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleEvaluacion" method="post">
+                                                    <input hidden name="idEval" id="idEval" value="${evaluacion.getIdevaluacion()}" >    
                                                     <button class="btn btn-default">Detalles</button>
                                                     </form>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>Legal</td>
-                                                <td>18-Oct-13</td>
-                                                <td>Favorable</td>
-                                                <td>
-                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleEvaluacion" method="post">
-                                                    <button class="btn btn-default">Detalles</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            </c:forEach> 
                                         </tbody>
+                                        </c:if>   
+                                        <c:if test="${listaEvaluaciones.isEmpty()}">
+                                            <h3><strong>No existen evaluaciones relacionadas</strong></h3>
+                                        </c:if>
                                     </table>
                                 </div>
                                 <br>
@@ -260,26 +251,34 @@
                                                 <th>Fecha de Notificación</th>
                                             </tr>
                                         </thead>
+                                        <c:if test="${!listaEvaluaciones.isEmpty()}">
                                         <tbody>
-                                            <tr>
-                                                <td>Observaciones</td>
-                                                <td>020273</td>
-                                                <td>11-Oct-13</td>
-                                                <td>11-Oct-13</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Reconsideración</td>
-                                                <td>027313</td>
-                                                <td>18-Oct-13</td>
-                                                <td>18-Oct-13</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Aptitud</td>
-                                                <td>029103</td>
-                                                <td>28-Oct-13</td>
-                                                <td>28-Oct-13</td>
-                                            </tr>
+                                            <c:forEach var="evaluacion" items="${listaEvaluaciones}" varStatus="status">
+                                                <c:if test="${!evaluacion.getResolucions().isEmpty()}">
+                                                    <c:forEach var="resolucion" items="${evaluacion.getResolucions()}" varStatus="status">
+                                                    <tr>
+                                                        <td>
+                                                            ${resolucion.getTipo() == 'apto' ? 'Apto' : '' }
+                                                            ${resolucion.getTipo() == 'improcedente' ? 'Improcedente' : '' }
+                                                            ${resolucion.getTipo() == 'fin' ? 'Fin de procedimiento' : '' }
+                                                            ${resolucion.getTipo() == 'observado' ? 'Observado' : '' }
+                                                            ${resolucion.getTipo() == 'colfam' ? 'Integracion Familiar' : '' }
+                                                            ${resolucion.getTipo() == 'sinefecto' ? 'Deja sin efecto la designacion' : '' }
+                                                            ${resolucion.getTipo() == 'adopcion' ? 'Resolución de adopción' : '' }
+                                                            ${resolucion.getTipo() == 'revocacion' ? 'Resolución que revoca la integración familiar' : '' }
+                                                        </td>
+                                                    <td>${resolucion.getNumero()}</td>
+                                                    <td>${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}</td>
+                                                    <td>${resolucion.getFechaNotificacion() != null ? df.dateToString(resolucion.getFechaNotificacion()) : ''}</td>
+                                                    </tr>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </c:forEach> 
                                         </tbody>
+                                        </c:if>
+                                        <c:if test="${listaEvaluaciones.isEmpty()}">
+                                            <h3><strong>No existen resoluciones relacionadas</strong></h3>
+                                        </c:if> 
                                     </table>
                                 </div>
                                 <br>
@@ -297,16 +296,38 @@
                                                 <th>Fecha de Solicitud Adopción</th>
                                             </tr>
                                         </thead>
+                                        <c:if test="${!listaEstudios.isEmpty()}">
                                         <tbody>
+                                            <c:forEach var="estudio" items="${listaEstudios}" varStatus="status">
                                             <tr>
-                                                <td>0202</td>
-                                                <td>Juanito Benitez</td>
-                                                <td>Mayores</td>
-                                                <td>MM</td>
-                                                <td>11-Oct-13</td>
-                                                <td></td>
+                                                <td>${estudio.getOrden()}</td>
+                                                <td>
+                                                    ${estudio.getNna().getNombre()}
+                                                    ${estudio.getNna().getApellidoP()}
+                                                    ${estudio.getNna().getApellidoM()}
+                                                </td>
+                                                <td>
+                                                    ${estudio.getNna().getEspecial() == 0 ? 'Necesidades Especiales' : ''}
+                                                    ${estudio.getNna().getEnfermo() == 0 ? 'Problemas de salud ' : ''}
+                                                    ${estudio.getNna().getMayor() == 0 ? 'Mayor de 9 años' : ''}
+                                                    ${estudio.getNna().getAdolescente() == 0 ? 'Adolescente' : ''}
+                                                    ${estudio.getNna().getHermano() == 0 ? 'Hermanos' : ''}
+                                                </td>
+                                                <td>
+                                                    <c:forEach var="expediente" items="${estudio.getNna().getExpedienteNnas()}" varStatus="status">
+                                                        ${expediente.getCodigoReferencia()}
+                                                    </c:forEach>
+                                                </td>
+                                                <td>${estudio.getFechaEstudio() != null ? df.dateToString(estudio.getFechaEstudio()) : ''}</td>
+                                                <td>${estudio.getFechaSolAdop() != null ? df.dateToString(estudio.getFechaSolAdop()) : ''}</td>
                                             </tr>
+                                            </c:forEach>  
                                         </tbody>
+                                        </c:if>
+                                        <c:if test="${listaEstudios.isEmpty()}">
+                                            <h3><strong>No existen Estudios de caso relacionados</strong></h3>
+                                        </c:if> 
+                                        
                                     </table>
                                 </div>
                                 <br>
@@ -326,18 +347,35 @@
                                                 <th>Obs</th>
                                             </tr>
                                         </thead>
+                                        <c:if test="${!listaDesignaciones.isEmpty()}">
                                         <tbody>
+                                            <c:forEach var="designacion" items="${listaDesignaciones}" > 
                                             <tr>
-                                                <td>0390</td>
-                                                <td>1</td>
-                                                <td>Dupla</td>
-                                                <td>No</td>
-                                                <td>Arturo Benitez</td>
-                                                <td>11-Oct-13</td>
-                                                <td>13-Oct-13</td>
-                                                <td>Se cambia la prioridad</td>
+                                                <td>${designacion.getNDesignacion()}</td>
+                                                <td>${designacion.getPrioridad()}</td>
+                                                <td>${designacion.getTipoPropuesta()}</td>
+                                                <td>
+                                                    ${designacion.getNna().getEspecial() == 0 || 
+                                                      designacion.getNna().getEnfermo() == 0 || 
+                                                      designacion.getNna().getMayor() == 0 || 
+                                                      designacion.getNna().getAdolescente() == 0 || 
+                                                      designacion.getNna().getHermano() == 0 ? 'Si' : 'No'}
+                                                   
+                                                <td>
+                                                    ${designacion.getNna().getNombre()}
+                                                    ${designacion.getNna().getApellidoP()}
+                                                    ${designacion.getNna().getApellidoM()}
+                                                </td>
+                                                <td>${designacion.getFechaPropuesta() != null ? df.dateToString(designacion.getFechaPropuesta()) : ''}</td>
+                                                <td>${designacion.getFechaConsejo() != null ? df.dateToString(designacion.getFechaConsejo()) : ''}</td>
+                                                <td>${designacion.getObs()}</td>
                                             </tr>
+                                            </c:forEach> 
                                         </tbody>
+                                        </c:if>
+                                        <c:if test="${listaDesignaciones.isEmpty()}">
+                                            <h3><strong>No existen Designaciones relacionadas</strong></h3>
+                                        </c:if> 
                                     </table>
                                 </div>
                                 </c:if>      

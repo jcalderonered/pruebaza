@@ -99,32 +99,8 @@
                         <form role="form">
                             <c:if test="${estado != 'formativa'}">
                             <br>
-                            <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
                             <br>
-                            
-                            <br>
-                            <h3 align="left"><strong>Datos de la ficha</strong></h3>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="control-label">Número</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Fecha de ingreso</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Hoja de ruta </label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                            </div> 
                             </c:if>
                             <br>
                             <br>
@@ -152,35 +128,35 @@
                                 <div class="control-group">
                                     <label class="control-label">Número de Sesión</label>
                                     <div class="controls">
-                                        <input id="nsesion" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${sesion.getNSesion()}" id="nsesion" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha </label>
                                     <div class="controls">
-                                        <input id="fecha_hora" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input value="${sesion.getFecha() != null ? df.dateToString(sesion.getFecha()): ''}" id="fecha_hora" name="full-name" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Hora</label>
                                     <div class="controls">
-                                        <input id="direccion" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${sesion.getHora()}" id="direccion" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Duración</label>
                                     <div class="controls">
-                                        <input id="duracion" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${sesion.getDuracion()}" id="duracion" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Dirección</label>
                                     <div class="controls">
-                                        <input id="fecha_hora" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${sesion.getDireccion()}" id="fecha_hora" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <!--FIN DE CONTENIDO-->

@@ -99,32 +99,8 @@
                         <form role="form">
                             <c:if test="${estado != 'formativa'}">
                             <br>
-                            <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
                             <br>
-                            
-                            <br>
-                            <h3 align="left"><strong>Datos de la ficha</strong></h3>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="control-label">Número</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Fecha de ingreso</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Hoja de ruta </label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                            </div> 
                             </c:if>
                             <br>
                             <br>
@@ -152,35 +128,35 @@
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Evaluación</label>
                                     <div class="controls">
-                                        <input placeholder="Psicológica" id="tipo_eval" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${evaluacion.getTipo()}" id="tipo_eval" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha asignación</label>
                                     <div class="controls">
-                                        <input type="text" class="datepicker span2" value="" id="dp3" >
+                                        <input value="${evaluacion.getFechaAsignacion() != null ? df.dateToString(evaluacion.getFechaAsignacion()) : ''}" type="text" class="datepicker span2" value="" id="dp3" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Responsable</label>
                                     <div class="controls">
-                                        <input id="responsable" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${evaluacion.getPersonal().getNombre()} ${evaluacion.getPersonal().getApellidoP()} ${evaluacion.getPersonal().getApellidoM()}" id="responsable" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Resultado</label>
                                     <div class="controls">
-                                        <input id="resul" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${evaluacion.getResultado()}" id="resul" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha del resultado</label>
                                     <div class="controls">
-                                        <input id="fecha_resul" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input value="${evaluacion.getFechaResultado() != null ? df.dateToString(evaluacion.getFechaResultado()) : ''}" id="fecha_resul" name="full-name" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>

@@ -98,37 +98,13 @@
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <c:if test="${estado != 'formativa'}">
                             <br>
-                            <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
                             <br>
-                            
-                            <br>
-                            <h3 align="left"><strong>Datos de la ficha</strong></h3>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="control-label">Número</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Fecha de ingreso</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Hoja de ruta </label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                            </div> 
                             </c:if>
                             <br>
                             <br>
                             <ul class="nav nav-tabs row">
-                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante" >La Solicitante</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante">La Solicitante</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/elSolicitante" >El solicitante</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/compFamiliar" >Composición familiar</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/vivienda" >Vivienda</a></li>
@@ -152,54 +128,44 @@
                                                 <th>Fecha y Hora</th>
                                                 <th>Tipo de atencion</th>
                                                 <th>Detalle</th>
-                                                <th>Observacioens</th>
+                                                <th>Observaciones</th>
                                                 <th>Editar</th>
                                             </tr>
                                         </thead>
+                                        <c:if test="${!listaAtenciones.isEmpty()}">
                                         <tbody>
+                                            <c:forEach var="atencion" items="${listaAtenciones}" varStatus="status">
                                             <tr>
-                                                <td>Juan Cabello</td>
-                                                <td>14-Nov-13 15:01</td>
-                                                <td>Teléfono</td>
-                                                <td>Requeria informacion sobre estado actual del proceso</td>
-                                                <td>Tuvimos problemas de estatica en la llamada</td>
-                                                <td>
-                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleEvaluacion" method="post">
-                                                    <button class="btn btn-default">Detalles</button>
-                                                    </form>
+                                                <td>${atencion.getPersonal().getNombre()}
+                                                    ${atencion.getPersonal().getApellidoP()}
+                                                    ${atencion.getPersonal().getApellidoM()}
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Juan Cabello</td>
-                                                <td>14-Nov-13 15:09</td>
-                                                <td>Teléfono</td>
-                                                <td>Requeria informacion sobre estado actual del proceso</td>
-                                                <td>2da vez que trata de contactarse para la misma información</td>
+                                                <td>
+                                                    ${atencion.getFecha() != null ? df.dateToString(atencion.getFecha()): ''}
+                                                    ${atencion.getHora()}
+                                                </td>
+                                                <td>${atencion.getTipoAtencion()}</td>
+                                                <td>${atencion.getDetalle()}</td>
+                                                <td>${atencion.getObservacion()}</td>
                                                 <td>
                                                     <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleAtencion" method="post">
+                                                    <input hidden id="idAtencion" name="idAtencion" value="${atencion.getIdatencion()}">    
                                                     <button class="btn btn-default">Detalles</button>
                                                     </form>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>Ernesto Zapata</td>
-                                                <td>19-Nov-13 09:00</td>
-                                                <td>Correo</td>
-                                                <td>Requeria informacion sobre estado actual del proceso</td>
-                                                <td></td>
-                                                <td>
-                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleAtencion" method="post">
-                                                    <button class="btn btn-default">Detalles</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                           </c:forEach>
                                         </tbody>
+                                        </c:if>
+                                        <c:if test="${listaAtenciones.isEmpty()}">
+                                            <h3><strong>No exiten sesiones relacionadas</strong></h3>
+                                        </c:if>
                                     </table>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar nueva atención</button>
+                                        <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/agregarAtencion'" id="singlebutton" name="singlebutton" class="btn btn-default">Registrar nueva atención</button>
                                     </div>
                                 </div>
                                 <!--FIN DE CONTENIDO-->
