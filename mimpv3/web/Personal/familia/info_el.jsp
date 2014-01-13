@@ -112,7 +112,7 @@
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/infoExpediente" >Información del Expediente</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/procesoAdopcion" >Proceso de adopción</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna" >Antecedentes del NNA</a></li>
-                                <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado" >NNA asociado</a></li>
+                                <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' || estado == 'designacion' || estado == 'adopcion' || estado == 'reevaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado" >NNA Adoptado</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/atenciones" >Atenciones</a></li>
                             </ul>
                             <br>
@@ -318,7 +318,7 @@
                                     <div class="col-md-3">  
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="trabDep" id="trabDep" value="0" ${El.getTrabajadorDepend() == 0 ? 'checked' : ''}>Si</label>
+                                                <input onclick="Dep()" type="checkbox" name="trabDep" id="trabDep" value="0" ${El.getTrabajadorDepend() == 0 ? 'checked' : ''}>Si</label>
                                         </div>
                                     </div>  
                                 </div> 
@@ -363,7 +363,7 @@
                                     <div class="col-md-3">  
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="trabIndep" id="trabIndep" value="0" ${El.getTrabajadorIndepend() == 0 ? 'checked' : ''}>Si</label>
+                                                <input onclick="Indep()()" type="checkbox" name="trabIndep" id="trabIndep" value="0" ${El.getTrabajadorIndepend() == 0 ? 'checked' : ''}>Si</label>
                                         </div>
                                     </div>  
                                 </div> 
@@ -534,10 +534,104 @@
                     if (curr_year != birth_year && birth_month < curr_month  ) edad.value = curr_year - birth_year;
                     if (curr_year == birth_year) edad.value = 0;
                      
-                    
+                        var indep = document.getElementById('trabIndep');
+                        var ocupInd = document.getElementById('ocupacionInd');
+                        var ingInd = document.getElementById('ingresoInd');
+                        
+                        var ocupDep = document.getElementById('ocupacionDep');
+                        var centTra = document.getElementById('centroTrabajo');
+                        var direcTrab = document.getElementById('direccionTrabajo');
+                        var telfTrab = document.getElementById('telefonoTrabajo');
+                        var ingDep = document.getElementById('ingresoDep'); 
+                        var dep = document.getElementById('trabDep');
+                        
+                        if (document.getElementById('trabDep').checked) {
+                            indep.checked = false;
+                            ocupInd.disabled = true;
+                            ingInd.disabled = true;
+                            ocupDep.disabled = false;
+                            centTra.disabled = false;
+                            direcTrab.disabled = false;
+                            telfTrab.disabled = false;
+                            ingDep.disabled = false;
+                       }
+                       
+                       if (document.getElementById('trabIndep').checked) {
+                            dep.checked = false;
+                            ocupInd.disabled = false;
+                            ingInd.disabled = false;
+                            
+                            ocupDep.disabled = true;
+                            centTra.disabled = true;
+                            direcTrab.disabled = true;
+                            telfTrab.disabled = true;
+                            ingDep.disabled = true;
+                            
+                            
+                       }
                 }
                 
             </script>
+            <script>
+                function Dep()
+                    {
+                        var indep = document.getElementById('trabIndep');
+                        var ocupInd = document.getElementById('ocupacionInd');
+                        var ingInd = document.getElementById('ingresoInd');
+                        
+                        var ocupDep = document.getElementById('ocupacionDep');
+                        var centTra = document.getElementById('centroTrabajo');
+                        var direcTrab = document.getElementById('direccionTrabajo');
+                        var telfTrab = document.getElementById('telefonoTrabajo');
+                        var ingDep = document.getElementById('ingresoDep');
+                        
+                        if (document.getElementById('trabDep').checked) {
+                            indep.checked = false;
+                            ocupInd.disabled = true;
+                            ingInd.disabled = true;
+                            ocupDep.disabled = false;
+                            centTra.disabled = false;
+                            direcTrab.disabled = false;
+                            telfTrab.disabled = false;
+                            ingDep.disabled = false;
+                       } else {
+                            
+                       }
+                    }
+           </script>  
+           <script>
+                function Indep()
+                    {
+                        var dep = document.getElementById('trabDep');
+                        var ocupInd = document.getElementById('ocupacionInd');
+                        var ingInd = document.getElementById('ingresoInd');
+                        
+                        var ocupDep = document.getElementById('ocupacionDep');
+                        var centTra = document.getElementById('centroTrabajo');
+                        var direcTrab = document.getElementById('direccionTrabajo');
+                        var telfTrab = document.getElementById('telefonoTrabajo');
+                        var ingDep = document.getElementById('ingresoDep');
+                        
+                        if (document.getElementById('trabIndep').checked) {
+                            dep.checked = false;
+                            ocupInd.disabled = false;
+                            ingInd.disabled = false;
+                            
+                            ocupDep.disabled = true;
+                            centTra.disabled = true;
+                            direcTrab.disabled = true;
+                            telfTrab.disabled = true;
+                            ingDep.disabled = true;
+                            
+                            
+                       } else {
+                            
+                       }
+                    }
+           </script>  
+             
+            
+            
             <!-- Ubicar al final -->
     </body>
 </html>

@@ -476,7 +476,13 @@ public class HiberMain {
         
         for (Iterator iter = designaciones.iterator(); iter.hasNext();) {
             Designacion temp = (Designacion) iter.next();
-            Hibernate.initialize(temp.getNna());
+            if (temp.getAceptacionConsejo() == 2){
+                Hibernate.initialize(temp.getNna().getExpedienteNnas());
+                Hibernate.initialize(temp.getNna().getJuzgado());
+                Hibernate.initialize(temp.getNna().getCar());
+            }else {
+                Hibernate.initialize(temp.getNna());
+            }
             allDesignaciones.add(temp);
         }
         

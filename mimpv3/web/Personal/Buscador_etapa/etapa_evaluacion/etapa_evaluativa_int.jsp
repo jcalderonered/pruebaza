@@ -149,6 +149,7 @@
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
                                                         <input hidden name="estado" id="estado" value="evaluacion">
+                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                                                         <button type="submit" class="btn btn-default">Ver</button>
                                                     </form>
                                                 </td>
@@ -226,7 +227,7 @@
                                                     </c:choose>
                                                </c:forEach>
                                                 </c:if>
-                                               <c:if test="${legal.getResolucions().isEmpty()}">
+                                               <c:if test="${legal == null || legal.getResolucions().isEmpty()}">
                                                    <td>
                                                        Pendiente
                                                    </td>

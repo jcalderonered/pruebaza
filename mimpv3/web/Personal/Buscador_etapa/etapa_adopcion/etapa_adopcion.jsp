@@ -132,10 +132,11 @@
                                                     <c:when test="${token != adopcion.getNna().getIdnna()}">
                                                         <c:set var="token" value="${adopcion.getNna().getIdnna()}"/>
                                                         <tr>
-                                                            <td>${adopcion.getExpedienteFamilia().getExpediente()} ${adopcion.getExpedienteFamilia().getIdexpedienteFamilia()}</td>
+                                                            <td>${adopcion.getExpedienteFamilia().getExpediente()}</td>
                                                             <td>
                                                               <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
                                                                     <input hidden name="estado" id="estado" value="adopcion">
+                                                                    <input hidden name="idExpediente" id="idExpediente" value="${adopcion.getExpedienteFamilia().getExpediente().getIdexpedienteFamilia()}">
                                                                     <button type="submit" class="btn btn-default">Ver</button>
                                                               </form>
                                                             </td>

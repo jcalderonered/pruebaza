@@ -53,6 +53,8 @@ public class main {
     
     InfoFamilia infoFam = new InfoFamilia();
     ExpedienteFamilia expediente = new ExpedienteFamilia();
+    Nna nnaAdoptado = new Nna();
+    ExpedienteNna expNna = new ExpedienteNna();
     /*      */
     @RequestMapping("/")
     public String hello() {
@@ -434,6 +436,20 @@ public class main {
             listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(idFam);
             listaSesiones = ServicioMain.getListaSesionesPorFamilia(idFam);
             listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(idFam);
+        }else if(estado.equals("evaluacion")){
+            Long idExp = Long.parseLong(idExpediente);
+            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+            expediente = tempExp;
+            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+            for (Adoptante adop : infoFam.getAdoptantes()) {
+                if(adop.getSexo() == 'f') Ella = adop;
+                if(adop.getSexo() == 'm') El = adop;
+            }
+            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+            
         }else if(estado.equals("espera")){
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -450,6 +466,76 @@ public class main {
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
         
+        }else if(estado.equals("designacion")){
+            Long idExp = Long.parseLong(idExpediente);
+            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+            expediente = tempExp;
+            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+            for (Adoptante adop : infoFam.getAdoptantes()) {
+                if(adop.getSexo() == 'f') Ella = adop;
+                if(adop.getSexo() == 'm') El = adop;
+            }
+            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+        }else if(estado.equals("adopcion")){
+            Long idExp = Long.parseLong(idExpediente);
+            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+            expediente = tempExp;
+            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+            for (Adoptante adop : infoFam.getAdoptantes()) {
+                if(adop.getSexo() == 'f') Ella = adop;
+                if(adop.getSexo() == 'm') El = adop;
+            }
+            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+        }else if(estado.equals("reevaluacion")){
+            Long idExp = Long.parseLong(idExpediente);
+            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+            expediente = tempExp;
+            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+            for (Adoptante adop : infoFam.getAdoptantes()) {
+                if(adop.getSexo() == 'f') Ella = adop;
+                if(adop.getSexo() == 'm') El = adop;
+            }
+            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+        
+        
+        }else if(estado.equals("post")){
+            Long idExp = Long.parseLong(idExpediente);
+            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+            expediente = tempExp;
+            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+            for (Adoptante adop : infoFam.getAdoptantes()) {
+                if(adop.getSexo() == 'f') Ella = adop;
+                if(adop.getSexo() == 'm') El = adop;
+            }
+            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+            
+            for (Designacion desig : listaDesignaciones) {
+                    if(desig.getAceptacionConsejo() == 2){
+                        nnaAdoptado = desig.getNna();
+                        expNna = desig.getNna().getExpedienteNnas().iterator().next();
+                    }
+            }
+            
         }
         
       
@@ -605,11 +691,12 @@ public class main {
         }
         
         
-        //ArrayList<Familia> allFamilias = new ArrayList();
-        //allFamilias = servicioEtapa.getListaFamilias();
+        
         map.put("df",df);
         map.put("estado",etapaOrigen);
         map.put("expediente",expediente);
+        map.put("nna",nnaAdoptado);
+        map.put("exp",expNna);
         return new ModelAndView("/Personal/familia/info_nna", map);
 }
  
@@ -853,10 +940,10 @@ public class main {
         infoFam.setNnaAdolescente(Short.parseShort(adolescente));
         infoFam.setNnaHermano(Short.parseShort(hermanos));
         
-        infoFam.setPuedeViajar(Short.parseShort(viajar));
-        infoFam.setExpectativaEdadMin(Short.parseShort(edadMin));
-        infoFam.setExpectativaEdadMax(Short.parseShort(edadMax));
-        infoFam.setExpectativaGenero(genero);
+        if (viajar != null && !viajar.equals("")) infoFam.setPuedeViajar(Short.parseShort(viajar));
+        if (edadMin != null && !edadMin.equals("")) infoFam.setExpectativaEdadMin(Short.parseShort(edadMin));
+        if (edadMax != null && !edadMax.equals("")) infoFam.setExpectativaEdadMax(Short.parseShort(edadMax));
+        if (genero != null && !genero.equals("")) infoFam.setExpectativaGenero(genero);
         
         ServicioMain.updateInfoFam(infoFam);
         
@@ -988,15 +1075,57 @@ public class main {
             El.setNivelInstruccion(nivelInstruccion);
             if (culminoNivel != null && !culminoNivel.equals("")) El.setCulminoNivel(Short.parseShort(culminoNivel));
             El.setProfesion(profesion);
-            if (trabDep != null && !trabDep.equals("")) El.setTrabajadorDepend(Short.parseShort(trabDep));
+            /*Trabajo*/
+            if (trabDep != null && !trabDep.equals("")) 
+            {  
+                El.setTrabajadorDepend(Short.parseShort(trabDep));
+            }else{
+                El.setTrabajadorDepend(null);
+            }
+            if (ocupacionDep != null && !ocupacionDep.equals("")) {
             El.setOcupActualDep(ocupacionDep);
+            }else{
+            El.setOcupActualDep(null);
+            }
+            if (centroTrabajo != null && !centroTrabajo.equals("")) {
             El.setCentroTrabajo(centroTrabajo);
+            }else{
+            El.setCentroTrabajo(null);
+            }
+            if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
             El.setDireccionCentro(direccionTrabajo);
+            }else {
+            El.setDireccionCentro(null);
+            }
+            if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
             El.setTelefonoCentro(telefonoTrabajo);
-            if (ingresoDep != null && !ingresoDep.equals("")) El.setIngresoDep(Long.parseLong(ingresoDep));
-            if (trabIndep != null && !trabIndep.equals("")) El.setTrabajadorIndepend(Short.parseShort(trabIndep));
+            }else{
+            El.setTelefonoCentro(null);
+            }
+            if (ingresoDep != null && !ingresoDep.equals(""))
+            {
+                El.setIngresoDep(Long.parseLong(ingresoDep));
+            }else{
+                El.setIngresoDep(null);
+            }
+            if (trabIndep != null && !trabIndep.equals("")) {
+                El.setTrabajadorIndepend(Short.parseShort(trabIndep));
+            }else{
+                El.setTrabajadorIndepend(null);
+            }
+            if (ocupacionInd != null && !ocupacionInd.equals("")) {
             El.setOcupActualInd(ocupacionInd);
-            if (ingresoInd != null && !ocupacionInd.equals("")) El.setIngresoIndep(Long.parseLong(ingresoInd));
+            }
+            else{
+            El.setOcupActualInd(null);
+                }
+            
+            if (ingresoInd != null && !ocupacionInd.equals("")) {
+                El.setIngresoIndep(Long.parseLong(ingresoInd));
+            }else{
+                El.setIngresoIndep(null);
+            }
+            /*Fin Trabajo*/
             if (seguroSalud != null && !seguroSalud.equals("")) El.setSeguroSalud(Short.parseShort(seguroSalud));
             El.setTipoSeguro(tipoSeguro);
             if (seguroVida != null && !seguroVida.equals("")) El.setSeguroVida(Short.parseShort(seguroVida));
@@ -1043,15 +1172,57 @@ public class main {
             Ella.setNivelInstruccion(nivelInstruccion);
             if (culminoNivel != null && !culminoNivel.equals("")) Ella.setCulminoNivel(Short.parseShort(culminoNivel));
             Ella.setProfesion(profesion);
-            if (trabDep != null && !trabDep.equals("")) Ella.setTrabajadorDepend(Short.parseShort(trabDep));
+            /*Trabajo*/
+            if (trabDep != null && !trabDep.equals("")) 
+            {  
+                Ella.setTrabajadorDepend(Short.parseShort(trabDep));
+            }else{
+                Ella.setTrabajadorDepend(null);
+            }
+            if (ocupacionDep != null && !ocupacionDep.equals("")) {
             Ella.setOcupActualDep(ocupacionDep);
+            }else{
+            Ella.setOcupActualDep(null);
+            }
+            if (centroTrabajo != null && !centroTrabajo.equals("")) {
             Ella.setCentroTrabajo(centroTrabajo);
+            }else{
+            Ella.setCentroTrabajo(null);
+            }
+            if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
             Ella.setDireccionCentro(direccionTrabajo);
+            }else {
+            Ella.setDireccionCentro(null);
+            }
+            if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
             Ella.setTelefonoCentro(telefonoTrabajo);
-            if (ingresoDep != null && !ingresoDep.equals("")) Ella.setIngresoDep(Long.parseLong(ingresoDep));
-            if (trabIndep != null && !trabIndep.equals("")) Ella.setTrabajadorIndepend(Short.parseShort(trabIndep));
+            }else{
+            Ella.setTelefonoCentro(null);
+            }
+            if (ingresoDep != null && !ingresoDep.equals(""))
+            {
+                Ella.setIngresoDep(Long.parseLong(ingresoDep));
+            }else{
+                Ella.setIngresoDep(null);
+            }
+            if (trabIndep != null && !trabIndep.equals("")) {
+                Ella.setTrabajadorIndepend(Short.parseShort(trabIndep));
+            }else{
+                Ella.setTrabajadorIndepend(null);
+            }
+            if (ocupacionInd != null && !ocupacionInd.equals("")) {
             Ella.setOcupActualInd(ocupacionInd);
-            if (ingresoInd != null && !ocupacionInd.equals("")) Ella.setIngresoIndep(Long.parseLong(ingresoInd));
+            }
+            else{
+            Ella.setOcupActualInd(null);
+                }
+            
+            if (ingresoInd != null && !ocupacionInd.equals("")) {
+                Ella.setIngresoIndep(Long.parseLong(ingresoInd));
+            }else{
+                Ella.setIngresoIndep(null);
+            }
+            /*Fin Trabajo*/
             if (seguroSalud != null && !seguroSalud.equals("")) Ella.setSeguroSalud(Short.parseShort(seguroSalud));
             Ella.setTipoSeguro(tipoSeguro);
             if (seguroVida != null && !seguroVida.equals("")) Ella.setSeguroVida(Short.parseShort(seguroVida));
