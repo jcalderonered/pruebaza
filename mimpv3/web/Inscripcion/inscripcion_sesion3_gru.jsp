@@ -61,7 +61,7 @@
         <br>
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesGrp" role="form" method="post">
+                <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesGrp" role="form" method="post" name="formulario" onsubmit="return(validar());">
                     <!-- Form Name -->
                     <input hidden id="idTurno" name="idTurno" value="${turno.getIdturno()}">
                     <input hidden id="estado" name="estado" value="${estado}">
@@ -372,6 +372,196 @@
         $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
     </script>
+    <script type="text/javascript">
+     
+            function validar()
+            {
+            //El  
+            if( document.formulario.nombreEl.value == "" )
+            {
+            alert( "Debe ingresar el nombre del asistente" );
+             document.formulario.nombreEl.focus() ;
+            return false;
+            }
+            if( document.formulario.apellidoPEl.value == "" )
+            {
+            alert( "Debe ingresar el apellido paterno del asistente" );
+             document.formulario.apellidoPEl.focus() ;
+            return false;
+            }
+            if( document.formulario.apellidoMEl.value == "" )
+            {
+            alert( "Debe ingresar el apellido materno del asistente" );
+             document.formulario.apellidoMEl.focus() ;
+            return false;
+            }
+            if( document.formulario.paisNacEl.value == "" )
+            {
+            alert( "Debe ingresar el país de nacimiento del asistente" );
+             document.formulario.paisNacEl.focus() ;
+            return false;
+            }
+            if( document.formulario.depNacEl.value == "" )
+            {
+            alert( "Debe ingresar el departamento de nacimiento del asistente" );
+             document.formulario.depNacEl.focus() ;
+            return false;
+            }
+            if( document.formulario.proNacEl.value == "" )
+            {
+            alert( "Debe ingresar la provincia de nacimiento del asistente" );
+             document.formulario.proNacEl.focus() ;
+            return false;
+            }
+            if( document.formulario.fechaNacEl.value == "" )
+            {
+            alert( "Debe ingresar la fecha de nacimiento del asistente" );
+             document.formulario.fechaNacEl.focus() ;
+            return false;
+            }
+            if( document.formulario.edadEl.value == "" )
+            {
+            alert( "Debe ingresar la edad del asistente" );
+             document.formulario.edadEl.focus() ;
+            return false;
+            }
+            if( document.formulario.docEl.value == "" )
+            {
+            alert( "Debe elegir el tipo de documento del asistente" );
+             document.formulario.docEl.focus() ;
+            return false;
+            }
+            if( document.formulario.numDocEl.value == "" )
+            {
+            alert( "Debe ingresar el número de documento del asistente" );
+             document.formulario.numDocEl.focus() ;
+            return false;
+            }
+            if( document.formulario.celEl.value == "" )
+            {
+            alert( "Debe ingresar el número celular del asistente" );
+             document.formulario.celEl.focus() ;
+            return false;
+            }
+            if( document.formulario.correoEl.value == "" )
+            {
+            alert( "Debe ingresar el correo electrónico del asistente" );
+             document.formulario.correoEl.focus() ;
+            return false;
+            }
+            //Ella
+            if( document.formulario.nombreElla.value == "" )
+            {
+            alert( "Debe ingresar el nombre de la asistente" );
+             document.formulario.nombreElla.focus() ;
+            return false;
+            }
+            if( document.formulario.apellidoPElla.value == "" )
+            {
+            alert( "Debe ingresar el apellido paterno de la asistente" );
+             document.formulario.apellidoPElla.focus() ;
+            return false;
+            }
+            if( document.formulario.apellidoMElla.value == "" )
+            {
+            alert( "Debe ingresar el apellido materno de la asistente" );
+             document.formulario.apellidoMElla.focus() ;
+            return false;
+            }
+            if( document.formulario.paisNacElla.value == "" )
+            {
+            alert( "Debe ingresar el país de nacimiento de la asistente" );
+             document.formulario.paisNacElla.focus() ;
+            return false;
+            }
+            if( document.formulario.depNacElla.value == "" )
+            {
+            alert( "Debe ingresar el departamento de nacimiento de la asistente" );
+             document.formulario.depNacEl.focus() ;
+            return false;
+            }
+            if( document.formulario.proNacElla.value == "" )
+            {
+            alert( "Debe ingresar la provincia de nacimiento de la asistente" );
+             document.formulario.proNacElla.focus() ;
+            return false;
+            }
+            if( document.formulario.fechaNacElla.value == "" )
+            {
+            alert( "Debe ingresar la fecha de nacimiento de la asistente" );
+             document.formulario.fechaNacElla.focus() ;
+            return false;
+            }
+            if( document.formulario.edadElla.value == "" )
+            {
+            alert( "Debe ingresar la edad de la asistente" );
+             document.formulario.edadElla.focus() ;
+            return false;
+            }
+            if( document.formulario.docElla.value == "" )
+            {
+            alert( "Debe elegir el tipo de documento de la asistente" );
+             document.formulario.docElla.focus() ;
+            return false;
+            }
+            if( document.formulario.numDocElla.value == "" )
+            {
+            alert( "Debe ingresar el número de documento de la asistente" );
+             document.formulario.numDocElla.focus() ;
+            return false;
+            }
+            if( document.formulario.celELla.value == "" )
+            {
+            alert( "Debe ingresar el número celular de la asistente" );
+             document.formulario.celELla.focus() ;
+            return false;
+            }
+            if( document.formulario.correoElla.value == "" )
+            {
+            alert( "Debe ingresar el correo electrónico de la asistente" );
+             document.formulario.correoElla.focus() ;
+            return false;
+            }
+            
+            if( document.formulario.pais.value == "" )
+            {
+            alert( "Debe ingresar su país de residencia" );
+             document.formulario.pais.focus() ;
+            return false;
+            }
+            if( document.formulario.dep.value == "" )
+            {
+            alert( "Debe ingresar su departamento de residencia" );
+             document.formulario.dep.focus() ;
+            return false;
+            }
+            if( document.formulario.prov.value == "" )
+            {
+            alert( "Debe ingresar su provincia de residencia" );
+             document.formulario.prov.focus() ;
+            return false;
+            }
+            if( document.formulario.dist.value == "" )
+            {
+            alert( "Debe ingresar su distrito de residencia" );
+             document.formulario.dist.focus() ;
+            return false;
+            }
+            if( document.formulario.dir.value == "" )
+            {
+            alert( "Debe ingresar su dirección domiciliaria" );
+             document.formulario.dir.focus() ;
+            return false;
+            }
+            if( document.formulario.telf.value == "" )
+            {
+            alert( "Debe ingresar su número de teléfono fijo" );
+             document.formulario.telf.focus() ;
+            return false;
+            }
+            return( true );
+            }
+            </script>
     <!-- Ubicar al final -->
 </body>
 </html>

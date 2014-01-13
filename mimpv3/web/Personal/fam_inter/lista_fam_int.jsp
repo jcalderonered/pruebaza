@@ -99,65 +99,64 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
-                                        <th colspan="3">El Adoptante</th>
-                                        <th colspan="3">La Adoptante</th>
-                                        <th rowspan="2">Organismo Acreditado o Autoridad Central</th>
-                                        <th rowspan="2">Detalles</th> 
-                                    </tr>
-                                    <tr>
-                                        <th>Nombres y Apellidos</th>
-                                        <th>Edad</th>
-                                        <th>Correo</th>
-                                        <th>Nombres y Apellidos</th> 
-                                        <th>Edad</th>
-                                        <th>Correo</th> 
-                                    </tr>
+                                    <th>Expediente</th>
+                                    <th>HT</th>
+                                    <th>Número de Expediente</th>
+                                    <th>Fecha de ingreso a DGA</th>
+                                    <th>Tipo de Familia</th>
+                                    <th>Tipo</th>
+                                    <th>Tipo Lista de Espera</th>
+                                    <th>Detalles</th>
                                 </thead>
 
                                 <tbody>
                                     <tr>
-                                        <td>Rick Davis</td>
-                                        <td>40</td>
-                                        <td>rdaivs@gmail.com</td>
-                                        <td>Lori Davis</td>
-                                        <td>40</td>
-                                        <td>ldaivs@gmail.com</td>
-                                        <td>Australia</td>
+                                        <td>Davis-Moore</td>
+                                        <td>HT-1578</td>
+                                        <td>16974</td>
+                                        <td>10-Feb-2013</td>
+                                        <td>EE</td>
+                                        <td>I</td>
+                                        <td>Extranjeros</td>
                                         <td><button href="#" class="btn btn-default">
                                                 <span class="glyphicon glyphicon-search"></span> 
-                                                Ver</button></td>
+                                                Ver</button>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>Daryl Wilshere</td>
-                                        <td>40</td>
-                                        <td>dwilshere@gmail.com</td>
-                                        <td>Carol Wilshere</td>
-                                        <td>40</td>
-                                        <td>cwilshere@gmail.com</td>
-                                        <td>Canada</td>
+                                        <td>Roger-Rose</td>
+                                        <td>HT-1587</td>
+                                        <td>2265</td>
+                                        <td>10-Mar-2010</td>
+                                        <td>EE</td>
+                                        <td>I</td>
+                                        <td>Extranjeros</td>
                                         <td><button href="#" class="btn btn-default">
                                                 <span class="glyphicon glyphicon-search"></span> 
-                                                Ver</button></td>
+                                                Ver</button>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>Glenn Williams</td>
-                                        <td>40</td>
-                                        <td>gwilliams@gmail.com</td>
-                                        <td>Maggie Williams</td>
-                                        <td>40</td>
-                                        <td>mwilliams@gmail.com</td>
-                                        <td>Canada</td>
+                                        <td>Walka-Mars</td>
+                                        <td>HT-2015</td>
+                                        <td>23547</td>
+                                        <td>10-Abr-2013</td>
+                                        <td>EE</td>
+                                        <td>I</td>
+                                        <td>Extranjeros</td>
                                         <td><button href="#" class="btn btn-default">
                                                 <span class="glyphicon glyphicon-search"></span> 
-                                                Ver</button></td>
+                                                Ver</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="control-group">
                             <div class="controls">
+                                <form role="form" action="${pageContext.servletContext.contextPath}/AgregarFamInt" method="post">
                                 <button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar</button>
+                                </form>
                             </div>
                         </div>
                         <br>

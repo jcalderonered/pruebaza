@@ -51,8 +51,7 @@ public class mainEtapas {
         }
         
         
-        //ArrayList<Familia> allFamilias = new ArrayList();
-        //allFamilias = servicioEtapa.getListaFamilias();
+       
         map.put("listaFamilias",servicioEtapa.getListaFamilias());
         return new ModelAndView("/Personal/Buscador_etapa/etapa_formativa", map);
     }
