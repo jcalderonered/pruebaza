@@ -384,25 +384,25 @@
                                         <form action="${pageContext.servletContext.contextPath}/FFicha/EditarRes" method="post">
                                             <tr>
                                                 <td>
-                                                    <inputt name="apellido_p" type="text" class="input_width">
+                                                    <input name="apellido_p" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <inputt name="apellido_m" type="text" class="input_width">
+                                                    <input name="apellido_m" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <inputt name="nombre" type="text" class="input_width">
+                                                    <input name="nombre" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <inputt name="parentesco" type="text" class="input_width">
+                                                    <input name="parentesco" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <inputt name="edad" type="text" class="input_width">
+                                                    <input name="edad" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <inputt name="ocupacion" type="text" class="input_width">
+                                                    <input name="ocupacion" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <inputt name="estado_salud" type="text" class="input_width">
+                                                    <input name="estado_salud" type="text" class="input_width">
                                                 </td>
                                                 <td>
                                                     <input hidden name="idresidente" id="idresidente" value="0">
