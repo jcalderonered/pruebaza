@@ -42,7 +42,6 @@ if (u==null){
             </div>
             <br>
             <br>
-
             <div class="container">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -81,7 +80,7 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Fecha</label>
                                     <div class="controls">
-                                        <input disabled placeholder="10/11/2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled value="${factual}" id="full-name" name="fecha_ingreso" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
@@ -89,21 +88,20 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Número</label>
                                     <div class="controls">
-                                        <input disabled placeholder="001-2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled value="" id="full-name" name="numero" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <br>
                         <br>
-
-                        <ul class="nav nav-tabs row" id="tabs" >
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc1" data-toggle="tab">La Solicitante</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc2" data-toggle="tab">El solicitante</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc3" data-toggle="tab">Composición familiar</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc4" data-toggle="tab">Vivienda</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/Fficha/opc5" data-toggle="tab">Proceso de adopción</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc6" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
+                        <ul class="nav nav-tabs row">
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc1">La Solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc2">El solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc3">Composición familiar</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc4">Vivienda</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/Fficha/opc5">Proceso de adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc6">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
                         <br>
                         <form class="form-horizontal"> 
@@ -125,37 +123,37 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Fecha de asistencia a la sesión informativa</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="fecha_sesion" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fechas de asistencia a reuniones de taller de preparación</label>
                                     <div class="controls">
-                                        <textarea class="input-xlarge" name="message" rows="5" ></textarea>
+                                        <textarea class="input-xlarge" name="fechas_reunion" rows="5" ></textarea>
                                     </div>
                                 </div>     
                                 <br>
                                 <h3><strong>Proceso de adopción anterior</strong></h3>
                                 <br>
-                                <h3>Se han presentado antes al proceso de adopción?</h3>
+                                <h3>¿Se han presentado antes al proceso de adopción?</h3>
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" >Si</label>
+                                                <input type="radio" name="proc_adop" id="optionsRadios1" value="0" >Si</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="1" >No</label>
+                                                <input type="radio" name="proc_adop" id="optionsRadios1" value="1" >No</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Cuantas veces?</label>
+                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">¿Cuantas veces?</label>
                                             <br>
                                             <input id="num_proceso" name="n_proc_adop_prev" type="text" class="input-xlarge">
                                         </div>                            
@@ -165,23 +163,23 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Año/s</label>
                                     <div class="controls">
-                                        <textarea class="input-xlarge" name="message" placeholder="" rows="5" ></textarea>
+                                        <textarea class="input-xlarge" name="anho_proc" rows="5" ></textarea>
                                     </div>
                                 </div>
                                 <br>
-                                <h3><strong>Culmino el proceso de preparación?</strong></h3>
+                                <h3><strong>¿Culminó el proceso de preparación?</strong></h3>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
+                                                <input type="radio" name="culm_prep" id="optionsRadios1" value="0" >Si</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >No</label>
+                                                <input type="radio" name="culm_prep" id="optionsRadios2" value="1" >No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -192,13 +190,13 @@ if (u==null){
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
+                                                <input type="radio" name="culm_eval" id="optionsRadios1" value="0" >Si</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >No</label>
+                                                <input type="radio" name="culm_eval" id="optionsRadios1" value="1" >No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +205,7 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Motivos por el que desea adoptar</label>
                                     <div class="controls">
-                                        <textarea id="motivo" class="input-xlarge" name="message" placeholder="" rows="5" ></textarea>
+                                        <textarea id="motivo" class="input-xlarge" name="motivo" placeholder="" rows="5" ></textarea>
                                     </div>
                                 </div>     
                                 <br>
@@ -218,12 +216,11 @@ if (u==null){
                                     procedimiento administrativo de adopción.
                                 </p>
                                 <!-- Text input-->
-
                                 <!-- Button -->
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">confirmar</button>
+                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>
                             </fieldset>

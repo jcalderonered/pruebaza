@@ -187,7 +187,7 @@
                                                     <input name="edad" type="text" class="input_width">
                                                 </td>
                                                 <td>
-                                                    <input name="fecha_nac" type="text" class="input_width">
+                                                    <input name="fecha_nac" type="text" class="datepicker input_width">
                                                 </td>
                                                 <td>
                                                     <input name="ocupacion" name="ocupación" type="text" class="input_width">
@@ -425,7 +425,7 @@
                             <br>
                             <div class="control-group">
                                 <div class="controls">
-                                    <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">confirmar</button>
+                                    <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar Cambios</button>
                                 </div>
                             </div>
 

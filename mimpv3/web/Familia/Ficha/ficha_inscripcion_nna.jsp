@@ -79,7 +79,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha</label>
                                     <div class="controls">
-                                        <input disabled placeholder="10/11/2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled value="${factual}" id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Número</label>
                                     <div class="controls">
-                                        <input disabled placeholder="001-2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
@@ -127,8 +127,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -138,8 +138,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -149,8 +149,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -160,8 +160,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -172,8 +172,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -199,8 +199,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -211,8 +211,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -223,8 +223,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -249,8 +249,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -260,8 +260,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -271,8 +271,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -282,8 +282,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -293,8 +293,8 @@
                                                 </td>
                                                 <td>
                                                     <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                        <option value="0">SI</option>
+                                                        <option value="1">NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -315,13 +315,13 @@
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
+                                            <input type="radio" name="puede_viajar" id="optionsRadios1" value="0" >Si</label>
                                     </div>
                                 </div> 
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >No</label>
+                                            <input type="radio" name="puede_viajar" id="optionsRadios1" value="1" >No</label>
                                     </div>
                                 </div>
                             </div>
@@ -330,7 +330,7 @@
                             <div class="control-group">
                                 <label class="control-label">En caso su respuesta sea negativa, indicar por qué</label>
                                 <div class="controls">
-                                    <textarea class="input-xlarge" name="message" placeholder="" rows="5" ></textarea>
+                                    <textarea class="input-xlarge" name="rpta_viaje" placeholder="" rows="5" ></textarea>
                                 </div>
                             </div>     
 
