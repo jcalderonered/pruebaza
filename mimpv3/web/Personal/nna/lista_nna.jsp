@@ -132,19 +132,12 @@
                                                     <c:choose>
                                                         <c:when test="${designacion.getAceptacionConsejo() == 0 || designacion.getAceptacionConsejo() == 1 || designacion.getAceptacionConsejo() == 2}">
                                                             <c:set var="tokenAdopcion" value="0" ></c:set>
-                                                        </c:when> 
-                                                        <c:otherwise> No </c:otherwise>            
+                                                        </c:when>             
                                                     </c:choose>
                                                 </c:forEach>  
                                                 ${tokenAdopcion == 0 ? 'Si' : 'No' }        
                                             </c:if>  
-                                                
-                                            <c:if test="${nna.getDesignacions().isEmpty()}">
-                                                
-                                                No
-                                            
-                                            </c:if>      
-                                                                                               
+                                                                                       
                                         </td>
                                         <td>
                                             <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
