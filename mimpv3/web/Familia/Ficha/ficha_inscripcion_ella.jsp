@@ -98,13 +98,13 @@
                         </div>
                         <br>
                         <br>
-                        <ul class="nav nav-tabs row" id="tabs" >
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/Fficha/opc1" data-toggle="tab">La Solicitante</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc2" data-toggle="tab">El solicitante</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc3" data-toggle="tab">Composición familiar</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc4" data-toggle="tab">Vivienda</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc5" data-toggle="tab">Proceso de adopción</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc6" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
+                        <ul class="nav nav-tabs row">
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/Fficha/opc1">La Solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc2">El solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc3">Composición familiar</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc4">Vivienda</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc5">Proceso de adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc6">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
                         <form role="form" action="${pageContext.servletContext.contextPath}/FfichaGuardar/opc1" method="post"> 
                             <fieldset>
@@ -553,35 +553,35 @@
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="ocup_actual" value="${sol.getOcupActualDep()}" name="ocup_act_dep_ella" type="text" class="input-xlarge">
+                                        <input id="ocup_actual" value="${sol.getOcupActualDep()}" name="ocup_act_dep_ella" type="text" class="input-xlarge" ${sol.getTrabajadorDepend() == 1 ? 'disabled' : ''}>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Centro de Trabajo </label>
                                     <div class="controls">
-                                        <input id="centro_trabajo" value="${sol.getCentroTrabajo()}" name="centro_trabajo_ella" type="text" class="input-xlarge">
+                                        <input id="centro_trabajo" value="${sol.getCentroTrabajo()}" name="centro_trabajo_ella" type="text" class="input-xlarge" ${sol.getTrabajadorDepend() == 1 ? 'disabled' : ''}>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Dirección del centro de trabajo</label>
                                     <div class="controls">
-                                        <input id="direccion_centro" value="${sol.getDireccionCentro()}" name="dir_centro_ella" type="text" class="input-xlarge">
+                                        <input id="direccion_centro" value="${sol.getDireccionCentro()}" name="dir_centro_ella" type="text" class="input-xlarge" ${sol.getTrabajadorDepend() == 1 ? 'disabled' : ''}>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Teléfono del centro de trabajo </label>
                                     <div class="controls">
-                                        <input id="telefono_centro" value="${sol.getTelefonoCentro()}" name="tel_centro_ella" type="text" class="input-xlarge">
+                                        <input id="telefono_centro" value="${sol.getTelefonoCentro()}" name="tel_centro_ella" type="text" class="input-xlarge" ${sol.getTrabajadorDepend() == 1 ? 'disabled' : ''}>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable (sueldo bruto) </label>
                                     <div class="controls">
-                                        <input id="ingreso_dep" value="${sol.getIngresoDep()}" name="ingreso_dep_ella" type="text" class="input-xlarge">
+                                        <input id="ingreso_dep" value="${sol.getIngresoDep()}" name="ingreso_dep_ella" type="text" class="input-xlarge" ${sol.getTrabajadorDepend() == 1 ? 'disabled' : ''}>
                                     </div>
                                 </div>
                                 <p style="color: red">${mensaje_ing_dep}</p>
@@ -605,14 +605,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Ocupación Actual</label>
                                     <div class="controls">
-                                        <input id="ocup_actual_in" value="${sol.getOcupActualInd()}" name="ocup_act_indep_ella" type="text" class="input-xlarge">
+                                        <input id="ocup_actual_in" value="${sol.getOcupActualInd()}" name="ocup_act_indep_ella" type="text" class="input-xlarge" ${sol.getTrabajadorIndepend() == 1 ? 'disabled' : ''}>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Ingreso mensual sustentable</label>
                                     <div class="controls">
-                                        <input id="ingreso_indep" value="${sol.getIngresoIndep()}" name="ingreso_ind_ella" type="text" class="input-xlarge">
+                                        <input id="ingreso_indep" value="${sol.getIngresoIndep()}" name="ingreso_ind_ella" type="text" class="input-xlarge" ${sol.getTrabajadorIndepend() == 1 ? 'disabled' : ''}>
                                     </div>
                                 </div>
                                 <p style="color: red">${mensaje_ing_indep}</p>

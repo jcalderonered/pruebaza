@@ -94,7 +94,6 @@
                         </div>
                         <br>
                         <br>
-
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc1" data-toggle="tab">La Solicitante</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc2" data-toggle="tab">El solicitante</a></li>
@@ -103,7 +102,6 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc5" data-toggle="tab">Proceso de adopción</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc6" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
-
                         <form class="form-horizontal"> 
                             <fieldset>
                                 <br>
@@ -295,7 +293,7 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">confirmar</button>
+                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar Cambios</button>
                                     </div>
                                 </div>
                             </fieldset>

@@ -555,7 +555,11 @@ public class familia {
             String fechaactual = format.dateToString(factual);
             map.addAttribute("factual", fechaactual);
             FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
-            String fechaMatri = format.dateToString(ficha.getFechaMatrimonio());
+            String fechaMatri = "";
+            try {
+                fechaMatri = format.dateToString(ficha.getFechaMatrimonio());
+            } catch (Exception ex) {
+            }
             map.addAttribute("fechaMatri", fechaMatri);
             char estCiv = ficha.getEstadoCivil().charAt(0);
             map.addAttribute("estCivil", estCiv);
@@ -589,7 +593,11 @@ public class familia {
             String fechaactual = format.dateToString(factual);
             map.addAttribute("factual", fechaactual);
             FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
-            String fechaMatri = format.dateToString(ficha.getFechaMatrimonio());
+            String fechaMatri = "";
+            try {
+                fechaMatri = format.dateToString(ficha.getFechaMatrimonio());
+            } catch (Exception ex) {
+            }
             map.addAttribute("fechaMatri", fechaMatri);
             char estCiv = ficha.getEstadoCivil().charAt(0);
             map.addAttribute("estCivil", estCiv);
@@ -618,8 +626,6 @@ public class familia {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        Date fechaAct = new Date();
-        int añoAct = fechaAct.getYear();
         ArrayList<Hijo> listaHijos = new ArrayList();
         ArrayList<Hijo> listaHijosAdop = new ArrayList();
         ArrayList<Residente> listaRes = new ArrayList();
@@ -708,14 +714,14 @@ public class familia {
             @RequestParam("culm_nivel_ella") String culm_nivel,
             @RequestParam("prof_ella") String prof,
             @RequestParam("Trabajador_Depend_ella") String trab_depend,
-            @RequestParam("ocup_act_dep_ella") String ocup_actual,
-            @RequestParam("centro_trabajo_ella") String centro_trabajo,
-            @RequestParam("dir_centro_ella") String dir_centro,
-            @RequestParam("tel_centro_ella") String tel_centro,
-            @RequestParam("ingreso_dep_ella") String ingreso_dep,
+            @RequestParam(value = "ocup_act_dep_ella", required = false) String ocup_actual,
+            @RequestParam(value = "centro_trabajo_ella", required = false) String centro_trabajo,
+            @RequestParam(value = "dir_centro_ella", required = false) String dir_centro,
+            @RequestParam(value = "tel_centro_ella", required = false) String tel_centro,
+            @RequestParam(value = "ingreso_dep_ella", required = false) String ingreso_dep,
             @RequestParam("Trabajador_Indep_ella") String trab_indep,
-            @RequestParam("ocup_act_indep_ella") String ocup_act_indep,
-            @RequestParam("ingreso_ind_ella") String ingreso_ind,
+            @RequestParam(value = "ocup_act_indep_ella", required = false) String ocup_act_indep,
+            @RequestParam(value = "ingreso_ind_ella", required = false) String ingreso_ind,
             @RequestParam("seguro_salud_ella") String seguro_salud,
             @RequestParam("tipo_seguro") String tipo_seguro,
             @RequestParam("seguro_vida_ella") String seguro_vida,
@@ -789,16 +795,20 @@ public class familia {
         try {
             sol.setIngresoDep(Long.valueOf(ingreso_dep));
         } catch (Exception ex) {
-            String mensaje_ingreso_dep = "ERROR: La información contenida en este campo contiene parámetros inválidos";
-            map.addAttribute("mensaje_ing_dep", mensaje_ingreso_dep);
+            if (ingreso_dep != null) {
+                String mensaje_ingreso_dep = "ERROR: La información contenida en este campo contiene parámetros inválidos";
+                map.addAttribute("mensaje_ing_dep", mensaje_ingreso_dep);
+            }
         }
         sol.setTrabajadorIndepend(Short.valueOf(trab_indep));
         sol.setOcupActualInd(ocup_act_indep);
         try {
             sol.setIngresoIndep(Long.valueOf(ingreso_ind));
         } catch (Exception ex) {
-            String mensaje_ingreso_indep = "ERROR: La información contenida en este campo contiene parámetros inválidos";
-            map.addAttribute("mensaje_ing_indep", mensaje_ingreso_indep);
+            if (ingreso_ind != null) {
+                String mensaje_ingreso_indep = "ERROR: La información contenida en este campo contiene parámetros inválidos";
+                map.addAttribute("mensaje_ing_indep", mensaje_ingreso_indep);
+            }
         }
         sol.setSeguroSalud(Short.valueOf(seguro_salud));
         sol.setTipoSeguro(tipo_seguro);
@@ -843,14 +853,14 @@ public class familia {
             @RequestParam("culm_nivel_el") String culm_nivel,
             @RequestParam("prof_el") String prof,
             @RequestParam("Trabajador_Depend_el") String trab_depend,
-            @RequestParam("ocup_act_dep_el") String ocup_actual,
-            @RequestParam("centro_trabajo_el") String centro_trabajo,
-            @RequestParam("dir_centro_el") String dir_centro,
-            @RequestParam("tel_centro_el") String tel_centro,
-            @RequestParam("ingreso_dep_el") String ingreso_dep,
+            @RequestParam(value = "ocup_act_dep_el", required = false) String ocup_actual,
+            @RequestParam(value = "centro_trabajo_el", required = false) String centro_trabajo,
+            @RequestParam(value = "dir_centro_el", required = false) String dir_centro,
+            @RequestParam(value = "tel_centro_el", required = false) String tel_centro,
+            @RequestParam(value = "ingreso_dep_el", required = false) String ingreso_dep,
             @RequestParam("Trabajador_Indep_el") String trab_indep,
-            @RequestParam("ocup_act_indep_el") String ocup_act_indep,
-            @RequestParam("ingreso_ind_el") String ingreso_ind,
+            @RequestParam(value = "ocup_act_indep_el", required = false) String ocup_act_indep,
+            @RequestParam(value = "ingreso_ind_el", required = false) String ingreso_ind,
             @RequestParam("seguro_salud_el") String seguro_salud,
             @RequestParam("tipo_seguro") String tipo_seguro,
             @RequestParam("seguro_vida_el") String seguro_vida,
@@ -868,7 +878,7 @@ public class familia {
         Date factual = new Date();
         String fechaactual = format.dateToString(factual);
         map.addAttribute("factual", fechaactual);
-        
+
         FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
         Solicitante sol = new Solicitante();
         for (Iterator iter2 = ficha.getSolicitantes().iterator(); iter2.hasNext();) {
@@ -953,7 +963,7 @@ public class familia {
         map.addAttribute("domicilio", ficha.getDomicilio());
         map.addAttribute("fijo", ficha.getFijo());
 
-        String pagina = "/Familia/Ficha/ficha_inscripcion_ella";
+        String pagina = "/Familia/Ficha/ficha_inscripcion_el";
         return new ModelAndView(pagina, map);
     }
 
