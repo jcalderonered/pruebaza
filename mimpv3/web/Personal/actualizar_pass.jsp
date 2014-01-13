@@ -115,8 +115,6 @@
                                     </div>
                                 </div>
                                 <br>
-                                <p style="color: red">La contraseña se ha cambiado con éxito</p>
-                                <br>
                                 <!-- Button -->
                                 <div class="control-group">
 
