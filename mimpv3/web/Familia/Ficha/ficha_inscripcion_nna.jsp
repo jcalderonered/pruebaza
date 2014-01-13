@@ -94,7 +94,6 @@
                         </div>
                         <br>
                         <br>
-
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc1" data-toggle="tab">La Solicitante</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc2" data-toggle="tab">El solicitante</a></li>
@@ -103,7 +102,6 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc5" data-toggle="tab">Proceso de adopción</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/Fficha/opc6" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
-
                         <form class="form-horizontal"> 
                             <br>
                             <h3><strong>Antecedentes, condiciones de salud y desarrollo del niño, niña o adolescente a adoptar(NNA)</strong></h3>
@@ -234,7 +232,6 @@
                                     </table>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div id="tabla_fam" class="table-responsive">
                                     <table id="hijos" class="table table-bordered table-striped ">

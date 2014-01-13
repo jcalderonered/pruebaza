@@ -79,7 +79,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha</label>
                                     <div class="controls">
-                                        <input disabled placeholder="10/11/2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled value="${factual}" id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Número</label>
                                     <div class="controls">
-                                        <input disabled placeholder="001-2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
@@ -113,21 +113,21 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Propia</label>
+                                                <input type="radio" name="propiedad_vivienda" id="optionsRadios1" value="Propia" checked>Propia</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Alquilada</label>
+                                                <input type="radio" name="propiedad_vivienda" id="optionsRadios2" value="Alquilada" >Alquilada</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
+                                                <input type="radio" name="propiedad_vivienda" id="optionsRadios3" value="Otros">Otros</label>
                                             <br>
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input name="propiedad_vivienda_otros" id="propiedad_vivienda_otros" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
@@ -139,22 +139,21 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Casa</label>
+                                                <input type="radio" name="tipo_vivienda" id="optionsRadios1" value="Casa" >Casa</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Departamento</label>
+                                                <input type="radio" name="tipo_vivienda" id="optionsRadios2" value="Departamento" >Departamento</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros(especificar)</label>
+                                                <input type="radio" onclick="dependiente(this.value)" name="tipo_vivienda" id="optionsRadios3" value="Otros">Otros(especificar)</label>
                                             <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="tipo_vivienda_otros" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
@@ -165,86 +164,87 @@
                                 <div class="control-group">
                                     <label class="control-label">Total</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="area_viv_total" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Construida</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="full-name" name="area_viv_const" type="text" class="input-xlarge">
                                     </div>
                                 </div>
-
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Distribución de la vivienda</label>
+                                    <div class="controls">
+                                        <textarea id="dist_vivienda" class="input-xlarge" name="dist_vivienda" rows="5"></textarea>
+                                    </div>
+                                </div> 
                                 <br>
                                 <br>
                                 <h3><strong>Servicios</strong></h3>
                                 <br>
-
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Energía Eléctrica</label>
+                                                <input type="checkbox" name="luz" id="luz" value="0" >Energía Eléctrica</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">    
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Agua Potable</label>
+                                                <input type="checkbox" name="agua" id="agua" value="0" >Agua Potable</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3">    
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Desague</label>
+                                                <input type="checkbox" name="desague" id="desague" value="0" >Desague</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros servicios</label>
+                                                <input type="checkbox" name="otros_serv" id="optionsRadios2" value="0">Otros servicios</label>
                                             <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="otros_serv" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
-
                                 <h3><strong>Material de construcción</strong></h3>
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Noble</label>
+                                                <input type="radio" name="mater_cons" id="optionsRadios1" value="Noble" >Noble</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
+                                                <input type="radio" name="mater_cons" id="optionsRadios2" value="Otros">Otros</label>
                                             <br>
 
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="mater_cons_otros" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
-
                                 <h3><strong>Paredes</strong></h3>
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Ladrillo</label>
+                                                <input type="radio" name="pared" id="optionsRadios1" value="Ladrillo" >Ladrillo</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
+                                                <input type="radio" name="pared" id="optionsRadios2" value="Otros">Otros</label>
                                             <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="pared_otros" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
@@ -254,42 +254,37 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Concreto</label>
+                                                <input type="radio" name="techo" id="optionsRadios1" value="Concreto" >Concreto</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
+                                                <input type="radio" name="techo" id="optionsRadios2" value="Otros">Otros</label>
                                             <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="techo_otros" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
-
                                 <h3><strong>Piso</strong></h3>
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Cemento</label>
+                                                <input type="radio" name="piso" id="optionsRadios1" value="Cemento" >Cemento</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
+                                                <input type="radio" name="piso" id="optionsRadios2" value="Otros">Otros</label>
                                             <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input id="full-name" name="piso_otros" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
                                 <br>
-                                <p>*Adjuntar un plano de ubicación (detallando principales avenidas, calles y señalar puntos de referencia a la vivienda).</p>
                                 <br>
-
                                 <p style="color: red">IMPORTANTE: FAVOR DE LLENAR TODOS LOS CAMPOS</p>
                                 <br>
                                 <p>Según lo establecido en la Ley Nº29733 - Ley de protección de datos personales, la información proporcionada por 
@@ -324,7 +319,13 @@
         ================================================== -->
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
             <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript">
 
+                                                    $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+            </script>
             <!-- Ubicar al final -->
     </body>
 </html>
