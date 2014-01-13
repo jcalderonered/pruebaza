@@ -903,5 +903,38 @@ public class HiberPersonal {
     
         return tempAFR;
     }
+    
+    public ArrayList<Entidad> ListaEntidades() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "FROM Entidad";
+        Query query = session.createQuery(hql);
+        List entidades = query.list();
+        ArrayList<Entidad> allEntidades = new ArrayList();
+        for (Iterator iter = entidades.iterator(); iter.hasNext();) {
+            Entidad temp = (Entidad) iter.next();
+            allEntidades.add(temp);
+        }
+        return allEntidades;
+    }
+    
+    public Entidad getEntidad(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Entidad Ent = new Entidad();
+
+        session.beginTransaction();
+        String hqlC = "FROM Entidad E WHERE E.id = :id";
+        Query queryC = session.createQuery(hqlC);
+        queryC.setLong("id", id);
+        Object queryResultC = queryC.uniqueResult();
+
+        Ent = (Entidad) queryResultC;
+
+        return Ent;
+    }
+    
     /*  */
 }

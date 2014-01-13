@@ -98,32 +98,8 @@
                         <form role="form">
                             <c:if test="${estado != 'formativa'}">
                             <br>
-                            <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
                             <br>
-                            
-                            <br>
-                            <h3 align="left"><strong>Datos de la ficha</strong></h3>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="control-label">Número</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Fecha de ingreso</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Hoja de ruta </label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                            </div> 
                             </c:if>
                             <br>
                             <br>
@@ -148,28 +124,28 @@
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Taller</label>
                                     <div class="controls">
-                                        <input id="tipo_taller" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${tipoTaller}" id="tipo_taller" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Nombre del taller</label>
                                     <div class="controls">
-                                        <input type="text" class="span2" value="" id="nombre" >
+                                        <input value="${nombreTaller}" type="text" class="span2" value="" id="nombre" >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Nombre del grupo</label>
                                     <div class="controls">
-                                        <input id="nombre_grupo" name="full-name" type="text" class="input-xlarge">
+                                        <input value="${nombreGrupo}" id="nombre_grupo" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Nombre del turno</label>
                                     <div class="controls">
-                                        <input type="texto" class="span2" value="" id="turno" >
+                                        <input value="${nombreTurno}" type="texto" class="span2" value="" id="turno" >
                                     </div>
                                 </div>
                                 <br>
@@ -183,52 +159,33 @@
                                                 <th>Hora</th>
                                                 <th>Duración</th>
                                                 <th>Dirección</th>
-                                                <th>Facilitador</th>
+                                                <th>Facilitador(es)</th>
                                                 <th>Asistencia</th>
                                             </tr>
                                         </thead>
+                                        <c:if test="${!listaReuniones.isEmpty()}">
                                         <tbody>
+                                            <c:forEach var="reunion" items="${listaReuniones}" varStatus="status">
                                             <tr>
-                                                <td>10-Nov-13</td>
-                                                <td>10:00</td>
-                                                <td>2 horas</td>
-                                                <td>"Agregar dirección"</td>
-                                                <td>Fernando Ramirez</td>
-                                                <td>A</td>
+                                                <td>${reunion.getFecha() != null ? df.dateToString(reunion.getFecha()): ''}</td>
+                                                <td>${reunion.getHora()}</td>
+                                                <td>${reunion.getDuracion()}</td>
+                                                <td>${reunion.getDireccion()}</td>
+                                                <td>${reunion.getFacilitador()}</td>
+                                                <td>
+                                                    <c:forEach var="asistencia" items="${listaAsistencia}" varStatus="status">
+                                                        <c:if test="${asistencia.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                            ${asistencia.getAsistencia()}
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </td>
                                             </tr>
-                                            <tr>
-                                                <td>11-Nov-13</td>
-                                                <td>10:00</td>
-                                                <td>2 horas</td>
-                                                <td>"Agregar dirección"</td>
-                                                <td>Juan Palomino</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr>
-                                                <td>13-Nov-13</td>
-                                                <td>10:00</td>
-                                                <td>2 horas</td>
-                                                <td>"Agregar dirección"</td>
-                                                <td>Alonso Herrera</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-Nov-13</td>
-                                                <td>10:00</td>
-                                                <td>2 horas</td>
-                                                <td>"Agregar dirección"</td>
-                                                <td>Alonso Herrera</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr>
-                                                <td>17-Nov-13</td>
-                                                <td>10:00</td>
-                                                <td>2 horas</td>
-                                                <td>"Agregar dirección"</td>
-                                                <td>Oscar Barreto</td>
-                                                <td>J</td>
-                                            </tr>
+                                            </c:forEach> 
                                         </tbody>
+                                        </c:if>   
+                                        <c:if test="${listaReuniones.isEmpty()}">
+                                            <h3><strong>No exiten reuniones relacionadas</strong></h3>
+                                        </c:if>
                                     </table>
                                 </div>
                                 <p>A: Asistió / J:  Inasistencia Justificada / I: Inasistencia</p>

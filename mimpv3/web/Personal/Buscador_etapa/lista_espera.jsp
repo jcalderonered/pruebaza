@@ -151,6 +151,7 @@
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
                                                         <input hidden name="estado" id="estado" value="espera">
+                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                                                        <button type="submit" class="btn btn-default">Ver</button>
                                                     </form>
                                                 </td>

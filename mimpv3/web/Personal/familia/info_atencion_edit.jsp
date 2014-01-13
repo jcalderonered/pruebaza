@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
         <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/assets/css/jquery.timepicker.css" rel="stylesheet">
     </head>
 
     <body id="bd" class="bd fs3 com_content">
@@ -94,41 +95,16 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <form role="form">
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <c:if test="${estado != 'formativa'}">
                             <br>
-                            <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
                             <br>
-                            
-                            <br>
-                            <h3 align="left"><strong>Datos de la ficha</strong></h3>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="control-label">Número</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Fecha de ingreso</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Hoja de ruta </label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                            </div> 
                             </c:if>
                             <br>
                             <br>
                             <ul class="nav nav-tabs row">
-                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante" >La Solicitante</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante">La Solicitante</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/elSolicitante" >El solicitante</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/compFamiliar" >Composición familiar</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/vivienda" >Vivienda</a></li>
@@ -140,6 +116,13 @@
                             </ul>
                             <br>
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
+                            <c:if test="${atencion == null}">
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearAtencion" method="post"> 
+                            </c:if>  
+                            <c:if test="${atencion != null}">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateAtencion" method="post"> 
+                                    <input hidden name="idAtencion" id="idAtencion" value="${atencion.getIdatencion()}">
+                                </c:if>  
                             <fieldset>
                                 <br>
                                 <h3><strong>Crear/Editar atención</strong></h3>
@@ -147,9 +130,10 @@
                                 <div class="control-group">
                                     <label class="control-label" for="selectbasic">Personal contactado</label>
                                     <div class="controls">
-                                        <select id="selectbasic" name="selectbasic" class="input-xlarge">
-                                            <option>Juan Cabello</option>
-                                            <option>Arturito Cervelo</option>
+                                        <select id="personal" name="personal" class="input-xlarge">
+                                            <c:forEach var="personal" items="${listaPersonal}" > 
+                                                <option value="${personal.getIdpersonal()}" ${atencion.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -157,24 +141,24 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha</label>
                                     <div class="controls">
-                                        <input id="fecha" name="full-name" type="text" class="datepicker input-xlarge">
+                                        <input id="fecha" name="fecha" value="${atencion.getFecha() != null ? df.dateToString(atencion.getFecha()): ''}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Hora</label>
                                     <div class="controls">
-                                        <input id="hora" name="full-name" type="text" class="input-xlarge">
+                                        <input id="hora" name="hora" value="${atencion.getHora()}" type="text" class="timepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="selectbasic">Tipo</label>
                                     <div class="controls">
-                                        <select id="selectbasic" name="selectbasic" class="input-xlarge">
-                                            <option>Presencial</option>
-                                            <option>Correo</option>
-                                            <option>Teléfono</option>
+                                        <select id="tipo" name="tipo" class="input-xlarge">
+                                            <option value="presencial" ${atencion.getTipoAtencion() != 'presencial' ? 'selected' : ''}>Presencial</option>
+                                            <option value="correo" ${atencion.getTipoAtencion() != 'correo' ? 'selected' : ''}>Correo</option>
+                                            <option value="telefono" ${atencion.getTipoAtencion() != 'telefono' ? 'selected' : ''}>Teléfono</option>
                                         </select>
                                     </div>
                                 </div>
@@ -182,14 +166,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Detalles de la comunicación</label>
                                     <div class="controls">
-                                        <textarea id="detalle" class="input-xlarge" name="message" placeholder="" rows="3" ></textarea>
+                                        <textarea id="detalle" class="input-xlarge" name="detalle" cols="25" rows="5" >${atencion.getDetalle()}</textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <textarea id="obs" class="input-xlarge" name="message" placeholder="" rows="3" ></textarea>
+                                        <textarea id="obs" class="input-xlarge" name="obs" cols="25" rows="5" >${atencion.getObservacion()}</textarea>
                                     </div>
                                 </div>
                                 <br>
@@ -220,10 +204,12 @@
             <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery.timepicker.js"></script>
             <script type="text/javascript">
 
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-
+                $('.timepicker').timepicker({'timeFormat': 'H:i'});
+                
             </script>
             <!-- Ubicar al final -->
     </body>

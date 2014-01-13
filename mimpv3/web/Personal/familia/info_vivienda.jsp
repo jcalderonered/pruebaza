@@ -31,7 +31,7 @@
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
 
-    <body id="bd" class="bd fs3 com_content">
+    <body onload="funct()" id="bd" class="bd fs3 com_content">
         <br>
         <br>
         <div id="wrap">
@@ -94,41 +94,17 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <form role="form">
+                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarVivienda" method="post">
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <c:if test="${estado != 'formativa'}">
                             <br>
-                            <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
                             <br>
-                           
-                            <br>
-                            <h3 align="left"><strong>Datos de la ficha</strong></h3>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="control-label">Número</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Fecha de ingreso</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Hoja de ruta </label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                            </div> 
                             </c:if>
                             <br>
                             <br>
                             <ul class="nav nav-tabs row">
-                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante" >La Solicitante</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante">La Solicitante</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/elSolicitante" >El solicitante</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/compFamiliar" >Composición familiar</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : 'class="active"'} ><a href="${pageContext.servletContext.contextPath}/vivienda" >Vivienda</a></li>
@@ -148,22 +124,21 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Propia</label>
+                                                <input onclick="Vivienda()" type="radio" name="propiedadVivienda" id="propia" value="Propia" ${infoFam.getPropiedadVivienda() == 'Propia'  ?  'checked' : ''} >Propia</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Alquilada</label>
+                                                <input onclick="Vivienda()" type="radio" name="propiedadVivienda" id="alquilada" value="Alquilada" ${infoFam.getPropiedadVivienda() == 'Alquilada'  ?  'checked' : ''} >Alquilada</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
+                                                <input onclick="Vivienda()" type="radio" name="propiedadVivienda" id="otro" value="Otros" ${infoFam.getPropiedadVivienda() != 'Propia' && infoFam.getPropiedadVivienda() != 'Alquilada'  ?  'checked' : ''}>Otros</label>
                                             <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input value="${infoFam.getPropiedadVivienda() != 'Propia' && infoFam.getPropiedadVivienda() != 'Alquilada' ? infoFam : ''}" id="propiedadDescrip" name="propiedadDescrip" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
@@ -175,22 +150,22 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Casa</label>
+                                                <input onclick="Tipo()" type="radio" name="tipoVivienda" id="casa" value="Casa" ${infoFam.getTipoVivienda() == 'Casa'  ?  'checked' : ''}>Casa</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Departamento</label>
+                                                <input onclick="Tipo()" type="radio" name="tipoVivienda" id="depa" value="Departamento" ${infoFam.getTipoVivienda() == 'Departamento'  ?  'checked' : ''}>Departamento</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros(especificar)</label>
+                                                <input onclick="Tipo()" type="radio" name="tipoVivienda" id="otro" value="Otros" ${infoFam.getTipoVivienda() != 'Casa' && infoFam.getTipoVivienda() != 'Departamento' ?  'checked' : ''}>Otros(especificar)</label>
                                             <br>
 
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input value="${infoFam.getTipoVivienda() != 'Casa' && infoFam.getTipoVivienda() != 'Departamento' ?  infoFam.getTipoVivienda() : ''}" id="tipoDescrip" name="tipoDescrip" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
@@ -201,28 +176,28 @@
                                 <div class="control-group">
                                     <label class="control-label">Dirección (Consignar dirección exacta)</label>
                                     <div class="controls">
-                                        <textarea id="domicilio" class="input-xlarge" name="message" placeholder="" rows="3" ></textarea>
+                                        <textarea id="domicilio" class="input-xlarge" name="domicilio" rows="3" >${infoFam.getDomicilio()}</textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Departamento de Residencia</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="DepRes" name="DepRes" value="${infoFam.getDepRes()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">País de Residencia</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="PaisRes" name="PaisRes" value="${infoFam.getPaisRes()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Teléfono</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="telefono" name="telefono" value="${infoFam.getTelefono()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -232,21 +207,21 @@
                                 <div class="control-group">
                                     <label class="control-label">Total</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="areaVivTotal" name="areaVivTotal" value="${infoFam.getAreaVivTotal()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Construida</label>
                                     <div class="controls">
-                                        <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input id="areaVivConst" name="areaVivConst" value="${infoFam.getAreaVivConst()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Distribución de la vivienda</label>
                                     <div class="controls">
-                                        <textarea id="domicilio" class="input-xlarge" name="message" placeholder="" rows="3" ></textarea>
+                                        <textarea id="distViv" class="input-xlarge" name="distViv" placeholder="" rows="3" >${infoFam.getDistVivienda()}</textarea>
                                     </div>
                                 </div>
                                 <br>
@@ -257,26 +232,26 @@
                                     <div class="col-md-3">  
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D" >Energía Eléctrica</label>
+                                                <input type="checkbox" name="luz" id="luz" value="0" ${infoFam.getLuz() == 0  ?  'checked' : ''}>Energía Eléctrica</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">    
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D" >Agua Potable</label>
+                                                <input type="checkbox" name="agua" id="agua" value="0" ${infoFam.getAgua() == 0  ?  'checked' : ''}>Agua Potable</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3">    
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="D" >Desague</label>
+                                                <input type="checkbox" name="desague" id="desague" value="0" ${infoFam.getDesague() == 0  ?  'checked' : ''}>Desague</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3">   
                                         <div class="control-group">
                                             <label class="control-label">Otros servicios</label>
                                             <div class="controls">
-                                                <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                                <input id="otrosServ" name="otrosServ" value="${infoFam.getOtrosServ()}" type="text" class="input-xlarge">
                                             </div>
                                         </div>
                                     </div>
@@ -286,16 +261,16 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Noble</label>
+                                                <input onclick="Material()" type="radio" name="materConst" id="noble" value="Noble" ${infoFam.getMaterConst() == 'Noble' ? 'checked' : ''}>Noble</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
+                                                <input onclick="Material()" type="radio" name="materConst" id="otros" value="Otros" ${infoFam.getMaterConst() != 'Noble' ? 'checked' : ''}>Otros</label>
                                             <br>
 
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input value="${infoFam.getMaterConst() != 'Noble' ?  infoFam.getMaterConst() : ''}" id="materConstDesc" name="materConstDesc" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
@@ -305,16 +280,16 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Ladrillo</label>
+                                                <input onclick="Paredes()" type="radio" name="pared" id="pared" value="Ladrillo" ${infoFam.getPared() == 'Ladrillo' ? 'checked' : ''}>Ladrillo</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
+                                                <input onclick="Paredes()" type="radio" name="pared" id="otro" value="Otros" ${infoFam.getPared() != 'Ladrillo' ? 'checked' : ''}>Otros</label>
                                             <br>
 
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input value="${infoFam.getPared() != 'Ladrillo' ?  infoFam.getPared() : ''}" id="paredDesc" name="paredDesc" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
@@ -323,16 +298,15 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Concreto</label>
+                                                <input onclick="Techo()" type="radio" name="techo" id="techo" value="Concreto" ${infoFam.getTecho() == 'Concreto' ? 'checked' : ''}>Concreto</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
+                                                <input onclick="Techo()" type="radio" name="techo" id="otro" value="Otros" ${infoFam.getTecho() != 'Concreto' ? 'checked' : ''}>Otros</label>
                                             <br>
-
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input value="${infoFam.getTecho() != 'Concreto' ?  infoFam.getTecho() : ''}" id="techoDesc" name="techoDesc" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
@@ -342,16 +316,16 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Cemento</label>
+                                                <input onclick="Piso()" type="radio" name="piso" id="piso" value="Cemento" ${infoFam.getPiso() == 'Cemento' ? 'checked' : ''}>Cemento</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Otros</label>
+                                                <input onclick="Piso()" type="radio" name="piso" id="otro" value="Otros" ${infoFam.getPiso() != 'Cemento' ? 'checked' : ''}>Otros</label>
                                             <br>
 
-                                            <input id="full-name" name="full-name" type="text" class="input-xlarge">
+                                            <input value="${infoFam.getPiso() != 'Cemento' ?  infoFam.getPiso() : ''}" id="pisoDesc" name="pisoDesc" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
@@ -386,6 +360,124 @@
 
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
+            </script>
+            <script>
+                function Vivienda()
+                    {
+                        var vivDesc = document.getElementById('propiedadDescrip');
+                        if (document.getElementById('propia').checked || document.getElementById('alquilada').checked) {
+                            vivDesc.disabled = true;
+                       } else {
+                            vivDesc.disabled = false;
+                       }
+                    }
+           </script>    
+           
+           <script>
+                function Tipo()
+                    {
+                        var tipoDesc = document.getElementById('tipoDescrip');
+                        if (document.getElementById('casa').checked || document.getElementById('depa').checked) {
+                            tipoDesc.disabled = true;
+                       } else {
+                            tipoDesc.disabled = false;
+                       }
+                    }
+           </script>    
+           
+           <script>
+                function Material()
+                    {
+                        var matDesc = document.getElementById('materConstDesc');
+                        if (document.getElementById('noble').checked) {
+                            matDesc.disabled = true;
+                       } else {
+                            matDesc.disabled = false;
+                       }
+                    }
+           </script>    
+           
+           <script>
+                function Paredes()
+                    {
+                        var paredDesc = document.getElementById('paredDesc');
+                        if (document.getElementById('pared').checked) {
+                            paredDesc.disabled = true;
+                       } else {
+                            paredDesc.disabled = false;
+                       }
+                    }
+           </script>    
+           
+           <script>
+                function Techo()
+                    {
+                        var techoDesc = document.getElementById('techoDesc');
+                        if (document.getElementById('techo').checked) {
+                            techoDesc.disabled = true;
+                       } else {
+                            techoDesc.disabled = false;
+                       }
+                    }
+           </script>    
+           
+           <script>
+                function Piso()
+                    {
+                        var pisoDesc = document.getElementById('pisoDesc');
+                        if (document.getElementById('piso').checked) {
+                            pisoDesc.disabled = true;
+                       } else {
+                            pisoDesc.disabled = false;
+                       }
+                    }
+           </script>    
+           <script type="text/javascript">
+              function funct(){
+                    
+                     var vivDesc = document.getElementById('propiedadDescrip');
+                        if (document.getElementById('propia').checked || document.getElementById('alquilada').checked) {
+                            vivDesc.disabled = true;
+                       } else {
+                            vivDesc.disabled = false;
+                       }
+                       
+                       var tipoDesc = document.getElementById('tipoDescrip');
+                        if (document.getElementById('casa').checked || document.getElementById('depa').checked) {
+                            tipoDesc.disabled = true;
+                       } else {
+                            tipoDesc.disabled = false;
+                       }
+                       
+                       var matDesc = document.getElementById('materConstDesc');
+                        if (document.getElementById('noble').checked) {
+                            matDesc.disabled = true;
+                       } else {
+                            matDesc.disabled = false;
+                       }
+                       
+                       var paredDesc = document.getElementById('paredDesc');
+                        if (document.getElementById('pared').checked) {
+                            paredDesc.disabled = true;
+                       } else {
+                            paredDesc.disabled = false;
+                       }
+                       
+                       var techoDesc = document.getElementById('techoDesc');
+                        if (document.getElementById('techo').checked) {
+                            techoDesc.disabled = true;
+                       } else {
+                            techoDesc.disabled = false;
+                       }
+                       
+                       var pisoDesc = document.getElementById('pisoDesc');
+                        if (document.getElementById('piso').checked) {
+                            pisoDesc.disabled = true;
+                       } else {
+                            pisoDesc.disabled = false;
+                       }
+                }
+                
             </script>
             <!-- Ubicar al final -->
     </body>

@@ -673,9 +673,21 @@ public class mainEtapas {
         
         for (ExpedienteFamilia expedienteFamilia : allExp) {
             for (InfoFamilia infoFamilia : expedienteFamilia.getFamilia().getInfoFamilias()) {
+                if ( infoFamilia.getExpectativaEdadMin() != null && 
+                     infoFamilia.getExpectativaEdadMax() != null && 
+                     infoFamilia.getExpectativaGenero() != null && 
+                     infoFamilia.getNnaIncesto() != null && 
+                     infoFamilia.getNnaMental() != null && 
+                     infoFamilia.getNnaEpilepsia() != null && 
+                     infoFamilia.getNnaAbuso() != null && 
+                     infoFamilia.getNnaSifilis() != null &&
+                     infoFamilia.getNnaSeguiMedico() != null && 
+                     infoFamilia.getNnaHiperactivo() != null && 
+                     infoFamilia.getNnaOperacion() != null    
+                     ){
                  if(tempNna.getEdadAnhos() >= infoFamilia.getExpectativaEdadMin() && 
-                         tempNna.getEdadAnhos() >= infoFamilia.getExpectativaEdadMin() &&
-                         tempNna.getSexo().equals(infoFamilia.getExpectativaGenero())) {
+                         tempNna.getEdadAnhos() <= infoFamilia.getExpectativaEdadMax() &&
+                         (tempNna.getSexo().equals(infoFamilia.getExpectativaGenero()) || infoFamilia.getExpectativaGenero().equals("indistinto")) ) {
                      
                      if( tempNna.getIncesto() == infoFamilia.getNnaIncesto() &&
                          tempNna.getMental() == infoFamilia.getNnaMental() &&
@@ -683,12 +695,13 @@ public class mainEtapas {
                          tempNna.getAbuso() == infoFamilia.getNnaAbuso() &&
                          tempNna.getSifilis() == infoFamilia.getNnaSifilis() &&
                          tempNna.getSeguiMedico() == infoFamilia.getNnaSeguiMedico() &&
-                         tempNna.getOperacion() == infoFamilia.getNnaHiperactivo() &&
+                         tempNna.getOperacion() == infoFamilia.getNnaOperacion() &&
                          tempNna.getHiperactivo() == infoFamilia.getNnaHiperactivo() ){
                          
                          listaMatching.add(expedienteFamilia);
                      }
                  }
+               }
             }
         }
         tempIdNnaRegular = idNna;

@@ -94,41 +94,17 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <form role="form">
+                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarRegistro" method="post">
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <c:if test="${estado != 'formativa'}">
                             <br>
-                            <h1 align="center"><strong>Familia "ApellidoP-ApellidoM"</strong></h1>
+                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
                             <br>
-                            
-                            <br>
-                            <h3 align="left"><strong>Datos de la ficha</strong></h3>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="control-label">Número</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="00293-12442" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Fecha de ingreso</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="11-Nov-13" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label">Hoja de ruta </label>
-                                    <div class="controls">
-                                        <input id="nombre" name="full-name" value="HR" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                            </div> 
                             </c:if>
                             <br>
                             <br>
                             <ul class="nav nav-tabs row">
-                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante" >La Solicitante</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante">La Solicitante</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/elSolicitante" >El solicitante</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/compFamiliar" >Composición familiar</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/vivienda" >Vivienda</a></li>
@@ -146,48 +122,48 @@
                             <div class="control-group">
                                 <label class="control-label">Número</label>
                                 <div class="controls">
-                                    <input id="full-name" name="full-name" value="00198" type="text" class="input-xlarge">
+                                    <input id="numero" name="numero" value="${expediente.getNumero()}" type="text" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Expediente</label>
                                 <div class="controls">
-                                    <input id="full-name" name="full-name" value="ApellidoP-ApellidoM" type="text" class="input-xlarge">
+                                    <input disabled id="expediente" name="expediente" value="${expediente.getExpediente()}" type="text" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">HT</label>
                                 <div class="controls">
-                                    <input id="full-name" name="full-name" value="AIEDGLA-097" type="text" class="input-xlarge">
+                                    <input id="ht" name="ht" value="${expediente.getHt()}" type="text" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Número de Expediente</label>
                                 <div class="controls">
-                                    <input id="full-name" name="full-name" value="1-2013-MIMP-DGA-LIMA" type="text" class="input-xlarge">
+                                    <input id="numeroExp" name="numeroExp" value="${expediente.getNumeroExpediente()}" type="text" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Fecha ingreso a DGA</label>
                                 <div class="controls">
-                                    <input id="full-name" name="full-name" value="11-Nov-2013" type="text" class="datepicker input-xlarge">
+                                    <input id="fechaIngreso" name="fechaIngreso" value="${expediente.getFechaIngresoDga() != null ? df.dateToString(expediente.getFechaIngresoDga()) : ''}" type="text" class="datepicker input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Estado</label>
                                 <div class="controls">
-                                    <select>
-                                        <option value="sia" selected >Evaluación</option>
-                                        <option value="mia" >Lista de espera</option>
-                                        <option value="mia" >Estudio de caso</option>
-                                        <option value="mia" >Designado</option>
-                                        <option value="mia" >Adopción</option>
-                                        <option value="mia" >Post Adopción</option>
+                                    <select disabled>
+                                        <option value="evaluacion" ${expediente.getEstado() == 'evaluacion' ? 'selected' : ''} >Evaluación</option>
+                                        <option value="espera" ${expediente.getEstado() == 'espera' ? 'selected' : ''} >Lista de espera</option>
+                                        <option value="estudio" ${expediente.getEstado() == 'estudio' ? 'selected' : ''} >Estudio de caso</option>
+                                        <option value="designacion" ${expediente.getEstado() == 'designacion' ? 'selected' : ''} >Designado</option>
+                                        <option value="adopcion" ${expediente.getEstado() == 'adopcion' ? 'selected' : ''} >Adopción</option>
+                                        <option value="post" ${expediente.getEstado() == 'post' ? 'selected' : ''} >Post Adopción</option>
                                     </select>
                                 </div>
                             </div>
@@ -195,46 +171,46 @@
                             <div class="control-group">
                                 <label class="control-label">TUPA</label>
                                 <div class="controls">
-                                    <input id="full-name" name="full-name" value="24-Dic-13" type="text" class="input-xlarge">
+                                    <input id="tupa" name="tupa" value="${expediente.getTupa() != null ? df.dateToString(expediente.getTupa()) : ''}" type="text" class="datepicker input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Nacionalidad</label>
                                 <div class="controls">
-                                    <select>
-                                        <option value="sia" selected >Nacional</option>
-                                        <option value="mia" >Internacional</option>
+                                    <select onchange="funcNacion(this.value)" id="nacionalidad" name="nacionalidad">
+                                        <option value="nacional" ${expediente.getNacionalidad() == 'nacional' ? 'selected' : ''} >N</option>
+                                        <option value="internacional" ${expediente.getNacionalidad() == 'internacional' ? 'selected' : ''} >I</option>
                                     </select>
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Pertenece al RNSA:</label>
-                                <select>
-                                        <option value="sia" selected >Si</option>
-                                        <option value="mia" >No</option>
+                                <select id="rnsa" name="rnsa">
+                                        <option value="0" ${expediente.getRnsa() == 0 ? 'selected' : ''} >Si</option>
+                                        <option value="1" ${expediente.getRnsa() == 1 ? 'selected' : ''} >No</option>
                                 </select>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Pertenece al RNAA:</label>
-                                <select>
-                                        <option value="sia" selected >Si</option>
-                                        <option value="mia" >No</option>
+                                <select id="rnaa" name="rnaa">
+                                        <option value="0" ${expediente.getRnaa() == 0 ? 'selected' : ''} >Si</option>
+                                        <option value="1" ${expediente.getRnaa() == 1 ? 'selected' : ''} >No</option>
                                 </select>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Tipo de familia</label>
                                 <div class="controls">
-                                    <select>
-                                        <option value="sia" selected >PP</option>
-                                        <option value="mia" >PE</option>
-                                        <option value="mia" >MP</option>
-                                        <option value="mia" >ME</option>
-                                        <option value="mia" >EP</option>
-                                        <option value="mia" >EE</option>
+                                    <select onchange="funcTipoFam(this.value)" id="tipoFamilia" name="tipoFamilia">
+                                        <option value="PP" ${expediente.getTipoFamilia() == 'PP' ? 'selected' : ''} >PP</option>
+                                        <option value="PE" ${expediente.getTipoFamilia() == 'PE' ? 'selected' : ''} >PE</option>
+                                        <option value="MP" ${expediente.getTipoFamilia() == 'MP' ? 'selected' : ''} >MP</option>
+                                        <option value="ME" ${expediente.getTipoFamilia() == 'ME' ? 'selected' : ''} >ME</option>
+                                        <option value="EP" ${expediente.getTipoFamilia() == 'EP' ? 'selected' : ''} >EP</option>
+                                        <option value="EE" ${expediente.getTipoFamilia() == 'EE' ? 'selected' : ''} >EE</option>
                                     </select>
                                 </div>
                             </div>
@@ -242,11 +218,11 @@
                             <div class="control-group">
                                 <label class="control-label">Tipo de Lista de Espera</label>
                                 <div class="controls">
-                                    <select>
-                                        <option value="sia" selected >Nacionales</option>
-                                        <option value="mia" >Peruanos Residentes en el Extranjero</option>
-                                        <option value="mia" >Mixtos</option>
-                                        <option value="mia" >Extranjeros</option>
+                                    <select id="tipoEspera" name="tipoEspera">
+                                        <option value="nac" ${expediente.getTipoListaEspera() == 'nac' ? 'selected' : ''} >Nacionales</option>
+                                        <option value="pre" ${expediente.getTipoListaEspera() == 'pre' ? 'selected' : ''} >Peruanos Residentes en el Extranjero</option>
+                                        <option value="mix" ${expediente.getTipoListaEspera() == 'mix' ? 'selected' : ''} >Mixtos</option>
+                                        <option value="ext" ${expediente.getTipoListaEspera() == 'ext' ? 'selected' : ''} >Extranjeros</option>
                                     </select>
                                 </div>
                             </div>
@@ -254,10 +230,10 @@
                             <div class="control-group">
                                 <label class="control-label">Unidad de Adopción donde se realiza el trámite</label>
                                 <div class="controls">
-                                    <select>
-                                        <option value="sia" selected >Lima</option>
-                                        <option value="mia" >Chiclayo</option>
-                                        <option value="mia" >Trujillo</option>
+                                    <select id="unidad" name="unidad" >
+                                            <c:forEach var="ua" items="${listaUA}" > 
+                                                <option value="${ua.getIdunidad()}" ${expediente.getUnidad().getIdunidad() ==  ua.getIdunidad() ? 'selected' : ''}>${ua.getNombre()}</option>
+                                            </c:forEach>
                                     </select>
                                 </div>
                             </div>   
@@ -265,11 +241,21 @@
                             <div class="control-group">
                                 <label class="control-label">Organismo Acreditado y/o Autoridad Central asociado</label>
                                 <div class="controls">
-                                    <select>
-                                        <option value="sia" selected >DGA</option>
-                                        <option value="mia" >España</option>
-                                        <option value="mia" ></option>
-                                    </select>
+                                    <c:if test="${expediente.getFamilia().getEntidad() != null}">
+                                        <select id="entAsoc" name="entAsoc" >
+                                            <c:forEach var="entidad" items="${listaEntidad}" > 
+                                                <option value="${entidad.getIdentidad()}" ${expediente.getFamilia().getEntidad().getIdentidad() == entidad.getIdentidad() ? 'selected' : ''}>${entidad.getNombre()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </c:if>
+                                    
+                                    <c:if test="${expediente.getFamilia().getEntidad() == null}">
+                                        <select id="entAsoc" name="entAsoc" >
+                                            <c:forEach var="entidad" items="${listaEntidad}" > 
+                                                <option value="${entidad.getIdentidad()}" >${entidad.getNombre()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </c:if>
                                 </div>
                             </div>
                             <br>
@@ -302,6 +288,49 @@
 
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
+            </script>
+            <script>
+                function funcNacion(value)
+                    {
+                        var tipoFam = document.getElementById("tipoFamilia");
+                        var tipoListEsp = document.getElementById("tipoEspera");
+                        
+                        //you can get the value from arguments itself
+                        //alert(value);
+                        if (value == 'nacional' ){
+                            tipoFam.value = 'PP';
+                            tipoListEsp.value='nac';
+                        }
+                        if (value == 'internacional'){
+                            tipoFam.value = 'EE';
+                            tipoListEsp.value='ext';
+                        }
+                    }
+                    
+                    
+            </script>
+            <script>
+                function funcTipoFam(value)
+                    {
+                        var tipoListEsp = document.getElementById("tipoEspera");
+                        
+                        //you can get the value from arguments itself
+                        //alert(value);
+                        if (value == 'PP' || value == 'EP' || value == 'MP'  ){
+                            tipoListEsp.value='nac';
+                        }
+                        if (value == 'PE'){
+                            tipoListEsp.value='pre';
+                        }
+                        if (value == 'ME'){
+                            tipoListEsp.value='mix';
+                        }
+                        if (value == 'EE'){
+                            tipoListEsp.value='ext';
+                        }
+                    }
+                    
+                    
             </script>
             <!-- Ubicar al final -->
     </body>

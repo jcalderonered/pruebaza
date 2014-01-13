@@ -253,8 +253,41 @@ public class HiberMain {
         Object queryResult = query.uniqueResult();
         temp = (InfoFamilia) queryResult;
         Hibernate.initialize(temp.getAdoptantes());
+        Hibernate.initialize(temp.getHijoActs());
+        Hibernate.initialize(temp.getResidenteActs());
         
         return temp;
+    }
+    
+    public InfoFamilia getInfoFamPorIdPropio(long idInfoFam){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        InfoFamilia temp = new InfoFamilia();
+        
+        String hql = "from InfoFamilia IF where IF.idinfoFamilia = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idInfoFam);
+        Object queryResult = query.uniqueResult();
+        temp = (InfoFamilia) queryResult;
+        
+        return temp;
+    }
+    
+    public void crearInfoFam(InfoFamilia temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        session.save(temp);
+    }
+    
+    public void updateInfoFam(InfoFamilia temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        session.update(temp);
     }
     
     public ArrayList<Atencion> getListaAtencionesPorFamilia(long idFam) {
@@ -273,6 +306,23 @@ public class HiberMain {
             allAtenciones.add(temp);
         }
         return allAtenciones;
+
+    }
+    
+    public Atencion getAtencion(long idAtencion) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        Atencion temp = new Atencion();
+        String hql = "From Atencion A where A.idatencion = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idAtencion);
+        Object queryResult = query.uniqueResult();
+        temp = (Atencion) queryResult;
+        Hibernate.initialize(temp.getPersonal());
+            
+        return temp;
 
     }
     
@@ -316,6 +366,160 @@ public class HiberMain {
         
         return allAsistenciaFR;
 
+    }
+    
+    public ExpedienteFamilia getInformacionRegistro(long id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ExpedienteFamilia expFamilia = new ExpedienteFamilia();
+        String hqlA = "FROM ExpedienteFamilia EF WHERE EF.id = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        expFamilia = (ExpedienteFamilia) queryResultA;
+        Hibernate.initialize(expFamilia.getUnidad());
+        Hibernate.initialize(expFamilia.getFamilia().getEntidad());
+        return expFamilia;
+        
+    }
+    
+    public void updateAdoptante ( Adoptante temp){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.update(temp);
+    
+    }
+    
+    public void crearAtencion ( Atencion temp){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.save(temp);
+    
+    }
+    
+    public void updateAtencion ( Atencion temp){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.update(temp);
+    
+    }
+    
+    public Sesion getInfoSesion (long id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        Sesion sesion = new Sesion();
+
+        session.beginTransaction();
+        String hql = "From Sesion S where S.id = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", id);
+        Object queryResultU = query.uniqueResult();
+
+        sesion = (Sesion) queryResultU;
+        return sesion;
+    
+    }
+    
+    public ArrayList<Reunion> getListaReunionesPorTurno(long idTurno) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        String hql = "From Reunion R where R.turno2 = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idTurno);
+        List reuniones = query.list();
+        ArrayList<Reunion> allReuniones = new ArrayList();
+        
+        for (Iterator iter = reuniones.iterator(); iter.hasNext();) {
+            Reunion temp = (Reunion) iter.next();
+            allReuniones.add(temp);
+        }
+        
+        return allReuniones;
+
+    }
+    
+    public ArrayList<Evaluacion> getListaEvaluacionesPorExpediente(long idExp) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        String hql = "From Evaluacion E where E.expedienteFamilia = :id ORDER BY E.idevaluacion DESC";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idExp);
+        List evaluaciones = query.list();
+        ArrayList<Evaluacion> allEvaluaciones = new ArrayList();
+        
+        for (Iterator iter = evaluaciones.iterator(); iter.hasNext();) {
+            Evaluacion temp = (Evaluacion) iter.next();
+            Hibernate.initialize(temp.getResolucions());
+            allEvaluaciones.add(temp);
+        }
+        
+        return allEvaluaciones;
+
+    }
+    
+    public ArrayList<Designacion> getListaDesignacionesPorExpediente(long idExp) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        String hql = "From Designacion D where D.expedienteFamilia = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idExp);
+        List designaciones = query.list();
+        ArrayList<Designacion> allDesignaciones = new ArrayList();
+        
+        for (Iterator iter = designaciones.iterator(); iter.hasNext();) {
+            Designacion temp = (Designacion) iter.next();
+            Hibernate.initialize(temp.getNna());
+            allDesignaciones.add(temp);
+        }
+        
+        return allDesignaciones;
+
+    }
+    
+    public ArrayList<EstudioCaso> getListaEstudiosPorExpediente(long idExp) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        String hql = "From EstudioCaso E where E.expedienteFamilia = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idExp);
+        List estudios = query.list();
+        ArrayList<EstudioCaso> allEstudios = new ArrayList();
+        
+        for (Iterator iter = estudios.iterator(); iter.hasNext();) {
+            EstudioCaso temp = (EstudioCaso) iter.next();
+            Hibernate.initialize(temp.getNna().getExpedienteNnas());
+            allEstudios.add(temp);
+        }
+        
+        return allEstudios;
+
+    }
+    
+    public Evaluacion getEvaluacionJuntoPersonal(long id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Evaluacion tempEval = new Evaluacion();
+        
+        String hqlA = "FROM Evaluacion E WHERE E.id = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        tempEval = (Evaluacion) queryResultA;
+        Hibernate.initialize(tempEval.getPersonal());
+        return tempEval;
+        
     }
     
 }
