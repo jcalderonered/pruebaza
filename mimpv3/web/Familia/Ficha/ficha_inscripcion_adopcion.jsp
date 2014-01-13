@@ -132,25 +132,24 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Fechas de asistencia a reuniones de taller de preparación</label>
                                     <div class="controls">
-                                        <textarea class="input-xlarge" name="message" placeholder="" rows="5" ></textarea>
+                                        <textarea class="input-xlarge" name="message" rows="5" ></textarea>
                                     </div>
                                 </div>     
                                 <br>
                                 <h3><strong>Proceso de adopción anterior</strong></h3>
                                 <br>
-
                                 <h3>Se han presentado antes al proceso de adopción?</h3>
                                 <div class="row">
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
+                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" >Si</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >No</label>
+                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="1" >No</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3">   
@@ -158,7 +157,7 @@ if (u==null){
                                             <label>
                                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="C">Cuantas veces?</label>
                                             <br>
-                                            <input id="num_proceso" name="num_proceso" type="text" class="input-xlarge">
+                                            <input id="num_proceso" name="n_proc_adop_prev" type="text" class="input-xlarge">
                                         </div>                            
                                     </div>
                                 </div>
@@ -187,7 +186,7 @@ if (u==null){
                                     </div>
                                 </div>
                                 <br>
-                                <h3><strong>Culmino el proceso de evaluación?</strong></h3>
+                                <h3><strong>¿Culminó el proceso de evaluación?</strong></h3>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-3">  

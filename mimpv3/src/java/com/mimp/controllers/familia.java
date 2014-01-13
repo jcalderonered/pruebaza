@@ -70,11 +70,11 @@ public class familia {
 
             Sesion sesionMasProx = new Sesion();
             //ArrayList<Personal> allPersonal = new ArrayList();
-            ArrayList<Turno> allTurnos = new ArrayList();                       
+            ArrayList<Turno> allTurnos = new ArrayList();
             sesionMasProx = ServicioFamilia.sesionMasProx(fechaactual);
-            
+
             allTurnos = ServicioMain.turnosSesion(sesionMasProx.getIdsesion());
-            
+
             //allPersonal = ServicioPersonal.ListaPersonal();
             String fecha = format.dateToString(sesionMasProx.getFecha());
             String hora = sesionMasProx.getHora();
@@ -84,7 +84,7 @@ public class familia {
             //map.put("listaPersonal", allPersonal);
             map.addAttribute("ts", ts);
             map.addAttribute("fecha", fecha);
-            map.addAttribute("hora", hora);            
+            map.addAttribute("hora", hora);
 
             map.put("formato", format);
 
@@ -406,136 +406,158 @@ public class familia {
     }
 
     //Ficha de inscripcion de solicitantes para la adopción
-    @RequestMapping("/Fficha/opc1")
-    public ModelAndView Fficha1(ModelMap map, HttpSession session
+    @RequestMapping("/Fficha/opc0")
+    public ModelAndView Fficha0(ModelMap map, HttpSession session
     ) {
         Familia usuario = (Familia) session.getAttribute("usuario");
-        dateFormat format = new dateFormat();
-        Date factual = new Date();
-        String fechaactual = format.dateToString(factual);
-        map.addAttribute("hoy", fechaactual);
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         } else {
-            //Verificamos si es la primera vez que llena la ficha
-            FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
-            if (ficha == null) {
-                ficha = new FichaSolicitudAdopcion();
-                Solicitante sol;
-                Hijo hijo;
-                Residente res = new Residente();
-                //En caso haya ficha, se crea una nueva ficha ingresando toda la información
-                for (Iterator iter = usuario.getInfoFamilias().iterator(); iter.hasNext();) {
-                    InfoFamilia ifa = (InfoFamilia) iter.next();
-                    ficha.setEstadoCivil(ifa.getEstadoCivil());
-                    //FALTA TELEFONO
-                    ficha.setDomicilio(ifa.getDomicilio());
-                    ficha.setDepRes(ifa.getDepRes());
-                    ficha.setPropiedadVivienda(ifa.getPropiedadVivienda());
-                    ficha.setTipoVivienda(ifa.getTipoVivienda());
-                    ficha.setAreaVivTotal(ifa.getAreaVivTotal());
-                    ficha.setAreaVivConst(ifa.getAreaVivConst());
-                    ficha.setDistVivenda(ifa.getDistVivienda());
-                    ficha.setLuz(ifa.getLuz());
-                    ficha.setAgua(ifa.getAgua());
-                    ficha.setDesague(ifa.getDesague());
-                    ficha.setOtrosServ(ifa.getOtrosServ());
-                    ficha.setMaterConst(ifa.getMaterConst());
-                    ficha.setPared(ifa.getPared());
-                    ficha.setTecho(ifa.getTecho());
-                    ficha.setPiso(ifa.getPiso());
-                    //no se está agregando: n_proc_adop_prev, anho_proceso, proceso_prep, proceso_eval
-                    ficha.setNnaIncesto(ifa.getNnaIncesto());
-                    ficha.setNnaMental(ifa.getNnaMental());
-                    ficha.setNnaEpilepsia(ifa.getNnaEpilepsia());
-                    ficha.setNnaAbuso(ifa.getNnaAbuso());
-                    ficha.setNnaSifilis(ifa.getNnaSifilis());
-                    ficha.setNnaSeguiMedico(ifa.getNnaSeguiMedico());
-                    ficha.setNnaOperacion(ifa.getNnaOperacion());
-                    ficha.setNnaHiperactivo(ifa.getNnaHiperactivo());
-                    ficha.setNnaEspecial(ifa.getNnaEspecial());
-                    ficha.setNnaEnfermo(ifa.getNnaEnfermo());
-                    ficha.setNnaMayor(ifa.getNnaMayor());
-                    ficha.setNnaAdolescente(ifa.getNnaAdolescente());
-                    ficha.setNnaHermano(ifa.getNnaHermano());
-                    //no se está agregando: nna_foraneo y rpta_foraneo
-                    for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
-                        Adoptante adp = (Adoptante) iter2.next();
-                        sol = new Solicitante();
-                        sol.setNombre(adp.getNombre());
-                        sol.setApellidoP(adp.getApellidoP());
-                        sol.setApellidoM(adp.getApellidoM());
-                        //no se está agregando: edad
-                        sol.setFechaNac(adp.getFechaNac());
-                        sol.setLugarNac(adp.getLugarNac());
-                        sol.setDepaNac(adp.getDepaNac());
-                        sol.setPaisNac(adp.getPaisNac());
-                        sol.setTipoDoc(adp.getTipoDoc());
-                        sol.setNDoc(adp.getNDoc());
-                        sol.setCelular(adp.getCelular());
-                        sol.setCorreo(adp.getCorreo());
-                        sol.setNivelInstruccion(adp.getNivelInstruccion());
-                        sol.setCulminoNivel(adp.getCulminoNivel());
-                        sol.setProfesion(adp.getProfesion());
-                        sol.setTrabajadorDepend(adp.getTrabajadorDepend());
-                        sol.setOcupActualDep(adp.getOcupActualDep());
-                        sol.setCentroTrabajo(adp.getCentroTrabajo());
-                        sol.setDireccionCentro(adp.getDireccionCentro());
-                        sol.setTelefonoCentro(adp.getTelefonoCentro());
-                        sol.setIngresoDep(adp.getIngresoDep());
-                        sol.setTrabajadorIndepend(adp.getTrabajadorIndepend());
-                        sol.setOcupActualInd(adp.getOcupActualInd());
-                        sol.setIngresoIndep(adp.getIngresoIndep());
-                        sol.setSeguroSalud(adp.getSeguroSalud());
-                        sol.setTipoSeguro(adp.getTipoSeguro());
-                        sol.setSeguroVida(adp.getSeguroVida());
-                        sol.setSistPensiones(adp.getSistPensiones());
-                        sol.setSaludActual(adp.getSaludActual());
-                        ficha.getSolicitantes().add(sol);
-                    }
-                    for (Iterator iter3 = ifa.getHijoActs().iterator(); iter3.hasNext();) {
-                        HijoAct ha = (HijoAct) iter3.next();
-                        hijo = new Hijo();
-                        hijo.setFechaNac(ha.getFechaNac());
-                        hijo.setBiologico(ha.getBiologico());
-                        hijo.setFechaAdop(ha.getFechaAdop());
-                        //no se esta agregando: edad
-                        hijo.setNombre(ha.getNombre());
-                        hijo.setApellidoP(ha.getApellidoP());
-                        hijo.setApellidoM(ha.getApellidoM());
-                        hijo.setOcupacion(ha.getOcupacion());
-                        hijo.setEstadoSalud(ha.getEstadoSalud());
-                        hijo.setReside(ha.getReside());
-                        ficha.getHijos().add(hijo);
-                    }
-                    for (Iterator iter4 = ifa.getResidenteActs().iterator(); iter4.hasNext();) {
-                        ResidenteAct ra = (ResidenteAct) iter4.next();
-                        res = new Residente();
-                        res.setNombre(ra.getNombre());
-                        res.setApellidoP(ra.getApellidoP());
-                        res.setApellidoM(ra.getApellidoM());
-                        res.setParentesco(ra.getParentesco());
-                        res.setEdad(ra.getEdad());
-                        res.setOcupacion(ra.getOcupacion());
-                        res.setEstadoSalud(ra.getEstadoSalud());
-                        ficha.getResidentes().add(res);
-                    }
+            dateFormat format = new dateFormat();
+            Date factual = new Date();
+            String fechaactual = format.dateToString(factual);
+            map.addAttribute("factual", fechaactual);
+            FichaSolicitudAdopcion ficha = new FichaSolicitudAdopcion();
+            Solicitante sol;
+            Hijo hijo;
+            Residente res;
+            //En caso haya ficha, se crea una nueva ficha ingresando toda la información
+            for (Iterator iter = usuario.getInfoFamilias().iterator(); iter.hasNext();) {
+                InfoFamilia ifa = (InfoFamilia) iter.next();
+                ficha.setEstadoCivil(ifa.getEstadoCivil());
+                ficha.setFijo(ifa.getTelefono());
+                ficha.setDomicilio(ifa.getDomicilio());
+                ficha.setDepRes(ifa.getDepRes());
+                ficha.setPropiedadVivienda(ifa.getPropiedadVivienda());
+                ficha.setTipoVivienda(ifa.getTipoVivienda());
+                ficha.setAreaVivTotal(ifa.getAreaVivTotal());
+                ficha.setAreaVivConst(ifa.getAreaVivConst());
+                ficha.setDistVivenda(ifa.getDistVivienda());
+                ficha.setLuz(ifa.getLuz());
+                ficha.setAgua(ifa.getAgua());
+                ficha.setDesague(ifa.getDesague());
+                ficha.setOtrosServ(ifa.getOtrosServ());
+                ficha.setMaterConst(ifa.getMaterConst());
+                ficha.setPared(ifa.getPared());
+                ficha.setTecho(ifa.getTecho());
+                ficha.setPiso(ifa.getPiso());
+                //no se está agregando: n_proc_adop_prev, anho_proceso, proceso_prep, proceso_eval
+                ficha.setNnaIncesto(ifa.getNnaIncesto());
+                ficha.setNnaMental(ifa.getNnaMental());
+                ficha.setNnaEpilepsia(ifa.getNnaEpilepsia());
+                ficha.setNnaAbuso(ifa.getNnaAbuso());
+                ficha.setNnaSifilis(ifa.getNnaSifilis());
+                ficha.setNnaSeguiMedico(ifa.getNnaSeguiMedico());
+                ficha.setNnaOperacion(ifa.getNnaOperacion());
+                ficha.setNnaHiperactivo(ifa.getNnaHiperactivo());
+                ficha.setNnaEspecial(ifa.getNnaEspecial());
+                ficha.setNnaEnfermo(ifa.getNnaEnfermo());
+                ficha.setNnaMayor(ifa.getNnaMayor());
+                ficha.setNnaAdolescente(ifa.getNnaAdolescente());
+                ficha.setNnaHermano(ifa.getNnaHermano());
+                //no se está agregando: nna_foraneo y rpta_foraneo
+                for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
+                    Adoptante adp = (Adoptante) iter2.next();
+                    sol = new Solicitante();
+                    sol.setNombre(adp.getNombre());
+                    sol.setApellidoP(adp.getApellidoP());
+                    sol.setApellidoM(adp.getApellidoM());
+                    sol.setSexo(adp.getSexo());
+                    //no se está agregando: edad
+                    sol.setFechaNac(adp.getFechaNac());
+                    sol.setLugarNac(adp.getLugarNac());
+                    sol.setDepaNac(adp.getDepaNac());
+                    sol.setPaisNac(adp.getPaisNac());
+                    sol.setTipoDoc(adp.getTipoDoc());
+                    sol.setNDoc(adp.getNDoc());
+                    sol.setCelular(adp.getCelular());
+                    sol.setCorreo(adp.getCorreo());
+                    sol.setNivelInstruccion(adp.getNivelInstruccion());
+                    sol.setCulminoNivel(adp.getCulminoNivel());
+                    sol.setProfesion(adp.getProfesion());
+                    sol.setTrabajadorDepend(adp.getTrabajadorDepend());
+                    sol.setOcupActualDep(adp.getOcupActualDep());
+                    sol.setCentroTrabajo(adp.getCentroTrabajo());
+                    sol.setDireccionCentro(adp.getDireccionCentro());
+                    sol.setTelefonoCentro(adp.getTelefonoCentro());
+                    sol.setIngresoDep(adp.getIngresoDep());
+                    sol.setTrabajadorIndepend(adp.getTrabajadorIndepend());
+                    sol.setOcupActualInd(adp.getOcupActualInd());
+                    sol.setIngresoIndep(adp.getIngresoIndep());
+                    sol.setSeguroSalud(adp.getSeguroSalud());
+                    sol.setTipoSeguro(adp.getTipoSeguro());
+                    sol.setSeguroVida(adp.getSeguroVida());
+                    sol.setSistPensiones(adp.getSistPensiones());
+                    sol.setSaludActual(adp.getSaludActual());
+                    ficha.getSolicitantes().add(sol);
                 }
-                session.setAttribute("ficha", ficha);
+                for (Iterator iter3 = ifa.getHijoActs().iterator(); iter3.hasNext();) {
+                    HijoAct ha = (HijoAct) iter3.next();
+                    hijo = new Hijo();
+                    hijo.setFechaNac(ha.getFechaNac());
+                    hijo.setBiologico(ha.getBiologico());
+                    hijo.setFechaAdop(ha.getFechaAdop());
+                    //no se esta agregando: edad
+                    hijo.setNombre(ha.getNombre());
+                    hijo.setApellidoP(ha.getApellidoP());
+                    hijo.setApellidoM(ha.getApellidoM());
+                    hijo.setOcupacion(ha.getOcupacion());
+                    hijo.setEstadoSalud(ha.getEstadoSalud());
+                    hijo.setReside(ha.getReside());
+                    ficha.getHijos().add(hijo);
+                }
+                for (Iterator iter4 = ifa.getResidenteActs().iterator(); iter4.hasNext();) {
+                    ResidenteAct ra = (ResidenteAct) iter4.next();
+                    res = new Residente();
+                    res.setNombre(ra.getNombre());
+                    res.setApellidoP(ra.getApellidoP());
+                    res.setApellidoM(ra.getApellidoM());
+                    res.setParentesco(ra.getParentesco());
+                    res.setEdad(ra.getEdad());
+                    res.setOcupacion(ra.getOcupacion());
+                    res.setEstadoSalud(ra.getEstadoSalud());
+                    ficha.getResidentes().add(res);
+                }
             }
+            session.setAttribute("ficha", ficha);
             String fechaMatri = "";
-            try {
-                fechaMatri = format.dateToString(ficha.getFechaMatrimonio());
-            } catch (Exception e) {
-            }
             map.addAttribute("fechaMatri", fechaMatri);
-            char estCiv = 'N';
-            try {
-                estCiv = ficha.getEstadoCivil().charAt(0);
-            } catch (Exception e) {
+            map.addAttribute("estCivil", ficha.getEstadoCivil().charAt(0));
+            map.addAttribute("domicilio", ficha.getDomicilio());
+            map.addAttribute("fijo", ficha.getFijo());
+            Solicitante sol1;
+            for (Iterator iter5 = ficha.getSolicitantes().iterator(); iter5.hasNext();) {
+                sol1 = (Solicitante) iter5.next();
+                if (sol1.getSexo() == 'F') {
+                    map.put("sol", sol1);
+                    String fechanac = format.dateToString(sol1.getFechaNac());
+                    map.addAttribute("fechanac", fechanac);
+                }
             }
+        }
+        String pagina = "/Familia/Ficha/ficha_inscripcion_ella";
+        return new ModelAndView(pagina, map);
+    }
+
+    @RequestMapping("/Fficha/opc1")
+    public ModelAndView Fficha1(ModelMap map, HttpSession session
+    ) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        } else {
+            dateFormat format = new dateFormat();
+            Date factual = new Date();
+            String fechaactual = format.dateToString(factual);
+            map.addAttribute("factual", fechaactual);
+            FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
+            String fechaMatri = format.dateToString(ficha.getFechaMatrimonio());
+            map.addAttribute("fechaMatri", fechaMatri);
+            char estCiv = ficha.getEstadoCivil().charAt(0);
             map.addAttribute("estCivil", estCiv);
             map.addAttribute("domicilio", ficha.getDomicilio());
             map.addAttribute("fijo", ficha.getFijo());
@@ -561,29 +583,26 @@ public class familia {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
-        }
-        FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
-        String fechaMatri = "";
-        try {
-            fechaMatri = format.dateToString(ficha.getFechaMatrimonio());
-        } catch (Exception e) {
-        }
-        map.addAttribute("fechaMatri", fechaMatri);
-        char estCiv = 'N';
-        try {
-            estCiv = ficha.getEstadoCivil().charAt(0);
-        } catch (Exception e) {
-        }
-        map.addAttribute("estCivil", estCiv);
-        map.addAttribute("domicilio", ficha.getDomicilio());
-        map.addAttribute("fijo", ficha.getFijo());
-        Solicitante sol;
-        for (Iterator iter5 = ficha.getSolicitantes().iterator(); iter5.hasNext();) {
-            sol = (Solicitante) iter5.next();
-            if (sol.getSexo() == 'M') {
-                map.put("sol", sol);
-                String fechanac = format.dateToString(sol.getFechaNac());
-                map.addAttribute("fechanac", fechanac);
+        } else {
+            dateFormat format = new dateFormat();
+            Date factual = new Date();
+            String fechaactual = format.dateToString(factual);
+            map.addAttribute("factual", fechaactual);
+            FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
+            String fechaMatri = format.dateToString(ficha.getFechaMatrimonio());
+            map.addAttribute("fechaMatri", fechaMatri);
+            char estCiv = ficha.getEstadoCivil().charAt(0);
+            map.addAttribute("estCivil", estCiv);
+            map.addAttribute("domicilio", ficha.getDomicilio());
+            map.addAttribute("fijo", ficha.getFijo());
+            Solicitante sol;
+            for (Iterator iter5 = ficha.getSolicitantes().iterator(); iter5.hasNext();) {
+                sol = (Solicitante) iter5.next();
+                if (sol.getSexo() == 'M') {
+                    map.put("sol", sol);
+                    String fechanac = format.dateToString(sol.getFechaNac());
+                    map.addAttribute("fechanac", fechanac);
+                }
             }
         }
         String pagina = "/Familia/Ficha/ficha_inscripcion_el";
@@ -710,6 +729,11 @@ public class familia {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        dateFormat format = new dateFormat();
+        Date factual = new Date();
+        String fechaactual = format.dateToString(factual);
+        map.addAttribute("factual", fechaactual);
+
         FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
         Solicitante sol = new Solicitante();
         for (Iterator iter2 = ficha.getSolicitantes().iterator(); iter2.hasNext();) {
@@ -731,14 +755,29 @@ public class familia {
         sol.setLugarNac(lugar_nac);
         sol.setDepaNac(depa_nac);
         sol.setPaisNac(pais_nac);
-        sol.setTipoDoc(tipo_doc.charAt(0));
+        try {
+            sol.setTipoDoc(tipo_doc.charAt(0));
+        } catch (Exception ex) {
+
+        }
         sol.setNDoc(n_doc);
         ficha.setDomicilio(domicilio);
         ficha.setFijo(telefono);
         sol.setCelular(celular);
         sol.setCorreo(correo);
-        ficha.setEstadoCivil(est_civil);
-        ficha.setFechaMatrimonio(format.stringToDate(fecha_matri));
+        try {
+            ficha.setEstadoCivil(est_civil);
+        } catch (Exception ex) {
+
+        }
+        Date tempfecha = ficha.getFechaMatrimonio();
+        if (fecha_matri.contains("ene") || fecha_matri.contains("feb") || fecha_matri.contains("mar") || fecha_matri.contains("abr")
+                || fecha_matri.contains("may") || fecha_matri.contains("jun") || fecha_matri.contains("jul") || fecha_matri.contains("ago")
+                || fecha_matri.contains("set") || fecha_matri.contains("oct") || fecha_matri.contains("nov") || fecha_matri.contains("dic")) {
+            ficha.setFechaMatrimonio(tempfecha);
+        } else {
+            ficha.setFechaMatrimonio(format.stringToDate(fecha_matri));
+        }
         sol.setNivelInstruccion(nivel_inst);
         sol.setCulminoNivel(Short.valueOf(culm_nivel));
         sol.setProfesion(prof);
@@ -767,6 +806,17 @@ public class familia {
         sol.setSistPensiones(Short.valueOf(sist_pen));
         sol.setSaludActual(est_salud);
         ficha.getSolicitantes().add(sol);
+        session.removeAttribute("ficha");
+        session.setAttribute("ficha", ficha);
+
+        map.put("sol", sol);
+        String fechanac = format.dateToString(sol.getFechaNac());
+        map.addAttribute("fechanac", fechanac);
+        map.addAttribute("estCivil", est_civil.charAt(0));
+        map.addAttribute("fechaMatri", format.dateToString(ficha.getFechaMatrimonio()));
+        map.addAttribute("estCivil", ficha.getEstadoCivil().charAt(0));
+        map.addAttribute("domicilio", ficha.getDomicilio());
+        map.addAttribute("fijo", ficha.getFijo());
 
         String pagina = "/Familia/Ficha/ficha_inscripcion_ella";
         return new ModelAndView(pagina, map);
@@ -814,6 +864,11 @@ public class familia {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        dateFormat format = new dateFormat();
+        Date factual = new Date();
+        String fechaactual = format.dateToString(factual);
+        map.addAttribute("factual", fechaactual);
+        
         FichaSolicitudAdopcion ficha = (FichaSolicitudAdopcion) session.getAttribute("ficha");
         Solicitante sol = new Solicitante();
         for (Iterator iter2 = ficha.getSolicitantes().iterator(); iter2.hasNext();) {
@@ -835,14 +890,29 @@ public class familia {
         sol.setLugarNac(lugar_nac);
         sol.setDepaNac(depa_nac);
         sol.setPaisNac(pais_nac);
-        sol.setTipoDoc(tipo_doc.charAt(0));
+        try {
+            sol.setTipoDoc(tipo_doc.charAt(0));
+        } catch (Exception ex) {
+
+        }
         sol.setNDoc(n_doc);
         ficha.setDomicilio(domicilio);
         ficha.setFijo(telefono);
         sol.setCelular(celular);
         sol.setCorreo(correo);
-        ficha.setEstadoCivil(est_civil);
-        ficha.setFechaMatrimonio(format.stringToDate(fecha_matri));
+        try {
+            ficha.setEstadoCivil(est_civil);
+        } catch (Exception ex) {
+
+        }
+        Date tempfecha = ficha.getFechaMatrimonio();
+        if (fecha_matri.contains("ene") || fecha_matri.contains("feb") || fecha_matri.contains("mar") || fecha_matri.contains("abr")
+                || fecha_matri.contains("may") || fecha_matri.contains("jun") || fecha_matri.contains("jul") || fecha_matri.contains("ago")
+                || fecha_matri.contains("set") || fecha_matri.contains("oct") || fecha_matri.contains("nov") || fecha_matri.contains("dic")) {
+            ficha.setFechaMatrimonio(tempfecha);
+        } else {
+            ficha.setFechaMatrimonio(format.stringToDate(fecha_matri));
+        }
         sol.setNivelInstruccion(nivel_inst);
         sol.setCulminoNivel(Short.valueOf(culm_nivel));
         sol.setProfesion(prof);
@@ -871,11 +941,22 @@ public class familia {
         sol.setSistPensiones(Short.valueOf(sist_pen));
         sol.setSaludActual(est_salud);
         ficha.getSolicitantes().add(sol);
+        session.removeAttribute("ficha");
+        session.setAttribute("ficha", ficha);
+
+        map.put("sol", sol);
+        String fechanac = format.dateToString(sol.getFechaNac());
+        map.addAttribute("fechanac", fechanac);
+        map.addAttribute("estCivil", est_civil.charAt(0));
+        map.addAttribute("fechaMatri", format.dateToString(ficha.getFechaMatrimonio()));
+        map.addAttribute("estCivil", ficha.getEstadoCivil().charAt(0));
+        map.addAttribute("domicilio", ficha.getDomicilio());
+        map.addAttribute("fijo", ficha.getFijo());
 
         String pagina = "/Familia/Ficha/ficha_inscripcion_ella";
         return new ModelAndView(pagina, map);
     }
-    
+
     @RequestMapping("/FFicha/EditarHijo")
     public ModelAndView FfichaHijo(ModelMap map,
             @RequestParam("apellido_p") String apellidoP,
@@ -898,10 +979,34 @@ public class familia {
             return new ModelAndView("login", map);
         }
         //FALTA
+        String mensajebio = "";
+        String mensajeadop = "";
+        Long idhijolong = Long.parseLong(idhijo);
+        if (idhijolong == 0) {
+            Hijo hijo = new Hijo();
+            hijo.setApellidoP(apellidoP);
+            hijo.setApellidoM(apellidoM);
+            hijo.setNombre(nombre);
+            try {
+                hijo.setEdad(Short.parseShort(edad));
+            } catch (Exception e) {
+                mensajebio = "<p style=\"color: red\">El campo edad no contiene parámetros válidos. Ingresarlos nuevamente<p> ";
+            }
+//            if (fecha_nac.contains("ene") || fecha_nac.contains("feb") || fecha_nac.contains("mar") || fecha_nac.contains("abr")
+//                    || fecha_nac.contains("may") || fecha_nac.contains("jun") || fecha_nac.contains("jul") || fecha_nac.contains("ago")
+//                    || fecha_nac.contains("set") || fecha_nac.contains("oct") || fecha_nac.contains("nov") || fecha_nac.contains("dic")) {
+//                hijo.setfecha();
+//                tempSesion.setFecha(tempfecha);
+//            } else {
+//                tempSesion.setFecha(format.stringToDate(fecha));
+//            }
+        } else {
+
+        }
         String pagina = "/Familia/Ficha/ficha_inscripcion_adopcion";
         return new ModelAndView(pagina, map);
     }
-    
+
     @RequestMapping("/FFicha/EditarRes")
     public ModelAndView FfichaRes(ModelMap map,
             @RequestParam("apellido_p") String apellidoP,

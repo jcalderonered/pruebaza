@@ -79,7 +79,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha</label>
                                     <div class="controls">
-                                        <input disabled placeholder="10/11/2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled value="${factual}" id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Número</label>
                                     <div class="controls">
-                                        <input disabled placeholder="001-2013" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
