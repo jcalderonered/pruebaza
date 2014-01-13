@@ -274,7 +274,10 @@ public class personal {
         ent.setFechaVenc(format.stringToDate(fecha_venc_aut));
         ent.setObs(obs);
         ent.setUser(user);
-        ent.setPass(pass);
+         if (!pass.equals("")) {
+            pass = DigestUtils.sha512Hex(pass);
+            ent.setPass(pass);
+        }
         aut.setTipo(tipo);
 
         ServicioPersonal.InsertAut(ent, aut);
@@ -312,7 +315,10 @@ public class personal {
         temp.getEntidad().setNombre(nombre);
         temp.getEntidad().setPais(pais);
         temp.getEntidad().setUser(user);
-        temp.getEntidad().setPass(pass);
+        if (!pass.equals("")) {
+            pass = DigestUtils.sha512Hex(pass);
+            temp.getEntidad().setPass(pass);
+        }
         temp.getEntidad().setDireccion(direccion);
         temp.getEntidad().setTelefono(telefono);
         temp.getEntidad().setResolAuto(resol_aut);
@@ -428,7 +434,10 @@ public class personal {
         ent.setTelefono(telefono);
         ent.setPais(pais);
         ent.setUser(user);
-        ent.setPass(pass);
+        if (!pass.equals("")) {
+            pass = DigestUtils.sha512Hex(pass);
+            ent.setPass(pass);
+        }
         ent.setResolAuto(resol_aut);
         ent.setFechaResol(format.stringToDate(fecha_emis_resol));
         ent.setResolRenov(resol_renov);
@@ -500,7 +509,10 @@ public class personal {
 
         org.getEntidad().setNombre(nombre);
         org.getEntidad().setUser(user);
-        org.getEntidad().setPass(pass);
+        if (!pass.equals("")) {
+            pass = DigestUtils.sha512Hex(pass);
+            org.getEntidad().setPass(pass);
+        }
         org.getEntidad().setDireccion(direccion);
         org.getEntidad().setTelefono(telefono);
         org.getEntidad().setPais(pais);
@@ -931,7 +943,10 @@ public class personal {
         temp.setApellidoP(apellidoP);
         temp.setApellidoM(apellidoM);
         temp.setUser(user);
-        temp.setPass(pass);
+        if (!pass.equals("")) {
+            pass = DigestUtils.sha512Hex(pass);
+            temp.setPass(pass);
+        }
         temp.setCorreoTrabajo(correoT);
         temp.setCorreoPersonal(correoP);
         temp.setProfesion(profesion);
@@ -1065,8 +1080,10 @@ public class personal {
         temp.setApellidoP(apellidoP);
         temp.setApellidoM(apellidoM);
         temp.setUser(user);
-        pass = DigestUtils.sha512Hex(pass);
-        temp.setPass(pass);
+        if (!pass.equals("")) {
+            pass = DigestUtils.sha512Hex(pass);
+            temp.setPass(pass);
+        }
         temp.setCorreoTrabajo(correoT);
         temp.setCorreoPersonal(correoP);
         temp.setProfesion(profesion);
@@ -2056,6 +2073,85 @@ public class personal {
         map.put("reunion", tempReun);
         return new ModelAndView("/Personal/Informativa/toma_asistencia", map);
     }     
-        
+       
+    
     /*    FIN DE SESIONES Y TALLERES                      */
+    /*    FAMILIAS INTERNACIONALES                        */
+    @RequestMapping(value = "/AgregarFamInt", method = RequestMethod.POST)
+    public ModelAndView AgregarFamInt(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        return new ModelAndView("/Personal/fam_inter/datos_reg", map);
+    }
+    
+    @RequestMapping(value = "/CrearRegistroInt", method = RequestMethod.POST)
+    public ModelAndView CrearRegistroInt(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        return new ModelAndView("/Personal/fam_inter/datos_ella", map);
+    }
+    
+    @RequestMapping(value = "/VerInfoRegInt", method = RequestMethod.POST)
+    public ModelAndView VerInfoRegInt(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        return new ModelAndView("/Personal/fam_inter/datos_ella", map);
+    }
+    
+    @RequestMapping(value = "/laSolicitanteInt", method = RequestMethod.GET)
+    public ModelAndView laSolicitanteInt(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        return new ModelAndView("/Personal/fam_inter/datos_ella", map);
+    }
+    
+    @RequestMapping(value = "/elSolicitanteInt", method = RequestMethod.GET)
+    public ModelAndView elSolicitanteInt(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        return new ModelAndView("/Personal/fam_inter/datos_el", map);
+    }
+    
+    @RequestMapping(value = "/antNnaInt", method = RequestMethod.GET)
+    public ModelAndView antNnaInt(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        return new ModelAndView("/Personal/fam_inter/datos_nna", map);
+    }
 }

@@ -63,7 +63,7 @@
                 <br>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesInd" role="form" method="post">
+                        <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesInd" role="form" method="post"  name="formulario" onsubmit="return(validar());">
                             <input hidden id="idTurno" name="idTurno" value="${turno.getIdturno()}">
                             <input hidden id="estado" name="estado" value="${estado}">
                             
@@ -257,6 +257,123 @@
 
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
+            </script>
+            
+            <script type="text/javascript">
+     
+            function validar()
+            {
+              
+            if( document.formulario.nombre.value == "" )
+            {
+            alert( "Debe ingresar su nombre" );
+             document.formulario.nombre.focus() ;
+            return false;
+            }
+            if( document.formulario.apellidoP.value == "" )
+            {
+            alert( "Debe ingresar su apellido paterno" );
+             document.formulario.apellidoP.focus() ;
+            return false;
+            }
+            if( document.formulario.apellidoM.value == "" )
+            {
+            alert( "Debe ingresar su apellido materno" );
+             document.formulario.apellidoM.focus() ;
+            return false;
+            }
+            if( document.formulario.paisNac.value == "" )
+            {
+            alert( "Debe ingresar su país de nacimiento" );
+             document.formulario.paisNac.focus() ;
+            return false;
+            }
+            if( document.formulario.depNac.value == "" )
+            {
+            alert( "Debe ingresar su país departamento de nacimiento" );
+             document.formulario.depNac.focus() ;
+            return false;
+            }
+            if( document.formulario.proNac.value == "" )
+            {
+            alert( "Debe ingresar su provincia de nacimiento" );
+             document.formulario.proNac.focus() ;
+            return false;
+            }
+            if( document.formulario.fechaNac.value == "" )
+            {
+            alert( "Debe ingresar su fecha de nacimiento" );
+             document.formulario.fechaNac.focus() ;
+            return false;
+            }
+            if( document.formulario.edad.value == "" )
+            {
+            alert( "Debe ingresar su edad" );
+             document.formulario.edad.focus() ;
+            return false;
+            }
+            if( document.formulario.doc.value == "" )
+            {
+            alert( "Debe elegir su documento de identidad" );
+             document.formulario.doc.focus() ;
+            return false;
+            }
+            if( document.formulario.numDoc.value == "" )
+            {
+            alert( "Debe elegir su número de documento de identidad" );
+             document.formulario.numDoc.focus() ;
+            return false;
+            }
+            if( document.formulario.cel.value == "" )
+            {
+            alert( "Debe ingresar su número celular" );
+             document.formulario.cel.focus() ;
+            return false;
+            }
+            if( document.formulario.correo.value == "" )
+            {
+            alert( "Debe ingresar su correo electrónico" );
+             document.formulario.correo.focus() ;
+            return false;
+            }
+            if( document.formulario.pais.value == "" )
+            {
+            alert( "Debe ingresar su país de residencia" );
+             document.formulario.pais.focus() ;
+            return false;
+            }
+            if( document.formulario.dep.value == "" )
+            {
+            alert( "Debe ingresar su departamento de residencia" );
+             document.formulario.dep.focus() ;
+            return false;
+            }
+            if( document.formulario.prov.value == "" )
+            {
+            alert( "Debe ingresar su provincia de residencia" );
+             document.formulario.prov.focus() ;
+            return false;
+            }
+            if( document.formulario.dist.value == "" )
+            {
+            alert( "Debe ingresar su distrito de residencia" );
+             document.formulario.dist.focus() ;
+            return false;
+            }
+            if( document.formulario.dir.value == "" )
+            {
+            alert( "Debe ingresar su dirección domiciliaria" );
+             document.formulario.dir.focus() ;
+            return false;
+            }
+            if( document.formulario.telf.value == "" )
+            {
+            alert( "Debe ingresar su número de teléfono fijo" );
+             document.formulario.telf.focus() ;
+            return false;
+            }
+            return( true );
+            }
             </script>
             <!-- Ubicar al final -->
     </body>

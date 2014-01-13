@@ -94,14 +94,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
                         </ul>
                     </div>
-                    <div class="col-md-8 col-md-offset-1">
+                    <div class="col-md-8 ">
                         <!-- AQUI AGREGAR EL CONTENIDO QUE ESTARA AL COSTADO DEL MENU -->
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>   
                         <br>
                         <h3><strong>Datos generales del registro</strong></h3>
                         <br>
                         <br>
-                        <form role="form">    
+                        <form role="form" action="${pageContext.servletContext.contextPath}/CrearRegistroInt" method="post">    
                             <div class="control-group">
                                 <label class="control-label">Número </label>
                                 <div class="controls">
@@ -178,11 +178,13 @@
                             <div class="control-group">
                                 <div class="controls">
                                     <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Editar y Ver información de familia</button>
-                                    &nbsp;
-                                    <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Ver información de familia</button>
                                 </div>
                             </div>
+                            <br>
                         </form>
+                          <form role="form" action="${pageContext.servletContext.contextPath}/VerInfoRegInt" method="post">   
+                            <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Ver información de familia</button>
+                          </form>   
                     </div>
 
                 </div>

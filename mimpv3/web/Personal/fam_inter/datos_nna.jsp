@@ -96,18 +96,18 @@
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
                         </ul>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <br>
                         <h1 align="center"><strong>Datos de la familia internacional</strong></h1>
                         <br>                      
-                        <ul class="nav nav-tabs row" id="tabs" >
-                            <li><a href="#" data-toggle="tab">La Solicitante</a></li>
-                            <li><a href="#" data-toggle="tab">El solicitante</a></li>
+                        <ul class="nav nav-tabs row" >
+                            <li><a href="${pageContext.servletContext.contextPath}/laSolicitanteInt" >La Solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/elSolicitanteInt" >El solicitante</a></li>
                             <!-- <li><a href="#" data-toggle="tab">Composición familiar</a></li> -->
                             <!-- <li><a href="#" data-toggle="tab">Vivienda</a></li> -->
                             <!--<li><a href="#" data-toggle="tab">Proceso de adopción</a></li> -->
-                            <li class="active"><a href="#" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/antNnaInt" >Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
 
                         <form class="form-horizontal"> 
