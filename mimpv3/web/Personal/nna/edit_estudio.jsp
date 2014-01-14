@@ -96,8 +96,8 @@
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" >
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
+                            <li ><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
                         </ul>
                         <br>
@@ -163,7 +163,7 @@
                         <h1>Información para la propuesta de adopción</h1>
                         <p>En caso una familia presente una solicitud de adopción (el resultado sea "Aceptado"), llenar la siguiente información:</p>
                         <br>
-                        <h3><strong>${nna}</strong></h3>
+                        
                         <form action="${pageContext.servletContext.contextPath}/generarDesignacionPrioritario" method="post">
                         <div class="control-group">
                             <label class="control-label">Fecha de solicitud de adopción</label>
