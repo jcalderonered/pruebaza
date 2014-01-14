@@ -137,7 +137,9 @@
                                                 </c:forEach>  
                                                 ${tokenAdopcion == 0 ? 'Si' : 'No' }        
                                             </c:if>  
-                                                                                       
+                                            <c:if test="${nna.getDesignacions().isEmpty()}">
+                                                No
+                                            </c:if>                                           
                                         </td>
                                         <td>
                                             <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">

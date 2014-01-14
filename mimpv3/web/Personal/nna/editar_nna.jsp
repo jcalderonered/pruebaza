@@ -477,10 +477,12 @@
                                                 <button ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Expediente</button>
                                        </form>  
                                         &nbsp;
+                                       <!-- 
                                        <form action="${pageContext.servletContext.contextPath}/listaDesignacionesNna" method="post">
                                                 <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
                                                 <button ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Propuesta de Designación</button>
-                                       </form>  
+                                       </form> 
+                                       -->
                                         
                         </div>
                 </div>
