@@ -395,8 +395,7 @@
                                 </div>
                             </fieldset>
                         </form>
-                                    <br>
-                                     <button id="singlebutton" name="singlebutton" class="btn btn-default">Propuesta de Designación</button>
+                                    
 
                     </div>
                 </div>

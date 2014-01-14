@@ -136,7 +136,7 @@
                                                             <td>
                                                               <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
                                                                     <input hidden name="estado" id="estado" value="adopcion">
-                                                                    <input hidden name="idExpediente" id="idExpediente" value="${adopcion.getExpedienteFamilia().getExpediente().getIdexpedienteFamilia()}">
+                                                                    <input hidden name="idExpediente" id="idExpediente" value="${adopcion.getExpedienteFamilia().getIdexpedienteFamilia()}">
                                                                     <button type="submit" class="btn btn-default">Ver</button>
                                                               </form>
                                                             </td>
@@ -145,7 +145,7 @@
                                                             </td>
                                                             <td>${adopcion.getPrioridad()}</td>
                                                             <td ${adopcion.getTipoPropuesta() == 'dupla' ? 'rowspan="2"' : ''} ${adopcion.getTipoPropuesta() == 'terna' ? 'rowspan="3"' : ''} style="vertical-align:middle" >
-                                                                 <form action="${pageContext.servletContext.contextPath}/" method="post">
+                                                                 <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
                                                                     <input hidden name="idNna" id="idNna" value="${adopcion.getNna().getIdnna()}">
                                                                     <button type="submit" class="btn btn-default">Ver</button>
                                                                  </form>   
