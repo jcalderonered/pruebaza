@@ -145,7 +145,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de ingreso</label>
                                     <div class="controls">
-                                        <input id="fechaIngreso" name="fechaIngreso" value="${expediente.getFechaIngreso() != null ? df.dateToString(expediente.getFechaIngreso()) : ''}" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaIngreso" name="fechaIngreso" value="${fechaing}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -166,7 +166,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de investigación tutelar</label>
                                     <div class="controls">
-                                        <input id="fechaInvTutelar" name="fechaInvTutelar" value="${expediente.getFechaInvTutelar() != null ? df.dateToString(expediente.getFechaInvTutelar()) : ''}" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaInvTutelar" name="fechaInvTutelar" value="${fechainv}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -237,7 +237,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha del estado</label>
                                     <div class="controls">
-                                        <input id="fechaEstado" name="fechaEstado" value="${expediente.getFechaEstado() != null ? df.dateToString(expediente.getFechaEstado()) : ''}" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaEstado" name="fechaEstado" value="${fechaest}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
