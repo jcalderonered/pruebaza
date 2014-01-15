@@ -84,7 +84,7 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin")) {%>
+                                if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                                 <%}%>
@@ -138,7 +138,6 @@
                         <br>
                         <div class="control-group">
                             <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/irEditarPersonal'" class="btn btn-default">Registrar Personal</button> 
-
                         </div>
                         <br>
                         <br>
@@ -146,7 +145,6 @@
                             <input hidden name="id" id="id" value="${personal.getIdpersonal()}">
                             <button type="submit" class="btn btn-default" disabled>Ver log</button>
                         </form>
-
                     </div>
                 </div>
             </div>

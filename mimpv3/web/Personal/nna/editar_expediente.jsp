@@ -86,7 +86,7 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin")) {%>
+                                if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                                 <%}%>
@@ -94,7 +94,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p> 
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/nna'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p> 
                         <h1 align="center"><strong>Expediente del NNA</strong></h1>
                         <br>
                         <c:if test="${expediente == null}">

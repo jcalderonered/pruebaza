@@ -79,7 +79,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha</label>
                                     <div class="controls">
-                                        <input disabled value="${factual}" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled value="${factual}" id="full-name" name="fecha_ingreso" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
@@ -87,20 +87,20 @@
                                 <div class="control-group">
                                     <label class="control-label">Número</label>
                                     <div class="controls">
-                                        <input disabled id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        <input disabled id="full-name" name="numero" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <br>
                         <br>
-                        <ul class="nav nav-tabs row" id="tabs" >
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc1" data-toggle="tab">La Solicitante</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc2" data-toggle="tab">El solicitante</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/Fficha/opc3" data-toggle="tab">Composición familiar</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc4" data-toggle="tab">Vivienda</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc5" data-toggle="tab">Proceso de adopción</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc6" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
+                        <ul class="nav nav-tabs row">
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc1">La Solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc2">El solicitante</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/Fficha/opc3">Composición familiar</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc4">Vivienda</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc5">Proceso de adopción</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Fficha/opc6">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
                         <form class="form-horizontal"> 
                             <br>
