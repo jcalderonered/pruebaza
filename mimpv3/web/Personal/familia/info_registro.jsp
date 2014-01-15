@@ -118,14 +118,6 @@
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                             <h3><strong>Información del Expediente</strong></h3>
                             <br>
-
-                            <div class="control-group">
-                                <label class="control-label">Número</label>
-                                <div class="controls">
-                                    <input id="numero" name="numero" value="${expediente.getNumero()}" type="text" class="input-xlarge">
-                                </div>
-                            </div>
-                            <br>
                             <div class="control-group">
                                 <label class="control-label">Expediente</label>
                                 <div class="controls">
@@ -187,7 +179,7 @@
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Pertenece al RNSA:</label>
-                                <select id="rnsa" name="rnsa">
+                                <select id="rnsa" name="rnsa" disabled>
                                         <option value="0" ${expediente.getRnsa() == 0 ? 'selected' : ''} >Si</option>
                                         <option value="1" ${expediente.getRnsa() == 1 ? 'selected' : ''} >No</option>
                                 </select>
@@ -195,7 +187,7 @@
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Pertenece al RNAA:</label>
-                                <select id="rnaa" name="rnaa">
+                                <select id="rnaa" name="rnaa" disabled>
                                         <option value="0" ${expediente.getRnaa() == 0 ? 'selected' : ''} >Si</option>
                                         <option value="1" ${expediente.getRnaa() == 1 ? 'selected' : ''} >No</option>
                                 </select>
@@ -287,7 +279,50 @@
             <script type="text/javascript">
 
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-
+                $('#fechaIngreso').on('changeDate', function (ev) {
+                    
+                    var ingreso =  document.getElementById("fechaIngreso").value;
+                    var tupa =  document.getElementById("tupa");
+                    var nacionalidad = document.getElementById("nacionalidad");
+                    var opcion = nacionalidad.options[nacionalidad.selectedIndex].value;
+                    
+                    var dia = 0;
+                    var mes = 0;
+                    var anho = 0;
+                    
+                    var pieces = ingreso.split('/');
+                    var date = parseInt(pieces[0]);
+                    var month = parseInt(pieces[1]);
+                    var year = parseInt(pieces[2]);
+                    //alert(opcion);
+                    if (opcion == 'nacional'){
+                        dia = date + 15;
+                        if ( dia > 30 ){
+                            dia = dia - 30;
+                            mes = month + 1;
+                        }else {
+                            mes = month;
+                        }
+                        if ( mes > 12){
+                            mes = mes - 12;
+                            anho = year + 1;
+                        }else {
+                            anho = year;
+                        }
+                    }else {
+                        dia = date;
+                        mes = month + 3;
+                        if ( mes > 12){
+                            mes = mes - 12;
+                            anho = year + 1;
+                        }else {
+                            anho = year;
+                        }
+                    }
+                    tupa.value = dia + "/" + mes + "/" + anho;
+                     
+                     
+                        });    
             </script>
             <script>
                 function funcNacion(value)

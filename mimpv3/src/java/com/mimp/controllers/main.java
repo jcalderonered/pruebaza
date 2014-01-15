@@ -956,14 +956,14 @@ public class main {
         
         @RequestMapping(value = "/ActualizarRegistro", method = RequestMethod.POST)
         public ModelAndView ActualizarRegistro(ModelMap map, HttpSession session,
-                                              @RequestParam(value="numero") long numero,  
+                                              //@RequestParam(value="numero") long numero,  
                                               @RequestParam(value="ht") String ht,  
                                               @RequestParam(value="numeroExp") String numeroExp,  
                                               @RequestParam(value="fechaIngreso") String fechaIngreso,  
                                               @RequestParam(value="tupa") String tupa,  
                                               @RequestParam(value="nacionalidad") String nacionalidad,
-                                              @RequestParam(value="rnsa") String rnsa,  
-                                              @RequestParam(value="rnaa") String rnaa,  
+                                              //@RequestParam(value="rnsa") String rnsa,  
+                                              //@RequestParam(value="rnaa") String rnaa,  
                                               @RequestParam(value="tipoFamilia") String tipoFamilia,  
                                               @RequestParam(value="tipoEspera") String tipoEspera,  
                                               @RequestParam(value="unidad") long unidad,  
@@ -980,7 +980,7 @@ public class main {
         Unidad tempUa = ServicioPersonal.getUa(unidad);
         Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
         
-        expediente.setNumero(numero);
+        //expediente.setNumero(numero);
         expediente.setHt(ht);
         expediente.setNumeroExpediente(numeroExp);
         if(fechaIngreso != null && !fechaIngreso.equals("")) expediente.setFechaIngresoDga(df.stringToDate(fechaIngreso));
@@ -989,8 +989,8 @@ public class main {
         if(tupa == null && tupa.equals("")) expediente.setTupa(null);
         
         expediente.setNacionalidad(nacionalidad);
-        expediente.setRnsa(Short.parseShort(rnsa));
-        expediente.setRnaa(Short.parseShort(rnaa));
+        //expediente.setRnsa(Short.parseShort(rnsa));
+        //expediente.setRnaa(Short.parseShort(rnaa));
         
         expediente.setTipoFamilia(tipoFamilia);
         expediente.setTipoListaEspera(tipoEspera);
@@ -1025,9 +1025,9 @@ public class main {
                                               @RequestParam(value="numCel", required = false) String numCel, 
                                               @RequestParam(value="correo", required = false) String correo, 
                                               @RequestParam(value="fechaMat", required = false) String fechaMat, 
-                                              @RequestParam(value="nivelInstruccion") String nivelInstruccion,  
-                                              @RequestParam(value="culminoNivel") String culminoNivel,
-                                              @RequestParam(value="profesion") String profesion,
+                                              @RequestParam(value="nivelInstruccion",required = false) String nivelInstruccion,  
+                                              @RequestParam(value="culminoNivel",required = false) String culminoNivel,
+                                              @RequestParam(value="profesion",required = false) String profesion,
                                               @RequestParam(value="trabDep", required = false) String trabDep,
                                               @RequestParam(value="ocupacionDep", required = false) String ocupacionDep,
                                               @RequestParam(value="centroTrabajo", required = false) String centroTrabajo,
@@ -1144,6 +1144,7 @@ public class main {
             servicioEtapa.updateExpedienteFamilia(expediente);
             map.put("df",df);
             map.put("estado",etapaOrigen);
+            map.put("infoFam",infoFam);
             map.put("expediente",expediente);
             map.put("El",El);
             return new ModelAndView("/Personal/familia/info_el", map);
@@ -1241,6 +1242,7 @@ public class main {
             servicioEtapa.updateExpedienteFamilia(expediente);
             map.put("df",df);
             map.put("estado",etapaOrigen);
+            map.put("infoFam",infoFam);
             map.put("expediente",expediente);
             map.put("Ella",Ella);
             return new ModelAndView("/Personal/familia/info_ella", map);
