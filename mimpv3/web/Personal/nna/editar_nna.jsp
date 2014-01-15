@@ -541,7 +541,7 @@
                     if (curr_year == birth_year) edad.value = 0;
                     if (curr_month == birth_month) meses.value = 0;
                     if (curr_month != birth_month && curr_month > birth_month ) meses.value = curr_month - birth_month;
-                    if (curr_month != birth_month && curr_month <= birth_month ) meses.value = curr_month;
+                    if (curr_month != birth_month && curr_month <= birth_month ) meses.value = curr_month + 12 - birth_month;
                      
                         });
                         

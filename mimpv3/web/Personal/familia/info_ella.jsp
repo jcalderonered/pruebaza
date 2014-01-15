@@ -92,7 +92,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post">
+                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario" onsubmit="return(validar());">
                             <input hidden id="adoptante" name="adoptante" value="ella">
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <c:if test="${estado != 'formativa'}">
@@ -388,7 +388,7 @@
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="checkbox" name="seguroSalud" id="checkbox1" value="0" ${Ella.getSeguroSalud() == 0 ? 'checked' : ''}>Si</label>
+                                                <input type="radio" name="seguroSalud" id="checkbox1" value="0" ${Ella.getSeguroSalud() == 0 ? 'checked' : ''}>Si</label>
                                         </div>
                                     </div>  
                                     <div class="col-md-2">  
@@ -632,7 +632,33 @@
                        }
                     }
            </script>  
-            <!-- Ubicar al final -->
-
+          <script type="text/javascript">
+            function validar()
+            {
+            var numericExpression = /^[0-9]+$/;
+            if(document.getElementById('trabIndep').checked){
+            if(document.formulario.ingresoInd.value.match(numericExpression))
+            {
+             return true
+            }else{
+                
+                alert( "El campo debe contener solo números" );
+                document.formulario.ingresoInd.focus() ;
+                return false;
+            }
+            }
+            if(document.getElementById('trabDep').checked){
+            if( document.formulario.ingresoDep.value.match(numericExpression))
+            {
+             return true
+            }else{
+                
+                alert( "El campo debe contener solo números" );
+                document.formulario.ingresoDep.focus() ;
+                return false;
+            }
+            }
+            }
+          </script>
     </body>
 </html>
