@@ -76,17 +76,17 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UAs</a></li>
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de Registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Organismo Acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de Autoridad Central</a></li>
                                 <%}%>
@@ -94,21 +94,29 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/usuarios'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <h1 align="center"><strong>Editar Personal</strong></h1>
-                        <br>
                         <c:if test="${personal.getIdpersonal() == null}">
+                            <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/usuarios'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            <h1 align="center"><strong>Editar Personal</strong></h1>
+                            <br>
                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editPersonal" method="post"> 
                             </c:if>  
                             <c:if test="${personal.getIdpersonal() != null && disabled == 'deshabilitar'}">
+                                <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post">
+                                    <input hidden name="ïdUA" id="ïdUA" value="${personal.getUnidad().getIdunidad()}">
+                                    <p align="right"><button type="submit" class="btn btn-default" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                                </form>
+                                <h1 align="center"><strong>Editar Personal</strong></h1>
+                                <br>
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonalUa" method="post">
                                     <input hidden name="idPers" id="idPers" value="${personal.getIdpersonal()}">    
                                 </c:if> 
-                                <c:if test="${personal.getIdpersonal() != null}">
+                                <c:if test="${personal.getIdpersonal() != null && disabled != 'deshabilitar'}">
+                                    <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/usuarios'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                                    <h1 align="center"><strong>Editar Personal</strong></h1>
+                                    <br>
                                     <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonal" method="post"> 
                                         <input hidden name="idPers" id="idPers" value="${personal.getIdpersonal()}">
                                     </c:if>  
-
                                     <fieldset>
                                         <!-- Text input-->
                                         <div class="control-group">
@@ -276,7 +284,7 @@
                                 <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
                                 <script type="text/javascript">
 
-                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
                                 </script>
                                 <!-- Ubicar al final -->

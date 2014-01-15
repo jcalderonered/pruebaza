@@ -61,6 +61,7 @@ public class HiberMain {
 
         if (queryResultP != null) {
             personal = (Personal) queryResultP;
+            Hibernate.initialize(personal.getUnidad());
             temp.add("personal");
             temp.add(personal);
             return temp;

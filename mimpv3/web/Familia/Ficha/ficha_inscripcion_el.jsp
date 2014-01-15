@@ -30,9 +30,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
         <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
-
     </head>
-
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
