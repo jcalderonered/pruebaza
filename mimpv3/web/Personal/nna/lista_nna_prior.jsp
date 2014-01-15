@@ -143,15 +143,21 @@
                                         </c:if>
                                         <td>
                                             <c:if test="${!nna.getDesignacions().isEmpty()}">
-                                                <c:forEach var="designacion" items="${nna.getDesignacions()}" varStatus="status">
+                                                <c:set var="tokenAdopcion" value="2" ></c:set>
+                                               <c:forEach var="designacion" items="${nna.getDesignacions()}" varStatus="status">
                                                     <c:choose>
                                                         <c:when test="${designacion.getAceptacionConsejo() == 0 || designacion.getAceptacionConsejo() == 1 || designacion.getAceptacionConsejo() == 2}">
                                                             <c:set var="tokenAdopcion" value="0" ></c:set>
-                                                        </c:when>           
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <c:if test="${tokenAdopcion != '0'}">
+                                                                <c:set var="tokenAdopcion" value="1" ></c:set>
+                                                            </c:if>
+                                                        </c:otherwise>
                                                     </c:choose>
-                                                </c:forEach>   
-                                               ${tokenAdopcion == 0 ? 'Si' : 'No' }           
-                                            </c:if> 
+                                                </c:forEach>
+                                                ${tokenAdopcion == '0' ? 'Si' : 'No' }        
+                                            </c:if>  
                                             <c:if test="${nna.getDesignacions().isEmpty()}">
                                                 No
                                             </c:if>  

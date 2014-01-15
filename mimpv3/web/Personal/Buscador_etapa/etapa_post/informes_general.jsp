@@ -126,14 +126,16 @@
                                                         <c:choose>
                                                             <c:when test="${informe.getEstado() != null && informe.getEstado() == 'listo'}">
                                                                 <h4><strong>Estado:</strong></h4>  Listo
+                                                                <br>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <h4><strong>Estado:</strong></h4>  Pendiente
+                                                                <br>
                                                             </c:otherwise>    
                                                         </c:choose>
                                                                 <br>
                                                                 <h4><strong>Fecha Aproximada de recepción:</strong></h4> ${listaFechas.get(status.index)}
-                                                                
+                                                                <br>
                                                     <form action="${pageContext.servletContext.contextPath}/EditarInforme" method="post">
                                                           <input hidden name="idInforme" id="idInforme" value="${informe.getIdinformePostAdoptivo()}">
                                                           <input hidden name="familia" id="familia" value="${familia}">

@@ -1146,6 +1146,7 @@ public class mainEtapas {
                                           @RequestParam("idNna") long idNna,
                                           @RequestParam("fechaConsejo") String fechaConsejo,
                                           @RequestParam("prioridad") long[] prioridad,
+                                          @RequestParam("idExp") long[] idExp,
                                           @RequestParam("obs") String obs
                                                        ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1154,7 +1155,18 @@ public class mainEtapas {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-       
+        if(idExp != null){
+            for (int i = 0; i < idExp.length; i++) {
+                ArrayList<Designacion> tempDesig = new ArrayList();
+                tempDesig = servicioEtapa.getListaDesignacionesDeFamilia(idExp[i]);
+                if(!tempDesig.isEmpty()){
+                    for (Designacion designacion : tempDesig) {
+                        designacion.setAceptacionConsejo(Short.parseShort("3"));
+                        servicioEtapa.updateDesignacion(designacion);
+                    }
+                }
+            }
+        }
         if(prioridad != null){
             ExpedienteNna tempExpNna = ServicioNna.getExpNna(idNna);
             tempExpNna.setEstado("adop");
