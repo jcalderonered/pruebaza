@@ -142,7 +142,10 @@
                                         <tbody>
                                             <c:forEach var="designacion" items="${listaDesignaciones}" varStatus="status">
                                             <tr>
-                                                <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
+                                                <td>
+                                                    ${designacion.getExpedienteFamilia().getExpediente()}
+                                                    <input hidden id="idExp" name="idExp" value="${designacion.getExpedienteFamilia().getIdexpedienteFamilia()}">                                                    
+                                                </td>
                                                 <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
                                                 <td><select id="prioridad" name="prioridad">
                                                         <option value="1">1</option>

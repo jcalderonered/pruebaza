@@ -294,9 +294,11 @@ public ArrayList<Familia> getListaFamilias () {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         
-        String hql = "from ExpedienteFamilia EF where EF.estado = :estado";
+        String hql = "from ExpedienteFamilia EF where (EF.estado = :estado) or (EF.estado = :estado2) or (EF.estado = :estado3)";
         Query query = session.createQuery(hql);
         query.setString("estado", "espera");
+        query.setString("estado2", "adopcion");
+        query.setString("estado3", "post");
         List expedientes = query.list();
         ArrayList<ExpedienteFamilia> allInfoFam = new ArrayList();
         for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
@@ -343,9 +345,11 @@ public ArrayList<Familia> getListaFamilias () {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         
-        String hql = "from ExpedienteFamilia EF where EF.estado = :estado and EF.expediente like :exp";
+        String hql = "from ExpedienteFamilia EF where (EF.estado = :estado) or (EF.estado = :estado2) or (EF.estado = :estado3) and EF.expediente like :exp";
         Query query = session.createQuery(hql);
         query.setString("estado", "espera");
+        query.setString("estado2", "adopcion");
+        query.setString("estado3", "post");
         query.setString("exp",'%' + exp + '%');
         List expedientes = query.list();
         ArrayList<ExpedienteFamilia> allInfoFam = new ArrayList();
@@ -504,6 +508,23 @@ public ArrayList<Familia> getListaFamilias () {
         Designacion temp = (Designacion) iter.next();
             Hibernate.initialize(temp.getExpedienteFamilia());
             Hibernate.initialize(temp.getNna().getExpedienteNnas());
+            allDesig.add(temp);
+        }
+        return allDesig;
+    }
+    
+    public ArrayList<Designacion> getListaDesignacionesDeFamilia(long idExpFam){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<Designacion> allDesig = new ArrayList();
+        String hql = "FROM Designacion D WHERE D.aceptacionConsejo = :aceptacionConsejo and D.expedienteFamilia = :id";
+        Query query = session.createQuery(hql);
+        query.setShort("aceptacionConsejo", Short.parseShort("0"));
+        query.setLong("id", idExpFam);
+        List expedientes = query.list();
+        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+        Designacion temp = (Designacion) iter.next();
             allDesig.add(temp);
         }
         return allDesig;
@@ -708,6 +729,7 @@ public ArrayList<Familia> getListaFamilias () {
         Query query2 = session.createQuery(hql2);
         List tempPost = query2.list();
         
+        if(!allResoluciones.isEmpty() && !tempPost.isEmpty()){
         for (Iterator iter = tempPost.iterator(); iter.hasNext();) {
         PostAdopcion temp2 = (PostAdopcion) iter.next();
                 for (Resolucion resol : allResoluciones) {
@@ -721,6 +743,8 @@ public ArrayList<Familia> getListaFamilias () {
             }
            allPostAdopcion.add(temp2);
         }
+        }
+        
         return allPostAdopcion;
     }
     

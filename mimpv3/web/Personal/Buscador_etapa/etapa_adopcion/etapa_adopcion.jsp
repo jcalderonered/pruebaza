@@ -140,17 +140,23 @@
                                                                     <button type="submit" class="btn btn-default">Ver</button>
                                                               </form>
                                                             </td>
-                                                            <td ${adopcion.getTipoPropuesta() == 'dupla' ? 'rowspan="2"' : ''} ${adopcion.getTipoPropuesta() == 'terna' ? 'rowspan="3"' : ''} style="vertical-align:middle" >                                                    
+                                                            <c:set var="numFilas" value="0"/>
+                                                                <c:forEach var="adopcion2" items="${listaAdopciones}" varStatus="status2">
+                                                                    <c:if test="${adopcion.getNDesignacion() == adopcion2.getNDesignacion()}">
+                                                                        <c:set var="numFilas" value="${numFilas + 1}"/>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            <td rowspan="${numFilas}" style="vertical-align: middle;"> 
                                                                 ${adopcion.getNDesignacion()}
                                                             </td>
                                                             <td>${adopcion.getPrioridad()}</td>
-                                                            <td ${adopcion.getTipoPropuesta() == 'dupla' ? 'rowspan="2"' : ''} ${adopcion.getTipoPropuesta() == 'terna' ? 'rowspan="3"' : ''} style="vertical-align:middle" >
+                                                            <td rowspan="${numFilas}" style="vertical-align: middle;"> 
                                                                  <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
                                                                     <input hidden name="idNna" id="idNna" value="${adopcion.getNna().getIdnna()}">
+                                                                    <h3><strong>${adopcion.getNna().getNombre()} ${adopcion.getNna().getApellidoP()}</strong></h3>
                                                                     <button type="submit" class="btn btn-default">Ver</button>
                                                                  </form>   
                                                             </td>
-                                                            
                                                                 <c:set var="expediente" value="${adopcion.getExpedienteFamilia()}"/> 
                                                                   <c:forEach var="evaluacion" items="${expediente.getEvaluacions()}" >
                                                                     <c:choose>

@@ -94,7 +94,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>    
                         </ul>
                     </div>
-                    <div class="col-md-6 col-md-offset-1">
+                    <div class="col-md-6">
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" >
