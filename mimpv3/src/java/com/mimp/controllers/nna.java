@@ -80,6 +80,10 @@ public class nna {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        
+        map.addAttribute("fechaNac", "");
+        map.addAttribute("fechaResolAband", "");
+        map.addAttribute("fechaResolConsen", "");
 
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
@@ -98,9 +102,9 @@ public class nna {
         Nna tempNna = new Nna();
         tempNna = ServicioNna.getNna(idNna);
 
-        map.addAttribute("fechainv", "");
-        map.addAttribute("fechaing", "");
-        map.addAttribute("fechaest", "");
+        map.addAttribute("fechaNac", "");
+        map.addAttribute("fechaResolAband", "");
+        map.addAttribute("fechaResolConsen", "");
         map.put("nna", tempNna);
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
@@ -666,12 +670,13 @@ public class nna {
         tempExp.setNna(tempNna);
         ServicioNna.crearExpNna(tempExp);
 
-        map.addAttribute("fechainv", df.dateToString(tempExp.getFechaInvTutelar()));
-        map.addAttribute("fechaing", df.dateToString(tempExp.getFechaIngreso()));
-        map.addAttribute("fechaest", df.dateToString(tempExp.getFechaEstado()));
+        map.addAttribute("fechaNac", df.dateToString(tempNna.getFechaNacimiento()));
+        map.addAttribute("fechaResolAband", df.dateToString(tempNna.getFechaResolAbandono()));
+        map.addAttribute("fechaResolConsen", df.dateToString(tempNna.getFechaResolConsentida()));
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
+        
         return new ModelAndView("/Personal/nna/editar_nna", map);
     }
 
@@ -802,9 +807,9 @@ public class nna {
         ServicioNna.updateNna(tempNna);
         ServicioNna.updateExpNna(tempExp);
 
-        map.addAttribute("fechainv", df.dateToString(tempExp.getFechaInvTutelar()));
-        map.addAttribute("fechaing", df.dateToString(tempExp.getFechaIngreso()));
-        map.addAttribute("fechaest", df.dateToString(tempExp.getFechaEstado()));
+        map.addAttribute("fechaNac", df.dateToString(tempNna.getFechaNacimiento()));
+        map.addAttribute("fechaResolAband", df.dateToString(tempNna.getFechaResolAbandono()));
+        map.addAttribute("fechaResolConsen", df.dateToString(tempNna.getFechaResolConsentida()));
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
