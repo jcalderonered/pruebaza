@@ -1772,7 +1772,11 @@ public class personal {
         allTurnos = ServicioMain.turnosSesion(id);
         temp = ServicioPersonal.getSesion(id);
         //allPersonal = ServicioPersonal.ListaPersonal();
-        String fecha = format.dateToString(temp.getFecha());
+        String fecha = "";
+        try {
+            fecha = format.dateToString(temp.getFecha());
+        } catch (Exception ex) {
+        }
         String hora = temp.getHora();
 
         map.put("listaTurnos", allTurnos);
@@ -1820,8 +1824,16 @@ public class personal {
         String fin = fechaFin + " " + horaFin;
         Short vac = Short.parseShort(vacantes);
 
-        temp.setInicioInscripcion(ts.stringToTimestamp(comienzo));
-        temp.setFinInscripcion(ts.stringToTimestamp(fin));
+        try {
+            temp.setInicioInscripcion(ts.stringToTimestamp(comienzo));
+        } catch (Exception ex) {
+            temp.setInicioInscripcion(ts.stringToTimestamp(fechaInicio + " 00:00"));
+        }
+        try {
+            temp.setFinInscripcion(ts.stringToTimestamp(fin));
+        } catch (Exception ex) {
+            temp.setFinInscripcion(ts.stringToTimestamp(fechaFin + " 00:00"));
+        }
         temp.setVacantes(vac);
 
         ServicioPersonal.PersonalCrearTurno(temp);
@@ -1882,8 +1894,16 @@ public class personal {
         String fin = fechaFin + " " + horaFin;
         Short vac = Short.parseShort(vacantes);
 
-        temp.setInicioInscripcion(ts.stringToTimestamp(comienzo));
-        temp.setFinInscripcion(ts.stringToTimestamp(fin));
+        try {
+            temp.setInicioInscripcion(ts.stringToTimestamp(comienzo));
+        } catch (Exception ex) {
+            temp.setInicioInscripcion(ts.stringToTimestamp(fechaInicio + " 00:00"));
+        }
+        try {
+            temp.setFinInscripcion(ts.stringToTimestamp(fin));
+        } catch (Exception ex) {
+            temp.setFinInscripcion(ts.stringToTimestamp(fechaFin + " 00:00"));
+        }
         temp.setVacantes(vac);
 
         ServicioPersonal.PersonalUpdateTurno(temp);
