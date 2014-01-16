@@ -1350,5 +1350,20 @@ public ModelAndView ActualizarVivienda(ModelMap map, HttpSession session,
         return new ModelAndView("/Personal/familia/info_vivienda", map);
         
 }    
-    
+
+/*  CRONOGRAMA */
+    @RequestMapping(value = "/CronogramaAnual", method = RequestMethod.GET)
+    public ModelAndView CronogramaAnual(ModelMap map, HttpSession session) {
+        
+        
+        
+        ArrayList<Taller> allTalleres = new ArrayList();
+        allTalleres = ServicioMain.listaTalleresHabilitados();
+        ArrayList<Sesion> allSesiones = new ArrayList();
+        allSesiones = ServicioMain.getListaSesionesHabilitadas();
+        map.put("df",df);
+        map.put("listaTalleres",allTalleres);
+        map.put("listaSesiones",allSesiones);
+        return new ModelAndView("cronograma", map);
+} 
 }

@@ -45,6 +45,7 @@
                         <ul class="nav navbar-nav navbar-left">
                             <li><a href="#">Inicio</a></li>
                             <li><a href="#">Inscripción a Sesión Informativa</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/CronogramaAnual">Ver el cronograma anual</a></li>
                             <li class="active"><a href="#">Información Adicional</a></li>
                             <li><a href="#">Contacto</a></li>
                         </ul>

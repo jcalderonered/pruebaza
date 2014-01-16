@@ -529,4 +529,57 @@ public class HiberMain {
         
     }
     
+    public ArrayList<Taller> listaTalleresHabilitados() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "FROM Taller T where T.habilitado = :int";
+        Query query = session.createQuery(hql);
+        query.setShort("int", Short.parseShort("0"));
+        List talleres = query.list();
+        ArrayList<Taller> allTalleres = new ArrayList();
+        for (Iterator iter = talleres.iterator(); iter.hasNext();) {
+            Taller temp = (Taller) iter.next();
+            Hibernate.initialize(temp.getGrupos());
+                Set<Grupo> grupos = new HashSet<Grupo>(0);
+            for (Grupo grp : temp.getGrupos()) {
+                    Hibernate.initialize(grp.getTurno2s());
+                        Set<Turno2> turno2s = new HashSet<Turno2>(0);
+                        for (Turno2 trn : grp.getTurno2s()) {
+                                Hibernate.initialize(trn.getReunions());
+                                turno2s.add(trn);
+                         }
+                       grp.setTurno2s(turno2s);
+                       grupos.add(grp);
+            }
+            temp.setGrupos(grupos);
+            allTalleres.add(temp);
+        }
+        return allTalleres;
+
+    }
+    
+    public ArrayList<Sesion> getListaSesionesHabilitadas() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        String hql = "From Sesion S where S.habilitado = :int";
+        Query query = session.createQuery(hql);
+        query.setShort("int", Short.parseShort("0"));
+        List sesiones = query.list();
+        ArrayList<Sesion> allSesiones = new ArrayList();
+        
+        for (Iterator iter = sesiones.iterator(); iter.hasNext();) {
+            Sesion temp = (Sesion) iter.next();
+            Hibernate.initialize(temp.getTurnos());
+            allSesiones.add(temp);
+        }
+        
+        return allSesiones;
+
+    }
+    
 }
