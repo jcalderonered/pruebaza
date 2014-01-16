@@ -148,7 +148,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input id="fechaNac" value="${nna.getFechaNacimiento() != null ? df.dateToString(nna.getFechaNacimiento()) : ''}" name="fechaNac" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaNac" value="${fechaNac}" name="fechaNac" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -234,7 +234,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de resolución de abandono</label>
                                     <div class="controls">
-                                        <input id="fechaResolAband" name="fechaResolAband" value="${nna.getFechaResolAbandono() != null ? df.dateToString(nna.getFechaResolAbandono()) : ''}" type="text" class="datepicker input-xlarge">
+                                        <input id="fechaResolAband" name="fechaResolAband" value="${fechaResolAband}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -248,7 +248,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de resolución consentida</label>
                                     <div class="controls">
-                                        <input  id="fechaResolConsen" name="fechaResolConsen" value="${nna.getFechaResolConsentida() != null ? df.dateToString(nna.getFechaResolConsentida()) : ''}" type="text" class="datepicker input-xlarge">
+                                        <input  id="fechaResolConsen" name="fechaResolConsen" value="${fechaResolConsen}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>

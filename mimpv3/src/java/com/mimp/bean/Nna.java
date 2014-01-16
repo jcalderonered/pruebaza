@@ -53,6 +53,9 @@ public class Nna  implements java.io.Serializable {
      private Set<Prioritario> prioritarios = new HashSet<Prioritario>(0);
      private Set<ExpedienteNna> expedienteNnas = new HashSet<ExpedienteNna>(0);
      private Set<EstudioCaso> estudioCasos = new HashSet<EstudioCaso>(0);
+     private String fechaNacimientoString;
+     private String fechaResolAbandonoString;
+     private String fechaResolConsentidaString;
 
     public Nna() {
     }
@@ -393,6 +396,48 @@ public class Nna  implements java.io.Serializable {
     
     public void setEstudioCasos(Set<EstudioCaso> estudioCasos) {
         this.estudioCasos = estudioCasos;
+    }
+
+    /**
+     * @return the fechaNacimientoString
+     */
+    public String getFechaNacimientoString() {
+        return fechaNacimientoString;
+    }
+
+    /**
+     * @param fechaNacimientoString the fechaNacimientoString to set
+     */
+    public void setFechaNacimientoString(String fechaNacimientoString) {
+        this.fechaNacimientoString = fechaNacimientoString;
+    }
+
+    /**
+     * @return the fechaResolAbandonoString
+     */
+    public String getFechaResolAbandonoString() {
+        return fechaResolAbandonoString;
+    }
+
+    /**
+     * @param fechaResolAbandonoString the fechaResolAbandonoString to set
+     */
+    public void setFechaResolAbandonoString(String fechaResolAbandonoString) {
+        this.fechaResolAbandonoString = fechaResolAbandonoString;
+    }
+
+    /**
+     * @return the fechaResolConsentidaString
+     */
+    public String getFechaResolConsentidaString() {
+        return fechaResolConsentidaString;
+    }
+
+    /**
+     * @param fechaResolConsentidaString the fechaResolConsentidaString to set
+     */
+    public void setFechaResolConsentidaString(String fechaResolConsentidaString) {
+        this.fechaResolConsentidaString = fechaResolConsentidaString;
     }
 
 
