@@ -80,7 +80,7 @@ public class nna {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         map.addAttribute("fechaNac", "");
         map.addAttribute("fechaResolAband", "");
         map.addAttribute("fechaResolConsen", "");
@@ -102,9 +102,9 @@ public class nna {
         Nna tempNna = new Nna();
         tempNna = ServicioNna.getNna(idNna);
 
-        map.addAttribute("fechaNac", "");
-        map.addAttribute("fechaResolAband", "");
-        map.addAttribute("fechaResolConsen", "");
+        map.addAttribute("fechaNac", df.dateToString(tempNna.getFechaNacimiento()));
+        map.addAttribute("fechaResolAband", df.dateToString(tempNna.getFechaResolAbandono()));
+        map.addAttribute("fechaResolConsen", df.dateToString(tempNna.getFechaResolConsentida()));
         map.put("nna", tempNna);
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
@@ -513,6 +513,10 @@ public class nna {
             return new ModelAndView("login", map);
         }
 
+        String tempfechaString = "";
+        map.addAttribute("fechainv", tempfechaString);
+        map.addAttribute("fechaing", tempfechaString);
+        map.addAttribute("fechaest", tempfechaString);
         map.put("nna", ServicioNna.getNna(idNna));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
@@ -529,9 +533,22 @@ public class nna {
         }
         ExpedienteNna tempExp = new ExpedienteNna();
         tempExp = ServicioNna.getExpNna(idNna);
-        map.addAttribute("fechainv", df.dateToString(tempExp.getFechaInvTutelar()));
-        map.addAttribute("fechaing", df.dateToString(tempExp.getFechaIngreso()));
-        map.addAttribute("fechaest", df.dateToString(tempExp.getFechaEstado()));
+        String tempfechaString = "";
+        try {
+            tempfechaString = df.dateToString(tempExp.getFechaInvTutelar());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechainv", tempfechaString);
+        try {
+            tempfechaString = df.dateToString(tempExp.getFechaIngreso());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechaing", tempfechaString);
+        try {
+            tempfechaString = df.dateToString(tempExp.getFechaEstado());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechaest", tempfechaString);
         map.put("expediente", tempExp);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
@@ -676,7 +693,7 @@ public class nna {
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
-        
+
         return new ModelAndView("/Personal/nna/editar_nna", map);
     }
 
