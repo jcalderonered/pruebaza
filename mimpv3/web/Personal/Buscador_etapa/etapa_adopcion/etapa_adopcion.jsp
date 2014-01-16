@@ -233,7 +233,7 @@
                                                     </c:when>
                                                     <c:otherwise>
                                                          <tr>
-                                                             <td>${adopcion.getExpedienteFamilia().getExpediente()} ${adopcion.getExpedienteFamilia().getIdexpedienteFamilia()}</td>
+                                                             <td>${adopcion.getExpedienteFamilia().getExpediente()}</td>
                                                              <td><button href="#" class="btn btn-default">Ver</button></td>
                                                              <td>${adopcion.getPrioridad()}</td>
                                                              <c:set var="expediente" value="${adopcion.getExpedienteFamilia()}"/> 
