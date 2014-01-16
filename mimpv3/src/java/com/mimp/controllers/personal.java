@@ -182,9 +182,17 @@ public class personal {
             return new ModelAndView("login", map);
         }
         dateFormat format = new dateFormat();
-        String fechanac = format.dateToString(usuario.getFechaNacimiento());
+        String fechanac = "";
+        String fechaing = "";
+        try {
+            fechanac = format.dateToString(usuario.getFechaNacimiento());
+        } catch (Exception ex) {
+        }
         map.addAttribute("fechanac", fechanac);
-        String fechaing = format.dateToString(usuario.getFechaIngreso());
+        try {
+            fechaing = format.dateToString(usuario.getFechaIngreso());
+        } catch (Exception ex) {
+        }
         map.addAttribute("fechaing", fechaing);
         return new ModelAndView("/Personal/actualizar_info", map);
     }
@@ -217,9 +225,17 @@ public class personal {
         ServicioPersonal.UpdatePersonal(usuario);
 
         dateFormat format = new dateFormat();
-        String fechanac = format.dateToString(usuario.getFechaNacimiento());
+        String fechanac = "";
+        String fechaing = "";
+        try {
+            fechanac = format.dateToString(usuario.getFechaNacimiento());
+        } catch (Exception ex) {
+        }
         map.addAttribute("fechanac", fechanac);
-        String fechaing = format.dateToString(usuario.getFechaIngreso());
+        try {
+            fechaing = format.dateToString(usuario.getFechaIngreso());
+        } catch (Exception ex) {
+        }
         map.addAttribute("fechaing", fechaing);
         return new ModelAndView("/Personal/actualizar_info", map);
     }
@@ -263,11 +279,23 @@ public class personal {
         //map.addAttribute("id", temp);
         Autoridad temp = new Autoridad();
         temp = ServicioPersonal.getAutoridad(id);
-        String fechaEmision = format.dateToString(temp.getEntidad().getFechaResol());
-        String fechaRenov = format.dateToString(temp.getEntidad().getFechaRenov());
-        String fechaVenc = format.dateToString(temp.getEntidad().getFechaVenc());
+        String fechaEmision = "";
+        String fechaRenov = "";
+        String fechaVenc = "";
+        try {
+            fechaEmision = format.dateToString(temp.getEntidad().getFechaResol());
+        } catch (Exception ex) {
+        }
         map.addAttribute("fechaEmision", fechaEmision);
+        try {
+            fechaRenov = format.dateToString(temp.getEntidad().getFechaRenov());
+        } catch (Exception ex) {
+        }
         map.addAttribute("fechaRenov", fechaRenov);
+        try {
+            fechaVenc = format.dateToString(temp.getEntidad().getFechaVenc());
+        } catch (Exception ex) {
+        }
         map.addAttribute("fechaVenc", fechaVenc);
         map.put("autoridad", temp);
         return new ModelAndView("/Personal/registros/autoridad/editar_aut", map);
@@ -303,10 +331,55 @@ public class personal {
         ent.setTelefono(telefono);
         ent.setPais(pais);
         ent.setResolAuto(resol_aut);
-        ent.setFechaResol(format.stringToDate(fecha_emis_resol));
+        Date tempfecha = ent.getFechaResol();
+        if (fecha_emis_resol != null) {
+            if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
+                    || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
+                    || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
+                ent.setFechaResol(tempfecha);
+            } else {
+                if (!fecha_emis_resol.equals("")) {
+                    ent.setFechaResol(format.stringToDate(fecha_emis_resol));
+                } else {
+                    ent.setFechaResol(null);
+                }
+            }
+        } else {
+            ent.setFechaResol(null);
+        }
         ent.setResolRenov(resol_renov);
-        ent.setFechaRenov(format.stringToDate(fecha_renov));
-        ent.setFechaVenc(format.stringToDate(fecha_venc_aut));
+        tempfecha = ent.getFechaRenov();
+        if (fecha_renov != null) {
+            if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
+                    || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
+                    || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
+                ent.setFechaRenov(tempfecha);
+            } else {
+                if (!fecha_renov.equals("")) {
+                    ent.setFechaRenov(format.stringToDate(fecha_renov));
+                } else {
+                    ent.setFechaRenov(null);
+                }
+            }
+        } else {
+            ent.setFechaRenov(null);
+        }
+        tempfecha = ent.getFechaVenc();
+        if (fecha_venc_aut != null) {
+            if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
+                    || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
+                    || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
+                ent.setFechaVenc(tempfecha);
+            } else {
+                if (!fecha_venc_aut.equals("")) {
+                    ent.setFechaVenc(format.stringToDate(fecha_venc_aut));
+                } else {
+                    ent.setFechaVenc(null);
+                }
+            }
+        } else {
+            ent.setFechaVenc(null);
+        }
         ent.setObs(obs);
         ent.setUser(user);
         if (!pass.equals("")) {
@@ -357,10 +430,56 @@ public class personal {
         temp.getEntidad().setDireccion(direccion);
         temp.getEntidad().setTelefono(telefono);
         temp.getEntidad().setResolAuto(resol_aut);
+        Date tempfecha = temp.getEntidad().getFechaResol();
+        if (fecha_emis_resol != null) {
+            if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
+                    || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
+                    || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
+                temp.getEntidad().setFechaResol(tempfecha);
+            } else {
+                if (!fecha_emis_resol.equals("")) {
+                    temp.getEntidad().setFechaResol(format.stringToDate(fecha_emis_resol));
+                } else {
+                    temp.getEntidad().setFechaResol(null);
+                }
+            }
+        } else {
+            temp.getEntidad().setFechaResol(null);
+        }
         temp.getEntidad().setFechaResol(format.stringToDate(fecha_emis_resol));
         temp.getEntidad().setResolRenov(resol_renov);
-        temp.getEntidad().setFechaRenov(format.stringToDate(fecha_renov));
-        temp.getEntidad().setFechaVenc(format.stringToDate(fecha_venc_aut));
+        tempfecha = temp.getEntidad().getFechaRenov();
+        if (fecha_renov != null) {
+            if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
+                    || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
+                    || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
+                temp.getEntidad().setFechaRenov(tempfecha);
+            } else {
+                if (!fecha_renov.equals("")) {
+                    temp.getEntidad().setFechaRenov(format.stringToDate(fecha_renov));
+                } else {
+                    temp.getEntidad().setFechaRenov(null);
+                }
+            }
+        } else {
+            temp.getEntidad().setFechaRenov(null);
+        }
+        tempfecha = temp.getEntidad().getFechaVenc();
+        if (fecha_venc_aut != null) {
+            if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
+                    || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
+                    || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
+                temp.getEntidad().setFechaVenc(tempfecha);
+            } else {
+                if (!fecha_venc_aut.equals("")) {
+                    temp.getEntidad().setFechaVenc(format.stringToDate(fecha_venc_aut));
+                } else {
+                    temp.getEntidad().setFechaVenc(null);
+                }
+            }
+        } else {
+            temp.getEntidad().setFechaVenc(null);
+        }
         temp.getEntidad().setObs(obs);
         ServicioPersonal.UpdateAut(temp.getEntidad(), temp);
         map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
@@ -390,13 +509,38 @@ public class personal {
         }
         Organismo temp = new Organismo();
         temp = ServicioPersonal.getOrganismo(id);
-        String fechaEmision = format.dateToString(temp.getEntidad().getFechaResol());
-        String fechaRenov = format.dateToString(temp.getEntidad().getFechaRenov());
-        String fechaVenc = format.dateToString(temp.getEntidad().getFechaVenc());
 
-        String fechaAutR = format.dateToString(temp.getRepresentantes().iterator().next().getFechaAuto());
-        String fechaRenovR = format.dateToString(temp.getRepresentantes().iterator().next().getFechaRenov());
-        String fechaVencR = format.dateToString(temp.getRepresentantes().iterator().next().getFechaVencAuto());
+        String fechaEmision = "";
+        String fechaRenov = "";
+        String fechaVenc = "";
+        String fechaAutR = "";
+        String fechaRenovR = "";
+        String fechaVencR = "";
+        try {
+            fechaEmision = format.dateToString(temp.getEntidad().getFechaResol());
+        } catch (Exception ex) {
+        }
+        try {
+            fechaRenov = format.dateToString(temp.getEntidad().getFechaRenov());
+        } catch (Exception ex) {
+        }
+        try {
+            fechaVenc = format.dateToString(temp.getEntidad().getFechaVenc());
+        } catch (Exception ex) {
+        }
+
+        try {
+            fechaAutR = format.dateToString(temp.getRepresentantes().iterator().next().getFechaAuto());
+        } catch (Exception ex) {
+        }
+        try {
+            fechaRenovR = format.dateToString(temp.getRepresentantes().iterator().next().getFechaRenov());
+        } catch (Exception ex) {
+        }
+        try {
+            fechaVencR = format.dateToString(temp.getRepresentantes().iterator().next().getFechaVencAuto());
+        } catch (Exception ex) {
+        }
 
         map.addAttribute("fechaEmision", fechaEmision);
         map.addAttribute("fechaRenov", fechaRenov);
@@ -456,9 +600,54 @@ public class personal {
         rep.setNombre(nombreR);
         rep.setApellidoP(apellidoP);
         rep.setApelldoM(apellidoM);
-        rep.setFechaAuto(format.stringToDate(fechaAutR));
-        rep.setFechaRenov(format.stringToDate(fechaRenovR));
-        rep.setFechaVencAuto(format.stringToDate(fechaVencR));
+        Date tempfecha = rep.getFechaAuto();
+        if (fechaAutR != null) {
+            if (fechaAutR.contains("ene") || fechaAutR.contains("feb") || fechaAutR.contains("mar") || fechaAutR.contains("abr")
+                    || fechaAutR.contains("may") || fechaAutR.contains("jun") || fechaAutR.contains("jul") || fechaAutR.contains("ago")
+                    || fechaAutR.contains("set") || fechaAutR.contains("oct") || fechaAutR.contains("nov") || fechaAutR.contains("dic")) {
+                rep.setFechaAuto(tempfecha);
+            } else {
+                if (!fechaAutR.equals("")) {
+                    rep.setFechaAuto(format.stringToDate(fechaAutR));
+                } else {
+                    rep.setFechaAuto(null);
+                }
+            }
+        } else {
+            rep.setFechaAuto(null);
+        }
+        tempfecha = rep.getFechaRenov();
+        if (fechaRenovR != null) {
+            if (fechaRenovR.contains("ene") || fechaRenovR.contains("feb") || fechaRenovR.contains("mar") || fechaRenovR.contains("abr")
+                    || fechaRenovR.contains("may") || fechaRenovR.contains("jun") || fechaRenovR.contains("jul") || fechaRenovR.contains("ago")
+                    || fechaRenovR.contains("set") || fechaRenovR.contains("oct") || fechaRenovR.contains("nov") || fechaRenovR.contains("dic")) {
+                rep.setFechaRenov(tempfecha);
+            } else {
+                if (!fechaAutR.equals("")) {
+                    rep.setFechaRenov(format.stringToDate(fechaRenovR));
+                } else {
+                    rep.setFechaRenov(null);
+                }
+            }
+        } else {
+            rep.setFechaRenov(null);
+        }
+        tempfecha = rep.getFechaVencAuto();
+        if (fechaAutR != null) {
+            if (fechaVencR.contains("ene") || fechaVencR.contains("feb") || fechaVencR.contains("mar") || fechaVencR.contains("abr")
+                    || fechaVencR.contains("may") || fechaVencR.contains("jun") || fechaVencR.contains("jul") || fechaVencR.contains("ago")
+                    || fechaVencR.contains("set") || fechaVencR.contains("oct") || fechaVencR.contains("nov") || fechaVencR.contains("dic")) {
+                rep.setFechaVencAuto(tempfecha);
+            } else {
+                if (!fechaAutR.equals("")) {
+                    rep.setFechaVencAuto(format.stringToDate(fechaVencR));
+                } else {
+                    rep.setFechaVencAuto(null);
+                }
+            }
+        } else {
+            rep.setFechaVencAuto(null);
+        }
         rep.setCorreo(correo);
         rep.setDireccion(direccionR);
         rep.setCelular(celular);
@@ -474,10 +663,55 @@ public class personal {
             ent.setPass(pass);
         }
         ent.setResolAuto(resol_aut);
-        ent.setFechaResol(format.stringToDate(fecha_emis_resol));
+        tempfecha = ent.getFechaResol();
+        if (fecha_emis_resol != null) {
+            if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
+                    || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
+                    || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
+                ent.setFechaResol(tempfecha);
+            } else {
+                if (!fecha_emis_resol.equals("")) {
+                    ent.setFechaResol(format.stringToDate(fecha_emis_resol));
+                } else {
+                    ent.setFechaResol(null);
+                }
+            }
+        } else {
+            ent.setFechaResol(null);
+        }
         ent.setResolRenov(resol_renov);
-        ent.setFechaRenov(format.stringToDate(fecha_renov));
-        ent.setFechaVenc(format.stringToDate(fecha_venc_aut));
+        tempfecha = ent.getFechaRenov();
+        if (fecha_renov != null) {
+            if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
+                    || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
+                    || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
+                ent.setFechaRenov(tempfecha);
+            } else {
+                if (!fecha_renov.equals("")) {
+                    ent.setFechaRenov(format.stringToDate(fecha_renov));
+                } else {
+                    ent.setFechaRenov(null);
+                }
+            }
+        } else {
+            ent.setFechaRenov(null);
+        }
+        tempfecha = ent.getFechaVenc();
+        if (fecha_venc_aut != null) {
+            if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
+                    || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
+                    || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
+                ent.setFechaVenc(tempfecha);
+            } else {
+                if (!fecha_venc_aut.equals("")) {
+                    ent.setFechaVenc(format.stringToDate(fecha_venc_aut));
+                } else {
+                    ent.setFechaVenc(null);
+                }
+            }
+        } else {
+            ent.setFechaVenc(null);
+        }
         ent.setObs(obs);
 
         ServicioPersonal.InsertOrg(ent, rep, org);
@@ -534,9 +768,54 @@ public class personal {
         org.getRepresentantes().iterator().next().setApellidoP(apellidoP);
         org.getRepresentantes().iterator().next().setApelldoM(apellidoM);
 
-        org.getRepresentantes().iterator().next().setFechaAuto(format.stringToDate(fechaAutR));
-        org.getRepresentantes().iterator().next().setFechaRenov(format.stringToDate(fechaRenovR));
-        org.getRepresentantes().iterator().next().setFechaVencAuto(format.stringToDate(fechaVencR));
+        Date tempfecha = org.getRepresentantes().iterator().next().getFechaAuto();
+        if (fechaAutR != null) {
+            if (fechaAutR.contains("ene") || fechaAutR.contains("feb") || fechaAutR.contains("mar") || fechaAutR.contains("abr")
+                    || fechaAutR.contains("may") || fechaAutR.contains("jun") || fechaAutR.contains("jul") || fechaAutR.contains("ago")
+                    || fechaAutR.contains("set") || fechaAutR.contains("oct") || fechaAutR.contains("nov") || fechaAutR.contains("dic")) {
+                org.getRepresentantes().iterator().next().setFechaAuto(tempfecha);
+            } else {
+                if (!fechaAutR.equals("")) {
+                    org.getRepresentantes().iterator().next().setFechaAuto(format.stringToDate(fechaAutR));
+                } else {
+                    org.getRepresentantes().iterator().next().setFechaAuto(null);
+                }
+            }
+        } else {
+            org.getRepresentantes().iterator().next().setFechaAuto(null);
+        }
+        tempfecha = org.getRepresentantes().iterator().next().getFechaRenov();
+        if (fechaRenovR != null) {
+            if (fechaRenovR.contains("ene") || fechaRenovR.contains("feb") || fechaRenovR.contains("mar") || fechaRenovR.contains("abr")
+                    || fechaRenovR.contains("may") || fechaRenovR.contains("jun") || fechaRenovR.contains("jul") || fechaRenovR.contains("ago")
+                    || fechaRenovR.contains("set") || fechaRenovR.contains("oct") || fechaRenovR.contains("nov") || fechaRenovR.contains("dic")) {
+                org.getRepresentantes().iterator().next().setFechaRenov(tempfecha);
+            } else {
+                if (!fechaRenovR.equals("")) {
+                    org.getRepresentantes().iterator().next().setFechaRenov(format.stringToDate(fechaRenovR));
+                } else {
+                    org.getRepresentantes().iterator().next().setFechaRenov(null);
+                }
+            }
+        } else {
+            org.getRepresentantes().iterator().next().setFechaRenov(null);
+        }
+        tempfecha = org.getRepresentantes().iterator().next().getFechaVencAuto();
+        if (fechaVencR != null) {
+            if (fechaVencR.contains("ene") || fechaVencR.contains("feb") || fechaVencR.contains("mar") || fechaVencR.contains("abr")
+                    || fechaVencR.contains("may") || fechaVencR.contains("jun") || fechaVencR.contains("jul") || fechaVencR.contains("ago")
+                    || fechaVencR.contains("set") || fechaVencR.contains("oct") || fechaVencR.contains("nov") || fechaVencR.contains("dic")) {
+                org.getRepresentantes().iterator().next().setFechaVencAuto(tempfecha);
+            } else {
+                if (!fechaRenovR.equals("")) {
+                    org.getRepresentantes().iterator().next().setFechaVencAuto(format.stringToDate(fechaVencR));
+                } else {
+                    org.getRepresentantes().iterator().next().setFechaVencAuto(null);
+                }
+            }
+        } else {
+            org.getRepresentantes().iterator().next().setFechaVencAuto(null);
+        }
         org.getRepresentantes().iterator().next().setCorreo(correo);
         org.getRepresentantes().iterator().next().setDireccion(direccionR);
         org.getRepresentantes().iterator().next().setCelular(celular);
@@ -552,12 +831,56 @@ public class personal {
         org.getEntidad().setTelefono(telefono);
         org.getEntidad().setPais(pais);
         org.getEntidad().setResolAuto(resol_aut);
-        org.getEntidad().setFechaResol(format.stringToDate(fecha_emis_resol));
+        tempfecha = org.getEntidad().getFechaResol();
+        if (fecha_emis_resol != null) {
+            if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
+                    || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
+                    || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
+                org.getEntidad().setFechaResol(tempfecha);
+            } else {
+                if (!fecha_emis_resol.equals("")) {
+                    org.getEntidad().setFechaResol(format.stringToDate(fecha_emis_resol));
+                } else {
+                    org.getEntidad().setFechaResol(null);
+                }
+            }
+        } else {
+            org.getEntidad().setFechaResol(null);
+        }
         org.getEntidad().setResolRenov(resol_renov);
-        org.getEntidad().setFechaRenov(format.stringToDate(fecha_renov));
-        org.getEntidad().setFechaVenc(format.stringToDate(fecha_venc_aut));
+        tempfecha = org.getEntidad().getFechaRenov();
+        if (fecha_renov != null) {
+            if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
+                    || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
+                    || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
+                org.getEntidad().setFechaRenov(tempfecha);
+            } else {
+                if (!fecha_renov.equals("")) {
+                    org.getEntidad().setFechaRenov(format.stringToDate(fecha_renov));
+                } else {
+                    org.getEntidad().setFechaRenov(null);
+                }
+            }
+        } else {
+            org.getEntidad().setFechaRenov(null);
+        }
+        tempfecha = org.getEntidad().getFechaVenc();
+        if (fecha_venc_aut != null) {
+            if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
+                    || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
+                    || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
+                org.getEntidad().setFechaVenc(tempfecha);
+            } else {
+                if (!fecha_venc_aut.equals("")) {
+                    org.getEntidad().setFechaVenc(format.stringToDate(fecha_venc_aut));
+                } else {
+                    org.getEntidad().setFechaVenc(null);
+                }
+            }
+        } else {
+            org.getEntidad().setFechaVenc(null);
+        }
         org.getEntidad().setObs(obs);
-
         ServicioPersonal.UpdateOrg(org.getEntidad(), org.getRepresentantes().iterator().next(), org);
 
         map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());
@@ -931,8 +1254,16 @@ public class personal {
         }
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(id);
-        String fechaNac = format.dateToString(temp.getFechaNacimiento());
-        String fechaIng = format.dateToString(temp.getFechaIngreso());
+        String fechaNac = "";
+        String fechaIng = "";
+        try {
+            fechaNac = format.dateToString(temp.getFechaNacimiento());
+        } catch (Exception ex) {
+        }
+        try {
+            fechaIng = format.dateToString(temp.getFechaIngreso());
+        } catch (Exception ex) {
+        }
         String noUa = "deshabilitar";
         map.addAttribute("fechaNac", fechaNac);
         map.addAttribute("fechaIng", fechaIng);
@@ -988,9 +1319,39 @@ public class personal {
         temp.setGradoInstruccion(grado);
         temp.setCargo(cargo);
         temp.setDni(dni);
-        temp.setFechaNacimiento(format.stringToDate(fechaNac));
+        Date tempfecha = temp.getFechaNacimiento();
+        if (fechaNac != null) {
+            if (fechaNac.contains("ene") || fechaNac.contains("feb") || fechaNac.contains("mar") || fechaNac.contains("abr")
+                    || fechaNac.contains("may") || fechaNac.contains("jun") || fechaNac.contains("jul") || fechaNac.contains("ago")
+                    || fechaNac.contains("set") || fechaNac.contains("oct") || fechaNac.contains("nov") || fechaNac.contains("dic")) {
+                temp.setFechaNacimiento(tempfecha);
+            } else {
+                if (!fechaNac.equals("")) {
+                    temp.setFechaNacimiento(format.stringToDate(fechaNac));
+                } else {
+                    temp.setFechaNacimiento(null);
+                }
+            }
+        } else {
+            temp.setFechaNacimiento(null);
+        }
         temp.setRegimen(regimen);
-        temp.setFechaIngreso(format.stringToDate(fechaIng));
+        tempfecha = temp.getFechaIngreso();
+        if (fechaIng != null) {
+            if (fechaIng.contains("ene") || fechaIng.contains("feb") || fechaIng.contains("mar") || fechaIng.contains("abr")
+                    || fechaIng.contains("may") || fechaIng.contains("jun") || fechaIng.contains("jul") || fechaIng.contains("ago")
+                    || fechaIng.contains("set") || fechaIng.contains("oct") || fechaIng.contains("nov") || fechaIng.contains("dic")) {
+                temp.setFechaIngreso(tempfecha);
+            } else {
+                if (!fechaNac.equals("")) {
+                    temp.setFechaIngreso(format.stringToDate(fechaIng));
+                } else {
+                    temp.setFechaIngreso(null);
+                }
+            }
+        } else {
+            temp.setFechaIngreso(null);
+        }
         temp.setDomicilio(domicilio);
         temp.setRol(rol);
 
@@ -1125,9 +1486,39 @@ public class personal {
         temp.setGradoInstruccion(grado);
         temp.setCargo(cargo);
         temp.setDni(dni);
-        temp.setFechaNacimiento(format.stringToDate(fechaNac));
+        Date tempfecha = temp.getFechaNacimiento();
+        if (fechaNac != null) {
+            if (fechaNac.contains("ene") || fechaNac.contains("feb") || fechaNac.contains("mar") || fechaNac.contains("abr")
+                    || fechaNac.contains("may") || fechaNac.contains("jun") || fechaNac.contains("jul") || fechaNac.contains("ago")
+                    || fechaNac.contains("set") || fechaNac.contains("oct") || fechaNac.contains("nov") || fechaNac.contains("dic")) {
+                temp.setFechaNacimiento(tempfecha);
+            } else {
+                if (!fechaNac.equals("")) {
+                    temp.setFechaNacimiento(format.stringToDate(fechaNac));
+                } else {
+                    temp.setFechaNacimiento(null);
+                }
+            }
+        } else {
+            temp.setFechaNacimiento(null);
+        }
         temp.setRegimen(regimen);
-        temp.setFechaIngreso(format.stringToDate(fechaIng));
+        tempfecha = temp.getFechaIngreso();
+        if (fechaIng != null) {
+            if (fechaIng.contains("ene") || fechaIng.contains("feb") || fechaIng.contains("mar") || fechaIng.contains("abr")
+                    || fechaIng.contains("may") || fechaIng.contains("jun") || fechaIng.contains("jul") || fechaIng.contains("ago")
+                    || fechaIng.contains("set") || fechaIng.contains("oct") || fechaIng.contains("nov") || fechaIng.contains("dic")) {
+                temp.setFechaIngreso(tempfecha);
+            } else {
+                if (!fechaNac.equals("")) {
+                    temp.setFechaIngreso(format.stringToDate(fechaIng));
+                } else {
+                    temp.setFechaIngreso(null);
+                }
+            }
+        } else {
+            temp.setFechaIngreso(null);
+        }
         temp.setDomicilio(domicilio);
         temp.setRol(rol);
 
@@ -1190,31 +1581,38 @@ public class personal {
         temp.setCargo(cargo);
         temp.setDni(dni);
         Date tempfecha = temp.getFechaNacimiento();
-        if (fechaNac.contains("ene") || fechaNac.contains("feb") || fechaNac.contains("mar") || fechaNac.contains("abr")
-                || fechaNac.contains("may") || fechaNac.contains("jun") || fechaNac.contains("jul") || fechaNac.contains("ago")
-                || fechaNac.contains("set") || fechaNac.contains("oct") || fechaNac.contains("nov") || fechaNac.contains("dic")) {
-            temp.setFechaNacimiento(tempfecha);
-        } else {
-            if (!fechaNac.equals("")) {
-                temp.setFechaNacimiento(format.stringToDate(fechaNac));
+        if (fechaNac != null) {
+            if (fechaNac.contains("ene") || fechaNac.contains("feb") || fechaNac.contains("mar") || fechaNac.contains("abr")
+                    || fechaNac.contains("may") || fechaNac.contains("jun") || fechaNac.contains("jul") || fechaNac.contains("ago")
+                    || fechaNac.contains("set") || fechaNac.contains("oct") || fechaNac.contains("nov") || fechaNac.contains("dic")) {
+                temp.setFechaNacimiento(tempfecha);
             } else {
-                temp.setFechaNacimiento(null);
+                if (!fechaNac.equals("")) {
+                    temp.setFechaNacimiento(format.stringToDate(fechaNac));
+                } else {
+                    temp.setFechaNacimiento(null);
+                }
             }
+        } else {
+            temp.setFechaNacimiento(null);
         }
         temp.setRegimen(regimen);
         tempfecha = temp.getFechaIngreso();
-        if (fechaIng.contains("ene") || fechaIng.contains("feb") || fechaIng.contains("mar") || fechaIng.contains("abr")
-                || fechaIng.contains("may") || fechaIng.contains("jun") || fechaIng.contains("jul") || fechaIng.contains("ago")
-                || fechaIng.contains("set") || fechaIng.contains("oct") || fechaIng.contains("nov") || fechaIng.contains("dic")) {
-            temp.setFechaNacimiento(tempfecha);
-        } else {
-            if (!fechaIng.equals("")) {
-                temp.setFechaIngreso(format.stringToDate(fechaNac));
+        if (fechaIng != null) {
+            if (fechaIng.contains("ene") || fechaIng.contains("feb") || fechaIng.contains("mar") || fechaIng.contains("abr")
+                    || fechaIng.contains("may") || fechaIng.contains("jun") || fechaIng.contains("jul") || fechaIng.contains("ago")
+                    || fechaIng.contains("set") || fechaIng.contains("oct") || fechaIng.contains("nov") || fechaIng.contains("dic")) {
+                temp.setFechaIngreso(tempfecha);
             } else {
-                temp.setFechaNacimiento(null);
+                if (!fechaNac.equals("")) {
+                    temp.setFechaIngreso(format.stringToDate(fechaIng));
+                } else {
+                    temp.setFechaIngreso(null);
+                }
             }
+        } else {
+            temp.setFechaIngreso(null);
         }
-        temp.setFechaIngreso(format.stringToDate(fechaIng));
         temp.setDomicilio(domicilio);
         temp.setRol(rol);
 
@@ -1262,9 +1660,23 @@ public class personal {
         Sesion tempSesion = new Sesion();
 
         tempSesion.setNSesion(numSesion);
-        tempSesion.setFecha(format.stringToDate(fecha));
+        Date tempfecha = tempSesion.getFecha();
+        if (fecha != null) {
+            if (fecha.contains("ene") || fecha.contains("feb") || fecha.contains("mar") || fecha.contains("abr")
+                    || fecha.contains("may") || fecha.contains("jun") || fecha.contains("jul") || fecha.contains("ago")
+                    || fecha.contains("set") || fecha.contains("oct") || fecha.contains("nov") || fecha.contains("dic")) {
+                tempSesion.setFecha(tempfecha);
+            } else {
+                if (!fecha.equals("")) {
+                    tempSesion.setFecha(format.stringToDate(fecha));
+                } else {
+                    tempSesion.setFecha(null);
+                }
+            }
+        } else {
+            tempSesion.setFecha(null);
+        }
         tempSesion.setHora(hora);
-
         short habilitado = Byte.valueOf("1");
         short inscritos = Byte.valueOf("0");
         tempSesion.setDuracion(duracion);
@@ -1299,12 +1711,20 @@ public class personal {
         Sesion tempSesion = ServicioPersonal.getSesion(id);
         tempSesion.setNSesion(numSesion);
         Date tempfecha = tempSesion.getFecha();
-        if (fecha.contains("ene") || fecha.contains("feb") || fecha.contains("mar") || fecha.contains("abr")
-                || fecha.contains("may") || fecha.contains("jun") || fecha.contains("jul") || fecha.contains("ago")
-                || fecha.contains("set") || fecha.contains("oct") || fecha.contains("nov") || fecha.contains("dic")) {
-            tempSesion.setFecha(tempfecha);
+        if (fecha != null) {
+            if (fecha.contains("ene") || fecha.contains("feb") || fecha.contains("mar") || fecha.contains("abr")
+                    || fecha.contains("may") || fecha.contains("jun") || fecha.contains("jul") || fecha.contains("ago")
+                    || fecha.contains("set") || fecha.contains("oct") || fecha.contains("nov") || fecha.contains("dic")) {
+                tempSesion.setFecha(tempfecha);
+            } else {
+                if (!fecha.equals("")) {
+                    tempSesion.setFecha(format.stringToDate(fecha));
+                } else {
+                    tempSesion.setFecha(null);
+                }
+            }
         } else {
-            tempSesion.setFecha(format.stringToDate(fecha));
+            tempSesion.setFecha(null);
         }
         tempSesion.setHora(hora);
         tempSesion.setDuracion(duracion);
@@ -1820,7 +2240,11 @@ public class personal {
 
         Reunion tempReun = new Reunion();
         tempReun = ServicioPersonal.getReunion(idReunion);
-        String fecha = format.dateToString(tempReun.getFecha());
+        String fecha = "";
+        try {
+            fecha = format.dateToString(tempReun.getFecha());
+        } catch (Exception ex) {
+        }
 
         map.addAttribute("fecha", fecha);
         map.put("reunion", tempReun);
@@ -1856,7 +2280,22 @@ public class personal {
 
         Reunion tempReun = new Reunion();
         tempReun.setTurno2(tempTurno);
-        tempReun.setFecha(format.stringToDate(fecha));
+        Date tempfecha = tempReun.getFecha();
+        if (fecha != null) {
+            if (fecha.contains("ene") || fecha.contains("feb") || fecha.contains("mar") || fecha.contains("abr")
+                    || fecha.contains("may") || fecha.contains("jun") || fecha.contains("jul") || fecha.contains("ago")
+                    || fecha.contains("set") || fecha.contains("oct") || fecha.contains("nov") || fecha.contains("dic")) {
+                tempReun.setFecha(tempfecha);
+            } else {
+                if (!fecha.equals("")) {
+                    tempReun.setFecha(format.stringToDate(fecha));
+                } else {
+                    tempReun.setFecha(null);
+                }
+            }
+        } else {
+            tempReun.setFecha(null);
+        }
         tempReun.setHora(hora);
         tempReun.setDuracion(duracion);
         tempReun.setDireccion(direccion);
@@ -1896,7 +2335,22 @@ public class personal {
         tempReun = ServicioPersonal.getReunion(idReunion);
 
         Short capac = Short.parseShort(capacidad);
-        tempReun.setFecha(format.stringToDate(fecha));
+        Date tempfecha = tempReun.getFecha();
+        if (fecha != null) {
+            if (fecha.contains("ene") || fecha.contains("feb") || fecha.contains("mar") || fecha.contains("abr")
+                    || fecha.contains("may") || fecha.contains("jun") || fecha.contains("jul") || fecha.contains("ago")
+                    || fecha.contains("set") || fecha.contains("oct") || fecha.contains("nov") || fecha.contains("dic")) {
+                tempReun.setFecha(tempfecha);
+            } else {
+                if (!fecha.equals("")) {
+                    tempReun.setFecha(format.stringToDate(fecha));
+                } else {
+                    tempReun.setFecha(null);
+                }
+            }
+        } else {
+            tempReun.setFecha(null);
+        }
         tempReun.setHora(hora);
         tempReun.setDuracion(duracion);
         tempReun.setDireccion(direccion);

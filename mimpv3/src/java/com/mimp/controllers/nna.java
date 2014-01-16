@@ -102,9 +102,22 @@ public class nna {
         Nna tempNna = new Nna();
         tempNna = ServicioNna.getNna(idNna);
 
-        map.addAttribute("fechaNac", df.dateToString(tempNna.getFechaNacimiento()));
-        map.addAttribute("fechaResolAband", df.dateToString(tempNna.getFechaResolAbandono()));
-        map.addAttribute("fechaResolConsen", df.dateToString(tempNna.getFechaResolConsentida()));
+        String tempfechaString = "";
+        try {
+            tempfechaString = df.dateToString(tempNna.getFechaNacimiento());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechaNac", tempfechaString);
+        try {
+            tempfechaString = df.dateToString(tempNna.getFechaResolAbandono());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechaResolAband", tempfechaString);
+        try {
+            tempfechaString = df.dateToString(tempNna.getFechaResolConsentida());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechaResolConsen", tempfechaString);
         map.put("nna", tempNna);
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
@@ -687,9 +700,22 @@ public class nna {
         tempExp.setNna(tempNna);
         ServicioNna.crearExpNna(tempExp);
 
-        map.addAttribute("fechaNac", df.dateToString(tempNna.getFechaNacimiento()));
-        map.addAttribute("fechaResolAband", df.dateToString(tempNna.getFechaResolAbandono()));
-        map.addAttribute("fechaResolConsen", df.dateToString(tempNna.getFechaResolConsentida()));
+        String tempfechaString = "";
+        try {
+            tempfechaString = df.dateToString(tempNna.getFechaNacimiento());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechaNac", tempfechaString);
+        try {
+            tempfechaString = df.dateToString(tempNna.getFechaResolAbandono());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechaResolAband", tempfechaString);
+        try {
+            tempfechaString = df.dateToString(tempNna.getFechaResolConsentida());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechaResolConsen", tempfechaString);
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
@@ -824,9 +850,22 @@ public class nna {
         ServicioNna.updateNna(tempNna);
         ServicioNna.updateExpNna(tempExp);
 
-        map.addAttribute("fechaNac", df.dateToString(tempNna.getFechaNacimiento()));
-        map.addAttribute("fechaResolAband", df.dateToString(tempNna.getFechaResolAbandono()));
-        map.addAttribute("fechaResolConsen", df.dateToString(tempNna.getFechaResolConsentida()));
+        String tempfechaString = "";
+        try {
+            tempfechaString = df.dateToString(tempNna.getFechaNacimiento());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechaNac", tempfechaString);
+        try {
+            tempfechaString = df.dateToString(tempNna.getFechaResolAbandono());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechaResolAband", tempfechaString);
+        try {
+            tempfechaString = df.dateToString(tempNna.getFechaResolConsentida());
+        } catch (Exception ex) {
+        }
+        map.addAttribute("fechaResolConsen", tempfechaString);
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
