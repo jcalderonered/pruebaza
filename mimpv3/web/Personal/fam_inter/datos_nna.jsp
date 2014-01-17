@@ -106,13 +106,10 @@
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/antNnaInt" >Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
 
-                        <form class="form-horizontal"> 
+                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarInfoFamiliaInt" method="post" name="formulario" onsubmit="return(validar());"> 
                             <br>
                             <h3><strong>Antecedentes, condiciones de salud y desarrollo del niño, niña o adolescente a adoptar(NNA)</strong></h3>
                             <br>
-                            <p>Teniendo en cuenta la información recibida, la familia se 
-                                siente dispuesta para asumir la adopción de un NNA que presente lo/s siguiente/s: 
-                            </p>
                             <br>
                             <!-- Text input-->
                             <div class="row">
@@ -130,10 +127,10 @@
                                                     <h4>Nacido(a) como consecuencia del incesto</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
-                                                    </select>
+                                                    <select id="incesto" name="incesto" >
+                                                            <option value="0" ${infoFam.getNnaIncesto() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaIncesto() != 0 ? 'selected' : ''} >NO</option>
+                                                        </select>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -141,9 +138,9 @@
                                                     <h4>Padres con enfermedad psiquiátrica (esquizofrenia, paranoia, etc</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="mental" name="mental" >
+                                                            <option value="0" ${infoFam.getNnaMental() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaMental() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -152,9 +149,9 @@
                                                     <h4>Padres con epilepsia</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="epilepsia" name="epilepsia" >
+                                                            <option value="0" ${infoFam.getNnaEpilepsia() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaEpilepsia() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -163,9 +160,9 @@
                                                     <h4>Niña, niño o adolescente víctima de abuso sexual</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="abuso" name="abuso" >
+                                                            <option value="0" ${infoFam.getNnaAbuso() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaAbuso() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -175,9 +172,9 @@
                                                         diagnosticado/a preliminarmente con sífilis congénita.</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="sifilis" name="sifilis" >
+                                                            <option value="0" ${infoFam.getNnaSifilis() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaSifilis() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -202,9 +199,9 @@
                                                         desnutrición crónica, etc.)</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="seguimiento" name="seguimiento" >
+                                                            <option value="0" ${infoFam.getNnaSeguiMedico() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaSeguiMedico() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -214,9 +211,9 @@
                                                         (labio leporino, estrabismo, etc.)</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="operacion" name="operacion" >
+                                                            <option value="0" ${infoFam.getNnaOperacion() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaOperacion() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -226,9 +223,9 @@
                                                         hiperactividad (TDAH)</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="hiperactivo" name="hiperactivo">
+                                                            <option value="0" ${infoFam.getNnaHiperactivo() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaHiperactivo() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -253,9 +250,9 @@
                                                     <h4>Niñas, niños y adolescentes con necesidades especiales</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="especial" name="especial">
+                                                            <option value="0" ${infoFam.getNnaEspecial() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaEspecial() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -264,9 +261,9 @@
                                                     <h4>Niñas, niños y adolescentes con problemas de salud </h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="salud" name="salud">
+                                                            <option value="0" ${infoFam.getNnaEnfermo() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaEnfermo() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -275,9 +272,9 @@
                                                     <h4>Niñas y niños mayores (A partir de 09 años)</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="mayor" name="mayor">
+                                                            <option value="0" ${infoFam.getNnaMayor() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaMayor() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -286,9 +283,9 @@
                                                     <h4>Adolescentes (De 12 años hasta 17 años 11 meses)</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="adolescente" name="adolescente">
+                                                            <option value="0" ${infoFam.getNnaAdolescente() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaAdolescente() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -297,9 +294,9 @@
                                                     <h4>Grupos de hermanos </h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="sia">SI</option>
-                                                        <option value="mia">NO</option>
+                                                    <select id="hermanos" name="hermanos">
+                                                            <option value="0" ${infoFam.getNnaHermano() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${infoFam.getNnaHermano() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -307,8 +304,65 @@
                                     </table>
                                 </div>
                             </div>
-                            <!-- Button -->
                             <br>
+                            <h3><strong>Adopción fuera del lugar de residencia de los solicitantes</strong></h3>
+                            <br>
+                            <br>
+                            <h3>En caso de ser designado/a para la adopción de un NNA que resida en una ciudad diferente 
+                                a la suya, ¿tendría disponibilidad para viajar? </h3>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="viajar" id="viajarSi" value="0" ${infoFam.getPuedeViajar() == 0 ? 'checked' : ''} >Si</label>
+                                    </div>
+                                </div> 
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="viajar" id="viajarNo" value="1" ${infoFam.getPuedeViajar() == 1 ? 'checked' : ''} >No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <h3><strong>Espectativas de Edad</strong></h3>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">¿Cuántos años podría tener como mínimo el niño, niña o adolescente a adoptar?</label>
+                                <div class="controls">
+                                    <input id="edadMin" name="edadMin" type="text" value="${infoFam.getExpectativaEdadMin()}" class="input-xlarge">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">¿Cuántos años podría tener como máximo el niño, niña o adolescente a adoptar?</label>
+                                <div class="controls">
+                                    <input id="edadMax" name="edadMax" type="text" value="${infoFam.getExpectativaEdadMax()}" class="input-xlarge">
+                                </div>
+                            </div>
+                            <br>
+                            <p><strong>Género del niño, niña o adolescente a adoptar</strong></p>
+                            <div class="row">
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="genero" id="masculino" value="masculino" ${infoFam.getExpectativaGenero() == 'masculino' ? 'checked' : ''} >Masculino</label>
+                                    </div>
+                                </div> 
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="genero" id="femenino" value="femenino" ${infoFam.getExpectativaGenero() == 'femenino' ? 'checked' : ''} >Femenino</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="genero" id="indistinto" value="indistinto" ${infoFam.getExpectativaGenero() == 'indistinto' ? 'checked' : ''} >Indistinto</label>
+                                    </div>
+                                </div>
+                            </div>
                             <br>
                             <div class="control-group">
                                 <div class="controls">
@@ -317,7 +371,6 @@
                             </div>
                         </form>
                         <br>
-
                     </div>
                 </div>
             </div>
@@ -343,6 +396,38 @@
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
             </script>
+            <script type="text/javascript">
+            function validar()
+            {
+            var numericExpression = /^[0-9]+$/;
+            if(!document.getElementById('viajarSi').checked && !document.getElementById('viajarNo').checked){
+                alert( "Debe elegir al menos una opción de viaje" );
+                document.formulario.viajarSi.focus() ;
+                return false;
+            }
+            if(!document.formulario.edadMin.value.match(numericExpression))
+            {
+                
+                alert( "El campo debe contener solo números" );
+                document.formulario.edadMin.focus() ;
+                return false;
+            }
+            if(!document.formulario.edadMax.value.match(numericExpression))
+            {
+                
+                alert( "El campo debe contener solo números" );
+                document.formulario.edadMax.focus() ;
+                return false;
+            }
+            if(!document.getElementById('masculino').checked && !document.getElementById('femenino').checked && !document.getElementById('indistinto').checked){
+                alert( "Debe elegir al menos una opción de género" );
+                document.formulario.masculino.focus() ;
+                return false;
+                
+            }
+            return true
+            }
+          </script>
             <!-- Ubicar al final -->
     </body>
 </html>

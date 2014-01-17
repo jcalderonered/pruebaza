@@ -94,7 +94,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarInfoFamilia" method="post">
+                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarInfoFamilia" method="post" name="formulario" onsubmit="return(validar());">
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <c:if test="${estado != 'formativa'}">
@@ -324,13 +324,13 @@
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="viajar" id="optionsRadios1" value="0" ${infoFam.getPuedeViajar() == 0 ? 'checked' : ''} >Si</label>
+                                            <input type="radio" name="viajar" id="viajarSi" value="0" ${infoFam.getPuedeViajar() == 0 ? 'checked' : ''} >Si</label>
                                     </div>
                                 </div> 
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="viajar" id="optionsRadios1" value="1" ${infoFam.getPuedeViajar() == 1 ? 'checked' : ''} >No</label>
+                                            <input type="radio" name="viajar" id="viajarNo" value="1" ${infoFam.getPuedeViajar() == 1 ? 'checked' : ''} >No</label>
                                     </div>
                                 </div>
                             </div>
@@ -403,6 +403,38 @@
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
             </script>
+            <script type="text/javascript">
+            function validar()
+            {
+            var numericExpression = /^[0-9]+$/;
+            if(!document.getElementById('viajarSi').checked && !document.getElementById('viajarNo').checked){
+                alert( "Debe elegir al menos una opción de viaje" );
+                document.formulario.viajarSi.focus() ;
+                return false;
+            }
+            if(!document.formulario.edadMin.value.match(numericExpression))
+            {
+                
+                alert( "El campo debe contener solo números" );
+                document.formulario.edadMin.focus() ;
+                return false;
+            }
+            if(!document.formulario.edadMax.value.match(numericExpression))
+            {
+                
+                alert( "El campo debe contener solo números" );
+                document.formulario.edadMax.focus() ;
+                return false;
+            }
+            if(!document.getElementById('masculino').checked && !document.getElementById('femenino').checked && !document.getElementById('indistinto').checked){
+                alert( "Debe elegir al menos una opción de género" );
+                document.formulario.masculino.focus() ;
+                return false;
+                
+            }
+            return true
+            }
+          </script>
             <!-- Ubicar al final -->
     </body>
 </html>

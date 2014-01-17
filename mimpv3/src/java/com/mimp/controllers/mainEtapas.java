@@ -846,6 +846,9 @@ public class mainEtapas {
             tempFam = tempEval.getExpedienteFamilia();
             tempFam.setEstado("espera");
             servicioEtapa.updateExpedienteFamilia(tempFam);
+        map.put("df",df);
+        map.put("listaEspera",servicioEtapa.getListaEspera());
+        return new ModelAndView("/Personal/Buscador_etapa/lista_espera", map);
         }
         map.put("familia", familia);
         map.put("legal", tempEval);
@@ -2237,7 +2240,7 @@ public class mainEtapas {
         int mes = Integer.parseInt(parts[1]);
         int dia = Integer.parseInt(parts[2]);
         String fechaEntrega;
-        ArrayList<String> listaFechas = new ArrayList<>();
+        ArrayList<String> listaFechas = new ArrayList();
         for (int i = 0; i < numInformes; i++) {
             int contadorMes = mes + 6;
             if (contadorMes > 12) {
@@ -2646,7 +2649,7 @@ public class mainEtapas {
         int mes = Integer.parseInt(parts[1]);
         int dia = Integer.parseInt(parts[2]);
         String fechaEntrega;
-        ArrayList<String> listaFechas = new ArrayList<>();
+        ArrayList<String> listaFechas = new ArrayList();
         for (int i = 0; i < numInformes; i++) {
             int contadorMes = mes + 6;
             if (contadorMes > 12) {
