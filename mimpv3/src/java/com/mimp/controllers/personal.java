@@ -31,11 +31,17 @@ public class personal {
 
     dateFormat format = new dateFormat();
     timeStampFormat ts = new timeStampFormat();
-
+    Adoptante El = new Adoptante();
+    Adoptante Ella = new Adoptante();
+    InfoFamilia infoFam = new InfoFamilia();
+    ExpedienteFamilia expedienteInt = new ExpedienteFamilia();
+    
     @Resource(name = "HiberPersonal")
     private HiberPersonal ServicioPersonal = new HiberPersonal();
     @Resource(name = "HiberMain")
     private HiberMain ServicioMain = new HiberMain();
+    @Resource(name = "HiberEtapa")
+    private HiberEtapa servicioEtapa = new HiberEtapa();
 
     //////////////////////// NAVEGACION ///////////////
     @RequestMapping(value = "/inicioper", method = RequestMethod.GET)
@@ -113,8 +119,8 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        //List<Personal> lista = Servicio.listaPersonal();
-        //map.addAttribute("id", temp);
+        map.put("df",format);
+        map.addAttribute("listaFamilias", ServicioPersonal.ListaFamiliasInt());
         return new ModelAndView("/Personal/fam_inter/lista_fam_int", map);
     }
 
@@ -2597,6 +2603,29 @@ public class personal {
 
     /*    FIN DE SESIONES Y TALLERES                      */
     /*    FAMILIAS INTERNACIONALES                        */
+    @RequestMapping(value = "/DetallesFamInt", method = RequestMethod.POST)
+    public ModelAndView DetallesFamInt(ModelMap map, HttpSession session,@RequestParam(value="idExpediente") long idExpediente) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExpediente);
+            expedienteInt = tempExp;
+            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+            for (Adoptante adop : infoFam.getAdoptantes()) {
+                if(adop.getSexo() == 'f') Ella = adop;
+                if(adop.getSexo() == 'm') El = adop;
+            }
+            
+        map.put("df",format);    
+        map.put("expediente",expedienteInt);    
+        map.put("listaEntidad",ServicioPersonal.ListaEntidades());
+        return new ModelAndView("/Personal/fam_inter/datos_reg", map);
+    }
+    
     @RequestMapping(value = "/AgregarFamInt", method = RequestMethod.POST)
     public ModelAndView AgregarFamInt(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -2606,22 +2635,344 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        map.put("listaEntidad",ServicioPersonal.ListaEntidades());
         return new ModelAndView("/Personal/fam_inter/datos_reg", map);
     }
 
     @RequestMapping(value = "/CrearRegistroInt", method = RequestMethod.POST)
-    public ModelAndView CrearRegistroInt(ModelMap map, HttpSession session) {
+    public ModelAndView CrearRegistroInt(ModelMap map, HttpSession session,
+                                              @RequestParam(value="ht") String ht,  
+                                              @RequestParam(value="numeroExp") String numeroExp,  
+                                              @RequestParam(value="fechaIngreso") String fechaIngreso,  
+                                              @RequestParam(value="tupa") String tupa,  
+                                              @RequestParam(value="tipoFamilia") String tipoFamilia,  
+                                              @RequestParam(value="entAsoc") long entAsoc
+                                              ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-
-        //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        
+        Familia tempFam = new Familia();
+        ExpedienteFamilia expediente = new ExpedienteFamilia();
+        Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
+        infoFam = new InfoFamilia();
+        
+        tempFam.setEntidad(tempEnt);
+        tempFam.setHabilitado(Short.parseShort("1"));
+        tempFam.setUser(usuario.getApellidoP()); //seteo el usuario por defecto como apellido paterno del usuario que lo registra
+        String pass = DigestUtils.sha512Hex(usuario.getApellidoP());
+        tempFam.setPass(pass);
+        
+        expediente.setHt(ht);
+        expediente.setNumeroExpediente(numeroExp);
+        if(fechaIngreso != null && !fechaIngreso.equals("")) expediente.setFechaIngresoDga(format.stringToDate(fechaIngreso));
+        if(fechaIngreso == null && fechaIngreso.equals("")) expediente.setFechaIngresoDga(null);
+        if(tupa != null && !tupa.equals("")) expediente.setTupa(format.stringToDate(tupa));
+        if(tupa == null && tupa.equals("")) expediente.setTupa(null);
+        expediente.setTipoFamilia(tipoFamilia);
+        expediente.setUnidad(usuario.getUnidad());
+        expediente.setEstado("evaluacion");
+        expediente.setNacionalidad("internacional");
+        expediente.setRnsa(Short.parseShort("0"));
+        expediente.setRnaa(Short.parseShort("1"));
+        
+        ServicioPersonal.crearFamInt(tempFam, expediente,infoFam);
+        expedienteInt = expediente;
+        //map.put("idInfo",infoFam.getIdinfoFamilia());
+        map.put("infoFam",infoFam);
+        map.put("Ella",Ella);
         return new ModelAndView("/Personal/fam_inter/datos_ella", map);
     }
+    
+    @RequestMapping(value = "/UpdateRegistroInt", method = RequestMethod.POST)
+    public ModelAndView UpdateRegistroInt(ModelMap map, HttpSession session,
+                                              @RequestParam(value="ht") String ht,  
+                                              @RequestParam(value="numeroExp") String numeroExp,  
+                                              @RequestParam(value="fechaIngreso") String fechaIngreso,  
+                                              @RequestParam(value="tupa") String tupa,  
+                                              @RequestParam(value="tipoFamilia") String tipoFamilia,  
+                                              @RequestParam(value="entAsoc") long entAsoc
+                                              ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
+        
+        expedienteInt.getFamilia().setEntidad(tempEnt);
+        expedienteInt.setHt(ht);
+        expedienteInt.setNumeroExpediente(numeroExp);
+        expedienteInt.setTipoFamilia(tipoFamilia);
+        if(fechaIngreso != null && !fechaIngreso.equals("")) expedienteInt.setFechaIngresoDga(format.stringToDate(fechaIngreso));
+        if(fechaIngreso == null && fechaIngreso.equals("")) expedienteInt.setFechaIngresoDga(null);
+        if(tupa != null && !tupa.equals("")) expedienteInt.setTupa(format.stringToDate(tupa));
+        if(tupa == null && tupa.equals("")) expedienteInt.setTupa(null);
+        
+        servicioEtapa.UpdateFamilia(expedienteInt.getFamilia());
+        servicioEtapa.updateExpedienteFamilia(expedienteInt);
+        
+        map.put("df",format);
+        map.put("infoFam",infoFam);
+        map.put("Ella",Ella);
+        return new ModelAndView("/Personal/fam_inter/datos_ella", map);
+    }
+    
+    @RequestMapping(value = "/ActualizarAdoptanteInt", method = RequestMethod.POST)
+        public ModelAndView ActualizarAdoptante(ModelMap map, HttpSession session,
+                                              @RequestParam(value="adoptante") String adoptante,  
+                                              @RequestParam(value="nombre", required = false) String nombre,  
+                                              @RequestParam(value="apellidoP", required = false) String apellidoP,  
+                                              @RequestParam(value="apellidoM", required = false) String apellidoM,  
+                                              @RequestParam(value="fechaNac", required = false) String fechaNac,  
+                                              @RequestParam(value="lugarNac", required = false) String lugarNac,
+                                              @RequestParam(value="depNac", required = false) String depNac,  
+                                              @RequestParam(value="paisNac", required = false) String paisNac,  
+                                              @RequestParam(value="doc", required = false) String doc, 
+                                              @RequestParam(value="numDoc", required = false) String numDoc, 
+                                              @RequestParam(value="numCel", required = false) String numCel, 
+                                              @RequestParam(value="correo", required = false) String correo, 
+                                              @RequestParam(value="estadoCivil", required = false) String estadoCivil, 
+                                              @RequestParam(value="fechaMat", required = false) String fechaMat, 
+                                              @RequestParam(value="nivelInstruccion",required = false) String nivelInstruccion,  
+                                              @RequestParam(value="culminoNivel",required = false) String culminoNivel,
+                                              @RequestParam(value="profesion",required = false) String profesion,
+                                              @RequestParam(value="trabDep", required = false) String trabDep,
+                                              @RequestParam(value="ocupacionDep", required = false) String ocupacionDep,
+                                              @RequestParam(value="centroTrabajo", required = false) String centroTrabajo,
+                                              @RequestParam(value="direccionTrabajo", required = false) String direccionTrabajo,
+                                              @RequestParam(value="telefonoTrabajo", required = false) String telefonoTrabajo,
+                                              @RequestParam(value="ingresoDep", required = false) String ingresoDep,
+                                              @RequestParam(value="trabIndep", required = false) String trabIndep,
+                                              @RequestParam(value="ocupacionInd", required = false) String ocupacionInd,
+                                              @RequestParam(value="ingresoInd", required = false) String ingresoInd,
+                                              @RequestParam(value="seguroSalud", required = false) String seguroSalud,
+                                              @RequestParam(value="tipoSeguro", required = false) String tipoSeguro,
+                                              @RequestParam(value="seguroVida", required = false) String seguroVida,
+                                              @RequestParam(value="sisPensiones", required = false) String sisPensiones,
+                                              @RequestParam(value="estadoActual", required = false) String estadoActual
+                                    
+                                             ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        if(adoptante.equals("el")){
+            El.setInfoFamilia(infoFam);
+            String genero = "m";
+            char sexo = genero.charAt(0);
+            El.setSexo(sexo);
+            El.setNombre(nombre);
+            El.setApellidoP(apellidoP);
+            El.setApellidoM(apellidoM);
+            if(fechaNac != null && !fechaNac.equals("")) El.setFechaNac(format.stringToDate(fechaNac));
+            if(fechaNac == null || fechaNac.equals("")) El.setFechaNac(null);
+            El.setLugarNac(lugarNac);
+            El.setDepaNac(depNac);
+            El.setPaisNac(paisNac);
+            if (doc != null && !doc.equals("")){
+            char d = doc.charAt(0);
+            El.setTipoDoc(d);
+            }
+            El.setNDoc(numDoc);
+            El.setCelular(numCel);
+            El.setCorreo(correo);
+            infoFam.setEstadoCivil(estadoCivil);
+            if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")){
+                infoFam.setFechaMatrimonio(format.stringToDate(fechaMat));
+            }else if(fechaMat == null || fechaMat.equals("")) {
+                infoFam.setFechaMatrimonio(null);
+            }
+            El.setNivelInstruccion(nivelInstruccion);
+            if (culminoNivel != null && !culminoNivel.equals("")) El.setCulminoNivel(Short.parseShort(culminoNivel));
+            El.setProfesion(profesion);
+            /*Trabajo*/
+            if (trabDep != null && !trabDep.equals("")) 
+            {  
+                El.setTrabajadorDepend(Short.parseShort(trabDep));
+            }else{
+                El.setTrabajadorDepend(null);
+            }
+            if (ocupacionDep != null && !ocupacionDep.equals("")) {
+            El.setOcupActualDep(ocupacionDep);
+            }else{
+            El.setOcupActualDep(null);
+            }
+            if (centroTrabajo != null && !centroTrabajo.equals("")) {
+            El.setCentroTrabajo(centroTrabajo);
+            }else{
+            El.setCentroTrabajo(null);
+            }
+            if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
+            El.setDireccionCentro(direccionTrabajo);
+            }else {
+            El.setDireccionCentro(null);
+            }
+            if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
+            El.setTelefonoCentro(telefonoTrabajo);
+            }else{
+            El.setTelefonoCentro(null);
+            }
+            if (ingresoDep != null && !ingresoDep.equals(""))
+            {
+                El.setIngresoDep(Long.parseLong(ingresoDep));
+            }else{
+                El.setIngresoDep(null);
+            }
+            if (trabIndep != null && !trabIndep.equals("")) {
+                El.setTrabajadorIndepend(Short.parseShort(trabIndep));
+            }else{
+                El.setTrabajadorIndepend(null);
+            }
+            if (ocupacionInd != null && !ocupacionInd.equals("")) {
+            El.setOcupActualInd(ocupacionInd);
+            }
+            else{
+            El.setOcupActualInd(null);
+                }
+            
+            if (ingresoInd != null && !ocupacionInd.equals("")) {
+                El.setIngresoIndep(Long.parseLong(ingresoInd));
+            }else{
+                El.setIngresoIndep(null);
+            }
+            /*Fin Trabajo*/
+            if (seguroSalud != null && !seguroSalud.equals("")) El.setSeguroSalud(Short.parseShort(seguroSalud));
+            El.setTipoSeguro(tipoSeguro);
+            if (seguroVida != null && !seguroVida.equals("")) El.setSeguroVida(Short.parseShort(seguroVida));
+            if (sisPensiones != null && !sisPensiones.equals("")) El.setSistPensiones(Short.parseShort(sisPensiones));
+            El.setSaludActual(estadoActual);
+            
+            ServicioMain.updateInfoFam(infoFam);
+            ServicioPersonal.crearActualizarAdoptante(El);
+            if (El.getApellidoP() != null && Ella.getApellidoP()!= null )
+            {
+                expedienteInt.setExpediente(El.getApellidoP() + "-" + Ella.getApellidoP());
+            }else if(El.getApellidoP() != null){
+                expedienteInt.setExpediente(El.getApellidoP());
+            }else if(Ella.getApellidoP() != null){
+                expedienteInt.setExpediente(Ella.getApellidoP());
+            }
+            servicioEtapa.updateExpedienteFamilia(expedienteInt);
+            map.put("df",format);
+            map.put("infoFam",infoFam);
+            map.put("El",El);
+            return new ModelAndView("/Personal/fam_inter/datos_el", map);
+        }else{
+            Ella.setInfoFamilia(infoFam);
+            String genero = "f";
+            char sexo = genero.charAt(0);
+            Ella.setSexo(sexo);
+            Ella.setNombre(nombre);
+            Ella.setApellidoP(apellidoP);
+            Ella.setApellidoM(apellidoM);
+            if(fechaNac != null && !fechaNac.equals("")) Ella.setFechaNac(format.stringToDate(fechaNac));
+            if(fechaNac == null || fechaNac.equals("")) Ella.setFechaNac(null);
+            Ella.setLugarNac(lugarNac);
+            Ella.setDepaNac(depNac);
+            Ella.setPaisNac(paisNac);
+            if (doc != null && !doc.equals("")){
+            char d = doc.charAt(0);
+            Ella.setTipoDoc(d);
+            }
+            Ella.setNDoc(numDoc);
+            Ella.setCelular(numCel);
+            Ella.setCorreo(correo);
+            infoFam.setEstadoCivil(estadoCivil);
+            if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")){
+                infoFam.setFechaMatrimonio(format.stringToDate(fechaMat));
+            }else if(fechaMat == null || fechaMat.equals("")) {
+                infoFam.setFechaMatrimonio(null);
+            }
+            Ella.setNivelInstruccion(nivelInstruccion);
+            if (culminoNivel != null && !culminoNivel.equals("")) Ella.setCulminoNivel(Short.parseShort(culminoNivel));
+            Ella.setProfesion(profesion);
+            /*Trabajo*/
+            if (trabDep != null && !trabDep.equals("")) 
+            {  
+                Ella.setTrabajadorDepend(Short.parseShort(trabDep));
+            }else{
+                Ella.setTrabajadorDepend(null);
+            }
+            if (ocupacionDep != null && !ocupacionDep.equals("")) {
+            Ella.setOcupActualDep(ocupacionDep);
+            }else{
+            Ella.setOcupActualDep(null);
+            }
+            if (centroTrabajo != null && !centroTrabajo.equals("")) {
+            Ella.setCentroTrabajo(centroTrabajo);
+            }else{
+            Ella.setCentroTrabajo(null);
+            }
+            if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
+            Ella.setDireccionCentro(direccionTrabajo);
+            }else {
+            Ella.setDireccionCentro(null);
+            }
+            if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
+            Ella.setTelefonoCentro(telefonoTrabajo);
+            }else{
+            Ella.setTelefonoCentro(null);
+            }
+            if (ingresoDep != null && !ingresoDep.equals(""))
+            {
+                Ella.setIngresoDep(Long.parseLong(ingresoDep));
+            }else{
+                Ella.setIngresoDep(null);
+            }
+            if (trabIndep != null && !trabIndep.equals("")) {
+                Ella.setTrabajadorIndepend(Short.parseShort(trabIndep));
+            }else{
+                Ella.setTrabajadorIndepend(null);
+            }
+            if (ocupacionInd != null && !ocupacionInd.equals("")) {
+            Ella.setOcupActualInd(ocupacionInd);
+            }
+            else{
+            Ella.setOcupActualInd(null);
+                }
+            
+            if (ingresoInd != null && !ocupacionInd.equals("")) {
+                Ella.setIngresoIndep(Long.parseLong(ingresoInd));
+            }else{
+                Ella.setIngresoIndep(null);
+            }
+            /*Fin Trabajo*/
+            if (seguroSalud != null && !seguroSalud.equals("")) Ella.setSeguroSalud(Short.parseShort(seguroSalud));
+            Ella.setTipoSeguro(tipoSeguro);
+            if (seguroVida != null && !seguroVida.equals("")) Ella.setSeguroVida(Short.parseShort(seguroVida));
+            if (sisPensiones != null && !sisPensiones.equals("")) Ella.setSistPensiones(Short.parseShort(sisPensiones));
+            Ella.setSaludActual(estadoActual);
+            
+            ServicioPersonal.crearActualizarAdoptante(Ella);
+            ServicioMain.updateInfoFam(infoFam);
+            if (El.getApellidoP() != null && Ella.getApellidoP()!= null )
+            {
+                expedienteInt.setExpediente(El.getApellidoP() + "-" + Ella.getApellidoP());
+            }else if(El.getApellidoP() != null){
+                expedienteInt.setExpediente(El.getApellidoP());
+            }else if(Ella.getApellidoP() != null){
+                expedienteInt.setExpediente(Ella.getApellidoP());
+            }
+            servicioEtapa.updateExpedienteFamilia(expedienteInt);
+            map.put("df",format);
+            map.put("infoFam",infoFam);
+            map.put("Ella",Ella);
+            return new ModelAndView("/Personal/fam_inter/datos_ella", map);
+            
+        }
+        
+        
+        
+}    
 
     @RequestMapping(value = "/VerInfoRegInt", method = RequestMethod.POST)
     public ModelAndView VerInfoRegInt(ModelMap map, HttpSession session) {
@@ -2633,6 +2984,9 @@ public class personal {
         }
 
         //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        map.put("df",format);
+        map.put("infoFam",infoFam);
+        map.put("Ella",Ella);
         return new ModelAndView("/Personal/fam_inter/datos_ella", map);
     }
 
@@ -2644,8 +2998,9 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-
-        //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        map.put("df",format);
+        map.put("infoFam",infoFam);
+        map.put("Ella",Ella);
         return new ModelAndView("/Personal/fam_inter/datos_ella", map);
     }
 
@@ -2657,8 +3012,9 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-
-        //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        map.put("df",format);
+        map.put("infoFam",infoFam);
+        map.put("El",El);
         return new ModelAndView("/Personal/fam_inter/datos_el", map);
     }
 
@@ -2672,6 +3028,62 @@ public class personal {
         }
 
         //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+        map.put("infoFam",infoFam);
         return new ModelAndView("/Personal/fam_inter/datos_nna", map);
     }
+    
+    @RequestMapping(value = "/ActualizarInfoFamiliaInt", method = RequestMethod.POST)
+    public ModelAndView ActualizarInfoFamiliaInt(ModelMap map, HttpSession session,
+                                              @RequestParam(value="incesto") String incesto,  
+                                              @RequestParam(value="mental") String mental,  
+                                              @RequestParam(value="epilepsia") String epilepsia,  
+                                              @RequestParam(value="abuso") String abuso,  
+                                              @RequestParam(value="sifilis") String sifilis,  
+                                              @RequestParam(value="seguimiento") String seguimiento,
+                                              @RequestParam(value="operacion") String operacion,  
+                                              @RequestParam(value="hiperactivo") String hiperactivo,  
+                                              @RequestParam(value="especial") String especial,  
+                                              @RequestParam(value="salud") String salud,  
+                                              @RequestParam(value="mayor") String mayor,  
+                                              @RequestParam(value="adolescente") String adolescente,
+                                              @RequestParam(value="hermanos") String hermanos,
+                                              
+                                              @RequestParam(value="viajar") String viajar,
+                                              @RequestParam(value="edadMin") String edadMin,
+                                              @RequestParam(value="edadMax") String edadMax,
+                                              @RequestParam(value="genero") String genero
+                                    
+                                             ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        infoFam.setNnaIncesto(Short.parseShort(incesto));
+        infoFam.setNnaMental(Short.parseShort(mental));
+        infoFam.setNnaEpilepsia(Short.parseShort(epilepsia));
+        infoFam.setNnaAbuso(Short.parseShort(abuso));
+        infoFam.setNnaSifilis(Short.parseShort(sifilis));
+        infoFam.setNnaSeguiMedico(Short.parseShort(seguimiento));
+        infoFam.setNnaOperacion(Short.parseShort(operacion));
+        infoFam.setNnaHiperactivo(Short.parseShort(hiperactivo));
+        infoFam.setNnaEspecial(Short.parseShort(especial));
+        infoFam.setNnaEnfermo(Short.parseShort(salud));
+        infoFam.setNnaMayor(Short.parseShort(mayor));
+        infoFam.setNnaAdolescente(Short.parseShort(adolescente));
+        infoFam.setNnaHermano(Short.parseShort(hermanos));
+        
+        if (viajar != null && !viajar.equals("")) infoFam.setPuedeViajar(Short.parseShort(viajar));
+        if (edadMin != null && !edadMin.equals("")) infoFam.setExpectativaEdadMin(Short.parseShort(edadMin));
+        if (edadMax != null && !edadMax.equals("")) infoFam.setExpectativaEdadMax(Short.parseShort(edadMax));
+        if (genero != null && !genero.equals("")) infoFam.setExpectativaGenero(genero);
+        
+        ServicioMain.updateInfoFam(infoFam);
+        
+        map.put("df",format);
+        map.put("infoFam",infoFam);
+        return new ModelAndView("/Personal/fam_inter/datos_nna", map);
+}    
 }

@@ -45,4 +45,13 @@ public class dateFormat {
         return fecha;
     }
     
+    public String dateToStringNumeros (Date temp){
+        SimpleDateFormat fromsql = new SimpleDateFormat("dd/MM/yyyy");
+        //SimpleDateFormat mystring = new SimpleDateFormat("dd/MM/yyyy");
+        
+        String fecha = fromsql.format(temp);
+    
+        return fecha;
+    }
+    
 }

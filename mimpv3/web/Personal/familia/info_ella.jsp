@@ -230,7 +230,7 @@
                                                 <input type="radio" name="estadoCivil" id="casada" value="casados" ${infoFam.getEstadoCivil() == 'casados' ? 'checked' : ''}>Casada</label>
                                             <br>
                                             <label class="control-label">Fecha de matrimonio Civil</label>
-                                            <input ${infoFam.getEstadoCivil() == 'casados' ? '' : 'disabled'} value="${infoFam.getFechaMatrimonio() != null ? df.dateToString(infoFam.getFechaMatrimonio()) : ''}" id="fechaMat" name="fechaMat" type="text" class="datepicker input-xlarge">
+                                            <input ${infoFam.getEstadoCivil() == 'casados' ? '' : 'disabled'} value="${infoFam.getFechaMatrimonio() != null ? df.dateToStringNumeros(infoFam.getFechaMatrimonio()) : ''}" id="fechaMat" name="fechaMat" type="text" class="datepicker input-xlarge">
                                         </div>                            
                                     </div>
                                     <div class="col-md-3">  
@@ -661,6 +661,13 @@
                 return false;
             }
             }
+            if(!document.getElementById('trabDep').checked || !document.getElementById('trabIndep').checked){
+                alert( "Debe elegir al menos un tipo de trabajo" );
+                document.formulario.trabDep.focus() ;
+                return false;
+                
+            }
+            
             }
           </script>
     </body>

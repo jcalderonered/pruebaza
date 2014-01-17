@@ -117,8 +117,8 @@ public class main {
     @RequestMapping("/SesionInfInicio")
     public ModelAndView SesionInfInicio(ModelMap map) {
 
-        ArrayList<Turno> temp = new ArrayList<>();
-        ArrayList<Turno> temp2 = new ArrayList<>();
+        ArrayList<Turno> temp = new ArrayList();
+        ArrayList<Turno> temp2 = new ArrayList();
         Date now = new Date();
         temp = ServicioMain.ListaTurnos();
         String pagina = "";
@@ -130,13 +130,13 @@ public class main {
             for (int i = 0; i < temp.size(); i++) {
                 if (now.after((Date) temp.get(i).getInicioInscripcion()) && now.before((Date) temp.get(i).getFinInscripcion())) {
                     if (i == temp.size() - 1 && temp.get(i).getAsistenciaFTs().size() >= temp.get(i).getVacantes()) {
-                        ArrayList<Sesion> tempSesiones = new ArrayList<>();
+                        ArrayList<Sesion> tempSesiones = new ArrayList();
                         tempSesiones = ServicioMain.listaSesionesSiguientes(temp.get(i).getSesion().getFecha());
                         if (tempSesiones.isEmpty()) {
                             pagina = "/Inscripcion/no_sesion_prog";
                             return new ModelAndView(pagina);
                         } else {
-                            ArrayList<Turno> tempTurnos = new ArrayList<>();
+                            ArrayList<Turno> tempTurnos = new ArrayList();
                             tempTurnos = ServicioMain.turnosSesion(tempSesiones.get(0).getIdsesion());
                             if (tempTurnos.isEmpty()) {
                                 pagina = "/Inscripcion/no_sesion_prog";
@@ -270,7 +270,7 @@ public class main {
         asis.setCelular(cel);
         asis.setCorreo(correo);
 
-        ArrayList<Asistente> tempList = new ArrayList<>();
+        ArrayList<Asistente> tempList = new ArrayList();
         tempList = ServicioMain.listaAsistentes(temp.getSesion().getIdsesion());
         for (Asistente asistente : tempList) {
             if (asistente.getNDoc().equals(numDoc)) {
@@ -394,7 +394,7 @@ public class main {
         asisElla.setCelular(celElla);
         asisElla.setCorreo(correoElla);
 
-        ArrayList<Asistente> tempList = new ArrayList<>();
+        ArrayList<Asistente> tempList = new ArrayList();
         tempList = ServicioMain.listaAsistentes(temp.getSesion().getIdsesion());
         for (Asistente asistente : tempList) {
             if (asistente.getNDoc().equals(numDocEl) || asistente.getNDoc().equals(numDocElla)) {
@@ -1365,5 +1365,9 @@ public ModelAndView ActualizarVivienda(ModelMap map, HttpSession session,
         map.put("listaTalleres",allTalleres);
         map.put("listaSesiones",allSesiones);
         return new ModelAndView("cronograma", map);
-} 
+}
+    
+    
+    
+    
 }

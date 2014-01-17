@@ -936,5 +936,45 @@ public class HiberPersonal {
         return Ent;
     }
     
-    /*  */
+    /* FAMILIAS INTERNACIONALES */
+    
+    public ArrayList<ExpedienteFamilia> ListaFamiliasInt() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "FROM ExpedienteFamilia EF WHERE EF.nacionalidad = :nac";
+        Query query = session.createQuery(hql);
+        query.setString("nac", "internacional");
+        List entidades = query.list();
+        ArrayList<ExpedienteFamilia> allExpedientesInt = new ArrayList();
+        for (Iterator iter = entidades.iterator(); iter.hasNext();) {
+            ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+            allExpedientesInt.add(temp);
+        }
+        return allExpedientesInt;
+    }
+    
+    public void crearFamInt(Familia fam, ExpedienteFamilia expFam, InfoFamilia info){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        fam.getInfoFamilias().add(info);
+        fam.getExpedienteFamilias().add(expFam);
+        expFam.setFamilia(fam);
+        info.setFamilia(fam);
+        session.save(fam);
+        session.save(expFam);
+        session.save(info);
+    
+    }
+    
+    public void crearActualizarAdoptante(Adoptante temp){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.saveOrUpdate(temp);
+    }
+    
 }

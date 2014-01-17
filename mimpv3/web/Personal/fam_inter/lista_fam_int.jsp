@@ -105,51 +105,36 @@
                                     <th>Fecha de ingreso a DGA</th>
                                     <th>Tipo de Familia</th>
                                     <th>Tipo</th>
-                                    <th>Tipo Lista de Espera</th>
                                     <th>Detalles</th>
                                 </thead>
-
+                                <c:if test="${listaFamilias != null}">
                                 <tbody>
+                                    <c:forEach var="expediente" items="${listaFamilias}" varStatus="status">
                                     <tr>
-                                        <td>Davis-Moore</td>
-                                        <td>HT-1578</td>
-                                        <td>16974</td>
-                                        <td>10-Feb-2013</td>
+                                        <td>${expediente.getExpediente()}</td>
+                                        <td>${expediente.getHt()}</td>
+                                        <td>${expediente.getNumeroExpediente()}</td>
+                                        <td><c:if test="${expediente.getFechaIngresoDga() != null}">
+                                                    ${df.dateToString(expediente.getFechaIngresoDga())}
+                                                    </c:if>
+                                        </td>
                                         <td>EE</td>
                                         <td>I</td>
-                                        <td>Extranjeros</td>
-                                        <td><button href="#" class="btn btn-default">
-                                                <span class="glyphicon glyphicon-search"></span> 
-                                                Ver</button>
+                                        <td>
+                                            <form action="${pageContext.servletContext.contextPath}/DetallesFamInt" method="post">
+                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                       <button href="#" class="btn btn-default">
+                                                             <span class="glyphicon glyphicon-search"></span> 
+                                                            Ver</button>
+                                            </form>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>Roger-Rose</td>
-                                        <td>HT-1587</td>
-                                        <td>2265</td>
-                                        <td>10-Mar-2010</td>
-                                        <td>EE</td>
-                                        <td>I</td>
-                                        <td>Extranjeros</td>
-                                        <td><button href="#" class="btn btn-default">
-                                                <span class="glyphicon glyphicon-search"></span> 
-                                                Ver</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Walka-Mars</td>
-                                        <td>HT-2015</td>
-                                        <td>23547</td>
-                                        <td>10-Abr-2013</td>
-                                        <td>EE</td>
-                                        <td>I</td>
-                                        <td>Extranjeros</td>
-                                        <td><button href="#" class="btn btn-default">
-                                                <span class="glyphicon glyphicon-search"></span> 
-                                                Ver</button>
-                                        </td>
-                                    </tr>
+                                    </c:forEach>
                                 </tbody>
+                                </c:if>
+                                <c:if test="${listaFamilias == null}">
+                                        <h3><strong>No existen familias registradas</strong></h3>
+                                      </c:if> 
                             </table>
                         </div>
                         <div class="control-group">

@@ -185,7 +185,7 @@ public ArrayList<Familia> getListaFamilias () {
         Object queryResultA = queryA.uniqueResult();
 
         tempEval = (Evaluacion) queryResultA;
-        
+        Hibernate.initialize(tempEval.getExpedienteFamilia());
         String hql2 = "from Resolucion R where R.evaluacion = :idEvaluacion ORDER BY R.fechaResol DESC";
                         Query query2 = session.createQuery(hql2);
                         query2.setLong("idEvaluacion", tempEval.getIdevaluacion());
