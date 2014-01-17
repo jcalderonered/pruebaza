@@ -608,7 +608,12 @@ public class familia {
                 sol = (Solicitante) iter5.next();
                 if (sol.getSexo() == 'M') {
                     map.put("sol", sol);
-                    String fechanac = format.dateToString(sol.getFechaNac());
+                    String fechanac = "";
+                    try{
+                        fechanac = format.dateToString(sol.getFechaNac());
+                    } catch (Exception ex){
+                        
+                    }
                     map.addAttribute("fechanac", fechanac);
                 }
             }

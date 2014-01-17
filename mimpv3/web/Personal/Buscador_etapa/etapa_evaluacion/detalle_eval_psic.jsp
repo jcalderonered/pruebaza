@@ -178,7 +178,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <textarea id="obs" name="obs" cols="25" rows="5" class="input-xlarge"> ${psicologica.getObservacion()}</textarea>
+                                        <textarea id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${psicologica.getObservacion()}</textarea>
                                     </div>
                                 </div>
                                 <br>
