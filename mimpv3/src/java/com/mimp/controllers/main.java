@@ -14,6 +14,7 @@ import com.mimp.hibernate.HiberNna;
 import com.mimp.hibernate.HiberPersonal;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -438,6 +439,7 @@ public class main {
             listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(idFam);
         }else if(estado.equals("evaluacion")){
             Long idExp = Long.parseLong(idExpediente);
+            System.out.print(estado);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
             expediente = tempExp;
             infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
@@ -1069,6 +1071,7 @@ public class main {
             El.setCorreo(correo);
             if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")){
                 infoFam.setFechaMatrimonio(df.stringToDate(fechaMat));
+                ServicioMain.updateInfoFam(infoFam);
             }else if(fechaMat == null || fechaMat.equals("")) {
                 infoFam.setFechaMatrimonio(null);
             }
@@ -1135,7 +1138,7 @@ public class main {
             ServicioMain.updateAdoptante(El);
             if (El.getApellidoP() != null && Ella.getApellidoP()!= null )
             {
-                expediente.setExpediente(El.getApellidoP() + "-" + Ella.getApellidoP());
+                expediente.setExpediente(El.getApellidoP() + " - " + Ella.getApellidoP());
             }else if(El.getApellidoP() != null){
                 expediente.setExpediente(El.getApellidoP());
             }else if(Ella.getApellidoP() != null){
@@ -1167,6 +1170,7 @@ public class main {
             Ella.setCorreo(correo);
             if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")){
                 infoFam.setFechaMatrimonio(df.stringToDate(fechaMat));
+                ServicioMain.updateInfoFam(infoFam);
             }else if(fechaMat == null || fechaMat.equals("")) {
                 infoFam.setFechaMatrimonio(null);
             }
@@ -1233,7 +1237,7 @@ public class main {
             ServicioMain.updateAdoptante(Ella);
             if (El.getApellidoP() != null && Ella.getApellidoP()!= null )
             {
-                expediente.setExpediente(El.getApellidoP() + "-" + Ella.getApellidoP());
+                expediente.setExpediente(El.getApellidoP() + " - " + Ella.getApellidoP());
             }else if(El.getApellidoP() != null){
                 expediente.setExpediente(El.getApellidoP());
             }else if(Ella.getApellidoP() != null){
@@ -1367,7 +1371,64 @@ public ModelAndView ActualizarVivienda(ModelMap map, HttpSession session,
         return new ModelAndView("cronograma", map);
 }
     
-    
-    
+@RequestMapping(value = "/GenerarExpNac", method = RequestMethod.POST)
+public ModelAndView GenerarExpNac(ModelMap map) {
+
+        map.put("df",df);
+        map.put("listaEntidad",ServicioPersonal.ListaEntidades());
+        return new ModelAndView("/Buscador_etapa/gen_exp", map);
+
+}    
+
+
+@RequestMapping(value = "/CrearExpNac", method = RequestMethod.POST)
+    public ModelAndView CrearExpNac(ModelMap map, HttpSession session,
+                                              @RequestParam(value="ht") String ht,  
+                                              @RequestParam(value="numeroExp") String numeroExp,  
+                                              @RequestParam(value="fechaIngreso") String fechaIngreso,  
+                                              @RequestParam(value="tupa") String tupa,  
+                                              @RequestParam(value="tipoFamilia") String tipoFamilia,  
+                                              @RequestParam(value="entAsoc", required = false) Long entAsoc
+                                              ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        /*
+        Familia tempFam = new Familia();
+        ExpedienteFamilia expediente = new ExpedienteFamilia();
+        Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
+        infoFam = new InfoFamilia();
+        
+        tempFam.setEntidad(tempEnt);
+        tempFam.setHabilitado(Short.parseShort("1"));
+        tempFam.setUser(usuario.getApellidoP()); //seteo el usuario por defecto como apellido paterno del usuario que lo registra
+        String pass = DigestUtils.sha512Hex(usuario.getApellidoP());
+        tempFam.setPass(pass);
+        
+        expediente.setHt(ht);
+        expediente.setNumeroExpediente(numeroExp);
+        if(fechaIngreso != null && !fechaIngreso.equals("")) expediente.setFechaIngresoDga(format.stringToDate(fechaIngreso));
+        if(fechaIngreso == null && fechaIngreso.equals("")) expediente.setFechaIngresoDga(null);
+        if(tupa != null && !tupa.equals("")) expediente.setTupa(format.stringToDate(tupa));
+        if(tupa == null && tupa.equals("")) expediente.setTupa(null);
+        expediente.setTipoFamilia(tipoFamilia);
+        expediente.setUnidad(usuario.getUnidad());
+        expediente.setEstado("evaluacion");
+        expediente.setNacionalidad("internacional");
+        expediente.setRnsa(Short.parseShort("0"));
+        expediente.setRnaa(Short.parseShort("1"));
+        
+        ServicioPersonal.crearFamInt(tempFam, expediente,infoFam);
+        expedienteInt = expediente;
+        //map.put("idInfo",infoFam.getIdinfoFamilia());
+        map.put("infoFam",infoFam);
+        map.put("Ella",Ella);
+                 */
+        return new ModelAndView("/Personal/fam_inter/datos_ella", map);
+               
+    }    
     
 }

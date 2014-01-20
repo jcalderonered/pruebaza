@@ -103,7 +103,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                             
@@ -135,7 +135,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha asignación</label>
                                     <div class="controls">
-                                        <input id="fechaAsig" name="fechaAsig" type="text" class="datepicker span2" value="${psicologica.getFechaAsignacion() != null ? df.dateToString(psicologica.getFechaAsignacion()) : ''}" id="dp3" >
+                                        <input id="fechaAsig" name="fechaAsig" type="text" class="datepicker span2" value="${psicologica.getFechaAsignacion() != null ? df.dateToStringNumeros(psicologica.getFechaAsignacion()) : ''}" id="dp3" >
                                     </div>
                                 </div>
                                 <br>
@@ -156,7 +156,7 @@
                                         <select id="resultado" name="resultado" > 
                                             <option value="favorable" ${psicologica.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
                                             <option value="desfavorable" ${psicologica.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
-                                            <option value="observado" ${psicologica.getResultado() == 'observado' ? 'selected' : ''}>Observado</option>
+                                            <option value="observado" ${psicologica.getResultado() == 'observado' ? 'selected' : ''}>En evaluación</option>
                                         </select>
                                     </div>  
                                 </div>
@@ -171,7 +171,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
-                                        <input id="fechaResul" name="fechaResul" type="text" value="${psicologica.getFechaResultado() != null ? df.dateToString(psicologica.getFechaResultado()) : ''}" class="datepicker input-xlarge">
+                                        <input id="fechaResul" name="fechaResul" type="text" value="${psicologica.getFechaResultado() != null ? df.dateToStringNumeros(psicologica.getFechaResultado()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>

@@ -153,11 +153,11 @@
                                                     <c:when test="${formulario.getAsistentes().size() == 2}">     
                                                         <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
                                                             <c:choose>
-                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                <c:when test="${asistente.getSexo() == 109}">
                                                                     <c:set var="el" value="${asistente}" scope="page" />
                                                                     
                                                                 </c:when>
-                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                <c:when test="${asistente.getSexo() == 102}">
                                                                     <c:set var="ella" value="${asistente}" scope="page" />
                                                                 </c:when> 
                                                             </c:choose>
@@ -197,7 +197,7 @@
                                                                             <input hidden name="turno" id="turno" value="${turno}"> 
                                                                                     <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
                                                                                         <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                                                     <button ${AFR.getAsistencia() == 'A' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
+                                                                                                     <button ${AFR.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
                                                                                         </c:if>                 
                                                                                     </c:forEach>   
                                                                         </form>
@@ -222,7 +222,7 @@
                                                     <c:when test="${formulario.getAsistentes().size() == 1}">
                                                         <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
                                                             <c:choose>
-                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                <c:when test="${asistente.getSexo() == 109}">
                                                                     <td>
                                                                     ${asistente.getNombre()}    
                                                                     ${asistente.getApellidoP()}
@@ -249,7 +249,7 @@
                                                                                     <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
                                          
                                                                                                <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                                                     <button ${AFR.getAsistencia() == 'A' ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
+                                                                                                     <button ${AFR.getAsistencia() == 65 ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
                                                                                                 </c:if>      
                                                                                             
                                                                                     </c:forEach>   
@@ -271,7 +271,7 @@
                                                                         </form>
                                                                     </td>
                                                                 </c:when>
-                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                <c:when test="${asistente.getSexo() == 102}">
                                                                     <td></td>
                                                                     <td></td>
                                                                     <td>
@@ -297,7 +297,7 @@
                                                                             <input hidden name="turno" id="turno" value="${turno}"> 
                                                                                     <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
                                                                                             <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                                                     <button ${AFR.getAsistencia() == 'A' ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
+                                                                                                     <button ${AFR.getAsistencia() == 65 ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
                                                                                          </c:if>  
                                                                                     </c:forEach>   
                                                                         </form>

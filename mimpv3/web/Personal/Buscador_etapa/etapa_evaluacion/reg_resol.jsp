@@ -103,7 +103,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <c:if test="${resolucion == null}">
@@ -149,14 +149,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha resolución</label>
                                     <div class="controls">
-                                        <input id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
+                                        <input id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToStringNumeros(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha notificación</label>
                                     <div class="controls">
-                                        <input id="fechaResul" name="fechaNot" type="text" value="${resolucion.getFechaNotificacion() != null ? df.dateToString(resolucion.getFechaNotificacion()) : ''}" class="datepicker input-xlarge">
+                                        <input id="fechaResul" name="fechaNot" type="text" value="${resolucion.getFechaNotificacion() != null ? df.dateToStringNumeros(resolucion.getFechaNotificacion()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>

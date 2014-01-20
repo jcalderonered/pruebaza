@@ -103,7 +103,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>    
                                 <br>
@@ -119,6 +119,7 @@
                                                 <th>Información</th>
                                                 <th>¿Culminó taller?</th>
                                                 <th>Número de Constancia</th>
+                                                <th>Generar Expediente</th>
                                                 
                                             </tr>
                                         </thead>
@@ -132,11 +133,11 @@
                                                     <c:when test="${formulario.getAsistentes().size() == 2}">     
                                                         <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
                                                             <c:choose>
-                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                <c:when test="${asistente.getSexo() == 109}">
                                                                     <c:set var="el" value="${asistente}" scope="page" />
                                                                     
                                                                 </c:when>
-                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                <c:when test="${asistente.getSexo() == 102}">
                                                                     <c:set var="ella" value="${asistente}" scope="page" />
                                                                 </c:when> 
                                                             </c:choose>
@@ -167,7 +168,7 @@
                                                                         <c:set var="flag" value="0" scope="page" />
                                                                         <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
                                                                             <c:choose>
-                                                                                <c:when test="${AFR.getAsistencia() != 'A' && AFR.getInasJus() == 1}">
+                                                                                <c:when test="${AFR.getAsistencia() != 65 && AFR.getInasJus() == 1}">
                                                                                     <c:set var="flag" value="1" scope="page" />
                                                                                 </c:when>
                                                                             </c:choose>
@@ -191,12 +192,17 @@
                                                                         <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
                                                                         </form>
                                                                     </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
+                                                                        <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
+                                                                        </form>
+                                                                    </td>
                                                                     
                                                     </c:when>
                                                     <c:when test="${formulario.getAsistentes().size() == 1}">
                                                         <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
                                                             <c:choose>
-                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                <c:when test="${asistente.getSexo() == 109}">
                                                                     <td>
                                                                     ${asistente.getNombre()}
                                                                     ${asistente.getApellidoP()}
@@ -217,7 +223,7 @@
                                                                         <c:set var="flag" value="0" scope="page" />
                                                                         <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
                                                                             <c:choose>
-                                                                                <c:when test="${AFR.getAsistencia() != 'A' && AFR.getInasJus() == 1}">
+                                                                                <c:when test="${AFR.getAsistencia() != 65 && AFR.getInasJus() == 1}">
                                                                                     <c:set var="flag" value="1" scope="page" />
                                                                                 </c:when>
                                                                             </c:choose>
@@ -243,7 +249,7 @@
                                                                     </td>
                                                                     
                                                                 </c:when>
-                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                <c:when test="${asistente.getSexo() == 102}">
                                                                     <td></td>
                                                                     <td></td>
                                                                     <td>
@@ -265,7 +271,7 @@
                                                                         <c:set var="flag" value="0" scope="page"/>
                                                                         <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
                                                                             <c:choose>
-                                                                                <c:when test="${AFR.getAsistencia() != 'A' && AFR.getInasJus() == 1}">
+                                                                                <c:when test="${AFR.getAsistencia() != 65 && AFR.getInasJus() == 1}">
                                                                                     <c:set var="flag" value="1" scope="page" />
                                                                                 </c:when>
                                                                             </c:choose>

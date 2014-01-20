@@ -46,7 +46,7 @@
     <!-- Data Source JNDI-->
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName">
-            <value>jdbc/OracleMimp_adopcion</value>
+            <value>jboss/renad</value>
         </property>
     </bean>
     

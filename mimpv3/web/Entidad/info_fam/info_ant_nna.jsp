@@ -109,10 +109,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaIncesto() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaIncesto() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaIncesto() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaIncesto() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -124,10 +124,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaMental() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaMental() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaMental() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaMental() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -139,10 +139,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaEpilepsia() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaEpilepsia() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaEpilepsia() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaEpilepsia() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -154,10 +154,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaAbuso() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaAbuso() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaAbuso() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaAbuso() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -170,10 +170,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaSifilis() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaSifilis() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaSifilis() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaSifilis() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -201,10 +201,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaSeguiMedico() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaSeguiMedico() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaSeguiMedico() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaSeguiMedico() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -217,10 +217,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaOperacion() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaOperacion() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaOperacion() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaOperacion() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -233,10 +233,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaHiperactivo() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaHiperactivo() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaHiperactivo() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaHiperactivo() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -264,10 +264,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaEspecial() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaEspecial() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaEspecial() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaEspecial() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -279,10 +279,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaEnfermo() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaEnfermo() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaEnfermo() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaEnfermo() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -294,10 +294,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaMayor() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaMayor() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaMayor() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaMayor() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -309,10 +309,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaAdolescente() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaAdolescente() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaAdolescente() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaAdolescente() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -324,10 +324,10 @@
                                             </td>
                                             <td>
                                                 <select disabled>
-                                                    <c:if test="${InfoNNA.getNnaHermano() == '0' }"  >
+                                                    <c:if test="${InfoNNA.getNnaHermano() == 0 }"  >
                                                         <option  value="sia">SI</option>
                                                     </c:if>
-                                                    <c:if test="${InfoNNA.getNnaHermano() == '1' }"  >
+                                                    <c:if test="${InfoNNA.getNnaHermano() == 1 }"  >
                                                         <option  value="mia">NO</option>
                                                     </c:if>
                                                 </select>
@@ -354,7 +354,7 @@
                                 <div class="radio">
                                     <label>
                                         <c:choose>
-                                            <c:when test="${Genero == 'M'}">
+                                            <c:when test="${Genero == 'masculino'}">
                                                 <input type="radio" name="optionsRadios1" id="Masculino" value="M" checked>Masculino</label>
                                             </c:when>
                                             <c:otherwise>
@@ -367,7 +367,7 @@
                                 <div class="radio">
                                     <label>
                                         <c:choose>
-                                            <c:when test="${Genero == 'F'}">
+                                            <c:when test="${Genero == 'femenino'}">
                                                 <input type="radio" name="optionsRadios1" id="Femenino" value="M" checked>Femenino</label>
                                             </c:when>
                                             <c:otherwise>
@@ -381,7 +381,7 @@
                                     
                                     <label>
                                         <c:choose>
-                                            <c:when test="${Genero == 'i'}">
+                                            <c:when test="${Genero == 'indistinto'}">
                                                 <input type="radio" name="optionsRadios1" id="Indistinto" value="M" checked>Indistinto</label>
                                             </c:when>
                                             <c:otherwise>

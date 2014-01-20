@@ -103,7 +103,7 @@
                             <li ><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                                 <br>

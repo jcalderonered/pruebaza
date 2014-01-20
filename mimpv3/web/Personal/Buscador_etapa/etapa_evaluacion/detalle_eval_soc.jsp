@@ -104,7 +104,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <c:if test="${social == null}">
@@ -134,7 +134,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha asignación</label>
                                     <div class="controls">
-                                        <input id="fechaAsig" name="fechaAsig" type="text" class="datepicker span2" value="${social.getFechaAsignacion() != null ? df.dateToString(social.getFechaAsignacion()) : ''}" >
+                                        <input id="fechaAsig" name="fechaAsig" type="text" class="datepicker span2" value="${social.getFechaAsignacion() != null ? df.dateToStringNumeros(social.getFechaAsignacion()) : ''}" >
                                     </div>
                                 </div>
                                 <br>
@@ -155,7 +155,7 @@
                                         <select id="resultado" name="resultado" > 
                                             <option value="favorable" ${social.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
                                             <option value="desfavorable" ${social.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
-                                            <option value="observado" ${social.getResultado() == 'observado' ? 'selected' : ''}>Observado</option>
+                                            <option value="observado" ${social.getResultado() == 'observado' ? 'selected' : ''}>En evaluación</option>
                                         </select>
                                     </div>  
                                 </div>
@@ -170,7 +170,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
-                                        <input id="fechaResul" name="fechaResul" type="text" value="${social.getFechaResultado() != null ? df.dateToString(social.getFechaResultado()) : ''}" class="datepicker input-xlarge">
+                                        <input id="fechaResul" name="fechaResul" type="text" value="${social.getFechaResultado() != null ? df.dateToStringNumeros(social.getFechaResultado()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>

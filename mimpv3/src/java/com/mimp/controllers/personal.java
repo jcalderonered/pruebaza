@@ -3086,4 +3086,5 @@ public class personal {
         map.put("infoFam",infoFam);
         return new ModelAndView("/Personal/fam_inter/datos_nna", map);
 }    
+
 }

@@ -147,7 +147,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input value="${Ella.getFechaNac() != null ? df.dateToString(Ella.getFechaNac()) : ''}" id="fechaNac" name="fechaNac" type="text" class="datepicker input-xlarge">
+                                        <input value="${Ella.getFechaNac() != null ? df.dateToStringNumeros(Ella.getFechaNac()) : ''}" id="fechaNac" name="fechaNac" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -183,13 +183,13 @@
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="doc" id="optionsRadios1" value="d" ${Ella.getTipoDoc() == 'd' ? 'checked' : ''}>DNI</label>
+                                                <input type="radio" name="doc" id="optionsRadios1" value="d" ${Ella.getTipoDoc() == 100 ? 'checked' : ''}>DNI</label> 
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="doc" id="optionsRadios2" value="c" ${Ella.getTipoDoc() == 'c' ? 'checked' : ''}>Carnet de Extranjería</label>
+                                                <input type="radio" name="doc" id="optionsRadios2" value="c" ${Ella.getTipoDoc() == 99 ? 'checked' : ''}>Carnet de Extranjería</label>
                                         </div>                            
                                     </div>
                                 </div>    
@@ -455,6 +455,7 @@
                                     </div>
                                 </div>
                             </fieldset>
+                            
                         </form>
                         <!--FIN DE CONTENIDO-->
                     </div>

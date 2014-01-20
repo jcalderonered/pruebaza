@@ -104,7 +104,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluación" >Reevaluación</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <c:if test="${legal == null}">
@@ -129,7 +129,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha asignación</label>
                                     <div class="controls">
-                                        <input id="fechaAsig" name="fechaAsig" type="text" class="datepicker span2" value="${legal.getFechaAsignacion() != null ? df.dateToString(legal.getFechaAsignacion()) : ''}" id="dp3" >
+                                        <input id="fechaAsig" name="fechaAsig" type="text" class="datepicker span2" value="${legal.getFechaAsignacion() != null ? df.dateToStringNumeros(legal.getFechaAsignacion()) : ''}" id="dp3" >
                                     </div>
                                 </div>
                                 <br>
@@ -150,7 +150,7 @@
                                         <select id="resultado" name="resultado" > 
                                             <option value="favorable" ${legal.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
                                             <option value="desfavorable" ${legal.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
-                                            <option value="observado" ${legal.getResultado() == 'observado' ? 'selected' : ''}>Observado</option>
+                                            <option value="observado" ${legal.getResultado() == 'observado' ? 'selected' : ''}>En evaluación</option>
                                         </select>
                                     </div>  
                                 </div>
@@ -165,7 +165,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de informe</label>
                                     <div class="controls">
-                                        <input id="fechaResul" name="fechaResul" type="text" value="${legal.getFechaResultado() != null ? df.dateToString(legal.getFechaResultado()) : ''}" class="datepicker input-xlarge">
+                                        <input id="fechaResul" name="fechaResul" type="text" value="${legal.getFechaResultado() != null ? df.dateToStringNumeros(legal.getFechaResultado()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
