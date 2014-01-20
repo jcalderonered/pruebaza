@@ -125,11 +125,11 @@
                                                     <c:when test="${formulario.getAsistentes().size() == 2}">     
                                                         <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
                                                             <c:choose>
-                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                <c:when test="${asistente.getSexo() == 109}">
                                                                     <c:set var="el" value="${asistente}" scope="page" />
                                                                     
                                                                 </c:when>
-                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                <c:when test="${asistente.getSexo() == 102}">
                                                                     <c:set var="ella" value="${asistente}" scope="page" />
                                                                 </c:when> 
                                                             </c:choose>
@@ -155,7 +155,7 @@
                                                     <c:when test="${formulario.getAsistentes().size() == 1}">
                                                         <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
                                                             <c:choose>
-                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                <c:when test="${asistente.getSexo() == 109}">
                                                                     <td>${asistente.getApellidoP()}</td>
                                                                     <td>${asistente.getApellidoM()}</td>
                                                                     <td>${asistente.getNombre()}</td>
@@ -172,7 +172,7 @@
                                                                         </form>
                                                                     </td>
                                                                 </c:when>
-                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                <c:when test="${asistente.getSexo() == 102}">
                                                                     <td></td>
                                                                     <td></td>
                                                                     <td></td>

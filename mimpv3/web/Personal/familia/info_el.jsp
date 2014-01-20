@@ -146,7 +146,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Fecha de nacimiento</label>
                                     <div class="controls">
-                                        <input value="${El.getFechaNac() != null ? df.dateToString(El.getFechaNac()) : ''}" id="fechaNac" name="fechaNac" type="text" class="datepicker input-xlarge">
+                                        <input value="${El.getFechaNac() != null ? df.dateToStringNumeros(El.getFechaNac()) : ''}" id="fechaNac" name="fechaNac" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -182,13 +182,13 @@
                                     <div class="col-md-2">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="doc" id="optionsRadios1" value="d" ${El.getTipoDoc() == 'd' ? 'checked' : ''}>DNI</label>
+                                                <input type="radio" name="doc" id="optionsRadios1" value="d" ${El.getTipoDoc() == 100 ? 'checked' : ''}>DNI</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="doc" id="optionsRadios2" value="c" ${El.getTipoDoc() == 'c' ? 'checked' : ''}>Carnet de Extranjería</label>
+                                                <input type="radio" name="doc" id="optionsRadios2" value="c" ${El.getTipoDoc() == 99 ? 'checked' : ''}>Carnet de Extranjería</label>
                                         </div>                            
                                     </div>
                                 </div>    

@@ -94,7 +94,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarVivienda" method="post">
+                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarVivienda" method="post" name="formulario" onsubmit="return(validar());">
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <c:if test="${estado != 'formativa'}">
                             <br>
@@ -479,6 +479,26 @@
                 }
                 
             </script>
+            <script type="text/javascript">
+            function validar()
+            {
+            var numericExpression = /^[0-9]+$/;
+            if(!document.formulario.areaVivTotal.value.match(numericExpression))
+            {
+                alert( "El campo debe contener solo números" );
+                document.formulario.areaVivTotal.focus() ;
+                return false;
+            }
+            if(!document.formulario.areaVivConst.value.match(numericExpression))
+            {
+                
+                alert( "El campo debe contener solo números" );
+                document.formulario.areaVivConst.focus() ;
+                return false;
+            }
+            return true
+            }
+          </script>
             <!-- Ubicar al final -->
     </body>
 </html>

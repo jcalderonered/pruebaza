@@ -101,11 +101,11 @@
                             <!-- Form Name -->
                             <c:forEach var="asistente" items="${listaAsistentes}" varStatus="status">
                                 <c:choose>
-                                    <c:when test="${asistente.getSexo() == 'm'}">
+                                    <c:when test="${asistente.getSexo() == 109}">
                                         <c:set var="el" value="${asistente}" scope="page" />
 
                                     </c:when>
-                                    <c:when test="${asistente.getSexo() == 'f'}">
+                                    <c:when test="${asistente.getSexo() == 102}">
                                         <c:set var="ella" value="${asistente}" scope="page" />
                                     </c:when> 
                                 </c:choose>
@@ -177,13 +177,13 @@
                                 <div class="control-group">
                                     <div class="radio">
                                         <label>
-                                            <input disabled type="radio" name="optionsRadios1" id="optionsRadios1" value="d" ${el.getTipoDoc() == 'd' ? 'checked' : ''}>
+                                            <input disabled type="radio" name="optionsRadios1" id="optionsRadios1" value="d" ${el.getTipoDoc() == 100 ? 'checked' : ''}>
                                             DNI
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input disabled type="radio" name="optionsRadios1" id="optionsRadios2" value="c" ${el.getTipoDoc() == 'c' ? 'checked' : ''}>
+                                            <input disabled type="radio" name="optionsRadios1" id="optionsRadios2" value="c" ${el.getTipoDoc() == 99 ? 'checked' : ''}>
                                             Carnet de Extranjería
                                         </label>
                                     </div>
@@ -294,14 +294,14 @@
                                 <div class="control-group">
                                     <div class="radio">
                                         <label>
-                                            <input disabled type="radio" name="optionsRadios2" id="optionsRadios1" value="d" ${ella.getTipoDoc() == 'd' ? 'checked' : ''}>
+                                            <input disabled type="radio" name="optionsRadios2" id="optionsRadios1" value="d" ${ella.getTipoDoc() == 100 ? 'checked' : ''}>
                                             DNI
                                         </label>
                                     </div>
                                     <br>
                                     <div class="radio">
                                         <label>
-                                            <input disabled type="radio" name="optionsRadios2" id="optionsRadios2" value="c" ${ella.getTipoDoc() == 'c' ? 'checked' : ''}>
+                                            <input disabled type="radio" name="optionsRadios2" id="optionsRadios2" value="c" ${ella.getTipoDoc() == 99 ? 'checked' : ''}>
                                             Carnet de Extranjería
                                         </label>
                                     </div>

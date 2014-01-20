@@ -40,6 +40,7 @@ public ArrayList<Familia> getListaFamilias () {
         ArrayList<Familia> allFamilias = new ArrayList();
         for (Iterator iter = familias.iterator(); iter.hasNext();) {
             Familia temp = (Familia) iter.next();
+            Hibernate.initialize(temp.getExpedienteFamilias());
             Hibernate.initialize(temp.getAsistenciaFRs());
             
             String hql2 = "FROM FormularioSesion F WHERE F.familia = :idFamilia ORDER BY F.fechaSol DESC ";

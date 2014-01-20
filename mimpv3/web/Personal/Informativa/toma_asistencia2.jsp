@@ -149,11 +149,11 @@
                                                         <c:set var="contador" value="${contador + 2}" scope="page"/>
                                                         <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status2">
                                                             <c:choose>
-                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                <c:when test="${asistente.getSexo() == 109}">
                                                                     <c:set var="el" value="${asistente}" scope="page" />
                                                                     
                                                                 </c:when>
-                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                <c:when test="${asistente.getSexo() == 102}">
                                                                     <c:set var="ella" value="${asistente}" scope="page" />
                                                                 </c:when> 
                                                             </c:choose>
@@ -189,7 +189,7 @@
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
                                                                             <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
                                                                             <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">        
-                                                                                                     <button ${AFT.getAsistencia() == 'A' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                                                     <button ${AFT.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
                                                                             </c:forEach>   
                                                                             
                                                                         </form>
@@ -208,7 +208,7 @@
                                                         <c:set var="contador" value="${contador + 1}" scope="page"/>
                                                         <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status3">
                                                             <c:choose>
-                                                                <c:when test="${asistente.getSexo() == 'm'}">
+                                                                <c:when test="${asistente.getSexo() == 109}">
                                                                     <td>${status.index + 1}</td>
                                                                     <td>
                                                                     ${asistente.getNombre()}    
@@ -231,7 +231,7 @@
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
                                                                             <input hidden type="text" name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
                                                                             <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">        
-                                                                                                     <button ${AFT.getAsistencia() == 'A' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                                                     <button ${AFT.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
                                                                             </c:forEach>
                                                                         </form>
                                                                     </td>
@@ -244,7 +244,7 @@
                                                                         </form>
                                                                     </td>
                                                                 </c:when>
-                                                                <c:when test="${asistente.getSexo() == 'f'}">
+                                                                <c:when test="${asistente.getSexo() == 102}">
                                                                     <td>${status.index + 1}</td>
                                                                     <td></td>
                                                                     <td></td>
@@ -267,7 +267,7 @@
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
                                                                             <input hidden type="text" name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
                                                                             <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">        
-                                                                                                     <button ${AFT.getAsistencia() == 'A' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                                                     <button ${AFT.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
                                                                             </c:forEach>
                                                                             
                                                                         </form>

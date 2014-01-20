@@ -2744,7 +2744,23 @@ public class mainEtapas {
         return new ModelAndView("/Personal/Buscador_etapa/etapa_post/informes_general", map);
 
     }
+    
+    @RequestMapping(value = "/Reevaluacion", method = RequestMethod.GET)
+    public ModelAndView Reevaluacion(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
 
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+        map.put("df", df);
+        map.put("listaReevaluacion", servicioEtapa.getListaReevaluación());
+        return new ModelAndView("/Personal/Buscador_etapa/lista_reevaluacion", map);
+    }
+    
     @RequestMapping(value = "/ListaEspera", method = RequestMethod.GET)
     public ModelAndView ListaEspera(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -2759,22 +2775,6 @@ public class mainEtapas {
         map.put("df", df);
         map.put("listaEspera", servicioEtapa.getListaEspera());
         return new ModelAndView("/Personal/Buscador_etapa/lista_espera", map);
-    }
-
-    @RequestMapping(value = "/Reevaluación", method = RequestMethod.GET)
-    public ModelAndView Reevaluación(ModelMap map, HttpSession session) {
-        Personal usuario = (Personal) session.getAttribute("usuario");
-        if (usuario == null) {
-            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
-            map.addAttribute("mensaje", mensaje);
-            return new ModelAndView("login", map);
-        }
-
-        //ArrayList<Familia> allFamilias = new ArrayList();
-        //allFamilias = servicioEtapa.getListaFamilias();
-        map.put("df", df);
-        map.put("listaReevaluacion", servicioEtapa.getListaReevaluación());
-        return new ModelAndView("/Personal/Buscador_etapa/lista_reevaluacion", map);
     }
 
     @RequestMapping(value = "/RegresarListaEspera", method = RequestMethod.POST)
