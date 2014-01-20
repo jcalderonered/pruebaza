@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jboss-deployment-structure>
-  <deployment>
-    <exclusions>
-      <module name="javax.api" />
-      <module name="javax.transaction.api" />
-      <module name="org.hibernate" />
-    </exclusions>
-  </deployment>
+    <deployment>
+        <exclusions>
+            <module name="javax.api"/>
+            <module name="javax.transaction.api"/>
+            <module name="org.hibernate"/>
+        </exclusions>
+    </deployment>
 </jboss-deployment-structure>
-
