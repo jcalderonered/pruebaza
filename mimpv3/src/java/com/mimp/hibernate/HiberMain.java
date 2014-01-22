@@ -582,4 +582,11 @@ public class HiberMain {
 
     }
     
+    public void crearUpdateExpFam (ExpedienteFamilia temp){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.saveOrUpdate(temp);
+    
+    }
+    
 }

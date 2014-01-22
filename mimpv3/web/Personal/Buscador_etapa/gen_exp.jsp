@@ -102,6 +102,8 @@
                         <br>
                         <br>
                             <form role="form" action="${pageContext.servletContext.contextPath}/CrearExpNac" method="post">
+                            <input hidden name="idFamilia" id="idFamilia" value="${idFamilia}"  >  
+                            <input hidden name="exp" id="idFamilia" value="${exp}"  >  
                             <div class="control-group">
                                 <label class="control-label">Número de Expediente </label>
                                 <div class="controls">
