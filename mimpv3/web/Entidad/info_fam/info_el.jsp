@@ -148,7 +148,7 @@ if (u==null){
                                     <div class="radio">
                                         <label>
                                             <c:choose>
-                                                <c:when test="${doc == 'D'}">
+                                                <c:when test="${doc == 'd'}">
                                                     <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" checked>DNI
                                                 </label>
                                             </c:when>
@@ -163,7 +163,7 @@ if (u==null){
 
                                         <label>
                                             <c:choose>
-                                                <c:when test="${doc == 'C'}">
+                                                <c:when test="${doc == 'c'}">
                                                     <input type="radio" name="optionsRadios1" id="optionsRadios2" value="C" checked>Carnet de Extranjería
                                                 </label>
                                             </c:when>
@@ -204,7 +204,7 @@ if (u==null){
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${estCivil == 'S'}">
+                                                    <c:when test="${estCivil == '163'}">
                                                         <input type="radio" name="optionsRadios2" id="soltero" value="D" checked>Soltero
                                             </label>
                                                     </c:when>
@@ -218,7 +218,7 @@ if (u==null){
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${estCivil == 'C'}">
+                                                    <c:when test="${estCivil == '99'}">
                                                         <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casado</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -231,7 +231,7 @@ if (u==null){
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${estCivil == 'V'}">
+                                                    <c:when test="${estCivil == '166'}">
                                                         <input type="radio" name="optionsRadios2" id="viudo" value="D" checked>Viudo</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -244,7 +244,7 @@ if (u==null){
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${estCivil == 'D'}">
+                                                    <c:when test="${estCivil == '100'}">
                                                         <input type="radio" name="optionsRadios2" id="divorciado" value="D" checked>Divorciado</label>
                                                     </c:when>
                                                     <c:otherwise>

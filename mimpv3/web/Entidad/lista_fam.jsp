@@ -90,12 +90,12 @@
                                     <c:forEach var="fam" items="${listaFam}" varStatus="status">
                                         <tr> 
                                             <c:forEach var="Adop" items="${listaAdop}" varStatus="status">
-                                                <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() && Adop.getSexo() == 'M' }"  >
+                                                <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() && Adop.getSexo() == '109' }"  >
                                                     <td>${Adop.getNombre()}</td>
                                                 </c:if>
                                         <form action="${pageContext.servletContext.contextPath}/Einfo" method="post">
 
-                                            <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() && Adop.getSexo() == 'F' }"  >
+                                            <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() && Adop.getSexo() == '102' }"  >
                                                 <td>${Adop.getNombre()}</td>
                                                 <input hidden name="idInfo" id="idInfo" value="${Adop.getInfoFamilia().getIdinfoFamilia()}">
                                             </c:if>

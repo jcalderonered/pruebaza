@@ -46,7 +46,7 @@
     <!-- Data Source JNDI-->
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName">
-            <value>jboss/renad</value>
+            <value>jboss/sirna</value>
         </property>
     </bean>
     
