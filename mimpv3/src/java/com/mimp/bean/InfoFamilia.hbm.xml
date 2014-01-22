@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Dec 23, 2013 3:56:23 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.InfoFamilia" table="INFO_FAMILIA" schema="MIMP_ADOPCION">
+    <class name="com.mimp.bean.InfoFamilia" table="INFO_FAMILIA" schema="SIRNA">
         <id name="idinfoFamilia" type="long">
             <column name="IDINFO_FAMILIA" precision="10" scale="0" />
             <generator class="increment" />

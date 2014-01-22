@@ -122,8 +122,8 @@ public class organismo {
             return new ModelAndView("login", map);
         }
 
-        Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "F");
-        Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "M");
+        Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "f");
+        Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "m");
         String doc = String.valueOf(LaAdop.getTipoDoc());
 
         map.put("LaAdop", LaAdop);
@@ -143,8 +143,8 @@ public class organismo {
             return new ModelAndView("login", map);
         }
 
-        Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "F");
-        Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "M");
+        Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "f");
+        Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "m");
         String doc = String.valueOf(ElAdop.getTipoDoc());
 
         map.put("LaAdop", LaAdop);
@@ -164,8 +164,8 @@ public class organismo {
             return new ModelAndView("login", map);
         }
         
-        Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "F");
-        Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "M");
+        Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "f");
+        Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "m");
         String doc = String.valueOf(LaAdop.getTipoDoc());
         
         map.put("LaAdop", LaAdop);
@@ -185,8 +185,8 @@ public class organismo {
             return new ModelAndView("login", map);
         }
         
-        Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "F");
-        Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "M");
+        Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "f");
+        Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "m");
         String doc = String.valueOf(LaAdop.getTipoDoc());
         InfoFamilia infoNNA = ServicioOrganismo.InfoFamilia(idInfo);
         
@@ -207,8 +207,8 @@ public class organismo {
             return new ModelAndView("login", map);
         }
 
-        map.put("LaAdop", ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "F"));
-        map.put("ElAdop", ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "M"));
+        map.put("LaAdop", ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "f"));
+        map.put("ElAdop", ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "m"));
         map.put("InfoNNA", ServicioOrganismo.InfoFamilia(idInfo));
         map.put("InfoExp", ServicioOrganismo.ExpPorIDFamilia(ServicioOrganismo.InfoFamilia(idInfo).getFamilia().getIdfamilia()));
         map.put("idInfo", idInfo);

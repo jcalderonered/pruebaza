@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Dec 23, 2013 3:56:23 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="com.mimp.bean.ExpedienteNna" table="EXPEDIENTE_NNA" schema="MIMP_ADOPCION">
+    <class name="com.mimp.bean.ExpedienteNna" table="EXPEDIENTE_NNA" schema="SIRNA">
         <id name="idexpedienteNna" type="long">
             <column name="IDEXPEDIENTE_NNA" precision="10" scale="0" />
             <generator class="increment" />

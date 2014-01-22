@@ -148,7 +148,7 @@
                                     <div class="radio">
                                         <label>
                                             <c:choose>
-                                                <c:when test="${doc == 'D'}">
+                                                <c:when test="${doc == 'd'}">
                                                     <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" checked>DNI
                                                 </label>
                                             </c:when>
@@ -163,7 +163,7 @@
 
                                         <label>
                                             <c:choose>
-                                                <c:when test="${doc == 'C'}">
+                                                <c:when test="${doc == 'c'}">
                                                     <input type="radio" name="optionsRadios1" id="optionsRadios2" value="C" checked>Carnet de Extranjería
                                                 </label>
                                             </c:when>
@@ -199,60 +199,60 @@
                             <br>
                             <h3>Estado Civil</h3>
                             <div class="row">
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${estCivil == 'S'}">
-                                                        <input type="radio" name="optionsRadios2" id="soltero" value="D" checked>Soltera
-                                            </label>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="soltero" value="D">Soltera</label>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                    </div>   
-                                    <div class="col-md-3">   
-                                        <div class="radio">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${estCivil == 'C'}">
-                                                        <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casada</label>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="casado" value="C">Casada</label>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>                            
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <c:choose>
+                                                <c:when test="${estCivil == '115'}">
+                                                    <input type="radio" name="optionsRadios2" id="soltero" value="D" checked>Soltera
+                                                </label>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="radio" name="optionsRadios2" id="soltero" value="D">Soltera</label>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${estCivil == 'V'}">
-                                                        <input type="radio" name="optionsRadios2" id="viudo" value="D" checked>Viuda</label>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="viudo" value="D">Viuda</label>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                    </div> 
-                                    <div class="col-md-3">  
-                                        <div class="radio">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${estCivil == 'D'}">
-                                                        <input type="radio" name="optionsRadios2" id="divorciado" value="D" checked>Divorciada</label>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="divorciado" value="D">Divorciada</label>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                    </div> 
                                 </div>   
+                                <div class="col-md-3">   
+                                    <div class="radio">
+                                        <label>
+                                            <c:choose>
+                                                <c:when test="${estCivil == '99'}">
+                                                    <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casada</label>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <input type="radio" name="optionsRadios2" id="casado" value="C">Casada</label>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>                            
+                                </div>
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <c:choose>
+                                                <c:when test="${estCivil == '118'}">
+                                                    <input type="radio" name="optionsRadios2" id="viudo" value="D" checked>Viuda</label>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <input type="radio" name="optionsRadios2" id="viudo" value="D">Viuda</label>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </div> 
+                                <div class="col-md-3">  
+                                    <div class="radio">
+                                        <label>
+                                            <c:choose>
+                                                <c:when test="${estCivil == '100'}">
+                                                    <input type="radio" name="optionsRadios2" id="divorciado" value="D" checked>Divorciada</label>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <input type="radio" name="optionsRadios2" id="divorciado" value="D">Divorciada</label>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </div> 
+                            </div>   
 
                             <br>
                             <!--<p style="color: red">IMPORTANTE: SE HA DESHABILITADO LA VISTA DEBIDO AL ESTADO CIVIL MARCADO EN EL SOLICITANTE</p>-->
