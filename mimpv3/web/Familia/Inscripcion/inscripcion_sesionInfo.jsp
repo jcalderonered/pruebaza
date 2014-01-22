@@ -90,6 +90,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <c:if test="${!listaTurnos.isEmpty()}" >  
                                     <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
                                     <tr>
                                                 <td>Turno ${status.index + 1} </td>
@@ -105,6 +106,10 @@
                                                 </td>
                                             </tr>
                                     </c:forEach>
+                                    </c:if>     
+                                    <c:if test="${!listaTurnos.isEmpty()}" >
+                                        
+                                    </c:if>        
                                 </tbody>
                             </table>
                         </div>

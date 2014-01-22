@@ -1372,11 +1372,13 @@ public ModelAndView ActualizarVivienda(ModelMap map, HttpSession session,
 }
     
 @RequestMapping(value = "/GenerarExpNac", method = RequestMethod.POST)
-public ModelAndView GenerarExpNac(ModelMap map) {
+public ModelAndView GenerarExpNac(ModelMap map,@RequestParam(value="idFamilia") long idFamilia,@RequestParam(value="exp") String exp) {
 
         map.put("df",df);
+        map.put("idFamilia",idFamilia);
+        map.put("exp",exp);
         map.put("listaEntidad",ServicioPersonal.ListaEntidades());
-        return new ModelAndView("/Buscador_etapa/gen_exp", map);
+        return new ModelAndView("/Personal/Buscador_etapa/gen_exp", map);
 
 }    
 
@@ -1387,7 +1389,9 @@ public ModelAndView GenerarExpNac(ModelMap map) {
                                               @RequestParam(value="numeroExp") String numeroExp,  
                                               @RequestParam(value="fechaIngreso") String fechaIngreso,  
                                               @RequestParam(value="tupa") String tupa,  
-                                              @RequestParam(value="tipoFamilia") String tipoFamilia,  
+                                              @RequestParam(value="idFamilia") long idFamilia,  
+                                              @RequestParam(value="tipoFamilia") String tipoFamilia,
+                                              @RequestParam(value="exp") String exp,
                                               @RequestParam(value="entAsoc", required = false) Long entAsoc
                                               ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1396,38 +1400,34 @@ public ModelAndView GenerarExpNac(ModelMap map) {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        /*
+        
         Familia tempFam = new Familia();
+        tempFam = servicioEtapa.getFamilia(idFamilia);
         ExpedienteFamilia expediente = new ExpedienteFamilia();
+        if(entAsoc != null && !entAsoc.equals("")){
         Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
-        infoFam = new InfoFamilia();
-        
         tempFam.setEntidad(tempEnt);
-        tempFam.setHabilitado(Short.parseShort("1"));
-        tempFam.setUser(usuario.getApellidoP()); //seteo el usuario por defecto como apellido paterno del usuario que lo registra
-        String pass = DigestUtils.sha512Hex(usuario.getApellidoP());
-        tempFam.setPass(pass);
+        }
         
+        expediente.setExpediente(exp);
         expediente.setHt(ht);
         expediente.setNumeroExpediente(numeroExp);
-        if(fechaIngreso != null && !fechaIngreso.equals("")) expediente.setFechaIngresoDga(format.stringToDate(fechaIngreso));
+        if(fechaIngreso != null && !fechaIngreso.equals("")) expediente.setFechaIngresoDga(df.stringToDate(fechaIngreso));
         if(fechaIngreso == null && fechaIngreso.equals("")) expediente.setFechaIngresoDga(null);
-        if(tupa != null && !tupa.equals("")) expediente.setTupa(format.stringToDate(tupa));
+        if(tupa != null && !tupa.equals("")) expediente.setTupa(df.stringToDate(tupa));
         if(tupa == null && tupa.equals("")) expediente.setTupa(null);
         expediente.setTipoFamilia(tipoFamilia);
         expediente.setUnidad(usuario.getUnidad());
         expediente.setEstado("evaluacion");
-        expediente.setNacionalidad("internacional");
-        expediente.setRnsa(Short.parseShort("0"));
+        expediente.setNacionalidad("nacional");
+        expediente.setRnsa(Short.parseShort("1"));
         expediente.setRnaa(Short.parseShort("1"));
+        expediente.setFamilia(tempFam);
+        ServicioMain.crearUpdateExpFam(expediente);
         
-        ServicioPersonal.crearFamInt(tempFam, expediente,infoFam);
-        expedienteInt = expediente;
-        //map.put("idInfo",infoFam.getIdinfoFamilia());
-        map.put("infoFam",infoFam);
-        map.put("Ella",Ella);
-                 */
-        return new ModelAndView("/Personal/fam_inter/datos_ella", map);
+       
+        map.put("listaFamilias", servicioEtapa.getListaFamilias());        
+        return new ModelAndView("Personal/Buscador_etapa/etapa_formativa", map);
                
     }    
     

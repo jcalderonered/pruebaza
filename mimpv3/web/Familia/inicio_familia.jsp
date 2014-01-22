@@ -74,7 +74,7 @@
                         <c:forEach items="${usuario.getInfoFamilias()}" varStatus="status" var="infofam">
                             <c:forEach items="${infofam.getAdoptantes()}" varStatus="status" var="item">
                                 <c:choose>
-                                    <c:when test="${item.getSexo() == 'M'}">
+                                    <c:when test="${item.getSexo() == 77}">
                                         <c:set var='apellido_h' value='${item.getApellidoP()}'/>
                                     </c:when>
                                     <c:otherwise>
