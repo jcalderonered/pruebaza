@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,6 +34,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
@@ -42,9 +44,12 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
  */
 @Controller
 public class reporte {
+    
+    @Resource(name = "HiberPersonal")
+    private HiberPersonal ServicioPersonal = new HiberPersonal();
 
-    @RequestMapping("/Reportes/UAs")
-    public ModelAndView Salir(ModelMap map, HttpSession session, HttpServletResponse response) {
+    @RequestMapping("/Reportes/UAs/Ejemplo")
+    public ModelAndView ReporteUAs(ModelMap map, HttpSession session, HttpServletResponse response) {
 //        Personal usuario = (Personal) session.getAttribute("usuario");
 //        if (usuario == null) {
 //            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -85,7 +90,7 @@ public class reporte {
         }
 
         try {
-            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"); 
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             response.setHeader("Content-Disposition", "attachment; filename=UnidadesAdopcion.xlsx");
             OutputStream fileOut = response.getOutputStream();
             wb.write(fileOut);
@@ -98,6 +103,61 @@ public class reporte {
             FileInputStream file = new FileInputStream(new File("C:\\test.xls"));
         } catch (Exception ex) {
 
+        }
+        return new ModelAndView("/login", map);
+    }
+
+    @RequestMapping("/Reportes/UAs")
+    public ModelAndView Ejemplo(ModelMap map, HttpSession session, HttpServletResponse response) {
+//        Personal usuario = (Personal) session.getAttribute("usuario");
+//        if (usuario == null) {
+//            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+//            map.addAttribute("mensaje", mensaje);
+//            return new ModelAndView("login", map);
+//        }
+        Workbook wb = new XSSFWorkbook();
+        try {
+            InputStream inp = new FileInputStream("C:\\Users\\User\\Desktop\\Plantillas\\UnidadesAdopción.xlsx");
+            wb = WorkbookFactory.create(inp);
+            Sheet sheet = wb.getSheetAt(0);
+
+            ArrayList<Unidad> listaUA = ServicioPersonal.ListaUa();
+            int i=1;
+            for (Unidad ua : listaUA) {
+                Row row = sheet.createRow(i);
+                
+                Cell cell = row.createCell(0);
+                cell.setCellValue(ua.getIdunidad());
+                cell = row.createCell(1);
+                cell.setCellValue(ua.getNombre());
+                cell = row.createCell(2);
+                cell.setCellValue(ua.getDireccion());
+                cell = row.createCell(3);
+                cell.setCellValue(ua.getDepartamento());
+                cell = row.createCell(4);
+                cell.setCellValue(ua.getProvincia());
+                cell = row.createCell(5);
+                cell.setCellValue(ua.getDistrito());
+                cell = row.createCell(6);
+                cell.setCellValue(ua.getCompetenciaRegional());
+                cell = row.createCell(7);
+                cell.setCellValue(ua.getCorreo());
+                cell = row.createCell(8);
+                
+                i++;
+            }
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+
+        try {
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setHeader("Content-Disposition", "attachment; filename=UnidadesAdopcion.xlsx");
+            OutputStream fileOut = response.getOutputStream();
+            wb.write(fileOut);
+            fileOut.close();
+        } catch (Exception ex) {
+            //ex.printStackTrace();
         }
         return new ModelAndView("/login", map);
     }
