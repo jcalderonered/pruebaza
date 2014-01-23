@@ -94,31 +94,26 @@
                     <div class="col-md-6 col-md-offset-1">
                         <h1 align="center"><strong>Cambio de contraseña</strong></h1>
                         <br>
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/Pcambiarcontra" method="post">
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Contraseña Actual</label>
-                                    <div>
-                                        <input id="textinput" name="textinput" type="password" placeholder="" class="input-xlarge">
-                                    </div>
+                                    <input id="oldpass" name="oldpass" type="password" placeholder="" class="input-xlarge">
                                     <br>
                                     <label class="control-label" for="textinput">Nueva Contraseña</label>
-                                    <div>
-                                        <input id="textinput" name="textinput" type="password" placeholder="" class="input-xlarge">
-                                    </div>
+                                    <input id="newpass" name="newpass" type="password" placeholder="" class="input-xlarge">
                                     <br>
                                     <label class="control-label" for="textinput">Reescribir nueva contraseña</label>
-                                    <div>
-                                        <input id="textinput" name="textinput" type="password" placeholder="" class="input-xlarge">
-                                    </div>
+                                    <input id="newpassconf" name="newpassconf" type="password" placeholder="" class="input-xlarge">
                                 </div>
+                                <br>
+                                <p style="color: red">${mensaje}</p>
                                 <br>
                                 <!-- Button -->
                                 <div class="control-group">
-
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Cambiar Contraseña</button>
+                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Cambiar Contraseña</button>
                                     </div>
                                 </div>
                             </fieldset>

@@ -2549,11 +2549,15 @@ public class personal {
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
 
         tempReun = ServicioPersonal.getReunion(idReunion);
-
+        int i  = 1;
+        short cont  = tempReun.getAsistencia();
+        cont = (short) (cont + (short)(1));
         afr = ServicioPersonal.getAsistFR(idFamilia, idReunion);
         char c = asistencia.charAt(0);
         afr.setAsistencia(c);
-
+        tempReun.setAsistencia(cont);
+        
+        ServicioPersonal.updateReunion(tempReun);
         ServicioPersonal.updateAsistenciaFR(afr);
         allFormularios = ServicioPersonal.formulariosReunion(idReunion);
         map.addAttribute("nombre", nombre);
@@ -3086,5 +3090,34 @@ public class personal {
         map.put("infoFam",infoFam);
         return new ModelAndView("/Personal/fam_inter/datos_nna", map);
 }    
+
+@RequestMapping("/Pcambiarcontra")
+    public ModelAndView Pcambiarcontra(ModelMap map, HttpSession session, @RequestParam("oldpass") String oldpass, @RequestParam("newpass") String newpass, @RequestParam("newpassconf") String newpassconf) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        String mensaje = "";
+        if (usuario == null) {
+            mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }else {
+            oldpass = DigestUtils.sha512Hex(oldpass);
+            if (usuario.getPass().equals(oldpass)) {
+                if (newpass.equals(newpassconf)) {
+                    newpass = DigestUtils.sha512Hex(newpass);
+                    usuario.setPass(newpass);
+                    ServicioPersonal.CambiaPass(usuario);
+                    mensaje = "La contraseña se ha cambiado con exito.";
+                } else {
+                    mensaje = "Las contraseñas no coinciden. Favor de reescribir la nueva contraseña.";
+                }
+            } else {
+                mensaje = "Contraseña de usuario incorrecta. Ingrese nuevamente.";
+            }
+        }
+        String pagina = "/Personal/actualizar_pass";
+        map.addAttribute("mensaje", mensaje);
+        return new ModelAndView(pagina, map);
+    }
+    
 
 }
