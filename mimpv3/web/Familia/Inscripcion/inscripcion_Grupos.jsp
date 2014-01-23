@@ -89,119 +89,55 @@
                                         <th class="col-sm-2 ">Registro</th>
                                     </tr>
                                 </thead>
-
+                                <c:if test="${!listaGrupos.isEmpty()}">
                                 <tbody>
-                                    <tr>
-                                        <td rowspan="10">Grupo Lunes</td>
-                                        <td rowspan="5">Mañana</td>
-                                        <td>19/12/13 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                        <td rowspan="5"><button href="#" class="btn btn-default">Inscribirse</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>26/12/13 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>03/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>14/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>21/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="5">Tarde</td>
-                                        <td>20/12/13 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                        <td rowspan="5"><button href="#" class="btn btn-default">Inscribirse</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>27/12/13 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>04/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>15/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>22/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="10">Grupo Martes</td>
-                                        <td rowspan="5">Mañana</td>
-                                        <td>19/12/13 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                        <td rowspan="5"><button href="#" class="btn btn-default">Inscribirse</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>26/12/13 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>03/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>14/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>21/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="5">Tarde</td>
-                                        <td>20/12/13 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                        <td rowspan="5"><button href="#" class="btn btn-default">Inscribirse</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>27/12/13 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>04/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>15/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>22/01/14 - 09:00</td>
-                                        <td>2 horas</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
+                                    <c:forEach var="grupo" items="${listaGrupos}" varStatus="status">
+                                        <c:set var="idGrupo" value="0" />
+                                        <c:set var="filasGrupo" value="0" />
+                                        <c:if test="${!grupo.getTurno2s().isEmpty()}">
+                                            <c:forEach var="turno" items="${grupo.getTurno2s()}" varStatus="status">
+                                                <c:set var="filasGrupo" value="${filasGrupo + turno.getReunions().size()}" />
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${!grupo.getTurno2s().isEmpty()}">   
+                                            <c:forEach var="turno2" items="${grupo.getTurno2s()}" varStatus="status">  
+                                                <c:set var="idTurno" value="0" />
+                                                <c:if test="${!turno2.getReunions().isEmpty()}">  
+                                                    <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
+                                                     <tr>
+                                                        <c:if test="${idGrupo != grupo.getIdgrupo()}">
+                                                        <c:set var="idGrupo" value="${grupo.getIdgrupo()}" />
+                                                        <td rowspan="${filasGrupo}">${grupo.getNombre()}</td>
+                                                        </c:if> 
+                                                        <c:if test="${idTurno != turno2.getIdturno2()}">
+                                                        <td rowspan="${turno2.getReunions().size()}">${turno2.getNombre()}</td>
+                                                        </c:if> 
+                                                        <td>${reunion.getFecha() != null ? df.dateToString(reunion.getFecha()) : ''} - ${reunion.getHora()}</td>
+                                                        <td>${reunion.getDuracion()}</td>
+                                                        <td>${reunion.getDireccion()}</td>
+                                                        <c:if test="${idTurno != turno2.getIdturno2()}">
+                                                        <c:set var="idTurno" value="${turno2.getIdturno2()}" />
+                                                        <td rowspan="${turno2.getReunions().size()}">
+                                                          <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/FamiliaInscribirTaller" method="post">
+                                                            <input hidden id="nombreTaller" name="nombreTaller" value="${nombreTaller}">    
+                                                            <input hidden id="nombreGrupo" name="nombreGrupo" value="${grupo.getNombre()}">  
+                                                            <input hidden id="nombreTurno" name="nombreTurno" value="${turno2.getNombre()}">    
+                                                            <input hidden id="idTurno2" name="idTurno2" value="${turno2.getIdturno2()}">    
+                                                            <button class="btn btn-default">Inscribirse</button>
+                                                          </form>
+                                                        </td>
+                                                        </c:if>
+                                                    </tr>
+                                                    </c:forEach> 
+                                                </c:if>
+                                            </c:forEach>  
+                                        </c:if> 
+                                    </c:forEach>
                                 </tbody>
+                                </c:if>
+                                <c:if test="${listaGrupos.isEmpty()}">
+                                            <h3><strong>No exiten grupos/turnos establecidos</strong></h3>
+                                </c:if>
                             </table>
                         </div>
                     </div>

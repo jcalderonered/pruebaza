@@ -39,10 +39,6 @@ public class HiberFamilia {
         List talleres = query.list();
         ArrayList<Taller> allTalleres = new ArrayList();
         
-        
-        
-        
-         
         for (Iterator iter = talleres.iterator(); iter.hasNext();) {
                 Taller temp = (Taller) iter.next();
                     Hibernate.initialize(temp.getGrupos());
@@ -103,4 +99,95 @@ public class HiberFamilia {
         session.beginTransaction();
         session.update(familia);
     }
+    
+    public ArrayList<Taller> listaTalleresHabilitados (){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        String hql = "From Taller T WHERE T.habilitado = :hab order by T.id";
+        Query query = session.createQuery(hql);
+        query.setShort("hab", Short.parseShort("0"));
+        List talleres = query.list();
+        ArrayList<Taller> allTalleres = new ArrayList();
+         for (Iterator iter = talleres.iterator(); iter.hasNext();) {
+                Taller temp = (Taller) iter.next();
+                allTalleres.add(temp);
+         }
+         return allTalleres;
+    }
+    
+    public ArrayList<Grupo> listaGruposDeTaller(long idTaller){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        String hql = "From Grupo G WHERE G.taller = :id order by G.id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idTaller);
+        List grupos = query.list();
+        ArrayList<Grupo> allGrupos = new ArrayList();
+         for (Iterator iter = grupos.iterator(); iter.hasNext();) {
+                Grupo temp = (Grupo) iter.next();
+                Hibernate.initialize(temp.getTurno2s());
+                Set<Turno2> allT2 = new HashSet<Turno2>(0);       
+                for (Turno2 t2 : temp.getTurno2s()) {
+                            Hibernate.initialize(t2.getReunions());
+                            allT2.add(t2);
+                }
+                temp.setTurno2s(allT2);
+                allGrupos.add(temp);
+         }
+         return allGrupos;
+    }
+    
+    public ArrayList<Reunion> listaReunionesTurno2(long idTurno2){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        String hql = "From Reunion R WHERE R.turno2 = :id order by R.id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idTurno2);
+        List reuniones = query.list();
+        ArrayList<Reunion> allReuniones = new ArrayList();
+         for (Iterator iter = reuniones.iterator(); iter.hasNext();) {
+                Reunion temp = (Reunion) iter.next();
+                Hibernate.initialize(temp.getAsistenciaFRs());
+                allReuniones.add(temp);
+         }
+         return allReuniones;
+    }
+    
+    public void crearAFR(AsistenciaFR temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.saveOrUpdate(temp);
+    }
+    
+    public Short numAsistentesFormulario(long idFamilia){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        int temp = 0;
+        String hql = "From FormularioSesion FS WHERE FS.familia = :id order by FS.idformularioSesion DESC";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFamilia);
+        query.setMaxResults(1);
+        FormularioSesion qryResult = (FormularioSesion) query.uniqueResult();
+        temp = temp + qryResult.getAsistentes().size();
+        
+         return (short)temp;
+    }
+    
+    public ArrayList<AsistenciaFR> listaReunionesInscritasFamilia(long idFamilia){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        String hql = "From AsistenciaFR AFR WHERE AFR.familia = :id order by AFR.id DESC";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFamilia);
+        List reuniones = query.list();
+        ArrayList<AsistenciaFR> allReuniones = new ArrayList();
+         for (Iterator iter = reuniones.iterator(); iter.hasNext();) {
+                AsistenciaFR temp = (AsistenciaFR) iter.next();
+                Hibernate.initialize(temp.getReunion());
+                allReuniones.add(temp);
+         }
+         return allReuniones;
+    }
+    
 }

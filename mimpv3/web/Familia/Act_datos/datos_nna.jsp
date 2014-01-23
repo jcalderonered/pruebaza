@@ -86,9 +86,6 @@
                             <br>
                             <h3><strong>Antecedentes, condiciones de salud y desarrollo del niño, niña o adolescente a adoptar(NNA)</strong></h3>
                             <br>
-                            <p>Teniendo en cuenta la información recibida en la sesión informativa y taller de preparación, se 
-                                siente/n dispuesto/a/s para asumir la adopción de un NNA que presente lo/s siguiente/s: 
-                            </p>
                             <br>
                             <!-- Text input-->
                             <div class="row">
@@ -106,18 +103,10 @@
                                                     <h4>Nacido(a) como consecuencia del incesto</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaIncesto() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </select>
+                                                    <select id="incesto" name="incesto" >
+                                                            <option value="0" ${ifa.getNnaIncesto() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaIncesto() != 0 ? 'selected' : ''} >NO</option>
+                                                        </select>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -125,17 +114,9 @@
                                                     <h4>Padres con enfermedad psiquiátrica (esquizofrenia, paranoia, etc</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaMental() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="mental" name="mental" >
+                                                            <option value="0" ${ifa.getNnaMental() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaMental() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -144,17 +125,9 @@
                                                     <h4>Padres con epilepsia</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaEpilepsia() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="epilepsia" name="epilepsia" >
+                                                            <option value="0" ${ifa.getNnaEpilepsia() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaEpilepsia() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -163,17 +136,9 @@
                                                     <h4>Niña, niño o adolescente víctima de abuso sexual</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaAbuso() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="abuso" name="abuso" >
+                                                            <option value="0" ${ifa.getNnaAbuso() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaAbuso() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -183,17 +148,9 @@
                                                         diagnosticado/a preliminarmente con sífilis congénita.</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaSifilis() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="sifilis" name="sifilis" >
+                                                            <option value="0" ${ifa.getNnaSifilis() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaSifilis() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -218,17 +175,9 @@
                                                         desnutrición crónica, etc.)</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaSeguiMedico() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="seguimiento" name="seguimiento" >
+                                                            <option value="0" ${ifa.getNnaSeguiMedico() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaSeguiMedico() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -238,17 +187,9 @@
                                                         (labio leporino, estrabismo, etc.)</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaOperacion() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="operacion" name="operacion" >
+                                                            <option value="0" ${ifa.getNnaOperacion() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaOperacion() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -258,17 +199,9 @@
                                                         hiperactividad (TDAH)</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaHiperactivo() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="hiperactivo" name="hiperactivo">
+                                                            <option value="0" ${ifa.getNnaHiperactivo() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaHiperactivo() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -293,17 +226,9 @@
                                                     <h4>Niñas, niños y adolescentes con necesidades especiales</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaEspecial() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="especial" name="especial">
+                                                            <option value="0" ${ifa.getNnaEspecial() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaEspecial() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -312,17 +237,9 @@
                                                     <h4>Niñas, niños y adolescentes con problemas de salud </h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaEnfermo() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="salud" name="salud">
+                                                            <option value="0" ${ifa.getNnaEnfermo() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaEnfermo() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -331,17 +248,9 @@
                                                     <h4>Niñas y niños mayores (A partir de 09 años)</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaMayor() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="mayor" name="mayor">
+                                                            <option value="0" ${ifa.getNnaMayor() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaMayor() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -350,17 +259,9 @@
                                                     <h4>Adolescentes (De 12 años hasta 17 años 11 meses)</h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaAdolescente() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="adolescente" name="adolescente">
+                                                            <option value="0" ${ifa.getNnaAdolescente() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaAdolescente() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -369,17 +270,9 @@
                                                     <h4>Grupos de hermanos </h4>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <c:choose>
-                                                            <c:when test="${ifa.getNnaHermano() == 1}">
-                                                                <option value="sia" selected>SI</option>
-                                                                <option value="mia">NO</option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="sia">SI</option>
-                                                                <option value="mia" selected>NO</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <select id="hermanos" name="hermanos">
+                                                            <option value="0" ${ifa.getNnaHermano() == 0 ? 'selected' : ''} >SI</option>
+                                                            <option value="1" ${ifa.getNnaHermano() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -398,83 +291,55 @@
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <c:choose>
-                                                <c:when test="${ifa.getPuedeViajar() == 1}">
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" checked>Si</label>
-                                                </c:when>
-                                                <c:otherwise>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="D" >Si</label>
-                                            </c:otherwise>
-                                        </c:choose>
+                                            <input type="radio" name="viajar" id="viajarSi" value="0" ${ifa.getPuedeViajar() == 0 ? 'checked' : ''} >Si</label>
                                     </div>
                                 </div> 
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <c:choose>
-                                                <c:when test="${ifa.getPuedeViajar() == 0}">
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="D" checked>No</label>
-                                                </c:when>
-                                                <c:otherwise>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="D" >No</label>
-                                            </c:otherwise>
-                                        </c:choose>
+                                            <input type="radio" name="viajar" id="viajarNo" value="1" ${ifa.getPuedeViajar() == 1 ? 'checked' : ''} >No</label>
                                     </div>
                                 </div>
                             </div>
                             <br>
-                            <h3><strong>Espectativas</strong></h3>
+                            <h3><strong>Espectativas de Edad</strong></h3>
                             <br>
                             <div class="control-group">
-                                <label class="control-label">¿Cuántos años podría tener el niño, niña o adolescente a adoptar?</label>
+                                <label class="control-label">¿Cuántos años podría tener como mínimo el niño, niña o adolescente a adoptar?</label>
                                 <div class="controls">
-                                    <input id="apellido_m" value="${ifa.getExpectativaEdad()}" name="full-name" type="text" class="input-xlarge" disabled>
+                                    <input id="edadMin" name="edadMin" type="text" value="${ifa.getExpectativaEdadMin()}" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
-                            <p><strong>Género del niño, niña o adolescente a adoptar </strong></p>
+                            <div class="control-group">
+                                <label class="control-label">¿Cuántos años podría tener como máximo el niño, niña o adolescente a adoptar?</label>
+                                <div class="controls">
+                                    <input id="edadMax" name="edadMax" type="text" value="${ifa.getExpectativaEdadMax()}" class="input-xlarge">
+                                </div>
+                            </div>
+                            <br>
+                            <p><strong>Género del niño, niña o adolescente a adoptar</strong></p>
                             <div class="row">
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <c:choose>
-                                                <c:when test="${ifa.getExpectativaGenero().charAt(0) == 'M'}">
-                                                    <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" checked>Masculino</label>
-                                                </c:when>
-                                                <c:otherwise>
-                                                <input type="radio" name="optionsRadios1" id="optionsRadios1" value="D" >Masculino</label>
-                                            </c:otherwise>
-                                        </c:choose>
+                                            <input type="radio" name="genero" id="optionsRadios1" value="masculino" ${ifa.getExpectativaGenero() == 'masculino' ? 'checked' : ''} >Masculino</label>
                                     </div>
                                 </div> 
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <c:choose>
-                                                <c:when test="${ifa.getExpectativaGenero().charAt(0) == 'F'}">
-                                                    <input type="radio" name="optionsRadios1" id="optionsRadios2" value="D" checked>Femenino</label>
-                                                </c:when>
-                                                <c:otherwise>
-                                                <input type="radio" name="optionsRadios1" id="optionsRadios2" value="D" >Femenino</label>
-                                            </c:otherwise>
-                                        </c:choose>
+                                            <input type="radio" name="genero" id="optionsRadios1" value="femenino" ${ifa.getExpectativaGenero() == 'femenino' ? 'checked' : ''} >Femenino</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <c:choose>
-                                                <c:when test="${ifa.getExpectativaGenero().charAt(0) == 'I'}">
-                                                    <input type="radio" name="optionsRadios1" id="optionsRadios3" value="D" checked>Indistinto</label>
-                                                </c:when>
-                                                <c:otherwise>
-                                                <input type="radio" name="optionsRadios1" id="optionsRadios3" value="D" >Indistinto</label>
-                                            </c:otherwise>
-                                        </c:choose>
-                                            
+                                            <input type="radio" name="genero" id="optionsRadios1" value="indistinto" ${ifa.getExpectativaGenero() == 'indistinto' ? 'checked' : ''} >Indistinto</label>
                                     </div>
                                 </div>
                             </div>
+                            <br>
                             <!-- Button -->
                             <br>
                             <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUD</p>

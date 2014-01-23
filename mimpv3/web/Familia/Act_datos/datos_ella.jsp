@@ -140,7 +140,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${adop.getTipoDoc() == 'D'}">
+                                                    <c:when test="${adop.getTipoDoc() == 100}">
                                                         <input type="radio" name="optionsRadios1" id="optionsRadios1" checked>DNI</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -153,7 +153,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${adop.getTipoDoc() == 'C'}">
+                                                    <c:when test="${adop.getTipoDoc() == 99}">
                                                         <input type="radio" name="optionsRadios1" id="optionsRadios2" checked>Carnet de Extranjería</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -191,7 +191,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${estCivil == 'S'}">
+                                                    <c:when test="${estCivil == 'soltera'}">
                                                         <input type="radio" name="optionsRadios2" id="soltero" value="D" checked>Soltera
                                             </label>
                                                     </c:when>
@@ -205,7 +205,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${estCivil == 'C'}">
+                                                    <c:when test="${estCivil == 'casados'}">
                                                         <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casada</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -218,7 +218,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${estCivil == 'V'}">
+                                                    <c:when test="${estCivil == 'viudad'}">
                                                         <input type="radio" name="optionsRadios2" id="viudo" value="D" checked>Viuda</label>
                                                     </c:when>
                                                     <c:otherwise>
@@ -231,7 +231,7 @@
                                         <div class="radio">
                                             <label>
                                                 <c:choose>
-                                                    <c:when test="${estCivil == 'D'}">
+                                                    <c:when test="${estCivil == 'divorciada'}">
                                                         <input type="radio" name="optionsRadios2" id="divorciado" value="D" checked>Divorciada</label>
                                                     </c:when>
                                                     <c:otherwise>

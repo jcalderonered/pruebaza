@@ -135,7 +135,7 @@
                                                             <td rowspan="${numFilasTaller}" style="vertical-align: middle;"> 
                                                                 ${taller.getNombre()}
                                                              </td>
-                                                            <td>${grupo.getNombre()}</td>
+                                                            <td style="vertical-align: middle;">${grupo.getNombre()}</td>
                                                             <td>
                                                                 <c:if test="${!grupo.getTurno2s().isEmpty()}">
                                                                     
@@ -176,7 +176,7 @@
                                                     </c:when>
                                                     <c:when test="${idTaller == taller.getIdtaller()}">
                                                         <tr>
-                                                            <td>${grupo.getNombre()}</td>
+                                                            <td style="vertical-align: middle;">${grupo.getNombre()}</td>
                                                             <td>
                                                                 <c:if test="${!grupo.getTurno2s().isEmpty()}">
                                                                     <c:forEach var="turno2" items="${grupo.getTurno2s()}" varStatus="status3">

@@ -72,9 +72,10 @@
                         </ul>
                     </div>
                     <div class="col-md-8 col-md-offset-1">
+                        <c:if test="${mensaje != 'negativo'}">
                         <h1 align="center"><strong>Inscripción Exitosa</strong></h1>
                         <br>
-                        <p>Sus datos han sido registrados, queda inscrita/o para asistir al Taller sobre Primeros adoptantes - Grupo Lunes - Turno Mañana</p>
+                        <p>Sus datos han sido registrados, queda inscrita/o para asistir al Taller: ${nombreTaller}  - Grupo: ${nombreGrupo} - Turno: ${nombreTurno}</p>
                         <br>
                         <p class="lead">Detalles:</p>
                         <br>
@@ -86,36 +87,33 @@
                                         <th class="col-sm-2 ">Dirección</th>
                                     </tr>
                                 </thead>
-
+                                <c:if test="${!listaReuniones.isEmpty()}">
                                 <tbody>
+                                    <c:forEach var="reunion" items="${listaReuniones}" varStatus="status">
                                     <tr>
-                                        <td>19/12/13 - 09:00</td>
-                                        <td>Dirección de la reunión</td>
+                                        <td>${reunion.getFecha() != null ? df.dateToString(reunion.getFecha()) : ''} - ${reunion.getHora()}</td>
+                                        <td>${reunion.getDireccion()}</td>
                                     </tr>
-                                    <tr>
-                                        <td>26/12/13 - 09:00</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>03/01/14 - 09:00</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>14/01/14 - 09:00</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
-                                    <tr>
-                                        <td>21/01/14 - 09:00</td>
-                                        <td>Dirección de la reunión</td>
-                                    </tr>
+                                    </c:forEach>
                                 </tbody>
+                                </c:if>
+                                <c:if test="${listaReuniones.isEmpty()}">
+                                </c:if>
                             </table>
                         </div>
                         <p><b>IMPORTANTE:</b></p>
                         <p>- Llevar DNI</p>
                         <p>- En caso de parejas casadas, ambos deben asistir a la reunión</p>
-                        <p>- No se aceptará el ingreso de personas pasada la hora de inicio de la Sesión. Ser puntuales.</p>
-                        <p>- No se aceptará el ingreso de acompañantes. Sólo de las personas inscritas a la Sesión.</p>
+                        <p>- No se aceptará el ingreso de personas pasada la hora de inicio de la Reunión. Ser puntuales.</p>
+                        <p>- No se aceptará el ingreso de acompañantes. Sólo de las personas inscritas a la Reunión.</p>
+                        </c:if>
+                        <c:if test="${mensaje == 'negativo'}">
+                            <h1 align="center"><strong>Inscripción No Exitosa</strong></h1>
+                        <br>
+                        <h1>Sus datos no han sido registrados debido a que no hay vacantes disponibles en el Grupo: ${nombreGrupo} - Turno: ${nombreTurno}</h1>
+                        <h1>Porfavor inscribirse en otro Grupo - Turno</h1>
+                        <br>
+                        </c:if>
                     </div>
                 </div>
             </div>

@@ -66,6 +66,16 @@ public class familia {
             }
         }
         String pagina;
+        boolean inscritoTaller = false;
+        ArrayList<AsistenciaFR> allReuniones = new ArrayList();
+        allReuniones = ServicioFamilia.listaReunionesInscritasFamilia(usuario.getIdfamilia());
+        if(!allReuniones.isEmpty()){
+        for (AsistenciaFR asistenciaFR : allReuniones) {
+            if(fechaactual.before(asistenciaFR.getReunion().getFecha())){
+                inscritoTaller = true;
+            }
+        }
+        }
         if (ultfecha.getYear() < fechaactual.getYear()) {
 
             Sesion sesionMasProx = new Sesion();
@@ -76,7 +86,10 @@ public class familia {
             allTurnos = ServicioMain.turnosSesion(sesionMasProx.getIdsesion());
 
             //allPersonal = ServicioPersonal.ListaPersonal();
-            String fecha = format.dateToString(sesionMasProx.getFecha());
+            String fecha = "";
+            if (sesionMasProx.getFecha() != null ) {
+                fecha = format.dateToString(sesionMasProx.getFecha());
+            }
             String hora = sesionMasProx.getHora();
 
             map.put("listaTurnos", allTurnos);
@@ -91,9 +104,14 @@ public class familia {
             pagina = "/Familia/Inscripcion/inscripcion_sesionInfo";
         } else {
 
-            map.put("listaTalleres", ServicioFamilia.listaTalleres());
+            map.put("listaTalleres", ServicioFamilia.listaTalleresHabilitados());
             map.put("formato", format);
-
+            if(inscritoTaller) {
+                map.put("inscrito", "true");
+                map.put("listaReuniones",allReuniones);
+            }else{
+                map.put("inscrito", "false");
+            }
             pagina = "/Familia/Inscripcion/inscripcion_Talleres";
         }
         return new ModelAndView(pagina, map);
@@ -280,7 +298,7 @@ public class familia {
                 InfoFamilia ifa = (InfoFamilia) iter.next();
                 String fechaMatri = format.dateToString(ifa.getFechaMatrimonio());
                 map.addAttribute("fechaMatri", fechaMatri);
-                map.addAttribute("estCivil", ifa.getEstadoCivil().charAt(0));
+                map.addAttribute("estCivil", ifa.getEstadoCivil());
                 for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
                     Adoptante adop = (Adoptante) iter2.next();
                     if (adop.getSexo() == 'F') {
@@ -308,7 +326,7 @@ public class familia {
                 InfoFamilia ifa = (InfoFamilia) iter.next();
                 String fechaMatri = format.dateToString(ifa.getFechaMatrimonio());
                 map.addAttribute("fechaMatri", fechaMatri);
-                map.addAttribute("estCivil", ifa.getEstadoCivil().charAt(0));
+                map.addAttribute("estCivil", ifa.getEstadoCivil());
                 for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
                     Adoptante adop = (Adoptante) iter2.next();
                     if (adop.getSexo() == 'M') {
@@ -1042,6 +1060,74 @@ public class familia {
         }
         //FALTA
         String pagina = "/Familia/Ficha/ficha_inscripcion_adopcion";
+        return new ModelAndView(pagina, map);
+    }
+    
+    @RequestMapping("/FamiliaDetalleTaller")
+    public ModelAndView FamiliaDetalleTaller(ModelMap map, HttpSession session, 
+                                             @RequestParam("idTaller") long idTaller,
+                                             @RequestParam("nombreTaller") String nombreTaller) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        String pagina = "/Familia/Inscripcion/inscripcion_Grupos";
+        ArrayList<Grupo> allGrupos = new ArrayList();
+        allGrupos = ServicioFamilia.listaGruposDeTaller(idTaller);
+        map.put("listaGrupos",allGrupos);
+        map.put("nombreTaller",nombreTaller);
+        map.put("df",format);
+        return new ModelAndView(pagina, map);
+    }
+    @RequestMapping("/FamiliaInscribirTaller")
+    public ModelAndView FamiliaInscribirTaller(ModelMap map, HttpSession session,
+                                               @RequestParam("idTurno2") long idTurno2,
+                                               @RequestParam("nombreTaller") String nombreTaller,
+                                               @RequestParam("nombreGrupo") String nombreGrupo,
+                                               @RequestParam("nombreTurno") String nombreTurno) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        ArrayList<Reunion> allReuniones = new ArrayList();
+        allReuniones = ServicioFamilia.listaReunionesTurno2(idTurno2);
+        short numAsistentes = ServicioFamilia.numAsistentesFormulario(usuario.getIdfamilia());
+        boolean inscripcion = false;
+        for (Reunion reunion : allReuniones) {
+            if(reunion.getAsistenciaFRs().size() + numAsistentes > reunion.getCapacidad()){
+                inscripcion = true;
+            }
+        }
+        if(!inscripcion){
+        for (Reunion reunion : allReuniones) {
+            AsistenciaFR tempAFR = new AsistenciaFR();
+            tempAFR.setFamilia(usuario);
+            tempAFR.setReunion(reunion);
+            String asistencia = "F";
+            char c = asistencia.charAt(0);
+            tempAFR.setAsistencia(c);
+            tempAFR.setInasJus(Short.parseShort("1"));
+            ServicioFamilia.crearAFR(tempAFR);
+        }
+        }
+        if(!inscripcion){
+        map.put("listaReuniones",allReuniones);
+        map.put("nombreTaller",nombreTaller);
+        map.put("nombreGrupo",nombreGrupo);
+        map.put("nombreTurno",nombreTurno);
+        map.put("df",format);
+        }else{
+        map.put("mensaje","negativo");
+        map.put("nombreGrupo",nombreGrupo);
+        map.put("nombreTurno",nombreTurno);
+        }
+        String pagina = "/Familia/Inscripcion/inscripcion_Grupos_afirm";
         return new ModelAndView(pagina, map);
     }
 }

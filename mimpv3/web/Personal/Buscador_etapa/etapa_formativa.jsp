@@ -195,7 +195,8 @@
                                                                     <td>
                                                                         <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
                                                                         <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >     
-                                                                        <input hidden name="exp" id="exp" value="${el.getApellidoP() + " - " + ella.getApellidoP()}"  >     
+                                                                        <input hidden name="el" id="el" value="${el.getApellidoP()}"  >   
+                                                                        <input hidden name="ella" id="ella" value="${ella.getApellidoP()}"  >   
                                                                         <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
                                                                         ${!familia.getExpedienteFamilias().isEmpty() ? 'La familia ha pasado al módulo de evaluación' : ''}
                                                                         </form>
@@ -253,7 +254,7 @@
                                                                     <td>
                                                                         <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
                                                                         <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >   
-                                                                        <input hidden name="exp" id="exp" value="${asistente.getApellidoP()}"  >  
+                                                                        <input hidden name="el" id="el" value="${asistente.getApellidoP()}"  >  
                                                                         <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
                                                                         ${!familia.getExpedienteFamilias().isEmpty() ? 'La familia ha pasado al módulo de evaluación' : ''}
                                                                         </form>
@@ -308,7 +309,7 @@
                                                                     <td>
                                                                         <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
                                                                         <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >  
-                                                                        <input hidden name="exp" id="exp" value="${asistente.getApellidoP()}"  >  
+                                                                        <input hidden name="ella" id="ella" value="${asistente.getApellidoP()}"  >  
                                                                         <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
                                                                         ${!familia.getExpedienteFamilias().isEmpty() ? 'La familia ha pasado al módulo de evaluación' : ''}
                                                                         </form>
