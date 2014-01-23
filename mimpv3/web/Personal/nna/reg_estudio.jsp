@@ -96,8 +96,8 @@
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" >
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
                         </ul>
                         <br>
