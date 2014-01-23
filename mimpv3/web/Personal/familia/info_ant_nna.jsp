@@ -335,7 +335,7 @@
                                 </div>
                             </div>
                             <br>
-                            <h3><strong>Espectativas de Edad</strong></h3>
+                            <h3><strong>Expectativas de Edad</strong></h3>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">¿Cuántos años podría tener como mínimo el niño, niña o adolescente a adoptar?</label>
