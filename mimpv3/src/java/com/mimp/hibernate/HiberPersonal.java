@@ -890,6 +890,15 @@ public class HiberPersonal {
          session.update(afr);
     }
     
+    public void updateReunion(Reunion temp){
+    
+    Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         
+         
+         session.update(temp);
+    }
+    
     public AsistenciaFR getAsistFR (long idFamilia, long idReunion){
     
         Session session = sessionFactory.getCurrentSession();
@@ -977,4 +986,9 @@ public class HiberPersonal {
         session.saveOrUpdate(temp);
     }
     
+    public void CambiaPass(Personal temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.update(temp);
+    }
 }
