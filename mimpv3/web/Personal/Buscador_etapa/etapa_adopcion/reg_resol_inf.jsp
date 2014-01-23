@@ -107,13 +107,13 @@ if (u==null){
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <c:if test="${resolucion == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearResolInforme" method="post"> 
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearResolInforme" method="post" onsubmit="return confirm('Desea crear la Resolución?');"> 
                                 <input hidden name="idInforme" id="idInforme" value="${idInforme}">
                                 <input hidden name="idNna" id="idNna" value="${idNna}">
                                 <input hidden name="idEmpatia" id="idEmpatia" value="${idEmpatia}">
                             </c:if>  
                             <c:if test="${resolucion != null}">
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateResolInforme" method="post"> 
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateResolInforme" method="post" onsubmit="return confirm('Desea cambiar la resolución?');"> 
                                     <input hidden name="idResolucion" id="idResolucion" value="${resolucion.getIdresolucion()}">
                                 </c:if> 
                             <fieldset>

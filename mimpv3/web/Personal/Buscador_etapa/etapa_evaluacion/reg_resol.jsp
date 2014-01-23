@@ -107,12 +107,12 @@
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <c:if test="${resolucion == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalCrearResolEvaluacion" method="post"> 
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalCrearResolEvaluacion" method="post" onsubmit="return confirm('Desea crear la Resolución?');"> 
                                 <input hidden name="idLegal" id="idLegal" value="${idLegal}">
                                 <input hidden name="origen" id="origen" value="${origen}">
                             </c:if>  
                             <c:if test="${resolucion != null}">
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalUpdateResolEvaluacion" method="post"> 
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalUpdateResolEvaluacion" method="post" onsubmit="return confirm('Desea cambiar la resolución?');" > 
                                     <input hidden name="idResolucion" id="idResolucion" value="${resolucion.getIdresolucion()}">
                                     <input hidden name="origen" id="origen" value="${origen}">
                                 </c:if>  

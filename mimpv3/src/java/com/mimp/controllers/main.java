@@ -1372,8 +1372,13 @@ public ModelAndView ActualizarVivienda(ModelMap map, HttpSession session,
 }
     
 @RequestMapping(value = "/GenerarExpNac", method = RequestMethod.POST)
-public ModelAndView GenerarExpNac(ModelMap map,@RequestParam(value="idFamilia") long idFamilia,@RequestParam(value="exp") String exp) {
+public ModelAndView GenerarExpNac(ModelMap map,@RequestParam(value="idFamilia") long idFamilia,
+                                  @RequestParam(value="el", required = false) String el,
+                                  @RequestParam(value="ella", required = false) String ella) {
 
+        String exp = el + " - " + ella;
+        if(el == null || el.equals("")) exp = ella;
+        if(ella == null || ella.equals("")) exp = el;
         map.put("df",df);
         map.put("idFamilia",idFamilia);
         map.put("exp",exp);

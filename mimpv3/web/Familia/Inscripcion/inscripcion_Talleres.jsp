@@ -72,6 +72,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8 col-md-offset-1">
+                        <c:if test="${inscrito == false}">
                         <h1 align="center"><strong>Inscripción a Talleres</strong></h1>
                         <br>
                         <div class="table-responsive">
@@ -80,34 +81,64 @@
                                     <tr>
                                         <th class="col-sm-2 ">Nombre</th>
                                         <th class="col-sm-2 ">Tipo</th>
-                                        <th class="col-sm-2 ">Descripción</th>
                                         <th class="col-sm-2 ">Grupos y Turnos</th>
 
                                     </tr>
                                 </thead>
-
+                                <c:if test="${!listaTalleres.isEmpty()}">
                                 <tbody>
+                                    <c:forEach var="taller" items="${listaTalleres}" varStatus="status">
                                     <tr>
-                                        <td>Taller de Capacitación 1</td>
-                                        <td>Preparación</td>
-                                        <td>Aquí ira la descripción del taller 1</td>
-                                        <td><button href="#" class="btn btn-default">Ver detalles</button></td>
+                                        <td>${taller.getNombre()}</td>
+                                        <td>${taller.getTipoTaller()}</td>
+                                        <td>
+                                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/FamiliaDetalleTaller" method="post">
+                                                    <input hidden id="idTaller" name="idTaller" value="${taller.getIdtaller()}">    
+                                                    <input hidden id="nombreTaller" name="nombreTaller" value="${taller.getNombre()}">  
+                                                    <button class="btn btn-default">Ver detalles</button>
+                                                    </form>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>Taller de cuidados a infantes</td>
-                                        <td>Post Adopción</td>
-                                        <td>Aquí ira la descripción del taller 2</td>
-                                        <td><button href="#" class="btn btn-default">Ver detalles</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Taller sobre primeros adoptantes</td>
-                                        <td>Lista de Espera</td>
-                                        <td>Aquí ira la descripción del taller 3</td>
-                                        <td><button href="#" class="btn btn-default">Ver detalles</button></td>
-                                    </tr>
+                                    </c:forEach>
                                 </tbody>
+                                </c:if>
+                                <c:if test="${listaTalleres.isEmpty()}">
+                                            <h3><strong>No exiten sesiones relacionadas</strong></h3>
+                                </c:if>
                             </table>
                         </div>
+                        </c:if>
+                        <c:if test="${inscrito == true}">
+                            <h3><strong>Usted se ha inscrito a las siguientes Reuniones como parte de los talleres de Preparación</strong></h3>
+                            <br>
+                            <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="col-sm-2 ">Fechas</th>
+                                        <th class="col-sm-2 ">Dirección</th>
+                                    </tr>
+                                </thead>
+                                <c:if test="${!listaReuniones.isEmpty()}">
+                                <tbody>
+                                    <c:forEach var="afr" items="${listaReuniones}" varStatus="status">
+                                    <tr>
+                                        <td>${afr.getReunion().getFecha() != null ? formato.dateToString(afr.getReunion().getFecha()) : ''} - ${afr.getReunion().getHora()}</td>
+                                        <td>${afr.getReunion().getDireccion()}</td>
+                                    </tr>
+                                    </c:forEach>
+                                </tbody>
+                                </c:if>
+                                <c:if test="${listaReuniones.isEmpty()}">
+                                </c:if>
+                            </table>
+                        </div>
+                        <p><b>IMPORTANTE:</b></p>
+                        <p>- Llevar DNI</p>
+                        <p>- En caso de parejas casadas, ambos deben asistir a la reunión</p>
+                        <p>- No se aceptará el ingreso de personas pasada la hora de inicio de la Reunión. Ser puntuales.</p>
+                        <p>- No se aceptará el ingreso de acompañantes. Sólo de las personas inscritas a la Reunión.</p>
+                        </c:if>
                     </div>
                 </div>
             </div>
