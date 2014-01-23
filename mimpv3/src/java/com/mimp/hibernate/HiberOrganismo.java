@@ -63,10 +63,12 @@ public class HiberOrganismo {
         for (Iterator iter = Adop.iterator(); iter.hasNext();) {
             Adoptante temp = (Adoptante) iter.next();
             Hibernate.initialize(temp.getInfoFamilia());
+            try{
             if (temp.getInfoFamilia().getFamilia().getEntidad().getIdentidad() == idEnt) {
                 Hibernate.initialize(temp.getInfoFamilia().getFamilia().getEntidad());
                 allAdop.add(temp);
-            }
+            } 
+            } catch(Exception ex){}
         }
         return allAdop;
     }
@@ -85,11 +87,13 @@ public class HiberOrganismo {
         for (Iterator iter = Exp.iterator(); iter.hasNext();) {
             ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
             Hibernate.initialize(temp.getFamilia());
+            try{
             if (temp.getFamilia().getEntidad().getIdentidad() == idEnt) {
                 Hibernate.initialize(temp.getFamilia().getEntidad());
                 allExp.add(temp);
 
             }
+            } catch(Exception ex){}
         }
         return allExp;
     }

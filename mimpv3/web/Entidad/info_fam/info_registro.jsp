@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="col-md-8 col-md-offset-1">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/listaFam'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <br>
                         <h1 align="center"><strong>Familia "${ElAdop.getApellidoP()} - ${LaAdop.getApellidoP()}"</strong></h1>
                         <br>
@@ -148,10 +148,10 @@
                         <br>
                         <div class="control-group">
                             <label class="control-label">Pertenece al Registro Nacional de Solicitantes para la Adopción: 
-                                <c:if test="${InfoExp.getRnsa() == '1' }"  >
+                                <c:if test="${InfoExp.getRnsa() == '0' }"  >
                                     SI
                                 </c:if>
-                                <c:if test="${InfoExp.getRnsa() == '0' }"  >
+                                <c:if test="${InfoExp.getRnsa() == '1' }"  >
                                     NO
                                 </c:if>
                             </label>
@@ -159,10 +159,10 @@
                         <br>
                         <div class="control-group">
                             <label class="control-label">Pertenece al Registro Nacional de Adoptantes para la Adopción: 
-                                <c:if test="${InfoExp.getRnaa() == '1' }"  >
+                                <c:if test="${InfoExp.getRnaa() == '0' }"  >
                                     SI
                                 </c:if>
-                                <c:if test="${InfoExp.getRnaa() == '0' }"  >
+                                <c:if test="${InfoExp.getRnaa() == '1' }"  >
                                     NO
                                 </c:if>
                             </label>

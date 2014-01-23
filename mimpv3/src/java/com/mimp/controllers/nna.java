@@ -400,8 +400,16 @@ public class nna {
         } else {
             tempNna.setFechaNacimiento(null);
         }
-        short edadtemp = Byte.valueOf(edad);
-        short mesestemp = Byte.valueOf(meses);
+        
+        
+        short edadtemp = 0;        
+        short mesestemp = 0;
+        
+        try{
+        edadtemp = Byte.valueOf(edad);        
+        mesestemp = Byte.valueOf(meses);
+        } catch(Exception ex){
+        }
         tempNna.setEdadAnhos(edadtemp);
         tempNna.setEdadMeses(mesestemp);
 

@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="col-md-8 col-md-offset-1">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/listaFam'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <br>
                         <h1 align="center"><strong>Familia "${ElAdop.getApellidoP()} - ${LaAdop.getApellidoP()}"</strong></h1>
                         <br>
