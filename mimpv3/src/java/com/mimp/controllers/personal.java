@@ -1779,8 +1779,10 @@ public class personal {
         tempSesion.setHabilitado(habilitado);
 
         ServicioPersonal.PersonalUpdateSesion(tempSesion);
-
+         
+        map.put("listaTalleres", ServicioPersonal.listaTalleres());
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        map.put("formato", format);
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
 
@@ -2499,7 +2501,12 @@ public class personal {
         char c = asistencia.charAt(0);
         aft.setAsistencia(c);
         ServicioPersonal.marcarAsistenciaSesion(aft);
-
+        int i  = 1;
+        short cont  = tempSesion.getAsistencia();
+        cont = (short) (cont + (short)(1));
+        
+        tempSesion.setAsistencia(cont);
+        ServicioPersonal.PersonalUpdateSesion(tempSesion);
         allFormularios = ServicioPersonal.InscritosSesion(idSesion);
 
         map.addAttribute("fecha", fecha);

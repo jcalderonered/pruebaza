@@ -53,7 +53,7 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-
+            <c:if test="${listaTurnos != null && !listaTurnos.isEmpty()}" >              
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <h2 align="center">Se hace una pausa en las inscripciones para la Sesión Informativa del <b>${ts.DateToString(listaTurnos.get(0).getSesion().getFecha())} a las ${listaTurnos.get(0).getSesion().getHora()}</b></h2>
             <br>
@@ -86,6 +86,7 @@
                                     </tr>
                                 </c:forEach>
                             </tbody>
+                            
                         </table>
                     </div>
                 </div>
@@ -94,6 +95,19 @@
             <!--FIN DE CONTENIDO-->
             <br>
             <br>
+            </c:if>  
+            <c:if test="${(listaTurnos == null || listaTurnos.isEmpty()) && mensaje == null}" >
+            <h2 align="center">Se hace una pausa en las inscripciones para la Sesión Informativa</h2>
+            <br>
+            <h2 align="center">Se le invita a inscribirse en los otros turnos hasta que se completen los cupos</h2>
+            <br>
+            <p align="center"><img src="<%=request.getContextPath()%>/assets/img/slogan1.png" width="400" border="0"></p>
+            </c:if>
+            <c:if test="${mensaje == 'inscrito'}" >
+            <h2 align="center">Usted ya se ha inscrito a la Sesión Informativa</h2>
+            <br>
+            <p align="center"><img src="<%=request.getContextPath()%>/assets/img/slogan1.png" width="400" border="0"></p>
+            </c:if>
         </div>   
         <div id="footer">
             <div id="ja-footer" class="wrap">
