@@ -83,6 +83,42 @@ public class HiberPersonal {
     }
 
     //<----------ORGANISMO---------->
+    
+    public boolean usuario(String user) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();                
+
+        String hqlP = "FROM Personal P WHERE P.user = :usuario ";//:=login
+        String hqlF = "FROM Familia F WHERE F.user = :usuario ";
+        String hqlE = "FROM Entidad R WHERE R.user = :usuario ";
+
+        Query queryP = session.createQuery(hqlP);
+        queryP.setString("usuario", user);        
+        Object queryResultP = queryP.uniqueResult();
+
+        Query queryF = session.createQuery(hqlF);
+        queryF.setString("usuario", user);        
+        Object queryResultF = queryF.uniqueResult();
+
+        Query queryE = session.createQuery(hqlE);
+        queryE.setString("usuario", user);        
+        Object queryResultE = queryE.uniqueResult();
+
+        if (queryResultP != null) {
+            
+            return true;
+        } else if (queryResultF != null) {            
+            return true;
+        } else if (queryResultE != null) {            
+            return true;
+        } else {            
+            return false;
+        }
+
+    }
+    
+    
     public void InsertOrg(Entidad ent, Representante rep, Organismo org) {
 
         Session session = sessionFactory.getCurrentSession();
