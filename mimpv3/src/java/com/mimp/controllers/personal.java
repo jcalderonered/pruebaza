@@ -393,6 +393,15 @@ public class personal {
             ent.setPass(pass);
         }
         aut.setTipo(tipo);
+        
+        if (ServicioPersonal.usuario(ent.getUser())){
+        
+            String mensaje_error = "El nombre de usuario ya existe en la base de datos. Por favor, ingresar nuevamente";
+            
+        map.put("listaOrganismos", ServicioPersonal.ListaAutoridades());
+        map.put("mensaje", mensaje_error);
+        return new ModelAndView("/Personal/registros/autoridad/editar_aut", map);
+        }
 
         ServicioPersonal.InsertAut(ent, aut);
 
@@ -720,6 +729,15 @@ public class personal {
         }
         ent.setObs(obs);
 
+        if (ServicioPersonal.usuario(ent.getUser())){
+        
+            String mensaje_error = "El nombre de usuario ya existe en la base de datos. Por favor, ingresar nuevamente";
+            
+        map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());
+        map.put("mensaje", mensaje_error);
+        return new ModelAndView("/Personal/registros/organismo/editar_org", map);
+        }
+        
         ServicioPersonal.InsertOrg(ent, rep, org);
 
         map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());
@@ -886,7 +904,9 @@ public class personal {
         } else {
             org.getEntidad().setFechaVenc(null);
         }
-        org.getEntidad().setObs(obs);
+        org.getEntidad().setObs(obs);       
+        
+        
         ServicioPersonal.UpdateOrg(org.getEntidad(), org.getRepresentantes().iterator().next(), org);
 
         map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());

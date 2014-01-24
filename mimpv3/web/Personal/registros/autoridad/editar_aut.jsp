@@ -96,6 +96,7 @@
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button id="singlebutton" onclick="location.href = '${pageContext.servletContext.contextPath}/autoridad'" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Editar Autoridad</strong></h1>
+                        <p style="color: red">${mensaje}</p>
                         <br>
                         <c:if test="${autoridad.getIdautoridad() == null}">
                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editAut" method="post"> 
