@@ -98,11 +98,25 @@
                                                 <td>${ts.DateToString(turno.getFinInscripcion())} ${ts.HourToString(turno.getFinInscripcion())}</td>
                                                 <td>${turno.getVacantes()}</td>
                                                 <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/FamiliaInscripcion" method="post">
-                                                        <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
-                                                        <input hidden name="index" id="index" value="${status.index + 1}">
-                                                        <button type="submit" class="btn btn-default">Registrar</button>
-                                                    </form>    
+                                                    <c:set var="now" value="<%=new java.util.Date()%>" />
+                                                    <c:choose>
+                                                    <c:when test="${turno.getVacantes() > turno.getAsistenciaFTs().size() && turno.getInicioInscripcion() < now && turno.getFinInscripcion() > now }">
+                                                        <form action="${pageContext.servletContext.contextPath}/FamiliaInscripcion" method="post">
+                                                            <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
+                                                            <input hidden name="index" id="index" value="${status.index + 1}">
+                                                            <button type="submit" class="btn btn-default">Registrar</button>
+                                                        </form>
+                                                    </c:when>
+                                                    <c:when test="${turno.getVacantes() <= turno.getAsistenciaFTs().size() || turno.getFinInscripcion() < now }">
+                                                        
+                                                        <p><strong>Se termino la inscripción</strong></p>
+                                                        
+                                                    </c:when>    
+                                                    <c:otherwise>
+                                                         <p><strong>En espera</strong></p>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                      
                                                 </td>
                                             </tr>
                                     </c:forEach>

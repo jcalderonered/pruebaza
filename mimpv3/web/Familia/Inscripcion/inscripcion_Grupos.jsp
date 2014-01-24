@@ -103,6 +103,13 @@
                                             <c:forEach var="turno2" items="${grupo.getTurno2s()}" varStatus="status">  
                                                 <c:set var="idTurno" value="0" />
                                                 <c:if test="${!turno2.getReunions().isEmpty()}">  
+                                                    <c:set var="now" value="<%=new java.util.Date()%>" />
+                                                    <c:set var="habilitar" value="0" />
+                                                    <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
+                                                        <c:if test="${now > reunion.getFecha()}">
+                                                            <c:set var="habilitar" value="1" />
+                                                        </c:if>
+                                                    </c:forEach>
                                                     <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
                                                      <tr>
                                                         <c:if test="${idGrupo != grupo.getIdgrupo()}">
@@ -123,7 +130,7 @@
                                                             <input hidden id="nombreGrupo" name="nombreGrupo" value="${grupo.getNombre()}">  
                                                             <input hidden id="nombreTurno" name="nombreTurno" value="${turno2.getNombre()}">    
                                                             <input hidden id="idTurno2" name="idTurno2" value="${turno2.getIdturno2()}">    
-                                                            <button class="btn btn-default">Inscribirse</button>
+                                                            <button ${habilitar == '1' ? 'disabled' : ''} class="btn btn-default">Inscribirse</button>
                                                           </form>
                                                         </td>
                                                         </c:if>

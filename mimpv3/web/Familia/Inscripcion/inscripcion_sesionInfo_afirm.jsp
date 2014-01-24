@@ -71,21 +71,28 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Fcontra"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>               
                         </ul>
                     </div>
+                    <c:if test="${mensaje == 'inscrito'}" >
                     <div class="col-md-8 col-md-offset-1">
                         <h1 align="center"><strong>Inscripción Existosa</strong></h1>
                         <br>
                         <p class="lead">
                             Sus datos han sido registrados, queda inscrita/o para asistir a la Sesión Informativa sobre Adopciones que se realizará el: 
                             <br>
-                            DÍA: miércoles 26 de setiembre del 2012.
+                            DÍA: ${sesion.getFecha() != null ? df.dateToString(sesion.getFecha()) : ''}
                             <br>
-                            HORA: de 5:45 a 8:30 pm., (hora exacta)
+                            HORA: ${sesion.getHora()}
                             <br>
-                            LUGAR: Auditorio de la Institución Educativa “Juana Alarco de Dammert”  ubicado en Av. Alfredo Benavides 2315 - Miraflores.
+                            LUGAR: ${sesion.getDireccion()}.
                             <br>
 
                         </p>
                     </div>
+                    </c:if>
+                            <c:if test="${mensaje == 'fallo'}" >
+                                <h1 align="center"><strong>Inscripción No Existosa</strong></h1>
+                                <h2>Debe inscribirse en otro Turno</h2>
+                        <br>
+                            </c:if>    
                 </div>
             </div>
             <!--FIN DE CONTENIDO-->

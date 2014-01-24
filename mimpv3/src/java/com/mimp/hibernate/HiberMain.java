@@ -234,7 +234,7 @@ public class HiberMain {
         ArrayList<Turno> allTurnos = new ArrayList();
         for (Iterator iter = asistentes.iterator(); iter.hasNext();) {
             Turno temp = (Turno) iter.next();
-
+            Hibernate.initialize(temp.getAsistenciaFTs());
             allTurnos.add(temp);
         }
         return allTurnos;

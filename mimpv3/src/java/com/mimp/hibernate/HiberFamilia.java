@@ -190,4 +190,46 @@ public class HiberFamilia {
          return allReuniones;
     }
     
+    public int AsistentesPorFormulario(long idFamilia){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        int temp = 0;
+        String hql = "From FormularioSesion FS WHERE FS.familia = :id order by FS.idformularioSesion DESC";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFamilia);
+        query.setMaxResults(1);
+        FormularioSesion qryResult = (FormularioSesion) query.uniqueResult();
+        temp = temp + qryResult.getAsistentes().size();
+        
+         return temp;
+    }
+    
+    public FormularioSesion ultimoFormulario(long idFamilia){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        int temp = 0;
+        String hql = "From FormularioSesion FS WHERE FS.familia = :id order by FS.idformularioSesion DESC";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFamilia);
+        query.setMaxResults(1);
+        FormularioSesion qryResult = (FormularioSesion) query.uniqueResult();
+        Hibernate.initialize(qryResult.getAsistentes());
+        
+         return qryResult;
+    }
+    
+    public Familia obtenerFormulariosFamilia(long idFamilia){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        String hql = "From Familia F WHERE F.idfamilia = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFamilia);
+        Familia qryResult = (Familia) query.uniqueResult();
+        Hibernate.initialize(qryResult.getFormularioSesions());
+        
+         return qryResult;
+    }
 }
