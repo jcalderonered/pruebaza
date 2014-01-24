@@ -132,9 +132,20 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        //List<Personal> lista = Servicio.listaPersonal();
-        //map.addAttribute("id", temp);
-        return new ModelAndView("/Personal/inicio_personal", map);
+        
+        return new ModelAndView("/Personal/Buscador/buscarFamilia", map);
+    }
+    
+    @RequestMapping(value = "/buscarNna", method = RequestMethod.GET)
+    public ModelAndView buscarNna(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        return new ModelAndView("/Personal/Buscador/buscarNna", map);
     }
 
     @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
