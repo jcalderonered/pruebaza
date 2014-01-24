@@ -854,6 +854,8 @@ public class HiberPersonal {
     
     }
     
+    
+    
     public AsistenciaFT getAFT (long idFormulario){
     
          Session session = sessionFactory.getCurrentSession();

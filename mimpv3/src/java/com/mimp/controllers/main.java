@@ -263,7 +263,7 @@ public class main {
         asis.setProvNac(proNac);
         short b = Byte.valueOf(edad);
         asis.setEdad(b);
-        asis.setFechaNac(df.stringToDate(fechaNac));
+        if (fechaNac != null && !fechaNac.equals("")) asis.setFechaNac(df.stringToDate(fechaNac));
         char c = doc.charAt(0);
         asis.setTipoDoc(c);
         asis.setNDoc(numDoc);
@@ -273,11 +273,14 @@ public class main {
 
         ArrayList<Asistente> tempList = new ArrayList();
         tempList = ServicioMain.listaAsistentes(temp.getSesion().getIdsesion());
+        if(!tempList.isEmpty()){
         for (Asistente asistente : tempList) {
             if (asistente.getNDoc().equals(numDoc)) {
-                return new ModelAndView("contacto", map);
+                map.put("mensaje", "inscrito");
+                return new ModelAndView("/Inscripcion/inscripcion_sesion1b", map);
             }
 
+        }
         }
         if (temp.getVacantes() > temp.getAsistenciaFTs().size()) {
             map.put("ts", ts);
@@ -367,7 +370,7 @@ public class main {
         asisEl.setProvNac(proNacEl);
         short bEl = Byte.valueOf(edadEl);
         asisEl.setEdad(bEl);
-        asisEl.setFechaNac(df.stringToDate(fechaNacEl));
+        if (fechaNacEl != null && !fechaNacEl.equals("")) asisEl.setFechaNac(df.stringToDate(fechaNacEl));
         char cEl = docEl.charAt(0);
         asisEl.setTipoDoc(cEl);
         char sexoEl = m.charAt(0);
@@ -385,7 +388,7 @@ public class main {
         asisElla.setProvNac(proNacElla);
         short bElla = Byte.valueOf(edadElla);
         asisElla.setEdad(bElla);
-        asisElla.setFechaNac(df.stringToDate(fechaNacElla));
+        if (fechaNacElla != null && !fechaNacElla.equals("")) asisElla.setFechaNac(df.stringToDate(fechaNacElla));
         char cElla = docElla.charAt(0);
         asisElla.setTipoDoc(cElla);
         char sexoElla = f.charAt(0);
@@ -397,19 +400,22 @@ public class main {
 
         ArrayList<Asistente> tempList = new ArrayList();
         tempList = ServicioMain.listaAsistentes(temp.getSesion().getIdsesion());
+        if(!tempList.isEmpty()){
         for (Asistente asistente : tempList) {
             if (asistente.getNDoc().equals(numDocEl) || asistente.getNDoc().equals(numDocElla)) {
-                return new ModelAndView("contacto", map);
+                map.put("mensaje", "inscrito");
+                return new ModelAndView("/Inscripcion/inscripcion_sesion1b", map);
             }
 
         }
-        if (temp.getVacantes() > temp.getAsistenciaFTs().size()) {
+        }
+        if (temp.getVacantes() > temp.getAsistenciaFTs().size() + 1) {
             map.put("ts", ts);
             map.put("turno", temp);
             ServicioMain.InsertFormGrp(asisEl, asisElla, fs, aft);
             return new ModelAndView("/Inscripcion/inscripcion_sesion4", map);
         }
-        return new ModelAndView("contacto", map);
+        return new ModelAndView("/Inscripcion/inscripcion_sesion1b", map);
     }
 
 /** ESTA SECCION ES USADA PARA ACTUALIZAR LOS DATOS DE LA FAMILIA POR PARTE DEL PERSONAL**/   
