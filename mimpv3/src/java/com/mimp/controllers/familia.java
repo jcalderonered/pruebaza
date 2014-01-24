@@ -57,6 +57,8 @@ public class familia {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        usuario = ServicioFamilia.obtenerFormulariosFamilia(usuario.getIdfamilia());
+        
         Date fechaactual = new Date();
         Date ultfecha = new Date(10, 0, 01);
         for (Iterator iter = usuario.getFormularioSesions().iterator(); iter.hasNext();) {
@@ -77,7 +79,8 @@ public class familia {
         }
         }
         if (ultfecha.getYear() < fechaactual.getYear()) {
-
+            System.out.print(ultfecha);
+            System.out.print(fechaactual);
             Sesion sesionMasProx = new Sesion();
             //ArrayList<Personal> allPersonal = new ArrayList();
             ArrayList<Turno> allTurnos = new ArrayList();
@@ -1062,6 +1065,136 @@ public class familia {
         String pagina = "/Familia/Ficha/ficha_inscripcion_adopcion";
         return new ModelAndView(pagina, map);
     }
+    
+    @RequestMapping("/FamiliaInscripcion")
+    public ModelAndView FamiliaInscripcion(ModelMap map, HttpSession session, 
+                                             @RequestParam("idTurno") long idTurno) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        Turno temp = ServicioMain.getTurno(idTurno);
+        int numAsist = ServicioFamilia.AsistentesPorFormulario(usuario.getIdfamilia());
+        int cont = numAsist + temp.getAsistenciaFTs().size();
+        if (cont < temp.getVacantes()){
+            map.put("mensaje","inscrito");
+            map.put("sesion",temp.getSesion());
+            FormularioSesion antiguo = ServicioFamilia.ultimoFormulario(usuario.getIdfamilia());
+            FormularioSesion nuevo = new FormularioSesion();
+            AsistenciaFT aft = new AsistenciaFT();
+            aft.setTurno(temp);
+            String asistencia = "F";
+            char asist = asistencia.charAt(0);
+            aft.setAsistencia(asist);
+            String inajust = "1";
+            Short i = Short.valueOf(inajust);
+            aft.setInasJus(i);
+            Asistente asis1 = new Asistente();
+            Asistente asis2 = new Asistente();
+            Date now = new Date();
+            if(antiguo.getAsistentes().size() == 1){
+                Asistente tempAsis = antiguo.getAsistentes().iterator().next();
+                
+                asis1.setNombre(tempAsis.getNombre());
+                asis1.setApellidoP(tempAsis.getApellidoP());
+                asis1.setApellidoM(tempAsis.getApellidoM());
+                asis1.setSexo(tempAsis.getSexo());
+                asis1.setPaisNac(tempAsis.getPaisNac());
+                asis1.setDepNac(tempAsis.getDepNac());
+                asis1.setProvNac(tempAsis.getProvNac());
+                asis1.setEdad(tempAsis.getEdad());
+                asis1.setFechaNac(tempAsis.getFechaNac());
+                asis1.setTipoDoc(tempAsis.getTipoDoc());
+                asis1.setNDoc(tempAsis.getNDoc());
+                asis1.setProfesion(tempAsis.getProfesion());
+                asis1.setCelular(tempAsis.getCelular());
+                asis1.setCorreo(tempAsis.getCorreo());
+                
+                nuevo.setFamilia(usuario);
+                nuevo.setFechaSol(now);
+                nuevo.setSesion(temp.getSesion());
+                nuevo.setPaisRes(antiguo.getPaisRes());
+                nuevo.setDepRes(antiguo.getDepRes());
+                nuevo.setProvRes(antiguo.getProvRes());
+                nuevo.setDistritoRes(antiguo.getDistritoRes());
+                nuevo.setDireccionRes(antiguo.getDireccionRes());
+                nuevo.setEstadoCivil(antiguo.getEstadoCivil());
+                nuevo.setTelefono(antiguo.getTelefono());
+                
+                ServicioMain.InsertFormInd(asis1, nuevo, aft);
+                
+            }else{
+                Asistente elTemp = new Asistente();
+                Asistente ellaTemp = new Asistente();
+                for (Asistente tempAsis : antiguo.getAsistentes()) {
+                        if(tempAsis.getSexo() == 109) {
+                            elTemp = tempAsis;
+                        }
+                        if(tempAsis.getSexo() == 102) {
+                            ellaTemp = tempAsis;
+                        }
+                }
+                
+                asis1.setNombre(elTemp.getNombre());
+                asis1.setApellidoP(elTemp.getApellidoP());
+                asis1.setApellidoM(elTemp.getApellidoM());
+                asis1.setSexo(elTemp.getSexo());
+                asis1.setPaisNac(elTemp.getPaisNac());
+                asis1.setDepNac(elTemp.getDepNac());
+                asis1.setProvNac(elTemp.getProvNac());
+                asis1.setEdad(elTemp.getEdad());
+                asis1.setFechaNac(elTemp.getFechaNac());
+                asis1.setTipoDoc(elTemp.getTipoDoc());
+                asis1.setNDoc(elTemp.getNDoc());
+                asis1.setProfesion(elTemp.getProfesion());
+                asis1.setCelular(elTemp.getCelular());
+                asis1.setCorreo(elTemp.getCorreo());
+                
+                asis2.setNombre(ellaTemp.getNombre());
+                asis2.setApellidoP(ellaTemp.getApellidoP());
+                asis2.setApellidoM(ellaTemp.getApellidoM());
+                asis2.setSexo(ellaTemp.getSexo());
+                asis2.setPaisNac(ellaTemp.getPaisNac());
+                asis2.setDepNac(ellaTemp.getDepNac());
+                asis2.setProvNac(ellaTemp.getProvNac());
+                asis2.setEdad(ellaTemp.getEdad());
+                asis2.setFechaNac(ellaTemp.getFechaNac());
+                asis2.setTipoDoc(ellaTemp.getTipoDoc());
+                asis2.setNDoc(ellaTemp.getNDoc());
+                asis2.setProfesion(ellaTemp.getProfesion());
+                asis2.setCelular(ellaTemp.getCelular());
+                asis2.setCorreo(ellaTemp.getCorreo());
+                
+                nuevo.setFamilia(usuario);
+                nuevo.setFechaSol(now);
+                nuevo.setSesion(temp.getSesion());
+                nuevo.setPaisRes(antiguo.getPaisRes());
+                nuevo.setDepRes(antiguo.getDepRes());
+                nuevo.setProvRes(antiguo.getProvRes());
+                nuevo.setDistritoRes(antiguo.getDistritoRes());
+                nuevo.setDireccionRes(antiguo.getDireccionRes());
+                nuevo.setEstadoCivil(antiguo.getEstadoCivil());
+                nuevo.setTelefono(antiguo.getTelefono());
+                
+                ServicioMain.InsertFormGrp(asis1, asis2, nuevo, aft);
+ 
+            }
+            
+            
+        }else{
+            map.put("mensaje","fallo");
+        }
+        
+        String pagina = "/Familia/Inscripcion/inscripcion_sesionInfo_afirm";
+        
+        map.put("df",format);
+        return new ModelAndView(pagina, map);
+    }
+    
+    
     
     @RequestMapping("/FamiliaDetalleTaller")
     public ModelAndView FamiliaDetalleTaller(ModelMap map, HttpSession session, 

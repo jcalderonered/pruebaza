@@ -224,7 +224,7 @@ public class main {
             @RequestParam("dir") String dir,
             @RequestParam("telf") String telf,
             @RequestParam("estado") String estado,
-            @RequestParam("idTurno") int turno
+            @RequestParam("idTurno") long turno
     ) {
 
         Turno temp = ServicioMain.getTurno(turno);

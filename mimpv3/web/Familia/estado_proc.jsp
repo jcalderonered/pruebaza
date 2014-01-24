@@ -139,7 +139,7 @@
                             <div class="col-md-3">
                                 <c:choose>
                                     <c:when test="${boton == 1}">
-                                        <button onclick="location.href = '${pageContext.servletContext.contextPath}/Fficha/opc0'" id="singlebutton" name="singlebutton" class="btn btn-default">Llenar ficha</button>
+                                       <!-- <button onclick="location.href = '${pageContext.servletContext.contextPath}/Fficha/opc0'" id="singlebutton" name="singlebutton" class="btn btn-default">Llenar ficha</button> -->
                                     </c:when>
                                     <c:otherwise>
                                         <button id="singlebutton" name="singlebutton" class="btn btn-default" disabled>Llenar ficha</button>
