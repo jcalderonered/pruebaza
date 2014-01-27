@@ -183,7 +183,7 @@ public class personal {
         datosExp.setApellidopActual(apellidoMAdop);
         datosExp.setApellidomActual(apellidoMAdop);
         if(estado != null && !estado.equals("none")) datosExp.setEstado(estado);
-        
+        if(estado == null || estado.equals("none")) datosExp.setEstado("none");
         datosNna.setNombre(nombre);
         datosNna.setApellidoP(apellidoP);
         datosNna.setApellidoM(apellidoM);

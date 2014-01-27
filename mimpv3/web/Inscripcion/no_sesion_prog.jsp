@@ -56,7 +56,7 @@
         <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
         <h2 align="center">Lo sentimos, aún se están programando las sesiones informativas.</h2>
         <br>
-        <h2 align="center">Siga visitando la web para más información próximamente</h2>
+        <h2 align="center">Siga visitando la web para más información próximamente.</h2>
         <br>
         <br>
         <p align="center"><img src="<%=request.getContextPath()%>/assets/img/slogan1.png" width="400" border="0"></p>
