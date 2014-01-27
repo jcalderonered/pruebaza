@@ -121,10 +121,14 @@
                                 </thead>
                                 <c:if test="${!listaReuniones.isEmpty()}">
                                 <tbody>
+                                    <c:set var="idReunion" value="0" />
                                     <c:forEach var="afr" items="${listaReuniones}" varStatus="status">
                                     <tr>
+                                        <c:if test="${idReunion != afr.getReunion().getIdreunion()}">
                                         <td>${afr.getReunion().getFecha() != null ? formato.dateToString(afr.getReunion().getFecha()) : ''} - ${afr.getReunion().getHora()}</td>
                                         <td>${afr.getReunion().getDireccion()}</td>
+                                        <c:set var="idReunion" value="${afr.getReunion().getIdreunion()}" />
+                                        </c:if>
                                     </tr>
                                     </c:forEach>
                                 </tbody>

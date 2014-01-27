@@ -59,7 +59,7 @@
                     <div class="col-md-8 col-md-offset-1">
                         <h1 align="center"><strong>Inscripción a la Sesión Informativa</strong></h1>
                         <br>
-                        <p><b>Próxima fecha:</b> ${ts.DateToString(listaTurnos.get(0).getSesion().getFecha())}</p>
+                        <p><b>Fecha de Sesión Informativa:</b> ${ts.DateToString(listaTurnos.get(0).getSesion().getFecha())}</p>
                         <p><b>Hora:</b> ${listaTurnos.get(0).getSesion().getHora()}</p>
                         <p><b>Direccion:</b> ${listaTurnos.get(0).getSesion().getDireccion()}</p>
                         <br>

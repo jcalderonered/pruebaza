@@ -85,7 +85,7 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
+                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                                 <%}%>
@@ -188,8 +188,12 @@
                                                                         <form action="${pageContext.servletContext.contextPath}/PersonalAsistioSesion" method="post">
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
                                                                             <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                                            <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">        
-                                                                                                     <button ${AFT.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                            <c:set var="token" value="0" scope="page" />
+                                                                            <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">
+                                                                                <c:if test="${token == '0'}">
+                                                                                   <button ${AFT.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                                   <c:set var="token" value="1" scope="page" />
+                                                                                </c:if>   
                                                                             </c:forEach>   
                                                                             
                                                                         </form>

@@ -2415,7 +2415,7 @@ public class personal {
             @RequestParam("duracion") String duracion,
             @RequestParam("direccion") String direccion,
             @RequestParam("capacidad") String capacidad,
-            @RequestParam("facilitador") String facilitador,
+            @RequestParam(value="facilitador",required=false) String facilitador,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2475,7 +2475,7 @@ public class personal {
             @RequestParam("duracion") String duracion,
             @RequestParam("direccion") String direccion,
             @RequestParam("capacidad") String capacidad,
-            @RequestParam("facilitador") String facilitador,
+            @RequestParam(value="facilitador",required=false) String facilitador,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2586,7 +2586,6 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        AsistenciaFT aft = new AsistenciaFT();
         FormularioSesion fs = new FormularioSesion();
         fs = ServicioPersonal.getFormulario(idFormulario);
         Sesion tempSesion = new Sesion();
@@ -2600,18 +2599,23 @@ public class personal {
         }
 
         tempTurno = ServicioPersonal.getTurno(tempSesion.getTurnos().iterator().next().getIdturno());
-
-        aft = ServicioPersonal.getAFT(idFormulario);
-        String asistencia = "A";
-        char c = asistencia.charAt(0);
-        aft.setAsistencia(c);
-        ServicioPersonal.marcarAsistenciaSesion(aft);
-        int i  = 1;
-        short cont  = tempSesion.getAsistencia();
-        cont = (short) (cont + (short)(1));
+        ArrayList<AsistenciaFT> allAsistencias = new ArrayList();
+        allAsistencias = ServicioPersonal.getAFT(idFormulario);
+        if(!allAsistencias.isEmpty()){
+            for (AsistenciaFT asistenciaFT : allAsistencias) {
+                 String asistencia = "A";
+                 char c = asistencia.charAt(0);
+                 asistenciaFT.setAsistencia(c);
+                 ServicioPersonal.marcarAsistenciaSesion(asistenciaFT);
+                 int i  = 1;
+                 short cont  = tempSesion.getAsistencia();
+                 cont = (short) (cont + (short)(1));
         
-        tempSesion.setAsistencia(cont);
-        ServicioPersonal.PersonalUpdateSesion(tempSesion);
+                 tempSesion.setAsistencia(cont);
+                 ServicioPersonal.PersonalUpdateSesion(tempSesion);
+            }
+        }
+        
         allFormularios = ServicioPersonal.InscritosSesion(idSesion);
 
         map.addAttribute("fecha", fecha);
@@ -2676,21 +2680,28 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        AsistenciaFR afr = new AsistenciaFR();
+        ArrayList<AsistenciaFR> allAsistencias = new ArrayList();
         Reunion tempReun = new Reunion();
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
 
         tempReun = ServicioPersonal.getReunion(idReunion);
-        int i  = 1;
-        short cont  = tempReun.getAsistencia();
-        cont = (short) (cont + (short)(1));
-        afr = ServicioPersonal.getAsistFR(idFamilia, idReunion);
-        char c = asistencia.charAt(0);
-        afr.setAsistencia(c);
-        tempReun.setAsistencia(cont);
+        allAsistencias = ServicioPersonal.getAsistFR(idFamilia, idReunion);
+        for (AsistenciaFR asistFR : allAsistencias) {
+            int i  = 1;
+            short cont  = tempReun.getAsistencia();
+            cont = (short) (cont + (short)(1));
+            char c = asistencia.charAt(0);
+            asistFR.setAsistencia(c);
+            tempReun.setAsistencia(cont);
+            ServicioPersonal.updateReunion(tempReun);
+            ServicioPersonal.updateAsistenciaFR(asistFR);
+        }
         
-        ServicioPersonal.updateReunion(tempReun);
-        ServicioPersonal.updateAsistenciaFR(afr);
+        
+        
+        
+        
+        
         allFormularios = ServicioPersonal.formulariosReunion(idReunion);
         map.addAttribute("nombre", nombre);
         map.addAttribute("grupo", grupo);
@@ -2716,17 +2727,21 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        AsistenciaFR afr = new AsistenciaFR();
+        ArrayList<AsistenciaFR> allAsistencias = new ArrayList();
         Reunion tempReun = new Reunion();
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
 
         tempReun = ServicioPersonal.getReunion(idReunion);
 
-        afr = ServicioPersonal.getAsistFR(idFamilia, idReunion);
-        Short sh = Short.valueOf(justificado);
-        afr.setInasJus(sh);
+        allAsistencias = ServicioPersonal.getAsistFR(idFamilia, idReunion);
+        for (AsistenciaFR asistFR : allAsistencias) {
+            Short sh = Short.valueOf(justificado);
+        asistFR.setInasJus(sh);
+        ServicioPersonal.updateAsistenciaFR(asistFR);
+        }
+        
 
-        ServicioPersonal.updateAsistenciaFR(afr);
+        
         allFormularios = ServicioPersonal.formulariosReunion(idReunion);
         map.addAttribute("nombre", nombre);
         map.addAttribute("grupo", grupo);

@@ -88,7 +88,7 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
+                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                                 <%}%>
@@ -99,11 +99,11 @@
                         <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <c:choose>
                             <c:when test="${ reunion == null }">
-                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearReunion" method="post">
+                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearReunion" method="post" name="formulario" onsubmit="return(validar());">
                                 <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">      
                             </c:when>
                             <c:otherwise>
-                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateReunion" method="post">
+                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateReunion" method="post" name="formulario" onsubmit="return(validar());">
                                     <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">  
                             </c:otherwise>
                         </c:choose>
@@ -157,9 +157,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Facilitador</label>
                                     <div class="controls">
-                                        <textarea id="facilitador" name="facilitador" cols="20" rows="5">
-                                            ${reunion.getFacilitador()}
-                                        </textarea>
+                                        <textarea id="facilitador" name="facilitador" cols="20" rows="5">${reunion.getFacilitador()}</textarea>
                                     </div>
                                 </div>
 
@@ -195,6 +193,55 @@
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
                 $('.timepicker').timepicker({'timeFormat': 'H:i'});
             </script>
+            <script type="text/javascript">
+            function validar()
+            {
+            var numericExpression = /^[0-9]+$/;
+            if(!document.formulario.capacidad.value.match(numericExpression))
+            {
+                alert( "El campo debe contener solo números" );
+                document.formulario.capacidad.focus() ;
+                return false;
+            }
+            if( document.formulario.capacidad.value == "" )
+            {
+            alert( "Debe ingresar la capacidad" );
+             document.formulario.capacidad.focus() ;
+            return false;
+            }
+            if( document.formulario.fecha.value == "" )
+            {
+            alert( "Debe ingresar una fecha" );
+             document.formulario.fecha.focus() ;
+            return false;
+            }
+            if( document.formulario.hora.value == "" )
+            {
+            alert( "Debe ingresar una hora" );
+             document.formulario.hora.focus() ;
+            return false;
+            }
+            if( document.formulario.duracion.value == "" )
+            {
+            alert( "Debe ingresar la duración" );
+             document.formulario.duracion.focus() ;
+            return false;
+            }
+            if( document.formulario.direccion.value == "" )
+            {
+            alert( "Debe ingresar la dirección" );
+             document.formulario.direccion.focus() ;
+            return false;
+            }
+            if( document.formulario.capacidad.value == "" )
+            {
+            alert( "Debe ingresar la capacidad" );
+             document.formulario.capacidad.focus() ;
+            return false;
+            }
+             return true;
+            }
+          </script>
             <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>

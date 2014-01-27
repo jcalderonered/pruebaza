@@ -161,7 +161,7 @@ public class HiberMain {
         session.save(aft);
     }
 
-    public void InsertFormGrp(Asistente asisEl, Asistente asisElla, FormularioSesion fs, AsistenciaFT aft) {
+    public void InsertFormGrp(Asistente asisEl, Asistente asisElla, FormularioSesion fs, AsistenciaFT aft, AsistenciaFT aft2) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -174,13 +174,15 @@ public class HiberMain {
         fs.getAsistentes().add(asisElla);
         
         aft.setFormularioSesion(fs);
+        aft2.setFormularioSesion(fs);
         fs.getAsistenciaFTs().add(aft);
+        fs.getAsistenciaFTs().add(aft2);
         
         session.save(fs);
         session.save(asisEl);
         session.save(asisElla);
         session.save(aft);
-        
+        session.save(aft2);
         
     }
 

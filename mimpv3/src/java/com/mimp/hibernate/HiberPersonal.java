@@ -799,18 +799,24 @@ public class HiberPersonal {
         Reunion tempReun = (Reunion) queryResult;
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
         Hibernate.initialize(tempReun.getAsistenciaFRs());
+        long idtemp = 0;
         for (AsistenciaFR afr : tempReun.getAsistenciaFRs()){
-                   Hibernate.initialize(afr.getFamilia().getFormularioSesions());
-              
-                   for (FormularioSesion formularioSesion : afr.getFamilia().getFormularioSesions()) {
-                                        Hibernate.initialize(formularioSesion.getAsistentes());
-                                        Hibernate.initialize(formularioSesion.getFamilia());
-                                        Familia fam = formularioSesion.getFamilia();
-                                        Hibernate.initialize(fam.getAsistenciaFRs());
-                                        formularioSesion.setFamilia(fam);
-                                        allFormularios.add(formularioSesion);
-                                }
+                   Hibernate.initialize(afr.getFamilia());
+                   if(afr.getFamilia().getIdfamilia() != idtemp){
+                   String hql2 = "FROM FormularioSesion F where F.familia = :id order by F.idformularioSesion DESC";
+                   Query query2 = session.createQuery(hql2);
+                   query2.setLong("id", afr.getFamilia().getIdfamilia());  
+                   query2.setMaxResults(1);
+                   List resultados = query2.list();
+                   for (Iterator iter2 = resultados.iterator(); iter2.hasNext();) {
+                                    FormularioSesion temp = (FormularioSesion) iter2.next();
+                                    Hibernate.initialize(temp.getAsistentes());
+                                    Hibernate.initialize(temp.getFamilia().getAsistenciaFRs());
+                                    allFormularios.add(temp);
                                     
+                            }
+                   idtemp = afr.getFamilia().getIdfamilia();
+                   }
                  }
         
         return allFormularios;
@@ -856,7 +862,7 @@ public class HiberPersonal {
     
     
     
-    public AsistenciaFT getAFT (long idFormulario){
+    public ArrayList<AsistenciaFT> getAFT (long idFormulario){
     
          Session session = sessionFactory.getCurrentSession();
          session.beginTransaction();
@@ -864,10 +870,14 @@ public class HiberPersonal {
         String hql = "FROM AsistenciaFT A where A.formularioSesion = :id";
         Query query = session.createQuery(hql);
         query.setLong("id", idFormulario);
-        Object queryResult = query.uniqueResult();
-        AsistenciaFT tempAFT = (AsistenciaFT) queryResult;
+        List asistencias = query.list();
+        ArrayList<AsistenciaFT> allAsistencias = new ArrayList();
+        for (Iterator iter = asistencias.iterator(); iter.hasNext();) {
+            AsistenciaFT temp = (AsistenciaFT) iter.next();
+            allAsistencias.add(temp);
+        }
        
-        return tempAFT;
+        return allAsistencias;
          
     }
     
@@ -937,7 +947,7 @@ public class HiberPersonal {
          session.update(temp);
     }
     
-    public AsistenciaFR getAsistFR (long idFamilia, long idReunion){
+    public ArrayList<AsistenciaFR> getAsistFR (long idFamilia, long idReunion){
     
         Session session = sessionFactory.getCurrentSession();
          session.beginTransaction();
@@ -945,10 +955,14 @@ public class HiberPersonal {
         Query query = session.createQuery(hql);
         query.setLong("idFamilia", idFamilia);
         query.setLong("idReunion", idReunion);
-        Object queryResult = query.uniqueResult();
-        AsistenciaFR tempAFR = (AsistenciaFR) queryResult;
-    
-        return tempAFR;
+        List asistencias = query.list();
+        ArrayList<AsistenciaFR> allAsistencias = new ArrayList();
+        for (Iterator iter = asistencias.iterator(); iter.hasNext();) {
+            AsistenciaFR temp = (AsistenciaFR) iter.next();
+            allAsistencias.add(temp);
+        }
+       
+        return allAsistencias;
     }
     
     public ArrayList<Entidad> ListaEntidades() {

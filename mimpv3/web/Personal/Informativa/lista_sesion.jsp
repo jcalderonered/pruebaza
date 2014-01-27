@@ -88,7 +88,7 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
+                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                                 <%}%>
@@ -162,7 +162,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                <button type="submit" class="btn btn-default">Guardar Cambios</button>
+                                <button ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar Cambios</button>
                             </form>
                             <br>
                             <div class="table-responsive">
@@ -187,7 +187,7 @@
                                                     <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno2" method="post">
                                                         <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
                                                         <input hidden name="index" id="index" value="${status.index + 1}">
-                                                        <button type="submit" class="btn btn-default">Modificar</button>
+                                                        <button ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Modificar</button>
                                                     </form>    
                                                 </td>
                                             </tr>
@@ -202,14 +202,14 @@
                                     <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno" method="post">
                                         <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
                                         <input hidden name="index" id="index" value="${listaTurnos.size() + 1}">
-                                        <button type="submit" class="btn btn-default">Agregar nuevo turno</button>
+                                        <button ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Agregar nuevo turno</button>
                                     </form>    
                                 </c:when>           
                                 <c:when test="${sesion != null && listaTurnos == null }">
                                     <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno" method="post">
                                         <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
                                         <input hidden name="index" id="index" value="1">
-                                        <button type="submit" class="btn btn-default">Agregar nuevo turno</button>
+                                        <button ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Agregar nuevo turno</button>
                                     </form>   
                                 </c:when>
                                 <c:otherwise>

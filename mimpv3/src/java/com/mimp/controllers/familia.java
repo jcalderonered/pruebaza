@@ -1085,13 +1085,17 @@ public class familia {
             FormularioSesion antiguo = ServicioFamilia.ultimoFormulario(usuario.getIdfamilia());
             FormularioSesion nuevo = new FormularioSesion();
             AsistenciaFT aft = new AsistenciaFT();
+            AsistenciaFT aft2 = new AsistenciaFT();
             aft.setTurno(temp);
+            aft2.setTurno(temp);
             String asistencia = "F";
             char asist = asistencia.charAt(0);
             aft.setAsistencia(asist);
+            aft2.setAsistencia(asist);
             String inajust = "1";
             Short i = Short.valueOf(inajust);
             aft.setInasJus(i);
+            aft2.setInasJus(i);
             Asistente asis1 = new Asistente();
             Asistente asis2 = new Asistente();
             Date now = new Date();
@@ -1179,7 +1183,7 @@ public class familia {
                 nuevo.setEstadoCivil(antiguo.getEstadoCivil());
                 nuevo.setTelefono(antiguo.getTelefono());
                 
-                ServicioMain.InsertFormGrp(asis1, asis2, nuevo, aft);
+                ServicioMain.InsertFormGrp(asis1, asis2, nuevo, aft, aft2);
  
             }
             
@@ -1233,7 +1237,7 @@ public class familia {
         short numAsistentes = ServicioFamilia.numAsistentesFormulario(usuario.getIdfamilia());
         boolean inscripcion = false;
         for (Reunion reunion : allReuniones) {
-            if(reunion.getAsistenciaFRs().size() + numAsistentes > reunion.getCapacidad()){
+            if(reunion.getAsistenciaFRs().size() + numAsistentes >= reunion.getCapacidad()){
                 inscripcion = true;
             }
         }
@@ -1247,6 +1251,17 @@ public class familia {
             tempAFR.setAsistencia(c);
             tempAFR.setInasJus(Short.parseShort("1"));
             ServicioFamilia.crearAFR(tempAFR);
+            short x = 2;
+            if (numAsistentes == x) {
+                AsistenciaFR tempAFR2 = new AsistenciaFR();
+                tempAFR2.setFamilia(usuario);
+                tempAFR2.setReunion(reunion);
+                String asistencia2 = "F";
+                char c2 = asistencia2.charAt(0);
+                tempAFR2.setAsistencia(c);
+                tempAFR2.setInasJus(Short.parseShort("1"));
+                ServicioFamilia.crearAFR(tempAFR2);
+            }
         }
         }
         if(!inscripcion){
