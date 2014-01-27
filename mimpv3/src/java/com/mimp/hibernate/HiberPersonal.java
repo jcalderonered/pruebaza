@@ -1029,4 +1029,61 @@ public class HiberPersonal {
         session.beginTransaction();
         session.update(temp);
     }
+    
+    public ArrayList<ExpedienteNna> FiltrarNna(ExpedienteNna expNna,Nna datosNna){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        String hql = "";
+        if(expNna.getEstado().equals("eval") || expNna.getEstado().equals("desig")
+           || expNna.getEstado().equals("adop") || expNna.getEstado().equals("arch")){
+        hql = "from ExpedienteNna E where E.NActual like :nombreAc "
+                +    "and E.apellidopActual like :apellidoPAct and E.apellidomActual like :apellidoMAct "
+                +    "and E.estado like :estado";
+        }else{
+        hql = "from ExpedienteNna E where E.NActual like :nombreAc "
+                +    "or E.apellidopActual like :apellidoPAct or E.apellidomActual like :apellidoMAct "
+                +    "or E.estado like :estado";
+        }
+        Query query = session.createQuery(hql);
+        query.setString("nombreAc",'%' + expNna.getNActual() + '%');
+        query.setString("apellidoPAct",'%' + expNna.getApellidopActual() + '%');
+        query.setString("apellidoMAct",'%' + expNna.getApellidomActual() + '%');
+        query.setString("estado",'%' + expNna.getEstado() + '%');
+        
+        List expedientes = query.list();
+        ArrayList<ExpedienteNna> allExpedientes = new ArrayList();
+        if(!expedientes.isEmpty()){
+            for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+            ExpedienteNna temp = (ExpedienteNna) iter.next();
+            Hibernate.initialize(temp.getNna());
+            
+            if(datosNna.getEspecial() == 0 || datosNna.getEnfermo() == 0 || datosNna.getAdolescente() == 0 
+                || datosNna.getMayor() == 0 || datosNna.getHermano() == 0){
+                
+                if(temp.getNna().getNombre().contains(datosNna.getNombre()) 
+               && temp.getNna().getApellidoP().contains(datosNna.getApellidoP())
+               && temp.getNna().getApellidoM().contains(datosNna.getApellidoM())  
+               && temp.getNna().getEspecial() == datosNna.getEspecial()
+               && temp.getNna().getEnfermo() == datosNna.getEnfermo()
+               && temp.getNna().getAdolescente() == datosNna.getAdolescente()
+               && temp.getNna().getMayor() == datosNna.getMayor()
+               && temp.getNna().getHermano() == datosNna.getHermano()){
+                
+                allExpedientes.add(temp);
+            }
+            } else if(temp.getNna().getNombre().contains(datosNna.getNombre())
+                      && temp.getNna().getApellidoP().contains(datosNna.getApellidoP())
+                      && temp.getNna().getApellidoM().contains(datosNna.getApellidoM())){
+                      allExpedientes.add(temp);
+                }
+            
+            }
+        
+        
+        }
+        
+        return allExpedientes;
+    
+    }
 }
