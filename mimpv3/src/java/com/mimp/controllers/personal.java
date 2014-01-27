@@ -148,6 +148,100 @@ public class personal {
         return new ModelAndView("/Personal/Buscador/buscarNna", map);
     }
 
+    @RequestMapping(value = "/FiltrarNna", method = RequestMethod.POST)
+    public ModelAndView FiltrarNna(ModelMap map, HttpSession session,
+                                   @RequestParam(value="nombre",required=false) String nombre,
+                                   @RequestParam(value="apellidoP",required=false) String apellidoP,
+                                   @RequestParam(value="apellidoM",required=false) String apellidoM,
+                                   @RequestParam(value="nombreAdop",required=false) String nombreAdop,
+                                   @RequestParam(value="apellidoPAdop",required=false) String apellidoPAdop,
+                                   @RequestParam(value="apellidoMAdop",required=false) String apellidoMAdop,
+                                   @RequestParam(value="estado",required=false) String estado,
+                                   @RequestParam(value="prioritario",required=false) String prioritario
+                                   /*
+                                   @RequestParam(value="incesto",required=false) String incesto,
+                                   @RequestParam(value="mental",required=false) String mental,
+                                   @RequestParam(value="epilepsia",required=false) String epilepsia,
+                                   @RequestParam(value="abuso",required=false) String abuso,
+                                   @RequestParam(value="sifilis",required=false) String sifilis,
+                                   @RequestParam(value="estable",required=false) String estable,
+                                   @RequestParam(value="operacion",required=false) String operacion,
+                                   @RequestParam(value="hiperactivo",required=false) String hiperactivo
+                                   */     
+                                   ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        ExpedienteNna datosExp = new ExpedienteNna();
+        Nna datosNna = new Nna();
+        
+        datosExp.setNActual(nombreAdop);
+        datosExp.setApellidopActual(apellidoMAdop);
+        datosExp.setApellidomActual(apellidoMAdop);
+        if(estado != null && !estado.equals("none")) datosExp.setEstado(estado);
+        
+        datosNna.setNombre(nombre);
+        datosNna.setApellidoP(apellidoP);
+        datosNna.setApellidoM(apellidoM);
+        if(prioritario.equals("none")){
+            datosNna.setEspecial(Short.parseShort("1"));
+            datosNna.setEnfermo(Short.parseShort("1"));
+            datosNna.setAdolescente(Short.parseShort("1"));
+            datosNna.setMayor(Short.parseShort("1"));
+            datosNna.setHermano(Short.parseShort("1"));
+        } else if(prioritario.equals("ne")){
+            datosNna.setEspecial(Short.parseShort("0"));
+            datosNna.setEnfermo(Short.parseShort("1"));
+            datosNna.setAdolescente(Short.parseShort("1"));
+            datosNna.setMayor(Short.parseShort("1"));
+            datosNna.setHermano(Short.parseShort("1"));
+        } else if(prioritario.equals("ps")){
+            datosNna.setEspecial(Short.parseShort("1"));
+            datosNna.setEnfermo(Short.parseShort("0"));
+            datosNna.setAdolescente(Short.parseShort("1"));
+            datosNna.setMayor(Short.parseShort("1"));
+            datosNna.setHermano(Short.parseShort("1"));
+        }  else if(prioritario.equals("m")){
+            datosNna.setEspecial(Short.parseShort("1"));
+            datosNna.setEnfermo(Short.parseShort("1"));
+            datosNna.setAdolescente(Short.parseShort("1"));
+            datosNna.setMayor(Short.parseShort("0"));
+            datosNna.setHermano(Short.parseShort("1"));
+        }   else if(prioritario.equals("a")){
+            datosNna.setEspecial(Short.parseShort("1"));
+            datosNna.setEnfermo(Short.parseShort("1"));
+            datosNna.setAdolescente(Short.parseShort("0"));
+            datosNna.setMayor(Short.parseShort("1"));
+            datosNna.setHermano(Short.parseShort("1"));
+        }   else if(prioritario.equals("h")){
+            datosNna.setEspecial(Short.parseShort("1"));
+            datosNna.setEnfermo(Short.parseShort("1"));
+            datosNna.setAdolescente(Short.parseShort("1"));
+            datosNna.setMayor(Short.parseShort("1"));
+            datosNna.setHermano(Short.parseShort("0"));
+        }
+        /*
+        datosNna.setIncesto(Short.parseShort(incesto));
+        datosNna.setMental(Short.parseShort(mental));
+        datosNna.setEpilepsia(Short.parseShort(epilepsia));
+        datosNna.setAbuso(Short.parseShort(abuso));
+        datosNna.setSifilis(Short.parseShort(sifilis));
+        datosNna.setSeguiMedico(Short.parseShort(estable));
+        datosNna.setOperacion(Short.parseShort(incesto));
+        datosNna.setHiperactivo(Short.parseShort(hiperactivo));
+        */
+        ArrayList<ExpedienteNna> listaBusqueda = new ArrayList();
+        listaBusqueda = ServicioPersonal.FiltrarNna(datosExp, datosNna);
+        
+        map.put("listaBusqueda",listaBusqueda);
+        return new ModelAndView("/Personal/Buscador/buscarNna", map);
+    }
+    
+    
     @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
     public ModelAndView Usuarios(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
