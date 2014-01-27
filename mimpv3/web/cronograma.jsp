@@ -54,15 +54,15 @@
                 <div class="row">
                     <div class="col-md-6 col-md-offset-2">
                         <br>
-                        <h2 align="center"><strong>Cronograma de Sesiones Informativas</strong></h2>
+                        <h2 align="center"><strong>CRONOGRAMA DE SESIONES INFORMATIVAS</strong></h2>
                         <br>
                         <div class="bs-example">
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th></th>
-                                                <th>Fecha de Inscripción</th>
-                                                <th>Fecha de Sesión Informativa</th>
+                                                <th>FECHA DE INSCRIPCIÓN</th>
+                                                <th>FECHA DE SESIÓN INFORMATIVA</th>
                                             </tr>
                                         </thead>
                                         <c:if test="${listaSesiones != null}">   
@@ -70,7 +70,7 @@
                                             <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
                                                 <tr>
                                                     <td>
-                                                        Sesion ${status.count}
+                                                        SESIÓN ${status.count}
                                                     </td>
                                                     <td>
                                                         <c:if test="${!sesion.getTurnos().isEmpty()}">
@@ -89,7 +89,7 @@
                                                                  ${df.dateToString(fechaInicio)}
                                                         </c:if>
                                                         <c:if test="${sesion.getTurnos().isEmpty()}">
-                                                                 No se han programado turnos de inscripción
+                                                                 NO SE HAN PROGRAMADO TURNOS DE INSCRIPCIÓN
                                                         </c:if>
                                                     </td>
                                                     <td>
@@ -100,22 +100,24 @@
                                         </tbody>
                                         </c:if> 
                                       <c:if test="${listaSesiones == null}">
-                                        <h3><strong>No existen Sesiones Informativas Programadas</strong></h3>
+                                        <h3><strong>NO EXISTEN SESIONES INFORMATIVAS PROGRAMADAS</strong></h3>
                                       </c:if> 
                                     </table>
                                 </div>
                         <br>
-                        <h2 align="center"><strong>Cronograma de Talleres</strong></h2>
-                        <h4> (Requisito: haber asistido a la Sesión Informativa)</h4>
+                        <h2 align="center"><strong>CRONOGRAMA DE TALLERES</strong></h2>
+                        <br>
+                        (Requisito: haber asistido a la Sesión Informativa)
+                        <br>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Taller</th>
-                                        <th>Grupo</th>
-                                        <th>Detalles</th>
-                                        <th>Clausura</th>
+                                        <th>TALLER</th>
+                                        <th>GRUPO</th>
+                                        <th>DETALLES</th>
+                                        <th>CLAUSURA</th>
                                     </tr>
                                 </thead>
                                 <c:if test="${!listaTalleres.isEmpty()}">
@@ -200,7 +202,7 @@
                                     </tbody>
                                 </c:if>   
                                 <c:if test="${listaTalleres.isEmpty()}">
-                                    <h3><strong>No existen Talleres Programados</strong></h3>
+                                    <h3><strong>NO EXISTEN TALLERES PROGRAMADOS</strong></h3>
                                 </c:if>
                             </table>
                         </div>
