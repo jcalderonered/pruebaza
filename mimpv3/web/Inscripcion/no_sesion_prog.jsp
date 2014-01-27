@@ -60,6 +60,7 @@
         <br>
         <br>
         <p align="center"><img src="<%=request.getContextPath()%>/assets/img/slogan1.png" width="400" border="0"></p>
+        <p align="center"><img src="<%=request.getContextPath()%>/assets/img/logo.png" width="400" border="0"></p>
         <!--FIN DE CONTENIDO-->
         <br>
         <br>  

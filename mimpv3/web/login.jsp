@@ -53,7 +53,7 @@
             <div id="contenedor1" class="container">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-2">
-                        <form role="form" action="${pageContext.servletContext.contextPath}/login" method="post">
+                        <form class="form-signin" action="${pageContext.servletContext.contextPath}/login" method="post">
                             <p align="center"><img src="<%=request.getContextPath()%>/assets/img/logo.png" width="200" border="0"></p>
                             <h2>Iniciar sesión:</h2>
                             <br>
