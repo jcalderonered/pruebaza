@@ -61,7 +61,14 @@ public class main {
     public String hello() {
         return "login";
     }
-
+    
+    @RequestMapping("/Contacto")
+    public ModelAndView Contacto(ModelMap map, HttpSession session) {
+        session.invalidate();
+        String pagina = "contacto";
+        return new ModelAndView(pagina, map);
+    }
+    
     @RequestMapping("/salir")
     public ModelAndView Salir(ModelMap map, HttpSession session) {
         session.invalidate();
@@ -341,16 +348,18 @@ public class main {
         Asistente asisEl = new Asistente();
         Asistente asisElla = new Asistente();
         AsistenciaFT aft = new AsistenciaFT();
+        AsistenciaFT aft2 = new AsistenciaFT();
         fs.setSesion(temp.getSesion());
         aft.setTurno(temp);
-        
+        aft2.setTurno(temp);
         String asistencia = "F";
         char asist = asistencia.charAt(0);
         aft.setAsistencia(asist);
+        aft2.setAsistencia(asist);
         String inajust = "1";
         Short i = Short.valueOf(inajust);
         aft.setInasJus(i);
-        
+        aft2.setInasJus(i);
         Date today = new Date();
 
         fs.setFechaSol(today);
@@ -412,7 +421,7 @@ public class main {
         if (temp.getVacantes() > temp.getAsistenciaFTs().size() + 1) {
             map.put("ts", ts);
             map.put("turno", temp);
-            ServicioMain.InsertFormGrp(asisEl, asisElla, fs, aft);
+            ServicioMain.InsertFormGrp(asisEl, asisElla, fs, aft, aft2);
             return new ModelAndView("/Inscripcion/inscripcion_sesion4", map);
         }
         return new ModelAndView("/Inscripcion/inscripcion_sesion1b", map);

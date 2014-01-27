@@ -64,7 +64,7 @@
                 <br>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesInd" role="form" method="post"  name="formulario" onsubmit="return(validar());">
+                        <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesInd" role="form" method="post"  name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
                             <input hidden id="idTurno" name="idTurno" value="${turno.getIdturno()}">
                             <input hidden id="estado" name="estado" value="${estado}">
                             
@@ -157,12 +157,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="selectbasic">Profesión/Ocupación <font style="color:red">(*)</font></label>
                                 <div class="controls">
-                                    <select id="profesion" name="profesion" class="input-xlarge">
-                                        <option value="ingeniero">Ingeniero(a)</option>
-                                        <option value="abogado">Abogado(a)</option>
-                                        <option value="psicologo">Psicólogo(a)</option>
-                                        <option value="otro">Otro</option>
-                                    </select>
+                                        <input id="profesion" name="profesion" type="text" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
@@ -257,7 +252,30 @@
             <script type="text/javascript">
 
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                
+                $('#fechaNac').on('changeDate', function (ev) {
+                    
+                    var nac =  document.getElementById("fechaNac").value;
+                    var edad =  document.getElementById("edad");
+                    
+                    var today = new Date();
+                    var curr_date = today.getDate();
+                    var curr_month = today.getMonth() + 1;
+                    var curr_year = today.getFullYear();
 
+                    var pieces = nac.split('/');
+                    var birth_date = pieces[0];
+                    var birth_month = pieces[1];
+                    var birth_year = pieces[2];
+                    
+                    
+                    if (curr_year != birth_year && birth_month > curr_month  ) edad.value = curr_year - birth_year - 1;
+                    if (curr_year != birth_year && birth_month == curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year != birth_year && birth_month < curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year == birth_year) edad.value = 0;
+                     
+                     
+                        });
             </script>
             
             <script type="text/javascript">
@@ -321,8 +339,14 @@
             }
             if( document.formulario.numDoc.value == "" )
             {
-            alert( "Debe elegir su número de documento de identidad" );
+            alert( "Debe ingresar su número de documento de identidad" );
              document.formulario.numDoc.focus() ;
+            return false;
+            }
+            if( document.formulario.profesion.value == "" )
+            {
+            alert( "Debe ingresar su profesión" );
+             document.formulario.profesion.focus() ;
             return false;
             }
             if( document.formulario.cel.value == "" )
@@ -375,6 +399,14 @@
             }
             return( true );
             }
+            </script>
+            
+            <script type="text/javascript">
+                function enter(e) {
+                     if (e.keyCode == 13) {
+                     return false;
+                    }
+                }
             </script>
             <!-- Ubicar al final -->
     </body>

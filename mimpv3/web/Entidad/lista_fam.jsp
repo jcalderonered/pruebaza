@@ -86,6 +86,7 @@
                                         <th class="col-sm-2 ">Estado de Trámite</th>                                          
                                     </tr>
                                 </thead>
+                                <c:if test="${!listaFam.isEmpty()}">
                                 <tbody>
                                     <c:forEach var="fam" items="${listaFam}" varStatus="status">
                                         <tr> 
@@ -123,6 +124,10 @@
                                     </tr>
                                 </c:forEach>
                                 </tbody>
+                                </c:if>
+                                <c:if test="${listaFam.isEmpty()}">
+                                    <h3><strong>No existen familias asociadas</strong></h3>    
+                                </c:if>
                             </table>
                         </div>
                         <br>

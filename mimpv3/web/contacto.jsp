@@ -43,71 +43,29 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li><a href="#">Inicio</a></li>
-                            <li><a href="#">Inscripción a Sesión Informativa</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/inicio">Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/SesionInfInicio">Inscripción a Sesión Informativa</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/CronogramaAnual">Ver el cronograma anual</a></li>
                             <li><a href="#">Información Adicional</a></li>
-                            <li class="active"><a href="#">Contacto</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/Contacto">Contacto</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
 
                 <div class="row">
-                    <h3><strong>
-                            ${nombre}
-                        </strong></h3>
+                    <div class="col-md-6 col-md-offset-2"> 
+                    <h1><strong>DIRECCIÓN GENERAL DE ADOPCIONES</strong></h1>
                     <br>
-                    <h3><strong>
-                            ${personal.getApellidoP()}
-                        </strong></h3>
-                    <!--FIN DE CONTENIDO-->
+                    <h2>Av. Benavides 1155, Miraflores, Lima - Perú</h2>
                     <br>
+                    <h2>Central telefónica: (511) 626 - 1600 anexo 1701</h2>
                     <br>
+                    <h2>adopcion@mimp.gob.pe</h2>
+                    <br>
+                    <h2>www.mimp.gob.pe</h2>
+                    <br>
+                    </div> 
                 </div>
-                <br>
-
-
-
-
-                <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/lista'" class="btn btn-default">Mostrar lista de personal</button>
-                <br>
-                <br>
-                <div class="row">
-                    <h3><strong>Lista de Personal</strong></h3> 
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="col-sm-2 ">id</th>
-                                    <th class="col-sm-2 ">Nombre</th>
-                                    <th class="col-sm-2 ">Apellido Paterno</th>
-                                    <th class="col-sm-2 ">Apellido Materno</th>
-                                    <th class="col-sm-2 ">Usuario</th>
-                                    <th class="col-sm-2 ">Información</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <c:forEach var="personal" items="${listap}">
-                                    <tr>
-                                        <td>${personal.getIdpersonal()}</td>
-                                        <td>${personal.getNombre()}</td>
-                                        <td>${personal.getApellidoP()}</td>
-                                        <td>${personal.getApellidoM()}</td>
-                                        <td>${personal.getUser()}</td>
-                                        <td>
-                                            <form action="${pageContext.servletContext.contextPath}/info" method="post">
-                                                <input hidden name="id" id="id" value="${personal.getIdpersonal()}">
-                                                <button type="submit" class="btn btn-default">Ver</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-
             </div> 
             <div id="footer">
                 <div id="ja-footer" class="wrap">

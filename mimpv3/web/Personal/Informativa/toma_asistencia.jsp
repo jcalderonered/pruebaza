@@ -85,7 +85,7 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
+                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                                 <%}%>
@@ -195,9 +195,13 @@
                                                                             <input hidden name="nombre" id="nombre" value="${nombre}"> 
                                                                             <input hidden name="grupo" id="grupo" value="${grupo}"> 
                                                                             <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                                    <c:set var="token" value="0" scope="page" />
                                                                                     <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
                                                                                         <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                                                     <button ${AFR.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
+                                                                                            <c:if test="${token == '0'}">
+                                                                                                <button ${AFR.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
+                                                                                                 <c:set var="token" value="1" scope="page" />   
+                                                                                            </c:if>        
                                                                                         </c:if>                 
                                                                                     </c:forEach>   
                                                                         </form>
@@ -210,9 +214,13 @@
                                                                             <input hidden name="nombre" id="nombre" value="${nombre}"> 
                                                                             <input hidden name="grupo" id="grupo" value="${grupo}"> 
                                                                             <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                                    <c:set var="token" value="0" scope="page" />
                                                                                     <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
                                                                                         <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                                            <c:if test="${token == '0'}">
                                                                                                      <button ${AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
+                                                                                             <c:set var="token" value="1" scope="page" />   
+                                                                                            </c:if>        
                                                                                         </c:if>                
                                                                                     </c:forEach>   
                                                                         </form>

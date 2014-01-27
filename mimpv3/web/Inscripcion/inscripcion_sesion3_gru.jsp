@@ -62,7 +62,7 @@
         <br>
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesGrp" role="form" method="post" name="formulario" onsubmit="return(validar());">
+                <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesGrp" role="form" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
                     <!-- Form Name -->
                     <input hidden id="idTurno" name="idTurno" value="${turno.getIdturno()}">
                     <input hidden id="estado" name="estado" value="${estado}">
@@ -156,12 +156,7 @@
                         <div class="control-group">
                             <label class="control-label" for="selectbasic">Profesión/Ocupación <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <select id="profesionEl" name="profesionEl" class="input-xlarge">
-                                    <option value="ingeniero">Ingeniero</option>
-                                    <option value="abogado">Abogado</option>
-                                    <option value="psicologo">Psicólogo</option>
-                                    <option value="otro">Otro</option>
-                                </select>
+                                <input id="profesionEl" name="profesionEl" type="text" placeholder="Profesión" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -273,12 +268,7 @@
                         <div class="control-group">
                             <label class="control-label" for="selectbasic">Profesión/Ocupación <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <select id="profesionElla" name="profesionElla" class="input-xlarge">
-                                    <option value="ingeniero">Ingeniero</option>
-                                    <option value="abogado">Abogado</option>
-                                    <option value="psicologo">Psicólogo</option>
-                                    <option value="otro">Otro</option>
-                                </select>
+                                <input id="profesionElla" name="profesionElla" type="text" placeholder="Profesión" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -371,6 +361,54 @@
     <script type="text/javascript">
 
         $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+        
+        $('#fechaNacEl').on('changeDate', function (ev) {
+                    
+                    var nac =  document.getElementById("fechaNacEl").value;
+                    var edad =  document.getElementById("edadEl");
+                    
+                    var today = new Date();
+                    var curr_date = today.getDate();
+                    var curr_month = today.getMonth() + 1;
+                    var curr_year = today.getFullYear();
+
+                    var pieces = nac.split('/');
+                    var birth_date = pieces[0];
+                    var birth_month = pieces[1];
+                    var birth_year = pieces[2];
+                    
+                    
+                    if (curr_year != birth_year && birth_month > curr_month  ) edad.value = curr_year - birth_year - 1;
+                    if (curr_year != birth_year && birth_month == curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year != birth_year && birth_month < curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year == birth_year) edad.value = 0;
+                     
+                     
+                        });
+                        
+         $('#fechaNacElla').on('changeDate', function (ev) {
+                    
+                    var nac =  document.getElementById("fechaNacElla").value;
+                    var edad =  document.getElementById("edadElla");
+                    
+                    var today = new Date();
+                    var curr_date = today.getDate();
+                    var curr_month = today.getMonth() + 1;
+                    var curr_year = today.getFullYear();
+
+                    var pieces = nac.split('/');
+                    var birth_date = pieces[0];
+                    var birth_month = pieces[1];
+                    var birth_year = pieces[2];
+                    
+                    
+                    if (curr_year != birth_year && birth_month > curr_month  ) edad.value = curr_year - birth_year - 1;
+                    if (curr_year != birth_year && birth_month == curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year != birth_year && birth_month < curr_month  ) edad.value = curr_year - birth_year;
+                    if (curr_year == birth_year) edad.value = 0;
+                     
+                     
+                        });               
 
     </script>
     <script type="text/javascript">
@@ -436,6 +474,12 @@
             {
             alert( "Debe ingresar el número de documento del asistente" );
              document.formulario.numDocEl.focus() ;
+            return false;
+            }
+            if( document.formulario.profesionEl.value == "" )
+            {
+            alert( "Debe ingresar su profesión" );
+             document.formulario.profesionEl.focus() ;
             return false;
             }
             if( document.formulario.celEl.value == "" )
@@ -505,6 +549,12 @@
              document.formulario.docElla.focus() ;
             return false;
             }
+            if( document.formulario.profesionElla.value == "" )
+            {
+            alert( "Debe ingresar su profesión" );
+             document.formulario.profesionElla.focus() ;
+            return false;
+            }
             if( document.formulario.numDocElla.value == "" )
             {
             alert( "Debe ingresar el número de documento de la asistente" );
@@ -562,6 +612,13 @@
             }
             return( true );
             }
+            </script>
+            <script type="text/javascript">
+                function enter(e) {
+                     if (e.keyCode == 13) {
+                     return false;
+                    }
+                }
             </script>
     <!-- Ubicar al final -->
 </body>
