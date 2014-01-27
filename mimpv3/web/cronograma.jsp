@@ -200,7 +200,7 @@
                                     </tbody>
                                 </c:if>   
                                 <c:if test="${listaTalleres.isEmpty()}">
-                                    <h3><strong>No exiten Talleres Programados</strong></h3>
+                                    <h3><strong>No existen Talleres Programados</strong></h3>
                                 </c:if>
                             </table>
                         </div>
