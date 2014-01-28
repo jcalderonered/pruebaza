@@ -56,6 +56,7 @@ public class InfoFamilia implements java.io.Serializable {
     private Date fechaMatrimonio;
     private String telefono;
     private Short expectativaEdadMax;
+    private Short nHijos;
     private Set<ResidenteAct> residenteActs = new HashSet<ResidenteAct>(0);
     private Set<HijoAct> hijoActs = new HashSet<HijoAct>(0);
     private Set<Adoptante> adoptantes = new HashSet<Adoptante>(0);
@@ -68,7 +69,7 @@ public class InfoFamilia implements java.io.Serializable {
         this.familia = familia;
     }
 
-    public InfoFamilia(long idinfoFamilia, Familia familia, String hojaReferencia, String depRes, String paisRes, String domicilio, String propiedadVivienda, String tipoVivienda, Long areaVivTotal, Long areaVivConst, String distVivienda, Short luz, Short agua, Short desague, String otrosServ, String materConst, String pared, String techo, String piso, Character nivelSocioeconomico, Short expectativaEdadMin, String expectativaGenero, String origenHijos, Short puedeViajar, String predisposicionAp, String condicion, String antecedenteFamilia, Date fechaAntecedenteFamilia, String observaciones, Short nnaIncesto, Short nnaMental, Short nnaEpilepsia, Short nnaAbuso, Short nnaSifilis, Short nnaSeguiMedico, Short nnaOperacion, Short nnaHiperactivo, Short nnaEspecial, Short nnaEnfermo, Short nnaMayor, Short nnaAdolescente, Short nnaHermano, String estadoCivil, Date fechaMatrimonio, String telefono, Short expectativaEdadMax, Set<ResidenteAct> residenteActs, Set<HijoAct> hijoActs, Set<Adoptante> adoptantes) {
+    public InfoFamilia(long idinfoFamilia, Familia familia, String hojaReferencia, String depRes, String paisRes, String domicilio, String propiedadVivienda, String tipoVivienda, Long areaVivTotal, Long areaVivConst, String distVivienda, Short luz, Short agua, Short desague, String otrosServ, String materConst, String pared, String techo, String piso, Character nivelSocioeconomico, Short expectativaEdadMin, String expectativaGenero, String origenHijos, Short puedeViajar, String predisposicionAp, String condicion, String antecedenteFamilia, Date fechaAntecedenteFamilia, String observaciones, Short nnaIncesto, Short nnaMental, Short nnaEpilepsia, Short nnaAbuso, Short nnaSifilis, Short nnaSeguiMedico, Short nnaOperacion, Short nnaHiperactivo, Short nnaEspecial, Short nnaEnfermo, Short nnaMayor, Short nnaAdolescente, Short nnaHermano, String estadoCivil, Date fechaMatrimonio, String telefono, Short expectativaEdadMax, Short nHijos,Set<ResidenteAct> residenteActs, Set<HijoAct> hijoActs, Set<Adoptante> adoptantes) {
         this.idinfoFamilia = idinfoFamilia;
         this.familia = familia;
         this.hojaReferencia = hojaReferencia;
@@ -115,6 +116,7 @@ public class InfoFamilia implements java.io.Serializable {
         this.fechaMatrimonio = fechaMatrimonio;
         this.telefono = telefono;
         this.expectativaEdadMax = expectativaEdadMax;
+        this.nHijos = nHijos;
         this.residenteActs = residenteActs;
         this.hijoActs = hijoActs;
         this.adoptantes = adoptantes;
@@ -295,7 +297,12 @@ public class InfoFamilia implements java.io.Serializable {
     public void setExpectativaEdadMax(Short expectativaEdadMax) {
         this.expectativaEdadMax = expectativaEdadMax;
     }
-
+    public Short getnHijos() {
+        return this.nHijos;
+    }
+    public void setnHijos(Short nHijos) {
+        this.nHijos = nHijos;
+    }
     public String getExpectativaGenero() {
         return this.expectativaGenero;
     }
