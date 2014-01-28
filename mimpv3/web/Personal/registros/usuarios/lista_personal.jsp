@@ -119,9 +119,9 @@
                                             <td>${personal.getUnidad().getNombre()}</td>
                                             <td>${personal.getCorreoTrabajo()}</td>
                                             <td>
-                                                <form action="${pageContext.servletContext.contextPath}/" method="post">
+                                                <form action="${pageContext.servletContext.contextPath}/logParticular" method="post">
                                                     <input hidden name="id" id="id" value="${personal.getIdpersonal()}">
-                                                    <button type="submit" class="btn btn-default" disabled>Ver</button>
+                                                    <button type="submit" class="btn btn-default">Ver</button>
                                                 </form>
                                             </td>
                                             <td>
@@ -141,9 +141,9 @@
                         </div>
                         <br>
                         <br>
-                        <form action="${pageContext.servletContext.contextPath}/" method="post">
+                        <form action="${pageContext.servletContext.contextPath}/logPersonal" method="post">
                             <input hidden name="id" id="id" value="${personal.getIdpersonal()}">
-                            <button type="submit" class="btn btn-default" disabled>Ver log</button>
+                            <button type="submit" class="btn btn-default">Ver log</button>
                         </form>
                     </div>
                 </div>

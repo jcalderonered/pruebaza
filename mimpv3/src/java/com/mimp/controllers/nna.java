@@ -320,6 +320,14 @@ public class nna {
 
         ServicioNna.crearNna(tempNna);
 
+        String mensaje_log = "Se registró un nuevo NNA a la base de datos con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+        String Tipo_registro = "NNA";
+
+        //try{
+        String Numero_registro = String.valueOf(tempNna.getIdnna());
+
+        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+
         if (prioritarios != null) {
             map.put("listaNna", ServicioNna.ListaNna("prioritario"));
             return new ModelAndView("/Personal/nna/lista_nna_prior", map);
@@ -400,15 +408,14 @@ public class nna {
         } else {
             tempNna.setFechaNacimiento(null);
         }
-        
-        
-        short edadtemp = 0;        
+
+        short edadtemp = 0;
         short mesestemp = 0;
-        
-        try{
-        edadtemp = Byte.valueOf(edad);        
-        mesestemp = Byte.valueOf(meses);
-        } catch(Exception ex){
+
+        try {
+            edadtemp = Byte.valueOf(edad);
+            mesestemp = Byte.valueOf(meses);
+        } catch (Exception ex) {
         }
         tempNna.setEdadAnhos(edadtemp);
         tempNna.setEdadMeses(mesestemp);
@@ -511,6 +518,14 @@ public class nna {
         tempNna.setObservaciones(obs);
 
         ServicioNna.updateNna(tempNna);
+
+        String mensaje_log = "Se editó el perfil del NNA con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+        String Tipo_registro = "NNA";
+
+        //try{
+        String Numero_registro = String.valueOf(tempNna.getIdnna());
+
+        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
 
         if (tempNna.getClasificacion().equals("prioritario")) {
             map.put("listaNna", ServicioNna.ListaNna("prioritario"));

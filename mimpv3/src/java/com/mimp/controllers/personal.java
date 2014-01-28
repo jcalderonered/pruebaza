@@ -1202,6 +1202,14 @@ public class personal {
 
         ServicioPersonal.InsertJuzgado(juzg);
 
+        String mensaje_log = "Se registró nuevo juzgado con Nombre, " + juzg.getNombre() + " y ID:"  + String.valueOf(juzg.getIdjuzgado());
+        String Tipo_registro = "Juzgado";
+
+        //try{
+        String Numero_registro = String.valueOf(juzg.getIdjuzgado());;
+
+        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         return new ModelAndView("/Personal/registros/juzgado/lista_juzg", map);
     }
@@ -1245,6 +1253,14 @@ public class personal {
         juzg.setObservaciones(obs);
 
         ServicioPersonal.UpdateJuzgado(juzg);
+
+        String mensaje_log = "Se registró nuevo juzgado con Nombre, " + juzg.getNombre() + " y ID:"  + String.valueOf(juzg.getIdjuzgado());
+        String Tipo_registro = "Juzgado";
+
+        //try{
+        String Numero_registro = String.valueOf(juzg.getIdjuzgado());;
+
+        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
 
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         return new ModelAndView("/Personal/registros/juzgado/lista_juzg", map);
@@ -2417,7 +2433,7 @@ public class personal {
             @RequestParam("duracion") String duracion,
             @RequestParam("direccion") String direccion,
             @RequestParam("capacidad") String capacidad,
-            @RequestParam(value="facilitador",required=false) String facilitador,
+            @RequestParam(value = "facilitador", required = false) String facilitador,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2477,7 +2493,7 @@ public class personal {
             @RequestParam("duracion") String duracion,
             @RequestParam("direccion") String direccion,
             @RequestParam("capacidad") String capacidad,
-            @RequestParam(value="facilitador",required=false) String facilitador,
+            @RequestParam(value = "facilitador", required = false) String facilitador,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2603,21 +2619,21 @@ public class personal {
         tempTurno = ServicioPersonal.getTurno(tempSesion.getTurnos().iterator().next().getIdturno());
         ArrayList<AsistenciaFT> allAsistencias = new ArrayList();
         allAsistencias = ServicioPersonal.getAFT(idFormulario);
-        if(!allAsistencias.isEmpty()){
+        if (!allAsistencias.isEmpty()) {
             for (AsistenciaFT asistenciaFT : allAsistencias) {
-                 String asistencia = "A";
-                 char c = asistencia.charAt(0);
-                 asistenciaFT.setAsistencia(c);
-                 ServicioPersonal.marcarAsistenciaSesion(asistenciaFT);
-                 int i  = 1;
-                 short cont  = tempSesion.getAsistencia();
-                 cont = (short) (cont + (short)(1));
-        
-                 tempSesion.setAsistencia(cont);
-                 ServicioPersonal.PersonalUpdateSesion(tempSesion);
+                String asistencia = "A";
+                char c = asistencia.charAt(0);
+                asistenciaFT.setAsistencia(c);
+                ServicioPersonal.marcarAsistenciaSesion(asistenciaFT);
+                int i = 1;
+                short cont = tempSesion.getAsistencia();
+                cont = (short) (cont + (short) (1));
+
+                tempSesion.setAsistencia(cont);
+                ServicioPersonal.PersonalUpdateSesion(tempSesion);
             }
         }
-        
+
         allFormularios = ServicioPersonal.InscritosSesion(idSesion);
 
         map.addAttribute("fecha", fecha);
@@ -2689,21 +2705,16 @@ public class personal {
         tempReun = ServicioPersonal.getReunion(idReunion);
         allAsistencias = ServicioPersonal.getAsistFR(idFamilia, idReunion);
         for (AsistenciaFR asistFR : allAsistencias) {
-            int i  = 1;
-            short cont  = tempReun.getAsistencia();
-            cont = (short) (cont + (short)(1));
+            int i = 1;
+            short cont = tempReun.getAsistencia();
+            cont = (short) (cont + (short) (1));
             char c = asistencia.charAt(0);
             asistFR.setAsistencia(c);
             tempReun.setAsistencia(cont);
             ServicioPersonal.updateReunion(tempReun);
             ServicioPersonal.updateAsistenciaFR(asistFR);
         }
-        
-        
-        
-        
 
-        
         allFormularios = ServicioPersonal.formulariosReunion(idReunion);
         map.addAttribute("nombre", nombre);
         map.addAttribute("grupo", grupo);
@@ -2738,12 +2749,10 @@ public class personal {
         allAsistencias = ServicioPersonal.getAsistFR(idFamilia, idReunion);
         for (AsistenciaFR asistFR : allAsistencias) {
             Short sh = Short.valueOf(justificado);
-        asistFR.setInasJus(sh);
-        ServicioPersonal.updateAsistenciaFR(asistFR);
+            asistFR.setInasJus(sh);
+            ServicioPersonal.updateAsistenciaFR(asistFR);
         }
-        
 
-        
         allFormularios = ServicioPersonal.formulariosReunion(idReunion);
         map.addAttribute("nombre", nombre);
         map.addAttribute("grupo", grupo);
@@ -3326,7 +3335,7 @@ public class personal {
 
         ExpedienteFamilia datosExp = new ExpedienteFamilia();
         Familia datosFam = new Familia();
-              
+
         if (expediente != null) {
             datosExp.setExpediente(expediente);
         }
@@ -3365,6 +3374,33 @@ public class personal {
         map.put("listaBusqueda", listaBusqueda);
         return new ModelAndView("/Personal/Buscador/buscarFamilia", map);
 
+    }
+
+    @RequestMapping(value = "/logParticular", method = RequestMethod.POST)
+    public ModelAndView logParticular(ModelMap map, HttpSession session, @RequestParam("id") Long idpersonal) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //List<Personal> lista = Servicio.listaPersonal();
+        map.put("listaParticularLog", ServicioPersonal.getLogParticular(idpersonal));
+        return new ModelAndView("/Personal/registros/usuarios/log_particular", map);
+    }
+
+    @RequestMapping(value = "/logPersonal", method = RequestMethod.POST)
+    public ModelAndView logPersonal(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //List<Personal> lista = Servicio.listaPersonal();
+        map.put("listaPersonalLog", ServicioPersonal.getLogPersonal());
+        
+        return new ModelAndView("/Personal/registros/usuarios/log_personal", map);
     }
 
 }
