@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-default">Filtrar</button>
+                            <button type="submit" class="btn btn-default" disabled>Filtrar</button>
                         </form>   
                         <br>
 
