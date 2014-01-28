@@ -8,6 +8,7 @@ package com.mimp.hibernate;
 import java.util.*;
 import org.hibernate.Session;
 import com.mimp.bean.*;
+import com.mimp.util.timeStampFormat;
 import javax.annotation.Resource;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -1236,6 +1237,67 @@ public class HiberPersonal {
         }
 
         return allExpedientes;
+
+    }
+    
+    public void InsertLog(Personal personal, String Tipo_registro, String Numero_registro, String mensaje) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        Log log = new Log();
+        Date date = new Date();
+        timeStampFormat st = new timeStampFormat();
+
+        log.setPersonal(personal);
+        log.setFecha(st.stringToTimestamp(date.toString()));
+        log.setTipoReg(Tipo_registro);
+        log.setNReg(Numero_registro);
+        log.setIncidencia(mensaje);
+
+        session.save(log);
+
+    }
+
+    public ArrayList<Log> getLogParticular(long idPersonal) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String hql = "FROM Log L where L.personal = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idPersonal);
+        List log = query.list();
+        ArrayList<Log> allLogsParticular = new ArrayList();
+        for (Iterator iter = log.iterator(); iter.hasNext();) {
+            Log temp = (Log) iter.next();
+            Hibernate.initialize(temp.getPersonal());
+            temp.getPersonal().getNombre();
+            temp.getPersonal().getApellidoP();
+            allLogsParticular.add(temp);
+        }
+
+        return allLogsParticular;
+
+    }
+    
+    public ArrayList<Log> getLogPersonal() {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String hql = "FROM Log L ";
+        Query query = session.createQuery(hql);        
+        List log = query.list();
+        ArrayList<Log> allLogsParticular = new ArrayList();
+        for (Iterator iter = log.iterator(); iter.hasNext();) {
+            Log temp = (Log) iter.next();
+            Hibernate.initialize(temp.getPersonal());
+            allLogsParticular.add(temp);
+        }
+
+        return allLogsParticular;
 
     }
 

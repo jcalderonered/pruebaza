@@ -76,17 +76,17 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                                 <%}%>
@@ -126,39 +126,27 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th > Item </th>
+                                        <th >ID del Personal</th>
+                                        <th >fecha</th>
 
-                                        <th class="col-sm-2 ">fecha</th>
-
-                                        <th class="col-sm-2 ">Tipo de registro</th>
-                                        <th class="col-sm-2 ">Número del registro</th>
-                                        <th class="col-sm-2 ">Incidencia</th>                                          
+                                        <th >Tipo de registro</th>
+                                        <th >Número del registro</th>
+                                        <th >Incidencia</th>                                          
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-
-                                        <td>20-Dic-2013</td>
-
-                                        <td>Expediente familia</td>
-                                        <td>1-2013-MIMP-DGA-LIMA</td>
-                                        <td>Agregó resolución al expediente</td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>20-Dic-2013</td>
-
-                                        <td>Expediente NNA</td>
-                                        <td>012013MIMP</td>
-                                        <td>Cambio de estado</td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>20-Dic-2013</td>
-
-                                        <td>Informe post-adoptivo</td>
-                                        <td>001-MIMP</td>
-                                        <td>Cambio de profesional asignado</td>
+                                    <c:forEach var="log" items="${listaParticularLog}" varStatus="status">
+                                        <tr>
+                                            <td>${status.index + 1}</td>
+                                            <td>${log.getPersonal().getNombre()} ${log.getPersonal().getApellidoP()} ${log.getPersonal().getApellidoM()}</td>
+                                            <td>${log.getFecha()}</td>
+                                            <td>${log.getTipoReg()}</td>
+                                            <td>${log.getNReg()}</td>
+                                            <td>${log.getIncidencia()}</td>                                                                            
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>

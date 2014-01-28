@@ -846,9 +846,9 @@ public class mainEtapas {
             tempFam = tempEval.getExpedienteFamilia();
             tempFam.setEstado("espera");
             servicioEtapa.updateExpedienteFamilia(tempFam);
-        map.put("df",df);
-        map.put("listaEspera",servicioEtapa.getListaEspera());
-        return new ModelAndView("/Personal/Buscador_etapa/lista_espera", map);
+            map.put("df", df);
+            map.put("listaEspera", servicioEtapa.getListaEspera());
+            return new ModelAndView("/Personal/Buscador_etapa/lista_espera", map);
         }
         map.put("familia", familia);
         map.put("legal", tempEval);
@@ -1225,6 +1225,16 @@ public class mainEtapas {
 
                 servicioEtapa.crearEstudioCaso(tempEst);
 
+                String mensaje_log = "Se registró nueva familia al estudio de caso del NNA con ID: " + String.valueOf(nnaPrioritario.getIdnna());
+                String Tipo_registro = "Estu_Caso";
+
+                //try{
+                String Numero_registro = tempEst.getOrden();
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                //}  catch (Exception ex){
+                //}
+
             }
             map.put("listaEstudios", servicioEtapa.getListaEstudioCaso(nnaPrioritario.getIdnna()));
             return new ModelAndView("/Personal/nna/lista_estudios", map);
@@ -1336,6 +1346,14 @@ public class mainEtapas {
                     servicioEtapa.updateExpedienteFamilia(tempExp);
                 }
             }
+
+            String mensaje_log = "Se editó el estudio de caso con Orden: " + tempEst.getOrden() + " y ID: " + String.valueOf(tempEst.getIdestudioCaso());
+            String Tipo_registro = "Estu_Caso";
+
+            //try{
+            String Numero_registro = tempEst.getOrden();
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
             map.put("df", df);
             map.put("nna", nnaEditarEstudioCaso);
             map.put("listaEstudios", servicioEtapa.getListaEstudioCasoOrden(orden));
@@ -1348,6 +1366,14 @@ public class mainEtapas {
             tempExp = tempEst.getExpedienteFamilia();
             tempExp.setEstado("espera");
             servicioEtapa.updateExpedienteFamilia(tempExp);
+
+            String mensaje_log = "Se editó el estudio de caso con Orden: " + tempEst.getOrden() + " y ID: " + String.valueOf(tempEst.getIdestudioCaso());
+            String Tipo_registro = "Estu_Caso";
+
+            //try{
+            String Numero_registro = tempEst.getOrden();
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
             map.put("df", df);
             map.put("nna", nnaEditarEstudioCaso);
             map.put("listaEstudios", servicioEtapa.getListaEstudioCasoOrden(orden));
@@ -1360,6 +1386,14 @@ public class mainEtapas {
             tempExp = tempEst.getExpedienteFamilia();
             tempExp.setEstado("espera");
             servicioEtapa.updateExpedienteFamilia(tempExp);
+
+            String mensaje_log = "Se editó el estudio de caso con Orden: " + tempEst.getOrden() + " y ID: " + String.valueOf(tempEst.getIdestudioCaso());
+            String Tipo_registro = "Estu_Caso";
+
+            //try{
+            String Numero_registro = tempEst.getOrden();
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
             map.put("df", df);
             map.put("nna", nnaEditarEstudioCaso);
             map.put("listaEstudios", servicioEtapa.getListaEstudioCasoOrden(orden));
@@ -1369,6 +1403,14 @@ public class mainEtapas {
             EstudioCaso tempEst = servicioEtapa.getEstudioCaso(idEstudio);
             tempEst.setResultado(resultado);
             servicioEtapa.updateEstudioCaso(tempEst);
+
+            String mensaje_log = "Se editó el estudio de caso con Orden: " + tempEst.getOrden() + " y ID: " + String.valueOf(tempEst.getIdestudioCaso());
+            String Tipo_registro = "Estu_Caso";
+
+            //try{
+            String Numero_registro = tempEst.getOrden();
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
 
             map.put("df", df);
             map.put("nna", nnaEditarEstudioCaso);
@@ -2430,11 +2472,11 @@ public class mainEtapas {
                 temp.setFechaRecepcionProyectado(null);
             }
             /*if (fechaProyectado != null && !fechaProyectado.equals("")) {
-                temp.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
-            }
-            if (fechaProyectado == null || fechaProyectado.equals("")) {
-                temp.setFechaRecepcionProyectado(null);
-            }*/
+             temp.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
+             }
+             if (fechaProyectado == null || fechaProyectado.equals("")) {
+             temp.setFechaRecepcionProyectado(null);
+             }*/
             tempfecha = temp.getFechaRecepcion();
             if (fechaRecepcion != null) {
                 if (fechaRecepcion.contains("ene") || fechaRecepcion.contains("feb") || fechaRecepcion.contains("mar") || fechaRecepcion.contains("abr")
@@ -2452,11 +2494,11 @@ public class mainEtapas {
                 temp.setFechaRecepcion(null);
             }
             /*if (fechaRecepcion != null && !fechaRecepcion.equals("")) {
-                temp.setFechaRecepcion(df.stringToDate(fechaRecepcion));
-            }
-            if (fechaRecepcion == null || fechaRecepcion.equals("")) {
-                temp.setFechaRecepcion(null);
-            }*/
+             temp.setFechaRecepcion(df.stringToDate(fechaRecepcion));
+             }
+             if (fechaRecepcion == null || fechaRecepcion.equals("")) {
+             temp.setFechaRecepcion(null);
+             }*/
             tempfecha = temp.getFechaInforme();
             if (fechaInforme != null) {
                 if (fechaInforme.contains("ene") || fechaInforme.contains("feb") || fechaInforme.contains("mar") || fechaInforme.contains("abr")
@@ -2474,11 +2516,11 @@ public class mainEtapas {
                 temp.setFechaInforme(null);
             }
             /*if (fechaInforme != null && !fechaInforme.equals("")) {
-                temp.setFechaInforme(df.stringToDate(fechaInforme));
-            }
-            if (fechaInforme == null || fechaInforme.equals("")) {
-                temp.setFechaInforme(null);
-            }*/
+             temp.setFechaInforme(df.stringToDate(fechaInforme));
+             }
+             if (fechaInforme == null || fechaInforme.equals("")) {
+             temp.setFechaInforme(null);
+             }*/
             tempfecha = temp.getFechaActa();
             if (fechaActa != null) {
                 if (fechaActa.contains("ene") || fechaActa.contains("feb") || fechaActa.contains("mar") || fechaActa.contains("abr")
@@ -2496,11 +2538,11 @@ public class mainEtapas {
                 temp.setFechaActa(null);
             }
             /*if (fechaActa != null && !fechaActa.equals("")) {
-                temp.setFechaActa(df.stringToDate(fechaActa));
-            }
-            if (fechaActa == null || fechaActa.equals("")) {
-                temp.setFechaActa(null);
-            }*/
+             temp.setFechaActa(df.stringToDate(fechaActa));
+             }
+             if (fechaActa == null || fechaActa.equals("")) {
+             temp.setFechaActa(null);
+             }*/
             Personal pers = ServicioPersonal.getPersonal(personal);
             temp.setPersonal(pers);
             temp.setObs(obs);
@@ -2528,11 +2570,11 @@ public class mainEtapas {
                 tempPost.setFechaRecepcionProyectado(null);
             }
             /*if (fechaProyectado != null && !fechaProyectado.equals("")) {
-                tempPost.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
-            }
-            if (fechaProyectado == null || fechaProyectado.equals("")) {
-                tempPost.setFechaRecepcionProyectado(null);
-            }*/
+             tempPost.setFechaRecepcionProyectado(df.stringToDate(fechaProyectado));
+             }
+             if (fechaProyectado == null || fechaProyectado.equals("")) {
+             tempPost.setFechaRecepcionProyectado(null);
+             }*/
             tempfecha = tempPost.getFechaRecepcion();
             if (fechaRecepcion != null) {
                 if (fechaRecepcion.contains("ene") || fechaRecepcion.contains("feb") || fechaRecepcion.contains("mar") || fechaRecepcion.contains("abr")
@@ -2550,11 +2592,11 @@ public class mainEtapas {
                 tempPost.setFechaRecepcion(null);
             }
             /*if (fechaRecepcion != null && !fechaRecepcion.equals("")) {
-                tempPost.setFechaRecepcion(df.stringToDate(fechaRecepcion));
-            }
-            if (fechaRecepcion == null || fechaRecepcion.equals("")) {
-                tempPost.setFechaRecepcion(null);
-            }*/
+             tempPost.setFechaRecepcion(df.stringToDate(fechaRecepcion));
+             }
+             if (fechaRecepcion == null || fechaRecepcion.equals("")) {
+             tempPost.setFechaRecepcion(null);
+             }*/
             tempfecha = tempPost.getFechaInforme();
             if (fechaInforme != null) {
                 if (fechaInforme.contains("ene") || fechaInforme.contains("feb") || fechaInforme.contains("mar") || fechaInforme.contains("abr")
@@ -2572,11 +2614,11 @@ public class mainEtapas {
                 tempPost.setFechaInforme(null);
             }
             /*if (fechaInforme != null && !fechaInforme.equals("")) {
-                tempPost.setFechaInforme(df.stringToDate(fechaInforme));
-            }
-            if (fechaInforme == null || fechaInforme.equals("")) {
-                tempPost.setFechaInforme(null);
-            }*/
+             tempPost.setFechaInforme(df.stringToDate(fechaInforme));
+             }
+             if (fechaInforme == null || fechaInforme.equals("")) {
+             tempPost.setFechaInforme(null);
+             }*/
             tempfecha = tempPost.getFechaActa();
             if (fechaActa != null) {
                 if (fechaActa.contains("ene") || fechaActa.contains("feb") || fechaActa.contains("mar") || fechaActa.contains("abr")
@@ -2594,11 +2636,11 @@ public class mainEtapas {
                 tempPost.setFechaActa(null);
             }
             /*if (fechaActa != null && !fechaActa.equals("")) {
-                tempPost.setFechaActa(df.stringToDate(fechaActa));
-            }
-            if (fechaActa == null || fechaActa.equals("")) {
-                tempPost.setFechaActa(null);
-            }*/
+             tempPost.setFechaActa(df.stringToDate(fechaActa));
+             }
+             if (fechaActa == null || fechaActa.equals("")) {
+             tempPost.setFechaActa(null);
+             }*/
             Personal pers = ServicioPersonal.getPersonal(personal);
             tempPost.setPersonal(pers);
             tempPost.setObs(obs);
@@ -2746,7 +2788,7 @@ public class mainEtapas {
         return new ModelAndView("/Personal/Buscador_etapa/etapa_post/informes_general", map);
 
     }
-    
+
     @RequestMapping(value = "/Reevaluacion", method = RequestMethod.GET)
     public ModelAndView Reevaluacion(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -2762,7 +2804,7 @@ public class mainEtapas {
         map.put("listaReevaluacion", servicioEtapa.getListaReevaluación());
         return new ModelAndView("/Personal/Buscador_etapa/lista_reevaluacion", map);
     }
-    
+
     @RequestMapping(value = "/ListaEspera", method = RequestMethod.GET)
     public ModelAndView ListaEspera(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
