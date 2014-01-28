@@ -20,6 +20,9 @@ public class ExpedienteFamilia  implements java.io.Serializable {
      private String ht;
      private String numeroExpediente;
      private Date fechaIngresoDga;
+     private String htFicha;
+     private String nFicha;
+     private Date fechaIngresoFicha;
      private String estado;
      private Date tupa;
      private String nacionalidad;
@@ -40,15 +43,18 @@ public class ExpedienteFamilia  implements java.io.Serializable {
         this.unidad = unidad;
         this.familia = familia;
     }
-    public ExpedienteFamilia(long idexpedienteFamilia, Unidad unidad, Familia familia, Long numero, String expediente, String ht, String numeroExpediente, Date fechaIngresoDga, String estado, Date tupa, String nacionalidad, Short rnsa, Short rnaa, String tipoFamilia, String tipoListaEspera, Set<Designacion> designacions, Set<Evaluacion> evaluacions, Set<EstudioCaso> estudioCasos) {
+    public ExpedienteFamilia(long idexpedienteFamilia, Unidad unidad, Familia familia, Long numero, String expediente, String ht, String htFicha,String nFicha,String numeroExpediente, Date fechaIngresoDga, Date fechaIngresoFicha, String estado, Date tupa, String nacionalidad, Short rnsa, Short rnaa, String tipoFamilia, String tipoListaEspera, Set<Designacion> designacions, Set<Evaluacion> evaluacions, Set<EstudioCaso> estudioCasos) {
        this.idexpedienteFamilia = idexpedienteFamilia;
        this.unidad = unidad;
        this.familia = familia;
        this.numero = numero;
        this.expediente = expediente;
        this.ht = ht;
+       this.htFicha = htFicha;
+       this.nFicha = nFicha;
        this.numeroExpediente = numeroExpediente;
        this.fechaIngresoDga = fechaIngresoDga;
+       this.fechaIngresoFicha = fechaIngresoFicha;
        this.estado = estado;
        this.tupa = tupa;
        this.nacionalidad = nacionalidad;
@@ -103,6 +109,20 @@ public class ExpedienteFamilia  implements java.io.Serializable {
     public void setHt(String ht) {
         this.ht = ht;
     }
+    public String getHtFicha() {
+        return this.htFicha;
+    }
+    
+    public void setHtFicha(String htFicha) {
+        this.htFicha = htFicha;
+    }
+    public String nFicha() {
+        return this.nFicha;
+    }
+    
+    public void nFicha(String nFicha) {
+        this.nFicha = nFicha;
+    }
     public String getNumeroExpediente() {
         return this.numeroExpediente;
     }
@@ -116,6 +136,13 @@ public class ExpedienteFamilia  implements java.io.Serializable {
     
     public void setFechaIngresoDga(Date fechaIngresoDga) {
         this.fechaIngresoDga = fechaIngresoDga;
+    }
+     public Date getFechaIngresoFicha() {
+        return this.fechaIngresoFicha;
+    }
+    
+    public void setFechaIngresoFicha(Date fechaIngresoFicha) {
+        this.fechaIngresoFicha = fechaIngresoFicha;
     }
     public String getEstado() {
         return this.estado;

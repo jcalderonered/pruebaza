@@ -29,6 +29,15 @@
         <property name="fechaIngresoDga" type="date">
             <column name="FECHA_INGRESO_DGA" length="7" />
         </property>
+        <property name="htFicha" type="string">
+            <column name="HTFICHA" length="40" />
+        </property>
+        <property name="nFicha" type="string">
+            <column name="NFICHA" length="40" />
+        </property>
+        <property name="fechaIngresoFicha" type="date">
+            <column name="FECHA_INGRESO_FICHA" length="7" />
+        </property>
         <property name="estado" type="string">
             <column name="ESTADO" length="40" />
         </property>

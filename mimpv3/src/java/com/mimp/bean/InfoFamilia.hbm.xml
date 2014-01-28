@@ -142,6 +142,9 @@
         </property>
        <property name="expectativaEdadMax" type="java.lang.Short">
             <column name="EXPECTATIVA_EDAD_MAX" precision="3" scale="0" />
+        </property>
+        <property name="nHijos" type="java.lang.Short">
+            <column name="NHIJOS" precision="3" scale="0" />
         </property> 
         <set name="residenteActs" table="RESIDENTE_ACT" inverse="true" lazy="true" fetch="select">
             <key>
