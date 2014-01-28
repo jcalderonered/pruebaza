@@ -116,11 +116,11 @@ public class ExpedienteFamilia  implements java.io.Serializable {
     public void setHtFicha(String htFicha) {
         this.htFicha = htFicha;
     }
-    public String nFicha() {
+    public String getnFicha() {
         return this.nFicha;
     }
     
-    public void nFicha(String nFicha) {
+    public void setnFicha(String nFicha) {
         this.nFicha = nFicha;
     }
     public String getNumeroExpediente() {
