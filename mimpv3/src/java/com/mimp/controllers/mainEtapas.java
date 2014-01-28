@@ -1055,7 +1055,7 @@ public class mainEtapas {
 
     }
 
-    @RequestMapping(value = "/insertarDesignación", method = RequestMethod.POST)
+    @RequestMapping(value = "/insertarDesignacion", method = RequestMethod.POST)
     public ModelAndView insertarDesignación(ModelMap map, HttpSession session, long[] idExpediente,
             @RequestParam(value = "fecha", required = false) String fecha,
             @RequestParam(value = "numDesig", required = false) String numDesig

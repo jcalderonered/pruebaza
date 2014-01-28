@@ -816,6 +816,26 @@ public ArrayList<Familia> getListaFamilias () {
         List expedientes = query.list();
         for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
         ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+        Hibernate.initialize(temp.getEvaluacions());
+        Set<Evaluacion> tempEvaluaciones = new HashSet<Evaluacion>(0);
+            for (Evaluacion eval : temp.getEvaluacions()){
+                if(eval.getTipo().equals("legal")){
+                        String hql2 = "from Resolucion R where R.evaluacion = :idEvaluacion and R.tipo = :tipo ORDER BY R.fechaResol DESC";
+                        Query query2 = session.createQuery(hql2);
+                        query2.setLong("idEvaluacion", eval.getIdevaluacion());
+                        query2.setString("tipo", "apto");
+                        query2.setMaxResults(1);
+                        Object queryResult = query2.uniqueResult();
+                        Resolucion tempResol = (Resolucion) queryResult;
+                        Set<Resolucion> tempResoluciones = new HashSet<Resolucion>(0);
+                        tempResoluciones.add(tempResol);
+                        eval.setResolucions(tempResoluciones);
+                        tempEvaluaciones.add(eval);
+                        
+                    }
+                
+            }
+            temp.setEvaluacions(tempEvaluaciones);
             allEspera.add(temp);
         }
         return allEspera;

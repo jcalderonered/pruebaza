@@ -46,6 +46,23 @@ public class HiberNna {
         return tempNna;
     }
     
+    public Nna getNnaPostAdopcion(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Nna tempNna = new Nna();
+
+        session.beginTransaction();
+        String hqlA = "FROM Nna N WHERE N.id = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        tempNna = (Nna) queryResultA;
+        Hibernate.initialize(tempNna.getExpedienteNnas());
+        Hibernate.initialize(tempNna.getCar());
+        Hibernate.initialize(tempNna.getJuzgado());
+        return tempNna;
+    }
     
     public void crearNna (Nna temp){
         
