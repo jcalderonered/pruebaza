@@ -14,6 +14,9 @@
         <property name="numeroInformes" type="java.lang.Long">
             <column name="NUMERO_INFORMES" precision="10" scale="0" />
         </property>
+        <property name="idNna" type="java.lang.Long">
+            <column name="IDNNA" precision="10" scale="0" />
+        </property>
         <property name="fechaResolucion" type="date">
             <column name="FECHA_RESOLUCION" length="7" />
         </property>

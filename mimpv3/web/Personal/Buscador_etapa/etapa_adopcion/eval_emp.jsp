@@ -113,7 +113,7 @@
                         <div class="row">
                             <div class="col-md-2 col-md-offset-2">
                             <c:if test="${empatia == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearEvalEmpatia" method="post"> 
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearEvalEmpatia" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)"> 
                                 <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
                             </c:if>  
                             <c:if test="${empatia != null}">
@@ -207,6 +207,34 @@
                     $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
                 </script>
+                <script type="text/javascript">
+                function enter(e) {
+                     if (e.keyCode == 13) {
+                     return false;
+                    }
+                }
+            </script>
+            <script type="text/javascript">
+     
+            function validar()
+            {
+              
+            if( document.formulario.numEval.value == "" )
+            {
+            alert( "Debe ingresar un número de informe" );
+             document.formulario.numEval.focus() ;
+            return false;
+            }
+            if( document.formulario.fechaEval.value == "" )
+            {
+            alert( "Debe ingresar la fecha" );
+             document.formulario.fechaEval.focus() ;
+            return false;
+            }
+            
+            return true;
+            }
+            </script>
                 <!-- Placed at the end of the document so the pages load faster -->               
                 </body>
                 </html>

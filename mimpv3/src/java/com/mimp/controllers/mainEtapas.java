@@ -1155,6 +1155,7 @@ public class mainEtapas {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        nnaEditarEstudioCaso = idNna;
         nnaPrioritario = ServicioNna.getNna(idNna);
         listaEstudioCaso.clear();
         return new ModelAndView("/Personal/nna/reg_estudio", map);
@@ -2077,6 +2078,7 @@ public class mainEtapas {
                 servicioEtapa.updateDesignacion(tempDesig);
                 PostAdopcion tempPost = new PostAdopcion();
                 tempPost.setFamilia(tempEval.getExpedienteFamilia().getFamilia());
+                tempPost.setidNna(idNna);
                 tempfecha = tempPost.getFechaResolucion();
                 if (fechaResol != null) {
                     if (fechaResol.contains("ene") || fechaResol.contains("feb") || fechaResol.contains("mar") || fechaResol.contains("abr")

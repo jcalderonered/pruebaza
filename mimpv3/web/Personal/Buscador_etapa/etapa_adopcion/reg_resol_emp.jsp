@@ -108,7 +108,7 @@ if (u==null){
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <c:if test="${resolucion == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearResolEmpatia" method="post" onsubmit="return confirm('Desea crear la Resolución?');"> 
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearResolEmpatia" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)"> 
                                 <input hidden name="idEmpatia" id="idEmpatia" value="${idEmpatia}">
                                 <input hidden name="idNna" id="idNna" value="${idNna}">
                             </c:if>  
@@ -200,7 +200,37 @@ if (u==null){
                        }
                        // alert("Al seleccionar esta opción el expediente será retirado del sistema");
                     }
-        </script>            
+        </script>   
+        <script type="text/javascript">
+                function enter(e) {
+                     if (e.keyCode == 13) {
+                     return false;
+                    }
+                }
+        </script>
+        <script type="text/javascript">
+     
+            function validar()
+            {
+              
+            if( document.formulario.numResol.value == "" )
+            {
+            alert( "Debe ingresar un número de resolución" );
+             document.formulario.numResol.focus() ;
+            return false;
+            }
+            if( document.formulario.fechaResol.value == "" )
+            {
+            alert( "Debe ingresar la fecha" );
+             document.formulario.fechaResol.focus() ;
+            return false;
+            }
+            
+            return confirm('Desea crear la resolución?');
+            
+            }
+         </script>
+        
         <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>

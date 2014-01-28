@@ -15,6 +15,7 @@ public class PostAdopcion  implements java.io.Serializable {
      private long idpostAdopcion;
      private Familia familia;
      private Long numeroInformes;
+     private Long idNna;
      private Date fechaResolucion;
      private Set<InformePostAdoptivo> informePostAdoptivos = new HashSet<InformePostAdoptivo>(0);
 
@@ -26,10 +27,11 @@ public class PostAdopcion  implements java.io.Serializable {
         this.idpostAdopcion = idpostAdopcion;
         this.familia = familia;
     }
-    public PostAdopcion(long idpostAdopcion, Familia familia, Long numeroInformes, Date fechaResolucion, Set<InformePostAdoptivo> informePostAdoptivos) {
+    public PostAdopcion(long idpostAdopcion, Familia familia, Long numeroInformes,Long idNna, Date fechaResolucion, Set<InformePostAdoptivo> informePostAdoptivos) {
        this.idpostAdopcion = idpostAdopcion;
        this.familia = familia;
        this.numeroInformes = numeroInformes;
+       this.idNna = idNna;
        this.fechaResolucion = fechaResolucion;
        this.informePostAdoptivos = informePostAdoptivos;
     }
@@ -54,6 +56,14 @@ public class PostAdopcion  implements java.io.Serializable {
     
     public void setNumeroInformes(Long numeroInformes) {
         this.numeroInformes = numeroInformes;
+    }
+    
+    public Long getidNna() {
+        return this.idNna;
+    }
+    
+    public void setidNna(Long idNna) {
+        this.idNna = idNna;
     }
     public Date getFechaResolucion() {
         return this.fechaResolucion;
