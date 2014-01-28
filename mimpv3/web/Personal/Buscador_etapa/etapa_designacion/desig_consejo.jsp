@@ -107,7 +107,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                        <form role="form" action="${pageContext.servletContext.contextPath}/aceptacionConsejo" method="post">
+                        <form role="form" action="${pageContext.servletContext.contextPath}/aceptacionConsejo" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
                             <fieldset>
                                 <br>
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
@@ -212,6 +212,29 @@
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
             </script>
+            <script type="text/javascript">
+                function enter(e) {
+                     if (e.keyCode == 13) {
+                     return false;
+                    }
+                }
+            </script>
+            <script type="text/javascript">
+     
+            function validar()
+            {
+              
+            if( document.formulario.fechaConsejo.value == "" )
+            {
+            alert( "Debe ingresar la fecha de consejo" );
+             document.formulario.fechaConsejo.focus() ;
+            return false;
+            }
+            
+            return true;
+            }
+            </script>
+            
             <!-- Ubicar al final -->
     </body>
 </html>
