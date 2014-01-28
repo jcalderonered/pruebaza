@@ -83,42 +83,40 @@ public class HiberPersonal {
     }
 
     //<----------ORGANISMO---------->
-    
     public boolean usuario(String user) {
 
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();                
+        session.beginTransaction();
 
         String hqlP = "FROM Personal P WHERE P.user = :usuario ";//:=login
         String hqlF = "FROM Familia F WHERE F.user = :usuario ";
         String hqlE = "FROM Entidad R WHERE R.user = :usuario ";
 
         Query queryP = session.createQuery(hqlP);
-        queryP.setString("usuario", user);        
+        queryP.setString("usuario", user);
         Object queryResultP = queryP.uniqueResult();
 
         Query queryF = session.createQuery(hqlF);
-        queryF.setString("usuario", user);        
+        queryF.setString("usuario", user);
         Object queryResultF = queryF.uniqueResult();
 
         Query queryE = session.createQuery(hqlE);
-        queryE.setString("usuario", user);        
+        queryE.setString("usuario", user);
         Object queryResultE = queryE.uniqueResult();
 
         if (queryResultP != null) {
-            
+
             return true;
-        } else if (queryResultF != null) {            
+        } else if (queryResultF != null) {
             return true;
-        } else if (queryResultE != null) {            
+        } else if (queryResultE != null) {
             return true;
-        } else {            
+        } else {
             return false;
         }
 
     }
-    
-    
+
     public void InsertOrg(Entidad ent, Representante rep, Organismo org) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -131,7 +129,6 @@ public class HiberPersonal {
         ent.getOrganismos().add(org);
         rep.setOrganismo(org);
 
-        
         session.save(ent);
         session.save(org);
         session.save(rep);
@@ -183,7 +180,6 @@ public class HiberPersonal {
     }
 
     //<----------CAR---------->
-    
     public void InsertCar(Car car) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -191,10 +187,9 @@ public class HiberPersonal {
         session.beginTransaction();
 
         session.save(car);
-        
 
     }
-    
+
     public void UpdateCar(Car car) {
         Session session = sessionFactory.getCurrentSession();
 
@@ -237,6 +232,7 @@ public class HiberPersonal {
 
         return car;
     }
+
     //<----------Juzgado---------->
     public void InsertJuzgado(Juzgado juzg) {
 
@@ -245,9 +241,9 @@ public class HiberPersonal {
         session.beginTransaction();
 
         session.save(juzg);
-       
+
     }
-    
+
     public void UpdateJuzgado(Juzgado juzg) {
         Session session = sessionFactory.getCurrentSession();
 
@@ -255,7 +251,7 @@ public class HiberPersonal {
 
         session.update(juzg);
     }
-    
+
     public ArrayList<Juzgado> ListaJuzgado() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -275,6 +271,7 @@ public class HiberPersonal {
 
         return allJuzgado;
     }
+
     public Juzgado getJuzgado(long id) {
         Session session = sessionFactory.getCurrentSession();
         Juzgado juzg = new Juzgado();
@@ -289,12 +286,8 @@ public class HiberPersonal {
 
         return juzg;
     }
-    
-    
-    
-    
+
     //<----------UA---------->
-    
     public void InsertUa(Unidad ua) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -303,15 +296,15 @@ public class HiberPersonal {
 
         session.save(ua);
     }
-    
+
     public void UpdateUa(Unidad ua) {
         Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
 
         session.update(ua);
-    }    
-     
+    }
+
     public ArrayList<Unidad> ListaUa() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -331,7 +324,7 @@ public class HiberPersonal {
 
         return allUa;
     }
-    
+
     public Unidad getUa(long id) {
         Session session = sessionFactory.getCurrentSession();
         Unidad ua = new Unidad();
@@ -346,7 +339,7 @@ public class HiberPersonal {
 
         return ua;
     }
-    
+
     public ArrayList<Personal> ListaPersonalUa(long idUa) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -367,7 +360,7 @@ public class HiberPersonal {
 
         return allPersonal;
     }
-    
+
     public ArrayList<Personal> ListaPersonalNoUa(long idUa) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -388,7 +381,7 @@ public class HiberPersonal {
 
         return allPersonal;
     }
-    
+
     //<----------Personal---------->
     public void InsertPersonal(Personal pers) {
 
@@ -398,15 +391,15 @@ public class HiberPersonal {
 
         session.save(pers);
     }
-    
+
     public void UpdatePersonal(Personal pers) {
         Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
 
         session.update(pers);
-    }  
-    
+    }
+
     public ArrayList<Personal> ListaPersonal() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -426,7 +419,7 @@ public class HiberPersonal {
 
         return allPersonal;
     }
-    
+
     public Personal getPersonal(long idPers) {
         Session session = sessionFactory.getCurrentSession();
         Personal pers = new Personal();
@@ -441,10 +434,10 @@ public class HiberPersonal {
         Hibernate.initialize(pers.getUnidad());
         return pers;
     }
-    
-    public ArrayList<Sesion> listaSesiones (){
-        
-    Session session = sessionFactory.getCurrentSession();
+
+    public ArrayList<Sesion> listaSesiones() {
+
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
         String hql = "From Sesion S order by S.fecha";
@@ -453,16 +446,16 @@ public class HiberPersonal {
         ArrayList<Sesion> allSesiones = new ArrayList();
         for (Iterator iter = sesiones.iterator(); iter.hasNext();) {
             Sesion temp = (Sesion) iter.next();
-            
+
             allSesiones.add(temp);
-            
+
         }
         return allSesiones;
-    
+
     }
-    
-    public Sesion getSesion (long id){
-    
+
+    public Sesion getSesion(long id) {
+
         Session session = sessionFactory.getCurrentSession();
         Sesion sesion = new Sesion();
 
@@ -475,45 +468,44 @@ public class HiberPersonal {
         sesion = (Sesion) queryResultU;
         Hibernate.initialize(sesion.getTurnos());
         return sesion;
-    
+
     }
-    
+
     /* PERSONAL CREACION/EDICION DE SESIONES Y TALLERES 
-    */
-    
-    
-    public void PersonalCrearSesion (Sesion temp){
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+     */
+    public void PersonalCrearSesion(Sesion temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.save(temp);
-    
+
     }
-    public void PersonalUpdateSesion (Sesion temp){
-        
-       Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+
+    public void PersonalUpdateSesion(Sesion temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.update(temp);
     }
-        
-    public void PersonalUpdateTurno (Turno temp){
-        
-       Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+
+    public void PersonalUpdateTurno(Turno temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.update(temp);
     }
-    
-    public void PersonalCrearTurno (Turno temp){
-        
-       Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+
+    public void PersonalCrearTurno(Turno temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.save(temp);
     }
-    
-    public ArrayList<FormularioSesion> InscritosSesion (long idSesion) {
-        
-         Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         
+
+    public ArrayList<FormularioSesion> InscritosSesion(long idSesion) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
         String hql = "FROM FormularioSesion F where F.sesion = :id";
         Query query = session.createQuery(hql);
         query.setLong("id", idSesion);
@@ -525,18 +517,18 @@ public class HiberPersonal {
             Hibernate.initialize(temp.getAsistenciaFTs());
             Hibernate.initialize(temp.getFamilia());
             allFormularios.add(temp);
-            
-        } 
-    
+
+        }
+
         return allFormularios;
-    
+
     }
-    
-    public ArrayList<Asistente> asistentePorFormulario (long idFormulario) {
-        
-         Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         
+
+    public ArrayList<Asistente> asistentePorFormulario(long idFormulario) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
         String hql = "FROM Asistente A where A.formularioSesion = :id";
         Query query = session.createQuery(hql);
         query.setLong("id", idFormulario);
@@ -546,98 +538,94 @@ public class HiberPersonal {
             Asistente temp = (Asistente) iter.next();
             Hibernate.initialize(temp.getFormularioSesion());
             allAsistentes.add(temp);
-            
-        } 
-    
+
+        }
+
         return allAsistentes;
-    
+
     }
-    
-    public void PersonalCrearTaller (Taller temp){
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+
+    public void PersonalCrearTaller(Taller temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.save(temp);
-    
+
     }
-    
-    public void PersonalUpdateTaller (Taller temp){
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+
+    public void PersonalUpdateTaller(Taller temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.update(temp);
-    
+
     }
-    
-    public void PersonalCrearGrupo (Grupo temp){
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+
+    public void PersonalCrearGrupo(Grupo temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.save(temp);
-    
+
     }
-    
-    public void PersonalUpdateGrupo (Grupo temp){
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+
+    public void PersonalUpdateGrupo(Grupo temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.update(temp);
-    
+
     }
-    
-    public void PersonalCrearTurno2 (Turno2 temp){
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+
+    public void PersonalCrearTurno2(Turno2 temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.save(temp);
-    
+
     }
-    
-    public void PersonalUpdateTurno2 (Turno2 temp){
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+
+    public void PersonalUpdateTurno2(Turno2 temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.update(temp);
-    
+
     }
-    
-    public void PersonalCrearReunion (Reunion temp){
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+
+    public void PersonalCrearReunion(Reunion temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.save(temp);
-    
+
     }
-    
-    public void PersonalUpdateReunion (Reunion temp){
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
+
+    public void PersonalUpdateReunion(Reunion temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         session.update(temp);
-    
+
     }
-    
-    public ArrayList<Taller> listaTalleres (){
-        
-    Session session = sessionFactory.getCurrentSession();
-        
-        Short numReun ;
+
+    public ArrayList<Taller> listaTalleres() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        Short numReun;
         int cont = 0;
         String size;
-        
+
         session.beginTransaction();
         String hql = "From Taller T order by T.id";
         Query query = session.createQuery(hql);
         List talleres = query.list();
         ArrayList<Taller> allTalleres = new ArrayList();
-        
-        
-        
-        
-         
+
         for (Iterator iter = talleres.iterator(); iter.hasNext();) {
-                Taller temp = (Taller) iter.next();
-                    Hibernate.initialize(temp.getGrupos());
-                  Set<Grupo> allGrp = new HashSet<Grupo>(0);  
+            Taller temp = (Taller) iter.next();
+            Hibernate.initialize(temp.getGrupos());
+            Set<Grupo> allGrp = new HashSet<Grupo>(0);
             for (Grupo grp : temp.getGrupos()) {
-                         Hibernate.initialize(grp.getTurno2s());
-                  Set<Turno2> allT2 = new HashSet<Turno2>(0);       
+                Hibernate.initialize(grp.getTurno2s());
+                Set<Turno2> allT2 = new HashSet<Turno2>(0);
                 for (Turno2 t2 : grp.getTurno2s()) {
-                            Hibernate.initialize(t2.getReunions());
-                                 cont = cont + t2.getReunions().size();
-                           allT2.add(t2);
+                    Hibernate.initialize(t2.getReunions());
+                    cont = cont + t2.getReunions().size();
+                    allT2.add(t2);
                 }
                 grp.setTurno2s(allT2);
                 allGrp.add(grp);
@@ -650,11 +638,11 @@ public class HiberPersonal {
             cont = 0;
         }
         return allTalleres;
-    
+
     }
-    
-    public Taller getTaller (long id){
-    
+
+    public Taller getTaller(long id) {
+
         Session session = sessionFactory.getCurrentSession();
         Taller taller = new Taller();
 
@@ -663,22 +651,22 @@ public class HiberPersonal {
         Query query = session.createQuery(hql);
         query.setLong("id", id);
         Object queryResult = query.uniqueResult();
-        
+
         taller = (Taller) queryResult;
         Hibernate.initialize(taller.getGrupos());
-        
+
         Set<Grupo> allGrupos = new HashSet<Grupo>(0);
         for (Grupo grup : taller.getGrupos()) {
-                Hibernate.initialize(grup.getTurno2s());
-                allGrupos.add(grup);
+            Hibernate.initialize(grup.getTurno2s());
+            allGrupos.add(grup);
         }
         taller.setGrupos(allGrupos);
         return taller;
-    
+
     }
-    
-    public Grupo getGrupo (long id){
-    
+
+    public Grupo getGrupo(long id) {
+
         Session session = sessionFactory.getCurrentSession();
         Grupo grp = new Grupo();
 
@@ -687,22 +675,22 @@ public class HiberPersonal {
         Query query = session.createQuery(hql);
         query.setLong("id", id);
         Object queryResult = query.uniqueResult();
-        
+
         grp = (Grupo) queryResult;
         Hibernate.initialize(grp.getTurno2s());
         Hibernate.initialize(grp.getTaller());
         Set<Turno2> allTurno2 = new HashSet<Turno2>(0);
         for (Turno2 t2 : grp.getTurno2s()) {
-                Hibernate.initialize(t2.getReunions());
-                allTurno2.add(t2);
+            Hibernate.initialize(t2.getReunions());
+            allTurno2.add(t2);
         }
         grp.setTurno2s(allTurno2);
         return grp;
-    
+
     }
-    
-    public Turno2 getTurno2 (long id){
-    
+
+    public Turno2 getTurno2(long id) {
+
         Session session = sessionFactory.getCurrentSession();
         Turno2 t2 = new Turno2();
 
@@ -711,17 +699,17 @@ public class HiberPersonal {
         Query query = session.createQuery(hql);
         query.setLong("id", id);
         Object queryResult = query.uniqueResult();
-        
+
         t2 = (Turno2) queryResult;
         Hibernate.initialize(t2.getReunions());
         Hibernate.initialize(t2.getGrupo());
-        
+
         return t2;
-    
+
     }
-    
-    public Reunion getReunion (long id){
-    
+
+    public Reunion getReunion(long id) {
+
         Session session = sessionFactory.getCurrentSession();
         Reunion reun = new Reunion();
 
@@ -730,68 +718,67 @@ public class HiberPersonal {
         Query query = session.createQuery(hql);
         query.setLong("id", id);
         Object queryResult = query.uniqueResult();
-        
+
         reun = (Reunion) queryResult;
         Hibernate.initialize(reun.getAsistenciaFRs());
         Hibernate.initialize(reun.getTurno2());
-        
+
         Turno2 temp = new Turno2();
         temp = reun.getTurno2();
         Hibernate.initialize(temp.getGrupo());
-        
+
         reun.setTurno2(temp);
         return reun;
-    
+
     }
-    
-    public ArrayList<FormularioSesion> InscritosTaller (long idTaller) {
-        
-         Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         ArrayList<FormularioSesion> allFormularios = new ArrayList();
-         Taller tempTaller = new Taller();
-         String hql = "From Taller T where T.id = :id";
+
+    public ArrayList<FormularioSesion> InscritosTaller(long idTaller) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<FormularioSesion> allFormularios = new ArrayList();
+        Taller tempTaller = new Taller();
+        String hql = "From Taller T where T.id = :id";
         Query query = session.createQuery(hql);
         query.setLong("id", idTaller);
         Object queryResult = query.uniqueResult();
-        
-        tempTaller = (Taller)queryResult;
+
+        tempTaller = (Taller) queryResult;
         Hibernate.initialize(tempTaller.getGrupos());
-         
+
         for (Grupo grp : tempTaller.getGrupos()) {
-                Hibernate.initialize(grp.getTurno2s());
-                
-                for (Turno2 T2 : grp.getTurno2s()) {
-                    Hibernate.initialize(T2.getReunions());
-                    
-                    for (Reunion reun : T2.getReunions()) {
-                            Hibernate.initialize(reun.getAsistenciaFRs());
-                            
-                            for (AsistenciaFR afr : reun.getAsistenciaFRs()){
-                                    Hibernate.initialize(afr.getFamilia().getFormularioSesions());
-                                    
-                                    for (FormularioSesion formularioSesion : afr.getFamilia().getFormularioSesions()) {
-                                        Hibernate.initialize(formularioSesion.getAsistentes());
-                                        
-                                        allFormularios.add(formularioSesion);
-                                }
-                                    
-                            }
+            Hibernate.initialize(grp.getTurno2s());
+
+            for (Turno2 T2 : grp.getTurno2s()) {
+                Hibernate.initialize(T2.getReunions());
+
+                for (Reunion reun : T2.getReunions()) {
+                    Hibernate.initialize(reun.getAsistenciaFRs());
+
+                    for (AsistenciaFR afr : reun.getAsistenciaFRs()) {
+                        Hibernate.initialize(afr.getFamilia().getFormularioSesions());
+
+                        for (FormularioSesion formularioSesion : afr.getFamilia().getFormularioSesions()) {
+                            Hibernate.initialize(formularioSesion.getAsistentes());
+
+                            allFormularios.add(formularioSesion);
+                        }
+
                     }
+                }
             }
-            
+
         }
-    
+
         return allFormularios;
-    
+
     }
-    
-    
-    public ArrayList<FormularioSesion> formulariosReunion (long idReunion) {
-        
-         Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         
+
+    public ArrayList<FormularioSesion> formulariosReunion(long idReunion) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
         String hql = "FROM Reunion R where R.id = :id";
         Query query = session.createQuery(hql);
         query.setLong("id", idReunion);
@@ -820,44 +807,44 @@ public class HiberPersonal {
                  }
         
         return allFormularios;
-    
+
     }
-    
-    public FormularioSesion getFormulario (long idFormulario){
-    
-         Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         
+
+    public FormularioSesion getFormulario(long idFormulario) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
         String hql = "FROM FormularioSesion F where F.id = :id";
         Query query = session.createQuery(hql);
         query.setLong("id", idFormulario);
         Object queryResult = query.uniqueResult();
         FormularioSesion tempFs = (FormularioSesion) queryResult;
-       Hibernate.initialize(tempFs.getAsistentes());
+        Hibernate.initialize(tempFs.getAsistentes());
         return tempFs;
     }
-    
-    public Turno getTurno (long idTurno){
-    
-         Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         
+
+    public Turno getTurno(long idTurno) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
         String hql = "FROM Turno T where T.id = :id";
         Query query = session.createQuery(hql);
         query.setLong("id", idTurno);
         Object queryResult = query.uniqueResult();
         Turno tempTurno = (Turno) queryResult;
-       
+
         return tempTurno;
     }
-    
-    public void marcarAsistenciaSesion (AsistenciaFT aft){
-    
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         
-         session.update(aft);
-    
+
+    public void marcarAsistenciaSesion(AsistenciaFT aft) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        session.update(aft);
+
     }
     
     
@@ -876,82 +863,80 @@ public class HiberPersonal {
             AsistenciaFT temp = (AsistenciaFT) iter.next();
             allAsistencias.add(temp);
         }
-       
+
         return allAsistencias;
-         
+
     }
-    
-    public void crearCuentaFamilia (Familia fam,FormularioSesion fs){
-    
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         
-         fam.getFormularioSesions().add(fs);
-         fs.setFamilia(fam);
-         
-         session.save(fam);
-         session.update(fs);
-         //A partir de aqui pasamos los datos que ya tenemos a InfoFamilia
-         InfoFamilia infofam = new InfoFamilia();
-         infofam.setFamilia(fam);
-         infofam.setDepRes(fs.getDepRes());
-         infofam.setPaisRes(fs.getPaisRes());
-         infofam.setDomicilio(fs.getDireccionRes());
-         infofam.setEstadoCivil(fs.getEstadoCivil());
-         infofam.setTelefono(fs.getTelefono());
-         
-         for (Iterator iter = fs.getAsistentes().iterator(); iter.hasNext();) {
-                Asistente as = (Asistente) iter.next();
-                Adoptante ad = new Adoptante();
-                
-                ad.setNombre(as.getNombre());
-                ad.setApellidoP(as.getApellidoP());
-                ad.setApellidoM(as.getApellidoM());
-                ad.setSexo(as.getSexo());
-                ad.setPaisNac(as.getPaisNac());
-                ad.setDepaNac(as.getDepNac());
-                ad.setFechaNac(as.getFechaNac());
-                ad.setTipoDoc(as.getTipoDoc());
-                ad.setNDoc(as.getNDoc());
-                ad.setProfesion(as.getProfesion());
-                ad.setCelular(as.getCelular());
-                ad.setCorreo(as.getCorreo());
-                
-                infofam.getAdoptantes().add(ad);
-         }
-         
-         session.save(infofam);
-         for (Iterator iter2 = infofam.getAdoptantes().iterator(); iter2.hasNext();) {
-             Adoptante ad = (Adoptante) iter2.next();
-             ad.setInfoFamilia(infofam);
-             session.save(ad);
-         }
-         
+
+    public void crearCuentaFamilia(Familia fam, FormularioSesion fs) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        fam.getFormularioSesions().add(fs);
+        fs.setFamilia(fam);
+
+        session.save(fam);
+        session.update(fs);
+        //A partir de aqui pasamos los datos que ya tenemos a InfoFamilia
+        InfoFamilia infofam = new InfoFamilia();
+        infofam.setFamilia(fam);
+        infofam.setDepRes(fs.getDepRes());
+        infofam.setPaisRes(fs.getPaisRes());
+        infofam.setDomicilio(fs.getDireccionRes());
+        infofam.setEstadoCivil(fs.getEstadoCivil());
+        infofam.setTelefono(fs.getTelefono());
+
+        for (Iterator iter = fs.getAsistentes().iterator(); iter.hasNext();) {
+            Asistente as = (Asistente) iter.next();
+            Adoptante ad = new Adoptante();
+
+            ad.setNombre(as.getNombre());
+            ad.setApellidoP(as.getApellidoP());
+            ad.setApellidoM(as.getApellidoM());
+            ad.setSexo(as.getSexo());
+            ad.setPaisNac(as.getPaisNac());
+            ad.setDepaNac(as.getDepNac());
+            ad.setFechaNac(as.getFechaNac());
+            ad.setTipoDoc(as.getTipoDoc());
+            ad.setNDoc(as.getNDoc());
+            ad.setProfesion(as.getProfesion());
+            ad.setCelular(as.getCelular());
+            ad.setCorreo(as.getCorreo());
+
+            infofam.getAdoptantes().add(ad);
+        }
+
+        session.save(infofam);
+        for (Iterator iter2 = infofam.getAdoptantes().iterator(); iter2.hasNext();) {
+            Adoptante ad = (Adoptante) iter2.next();
+            ad.setInfoFamilia(infofam);
+            session.save(ad);
+        }
+
     }
-    
-    public void updateAsistenciaFR (AsistenciaFR afr){
-    
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         
-         
-         session.update(afr);
+
+    public void updateAsistenciaFR(AsistenciaFR afr) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        session.update(afr);
     }
-    
-    public void updateReunion(Reunion temp){
-    
-    Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         
-         
-         session.update(temp);
+
+    public void updateReunion(Reunion temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        session.update(temp);
     }
     
     public ArrayList<AsistenciaFR> getAsistFR (long idFamilia, long idReunion){
     
         Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         String hql = "From AsistenciaFR AFR where AFR.familia = :idFamilia and AFR.reunion = :idReunion";
+        session.beginTransaction();
+        String hql = "From AsistenciaFR AFR where AFR.familia = :idFamilia and AFR.reunion = :idReunion";
         Query query = session.createQuery(hql);
         query.setLong("idFamilia", idFamilia);
         query.setLong("idReunion", idReunion);
@@ -964,7 +949,7 @@ public class HiberPersonal {
        
         return allAsistencias;
     }
-    
+
     public ArrayList<Entidad> ListaEntidades() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -981,7 +966,7 @@ public class HiberPersonal {
         }
         return allEntidades;
     }
-    
+
     public Entidad getEntidad(long id) {
         Session session = sessionFactory.getCurrentSession();
         Entidad Ent = new Entidad();
@@ -996,9 +981,8 @@ public class HiberPersonal {
 
         return Ent;
     }
-    
+
     /* FAMILIAS INTERNACIONALES */
-    
     public ArrayList<ExpedienteFamilia> ListaFamiliasInt() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -1016,9 +1000,9 @@ public class HiberPersonal {
         }
         return allExpedientesInt;
     }
-    
-    public void crearFamInt(Familia fam, ExpedienteFamilia expFam, InfoFamilia info){
-        
+
+    public void crearFamInt(Familia fam, ExpedienteFamilia expFam, InfoFamilia info) {
+
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         fam.getInfoFamilias().add(info);
@@ -1028,76 +1012,231 @@ public class HiberPersonal {
         session.save(fam);
         session.save(expFam);
         session.save(info);
-    
+
     }
-    
-    public void crearActualizarAdoptante(Adoptante temp){
-    
+
+    public void crearActualizarAdoptante(Adoptante temp) {
+
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.saveOrUpdate(temp);
     }
-    
+
     public void CambiaPass(Personal temp) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.update(temp);
     }
-    
-    public ArrayList<ExpedienteNna> FiltrarNna(ExpedienteNna expNna,Nna datosNna){
+
+    public ArrayList<ExpedienteNna> FiltrarNna(ExpedienteNna expNna, Nna datosNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        
+
         String hql = "";
-        if(expNna.getEstado().equals("eval") || expNna.getEstado().equals("desig")
-           || expNna.getEstado().equals("adop") || expNna.getEstado().equals("arch")){
-        hql = "from ExpedienteNna E where E.NActual like :nombreAc "
-                +    "and E.apellidopActual like :apellidoPAct and E.apellidomActual like :apellidoMAct "
-                +    "and E.estado like :estado";
-        }else{
-        hql = "from ExpedienteNna E where E.NActual like :nombreAc "
-                +    "or E.apellidopActual like :apellidoPAct or E.apellidomActual like :apellidoMAct "
-                +    "or E.estado like :estado";
+        if (expNna.getEstado().equals("eval") || expNna.getEstado().equals("desig")
+                || expNna.getEstado().equals("adop") || expNna.getEstado().equals("arch")) {
+            hql = "from ExpedienteNna E where E.NActual like :nombreAc "
+                    + "and E.apellidopActual like :apellidoPAct and E.apellidomActual like :apellidoMAct "
+                    + "and E.estado like :estado";
+        } else {
+            hql = "from ExpedienteNna E where E.NActual like :nombreAc "
+                    + "or E.apellidopActual like :apellidoPAct or E.apellidomActual like :apellidoMAct "
+                    + "or E.estado like :estado";
         }
         Query query = session.createQuery(hql);
-        query.setString("nombreAc",'%' + expNna.getNActual() + '%');
-        query.setString("apellidoPAct",'%' + expNna.getApellidopActual() + '%');
-        query.setString("apellidoMAct",'%' + expNna.getApellidomActual() + '%');
-        query.setString("estado",'%' + expNna.getEstado() + '%');
-        
+        query.setString("nombreAc", '%' + expNna.getNActual() + '%');
+        query.setString("apellidoPAct", '%' + expNna.getApellidopActual() + '%');
+        query.setString("apellidoMAct", '%' + expNna.getApellidomActual() + '%');
+        query.setString("estado", '%' + expNna.getEstado() + '%');
+
         List expedientes = query.list();
         ArrayList<ExpedienteNna> allExpedientes = new ArrayList();
-        if(!expedientes.isEmpty()){
+        if (!expedientes.isEmpty()) {
             for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
-            ExpedienteNna temp = (ExpedienteNna) iter.next();
-            Hibernate.initialize(temp.getNna());
-            
-            if(datosNna.getEspecial() == 0 || datosNna.getEnfermo() == 0 || datosNna.getAdolescente() == 0 
-                || datosNna.getMayor() == 0 || datosNna.getHermano() == 0){
-                
-                if(temp.getNna().getNombre().contains(datosNna.getNombre()) 
-               && temp.getNna().getApellidoP().contains(datosNna.getApellidoP())
-               && temp.getNna().getApellidoM().contains(datosNna.getApellidoM())  
-               && temp.getNna().getEspecial() == datosNna.getEspecial()
-               && temp.getNna().getEnfermo() == datosNna.getEnfermo()
-               && temp.getNna().getAdolescente() == datosNna.getAdolescente()
-               && temp.getNna().getMayor() == datosNna.getMayor()
-               && temp.getNna().getHermano() == datosNna.getHermano()){
-                
-                allExpedientes.add(temp);
-            }
-            } else if(temp.getNna().getNombre().contains(datosNna.getNombre())
-                      && temp.getNna().getApellidoP().contains(datosNna.getApellidoP())
-                      && temp.getNna().getApellidoM().contains(datosNna.getApellidoM())){
-                      allExpedientes.add(temp);
+                ExpedienteNna temp = (ExpedienteNna) iter.next();
+                Hibernate.initialize(temp.getNna());
+
+                if (datosNna.getEspecial() == 0 || datosNna.getEnfermo() == 0 || datosNna.getAdolescente() == 0
+                        || datosNna.getMayor() == 0 || datosNna.getHermano() == 0) {
+
+                    if (temp.getNna().getNombre().contains(datosNna.getNombre())
+                            && temp.getNna().getApellidoP().contains(datosNna.getApellidoP())
+                            && temp.getNna().getApellidoM().contains(datosNna.getApellidoM())
+                            && temp.getNna().getEspecial() == datosNna.getEspecial()
+                            && temp.getNna().getEnfermo() == datosNna.getEnfermo()
+                            && temp.getNna().getAdolescente() == datosNna.getAdolescente()
+                            && temp.getNna().getMayor() == datosNna.getMayor()
+                            && temp.getNna().getHermano() == datosNna.getHermano()) {
+
+                        allExpedientes.add(temp);
+                    }
+                } else if (temp.getNna().getNombre().contains(datosNna.getNombre())
+                        && temp.getNna().getApellidoP().contains(datosNna.getApellidoP())
+                        && temp.getNna().getApellidoM().contains(datosNna.getApellidoM())) {
+                    allExpedientes.add(temp);
                 }
-            
+
             }
-        
-        
+
         }
-        
+
         return allExpedientes;
-    
+
     }
+
+    public ArrayList<ExpedienteFamilia> FiltrarFam(ExpedienteFamilia expFam, Familia datosFam) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String hql = "";
+        Query query = session.createQuery(hql);
+        /*   if (expFam.getEstado().equals("evaluacion") || expFam.getEstado().equals("espera")
+         || expFam.getEstado().equals("estudio") || expFam.getEstado().equals("designado")
+         || expFam.getEstado().equals("adopcion") || expFam.getEstado().equals("reevaluacion")
+         || expFam.getEstado().equals("post") || expFam.getEstado().equals("eliminado")) {
+         hql = "from ExpedienteFamilia E where E.expediente like :exp "
+         + "and E.estado = :estado ";
+         query = session.createQuery(hql);
+         query.setString("exp", '%' + expFam.getExpediente() + '%');
+         query.setString("estado", expFam.getEstado());
+         }
+
+         if (expFam.getTipoFamilia().equals("PP") || expFam.getTipoFamilia().equals("PE")
+         || expFam.getTipoFamilia().equals("MP") || expFam.getTipoFamilia().equals("ME")
+         || expFam.getTipoFamilia().equals("EP") || expFam.getTipoFamilia().equals("EE")) {
+         hql = "from ExpedienteFamilia E where "
+         + " E.tipoFamilia like :tipoFamilia ";
+         query = session.createQuery(hql);
+         query.setString("tipoFamilia", expFam.getTipoFamilia() + '%');
+         } else if (expFam.getTipoFamilia().equals("none")) {
+         hql = "from ExpedienteFamilia E where E.expediente like :exp "
+         + "or E.estado like :estado ";
+         query = session.createQuery(hql);
+         query.setString("exp", '%' + expFam.getExpediente() + '%');
+         query.setString("estado", expFam.getEstado() + '%');
+         }*/
+
+        hql = "from ExpedienteFamilia E where ";
+
+        if (!(expFam.getExpediente() == "")) {
+            hql = hql + " E.expediente like :exp ";
+
+            query = session.createQuery(hql);
+            query.setString("exp", '%' + expFam.getExpediente() + '%');
+        }
+
+        if (!(expFam.getHt() == "")) {
+            if (hql.equals("from ExpedienteFamilia E where ")) {
+                hql = hql + " E.ht like :ht ";
+
+                query = session.createQuery(hql);
+                query.setString("ht", '%' + expFam.getHt() + '%');
+            } else {
+
+                hql = hql + " and E.ht like :ht ";
+
+                query = session.createQuery(hql);
+                if (!(expFam.getExpediente() == "")) {
+                    query.setString("exp", '%' + expFam.getExpediente() + '%');
+                }
+
+                query.setString("ht", '%' + expFam.getHt() + '%');
+            }
+        }
+
+        if (!(expFam.getNacionalidad() == "none")) {
+            if (hql.equals("from ExpedienteFamilia E where ")) {
+                hql = hql + " E.nacionalidad = :nacionalidad ";
+
+                query = session.createQuery(hql);
+                query.setString("nacionalidad", expFam.getNacionalidad());
+            } else {
+
+                hql = hql + " and E.nacionalidad = :nacionalidad ";
+
+                query = session.createQuery(hql);
+                if (!(expFam.getExpediente() == "")) {
+                    query.setString("exp", '%' + expFam.getExpediente() + '%');
+                }
+                if (!(expFam.getHt() == "")) {
+                    query.setString("ht", '%' + expFam.getHt() + '%');
+                }
+
+                query.setString("nacionalidad", expFam.getNacionalidad());
+            }
+        }
+
+        if (!(expFam.getEstado() == "none")) {
+            if (hql.equals("from ExpedienteFamilia E where ")) {
+                hql = hql + " E.estado = :estado ";
+
+                query = session.createQuery(hql);
+                query.setString("estado", expFam.getEstado());
+            } else {
+
+                hql = hql + " and E.estado like :estado ";
+
+                query = session.createQuery(hql);
+                if (!(expFam.getExpediente() == "")) {
+                    query.setString("exp", '%' + expFam.getExpediente() + '%');
+                }
+                if (!(expFam.getHt() == "")) {
+                    query.setString("ht", '%' + expFam.getHt() + '%');
+                }
+
+                if (!(expFam.getNacionalidad() == "none")) {
+                    query.setString("nacionalidad", expFam.getNacionalidad());
+                }
+
+                query.setString("estado", expFam.getEstado());
+            }
+        }
+
+        if (!(expFam.getTipoFamilia() == "none")) {
+            if (hql.equals("from ExpedienteFamilia E where ")) {
+                hql = hql + " E.tipoFamilia = :tipoFamilia ";
+
+                query = session.createQuery(hql);
+                query.setString("tipoFamilia", expFam.getTipoFamilia());
+            } else {
+
+                hql = hql + " and E.tipoFamilia like :tipoFamilia ";
+
+                query = session.createQuery(hql);
+                if (!(expFam.getExpediente() == "")) {
+                    query.setString("exp", '%' + expFam.getExpediente() + '%');
+                }
+                if (!(expFam.getHt() == "")) {
+                    query.setString("ht", '%' + expFam.getHt() + '%');
+                }
+
+                if (!(expFam.getNacionalidad() == "none")) {
+                    query.setString("nacionalidad", expFam.getNacionalidad());
+                }
+
+                if (!(expFam.getEstado() == "none")) {
+                    query.setString("estado", expFam.getEstado());
+                }
+
+                query.setString("tipoFamilia", expFam.getTipoFamilia());
+            }
+        }
+
+        List expedientes = query.list();
+        ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
+        if (!expedientes.isEmpty()) {
+            for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+                ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+                Hibernate.initialize(temp.getFamilia());
+
+                allExpedientes.add(temp);
+
+            }
+
+        }
+
+        return allExpedientes;
+
+    }
+
 }
