@@ -103,13 +103,13 @@
                         </ul>
                         <br>
                         <br>
-                        <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/agregarExp'" id="singlebutton" name="singlebutton" class="btn btn-default">Agregar Familia</button>
-                        <br>
                         <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
                         <br>
                         <h3><strong>${mensaje}</strong></h3>
                         <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarDesignación" method="post">
+                        <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/agregarExp'" id="singlebutton" name="singlebutton" class="btn btn-default">Agregar Familia</button>
+                        <br>
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarDesignacion" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
                         <br>
                         <div class="control-group">
                             <label class="control-label">Fecha de propuesta</label>
@@ -131,7 +131,6 @@
                                     <tr>
                                         <th class="col-sm-2 " >Expediente</th>
                                         <th class="col-sm-2 " >Nivel sociec</th>
-                                        <th class="col-sm-2 " >Información</th>
                                         <th class="col-sm-2 " >Resolución de aptitud</th>
                                         <th class="col-sm-2 " >Seleccionar</th>
                                     </tr>
@@ -146,7 +145,6 @@
                                                 ${info.getNivelSocioeconomico()}
                                             </c:forEach>
                                         </td>
-                                        <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
                                         <td>
                                             <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
                                                     <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
@@ -199,6 +197,34 @@
             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
+        <script type="text/javascript">
+                function enter(e) {
+                     if (e.keyCode == 13) {
+                     return false;
+                    }
+                }
+            </script>
+            <script type="text/javascript">
+     
+            function validar()
+            {
+              
+            if( document.formulario.fecha.value == "" )
+            {
+            alert( "Debe ingresar una fecha");
+             document.formulario.fecha.focus() ;
+            return false;
+            }
+            if( document.formulario.numDesig.value == "" )
+            {
+            alert( "Debe ingresar el número de designación" );
+             document.formulario.numDesig.focus() ;
+            return false;
+            }
+            
+            return true;
+            }
+            </script>
         <!-- Ubicar al final -->
     </body>
 </html>

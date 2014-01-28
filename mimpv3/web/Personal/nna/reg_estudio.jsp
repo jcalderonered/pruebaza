@@ -102,7 +102,7 @@
                         </ul>
                         <br>
                         <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarEstudio" method="post">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarEstudio" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
                         <br>
                         <div class="control-group">
                             <label class="control-label">Orden del Estudio de Caso</label>
@@ -208,6 +208,34 @@
             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
+        <script type="text/javascript">
+                function enter(e) {
+                     if (e.keyCode == 13) {
+                     return false;
+                    }
+                }
+            </script>
+            <script type="text/javascript">
+     
+            function validar()
+            {
+              
+            if( document.formulario.orden.value == "" )
+            {
+            alert( "Debe ingresar un número de orden");
+             document.formulario.orden.focus() ;
+            return false;
+            }
+            if( document.formulario.fechaEval.value == "" )
+            {
+            alert( "Debe ingresar la fecha" );
+             document.formulario.fechaEval.focus() ;
+            return false;
+            }
+            
+            return true;
+            }
+            </script>
         <!-- Ubicar al final -->
     </body>
 </html>

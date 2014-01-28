@@ -433,7 +433,8 @@ public class main {
     public ModelAndView IrPersonalFamilia(ModelMap map, HttpSession session, 
                                           @RequestParam(value="estado", required = false) String estado,
                                           @RequestParam(value="idFamilia", required = false) String idFamilia,
-                                          @RequestParam(value="idExpediente", required = false) String idExpediente
+                                          @RequestParam(value="idExpediente", required = false) String idExpediente,
+                                          @RequestParam(value="idNna", required = false) Long idNna
                                           ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -545,14 +546,16 @@ public class main {
             listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
-            
+            nnaAdoptado = ServicioNna.getNnaPostAdopcion(idNna);
+            expNna = nnaAdoptado.getExpedienteNnas().iterator().next();
+            /*
             for (Designacion desig : listaDesignaciones) {
                     if(desig.getAceptacionConsejo() == 2){
                         nnaAdoptado = desig.getNna();
                         expNna = desig.getNna().getExpedienteNnas().iterator().next();
                     }
             }
-            
+            */
         }
         
       

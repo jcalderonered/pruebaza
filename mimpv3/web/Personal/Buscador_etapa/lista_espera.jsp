@@ -115,7 +115,7 @@
                                                 <th>HT</th>
                                                 <th>Número de Expediente</th>
                                                 <th>Fecha de ingreso a DGA</th>
-                                                <th>Tipo de Familia</th>
+                                                <th>Fecha de Resolución de Aptitud</th>
                                                 <th>Tipo</th>
                                                 <th>Tipo Lista de Espera</th>
                                                 <th>Detalles</th>
@@ -140,7 +140,15 @@
                                                     </c:if>
                                                 </td>
                                                 <td>
-                                                    ${expediente.getTipoFamilia()}
+                                                    <c:if test="${!expediente.getEvaluacions().isEmpty()}">
+                                                    <c:forEach var="eval" items="${expediente.getEvaluacions()}" varStatus="status">
+                                                        <c:if test="${!eval.getResolucions().isEmpty()}">
+                                                    <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
+                                                        ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
+                                                    </c:forEach>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                    </c:if>
                                                 </td>
                                                 <td>
                                                     ${expediente.getNacionalidad() == 'nacional' ? 'N' : 'I' }
