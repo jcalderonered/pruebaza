@@ -74,10 +74,10 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -102,81 +102,123 @@
                         <br>
                         <h1 align="center"><strong>Búsqueda de Expedientes de Familia</strong></h1>
                         <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/buscarExpediente" method="post">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/FiltrarFam" method="post" name="formulario" onsubmit="return(validar());">
                             <fieldset>
-                                <div class="control-group">
-                                    <label class="control-label">Expediente (ApellidoEl-ApellidoElla)</label>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="control-group">
+                                            <label class="control-label">Apellidos (Paterno/Materno)</label>
+                                            <div class="controls">
+                                                <input id="expediente" name="expediente" type="text" class="input-xlarge">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">HT</label>
+                                            <div class="controls">
+                                                <input id="HT" name="HT" type="text" class="input-xlarge">
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <br>
+                                    </div>   
                                     <br>
-                                    <div class="controls">
-                                        <input id="exp" name="exp" type="text" class="input-xlarge">
+                                    <div class="col-md-4 col-md-offset-1">
+                                        <div class="control-group">
+                                            <label class="control-label">Nacionalidad</label>
+                                            <div class="controls">
+                                                <select id="nacionalidad" name="nacionalidad">
+                                                    <option value="none" >Todas</option>
+                                                    <option value="nacional" >Nacional</option>
+                                                    <option value="internacional">Internacional</option>               
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <div>
+                                            <label class="control-label">Estado</label>
+                                            <div class="controls">
+                                                <select id="estado" name="estado">
+                                                    <option value="none" ></option>
+                                                    <option value="evaluacion" >En evaluación</option>
+                                                    <option value="espera">Lista de espera</option>
+                                                    <option value="estudio" >Asignado a un estudio de caso</option>
+                                                    <option value="designado" >Designado</option>
+                                                    <option value="adopcion" >En proceso de adopción</option>
+                                                    <option value="reevaluacion" >Reevaluación</option>
+                                                    <option value="post" >En post adopción</option>
+                                                    <option value="eliminado" >Eliminado</option>
+                                                </select>
+                                            </div>    
+                                        </div>
+                                        <br>                                
                                     </div>
+                                    <div class="col-md-4">                                                                                          
+
+                                        <div>
+                                            <label class="control-label">Tipo Familia</label>
+                                            <div class="controls">
+                                                <select id="tipofamilia" name="tipofamilia">
+                                                    <option value="none" >Ninguna</option>
+                                                    <option value="PP" >PP</option>
+                                                    <option value="PE">PE</option>
+                                                    <option value="MP" >MP</option>
+                                                    <option value="ME" >ME</option>
+                                                    <option value="EP" >EP</option>
+                                                    <option value="EE" >EE</option>
+                                                </select>
+                                            </div>    
+                                        </div>
+
+                                    </div>    
                                 </div>
-                                <br>
+
                                 <button id="singlebutton" name="singlebutton" class="btn btn-default">Buscar</button>
                             </fieldset>
                         </form>
                         <br>
                         <h1 align="center"><strong>Resultados de la Búsqueda</strong></h1>
                         <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarExpediente" method="post">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="col-sm-2 " >Expediente</th>
-                                        <th class="col-sm-2 " >Nivel sociec</th>
-                                        <th class="col-sm-2 " >Información</th>
-                                        <th class="col-sm-2 " >Resolución de aptitud</th>
-                                        <th class="col-sm-2 " >Seleccionar</th>
-                                    </tr>
-                                </thead>
-                                <c:if test="${!listaBusqueda.isEmpty()}"> 
-                                <tbody>
-                                    <c:forEach var="familia" items="${listaBusqueda}" varStatus="status">
-                                        <c:set var="agregado" value="1" />
-                                            <tr>
-                                                <td>${familia.getExpediente()}</td>
-                                                <td>
-                                                    <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
-                                                        ${info.getNivelSocioeconomico()}
-                                                    </c:forEach>
-                                                </td>
-                                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
-                                                <td>
-                                                    <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
-                                                    <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
-                                                        ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
-                                                    </c:forEach>
-                                                    </c:forEach>
-                                                </td>
-                                                <td>
-                                                    <c:if test="${!listaMatching.isEmpty()}">
-                                                        <c:forEach var="familia2" items="${listaMatching}" varStatus="status">
-                                                            <c:if test="${familia.getIdexpedienteFamilia() == familia2.getIdexpedienteFamilia()}">
-                                                                <c:set var="agregado" value="0" />
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </c:if> 
-                                                    <div class="checkbox">
-                                                    <label>
-                                                        <input ${agregado == 0 ? 'disabled' : ''} ${agregado == 0 ? 'checked' : ''} name="idExpediente" value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
-                                                    </label>
-                                                        <c:if test="${agregado == 0}">
-                                                            <h4><strong>Expediente ya agregado</strong></h4>
-                                                        </c:if>
-                                                    </div>
-                                                </td>
-                                             </tr>
-                                  </c:forEach>  
-                                </tbody>
-                              </c:if> 
-                               <c:if test="${listaBusqueda.isEmpty()}">
-                                    <h3><strong>No se encontraron expedientes</strong></h3>
-                                </c:if>  
-                            </table>
-                        </div>
-                        <br>
-                      </form>
+                        
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-2 " >Expediente</th>
+                                            <th class="col-sm-2 " >Nacionalidad</th>                                            
+                                            <th class="col-sm-2 " >Estado</th>
+                                            <th class="col-sm-2 " >Información</th>
+                                        </tr>
+                                    </thead>
+                                    <c:if test="${!listaBusqueda.isEmpty()}"> 
+                                        <tbody>
+                                            <c:forEach var="familia" items="${listaBusqueda}" varStatus="status">
+                                                <c:set var="agregado" value="1" />
+                                                <tr>
+                                                    <td>${familia.getExpediente()}</td>                                                                               
+                                                    <td>${familia.getNacionalidad()}</td> 
+                                                    <td>${familia.getEstado()}</td> 
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                            <input hidden name="estado" id="estado" value="${familia.getEstado()}">
+                                                            <input hidden name="idExpediente" id="idExpediente" value="${familia.getIdexpedienteFamilia()}">
+                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>  
+                                        </tbody>
+                                    </c:if> 
+                                    <c:if test="${listaBusqueda.isEmpty()}">
+                                        <h3><strong>No se encontraron expedientes</strong></h3>
+                                    </c:if>  
+                                </table>
+                            </div>
+                            <br>
+                        
                     </div>
                 </div>
             </div>
@@ -195,6 +237,22 @@
 ================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+        <script type="text/javascript">
+
+                            function validar()
+                            {
+
+                                if (document.formulario.expediente.value == "" && document.formulario.HT.value == ""
+                                        && document.getElementById("nacionalidad").value == "none" && document.getElementById("estado").value == "none"
+                                        && document.getElementById("tipofamilia").value == "none" )
+                                {
+                                    alert("Debe elegir al menos un filtro de búsqueda");
+                                    return false;
+                                }
+
+                                return(true);
+                            }
+        </script>
         <!-- Ubicar al final -->
     </body>
 </html>
