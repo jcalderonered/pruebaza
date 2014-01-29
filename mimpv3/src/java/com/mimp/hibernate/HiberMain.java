@@ -255,9 +255,10 @@ public class HiberMain {
         query.setMaxResults(1);
         Object queryResult = query.uniqueResult();
         temp = (InfoFamilia) queryResult;
+        Hibernate.initialize(temp.getFamilia());
         Hibernate.initialize(temp.getAdoptantes());
-        Hibernate.initialize(temp.getHijoActs());
-        Hibernate.initialize(temp.getResidenteActs());
+        //Hibernate.initialize(temp.getHijoActs());
+        //Hibernate.initialize(temp.getResidenteActs());
         
         return temp;
     }

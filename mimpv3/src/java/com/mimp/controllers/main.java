@@ -567,6 +567,31 @@ public class main {
         map.put("Ella",Ella);
         return new ModelAndView("/Personal/familia/info_ella", map);
 }     
+ 
+@RequestMapping(value = "/Habilitacion", method = RequestMethod.GET)
+    public ModelAndView Habilitacion(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        if (infoFam.getFamilia().getHabilitado() == 0){
+            infoFam.getFamilia().setHabilitado(Short.parseShort("1"));
+            servicioEtapa.UpdateFamilia(infoFam.getFamilia());
+        }else {
+            infoFam.getFamilia().setHabilitado(Short.parseShort("0"));
+            servicioEtapa.UpdateFamilia(infoFam.getFamilia());
+        }
+        
+        map.put("df",df);
+        map.put("infoFam",infoFam);
+        map.put("estado",etapaOrigen);
+        map.put("expediente",expediente);
+        map.put("Ella",Ella);
+        return new ModelAndView("/Personal/familia/info_ella", map);
+}     
     
 @RequestMapping(value = "/elSolicitante", method = RequestMethod.GET)
     public ModelAndView elSolicitante(ModelMap map, HttpSession session) {
@@ -580,12 +605,13 @@ public class main {
         
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        
         map.put("df",df);
         map.put("infoFam",infoFam);
         map.put("estado",etapaOrigen);
         map.put("expediente",expediente);
-        map.put("El",El);
-        return new ModelAndView("/Personal/familia/info_el", map);
+        map.put("Ella",Ella);
+        return new ModelAndView("/Personal/familia/info_ella", map);
 } 
 
 @RequestMapping(value = "/laSolicitante", method = RequestMethod.GET)
