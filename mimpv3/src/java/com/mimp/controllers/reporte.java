@@ -138,7 +138,7 @@ public class reporte {
             Sheet sheet = wb.getSheetAt(0);
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<PostAdopcion> listapost = ServicioReporte.getListaPostAdopcion();
+            ArrayList<PostAdopcion> listapost = ServicioReporte.ReporteListaPostAdopcion();
 
             int i = 1;
             for (PostAdopcion post : listapost) {

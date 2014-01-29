@@ -36,7 +36,7 @@ public class HiberReporte {
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
 
-    public ArrayList<Organismo> ListaOrganismos() {
+    public ArrayList<Organismo> ReporteListaOrganismos() {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -55,7 +55,7 @@ public class HiberReporte {
         return allOrganismos;
     }
 
-    public ArrayList<PostAdopcion> getListaPostAdopcion() {
+    public ArrayList<PostAdopcion> ReporteListaPostAdopcion() {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
