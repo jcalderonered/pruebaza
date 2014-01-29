@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author User
  */
-@Service("HiberEtapa")
+@Service("HiberReporte")
 @Transactional
 public class HiberReporte {
 
