@@ -142,6 +142,10 @@
                                             <option value="improcedente" ${resolucion.getTipo() == 'improcedente' ? 'selected' : ''}>Improcedente</option>
                                             <option value="fin" ${resolucion.getTipo() == 'fin' ? 'selected' : ''}>Fin de procedimiento</option>
                                             <option value="observado" ${resolucion.getTipo() == 'observado' ? 'selected' : ''}>Observado</option>
+                                            <option value="observado" ${resolucion.getTipo() == 'prorroga' ? 'selected' : ''}>Prórroga</option>
+                                            <option value="observado" ${resolucion.getTipo() == 'reconsideracion' ? 'selected' : ''}>Reconsideración</option>
+                                            <option value="observado" ${resolucion.getTipo() == 'infundada' ? 'selected' : ''}>Infundada la reconsideración</option>
+                                            <option value="observado" ${resolucion.getTipo() == 'desistimiento' ? 'selected' : ''}>Desistimiento</option>
                                         </select>
                                     </div>    
                                 </div>

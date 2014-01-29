@@ -262,6 +262,10 @@
                                                             ${resolucion.getTipo() == 'improcedente' ? 'Improcedente' : '' }
                                                             ${resolucion.getTipo() == 'fin' ? 'Fin de procedimiento' : '' }
                                                             ${resolucion.getTipo() == 'observado' ? 'Observado' : '' }
+                                                            ${resolucion.getTipo() == 'prorroga' ? 'Prórroga' : '' }
+                                                            ${resolucion.getTipo() == 'reconsideracion' ? 'Reconsideración' : '' }
+                                                            ${resolucion.getTipo() == 'infundada' ? 'Infundada la reconsideración' : '' }
+                                                            ${resolucion.getTipo() == 'desistimiento' ? 'Desistimiento' : '' }
                                                             ${resolucion.getTipo() == 'colfam' ? 'Integracion Familiar' : '' }
                                                             ${resolucion.getTipo() == 'sinefecto' ? 'Deja sin efecto la designacion' : '' }
                                                             ${resolucion.getTipo() == 'adopcion' ? 'Resolución de adopción' : '' }

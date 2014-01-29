@@ -151,7 +151,7 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
+                        <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
                         </form>
                         
                         <br>
@@ -176,7 +176,7 @@
                                   <td>
                                      <form action="${pageContext.servletContext.contextPath}/PersonalEditarGrupo" method="post">
                                             <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
-                                            <button type="submit" class="btn btn-default">Modificar</button>
+                                            <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Modificar</button>
                                      </form>
                                   </td>
                                   </tr>   
@@ -193,7 +193,7 @@
                         <c:if test="${taller != null}">  
                          <form action="${pageContext.servletContext.contextPath}/PersonalAgregarGrupo" method="post">
                                 <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar Grupo</button>
+                                <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar Grupo</button>
                          </form>                
                         </c:if>
                         <br>
