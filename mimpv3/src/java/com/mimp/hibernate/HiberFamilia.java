@@ -200,7 +200,7 @@ public class HiberFamilia {
         query.setLong("id", idFamilia);
         query.setMaxResults(1);
         FormularioSesion qryResult = (FormularioSesion) query.uniqueResult();
-        temp = temp + qryResult.getAsistentes().size();
+        if (qryResult != null) temp = temp + qryResult.getAsistentes().size();
         
          return temp;
     }

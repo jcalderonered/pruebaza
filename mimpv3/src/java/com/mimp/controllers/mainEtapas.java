@@ -845,6 +845,7 @@ public class mainEtapas {
             ExpedienteFamilia tempFam = new ExpedienteFamilia();
             tempFam = tempEval.getExpedienteFamilia();
             tempFam.setEstado("espera");
+            tempFam.setRnaa(Short.parseShort("0"));
             servicioEtapa.updateExpedienteFamilia(tempFam);
             map.put("df", df);
             map.put("listaEspera", servicioEtapa.getListaEspera());

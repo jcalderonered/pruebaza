@@ -115,7 +115,29 @@
                                 <li ><a href="${pageContext.servletContext.contextPath}/atenciones" >Atenciones</a></li>
                             </ul>
                             <br>
-                            <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
+                            <h3><strong>Información de la Ficha de Inscripción de Solicitantes de Adopción</strong></h3>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">HT</label>
+                                <div class="controls">
+                                    <input id="htFicha" name="htFicha" value="${expediente.getHtFicha()}" type="text" class="input-xlarge">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Número de la ficha</label>
+                                <div class="controls">
+                                    <input id="nFicha" name="nFicha" value="${expediente.getnFicha()}" type="text" class="input-xlarge">
+                                </div>
+                            </div>
+                            <br>    
+                            <div class="control-group">
+                                <label class="control-label">Fecha de ingreso</label>
+                                <div class="controls">
+                                    <input id="fechaIngresoFicha" name="fechaIngresoFicha" value="${expediente.getFechaIngresoFicha() != null ? df.dateToStringNumeros(expediente.getFechaIngresoFicha()) : ''}" type="text" class="datepicker input-xlarge">
+                                </div>
+                            </div>
+                            <br>
                             <h3><strong>Información del Expediente</strong></h3>
                             <br>
                             <div class="control-group">
@@ -142,7 +164,7 @@
                             <div class="control-group">
                                 <label class="control-label">Fecha ingreso a DGA</label>
                                 <div class="controls">
-                                    <input id="fechaIngreso" name="fechaIngreso" value="${expediente.getFechaIngresoDga() != null ? df.dateToString(expediente.getFechaIngresoDga()) : ''}" type="text" class="datepicker input-xlarge">
+                                    <input id="fechaIngreso" name="fechaIngreso" value="${expediente.getFechaIngresoDga() != null ? df.dateToStringNumeros(expediente.getFechaIngresoDga()) : ''}" type="text" class="datepicker input-xlarge">
                                 </div>
                             </div>
                             <br>
@@ -163,7 +185,7 @@
                             <div class="control-group">
                                 <label class="control-label">TUPA</label>
                                 <div class="controls">
-                                    <input id="tupa" name="tupa" value="${expediente.getTupa() != null ? df.dateToString(expediente.getTupa()) : ''}" type="text" class="datepicker input-xlarge">
+                                    <input id="tupa" name="tupa" value="${expediente.getTupa() != null ? df.dateToStringNumeros(expediente.getTupa()) : ''}" type="text" class="datepicker input-xlarge">
                                 </div>
                             </div>
                             <br>
