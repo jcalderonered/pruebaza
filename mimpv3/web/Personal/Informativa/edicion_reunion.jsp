@@ -96,7 +96,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                         <c:choose>
                             <c:when test="${ reunion == null }">
                                 <form action="${pageContext.servletContext.contextPath}/PersonalCrearReunion" method="post" name="formulario" onsubmit="return(validar());">

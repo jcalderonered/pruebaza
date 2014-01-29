@@ -92,7 +92,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 ">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                         <h1 align="center"><strong>Lista de Familias Internacionales </strong></h1>
 
                         <br>

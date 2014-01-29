@@ -77,8 +77,8 @@
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc1" data-toggle="tab">La Solicitante</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc2" data-toggle="tab">El solicitante</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc3" data-toggle="tab">Composición familiar</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc4" data-toggle="tab">Vivienda</a></li>
+                            <!--<li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc3" data-toggle="tab">Composición familiar</a></li>-->
+                            <!-- <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc4" data-toggle="tab">Vivienda</a></li> -->
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/FactDatos/opc5" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
 
@@ -103,7 +103,7 @@
                                                     <h4>Nacido(a) como consecuencia del incesto</h4>
                                                 </td>
                                                 <td>
-                                                    <select id="incesto" name="incesto" >
+                                                    <select disabled id="incesto" name="incesto" >
                                                             <option value="0" ${ifa.getNnaIncesto() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaIncesto() != 0 ? 'selected' : ''} >NO</option>
                                                         </select>
@@ -114,7 +114,7 @@
                                                     <h4>Padres con enfermedad psiquiátrica (esquizofrenia, paranoia, etc</h4>
                                                 </td>
                                                 <td>
-                                                    <select id="mental" name="mental" >
+                                                    <select disabled id="mental" name="mental" >
                                                             <option value="0" ${ifa.getNnaMental() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaMental() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -125,7 +125,7 @@
                                                     <h4>Padres con epilepsia</h4>
                                                 </td>
                                                 <td>
-                                                    <select id="epilepsia" name="epilepsia" >
+                                                    <select disabled id="epilepsia" name="epilepsia" >
                                                             <option value="0" ${ifa.getNnaEpilepsia() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaEpilepsia() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -136,7 +136,7 @@
                                                     <h4>Niña, niño o adolescente víctima de abuso sexual</h4>
                                                 </td>
                                                 <td>
-                                                    <select id="abuso" name="abuso" >
+                                                    <select disabled id="abuso" name="abuso" >
                                                             <option value="0" ${ifa.getNnaAbuso() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaAbuso() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -148,7 +148,7 @@
                                                         diagnosticado/a preliminarmente con sífilis congénita.</h4>
                                                 </td>
                                                 <td>
-                                                    <select id="sifilis" name="sifilis" >
+                                                    <select disabled id="sifilis" name="sifilis" >
                                                             <option value="0" ${ifa.getNnaSifilis() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaSifilis() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -175,7 +175,7 @@
                                                         desnutrición crónica, etc.)</h4>
                                                 </td>
                                                 <td>
-                                                    <select id="seguimiento" name="seguimiento" >
+                                                    <select disabled id="seguimiento" name="seguimiento" >
                                                             <option value="0" ${ifa.getNnaSeguiMedico() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaSeguiMedico() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -187,7 +187,7 @@
                                                         (labio leporino, estrabismo, etc.)</h4>
                                                 </td>
                                                 <td>
-                                                    <select id="operacion" name="operacion" >
+                                                    <select disabled id="operacion" name="operacion" >
                                                             <option value="0" ${ifa.getNnaOperacion() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaOperacion() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -199,7 +199,7 @@
                                                         hiperactividad (TDAH)</h4>
                                                 </td>
                                                 <td>
-                                                    <select id="hiperactivo" name="hiperactivo">
+                                                    <select disabled id="hiperactivo" name="hiperactivo">
                                                             <option value="0" ${ifa.getNnaHiperactivo() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaHiperactivo() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -226,7 +226,7 @@
                                                     <h4>Niñas, niños y adolescentes con necesidades especiales</h4>
                                                 </td>
                                                 <td>
-                                                    <select id="especial" name="especial">
+                                                    <select disabled id="especial" name="especial">
                                                             <option value="0" ${ifa.getNnaEspecial() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaEspecial() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -237,7 +237,7 @@
                                                     <h4>Niñas, niños y adolescentes con problemas de salud </h4>
                                                 </td>
                                                 <td>
-                                                    <select id="salud" name="salud">
+                                                    <select disabled id="salud" name="salud">
                                                             <option value="0" ${ifa.getNnaEnfermo() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaEnfermo() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -248,7 +248,7 @@
                                                     <h4>Niñas y niños mayores (A partir de 09 años)</h4>
                                                 </td>
                                                 <td>
-                                                    <select id="mayor" name="mayor">
+                                                    <select disabled id="mayor" name="mayor">
                                                             <option value="0" ${ifa.getNnaMayor() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaMayor() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -259,7 +259,7 @@
                                                     <h4>Adolescentes (De 12 años hasta 17 años 11 meses)</h4>
                                                 </td>
                                                 <td>
-                                                    <select id="adolescente" name="adolescente">
+                                                    <select disabled id="adolescente" name="adolescente">
                                                             <option value="0" ${ifa.getNnaAdolescente() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaAdolescente() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -270,7 +270,7 @@
                                                     <h4>Grupos de hermanos </h4>
                                                 </td>
                                                 <td>
-                                                    <select id="hermanos" name="hermanos">
+                                                    <select disabled id="hermanos" name="hermanos">
                                                             <option value="0" ${ifa.getNnaHermano() == 0 ? 'selected' : ''} >SI</option>
                                                             <option value="1" ${ifa.getNnaHermano() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
@@ -291,13 +291,13 @@
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="viajar" id="viajarSi" value="0" ${ifa.getPuedeViajar() == 0 ? 'checked' : ''} >Si</label>
+                                            <input disabled type="radio" name="viajar" id="viajarSi" value="0" ${ifa.getPuedeViajar() == 0 ? 'checked' : ''} >Si</label>
                                     </div>
                                 </div> 
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="viajar" id="viajarNo" value="1" ${ifa.getPuedeViajar() == 1 ? 'checked' : ''} >No</label>
+                                            <input disabled type="radio" name="viajar" id="viajarNo" value="1" ${ifa.getPuedeViajar() == 1 ? 'checked' : ''} >No</label>
                                     </div>
                                 </div>
                             </div>
@@ -307,14 +307,14 @@
                             <div class="control-group">
                                 <label class="control-label">¿Cuántos años podría tener como mínimo el niño, niña o adolescente a adoptar?</label>
                                 <div class="controls">
-                                    <input id="edadMin" name="edadMin" type="text" value="${ifa.getExpectativaEdadMin()}" class="input-xlarge">
+                                    <input disabled id="edadMin" name="edadMin" type="text" value="${ifa.getExpectativaEdadMin()}" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">¿Cuántos años podría tener como máximo el niño, niña o adolescente a adoptar?</label>
                                 <div class="controls">
-                                    <input id="edadMax" name="edadMax" type="text" value="${ifa.getExpectativaEdadMax()}" class="input-xlarge">
+                                    <input disabled id="edadMax" name="edadMax" type="text" value="${ifa.getExpectativaEdadMax()}" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
@@ -323,19 +323,19 @@
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="genero" id="optionsRadios1" value="masculino" ${ifa.getExpectativaGenero() == 'masculino' ? 'checked' : ''} >Masculino</label>
+                                            <input disabled type="radio" name="genero" id="optionsRadios1" value="masculino" ${ifa.getExpectativaGenero() == 'masculino' ? 'checked' : ''} >Masculino</label>
                                     </div>
                                 </div> 
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="genero" id="optionsRadios1" value="femenino" ${ifa.getExpectativaGenero() == 'femenino' ? 'checked' : ''} >Femenino</label>
+                                            <input disabled type="radio" name="genero" id="optionsRadios1" value="femenino" ${ifa.getExpectativaGenero() == 'femenino' ? 'checked' : ''} >Femenino</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">  
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="genero" id="optionsRadios1" value="indistinto" ${ifa.getExpectativaGenero() == 'indistinto' ? 'checked' : ''} >Indistinto</label>
+                                            <input disabled type="radio" name="genero" id="optionsRadios1" value="indistinto" ${ifa.getExpectativaGenero() == 'indistinto' ? 'checked' : ''} >Indistinto</label>
                                     </div>
                                 </div>
                             </div>

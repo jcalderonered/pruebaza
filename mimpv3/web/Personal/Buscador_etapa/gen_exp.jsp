@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-md-8 ">
                         <!-- AQUI AGREGAR EL CONTENIDO QUE ESTARA AL COSTADO DEL MENU -->
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>   
+                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                         <br>
                         <h3><strong>Datos generales del expediente</strong></h3>
                         <br>

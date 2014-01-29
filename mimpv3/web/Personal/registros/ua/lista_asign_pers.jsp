@@ -94,7 +94,7 @@
                     <div class="col-md-6 col-md-offset-1">
                         <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post">
                             <input hidden name="ïdUA" id="ïdUA" value="${ua.getIdunidad()}">
-                            <p align="right"><button type="submit" class="btn btn-default" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                         </form>
                         <h1 align="center"><strong>Lista del Personal Asignable a UA: ${ua.getNombre()}</strong></h1>
                         <br>

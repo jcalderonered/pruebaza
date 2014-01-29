@@ -94,7 +94,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                         <form role="form">
                             <c:if test="${estado != 'formativa'}">
                             <br>
