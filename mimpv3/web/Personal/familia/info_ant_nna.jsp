@@ -373,6 +373,22 @@
                                 </div>
                             </div>
                             <br>
+                            <h3><strong>Datos de la Familia</strong></h3>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Número de hijos actuales que tiene la familia</label>
+                                <div class="controls">
+                                    <input id="numHijos" name="numHijos" type="text" value="${infoFam.getnHijos()}" class="input-xlarge">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Nivel socioeconómico de la familia</label>
+                                <div class="controls">
+                                    <input id="nivel" name="nivel" type="text" value="${infoFam.getNivelSocioeconomico()}" class="input-xlarge">
+                                </div>
+                            </div>
+                            <br>    
                             <div class="control-group">
                                 <div class="controls">
                                     <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
@@ -407,6 +423,8 @@
             function validar()
             {
             var numericExpression = /^[0-9]+$/;
+            var textNivel = document.getElementById("nivel");
+            var cant = textNivel.value.length;
             if(!document.getElementById('viajarSi').checked && !document.getElementById('viajarNo').checked){
                 alert( "Debe elegir al menos una opción de viaje" );
                 document.formulario.viajarSi.focus() ;
@@ -426,13 +444,28 @@
                 document.formulario.edadMax.focus() ;
                 return false;
             }
+            if(!document.formulario.numHijos.value.match(numericExpression))
+            {
+                
+                alert( "El campo debe contener solo números" );
+                document.formulario.numHijos.focus() ;
+                return false;
+            }
+            if(cant > 1)
+            {
+                
+                alert( "El campo debe contener solo un caracter A/B/C" );
+                document.formulario.nivel.focus() ;
+                return false;
+            }
             if(!document.getElementById('masculino').checked && !document.getElementById('femenino').checked && !document.getElementById('indistinto').checked){
                 alert( "Debe elegir al menos una opción de género" );
                 document.formulario.masculino.focus() ;
                 return false;
                 
             }
-            return true
+            
+            return true;
             }
           </script>
             <!-- Ubicar al final -->

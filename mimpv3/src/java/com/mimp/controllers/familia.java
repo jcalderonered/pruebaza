@@ -1078,8 +1078,10 @@ public class familia {
         
         Turno temp = ServicioMain.getTurno(idTurno);
         int numAsist = ServicioFamilia.AsistentesPorFormulario(usuario.getIdfamilia());
-        int cont = numAsist + temp.getAsistenciaFTs().size();
-        if (cont < temp.getVacantes()){
+        int cont = 0;
+        if(!temp.getAsistenciaFTs().isEmpty()) cont = numAsist + temp.getAsistenciaFTs().size();
+        if(temp.getAsistenciaFTs().isEmpty()) cont = numAsist;
+        if (cont <= temp.getVacantes()){
             map.put("mensaje","inscrito");
             map.put("sesion",temp.getSesion());
             FormularioSesion antiguo = ServicioFamilia.ultimoFormulario(usuario.getIdfamilia());

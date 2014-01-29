@@ -936,7 +936,9 @@ public class main {
                                               @RequestParam(value="viajar") String viajar,
                                               @RequestParam(value="edadMin") String edadMin,
                                               @RequestParam(value="edadMax") String edadMax,
-                                              @RequestParam(value="genero") String genero
+                                              @RequestParam(value="genero") String genero,
+                                              @RequestParam(value="numHijos") String numHijos,
+                                              @RequestParam(value="nivel") String nivel
                                     
                                              ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -964,6 +966,11 @@ public class main {
         if (edadMin != null && !edadMin.equals("")) infoFam.setExpectativaEdadMin(Short.parseShort(edadMin));
         if (edadMax != null && !edadMax.equals("")) infoFam.setExpectativaEdadMax(Short.parseShort(edadMax));
         if (genero != null && !genero.equals("")) infoFam.setExpectativaGenero(genero);
+        if (numHijos != null && !numHijos.equals("")) infoFam.setnHijos(Short.parseShort(numHijos));
+        if (nivel != null && !nivel.equals("")){
+            char n = nivel.charAt(0);
+            infoFam.setNivelSocioeconomico(n);
+        }
         
         ServicioMain.updateInfoFam(infoFam);
         
@@ -977,6 +984,9 @@ public class main {
         @RequestMapping(value = "/ActualizarRegistro", method = RequestMethod.POST)
         public ModelAndView ActualizarRegistro(ModelMap map, HttpSession session,
                                               //@RequestParam(value="numero") long numero,  
+                                              @RequestParam(value="htFicha") String htFicha,
+                                              @RequestParam(value="nFicha") String nFicha,
+                                              @RequestParam(value="fechaIngresoFicha") String fechaIngresoFicha,
                                               @RequestParam(value="ht") String ht,  
                                               @RequestParam(value="numeroExp") String numeroExp,  
                                               @RequestParam(value="fechaIngreso") String fechaIngreso,  
@@ -1001,12 +1011,16 @@ public class main {
         Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
         
         //expediente.setNumero(numero);
+        expediente.setHtFicha(htFicha);
+        expediente.setnFicha(nFicha);
+        if(fechaIngresoFicha != null && !fechaIngresoFicha.equals("")) expediente.setFechaIngresoFicha(df.stringToDate(fechaIngresoFicha));
+        if(fechaIngresoFicha == null || fechaIngresoFicha.equals("")) expediente.setFechaIngresoDga(null);
         expediente.setHt(ht);
         expediente.setNumeroExpediente(numeroExp);
         if(fechaIngreso != null && !fechaIngreso.equals("")) expediente.setFechaIngresoDga(df.stringToDate(fechaIngreso));
-        if(fechaIngreso == null && fechaIngreso.equals("")) expediente.setFechaIngresoDga(null);
+        if(fechaIngreso == null || fechaIngreso.equals("")) expediente.setFechaIngresoDga(null);
         if(tupa != null && !tupa.equals("")) expediente.setTupa(df.stringToDate(tupa));
-        if(tupa == null && tupa.equals("")) expediente.setTupa(null);
+        if(tupa == null || tupa.equals("")) expediente.setTupa(null);
         
         expediente.setNacionalidad(nacionalidad);
         //expediente.setRnsa(Short.parseShort(rnsa));
