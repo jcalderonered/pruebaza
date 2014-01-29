@@ -1227,14 +1227,14 @@ public class mainEtapas {
                 servicioEtapa.crearEstudioCaso(tempEst);
 
                 String mensaje_log = "Se registró nueva familia al estudio de caso del NNA con ID: " + String.valueOf(nnaPrioritario.getIdnna());
-                String Tipo_registro = "Estu_Caso";
+                String Tipo_registro = "Login";
 
-                //try{
+                try{
                 String Numero_registro = tempEst.getOrden();
 
                 ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-                //}  catch (Exception ex){
-                //}
+                }  catch (Exception ex){
+                }
 
             }
             map.put("listaEstudios", servicioEtapa.getListaEstudioCaso(nnaPrioritario.getIdnna()));
