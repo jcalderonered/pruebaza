@@ -93,6 +93,17 @@ public class main {
             if (!personal.getRol().equals("Inactivo")) {
                 session.setAttribute("usuario", personal);
                 pagina = "/Personal/inicio_personal";
+                
+                String mensaje_log = "El usuario, " + personal.getUser() + " con ID, " + personal.getIdpersonal() + ". Ingresó al sistema.";
+                String Tipo_registro = "Login";
+
+                try{
+                String Numero_registro = String.valueOf(personal.getIdpersonal());
+
+                ServicioPersonal.InsertLog(personal, Tipo_registro, Numero_registro, mensaje_log);
+                }  catch (Exception ex){
+                }
+                
             } else {
                 map.addAttribute("mensaje", mensaje);
                 pagina = "login";

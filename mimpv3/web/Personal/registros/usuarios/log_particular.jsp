@@ -94,6 +94,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
+                        <p align="right"><button id="singlebutton" onclick="location.href = '${pageContext.servletContext.contextPath}/usuarios'" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Lista de logs del Personal con ID: ${user.getIdpersonal()}</strong></h1>
 
                         <form action="${pageContext.servletContext.contextPath}/logParticular" method="post">
