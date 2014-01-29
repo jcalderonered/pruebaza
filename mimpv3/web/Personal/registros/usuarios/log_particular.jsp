@@ -94,7 +94,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h1 align="center"><strong>Lista de logs del Personal con ID: ${usuario.getIdpersonal()}</strong></h1>
+                        <h1 align="center"><strong>Lista de logs del Personal con ID: ${user.getIdpersonal()}</strong></h1>
 
                         <form action="${pageContext.servletContext.contextPath}/logParticular" method="post">
                             <div class="row">
@@ -113,13 +113,13 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-4 col-md-offset-1">
-                                    <input hidden name="id" id="id" value="${usuario.getIdpersonal()}">
+                                    <input hidden name="id" id="id" value="${user.getIdpersonal()}">
                                     <button type="submit" class="btn btn-default" >Filtrar</button>                            
                                 </div> 
                         </form>  
                         <div class="col-md-4 col-md-offset-1">
                             <form action="${pageContext.servletContext.contextPath}/logParticularFiltroHoy" method="post">  
-                                <input hidden name="id" id="id" value="${usuario.getIdpersonal()}">
+                                <input hidden name="id" id="id" value="${user.getIdpersonal()}">
                                 <button type="submit" class="btn btn-default" >Ver Logs de Hoy</button>
                             </form> 
                         </div>
