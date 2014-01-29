@@ -95,6 +95,14 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
+                        <br>
+                        <h3><strong>Habilitación de Usuario</strong></h3>
+                        <br>
+                        Estado actual: ${infoFam.getFamilia().getHabilitado() == 0 ? 'Habilitado' : 'No Habilitado'}
+                        <br>
+                        <br>
+                        <button onclick="location.href = '${pageContext.servletContext.contextPath}/Habilitacion'" id="singlebutton" name="singlebutton" class="btn btn-default">${infoFam.getFamilia().getHabilitado() == 0 ? 'Deshabilitar' : 'Habilitar'}</button>
+                        <br>
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario" onsubmit="return(validar());">
                             <input hidden id="adoptante" name="adoptante" value="ella">
                             <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
