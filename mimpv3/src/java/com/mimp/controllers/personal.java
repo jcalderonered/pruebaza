@@ -1202,7 +1202,7 @@ public class personal {
 
         ServicioPersonal.InsertJuzgado(juzg);
 
-        String mensaje_log = "Se registró nuevo juzgado con Nombre, " + juzg.getNombre() + " y ID:"  + String.valueOf(juzg.getIdjuzgado());
+        String mensaje_log = "Se registró nuevo juzgado con Nombre, " + juzg.getNombre() + " y ID:" + String.valueOf(juzg.getIdjuzgado());
         String Tipo_registro = "Juzgado";
 
         //try{
@@ -1254,7 +1254,7 @@ public class personal {
 
         ServicioPersonal.UpdateJuzgado(juzg);
 
-        String mensaje_log = "Se registró nuevo juzgado con Nombre, " + juzg.getNombre() + " y ID:"  + String.valueOf(juzg.getIdjuzgado());
+        String mensaje_log = "Se registró nuevo juzgado con Nombre, " + juzg.getNombre() + " y ID:" + String.valueOf(juzg.getIdjuzgado());
         String Tipo_registro = "Juzgado";
 
         //try{
@@ -3377,7 +3377,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/logParticular", method = RequestMethod.POST)
-    public ModelAndView logParticular(ModelMap map, HttpSession session, @RequestParam("id") Long idpersonal) {
+    public ModelAndView logParticular(ModelMap map, HttpSession session, @RequestParam("id") Long idpersonal, @RequestParam("dia") String dia) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3385,12 +3385,14 @@ public class personal {
             return new ModelAndView("login", map);
         }
         //List<Personal> lista = Servicio.listaPersonal();
-        map.put("listaParticularLog", ServicioPersonal.getLogParticular(idpersonal));
+        map.put("listaParticularLog", ServicioPersonal.getLogParticularPorDia(idpersonal, dia));
+        map.put("dia", dia);
+        
         return new ModelAndView("/Personal/registros/usuarios/log_particular", map);
     }
 
-    @RequestMapping(value = "/logPersonal", method = RequestMethod.POST)
-    public ModelAndView logPersonal(ModelMap map, HttpSession session) {
+    @RequestMapping(value = "/logParticularFiltroHoy", method = RequestMethod.POST)
+    public ModelAndView logParticularFiltroHoy(ModelMap map, HttpSession session, @RequestParam("id") Long idpersonal) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3398,8 +3400,49 @@ public class personal {
             return new ModelAndView("login", map);
         }
         //List<Personal> lista = Servicio.listaPersonal();
-        map.put("listaPersonalLog", ServicioPersonal.getLogPersonal());
+        Date diatemp = new Date();
+        String dia = String.valueOf(diatemp.getDate()) + "/" + String.valueOf(diatemp.getMonth() + 1) + "/" + String.valueOf(diatemp.getYear() + 1900);             
+        Personal personal = new Personal();
         
+        personal = ServicioPersonal.getPersonal(idpersonal);
+        
+        map.put("listaParticularLog", ServicioPersonal.getLogParticularPorDia(idpersonal, dia));        
+        map.put("usuario", personal); 
+        map.put("dia", dia);
+        return new ModelAndView("/Personal/registros/usuarios/log_particular", map);
+    }
+
+    @RequestMapping(value = "/logPersonalFiltro", method = RequestMethod.POST)
+    public ModelAndView logPersonalFiltro(ModelMap map, HttpSession session, @RequestParam("dia") String dia) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //List<Personal> lista = Servicio.listaPersonal();
+
+        map.put("listaPersonalLog", ServicioPersonal.getLogPersonalPorDia(dia));
+        map.put("dia", dia);
+
+        return new ModelAndView("/Personal/registros/usuarios/log_personal", map);
+    }
+
+    @RequestMapping(value = "/logPersonalFiltroHoy", method = RequestMethod.POST)
+    public ModelAndView logPersonalFiltroHoy(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        //List<Personal> lista = Servicio.listaPersonal();
+        Date diatemp = new Date();
+        String dia = String.valueOf(diatemp.getDate()) + "/" + String.valueOf(diatemp.getMonth() + 1) + "/" + String.valueOf(diatemp.getYear() + 1900);
+
+        map.put("listaPersonalLog", ServicioPersonal.getLogPersonalPorDia(dia));
+        map.put("dia", dia);
+
         return new ModelAndView("/Personal/registros/usuarios/log_personal", map);
     }
 

@@ -788,25 +788,25 @@ public class HiberPersonal {
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
         Hibernate.initialize(tempReun.getAsistenciaFRs());
         long idtemp = 0;
-        for (AsistenciaFR afr : tempReun.getAsistenciaFRs()){
-                   Hibernate.initialize(afr.getFamilia());
-                   if(afr.getFamilia().getIdfamilia() != idtemp){
-                   String hql2 = "FROM FormularioSesion F where F.familia = :id order by F.idformularioSesion DESC";
-                   Query query2 = session.createQuery(hql2);
-                   query2.setLong("id", afr.getFamilia().getIdfamilia());  
-                   query2.setMaxResults(1);
-                   List resultados = query2.list();
-                   for (Iterator iter2 = resultados.iterator(); iter2.hasNext();) {
-                                    FormularioSesion temp = (FormularioSesion) iter2.next();
-                                    Hibernate.initialize(temp.getAsistentes());
-                                    Hibernate.initialize(temp.getFamilia().getAsistenciaFRs());
-                                    allFormularios.add(temp);
-                                    
-                            }
-                   idtemp = afr.getFamilia().getIdfamilia();
-                   }
-                 }
-        
+        for (AsistenciaFR afr : tempReun.getAsistenciaFRs()) {
+            Hibernate.initialize(afr.getFamilia());
+            if (afr.getFamilia().getIdfamilia() != idtemp) {
+                String hql2 = "FROM FormularioSesion F where F.familia = :id order by F.idformularioSesion DESC";
+                Query query2 = session.createQuery(hql2);
+                query2.setLong("id", afr.getFamilia().getIdfamilia());
+                query2.setMaxResults(1);
+                List resultados = query2.list();
+                for (Iterator iter2 = resultados.iterator(); iter2.hasNext();) {
+                    FormularioSesion temp = (FormularioSesion) iter2.next();
+                    Hibernate.initialize(temp.getAsistentes());
+                    Hibernate.initialize(temp.getFamilia().getAsistenciaFRs());
+                    allFormularios.add(temp);
+
+                }
+                idtemp = afr.getFamilia().getIdfamilia();
+            }
+        }
+
         return allFormularios;
 
     }
@@ -847,14 +847,12 @@ public class HiberPersonal {
         session.update(aft);
 
     }
-    
-    
-    
-    public ArrayList<AsistenciaFT> getAFT (long idFormulario){
-    
-         Session session = sessionFactory.getCurrentSession();
-         session.beginTransaction();
-         
+
+    public ArrayList<AsistenciaFT> getAFT(long idFormulario) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
         String hql = "FROM AsistenciaFT A where A.formularioSesion = :id";
         Query query = session.createQuery(hql);
         query.setLong("id", idFormulario);
@@ -932,9 +930,9 @@ public class HiberPersonal {
 
         session.update(temp);
     }
-    
-    public ArrayList<AsistenciaFR> getAsistFR (long idFamilia, long idReunion){
-    
+
+    public ArrayList<AsistenciaFR> getAsistFR(long idFamilia, long idReunion) {
+
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         String hql = "From AsistenciaFR AFR where AFR.familia = :idFamilia and AFR.reunion = :idReunion";
@@ -947,7 +945,7 @@ public class HiberPersonal {
             AsistenciaFR temp = (AsistenciaFR) iter.next();
             allAsistencias.add(temp);
         }
-       
+
         return allAsistencias;
     }
 
@@ -1239,7 +1237,7 @@ public class HiberPersonal {
         return allExpedientes;
 
     }
-    
+
     public void InsertLog(Personal personal, String Tipo_registro, String Numero_registro, String mensaje) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -1281,14 +1279,40 @@ public class HiberPersonal {
         return allLogsParticular;
 
     }
-    
+
+    public ArrayList<Log> getLogParticularPorDia(long idPersonal, String dia) {
+
+        timeStampFormat timestamp = new timeStampFormat();
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String diain = dia + " 00:00:00";
+        String diafin = dia + " 23:59:59";
+
+        String hql = "FROM Log L where L.personal = :id and L.fecha >= :diain and L.fecha <= :diafin";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idPersonal);
+        query.setTimestamp("diain", timestamp.stringToTimestampLog(diain));
+        query.setTimestamp("diafin", timestamp.stringToTimestampLog(diafin));
+        List log = query.list();
+        ArrayList<Log> allLogsParticularPorDia = new ArrayList();
+        for (Iterator iter = log.iterator(); iter.hasNext();) {
+            Log temp = (Log) iter.next();
+            Hibernate.initialize(temp.getPersonal());
+            allLogsParticularPorDia.add(temp);
+        }
+
+        return allLogsParticularPorDia;
+    }
+
     public ArrayList<Log> getLogPersonal() {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
         String hql = "FROM Log L ";
-        Query query = session.createQuery(hql);        
+        Query query = session.createQuery(hql);
         List log = query.list();
         ArrayList<Log> allLogsParticular = new ArrayList();
         for (Iterator iter = log.iterator(); iter.hasNext();) {
@@ -1298,6 +1322,32 @@ public class HiberPersonal {
         }
 
         return allLogsParticular;
+
+    }
+
+    public ArrayList<Log> getLogPersonalPorDia(String dia) {
+
+        timeStampFormat timestamp = new timeStampFormat();
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String diain = dia + " 00:00:00";
+        String diafin = dia + " 23:59:59";
+
+        String hql = "FROM Log L where L.fecha >= :diain and L.fecha <= :diafin";
+        Query query = session.createQuery(hql);
+        query.setTimestamp("diain", timestamp.stringToTimestampLog(diain));
+        query.setTimestamp("diafin", timestamp.stringToTimestampLog(diafin));
+        List log = query.list();
+        ArrayList<Log> allLogsParticularPorDia = new ArrayList();
+        for (Iterator iter = log.iterator(); iter.hasNext();) {
+            Log temp = (Log) iter.next();
+            Hibernate.initialize(temp.getPersonal());
+            allLogsParticularPorDia.add(temp);
+        }
+
+        return allLogsParticularPorDia;
 
     }
 

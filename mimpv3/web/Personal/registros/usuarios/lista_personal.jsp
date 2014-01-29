@@ -119,7 +119,7 @@
                                             <td>${personal.getUnidad().getNombre()}</td>
                                             <td>${personal.getCorreoTrabajo()}</td>
                                             <td>
-                                                <form action="${pageContext.servletContext.contextPath}/logParticular" method="post">
+                                                <form action="${pageContext.servletContext.contextPath}/logParticularFiltroHoy" method="post">
                                                     <input hidden name="id" id="id" value="${personal.getIdpersonal()}">
                                                     <button type="submit" class="btn btn-default">Ver</button>
                                                 </form>
@@ -141,7 +141,7 @@
                         </div>
                         <br>
                         <br>
-                        <form action="${pageContext.servletContext.contextPath}/logPersonal" method="post">
+                        <form action="${pageContext.servletContext.contextPath}/logPersonalFiltroHoy" method="post">
                             <input hidden name="id" id="id" value="${personal.getIdpersonal()}">
                             <button type="submit" class="btn btn-default">Ver log</button>
                         </form>
