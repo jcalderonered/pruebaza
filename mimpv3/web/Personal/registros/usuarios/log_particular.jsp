@@ -94,48 +94,56 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h1 align="center"><strong>Lista de logs del Personal 1</strong></h1>
-                        <br>
-                        <h3><strong>Filtrar por fechas</strong></h3>
-                        <br>
-                        <form role="form">
+                        <h1 align="center"><strong>Lista de logs del Personal con ID: ${usuario.getIdpersonal()}</strong></h1>
+
+                        <form action="${pageContext.servletContext.contextPath}/logParticular" method="post">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4 col-md-offset-1">
+                                    <br>
+                                    <h3><strong>Filtrar por fechas</strong></h3>
+                                    <br>
                                     <div class="control-group">
                                         <div class="controls">
-                                            <label class="control-label">Desde</label>
-                                            <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
+                                            <label class="control-label">Seleccionar Dia</label>
+                                            <input id="dia" name="dia" type="text" class="datepicker input-xlarge" value="${dia}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <label class="control-label">Hasta</label>
-                                            <input id="full-name" name="full-name" type="text" class="datepicker input-xlarge">
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>              
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-default" disabled>Filtrar</button>
-                        </form>    
-                        <br>
-                        <br>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th > Item </th>
-                                        <th >ID del Personal</th>
-                                        <th >fecha</th>
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-1">
+                                    <input hidden name="id" id="id" value="${usuario.getIdpersonal()}">
+                                    <button type="submit" class="btn btn-default" >Filtrar</button>                            
+                                </div> 
+                        </form>  
+                        <div class="col-md-4 col-md-offset-1">
+                            <form action="${pageContext.servletContext.contextPath}/logParticularFiltroHoy" method="post">  
+                                <input hidden name="id" id="id" value="${usuario.getIdpersonal()}">
+                                <button type="submit" class="btn btn-default" >Ver Logs de Hoy</button>
+                            </form> 
+                        </div>
+                    </div>
 
-                                        <th >Tipo de registro</th>
-                                        <th >Número del registro</th>
-                                        <th >Incidencia</th>                                          
-                                    </tr>
-                                </thead>
+                    <br>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <div>
+                                <h3><strong>Logs del día: ${dia}</strong></h3>
+                            </div>
+                            <thead>
+                                <tr>
+                                    <th > Item </th>
+                                    <th >ID del Personal</th>
+                                    <th >fecha</th>
 
+                                    <th >Tipo de registro</th>
+                                    <th >Número del registro</th>
+                                    <th >Incidencia</th>                                          
+                                </tr>
+                            </thead>
+                            <c:if test="${!listaParticularLog.isEmpty()}"> 
                                 <tbody>
                                     <c:forEach var="log" items="${listaParticularLog}" varStatus="status">
                                         <tr>
@@ -148,34 +156,38 @@
                                         </tr>
                                     </c:forEach>
                                 </tbody>
-                            </table>
-                        </div>
-                        <br>
+                            </c:if> 
+                            <c:if test="${listaParticularLog.isEmpty()}">
+                                <h3><strong>No se encontraron resultados</strong></h3>
+                            </c:if>   
+                        </table>
                     </div>
+                    <br>
                 </div>
             </div>
-            <!--FIN DE CONTENIDO-->
-            <br>
-            <br>
-        </div>   
-        <div id="footer">
-            <div id="ja-footer" class="wrap">
-                <hr width=80% align="center">
-                <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-                <p align="right">Diseñado por RED<br>www.red.net.pe</p>
-            </div>
         </div>
-        <!-- core JavaScript
-                ================================================== -->
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
-        <script type="text/javascript">
+        <!--FIN DE CONTENIDO-->
+        <br>
+        <br>
+    </div>   
+    <div id="footer">
+        <div id="ja-footer" class="wrap">
+            <hr width=80% align="center">
+            <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
+            <p align="right">Diseñado por RED<br>www.red.net.pe</p>
+        </div>
+    </div>
+    <!-- core JavaScript
+            ================================================== -->
+    <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+    <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+    <script type="text/javascript">
 
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
-        </script>
-        <!-- Ubicar al final -->
-    </body>
+    </script>
+    <!-- Ubicar al final -->
+</body>
 </html>

@@ -51,6 +51,24 @@ public class timeStampFormat {
         
     }
     
+        public Timestamp stringToTimestampLog (String temp){
+        SimpleDateFormat dateFormater = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        
+        Date utiDate = new Date();
+        try {
+            utiDate = dateFormater.parse(temp);
+        } catch (ParseException ex) {
+            Logger.getLogger(dateFormat.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        long time = utiDate.getTime();
+        
+        Timestamp ts = new Timestamp(time);
+        return ts;
+        
+    }
+    
+    
+    
     public String TimeToString (Date temp){
         SimpleDateFormat fromsql = new SimpleDateFormat("dd/MMM/yyyy HH:mm",new Locale("ES"));
         //SimpleDateFormat mystring = new SimpleDateFormat("dd/MM/yyyy");
