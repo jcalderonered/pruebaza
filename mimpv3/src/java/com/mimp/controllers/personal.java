@@ -3385,9 +3385,14 @@ public class personal {
             return new ModelAndView("login", map);
         }
         //List<Personal> lista = Servicio.listaPersonal();
+        Personal personal = new Personal();
+
+        personal = ServicioPersonal.getPersonal(idpersonal);
+
         map.put("listaParticularLog", ServicioPersonal.getLogParticularPorDia(idpersonal, dia));
+        map.put("user", personal);
         map.put("dia", dia);
-        
+
         return new ModelAndView("/Personal/registros/usuarios/log_particular", map);
     }
 
@@ -3401,13 +3406,13 @@ public class personal {
         }
         //List<Personal> lista = Servicio.listaPersonal();
         Date diatemp = new Date();
-        String dia = String.valueOf(diatemp.getDate()) + "/" + String.valueOf(diatemp.getMonth() + 1) + "/" + String.valueOf(diatemp.getYear() + 1900);             
+        String dia = String.valueOf(diatemp.getDate()) + "/" + String.valueOf(diatemp.getMonth() + 1) + "/" + String.valueOf(diatemp.getYear() + 1900);
         Personal personal = new Personal();
-        
+
         personal = ServicioPersonal.getPersonal(idpersonal);
-        
-        map.put("listaParticularLog", ServicioPersonal.getLogParticularPorDia(idpersonal, dia));        
-        map.put("usuario", personal); 
+
+        map.put("listaParticularLog", ServicioPersonal.getLogParticularPorDia(idpersonal, dia));
+        map.put("user", personal);
         map.put("dia", dia);
         return new ModelAndView("/Personal/registros/usuarios/log_particular", map);
     }
