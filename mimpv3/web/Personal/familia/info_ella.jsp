@@ -97,7 +97,7 @@
                     <div class="col-md-8">
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario" onsubmit="return(validar());">
                             <input hidden id="adoptante" name="adoptante" value="ella">
-                            <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                             <c:if test="${estado != 'formativa'}">
                             <br>
                             <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>

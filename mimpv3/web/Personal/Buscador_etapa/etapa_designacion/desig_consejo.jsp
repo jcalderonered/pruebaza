@@ -111,7 +111,7 @@
                             <fieldset>
                                 <br>
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
-                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
+                                <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                                 <br>
                                 <h1 align="center"><strong>NNA "${nna.getNombre()} ${nna.getApellidoP()} ${nna.getApellidoM()}"</strong></h1>
                                 <br>

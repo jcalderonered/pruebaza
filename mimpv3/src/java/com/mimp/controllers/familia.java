@@ -304,7 +304,7 @@ public class familia {
                 map.addAttribute("estCivil", ifa.getEstadoCivil());
                 for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
                     Adoptante adop = (Adoptante) iter2.next();
-                    if (adop.getSexo() == 'F') {
+                    if (adop.getSexo() == 'f') {
                         map.put("adop", adop);
                         String fechanac = format.dateToString(adop.getFechaNac());
                         map.addAttribute("fechanac", fechanac);
@@ -332,7 +332,7 @@ public class familia {
                 map.addAttribute("estCivil", ifa.getEstadoCivil());
                 for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
                     Adoptante adop = (Adoptante) iter2.next();
-                    if (adop.getSexo() == 'M') {
+                    if (adop.getSexo() == 'm') {
                         map.put("adop", adop);
                         String fechanac = format.dateToString(adop.getFechaNac());
                         map.addAttribute("fechanac", fechanac);

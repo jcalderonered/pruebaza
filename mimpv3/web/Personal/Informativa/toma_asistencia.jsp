@@ -93,7 +93,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                         <p class="text-left"><h1><strong> Listado de Asistentes</strong> </h1></p>
                         <br>
 

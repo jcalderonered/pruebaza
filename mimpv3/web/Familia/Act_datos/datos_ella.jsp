@@ -75,8 +75,8 @@
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/FactDatos/opc1" data-toggle="tab">La Solicitante</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc2" data-toggle="tab">El solicitante</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc3" data-toggle="tab">Composición familiar</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc4" data-toggle="tab">Vivienda</a></li>
+                            <!--<li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc3" data-toggle="tab">Composición familiar</a></li>-->
+                            <!-- <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc4" data-toggle="tab">Vivienda</a></li> -->
                             <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc5" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
 
@@ -141,10 +141,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getTipoDoc() == 100}">
-                                                        <input type="radio" name="optionsRadios1" id="optionsRadios1" checked>DNI</label>
+                                                        <input type="radio" name="optionsRadios1" id="optionsRadios1" checked disabled>DNI</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios1" id="optionsRadios1">DNI</label>
+                                                    <input type="radio" name="optionsRadios1" id="optionsRadios1" disabled>DNI</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -154,10 +154,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getTipoDoc() == 99}">
-                                                        <input type="radio" name="optionsRadios1" id="optionsRadios2" checked>Carnet de Extranjería</label>
+                                                        <input type="radio" name="optionsRadios1" id="optionsRadios2" checked disabled>Carnet de Extranjería</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios1" id="optionsRadios2">Carnet de Extranjería</label>
+                                                    <input type="radio" name="optionsRadios1" id="optionsRadios2" disabled>Carnet de Extranjería</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>                            
@@ -192,11 +192,11 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${estCivil == 'soltera'}">
-                                                        <input type="radio" name="optionsRadios2" id="soltero" value="D" checked>Soltera
+                                                        <input type="radio" name="optionsRadios2" id="soltero" value="D" checked disabled>Soltera
                                             </label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="soltero" value="D">Soltera</label>
+                                                    <input type="radio" name="optionsRadios2" id="soltero" value="D" disabled>Soltera</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -206,10 +206,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${estCivil == 'casados'}">
-                                                        <input type="radio" name="optionsRadios2" id="casado" value="C" checked>Casada</label>
+                                                        <input type="radio" name="optionsRadios2" id="casado" value="C" checked disabled>Casada</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="casado" value="C">Casada</label>
+                                                    <input type="radio" name="optionsRadios2" id="casado" value="C" disabled>Casada</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>                            
@@ -219,10 +219,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${estCivil == 'viudad'}">
-                                                        <input type="radio" name="optionsRadios2" id="viudo" value="D" checked>Viuda</label>
+                                                        <input type="radio" name="optionsRadios2" id="viudo" value="D" checked disabled>Viuda</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="viudo" value="D">Viuda</label>
+                                                    <input type="radio" name="optionsRadios2" id="viudo" value="D" disabled>Viuda</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -232,10 +232,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${estCivil == 'divorciada'}">
-                                                        <input type="radio" name="optionsRadios2" id="divorciado" value="D" checked>Divorciada</label>
+                                                        <input type="radio" name="optionsRadios2" id="divorciado" value="D" checked disabled>Divorciada</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="divorciado" value="D">Divorciada</label>
+                                                    <input type="radio" name="optionsRadios2" id="divorciado" value="D" disabled>Divorciada</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -267,10 +267,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getCulminoNivel() == 1}">
-                                                        <input type="radio" name="optionsRadios4" id="si" value="D" checked>Si</label>
+                                                        <input type="radio" name="optionsRadios4" id="si" value="D" checked disabled>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios4" id="si" value="D">Si</label>
+                                                    <input type="radio" name="optionsRadios4" id="si" value="D" disabled>Si</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -280,10 +280,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getCulminoNivel() == 0}">
-                                                        <input type="radio" name="optionsRadios4" id="no" value="D" checked>No</label>
+                                                        <input type="radio" name="optionsRadios4" id="no" value="D" checked disabled>No</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios4" id="no" value="D">No</label>
+                                                    <input type="radio" name="optionsRadios4" id="no" value="D" disabled>No</label>
                                                 </c:otherwise>
                                             </c:choose>
 
@@ -305,10 +305,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getTrabajadorDepend() == 1}">
-                                                        <input type="checkbox" name="checkbox1" id="checkbox1" value="D" checked>Si</label>
+                                                        <input type="checkbox" name="checkbox1" id="checkbox1" value="D" checked disabled>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="checkbox" name="checkbox1" id="checkbox1" value="D" >Si</label>
+                                                    <input type="checkbox" name="checkbox1" id="checkbox1" value="D" disabled >Si</label>
                                                 </c:otherwise>
                                             </c:choose>                                 
                                         </div>
@@ -357,10 +357,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getTrabajadorIndepend() == 1}">
-                                                        <input type="checkbox" name="checkbox2" id="checkbox2" value="D" checked>Si</label>
+                                                        <input type="checkbox" name="checkbox2" id="checkbox2" value="D" checked disabled>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="checkbox" name="checkbox2" id="checkbox2" value="D">Si</label>
+                                                    <input type="checkbox" name="checkbox2" id="checkbox2" value="D" disabled>Si</label>
                                                 </c:otherwise>
                                             </c:choose>    
                                         </div>
@@ -391,10 +391,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getSeguroSalud() == 1}">
-                                                        <input type="radio" name="optionsRadios5" id="seguro_si" value="D" checked>Si</label>
+                                                        <input type="radio" name="optionsRadios5" id="seguro_si" value="D" checked disabled>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios5" id="seguro_si" value="D">Si</label>
+                                                    <input type="radio" name="optionsRadios5" id="seguro_si" value="D" disabled>Si</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -404,10 +404,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getSeguroSalud() == 0}">
-                                                        <input type="radio" name="optionsRadios5" id="seguro_no" value="D" checked>No</label>
+                                                        <input type="radio" name="optionsRadios5" id="seguro_no" value="D" checked disabled>No</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios5" id="seguro_no" value="D">No</label>
+                                                    <input type="radio" name="optionsRadios5" id="seguro_no" value="D" disabled>No</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -428,10 +428,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getSeguroVida() == 1}">
-                                                        <input type="radio" name="optionsRadios6" id="vida_si" value="D" checked>Si</label>
+                                                        <input type="radio" name="optionsRadios6" id="vida_si" value="D" checked disabled>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios6" id="vida_si" value="D">Si</label>
+                                                    <input type="radio" name="optionsRadios6" id="vida_si" value="D" disabled>Si</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -441,10 +441,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getSeguroVida() == 0}">
-                                                        <input type="radio" name="optionsRadios6" id="vida_no" value="D" checked>No</label>
+                                                        <input type="radio" name="optionsRadios6" id="vida_no" value="D" checked disabled>No</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios6" id="vida_no" value="D">No</label>
+                                                    <input type="radio" name="optionsRadios6" id="vida_no" value="D" disabled>No</label>
                                                 </c:otherwise>
                                             </c:choose>
 
@@ -459,10 +459,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getSistPensiones() == 1}">
-                                                        <input type="radio" name="optionsRadios7" id="afiliado_si" value="D" checked>Si</label>
+                                                        <input type="radio" name="optionsRadios7" id="afiliado_si" value="D" checked disabled>Si</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios7" id="afiliado_si" value="D">Si</label>
+                                                    <input type="radio" name="optionsRadios7" id="afiliado_si" value="D" disabled>Si</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -472,10 +472,10 @@
                                             <label>
                                                 <c:choose>
                                                     <c:when test="${adop.getSistPensiones() == 0}">
-                                                        <input type="radio" name="optionsRadios7" id="afiliado_no" value="D" checked>No</label>
+                                                        <input type="radio" name="optionsRadios7" id="afiliado_no" value="D" checked disabled>No</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios7" id="afiliado_no" value="D">No</label>
+                                                    <input type="radio" name="optionsRadios7" id="afiliado_no" value="D" disabled>No</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>

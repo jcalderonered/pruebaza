@@ -119,7 +119,7 @@
                             <fieldset>
                                 <br>
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
-                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
+                                <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                                 <br>
                                 <h1 align="center"><strong>Familia "${familia}"</strong></h1>
                                 <input hidden name="familia" id="familia" value="${familia}">
