@@ -621,8 +621,8 @@ public class main {
         map.put("infoFam",infoFam);
         map.put("estado",etapaOrigen);
         map.put("expediente",expediente);
-        map.put("Ella",Ella);
-        return new ModelAndView("/Personal/familia/info_ella", map);
+        map.put("El",El);
+        return new ModelAndView("/Personal/familia/info_el", map);
 } 
 
 @RequestMapping(value = "/laSolicitante", method = RequestMethod.GET)

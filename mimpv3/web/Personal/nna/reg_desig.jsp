@@ -208,16 +208,16 @@
      
             function validar()
             {
-              
+            var numericExpression = /^[0-9]+$/;  
             if( document.formulario.fecha.value == "" )
             {
             alert( "Debe ingresar una fecha");
              document.formulario.fecha.focus() ;
             return false;
             }
-            if( document.formulario.numDesig.value == "" )
+            if(!document.formulario.numDesig.value.match(numericExpression))
             {
-            alert( "Debe ingresar el número de designación" );
+            alert( "Debe ingresar solo números en este campo" );
              document.formulario.numDesig.focus() ;
             return false;
             }
