@@ -102,7 +102,7 @@
                         </ul>
                         <br>
                         <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarEstudio" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarEstudio" method="post" name="formulario" onkeypress="return enter(event)">
                         <br>
                         <div class="control-group">
                             <label class="control-label">Orden del Estudio de Caso</label>

@@ -177,7 +177,7 @@
                                         <td>
                                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarEstudio" method="post">
                                                  <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
-                                                 <button ${tokenAdopcion == 0 ? 'disabled' : '' } class="btn btn-default">Registrar</button>
+                                                 <button ${tokenAdopcion == 0 || nna.getExpedienteNnas().isEmpty() == true? 'disabled' : '' } class="btn btn-default">Registrar</button>
                                             </form>
                                         </td>
                                         <td>
