@@ -2507,17 +2507,17 @@ public class reporte {
                     }
                     cell.setCellValue(edad);
                     cell = row.createCell(47);
-                    cell.setCellValue(desig.getNna().getSexo());//sexo
+                    cell.setCellValue(desig.getNna().getSexo());
                     cell = row.createCell(48);
                     String caracteristicas = "Presenta lo siguiente: ";
                     if (desig.getNna().getSeguiMedico() == 0) {
-                        caracteristicas = caracteristicas + "";
+                        caracteristicas = caracteristicas + "requiere de seguimiento médico, ";
                     }
                     if (desig.getNna().getOperacion() == 0) {
-                        caracteristicas = caracteristicas + "";
+                        caracteristicas = caracteristicas + "requiere de cirugía menor, ";
                     }
                     if (desig.getNna().getHiperactivo() == 0) {
-                        caracteristicas = caracteristicas + "";
+                        caracteristicas = caracteristicas + "sufre de TDAH, ";
                     }
                     caracteristicas = caracteristicas + " y las siguientes observaciones: " + desig.getNna().getObservaciones();
                     cell.setCellValue(caracteristicas);//caracteristicas
@@ -2747,113 +2747,90 @@ public class reporte {
                 } catch (Exception ex) {
                 }
                 cell.setCellValue(fecha);
-                fecha = "";//AQUI
+                fecha = "";
+                ultfecha = new Date(10, 0, 01);
                 Resolucion resol = new Resolucion();
-                for (Iterator iter3 = exp.getEvaluacions().iterator(); iter3.hasNext();) {
-                    eval = (Evaluacion) iter3.next();
+                for (Iterator iter6 = exp.getEvaluacions().iterator(); iter6.hasNext();) {
+                    eval = (Evaluacion) iter6.next();
                     for (Iterator iter4 = eval.getResolucions().iterator(); iter4.hasNext();) {
                         resol = (Resolucion) iter4.next();
                         if (resol.getTipo().equals("apto") || resol.getTipo().equals("improcedente") || resol.getTipo().equals("fin") || resol.getTipo().equals("observado")) {
-                            break;
+                            if (ultfecha.before(resol.getFechaResol())) {
+                                break;
+                            }
                         }
                     }
                 }
                 cell = row.createCell(42);
-                
+                cell.setCellValue(resol.getTipo());
+                cell = row.createCell(43);
+                cell.setCellValue(resol.getNumero());
+                cell = row.createCell(44);
+                int añoresol = 0;
                 try {
                     fecha = format.dateToString(resol.getFechaResol());
+                    añoresol = resol.getFechaResol().getYear();
                 } catch (Exception ex) {
                 }
                 cell.setCellValue(fecha);
                 fecha = "";
-                cell = row.createCell(21);
-                cell.setCellValue(ifam.getExpectativaEdadMin().toString());
-                cell = row.createCell(22);
-                cell.setCellValue(ifam.getExpectativaEdadMax().toString());
-                cell = row.createCell(23);
-                cell.setCellValue(ifam.getExpectativaGenero());
-                cell = row.createCell(24);
-                cell.setCellValue(exp.getEstado());
-                cell = row.createCell(25);
-                cell.setCellValue(ifam.getObservaciones());
-                cell = row.createCell(38);
+                cell = row.createCell(45);
+                cell.setCellValue(añoresol);
+                cell = row.createCell(46);
+                try {
+                    fecha = format.dateToString(resol.getFechaNotificacion());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";//AQUI
+                cell = row.createCell(47);
+                cell.setCellValue(ifam.getNivelSocioeconomico());
+                cell = row.createCell(48);
+                cell.setCellValue(ifam.getExpectativaEdadMin().toString() + " - " + ifam.getExpectativaEdadMax().toString());
+                cell = row.createCell(49);
+                String caracteristicas = "Acepta las siguientes condiciones: ";
+                if (ifam.getNnaSeguiMedico() == 0) {
+                    caracteristicas = caracteristicas + "requiere de seguimiento médico, ";
+                }
+                if (ifam.getNnaOperacion() == 0) {
+                    caracteristicas = caracteristicas + "requiere de cirugía menor, ";
+                }
+                if (ifam.getNnaHiperactivo() == 0) {
+                    caracteristicas = caracteristicas + "sufre de TDAH.";
+                }
+                cell.setCellValue(caracteristicas);
+                cell = row.createCell(50); //AQUI
+                caracteristicas = "Acepta los siguientes antecedentes: ";
+                if (ifam.getNnaIncesto() == 0) {
+                    caracteristicas = caracteristicas + "producto de incesto, ";
+                }
+                if (ifam.getNnaMental() == 0) {
+                    caracteristicas = caracteristicas + "padres con enfermedad psiquiatrica, ";
+                }
+                if (ifam.getNnaEpilepsia() == 0) {
+                    caracteristicas = caracteristicas + "padres con epilepsia, ";
+                }
+                if (ifam.getNnaAbuso() == 0){
+                    caracteristicas = caracteristicas + "víctima de abuso sexual, ";
+                }
+                if (ifam.getNnaSifilis() == 0){
+                    caracteristicas = caracteristicas + "con sífilis al nacer. ";
+                }
+                cell.setCellValue(caracteristicas);
+                cell = row.createCell(51);
+                cell.setCellValue(ifam.getnHijos());
+                cell = row.createCell(52);
                 cell.setCellValue(ifam.getOrigenHijos());
-                cell = row.createCell(39);
+                cell = row.createCell(53);
                 if (ifam.getPuedeViajar() == 0) {
                     cell.setCellValue("Si");
                 } else {
                     cell.setCellValue("No");
                 }
-                cell = row.createCell(40);
+                cell = row.createCell(54);
                 cell.setCellValue(ifam.getPredisposicionAp());
-                cell = row.createCell(41);
-                cell.setCellValue(exp.getEstado());
-                cell = row.createCell(42);
-                ultfecha = new Date(10, 0, 01);
-                Designacion desig = new Designacion();
-                for (Iterator iter = exp.getDesignacions().iterator(); iter.hasNext();) {
-                    Designacion daux = (Designacion) iter.next();
-                    if (ultfecha.before(daux.getFechaConsejo())) {
-                        ultfecha = daux.getFechaConsejo();
-                        desig = daux;
-                    }
-                }
-                cell.setCellValue(desig.getFechaConsejo());
-                cell = row.createCell(43);
+                cell = row.createCell(55);
                 cell.setCellValue(ifam.getObservaciones());
-                //Debemos determinar si una resolucion desfavorable fue dada despues de una designacion
-                resol = new Resolucion();
-                for (Iterator iter3 = exp.getEvaluacions().iterator(); iter3.hasNext();) {
-                    eval = (Evaluacion) iter3.next();
-                    for (Iterator iter4 = eval.getResolucions().iterator(); iter4.hasNext();) {
-                        resol = (Resolucion) iter4.next();
-                        if (resol.getTipo().equals("sinefecto") || resol.getTipo().equals("revocacion")) {
-                            if (resol.getFechaResol().after(desig.getFechaConsejo())) {
-                                desig = new Designacion();
-                            }
-
-                        }
-                    }
-                }
-                if (desig.getIddesignacion() != 0) {
-                    cell = row.createCell(44);
-                    cell.setCellValue(desig.getNna().getNombre() + " " + desig.getNna().getApellidoP());
-                    cell = row.createCell(45);
-                    try {
-                        fecha = format.dateToString(desig.getNna().getFechaNacimiento());
-                    } catch (Exception ex) {
-                    }
-                    cell.setCellValue(fecha);
-                    fecha = "";
-                    cell = row.createCell(46);
-                    edad = añoAct - desig.getNna().getFechaNacimiento().getYear();
-                    if ((desig.getNna().getFechaNacimiento().getMonth() - fechaAct.getMonth())
-                            > 0) {
-                        edad--;
-                    } else if ((desig.getNna().getFechaNacimiento().getMonth()
-                            - fechaAct.getMonth()) == 0) {
-                        if ((desig.getNna().getFechaNacimiento().getDate() - fechaAct.getDate())
-                                > 0) {
-                            edad--;
-                        }
-                    }
-                    cell.setCellValue(edad);
-                    cell = row.createCell(47);
-                    cell.setCellValue(desig.getNna().getSexo());//sexo
-                    cell = row.createCell(48);
-                    String caracteristicas = "Presenta lo siguiente: ";
-                    if (desig.getNna().getSeguiMedico() == 0) {
-                        caracteristicas = caracteristicas + "";
-                    }
-                    if (desig.getNna().getOperacion() == 0) {
-                        caracteristicas = caracteristicas + "";
-                    }
-                    if (desig.getNna().getHiperactivo() == 0) {
-                        caracteristicas = caracteristicas + "";
-                    }
-                    caracteristicas = caracteristicas + " y las siguientes observaciones: " + desig.getNna().getObservaciones();
-                    cell.setCellValue(caracteristicas);//caracteristicas
-                }
 
                 i++;
             }
