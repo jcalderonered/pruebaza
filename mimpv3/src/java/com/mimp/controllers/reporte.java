@@ -140,7 +140,7 @@ public class reporte {
             //Aquí va el query que consigue los datos de la tabla
             ArrayList<PostAdopcion> listapost = ServicioReporte.ReportePostAdopcion();
 
-            int i = 1;
+            int i = 3;
             for (PostAdopcion post : listapost) {
                 Row row = sheet.createRow(i);
 
@@ -336,7 +336,7 @@ public class reporte {
             //Aquí va el query que consigue los datos de la tabla
             ArrayList<Nna> listanna = ServicioNna.ListaNna("prioritario");
 
-            int i = 1;
+            int i = 2;
             for (Nna nna : listanna) {
                 Row row = sheet.createRow(i);
 
@@ -507,6 +507,7 @@ public class reporte {
                         iter.hasNext();) {
                     Designacion daux = (Designacion) iter.next();
                     if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
                         desig = daux;
                     }
                 }
@@ -686,6 +687,7 @@ public class reporte {
                         iter.hasNext();) {
                     Designacion daux = (Designacion) iter.next();
                     if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
                         desig = daux;
                     }
                 }
@@ -865,6 +867,7 @@ public class reporte {
                         iter.hasNext();) {
                     Designacion daux = (Designacion) iter.next();
                     if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
                         desig = daux;
                     }
                 }
@@ -907,7 +910,7 @@ public class reporte {
             //Aquí va el query que consigue los datos de la tabla
             ArrayList<Nna> listanna = ServicioNna.ListaNna("prioritario");
 
-            int i = 1;
+            int i = 2;
             for (Nna nna : listanna) {
                 Row row = sheet.createRow(i);
 
@@ -1064,6 +1067,7 @@ public class reporte {
                         iter4.hasNext();) {
                     Designacion daux = (Designacion) iter4.next();
                     if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
                         desig = daux;
                     }
                 }
@@ -1136,7 +1140,7 @@ public class reporte {
                 }
             }
 
-            int i = 1;
+            int i = 2;
             for (Nna nna : listamayor) {
                 row = sheet.createRow(i);
                 Prioritario prior = new Prioritario();
@@ -1201,8 +1205,7 @@ public class reporte {
                 cell.setCellValue(nna.getObservaciones());
                 int index = 1;
                 int indexcelda = 10;
-                for (Iterator iter2 = nna.getEstudioCasos().iterator();
-                        iter2.hasNext();) {
+                for (Iterator iter2 = nna.getEstudioCasos().iterator(); iter2.hasNext();) {
                     EstudioCaso est = (EstudioCaso) iter2.next();
                     if (index > 2) {
                         break;
@@ -1224,18 +1227,17 @@ public class reporte {
                     cell.setCellValue(est.getExpedienteFamilia().getExpediente());
                     indexcelda++;
                     cell = row.createCell(indexcelda);
-                    cell.setCellValue(est.getNSolicitud().toString());
-//Historico (revisar)
+                    cell.setCellValue(est.getNSolicitud().toString());//Historico (revisar)
                     indexcelda++;
 
                     index++;
                 }
                 Date ultfecha = new Date(10, 0, 01);
                 Designacion desig = new Designacion();
-                for (Iterator iter3 = nna.getDesignacions().iterator();
-                        iter3.hasNext();) {
+                for (Iterator iter3 = nna.getDesignacions().iterator(); iter3.hasNext();) {
                     Designacion daux = (Designacion) iter3.next();
                     if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
                         desig = daux;
                     }
                 }
@@ -1244,8 +1246,7 @@ public class reporte {
                 cell = row.createCell(18);
                 cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
                 cell = row.createCell(19);
-                cell.setCellValue(desig.getNDesignacion().toString());
-//Historico (revisar)
+                cell.setCellValue(desig.getNDesignacion().toString());//Historico (revisar)
                 cell = row.createCell(20);
                 cell.setCellValue(prior.getProfesional());
 
@@ -1260,7 +1261,7 @@ public class reporte {
                 }
             }
 
-            i = 1;
+            i = 2;
             for (Nna nna : listasalud) {
                 row = sheet.createRow(i);
                 Prioritario prior = new Prioritario();
@@ -1350,18 +1351,17 @@ public class reporte {
                     cell.setCellValue(est.getExpedienteFamilia().getExpediente());
                     indexcelda++;
                     cell = row.createCell(indexcelda);
-                    cell.setCellValue(est.getNSolicitud().toString());
-//Historico (revisar)
+                    cell.setCellValue(est.getNSolicitud().toString());//Historico (revisar)
                     indexcelda++;
 
                     index++;
                 }
                 Date ultfecha = new Date(10, 0, 01);
                 Designacion desig = new Designacion();
-                for (Iterator iter3 = nna.getDesignacions().iterator();
-                        iter3.hasNext();) {
+                for (Iterator iter3 = nna.getDesignacions().iterator(); iter3.hasNext();) {
                     Designacion daux = (Designacion) iter3.next();
                     if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
                         desig = daux;
                     }
                 }
@@ -1370,8 +1370,7 @@ public class reporte {
                 cell = row.createCell(19);
                 cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
                 cell = row.createCell(20);
-                cell.setCellValue(desig.getNDesignacion().toString());
-//Historico (revisar)
+                cell.setCellValue(desig.getNDesignacion().toString());//Historico (revisar)
                 cell = row.createCell(21);
                 cell.setCellValue(prior.getProfesional());
 
@@ -1386,12 +1385,11 @@ public class reporte {
                 }
             }
 
-            i = 1;
+            i = 2;
             for (Nna nna : listahermano) {
                 row = sheet.createRow(i);
                 Prioritario prior = new Prioritario();
-                for (Iterator iter = nna.getPrioritarios().iterator();
-                        iter.hasNext();) {
+                for (Iterator iter = nna.getPrioritarios().iterator(); iter.hasNext();) {
                     prior = (Prioritario) iter.next();
                 }
 
@@ -1402,8 +1400,7 @@ public class reporte {
                 cell = row.createCell(2);
                 cell.setCellValue(nna.getNombre());
                 cell = row.createCell(3);
-                cell.setCellValue(nna.getApellidoP() + " "
-                        + nna.getApellidoM());
+                cell.setCellValue(nna.getApellidoP() + " " + nna.getApellidoM());
                 cell = row.createCell(4);
                 cell.setCellValue(nna.getSexo());
                 cell = row.createCell(5);
@@ -1476,18 +1473,17 @@ public class reporte {
                     cell.setCellValue(est.getExpedienteFamilia().getExpediente());
                     indexcelda++;
                     cell = row.createCell(indexcelda);
-                    cell.setCellValue(est.getNSolicitud().toString());
-//Historico (revisar)
+                    cell.setCellValue(est.getNSolicitud().toString());//Historico (revisar)
                     indexcelda++;
 
                     index++;
                 }
                 Date ultfecha = new Date(10, 0, 01);
                 Designacion desig = new Designacion();
-                for (Iterator iter3 = nna.getDesignacions().iterator();
-                        iter3.hasNext();) {
+                for (Iterator iter3 = nna.getDesignacions().iterator(); iter3.hasNext();) {
                     Designacion daux = (Designacion) iter3.next();
                     if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
                         desig = daux;
                     }
                 }
@@ -1496,8 +1492,7 @@ public class reporte {
                 cell = row.createCell(19);
                 cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
                 cell = row.createCell(20);
-                cell.setCellValue(desig.getNDesignacion().toString());
-//Historico (revisar)
+                cell.setCellValue(desig.getNDesignacion().toString());//Historico (revisar)
                 cell = row.createCell(21);
                 cell.setCellValue(prior.getProfesional());
 
@@ -1512,7 +1507,7 @@ public class reporte {
                 }
             }
 
-            i = 1;
+            i = 2;
             for (Nna nna : listaespecial) {
                 row = sheet.createRow(i);
                 Prioritario prior = new Prioritario();
@@ -1604,18 +1599,17 @@ public class reporte {
                     cell.setCellValue(est.getExpedienteFamilia().getExpediente());
                     indexcelda++;
                     cell = row.createCell(indexcelda);
-                    cell.setCellValue(est.getNSolicitud().toString());
-//Historico (revisar)
+                    cell.setCellValue(est.getNSolicitud().toString());//Historico (revisar)
                     indexcelda++;
 
                     index++;
                 }
                 Date ultfecha = new Date(10, 0, 01);
                 Designacion desig = new Designacion();
-                for (Iterator iter3 = nna.getDesignacions().iterator();
-                        iter3.hasNext();) {
+                for (Iterator iter3 = nna.getDesignacions().iterator(); iter3.hasNext();) {
                     Designacion daux = (Designacion) iter3.next();
                     if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
                         desig = daux;
                     }
                 }
@@ -1640,7 +1634,7 @@ public class reporte {
                 }
             }
 
-            i = 1;
+            i = 2;
             for (Nna nna : listaadolescente) {
                 row = sheet.createRow(i);
                 Prioritario prior = new Prioritario();
@@ -1729,8 +1723,7 @@ public class reporte {
                     cell.setCellValue(est.getExpedienteFamilia().getExpediente());
                     indexcelda++;
                     cell = row.createCell(indexcelda);
-                    cell.setCellValue(est.getNSolicitud().toString());
-//Historico (revisar)
+                    cell.setCellValue(est.getNSolicitud().toString());//Historico (revisar)
                     indexcelda++;
 
                     index++;
@@ -1741,6 +1734,7 @@ public class reporte {
                         iter3.hasNext();) {
                     Designacion daux = (Designacion) iter3.next();
                     if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
                         desig = daux;
                     }
                 }
@@ -1749,8 +1743,7 @@ public class reporte {
                 cell = row.createCell(19);
                 cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
                 cell = row.createCell(20);
-                cell.setCellValue(desig.getNDesignacion().toString());
-//Historico (revisar)
+                cell.setCellValue(desig.getNDesignacion().toString());//Historico (revisar)
                 cell = row.createCell(21);
                 cell.setCellValue(prior.getProfesional());
 
@@ -1773,6 +1766,7 @@ public class reporte {
         }
     }
 
+    //PROBAR
     @RequestMapping("/Reportes/AptosNacionales")
     public void ReporteAptosNacionales(ModelMap map, HttpSession session,
             HttpServletResponse response) {
@@ -1792,7 +1786,7 @@ public class reporte {
             //Aquí va el query que consigue los datos de la tabla
             ArrayList<Familia> listafam = ServicioEtapa.getListaFamilias();//Cambiar
 
-            int i = 1;
+            int i = 2;
             for (Familia fam : listafam) {
                 Row row = sheet.createRow(i);
 
@@ -1803,6 +1797,222 @@ public class reporte {
                 for (Iterator iter = fam.getExpedienteFamilias().iterator(); iter.hasNext();) {
                     exp = (ExpedienteFamilia) iter.next();
                 }
+                cell.setCellValue(exp.getExpediente());
+                cell = row.createCell(2);
+                cell.setCellValue(exp.getNumeroExpediente());
+                Adoptante el = new Adoptante();
+                Adoptante ella = new Adoptante();
+                InfoFamilia ifam = new InfoFamilia();
+                for (Iterator iter2 = fam.getInfoFamilias().iterator(); iter2.hasNext();) {
+                    ifam = (InfoFamilia) iter2.next();
+                    for (Iterator iter3 = ifam.getAdoptantes().iterator();
+                            iter3.hasNext();) {
+                        Adoptante adop = (Adoptante) iter3.next();
+                        if (adop.getSexo() == 'm') {
+                            el = adop;
+                        } else {
+                            ella = adop;
+                        }
+                    }
+                }
+                cell = row.createCell(3);
+                cell.setCellValue(el.getNombre());
+                cell = row.createCell(4);
+                cell.setCellValue(el.getApellidoP());
+                cell = row.createCell(5);
+                cell.setCellValue(el.getApellidoM());
+                cell = row.createCell(6);
+                Date fechaAct = new Date();
+                int añoAct = fechaAct.getYear();
+                int edad = añoAct - el.getFechaNac().getYear();
+                if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
+                        > 0) {
+                    edad--;
+                } else if ((el.getFechaNac().getMonth()
+                        - fechaAct.getMonth()) == 0) {
+                    if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                            > 0) {
+                        edad--;
+                    }
+                }
+                cell.setCellValue(edad);
+                cell = row.createCell(7);
+                String fecha = "";
+                try {
+                    fecha = format.dateToString(el.getFechaNac());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                cell = row.createCell(8);
+                cell.setCellValue(ella.getNombre());
+                cell = row.createCell(9);
+                cell.setCellValue(ella.getApellidoP());
+                cell = row.createCell(10);
+                cell.setCellValue(ella.getApellidoM());
+                cell = row.createCell(11);
+                añoAct = fechaAct.getYear();
+                edad = añoAct - ella.getFechaNac().getYear();
+                if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
+                        > 0) {
+                    edad--;
+                } else if ((ella.getFechaNac().getMonth()
+                        - fechaAct.getMonth()) == 0) {
+                    if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                            > 0) {
+                        edad--;
+                    }
+                }
+                cell.setCellValue(edad);
+                cell = row.createCell(12);
+                fecha = "";
+                try {
+                    fecha = format.dateToString(ella.getFechaNac());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";
+                cell = row.createCell(13);
+                cell.setCellValue(ifam.getEstadoCivil());
+                cell = row.createCell(14);
+                cell.setCellValue(ifam.getPaisRes());
+                cell = row.createCell(15);
+                cell.setCellValue(ifam.getDepRes());
+                cell = row.createCell(16);
+                cell.setCellValue(ifam.getNivelSocioeconomico());
+                cell = row.createCell(17);
+                cell.setCellValue(exp.getTipoFamilia());
+                cell = row.createCell(18);
+                cell.setCellValue(exp.getNacionalidad());
+                cell = row.createCell(19);
+                cell.setCellValue(exp.getUnidad().getNombre());
+                Resolucion resol = new Resolucion();
+                for (Iterator iter3 = exp.getEvaluacions().iterator(); iter3.hasNext();) {
+                    Evaluacion eval = (Evaluacion) iter3.next();
+                    for (Iterator iter4 = eval.getResolucions().iterator(); iter4.hasNext();) {
+                        resol = (Resolucion) iter4.next();
+                        if (resol.getTipo().equals("apto")) {
+                            break;
+                        }
+                    }
+                }
+                cell = row.createCell(20);
+                try {
+                    fecha = format.dateToString(resol.getFechaResol());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";
+                cell = row.createCell(21);
+                cell.setCellValue(ifam.getExpectativaEdadMin().toString());
+                cell = row.createCell(22);
+                cell.setCellValue(ifam.getExpectativaEdadMax().toString());
+                cell = row.createCell(23);
+                cell.setCellValue(ifam.getExpectativaGenero());
+                cell = row.createCell(24);
+                if (ifam.getNnaIncesto() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(25);
+                if (ifam.getNnaMental() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(26);
+                if (ifam.getNnaEpilepsia() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(27);
+                if (ifam.getNnaAbuso() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(28);
+                if (ifam.getNnaSifilis() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(29);
+                if (ifam.getNnaSeguiMedico() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(30);
+                if (ifam.getNnaOperacion() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(31);
+                if (ifam.getNnaHiperactivo() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(32);
+                if (ifam.getNnaEspecial() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(33);
+                if (ifam.getNnaEnfermo() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(34);
+                if (ifam.getNnaMayor() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(35);
+                if (ifam.getNnaAdolescente() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(36);
+                if (ifam.getNnaHermano() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(37);
+                cell.setCellValue(ifam.getnHijos().toString());
+                cell = row.createCell(38);
+                cell.setCellValue(ifam.getOrigenHijos());
+                cell = row.createCell(39);
+                if (ifam.getPuedeViajar() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(40);
+                cell.setCellValue(ifam.getPredisposicionAp());
+                cell = row.createCell(41);
+                cell.setCellValue(exp.getEstado());
+                cell = row.createCell(42);
+                Date ultfecha = new Date(10, 0, 01);
+                Designacion desig = new Designacion();
+                for (Iterator iter = exp.getDesignacions().iterator(); iter.hasNext();) {
+                    Designacion daux = (Designacion) iter.next();
+                    if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
+                        desig = daux;
+                    }
+                }
+                cell.setCellValue(desig.getFechaConsejo());
+                cell = row.createCell(43);
+                cell.setCellValue(ifam.getObservaciones());
 
                 i++;
             }
@@ -1813,6 +2023,847 @@ public class reporte {
         try {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             response.setHeader("Content-Disposition", "attachment; filename=Registro de Adoptantes Aptos Nacionales.xlsx");
+            OutputStream fileOut = response.getOutputStream();
+            wb.write(fileOut);
+            fileOut.flush();
+            fileOut.close();
+        } catch (Exception ex) {
+            //ex.printStackTrace();
+        }
+    }
+
+    //PROBAR
+    @RequestMapping("/Reportes/AptosInternacionales")
+    public void ReporteAptosInternacionales(ModelMap map, HttpSession session,
+            HttpServletResponse response) {
+//        Personal usuario = (Personal) session.getAttribute("usuario");
+//        if (usuario == null) {
+//            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+//            map.addAttribute("mensaje", mensaje);
+//            return new ModelAndView("login", map);
+//        }
+        Workbook wb = new XSSFWorkbook();
+        try {
+            //Se llama a la plantilla localizada en la ruta
+            InputStream inp = new FileInputStream("C:\\Users\\User\\Desktop\\Plantillas\\5 Registro de Adoptantes Aptos Internacional.xlsx");
+            wb = WorkbookFactory.create(inp);
+            Sheet sheet = wb.getSheetAt(0);
+
+            //Aquí va el query que consigue los datos de la tabla
+            ArrayList<Familia> listafam = ServicioEtapa.getListaFamilias();//Cambiar
+
+            int i = 2;
+            for (Familia fam : listafam) {
+                Row row = sheet.createRow(i);
+
+                Cell cell = row.createCell(0);
+                cell.setCellValue(i);
+                cell = row.createCell(1);
+                ExpedienteFamilia exp = new ExpedienteFamilia();
+                for (Iterator iter = fam.getExpedienteFamilias().iterator(); iter.hasNext();) {
+                    exp = (ExpedienteFamilia) iter.next();
+                }
+                cell.setCellValue(exp.getExpediente());
+                cell = row.createCell(2);
+                cell.setCellValue(exp.getNumeroExpediente());
+                Adoptante el = new Adoptante();
+                Adoptante ella = new Adoptante();
+                InfoFamilia ifam = new InfoFamilia();
+                for (Iterator iter2 = fam.getInfoFamilias().iterator(); iter2.hasNext();) {
+                    ifam = (InfoFamilia) iter2.next();
+                    for (Iterator iter3 = ifam.getAdoptantes().iterator();
+                            iter3.hasNext();) {
+                        Adoptante adop = (Adoptante) iter3.next();
+                        if (adop.getSexo() == 'm') {
+                            el = adop;
+                        } else {
+                            ella = adop;
+                        }
+                    }
+                }
+                cell = row.createCell(3);
+                cell.setCellValue(el.getNombre());
+                cell = row.createCell(4);
+                cell.setCellValue(el.getApellidoP());
+                cell = row.createCell(5);
+                cell.setCellValue(el.getApellidoM());
+                cell = row.createCell(6);
+                Date fechaAct = new Date();
+                int añoAct = fechaAct.getYear();
+                int edad = añoAct - el.getFechaNac().getYear();
+                if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
+                        > 0) {
+                    edad--;
+                } else if ((el.getFechaNac().getMonth()
+                        - fechaAct.getMonth()) == 0) {
+                    if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                            > 0) {
+                        edad--;
+                    }
+                }
+                cell.setCellValue(edad);
+                cell = row.createCell(7);
+                String fecha = "";
+                try {
+                    fecha = format.dateToString(el.getFechaNac());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                cell = row.createCell(8);
+                cell.setCellValue(ella.getNombre());
+                cell = row.createCell(9);
+                cell.setCellValue(ella.getApellidoP());
+                cell = row.createCell(10);
+                cell.setCellValue(ella.getApellidoM());
+                cell = row.createCell(11);
+                añoAct = fechaAct.getYear();
+                edad = añoAct - ella.getFechaNac().getYear();
+                if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
+                        > 0) {
+                    edad--;
+                } else if ((ella.getFechaNac().getMonth()
+                        - fechaAct.getMonth()) == 0) {
+                    if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                            > 0) {
+                        edad--;
+                    }
+                }
+                cell.setCellValue(edad);
+                cell = row.createCell(12);
+                fecha = "";
+                try {
+                    fecha = format.dateToString(ella.getFechaNac());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";
+                cell = row.createCell(13);
+                cell.setCellValue(ifam.getEstadoCivil());
+                cell = row.createCell(14);
+                cell.setCellValue(ifam.getPaisRes());
+                cell = row.createCell(15);
+                cell.setCellValue(ifam.getDepRes());
+                cell = row.createCell(16);
+                cell.setCellValue(ifam.getNivelSocioeconomico());
+                cell = row.createCell(17);
+                cell.setCellValue(exp.getTipoFamilia());
+                cell = row.createCell(18);
+                cell.setCellValue(exp.getNacionalidad());
+                cell = row.createCell(19);
+                cell.setCellValue(fam.getEntidad().getNombre());
+                Resolucion resol = new Resolucion();
+                for (Iterator iter3 = exp.getEvaluacions().iterator(); iter3.hasNext();) {
+                    Evaluacion eval = (Evaluacion) iter3.next();
+                    for (Iterator iter4 = eval.getResolucions().iterator(); iter4.hasNext();) {
+                        resol = (Resolucion) iter4.next();
+                        if (resol.getTipo().equals("apto")) {
+                            break;
+                        }
+                    }
+                }
+                cell = row.createCell(20);
+                try {
+                    fecha = format.dateToString(resol.getFechaResol());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";
+                cell = row.createCell(21);
+                cell.setCellValue(ifam.getExpectativaEdadMin().toString());
+                cell = row.createCell(22);
+                cell.setCellValue(ifam.getExpectativaEdadMax().toString());
+                cell = row.createCell(23);
+                cell.setCellValue(ifam.getExpectativaGenero());
+                cell = row.createCell(24);
+                if (ifam.getNnaIncesto() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(25);
+                if (ifam.getNnaMental() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(26);
+                if (ifam.getNnaEpilepsia() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(27);
+                if (ifam.getNnaAbuso() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(28);
+                if (ifam.getNnaSifilis() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(29);
+                if (ifam.getNnaSeguiMedico() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(30);
+                if (ifam.getNnaOperacion() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(31);
+                if (ifam.getNnaHiperactivo() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(32);
+                if (ifam.getNnaEspecial() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(33);
+                if (ifam.getNnaEnfermo() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(34);
+                if (ifam.getNnaMayor() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(35);
+                if (ifam.getNnaAdolescente() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(36);
+                if (ifam.getNnaHermano() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(37);
+                cell.setCellValue(ifam.getnHijos().toString());
+                cell = row.createCell(38);
+                cell.setCellValue(ifam.getOrigenHijos());
+                cell = row.createCell(39);
+                if (ifam.getPuedeViajar() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(40);
+                cell.setCellValue(ifam.getPredisposicionAp());
+                cell = row.createCell(41);
+                cell.setCellValue(exp.getEstado());
+                cell = row.createCell(42);
+                Date ultfecha = new Date(10, 0, 01);
+                Designacion desig = new Designacion();
+                for (Iterator iter = exp.getDesignacions().iterator(); iter.hasNext();) {
+                    Designacion daux = (Designacion) iter.next();
+                    if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
+                        desig = daux;
+                    }
+                }
+                cell.setCellValue(desig.getFechaConsejo());
+                cell = row.createCell(43);
+                cell.setCellValue(ifam.getObservaciones());
+
+                i++;
+            }
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+
+        try {
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setHeader("Content-Disposition", "attachment; filename=Registro de Adoptantes Aptos Internacionales.xlsx");
+            OutputStream fileOut = response.getOutputStream();
+            wb.write(fileOut);
+            fileOut.flush();
+            fileOut.close();
+        } catch (Exception ex) {
+            //ex.printStackTrace();
+        }
+    }
+
+    //PROBAR
+    @RequestMapping("/Reportes/AdopcionExtranjero")
+    public void ReporteAdopcionExtranjero(ModelMap map, HttpSession session,
+            HttpServletResponse response) {
+//        Personal usuario = (Personal) session.getAttribute("usuario");
+//        if (usuario == null) {
+//            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+//            map.addAttribute("mensaje", mensaje);
+//            return new ModelAndView("login", map);
+//        }
+        Workbook wb = new XSSFWorkbook();
+        try {
+            //Se llama a la plantilla localizada en la ruta
+            InputStream inp = new FileInputStream("C:\\Users\\User\\Desktop\\Plantillas\\6 Registro de Adopción en el Extranjero.xlsx");
+            wb = WorkbookFactory.create(inp);
+            Sheet sheet = wb.getSheetAt(0);
+
+            //Aquí va el query que consigue los datos de la tabla
+            ArrayList<Familia> listafam = ServicioEtapa.getListaFamilias();//Cambiar
+
+            int i = 3;
+            for (Familia fam : listafam) {
+                Row row = sheet.createRow(i);
+
+                Cell cell = row.createCell(0);
+                cell.setCellValue(i);
+                cell = row.createCell(1);
+                ExpedienteFamilia exp = new ExpedienteFamilia();
+                for (Iterator iter = fam.getExpedienteFamilias().iterator(); iter.hasNext();) {
+                    exp = (ExpedienteFamilia) iter.next();
+                }
+                cell.setCellValue(exp.getExpediente());
+                cell = row.createCell(2);
+                cell.setCellValue(exp.getNumeroExpediente());
+                Adoptante el = new Adoptante();
+                Adoptante ella = new Adoptante();
+                InfoFamilia ifam = new InfoFamilia();
+                for (Iterator iter2 = fam.getInfoFamilias().iterator(); iter2.hasNext();) {
+                    ifam = (InfoFamilia) iter2.next();
+                    for (Iterator iter3 = ifam.getAdoptantes().iterator();
+                            iter3.hasNext();) {
+                        Adoptante adop = (Adoptante) iter3.next();
+                        if (adop.getSexo() == 'm') {
+                            el = adop;
+                        } else {
+                            ella = adop;
+                        }
+                    }
+                }
+                cell = row.createCell(3);
+                cell.setCellValue(el.getNombre());
+                cell = row.createCell(4);
+                cell.setCellValue(el.getApellidoP());
+                cell = row.createCell(5);
+                cell.setCellValue(el.getApellidoM());
+                cell = row.createCell(6);
+                Date fechaAct = new Date();
+                int añoAct = fechaAct.getYear();
+                int edad = añoAct - el.getFechaNac().getYear();
+                if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
+                        > 0) {
+                    edad--;
+                } else if ((el.getFechaNac().getMonth()
+                        - fechaAct.getMonth()) == 0) {
+                    if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                            > 0) {
+                        edad--;
+                    }
+                }
+                cell.setCellValue(edad);
+                cell = row.createCell(7);
+                String fecha = "";
+                try {
+                    fecha = format.dateToString(el.getFechaNac());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                cell = row.createCell(8);
+                cell.setCellValue(ella.getNombre());
+                cell = row.createCell(9);
+                cell.setCellValue(ella.getApellidoP());
+                cell = row.createCell(10);
+                cell.setCellValue(ella.getApellidoM());
+                cell = row.createCell(11);
+                añoAct = fechaAct.getYear();
+                edad = añoAct - ella.getFechaNac().getYear();
+                if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
+                        > 0) {
+                    edad--;
+                } else if ((ella.getFechaNac().getMonth()
+                        - fechaAct.getMonth()) == 0) {
+                    if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                            > 0) {
+                        edad--;
+                    }
+                }
+                cell.setCellValue(edad);
+                cell = row.createCell(12);
+                fecha = "";
+                try {
+                    fecha = format.dateToString(ella.getFechaNac());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";
+                cell = row.createCell(13);
+                cell.setCellValue(ifam.getEstadoCivil());
+                cell = row.createCell(14);
+                cell.setCellValue(ifam.getPaisRes());
+                cell = row.createCell(15);
+                cell.setCellValue(ifam.getDepRes());
+                cell = row.createCell(16);
+                cell.setCellValue(ifam.getTelefono());
+                cell = row.createCell(17);
+                cell.setCellValue(ifam.getDomicilio());
+                cell = row.createCell(18);
+                cell.setCellValue(fam.getCorreo());
+                cell = row.createCell(19);
+                cell.setCellValue(fam.getEntidad().getPais());
+                Resolucion resol = new Resolucion();
+                for (Iterator iter3 = exp.getEvaluacions().iterator(); iter3.hasNext();) {
+                    Evaluacion eval = (Evaluacion) iter3.next();
+                    for (Iterator iter4 = eval.getResolucions().iterator(); iter4.hasNext();) {
+                        resol = (Resolucion) iter4.next();
+                        if (resol.getTipo().equals("apto")) {
+                            break;
+                        }
+                    }
+                }
+                cell = row.createCell(20);
+                try {
+                    fecha = format.dateToString(resol.getFechaResol());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";
+                cell = row.createCell(21);
+                cell.setCellValue(ifam.getExpectativaEdadMin().toString());
+                cell = row.createCell(22);
+                cell.setCellValue(ifam.getExpectativaEdadMax().toString());
+                cell = row.createCell(23);
+                cell.setCellValue(ifam.getExpectativaGenero());
+                cell = row.createCell(24);
+                cell.setCellValue(exp.getEstado());
+                cell = row.createCell(25);
+                cell.setCellValue(ifam.getObservaciones()); //AQUI
+                cell = row.createCell(38);
+                cell.setCellValue(ifam.getOrigenHijos());
+                cell = row.createCell(39);
+                if (ifam.getPuedeViajar() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(40);
+                cell.setCellValue(ifam.getPredisposicionAp());
+                cell = row.createCell(41);
+                cell.setCellValue(exp.getEstado());
+                cell = row.createCell(42);
+                Date ultfecha = new Date(10, 0, 01);
+                Designacion desig = new Designacion();
+                for (Iterator iter = exp.getDesignacions().iterator(); iter.hasNext();) {
+                    Designacion daux = (Designacion) iter.next();
+                    if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
+                        desig = daux;
+                    }
+                }
+                cell.setCellValue(desig.getFechaConsejo());
+                cell = row.createCell(43);
+                cell.setCellValue(ifam.getObservaciones());
+                //Debemos determinar si una resolucion desfavorable fue dada despues de una designacion
+                resol = new Resolucion();
+                for (Iterator iter3 = exp.getEvaluacions().iterator(); iter3.hasNext();) {
+                    Evaluacion eval = (Evaluacion) iter3.next();
+                    for (Iterator iter4 = eval.getResolucions().iterator(); iter4.hasNext();) {
+                        resol = (Resolucion) iter4.next();
+                        if (resol.getTipo().equals("sinefecto") || resol.getTipo().equals("revocacion")) {
+                            if (resol.getFechaResol().after(desig.getFechaConsejo())) {
+                                desig = new Designacion();
+                            }
+
+                        }
+                    }
+                }
+                if (desig.getIddesignacion() != 0) {
+                    cell = row.createCell(44);
+                    cell.setCellValue(desig.getNna().getNombre() + " " + desig.getNna().getApellidoP());
+                    cell = row.createCell(45);
+                    try {
+                        fecha = format.dateToString(desig.getNna().getFechaNacimiento());
+                    } catch (Exception ex) {
+                    }
+                    cell.setCellValue(fecha);
+                    fecha = "";
+                    cell = row.createCell(46);
+                    edad = añoAct - desig.getNna().getFechaNacimiento().getYear();
+                    if ((desig.getNna().getFechaNacimiento().getMonth() - fechaAct.getMonth())
+                            > 0) {
+                        edad--;
+                    } else if ((desig.getNna().getFechaNacimiento().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((desig.getNna().getFechaNacimiento().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
+                    }
+                    cell.setCellValue(edad);
+                    cell = row.createCell(47);
+                    cell.setCellValue(desig.getNna().getSexo());//sexo
+                    cell = row.createCell(48);
+                    String caracteristicas = "Presenta lo siguiente: ";
+                    if (desig.getNna().getSeguiMedico() == 0) {
+                        caracteristicas = caracteristicas + "";
+                    }
+                    if (desig.getNna().getOperacion() == 0) {
+                        caracteristicas = caracteristicas + "";
+                    }
+                    if (desig.getNna().getHiperactivo() == 0) {
+                        caracteristicas = caracteristicas + "";
+                    }
+                    caracteristicas = caracteristicas + " y las siguientes observaciones: " + desig.getNna().getObservaciones();
+                    cell.setCellValue(caracteristicas);//caracteristicas
+                }
+
+                i++;
+            }
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+
+        try {
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setHeader("Content-Disposition", "attachment; filename=Registro de Adopcion en el Extranjero.xlsx");
+            OutputStream fileOut = response.getOutputStream();
+            wb.write(fileOut);
+            fileOut.flush();
+            fileOut.close();
+        } catch (Exception ex) {
+            //ex.printStackTrace();
+        }
+    }
+
+    //PROBAR
+    @RequestMapping("/Reportes/Expedientes")
+    public void ReporteExpedientes(ModelMap map, HttpSession session,
+            HttpServletResponse response) {
+//        Personal usuario = (Personal) session.getAttribute("usuario");
+//        if (usuario == null) {
+//            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+//            map.addAttribute("mensaje", mensaje);
+//            return new ModelAndView("login", map);
+//        }
+        Workbook wb = new XSSFWorkbook();
+        try {
+            //Se llama a la plantilla localizada en la ruta
+            InputStream inp = new FileInputStream("C:\\Users\\User\\Desktop\\Plantillas\\3 Registro Nacional de Exp. Nacionales e Internacionales.xlsx");
+            wb = WorkbookFactory.create(inp);
+            Sheet sheet = wb.getSheetAt(1);
+
+            //Aquí va el query que consigue los datos de la tabla
+            ArrayList<Familia> listafam = ServicioEtapa.getListaFamilias();//Cambiar
+
+            int i = 3;
+            for (Familia fam : listafam) {
+                Row row = sheet.createRow(i);
+
+                Cell cell = row.createCell(0);
+                cell.setCellValue(i);
+                cell = row.createCell(1);
+                ExpedienteFamilia exp = new ExpedienteFamilia();
+                for (Iterator iter = fam.getExpedienteFamilias().iterator(); iter.hasNext();) {
+                    exp = (ExpedienteFamilia) iter.next();
+                }
+                cell.setCellValue(exp.getExpediente());
+                cell = row.createCell(2);
+                cell.setCellValue(exp.getHtFicha());
+                cell = row.createCell(3);
+                cell.setCellValue(exp.getnFicha());
+                cell = row.createCell(4);
+                cell.setCellValue(exp.getFechaIngresoFicha());
+                cell = row.createCell(5);
+                cell.setCellValue(exp.getHt());
+                cell = row.createCell(6);
+                cell.setCellValue(exp.getUnidad().getNombre());
+                cell = row.createCell(7);
+                cell.setCellValue(exp.getNumeroExpediente());
+                cell = row.createCell(8);
+                String fecha = "";
+                int año = 0;
+                try {
+                    fecha = format.dateToString(exp.getFechaIngresoDga());
+                    año = exp.getFechaIngresoDga().getYear();
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";
+                cell = row.createCell(9);
+                cell.setCellValue(año);
+                Adoptante el = new Adoptante();
+                Adoptante ella = new Adoptante();
+                InfoFamilia ifam = new InfoFamilia();
+                for (Iterator iter2 = fam.getInfoFamilias().iterator(); iter2.hasNext();) {
+                    ifam = (InfoFamilia) iter2.next();
+                    for (Iterator iter3 = ifam.getAdoptantes().iterator();
+                            iter3.hasNext();) {
+                        Adoptante adop = (Adoptante) iter3.next();
+                        if (adop.getSexo() == 'm') {
+                            el = adop;
+                        } else {
+                            ella = adop;
+                        }
+                    }
+                }
+                cell = row.createCell(10);
+                cell.setCellValue(el.getNombre());
+                cell = row.createCell(11);
+                cell.setCellValue(el.getApellidoP());
+                cell = row.createCell(12);
+                cell.setCellValue(el.getApellidoM());
+                cell = row.createCell(13);
+                Date fechaAct = new Date();
+                int añoAct = fechaAct.getYear();
+                int edad = añoAct - el.getFechaNac().getYear();
+                if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
+                        > 0) {
+                    edad--;
+                } else if ((el.getFechaNac().getMonth()
+                        - fechaAct.getMonth()) == 0) {
+                    if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                            > 0) {
+                        edad--;
+                    }
+                }
+                cell.setCellValue(edad);
+                cell = row.createCell(14);
+                cell.setCellValue(ella.getNombre());
+                cell = row.createCell(15);
+                cell.setCellValue(ella.getApellidoP());
+                cell = row.createCell(16);
+                cell.setCellValue(ella.getApellidoM());
+                cell = row.createCell(17);
+                añoAct = fechaAct.getYear();
+                edad = añoAct - ella.getFechaNac().getYear();
+                if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
+                        > 0) {
+                    edad--;
+                } else if ((ella.getFechaNac().getMonth()
+                        - fechaAct.getMonth()) == 0) {
+                    if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                            > 0) {
+                        edad--;
+                    }
+                }
+                cell.setCellValue(edad);
+                cell = row.createCell(18);
+                cell.setCellValue(ifam.getEstadoCivil().charAt(0));
+                cell = row.createCell(19);
+                cell.setCellValue(el.getPaisNac());
+                cell = row.createCell(20);
+                cell.setCellValue(ella.getPaisNac());
+                cell = row.createCell(21);
+                cell.setCellValue(ifam.getPaisRes());
+                cell = row.createCell(22);
+                cell.setCellValue(ifam.getDepRes());
+                cell = row.createCell(23);
+                cell.setCellValue(exp.getTipoFamilia());
+                cell = row.createCell(24);
+                cell.setCellValue(exp.getTipoListaEspera());
+                cell = row.createCell(25);
+                cell.setCellValue(fam.getEntidad().getNombre());
+                cell = row.createCell(26);
+                cell.setCellValue(exp.getNacionalidad());
+                Evaluacion eval = new Evaluacion();
+                Date ultfecha = new Date(10, 0, 01);
+                for (Iterator iter3 = exp.getEvaluacions().iterator(); iter3.hasNext();) {
+                    Evaluacion evalaux = (Evaluacion) iter3.next();
+                    if (ultfecha.before(evalaux.getFechaAsignacion()) && evalaux.getTipo().equals("legal")) {
+                        ultfecha = evalaux.getFechaAsignacion();
+                        eval = evalaux;
+                    }
+                }
+                cell = row.createCell(27);
+                try {
+                    fecha = format.dateToString(eval.getFechaAsignacion());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";
+                cell = row.createCell(28);
+                cell.setCellValue(eval.getPersonal().getNombre() + " " + eval.getPersonal().getApellidoP());
+                cell = row.createCell(29);
+                cell.setCellValue(eval.getResultado());
+                cell = row.createCell(30);
+                cell.setCellValue(eval.getObservacion());
+                eval = new Evaluacion();
+                ultfecha = new Date(10, 0, 01);
+                for (Iterator iter4 = exp.getEvaluacions().iterator(); iter4.hasNext();) {
+                    Evaluacion evalaux = (Evaluacion) iter4.next();
+                    if (ultfecha.before(evalaux.getFechaAsignacion()) && evalaux.getTipo().equals("psicologica")) {
+                        ultfecha = evalaux.getFechaAsignacion();
+                        eval = evalaux;
+                    }
+                }
+                cell = row.createCell(31);
+                try {
+                    fecha = format.dateToString(eval.getFechaAsignacion());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";
+                cell = row.createCell(32);
+                cell.setCellValue(eval.getPersonal().getNombre() + " " + eval.getPersonal().getApellidoP());
+                cell = row.createCell(33);
+                cell.setCellValue(eval.getResultado());
+                cell = row.createCell(34);
+                cell.setCellValue(eval.getObservacion());
+                eval = new Evaluacion();
+                ultfecha = new Date(10, 0, 01);
+                for (Iterator iter5 = exp.getEvaluacions().iterator(); iter5.hasNext();) {
+                    Evaluacion evalaux = (Evaluacion) iter5.next();
+                    if (ultfecha.before(evalaux.getFechaAsignacion()) && evalaux.getTipo().equals("social")) {
+                        ultfecha = evalaux.getFechaAsignacion();
+                        eval = evalaux;
+                    }
+                }
+                cell = row.createCell(35);
+                try {
+                    fecha = format.dateToString(eval.getFechaAsignacion());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";
+                cell = row.createCell(36);
+                cell.setCellValue(eval.getPersonal().getNombre() + " " + eval.getPersonal().getApellidoP());
+                cell = row.createCell(37);
+                cell.setCellValue(eval.getResultado());
+                cell = row.createCell(38);
+                cell.setCellValue(eval.getObservacion());
+                cell = row.createCell(39);
+                cell.setCellValue("");//REVISAR FECHA DE VENCIMIENTO DEIA
+                cell = row.createCell(40);
+                cell.setCellValue(exp.getEstado());
+                cell = row.createCell(41);
+                try {
+                    fecha = format.dateToString(exp.getTupa());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";//AQUI
+                Resolucion resol = new Resolucion();
+                for (Iterator iter3 = exp.getEvaluacions().iterator(); iter3.hasNext();) {
+                    eval = (Evaluacion) iter3.next();
+                    for (Iterator iter4 = eval.getResolucions().iterator(); iter4.hasNext();) {
+                        resol = (Resolucion) iter4.next();
+                        if (resol.getTipo().equals("apto") || resol.getTipo().equals("improcedente") || resol.getTipo().equals("fin") || resol.getTipo().equals("observado")) {
+                            break;
+                        }
+                    }
+                }
+                cell = row.createCell(42);
+                
+                try {
+                    fecha = format.dateToString(resol.getFechaResol());
+                } catch (Exception ex) {
+                }
+                cell.setCellValue(fecha);
+                fecha = "";
+                cell = row.createCell(21);
+                cell.setCellValue(ifam.getExpectativaEdadMin().toString());
+                cell = row.createCell(22);
+                cell.setCellValue(ifam.getExpectativaEdadMax().toString());
+                cell = row.createCell(23);
+                cell.setCellValue(ifam.getExpectativaGenero());
+                cell = row.createCell(24);
+                cell.setCellValue(exp.getEstado());
+                cell = row.createCell(25);
+                cell.setCellValue(ifam.getObservaciones());
+                cell = row.createCell(38);
+                cell.setCellValue(ifam.getOrigenHijos());
+                cell = row.createCell(39);
+                if (ifam.getPuedeViajar() == 0) {
+                    cell.setCellValue("Si");
+                } else {
+                    cell.setCellValue("No");
+                }
+                cell = row.createCell(40);
+                cell.setCellValue(ifam.getPredisposicionAp());
+                cell = row.createCell(41);
+                cell.setCellValue(exp.getEstado());
+                cell = row.createCell(42);
+                ultfecha = new Date(10, 0, 01);
+                Designacion desig = new Designacion();
+                for (Iterator iter = exp.getDesignacions().iterator(); iter.hasNext();) {
+                    Designacion daux = (Designacion) iter.next();
+                    if (ultfecha.before(daux.getFechaConsejo())) {
+                        ultfecha = daux.getFechaConsejo();
+                        desig = daux;
+                    }
+                }
+                cell.setCellValue(desig.getFechaConsejo());
+                cell = row.createCell(43);
+                cell.setCellValue(ifam.getObservaciones());
+                //Debemos determinar si una resolucion desfavorable fue dada despues de una designacion
+                resol = new Resolucion();
+                for (Iterator iter3 = exp.getEvaluacions().iterator(); iter3.hasNext();) {
+                    eval = (Evaluacion) iter3.next();
+                    for (Iterator iter4 = eval.getResolucions().iterator(); iter4.hasNext();) {
+                        resol = (Resolucion) iter4.next();
+                        if (resol.getTipo().equals("sinefecto") || resol.getTipo().equals("revocacion")) {
+                            if (resol.getFechaResol().after(desig.getFechaConsejo())) {
+                                desig = new Designacion();
+                            }
+
+                        }
+                    }
+                }
+                if (desig.getIddesignacion() != 0) {
+                    cell = row.createCell(44);
+                    cell.setCellValue(desig.getNna().getNombre() + " " + desig.getNna().getApellidoP());
+                    cell = row.createCell(45);
+                    try {
+                        fecha = format.dateToString(desig.getNna().getFechaNacimiento());
+                    } catch (Exception ex) {
+                    }
+                    cell.setCellValue(fecha);
+                    fecha = "";
+                    cell = row.createCell(46);
+                    edad = añoAct - desig.getNna().getFechaNacimiento().getYear();
+                    if ((desig.getNna().getFechaNacimiento().getMonth() - fechaAct.getMonth())
+                            > 0) {
+                        edad--;
+                    } else if ((desig.getNna().getFechaNacimiento().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((desig.getNna().getFechaNacimiento().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
+                    }
+                    cell.setCellValue(edad);
+                    cell = row.createCell(47);
+                    cell.setCellValue(desig.getNna().getSexo());//sexo
+                    cell = row.createCell(48);
+                    String caracteristicas = "Presenta lo siguiente: ";
+                    if (desig.getNna().getSeguiMedico() == 0) {
+                        caracteristicas = caracteristicas + "";
+                    }
+                    if (desig.getNna().getOperacion() == 0) {
+                        caracteristicas = caracteristicas + "";
+                    }
+                    if (desig.getNna().getHiperactivo() == 0) {
+                        caracteristicas = caracteristicas + "";
+                    }
+                    caracteristicas = caracteristicas + " y las siguientes observaciones: " + desig.getNna().getObservaciones();
+                    cell.setCellValue(caracteristicas);//caracteristicas
+                }
+
+                i++;
+            }
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+
+        try {
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setHeader("Content-Disposition", "attachment; filename=Registro Nacional de Exp. Nacionales e Internacionales.xlsx");
             OutputStream fileOut = response.getOutputStream();
             wb.write(fileOut);
             fileOut.flush();
