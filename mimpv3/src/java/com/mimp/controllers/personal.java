@@ -513,6 +513,18 @@ public class personal {
 
         ServicioPersonal.InsertAut(ent, aut);
 
+        String mensaje_log = "Se creó la autoridad con nombre: " + ent.getNombre()
+                + " con ID: " + aut.getIdautoridad();
+
+        String Tipo_registro = "Autoridad";
+
+        try {
+            String Numero_registro = String.valueOf(aut.getIdautoridad());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
         return new ModelAndView("/Personal/registros/autoridad/lista_aut", map);
     }
@@ -605,6 +617,19 @@ public class personal {
         }
         temp.getEntidad().setObs(obs);
         ServicioPersonal.UpdateAut(temp.getEntidad(), temp);
+
+        String mensaje_log = "Se editó la Autoridad con nombre: " + temp.getEntidad().getNombre()
+                + " con ID: " + ServicioPersonal.getAutoridad(temp.getIdautoridad()).getIdautoridad();
+
+        String Tipo_registro = "Autoridad";
+
+        try {
+            String Numero_registro = String.valueOf(ServicioPersonal.getAutoridad(temp.getIdautoridad()).getIdautoridad());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
         return new ModelAndView("/Personal/registros/autoridad/lista_aut", map);
     }
@@ -848,6 +873,18 @@ public class personal {
 
         ServicioPersonal.InsertOrg(ent, rep, org);
 
+        String mensaje_log = "Se creó el Organismo con nombre: " + org.getEntidad().getNombre()
+                + " con ID: " + org.getIdorganismo();
+
+        String Tipo_registro = "Organismo";
+
+        try {
+            String Numero_registro = String.valueOf(org.getIdorganismo());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());
         return new ModelAndView("/Personal/registros/organismo/lista_org", map);
     }
@@ -1015,6 +1052,18 @@ public class personal {
         org.getEntidad().setObs(obs);
 
         ServicioPersonal.UpdateOrg(org.getEntidad(), org.getRepresentantes().iterator().next(), org);
+
+        String mensaje_log = "Se editó el Organismo con nombre: " + org.getEntidad().getNombre()
+                + " con ID: " + org.getIdorganismo();
+
+        String Tipo_registro = "Organismo";
+
+        try {
+            String Numero_registro = String.valueOf(org.getIdorganismo());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());
         return new ModelAndView("/Personal/registros/organismo/lista_org", map);
@@ -1745,6 +1794,18 @@ public class personal {
 
         ServicioPersonal.InsertPersonal(temp);
 
+        String mensaje_log = "Se creó nuevo usuario con nombre: " + temp.getNombre() + " " + temp.getApellidoP()
+                + " con ID: " + temp.getIdpersonal();
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(temp.getIdpersonal());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         return new ModelAndView("/Personal/registros/usuarios/lista_personal", map);
     }
@@ -1838,6 +1899,18 @@ public class personal {
         temp.setUnidad(temp2);
 
         ServicioPersonal.UpdatePersonal(temp);
+
+        String mensaje_log = "Se editó el usuario con nombre: " + temp.getNombre() + " " + temp.getApellidoP()
+                + " con ID: " + temp.getIdpersonal();
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(temp.getIdpersonal());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         return new ModelAndView("/Personal/registros/usuarios/lista_personal", map);
