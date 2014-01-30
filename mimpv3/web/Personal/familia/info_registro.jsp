@@ -76,17 +76,17 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                                 <%}%>
@@ -97,9 +97,9 @@
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarRegistro" method="post">
                             <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                             <c:if test="${estado != 'formativa'}">
-                            <br>
-                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
-                            <br>
+                                <br>
+                                <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
+                                <br>
                             </c:if>
                             <br>
                             <br>
@@ -113,6 +113,7 @@
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna" >Antecedentes del NNA</a></li>
                                 <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' || estado == 'designacion' || estado == 'adopcion' || estado == 'reevaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado" >NNA Adoptado</a></li>
                                 <li ><a href="${pageContext.servletContext.contextPath}/atenciones" >Atenciones</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/EditUserPass" >Editar Perfil de Familia</a></li>
                             </ul>
                             <br>
                             <h3><strong>Información de la Ficha de Inscripción de Solicitantes de Adopción</strong></h3>
@@ -202,16 +203,16 @@
                             <div class="control-group">
                                 <label class="control-label">Pertenece al RNSA:</label>
                                 <select id="rnsa" name="rnsa" disabled>
-                                        <option value="0" ${expediente.getRnsa() == 0 ? 'selected' : ''} >Si</option>
-                                        <option value="1" ${expediente.getRnsa() == 1 ? 'selected' : ''} >No</option>
+                                    <option value="0" ${expediente.getRnsa() == 0 ? 'selected' : ''} >Si</option>
+                                    <option value="1" ${expediente.getRnsa() == 1 ? 'selected' : ''} >No</option>
                                 </select>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Pertenece al RNAA:</label>
                                 <select id="rnaa" name="rnaa" disabled>
-                                        <option value="0" ${expediente.getRnaa() == 0 ? 'selected' : ''} >Si</option>
-                                        <option value="1" ${expediente.getRnaa() == 1 ? 'selected' : ''} >No</option>
+                                    <option value="0" ${expediente.getRnaa() == 0 ? 'selected' : ''} >Si</option>
+                                    <option value="1" ${expediente.getRnaa() == 1 ? 'selected' : ''} >No</option>
                                 </select>
                             </div>
                             <br>
@@ -245,9 +246,9 @@
                                 <label class="control-label">Unidad de Adopción donde se realiza el trámite</label>
                                 <div class="controls">
                                     <select id="unidad" name="unidad" >
-                                            <c:forEach var="ua" items="${listaUA}" > 
-                                                <option value="${ua.getIdunidad()}" ${expediente.getUnidad().getIdunidad() ==  ua.getIdunidad() ? 'selected' : ''}>${ua.getNombre()}</option>
-                                            </c:forEach>
+                                        <c:forEach var="ua" items="${listaUA}" > 
+                                            <option value="${ua.getIdunidad()}" ${expediente.getUnidad().getIdunidad() ==  ua.getIdunidad() ? 'selected' : ''}>${ua.getNombre()}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>   
@@ -262,7 +263,7 @@
                                             </c:forEach>
                                         </select>
                                     </c:if>
-                                    
+
                                     <c:if test="${expediente.getFamilia().getEntidad() == null}">
                                         <select id="entAsoc" name="entAsoc" >
                                             <c:forEach var="entidad" items="${listaEntidad}" > 
@@ -300,94 +301,94 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-                $('#fechaIngreso').on('changeDate', function (ev) {
-                    
-                    var ingreso =  document.getElementById("fechaIngreso").value;
-                    var tupa =  document.getElementById("tupa");
-                    var nacionalidad = document.getElementById("nacionalidad");
-                    var opcion = nacionalidad.options[nacionalidad.selectedIndex].value;
-                    
-                    var dia = 0;
-                    var mes = 0;
-                    var anho = 0;
-                    
-                    var pieces = ingreso.split('/');
-                    var date = parseInt(pieces[0]);
-                    var month = parseInt(pieces[1]);
-                    var year = parseInt(pieces[2]);
-                    //alert(opcion);
-                    if (opcion == 'nacional'){
-                        dia = date + 15;
-                        if ( dia > 30 ){
-                            dia = dia - 30;
-                            mes = month + 1;
-                        }else {
-                            mes = month;
-                        }
-                        if ( mes > 12){
-                            mes = mes - 12;
-                            anho = year + 1;
-                        }else {
-                            anho = year;
-                        }
-                    }else {
-                        dia = date;
-                        mes = month + 3;
-                        if ( mes > 12){
-                            mes = mes - 12;
-                            anho = year + 1;
-                        }else {
-                            anho = year;
-                        }
-                    }
-                    tupa.value = dia + "/" + mes + "/" + anho;
-                     
-                     
-                        });    
+                                        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                        $('#fechaIngreso').on('changeDate', function(ev) {
+
+                                            var ingreso = document.getElementById("fechaIngreso").value;
+                                            var tupa = document.getElementById("tupa");
+                                            var nacionalidad = document.getElementById("nacionalidad");
+                                            var opcion = nacionalidad.options[nacionalidad.selectedIndex].value;
+
+                                            var dia = 0;
+                                            var mes = 0;
+                                            var anho = 0;
+
+                                            var pieces = ingreso.split('/');
+                                            var date = parseInt(pieces[0]);
+                                            var month = parseInt(pieces[1]);
+                                            var year = parseInt(pieces[2]);
+                                            //alert(opcion);
+                                            if (opcion == 'nacional') {
+                                                dia = date + 15;
+                                                if (dia > 30) {
+                                                    dia = dia - 30;
+                                                    mes = month + 1;
+                                                } else {
+                                                    mes = month;
+                                                }
+                                                if (mes > 12) {
+                                                    mes = mes - 12;
+                                                    anho = year + 1;
+                                                } else {
+                                                    anho = year;
+                                                }
+                                            } else {
+                                                dia = date;
+                                                mes = month + 3;
+                                                if (mes > 12) {
+                                                    mes = mes - 12;
+                                                    anho = year + 1;
+                                                } else {
+                                                    anho = year;
+                                                }
+                                            }
+                                            tupa.value = dia + "/" + mes + "/" + anho;
+
+
+                                        });
             </script>
             <script>
                 function funcNacion(value)
-                    {
-                        var tipoFam = document.getElementById("tipoFamilia");
-                        var tipoListEsp = document.getElementById("tipoEspera");
-                        
-                        //you can get the value from arguments itself
-                        //alert(value);
-                        if (value == 'nacional' ){
-                            tipoFam.value = 'PP';
-                            tipoListEsp.value='nac';
-                        }
-                        if (value == 'internacional'){
-                            tipoFam.value = 'EE';
-                            tipoListEsp.value='ext';
-                        }
+                {
+                    var tipoFam = document.getElementById("tipoFamilia");
+                    var tipoListEsp = document.getElementById("tipoEspera");
+
+                    //you can get the value from arguments itself
+                    //alert(value);
+                    if (value == 'nacional') {
+                        tipoFam.value = 'PP';
+                        tipoListEsp.value = 'nac';
                     }
-                    
-                    
+                    if (value == 'internacional') {
+                        tipoFam.value = 'EE';
+                        tipoListEsp.value = 'ext';
+                    }
+                }
+
+
             </script>
             <script>
                 function funcTipoFam(value)
-                    {
-                        var tipoListEsp = document.getElementById("tipoEspera");
-                        
-                        //you can get the value from arguments itself
-                        //alert(value);
-                        if (value == 'PP' || value == 'EP' || value == 'MP'  ){
-                            tipoListEsp.value='nac';
-                        }
-                        if (value == 'PE'){
-                            tipoListEsp.value='pre';
-                        }
-                        if (value == 'ME'){
-                            tipoListEsp.value='mix';
-                        }
-                        if (value == 'EE'){
-                            tipoListEsp.value='ext';
-                        }
+                {
+                    var tipoListEsp = document.getElementById("tipoEspera");
+
+                    //you can get the value from arguments itself
+                    //alert(value);
+                    if (value == 'PP' || value == 'EP' || value == 'MP') {
+                        tipoListEsp.value = 'nac';
                     }
-                    
-                    
+                    if (value == 'PE') {
+                        tipoListEsp.value = 'pre';
+                    }
+                    if (value == 'ME') {
+                        tipoListEsp.value = 'mix';
+                    }
+                    if (value == 'EE') {
+                        tipoListEsp.value = 'ext';
+                    }
+                }
+
+
             </script>
             <!-- Ubicar al final -->
     </body>

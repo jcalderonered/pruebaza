@@ -77,17 +77,17 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                                 <%}%>
@@ -98,9 +98,9 @@
                         <form role="form">
                             <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                             <c:if test="${estado != 'formativa'}">
-                            <br>
-                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
-                            <br>
+                                <br>
+                                <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
+                                <br>
                             </c:if>
                             <br>
                             <br>
@@ -114,6 +114,7 @@
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna" >Antecedentes del NNA</a></li>
                                 <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' || estado == 'designacion' || estado == 'adopcion' || estado == 'reevaluacion' ? 'class="hidden"' : 'class="active"'} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado" >NNA Adoptado</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/atenciones" >Atenciones</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/EditUserPass" >Editar Perfil de Familia</a></li>
                             </ul>
                             <br>
                             <fieldset>
@@ -146,26 +147,26 @@
                                 <h3><strong>Nombre Adoptado</strong></h3>
                                 <br>
                                 <c:if test="${exp != null}">
-                                <div class="control-group">
-                                    <label class="control-label">Nombre</label>
-                                    <div class="controls">
-                                        <input value="${exp.getNActual()}" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    <div class="control-group">
+                                        <label class="control-label">Nombre</label>
+                                        <div class="controls">
+                                            <input value="${exp.getNActual()}" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Paterno</label>
-                                    <div class="controls">
-                                        <input value="${exp.getApellidopActual()}" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Apellido Paterno</label>
+                                        <div class="controls">
+                                            <input value="${exp.getApellidopActual()}" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Materno</label>
-                                    <div class="controls">
-                                        <input value="${exp.getApellidomActual()}" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Apellido Materno</label>
+                                        <div class="controls">
+                                            <input value="${exp.getApellidomActual()}" id="full-name" name="full-name" type="text" class="input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
                                 </c:if>
                                 <br>
                                 <div class="control-group">
