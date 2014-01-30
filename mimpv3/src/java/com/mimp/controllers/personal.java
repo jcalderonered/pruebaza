@@ -1087,6 +1087,16 @@ public class personal {
 
         ServicioPersonal.InsertCar(car);
 
+        String mensaje_log = "Se registró nuevo CAR con Nombre, " + car.getNombre() + " y ID:" + String.valueOf(car.getIdcar());
+        String Tipo_registro = "CAR";
+
+        try {
+            String Numero_registro = String.valueOf(car.getIdcar());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         map.put("listaCar", ServicioPersonal.ListaCar());
         return new ModelAndView("/Personal/registros/car/lista_car", map);
     }
@@ -1130,6 +1140,16 @@ public class personal {
         car.setObservaciones(obs);
 
         ServicioPersonal.UpdateCar(car);
+
+        String mensaje_log = "Se editó el CAR con Nombre, " + car.getNombre() + " y ID:" + String.valueOf(car.getIdcar());
+        String Tipo_registro = "CAR";
+
+        try {
+            String Numero_registro = String.valueOf(car.getIdcar());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         map.put("listaCar", ServicioPersonal.ListaCar());
         return new ModelAndView("/Personal/registros/car/lista_car", map);
@@ -1330,6 +1350,16 @@ public class personal {
 
         ServicioPersonal.InsertUa(ua);
 
+        String mensaje_log = "Se agregó nuevo UA con Nombre, " + ua.getNombre() + " y ID:" + String.valueOf(ua.getIdunidad());
+        String Tipo_registro = "UA";
+
+        try {
+            String Numero_registro = String.valueOf(ua.getIdunidad());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         map.put("listaUa", ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/registros/ua/lista_ua", map);
     }
@@ -1371,6 +1401,16 @@ public class personal {
         ua.setObs(obs);
 
         ServicioPersonal.UpdateUa(ua);
+
+        String mensaje_log = "Se editó el UA con Nombre, " + ua.getNombre() + " y ID:" + String.valueOf(ua.getIdunidad());
+        String Tipo_registro = "UA";
+
+        try {
+            String Numero_registro = String.valueOf(ua.getIdunidad());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         map.put("listaUa", ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/registros/ua/lista_ua", map);
@@ -1508,6 +1548,19 @@ public class personal {
         //temp2 = ServicioPersonal.getUa(ua);
         //temp.setUnidad(temp2);
         ServicioPersonal.UpdatePersonal(temp);
+
+        String mensaje_log = "Se editó el personal con nombre " + temp.getNombre() + " " + temp.getApellidoP()
+                + " " + temp.getApellidoM()
+                + "con ID, " + temp.getIdpersonal();
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(expedienteInt.getIdexpedienteFamilia());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         map.put("ua", ServicioPersonal.getUa(temp.getUnidad().getIdunidad()));
         map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(temp.getUnidad().getIdunidad()));
         return new ModelAndView("/Personal/registros/ua/lista_ua_personal", map);
@@ -1546,6 +1599,20 @@ public class personal {
 
         per.setUnidad(ua);
         ServicioPersonal.UpdatePersonal(per);
+
+        String mensaje_log = "Se asignó nuevo personal con nombre " + per.getNombre() + " " + per.getApellidoP()
+                + " " + per.getApellidoM()
+                + "con ID, " + per.getIdpersonal() + ". A la Unidad de adopción: "
+                + ua.getNombre() + " y ID: " + ua.getIdunidad();
+        String Tipo_registro = "UA";
+
+        try {
+            String Numero_registro = String.valueOf(ua.getIdunidad());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(idUa));
         return new ModelAndView("/Personal/registros/ua/lista_ua_personal", map);
@@ -2857,6 +2924,18 @@ public class personal {
 
         ServicioPersonal.crearFamInt(tempFam, expediente, infoFam);
         expedienteInt = expediente;
+
+        String mensaje_log = "Se creó nuevo expediente internacional con nombre: " + expedienteInt.getExpediente()
+                + " con ID: " + expedienteInt.getIdexpedienteFamilia();
+
+        String Tipo_registro = "Familia";
+
+        try {
+            String Numero_registro = String.valueOf(expedienteInt.getNumeroExpediente());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
         //map.put("idInfo",infoFam.getIdinfoFamilia());
         map.put("infoFam", infoFam);
         map.put("Ella", Ella);
@@ -2900,6 +2979,18 @@ public class personal {
 
         servicioEtapa.UpdateFamilia(expedienteInt.getFamilia());
         servicioEtapa.updateExpedienteFamilia(expedienteInt);
+
+        String mensaje_log = "Se editó los datos del expediente "
+                + "con familia con Usuario, " + expedienteInt.getFamilia().getUser() + " y ID de expediente:"
+                + String.valueOf(expedienteInt.getIdexpedienteFamilia());
+        String Tipo_registro = "Familia";
+
+        try {
+            String Numero_registro = String.valueOf(expedienteInt.getIdexpedienteFamilia());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         map.put("df", format);
         map.put("infoFam", infoFam);
@@ -3053,6 +3144,18 @@ public class personal {
                 expedienteInt.setExpediente(Ella.getApellidoP());
             }
             servicioEtapa.updateExpedienteFamilia(expedienteInt);
+
+            String mensaje_log = "Se editó el Adoptante con nombre, " + El.getNombre() + " " + El.getApellidoP()
+                    + " y ID:" + String.valueOf(El.getIdadoptante());
+            String Tipo_registro = "Adoptante";
+
+            try {
+                String Numero_registro = String.valueOf(El.getIdadoptante());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
             map.put("df", format);
             map.put("infoFam", infoFam);
             map.put("El", El);
@@ -3162,6 +3265,18 @@ public class personal {
                 expedienteInt.setExpediente(Ella.getApellidoP());
             }
             servicioEtapa.updateExpedienteFamilia(expedienteInt);
+
+            String mensaje_log = "Se editó la Adoptante con nombre, " + Ella.getNombre() + " " + Ella.getApellidoP()
+                    + " y ID:" + String.valueOf(Ella.getIdadoptante());
+            String Tipo_registro = "Adoptante";
+
+            try {
+                String Numero_registro = String.valueOf(Ella.getIdadoptante());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
             map.put("df", format);
             map.put("infoFam", infoFam);
             map.put("Ella", Ella);
@@ -3284,6 +3399,18 @@ public class personal {
         }
 
         ServicioMain.updateInfoFam(infoFam);
+
+        String mensaje_log = "Se editó la información de Familia internacional con usuario, "
+                + infoFam.getFamilia().getUser() + " y ID, " + infoFam.getFamilia().getIdfamilia();
+
+        String Tipo_registro = "Familia";
+
+        try {
+            String Numero_registro = String.valueOf(infoFam.getFamilia().getIdfamilia());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         map.put("df", format);
         map.put("infoFam", infoFam);
