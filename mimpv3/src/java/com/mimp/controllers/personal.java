@@ -3659,6 +3659,9 @@ public class personal {
         map.put("dia", dia);
 
         return new ModelAndView("/Personal/registros/usuarios/log_personal", map);
+        
     }
+    
+    
 
 }

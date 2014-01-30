@@ -1350,5 +1350,19 @@ public class HiberPersonal {
         return allLogsParticularPorDia;
 
     }
+    
+        public Familia getFamilia(long idFamilia) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String hql = "FROM Familia F where F.id = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idFamilia);
+        Object queryResult = query.uniqueResult();
+        Familia tempFa = (Familia) queryResult;
+        
+        return tempFa;
+    }
 
 }

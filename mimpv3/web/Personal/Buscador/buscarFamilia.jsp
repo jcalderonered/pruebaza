@@ -203,7 +203,15 @@
                                                     <td>${familia.getEstado()}</td> 
                                                     <td>
                                                         <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                            
+                                                             <c:if test="${familia.getEstado() == 'post' }" > 
+                                                            <input hidden name="estado" id="estado" value="reevaluacion">
+                                                            </c:if> 
+                                                            
+                                                            <c:if test="${familia.getEstado() != 'post' }" > 
                                                             <input hidden name="estado" id="estado" value="${familia.getEstado()}">
+                                                            </c:if>
+                                                            
                                                             <input hidden name="idExpediente" id="idExpediente" value="${familia.getIdexpedienteFamilia()}">
                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                         </form>

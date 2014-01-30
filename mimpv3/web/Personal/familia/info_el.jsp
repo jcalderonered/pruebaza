@@ -76,17 +76,17 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                                 <%}%>
@@ -98,9 +98,9 @@
                             <input hidden id="adoptante" name="adoptante" value="el">
                             <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                             <c:if test="${estado != 'formativa'}">
-                            <br>
-                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
-                            <br>
+                                <br>
+                                <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
+                                <br>
                             </c:if>
                             <br>
                             <br>
@@ -114,6 +114,7 @@
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna" >Antecedentes del NNA</a></li>
                                 <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' || estado == 'designacion' || estado == 'adopcion' || estado == 'reevaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado" >NNA Adoptado</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/atenciones" >Atenciones</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/EditUserPass" >Editar Perfil de Familia</a></li>
                             </ul>
                             <br>
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
@@ -476,36 +477,40 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-                
-            $('#fechaNac').on('changeDate', function (ev) {
-                    
-                    var nac =  document.getElementById("fechaNac").value;
-                    var edad =  document.getElementById("edad");
-                    
-                    var today = new Date();
-                    var curr_date = today.getDate();
-                    var curr_month = today.getMonth() + 1;
-                    var curr_year = today.getFullYear();
+                                                    $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
-                    var pieces = nac.split('/');
-                    var birth_date = pieces[0];
-                    var birth_month = pieces[1];
-                    var birth_year = pieces[2];
-                    
-                    
-                    if (curr_year != birth_year && birth_month > curr_month  ) edad.value = curr_year - birth_year - 1;
-                    if (curr_year != birth_year && birth_month == curr_month  ) edad.value = curr_year - birth_year;
-                    if (curr_year != birth_year && birth_month < curr_month  ) edad.value = curr_year - birth_year;
-                    if (curr_year == birth_year) edad.value = 0;
-                     
-                        });
+                                                    $('#fechaNac').on('changeDate', function(ev) {
+
+                                                        var nac = document.getElementById("fechaNac").value;
+                                                        var edad = document.getElementById("edad");
+
+                                                        var today = new Date();
+                                                        var curr_date = today.getDate();
+                                                        var curr_month = today.getMonth() + 1;
+                                                        var curr_year = today.getFullYear();
+
+                                                        var pieces = nac.split('/');
+                                                        var birth_date = pieces[0];
+                                                        var birth_month = pieces[1];
+                                                        var birth_year = pieces[2];
+
+
+                                                        if (curr_year != birth_year && birth_month > curr_month)
+                                                            edad.value = curr_year - birth_year - 1;
+                                                        if (curr_year != birth_year && birth_month == curr_month)
+                                                            edad.value = curr_year - birth_year;
+                                                        if (curr_year != birth_year && birth_month < curr_month)
+                                                            edad.value = curr_year - birth_year;
+                                                        if (curr_year == birth_year)
+                                                            edad.value = 0;
+
+                                                    });
             </script>
             <script type="text/javascript">
-              function funct(){
-                    var nac =  document.getElementById("fechaNac").value;
-                    var edad =  document.getElementById("edad");
-                    
+                function funct() {
+                    var nac = document.getElementById("fechaNac").value;
+                    var edad = document.getElementById("edad");
+
                     var today = new Date();
                     var curr_date = today.getDate();
                     var curr_month = today.getMonth() + 1;
@@ -514,156 +519,172 @@
                     var pieces = nac.split('/');
                     var birth_date = pieces[0];
                     var birth_month = pieces[1];
-                    if (birth_month == 'ene') birth_month = 1;
-                    if (birth_month == 'feb') birth_month = 2;
-                    if (birth_month == 'mar') birth_month = 3;
-                    if (birth_month == 'abr') birth_month = 4;
-                    if (birth_month == 'may') birth_month = 5;
-                    if (birth_month == 'jun') birth_month = 6;
-                    if (birth_month == 'jul') birth_month = 7;
-                    if (birth_month == 'ago') birth_month = 8;
-                    if (birth_month == 'sep') birth_month = 9;
-                    if (birth_month == 'oct') birth_month = 10;
-                    if (birth_month == 'nov') birth_month = 11;
-                    if (birth_month == 'dic') birth_month = 12;
-                    
+                    if (birth_month == 'ene')
+                        birth_month = 1;
+                    if (birth_month == 'feb')
+                        birth_month = 2;
+                    if (birth_month == 'mar')
+                        birth_month = 3;
+                    if (birth_month == 'abr')
+                        birth_month = 4;
+                    if (birth_month == 'may')
+                        birth_month = 5;
+                    if (birth_month == 'jun')
+                        birth_month = 6;
+                    if (birth_month == 'jul')
+                        birth_month = 7;
+                    if (birth_month == 'ago')
+                        birth_month = 8;
+                    if (birth_month == 'sep')
+                        birth_month = 9;
+                    if (birth_month == 'oct')
+                        birth_month = 10;
+                    if (birth_month == 'nov')
+                        birth_month = 11;
+                    if (birth_month == 'dic')
+                        birth_month = 12;
+
                     var birth_year = pieces[2];
-                    
-                    if (curr_year != birth_year && birth_month > curr_month  ) edad.value = curr_year - birth_year - 1;
-                    if (curr_year != birth_year && birth_month == curr_month  ) edad.value = curr_year - birth_year;
-                    if (curr_year != birth_year && birth_month < curr_month  ) edad.value = curr_year - birth_year;
-                    if (curr_year == birth_year) edad.value = 0;
-                     
-                        var indep = document.getElementById('trabIndep');
-                        var ocupInd = document.getElementById('ocupacionInd');
-                        var ingInd = document.getElementById('ingresoInd');
-                        
-                        var ocupDep = document.getElementById('ocupacionDep');
-                        var centTra = document.getElementById('centroTrabajo');
-                        var direcTrab = document.getElementById('direccionTrabajo');
-                        var telfTrab = document.getElementById('telefonoTrabajo');
-                        var ingDep = document.getElementById('ingresoDep'); 
-                        var dep = document.getElementById('trabDep');
-                        
-                        if (document.getElementById('trabDep').checked) {
-                            indep.checked = false;
-                            ocupInd.disabled = true;
-                            ingInd.disabled = true;
-                            ocupDep.disabled = false;
-                            centTra.disabled = false;
-                            direcTrab.disabled = false;
-                            telfTrab.disabled = false;
-                            ingDep.disabled = false;
-                       }
-                       
-                       if (document.getElementById('trabIndep').checked) {
-                            dep.checked = false;
-                            ocupInd.disabled = false;
-                            ingInd.disabled = false;
-                            
-                            ocupDep.disabled = true;
-                            centTra.disabled = true;
-                            direcTrab.disabled = true;
-                            telfTrab.disabled = true;
-                            ingDep.disabled = true;
-                            
-                            
-                       }
+
+                    if (curr_year != birth_year && birth_month > curr_month)
+                        edad.value = curr_year - birth_year - 1;
+                    if (curr_year != birth_year && birth_month == curr_month)
+                        edad.value = curr_year - birth_year;
+                    if (curr_year != birth_year && birth_month < curr_month)
+                        edad.value = curr_year - birth_year;
+                    if (curr_year == birth_year)
+                        edad.value = 0;
+
+                    var indep = document.getElementById('trabIndep');
+                    var ocupInd = document.getElementById('ocupacionInd');
+                    var ingInd = document.getElementById('ingresoInd');
+
+                    var ocupDep = document.getElementById('ocupacionDep');
+                    var centTra = document.getElementById('centroTrabajo');
+                    var direcTrab = document.getElementById('direccionTrabajo');
+                    var telfTrab = document.getElementById('telefonoTrabajo');
+                    var ingDep = document.getElementById('ingresoDep');
+                    var dep = document.getElementById('trabDep');
+
+                    if (document.getElementById('trabDep').checked) {
+                        indep.checked = false;
+                        ocupInd.disabled = true;
+                        ingInd.disabled = true;
+                        ocupDep.disabled = false;
+                        centTra.disabled = false;
+                        direcTrab.disabled = false;
+                        telfTrab.disabled = false;
+                        ingDep.disabled = false;
+                    }
+
+                    if (document.getElementById('trabIndep').checked) {
+                        dep.checked = false;
+                        ocupInd.disabled = false;
+                        ingInd.disabled = false;
+
+                        ocupDep.disabled = true;
+                        centTra.disabled = true;
+                        direcTrab.disabled = true;
+                        telfTrab.disabled = true;
+                        ingDep.disabled = true;
+
+
+                    }
                 }
-                
+
             </script>
             <script>
                 function Dep()
-                    {
-                        var indep = document.getElementById('trabIndep');
-                        var ocupInd = document.getElementById('ocupacionInd');
-                        var ingInd = document.getElementById('ingresoInd');
-                        
-                        var ocupDep = document.getElementById('ocupacionDep');
-                        var centTra = document.getElementById('centroTrabajo');
-                        var direcTrab = document.getElementById('direccionTrabajo');
-                        var telfTrab = document.getElementById('telefonoTrabajo');
-                        var ingDep = document.getElementById('ingresoDep');
-                        
-                        if (document.getElementById('trabDep').checked) {
-                            indep.checked = false;
-                            ocupInd.disabled = true;
-                            ingInd.disabled = true;
-                            ocupDep.disabled = false;
-                            centTra.disabled = false;
-                            direcTrab.disabled = false;
-                            telfTrab.disabled = false;
-                            ingDep.disabled = false;
-                       } else {
-                            
-                       }
+                {
+                    var indep = document.getElementById('trabIndep');
+                    var ocupInd = document.getElementById('ocupacionInd');
+                    var ingInd = document.getElementById('ingresoInd');
+
+                    var ocupDep = document.getElementById('ocupacionDep');
+                    var centTra = document.getElementById('centroTrabajo');
+                    var direcTrab = document.getElementById('direccionTrabajo');
+                    var telfTrab = document.getElementById('telefonoTrabajo');
+                    var ingDep = document.getElementById('ingresoDep');
+
+                    if (document.getElementById('trabDep').checked) {
+                        indep.checked = false;
+                        ocupInd.disabled = true;
+                        ingInd.disabled = true;
+                        ocupDep.disabled = false;
+                        centTra.disabled = false;
+                        direcTrab.disabled = false;
+                        telfTrab.disabled = false;
+                        ingDep.disabled = false;
+                    } else {
+
                     }
-           </script>  
-           <script>
+                }
+            </script>  
+            <script>
                 function Indep()
-                    {
-                        var dep = document.getElementById('trabDep');
-                        var ocupInd = document.getElementById('ocupacionInd');
-                        var ingInd = document.getElementById('ingresoInd');
-                        
-                        var ocupDep = document.getElementById('ocupacionDep');
-                        var centTra = document.getElementById('centroTrabajo');
-                        var direcTrab = document.getElementById('direccionTrabajo');
-                        var telfTrab = document.getElementById('telefonoTrabajo');
-                        var ingDep = document.getElementById('ingresoDep');
-                        
-                        if (document.getElementById('trabIndep').checked) {
-                            dep.checked = false;
-                            ocupInd.disabled = false;
-                            ingInd.disabled = false;
-                            
-                            ocupDep.disabled = true;
-                            centTra.disabled = true;
-                            direcTrab.disabled = true;
-                            telfTrab.disabled = true;
-                            ingDep.disabled = true;
-                            
-                            
-                       } else {
-                            
-                       }
+                {
+                    var dep = document.getElementById('trabDep');
+                    var ocupInd = document.getElementById('ocupacionInd');
+                    var ingInd = document.getElementById('ingresoInd');
+
+                    var ocupDep = document.getElementById('ocupacionDep');
+                    var centTra = document.getElementById('centroTrabajo');
+                    var direcTrab = document.getElementById('direccionTrabajo');
+                    var telfTrab = document.getElementById('telefonoTrabajo');
+                    var ingDep = document.getElementById('ingresoDep');
+
+                    if (document.getElementById('trabIndep').checked) {
+                        dep.checked = false;
+                        ocupInd.disabled = false;
+                        ingInd.disabled = false;
+
+                        ocupDep.disabled = true;
+                        centTra.disabled = true;
+                        direcTrab.disabled = true;
+                        telfTrab.disabled = true;
+                        ingDep.disabled = true;
+
+
+                    } else {
+
                     }
-           </script>  
-           <script type="text/javascript">
-            function validar()
-            {
-            var numericExpression = /^[0-9]+$/;
-            if(document.getElementById('trabIndep').checked){
-            if(document.formulario.ingresoInd.value.match(numericExpression))
-            {
-             return true
-            }else{
-                
-                alert( "El campo debe contener solo números" );
-                document.formulario.ingresoInd.focus() ;
-                return false;
-            }
-            }
-            if(document.getElementById('trabDep').checked){
-            if( document.formulario.ingresoDep.value.match(numericExpression))
-            {
-             return true
-            }else{
-                
-                alert( "El campo debe contener solo números" );
-                document.formulario.ingresoDep.focus() ;
-                return false;
-            }
-            }
-            if(!document.getElementById('trabDep').checked || !document.getElementById('trabIndep').checked){
-                alert( "Debe elegir al menos un tipo de trabajo" );
-                document.formulario.trabDep.focus() ;
-                return false;
-                
-            }
-            
-            }
-          </script>
+                }
+            </script>  
+            <script type="text/javascript">
+                function validar()
+                {
+                    var numericExpression = /^[0-9]+$/;
+                    if (document.getElementById('trabIndep').checked) {
+                        if (document.formulario.ingresoInd.value.match(numericExpression))
+                        {
+                            return true
+                        } else {
+
+                            alert("El campo debe contener solo números");
+                            document.formulario.ingresoInd.focus();
+                            return false;
+                        }
+                    }
+                    if (document.getElementById('trabDep').checked) {
+                        if (document.formulario.ingresoDep.value.match(numericExpression))
+                        {
+                            return true
+                        } else {
+
+                            alert("El campo debe contener solo números");
+                            document.formulario.ingresoDep.focus();
+                            return false;
+                        }
+                    }
+                    if (!document.getElementById('trabDep').checked || !document.getElementById('trabIndep').checked) {
+                        alert("Debe elegir al menos un tipo de trabajo");
+                        document.formulario.trabDep.focus();
+                        return false;
+
+                    }
+
+                }
+            </script>
     </body>
 </html>
 
