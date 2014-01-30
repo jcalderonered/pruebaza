@@ -94,7 +94,7 @@ public class main {
                 session.setAttribute("usuario", personal);
                 pagina = "/Personal/inicio_personal";
                 
-                String mensaje_log = "El usuario, " + personal.getUser() + " con ID, " + personal.getIdpersonal() + ". Ingresó al sistema.";
+                String mensaje_log = "El usuario, " + personal.getUser() + " con ID: " + personal.getIdpersonal() + ". Ingresó al sistema.";
                 String Tipo_registro = "Login";
 
                 try{
