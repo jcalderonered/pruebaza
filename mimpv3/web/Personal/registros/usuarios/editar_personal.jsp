@@ -97,6 +97,7 @@
                         <c:if test="${personal.getIdpersonal() == null}">
                             <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/usuarios'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <h1 align="center"><strong>Editar Personal</strong></h1>
+                            <p style="color: red">${mensaje}</p>
                             <br>
                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editPersonal" method="post"> 
                             </c:if>  
@@ -106,6 +107,7 @@
                                     <p align="right"><button type="submit" class="btn btn-default" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                                 </form>
                                 <h1 align="center"><strong>Editar Personal</strong></h1>
+                                
                                 <br>
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonalUa" method="post">
                                     <input hidden name="idPers" id="idPers" value="${personal.getIdpersonal()}">    
@@ -113,6 +115,7 @@
                                 <c:if test="${personal.getIdpersonal() != null && disabled != 'deshabilitar'}">
                                     <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/usuarios'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                                     <h1 align="center"><strong>Editar Personal</strong></h1>
+                                    <p style="color: red">${mensaje}</p>
                                     <br>
                                     <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonal" method="post"> 
                                         <input hidden name="idPers" id="idPers" value="${personal.getIdpersonal()}">

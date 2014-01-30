@@ -1792,6 +1792,15 @@ public class personal {
 
         temp.setUnidad(temp2);
 
+        if (ServicioPersonal.usuario(temp.getUser())) {
+
+            String mensaje_error = "El nombre de usuario ya existe en la base de datos. Por favor, ingresar nuevamente los datos";
+
+            map.put("mensaje", mensaje_error);
+            map.put("listaUa", ServicioPersonal.ListaUa());
+            return new ModelAndView("/Personal/registros/usuarios/editar_personal", map);
+        }
+
         ServicioPersonal.InsertPersonal(temp);
 
         String mensaje_log = "Se creó nuevo usuario con nombre: " + temp.getNombre() + " " + temp.getApellidoP()
@@ -2812,7 +2821,8 @@ public class personal {
         fam.setPass(pass);
         fam.setCorreo(user);
         Short habilitado = Short.parseShort("0");
-        fam.setHabilitado(habilitado);
+        fam.setHabilitado(habilitado); 
+
         ServicioPersonal.crearCuentaFamilia(fam, fs);
 
         allFormularios = ServicioPersonal.InscritosSesion(idSesion);

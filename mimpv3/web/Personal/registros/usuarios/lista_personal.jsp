@@ -93,6 +93,7 @@
                     </div>
                     <div class="col-md-6 col-md-offset-1">
                         <h1 align="center"><strong>Lista del Personal</strong></h1>
+                        
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
