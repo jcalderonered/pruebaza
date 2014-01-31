@@ -3212,7 +3212,7 @@ public class reporte {
                 Row row = sheet.createRow(i);
 
                 Cell cell = row.createCell(0);
-                cell.setCellValue(i);
+                cell.setCellValue(i-2);
                 cell = row.createCell(1);
                 ExpedienteFamilia exp = new ExpedienteFamilia();
                 for (Iterator iter = fam.getExpedienteFamilias().iterator(); iter.hasNext();) {
