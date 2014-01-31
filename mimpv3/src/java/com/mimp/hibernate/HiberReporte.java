@@ -9,7 +9,9 @@ package com.mimp.hibernate;
 import com.mimp.bean.Adoptante;
 import com.mimp.bean.Designacion;
 import com.mimp.bean.ExpedienteFamilia;
+import com.mimp.bean.ExpedienteNna;
 import com.mimp.bean.InfoFamilia;
+import com.mimp.bean.Nna;
 import com.mimp.bean.Organismo;
 import com.mimp.bean.PostAdopcion;
 import com.mimp.bean.Resolucion;
@@ -124,5 +126,39 @@ public class HiberReporte {
         }
 
         return allPostAdopcion;
+    }
+    
+    public ArrayList<Nna> ListaNnaReporte(String clasificacion) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "from Nna N where N.clasificacion = :clasificacion ORDER BY N.idnna DESC";
+        Query query = session.createQuery(hql);
+        query.setString("clasificacion", clasificacion);
+        List listaNna = query.list();
+        ArrayList<Nna> allNna = new ArrayList();
+        for (Iterator iter = listaNna.iterator(); iter.hasNext();) {
+            Nna temp = (Nna) iter.next();
+            Hibernate.initialize(temp.getJuzgado());
+            Hibernate.initialize(temp.getCar());
+            Hibernate.initialize(temp.getDesignacions());
+            Hibernate.initialize(temp.getExpedienteNnas());
+            Set<ExpedienteNna> listaExp = new HashSet<ExpedienteNna>(0);
+            if(!temp.getExpedienteNnas().isEmpty()){
+                for (ExpedienteNna nnaExp : temp.getExpedienteNnas()) {
+                        Hibernate.initialize(nnaExp.getUnidad());
+                        listaExp.add(nnaExp);
+                }
+                temp.setExpedienteNnas(listaExp);
+            }
+            
+            if(clasificacion.equals("prioritario")){
+                Hibernate.initialize(temp.getEstudioCasos());
+            }
+            allNna.add(temp);
+        }
+        return allNna;
     }
 }
