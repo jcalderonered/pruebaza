@@ -8,6 +8,7 @@ package com.mimp.hibernate;
 
 import com.mimp.bean.Adoptante;
 import com.mimp.bean.Designacion;
+import com.mimp.bean.EstudioCaso;
 import com.mimp.bean.ExpedienteFamilia;
 import com.mimp.bean.ExpedienteNna;
 import com.mimp.bean.InfoFamilia;
@@ -156,6 +157,23 @@ public class HiberReporte {
             
             if(clasificacion.equals("prioritario")){
                 Hibernate.initialize(temp.getEstudioCasos());
+                Set<EstudioCaso> listaEst = new HashSet<EstudioCaso>(0);
+                if(!temp.getEstudioCasos().isEmpty()){
+                for (EstudioCaso estudioCaso : temp.getEstudioCasos()) {
+                    Hibernate.initialize(estudioCaso.getExpedienteFamilia());
+                    listaEst.add(estudioCaso);
+                }
+                temp.setEstudioCasos(listaEst);
+                }
+                
+                Set<Designacion> listaDesignacions = new HashSet<Designacion>(0);
+                if(!temp.getDesignacions().isEmpty()){
+                for (Designacion desig : temp.getDesignacions()) {
+                    Hibernate.initialize(desig.getExpedienteFamilia().getFamilia().getInfoFamilias());
+                    listaDesignacions.add(desig);
+                }
+                temp.setDesignacions(listaDesignacions);
+                }
             }
             allNna.add(temp);
         }
