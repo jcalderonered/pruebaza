@@ -157,6 +157,8 @@ public class HiberReporte {
             
             if(clasificacion.equals("prioritario")){
                 Hibernate.initialize(temp.getEstudioCasos());
+                
+                
                 Set<EstudioCaso> listaEst = new HashSet<EstudioCaso>(0);
                 if(!temp.getEstudioCasos().isEmpty()){
                 for (EstudioCaso estudioCaso : temp.getEstudioCasos()) {
@@ -169,6 +171,7 @@ public class HiberReporte {
                 Set<Designacion> listaDesignacions = new HashSet<Designacion>(0);
                 if(!temp.getDesignacions().isEmpty()){
                 for (Designacion desig : temp.getDesignacions()) {
+                    Hibernate.initialize(desig.getExpedienteFamilia().getFamilia().getEntidad());
                     Hibernate.initialize(desig.getExpedienteFamilia().getFamilia().getInfoFamilias());
                     listaDesignacions.add(desig);
                 }

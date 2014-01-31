@@ -1152,7 +1152,7 @@ public class reporte {
                 cell = row.createCell(16);
                 cell.setCellValue(exp.getDiagnostico());
                 cell = row.createCell(17);
-                if (exp.getCodigoReferencia() != null) cell.setCellValue(exp.getCodigoReferencia().indexOf(0));
+                if (exp.getCodigoReferencia() != null) cell.setCellValue(exp.getCodigoReferencia().substring(0, 1));
                 cell = row.createCell(18);
                 if (nna.getEspecial() != null && nna.getEspecial() == 0) {
                     cell.setCellValue(exp.getCodigoReferencia());
@@ -1206,7 +1206,9 @@ public class reporte {
                     cell.setCellValue(est.getExpedienteFamilia().getExpediente());
                     indexcelda++;
                     cell = row.createCell(indexcelda);
+                    if (est.getNSolicitud() != null){
                     cell.setCellValue(est.getNSolicitud().toString());
+                    }
                     indexcelda++;
 
                     index++;
@@ -1248,14 +1250,14 @@ public class reporte {
                        }
                     }
                 }
-                cell.setCellValue(inf.getPaisRes());
+                if (inf.getPaisRes() != null) cell.setCellValue(inf.getPaisRes());
                 cell = row.createCell(36);
-                cell.setCellValue(inf.getDepRes());
+                if (inf.getDepRes() != null )cell.setCellValue(inf.getDepRes());
                 cell = row.createCell(37);
                 if (desig.getExpedienteFamilia() != null){
                   if(desig.getExpedienteFamilia().getFamilia() != null){  
                     if(desig.getExpedienteFamilia().getFamilia().getEntidad() != null){  
-                        cell.setCellValue(desig.getExpedienteFamilia().getFamilia().getEntidad().getNombre());
+                        if (desig.getExpedienteFamilia().getFamilia().getEntidad().getNombre() != null ) cell.setCellValue(desig.getExpedienteFamilia().getFamilia().getEntidad().getNombre());
                      }
                    }
                 }
