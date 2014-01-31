@@ -1,5 +1,5 @@
 <%-- 
-    Document   : inicio_personal
+    Document   : reporte
     Created on : 28/10/2013, 09:54:29 AM
     Author     : Ayner Pérez
 --%>
@@ -18,9 +18,7 @@
 <% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -28,10 +26,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
-        <!-- Datepicker -->
-        <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
-
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -77,17 +72,17 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
@@ -95,47 +90,91 @@
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
-                    <div class="col-md-6">
-                        <h1 align="center"><strong>Registro Post-adoptivo</strong></h1>
+                    <div class="col-md-6 col-md-offset-1">
+                        <h1 align="center"><strong>Reportes</strong></h1>
                         <br>
-                        <ul class="nav nav-tabs row" >
-                            <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig" >Designación</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
-                        </ul>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/EditarExpedientePost" method="post"> 
+                        <form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/act_info/act" method="post">
                             <fieldset>
-                                <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
-                                <br>
-                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
-                                <br>
+                                <!-- Text input-->
                                 <div class="control-group">
-                                    <label class="control-label">Número de informes</label>
+                                    <label class="control-label">Registro Nacional de NNAs declarados judicialmente en abandono</label>
                                     <div class="controls">
-                                        <input value="${post.getNumeroInformes()}" id="numInformes" name="numInformes" type="text" class="input-xlarge">
+                                        <a href="${pageContext.servletContext.contextPath}/Reportes/NNAs" class="btn btn-default">Generar Reporte</a>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Fecha de resolución de adopción</label>
+                                    <label class="control-label">Registro de NNAs prioritarios</label>
                                     <div class="controls">
-                                        <input value="${post.getFechaResolucion() != null ? df.dateToString(post.getFechaResolucion()) : ''}" id="full-name" name="full-name" type="text" class="datepicker input-xlarge" disabled>
+                                        <a href="${pageContext.servletContext.contextPath}/Reportes/NNAPrioritarios" class="btn btn-default">Generar Reporte</a>
                                     </div>
                                 </div>
-                                    <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
                                 <br>
-                                <!-- Button -->
+                                <div class="control-group">
+                                    <label class="control-label">Registro de NNAs prioritarios por Grupo de Referencia</label>
+                                    <div class="controls">
+                                        <a href="${pageContext.servletContext.contextPath}/Reportes/RegistroNNAsPrioGrupos" class="btn btn-default">Generar Reporte</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Registro Nacional de Expedientes Nacionales e Internacionales</label>
+                                    <div class="controls">
+                                        <a href="${pageContext.servletContext.contextPath}/Reportes/Expedientes" class="btn btn-default">Generar Reporte</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Registro de Adoptantes Aptos Nacionales</label>
+                                    <div class="controls">
+                                        <a href="${pageContext.servletContext.contextPath}/Reportes/AptosNacionales" class="btn btn-default">Generar Reporte</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Registro de Adoptantes Aptos Internacionales</label>
+                                    <div class="controls">
+                                        <a href="${pageContext.servletContext.contextPath}/Reportes/AptosInternacionales" class="btn btn-default">Generar Reporte</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Registro de adopdción en el extranjero</label>
+                                    <div class="controls">
+                                        <a href="${pageContext.servletContext.contextPath}/Reportes/AdopcionExtranjero" class="btn btn-default">Generar Reporte</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Registro de Post Adopción</label>
+                                    <div class="controls">
+                                        <a href="${pageContext.servletContext.contextPath}/Reportes/PostAdopcion" class="btn btn-default">Generar Reporte</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Registro de Organismos Acreditados</label>
+                                    <div class="controls">
+                                        <a href="${pageContext.servletContext.contextPath}/Reportes/OrganismosAcreditados" class="btn btn-default">Generar Reporte</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">RENAD</label>
+                                    <div class="controls">
+                                        <a href="${pageContext.servletContext.contextPath}/Reportes/RENAD" class="btn btn-default">Generar Reporte</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <!-- 
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button ${post.getNumeroInformes() != null ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Actualizar datos</button>
                                     </div>
-                                </div>
+                                </div> Button -->
                             </fieldset>
-                        </form>    
+                        </form>
                     </div>
                 </div>
             </div>
@@ -150,18 +189,5 @@
                     <p align="right">Diseñado por RED<br>www.red.net.pe</p>
                 </div>
             </div>
-
-            <!-- core JavaScript
-                    ================================================== -->
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
-            <script type="text/javascript">
-
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-
-            </script>
-            <!-- Ubicar al final -->
     </body>
 </html>
