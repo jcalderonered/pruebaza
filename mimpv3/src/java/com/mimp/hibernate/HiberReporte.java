@@ -7,6 +7,7 @@
 package com.mimp.hibernate;
 
 import com.mimp.bean.Adoptante;
+import com.mimp.bean.Designacion;
 import com.mimp.bean.ExpedienteFamilia;
 import com.mimp.bean.InfoFamilia;
 import com.mimp.bean.Organismo;
@@ -70,6 +71,17 @@ public class HiberReporte {
         for (Iterator iter = tempResoluciones.iterator(); iter.hasNext();) {
             Resolucion temp = (Resolucion) iter.next();
             Hibernate.initialize(temp.getEvaluacion().getExpedienteFamilia());
+            Hibernate.initialize(temp.getEvaluacion());
+            Hibernate.initialize(temp.getEvaluacion().getExpedienteFamilia().getDesignacions());
+            Set<Designacion> tempDesignacion = new HashSet<Designacion>(0);
+            for (Designacion tempdesig : temp.getEvaluacion().getExpedienteFamilia().getDesignacions()) {
+                Hibernate.initialize(tempdesig.getNna());
+                Hibernate.initialize(tempdesig.getNna().getCar());
+                Hibernate.initialize(tempdesig.getNna().getExpedienteNnas());
+                Hibernate.initialize(tempdesig.getPersonal());
+                tempDesignacion.add(tempdesig);
+            }
+            temp.getEvaluacion().getExpedienteFamilia().setDesignacions(tempDesignacion);
             allResoluciones.add(temp);
         }
 
@@ -90,12 +102,10 @@ public class HiberReporte {
                         for (InfoFamilia infofam : temp2.getFamilia().getInfoFamilias()) {
                             String hql3 = "from Adoptante A where A.idinfo_familia = :idinfofam";
                             Query query3 = session.createQuery(hql3);
-                            query3.setLong("idinfofam",
-                                    infofam.getIdinfoFamilia());
+                            query3.setLong("idinfofam", infofam.getIdinfoFamilia());
                             List adoptantes = query3.list();
                             Set<Adoptante> tempAdoptantes = new HashSet<Adoptante>(0);
-                            for (Iterator iter9 = adoptantes.iterator();
-                                    iter9.hasNext();) {
+                            for (Iterator iter9 = adoptantes.iterator(); iter9.hasNext();) {
                                 Adoptante adopTemp = (Adoptante) iter9.next();
                                 tempAdoptantes.add(adopTemp);
                             }
