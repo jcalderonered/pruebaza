@@ -2347,7 +2347,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("C:\\Plantillas\\6 Registro de Adopción en el Extranjero.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\6 Registro de Adopción en el Extranjero.xls");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -2567,7 +2567,7 @@ public class reporte {
 
         try {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            response.setHeader("Content-Disposition", "attachment; filename=Registro de Adopcion en el Extranjero.xlsx");
+            response.setHeader("Content-Disposition", "attachment; filename=Registro de Adopcion en el Extranjero.xls");
             OutputStream fileOut = response.getOutputStream();
             wb.write(fileOut);
             fileOut.flush();
@@ -2901,7 +2901,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("C:\\Plantillas\\RENAD V0425.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\RENAD V0425.xlsm");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -3246,7 +3246,7 @@ public class reporte {
 
         try {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            response.setHeader("Content-Disposition", "attachment; filename=RENAD V0425.xlsx");
+            response.setHeader("Content-Disposition", "attachment; filename=RENAD V0425.xlsm");
             OutputStream fileOut = response.getOutputStream();
             wb.write(fileOut);
             fileOut.flush();
