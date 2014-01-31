@@ -1207,7 +1207,6 @@ public class reporte {
                     indexcelda++;
                     cell = row.createCell(indexcelda);
                     cell.setCellValue(est.getNSolicitud().toString());
-//Historico (revisar)
                     indexcelda++;
 
                     index++;
@@ -1235,6 +1234,8 @@ public class reporte {
                 if(desig.getExpedienteFamilia() != null){
                 cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
                 }
+                cell = row.createCell(35);
+                cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
                 cell = row.createCell(35);
                 InfoFamilia inf = new InfoFamilia();
                 if(desig.getExpedienteFamilia() != null){
@@ -1518,7 +1519,7 @@ public class reporte {
                     edad = añoAct - añoNac - 1;
                 }
                 if (añoAct != añoNac && mesNac == mesAct) {
-                    edad = añoAct - mesAct;
+                    edad = añoAct - añoNac;
                 }
                 if (añoAct != añoNac && mesNac < mesAct) {
                     edad = añoAct - añoNac;
@@ -1668,7 +1669,7 @@ public class reporte {
                     edad = añoAct - añoNac - 1;
                 }
                 if (añoAct != añoNac && mesNac == mesAct) {
-                    edad = añoAct - mesAct;
+                    edad = añoAct - añoNac;
                 }
                 if (añoAct != añoNac && mesNac < mesAct) {
                     edad = añoAct - añoNac;
@@ -1819,7 +1820,7 @@ public class reporte {
                     edad = añoAct - añoNac - 1;
                 }
                 if (añoAct != añoNac && mesNac == mesAct) {
-                    edad = añoAct - mesAct;
+                    edad = añoAct - añoNac;
                 }
                 if (añoAct != añoNac && mesNac < mesAct) {
                     edad = añoAct - añoNac;
@@ -1974,7 +1975,7 @@ public class reporte {
                     edad = añoAct - añoNac - 1;
                 }
                 if (añoAct != añoNac && mesNac == mesAct) {
-                    edad = añoAct - mesAct;
+                    edad = añoAct - añoNac;
                 }
                 if (añoAct != añoNac && mesNac < mesAct) {
                     edad = añoAct - añoNac;
@@ -3867,7 +3868,7 @@ public class reporte {
                     edad = añoAct - añoNac - 1;
                 }
                 if (añoAct != añoNac && mesNac == mesAct) {
-                    edad = añoAct - mesAct;
+                    edad = añoAct - añoNac;
                 }
                 if (añoAct != añoNac && mesNac < mesAct) {
                     edad = añoAct - añoNac;
