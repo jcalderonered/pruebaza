@@ -44,6 +44,9 @@
         <property name="obs" type="string">
             <column name="OBS" length="200" />
         </property>
+        <property name="correo" type="string">
+            <column name="CORREO" length="50" />
+        </property>
         <set name="organismos" table="ORGANISMO" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="IDENTIDAD" precision="10" scale="0" not-null="true" />
