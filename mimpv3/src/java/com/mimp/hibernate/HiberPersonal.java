@@ -869,6 +869,24 @@ public class HiberPersonal {
 
     public void crearCuentaFamilia(Familia fam, FormularioSesion fs) {
 
+        Familia famrep = getFamilia(fam.getUser());
+        String usuariotemp = fam.getUser();
+        int idextra = 1;
+
+        //Determinamos si el usuario de familia no se repite
+        if (famrep != null) {
+            if (famrep.getIdfamilia() != 0) {
+                while (true) {
+                    if (fam.getUser().equals(famrep.getUser())) {
+                        fam.setUser(usuariotemp + idextra);
+                    } else {
+                        break;
+                    }
+                    idextra++;
+                }
+            }
+        }
+
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
@@ -1350,8 +1368,8 @@ public class HiberPersonal {
         return allLogsParticularPorDia;
 
     }
-    
-        public Familia getFamilia(long idFamilia) {
+
+    public Familia getFamilia(long idFamilia) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -1361,7 +1379,21 @@ public class HiberPersonal {
         query.setLong("id", idFamilia);
         Object queryResult = query.uniqueResult();
         Familia tempFa = (Familia) queryResult;
-        
+
+        return tempFa;
+    }
+
+    public Familia getFamilia(String user) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String hql = "FROM Familia F where F.user = :user";
+        Query query = session.createQuery(hql);
+        query.setString("user", user);
+        Object queryResult = query.uniqueResult();
+        Familia tempFa = (Familia) queryResult;
+
         return tempFa;
     }
 
