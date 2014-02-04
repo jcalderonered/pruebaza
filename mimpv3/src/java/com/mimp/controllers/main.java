@@ -1651,6 +1651,7 @@ public class main {
                 hibermail.generateAndSendEmail(personal.getCorreoPersonal(), pass_plano, personal.getUser());
                 mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
                         + ". Por favor, revisar su bandeja.";
+                map.addAttribute("mensaje", mensaje);
                 pagina = "login";
 
             } else {
@@ -1667,6 +1668,7 @@ public class main {
                 hibermail.generateAndSendEmail(familia.getCorreo(), pass_plano, familia.getUser());
                 mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
                         + ". Por favor, revisar su bandeja.";
+                map.addAttribute("mensaje", mensaje);
                 pagina = "login";
             } else {
                 map.addAttribute("mensaje", mensaje);
@@ -1683,6 +1685,7 @@ public class main {
             hibermail.generateAndSendEmail(rep.getCorreo(), pass_plano, entidad.getUser());
             mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
                         + ". Por favor, revisar su bandeja.";
+            map.addAttribute("mensaje", mensaje);
             pagina = "login";                        
 
         } else if (aux.get(0) == "autoridad") {
@@ -1695,6 +1698,7 @@ public class main {
             hibermail.generateAndSendEmail(entidad.getCorreo(), pass_plano, entidad.getUser());
             mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
                         + ". Por favor, revisar su bandeja.";
+            map.addAttribute("mensaje", mensaje);
             pagina = "login";
 
         }else if (user.equals("") || pass.equals("")) {
