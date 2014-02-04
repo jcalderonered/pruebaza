@@ -541,5 +541,111 @@ public class HiberReporte {
             return ultimaDesig;
     }
     
+    public ArrayList<Familia> getRenad() {
+        
+         Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         
+        String hql = "FROM Familia F WHERE F.habilitado = 0";
+        Query query = session.createQuery(hql);
+        List familias = query.list();
+        ArrayList<Familia> allFamilias = new ArrayList();
+        for (Iterator iter = familias.iterator(); iter.hasNext();) {
+            Familia temp = (Familia) iter.next();
+            Hibernate.initialize(temp.getEntidad());
+            String hql2 = "FROM ExpedienteFamilia EF WHERE EF.familia = :idFamilia and EF.estado = :estado ORDER BY EF.idexpedienteFamilia DESC";
+            Query query2 = session.createQuery(hql2);
+            query2.setLong("idFamilia", temp.getIdfamilia());
+            query2.setString("estado", "espera");
+            query2.setMaxResults(1);
+            Object queryResult2 = query2.uniqueResult();
+            if (queryResult2 != null){
+            ExpedienteFamilia tempExp = (ExpedienteFamilia) queryResult2;
+            Hibernate.initialize(tempExp.getUnidad());
+            Set<ExpedienteFamilia> listExp = new HashSet<ExpedienteFamilia>();
+            listExp.add(tempExp);
+            temp.setExpedienteFamilias(listExp);
+            }
+            
+            String hql3 = "FROM InfoFamilia IF WHERE IF.familia = :idFamilia ORDER BY IF.idinfoFamilia DESC";
+            Query query3 = session.createQuery(hql3);
+            query3.setLong("idFamilia", temp.getIdfamilia());
+            query3.setMaxResults(1);
+            Object queryResult3 = query3.uniqueResult();
+            if (queryResult3 != null){
+            InfoFamilia infoFam = (InfoFamilia) queryResult3;
+            Hibernate.initialize(infoFam.getAdoptantes());
+            Set<InfoFamilia> listInf = new HashSet<InfoFamilia>();
+            listInf.add(infoFam);
+            temp.setInfoFamilias(listInf);
+            }
+            if (query2.uniqueResult() != null && query3.uniqueResult() != null){
+            allFamilias.add(temp);
+            }
+        } 
     
+        return allFamilias;
+    
+    }
+    
+    public Designacion getUltimaDesignacionNnaCarJuzExp(Long expFam){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        Designacion ultimaDesig = new Designacion();
+        
+        String hql = "from Designacion D where D.expedienteFamilia = :expFam ORDER BY D.fechaPropuesta DESC";
+        Query query = session.createQuery(hql);
+        query.setLong("expFam", expFam);
+        query.setMaxResults(1);
+        Object queryResultA = query.uniqueResult();
+       
+        if(query.uniqueResult() != null){
+              ultimaDesig = (Designacion) queryResultA;
+              Hibernate.initialize(ultimaDesig.getNna().getExpedienteNnas());
+              Hibernate.initialize(ultimaDesig.getNna().getCar());
+              Hibernate.initialize(ultimaDesig.getNna().getJuzgado());
+              
+        }
+            return ultimaDesig;
+    }
+    
+    public Evaluacion getEvaluacion(Long expFam, String tipo){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        Evaluacion tempEval = new Evaluacion();
+        
+        String hql = "from Evaluacion E where E.tipo = :tipo1 and E.expedienteFamilia = :expFam";
+        Query query = session.createQuery(hql);
+        query.setString("tipo1", tipo);
+        query.setLong("expFam", expFam);
+        Object queryResultA = query.uniqueResult();
+       
+        if(query.uniqueResult() != null){
+            tempEval = (Evaluacion) queryResultA;
+        }
+            return tempEval;
+    }
+    
+    public Resolucion getResolucionDeEvaluacion(Long idEval){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        Resolucion ultimaResol = new Resolucion();
+        
+        String hql1 = "FROM Resolucion R WHERE R.evaluacion = :idEval ORDER BY R.idresolucion DESC";
+        Query query1 = session.createQuery(hql1);
+        query1.setLong("idEval", idEval);
+        query1.setMaxResults(1);
+        Object queryResult1 = query1.uniqueResult();
+        if (query1.uniqueResult() != null){
+            ultimaResol = (Resolucion) queryResult1;
+            return ultimaResol;
+        }
+        return ultimaResol;
+    }
 }

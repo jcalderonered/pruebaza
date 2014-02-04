@@ -3641,12 +3641,12 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("C:\\Plantillas\\RENAD V0425.xlsm");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\Test.xlsx");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<Familia> listafam = ServicioEtapa.getListaFamilias();//Cambiar
+            ArrayList<Familia> listafam = ServicioReporte.getListaFamilias();//Solo de prueba, falta cambiar por otro metodo
 
             int i = 3;
             for (Familia fam : listafam) {
@@ -3779,15 +3779,8 @@ public class reporte {
                     cell.setCellValue(exp.getNacionalidad());
                 }
                 cell = row.createCell(21);
-                Date ultfecha = new Date(10, 0, 01);
                 Designacion desig = new Designacion();
-                for (Iterator iter4 = exp.getDesignacions().iterator(); iter4.hasNext();) {
-                    Designacion daux = (Designacion) iter4.next();
-                    if (ultfecha.before(daux.getFechaConsejo())) {
-                        ultfecha = daux.getFechaConsejo();
-                        desig = daux;
-                    }
-                }
+                desig = ServicioReporte.getUltimaDesignacionNna(exp.getIdexpedienteFamilia());
                 if (desig.getNna() != null) {
                     if (desig.getNna().getNombre() != null) {
                         cell.setCellValue(desig.getNna().getNombre());
@@ -3805,13 +3798,13 @@ public class reporte {
                         cell.setCellValue(desig.getNna().getApellidoM());
                     }
                 }
+                ExpedienteNna tempExp = ServicioNna.getExpNna(desig.getNna().getIdnna());
                 if (desig.getNna() != null) {
-                    if (desig.getNna().getClasificacion() != null || desig.getNna().getHermano() != null) {
+                    if (desig.getNna().getClasificacion() != null && desig.getNna().getHermano() != null) {
                         if (desig.getNna().getClasificacion().equals("prioritario") && desig.getNna().getHermano() == 0) {
                             cell = row.createCell(24);
-                            for (Iterator iter5 = desig.getNna().getPrioritarios().iterator(); iter5.hasNext();) {
-                                Prioritario prio = (Prioritario) iter5.next();
-                                cell.setCellValue(prio.getCodHermano());
+                            if(tempExp.getIdexpedienteNna() != 0){
+                            cell.setCellValue(tempExp.getCodigoReferencia());
                             }
                         }
                     }
@@ -3842,7 +3835,7 @@ public class reporte {
                 if (añoAct != añoNac && mesNac == mesAct) {
                     edad = añoAct - añoNac;
                 }
-                if (añoAct != añoNac && mesNac < mesAct) {
+                if (añoAct != añoNac && mesNac > mesAct) {
                     edad = añoAct - añoNac;
                 }
                 if (añoAct == añoNac) {
@@ -3897,10 +3890,8 @@ public class reporte {
                 }
                 cell = row.createCell(34);
                 cell.setCellValue("");//DIT (Revisar)
-                ExpedienteNna expnna = new ExpedienteNna();
-                for (Iterator iter6 = desig.getNna().getExpedienteNnas().iterator(); iter6.hasNext();) {
-                    expnna = (ExpedienteNna) iter6.next();
-                }
+                ExpedienteNna expnna = tempExp;
+                
                 cell = row.createCell(35);
                 try {
                     fecha = format.dateToString(expnna.getFechaInvTutelar());
@@ -3985,20 +3976,9 @@ public class reporte {
                     cell.setCellValue(desig.getTipoPropuesta());
                 }
                 Resolucion resol = new Resolucion();
+                resol = ServicioReporte.getResolucionAptitud(exp.getIdexpedienteFamilia());
                 Evaluacion eval = new Evaluacion();
-                ultfecha = new Date(10, 0, 01);
-                for (Iterator iter6 = exp.getEvaluacions().iterator(); iter6.hasNext();) {
-                    eval = (Evaluacion) iter6.next();
-                    for (Iterator iter4 = eval.getResolucions().iterator(); iter4.hasNext();) {
-                        Resolucion raux = (Resolucion) iter4.next();
-                        if (raux.getTipo().equals("apto")) {
-                            if (ultfecha.before(raux.getFechaResol())) {
-                                resol = raux;
-                                ultfecha = raux.getFechaResol();
-                            }
-                        }
-                    }
-                }
+                
                 cell = row.createCell(41);
                 try {
                     fecha = format.dateToString(exp.getFechaIngresoDga());//Se entiende que la fecha de ingreso de expedientes es la fecha en la que pasa a la DGA
@@ -4028,14 +4008,13 @@ public class reporte {
                         cell.setCellValue("No");
                     }
                 }
-                for (Iterator iter7 = exp.getEvaluacions().iterator(); iter7.hasNext();) {
-                    Evaluacion evalaux = (Evaluacion) iter7.next();
-                    if (evalaux.getTipo().equals("empatia")) {
-                        eval = evalaux;
-                        for (Iterator iter8 = evalaux.getResolucions().iterator(); iter8.hasNext();) {
-                            resol = (Resolucion) iter8.next();
-                        }
-                    }
+                
+                //evaluacion de empatia
+                eval = ServicioReporte.getEvaluacion(exp.getIdexpedienteFamilia(), "empatia");
+                if (eval.getIdevaluacion() != 0){
+                    resol = ServicioReporte.getResolucionDeEvaluacion(eval.getIdevaluacion());
+                }else {
+                    resol = new Resolucion();
                 }
                 cell = row.createCell(45);
                 try {
@@ -4076,15 +4055,14 @@ public class reporte {
                 if (resol.getNumero() != null) {
                     cell.setCellValue(resol.getNumero());
                 }
-                for (Iterator iter8 = exp.getEvaluacions().iterator(); iter8.hasNext();) {
-                    Evaluacion evalaux = (Evaluacion) iter8.next();
-                    if (eval.getTipo().equals("informe")) {
-                        eval = evalaux;
-                        for (Iterator iter9 = eval.getResolucions().iterator(); iter9.hasNext();) {
-                            resol = (Resolucion) iter9.next();
-                        }
-                    }
+                
+                eval = ServicioReporte.getEvaluacion(exp.getIdexpedienteFamilia(), "informe");
+                if (eval.getIdevaluacion() != 0){
+                    resol = ServicioReporte.getResolucionDeEvaluacion(eval.getIdevaluacion());
+                }else {
+                    resol = new Resolucion();
                 }
+                
                 cell = row.createCell(53);
                 try {
                     fecha = format.dateToString(eval.getFechaResultado());
@@ -4144,7 +4122,7 @@ public class reporte {
 
         try {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            response.setHeader("Content-Disposition", "attachment; filename=RENAD V0425.xlsm");
+            response.setHeader("Content-Disposition", "attachment; filename=Test.xlsx");
             OutputStream fileOut = response.getOutputStream();
             wb.write(fileOut);
             fileOut.flush();
