@@ -55,16 +55,17 @@
             <div id="contenedor1" class="container">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-2">
-                        <form role="form">
-                            <h2>Escribir la dirección de correo asociada a la cuenta:</h2>
+                        <form class="form-signin" action="${pageContext.servletContext.contextPath}/recordarContraEnvio" method="post">
+                            <h2>Escribir el nombre del usuario asociada a la cuenta:</h2>
                             <br>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Correo</label>
-                                <input type="email" class="form-control" id="exampleInEputEmail1" placeholder="Ingrese el correo">
+                                <label for="exampleInputEmail1">Usuario</label>
+                                <input name="usuario" id="usuario" type="text" class="form-control"  placeholder="Ingrese el usuario">
                             </div>
                             <div class="btn-toolbar">  
                                 <button type="submit" class="btn btn-default">Enviar Información</button>
                             </div>  
+                             <p style="color: red">${mensaje}</p>
                         </form>
                     </div>
                 </div>

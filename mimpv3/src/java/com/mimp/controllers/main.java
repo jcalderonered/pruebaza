@@ -8,6 +8,7 @@ package com.mimp.controllers;
 import java.util.*;
 import com.mimp.bean.*;
 import com.mimp.hibernate.HiberEtapa;
+import com.mimp.hibernate.HiberMail;
 import com.mimp.util.*;
 import com.mimp.hibernate.HiberMain;
 import com.mimp.hibernate.HiberNna;
@@ -39,6 +40,8 @@ public class main {
     private HiberEtapa servicioEtapa = new HiberEtapa();
     dateFormat df = new dateFormat();
     timeStampFormat ts = new timeStampFormat();
+    @Resource(name = "HiberMail")
+    private HiberMail hibermail = new HiberMail();
 
     /* PARAMETROS A PASAR A FAMILIA DENTRO DE PERSONAL */
     String etapaOrigen;
@@ -639,7 +642,7 @@ public class main {
         String pagina = "/Personal/familia/info_user_pass";
         map.put("infoFam", infoFam);
         map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);        
+        map.put("expediente", expediente);
 
         return new ModelAndView(pagina, map);
     }
@@ -1608,9 +1611,9 @@ public class main {
                 infoFam.getFamilia().setPass(newpass);
                 servicioEtapa.UpdateFamilia(infoFam.getFamilia());
                 mensaje = "La contraseña se ha cambiado con exito.";
-            }else {
-            
-            mensaje = "Contraseña no válida. Por favor generar una nueva contraseña.";
+            } else {
+
+                mensaje = "Contraseña no válida. Por favor generar una nueva contraseña.";
             }
         }
         String pagina = "/Personal/familia/info_user_pass";
@@ -1618,6 +1621,93 @@ public class main {
         map.put("estado", etapaOrigen);
         map.put("expediente", expediente);
         map.addAttribute("mensaje", mensaje);
+        return new ModelAndView(pagina, map);
+    }
+
+    @RequestMapping(value = "/recordarContra")
+    public ModelAndView recordarContra(ModelMap map) {
+
+        String pagina = "/record_contra";
+        return new ModelAndView(pagina);
+    }
+
+    @RequestMapping(value = "/recordarContraEnvio", method = RequestMethod.POST)
+    public ModelAndView recordarContraEnvio(ModelMap map, HttpSession session, @RequestParam("usuario") String user) {
+
+        String pass_plano = ServicioPersonal.generateUniqueToken(8);
+        String pass = DigestUtils.sha512Hex(pass_plano);
+
+        ArrayList aux = hibermail.usuario(user);
+
+        String pagina;
+        String mensaje = null;
+
+        if (aux.get(0) == "personal") {
+            Personal personal = (Personal) aux.get(1);
+            if (!personal.getRol().equals("Inactivo")) {
+                session.setAttribute("usuario", personal);
+                personal.setPass(pass);
+                ServicioPersonal.UpdatePersonal(personal);
+                hibermail.generateAndSendEmail(personal.getCorreoPersonal(), pass_plano, personal.getUser());
+                mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
+                        + ". Por favor, revisar su bandeja.";
+                pagina = "login";
+
+            } else {
+                mensaje = "El usuario se encuentra Deshabilitado. Favor contactar a la Dirección General de Adopciones para más información";
+                map.addAttribute("mensaje", mensaje);
+                pagina = "login";
+            }
+        } else if (aux.get(0) == "familia") {
+            Familia familia = (Familia) aux.get(1);
+            if (familia.getHabilitado() == 0) {
+                session.setAttribute("usuario", familia);
+                familia.setPass(pass);
+                servicioEtapa.UpdateFamilia(familia);
+                hibermail.generateAndSendEmail(familia.getCorreo(), pass_plano, familia.getUser());
+                mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
+                        + ". Por favor, revisar su bandeja.";
+                pagina = "login";
+            } else {
+                map.addAttribute("mensaje", mensaje);
+                pagina = "login";
+            }
+        } else if (aux.get(0) == "representante") {
+            Entidad entidad = (Entidad) aux.get(1);
+            session.setAttribute("usuario", entidad);
+            entidad.setPass(pass);
+            ServicioPersonal.UpdateAut(entidad, null);
+            Organismo org = ServicioPersonal.getOrganismobyentidad(entidad.getIdentidad());
+
+            Representante rep = ServicioPersonal.getRepresentantebyOrganismo(org.getIdorganismo());
+            hibermail.generateAndSendEmail(rep.getCorreo(), pass_plano, entidad.getUser());
+            mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
+                        + ". Por favor, revisar su bandeja.";
+            pagina = "login";                        
+
+        } else if (aux.get(0) == "autoridad") {
+            Entidad entidad = (Entidad) aux.get(1);
+            session.setAttribute("usuario", entidad);
+            entidad.setPass(pass);
+            ServicioPersonal.UpdateAut(entidad, null);
+            
+            
+            hibermail.generateAndSendEmail(entidad.getCorreo(), pass_plano, entidad.getUser());
+            mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
+                        + ". Por favor, revisar su bandeja.";
+            pagina = "login";
+
+        }else if (user.equals("") || pass.equals("")) {
+            mensaje = "Por favor llenar el campo solicitado";
+            map.addAttribute("mensaje", mensaje);
+            pagina = "record_contra";
+        } else {
+            mensaje = "El Usuario no está registrado en nuestra base de datos. Por favor, comunicarse con el coordinador de adopciones";
+            map.addAttribute("mensaje", mensaje);
+            pagina = "login";
+        }
+
+       
         return new ModelAndView(pagina, map);
     }
 
