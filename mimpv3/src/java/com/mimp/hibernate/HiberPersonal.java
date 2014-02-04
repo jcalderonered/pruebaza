@@ -179,6 +179,34 @@ public class HiberPersonal {
         Hibernate.initialize(org.getRepresentantes());
         return org;
     }
+    
+     public Organismo getOrganismobyentidad(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Organismo org = new Organismo();
+
+        session.beginTransaction();
+        String hqlO = "FROM Organismo O WHERE O.entidad = :id";
+        Query queryO = session.createQuery(hqlO);
+        queryO.setLong("id", id);
+        Object queryResultA = queryO.uniqueResult();
+
+        org = (Organismo) queryResultA;
+        return org;
+    }
+
+    public Representante getRepresentantebyOrganismo(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Representante rep = new Representante();
+
+        session.beginTransaction();
+        String hqlO = "FROM Representante R WHERE R.organismo = :id";
+        Query queryO = session.createQuery(hqlO);
+        queryO.setLong("id", id);
+        Object queryResultA = queryO.uniqueResult();
+
+        rep = (Representante) queryResultA;
+        return rep;
+    }
 
     //<----------CAR---------->
     public void InsertCar(Car car) {
@@ -1395,6 +1423,32 @@ public class HiberPersonal {
         Familia tempFa = (Familia) queryResult;
 
         return tempFa;
+    }
+    
+        public static synchronized String generateUniqueToken(Integer length) {
+
+        byte random[] = new byte[length];
+        Random randomGenerator = new Random();
+        StringBuffer buffer = new StringBuffer();
+
+        randomGenerator.nextBytes(random);
+
+        for (int j = 0; j < random.length; j++) {
+            byte b1 = (byte) ((random[j] & 0xf0) >> 4);
+            byte b2 = (byte) (random[j] & 0x0f);
+            if (b1 < 10) {
+                buffer.append((char) ('0' + b1));
+            } else {
+                buffer.append((char) ('A' + (b1 - 10)));
+            }
+            if (b2 < 10) {
+                buffer.append((char) ('0' + b2));
+            } else {
+                buffer.append((char) ('A' + (b2 - 10)));
+            }
+        }
+
+        return (buffer.toString());
     }
 
 }

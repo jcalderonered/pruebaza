@@ -67,7 +67,7 @@
                             </div>
                             <div class="btn-toolbar">  
                                 <button type="submit" class="btn btn-default">Ingresar</button>
-                                <a href="#" class="btn btn-default">Recuperar contraseña</a>
+                                <a href="${pageContext.servletContext.contextPath}/recordarContra" class="btn btn-default">Recuperar contraseña</a>
                             </div>
                             <br>
                             <p style="color: red">${mensaje}</p>
