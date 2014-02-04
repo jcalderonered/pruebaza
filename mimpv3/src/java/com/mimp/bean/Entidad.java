@@ -25,6 +25,7 @@ public class Entidad  implements java.io.Serializable {
      private Date fechaRenov;
      private Date fechaVenc;
      private String obs;
+     private String correo;
      private Set<Organismo> organismos = new HashSet<Organismo>(0);
      private Set<Autoridad> autoridads = new HashSet<Autoridad>(0);
      private Set<Familia> familias = new HashSet<Familia>(0);
@@ -36,7 +37,7 @@ public class Entidad  implements java.io.Serializable {
     public Entidad(long identidad) {
         this.identidad = identidad;
     }
-    public Entidad(long identidad, String nombre, String user, String pass, String direccion, String telefono, String pais, String resolAuto, Date fechaResol, String resolRenov, Date fechaRenov, Date fechaVenc, String obs, Set<Organismo> organismos, Set<Autoridad> autoridads, Set<Familia> familias) {
+    public Entidad(long identidad, String nombre, String user, String pass, String direccion, String telefono, String pais, String resolAuto, Date fechaResol, String resolRenov, Date fechaRenov, Date fechaVenc, String obs, String correo, Set<Organismo> organismos, Set<Autoridad> autoridads, Set<Familia> familias) {
        this.identidad = identidad;
        this.nombre = nombre;
        this.user = user;
@@ -50,6 +51,7 @@ public class Entidad  implements java.io.Serializable {
        this.fechaRenov = fechaRenov;
        this.fechaVenc = fechaVenc;
        this.obs = obs;
+       this.correo = correo;
        this.organismos = organismos;
        this.autoridads = autoridads;
        this.familias = familias;
@@ -145,6 +147,13 @@ public class Entidad  implements java.io.Serializable {
     
     public void setObs(String obs) {
         this.obs = obs;
+    }
+    public String getCorreo() {
+        return this.correo;
+    }
+    
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
     public Set<Organismo> getOrganismos() {
         return this.organismos;

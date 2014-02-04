@@ -43,6 +43,7 @@ public class HiberNna {
 
         tempNna = (Nna) queryResultA;
         Hibernate.initialize(tempNna.getExpedienteNnas());
+        Hibernate.initialize(tempNna.getCar());
         return tempNna;
     }
     
