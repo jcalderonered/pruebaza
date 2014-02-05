@@ -46,10 +46,8 @@ public class HiberMail {
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "false");
-        props.put("mail.smtp.tls.enable", "true");
-        
-        props.put("mail.smtp.host", "172.16.100.13");
-        
+        props.put("mail.smtp.starttls.enable", "true");        
+        props.put("mail.smtp.host", "172.16.100.13");        
         props.put("mail.smtp.port", "587");
 
         Session session = Session.getInstance(props);
@@ -60,7 +58,7 @@ public class HiberMail {
             message.setFrom(new InternetAddress("formacionadopcion@mimp.gob.pe"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(correo));
-            message.setSubject("Prueba - Sistema de adopciones");
+            message.setSubject("Sistema de adopciones");
             message.setText("Estimado adoptante,"
                     + "\n\n Su solicitud de recuperación de contraseña ha sido procesada. Su usuario y contraseña para acceder a la plataforma de adopciones son los siguientes:"
                     + "\n\n Usuario:" + user
