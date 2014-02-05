@@ -153,6 +153,7 @@
                                             <input id="user" name="user" value="${autoridad.getEntidad().getUser()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
+                                        
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Contraseña</label>
@@ -160,6 +161,14 @@
                                             <input id="pass" name="pass" type="password" class="input-xlarge">
                                         </div>
                                     </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Correo</label>  
+                                        <div class="controls">
+                                            <input id="user" name="user" value="${autoridad.getEntidad().getCorreo()}" type="text" class="input-xlarge">
+                                        </div>
+                                    </div>
+                                    
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Resolución de </label>
