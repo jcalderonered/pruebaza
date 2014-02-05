@@ -1039,9 +1039,11 @@ public class HiberPersonal {
         query.setString("nac", "internacional");
         List entidades = query.list();
         ArrayList<ExpedienteFamilia> allExpedientesInt = new ArrayList();
+        if(!query.list().isEmpty()){
         for (Iterator iter = entidades.iterator(); iter.hasNext();) {
             ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
             allExpedientesInt.add(temp);
+        }
         }
         return allExpedientesInt;
     }

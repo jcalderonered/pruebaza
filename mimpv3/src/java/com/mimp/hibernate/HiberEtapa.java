@@ -38,6 +38,7 @@ public ArrayList<Familia> getListaFamilias () {
         Query query = session.createQuery(hql);
         List familias = query.list();
         ArrayList<Familia> allFamilias = new ArrayList();
+        if(!query.list().isEmpty()){
         for (Iterator iter = familias.iterator(); iter.hasNext();) {
             Familia temp = (Familia) iter.next();
             Hibernate.initialize(temp.getExpedienteFamilias());
@@ -60,7 +61,7 @@ public ArrayList<Familia> getListaFamilias () {
             allFamilias.add(temp);
             
         } 
-    
+        }
         return allFamilias;
     
     }
