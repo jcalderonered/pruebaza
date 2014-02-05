@@ -3641,7 +3641,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("C:\\Plantillas\\Renad.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\Renad2.xlsx");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -4126,7 +4126,7 @@ public class reporte {
 
         try {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            response.setHeader("Content-Disposition", "attachment; filename=Renad.xlsx");
+            response.setHeader("Content-Disposition", "attachment; filename=Renad2.xlsx");
             OutputStream fileOut = response.getOutputStream();
             wb.write(fileOut);
             fileOut.flush();
