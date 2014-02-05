@@ -553,10 +553,10 @@ public class HiberReporte {
         for (Iterator iter = familias.iterator(); iter.hasNext();) {
             Familia temp = (Familia) iter.next();
             Hibernate.initialize(temp.getEntidad());
-            String hql2 = "FROM ExpedienteFamilia EF WHERE EF.familia = :idFamilia and EF.estado = :estado ORDER BY EF.idexpedienteFamilia DESC";
+            String hql2 = "FROM ExpedienteFamilia EF WHERE EF.familia = :idFamilia and EF.estado != :estado ORDER BY EF.idexpedienteFamilia DESC";
             Query query2 = session.createQuery(hql2);
             query2.setLong("idFamilia", temp.getIdfamilia());
-            query2.setString("estado", "espera");
+            query2.setString("estado", "evaluacion");
             query2.setMaxResults(1);
             Object queryResult2 = query2.uniqueResult();
             if (queryResult2 != null){

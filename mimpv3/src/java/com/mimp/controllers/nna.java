@@ -672,7 +672,23 @@ public class nna {
         }
         tempExp.setFichaIntegral(Short.parseShort(fichaInt));
         tempExp.setRespLegalNombre(respLegal);
+        for (Personal pers : ServicioPersonal.ListaPersonal()) {
+            if(pers.getDni() != null){
+            if(pers.getDni().equals(respLegal)){
+                tempExp.setRespLegalP(pers.getNombre());
+                tempExp.setRespLegalM(pers.getApellidoP());
+            }
+            }
+        }
         tempExp.setRespPsicosocialNombre(respPsico);
+        for (Personal pers : ServicioPersonal.ListaPersonal()) {
+            if(pers.getDni() != null){
+            if(pers.getDni().equals(respPsico)){
+                tempExp.setRespPiscosocialP(pers.getNombre());
+                tempExp.setRespPsicosocialM(pers.getApellidoP());
+            }
+            }
+        }
         tempExp.setEstado(estado);
         tempfecha = tempExp.getFechaEstado();
         if (fechaEstado != null) {
@@ -823,7 +839,23 @@ public class nna {
         }
         tempExp.setProcTutelar(procTutelar);
         tempExp.setRespLegalNombre(respLegal);
+        for (Personal pers : ServicioPersonal.ListaPersonal()) {
+            if(pers.getDni() != null){
+            if(pers.getDni().equals(respLegal)){
+                tempExp.setRespLegalP(pers.getNombre());
+                tempExp.setRespLegalM(pers.getApellidoP());
+            }
+            }
+        }
         tempExp.setRespPsicosocialNombre(respPsico);
+        for (Personal pers : ServicioPersonal.ListaPersonal()) {
+            if(pers.getDni() != null){
+            if(pers.getDni().equals(respPsico)){
+                tempExp.setRespPiscosocialP(pers.getNombre());
+                tempExp.setRespPsicosocialM(pers.getApellidoP());
+            }
+            }
+        }
         tempExp.setEstado(estado);
         tempfecha = tempExp.getFechaEstado();
         if (fechaEstado != null) {
