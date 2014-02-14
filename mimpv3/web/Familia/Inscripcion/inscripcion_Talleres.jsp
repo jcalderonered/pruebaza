@@ -96,7 +96,7 @@
                                                     <input hidden id="idTaller" name="idTaller" value="${taller.getIdtaller()}">    
                                                     <input hidden id="nombreTaller" name="nombreTaller" value="${taller.getNombre()}">  
                                                     <button class="btn btn-default">Ver detalles</button>
-                                                    </form>
+                                            </form>
                                         </td>
                                     </tr>
                                     </c:forEach>

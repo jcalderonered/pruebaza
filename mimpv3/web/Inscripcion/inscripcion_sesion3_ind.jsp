@@ -120,7 +120,7 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <label for="fecha">Fecha de Nacimiento <font style="color:red">(*)</font></label> 
-                                    <input id="fecha" name="fechaNac" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
+                                    <input id="fechaNac" name="fechaNac" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="edad">Edad <font style="color:red">(*)</font></label> 
