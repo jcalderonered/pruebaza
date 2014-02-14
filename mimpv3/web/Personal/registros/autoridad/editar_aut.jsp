@@ -168,7 +168,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Correo</label>  
                                         <div class="controls">
-                                            <input id="user" name="user" value="${autoridad.getEntidad().getCorreo()}" type="text" class="input-xlarge">
+                                            <input id="correo" name="correo" value="${autoridad.getEntidad().getCorreo()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     

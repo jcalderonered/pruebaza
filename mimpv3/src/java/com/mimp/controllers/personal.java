@@ -424,6 +424,7 @@ public class personal {
             @RequestParam("telefono") String telefono,
             @RequestParam("user") String user,
             @RequestParam("pass") String pass,
+            @RequestParam("correo") String correo,
             @RequestParam("resol_aut") String resol_aut,
             @RequestParam("fecha_emis_resol") String fecha_emis_resol,
             @RequestParam("resol_renov") String resol_renov,
@@ -496,6 +497,7 @@ public class personal {
         }
         ent.setObs(obs);
         ent.setUser(user);
+        ent.setCorreo(correo);
         if (!pass.equals("")) {
             pass = DigestUtils.sha512Hex(pass);
             ent.setPass(pass);
