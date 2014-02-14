@@ -176,7 +176,6 @@
                 <div id="ja-footer" class="wrap">
                     <hr width=80% align="center">
                     <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-                    <p align="right">Diseñado por RED<br>www.red.net.pe</p>
                 </div>
             </div>
             <!-- core JavaScript
