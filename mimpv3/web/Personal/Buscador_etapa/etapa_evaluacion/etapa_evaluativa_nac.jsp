@@ -153,6 +153,7 @@
                                                                 </c:when> 
                                                             </c:choose>
                                                 </c:forEach>
+                                                
                                                 <tr>
                                                 <td>${expediente.getExpediente()}</td>
                                                 <td>
@@ -173,7 +174,7 @@
                                                 </td>
                                                 <td>
                                                     <c:choose>
-                                                        <c:when test="${psicologica != null}">
+                                                        <c:when test="${psicologica != null && psicologica.getTipo() == 'psicologica'}">
                                                             ${psicologica.getResultado()}
                                                         </c:when>
                                                         <c:otherwise>
@@ -192,7 +193,7 @@
                                                 </td>
                                                 <td>
                                                     <c:choose>
-                                                        <c:when test="${social != null}">
+                                                        <c:when test="${social != null && social.getTipo() == 'social'}">
                                                             ${social.getResultado()}
                                                         </c:when>
                                                         <c:otherwise>
@@ -211,7 +212,7 @@
                                                 </td>
                                                 <td>
                                                     <c:choose>
-                                                        <c:when test="${legal != null}">
+                                                        <c:when test="${legal != null && legal.getTipo() == 'legal'}">
                                                             ${legal.getResultado()}
                                                         </c:when>
                                                         <c:otherwise>
@@ -245,6 +246,9 @@
                                                    </td>
                                                </c:if>
                                              </tr>
+                                             <c:set var="psicologica" value="${null}" scope="page" />
+                                             <c:set var="social" value="${null}" scope="page" />
+                                             <c:set var="legal" value="${null}" scope="page" />
                                             </c:forEach>
                                     </tbody>
                                 </c:if> 

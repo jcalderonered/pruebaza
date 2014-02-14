@@ -243,6 +243,9 @@
                                                    </td>
                                               </c:if>
                                                 </tr>
+                                                <c:set var="psicologica" value="${null}" scope="page" />
+                                                <c:set var="social" value="${null}" scope="page" />
+                                                <c:set var="legal" value="${null}" scope="page" />
                                             </c:forEach>
                                         </c:if> 
                                     </tbody>
