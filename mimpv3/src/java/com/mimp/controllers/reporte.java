@@ -74,8 +74,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
             //InputStream inp = new FileInputStream("C:\\Plantillas\\8 Registro del número Organismos Acreditados.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/8 Registro del número Organismos Acreditados.xlsx");
-            wb = WorkbookFactory.create(inp);
+            //InputStream inp = new FileInputStream("/opt/Plantillas/8 Registro del número Organismos Acreditados.xlsx");
+            //wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
             //Aquí va el query que consigue los datos de la tabla
