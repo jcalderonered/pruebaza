@@ -179,8 +179,8 @@ public class HiberPersonal {
         Hibernate.initialize(org.getRepresentantes());
         return org;
     }
-    
-     public Organismo getOrganismobyentidad(long id) {
+
+    public Organismo getOrganismobyentidad(long id) {
         Session session = sessionFactory.getCurrentSession();
         Organismo org = new Organismo();
 
@@ -905,10 +905,15 @@ public class HiberPersonal {
         if (famrep != null) {
             if (famrep.getIdfamilia() != 0) {
                 while (true) {
-                    if (fam.getUser().equals(famrep.getUser())) {
-                        fam.setUser(usuariotemp + idextra);
-                    } else {
-                        break;
+                    if (famrep != null) {
+                        if (famrep.getIdfamilia() != 0) {
+                            if (fam.getUser().equals(famrep.getUser())) {
+                                fam.setUser(usuariotemp + idextra);
+                                famrep = getFamilia(fam.getUser());
+                            } else {
+                                break;
+                            }
+                        }
                     }
                     idextra++;
                 }
@@ -1039,11 +1044,11 @@ public class HiberPersonal {
         query.setString("nac", "internacional");
         List entidades = query.list();
         ArrayList<ExpedienteFamilia> allExpedientesInt = new ArrayList();
-        if(!query.list().isEmpty()){
-        for (Iterator iter = entidades.iterator(); iter.hasNext();) {
-            ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
-            allExpedientesInt.add(temp);
-        }
+        if (!query.list().isEmpty()) {
+            for (Iterator iter = entidades.iterator(); iter.hasNext();) {
+                ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+                allExpedientesInt.add(temp);
+            }
         }
         return allExpedientesInt;
     }
@@ -1426,8 +1431,8 @@ public class HiberPersonal {
 
         return tempFa;
     }
-    
-        public static synchronized String generateUniqueToken(Integer length) {
+
+    public static synchronized String generateUniqueToken(Integer length) {
 
         byte random[] = new byte[length];
         Random randomGenerator = new Random();

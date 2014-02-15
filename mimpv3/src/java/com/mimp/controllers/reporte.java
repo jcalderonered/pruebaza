@@ -69,7 +69,7 @@ public class reporte {
     @RequestMapping("/Reportes/OrganismosAcreditados")
     public void ReporteOrganismo(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-        Personal usuario = (Personal) session.getAttribute("usuario");
+//        Personal usuario = (Personal) session.getAttribute("usuario");
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
