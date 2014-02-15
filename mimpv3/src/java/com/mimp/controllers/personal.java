@@ -35,6 +35,7 @@ public class personal {
     Adoptante Ella = new Adoptante();
     InfoFamilia infoFam = new InfoFamilia();
     ExpedienteFamilia expedienteInt = new ExpedienteFamilia();
+    HiberMail hibermail = new HiberMail();
 
     @Resource(name = "HiberPersonal")
     private HiberPersonal ServicioPersonal = new HiberPersonal();
@@ -2819,13 +2820,16 @@ public class personal {
         }
 
         fam.setUser(user);
-        String pass = DigestUtils.sha512Hex("12345");
+        String pass_plano = ServicioPersonal.generateUniqueToken(8);
+        String pass = DigestUtils.sha512Hex(pass_plano);
+
         fam.setPass(pass);
         fam.setCorreo(user);
         Short habilitado = Short.parseShort("0");
-        fam.setHabilitado(habilitado); 
+        fam.setHabilitado(habilitado);
 
         ServicioPersonal.crearCuentaFamilia(fam, fs);
+        hibermail.generateAndSendEmail2(user, pass_plano, user);
 
         allFormularios = ServicioPersonal.InscritosSesion(idSesion);
 
@@ -3661,9 +3665,7 @@ public class personal {
         map.put("dia", dia);
 
         return new ModelAndView("/Personal/registros/usuarios/log_personal", map);
-        
+
     }
-    
-    
 
 }

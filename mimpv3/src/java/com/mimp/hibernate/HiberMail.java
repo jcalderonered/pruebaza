@@ -44,13 +44,21 @@ public class HiberMail {
 
     public static void generateAndSendEmail(String correo, String pass_plano, String user) {
 
+        final String username = "sssirna@gmail.com";
+        final String password = "s1rn44d0pc10n!";
+
         Properties props = new Properties();
-        props.put("mail.smtp.auth", "false");
+        props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "172.16.100.13");
+        props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
 
-        Session session = Session.getInstance(props);
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
 
         try {
 
@@ -61,17 +69,64 @@ public class HiberMail {
             message.setSubject("Sistema de adopciones");
             message.setText("Estimado adoptante,"
                     + "\n\n Su solicitud de recuperación de contraseña ha sido procesada. Su usuario y contraseña para acceder a la plataforma de adopciones son los siguientes:"
+                    + "\n\n Usuario: " + user
+                    + "\n\n Contraseña: " + pass_plano
+                    + "\n\n Saludos cordiales, ");
+
+            Transport.send(message);
+
+        } catch (Exception ex) {
+
+        }
+
+        /*catch (MessagingException e) {
+         throw new RuntimeException(e);
+         }*/
+    }
+
+    public static void generateAndSendEmail2(String correo, String pass_plano, String user) {
+
+        final String username = "sssirna@gmail.com";
+        final String password = "s1rn44d0pc10n!";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("formacionadopcion@mimp.gob.pe"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(correo));
+            message.setSubject("Sistema de adopciones");
+            message.setText("Estimado adoptante,"
+                    + "\n\n Bienvenido al SISTEMA INFORMÁTICO DEL REGISTRO NACIONAL DE ADOPCIONES, "
+                    + "sus credenciales para inscribirse al taller son las siguientes:"
                     + "\n\n Usuario:" + user
                     + "\n\n Contraseña:" + pass_plano
                     + "\n\n Saludos cordiales, ");
 
             Transport.send(message);
 
+            /*  } catch (Exception ex) {
+             */
         } catch (Exception ex) {
-            
-        } /*catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }*/
+
+        }
+
+        /*catch (MessagingException e) {
+         throw new RuntimeException(e);
+         }*/
     }
 
     public ArrayList<Object> usuario(String user) {
@@ -99,7 +154,6 @@ public class HiberMail {
         Object queryResultF = queryF.uniqueResult();
 
         Query queryE = session.createQuery(hqlE);
-        queryE.setString("usuario", user);
 
         Object queryResultE = queryE.uniqueResult();
 
