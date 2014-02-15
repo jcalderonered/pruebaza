@@ -74,8 +74,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
             //InputStream inp = new FileInputStream("C:\\Plantillas\\8 Registro del número Organismos Acreditados.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/8 Registro del número Organismos Acreditados.xlsx");
-            //wb = WorkbookFactory.create(inp);
+            InputStream inp = new FileInputStream("/opt/Plantillas/8_Registro_del_número_Organismos_Acreditados.xlsx");
+            wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
             //Aquí va el query que consigue los datos de la tabla
@@ -141,7 +141,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("/opt/Plantillas/7 Registros Post-Adopción.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/7_Registros_Post-Adopción.xlsx");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -363,7 +363,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("/opt/Plantillas/1 Registro Nacional de NNAs declarados Judicialmente en Abandono.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/1_Registro_Nacional_de_NNAs_declarados_Judicialmente_en_Abandono.xlsx");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -1046,7 +1046,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("/opt/Plantillas/2 Registro de NNAs prioritarios.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/2_Registro_de_NNAs_prioritarios.xlsx");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -1288,7 +1288,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("/opt/Plantillas/2.0Registro de NNAs prioritarios Mensual por Grupo de Referencia.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/2.0Registro_de_NNAs_prioritarios_Mensual_por_Grupo_de_Referencia.xlsx");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
             Row row = sheet.createRow(11);
@@ -2148,7 +2148,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("/opt/Plantillas/4 Registro de Adoptantes Aptos Nacionales.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/4_Registro_de_Adoptantes_Aptos_Nacionales.xlsx");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -2517,7 +2517,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("/opt/Plantillas/5 Registro de Adoptantes Aptos Internacional.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/5_Registro_de_Adoptantes_Aptos_Internacional.xlsx");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -2884,7 +2884,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("/opt/Plantillas/6 Registro de Adopción en el Extranjero.xls");
+            InputStream inp = new FileInputStream("/opt/Plantillas/6_Registro_de_Adopción_en_el_Extranjero.xls");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -3161,7 +3161,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("/opt/Plantillas/3 Registro Nacional de Exp. Nacionales e Internacionales.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/3_Registro_Nacional_de_Exp._Nacionales_e_Internacionales.xlsx");
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(1);
 
