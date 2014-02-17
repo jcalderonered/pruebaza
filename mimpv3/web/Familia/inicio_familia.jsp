@@ -71,14 +71,16 @@
                         </ul>
                     </div>
                     <div class="col-md-8 col-md-offset-1">
+                        <c:set var='apellido_h' value=''/>
+                        <c:set var='apellido_m' value=''/>
                         <c:forEach items="${usuario.getInfoFamilias()}" varStatus="status" var="infofam">
                             <c:forEach items="${infofam.getAdoptantes()}" varStatus="status" var="item">
                                 <c:choose>
-                                    <c:when test="${item.getSexo() == 77}">
+                                    <c:when test="${item.getSexo() == 109}">
                                         <c:set var='apellido_h' value='${item.getApellidoP()}'/>
                                     </c:when>
                                     <c:otherwise>
-                                        <c:set var='apellido_m' value='${item.getApellidoM()}'/>
+                                        <c:set var='apellido_m' value='${item.getApellidoP()}'/>
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
