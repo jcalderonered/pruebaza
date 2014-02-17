@@ -11,6 +11,10 @@ import com.mimp.bean.FichaSolicitudAdopcion;
 import com.mimp.bean.InfoFamilia;
 import com.mimp.bean.Organismo;
 import com.mimp.bean.Personal;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Properties;
@@ -27,6 +31,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.jdbc.Work;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +46,8 @@ public class HiberMail {
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
+
+    ArrayList<Object> temp = new ArrayList<Object>();
 
     public static void generateAndSendEmail(String correo, String pass_plano, String user) {
 
@@ -197,6 +204,37 @@ public class HiberMail {
             return temp;
         }
 
+    }
+
+    public ArrayList<Object> usuario2(String user, String pass) {
+        
+        org.hibernate.Session session = sessionFactory.getCurrentSession();
+
+        final String usuario = user;
+        final String password = pass;
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                String query = "{call CONTRASENA(?, ?, ?, ?)}";
+                CallableStatement statement = connection.prepareCall(query);
+                statement.setString(1, usuario);
+                statement.setString(2, password);
+                statement.registerOutParameter(3, java.sql.Types.VARCHAR);
+                statement.registerOutParameter(4, java.sql.Types.VARCHAR);
+                statement.execute();
+
+                String correo = statement.getString(3);
+                String mensaje = statement.getString(4);
+                temp.add(0, correo);
+                temp.add(1, mensaje);
+                statement.close();
+            }
+        };
+        
+        session.doWork(work);
+
+        return temp;
     }
 
 }
