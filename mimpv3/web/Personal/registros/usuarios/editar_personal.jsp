@@ -76,7 +76,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -301,7 +301,7 @@
                                 <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
                                 <script type="text/javascript">
 
-                                                    $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
                                 </script>
                                 <script type="text/javascript">
@@ -313,14 +313,21 @@
 
                                         if (str1 !== str2)
                                         {
-                                             document.formulario.pass.focus() ;
-                                             document.formulario.pass2.focus() ;
+                                            document.formulario.pass.focus();
+                                            document.formulario.pass2.focus();
                                             alert("Las contraseñas ingresadas no son iguales. Por favor ingresar nuevamente.");
                                             return false;
                                         }
-                                        return( true );
+                                        return(true);
                                     }
 
+                                </script>
+                                <script type="text/javascript">
+                                    function enter(e) {
+                                        if (e.keyCode == 13) {
+                                            return false;
+                                        }
+                                    }
                                 </script>
                                 <!-- Ubicar al final -->
                                 </body>

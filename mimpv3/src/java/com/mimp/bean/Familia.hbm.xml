@@ -12,7 +12,7 @@
             <column name="IDENTIDAD" precision="10" scale="0" />
         </many-to-one>
         <property name="user" type="string">
-            <column name="USER_" length="20" />
+            <column name="USER_" length="50" />
         </property>
         <property name="pass" type="string">
             <column name="PASS" length="512" />

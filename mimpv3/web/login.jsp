@@ -57,6 +57,8 @@
                             <p align="center"><img src="<%=request.getContextPath()%>/assets/img/logo.png" width="200" border="0"></p>
                             <h2>Iniciar sesión:</h2>
                             <br>
+                            <p style="color: red">${mensaje}</p>
+                            <br>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Usuario</label>
                                 <input type="text" class="form-control" id="email" name="email" placeholder="Ingrese el usuario">
@@ -69,8 +71,7 @@
                                 <button type="submit" class="btn btn-default">Ingresar</button>
                                 <a href="${pageContext.servletContext.contextPath}/recordarContra" class="btn btn-default">Recuperar contraseña</a>
                             </div>
-                            <br>
-                            <p style="color: red">${mensaje}</p>
+
                         </form>
                     </div>
                 </div>

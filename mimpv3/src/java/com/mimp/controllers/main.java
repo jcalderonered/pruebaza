@@ -1637,81 +1637,105 @@ public class main {
         String pass_plano = ServicioPersonal.generateUniqueToken(8);
         String pass = DigestUtils.sha512Hex(pass_plano);
 
-        ArrayList aux = hibermail.usuario(user);
+        //ArrayList aux = hibermail.usuario(user);
+        ArrayList aux = hibermail.usuario2(user, pass);
 
         String pagina;
         String mensaje = null;
+        
+        
 
-        if (aux.get(0) == "personal") {
-            Personal personal = (Personal) aux.get(1);
-            if (!personal.getRol().equals("Inactivo")) {
-                session.setAttribute("usuario", personal);
-                personal.setPass(pass);
-                ServicioPersonal.UpdatePersonal(personal);
-                hibermail.generateAndSendEmail(personal.getCorreoPersonal(), pass_plano, personal.getUser());
-                mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
-                        + ". Por favor, revisar su bandeja.";
-                map.addAttribute("mensaje", mensaje);
-                pagina = "login";
+        if (!user.equals("") && !aux.isEmpty()) {
 
-            } else {
-                mensaje = "El usuario se encuentra Deshabilitado. Favor contactar a la Dirección General de Adopciones para más información";
-                map.addAttribute("mensaje", mensaje);
-                pagina = "login";
-            }
-        } else if (aux.get(0) == "familia") {
-            Familia familia = (Familia) aux.get(1);
-            if (familia.getHabilitado() == 0) {
-                session.setAttribute("usuario", familia);
-                familia.setPass(pass);
-                servicioEtapa.UpdateFamilia(familia);
-                hibermail.generateAndSendEmail(familia.getCorreo(), pass_plano, familia.getUser());
-                mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
-                        + ". Por favor, revisar su bandeja.";
-                map.addAttribute("mensaje", mensaje);
-                pagina = "login";
-            } else {
-                map.addAttribute("mensaje", mensaje);
-                pagina = "login";
-            }
-        } else if (aux.get(0) == "representante") {
-            Entidad entidad = (Entidad) aux.get(1);
-            session.setAttribute("usuario", entidad);
-            entidad.setPass(pass);
-            ServicioPersonal.UpdateAut(entidad, null);
-            Organismo org = ServicioPersonal.getOrganismobyentidad(entidad.getIdentidad());
+            hibermail.generateAndSendEmail(aux.get(0).toString(), pass_plano, user);
+            mensaje = aux.get(1).toString();
 
-            Representante rep = ServicioPersonal.getRepresentantebyOrganismo(org.getIdorganismo());
-            hibermail.generateAndSendEmail(rep.getCorreo(), pass_plano, entidad.getUser());
-            mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
-                        + ". Por favor, revisar su bandeja.";
-            map.addAttribute("mensaje", mensaje);
-            pagina = "login";                        
-
-        } else if (aux.get(0) == "autoridad") {
-            Entidad entidad = (Entidad) aux.get(1);
-            session.setAttribute("usuario", entidad);
-            entidad.setPass(pass);
-            ServicioPersonal.UpdateAut(entidad, null);
-            
-            
-            hibermail.generateAndSendEmail(entidad.getCorreo(), pass_plano, entidad.getUser());
-            mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
-                        + ". Por favor, revisar su bandeja.";
             map.addAttribute("mensaje", mensaje);
             pagina = "login";
 
-        }else if (user.equals("") || pass.equals("")) {
+        }else if (aux.isEmpty()) {
+            mensaje = "Lo sentimos el correo no se encuentra registrado en la base de datos";
+            map.addAttribute("mensaje", mensaje);
+            pagina = "record_contra";
+
+        } else {
+
             mensaje = "Por favor llenar el campo solicitado";
             map.addAttribute("mensaje", mensaje);
             pagina = "record_contra";
-        } else {
-            mensaje = "El Usuario no está registrado en nuestra base de datos. Por favor, comunicarse con el coordinador de adopciones";
-            map.addAttribute("mensaje", mensaje);
-            pagina = "login";
-        }
 
-       
+        };
+
+        /*
+         if (aux.get(0) == "personal") {
+         Personal personal = (Personal) aux.get(1);
+         if (!personal.getRol().equals("Inactivo")) {
+         session.setAttribute("usuario", personal);
+         personal.setPass(pass);
+         ServicioPersonal.UpdatePersonal(personal);
+         hibermail.generateAndSendEmail(personal.getCorreoPersonal(), pass_plano, personal.getUser());
+         mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
+         + ". Por favor, revisar su bandeja.";
+         map.addAttribute("mensaje", mensaje);
+         pagina = "login";
+
+         } else {
+         mensaje = "El usuario se encuentra Deshabilitado. Favor contactar a la Dirección General de Adopciones para más información";
+         map.addAttribute("mensaje", mensaje);
+         pagina = "login";
+         }
+         } else if (aux.get(0) == "familia") {
+         Familia familia = (Familia) aux.get(1);
+         if (familia.getHabilitado() == 0) {
+         session.setAttribute("usuario", familia);
+         familia.setPass(pass);
+         servicioEtapa.UpdateFamilia(familia);
+         hibermail.generateAndSendEmail(familia.getCorreo(), pass_plano, familia.getUser());
+         mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
+         + ". Por favor, revisar su bandeja.";
+         map.addAttribute("mensaje", mensaje);
+         pagina = "login";
+         } else {
+         map.addAttribute("mensaje", mensaje);
+         pagina = "login";
+         }
+         } else if (aux.get(0) == "representante") {
+         Entidad entidad = (Entidad) aux.get(1);
+         session.setAttribute("usuario", entidad);
+         entidad.setPass(pass);
+         ServicioPersonal.UpdateAut(entidad, null);
+         Organismo org = ServicioPersonal.getOrganismobyentidad(entidad.getIdentidad());
+
+         Representante rep = ServicioPersonal.getRepresentantebyOrganismo(org.getIdorganismo());
+         hibermail.generateAndSendEmail(rep.getCorreo(), pass_plano, entidad.getUser());
+         mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
+         + ". Por favor, revisar su bandeja.";
+         map.addAttribute("mensaje", mensaje);
+         pagina = "login";                        
+
+         } else if (aux.get(0) == "autoridad") {
+         Entidad entidad = (Entidad) aux.get(1);
+         session.setAttribute("usuario", entidad);
+         entidad.setPass(pass);
+         ServicioPersonal.UpdateAut(entidad, null);
+            
+            
+         hibermail.generateAndSendEmail(entidad.getCorreo(), pass_plano, entidad.getUser());
+         mensaje = "Una nueva contraseña se ha enviado a su correo de contacto asociado a su cuenta"
+         + ". Por favor, revisar su bandeja.";
+         map.addAttribute("mensaje", mensaje);
+         pagina = "login";
+
+         }else if (user.equals("")) {
+         mensaje = "Por favor llenar el campo solicitado";
+         map.addAttribute("mensaje", mensaje);
+         pagina = "record_contra";
+         } else {
+         mensaje = "El Usuario no está registrado en nuestra base de datos. Por favor, comunicarse con el coordinador de adopciones";
+         map.addAttribute("mensaje", mensaje);
+         pagina = "login";
+         }
+         */
         return new ModelAndView(pagina, map);
     }
 
