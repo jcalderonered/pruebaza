@@ -538,9 +538,8 @@ public class HiberMain {
 
         session.beginTransaction();
 
-        String hql = "FROM Taller T where T.habilitado = :int";
+        String hql = "FROM Taller T";
         Query query = session.createQuery(hql);
-        query.setShort("int", Short.parseShort("0"));
         List talleres = query.list();
         ArrayList<Taller> allTalleres = new ArrayList();
         for (Iterator iter = talleres.iterator(); iter.hasNext();) {
@@ -569,9 +568,8 @@ public class HiberMain {
         Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-        String hql = "From Sesion S where S.habilitado = :int";
+        String hql = "From Sesion S";
         Query query = session.createQuery(hql);
-        query.setShort("int", Short.parseShort("0"));
         List sesiones = query.list();
         ArrayList<Sesion> allSesiones = new ArrayList();
         

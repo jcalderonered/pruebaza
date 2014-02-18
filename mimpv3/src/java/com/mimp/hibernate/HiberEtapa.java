@@ -347,12 +347,11 @@ public ArrayList<Familia> getListaFamilias () {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         
-        String hql = "from ExpedienteFamilia EF where (EF.estado = :estado) or (EF.estado = :estado2) or (EF.estado = :estado3) or (EF.estado = :estado4) and EF.expediente like :exp";
+        String hql = "from ExpedienteFamilia EF where (EF.estado = :estado) or (EF.estado = :estado2) or (EF.estado = :estado3) and EF.expediente like :exp";
         Query query = session.createQuery(hql);
         query.setString("estado", "espera");
         query.setString("estado2", "adopcion");
-        query.setString("estado3", "post");
-        query.setString("estado4", "estudio");
+        query.setString("estado3", "estudio");
         query.setString("exp",'%' + exp + '%');
         List expedientes = query.list();
         ArrayList<ExpedienteFamilia> allInfoFam = new ArrayList();

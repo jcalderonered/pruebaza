@@ -153,7 +153,7 @@
                                     Si
                                 </label>
                                 <label class="radio inline" for="radios-1">
-                                    <input type="radio" name="habilitado" id="radios-1" value="1" ${taller.getHabilitado() == 1 ? 'checked' : ''}>
+                                    <input type="radio" name="habilitado" id="radios-1" value="1" ${taller.getHabilitado() == 1 || taller.getHabilitado() == null ? 'checked' : ''}>
                                     No
                                 </label>
                             </div>

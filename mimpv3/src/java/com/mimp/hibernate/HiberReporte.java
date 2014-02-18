@@ -8,6 +8,7 @@ package com.mimp.hibernate;
 
 import com.mimp.bean.Adoptante;
 import com.mimp.bean.Designacion;
+import com.mimp.bean.Entidad;
 import com.mimp.bean.EstudioCaso;
 import com.mimp.bean.Evaluacion;
 import com.mimp.bean.ExpedienteFamilia;
@@ -20,16 +21,23 @@ import com.mimp.bean.Nna;
 import com.mimp.bean.Organismo;
 import com.mimp.bean.PostAdopcion;
 import com.mimp.bean.Resolucion;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Resource;
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.jdbc.Work;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -587,6 +595,42 @@ public class HiberReporte {
         return allFamilias;
     
     }
+    
+    public ArrayList<Familia> getRenad_Parte1() {
+        
+         Session session = sessionFactory.getCurrentSession();
+         session.beginTransaction();
+         ArrayList<Familia> allFamilias = new ArrayList();
+         
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                String query = "{call RENAD_PARTE1(?)}";
+                CallableStatement statement = connection.prepareCall(query);
+                statement.registerOutParameter(1, OracleTypes.CURSOR);
+                statement.execute();
+                ResultSet rs = ((OracleCallableStatement)statement).getCursor(1);
+                while (rs.next()) {
+                    Familia tempFam = new Familia();
+                    ExpedienteFamilia tempExpFam = new ExpedienteFamilia();
+                    
+                    tempFam.setIdfamilia(rs.getLong("IDFAMILIA"));
+                    Long idEntidad = rs.getLong("IDENTIDAD");
+                    if(idEntidad != null){
+                        Entidad tempEnt = new Entidad();
+                        
+                    }
+                    
+                }
+                statement.close();
+            }
+        };
+    
+        return allFamilias;
+    
+    }
+    
+    
     
     public Designacion getUltimaDesignacionNnaCarJuzExp(Long expFam){
     
