@@ -109,14 +109,14 @@
                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editPersonal" method="post"  onsubmit="return(validar());" onkeypress="return enter(event)"> 
                             </c:if>  
                             <c:if test="${personal.getIdpersonal() != null && disabled == 'deshabilitar'}">
-                                <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post">
+                                <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post" onsubmit="return(validar());" onkeypress="return enter(event)">
                                     <input hidden name="ïdUA" id="ïdUA" value="${personal.getUnidad().getIdunidad()}">
                                     <p align="right"><button type="submit" class="btn btn-default" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                                 </form>
                                 <h1 align="center"><strong>Editar Personal</strong></h1>
 
                                 <br>
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonalUa" method="post">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonalUa" method="post" onsubmit="return(validar());" onkeypress="return enter(event)">
                                     <input hidden name="idPers" id="idPers" value="${personal.getIdpersonal()}">    
                                 </c:if> 
                                 <c:if test="${personal.getIdpersonal() != null && disabled != 'deshabilitar'}">
@@ -124,7 +124,7 @@
                                     <h1 align="center"><strong>Editar Personal</strong></h1>
                                     <p style="color: red">${mensaje}</p>
                                     <br>
-                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonal" method="post"> 
+                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonal" method="post" onsubmit="return(validar());" onkeypress="return enter(event)"> 
                                         <input hidden name="idPers" id="idPers" value="${personal.getIdpersonal()}">
                                     </c:if>  
                                     <fieldset>
@@ -312,7 +312,7 @@
                                         var str2 = document.getElementById("pass2").value;
 
                                         if (str1 !== str2)
-                                        {                                            
+                                        {
                                             alert("Las contraseñas ingresadas no son iguales. Por favor ingresar nuevamente.");
                                             return false;
                                         }

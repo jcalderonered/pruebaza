@@ -75,28 +75,28 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                <%}
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -106,10 +106,10 @@
                         <p style="color: red">${mensaje}</p>
                         <br>
                         <c:if test="${autoridad.getIdautoridad() == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editAut" method="post"> 
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editAut" method="post" onsubmit="return(validar());" onkeypress="return enter(event)"> 
                             </c:if>  
                             <c:if test="${autoridad.getIdautoridad() != null}">
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateAut" method="post"> 
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateAut" method="post" onsubmit="return(validar());" onkeypress="return enter(event)"> 
                                     <input hidden name="id" id="id" value="${autoridad.getIdautoridad()}">
                                 </c:if>     
 
@@ -159,7 +159,7 @@
                                             <input id="user" name="user" value="${autoridad.getEntidad().getUser()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
-                                        
+
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Contraseña</label>
@@ -168,13 +168,22 @@
                                         </div>
                                     </div>
                                     <br>
+
+                                    <div class="control-group">
+                                        <label class="control-label">Ingresar nuevamente Contraseña</label>
+                                        <div class="controls">
+                                            <input id="pass2" name="pass2" type="password" value="" class="input-xlarge">
+                                        </div>
+                                    </div>
+
+                                    <br>
                                     <div class="control-group">
                                         <label class="control-label">Correo</label>  
                                         <div class="controls">
                                             <input id="correo" name="correo" value="${autoridad.getEntidad().getCorreo()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
-                                    
+
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Resolución de </label>
@@ -226,7 +235,7 @@
                                     <!-- Button -->
                                     <div class="control-group">
                                         <div class="controls">
-                                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar</button>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -252,8 +261,31 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
+            </script>
+            <script type="text/javascript">
+
+                function validar()
+                {
+                    var str1 = document.getElementById("pass").value;
+                    var str2 = document.getElementById("pass2").value;
+
+                    if (str1 !== str2)
+                    {
+                        alert("Las contraseñas ingresadas no son iguales. Por favor ingresar nuevamente.");
+                        return false;
+                    }
+                    return(true);
+                }
+
+            </script>
+            <script type="text/javascript">
+                function enter(e) {
+                    if (e.keyCode == 13) {
+                        return false;
+                    }
+                }
             </script>
             <!-- Ubicar al final -->
     </body>

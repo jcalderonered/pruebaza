@@ -187,7 +187,7 @@
                                     <!-- Button -->
                                     <div class="control-group">
                                         <div class="controls">
-                                            <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                            <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar</button>
                                         </div>
                                     </div>
                                 </fieldset>

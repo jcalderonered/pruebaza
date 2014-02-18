@@ -399,7 +399,7 @@
                                 </div> 
                                 <div class="control-group">
                                     <div class="controls">
-                                        <p align="center"><button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button></p>
+                                        <p align="center"><button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar</button></p>
                                     </div>
                                 </div>
                             </form>
