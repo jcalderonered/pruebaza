@@ -106,7 +106,7 @@
                             <h1 align="center"><strong>Editar Personal</strong></h1>
                             <p style="color: red">${mensaje}</p>
                             <br>
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editPersonal" method="post"> 
+                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editPersonal" method="post"  onsubmit="return(validar());" onkeypress="return enter(event)"> 
                             </c:if>  
                             <c:if test="${personal.getIdpersonal() != null && disabled == 'deshabilitar'}">
                                 <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post">
@@ -116,7 +116,7 @@
                                 <h1 align="center"><strong>Editar Personal</strong></h1>
 
                                 <br>
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonalUa" method="post" onsubmit="return(validar());">
+                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updatePersonalUa" method="post">
                                     <input hidden name="idPers" id="idPers" value="${personal.getIdpersonal()}">    
                                 </c:if> 
                                 <c:if test="${personal.getIdpersonal() != null && disabled != 'deshabilitar'}">
@@ -308,13 +308,11 @@
 
                                     function validar()
                                     {
-                                        var str1 = $("#pass").val();
-                                        var str2 = $("#pass2").val();
+                                        var str1 = document.getElementById("pass").value;
+                                        var str2 = document.getElementById("pass2").value;
 
                                         if (str1 !== str2)
-                                        {
-                                            document.formulario.pass.focus();
-                                            document.formulario.pass2.focus();
+                                        {                                            
                                             alert("Las contraseñas ingresadas no son iguales. Por favor ingresar nuevamente.");
                                             return false;
                                         }
