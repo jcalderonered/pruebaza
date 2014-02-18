@@ -103,7 +103,7 @@
                                 </tbody>
                                 </c:if>
                                 <c:if test="${listaTalleres.isEmpty()}">
-                                            <h3><strong>No exiten sesiones relacionadas</strong></h3>
+                                            <h3><strong>No exiten talleres habilitados</strong></h3>
                                 </c:if>
                             </table>
                         </div>
