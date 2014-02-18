@@ -3451,7 +3451,8 @@ public class personal {
             @RequestParam(value = "viajar") String viajar,
             @RequestParam(value = "edadMin") String edadMin,
             @RequestParam(value = "edadMax") String edadMax,
-            @RequestParam(value = "genero") String genero
+            @RequestParam(value = "genero") String genero,
+            @RequestParam(value = "obs") String obs
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -3485,6 +3486,9 @@ public class personal {
         }
         if (genero != null && !genero.equals("")) {
             infoFam.setExpectativaGenero(genero);
+        }
+        if (obs != null && !obs.equals("")) {
+            infoFam.setObservaciones(obs);
         }
 
         ServicioMain.updateInfoFam(infoFam);

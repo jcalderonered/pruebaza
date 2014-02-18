@@ -74,28 +74,28 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                <%}
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -135,9 +135,9 @@
                                                 </td>
                                                 <td>
                                                     <select id="incesto" name="incesto" >
-                                                            <option value="0" ${infoFam.getNnaIncesto() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaIncesto() != 0 ? 'selected' : ''} >NO</option>
-                                                        </select>
+                                                        <option value="0" ${infoFam.getNnaIncesto() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaIncesto() != 0 ? 'selected' : ''} >NO</option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -146,8 +146,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="mental" name="mental" >
-                                                            <option value="0" ${infoFam.getNnaMental() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaMental() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaMental() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaMental() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -157,8 +157,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="epilepsia" name="epilepsia" >
-                                                            <option value="0" ${infoFam.getNnaEpilepsia() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaEpilepsia() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaEpilepsia() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaEpilepsia() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -168,8 +168,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="abuso" name="abuso" >
-                                                            <option value="0" ${infoFam.getNnaAbuso() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaAbuso() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaAbuso() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaAbuso() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -180,8 +180,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="sifilis" name="sifilis" >
-                                                            <option value="0" ${infoFam.getNnaSifilis() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaSifilis() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaSifilis() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaSifilis() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -207,8 +207,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="seguimiento" name="seguimiento" >
-                                                            <option value="0" ${infoFam.getNnaSeguiMedico() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaSeguiMedico() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaSeguiMedico() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaSeguiMedico() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -219,8 +219,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="operacion" name="operacion" >
-                                                            <option value="0" ${infoFam.getNnaOperacion() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaOperacion() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaOperacion() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaOperacion() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -231,8 +231,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="hiperactivo" name="hiperactivo">
-                                                            <option value="0" ${infoFam.getNnaHiperactivo() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaHiperactivo() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaHiperactivo() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaHiperactivo() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -258,8 +258,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="especial" name="especial">
-                                                            <option value="0" ${infoFam.getNnaEspecial() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaEspecial() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaEspecial() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaEspecial() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -269,8 +269,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="salud" name="salud">
-                                                            <option value="0" ${infoFam.getNnaEnfermo() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaEnfermo() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaEnfermo() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaEnfermo() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -280,8 +280,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="mayor" name="mayor">
-                                                            <option value="0" ${infoFam.getNnaMayor() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaMayor() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaMayor() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaMayor() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -291,8 +291,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="adolescente" name="adolescente">
-                                                            <option value="0" ${infoFam.getNnaAdolescente() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaAdolescente() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaAdolescente() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaAdolescente() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -302,8 +302,8 @@
                                                 </td>
                                                 <td>
                                                     <select id="hermanos" name="hermanos">
-                                                            <option value="0" ${infoFam.getNnaHermano() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${infoFam.getNnaHermano() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${infoFam.getNnaHermano() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${infoFam.getNnaHermano() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -311,6 +311,13 @@
                                     </table>
                                 </div>
                             </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Observaciones</label>
+                                <div class="controls">
+                                    <textarea class="input-xlarge" id="obs" name="obs" placeholder="Ingrese sus observaciones" rows="5" >${infoFam.getObservaciones()}</textarea>
+                                </div>
+                            </div> 
                             <br>
                             <h3><strong>Adopción fuera del lugar de residencia de los solicitantes</strong></h3>
                             <br>
@@ -369,7 +376,7 @@
                                             <input type="radio" name="genero" id="indistinto" value="indistinto" ${infoFam.getExpectativaGenero() == 'indistinto' ? 'checked' : ''} >Indistinto</label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                             <br>
                             <div class="control-group">
                                 <div class="controls">
@@ -399,41 +406,41 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
             </script>
             <script type="text/javascript">
-            function validar()
-            {
-            var numericExpression = /^[0-9]+$/;
-            if(!document.getElementById('viajarSi').checked && !document.getElementById('viajarNo').checked){
-                alert( "Debe elegir al menos una opción de viaje" );
-                document.formulario.viajarSi.focus() ;
-                return false;
-            }
-            if(!document.formulario.edadMin.value.match(numericExpression))
-            {
-                
-                alert( "El campo debe contener solo números" );
-                document.formulario.edadMin.focus() ;
-                return false;
-            }
-            if(!document.formulario.edadMax.value.match(numericExpression))
-            {
-                
-                alert( "El campo debe contener solo números" );
-                document.formulario.edadMax.focus() ;
-                return false;
-            }
-            if(!document.getElementById('masculino').checked && !document.getElementById('femenino').checked && !document.getElementById('indistinto').checked){
-                alert( "Debe elegir al menos una opción de género" );
-                document.formulario.masculino.focus() ;
-                return false;
-                
-            }
-            return true
-            }
-          </script>
+                function validar()
+                {
+                    var numericExpression = /^[0-9]+$/;
+                    if (!document.getElementById('viajarSi').checked && !document.getElementById('viajarNo').checked) {
+                        alert("Debe elegir al menos una opción de viaje");
+                        document.formulario.viajarSi.focus();
+                        return false;
+                    }
+                    if (!document.formulario.edadMin.value.match(numericExpression))
+                    {
+
+                        alert("El campo debe contener solo números");
+                        document.formulario.edadMin.focus();
+                        return false;
+                    }
+                    if (!document.formulario.edadMax.value.match(numericExpression))
+                    {
+
+                        alert("El campo debe contener solo números");
+                        document.formulario.edadMax.focus();
+                        return false;
+                    }
+                    if (!document.getElementById('masculino').checked && !document.getElementById('femenino').checked && !document.getElementById('indistinto').checked) {
+                        alert("Debe elegir al menos una opción de género");
+                        document.formulario.masculino.focus();
+                        return false;
+
+                    }
+                    return true
+                }
+            </script>
             <!-- Ubicar al final -->
     </body>
 </html>

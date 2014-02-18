@@ -166,6 +166,7 @@
                                         <select id="estado" name="estado">
                                             <option value="none" ></option>
                                             <option value="eval" >Evaluación</option>
+                                            <option value="adoptable">Adoptable</option>
                                             <option value="desig">Designado</option>
                                             <option value="adop" >Adoptado</option>
                                             <option value="arch" >Archivado</option>
@@ -220,6 +221,7 @@
                                                 </td>
                                                 <td>
                                                     ${expediente.getEstado() == 'eval' ? 'evaluación' : ''}
+                                                    ${expediente.getEstado() == 'adoptable' ? 'adoptable' : ''}
                                                     ${expediente.getEstado() == 'desig' ? 'designado' : ''}
                                                     ${expediente.getEstado() == 'adop' ? 'adoptado' : ''}
                                                     ${expediente.getEstado() == 'arch' ? 'archivado' : ''}
