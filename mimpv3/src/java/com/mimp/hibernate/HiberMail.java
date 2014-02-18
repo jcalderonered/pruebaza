@@ -136,7 +136,7 @@ public class HiberMail {
          }*/
     }
 
-    public ArrayList<Object> usuario(String user) {
+ /*   public ArrayList<Object> usuario(String user) {
 
         org.hibernate.Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -205,7 +205,7 @@ public class HiberMail {
         }
 
     }
-
+*/
     public ArrayList<Object> usuario2(String user, String pass) {
         
         org.hibernate.Session session = sessionFactory.getCurrentSession();
