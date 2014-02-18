@@ -234,6 +234,7 @@
                                     <div class="controls">
                                         <select id="estado" name="estado">
                                             <option value="eval" ${expediente.getEstado().equals("eval") ? 'selected' : ''} >Evaluación</option>
+                                            <option value="adoptable" ${expediente.getEstado().equals("adoptable") ? 'selected' : ''} >Adoptable</option>
                                             <option value="desig" ${expediente.getEstado().equals("desig") ? 'selected' : ''} >Designado</option>
                                             <option value="adop" ${expediente.getEstado().equals("adop") ? 'selected' : ''} >Adoptado</option>
                                             <option value="arch" ${expediente.getEstado().equals("arch") ? 'selected' : ''} >Archivado</option>
