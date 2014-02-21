@@ -163,7 +163,7 @@
                                         <select id="resultado" name="resultado" > 
                                             <option value="favorable" ${psicologica.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
                                             <option value="desfavorable" ${psicologica.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
-                                            <option value="observado" ${psicologica.getResultado() == 'observado' ? 'selected' : ''}>En evaluación</option>
+                                            <option value="evaluacion" ${psicologica.getResultado() == 'evaluacion' ? 'selected' : ''}>En evaluación</option>
                                         </select>
                                     </div>  
                                 </div>
