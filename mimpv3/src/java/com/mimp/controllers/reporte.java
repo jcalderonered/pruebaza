@@ -73,14 +73,20 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
+
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\8 Registro del número Organismos Acreditados.xlsx");
+            //InputStream inp = new FileInputStream("/opt/Plantillas/8_Registro_del_número_Organismos_Acreditados.xlsx");
+
             InputStream inp = new FileInputStream("C:\\Plantillas\\OrgAcred.xlsx");
             //InputStream inp = new FileInputStream("/opt/Plantillas/OrgAcred.xlsx");
+
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<Organismo> listaorg = ServicioPersonal.ListaOrganismos();
-
+            //ArrayList<Organismo> listaorg = ServicioPersonal.ListaOrganismos();
+            ArrayList<Organismo> listaorg = ServicioReporte.ReporteOrganismo2();
+            
             int i = 1;
             for (Organismo org : listaorg) {
                 Row row = sheet.createRow(i);
@@ -141,19 +147,25 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
+
+            //InputStream inp = new FileInputStream("/opt/Plantillas/7_Registros_Post-Adopción.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\7 Registros Post-Adopción.xlsx");
+
             InputStream inp = new FileInputStream("C:\\Plantillas\\PostAdop.xlsx");
             //InputStream inp = new FileInputStream("/opt/Plantillas/PostAdop.xlsx");
+
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<PostAdopcion> listapost = ServicioReporte.ReportePostAdopcion();
-
+            //ArrayList<PostAdopcion> listapost = ServicioReporte.ReportePostAdopcion();
+            ArrayList<PostAdopcion> listapost = ServicioReporte.ReportePostAdopcion2();
+            
             int i = 3;
             for (PostAdopcion post : listapost) {
                 Row row = sheet.createRow(i);
 
-                Nna nna = ServicioNna.getNna(post.getidNna());
+                Nna nna = ServicioReporte.getNna(post.getidNna());
 
                 Cell cell = row.createCell(0);
                 cell.setCellValue(i-2);
@@ -268,8 +280,8 @@ public class reporte {
                 if (post.getFamilia() != null && post.getFamilia().getEntidad() != null) cell.setCellValue(post.getFamilia().getEntidad().getNombre());
                 
                 Designacion desig = new Designacion();
-                desig = ServicioReporte.getDesigNnaFam( nna.getIdnna(), exp.getIdexpedienteFamilia());
-                
+                //desig = ServicioReporte.getDesigNnaFam( nna.getIdnna(), exp.getIdexpedienteFamilia());
+                desig = ServicioReporte.getDesigNnaFam2(nna.getIdnna(), exp.getIdexpedienteFamilia());
                 cell = row.createCell(21);
                 cell.setCellValue(desig.getTipoPropuesta());
                 cell = row.createCell(22);
@@ -364,14 +376,21 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
+
+            //InputStream inp = new FileInputStream("/opt/Plantillas/1_Registro_Nacional_de_NNAs_declarados_Judicialmente_en_Abandono.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\1 Registro Nacional de NNAs declarados Judicialmente en Abandono.xlsx");
+
             InputStream inp = new FileInputStream("C:\\Plantillas\\NnaAbandono.xlsx");
             //InputStream inp = new FileInputStream("/opt/Plantillas/NnaAbandono.xlsx");
+
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<Nna> listanna = ServicioReporte.ListaNnaReporte("prioritario");
-
+            //ArrayList<Nna> listanna = ServicioReporte.ListaNnaReporte("prioritario");
+            ArrayList<Nna> listanna = ServicioReporte.ListaNnaReporte2("prioritario");
+            
+            
             int i = 2;
             for (Nna nna : listanna) {
                 Row row = sheet.createRow(i);
@@ -567,18 +586,19 @@ public class reporte {
                 cell = row.createCell(35);
                 Date ultfecha = new Date(10, 0, 01);
                 Designacion desig = new Designacion();
-                if(!nna.getDesignacions().isEmpty()){
-                for (Iterator iter = nna.getDesignacions().iterator();
-                        iter.hasNext();) {
-                    Designacion daux = (Designacion) iter.next();
-                    if(daux.getFechaConsejo() != null && !daux.getFechaConsejo().equals("")){
-                    if (ultfecha.before(daux.getFechaConsejo())) {
-                        ultfecha = daux.getFechaConsejo();
-                        desig = daux;
-                    }
-                    }
-                }
-                }
+                desig = ServicioReporte.getDesignacionNna(nna.getIdnna());
+//                if(!nna.getDesignacions().isEmpty()){
+//                for (Iterator iter = nna.getDesignacions().iterator();
+//                        iter.hasNext();) {
+//                    Designacion daux = (Designacion) iter.next();
+//                    if(daux.getFechaConsejo() != null && !daux.getFechaConsejo().equals("")){
+//                    if (ultfecha.before(daux.getFechaConsejo())) {
+//                        ultfecha = daux.getFechaConsejo();
+//                        desig = daux;
+//                    }
+//                    }
+//                }
+//                }
                 if(desig.getFechaConsejo() != null && !desig.getFechaConsejo().equals("")){
                 cell.setCellValue(format.dateToString(desig.getFechaConsejo()));
                 }else{
@@ -587,8 +607,9 @@ public class reporte {
                 i++;
             }
 
-            listanna = ServicioReporte.ListaNnaReporte("regular");
-
+            //listanna = ServicioReporte.ListaNnaReporte("regular");
+            listanna = ServicioReporte.ListaNnaReporte2("regular");
+            
             for (Nna nna : listanna) {
                 Row row = sheet.createRow(i);
 
@@ -783,18 +804,19 @@ public class reporte {
                 cell = row.createCell(35);
                 Date ultfecha = new Date(10, 0, 01);
                 Designacion desig = new Designacion();
-                if(!nna.getDesignacions().isEmpty()){
-                for (Iterator iter = nna.getDesignacions().iterator();
-                        iter.hasNext();) {
-                    Designacion daux = (Designacion) iter.next();
-                    if(daux.getFechaConsejo() != null && !daux.getFechaConsejo().equals("")){
-                    if (ultfecha.before(daux.getFechaConsejo())) {
-                        ultfecha = daux.getFechaConsejo();
-                        desig = daux;
-                    }
-                    }
-                }
-                }
+                desig = ServicioReporte.getDesignacionNna(nna.getIdnna());
+//                if(!nna.getDesignacions().isEmpty()){
+//                for (Iterator iter = nna.getDesignacions().iterator();
+//                        iter.hasNext();) {
+//                    Designacion daux = (Designacion) iter.next();
+//                    if(daux.getFechaConsejo() != null && !daux.getFechaConsejo().equals("")){
+//                    if (ultfecha.before(daux.getFechaConsejo())) {
+//                        ultfecha = daux.getFechaConsejo();
+//                        desig = daux;
+//                    }
+//                    }
+//                }
+//                }
                 if(desig.getFechaConsejo() != null && !desig.getFechaConsejo().equals("")){
                 cell.setCellValue(format.dateToString(desig.getFechaConsejo()));
                 }else{
@@ -803,8 +825,9 @@ public class reporte {
                 i++;
             }
 
-            listanna = ServicioReporte.ListaNnaReporte("seguimiento");
-
+            //listanna = ServicioReporte.ListaNnaReporte("seguimiento");
+            listanna = ServicioReporte.ListaNnaReporte2("seguimiento");
+            
             for (Nna nna : listanna) {
                 Row row = sheet.createRow(i);
 
@@ -999,18 +1022,19 @@ public class reporte {
                 cell = row.createCell(35);
                 Date ultfecha = new Date(10, 0, 01);
                 Designacion desig = new Designacion();
-                if(!nna.getDesignacions().isEmpty()){
-                for (Iterator iter = nna.getDesignacions().iterator();
-                        iter.hasNext();) {
-                    Designacion daux = (Designacion) iter.next();
-                    if(daux.getFechaConsejo() != null && !daux.getFechaConsejo().equals("")){
-                    if (ultfecha.before(daux.getFechaConsejo())) {
-                        ultfecha = daux.getFechaConsejo();
-                        desig = daux;
-                    }
-                    }
-                }
-                }
+                desig = ServicioReporte.getDesignacionNna(nna.getIdnna());
+//                if(!nna.getDesignacions().isEmpty()){
+//                for (Iterator iter = nna.getDesignacions().iterator();
+//                        iter.hasNext();) {
+//                    Designacion daux = (Designacion) iter.next();
+//                    if(daux.getFechaConsejo() != null && !daux.getFechaConsejo().equals("")){
+//                    if (ultfecha.before(daux.getFechaConsejo())) {
+//                        ultfecha = daux.getFechaConsejo();
+//                        desig = daux;
+//                    }
+//                    }
+//                }
+//                }
                 if(desig.getFechaConsejo() != null && !desig.getFechaConsejo().equals("")){
                 cell.setCellValue(format.dateToString(desig.getFechaConsejo()));
                 }else{
@@ -1048,14 +1072,21 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
+
+            //InputStream inp = new FileInputStream("/opt/Plantillas/2_Registro_de_NNAs_prioritarios.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\2 Registro de NNAs prioritarios.xlsx");
+
             InputStream inp = new FileInputStream("C:\\Plantillas\\NnaPrio.xlsx");
             //InputStream inp = new FileInputStream("/opt/Plantillas/NnaPrio.xlsx");
+
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<Nna> listanna = ServicioReporte.ListaNnaReporte("prioritario");
+            //ArrayList<Nna> listanna = ServicioReporte.ListaNnaReporte("prioritario");
 
+            ArrayList<Nna> listanna = ServicioReporte.ListaNnaPriorita();
+            
             int i = 2;
             for (Nna nna : listanna) {
                 Row row = sheet.createRow(i);
@@ -1154,7 +1185,11 @@ public class reporte {
                 cell = row.createCell(16);
                 cell.setCellValue(exp.getDiagnostico());
                 cell = row.createCell(17);
-                if (exp.getCodigoReferencia() != null) cell.setCellValue(exp.getCodigoReferencia().substring(0, 1));
+                if (exp.getCodigoReferencia() != null){
+                    
+                    if (!exp.getCodigoReferencia().substring(2).equals("NE")) cell.setCellValue(exp.getCodigoReferencia().substring(0, 1));
+                    else cell.setCellValue(exp.getCodigoReferencia().substring(2));
+                }
                 cell = row.createCell(18);
                 if (nna.getEspecial() != null && nna.getEspecial() == 0) {
                     cell.setCellValue(exp.getCodigoReferencia());
@@ -1291,8 +1326,13 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
+
+            //InputStream inp = new FileInputStream("/opt/Plantillas/2.0Registro_de_NNAs_prioritarios_Mensual_por_Grupo_de_Referencia.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\2.0Registro de NNAs prioritarios Mensual por Grupo de Referencia.xlsx");
+
             InputStream inp = new FileInputStream("C:\\Plantillas\\NnaGrupos.xlsx");
             //InputStream inp = new FileInputStream("/opt/Plantillas/NnaGrupos.xlsx");
+
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
             Row row = sheet.createRow(11);
@@ -1307,8 +1347,8 @@ public class reporte {
             ArrayList<Nna> listaadolescente = new ArrayList();
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<Nna> listanna = ServicioReporte.ListaNnaReporte("prioritario");
-
+            //ArrayList<Nna> listanna = ServicioReporte.ListaNnaReporte("prioritario");
+            ArrayList<Nna> listanna = ServicioReporte.ListaNnaPriorita();
             for (Nna nnaAux : listanna) {
                 if (nnaAux.getMayor() == 0) {
                     listamayor.add(nnaAux);
@@ -2152,14 +2192,20 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
+
+            //InputStream inp = new FileInputStream("/opt/Plantillas/4_Registro_de_Adoptantes_Aptos_Nacionales.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\4 Registro de Adoptantes Aptos Nacionales.xlsx");
+
             InputStream inp = new FileInputStream("C:\\Plantillas\\AdopNac.xlsx");
             //InputStream inp = new FileInputStream("/opt/Plantillas/AdopNac.xlsx");
+
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<Familia> listafam = ServicioReporte.getListaFamiliasNacionales();
-
+            //ArrayList<Familia> listafam = ServicioReporte.getListaFamiliasNacionales();
+            ArrayList<Familia> listafam = ServicioReporte.getListaFamiliasNacionales2();
+            
             int i = 2;
             for (Familia fam : listafam) {
                 Row row = sheet.createRow(i);
@@ -2305,7 +2351,7 @@ public class reporte {
                 } catch (Exception ex) {
                 }
                 Resolucion resol = new Resolucion();
-                resol = ServicioReporte.getResolucionAptitud(exp.getIdexpedienteFamilia());
+                resol = ServicioReporte.getResolucionAptitud2(exp.getIdexpedienteFamilia());
                 
                 cell = row.createCell(20);
                 try {
@@ -2478,7 +2524,7 @@ public class reporte {
                 cell = row.createCell(42);
                 
                 Designacion desig = new Designacion();
-                desig = ServicioReporte.getUltimaDesignacion(exp.getIdexpedienteFamilia());
+                desig = ServicioReporte.getUltimaDesignacion2(exp.getIdexpedienteFamilia());
                 try {
                     fecha = format.dateToString(desig.getFechaPropuesta());
                 } catch (Exception ex) {
@@ -2522,14 +2568,20 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
+
+            //InputStream inp = new FileInputStream("/opt/Plantillas/5_Registro_de_Adoptantes_Aptos_Internacional.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\5 Registro de Adoptantes Aptos Internacional.xlsx");
+
             InputStream inp = new FileInputStream("C:\\Plantillas\\AdopInter.xlsx");
             //InputStream inp = new FileInputStream("/opt/Plantillas/AdopInter.xlsx");
+
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<Familia> listafam = ServicioReporte.getListaFamiliasInternacionales();
-
+            //ArrayList<Familia> listafam = ServicioReporte.getListaFamiliasInternacionales();
+            ArrayList<Familia> listafam = ServicioReporte.getListaFamiliasInternacionales2();
+            
             int i = 2;
             for (Familia fam : listafam) {
                 Row row = sheet.createRow(i);
@@ -2675,7 +2727,7 @@ public class reporte {
                 } catch (Exception ex) {
                 }
                 Resolucion resol = new Resolucion();
-                resol = ServicioReporte.getResolucionAptitud(exp.getIdexpedienteFamilia());
+                resol = ServicioReporte.getResolucionAptitud2(exp.getIdexpedienteFamilia());
                 cell = row.createCell(20);
                 try {
                     fecha = format.dateToString(resol.getFechaResol());
@@ -2847,7 +2899,8 @@ public class reporte {
                 cell = row.createCell(42);
                 
                 Designacion desig = new Designacion();
-                desig = ServicioReporte.getUltimaDesignacion(exp.getIdexpedienteFamilia());
+                //desig = ServicioReporte.getUltimaDesignacion(exp.getIdexpedienteFamilia());
+                desig = ServicioReporte.getUltimaDesignacion2(exp.getIdexpedienteFamilia());
                 try {
                     fecha = format.dateToString(desig.getFechaPropuesta());
                     cell.setCellValue(fecha);
@@ -2890,14 +2943,19 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
+
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\6 Registro de Adopción en el Extranjero.xls");
+
             InputStream inp = new FileInputStream("C:\\Plantillas\\AdopExtran.xls");
             //InputStream inp = new FileInputStream("/opt/Plantillas/AdopExtran.xls");
+
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<Familia> listafam = ServicioReporte.getListaFamiliasInternacionales();
-
+            //ArrayList<Familia> listafam = ServicioReporte.getListaFamiliasInternacionales();
+            ArrayList<Familia> listafam = ServicioReporte.getListaFamiliasInternacionales2();
+            
             int i = 3;
             for (Familia fam : listafam) {
                 Row row = sheet.createRow(i);
@@ -3043,7 +3101,8 @@ public class reporte {
                 } catch (Exception ex) {
                 }
                 Resolucion resol = new Resolucion();
-                resol = ServicioReporte.getResolucionAptitud(exp.getIdexpedienteFamilia());
+                //resol = ServicioReporte.getResolucionAptitud(exp.getIdexpedienteFamilia());
+                resol = ServicioReporte.getResolucionAptitud2(exp.getIdexpedienteFamilia());
                 cell = row.createCell(20);
                 try {
                     fecha = format.dateToString(resol.getFechaResol());
@@ -3078,10 +3137,9 @@ public class reporte {
                 }
                 
                 Designacion desig = new Designacion();
-                desig = ServicioReporte.getUltimaDesignacionNna(exp.getIdexpedienteFamilia());
-                
-                short acep = (short) 2;
-                
+                //desig = ServicioReporte.getUltimaDesignacionNna(exp.getIdexpedienteFamilia());
+                desig = ServicioReporte.getUltimaDesignacionNna2(exp.getIdexpedienteFamilia());
+                Short acep = (short) 2;
                 if (desig.getAceptacionConsejo() == acep) {
                     cell = row.createCell(26);
                     try {
@@ -3168,14 +3226,20 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
+
+            //InputStream inp = new FileInputStream("/opt/Plantillas/3_Registro_Nacional_de_Exp._Nacionales_e_Internacionales.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\3 Registro Nacional de Exp. Nacionales e Internacionales.xlsx");
+
             InputStream inp = new FileInputStream("C:\\Plantillas\\Expedientes.xlsx");
             //InputStream inp = new FileInputStream("/opt/Plantillas/Expedientes.xlsx");
+
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(1);
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<Familia> listafam = ServicioReporte.getListaFamilias();
-
+            //ArrayList<Familia> listafam = ServicioReporte.getListaFamilias();
+            ArrayList<Familia> listafam = ServicioReporte.getListaFamilias2();
+            
             int i = 3;
             for (Familia fam : listafam) {
                 Row row = sheet.createRow(i);
@@ -3488,11 +3552,12 @@ public class reporte {
                 fecha = "";
                 ultfecha = new Date();
                 Resolucion resol = new Resolucion();
-                if (exp.getIdexpedienteFamilia() != 0) resol = ServicioReporte.getUltimaResolucion(exp.getIdexpedienteFamilia());
-                
+                //if (exp.getIdexpedienteFamilia() != 0) resol = ServicioReporte.getUltimaResolucion(exp.getIdexpedienteFamilia());
+                if (exp.getIdexpedienteFamilia() != 0) resol = ServicioReporte.getUltimaResolucion2(exp.getIdexpedienteFamilia());
                 cell = row.createCell(43);
                 try {
                     cell.setCellValue(resol.getTipo());
+                    //cell.setCellValue(resol.getIdresolucion());
                 } catch (Exception ex) {
                 }
                 cell = row.createCell(44);
@@ -3650,21 +3715,26 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
+
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\Renad.xlsx");
+
             InputStream inp = new FileInputStream("C:\\Plantillas\\Renad.xlsx");
             //InputStream inp = new FileInputStream("/opt/Plantillas/Renad.xlsx");
+
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheet("BD");
 
             //Aquí va el query que consigue los datos de la tabla
-            ArrayList<Familia> listafam = ServicioReporte.getRenad();
-
+            //ArrayList<Familia> listafam = ServicioReporte.getRenad();
+            ArrayList<Familia> listafam = ServicioReporte.getRenad_Parte1();
             int i = 3;
             for (Familia fam : listafam) {
                 Row row = sheet.createRow(i);
-
+                
                 Cell cell = row.createCell(0);
                 cell.setCellValue(i - 2);
                 cell = row.createCell(1);
+//                cell.setCellValue(fam.getIdfamilia());
                 ExpedienteFamilia exp = new ExpedienteFamilia();
                 if(!fam.getExpedienteFamilias().isEmpty()){
                 exp = fam.getExpedienteFamilias().iterator().next();
@@ -3686,9 +3756,23 @@ public class reporte {
                 if (exp.getNumeroExpediente() != null) {
                     cell.setCellValue(exp.getNumeroExpediente());
                 }
+                
                 Adoptante el = new Adoptante();
                 Adoptante ella = new Adoptante();
                 InfoFamilia ifam = new InfoFamilia();
+//                if(!fam.getInfoFamilias().isEmpty()){
+//                ifam = fam.getInfoFamilias().iterator().next();
+//                }
+//                cell = row.createCell(5);
+//                if (ifam.getNivelSocioeconomico() != null) {
+//                    cell.setCellValue(ifam.getNivelSocioeconomico());
+//                }
+//                cell = row.createCell(6);
+//                if (fam.getEntidad() != null) {
+//                    if (fam.getEntidad().getNombre() != null) {
+//                        cell.setCellValue(fam.getEntidad().getNombre());
+//                    }
+//                }
                 for (Iterator iter2 = fam.getInfoFamilias().iterator(); iter2.hasNext();) {
                     ifam = (InfoFamilia) iter2.next();
                     for (Iterator iter3 = ifam.getAdoptantes().iterator();
@@ -3794,25 +3878,42 @@ public class reporte {
                 }
                 cell = row.createCell(22);
                 Designacion desig = new Designacion();
-                desig = ServicioReporte.getUltimaDesignacionNnaCarJuzExp(exp.getIdexpedienteFamilia());
+//                if (ServicioReporte.getUltimaDesignacionNnaCarJuzExp(exp.getIdexpedienteFamilia()) != null){
+//                    desig = ServicioReporte.getUltimaDesignacionNnaCarJuzExp(exp.getIdexpedienteFamilia());
+//                }
+                desig = ServicioReporte.getUltimaDesignacionNnaCarJuzExp2(exp.getIdexpedienteFamilia());
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getNombre() != null) {
                         cell.setCellValue(desig.getNna().getNombre());
+                        //cell.setCellValue(desig.getNDesignacion());
                     }
                 }
+                }
                 cell = row.createCell(23);
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getApellidoP() != null) {
                         cell.setCellValue(desig.getNna().getApellidoP());
+                        //cell.setCellValue(desig.getTipoPropuesta());
                     }
                 }
+                }
                 cell = row.createCell(24);
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getApellidoM() != null) {
                         cell.setCellValue(desig.getNna().getApellidoM());
                     }
                 }
-                ExpedienteNna tempExp = ServicioNna.getExpNna(desig.getNna().getIdnna());
+                }
+                ExpedienteNna tempExp = new ExpedienteNna();
+                if(desig.getIddesignacion() != 0){
+                if (desig.getNna() != null){
+                tempExp = desig.getNna().getExpedienteNnas().iterator().next();
+                }
+                }
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getClasificacion() != null && desig.getNna().getHermano() != null) {
                         if (desig.getNna().getClasificacion().equals("prioritario") && desig.getNna().getHermano() == 0) {
@@ -3823,22 +3924,34 @@ public class reporte {
                         }
                     }
                 }
+                }
                 cell = row.createCell(26);
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getSexo() != null) {
                         cell.setCellValue(desig.getNna().getSexo());
                     }
                 }
+                }
                 cell = row.createCell(27);
                 String fecha = "";
                 try {
-                    fecha = format.dateToString(desig.getNna().getFechaNacimiento());
+                    if(desig.getIddesignacion() != 0){
+                    if (desig.getNna() != null){
+                      if(desig.getNna().getFechaNacimiento() != null){ 
+                        fecha = format.dateToString(desig.getNna().getFechaNacimiento());
+                      }
+                    }
+                    }
                 } catch (Exception ex) {
                 }
                 cell.setCellValue(fecha);
                 fecha = "";
                 fechaAct = new Date();
                 int mesAct = fechaAct.getMonth();
+                if(desig.getIddesignacion() != 0){
+                   if(desig.getNna() != null) {
+                       if(desig.getNna().getFechaNacimiento() != null){
                 int añoNac = desig.getNna().getFechaNacimiento().getYear();
                 int mesNac = desig.getNna().getFechaNacimiento().getMonth();
                 edad = 0;
@@ -3868,25 +3981,35 @@ public class reporte {
                 cell.setCellValue(edad);
                 cell = row.createCell(29);
                 cell.setCellValue(meses);
+                       }
+                   }
+                }
                 cell = row.createCell(30);
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getDepartamentoNacimiento() != null) {
                         cell.setCellValue(desig.getNna().getDepartamentoNacimiento());
                     }
                 }
+                }
                 cell = row.createCell(31);
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getProvinciaNacimiento() != null) {
                         cell.setCellValue(desig.getNna().getProvinciaNacimiento());
                     }
                 }
+                }
                 cell = row.createCell(32);
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getDistritoNacimiento() != null) {
                         cell.setCellValue(desig.getNna().getDistritoNacimiento());
                     }
                 }
+                }
                 cell = row.createCell(33);
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getCar() != null) {
                         if (desig.getNna().getCar().getNombre() != null) {
@@ -3894,7 +4017,9 @@ public class reporte {
                         }
                     }
                 }
+                }
                 cell = row.createCell(34);
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getCar() != null) {
                         if (desig.getNna().getCar().getDepartamento() != null) {
@@ -3902,18 +4027,22 @@ public class reporte {
                         }
                     }
                 }
+                }
                 cell = row.createCell(35);
                 cell.setCellValue("");//DIT (Revisar)
                 ExpedienteNna expnna = tempExp;
                 
                 cell = row.createCell(36);
                 try {
+                    if(expnna.getFechaInvTutelar() != null){
                     fecha = format.dateToString(expnna.getFechaInvTutelar());
+                    }
                 } catch (Exception ex) {
                 }
                 cell.setCellValue(fecha);
                 fecha = "";
                 cell = row.createCell(37);
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getJuzgado() != null) {
                         if (desig.getNna().getJuzgado().getNombre() != null) {
@@ -3921,22 +4050,29 @@ public class reporte {
                         }
                     }
                 }
+                }
                 cell = row.createCell(38);
                 String antecedentes = "";
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna().getIncesto() != null) {
                     if (desig.getNna().getIncesto() == 0) { //No se está guardando dentro de la BD casos de violación
                         antecedentes = antecedentes + " NIV";
                     }
                 }
+                }
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna().getMental() != null) {
                     if (desig.getNna().getMental() == 0) {
                         antecedentes = antecedentes + " PPS";
                     }
                 }
+                }
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna().getEpilepsia() != null && desig.getNna().getSifilis() != null) {
                     if (desig.getNna().getEpilepsia() == 0 || desig.getNna().getSifilis() == 0) { //Se considera caso de sifilis al nacer o padres con epilepsia como Antecedentes de menor incidencia familiar
                         antecedentes = antecedentes + " AME";
                     }
+                }
                 }
                 if (antecedentes.equals("")) {
                     antecedentes = "NPA";
@@ -3944,6 +4080,7 @@ public class reporte {
                 cell.setCellValue(antecedentes); //No hay en la BD forma de detectar abuso de drogas como antecedente o determinar un caso de sin antecedentes conocidos
                 cell = row.createCell(45);
                 boolean flag = true;
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getEspecial() != null) {
                         if (desig.getNna().getEspecial() == 0) {
@@ -3977,20 +4114,25 @@ public class reporte {
                     }
                     if (flag) {
                         cell.setCellValue("NP");
+                       }
                     }
                 }
                 cell = row.createCell(46);
+                if(desig.getIddesignacion() != 0){
                 if (desig.getNna() != null) {
                     if (desig.getNna().getClasificacion() != null) {
                         cell.setCellValue(desig.getNna().getClasificacion());
                     }
                 }
+                }
                 cell = row.createCell(47);
                 if (desig.getTipoPropuesta() != null) {
                     cell.setCellValue(desig.getTipoPropuesta());
                 }
+                //
                 Resolucion resol = new Resolucion();
-                resol = ServicioReporte.getResolucionAptitud(exp.getIdexpedienteFamilia());
+                //resol = ServicioReporte.getResolucionAptitud(exp.getIdexpedienteFamilia());
+                resol = ServicioReporte.getResolucionAptitud2(exp.getIdexpedienteFamilia());
                 Evaluacion eval = new Evaluacion();
                 
                 cell = row.createCell(48);
@@ -4024,9 +4166,11 @@ public class reporte {
                 }
                 
                 //evaluacion de empatia
-                eval = ServicioReporte.getEvaluacion(exp.getIdexpedienteFamilia(), "empatia");
+                //eval = ServicioReporte.getEvaluacion(exp.getIdexpedienteFamilia(), "empatia");
+                eval = ServicioReporte.getEvaluacion2(exp.getIdexpedienteFamilia(), "empatia");
                 if (eval.getIdevaluacion() != 0){
-                    resol = ServicioReporte.getResolucionDeEvaluacion(eval.getIdevaluacion());
+                    //resol = ServicioReporte.getResolucionDeEvaluacion(eval.getIdevaluacion());
+                    resol = ServicioReporte.getResolucionDeEvaluacion2(eval.getIdevaluacion());
                 }else {
                     resol = new Resolucion();
                 }
@@ -4070,9 +4214,11 @@ public class reporte {
                     cell.setCellValue(resol.getNumero());
                 }
                 
-                eval = ServicioReporte.getEvaluacion(exp.getIdexpedienteFamilia(), "informe");
+                //eval = ServicioReporte.getEvaluacion(exp.getIdexpedienteFamilia(), "informe");
+                eval = ServicioReporte.getEvaluacion2(exp.getIdexpedienteFamilia(), "informe");
                 if (eval.getIdevaluacion() != 0){
-                    resol = ServicioReporte.getResolucionDeEvaluacion(eval.getIdevaluacion());
+                    //resol = ServicioReporte.getResolucionDeEvaluacion(eval.getIdevaluacion());
+                    resol = ServicioReporte.getResolucionDeEvaluacion2(eval.getIdevaluacion());
                 }else {
                     resol = new Resolucion();
                 }
@@ -4127,7 +4273,7 @@ public class reporte {
                 if (expnna.getRespPiscosocialP() != null && expnna.getRespPsicosocialM() != null) {
                     cell.setCellValue(expnna.getRespPiscosocialP() + " " + expnna.getRespPsicosocialM());
                 }
-
+                
                 i++;
             }
         } catch (Exception e) {

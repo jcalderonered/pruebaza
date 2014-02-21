@@ -157,7 +157,7 @@
                                         <select id="resultado" name="resultado" > 
                                             <option value="favorable" ${legal.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
                                             <option value="desfavorable" ${legal.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
-                                            <option value="observado" ${legal.getResultado() == 'observado' ? 'selected' : ''}>En evaluación</option>
+                                            <option value="evaluacion" ${legal.getResultado() == 'evaluacion' ? 'selected' : ''}>En evaluación</option>
                                         </select>
                                     </div>  
                                 </div>

@@ -162,7 +162,7 @@
                                         <select id="resultado" name="resultado" > 
                                             <option value="favorable" ${social.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
                                             <option value="desfavorable" ${social.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
-                                            <option value="observado" ${social.getResultado() == 'observado' ? 'selected' : ''}>En evaluación</option>
+                                            <option value="evaluacion" ${social.getResultado() == 'evaluacion' ? 'selected' : ''}>En evaluación</option>
                                         </select>
                                     </div>  
                                 </div>
