@@ -52,7 +52,6 @@ public class HiberNna {
 //        Hibernate.initialize(tempNna.getCar());
 //        return tempNna;
 //    }
-    
     //PROBADO
     public Nna getNna(long id) {
         Session session = sessionFactory.getCurrentSession();
@@ -158,7 +157,7 @@ public class HiberNna {
             }
         };
         session.doWork(work);
-        
+
         return tempnna;
     }
 
@@ -179,11 +178,10 @@ public class HiberNna {
 //        Hibernate.initialize(tempNna.getJuzgado());
 //        return tempNna;
 //    }
-    
     //PARA PROBAR
     public Nna getNnaPostAdopcion(long id) {
         Session session = sessionFactory.getCurrentSession();
-        
+
         final Nna tempnna = new Nna();
         final Long idnna = id;
 
@@ -345,7 +343,7 @@ public class HiberNna {
 //        return allNna;
 //    }
     
-    
+    //
     public ArrayList<Nna> ListaNna(String clasificacion) {
         Session session = sessionFactory.getCurrentSession();
         final String clasif = clasificacion;
@@ -356,6 +354,10 @@ public class HiberNna {
             public void execute(Connection connection) throws SQLException {
                 ExpedienteNna expnna;
                 Nna tempnna;
+                Designacion desig;
+                Set<Designacion> listDesig = new HashSet<Designacion>();
+                EstudioCaso est;
+                Set<EstudioCaso> listEst = new HashSet<EstudioCaso>();
 
                 String hql = "{call HN_GET_NNA_CLAS(?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
@@ -432,18 +434,59 @@ public class HiberNna {
                     Set<ExpedienteNna> listexp = new HashSet<ExpedienteNna>();
                     listexp.add(expnna);
                     tempnna.setExpedienteNnas(listexp);
+
+                    //AQUI DESIGNACIONES Y ESTUDIO DE CASOS EN CASO SEA PRIORITARIO
+                    String hql2 = "{call GET_DESIGNACIONES(?,?)}";
+                    CallableStatement statement2 = connection.prepareCall(hql2);
+                    statement2.setLong(1, temp.getLong(1));
+                    statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement2.execute();
+
+                    ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                    while (rs2.next()) {
+                        desig = new Designacion();
+                        desig.setIddesignacion(rs2.getLong(1));
+                        desig.setNDesignacion(rs2.getLong(5));
+                        desig.setPrioridad(rs2.getLong(6));
+                        desig.setFechaPropuesta(rs2.getDate(7));
+                        desig.setFechaConsejo(rs2.getDate(8));
+                        desig.setAceptacionConsejo(rs2.getShort(9));
+                        desig.setTipoPropuesta(rs2.getString(10));
+                        desig.setObs(rs2.getString(11));
+                        listDesig.add(desig);
+                    }
+                    tempnna.setDesignacions(listDesig);
+
+                    if (tempnna.getClasificacion().equals("prioritario")) {
+                        String hql3 = "{call GET_ESTUDIOS_CASO(?,?)}";
+                        CallableStatement statement3 = connection.prepareCall(hql3);
+                        statement3.setLong(1, temp.getLong(1));
+                        statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement3.execute();
+                        
+                        ResultSet rs3 = (ResultSet) statement3.getObject(2);
+                        while(rs3.next()){
+                            est = new EstudioCaso();
+                            est.setIdestudioCaso(rs3.getLong(1));
+                            est.setOrden(rs3.getString(4));
+                            est.setFechaEstudio(rs3.getDate(5));
+                            est.setFechaSolAdop(rs3.getDate(6));
+                            est.setResultado(rs3.getString(7));
+                            est.setPrioridad(rs3.getLong(8));
+                            est.setNSolicitud(rs3.getBigDecimal(9));
+                            listEst.add(est);
+                        }
+                        tempnna.setEstudioCasos(listEst);
+                    }
                     allNna.add(tempnna);
                 }
             }
         };
         session.doWork(work);
-        
-        for(Nna auxnna : allNna){
-            //AQUI DESIGNACIONES Y ESTUDIO DE CASOS EN CASO SEA PRIORITARIO
-        }
+
         return allNna;
     }
-    
+
 //    public ExpedienteNna getExpNna(long idNna) {
 //        Session session = sessionFactory.getCurrentSession();
 //        session.beginTransaction();
@@ -459,11 +502,10 @@ public class HiberNna {
 //        Hibernate.initialize(tempExpNna.getNna());
 //        return tempExpNna;
 //    }
-
     //PROBADO
     public ExpedienteNna getExpNna(long idNna) {
         Session session = sessionFactory.getCurrentSession();
-        
+
         final ExpedienteNna expnna = new ExpedienteNna();
         final Long idnna = idNna;
 
@@ -566,7 +608,6 @@ public class HiberNna {
 //        }
 //        return allExpNna;
 //    }
-    
     //PROBADO
     public ArrayList<ExpedienteNna> listaExpNna() {
         Session session = sessionFactory.getCurrentSession();
