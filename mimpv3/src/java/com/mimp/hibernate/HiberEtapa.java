@@ -1706,7 +1706,7 @@ public class HiberEtapa {
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                String hql = "{call HE_GET_LISTA_ESTUDIO_CASO_ORDEN(?,?)}";
+                String hql = "{call HE_GET_LISTA_ESTUDIOCASOORDEN(?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setString(1, orden);
                 statement.registerOutParameter(2, OracleTypes.CURSOR);
