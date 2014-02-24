@@ -1162,13 +1162,59 @@ public class HiberEtapa {
     }
     
     
+//    public void updateExpedienteFamilia(ExpedienteFamilia temp) {
+//
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//
+//        session.update(temp);
+//
+//    }
+    
     public void updateExpedienteFamilia(ExpedienteFamilia temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
-        session.update(temp);
-
+        final String expediente = temp.getExpediente();
+        final String ht = temp.getHt();
+        final String numExp = temp.getNumeroExpediente();
+        final String estado = temp.getEstado();
+        final String nac = temp.getNacionalidad();
+        final short rnsa = temp.getRnsa();
+        final short rnaa = temp.getRnaa();
+        final String tipofam = temp.getTipoFamilia();
+        final String tipolista = temp.getTipoListaEspera();
+        final String htficha = temp.getHtFicha();
+        final String nficha = temp.getnFicha();
+        final Long idExp = temp.getIdexpedienteFamilia();
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                String hql = "{call HE_UPDATEEXP(?,?,?,?,?,?,?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1,idExp );
+                statement.setString(2, expediente);
+                statement.setString(3, ht);
+                statement.setString(4, numExp);
+                statement.setString(5, estado);
+                statement.setString(6, nac);
+                statement.setShort(7, rnsa);
+                statement.setShort(8, rnaa);
+                statement.setString(9, tipofam);
+                statement.setString(10, tipolista);
+                statement.setString(11, htficha);
+                statement.setString(12, nficha);
+                
+                statement.execute();
+                statement.close();
+            }
+        };
+        
+        session.doWork(work);
+        
     }
 
     public void crearEvaluacion(Evaluacion temp) {
