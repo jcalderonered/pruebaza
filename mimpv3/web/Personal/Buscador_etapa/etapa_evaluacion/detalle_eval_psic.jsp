@@ -76,28 +76,28 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -113,7 +113,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                            
+
                         <c:if test="${psicologica == null}">
                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalCrearEvalPsicologicaNac" method="post"> 
                                 <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
@@ -124,25 +124,37 @@
                                     <input hidden name="idEvalPsicologica" id="idEvalPsicologica" value="${psicologica.getIdevaluacion()}">
                                     <input hidden name="origen" id="origen" value="${origen}">
                                 </c:if>  
-                            
-                            <fieldset>
-                                <br>
-                                <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
-                                <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
-                                <br>
-                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
-                                <br>
-                                <br>
-                                <h3 align="left"><strong>Detalles de la evaluación</strong></h3>
-                                <br>
-                                
-                                <h3><strong>Tipo de Evaluación : Psicológica</strong></h3>
-                                
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha asignación</label>
-                                    <div class="controls">
-                                        <input id="fechaAsig" name="fechaAsig" type="text" class="datepicker span2" value="${psicologica.getFechaAsignacion() != null ? df.dateToStringNumeros(psicologica.getFechaAsignacion()) : ''}" id="dp3" >
+
+                                <fieldset>
+                                    <br>
+                                    <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
+                                    <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                                    <br>
+                                    <h1 align="center"><strong>Familia "${familia}"</strong></h1>
+                                    <br>
+                                    <br>
+                                    <h3 align="left"><strong>Detalles de la evaluación</strong></h3>
+                                    <br>
+
+                                    <h3><strong>Tipo de Evaluación : Psicológica</strong></h3>
+
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Fecha asignación</label>
+                                        <div class="controls">
+                                            <input id="fechaAsig" name="fechaAsig" type="text" class="datepicker span2" value="${psicologica.getFechaAsignacion() != null ? df.dateToStringNumeros(psicologica.getFechaAsignacion()) : ''}" id="dp3" >
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Responsable</label>
+                                        <div class="controls">
+                                            <select id="personal" name="personal" class="input-xlarge">
+                                                <c:forEach var="personal" items="${listaPersonal}" > 
+                                                    <option value="${personal.getIdpersonal()}" ${psicologica.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>    
                                     </div>
                                 </div>
                                 <br>
@@ -173,31 +185,37 @@
                                     <div class="controls">
                                         <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${psicologica.getNumEval()}" >
                                     </div>
-                                </div>
-                                <br>    
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de informe</label>
-                                    <div class="controls">
-                                        <input id="fechaResul" name="fechaResul" type="text" value="${psicologica.getFechaResultado() != null ? df.dateToStringNumeros(psicologica.getFechaResultado()) : ''}" class="datepicker input-xlarge">
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Número de informe</label>
+                                        <div class="controls">
+                                            <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${psicologica.getNumEval()}" >
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones</label>
-                                    <div class="controls">
-                                        <textarea id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${psicologica.getObservacion()}</textarea>
+                                    <br>    
+                                    <div class="control-group">
+                                        <label class="control-label">Fecha de informe</label>
+                                        <div class="controls">
+                                            <input id="fechaResul" name="fechaResul" type="text" value="${psicologica.getFechaResultado() != null ? df.dateToStringNumeros(psicologica.getFechaResultado()) : ''}" class="datepicker input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
-                                <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Observaciones</label>
+                                        <div class="controls">
+                                            <textarea id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${psicologica.getObservacion()}</textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--FIN DE CONTENIDO-->
-                            </fieldset>
-                        </form>
+                                    <br>
+                                    <!-- Button -->
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        </div>
+                                    </div>
+                                    <!--FIN DE CONTENIDO-->
+                                </fieldset>
+                            </form>
                     </div>
                 </div>
             </div>
