@@ -178,7 +178,8 @@ public class HiberNna {
 //        Hibernate.initialize(tempNna.getJuzgado());
 //        return tempNna;
 //    }
-    //PARA PROBAR
+    
+    //PROBADO
     public Nna getNnaPostAdopcion(long id) {
         Session session = sessionFactory.getCurrentSession();
 
@@ -343,7 +344,7 @@ public class HiberNna {
 //        return allNna;
 //    }
     
-    //
+    //PROBADO
     public ArrayList<Nna> ListaNna(String clasificacion) {
         Session session = sessionFactory.getCurrentSession();
         final String clasif = clasificacion;
@@ -436,7 +437,7 @@ public class HiberNna {
                     tempnna.setExpedienteNnas(listexp);
 
                     //AQUI DESIGNACIONES Y ESTUDIO DE CASOS EN CASO SEA PRIORITARIO
-                    String hql2 = "{call GET_DESIGNACIONES(?,?)}";
+                    String hql2 = "{call HN_GET_DESIGNACIONES(?,?)}";
                     CallableStatement statement2 = connection.prepareCall(hql2);
                     statement2.setLong(1, temp.getLong(1));
                     statement2.registerOutParameter(2, OracleTypes.CURSOR);
@@ -458,7 +459,7 @@ public class HiberNna {
                     tempnna.setDesignacions(listDesig);
 
                     if (tempnna.getClasificacion().equals("prioritario")) {
-                        String hql3 = "{call GET_ESTUDIOS_CASO(?,?)}";
+                        String hql3 = "{call HN_GET_ESTUDIOS_CASO(?,?)}";
                         CallableStatement statement3 = connection.prepareCall(hql3);
                         statement3.setLong(1, temp.getLong(1));
                         statement3.registerOutParameter(2, OracleTypes.CURSOR);
@@ -502,6 +503,7 @@ public class HiberNna {
 //        Hibernate.initialize(tempExpNna.getNna());
 //        return tempExpNna;
 //    }
+    
     //PROBADO
     public ExpedienteNna getExpNna(long idNna) {
         Session session = sessionFactory.getCurrentSession();
