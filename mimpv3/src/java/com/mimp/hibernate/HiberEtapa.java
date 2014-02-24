@@ -1553,22 +1553,127 @@ public class HiberEtapa {
 
     }
 
-    public ArrayList<InformePostAdoptivo> getListaInformesPost(long idPost) {
+    /*   public ArrayList<InformePostAdoptivo> getListaInformesPost(long idPost) {
+
+     Session session = sessionFactory.getCurrentSession();
+     session.beginTransaction();
+     ArrayList<InformePostAdoptivo> allInformePostAdoptivo = new ArrayList();
+
+     String hql = "FROM InformePostAdoptivo IP WHERE IP.postAdopcion = :idPost ORDER BY IP.numeroInforme ASC";
+     Query query = session.createQuery(hql);
+     query.setLong("idPost", idPost);
+     List informes = query.list();
+
+     for (Iterator iter = informes.iterator(); iter.hasNext();) {
+     InformePostAdoptivo temp = (InformePostAdoptivo) iter.next();
+     Hibernate.initialize(temp.getPersonal());
+     allInformePostAdoptivo.add(temp);
+     }
+     return allInformePostAdoptivo;
+     }*/
+    public ArrayList<InformePostAdoptivo> getListaInformesPost(final long idPost) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        ArrayList<InformePostAdoptivo> allInformePostAdoptivo = new ArrayList();
+        final ArrayList<InformePostAdoptivo> allInformePostAdoptivo = new ArrayList();
 
-        String hql = "FROM InformePostAdoptivo IP WHERE IP.postAdopcion = :idPost ORDER BY IP.numeroInforme ASC";
-        Query query = session.createQuery(hql);
-        query.setLong("idPost", idPost);
-        List informes = query.list();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                String hql_informepost = "{call HE_GET_LISTA_INFORMES_POST(?, ?)}";
+                CallableStatement statement_informespost = connection.prepareCall(hql_informepost);
+                statement_informespost.setLong(1, idPost);
+                statement_informespost.registerOutParameter(2, OracleTypes.CURSOR);
+                statement_informespost.execute();
 
-        for (Iterator iter = informes.iterator(); iter.hasNext();) {
-            InformePostAdoptivo temp = (InformePostAdoptivo) iter.next();
-            Hibernate.initialize(temp.getPersonal());
-            allInformePostAdoptivo.add(temp);
-        }
+                temp_infopost = (ResultSet) statement_informespost.getObject(2);
+                while (temp_infopost.next()) {
+
+                    InformePostAdoptivo infopost = new InformePostAdoptivo();
+                    PostAdopcion postadopcion = new PostAdopcion();
+                    Personal personal = new Personal();
+                    Unidad unidad = new Unidad();
+
+                    infopost.setIdinformePostAdoptivo(temp_infopost.getShort(1));
+                    if (temp_infopost.getShort(2) != 0) {
+
+                        String hql_informepost_postadopcion = "{call HE_GET_POST_ADOPCION(?, ?)}";
+                        CallableStatement statement_informepost_postadopcion = connection.prepareCall(hql_informepost_postadopcion);
+                        statement_informepost_postadopcion.setLong(1, temp_infopost.getShort(2));
+                        statement_informepost_postadopcion.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement_informepost_postadopcion.execute();
+                        temp_postadopcion = (ResultSet) statement_informepost_postadopcion.getObject(2);
+                        while (temp_postadopcion.next()) {
+                            postadopcion.setIdpostAdopcion(temp_postadopcion.getShort(1));
+                            infopost.setPostAdopcion(postadopcion);
+                        }
+                        statement_informepost_postadopcion.close();
+                    }
+                    if (temp_infopost.getShort(3) != 0) {
+
+                        String hql_informepost_personal = "{call HE_GET_PERSONAL(?, ?)}";
+                        CallableStatement statement_informepost_personal = connection.prepareCall(hql_informepost_personal);
+                        statement_informepost_personal.setLong(1, temp_infopost.getShort(3));
+                        statement_informepost_personal.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement_informepost_personal.execute();
+                        temp_personal = (ResultSet) statement_informepost_personal.getObject(2);
+                        while (temp_personal.next()) {
+                            personal.setIdpersonal(temp_personal.getShort(1));
+
+                            if (temp_personal.getShort(2) != 0) {
+
+                                String hql3 = "{call HE_GET_UNIDAD(?, ?)}";
+                                CallableStatement statement3 = connection.prepareCall(hql3);
+                                statement3.setLong(1, temp_personal.getShort(3));
+                                statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                                statement3.execute();
+                                temp2 = (ResultSet) statement3.getObject(2);
+                                while (temp2.next()) {
+                                    unidad.setIdunidad(temp2.getShort(1));
+                                    personal.setUnidad(unidad);
+                                }
+                                statement3.close();
+                            }
+                            
+                            personal.setNombre(temp_personal.getString(3));
+                            personal.setApellidoP(temp_personal.getString(4));
+                            personal.setApellidoM(temp_personal.getString(5));
+                            personal.setUser(temp_personal.getString(6));
+                            personal.setPass(temp_personal.getString(7));
+                            personal.setCorreoTrabajo(temp_personal.getString(8));
+                            personal.setCorreoPersonal(temp_personal.getString(9));
+                            personal.setProfesion(temp_personal.getString(10));
+                            personal.setGradoInstruccion(temp_personal.getString(11));
+                            personal.setCargo(temp_personal.getString(12));
+                            personal.setDni(temp_personal.getString(13));
+                            personal.setFechaNacimiento(temp_personal.getDate(14));
+                            personal.setRegimen(temp_personal.getString(15));
+                            personal.setFechaIngreso(temp_personal.getDate(16));
+                            personal.setDomicilio(temp_personal.getString(17));
+                            personal.setRol(temp_personal.getString(18));
+                           
+                            infopost.setPersonal(personal);
+                        }
+                        statement_informepost_personal.close();
+                    }
+                    infopost.setEstado(temp_infopost.getString(4));
+                    infopost.setNumeroInforme(temp_infopost.getString(5));
+                    infopost.setFechaRecepcionProyectado(temp_infopost.getDate(6));
+                    infopost.setFechaRecepcion(temp_infopost.getDate(7));
+                    infopost.setFechaInforme(temp_infopost.getDate(8));
+                    infopost.setFechaActa(temp_infopost.getDate(9));
+                    infopost.setObs(temp_infopost.getString(10));
+                    
+                    allInformePostAdoptivo.add(infopost);
+
+                }
+
+                statement_informespost.close();
+            }
+        };
+
+        session.doWork(work);
+
         return allInformePostAdoptivo;
     }
 
@@ -1695,19 +1800,97 @@ public class HiberEtapa {
         return allEspera;
     }
 
+    /*  public ArrayList<ExpedienteFamilia> getListaReevaluación() {
+
+     Session session = sessionFactory.getCurrentSession();
+     session.beginTransaction();
+     ArrayList<ExpedienteFamilia> allReevaluacion = new ArrayList();
+     String hql = "from ExpedienteFamilia EF where EF.estado = :estado";
+     Query query = session.createQuery(hql);
+     query.setString("estado", "reevaluacion");
+     List expedientes = query.list();
+     for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+     ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+     allReevaluacion.add(temp);
+     }
+     return allReevaluacion;
+     }*/
     public ArrayList<ExpedienteFamilia> getListaReevaluación() {
 
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-        ArrayList<ExpedienteFamilia> allReevaluacion = new ArrayList();
-        String hql = "from ExpedienteFamilia EF where EF.estado = :estado";
-        Query query = session.createQuery(hql);
-        query.setString("estado", "reevaluacion");
-        List expedientes = query.list();
-        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
-            ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
-            allReevaluacion.add(temp);
-        }
+
+        final ArrayList<ExpedienteFamilia> allReevaluacion = new ArrayList();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                String hql = "{call HE_GET_LISTAREEVALUACION(?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.registerOutParameter(1, OracleTypes.CURSOR);
+                statement.execute();
+
+                temp = (ResultSet) statement.getObject(1);
+                while (temp.next()) {
+
+                    ExpedienteFamilia expFamilia = new ExpedienteFamilia();
+                    Familia fam = new Familia();
+                    Unidad unidad = new Unidad();
+
+                    expFamilia.setIdexpedienteFamilia(temp.getShort(1));
+                    if (temp.getShort(2) != 0) {
+
+                        String hql2 = "{call HE_GETFAMILIA(?, ?)}";
+                        CallableStatement statement2 = connection.prepareCall(hql2);
+                        statement2.setLong(1, temp.getShort(2));
+                        statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement2.execute();
+                        temp2 = (ResultSet) statement2.getObject(2);
+                        while (temp2.next()) {
+                            fam.setIdfamilia(temp2.getShort(1));
+                            expFamilia.setFamilia(fam);
+                        }
+                        statement2.close();
+                    }
+                    if (temp.getShort(3) != 0) {
+
+                        String hql3 = "{call HE_GET_UNIDAD(?, ?)}";
+                        CallableStatement statement3 = connection.prepareCall(hql3);
+                        statement3.setLong(1, temp.getShort(3));
+                        statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement3.execute();
+                        temp2 = (ResultSet) statement3.getObject(2);
+                        while (temp2.next()) {
+                            unidad.setIdunidad(temp2.getShort(1));
+                            expFamilia.setUnidad(unidad);
+                        }
+                        statement3.close();
+                    }
+                    expFamilia.setNumero(temp.getLong(4));
+                    expFamilia.setExpediente(temp.getString(5));
+                    expFamilia.setHt(temp.getString(6));
+                    expFamilia.setNumeroExpediente(temp.getString(7));
+                    expFamilia.setFechaIngresoDga(temp.getDate(8));
+                    expFamilia.setEstado(temp.getString(9));
+                    expFamilia.setTupa(temp.getDate(10));
+                    expFamilia.setNacionalidad(temp.getString(11));
+                    expFamilia.setRnsa(temp.getShort(12));
+                    expFamilia.setRnaa(temp.getShort(13));
+                    expFamilia.setTipoFamilia(temp.getString(14));
+                    expFamilia.setTipoListaEspera(temp.getString(15));
+                    expFamilia.setHtFicha(temp.getString(16));
+                    expFamilia.setnFicha(temp.getString(17));
+                    expFamilia.setFechaIngresoFicha(temp.getDate(18));
+
+                    allReevaluacion.add(expFamilia);
+
+                }
+
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
+
         return allReevaluacion;
     }
 
