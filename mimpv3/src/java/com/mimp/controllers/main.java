@@ -1642,8 +1642,6 @@ public class main {
 
         String pagina;
         String mensaje = null;
-        
-        
 
         if (!user.equals("") && !aux.isEmpty()) {
 
@@ -1653,7 +1651,7 @@ public class main {
             map.addAttribute("mensaje", mensaje);
             pagina = "login";
 
-        }else if (aux.isEmpty()) {
+        } else if (aux.isEmpty()) {
             mensaje = "Lo sentimos el correo no se encuentra registrado en la base de datos";
             map.addAttribute("mensaje", mensaje);
             pagina = "record_contra";

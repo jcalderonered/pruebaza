@@ -657,6 +657,7 @@ public class HiberNna {
                     expnna.setFechaInvTutelar(temp.getDate(28));
                     allExpNna.add(expnna);
                 }
+                statement.close();
             }
         };
         session.doWork(work);

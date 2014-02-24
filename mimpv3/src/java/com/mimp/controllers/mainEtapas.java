@@ -1229,11 +1229,11 @@ public class mainEtapas {
                 String mensaje_log = "Se registró nueva familia al estudio de caso del NNA con ID: " + String.valueOf(nnaPrioritario.getIdnna());
                 String Tipo_registro = "Login";
 
-                try{
-                String Numero_registro = tempEst.getOrden();
+                try {
+                    String Numero_registro = tempEst.getOrden();
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-                }  catch (Exception ex){
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
                 }
 
             }

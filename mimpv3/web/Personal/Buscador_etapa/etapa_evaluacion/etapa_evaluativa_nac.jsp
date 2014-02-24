@@ -76,28 +76,28 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -118,43 +118,43 @@
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Familias Nacionales</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaEvalInter" >Familias Internacionales</a></li>
                         </ul>    
-                            
-                        
-                                <br>
-                                <div class="bs-example">
-                                    <table class="table table-bordered">
-                                        <thead>
+
+
+                        <br>
+                        <div class="bs-example">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Expediente</th>
+                                        <th>Información</th>
+                                        <th>Evaluación Psicológica</th>
+                                        <th>Resultado</th>
+                                        <th>Evaluación Social</th>
+                                        <th>Resultado</th>
+                                        <th>Evaluación Legal</th>
+                                        <th>Resultado</th>
+                                        <th>Fecha de Resolución</th>
+                                        <th>Tipo de Resolución</th>
+                                    </tr>
+                                </thead>
+                                <c:if test="${ListaExpedientes != null}">   
+                                    <tbody>
+                                        <c:forEach var="expediente" items="${ListaExpedientes}" varStatus="status">
+                                            <c:forEach var="evaluacion" items="${expediente.getEvaluacions()}" >
+                                                <c:choose>
+                                                    <c:when test="${evaluacion.getTipo() == 'psicologica'}">
+                                                        <c:set var="psicologica" value="${evaluacion}" scope="page" />
+                                                    </c:when>
+                                                    <c:when test="${evaluacion.getTipo() == 'social'}">
+                                                        <c:set var="social" value="${evaluacion}" scope="page" />
+                                                    </c:when> 
+                                                    <c:when test="${evaluacion.getTipo() == 'legal'}">
+                                                        <c:set var="legal" value="${evaluacion}" scope="page" />
+                                                    </c:when> 
+                                                </c:choose>
+                                            </c:forEach>
+
                                             <tr>
-                                                <th>Expediente</th>
-                                                <th>Información</th>
-                                                <th>Evaluación Psicológica</th>
-                                                <th>Resultado</th>
-                                                <th>Evaluación Social</th>
-                                                <th>Resultado</th>
-                                                <th>Evaluación Legal</th>
-                                                <th>Resultado</th>
-                                                <th>Fecha de Resolución</th>
-                                                <th>Tipo de Resolución</th>
-                                            </tr>
-                                        </thead>
-                                       <c:if test="${ListaExpedientes != null}">   
-                                        <tbody>
-                                            <c:forEach var="expediente" items="${ListaExpedientes}" varStatus="status">
-                                                <c:forEach var="evaluacion" items="${expediente.getEvaluacions()}" >
-                                                            <c:choose>
-                                                                <c:when test="${evaluacion.getTipo() == 'psicologica'}">
-                                                                    <c:set var="psicologica" value="${evaluacion}" scope="page" />
-                                                                </c:when>
-                                                                <c:when test="${evaluacion.getTipo() == 'social'}">
-                                                                    <c:set var="social" value="${evaluacion}" scope="page" />
-                                                                </c:when> 
-                                                                <c:when test="${evaluacion.getTipo() == 'legal'}">
-                                                                    <c:set var="legal" value="${evaluacion}" scope="page" />
-                                                                </c:when> 
-                                                            </c:choose>
-                                                </c:forEach>
-                                                
-                                                <tr>
                                                 <td>${expediente.getExpediente()}</td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
@@ -165,11 +165,11 @@
                                                 </td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/PersonalAgregarEvalPsicologica" method="post">
-                                                          <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
-                                                          <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
-                                                          <input hidden name="idPsicologica" id="idPsicologica" value="${psicologica.getIdevaluacion()}">
-                                                          <input hidden name="origen" id="origen" value="nacional">
-                                                          <button type="submit" class="btn btn-default">Registrar</button>
+                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                        <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
+                                                        <input hidden name="idPsicologica" id="idPsicologica" value="${psicologica.getIdevaluacion()}">
+                                                        <input hidden name="origen" id="origen" value="nacional">
+                                                        <button type="submit" class="btn btn-default">Registrar</button>
                                                     </form>  
                                                 </td>
                                                 <td>
@@ -184,11 +184,11 @@
                                                 </td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/PersonalAgregarEvalSocial" method="post">
-                                                          <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
-                                                          <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
-                                                          <input hidden name="idSocial" id="idSocial" value="${social.getIdevaluacion()}">
-                                                          <input hidden name="origen" id="origen" value="nacional">
-                                                          <button type="submit" class="btn btn-default">Registrar</button>
+                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                        <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
+                                                        <input hidden name="idSocial" id="idSocial" value="${social.getIdevaluacion()}">
+                                                        <input hidden name="origen" id="origen" value="nacional">
+                                                        <button type="submit" class="btn btn-default">Registrar</button>
                                                     </form>  
                                                 </td>
                                                 <td>
@@ -203,11 +203,11 @@
                                                 </td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/PersonalAgregarEvalLegal" method="post">
-                                                          <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
-                                                          <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
-                                                          <input hidden name="idLegal" id="idLegal" value="${legal.getIdevaluacion()}">
-                                                          <input hidden name="origen" id="origen" value="nacional">
-                                                          <button type="submit" class="btn btn-default">Registrar</button>
+                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                        <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
+                                                        <input hidden name="idLegal" id="idLegal" value="${legal.getIdevaluacion()}">
+                                                        <input hidden name="origen" id="origen" value="nacional">
+                                                        <button type="submit" class="btn btn-default">Registrar</button>
                                                     </form>  
                                                 </td>
                                                 <td>
@@ -221,44 +221,44 @@
                                                     </c:choose>
                                                 </td>
                                                 <c:if test="${!legal.getResolucions().isEmpty()}">
-                                                <c:forEach var="resolucion" items="${legal.getResolucions()}" varStatus="status">
-                                                     <c:choose>
-                                                        <c:when test="${status.index == 0}">
-                                                            <td>
-                                                            ${df.dateToString(resolucion.getFechaResol())}
-                                                            </td>
-                                                            <td>
-                                                            ${resolucion.getTipo()}
-                                                            </td>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </c:forEach>
-                                               </c:if>
-                                               <c:if test="${legal == null || legal.getResolucions().isEmpty()}">
-                                                   <td>
-                                                       Pendiente
-                                                   </td>
-                                                   <td>
-                                                       Pendiente
-                                                   </td>
-                                               </c:if>
-                                             </tr>
-                                             <c:set var="psicologica" value="${null}" scope="page" />
-                                             <c:set var="social" value="${null}" scope="page" />
-                                             <c:set var="legal" value="${null}" scope="page" />
-                                            </c:forEach>
+                                                    <c:forEach var="resolucion" items="${legal.getResolucions()}" varStatus="status">
+                                                        <c:choose>
+                                                            <c:when test="${status.index == 0}">
+                                                                <td>
+                                                                    ${df.dateToString(resolucion.getFechaResol())}
+                                                                </td>
+                                                                <td>
+                                                                    ${resolucion.getTipo()}
+                                                                </td>
+                                                            </c:when>
+                                                            <c:otherwise>
+
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </c:forEach>
+                                                </c:if>
+                                                <c:if test="${legal == null || legal.getResolucions().isEmpty()}">
+                                                    <td>
+                                                        Pendiente
+                                                    </td>
+                                                    <td>
+                                                        Pendiente
+                                                    </td>
+                                                </c:if>
+                                            </tr>
+                                            <c:set var="psicologica" value="${null}" scope="page" />
+                                            <c:set var="social" value="${null}" scope="page" />
+                                            <c:set var="legal" value="${null}" scope="page" />
+                                        </c:forEach>
                                     </tbody>
                                 </c:if> 
-                                 <c:if test="${ListaExpedientes == null}">
+                                <c:if test="${ListaExpedientes == null}">
                                     <h3><strong>No existen familias en esta etapa</strong></h3>
                                 </c:if> 
-                                    </table>
-                                  
-                                </div>
-                           
+                            </table>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
