@@ -86,7 +86,7 @@ public class main {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(ModelMap map, @RequestParam("email") String email, @RequestParam("password") String pass, HttpSession session) {
+    public ModelAndView login(ModelMap map, @RequestParam(value = "email" , required = false) String email, @RequestParam(value = "password", required = false) String pass, HttpSession session) {
 
         String pagina;
         String mensaje = "El usuario se encuentra Deshabilitado. Favor contactar a la Dirección General de Adopciones para más información";
