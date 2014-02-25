@@ -1252,7 +1252,7 @@ public class HiberEtapa {
                 statement.setLong(1,idExp );
                 statement.setLong(2, idPer);
                 statement.setString(3, tipoEval);
-                statement.setDate(4, (java.sql.Date) fechaAsig);
+                statement.setDate(4, (java.sql.Date)fechaAsig);
                 statement.setString(5, result);
                 statement.setDate(6, (java.sql.Date) fechaResul);
                 statement.setString(7, obs);
@@ -1278,6 +1278,51 @@ public class HiberEtapa {
 
     }
 
+    public void updateEvaluacion2(Evaluacion temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idEval = temp.getIdevaluacion();
+        final Long idExp = temp.getExpedienteFamilia().getIdexpedienteFamilia();
+        final Long idPer = temp.getPersonal().getIdpersonal();
+        final String tipoEval = temp.getTipo();
+        final Date fechaAsig = temp.getFechaAsignacion();
+        final String result = temp.getResultado();
+        final Date fechaResul = temp.getFechaResultado();
+        final String obs  = temp.getObservacion();
+        final String sust = temp.getSustento();
+        final String ndesig = temp.getNDesignacion();
+        final String numEval = temp.getNumEval();
+        
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                String hql = "{call HE_UPDATE_EVAL(?,?,?,?,?,?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1,idEval );
+                statement.setLong(2,idExp );
+                statement.setLong(3, idPer);
+                statement.setString(4, tipoEval);
+                statement.setDate(5, (java.sql.Date) fechaAsig);
+                statement.setString(6, result);
+                statement.setDate(7, (java.sql.Date) fechaResul);
+                statement.setString(8, obs);
+                statement.setString(9, sust);
+                statement.setString(10, ndesig);
+                statement.setString(11, numEval);
+                
+                statement.execute();
+                statement.close();
+            }
+        };
+        
+        session.doWork(work);
+
+    }
+    
     public void crearResolEvaluacion(Resolucion temp) {
 
         Session session = sessionFactory.getCurrentSession();
