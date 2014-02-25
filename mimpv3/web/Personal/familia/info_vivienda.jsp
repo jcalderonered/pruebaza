@@ -75,38 +75,39 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-8">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarVivienda" method="post" name="formulario" onsubmit="return(validar());">
-                            <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+
                             <c:if test="${estado != 'formativa'}">
-                            <br>
-                            <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
-                            <br>
+                                <br>
+                                <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
+                                <br>
                             </c:if>
                             <br>
                             <br>
@@ -364,147 +365,147 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                                    $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
             </script>
             <script>
                 function Vivienda()
-                    {
-                        var vivDesc = document.getElementById('propiedadDescrip');
-                        if (document.getElementById('propia').checked || document.getElementById('alquilada').checked) {
-                            vivDesc.disabled = true;
-                       } else {
-                            vivDesc.disabled = false;
-                       }
+                {
+                    var vivDesc = document.getElementById('propiedadDescrip');
+                    if (document.getElementById('propia').checked || document.getElementById('alquilada').checked) {
+                        vivDesc.disabled = true;
+                    } else {
+                        vivDesc.disabled = false;
                     }
-           </script>    
-           
-           <script>
-                function Tipo()
-                    {
-                        var tipoDesc = document.getElementById('tipoDescrip');
-                        if (document.getElementById('casa').checked || document.getElementById('depa').checked) {
-                            tipoDesc.disabled = true;
-                       } else {
-                            tipoDesc.disabled = false;
-                       }
-                    }
-           </script>    
-           
-           <script>
-                function Material()
-                    {
-                        var matDesc = document.getElementById('materConstDesc');
-                        if (document.getElementById('noble').checked) {
-                            matDesc.disabled = true;
-                       } else {
-                            matDesc.disabled = false;
-                       }
-                    }
-           </script>    
-           
-           <script>
-                function Paredes()
-                    {
-                        var paredDesc = document.getElementById('paredDesc');
-                        if (document.getElementById('pared').checked) {
-                            paredDesc.disabled = true;
-                       } else {
-                            paredDesc.disabled = false;
-                       }
-                    }
-           </script>    
-           
-           <script>
-                function Techo()
-                    {
-                        var techoDesc = document.getElementById('techoDesc');
-                        if (document.getElementById('techo').checked) {
-                            techoDesc.disabled = true;
-                       } else {
-                            techoDesc.disabled = false;
-                       }
-                    }
-           </script>    
-           
-           <script>
-                function Piso()
-                    {
-                        var pisoDesc = document.getElementById('pisoDesc');
-                        if (document.getElementById('piso').checked) {
-                            pisoDesc.disabled = true;
-                       } else {
-                            pisoDesc.disabled = false;
-                       }
-                    }
-           </script>    
-           <script type="text/javascript">
-              function funct(){
-                    
-                     var vivDesc = document.getElementById('propiedadDescrip');
-                        if (document.getElementById('propia').checked || document.getElementById('alquilada').checked) {
-                            vivDesc.disabled = true;
-                       } else {
-                            vivDesc.disabled = false;
-                       }
-                       
-                       var tipoDesc = document.getElementById('tipoDescrip');
-                        if (document.getElementById('casa').checked || document.getElementById('depa').checked) {
-                            tipoDesc.disabled = true;
-                       } else {
-                            tipoDesc.disabled = false;
-                       }
-                       
-                       var matDesc = document.getElementById('materConstDesc');
-                        if (document.getElementById('noble').checked) {
-                            matDesc.disabled = true;
-                       } else {
-                            matDesc.disabled = false;
-                       }
-                       
-                       var paredDesc = document.getElementById('paredDesc');
-                        if (document.getElementById('pared').checked) {
-                            paredDesc.disabled = true;
-                       } else {
-                            paredDesc.disabled = false;
-                       }
-                       
-                       var techoDesc = document.getElementById('techoDesc');
-                        if (document.getElementById('techo').checked) {
-                            techoDesc.disabled = true;
-                       } else {
-                            techoDesc.disabled = false;
-                       }
-                       
-                       var pisoDesc = document.getElementById('pisoDesc');
-                        if (document.getElementById('piso').checked) {
-                            pisoDesc.disabled = true;
-                       } else {
-                            pisoDesc.disabled = false;
-                       }
                 }
-                
+            </script>    
+
+            <script>
+                function Tipo()
+                {
+                    var tipoDesc = document.getElementById('tipoDescrip');
+                    if (document.getElementById('casa').checked || document.getElementById('depa').checked) {
+                        tipoDesc.disabled = true;
+                    } else {
+                        tipoDesc.disabled = false;
+                    }
+                }
+            </script>    
+
+            <script>
+                function Material()
+                {
+                    var matDesc = document.getElementById('materConstDesc');
+                    if (document.getElementById('noble').checked) {
+                        matDesc.disabled = true;
+                    } else {
+                        matDesc.disabled = false;
+                    }
+                }
+            </script>    
+
+            <script>
+                function Paredes()
+                {
+                    var paredDesc = document.getElementById('paredDesc');
+                    if (document.getElementById('pared').checked) {
+                        paredDesc.disabled = true;
+                    } else {
+                        paredDesc.disabled = false;
+                    }
+                }
+            </script>    
+
+            <script>
+                function Techo()
+                {
+                    var techoDesc = document.getElementById('techoDesc');
+                    if (document.getElementById('techo').checked) {
+                        techoDesc.disabled = true;
+                    } else {
+                        techoDesc.disabled = false;
+                    }
+                }
+            </script>    
+
+            <script>
+                function Piso()
+                {
+                    var pisoDesc = document.getElementById('pisoDesc');
+                    if (document.getElementById('piso').checked) {
+                        pisoDesc.disabled = true;
+                    } else {
+                        pisoDesc.disabled = false;
+                    }
+                }
+            </script>    
+            <script type="text/javascript">
+                function funct() {
+
+                    var vivDesc = document.getElementById('propiedadDescrip');
+                    if (document.getElementById('propia').checked || document.getElementById('alquilada').checked) {
+                        vivDesc.disabled = true;
+                    } else {
+                        vivDesc.disabled = false;
+                    }
+
+                    var tipoDesc = document.getElementById('tipoDescrip');
+                    if (document.getElementById('casa').checked || document.getElementById('depa').checked) {
+                        tipoDesc.disabled = true;
+                    } else {
+                        tipoDesc.disabled = false;
+                    }
+
+                    var matDesc = document.getElementById('materConstDesc');
+                    if (document.getElementById('noble').checked) {
+                        matDesc.disabled = true;
+                    } else {
+                        matDesc.disabled = false;
+                    }
+
+                    var paredDesc = document.getElementById('paredDesc');
+                    if (document.getElementById('pared').checked) {
+                        paredDesc.disabled = true;
+                    } else {
+                        paredDesc.disabled = false;
+                    }
+
+                    var techoDesc = document.getElementById('techoDesc');
+                    if (document.getElementById('techo').checked) {
+                        techoDesc.disabled = true;
+                    } else {
+                        techoDesc.disabled = false;
+                    }
+
+                    var pisoDesc = document.getElementById('pisoDesc');
+                    if (document.getElementById('piso').checked) {
+                        pisoDesc.disabled = true;
+                    } else {
+                        pisoDesc.disabled = false;
+                    }
+                }
+
             </script>
             <script type="text/javascript">
-            function validar()
-            {
-            var numericExpression = /^[0-9]+$/;
-            if(!document.formulario.areaVivTotal.value.match(numericExpression))
-            {
-                alert( "El campo debe contener solo números" );
-                document.formulario.areaVivTotal.focus() ;
-                return false;
-            }
-            if(!document.formulario.areaVivConst.value.match(numericExpression))
-            {
-                
-                alert( "El campo debe contener solo números" );
-                document.formulario.areaVivConst.focus() ;
-                return false;
-            }
-            return true
-            }
-          </script>
+                function validar()
+                {
+                    var numericExpression = /^[0-9]+$/;
+                    if (!document.formulario.areaVivTotal.value.match(numericExpression))
+                    {
+                        alert("El campo debe contener solo números");
+                        document.formulario.areaVivTotal.focus();
+                        return false;
+                    }
+                    if (!document.formulario.areaVivConst.value.match(numericExpression))
+                    {
+
+                        alert("El campo debe contener solo números");
+                        document.formulario.areaVivConst.focus();
+                        return false;
+                    }
+                    return true
+                }
+            </script>
             <!-- Ubicar al final -->
     </body>
 </html>
