@@ -791,14 +791,14 @@ public class HiberEtapa {
                                 }
                                 statement_evaluacion_personal.close();
                             }
-                            evaluacion.setTipo(temp.getString(4));
-                            evaluacion.setFechaAsignacion(temp.getDate(5));
-                            evaluacion.setResultado(temp.getString(6));
-                            evaluacion.setFechaResultado(temp.getDate(7));
-                            evaluacion.setObservacion(temp.getString(8));
-                            evaluacion.setSustento(temp.getString(9));
-                            evaluacion.setNDesignacion(temp.getString(10));
-                            evaluacion.setNumEval(temp.getString(11));
+                            evaluacion.setTipo(temp_evaluacion.getString(4));
+                            evaluacion.setFechaAsignacion(temp_evaluacion.getDate(5));
+                            evaluacion.setResultado(temp_evaluacion.getString(6));
+                            evaluacion.setFechaResultado(temp_evaluacion.getDate(7));
+                            evaluacion.setObservacion(temp_evaluacion.getString(8));
+                            evaluacion.setSustento(temp_evaluacion.getString(9));
+                            evaluacion.setNDesignacion(temp_evaluacion.getString(10));
+                            evaluacion.setNumEval(temp_evaluacion.getString(11));
 
                             resolucion.setEvaluacion(evaluacion);
                         }
@@ -1269,16 +1269,16 @@ public class HiberEtapa {
 
     }
 
+//    public void updateEvaluacion(Evaluacion temp) {
+//
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//
+//        session.update(temp);
+//
+//    }
+
     public void updateEvaluacion(Evaluacion temp) {
-
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-
-        session.update(temp);
-
-    }
-
-    public void updateEvaluacion2(Evaluacion temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -1323,21 +1323,90 @@ public class HiberEtapa {
 
     }
     
+//    public void crearResolEvaluacion(Resolucion temp) {
+//
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//
+//        session.save(temp);
+//
+//    }
+    
     public void crearResolEvaluacion(Resolucion temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-
-        session.save(temp);
-
+        
+        final Long idEv = temp.getEvaluacion().getIdevaluacion();
+        final String tipoResol = temp.getTipo();
+        final String numResol = temp.getNumero();
+        final Date fechaRes = temp.getFechaResol();
+        final Date fechaNot = temp.getFechaNotificacion();
+                
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                String hql = "{call HE_CREAR_RESOL(?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1,idEv );
+                statement.setString(2, tipoResol);
+                statement.setString(3, numResol);
+                statement.setDate(4, (java.sql.Date)fechaRes);
+                statement.setDate(5, (java.sql.Date) fechaNot);                
+                
+                statement.execute();
+                statement.close();
+            }
+        };
+        
+        session.doWork(work);
+        
     }
+    
 
+//    public void updateResolEvaluacion(Resolucion temp) {
+//
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//
+//        session.update(temp);
+//
+//    }
+    
     public void updateResolEvaluacion(Resolucion temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
-        session.update(temp);
+        final Long idRes = temp.getIdresolucion();
+        final Long idEv = temp.getEvaluacion().getIdevaluacion();
+        final String tipoResol = temp.getTipo();
+        final String numResol = temp.getNumero();
+        final Date fechaRes = temp.getFechaResol();
+        final Date fechaNot = temp.getFechaNotificacion();
+                
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                String hql = "{call HE_UPDATE_RESOL(?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1,idRes );
+                statement.setLong(2,idEv );
+                statement.setString(3, tipoResol);
+                statement.setString(4, numResol);
+                statement.setDate(5, (java.sql.Date)fechaRes);
+                statement.setDate(6, (java.sql.Date) fechaNot);                
+                
+                statement.execute();
+                statement.close();
+            }
+        };
+        
+        session.doWork(work);
 
     }
 
