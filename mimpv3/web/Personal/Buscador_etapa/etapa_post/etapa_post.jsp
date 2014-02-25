@@ -76,32 +76,33 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-6 ">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -113,30 +114,30 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                                <br>
-                                <div class="bs-example">
-                                    <table class="table table-bordered">
-                                        <thead>
+                        <br>
+                        <div class="bs-example">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Expediente</th>
+                                        <th>Info</th>
+                                        <th>Expediente Post</th>
+                                        <th>N° Informes a presentar</th>
+                                        <th>Información de Informes</th>
+                                        <th>N° Informes presentados (estado : Listo)</th>
+                                    </tr>
+                                </thead>
+                                <c:if test="${listaPost != null}">   
+                                    <tbody>
+                                        <c:forEach var="post" items="${listaPost}" varStatus="status">
+                                            <c:set var="contador" value="0" />
                                             <tr>
-                                                <th>Expediente</th>
-                                                <th>Info</th>
-                                                <th>Expediente Post</th>
-                                                <th>N° Informes a presentar</th>
-                                                <th>Información de Informes</th>
-                                                <th>N° Informes presentados (estado : Listo)</th>
-                                            </tr>
-                                        </thead>
-                                        <c:if test="${listaPost != null}">   
-                                        <tbody>
-                                            <c:forEach var="post" items="${listaPost}" varStatus="status">
-                                                <c:set var="contador" value="0" />
-                                                <tr>
                                                 <td>
                                                     <c:forEach var="expediente" items="${post.getFamilia().getExpedienteFamilias()}" varStatus="temp">
                                                         <c:if test="${temp.index == '0'}">
                                                             <c:set var="exp" value="${expediente}" />
                                                         </c:if>
-                                                    ${exp.getExpediente()}
+                                                        ${exp.getExpediente()}
                                                     </c:forEach>
                                                 </td>
                                                 <td>
@@ -149,9 +150,9 @@
                                                 </td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/UpdatePostAdopcion" method="post">
-                                                          <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
-                                                          <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
-                                                          <button type="submit" class="btn btn-default">Registrar</button>
+                                                        <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
+                                                        <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
+                                                        <button type="submit" class="btn btn-default">Registrar</button>
                                                     </form>  
                                                 </td>
                                                 <td>
@@ -159,20 +160,20 @@
                                                 </td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/verInformesPost" method="post">
-                                                          <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
-                                                          <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
-                                                          <input hidden name="numInformes" id="numInformes" value="${post.getNumeroInformes()}">
-                                                          <input hidden name="fechaAdopcion" id="fechaAdopcion" value="${post.getFechaResolucion()}">
-                                                          <button ${post.getNumeroInformes() == null ? 'disabled' : ''} type="submit" class="btn btn-default">Ver</button>
+                                                        <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
+                                                        <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
+                                                        <input hidden name="numInformes" id="numInformes" value="${post.getNumeroInformes()}">
+                                                        <input hidden name="fechaAdopcion" id="fechaAdopcion" value="${post.getFechaResolucion()}">
+                                                        <button ${post.getNumeroInformes() == null ? 'disabled' : ''} type="submit" class="btn btn-default">Ver</button>
                                                     </form> 
                                                 </td>
                                                 <td>
                                                     <c:choose>
                                                         <c:when test="${!post.getInformePostAdoptivos().isEmpty()}">
                                                             <c:forEach var="informe" items="${post.getInformePostAdoptivos()}">
-                                                               <c:if test="${informe.getEstado() == 'listo'}">  
-                                                                <c:set var="contador" value="${contador + 1}"/>
-                                                               </c:if>
+                                                                <c:if test="${informe.getEstado() == 'listo'}">  
+                                                                    <c:set var="contador" value="${contador + 1}"/>
+                                                                </c:if>
                                                             </c:forEach>
                                                             ${contador} 
                                                         </c:when>
@@ -181,15 +182,15 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                        </c:if> 
-                                      <c:if test="${listaPost == null}">
-                                        <h3><strong>No existen familias en esta etapa</strong></h3>
-                                      </c:if> 
-                                    </table>
-                                </div>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </c:if> 
+                                <c:if test="${listaPost == null}">
+                                    <h3><strong>No existen familias en esta etapa</strong></h3>
+                                </c:if> 
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -211,7 +212,7 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
         <!-- Placed at the end of the document so the pages load faster -->        

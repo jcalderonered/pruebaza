@@ -119,6 +119,7 @@
                             </c:forEach>
                             <c:if test="${el != null}"> 
                             <div class="col-md-4 col-md-offset-2">
+                                <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inf'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                                  
                                 <p class="text-left"><legend>Información Personal <br>(EL)</legend></p>
                                 <br>

@@ -97,6 +97,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Reportes</strong></h1>
                         <br>
                         <form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/act_info/act" method="post">

@@ -107,6 +107,7 @@
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/buscarNna" >Búsqueda de NNA's</a></li>
                         </ul>
                         <br>
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <br>
                         <h1 align="left"><strong>Búsqueda de NNA's</strong></h1>
                         <br>
