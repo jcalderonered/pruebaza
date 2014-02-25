@@ -76,32 +76,33 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-6 ">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -113,25 +114,25 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                                <br>
-                                <div class="bs-example">
-                                    <table class="table table-bordered">
-                                        <thead>
+                        <br>
+                        <div class="bs-example">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Expediente</th>
+                                        <th>HT</th>
+                                        <th>Número de Expediente</th>
+                                        <th>Fecha de ingreso a DGA</th>
+                                        <th>Fecha de Resolución de Aptitud</th>
+                                        <th>Tipo</th>
+                                        <th>Tipo Lista de Espera</th>
+                                        <th>Detalles</th>
+                                    </tr>
+                                </thead>
+                                <c:if test="${listaEspera != null}">   
+                                    <tbody>
+                                        <c:forEach var="expediente" items="${listaEspera}" varStatus="status">
                                             <tr>
-                                                <th>Expediente</th>
-                                                <th>HT</th>
-                                                <th>Número de Expediente</th>
-                                                <th>Fecha de ingreso a DGA</th>
-                                                <th>Fecha de Resolución de Aptitud</th>
-                                                <th>Tipo</th>
-                                                <th>Tipo Lista de Espera</th>
-                                                <th>Detalles</th>
-                                            </tr>
-                                        </thead>
-                                        <c:if test="${listaEspera != null}">   
-                                        <tbody>
-                                            <c:forEach var="expediente" items="${listaEspera}" varStatus="status">
-                                                <tr>
                                                 <td>
                                                     ${expediente.getExpediente()}
                                                 </td>
@@ -143,18 +144,18 @@
                                                 </td>
                                                 <td>
                                                     <c:if test="${expediente.getFechaIngresoDga() != null}">
-                                                    ${df.dateToString(expediente.getFechaIngresoDga())}
+                                                        ${df.dateToString(expediente.getFechaIngresoDga())}
                                                     </c:if>
                                                 </td>
                                                 <td>
                                                     <c:if test="${!expediente.getEvaluacions().isEmpty()}">
-                                                    <c:forEach var="eval" items="${expediente.getEvaluacions()}" varStatus="status">
-                                                        <c:if test="${!eval.getResolucions().isEmpty()}">
-                                                    <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
-                                                        ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
-                                                    </c:forEach>
-                                                        </c:if>
-                                                    </c:forEach>
+                                                        <c:forEach var="eval" items="${expediente.getEvaluacions()}" varStatus="status">
+                                                            <c:if test="${!eval.getResolucions().isEmpty()}">
+                                                                <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
+                                                                    ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
+                                                                </c:forEach>
+                                                            </c:if>
+                                                        </c:forEach>
                                                     </c:if>
                                                 </td>
                                                 <td>
@@ -167,18 +168,18 @@
                                                     <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
                                                         <input hidden name="estado" id="estado" value="espera">
                                                         <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
-                                                       <button type="submit" class="btn btn-default">Ver</button>
+                                                        <button type="submit" class="btn btn-default">Ver</button>
                                                     </form>
                                                 </td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                        </c:if> 
-                                      <c:if test="${listaEspera == null}">
-                                        <h3><strong>No existen familias en esta etapa</strong></h3>
-                                      </c:if> 
-                                    </table>
-                                </div>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </c:if> 
+                                <c:if test="${listaEspera == null}">
+                                    <h3><strong>No existen familias en esta etapa</strong></h3>
+                                </c:if> 
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -200,7 +201,7 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
         <!-- Placed at the end of the document so the pages load faster -->        

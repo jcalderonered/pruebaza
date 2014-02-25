@@ -74,156 +74,156 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inf'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <c:choose>
                             <c:when test="${ taller == null }">
                                 <form action="${pageContext.servletContext.contextPath}/PersonalCrearTaller" method="post">
-                            </c:when>
-                            <c:otherwise>
+                                </c:when>
+                                <c:otherwise>
                                     <form action="${pageContext.servletContext.contextPath}/PersonalUpdateTaller" method="post">
-                                    <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">  
-                            </c:otherwise>
-                        </c:choose>
-                        <h1>Edición de taller</h1>
-                        <br>
-                        <!-- Select Basic -->
-                        <!-- Text input-->
-                        <div class="control-group">
-                            <label class="control-label" for="textinput">Nombre del taller:</label>
-                            <div class="controls">
-                                <input id="nombre" name="nombre" value="${taller.getNombre()}" type="text" placeholder="Nombre" class="input-xlarge">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label" for="selectbasic">Tipo de Taller</label>
-                            <div class="controls">
-                                <select id="tipo" name="tipo" class="input-xlarge">
-                                    <option ${taller.getTipoTaller() == 'preparacion' ? 'selected' : ''} value="preparacion" >Preparación</option>
-                                    <option ${taller.getTipoTaller() == 'lista' ? 'selected' : ''} value="lista"  >Lista de espera</option>
-                                    <option ${taller.getTipoTaller() == 'post' ? 'selected' : ''} value="post" >Post Adopción</option>
-                                </select>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label" for="selectbasic">Asociado a sesión: (Sólo en caso se trate de un Taller de Preparación)</label>
-                            <div class="controls">
-                                <select id="numSesion" name="numSesion" class="input-xlarge">
-                                     <option value="ninguno" selected >Ninguno</option>
-                                     <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
-                                     <option value="${sesion.getNSesion()}" ${taller.getNSesion() == sesion.getNSesion() ? 'selected' : ''}> ${sesion.getNSesion()}</option> 
-                                     </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-                        <br>
-                        <!-- Multiple Radios (inline) -->
-                        <div class="control-group">
-                            <label class="control-label" for="radios">Habilitado para inscripción:</label>
-                            <div class="controls">
-                                <label class="radio inline" for="radios-0">
-                                    <input type="radio" name="habilitado" id="radios-0" value="0" ${taller.getHabilitado() == 0 ? 'checked' : ''}>
-                                    Si
-                                </label>
-                                <label class="radio inline" for="radios-1">
-                                    <input type="radio" name="habilitado" id="radios-1" value="1" ${taller.getHabilitado() == 1 || taller.getHabilitado() == null ? 'checked' : ''}>
-                                    No
-                                </label>
-                            </div>
-                        </div>
-                        <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
-                        </form>
-                        
-                        <br>
-                        <h1>Listado de Grupos</h1>
-                        <br>
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>id de Grupo</th>
-                                    <th>Grupo</th>
-                                    <th>N° de Turnos Habilitados</th>
-                                    <th>Edicion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              <c:if test="${taller != null}">   
-                                  <c:forEach var="grupo" items="${taller.getGrupos()}" varStatus="status">
-                                  <tr>
-                                  <td>${status.index + 1}  </td>
-                                  <td>${grupo.getNombre()}  </td>
-                                  <td>${grupo.getTurno2s().size()}  </td>
-                                  <td>
-                                     <form action="${pageContext.servletContext.contextPath}/PersonalEditarGrupo" method="post">
-                                            <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
-                                            <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Modificar</button>
-                                     </form>
-                                  </td>
-                                  </tr>   
-                                  </c:forEach>
-                              </c:if>    
-                            </tbody>
-                            
-                             
-                        </table>
-                        <c:if test="${taller == null}"> 
+                                        <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">  
+                                    </c:otherwise>
+                                </c:choose>
+                                <h1>Edición de taller</h1>
+                                <br>
+                                <!-- Select Basic -->
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="textinput">Nombre del taller:</label>
+                                    <div class="controls">
+                                        <input id="nombre" name="nombre" value="${taller.getNombre()}" type="text" placeholder="Nombre" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label" for="selectbasic">Tipo de Taller</label>
+                                    <div class="controls">
+                                        <select id="tipo" name="tipo" class="input-xlarge">
+                                            <option ${taller.getTipoTaller() == 'preparacion' ? 'selected' : ''} value="preparacion" >Preparación</option>
+                                            <option ${taller.getTipoTaller() == 'lista' ? 'selected' : ''} value="lista"  >Lista de espera</option>
+                                            <option ${taller.getTipoTaller() == 'post' ? 'selected' : ''} value="post" >Post Adopción</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label" for="selectbasic">Asociado a sesión: (Sólo en caso se trate de un Taller de Preparación)</label>
+                                    <div class="controls">
+                                        <select id="numSesion" name="numSesion" class="input-xlarge">
+                                            <option value="ninguno" selected >Ninguno</option>
+                                            <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
+                                                <option value="${sesion.getNSesion()}" ${taller.getNSesion() == sesion.getNSesion() ? 'selected' : ''}> ${sesion.getNSesion()}</option> 
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Multiple Radios (inline) -->
+                                <div class="control-group">
+                                    <label class="control-label" for="radios">Habilitado para inscripción:</label>
+                                    <div class="controls">
+                                        <label class="radio inline" for="radios-0">
+                                            <input type="radio" name="habilitado" id="radios-0" value="0" ${taller.getHabilitado() == 0 ? 'checked' : ''}>
+                                            Si
+                                        </label>
+                                        <label class="radio inline" for="radios-1">
+                                            <input type="radio" name="habilitado" id="radios-1" value="1" ${taller.getHabilitado() == 1 || taller.getHabilitado() == null ? 'checked' : ''}>
+                                            No
+                                        </label>
+                                    </div>
+                                </div>
+                                <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
+                            </form>
+
+                            <br>
+                            <h1>Listado de Grupos</h1>
+                            <br>
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>id de Grupo</th>
+                                        <th>Grupo</th>
+                                        <th>N° de Turnos Habilitados</th>
+                                        <th>Edicion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:if test="${taller != null}">   
+                                        <c:forEach var="grupo" items="${taller.getGrupos()}" varStatus="status">
+                                            <tr>
+                                                <td>${status.index + 1}  </td>
+                                                <td>${grupo.getNombre()}  </td>
+                                                <td>${grupo.getTurno2s().size()}  </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/PersonalEditarGrupo" method="post">
+                                                        <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
+                                                        <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Modificar</button>
+                                                    </form>
+                                                </td>
+                                            </tr>   
+                                        </c:forEach>
+                                    </c:if>    
+                                </tbody>
+
+
+                            </table>
+                            <c:if test="${taller == null}"> 
                                 <h3><strong>Debe crear un Taller antes de poder agregar los Grupos</strong></h3>    
                             </c:if>   
-                        <br>
-                        <c:if test="${taller != null}">  
-                         <form action="${pageContext.servletContext.contextPath}/PersonalAgregarGrupo" method="post">
-                                <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
-                                <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar Grupo</button>
-                         </form>                
-                        </c:if>
-                        <br>
-                        <br>
-                        
-                    </div>
-                </div>
-            </div>
-            <!--FIN DE CONTENIDO-->
-            <br>
-            <br>
+                            <br>
+                            <c:if test="${taller != null}">  
+                                <form action="${pageContext.servletContext.contextPath}/PersonalAgregarGrupo" method="post">
+                                    <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
+                                    <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar Grupo</button>
+                                </form>                
+                            </c:if>
+                            <br>
+                            <br>
 
-            <div id="footer">
-                <div id="ja-footer" class="wrap">
-                    <hr width=80% align="center">
-                    <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-                </div>
-            </div>
-            <!-- core JavaScript
-        ================================================== -->
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+                            </div>
+                            </div>
+                            </div>
+                            <!--FIN DE CONTENIDO-->
+                            <br>
+                            <br>
 
-            <!-- Ubicar al final -->
-    </body>
-</html>
+                            <div id="footer">
+                                <div id="ja-footer" class="wrap">
+                                    <hr width=80% align="center">
+                                    <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
+                                </div>
+                            </div>
+                            <!-- core JavaScript
+                        ================================================== -->
+                            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+                            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+
+                            <!-- Ubicar al final -->
+                            </body>
+                            </html>
