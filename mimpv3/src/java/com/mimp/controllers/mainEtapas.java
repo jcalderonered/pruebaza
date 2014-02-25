@@ -287,7 +287,7 @@ public class mainEtapas {
         evalPsicologica.setNumEval(numEval);
         evalPsicologica.setObservacion(obs);
 
-        servicioEtapa.updateEvaluacion(evalPsicologica);
+        servicioEtapa.updateEvaluacion2(evalPsicologica);
 
         if (origen.equals("nacional")) {
 
@@ -496,7 +496,7 @@ public class mainEtapas {
         evalSocial.setNumEval(numEval);
         evalSocial.setObservacion(obs);
 
-        servicioEtapa.updateEvaluacion(evalSocial);
+        servicioEtapa.updateEvaluacion2(evalSocial);
 
         if (origen.equals("nacional")) {
 
@@ -708,7 +708,7 @@ public class mainEtapas {
         evalLegal.setNumEval(numEval);
         evalLegal.setObservacion(obs);
 
-        servicioEtapa.updateEvaluacion(evalLegal);
+        servicioEtapa.updateEvaluacion2(evalLegal);
 
         if (origen.equals("nacional")) {
 
