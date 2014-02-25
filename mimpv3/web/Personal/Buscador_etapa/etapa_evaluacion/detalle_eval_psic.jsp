@@ -156,18 +156,6 @@
                                             </select>
                                         </div>    
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Responsable</label>
-                                    <div class="controls">
-                                        <select id="personal" name="personal" class="input-xlarge">
-                                            <c:forEach var="personal" items="${listaPersonal}" > 
-                                                <option value="${personal.getIdpersonal()}" ${psicologica.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>    
-                                </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Resultado</label>
@@ -180,12 +168,6 @@
                                     </div>  
                                 </div>
                                 <br>
-                                <div class="control-group">
-                                    <label class="control-label">Número de informe</label>
-                                    <div class="controls">
-                                        <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${psicologica.getNumEval()}" >
-                                    </div>
-                                    <br>
                                     <div class="control-group">
                                         <label class="control-label">Número de informe</label>
                                         <div class="controls">
