@@ -76,34 +76,35 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-8 ">
                         <!-- AQUI AGREGAR EL CONTENIDO QUE ESTARA AL COSTADO DEL MENU -->
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/famint'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <br>
                         <h3><strong>Datos generales del registro</strong></h3>
                         <br>
@@ -115,93 +116,93 @@
                                 <form role="form" action="${pageContext.servletContext.contextPath}/UpdateRegistroInt" method="post"> 
                                     <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                                 </c:if> 
-                            <div class="control-group">
-                                <label class="control-label">Número de Expediente </label>
-                                <div class="controls">
-                                    <input id="numeroExp" name="numeroExp" type="text" class="input-xlarge" value="${expediente.getNumeroExpediente()}">
+                                <div class="control-group">
+                                    <label class="control-label">Número de Expediente </label>
+                                    <div class="controls">
+                                        <input id="numeroExp" name="numeroExp" type="text" class="input-xlarge" value="${expediente.getNumeroExpediente()}">
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">HT </label>
-                                <div class="controls">
-                                    <input id="ht" name="ht" type="text" class="input-xlarge" value="${expediente.getHt()}">
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">HT </label>
+                                    <div class="controls">
+                                        <input id="ht" name="ht" type="text" class="input-xlarge" value="${expediente.getHt()}">
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">Fecha de ingreso</label>
-                                <div class="controls">
-                                    <input id="fechaIngreso" name="fechaIngreso" type="text" class="datepicker input-xlarge" value="${expediente.getFechaIngresoDga() != null ? df.dateToStringNumeros(expediente.getFechaIngresoDga()) : ''}">
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Fecha de ingreso</label>
+                                    <div class="controls">
+                                        <input id="fechaIngreso" name="fechaIngreso" type="text" class="datepicker input-xlarge" value="${expediente.getFechaIngresoDga() != null ? df.dateToStringNumeros(expediente.getFechaIngresoDga()) : ''}">
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <label> Estado</label>
-                                <div class="controls">
-                                    <select disabled>
-                                        <option value="evaluacion" ${expediente.getEstado() == 'evaluacion' ? 'selected' : ''} >Evaluación</option>
-                                        <option value="espera" ${expediente.getEstado() == 'espera' ? 'selected' : ''} >Lista de espera</option>
-                                        <option value="estudio" ${expediente.getEstado() == 'estudio' ? 'selected' : ''} >Estudio de caso</option>
-                                        <option value="designacion" ${expediente.getEstado() == 'designacion' ? 'selected' : ''} >Designado</option>
-                                        <option value="adopcion" ${expediente.getEstado() == 'adopcion' ? 'selected' : ''} >Adopción</option>
-                                        <option value="post" ${expediente.getEstado() == 'post' ? 'selected' : ''} >Post Adopción</option>
-                                    </select>
-                                </div>   
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">Tupa</label>
-                                <div class="controls">
-                                    <input id="tupa" name="tupa" type="text" class="datepicker input-xlarge" value="${expediente.getTupa() != null ? df.dateToStringNumeros(expediente.getTupa()) : ''}">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <label> Tipo de familia</label>
-                                <div class="controls">
-                                    <select onchange="funcTipoFam(this.value)" id="tipoFamilia" name="tipoFamilia">
-                                        <option value="PP" ${expediente.getTipoFamilia() == 'PP' ? 'selected' : ''} >PP</option>
-                                        <option value="PE" ${expediente.getTipoFamilia() == 'PE' ? 'selected' : ''} >PE</option>
-                                        <option value="MP" ${expediente.getTipoFamilia() == 'MP' ? 'selected' : ''} >MP</option>
-                                        <option value="ME" ${expediente.getTipoFamilia() == 'ME' ? 'selected' : ''} >ME</option>
-                                        <option value="EP" ${expediente.getTipoFamilia() == 'EP' ? 'selected' : ''} >EP</option>
-                                        <option value="EE" ${expediente.getTipoFamilia() == 'EE' ? 'selected' : ''} >EE</option>
-                                    </select>
-                                </div>   
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">Organismo Acreditado y/o Autoridad Central asociado</label>
-                                <div class="controls">
-                                    <c:if test="${expediente.getFamilia().getEntidad() != null}">
-                                        <select id="entAsoc" name="entAsoc" >
-                                            <c:forEach var="entidad" items="${listaEntidad}" > 
-                                                <option value="${entidad.getIdentidad()}" ${expediente.getFamilia().getEntidad().getIdentidad() == entidad.getIdentidad() ? 'selected' : ''}>${entidad.getNombre()}</option>
-                                            </c:forEach>
+                                <br>
+                                <div class="control-group">
+                                    <label> Estado</label>
+                                    <div class="controls">
+                                        <select disabled>
+                                            <option value="evaluacion" ${expediente.getEstado() == 'evaluacion' ? 'selected' : ''} >Evaluación</option>
+                                            <option value="espera" ${expediente.getEstado() == 'espera' ? 'selected' : ''} >Lista de espera</option>
+                                            <option value="estudio" ${expediente.getEstado() == 'estudio' ? 'selected' : ''} >Estudio de caso</option>
+                                            <option value="designacion" ${expediente.getEstado() == 'designacion' ? 'selected' : ''} >Designado</option>
+                                            <option value="adopcion" ${expediente.getEstado() == 'adopcion' ? 'selected' : ''} >Adopción</option>
+                                            <option value="post" ${expediente.getEstado() == 'post' ? 'selected' : ''} >Post Adopción</option>
                                         </select>
-                                    </c:if>
-                                    
-                                    <c:if test="${expediente.getFamilia().getEntidad() == null}">
-                                        <select id="entAsoc" name="entAsoc" >
-                                            <c:forEach var="entidad" items="${listaEntidad}" > 
-                                                <option value="${entidad.getIdentidad()}" >${entidad.getNombre()}</option>
-                                            </c:forEach>
+                                    </div>   
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Tupa</label>
+                                    <div class="controls">
+                                        <input id="tupa" name="tupa" type="text" class="datepicker input-xlarge" value="${expediente.getTupa() != null ? df.dateToStringNumeros(expediente.getTupa()) : ''}">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label> Tipo de familia</label>
+                                    <div class="controls">
+                                        <select onchange="funcTipoFam(this.value)" id="tipoFamilia" name="tipoFamilia">
+                                            <option value="PP" ${expediente.getTipoFamilia() == 'PP' ? 'selected' : ''} >PP</option>
+                                            <option value="PE" ${expediente.getTipoFamilia() == 'PE' ? 'selected' : ''} >PE</option>
+                                            <option value="MP" ${expediente.getTipoFamilia() == 'MP' ? 'selected' : ''} >MP</option>
+                                            <option value="ME" ${expediente.getTipoFamilia() == 'ME' ? 'selected' : ''} >ME</option>
+                                            <option value="EP" ${expediente.getTipoFamilia() == 'EP' ? 'selected' : ''} >EP</option>
+                                            <option value="EE" ${expediente.getTipoFamilia() == 'EE' ? 'selected' : ''} >EE</option>
                                         </select>
-                                    </c:if>
+                                    </div>   
                                 </div>
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Guardar y Ver información de familia</button>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Organismo Acreditado y/o Autoridad Central asociado</label>
+                                    <div class="controls">
+                                        <c:if test="${expediente.getFamilia().getEntidad() != null}">
+                                            <select id="entAsoc" name="entAsoc" >
+                                                <c:forEach var="entidad" items="${listaEntidad}" > 
+                                                    <option value="${entidad.getIdentidad()}" ${expediente.getFamilia().getEntidad().getIdentidad() == entidad.getIdentidad() ? 'selected' : ''}>${entidad.getNombre()}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </c:if>
+
+                                        <c:if test="${expediente.getFamilia().getEntidad() == null}">
+                                            <select id="entAsoc" name="entAsoc" >
+                                                <c:forEach var="entidad" items="${listaEntidad}" > 
+                                                    <option value="${entidad.getIdentidad()}" >${entidad.getNombre()}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </c:if>
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
-                        </form>
-                          <form role="form" action="${pageContext.servletContext.contextPath}/VerInfoRegInt" method="post">   
-                            <button ${expediente == null ? 'disabled' : ''} id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Ver información de familia</button>
-                          </form>   
+                                <br>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Guardar y Ver información de familia</button>
+                                    </div>
+                                </div>
+                                <br>
+                            </form>
+                            <form role="form" action="${pageContext.servletContext.contextPath}/VerInfoRegInt" method="post">   
+                                <button ${expediente == null ? 'disabled' : ''} id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Ver información de familia</button>
+                            </form>   
                     </div>
 
                 </div>
@@ -224,7 +225,7 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
         <!-- Ubicar al final -->
