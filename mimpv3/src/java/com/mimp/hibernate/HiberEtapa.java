@@ -9,6 +9,7 @@ import java.util.*;
 import org.hibernate.Session;
 import com.mimp.bean.*;
 import com.mimp.util.*;
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -3290,7 +3291,7 @@ public class HiberEtapa {
         session.doWork(work);
 
     }
-    
+
     public void updateDesignacion(Designacion temp) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -3299,7 +3300,7 @@ public class HiberEtapa {
         session.update(temp);
 
     }
-    
+
     public void updateDesignacion2(Designacion temp) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -3391,12 +3392,49 @@ public class HiberEtapa {
 
     }
 
+    /* public void updateEstudioCaso(EstudioCaso temp) {
+
+     Session session = sessionFactory.getCurrentSession();
+     session.beginTransaction();
+
+     session.update(temp);
+
+     }*/
     public void updateEstudioCaso(EstudioCaso temp) {
 
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
-        session.update(temp);
+        final Long idestudio_caso = temp.getIdestudioCaso();
+        final Long idNna = temp.getNna().getIdnna();
+        final Long idExpdiente_fam = temp.getExpedienteFamilia().getIdexpedienteFamilia();
+        final String Orden = temp.getOrden();        
+        final Date fecha_estudio = temp.getFechaEstudio();
+        final Date fecha_sol_adop = temp.getFechaSolAdop();
+        final String Resultado = temp.getResultado();      
+        final Long prioridad = temp.getPrioridad();
+        final BigDecimal nsolicitud = temp.getNSolicitud();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HE_UPDATE_ESTUDIO_CASO(?,?,?,?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idestudio_caso);
+                statement.setLong(2, idNna);
+                statement.setLong(3, idExpdiente_fam);
+                statement.setString(4, Orden);                
+                statement.setDate(5, (java.sql.Date) fecha_estudio);
+                statement.setDate(6, (java.sql.Date) fecha_sol_adop);
+                statement.setString(7, Resultado);      
+                statement.setLong(8, prioridad);
+                statement.setBigDecimal(9, nsolicitud);
+                statement.execute();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
 
     }
 
@@ -3409,12 +3447,41 @@ public class HiberEtapa {
 
     }
 
+    /*public void updatePostAdopcion(PostAdopcion temp) {
+
+     Session session = sessionFactory.getCurrentSession();
+     session.beginTransaction();
+
+     session.update(temp);
+
+     }*/
     public void updatePostAdopcion(PostAdopcion temp) {
 
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
-        session.update(temp);
+        final Long idpost = temp.getIdpostAdopcion();
+        final Long idFam = temp.getFamilia().getIdfamilia();
+        final Long numInfor = temp.getNumeroInformes();
+        final Date fechaResol = temp.getFechaResolucion();
+        final Long idNna = temp.getidNna();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HE_UPDATE_POST_ADOPCION(?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idpost);
+                statement.setLong(2, idFam);
+                statement.setLong(3, numInfor);
+                statement.setDate(4, (java.sql.Date) fechaResol);
+                statement.setLong(5, idNna);
+                statement.execute();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
 
     }
 
@@ -3427,12 +3494,51 @@ public class HiberEtapa {
 
     }
 
+    /* public void updateInformePost(InformePostAdoptivo temp) {
+
+     Session session = sessionFactory.getCurrentSession();
+     session.beginTransaction();
+
+     session.update(temp);
+
+     }*/
     public void updateInformePost(InformePostAdoptivo temp) {
 
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
-        session.update(temp);
+        final Long idinfo_post = temp.getIdinformePostAdoptivo();
+        final Long idpost = temp.getPostAdopcion().getIdpostAdopcion();
+        final Long idpersonal = temp.getPersonal().getIdpersonal();
+        final String estado = temp.getEstado();
+        final String numero_informe = temp.getNumeroInforme();
+        final Date fecha_rec_proy = temp.getFechaRecepcionProyectado();
+        final Date fecha_rec = temp.getFechaRecepcion();
+        final Date fecha_info = temp.getFechaInforme();
+        final Date fecha_act = temp.getFechaActa();
+        final String obs = temp.getObs();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HE_UPDATE_INFO_POST(?,?,?,?,?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idinfo_post);
+                statement.setLong(2, idpost);
+                statement.setLong(3, idpersonal);
+                statement.setString(4, estado);
+                statement.setString(5, numero_informe);
+                statement.setDate(6, (java.sql.Date) fecha_rec_proy);
+                statement.setDate(7, (java.sql.Date) fecha_rec);
+                statement.setDate(8, (java.sql.Date) fecha_info);
+                statement.setDate(9, (java.sql.Date) fecha_act);
+                statement.setString(10, obs);
+                statement.execute();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
 
     }
 
@@ -3739,7 +3845,7 @@ public class HiberEtapa {
                                     }
                                     statement3.close();
                                 }
-                                
+
                                 expNna.setNumero(temp_expediente.getString(4));
                                 expNna.setFechaIngreso(temp_expediente.getDate(5));
                                 expNna.setHt(temp_expediente.getString(6));
