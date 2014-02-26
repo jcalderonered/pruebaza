@@ -959,7 +959,7 @@ public class mainEtapas {
         ArrayList<ExpedienteFamilia> allExp = new ArrayList();
 
         tempNna = ServicioNna.getNna(idNna);
-        allExp = servicioEtapa.listaInfoFamilias();
+        allExp = servicioEtapa.listaExpInfoFam();
 
         for (ExpedienteFamilia expedienteFamilia : allExp) {
             for (InfoFamilia infoFamilia : expedienteFamilia.getFamilia().getInfoFamilias()) {
