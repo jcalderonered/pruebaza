@@ -453,7 +453,7 @@ public class HiberReporte {
 
                 if (rs.next()) {
                     tempDesig.setIddesignacion(rs.getLong("IDDESIGNACION"));
-                    tempDesig.setNDesignacion(rs.getLong("N_DESIGNACION"));
+                    tempDesig.setNDesignacion(rs.getString("N_DESIGNACION"));
                     tempDesig.setPrioridad(rs.getLong("PRIORIDAD"));
                     tempDesig.setFechaPropuesta(rs.getDate("FECHA_PROPUESTA"));
                     tempDesig.setFechaConsejo(rs.getDate("FECHA_CONSEJO"));
@@ -811,7 +811,7 @@ public class HiberReporte {
                         Designacion tempDesig = new Designacion();
                         
                         tempDesig.setIddesignacion(rs3.getLong("IDDESIGNACION"));
-                        tempDesig.setNDesignacion(rs3.getLong("N_DESIGNACION"));
+                        tempDesig.setNDesignacion(rs3.getString("N_DESIGNACION"));
                         tempDesig.setPrioridad(rs3.getLong("PRIORIDAD"));
                         tempDesig.setFechaPropuesta(rs3.getDate("FECHA_PROPUESTA"));
                         tempDesig.setFechaConsejo(rs3.getDate("FECHA_CONSEJO"));
@@ -2113,7 +2113,7 @@ public class HiberReporte {
                     tempNna.setNResolCons(rs.getString("N_RESOL_CONS"));
 
                     ultimaDesig.setIddesignacion(rs.getLong("IDDESIGNACION"));
-                    ultimaDesig.setNDesignacion(rs.getLong("N_DESIGNACION"));
+                    ultimaDesig.setNDesignacion(rs.getString("N_DESIGNACION"));
                     ultimaDesig.setPrioridad(rs.getLong("PRIORIDAD"));
                     ultimaDesig.setFechaPropuesta(rs.getDate("FECHA_PROPUESTA"));
                     ultimaDesig.setFechaConsejo(rs.getDate("FECHA_CONSEJO"));
@@ -2451,7 +2451,7 @@ public class HiberReporte {
                     Set<ExpedienteNna> listExp = new HashSet<ExpedienteNna>();
 
                     ultimaDesig.setIddesignacion(rs.getLong(1));
-                    ultimaDesig.setNDesignacion(rs.getLong(5));
+                    ultimaDesig.setNDesignacion(rs.getString(5));
                     ultimaDesig.setPrioridad(rs.getLong(6));
                     ultimaDesig.setFechaPropuesta(rs.getDate(7));
                     ultimaDesig.setFechaConsejo(rs.getDate(8));

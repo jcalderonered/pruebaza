@@ -499,7 +499,7 @@ public class HiberNna {
                     while (rs2.next()) {
                         desig = new Designacion();
                         desig.setIddesignacion(rs2.getLong(1));
-                        desig.setNDesignacion(rs2.getLong(5));
+                        desig.setNDesignacion(rs2.getString(5));
                         desig.setPrioridad(rs2.getLong(6));
                         desig.setFechaPropuesta(rs2.getDate(7));
                         desig.setFechaConsejo(rs2.getDate(8));

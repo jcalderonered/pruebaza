@@ -14,7 +14,7 @@ public class Designacion  implements java.io.Serializable {
      private Nna nna;
      private Personal personal;
      private ExpedienteFamilia expedienteFamilia;
-     private Long NDesignacion;
+     private String NDesignacion;
      private Long prioridad;
      private Date fechaPropuesta;
      private Date fechaConsejo;
@@ -32,7 +32,7 @@ public class Designacion  implements java.io.Serializable {
         this.personal = personal;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public Designacion(long iddesignacion, Nna nna, Personal personal, ExpedienteFamilia expedienteFamilia, Long NDesignacion, Long prioridad, Date fechaPropuesta, Date fechaConsejo, Short aceptacionConsejo, String tipoPropuesta, String obs) {
+    public Designacion(long iddesignacion, Nna nna, Personal personal, ExpedienteFamilia expedienteFamilia, String NDesignacion, Long prioridad, Date fechaPropuesta, Date fechaConsejo, Short aceptacionConsejo, String tipoPropuesta, String obs) {
        this.iddesignacion = iddesignacion;
        this.nna = nna;
        this.personal = personal;
@@ -74,11 +74,11 @@ public class Designacion  implements java.io.Serializable {
     public void setExpedienteFamilia(ExpedienteFamilia expedienteFamilia) {
         this.expedienteFamilia = expedienteFamilia;
     }
-    public Long getNDesignacion() {
+    public String getNDesignacion() {
         return this.NDesignacion;
     }
     
-    public void setNDesignacion(Long NDesignacion) {
+    public void setNDesignacion(String NDesignacion) {
         this.NDesignacion = NDesignacion;
     }
     public Long getPrioridad() {
