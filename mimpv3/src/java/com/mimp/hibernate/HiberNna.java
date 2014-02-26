@@ -386,9 +386,9 @@ public class HiberNna {
                 ExpedienteNna expnna;
                 Nna tempnna;
                 Designacion desig;
-                Set<Designacion> listDesig = new HashSet<Designacion>();
+                
                 EstudioCaso est;
-                Set<EstudioCaso> listEst = new HashSet<EstudioCaso>();
+                
 
                 String hql = "{call HN_GET_NNA_CLAS(?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
@@ -452,12 +452,13 @@ public class HiberNna {
 
                 //AQUI DESIGNACIONES Y ESTUDIO DE CASOS EN CASO SEA PRIORITARIO
                 for (Nna auxnna : allNnaAux) {
+                    Set<Designacion> listDesig = new HashSet<Designacion>();
                     String hql2 = "{call HN_GET_DESIGNACIONES(?,?)}";
                     CallableStatement statement2 = connection.prepareCall(hql2);
                     statement2.setLong(1, auxnna.getIdnna());
                     statement2.registerOutParameter(2, OracleTypes.CURSOR);
                     statement2.execute();
-
+                    
                     ResultSet rs2 = (ResultSet) statement2.getObject(2);
                     while (rs2.next()) {
                         desig = new Designacion();
@@ -479,6 +480,7 @@ public class HiberNna {
 
                 for (Nna auxnna : allNna) {
                     if (auxnna.getClasificacion().equals("prioritario")) {
+                        Set<EstudioCaso> listEst = new HashSet<EstudioCaso>();
                         String hql3 = "{call HN_GET_ESTUDIOS_CASO(?,?)}";
                         CallableStatement statement3 = connection.prepareCall(hql3);
                         statement3.setLong(1, auxnna.getIdnna());
