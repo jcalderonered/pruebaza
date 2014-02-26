@@ -63,6 +63,7 @@ public class HiberNna {
             @Override
             public void execute(Connection connection) throws SQLException {
                 ExpedienteNna expnna;
+                Juzgado juz;
                 Car car;
 
                 String hql = "{call HN_GET_NNA(?,?)}";
@@ -75,84 +76,67 @@ public class HiberNna {
 
                 while (temp.next()) {
                     tempnna.setIdnna(idnna);
-                    tempnna.setNombre(temp.getString(1));
-                    tempnna.setApellidoP(temp.getString(2));
-                    tempnna.setApellidoM(temp.getString(3));
-                    tempnna.setSexo(temp.getString(4));
-                    tempnna.setFechaNacimiento(temp.getDate(5));
-                    tempnna.setEdadAnhos(temp.getShort(6));
-                    tempnna.setEdadMeses(temp.getShort(7));
-                    tempnna.setActaNacimiento(temp.getShort(8));
-                    tempnna.setCondicionSalud(temp.getString(9));
-                    tempnna.setDepartamentoNacimiento(temp.getString(10));
-                    tempnna.setProvinciaNacimiento(temp.getString(11));
-                    tempnna.setDistritoNacimiento(temp.getString(12));
-                    tempnna.setPaisNacimiento(temp.getString(13));
-                    tempnna.setLugarNac(temp.getString(14));
-                    tempnna.setFechaResolAbandono(temp.getDate(15));
-                    tempnna.setFechaResolConsentida(temp.getDate(16));
-                    tempnna.setClasificacion(temp.getString(17));
-                    tempnna.setIncesto(temp.getShort(18));
-                    tempnna.setMental(temp.getShort(19));
-                    tempnna.setEpilepsia(temp.getShort(20));
-                    tempnna.setAbuso(temp.getShort(21));
-                    tempnna.setSifilis(temp.getShort(22));
-                    tempnna.setSeguiMedico(temp.getShort(23));
-                    tempnna.setOperacion(temp.getShort(24));
-                    tempnna.setHiperactivo(temp.getShort(25));
-                    tempnna.setEspecial(temp.getShort(26));
-                    tempnna.setEnfermo(temp.getShort(27));
-                    tempnna.setMayor(temp.getShort(28));
-                    tempnna.setAdolescente(temp.getShort(29));
-                    tempnna.setHermano(temp.getShort(30));
-                    tempnna.setNn(temp.getShort(31));
-                    tempnna.setObservaciones(temp.getString(32));
-                    tempnna.setNResolAband(temp.getString(33));
-                    tempnna.setNResolCons(temp.getString(34));
-                    expnna = new ExpedienteNna();
-                    expnna.setIdexpedienteNna(temp.getShort(35));
-                    expnna.setNumero(temp.getString(36));
-                    expnna.setFechaIngreso(temp.getDate(37));
-                    expnna.setHt(temp.getString(38));
-                    expnna.setNExpTutelar(temp.getString(39));
-                    expnna.setProcTutelar(temp.getString(40));
-                    expnna.setFichaIntegral(temp.getShort(41));
-                    expnna.setComentarios(temp.getString(42));
-                    expnna.setRespLegalNombre(temp.getString(43));
-                    expnna.setRespLegalP(temp.getString(44));
-                    expnna.setRespLegalM(temp.getString(45));
-                    expnna.setRespPsicosocialNombre(temp.getString(46));
-                    expnna.setRespPiscosocialP(temp.getString(47));
-                    expnna.setRespPsicosocialM(temp.getString(48));
-                    expnna.setEstado(temp.getString(49));
-                    expnna.setFechaEstado(temp.getDate(50));
-                    expnna.setAdoptable(temp.getShort(51));
-                    expnna.setFechaResolCons(temp.getDate(52));
-                    expnna.setNacional(temp.getShort(53));
-                    expnna.setDiagnostico(temp.getString(54));
-                    expnna.setCodigoReferencia(temp.getString(55));
-                    expnna.setNActual(temp.getString(56));
-                    expnna.setApellidopActual(temp.getString(57));
-                    expnna.setApellidomActual(temp.getString(58));
-                    expnna.setObservaciones(temp.getString(59));
-                    expnna.setFechaInvTutelar(temp.getDate(60));
-                    Set<ExpedienteNna> listexp = new HashSet<ExpedienteNna>();
-                    listexp.add(expnna);
-                    tempnna.setExpedienteNnas(listexp);
+                    juz = new Juzgado();
+                    juz.setIdjuzgado(temp.getLong(1));
+                    tempnna.setJuzgado(juz);
+                    tempnna.setNombre(temp.getString(2));
+                    tempnna.setApellidoP(temp.getString(3));
+                    tempnna.setApellidoM(temp.getString(4));
+                    tempnna.setSexo(temp.getString(5));
+                    tempnna.setFechaNacimiento(temp.getDate(6));
+                    tempnna.setEdadAnhos(temp.getShort(7));
+                    tempnna.setEdadMeses(temp.getShort(8));
+                    tempnna.setActaNacimiento(temp.getShort(9));
+                    tempnna.setCondicionSalud(temp.getString(10));
+                    tempnna.setDepartamentoNacimiento(temp.getString(11));
+                    tempnna.setProvinciaNacimiento(temp.getString(12));
+                    tempnna.setDistritoNacimiento(temp.getString(13));
+                    tempnna.setPaisNacimiento(temp.getString(14));
+                    tempnna.setLugarNac(temp.getString(15));
+                    tempnna.setFechaResolAbandono(temp.getDate(16));
+                    tempnna.setFechaResolConsentida(temp.getDate(17));
+                    tempnna.setClasificacion(temp.getString(18));
+                    tempnna.setIncesto(temp.getShort(19));
+                    tempnna.setMental(temp.getShort(20));
+                    tempnna.setEpilepsia(temp.getShort(21));
+                    tempnna.setAbuso(temp.getShort(22));
+                    tempnna.setSifilis(temp.getShort(23));
+                    tempnna.setSeguiMedico(temp.getShort(24));
+                    tempnna.setOperacion(temp.getShort(25));
+                    tempnna.setHiperactivo(temp.getShort(26));
+                    tempnna.setEspecial(temp.getShort(27));
+                    tempnna.setEnfermo(temp.getShort(28));
+                    tempnna.setMayor(temp.getShort(29));
+                    tempnna.setAdolescente(temp.getShort(30));
+                    tempnna.setHermano(temp.getShort(31));
+                    tempnna.setNn(temp.getShort(32));
+                    tempnna.setObservaciones(temp.getString(33));
+                    tempnna.setNResolAband(temp.getString(34));
+                    tempnna.setNResolCons(temp.getString(35));
+                    try {
+                        expnna = getExpNna(temp.getLong(1));
+                        if (expnna.getIdexpedienteNna() != 0) {
+                            Set<ExpedienteNna> listexp = new HashSet<ExpedienteNna>();
+                            listexp.add(expnna);
+                            tempnna.setExpedienteNnas(listexp);
+                        }
+                    } catch (Exception e) {
+
+                    }
                     car = new Car();
-                    car.setIdcar(temp.getShort(61));
-                    car.setNombre(temp.getString(62));
-                    car.setDireccion(temp.getString(63));
-                    car.setDepartamento(temp.getString(64));
-                    car.setProvincia(temp.getString(65));
-                    car.setDistrito(temp.getString(66));
-                    car.setDirector(temp.getString(67));
-                    car.setContacto(temp.getString(68));
-                    car.setCorreo(temp.getString(69));
-                    car.setFax(temp.getString(70));
-                    car.setCelular(temp.getString(71));
-                    car.setTelefono(temp.getString(72));
-                    car.setObservaciones(temp.getString(73));
+                    car.setIdcar(temp.getShort(36));
+                    car.setNombre(temp.getString(37));
+                    car.setDireccion(temp.getString(38));
+                    car.setDepartamento(temp.getString(39));
+                    car.setProvincia(temp.getString(40));
+                    car.setDistrito(temp.getString(41));
+                    car.setDirector(temp.getString(42));
+                    car.setContacto(temp.getString(43));
+                    car.setCorreo(temp.getString(44));
+                    car.setFax(temp.getString(45));
+                    car.setCelular(temp.getString(46));
+                    car.setTelefono(temp.getString(47));
+                    car.setObservaciones(temp.getString(48));
                     tempnna.setCar(car);
                 }
                 statement.close();
@@ -162,8 +146,6 @@ public class HiberNna {
 
         return tempnna;
     }
-    
-    
 
 //    public Nna getNnaPostAdopcion(long id) {
 //        Session session = sessionFactory.getCurrentSession();
@@ -182,7 +164,8 @@ public class HiberNna {
 //        Hibernate.initialize(tempNna.getJuzgado());
 //        return tempNna;
 //    }
-    //PROBADO
+    
+    //PARA PROBARSE
     public Nna getNnaPostAdopcion(long id) {
         Session session = sessionFactory.getCurrentSession();
 
@@ -240,64 +223,44 @@ public class HiberNna {
                     tempnna.setObservaciones(temp.getString(32));
                     tempnna.setNResolAband(temp.getString(33));
                     tempnna.setNResolCons(temp.getString(34));
-                    expnna = new ExpedienteNna();
-                    expnna.setIdexpedienteNna(temp.getShort(35));
-                    expnna.setNumero(temp.getString(36));
-                    expnna.setFechaIngreso(temp.getDate(37));
-                    expnna.setHt(temp.getString(38));
-                    expnna.setNExpTutelar(temp.getString(39));
-                    expnna.setProcTutelar(temp.getString(40));
-                    expnna.setFichaIntegral(temp.getShort(41));
-                    expnna.setComentarios(temp.getString(42));
-                    expnna.setRespLegalNombre(temp.getString(43));
-                    expnna.setRespLegalP(temp.getString(44));
-                    expnna.setRespLegalM(temp.getString(45));
-                    expnna.setRespPsicosocialNombre(temp.getString(46));
-                    expnna.setRespPiscosocialP(temp.getString(47));
-                    expnna.setRespPsicosocialM(temp.getString(48));
-                    expnna.setEstado(temp.getString(49));
-                    expnna.setFechaEstado(temp.getDate(50));
-                    expnna.setAdoptable(temp.getShort(51));
-                    expnna.setFechaResolCons(temp.getDate(52));
-                    expnna.setNacional(temp.getShort(53));
-                    expnna.setDiagnostico(temp.getString(54));
-                    expnna.setCodigoReferencia(temp.getString(55));
-                    expnna.setNActual(temp.getString(56));
-                    expnna.setApellidopActual(temp.getString(57));
-                    expnna.setApellidomActual(temp.getString(58));
-                    expnna.setObservaciones(temp.getString(59));
-                    expnna.setFechaInvTutelar(temp.getDate(60));
-                    Set<ExpedienteNna> listexp = new HashSet<ExpedienteNna>();
-                    listexp.add(expnna);
-                    tempnna.setExpedienteNnas(listexp);
+                    try {
+                        expnna = getExpNna(temp.getLong(1));
+                        if (expnna.getIdexpedienteNna() != 0) {
+                            Set<ExpedienteNna> listexp = new HashSet<ExpedienteNna>();
+                            listexp.add(expnna);
+                            tempnna.setExpedienteNnas(listexp);
+                        }
+                    } catch (Exception e) {
+
+                    }
                     car = new Car();
-                    car.setIdcar(temp.getShort(61));
-                    car.setNombre(temp.getString(62));
-                    car.setDireccion(temp.getString(63));
-                    car.setDepartamento(temp.getString(64));
-                    car.setProvincia(temp.getString(65));
-                    car.setDistrito(temp.getString(66));
-                    car.setDirector(temp.getString(67));
-                    car.setContacto(temp.getString(68));
-                    car.setCorreo(temp.getString(69));
-                    car.setFax(temp.getString(70));
-                    car.setCelular(temp.getString(71));
-                    car.setTelefono(temp.getString(72));
-                    car.setObservaciones(temp.getString(73));
+                    car.setIdcar(temp.getShort(35));
+                    car.setNombre(temp.getString(36));
+                    car.setDireccion(temp.getString(37));
+                    car.setDepartamento(temp.getString(38));
+                    car.setProvincia(temp.getString(39));
+                    car.setDistrito(temp.getString(40));
+                    car.setDirector(temp.getString(41));
+                    car.setContacto(temp.getString(42));
+                    car.setCorreo(temp.getString(43));
+                    car.setFax(temp.getString(44));
+                    car.setCelular(temp.getString(45));
+                    car.setTelefono(temp.getString(46));
+                    car.setObservaciones(temp.getString(47));
                     tempnna.setCar(car);
                     juz = new Juzgado();
-                    juz.setIdjuzgado(temp.getLong(74));
-                    juz.setNombre(temp.getString(75));
-                    juz.setDenominacion(temp.getString(76));
-                    juz.setEspecialidad(temp.getString(77));
-                    juz.setDireccion(temp.getString(78));
-                    juz.setDepartamento(temp.getString(79));
-                    juz.setCorteSuperior(temp.getString(80));
-                    juz.setDistritoJudicial(temp.getString(81));
-                    juz.setNombreJuez(temp.getString(82));
-                    juz.setTelefono(temp.getString(83));
-                    juz.setCorreo(temp.getString(84));
-                    juz.setObservaciones(temp.getString(85));
+                    juz.setIdjuzgado(temp.getLong(48));
+                    juz.setNombre(temp.getString(49));
+                    juz.setDenominacion(temp.getString(50));
+                    juz.setEspecialidad(temp.getString(51));
+                    juz.setDireccion(temp.getString(52));
+                    juz.setDepartamento(temp.getString(53));
+                    juz.setCorteSuperior(temp.getString(54));
+                    juz.setDistritoJudicial(temp.getString(55));
+                    juz.setNombreJuez(temp.getString(56));
+                    juz.setTelefono(temp.getString(57));
+                    juz.setCorreo(temp.getString(58));
+                    juz.setObservaciones(temp.getString(59));
                     tempnna.setJuzgado(juz);
                 }
                 statement.close();
