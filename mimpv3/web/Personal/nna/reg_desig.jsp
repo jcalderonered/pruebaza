@@ -221,13 +221,7 @@
              document.formulario.fecha.focus() ;
             return false;
             }
-            if(!document.formulario.numDesig.value.match(numericExpression))
-            {
-            alert( "Debe ingresar solo números en este campo" );
-             document.formulario.numDesig.focus() ;
-            return false;
-            }
-            
+                        
             return true;
             }
             </script>

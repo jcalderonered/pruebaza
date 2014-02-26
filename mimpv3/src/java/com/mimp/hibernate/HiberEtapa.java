@@ -2215,7 +2215,7 @@ public class HiberEtapa {
 
                                     nna.setJuzgado(juzgado);
                                 }
-                                statement_designacion_NNA.close();
+                                statement_designacion_NNA_Juzgado.close();
                             }
 
                             if (temp_nna.getShort(3) != 0) {
@@ -2231,7 +2231,7 @@ public class HiberEtapa {
 
                                     nna.setCar(car);
                                 }
-                                statement_designacion_NNA.close();
+                                statement_designacion_NNA_CAR.close();
                             }
 
                             nna.setNombre(temp_nna.getString(4));
