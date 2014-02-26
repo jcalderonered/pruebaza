@@ -270,83 +270,145 @@ public class HiberNna {
         return tempnna;
     }
 
-    public void crearNna(Nna temp) {
-
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-
-        session.save(temp);
-
-    }
-
-    //EN PROCESO
 //    public void crearNna(Nna temp) {
 //
 //        Session session = sessionFactory.getCurrentSession();
 //        session.beginTransaction();
-//        final Nna nna = temp;
-//        
-//        Work work = new Work() {
-//            @Override
-//            public void execute(Connection connection) throws SQLException {
-//                
-//                String hql = "{call HN_SAVE_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
-//                CallableStatement statement = connection.prepareCall(hql);
-//                statement.setLong(1, nna.getJuzgado().getIdjuzgado());
-//                statement.setLong(2, nna.getCar().getIdcar());
-//                statement.setString(3, nna.getNombre());
-//                statement.setString(4, nna.getApellidoP());
-//                statement.setString(5, nna.getApellidoM());
-//                statement.setString(6, nna.getSexo());
-//                java.sql.Date fechanac = new java.sql.Date(nna.getFechaNacimiento().getTime());
-//                statement.setDate(7, fechanac);
-//                statement.setShort(8, nna.getEdadAnhos());
-//                statement.setShort(9, nna.getEdadMeses());
-//                statement.setShort(10, nna.getActaNacimiento());
-//                statement.setString(11, nna.getCondicionSalud());
-//                statement.setString(12, nna.getDepartamentoNacimiento());
-//                statement.setString(13, nna.getProvinciaNacimiento());
-//                statement.setString(14, nna.getDistritoNacimiento());
-//                statement.setString(15, nna.getPaisNacimiento());
-//                statement.setString(16, nna.getLugarNac());
-//                java.sql.Date fechaAband = new java.sql.Date(nna.getFechaResolAbandono().getTime());
-//                statement.setDate(17, fechaAband);
-//                java.sql.Date fechaCons = new java.sql.Date(nna.getFechaResolConsentida().getTime());
-//                statement.setDate(18, fechaCons);
-//                statement.setString(19, nna.getClasificacion());
-//                statement.setShort(20, nna.getIncesto());
-//                statement.setShort(21, nna.getMental());
-//                statement.setShort(22, nna.getEpilepsia());
-//                statement.setShort(23, nna.getAbuso());
-//                statement.setShort(24, nna.getSifilis());
-//                statement.setShort(25, nna.getSeguiMedico());
-//                statement.setShort(26, nna.getOperacion());
-//                statement.setShort(27, nna.getHiperactivo());
-//                statement.setShort(28, nna.getEspecial());
-//                statement.setShort(29, nna.getEnfermo());
-//                statement.setShort(30, nna.getMayor());
-//                statement.setShort(31, nna.getAdolescente());
-//                statement.setShort(32, nna.getHermano());
-//                statement.setShort(33, nna.getNn());
-//                statement.setString(34, nna.getObservaciones());
-//                statement.setString(35, nna.getNResolAband());
-//                statement.setString(36, nna.getNResolCons());
-//                
-//                statement.execute();
-//                statement.close();
-//            }
-//        };
-//        
-//        session.doWork(work);
+//
+//        session.save(temp);
 //
 //    }
+
+    //PROBADO
+    public void crearNna(Nna temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        final Nna nna = temp;
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                String hql = "{call HN_SAVE_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, nna.getJuzgado().getIdjuzgado());
+                statement.setLong(2, nna.getCar().getIdcar());
+                statement.setString(3, nna.getNombre());
+                statement.setString(4, nna.getApellidoP());
+                statement.setString(5, nna.getApellidoM());
+                statement.setString(6, nna.getSexo());
+                java.sql.Date fechanac = new java.sql.Date(nna.getFechaNacimiento().getTime());
+                statement.setDate(7, fechanac);
+                statement.setShort(8, nna.getEdadAnhos());
+                statement.setShort(9, nna.getEdadMeses());
+                statement.setShort(10, nna.getActaNacimiento());
+                statement.setString(11, nna.getCondicionSalud());
+                statement.setString(12, nna.getDepartamentoNacimiento());
+                statement.setString(13, nna.getProvinciaNacimiento());
+                statement.setString(14, nna.getDistritoNacimiento());
+                statement.setString(15, nna.getPaisNacimiento());
+                statement.setString(16, nna.getLugarNac());
+                java.sql.Date fechaAband = new java.sql.Date(nna.getFechaResolAbandono().getTime());
+                statement.setDate(17, fechaAband);
+                java.sql.Date fechaCons = new java.sql.Date(nna.getFechaResolConsentida().getTime());
+                statement.setDate(18, fechaCons);
+                statement.setString(19, nna.getClasificacion());
+                statement.setShort(20, nna.getIncesto());
+                statement.setShort(21, nna.getMental());
+                statement.setShort(22, nna.getEpilepsia());
+                statement.setShort(23, nna.getAbuso());
+                statement.setShort(24, nna.getSifilis());
+                statement.setShort(25, nna.getSeguiMedico());
+                statement.setShort(26, nna.getOperacion());
+                statement.setShort(27, nna.getHiperactivo());
+                statement.setShort(28, nna.getEspecial());
+                statement.setShort(29, nna.getEnfermo());
+                statement.setShort(30, nna.getMayor());
+                statement.setShort(31, nna.getAdolescente());
+                statement.setShort(32, nna.getHermano());
+                statement.setShort(33, nna.getNn());
+                statement.setString(34, nna.getObservaciones());
+                statement.setString(35, nna.getNResolAband());
+                statement.setString(36, nna.getNResolCons());
+                
+                statement.execute();
+                statement.close();
+            }
+        };
+        
+        session.doWork(work);
+
+    }
+    
+//    public void updateNna(Nna temp) {
+//
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//
+//        session.update(temp);
+//
+//    }
+    
+    //
     public void updateNna(Nna temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-
-        session.update(temp);
-
+        final Nna nna = temp;
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                String hql = "{call HN_UPDATE_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, nna.getJuzgado().getIdjuzgado());
+                statement.setLong(2, nna.getCar().getIdcar());
+                statement.setString(3, nna.getNombre());
+                statement.setString(4, nna.getApellidoP());
+                statement.setString(5, nna.getApellidoM());
+                statement.setString(6, nna.getSexo());
+                java.sql.Date fechanac = new java.sql.Date(nna.getFechaNacimiento().getTime());
+                statement.setDate(7, fechanac);
+                statement.setShort(8, nna.getEdadAnhos());
+                statement.setShort(9, nna.getEdadMeses());
+                statement.setShort(10, nna.getActaNacimiento());
+                statement.setString(11, nna.getCondicionSalud());
+                statement.setString(12, nna.getDepartamentoNacimiento());
+                statement.setString(13, nna.getProvinciaNacimiento());
+                statement.setString(14, nna.getDistritoNacimiento());
+                statement.setString(15, nna.getPaisNacimiento());
+                statement.setString(16, nna.getLugarNac());
+                java.sql.Date fechaAband = new java.sql.Date(nna.getFechaResolAbandono().getTime());
+                statement.setDate(17, fechaAband);
+                java.sql.Date fechaCons = new java.sql.Date(nna.getFechaResolConsentida().getTime());
+                statement.setDate(18, fechaCons);
+                statement.setString(19, nna.getClasificacion());
+                statement.setShort(20, nna.getIncesto());
+                statement.setShort(21, nna.getMental());
+                statement.setShort(22, nna.getEpilepsia());
+                statement.setShort(23, nna.getAbuso());
+                statement.setShort(24, nna.getSifilis());
+                statement.setShort(25, nna.getSeguiMedico());
+                statement.setShort(26, nna.getOperacion());
+                statement.setShort(27, nna.getHiperactivo());
+                statement.setShort(28, nna.getEspecial());
+                statement.setShort(29, nna.getEnfermo());
+                statement.setShort(30, nna.getMayor());
+                statement.setShort(31, nna.getAdolescente());
+                statement.setShort(32, nna.getHermano());
+                statement.setShort(33, nna.getNn());
+                statement.setString(34, nna.getObservaciones());
+                statement.setString(35, nna.getNResolAband());
+                statement.setString(36, nna.getNResolCons());
+                statement.setLong(37, nna.getIdnna());
+                
+                statement.execute();
+                statement.close();
+            }
+        };
+        session.doWork(work);
     }
 
 //    public ArrayList<Nna> ListaNna(String clasificacion) {

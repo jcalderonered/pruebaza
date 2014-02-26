@@ -149,7 +149,7 @@ public class nna {
             @RequestParam(value = "psiquiatrica", required = false) String psiquiatrica,
             @RequestParam(value = "epilepsia", required = false) String epilepsia,
             @RequestParam(value = "abuso", required = false) String abuso,
-            @RequestParam(value = "sano", required = false) String sifilis,
+            @RequestParam(value = "sifilis", required = false) String sifilis,
             @RequestParam(value = "estable", required = false) String estable,
             @RequestParam(value = "intervencion", required = false) String intervencion,
             @RequestParam(value = "trastorno", required = false) String trastorno,
@@ -281,8 +281,9 @@ public class nna {
 
         tempNna.setIncesto(shIncesto);
         tempNna.setMental(shPsiquiatrica);
-        //tempNna.setEpilepsia(shEpilepsia);
+        tempNna.setEpilepsia(shEpilepsia);
         tempNna.setAbuso(shAbuso);
+        tempNna.setSifilis(shSifilis);
         tempNna.setSeguiMedico(shEstable);
         tempNna.setOperacion(shIntervencion);
         tempNna.setHiperactivo(shTrastorno);
