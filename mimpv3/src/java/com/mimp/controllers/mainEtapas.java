@@ -1583,7 +1583,7 @@ public class mainEtapas {
             tempExpNna.setEstado("adop");
             Date now = new Date();
             tempExpNna.setFechaEstado(now);
-            ServicioNna.updateExpNna(tempExpNna);
+            //ServicioNna.updateExpNna(tempExpNna);
             for (int i = 0; i < prioridad.length; i++) {
                 Designacion tempDesg = allDesig.get(i);
                 Date tempfecha = tempDesg.getFechaConsejo();

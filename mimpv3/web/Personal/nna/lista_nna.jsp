@@ -134,11 +134,12 @@
                                         <td>${nna.getApellidoM()}</td>
                                         <td>${nna.getSexo()}</td>
                                         <td>
+                                            <c:set var="tokenAdopcion" value="2" ></c:set>
                                             <c:if test="${!nna.getDesignacions().isEmpty()}">
-                                                <c:set var="tokenAdopcion" value="2" ></c:set>
                                                <c:forEach var="designacion" items="${nna.getDesignacions()}" varStatus="status">
                                                     <c:choose>
                                                         <c:when test="${designacion.getAceptacionConsejo() == 0 || designacion.getAceptacionConsejo() == 1 || designacion.getAceptacionConsejo() == 2}">
+                                                            
                                                             <c:set var="tokenAdopcion" value="0" ></c:set>
                                                         </c:when>
                                                         <c:otherwise>
