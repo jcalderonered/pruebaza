@@ -162,6 +162,8 @@ public class HiberNna {
 
         return tempnna;
     }
+    
+    
 
 //    public Nna getNnaPostAdopcion(long id) {
 //        Session session = sessionFactory.getCurrentSession();
@@ -406,7 +408,8 @@ public class HiberNna {
 //        }
 //        return allNna;
 //    }
-    //DUPLICA RESULTADOS
+    
+    //PROBADO Y TERMINADO
     public ArrayList<Nna> ListaNna(String clasificacion) {
         Session session = sessionFactory.getCurrentSession();
         final String clasif = clasificacion;
@@ -557,8 +560,9 @@ public class HiberNna {
     //        Hibernate.initialize(tempExpNna.getNna());
     //        return tempExpNna;
     //    }
-    //PROBADO
-
+    
+    
+    //PROBADO Y TERMINADO
     public ExpedienteNna getExpNna(long idNna) {
         Session session = sessionFactory.getCurrentSession();
 
@@ -665,7 +669,7 @@ public class HiberNna {
 //        }
 //        return allExpNna;
 //    }
-    //PROBADO
+    //PROBADO Y TERMINADO
     public ArrayList<ExpedienteNna> listaExpNna() {
         Session session = sessionFactory.getCurrentSession();
         final ArrayList<ExpedienteNna> allExpNna = new ArrayList();
