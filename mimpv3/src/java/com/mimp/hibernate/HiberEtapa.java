@@ -3500,6 +3500,7 @@ public class HiberEtapa {
                 while (temp_designacion.next()) {
                     Designacion designacion = new Designacion();
                     ExpedienteFamilia expFamilia = new ExpedienteFamilia();
+                    ExpedienteNna expNna = new ExpedienteNna();
                     Personal personal = new Personal();
                     Nna nna = new Nna();
                     Familia fam = new Familia();
@@ -3644,6 +3645,84 @@ public class HiberEtapa {
                             nna.setObservaciones(temp_nna.getString(35));
                             nna.setNResolAband(temp_nna.getString(36));
                             nna.setNResolCons(temp_nna.getString(37));
+
+                            String hql_listaexp = "{call HE_LISTAEXP_BY_IDNNA(?,?)}";
+                            CallableStatement statement_listaexp = connection.prepareCall(hql_listaexp);
+                            statement_listaexp.setLong(1, idNna);
+                            statement_listaexp.registerOutParameter(2, OracleTypes.CURSOR);
+                            statement_listaexp.execute();
+                            Set<ExpedienteNna> listaExp = new HashSet<ExpedienteNna>();
+
+                            temp_expediente = (ResultSet) statement_listaexp.getObject(2);
+
+                            while (temp_expediente.next()) {
+
+                                expNna.setIdexpedienteNna(temp_expediente.getLong(1));
+
+                                if (temp_expediente.getLong(2) != 0) {
+
+                                    String hql_NNA = "{call HE_GET_NNA(?, ?)}";
+                                    CallableStatement statement_NNA = connection.prepareCall(hql_NNA);
+                                    statement_NNA.setLong(1, temp_expediente.getLong(2));
+                                    statement_NNA.registerOutParameter(2, OracleTypes.CURSOR);
+                                    statement_NNA.execute();
+                                    ResultSet temp_nna_2 = (ResultSet) statement_NNA.getObject(2);
+                                    while (temp_nna_2.next()) {
+                                        nna.setIdnna(temp_nna_2.getLong(1));
+
+                                        nna.setCar(car);
+                                    }
+                                    statement_NNA.close();
+                                }
+
+                                if (temp_expediente.getLong(3) != 0) {
+
+                                    String hql3 = "{call HE_GET_UNIDAD(?, ?)}";
+                                    CallableStatement statement3 = connection.prepareCall(hql3);
+                                    statement3.setLong(1, temp_expediente.getLong(3));
+                                    statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                                    statement3.execute();
+                                    temp2 = (ResultSet) statement3.getObject(2);
+                                    while (temp2.next()) {
+                                        unidad.setIdunidad(temp2.getShort(1));
+                                        expFamilia.setUnidad(unidad);
+                                    }
+                                    statement3.close();
+                                }
+                                
+                                expNna.setNumero(temp_expediente.getString(4));
+                                expNna.setFechaIngreso(temp_expediente.getDate(5));
+                                expNna.setHt(temp_expediente.getString(6));
+                                expNna.setNExpTutelar(temp_expediente.getString(7));
+                                expNna.setProcTutelar(temp_expediente.getString(8));
+                                expNna.setFichaIntegral(temp_expediente.getShort(9));
+                                expNna.setComentarios(temp_expediente.getString(10));
+                                expNna.setRespLegalNombre(temp_expediente.getString(11));
+                                expNna.setRespLegalP(temp_expediente.getString(12));
+                                expNna.setRespLegalM(temp_expediente.getString(13));
+                                expNna.setRespPsicosocialNombre(temp_expediente.getString(14));
+                                expNna.setRespPiscosocialP(temp_expediente.getString(15));
+                                expNna.setRespPsicosocialM(temp_expediente.getString(16));
+                                expNna.setEstado(temp_expediente.getString(17));
+                                expNna.setFechaEstado(temp_expediente.getDate(18));
+                                expNna.setAdoptable(temp_expediente.getShort(19));
+                                expNna.setFechaResolCons(temp_expediente.getDate(20));
+                                expNna.setNacional(temp_expediente.getShort(21));
+                                expNna.setDiagnostico(temp_expediente.getString(22));
+                                expNna.setCodigoReferencia(temp_expediente.getString(23));
+                                expNna.setNActual(temp_expediente.getString(24));
+                                expNna.setApellidopActual(temp_expediente.getString(25));
+                                expNna.setApellidomActual(temp_expediente.getString(26));
+                                expNna.setObservaciones(temp_expediente.getString(27));
+                                expNna.setFechaInvTutelar(temp_expediente.getDate(28));
+
+                                listaExp.add(expNna);
+
+                            }
+
+                            statement_listaexp.close();
+
+                            nna.setExpedienteNnas(listaExp);
 
                             designacion.setNna(nna);
                         }
