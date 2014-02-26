@@ -1098,7 +1098,7 @@ public class mainEtapas {
                  if (fecha == null || fecha.equals("")) {
                  tempDesign.setFechaPropuesta(null);
                  }*/
-                tempDesign.setNDesignacion(Long.parseLong(numDesig));
+                tempDesign.setNDesignacion(numDesig);
                 if (idExpediente.length == 1) {
                     tempDesign.setTipoPropuesta("directa");
                 }
@@ -1497,7 +1497,7 @@ public class mainEtapas {
          if (fechaPropuesta == null || fechaPropuesta.equals("")) {
          tempDesign.setFechaPropuesta(null);
          }*/
-        tempDesign.setNDesignacion(Long.parseLong(numDesig));
+        tempDesign.setNDesignacion(numDesig);
         tempDesign.setTipoPropuesta("directa");
         tempDesign.setAceptacionConsejo(Short.parseShort("1"));
         servicioEtapa.crearDesignacion(tempDesign);

@@ -2287,7 +2287,7 @@ public class HiberEtapa {
                         }
                         statement_designacion_personal.close();
                     }
-                    designacion.setNDesignacion(temp_designacion.getLong(5));
+                    designacion.setNDesignacion(temp_designacion.getString(5));
                     designacion.setPrioridad(temp_designacion.getLong(6));
                     designacion.setFechaPropuesta(temp_designacion.getDate(7));
                     designacion.setFechaConsejo(temp_designacion.getDate(8));
@@ -2389,7 +2389,7 @@ public class HiberEtapa {
                         }
                         statement_designacion_personal.close();
                     }
-                    designacion.setNDesignacion(temp_designacion.getLong(5));
+                    designacion.setNDesignacion(temp_designacion.getString(5));
                     designacion.setPrioridad(temp_designacion.getLong(6));
                     designacion.setFechaPropuesta(temp_designacion.getDate(7));
                     designacion.setFechaConsejo(temp_designacion.getDate(8));
@@ -2494,7 +2494,7 @@ public class HiberEtapa {
                         }
                         statement_designacion_personal.close();
                     }
-                    designacion.setNDesignacion(temp_designacion.getLong(5));
+                    designacion.setNDesignacion(temp_designacion.getString(5));
                     designacion.setPrioridad(temp_designacion.getLong(6));
                     designacion.setFechaPropuesta(temp_designacion.getDate(7));
                     designacion.setFechaConsejo(temp_designacion.getDate(8));
@@ -3250,7 +3250,57 @@ public class HiberEtapa {
 
     }
 
+    public void crearDesignacion2(Designacion temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idEx = temp.getExpedienteFamilia().getIdexpedienteFamilia();
+        final Long idNna = temp.getNna().getIdnna();
+        final Long idPer = temp.getPersonal().getIdpersonal();
+        final String nDesig = temp.getNDesignacion();
+        final Long prio = temp.getPrioridad();
+        final Date fechaPro = temp.getFechaPropuesta();
+        final Date fechaCon = temp.getFechaConsejo();
+        final short acepCon = temp.getAceptacionConsejo();
+        final String tipo = temp.getTipoPropuesta();
+        final String obs = temp.getObs();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HE_CREAR_DESIG(?,?,?,?,?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idEx);
+                statement.setLong(2, idNna);
+                statement.setLong(3, idPer);
+                statement.setString(4, nDesig);
+                statement.setLong(5, prio);
+                statement.setDate(6, (java.sql.Date) fechaPro);
+                statement.setDate(7, (java.sql.Date) fechaCon);
+                statement.setShort(8, acepCon);
+                statement.setString(9, tipo);
+                statement.setString(10, obs);
+                statement.execute();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
+
+    }
+    
     public void updateDesignacion(Designacion temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        session.update(temp);
+
+    }
+    
+    public void updateDesignacion2(Designacion temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -3742,7 +3792,7 @@ public class HiberEtapa {
                         }
                         statement_designacion_personal.close();
                     }
-                    designacion.setNDesignacion(temp_designacion.getLong(5));
+                    designacion.setNDesignacion(temp_designacion.getString(5));
                     designacion.setPrioridad(temp_designacion.getLong(6));
                     designacion.setFechaPropuesta(temp_designacion.getDate(7));
                     designacion.setFechaConsejo(temp_designacion.getDate(8));
