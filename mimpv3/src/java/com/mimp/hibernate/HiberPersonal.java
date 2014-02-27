@@ -8,11 +8,17 @@ package com.mimp.hibernate;
 import java.util.*;
 import org.hibernate.Session;
 import com.mimp.bean.*;
-import com.mimp.util.timeStampFormat;
+import com.mimp.util.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.annotation.Resource;
+import oracle.jdbc.OracleTypes;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.jdbc.Work;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -639,7 +645,7 @@ public class HiberPersonal {
         String size;
 
         session.beginTransaction();
-        String hql = "From Taller T order by T.id";
+        String hql = "From Taller T where T.habilitado = 0 order by T.id";
         Query query = session.createQuery(hql);
         List talleres = query.list();
         ArrayList<Taller> allTalleres = new ArrayList();
@@ -819,7 +825,7 @@ public class HiberPersonal {
         for (AsistenciaFR afr : tempReun.getAsistenciaFRs()) {
             Hibernate.initialize(afr.getFamilia());
             if (afr.getFamilia().getIdfamilia() != idtemp) {
-                String hql2 = "FROM FormularioSesion F where F.familia = :id order by F.idformularioSesion DESC";
+                String hql2 = "FROM FormularioSesion F where F.familia = :id order by F.fechaSol DESC";
                 Query query2 = session.createQuery(hql2);
                 query2.setLong("id", afr.getFamilia().getIdfamilia());
                 query2.setMaxResults(1);
@@ -1457,5 +1463,161 @@ public class HiberPersonal {
 
         return (buffer.toString());
     }
+    
+    public ArrayList<Grupo> listaGruposTurnos2Reuniones (Long idTaller){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idT = idTaller;
+        final ArrayList<Grupo> ListaGrupos = new ArrayList();
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                
+                String hql = "{call PERS_LISTAGRUPOS(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idT);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+                
+                ResultSet rs = (ResultSet) statement.getObject(2);
+               
+                while(rs.next()){
+                    Grupo tempGrp = new Grupo();
+                    tempGrp.setIdgrupo(rs.getLong("IDGRUPO"));
+                    tempGrp.setNombre(rs.getString("NOMBRE"));
+                                Set<Turno2> listTurno2 = new HashSet<Turno2>(0);
+                                String hql2 = "{call PERS_LISTA_TURNO2(?,?)}";
+                                CallableStatement statement2 = connection.prepareCall(hql2);
+                                statement2.setLong(1, tempGrp.getIdgrupo());
+                                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                                statement2.execute();
+
+                                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                                while(rs2.next()){
+                                    Turno2 tempT2 = new Turno2();
+                                    tempT2.setIdturno2(rs2.getLong("IDTURNO2"));
+                                    tempT2.setNombre(rs2.getString("NOMBRE"));
+                                    tempT2.setGrupo(tempGrp);
+                                                    Set<Reunion> listR = new HashSet<Reunion>(0);
+                                                    String hql3 = "{call PERS_LISTA_REUNION(?,?)}";
+                                                    CallableStatement statement3 = connection.prepareCall(hql3);
+                                                    statement3.setLong(1, tempT2.getIdturno2());
+                                                    statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                                                    statement3.execute();
+
+                                                    ResultSet rs3 = (ResultSet) statement3.getObject(2);
+
+                                                    while(rs3.next()){
+                                                        Reunion tempR = new Reunion();
+                                                        tempR.setIdreunion(rs3.getLong("IDREUNION"));
+                                                        tempR.setFecha(rs3.getDate("FECHA"));
+                                                        tempR.setHora(rs3.getString("HORA"));
+                                                        tempR.setDuracion(rs3.getString("DURACION"));
+                                                        tempR.setDireccion(rs3.getString("DIRECCION"));
+                                                        tempR.setTurno2(tempT2);
+                                                        listR.add(tempR);
+                                                        
+                                                    }
+                                                    rs3.close();
+                                                    statement3.close();
+                                                    
+                                      tempT2.setReunions(listR);
+                                      listTurno2.add(tempT2);
+                                }
+                                rs2.close();
+                                statement2.close();
+                          tempGrp.setTurno2s(listTurno2);
+                      ListaGrupos.add(tempGrp);
+                }
+                rs.close();
+                statement.close();
+            }
+        };
+        
+        session.doWork(work);
+        
+        
+        
+        return ListaGrupos;
+    }
+    
+    public ArrayList<FormularioSesion> InscritosReunion(long idReunion) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idR = idReunion;
+        final ArrayList<FormularioSesion> allFormularios = new ArrayList();
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                
+                String hql = "{call PERS_ASIS_REUNION(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idR);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+                
+                ResultSet rs = (ResultSet) statement.getObject(2);
+               
+                while(rs.next()){
+                    FormularioSesion tempFs = new FormularioSesion();
+                    Familia tempF = new Familia();
+                    Sesion tempS = new Sesion();
+                    tempF.setIdfamilia(rs.getLong("IDFAMILIA"));
+                    tempS.setIdsesion(rs.getLong("IDSESION"));
+                    tempFs.setIdformularioSesion(rs.getLong("IDFORMULARIO_SESION"));
+                    tempFs.setFamilia(tempF);
+                    tempFs.setSesion(tempS);
+                                Set<Asistente> listAsis = new HashSet<Asistente>(0);
+                                String hql2 = "{call HE_GET_ASIS_BY_IDFS(?,?)}";
+                                CallableStatement statement2 = connection.prepareCall(hql2);
+                                statement2.setLong(1, tempFs.getIdformularioSesion());
+                                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                                statement2.execute();
+
+                                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                                while(rs2.next()){
+                                    Asistente tempA = new Asistente();
+                                    tempA.setIdasistente(rs2.getLong("IDASISTENTE"));
+                                    tempA.setNombre(rs2.getString("NOMBRE"));
+                                    tempA.setApellidoP(rs2.getString("APELLIDO_P"));
+                                    tempA.setApellidoM(rs2.getString("APELLIDO_M"));
+                                    String tempsexo = "";
+                                    tempsexo = rs2.getString("SEXO");
+                                    if (!rs2.wasNull()) {
+                                            tempA.setSexo(tempsexo.charAt(0));
+                                    }
+                                    tempA.setEdad(rs2.getShort("EDAD"));
+                                    tempA.setCorreo(rs2.getString("CORREO"));
+                                    tempA.setFormularioSesion(tempFs);
+                                    listAsis.add(tempA);
+                                    
+                                    
+                                }
+                                rs2.close();
+                                statement2.close();
+                                tempFs.setAsistentes(listAsis);
+                                allFormularios.add(tempFs);
+                }
+                rs.close();
+                statement.close();
+            }
+        };
+        
+        session.doWork(work);
+
+        return allFormularios;
+
+    }
+    
 
 }
