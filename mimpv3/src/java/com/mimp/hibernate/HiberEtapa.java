@@ -3251,7 +3251,6 @@ public class HiberEtapa {
 //        session.save(temp);
 //
 //    }
-
     public void crearDesignacion(Designacion temp) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -3299,7 +3298,6 @@ public class HiberEtapa {
 //        session.update(temp);
 //
 //    }
-    
     public void updateDesignacion(Designacion temp) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -3317,12 +3315,9 @@ public class HiberEtapa {
         final String tipo = temp.getTipoPropuesta();
         final String obs = temp.getObs();
 
-
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-
-    
 
                 String hql = "{call HE_UPDATE_DESIG(?,?,?,?,?,?,?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
@@ -3361,34 +3356,33 @@ public class HiberEtapa {
 //        }
 //        return allDesig;
 //    }
-    
     public ArrayList<Designacion> getListaDesignaciones(long idNna) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        
+
         final Long idN = idNna;
         final ArrayList<Designacion> allDesig = new ArrayList();
-        
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
                 ExpedienteNna expnna;
-                
+
                 String hql = "{call HE_LISTADESIG_BY_IDNNA(?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, idN);
                 statement.registerOutParameter(2, OracleTypes.CURSOR);
                 statement.execute();
-                
+
                 ResultSet rs = (ResultSet) statement.getObject(2);
-               
-                while(rs.next()){
+
+                while (rs.next()) {
                     Designacion tempDesig = new Designacion();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
                     Nna tempNna = new Nna();
                     Personal tempPerso = new Personal();
-                    
+
                     tempDesig.setIddesignacion(rs.getLong(1));
                     tempDesig.setNDesignacion(rs.getString(5));
                     tempDesig.setPrioridad(rs.getLong(6));
@@ -3397,9 +3391,9 @@ public class HiberEtapa {
                     tempDesig.setAceptacionConsejo(rs.getShort(9));
                     tempDesig.setTipoPropuesta(rs.getString(10));
                     tempDesig.setObs(rs.getString(11));
-                    
+
                     tempPerso.setIdpersonal(rs.getLong(4));
-                    
+
                     tempEF.setIdexpedienteFamilia(rs.getLong(2));
                     tempEF.setExpediente(rs.getString("EXPEDIENTE"));
                     tempEF.setHt(rs.getString("HT"));
@@ -3415,8 +3409,7 @@ public class HiberEtapa {
                     tempEF.setHtFicha(rs.getString("HTFICHA"));
                     tempEF.setnFicha(rs.getString("NFICHA"));
                     tempEF.setFechaIngresoFicha(rs.getDate("FECHA_INGRESO_FICHA"));
-                    
-                    
+
                     tempNna.setIdnna(rs.getLong("IDNNA"));
                     tempNna.setNombre(rs.getString("NOMBRE"));
                     tempNna.setApellidoP(rs.getString("APELLIDO_P"));
@@ -3448,24 +3441,23 @@ public class HiberEtapa {
                     tempNna.setMayor(rs.getShort("MAYOR"));
                     tempNna.setAdolescente(rs.getShort("ADOLESCENTE"));
                     tempNna.setHermano(rs.getShort("HERMANO"));
-                    tempNna.setNn(rs.getShort("NN"));                    
+                    tempNna.setNn(rs.getShort("NN"));
                     tempNna.setObservaciones(rs.getString("OBSERVACIONES"));
                     tempNna.setNResolAband(rs.getString("N_RESOL_ABAND"));
                     tempNna.setNResolCons(rs.getString("N_RESOL_CONS"));
-                    
-                    
+
                     tempDesig.setExpedienteFamilia(tempEF);
                     tempDesig.setNna(tempNna);
                     tempDesig.setPersonal(tempPerso);
-                    
+
                     allDesig.add(tempDesig);
                 }
                 statement.close();
             }
         };
-        
+
         session.doWork(work);
-        
+
         return allDesig;
     }
 
@@ -3504,33 +3496,31 @@ public class HiberEtapa {
 //        }
 //        return allDesig;
 //    }
-
     public ArrayList<Designacion> getListaAdopciones() {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        
-        
+
         final ArrayList<Designacion> allDesig = new ArrayList();
-        
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
                 ExpedienteNna expnna;
-                
+
                 String hql = "{call HE_LISTADESIG_ADOPCION(?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.registerOutParameter(1, OracleTypes.CURSOR);
                 statement.execute();
-                
+
                 ResultSet rs = (ResultSet) statement.getObject(1);
-               
-                while(rs.next()){
+
+                while (rs.next()) {
                     Designacion tempDesig = new Designacion();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
                     Nna tempNna = new Nna();
                     Personal tempPerso = new Personal();
-                    
+
                     tempDesig.setIddesignacion(rs.getLong(1));
                     tempDesig.setNDesignacion(rs.getString(5));
                     tempDesig.setPrioridad(rs.getLong(6));
@@ -3539,9 +3529,9 @@ public class HiberEtapa {
                     tempDesig.setAceptacionConsejo(rs.getShort(9));
                     tempDesig.setTipoPropuesta(rs.getString(10));
                     tempDesig.setObs(rs.getString(11));
-                    
+
                     tempPerso.setIdpersonal(rs.getLong(4));
-                    
+
                     tempEF.setIdexpedienteFamilia(rs.getLong(2));
                     tempEF.setExpediente(rs.getString("EXPEDIENTE"));
                     tempEF.setHt(rs.getString("HT"));
@@ -3557,9 +3547,9 @@ public class HiberEtapa {
                     tempEF.setHtFicha(rs.getString("HTFICHA"));
                     tempEF.setnFicha(rs.getString("NFICHA"));
                     tempEF.setFechaIngresoFicha(rs.getDate("FECHA_INGRESO_FICHA"));
-                    
+
                     Set<Evaluacion> listaEv = new HashSet<Evaluacion>();
-                    
+
                     String hql2 = "{call HE_LISTAEVAL_BY_IDEXPFAM(?,?)}";
                     CallableStatement statement2 = connection.prepareCall(hql2);
                     statement2.setLong(1, tempEF.getIdexpedienteFamilia());
@@ -3613,9 +3603,9 @@ public class HiberEtapa {
 
                     }
                     statement2.close();
-                    
+
                     tempEF.setEvaluacions(listaEv);
-                    
+
                     tempNna.setIdnna(rs.getLong("IDNNA"));
                     tempNna.setNombre(rs.getString("NOMBRE"));
                     tempNna.setApellidoP(rs.getString("APELLIDO_P"));
@@ -3647,28 +3637,26 @@ public class HiberEtapa {
                     tempNna.setMayor(rs.getShort("MAYOR"));
                     tempNna.setAdolescente(rs.getShort("ADOLESCENTE"));
                     tempNna.setHermano(rs.getShort("HERMANO"));
-                    tempNna.setNn(rs.getShort("NN"));                    
+                    tempNna.setNn(rs.getShort("NN"));
                     tempNna.setObservaciones(rs.getString("OBSERVACIONES"));
                     tempNna.setNResolAband(rs.getString("N_RESOL_ABAND"));
                     tempNna.setNResolCons(rs.getString("N_RESOL_CONS"));
-                    
-                    
+
                     tempDesig.setExpedienteFamilia(tempEF);
                     tempDesig.setNna(tempNna);
                     tempDesig.setPersonal(tempPerso);
-                    
+
                     allDesig.add(tempDesig);
                 }
                 statement.close();
             }
         };
-        
+
         session.doWork(work);
-        
-        
+
         return allDesig;
     }
-    
+
 //    public void deleteResolucion(Resolucion temp) {
 //        
 //        Session session = sessionFactory.getCurrentSession();
@@ -3677,14 +3665,13 @@ public class HiberEtapa {
 //        session.delete(temp);
 //    
 //    }
-    
     public void deleteResolucion(Resolucion temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
         final Long idR = temp.getIdresolucion();
-        
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
@@ -3699,7 +3686,6 @@ public class HiberEtapa {
         };
 
         session.doWork(work);
-        
 
     }
 
@@ -3711,14 +3697,13 @@ public class HiberEtapa {
 //        session.delete(temp);
 //    
 //    }
-    
     public void deleteEvaluacion(Evaluacion temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
         final Long idE = temp.getIdevaluacion();
-        
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
@@ -3744,7 +3729,6 @@ public class HiberEtapa {
 //        session.save(temp);
 //
 //    }
-    
     public void crearEstudioCaso(EstudioCaso temp) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -3777,7 +3761,6 @@ public class HiberEtapa {
 
     }
 
-
 //    public void updateEstudioCaso(EstudioCaso temp) {
 //
 //        Session session = sessionFactory.getCurrentSession();
@@ -3786,16 +3769,13 @@ public class HiberEtapa {
 //        session.update(temp);
 //
 //    }
-    
     public void updateEstudioCaso(EstudioCaso temp) {
 
         Session session = sessionFactory.getCurrentSession();
 
-
         final Long idEs = temp.getIdestudioCaso();
         final Date fechaSol = temp.getFechaSolAdop();
         final String res = temp.getResultado();
-        
 
         Work work = new Work() {
             @Override
@@ -3806,7 +3786,6 @@ public class HiberEtapa {
                 statement.setLong(1, idEs);
                 statement.setDate(2, (java.sql.Date) fechaSol);
                 statement.setString(3, res);
-                
 
                 statement.execute();
                 statement.close();
@@ -3962,39 +3941,177 @@ public class HiberEtapa {
         return allPostAdopcion;
     }
 
+    /* public ArrayList<ExpedienteFamilia> getListaEspera() {
+
+     Session session = sessionFactory.getCurrentSession();
+     session.beginTransaction();
+     ArrayList<ExpedienteFamilia> allEspera = new ArrayList();
+     String hql = "from ExpedienteFamilia EF where EF.estado = :estado";
+     Query query = session.createQuery(hql);
+     query.setString("estado", "espera");
+     List expedientes = query.list();
+     for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+     ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+     Hibernate.initialize(temp.getEvaluacions());
+     Set<Evaluacion> tempEvaluaciones = new HashSet<Evaluacion>(0);
+     for (Evaluacion eval : temp.getEvaluacions()) {
+     if (eval.getTipo().equals("legal")) {
+     String hql2 = "from Resolucion R where R.evaluacion = :idEvaluacion and R.tipo = :tipo ORDER BY R.fechaResol DESC";
+     Query query2 = session.createQuery(hql2);
+     query2.setLong("idEvaluacion", eval.getIdevaluacion());
+     query2.setString("tipo", "apto");
+     query2.setMaxResults(1);
+     Object queryResult = query2.uniqueResult();
+     Resolucion tempResol = (Resolucion) queryResult;
+     Set<Resolucion> tempResoluciones = new HashSet<Resolucion>(0);
+     tempResoluciones.add(tempResol);
+     eval.setResolucions(tempResoluciones);
+     tempEvaluaciones.add(eval);
+
+     }
+
+     }
+     temp.setEvaluacions(tempEvaluaciones);
+     allEspera.add(temp);
+     }
+     return allEspera;
+     }*/
+    
     public ArrayList<ExpedienteFamilia> getListaEspera() {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        ArrayList<ExpedienteFamilia> allEspera = new ArrayList();
-        String hql = "from ExpedienteFamilia EF where EF.estado = :estado";
-        Query query = session.createQuery(hql);
-        query.setString("estado", "espera");
-        List expedientes = query.list();
-        for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
-            ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
-            Hibernate.initialize(temp.getEvaluacions());
-            Set<Evaluacion> tempEvaluaciones = new HashSet<Evaluacion>(0);
-            for (Evaluacion eval : temp.getEvaluacions()) {
-                if (eval.getTipo().equals("legal")) {
-                    String hql2 = "from Resolucion R where R.evaluacion = :idEvaluacion and R.tipo = :tipo ORDER BY R.fechaResol DESC";
-                    Query query2 = session.createQuery(hql2);
-                    query2.setLong("idEvaluacion", eval.getIdevaluacion());
-                    query2.setString("tipo", "apto");
-                    query2.setMaxResults(1);
-                    Object queryResult = query2.uniqueResult();
-                    Resolucion tempResol = (Resolucion) queryResult;
-                    Set<Resolucion> tempResoluciones = new HashSet<Resolucion>(0);
-                    tempResoluciones.add(tempResol);
-                    eval.setResolucions(tempResoluciones);
-                    tempEvaluaciones.add(eval);
 
+        final ArrayList<ExpedienteFamilia> allEspera = new ArrayList();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HE_GET_LISTA_ESPERA(?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.registerOutParameter(1, OracleTypes.CURSOR);
+                statement.execute();
+
+                temp_expediente = (ResultSet) statement.getObject(1);
+
+                while (temp_expediente.next()) {
+                    ExpedienteFamilia expFamilia = new ExpedienteFamilia();
+                    Familia fam = new Familia();
+                    Unidad unidad = new Unidad();
+                    Personal personal = new Personal();
+
+                    expFamilia.setIdexpedienteFamilia(temp.getShort(1));
+                    if (temp.getShort(2) != 0) {
+
+                        String hql2 = "{call HE_GETFAMILIA(?, ?)}";
+                        CallableStatement statement2 = connection.prepareCall(hql2);
+                        statement2.setLong(1, temp.getShort(2));
+                        statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement2.execute();
+                        temp2 = (ResultSet) statement2.getObject(2);
+                        while (temp2.next()) {
+                            fam.setIdfamilia(temp2.getShort(1));
+                            expFamilia.setFamilia(fam);
+                        }
+                        statement2.close();
+                    }
+                    if (temp.getShort(3) != 0) {
+
+                        String hql3 = "{call HE_GET_UNIDAD(?, ?)}";
+                        CallableStatement statement3 = connection.prepareCall(hql3);
+                        statement3.setLong(1, temp.getShort(3));
+                        statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement3.execute();
+                        temp2 = (ResultSet) statement3.getObject(2);
+                        while (temp2.next()) {
+                            unidad.setIdunidad(temp2.getShort(1));
+                            expFamilia.setUnidad(unidad);
+                        }
+                        statement3.close();
+                    }
+                    expFamilia.setNumero(temp.getLong(4));
+                    expFamilia.setExpediente(temp.getString(5));
+                    expFamilia.setHt(temp.getString(6));
+                    expFamilia.setNumeroExpediente(temp.getString(7));
+                    expFamilia.setFechaIngresoDga(temp.getDate(8));
+                    expFamilia.setEstado(temp.getString(9));
+                    expFamilia.setTupa(temp.getDate(10));
+                    expFamilia.setNacionalidad(temp.getString(11));
+                    expFamilia.setRnsa(temp.getShort(12));
+                    expFamilia.setRnaa(temp.getShort(13));
+                    expFamilia.setTipoFamilia(temp.getString(14));
+                    expFamilia.setTipoListaEspera(temp.getString(15));
+                    expFamilia.setHtFicha(temp.getString(16));
+                    expFamilia.setnFicha(temp.getString(17));
+                    expFamilia.setFechaIngresoFicha(temp.getDate(18));
+
+                    Set<Evaluacion> listaEv = new HashSet<Evaluacion>();
+
+                    String hql2 = "{call HE_GET_LISTA_EVALUACIONES(?,?)}";
+                    CallableStatement statement2 = connection.prepareCall(hql2);
+                    statement2.setLong(1, expFamilia.getIdexpedienteFamilia());
+                    statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement2.execute();
+
+                    ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                    while (rs2.next()) {
+                        Evaluacion tempEval = new Evaluacion();
+                        tempEval.setIdevaluacion(rs2.getLong("IDEVALUACION"));
+                        tempEval.setExpedienteFamilia(expFamilia);
+                        
+                        tempEval.setTipo(rs2.getString("TIPO"));
+                        tempEval.setFechaAsignacion(rs2.getDate("FECHA_ASIGNACION"));
+                        tempEval.setResultado(rs2.getString("RESULTADO"));
+                        tempEval.setFechaResultado(rs2.getDate("FECHA_RESULTADO"));
+                        tempEval.setObservacion(rs2.getString("OBSERVACION"));
+                        tempEval.setSustento(rs2.getString("SUSTENTO"));
+                        tempEval.setNDesignacion(rs2.getString("N_DESIGNACION"));
+                        tempEval.setNumEval(rs2.getString("NUM_EVAL"));
+                        Set<Resolucion> listaRe = new HashSet<Resolucion>();
+
+                        if (tempEval.getTipo().equals("legal")) {
+
+                            String hql3 = "{call HE_GET_RESOLUCION_APTA(?,?)}";
+                            CallableStatement statement3 = connection.prepareCall(hql3);
+                            statement3.setLong(1, tempEval.getIdevaluacion());
+                            statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                            statement3.execute();
+
+                            ResultSet rs3 = (ResultSet) statement3.getObject(2);
+
+                            if (rs3.next()) {
+                                Resolucion tempResol = new Resolucion();
+                                tempResol.setIdresolucion(rs3.getLong("IDRESOLUCION"));
+                                tempResol.setTipo(rs3.getString("TIPO"));
+                                tempResol.setNumero(rs3.getString("NUMERO"));
+                                tempResol.setFechaResol(rs3.getDate("FECHA_RESOL"));
+                                tempResol.setFechaNotificacion(rs3.getDate("FECHA_NOTIFICACION"));
+                                tempResol.setEvaluacion(tempEval);
+
+                                listaRe.add(tempResol);
+
+                            }
+                            statement3.close();
+
+                        }
+
+                        tempEval.setResolucions(listaRe);
+                        listaEv.add(tempEval);
+
+                    }
+                    statement2.close();
+
+                    expFamilia.setEvaluacions(listaEv);                                                                         
+                    allEspera.add(expFamilia);
                 }
-
+                statement.close();
             }
-            temp.setEvaluacions(tempEvaluaciones);
-            allEspera.add(temp);
-        }
+        };
+
+        session.doWork(work);
+
         return allEspera;
     }
 
@@ -4011,7 +4128,7 @@ public class HiberEtapa {
      for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
      Designacion temp = (Designacion) iter.next();
      Hibernate.initialize(temp.getExpedienteFamilia());
-     Hibernate.initialize(temp.getNna().getExpedienteNnas());  // FALTA ESTE INITIALIZEEEEEEEEEEEE
+     Hibernate.initialize(temp.getNna().getExpedienteNnas());
      allDesig.add(temp);
      }
      return allDesig;
