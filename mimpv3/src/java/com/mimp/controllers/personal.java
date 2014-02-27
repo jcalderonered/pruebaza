@@ -2244,19 +2244,20 @@ public class personal {
         return new ModelAndView("/Personal/Informativa/lista_fam_ins", map);
     }
 
-    @RequestMapping(value = "/PersonalInscritosTaller", method = RequestMethod.POST)
-    public ModelAndView PersonalInscritosTaller(ModelMap map, @RequestParam("idTaller") long idTaller, HttpSession session) {
+    @RequestMapping(value = "/PersonalInscritosTallerInicio", method = RequestMethod.POST)
+    public ModelAndView PersonalInscritosTallerInicio(ModelMap map, @RequestParam("idTaller") Long idTaller, @RequestParam("nombreTaller") String taller,HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        ArrayList<FormularioSesion> allFormularios = new ArrayList();
-        allFormularios = ServicioPersonal.InscritosTaller(idTaller);
-
-        map.put("listaFormularios", allFormularios);
-        return new ModelAndView("/Personal/Informativa/lista_fam_ins", map);
+        ArrayList<Grupo> allGrupos = new ArrayList();
+        allGrupos = ServicioPersonal.listaGruposTurnos2Reuniones(idTaller);
+        map.put("taller", taller);
+        map.put("df", format);
+        map.put("listaGrupos", allGrupos);
+        return new ModelAndView("/Personal/Informativa/lista_reuniones_taller", map);
     }
 
     @RequestMapping(value = "/PersonalDetalleFamiliaInscritaSesion", method = RequestMethod.POST)
@@ -2715,7 +2716,7 @@ public class personal {
         map.addAttribute("formato", format);
         map.put("listaFormularios", allFormularios);
         map.put("reunion", tempReun);
-        return new ModelAndView("/Personal/Informativa/toma_asistencia", map);
+        return new ModelAndView("/Personal/Informativa/toma_asistencia_reunion", map);
     }
 
     @RequestMapping(value = "/PersonalTomaAsistencia2", method = RequestMethod.POST)
@@ -2878,7 +2879,7 @@ public class personal {
         map.addAttribute("formato", format);
         map.put("listaFormularios", allFormularios);
         map.put("reunion", tempReun);
-        return new ModelAndView("/Personal/Informativa/toma_asistencia", map);
+        return new ModelAndView("/Personal/Informativa/toma_asistencia_reunion", map);
     }
 
     @RequestMapping(value = "/PersonalInasistenciaReunion", method = RequestMethod.POST)
@@ -2916,7 +2917,7 @@ public class personal {
         map.addAttribute("formato", format);
         map.put("listaFormularios", allFormularios);
         map.put("reunion", tempReun);
-        return new ModelAndView("/Personal/Informativa/toma_asistencia", map);
+        return new ModelAndView("/Personal/Informativa/toma_asistencia_reunion", map);
     }
 
     /*    FIN DE SESIONES Y TALLERES                      */
@@ -3671,5 +3672,24 @@ public class personal {
         return new ModelAndView("/Personal/registros/usuarios/log_personal", map);
 
     }
+    
+    //MODIFICACIÓN DE PERSONAL - INFORMATIVA - LISTA CHARLAS
+    
+    @RequestMapping(value = "/PersonalInscritosTallerReunion", method = RequestMethod.POST)
+    public ModelAndView PersonalTomaAsistenciaTallerInicio(ModelMap map, HttpSession session,@RequestParam("idReunion") Long idReunion) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        ArrayList<FormularioSesion> allFormularios = new ArrayList();
+        allFormularios = ServicioPersonal.InscritosReunion(idReunion);
+
+        map.put("listaFormularios", allFormularios);
+        return new ModelAndView("/Personal/Informativa/lista_fam_ins", map);
+    }
+    
+    
 
 }

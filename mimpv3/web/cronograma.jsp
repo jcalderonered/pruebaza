@@ -6,7 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+
 
 <html>
     <head>
@@ -56,6 +58,8 @@
                         <br>
                         <h2 align="center"><strong>CRONOGRAMA DE SESIONES INFORMATIVAS</strong></h2>
                         <br>
+                        <c:set var="now" value="<%=new java.util.Date()%>" /> 
+                        <fmt:formatDate var="year" value="${now}" pattern="y" />  
                         <div class="bs-example">
                                     <table class="table table-bordered">
                                         <thead>
@@ -68,6 +72,9 @@
                                         <c:if test="${listaSesiones != null}">   
                                         <tbody>
                                             <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
+                                                <c:set var="fechaSesion" value="${sesion.getFecha()}" /> 
+                                            <fmt:formatDate var="yearSesion" value="${fechaSesion}" pattern="y" />  
+                                            <c:if test="${year == yearSesion}">
                                                 <tr>
                                                     <td>
                                                         SESIÓN ${status.count}
@@ -96,6 +103,7 @@
                                                         ${sesion.getFecha() != null ? df.dateToString(sesion.getFecha()) : ''}
                                                     </td>
                                                 </tr>
+                                                </c:if>    
                                             </c:forEach>
                                         </tbody>
                                         </c:if> 
@@ -124,6 +132,27 @@
                                     <c:set var="idTaller" value="0"/>
                                     <tbody>
                                         <c:forEach var="taller" items="${listaTalleres}" varStatus="status1">
+                                            <c:set var="mostrar" value="0" ></c:set>  
+                                            <c:if test="${!taller.getGrupos().isEmpty()}">  
+                                                <c:forEach var="grupo" items="${taller.getGrupos()}" varStatus="status">
+                                                    <c:if test="${!grupo.getTurno2s().isEmpty()}">
+                                                        <c:forEach var="turno2" items="${grupo.getTurno2s()}" varStatus="status">
+                                                            <c:if test="${!turno2.getReunions().isEmpty()}">
+                                                                <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
+                                                                    <c:if test="${ reunion.getFecha() != null}">
+                                                                        <c:set var="fechaReunion" value="${reunion.getFecha()}" /> 
+                                                                        <fmt:formatDate var="yearReunion" value="${fechaReunion}" pattern="y" />  
+                                                                        <c:if test="${year != yearReunion}">
+                                                                            <c:set var="mostrar" value="1" ></c:set>  
+                                                                        </c:if> 
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </c:if>  
+                                                        </c:forEach>
+                                                    </c:if>  
+                                                </c:forEach>
+                                            </c:if>  
+                                            <c:if test="${mostrar == '0'}">
                                             <c:if test="${!taller.getGrupos().isEmpty()}">
                                                 <c:set var="numFilasTaller" value="${taller.getGrupos().size()}"/>
                                             </c:if>
@@ -197,7 +226,8 @@
                                                     </c:when>    
                                                 </c:choose>       
                                             </c:forEach>
-                                         </c:if>               
+                                         </c:if>    
+                                        </c:if>                                              
                                         </c:forEach> 
                                     </tbody>
                                 </c:if>   

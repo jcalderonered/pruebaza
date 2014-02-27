@@ -18,6 +18,7 @@
 <% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 
@@ -74,33 +75,34 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                <%}
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <c:set var="now" value="<%=new java.util.Date()%>" /> 
+                        <fmt:formatDate var="year" value="${now}" pattern="y" />  
                         <h1>Listado de sesiones</h1>
                         <br>
                         <div class="table-responsive">
@@ -111,33 +113,46 @@
                                         <th>Habilitado</th>
                                         <th>Modificar</th>
                                         <th>Ver Inscritos</th>
+                                        <th>Asistencia</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
-                                        <tr>
-                                            <td>${sesion.getNSesion()}</td>
-                                            <c:if test="${sesion.getHabilitado() == 0}">
-                                                <td>Si</td> 
-                                            </c:if>  
-                                            <c:if test="${sesion.getHabilitado() == 1}">
-                                                <td>No</td> 
-                                            </c:if>     
-                                            <td>
-                                                <form action="${pageContext.servletContext.contextPath}/PersonalEditarSesion" method="post">
-                                                    <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                    <button type="submit" class="btn btn-default">Modificar</button>
-                                                </form>
-                                            </td>
+                                    <c:if test="${!listaSesiones.isEmpty()}">  
+                                        <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
+                                            <c:set var="fechaSesion" value="${sesion.getFecha()}" /> 
+                                            <fmt:formatDate var="yearSesion" value="${fechaSesion}" pattern="y" />  
+                                            <c:if test="${year == yearSesion}">    
+                                                <tr>
+                                                    <td>${sesion.getNSesion()}</td>
+                                                    <c:if test="${sesion.getHabilitado() == 0}">
+                                                        <td>Si</td> 
+                                                    </c:if>  
+                                                    <c:if test="${sesion.getHabilitado() == 1}">
+                                                        <td>No</td> 
+                                                    </c:if>     
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarSesion" method="post">
+                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                            <button type="submit" class="btn btn-default">Modificar</button>
+                                                        </form>
+                                                    </td>
 
-                                            <td>
-                                                <form action="${pageContext.servletContext.contextPath}/PersonalInscritosSesion" method="post">
-                                                    <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                    <button type="submit" class="btn btn-default">Inscritos</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInscritosSesion" method="post">
+                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                            <button type="submit" class="btn btn-default">Inscritos</button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia2" method="post">
+                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                            <button ${sesion.getHabilitado() == 1 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:if> 
+                                        </c:forEach>
+                                    </c:if>     
                                 </tbody>
                             </table>
                         </div>
@@ -158,36 +173,61 @@
                                         <th>N° de reuniones</th>
                                         <th>Habilitado</th>
                                         <th>Modificar</th>
-                                        <th>Ver Inscritos</th>
+                                        <th>Asistencia/Ver inscritos</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="taller" items="${listaTalleres}" varStatus="status">
-                                        <tr>
-                                            <td>${taller.getTipoTaller()}</td>
-                                            <td>${taller.getNombre()}</td> 
-                                            <td>${taller.getNReunion()}</td> 
-                                            <c:if test="${taller.getHabilitado() == 0}">
-                                                <td>Si</td> 
+                                    <c:if test="${!listaTalleres.isEmpty()}">   
+                                        <c:forEach var="taller" items="${listaTalleres}" varStatus="status">
+                                            <c:set var="mostrar" value="0" ></c:set>  
+                                            <c:if test="${!taller.getGrupos().isEmpty()}">  
+                                                <c:forEach var="grupo" items="${taller.getGrupos()}" varStatus="status">
+                                                    <c:if test="${!grupo.getTurno2s().isEmpty()}">
+                                                        <c:forEach var="turno2" items="${grupo.getTurno2s()}" varStatus="status">
+                                                            <c:if test="${!turno2.getReunions().isEmpty()}">
+                                                                <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
+                                                                    <c:if test="${ reunion.getFecha() != null}">
+                                                                        <c:set var="fechaReunion" value="${reunion.getFecha()}" /> 
+                                                                        <fmt:formatDate var="yearReunion" value="${fechaReunion}" pattern="y" />  
+                                                                        <c:if test="${year != yearReunion}">
+                                                                            <c:set var="mostrar" value="1" ></c:set>  
+                                                                        </c:if> 
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </c:if>  
+                                                        </c:forEach>
+                                                    </c:if>  
+                                                </c:forEach>
                                             </c:if>  
-                                            <c:if test="${taller.getHabilitado() == 1}">
-                                                <td>No</td> 
-                                            </c:if>  
-                                            <td>
-                                                <form action="${pageContext.servletContext.contextPath}/PersonalEditarTaller" method="post">
-                                                    <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
-                                                    <button type="submit" class="btn btn-default">Modificar</button>
-                                                </form>
-                                            </td>
+                                            <c:if test="${mostrar == '0'}">     
+                                                <tr>
+                                                    <td>${taller.getTipoTaller()}</td>
+                                                    <td>${taller.getNombre()}</td> 
+                                                    <td>${taller.getNReunion()}</td> 
+                                                    <c:if test="${taller.getHabilitado() == 0}">
+                                                        <td>Si</td> 
+                                                    </c:if>  
+                                                    <c:if test="${taller.getHabilitado() == 1}">
+                                                        <td>No</td> 
+                                                    </c:if>  
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarTaller" method="post">
+                                                            <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
+                                                            <button type="submit" class="btn btn-default">Modificar</button>
+                                                        </form>
+                                                    </td>
 
-                                            <td>
-                                                <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTaller" method="post">
-                                                    <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
-                                                    <button type="submit" class="btn btn-default">Inscritos</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerInicio" method="post">
+                                                            <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
+                                                            <input hidden name="nombreTaller" id="nombreTaller" value="${taller.getNombre()}">
+                                                            <button type="submit" class="btn btn-default">Detalles</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>   
                                 </tbody>
                             </table>
                         </div>
@@ -195,74 +235,6 @@
                             <button href="#" class="btn btn-default">Agregar nuevo Taller</button>
                         </form>
                         <br>
-                        <br>
-                        <h1>Talleres / Charlas Pasados o en Curso</h1>
-                        <br>
-                        <p>A continuación se presenta una lista de los talleres y charlas pasados que necesitan registrar su asistencia</p>
-                        <br>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Tipo </th>
-                                        <th>Nombre / N° sesión</th>
-                                        <th>Grupo / Turno / Día</th>
-                                        <th>Toma de asistencia</th>
-                                    </tr>
-                                </thead>
-                                
-                                <tbody>
-                                <c:set var="now" value="<%=new java.util.Date()%>" /> 
-                                  <c:if test="${listaSesiones != null}"> 
-                                    <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
-                                        <c:if test="${now > sesion.getFecha()}"> 
-                                        <tr>
-                                            <td>Sesion</td>
-                                            <td>${sesion.getNSesion()}</td>
-                                            <td> ---- </td> 
-                                            <td>
-                                                <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia2" method="post">
-                                                    <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                    <button type="submit" class="btn btn-default">Asistencia</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                       </c:if> 
-                                    </c:forEach>
-                                  </c:if> 
-                                  <c:if test="${listaTalleres != null}">       
-                                       <c:forEach var="taller" items="${listaTalleres}" varStatus="status">
-                                           <c:forEach var="grupo" items="${taller.getGrupos()}" varStatus="status">
-                                                    <c:forEach var="turno2" items="${grupo.getTurno2s()}" varStatus="status">
-                                                            <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
-                                                                    <c:if test="${ reunion.getFecha() != null && now > reunion.getFecha() }">
-                                                                        <tr>
-                                                                            <td>Taller</td>
-                                                                            <td>${taller.getNombre()}</td>
-                                                                            <td>${grupo.getNombre()} / ${turno2.getNombre()} /
-                                                                                ${formato.dateToString(reunion.getFecha())}
-                                                                                
-                                                                            </td>
-                                                                            <td>
-                                                                                <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia" method="post">
-                                                                                <input hidden name="nombre" id="idReunion" value="${taller.getNombre()}">
-                                                                                <input hidden name="grupo" id="grupo" value="${grupo.getNombre()}">
-                                                                                <input hidden name="turno" id="turno" value="${turno2.getNombre()}">
-                                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                                <button type="submit" class="btn btn-default">Asistencia</button>
-                                                                                </form>
-                                                                            </td>
-                                                                        </tr>  
-                                                                    </c:if>
-                                                            </c:forEach>
-                                                    </c:forEach>
-                                           </c:forEach>
-                                      </c:forEach>
-                                 </c:if>      
-                                </tbody>
-                                
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>

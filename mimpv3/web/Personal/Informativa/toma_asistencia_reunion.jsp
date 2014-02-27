@@ -152,7 +152,7 @@
                                         <th>Inasistencia Justificada</th>
                                     </tr>
                                 </thead>
-                                <c:if test="${listaFormularios != null}">
+                                <c:if test="${!listaFormularios.isEmpty()}">
                                 <tbody>
                                     <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
                                             <tr>
