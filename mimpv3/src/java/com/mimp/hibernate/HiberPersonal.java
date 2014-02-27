@@ -645,7 +645,7 @@ public class HiberPersonal {
         String size;
 
         session.beginTransaction();
-        String hql = "From Taller T where T.habilitado = 0 order by T.id";
+        String hql = "From Taller T order by T.id";
         Query query = session.createQuery(hql);
         List talleres = query.list();
         ArrayList<Taller> allTalleres = new ArrayList();
