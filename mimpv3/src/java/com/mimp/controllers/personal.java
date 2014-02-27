@@ -2245,7 +2245,11 @@ public class personal {
     }
 
     @RequestMapping(value = "/PersonalInscritosTallerInicio", method = RequestMethod.POST)
-    public ModelAndView PersonalInscritosTallerInicio(ModelMap map, @RequestParam("idTaller") Long idTaller, @RequestParam("nombreTaller") String taller,HttpSession session) {
+    public ModelAndView PersonalInscritosTallerInicio(ModelMap map, 
+                                                      @RequestParam("idTaller") Long idTaller, 
+                                                      @RequestParam("nombreTaller") String taller,
+                                                      @RequestParam("historial") String historico,
+                                                      HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -2254,6 +2258,7 @@ public class personal {
         }
         ArrayList<Grupo> allGrupos = new ArrayList();
         allGrupos = ServicioPersonal.listaGruposTurnos2Reuniones(idTaller);
+        map.put("historico", historico);
         map.put("taller", taller);
         map.put("df", format);
         map.put("listaGrupos", allGrupos);
@@ -3690,6 +3695,34 @@ public class personal {
         return new ModelAndView("/Personal/Informativa/lista_fam_ins", map);
     }
     
+    @RequestMapping(value = "/HistorioSesionesTalleres", method = RequestMethod.POST)
+    public ModelAndView HistorioSesionesTalleres(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("formato", format);
+
+        return new ModelAndView("/Personal/Informativa/lista_historico_sesiones_talleres", map);
+    }
     
+    @RequestMapping(value = "/PersonalFiltrarSesionTalleres", method = RequestMethod.POST)
+    public ModelAndView PersonalFiltrarSesionTalleres(ModelMap map, HttpSession session,@RequestParam("year") Long year) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("formato", format);
+        map.put("year", year);
+        return new ModelAndView("/Personal/Informativa/lista_historico_sesiones_talleres", map);
+    }
 
 }

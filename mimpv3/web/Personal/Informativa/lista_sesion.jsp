@@ -110,13 +110,13 @@
                                 </c:when>
                                 <c:otherwise>
                                     <form action="${pageContext.servletContext.contextPath}/PersonalUpdateSesion" method="post">
-                                        <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">  
+                                        <input ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">  
                                     </c:otherwise>
                                 </c:choose>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput"><h1>Sesión Informativa</h1></label>
                                     <div class="controls">
-                                        <input id="numSesion" name="numSesion" value= "${sesion.getNSesion()}" type="text" placeholder="número de sesión" class="input-xlarge">
+                                        <input ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="numSesion" name="numSesion" value= "${sesion.getNSesion()}" type="text" placeholder="número de sesión" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -133,7 +133,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Fecha de Sesión Informativa:</label>
                                     <div class="controls">
-                                        <input id="fecha" value= "${fecha}" name="fecha" type="text" placeholder="fecha" class="datepicker input-xlarge">
+                                        <input ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="fecha" value= "${fecha}" name="fecha" type="text" placeholder="fecha" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -141,7 +141,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Hora de inicio:</label>
                                     <div class="controls">
-                                        <input id="hora" value="${hora}" name="hora" type="text" placeholder="hora" class="timepicker input-xlarge">
+                                        <input ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="hora" value="${hora}" name="hora" type="text" placeholder="hora" class="timepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -149,7 +149,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Duración:</label>
                                     <div class="controls">
-                                        <input id="duracion" value="${sesion.getDuracion()}" name="duracion" type="text" placeholder="duracion" class="input-xlarge">
+                                        <input ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="duracion" value="${sesion.getDuracion()}" name="duracion" type="text" placeholder="duracion" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -157,7 +157,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Dirección/Lugar de Sesión Informativa:</label>
                                     <div class="controls">
-                                        <input id="direccion" value="${sesion.getDireccion()}" name="direccion" type="text" placeholder="direccion" class="input-xlarge">
+                                        <input ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="direccion" value="${sesion.getDireccion()}" name="direccion" type="text" placeholder="direccion" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -165,7 +165,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Facilitador:</label>
                                     <div>
-                                        <textarea id="capacitador" name="capacitador" cols="20" rows="5">${sesion.getFacilitador()}</textarea>
+                                        <textarea ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="capacitador" name="capacitador" cols="20" rows="5">${sesion.getFacilitador()}</textarea>
                                     </div>
                                 </div>
                                 <br>

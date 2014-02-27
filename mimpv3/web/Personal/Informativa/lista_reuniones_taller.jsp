@@ -163,7 +163,7 @@
                                                                             <input hidden name="grupo" id="idReunion" value="${grp.getNombre()}">
                                                                             <input hidden name="turno" id="idReunion" value="${turno2.getNombre()}">
                                                                             <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <button  type="submit" class="btn btn-default">Asistencia</button>
+                                                                            <button ${historico == 'true' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
                                                                         </form> 
                                                                     </td>
                                                                 </tr>
@@ -198,7 +198,7 @@
                                                                             <input hidden name="grupo" id="idReunion" value="${grp.getNombre()}">
                                                                             <input hidden name="turno" id="idReunion" value="${turno2.getNombre()}">
                                                                             <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <button  type="submit" class="btn btn-default">Asistencia</button>
+                                                                            <button ${historico == 'true' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
                                                                         </form> 
                                                                     </td>
                                                                 </tr>
@@ -230,7 +230,7 @@
                                                                             <input hidden name="grupo" id="idReunion" value="${grp.getNombre()}">
                                                                             <input hidden name="turno" id="idReunion" value="${turno2.getNombre()}">
                                                                             <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <button  type="submit" class="btn btn-default">Asistencia</button>
+                                                                            <button ${historico == 'true' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
                                                                         </form> 
                                                                     </td>
                                                                 </tr>

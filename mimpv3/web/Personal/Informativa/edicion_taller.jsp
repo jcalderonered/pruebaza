@@ -107,7 +107,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <form action="${pageContext.servletContext.contextPath}/PersonalUpdateTaller" method="post">
-                                        <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">  
+                                        <input ${taller.getHabilitado() == 0 ? 'disabled' : ''} hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">  
                                     </c:otherwise>
                                 </c:choose>
                                 <h1>Edición de taller</h1>
@@ -117,14 +117,14 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Nombre del taller:</label>
                                     <div class="controls">
-                                        <input id="nombre" name="nombre" value="${taller.getNombre()}" type="text" placeholder="Nombre" class="input-xlarge">
+                                        <input ${taller.getHabilitado() == 0 ? 'disabled' : ''} id="nombre" name="nombre" value="${taller.getNombre()}" type="text" placeholder="Nombre" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label" for="selectbasic">Tipo de Taller</label>
                                     <div class="controls">
-                                        <select id="tipo" name="tipo" class="input-xlarge">
+                                        <select ${taller.getHabilitado() == 0 ? 'disabled' : ''} id="tipo" name="tipo" class="input-xlarge">
                                             <option ${taller.getTipoTaller() == 'preparacion' ? 'selected' : ''} value="preparacion" >Preparación</option>
                                             <option ${taller.getTipoTaller() == 'lista' ? 'selected' : ''} value="lista"  >Lista de espera</option>
                                             <option ${taller.getTipoTaller() == 'post' ? 'selected' : ''} value="post" >Post Adopción</option>
@@ -135,7 +135,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="selectbasic">Asociado a sesión: (Sólo en caso se trate de un Taller de Preparación)</label>
                                     <div class="controls">
-                                        <select id="numSesion" name="numSesion" class="input-xlarge">
+                                        <select ${taller.getHabilitado() == 0 ? 'disabled' : ''} id="numSesion" name="numSesion" class="input-xlarge">
                                             <option value="ninguno" selected >Ninguno</option>
                                             <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
                                                 <option value="${sesion.getNSesion()}" ${taller.getNSesion() == sesion.getNSesion() ? 'selected' : ''}> ${sesion.getNSesion()}</option> 
@@ -149,11 +149,11 @@
                                     <label class="control-label" for="radios">Habilitado para inscripción:</label>
                                     <div class="controls">
                                         <label class="radio inline" for="radios-0">
-                                            <input type="radio" name="habilitado" id="radios-0" value="0" ${taller.getHabilitado() == 0 ? 'checked' : ''}>
+                                            <input ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="radio" name="habilitado" id="radios-0" value="0" ${taller.getHabilitado() == 0 ? 'checked' : ''}>
                                             Si
                                         </label>
                                         <label class="radio inline" for="radios-1">
-                                            <input type="radio" name="habilitado" id="radios-1" value="1" ${taller.getHabilitado() == 1 || taller.getHabilitado() == null ? 'checked' : ''}>
+                                            <input ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="radio" name="habilitado" id="radios-1" value="1" ${taller.getHabilitado() == 1 || taller.getHabilitado() == null ? 'checked' : ''}>
                                             No
                                         </label>
                                     </div>
