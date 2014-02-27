@@ -3900,47 +3900,6 @@ public class HiberEtapa {
 
     }
 
-    public ArrayList<PostAdopcion> getListaPostAdopcion() {
-
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-        ArrayList<PostAdopcion> allPostAdopcion = new ArrayList();
-        ArrayList<Resolucion> allResoluciones = new ArrayList();
-
-        String hql1 = "FROM Resolucion R WHERE R.tipo = :tipo";
-        Query query1 = session.createQuery(hql1);
-        query1.setString("tipo", "adopcion");
-        List tempResoluciones = query1.list();
-
-        for (Iterator iter = tempResoluciones.iterator(); iter.hasNext();) {
-            Resolucion temp = (Resolucion) iter.next();
-            Hibernate.initialize(temp.getEvaluacion().getExpedienteFamilia());
-            allResoluciones.add(temp);
-        }
-
-        String hql2 = "FROM PostAdopcion PA ORDER BY PA.idpostAdopcion ASC";
-        Query query2 = session.createQuery(hql2);
-        List tempPost = query2.list();
-
-        if (!allResoluciones.isEmpty() && !tempPost.isEmpty()) {
-            for (Iterator iter = tempPost.iterator(); iter.hasNext();) {
-                PostAdopcion temp2 = (PostAdopcion) iter.next();
-                for (Resolucion resol : allResoluciones) {
-                    if (resol.getFechaResol().equals(temp2.getFechaResolucion())) {
-                        Set<ExpedienteFamilia> tempExpediente = new HashSet<ExpedienteFamilia>(0);
-                        tempExpediente.add(resol.getEvaluacion().getExpedienteFamilia());
-                        Hibernate.initialize(temp2.getFamilia());
-                        Hibernate.initialize(temp2.getInformePostAdoptivos());
-                        temp2.getFamilia().setExpedienteFamilias(tempExpediente);
-                    }
-                }
-                allPostAdopcion.add(temp2);
-            }
-        }
-
-        return allPostAdopcion;
-    }
-
     /* public ArrayList<ExpedienteFamilia> getListaEspera() {
 
      Session session = sessionFactory.getCurrentSession();
@@ -3976,7 +3935,6 @@ public class HiberEtapa {
      }
      return allEspera;
      }*/
-    
     public ArrayList<ExpedienteFamilia> getListaEspera() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -4060,7 +4018,7 @@ public class HiberEtapa {
                         Evaluacion tempEval = new Evaluacion();
                         tempEval.setIdevaluacion(rs2.getLong("IDEVALUACION"));
                         tempEval.setExpedienteFamilia(expFamilia);
-                        
+
                         tempEval.setTipo(rs2.getString("TIPO"));
                         tempEval.setFechaAsignacion(rs2.getDate("FECHA_ASIGNACION"));
                         tempEval.setResultado(rs2.getString("RESULTADO"));
@@ -4103,7 +4061,7 @@ public class HiberEtapa {
                     }
                     statement2.close();
 
-                    expFamilia.setEvaluacions(listaEv);                                                                         
+                    expFamilia.setEvaluacions(listaEv);
                     allEspera.add(expFamilia);
                 }
                 statement.close();
@@ -4412,6 +4370,47 @@ public class HiberEtapa {
 
         session.doWork(work);
         return allDesig;
+    }
+
+    public ArrayList<PostAdopcion> getListaPostAdopcion() {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ArrayList<PostAdopcion> allPostAdopcion = new ArrayList();
+        ArrayList<Resolucion> allResoluciones = new ArrayList();
+
+        String hql1 = "FROM Resolucion R WHERE R.tipo = :tipo";
+        Query query1 = session.createQuery(hql1);
+        query1.setString("tipo", "adopcion");
+        List tempResoluciones = query1.list();
+
+        for (Iterator iter = tempResoluciones.iterator(); iter.hasNext();) {
+            Resolucion temp = (Resolucion) iter.next();
+            Hibernate.initialize(temp.getEvaluacion().getExpedienteFamilia());
+            allResoluciones.add(temp);
+        }
+
+        String hql2 = "FROM PostAdopcion PA ORDER BY PA.idpostAdopcion ASC";
+        Query query2 = session.createQuery(hql2);
+        List tempPost = query2.list();
+
+        if (!allResoluciones.isEmpty() && !tempPost.isEmpty()) {
+            for (Iterator iter = tempPost.iterator(); iter.hasNext();) {
+                PostAdopcion temp2 = (PostAdopcion) iter.next();
+                for (Resolucion resol : allResoluciones) {
+                    if (resol.getFechaResol().equals(temp2.getFechaResolucion())) {
+                        Set<ExpedienteFamilia> tempExpediente = new HashSet<ExpedienteFamilia>(0);
+                        tempExpediente.add(resol.getEvaluacion().getExpedienteFamilia());
+                        Hibernate.initialize(temp2.getFamilia());
+                        Hibernate.initialize(temp2.getInformePostAdoptivos());
+                        temp2.getFamilia().setExpedienteFamilias(tempExpediente);
+                    }
+                }
+                allPostAdopcion.add(temp2);
+            }
+        }
+
+        return allPostAdopcion;
     }
 
 }
