@@ -336,9 +336,7 @@ public class HiberNna {
                 statement.close();
             }
         };
-        
         session.doWork(work);
-
     }
     
 //    public void updateNna(Nna temp) {
@@ -350,7 +348,7 @@ public class HiberNna {
 //
 //    }
     
-    //
+    //PROBADO Y TERMINASDO
     public void updateNna(Nna temp) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -750,13 +748,65 @@ public class HiberNna {
         return allExpNna;
     }
 
+//    public void crearExpNna(ExpedienteNna temp) {
+//
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//
+//        session.save(temp);
+//
+//    }
+    
+    //
     public void crearExpNna(ExpedienteNna temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-
-        session.save(temp);
-
+        final ExpedienteNna expnna = temp;
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                String hql = "{call HN_SAVE_EXP_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, expnna.getNna().getIdnna());
+                statement.setLong(2, expnna.getUnidad().getIdunidad());
+                statement.setString(3, expnna.getNumero());
+                java.sql.Date fechaingreso = new java.sql.Date(expnna.getFechaIngreso().getTime());
+                statement.setDate(4, fechaingreso);
+                statement.setString(5, expnna.getHt());
+                statement.setString(6, expnna.getNExpTutelar());
+                statement.setString(7, expnna.getProcTutelar());
+                statement.setShort(8, expnna.getFichaIntegral());
+                statement.setString(9, expnna.getComentarios());
+                statement.setString(10, expnna.getRespLegalNombre());
+                statement.setString(11, expnna.getRespLegalP());
+                statement.setString(12, expnna.getRespLegalM());
+                statement.setString(13, expnna.getRespPsicosocialNombre());
+                statement.setString(14, expnna.getRespPiscosocialP());
+                statement.setString(15, expnna.getRespPsicosocialM());
+                statement.setString(16, expnna.getEstado());
+                java.sql.Date fechaEstado = new java.sql.Date(expnna.getFechaEstado().getTime());
+                statement.setDate(17, fechaEstado);
+                statement.setShort(18, expnna.getAdoptable());
+                java.sql.Date fechaResolCons = new java.sql.Date(expnna.getFechaResolCons().getTime());
+                statement.setDate(19, fechaResolCons);
+                statement.setShort(20, expnna.getNacional());
+                statement.setString(21, expnna.getDiagnostico());
+                statement.setString(22, expnna.getCodigoReferencia());
+                statement.setString(23, expnna.getNActual());
+                statement.setString(24, expnna.getApellidopActual());
+                statement.setString(25, expnna.getApellidomActual());
+                statement.setString(26, expnna.getObservaciones());
+                java.sql.Date fechaInvTutelar = new java.sql.Date(expnna.getFechaInvTutelar().getTime());
+                statement.setDate(27, fechaInvTutelar);
+                
+                statement.execute();
+                statement.close();
+            }
+        };
+        session.doWork(work);
     }
 
     public void updateExpNna(ExpedienteNna temp) {
