@@ -3796,12 +3796,40 @@ public class HiberEtapa {
 
     }
 
+//    public void crearPostAdopcion(PostAdopcion temp) {
+//
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//
+//        session.save(temp);
+//
+//    }
+    
     public void crearPostAdopcion(PostAdopcion temp) {
 
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
-        session.save(temp);
+        final Long idFam = temp.getFamilia().getIdfamilia();
+        final Long numInfor = temp.getNumeroInformes();
+        final Date fechaResol = temp.getFechaResolucion();
+        final Long idNna = temp.getidNna();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HE_SAVE_POST(?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idFam);
+                statement.setLong(2, numInfor);
+                statement.setDate(3, (java.sql.Date) fechaResol);
+                statement.setLong(4, idNna);
+                statement.execute();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
 
     }
 
@@ -3843,12 +3871,50 @@ public class HiberEtapa {
 
     }
 
+//    public void crearInformePost(InformePostAdoptivo temp) {
+//
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//
+//        session.save(temp);
+//
+//    }
+    
     public void crearInformePost(InformePostAdoptivo temp) {
 
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
-        session.save(temp);
+        final Long idpost = temp.getPostAdopcion().getIdpostAdopcion();
+        final Long idpersonal = temp.getPersonal().getIdpersonal();
+        final String estado = temp.getEstado();
+        final String numero_informe = temp.getNumeroInforme();
+        final Date fecha_rec_proy = temp.getFechaRecepcionProyectado();
+        final Date fecha_rec = temp.getFechaRecepcion();
+        final Date fecha_info = temp.getFechaInforme();
+        final Date fecha_act = temp.getFechaActa();
+        final String obs = temp.getObs();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HE_SAVE_INFORME_POST(?,?,?,?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idpost);
+                statement.setLong(2, idpersonal);
+                statement.setString(3, estado);
+                statement.setString(4, numero_informe);
+                statement.setDate(5, (java.sql.Date) fecha_rec_proy);
+                statement.setDate(6, (java.sql.Date) fecha_rec);
+                statement.setDate(7, (java.sql.Date) fecha_info);
+                statement.setDate(8, (java.sql.Date) fecha_act);
+                statement.setString(9, obs);
+                statement.execute();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
 
     }
 
