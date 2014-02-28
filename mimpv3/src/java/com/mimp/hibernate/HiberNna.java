@@ -224,7 +224,7 @@ public class HiberNna {
                     tempnna.setNResolAband(temp.getString(33));
                     tempnna.setNResolCons(temp.getString(34));
                     try {
-                        expnna = getExpNna(temp.getLong(1));
+                        expnna = getExpNna(tempnna.getIdnna());
                         if (expnna.getIdexpedienteNna() != 0) {
                             Set<ExpedienteNna> listexp = new HashSet<ExpedienteNna>();
                             listexp.add(expnna);
@@ -234,7 +234,7 @@ public class HiberNna {
 
                     }
                     car = new Car();
-                    car.setIdcar(temp.getShort(35));
+                    car.setIdcar(temp.getLong(35));
                     car.setNombre(temp.getString(36));
                     car.setDireccion(temp.getString(37));
                     car.setDepartamento(temp.getString(38));
@@ -249,7 +249,7 @@ public class HiberNna {
                     car.setObservaciones(temp.getString(47));
                     tempnna.setCar(car);
                     juz = new Juzgado();
-                    juz.setIdjuzgado(temp.getLong(48));
+                    juz.setIdjuzgado(temp.getLong("IDJUZGADO"));
                     juz.setNombre(temp.getString(49));
                     juz.setDenominacion(temp.getString(50));
                     juz.setEspecialidad(temp.getString(51));
@@ -607,7 +607,7 @@ public class HiberNna {
                 tempexp = (ResultSet) statement.getObject(2);
 
                 while (tempexp.next()) {
-                    expnna.setIdexpedienteNna(tempexp.getShort(1));
+                    expnna.setIdexpedienteNna(tempexp.getLong(1));
                     expnna.setNumero(tempexp.getString(2));
                     expnna.setFechaIngreso(tempexp.getDate(3));
                     expnna.setHt(tempexp.getString(4));
