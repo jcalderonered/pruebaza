@@ -385,14 +385,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Diagnóstico</label>
                                     <div class="controls">
-                                        <textarea id="diagnostico" name="diagnostico" value="${expediente.getDiagnostico()}" type="text" class="input-xlarge"></textarea>
+                                        <textarea id="diagnostico" name="diagnostico" type="text" class="input-xlarge">${expediente.getComentarios()}</textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Comentario</label>
                                     <div class="controls">
-                                        <textarea id="comentario" name="comentario" value="${expediente.getObservaciones()}" type="text" class="input-xlarge"></textarea>
+                                        <textarea id="comentario" name="comentario" type="text" class="input-xlarge">${expediente.getDiagnostico()}</textarea>
                                     </div>
                                 </div>
                                 <br>
