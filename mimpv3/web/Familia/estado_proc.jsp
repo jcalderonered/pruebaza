@@ -139,7 +139,7 @@
                             <div class="col-md-3">
                                 <c:choose>
                                     <c:when test="${boton == 1}">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Descargar ficha</button> 
+                                        <button onclick="location.href = 'http://www.mimp.gob.pe/files/direcciones/dga/FichaInscripcion_Para_Solicitantes_Adopcion.pdf'" id="singlebutton" name="singlebutton" class="btn btn-default">Descargar ficha</button> 
                                     </c:when>
                                     <c:otherwise>
                                         <button id="singlebutton" name="singlebutton" class="btn btn-default" disabled>Llenar ficha</button>
