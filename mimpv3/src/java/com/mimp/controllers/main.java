@@ -1145,24 +1145,24 @@ public class main {
             @RequestParam(value = "numDoc", required = false) String numDoc,
             @RequestParam(value = "numCel", required = false) String numCel,
             @RequestParam(value = "correo", required = false) String correo,
-            @RequestParam(value = "fechaMat", required = false) String fechaMat,
-            @RequestParam(value = "nivelInstruccion", required = false) String nivelInstruccion,
-            @RequestParam(value = "culminoNivel", required = false) String culminoNivel,
-            @RequestParam(value = "profesion", required = false) String profesion,
-            @RequestParam(value = "trabDep", required = false) String trabDep,
-            @RequestParam(value = "ocupacionDep", required = false) String ocupacionDep,
-            @RequestParam(value = "centroTrabajo", required = false) String centroTrabajo,
-            @RequestParam(value = "direccionTrabajo", required = false) String direccionTrabajo,
-            @RequestParam(value = "telefonoTrabajo", required = false) String telefonoTrabajo,
-            @RequestParam(value = "ingresoDep", required = false) String ingresoDep,
-            @RequestParam(value = "trabIndep", required = false) String trabIndep,
-            @RequestParam(value = "ocupacionInd", required = false) String ocupacionInd,
-            @RequestParam(value = "ingresoInd", required = false) String ingresoInd,
-            @RequestParam(value = "seguroSalud", required = false) String seguroSalud,
-            @RequestParam(value = "tipoSeguro", required = false) String tipoSeguro,
-            @RequestParam(value = "seguroVida", required = false) String seguroVida,
-            @RequestParam(value = "sisPensiones", required = false) String sisPensiones,
-            @RequestParam(value = "estadoActual", required = false) String estadoActual
+            @RequestParam(value = "fechaMat", required = false) String fechaMat
+//            @RequestParam(value = "nivelInstruccion", required = false) String nivelInstruccion,
+//            @RequestParam(value = "culminoNivel", required = false) String culminoNivel,
+//            @RequestParam(value = "profesion", required = false) String profesion,
+//            @RequestParam(value = "trabDep", required = false) String trabDep,
+//            @RequestParam(value = "ocupacionDep", required = false) String ocupacionDep,
+//            @RequestParam(value = "centroTrabajo", required = false) String centroTrabajo,
+//            @RequestParam(value = "direccionTrabajo", required = false) String direccionTrabajo,
+//            @RequestParam(value = "telefonoTrabajo", required = false) String telefonoTrabajo,
+//            @RequestParam(value = "ingresoDep", required = false) String ingresoDep,
+//            @RequestParam(value = "trabIndep", required = false) String trabIndep,
+//            @RequestParam(value = "ocupacionInd", required = false) String ocupacionInd,
+//            @RequestParam(value = "ingresoInd", required = false) String ingresoInd,
+//            @RequestParam(value = "seguroSalud", required = false) String seguroSalud,
+//            @RequestParam(value = "tipoSeguro", required = false) String tipoSeguro,
+//            @RequestParam(value = "seguroVida", required = false) String seguroVida,
+//            @RequestParam(value = "sisPensiones", required = false) String sisPensiones,
+//            @RequestParam(value = "estadoActual", required = false) String estadoActual
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1197,70 +1197,70 @@ public class main {
             } else if (fechaMat == null || fechaMat.equals("")) {
                 infoFam.setFechaMatrimonio(null);
             }
-            El.setNivelInstruccion(nivelInstruccion);
-            if (culminoNivel != null && !culminoNivel.equals("")) {
-                El.setCulminoNivel(Short.parseShort(culminoNivel));
-            }
-            El.setProfesion(profesion);
-            /*Trabajo*/
-            if (trabDep != null && !trabDep.equals("")) {
-                El.setTrabajadorDepend(Short.parseShort(trabDep));
-            } else {
-                El.setTrabajadorDepend(null);
-            }
-            if (ocupacionDep != null && !ocupacionDep.equals("")) {
-                El.setOcupActualDep(ocupacionDep);
-            } else {
-                El.setOcupActualDep(null);
-            }
-            if (centroTrabajo != null && !centroTrabajo.equals("")) {
-                El.setCentroTrabajo(centroTrabajo);
-            } else {
-                El.setCentroTrabajo(null);
-            }
-            if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
-                El.setDireccionCentro(direccionTrabajo);
-            } else {
-                El.setDireccionCentro(null);
-            }
-            if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
-                El.setTelefonoCentro(telefonoTrabajo);
-            } else {
-                El.setTelefonoCentro(null);
-            }
-            if (ingresoDep != null && !ingresoDep.equals("")) {
-                El.setIngresoDep(Long.parseLong(ingresoDep));
-            } else {
-                El.setIngresoDep(null);
-            }
-            if (trabIndep != null && !trabIndep.equals("")) {
-                El.setTrabajadorIndepend(Short.parseShort(trabIndep));
-            } else {
-                El.setTrabajadorIndepend(null);
-            }
-            if (ocupacionInd != null && !ocupacionInd.equals("")) {
-                El.setOcupActualInd(ocupacionInd);
-            } else {
-                El.setOcupActualInd(null);
-            }
-
-            if (ingresoInd != null && !ocupacionInd.equals("")) {
-                El.setIngresoIndep(Long.parseLong(ingresoInd));
-            } else {
-                El.setIngresoIndep(null);
-            }
-            /*Fin Trabajo*/
-            if (seguroSalud != null && !seguroSalud.equals("")) {
-                El.setSeguroSalud(Short.parseShort(seguroSalud));
-            }
-            El.setTipoSeguro(tipoSeguro);
-            if (seguroVida != null && !seguroVida.equals("")) {
-                El.setSeguroVida(Short.parseShort(seguroVida));
-            }
-            if (sisPensiones != null && !sisPensiones.equals("")) {
-                El.setSistPensiones(Short.parseShort(sisPensiones));
-            }
-            El.setSaludActual(estadoActual);
+//            El.setNivelInstruccion(nivelInstruccion);
+//            if (culminoNivel != null && !culminoNivel.equals("")) {
+//                El.setCulminoNivel(Short.parseShort(culminoNivel));
+//            }
+//            El.setProfesion(profesion);
+//            /*Trabajo*/
+//            if (trabDep != null && !trabDep.equals("")) {
+//                El.setTrabajadorDepend(Short.parseShort(trabDep));
+//            } else {
+//                El.setTrabajadorDepend(null);
+//            }
+//            if (ocupacionDep != null && !ocupacionDep.equals("")) {
+//                El.setOcupActualDep(ocupacionDep);
+//            } else {
+//                El.setOcupActualDep(null);
+//            }
+//            if (centroTrabajo != null && !centroTrabajo.equals("")) {
+//                El.setCentroTrabajo(centroTrabajo);
+//            } else {
+//                El.setCentroTrabajo(null);
+//            }
+//            if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
+//                El.setDireccionCentro(direccionTrabajo);
+//            } else {
+//                El.setDireccionCentro(null);
+//            }
+//            if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
+//                El.setTelefonoCentro(telefonoTrabajo);
+//            } else {
+//                El.setTelefonoCentro(null);
+//            }
+//            if (ingresoDep != null && !ingresoDep.equals("")) {
+//                El.setIngresoDep(Long.parseLong(ingresoDep));
+//            } else {
+//                El.setIngresoDep(null);
+//            }
+//            if (trabIndep != null && !trabIndep.equals("")) {
+//                El.setTrabajadorIndepend(Short.parseShort(trabIndep));
+//            } else {
+//                El.setTrabajadorIndepend(null);
+//            }
+//            if (ocupacionInd != null && !ocupacionInd.equals("")) {
+//                El.setOcupActualInd(ocupacionInd);
+//            } else {
+//                El.setOcupActualInd(null);
+//            }
+//
+//            if (ingresoInd != null && !ocupacionInd.equals("")) {
+//                El.setIngresoIndep(Long.parseLong(ingresoInd));
+//            } else {
+//                El.setIngresoIndep(null);
+//            }
+//            /*Fin Trabajo*/
+//            if (seguroSalud != null && !seguroSalud.equals("")) {
+//                El.setSeguroSalud(Short.parseShort(seguroSalud));
+//            }
+//            El.setTipoSeguro(tipoSeguro);
+//            if (seguroVida != null && !seguroVida.equals("")) {
+//                El.setSeguroVida(Short.parseShort(seguroVida));
+//            }
+//            if (sisPensiones != null && !sisPensiones.equals("")) {
+//                El.setSistPensiones(Short.parseShort(sisPensiones));
+//            }
+//            El.setSaludActual(estadoActual);
 
             ServicioMain.updateAdoptante(El);
             if (El.getApellidoP() != null && Ella.getApellidoP() != null) {
@@ -1304,70 +1304,70 @@ public class main {
             } else if (fechaMat == null || fechaMat.equals("")) {
                 infoFam.setFechaMatrimonio(null);
             }
-            Ella.setNivelInstruccion(nivelInstruccion);
-            if (culminoNivel != null && !culminoNivel.equals("")) {
-                Ella.setCulminoNivel(Short.parseShort(culminoNivel));
-            }
-            Ella.setProfesion(profesion);
-            /*Trabajo*/
-            if (trabDep != null && !trabDep.equals("")) {
-                Ella.setTrabajadorDepend(Short.parseShort(trabDep));
-            } else {
-                Ella.setTrabajadorDepend(null);
-            }
-            if (ocupacionDep != null && !ocupacionDep.equals("")) {
-                Ella.setOcupActualDep(ocupacionDep);
-            } else {
-                Ella.setOcupActualDep(null);
-            }
-            if (centroTrabajo != null && !centroTrabajo.equals("")) {
-                Ella.setCentroTrabajo(centroTrabajo);
-            } else {
-                Ella.setCentroTrabajo(null);
-            }
-            if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
-                Ella.setDireccionCentro(direccionTrabajo);
-            } else {
-                Ella.setDireccionCentro(null);
-            }
-            if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
-                Ella.setTelefonoCentro(telefonoTrabajo);
-            } else {
-                Ella.setTelefonoCentro(null);
-            }
-            if (ingresoDep != null && !ingresoDep.equals("")) {
-                Ella.setIngresoDep(Long.parseLong(ingresoDep));
-            } else {
-                Ella.setIngresoDep(null);
-            }
-            if (trabIndep != null && !trabIndep.equals("")) {
-                Ella.setTrabajadorIndepend(Short.parseShort(trabIndep));
-            } else {
-                Ella.setTrabajadorIndepend(null);
-            }
-            if (ocupacionInd != null && !ocupacionInd.equals("")) {
-                Ella.setOcupActualInd(ocupacionInd);
-            } else {
-                Ella.setOcupActualInd(null);
-            }
-
-            if (ingresoInd != null && !ocupacionInd.equals("")) {
-                Ella.setIngresoIndep(Long.parseLong(ingresoInd));
-            } else {
-                Ella.setIngresoIndep(null);
-            }
+//            Ella.setNivelInstruccion(nivelInstruccion);
+//            if (culminoNivel != null && !culminoNivel.equals("")) {
+//                Ella.setCulminoNivel(Short.parseShort(culminoNivel));
+//            }
+//            Ella.setProfesion(profesion);
+//            /*Trabajo*/
+//            if (trabDep != null && !trabDep.equals("")) {
+//                Ella.setTrabajadorDepend(Short.parseShort(trabDep));
+//            } else {
+//                Ella.setTrabajadorDepend(null);
+//            }
+//            if (ocupacionDep != null && !ocupacionDep.equals("")) {
+//                Ella.setOcupActualDep(ocupacionDep);
+//            } else {
+//                Ella.setOcupActualDep(null);
+//            }
+//            if (centroTrabajo != null && !centroTrabajo.equals("")) {
+//                Ella.setCentroTrabajo(centroTrabajo);
+//            } else {
+//                Ella.setCentroTrabajo(null);
+//            }
+//            if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
+//                Ella.setDireccionCentro(direccionTrabajo);
+//            } else {
+//                Ella.setDireccionCentro(null);
+//            }
+//            if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
+//                Ella.setTelefonoCentro(telefonoTrabajo);
+//            } else {
+//                Ella.setTelefonoCentro(null);
+//            }
+//            if (ingresoDep != null && !ingresoDep.equals("")) {
+//                Ella.setIngresoDep(Long.parseLong(ingresoDep));
+//            } else {
+//                Ella.setIngresoDep(null);
+//            }
+//            if (trabIndep != null && !trabIndep.equals("")) {
+//                Ella.setTrabajadorIndepend(Short.parseShort(trabIndep));
+//            } else {
+//                Ella.setTrabajadorIndepend(null);
+//            }
+//            if (ocupacionInd != null && !ocupacionInd.equals("")) {
+//                Ella.setOcupActualInd(ocupacionInd);
+//            } else {
+//                Ella.setOcupActualInd(null);
+//            }
+//
+//            if (ingresoInd != null && !ocupacionInd.equals("")) {
+//                Ella.setIngresoIndep(Long.parseLong(ingresoInd));
+//            } else {
+//                Ella.setIngresoIndep(null);
+//            }
             /*Fin Trabajo*/
-            if (seguroSalud != null && !seguroSalud.equals("")) {
-                Ella.setSeguroSalud(Short.parseShort(seguroSalud));
-            }
-            Ella.setTipoSeguro(tipoSeguro);
-            if (seguroVida != null && !seguroVida.equals("")) {
-                Ella.setSeguroVida(Short.parseShort(seguroVida));
-            }
-            if (sisPensiones != null && !sisPensiones.equals("")) {
-                Ella.setSistPensiones(Short.parseShort(sisPensiones));
-            }
-            Ella.setSaludActual(estadoActual);
+//            if (seguroSalud != null && !seguroSalud.equals("")) {
+//                Ella.setSeguroSalud(Short.parseShort(seguroSalud));
+//            }
+//            Ella.setTipoSeguro(tipoSeguro);
+//            if (seguroVida != null && !seguroVida.equals("")) {
+//                Ella.setSeguroVida(Short.parseShort(seguroVida));
+//            }
+//            if (sisPensiones != null && !sisPensiones.equals("")) {
+//                Ella.setSistPensiones(Short.parseShort(sisPensiones));
+//            }
+//            Ella.setSaludActual(estadoActual);
 
             ServicioMain.updateAdoptante(Ella);
             if (El.getApellidoP() != null && Ella.getApellidoP() != null) {

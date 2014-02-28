@@ -114,12 +114,12 @@ if (u==null){
                             <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                        <c:if test="${resolucion == null}">
+                        <c:if test="${resolucion.getIdresolucion() == 0}">
                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearResolEmpatia" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)"> 
                                 <input hidden name="idEmpatia" id="idEmpatia" value="${idEmpatia}">
                                 <input hidden name="idNna" id="idNna" value="${idNna}">
                             </c:if>  
-                            <c:if test="${resolucion != null}">
+                            <c:if test="${resolucion.getIdresolucion() != 0}">
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateResolEmpatia" method="post" onsubmit="return confirm('Desea cambiar la resolución?');"> 
                                     <input hidden name="idResolucion" id="idResolucion" value="${resolucion.getIdresolucion()}">
                                 </c:if> 
@@ -136,14 +136,14 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">N° de resolución</label>
                                     <div class="controls">
-                                        <input ${resolucion != null ? 'disabled' : ''} id="numResol" name="numResol" type="text" value="${resolucion.getNumero()}" class="input-xlarge">
+                                        <input ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="numResol" name="numResol" type="text" value="${resolucion.getNumero()}" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Tipo de Resolución</label>
                                     <div class="controls">
-                                        <select ${resolucion != null ? 'disabled' : ''} id="tipo" name="tipo">
+                                        <select ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="tipo" name="tipo">
                                             <option value="colfam" ${resolucion.getTipo() == 'colfam' ? 'selected' : ''}>Integración Familiar</option>
                                             <option value="sinefecto" ${resolucion.getTipo() == 'sinefecto' ? 'selected' : ''}>Deja sin efecto la designación</option>
                                         </select>
@@ -153,21 +153,21 @@ if (u==null){
                                 <div class="control-group">
                                     <label class="control-label">Fecha resolución</label>
                                     <div class="controls">
-                                        <input ${resolucion != null ? 'disabled' : ''} id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
+                                        <input ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <h3><strong>En caso de tener un Fin de Procedimiento</strong></h3>
                                 <div class="checkbox">
                                     <label>
-                                        <input onclick="confirmar()" ${resolucion != null ? 'disabled' : ''} value="eliminar" id="eliminar" name="eliminar" type="checkbox"> Eliminar del Registro Nacional de Adoptantes para la Adopción
+                                        <input onclick="confirmar()" ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} value="eliminar" id="eliminar" name="eliminar" type="checkbox"> Eliminar del Registro Nacional de Adoptantes para la Adopción
                                     </label>
                                 </div>
                                 <br>
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button ${resolucion != null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        <button ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>
                                 <!--FIN DE CONTENIDO-->
