@@ -248,7 +248,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Número de resolución consentida</label>
                                     <div class="controls">
-                                        <input id="numResolConsen" name="numResolConsen" value="${nna.getNResolAband()}" type="text" class="input-xlarge">
+                                        <input id="numResolConsen" name="numResolConsen" value="${nna.getNResolCons()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>

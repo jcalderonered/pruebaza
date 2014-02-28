@@ -102,22 +102,25 @@ public class nna {
         Nna tempNna = new Nna();
         tempNna = ServicioNna.getNna(idNna);
 
-        String tempfechaString = "";
+        String tempfechaNac = "";
+        String tempfechaResolAban = "";
+        String tempfechaResolCon = "";
+        
         try {
-            tempfechaString = df.dateToString(tempNna.getFechaNacimiento());
+            tempfechaNac = df.dateToString(tempNna.getFechaNacimiento());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechaNac", tempfechaString);
+        map.addAttribute("fechaNac", tempfechaNac);
         try {
-            tempfechaString = df.dateToString(tempNna.getFechaResolAbandono());
+            tempfechaResolAban = df.dateToString(tempNna.getFechaResolAbandono());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechaResolAband", tempfechaString);
+        map.addAttribute("fechaResolAband", tempfechaResolAban);
         try {
-            tempfechaString = df.dateToString(tempNna.getFechaResolConsentida());
+            tempfechaResolCon = df.dateToString(tempNna.getFechaResolConsentida());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechaResolConsen", tempfechaString);
+        map.addAttribute("fechaResolConsen", tempfechaResolCon);
         map.put("nna", tempNna);
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
@@ -728,7 +731,8 @@ public class nna {
                 tempExp.setCodigoReferencia(codEspeciales);
             }
         }
-
+        tempExp.setNacional(Short.parseShort("0"));
+        tempExp.setAdoptable(Short.parseShort("0"));
         if (clasificacion != null && (clasificacion.equals("regular") || clasificacion.equals("seguimiento"))) {
             tempNna.setEspecial(Short.parseShort("1"));
             tempNna.setMayor(Short.parseShort("1"));
@@ -737,25 +741,28 @@ public class nna {
             tempNna.setEnfermo(Short.parseShort("1"));
         }
         ServicioNna.updateNna(tempNna);
+        if(clasificacion.equals("seguimiento")) tempExp.setAdoptable(Short.parseShort("1"));
         tempExp.setNna(tempNna);
         ServicioNna.crearExpNna(tempExp);
 
-        String tempfechaString = "";
+        String tempfechaNac = "";
+        String tempfechaAban = "";
+        String tempfechaCon = "";
         try {
-            tempfechaString = df.dateToString(tempNna.getFechaNacimiento());
+            tempfechaNac = df.dateToString(tempNna.getFechaNacimiento());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechaNac", tempfechaString);
+        map.addAttribute("fechaNac", tempfechaNac);
         try {
-            tempfechaString = df.dateToString(tempNna.getFechaResolAbandono());
+            tempfechaAban = df.dateToString(tempNna.getFechaResolAbandono());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechaResolAband", tempfechaString);
+        map.addAttribute("fechaResolAband", tempfechaAban);
         try {
-            tempfechaString = df.dateToString(tempNna.getFechaResolConsentida());
+            tempfechaCon = df.dateToString(tempNna.getFechaResolConsentida());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechaResolConsen", tempfechaString);
+        map.addAttribute("fechaResolConsen", tempfechaCon);
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
@@ -904,24 +911,28 @@ public class nna {
             tempNna.setEnfermo(Short.parseShort("1"));
         }
         ServicioNna.updateNna(tempNna);
+        tempExp.setNacional(Short.parseShort("0"));
+        if(clasificacion.equals("seguimiento")) tempExp.setAdoptable(Short.parseShort("1"));
         ServicioNna.updateExpNna(tempExp);
 
-        String tempfechaString = "";
+        String tempfechaNac = "";
+        String tempfechaResolAban = "";
+        String tempfechaResolCon = "";
         try {
-            tempfechaString = df.dateToString(tempNna.getFechaNacimiento());
+            tempfechaNac = df.dateToString(tempNna.getFechaNacimiento());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechaNac", tempfechaString);
+        map.addAttribute("fechaNac", tempfechaNac);
         try {
-            tempfechaString = df.dateToString(tempNna.getFechaResolAbandono());
+            tempfechaResolAban = df.dateToString(tempNna.getFechaResolAbandono());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechaResolAband", tempfechaString);
+        map.addAttribute("fechaResolAband", tempfechaResolAban);
         try {
-            tempfechaString = df.dateToString(tempNna.getFechaResolConsentida());
+            tempfechaResolCon = df.dateToString(tempNna.getFechaResolConsentida());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechaResolConsen", tempfechaString);
+        map.addAttribute("fechaResolConsen", tempfechaResolCon);
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
