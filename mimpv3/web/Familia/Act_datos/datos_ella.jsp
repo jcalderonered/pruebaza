@@ -72,6 +72,7 @@
                         </ul>
                     </div>
                     <div class="col-md-9">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioFam'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/FactDatos/opc1" data-toggle="tab">La Solicitante</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc2" data-toggle="tab">El solicitante</a></li>
@@ -193,9 +194,9 @@
                                                 <c:choose>
                                                     <c:when test="${estCivil == 'soltera'}">
                                                         <input type="radio" name="optionsRadios2" id="soltero" value="D" checked disabled>Soltera
-                                            </label>
-                                                    </c:when>
-                                                    <c:otherwise>
+                                                    </label>
+                                                </c:when>
+                                                <c:otherwise>
                                                     <input type="radio" name="optionsRadios2" id="soltero" value="D" disabled>Soltera</label>
                                                 </c:otherwise>
                                             </c:choose>

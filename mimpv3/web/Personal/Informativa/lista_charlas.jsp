@@ -101,6 +101,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <c:set var="now" value="<%=new java.util.Date()%>" /> 
                         <fmt:formatDate var="year" value="${now}" pattern="y" />  
                         <h1>Listado de sesiones</h1>

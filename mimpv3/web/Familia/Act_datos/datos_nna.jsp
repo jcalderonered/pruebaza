@@ -74,6 +74,7 @@
                         </ul>
                     </div>
                     <div class="col-md-9">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioFam'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <ul class="nav nav-tabs row" id="tabs" >
                             <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc1" data-toggle="tab">La Solicitante</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc2" data-toggle="tab">El solicitante</a></li>
@@ -104,9 +105,9 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="incesto" name="incesto" >
-                                                            <option value="0" ${ifa.getNnaIncesto() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaIncesto() != 0 ? 'selected' : ''} >NO</option>
-                                                        </select>
+                                                        <option value="0" ${ifa.getNnaIncesto() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaIncesto() != 0 ? 'selected' : ''} >NO</option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -115,8 +116,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="mental" name="mental" >
-                                                            <option value="0" ${ifa.getNnaMental() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaMental() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaMental() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaMental() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -126,8 +127,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="epilepsia" name="epilepsia" >
-                                                            <option value="0" ${ifa.getNnaEpilepsia() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaEpilepsia() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaEpilepsia() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaEpilepsia() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -137,8 +138,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="abuso" name="abuso" >
-                                                            <option value="0" ${ifa.getNnaAbuso() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaAbuso() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaAbuso() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaAbuso() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -149,8 +150,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="sifilis" name="sifilis" >
-                                                            <option value="0" ${ifa.getNnaSifilis() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaSifilis() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaSifilis() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaSifilis() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -176,8 +177,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="seguimiento" name="seguimiento" >
-                                                            <option value="0" ${ifa.getNnaSeguiMedico() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaSeguiMedico() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaSeguiMedico() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaSeguiMedico() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -188,8 +189,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="operacion" name="operacion" >
-                                                            <option value="0" ${ifa.getNnaOperacion() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaOperacion() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaOperacion() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaOperacion() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -200,8 +201,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="hiperactivo" name="hiperactivo">
-                                                            <option value="0" ${ifa.getNnaHiperactivo() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaHiperactivo() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaHiperactivo() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaHiperactivo() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -227,8 +228,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="especial" name="especial">
-                                                            <option value="0" ${ifa.getNnaEspecial() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaEspecial() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaEspecial() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaEspecial() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -238,8 +239,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="salud" name="salud">
-                                                            <option value="0" ${ifa.getNnaEnfermo() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaEnfermo() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaEnfermo() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaEnfermo() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -249,8 +250,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="mayor" name="mayor">
-                                                            <option value="0" ${ifa.getNnaMayor() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaMayor() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaMayor() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaMayor() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -260,8 +261,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="adolescente" name="adolescente">
-                                                            <option value="0" ${ifa.getNnaAdolescente() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaAdolescente() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaAdolescente() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaAdolescente() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -271,8 +272,8 @@
                                                 </td>
                                                 <td>
                                                     <select disabled id="hermanos" name="hermanos">
-                                                            <option value="0" ${ifa.getNnaHermano() == 0 ? 'selected' : ''} >SI</option>
-                                                            <option value="1" ${ifa.getNnaHermano() != 0 ? 'selected' : ''} >NO</option>
+                                                        <option value="0" ${ifa.getNnaHermano() == 0 ? 'selected' : ''} >SI</option>
+                                                        <option value="1" ${ifa.getNnaHermano() != 0 ? 'selected' : ''} >NO</option>
                                                     </select>
                                                 </td>
                                             </tr>
