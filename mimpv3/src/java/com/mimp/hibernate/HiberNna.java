@@ -608,7 +608,7 @@ public class HiberNna {
                     expnna.setNExpTutelar(tempexp.getString(5));
                     expnna.setProcTutelar(tempexp.getString(6));
                     expnna.setFichaIntegral(tempexp.getShort(7));
-                    expnna.setComentarios(tempexp.getString("COMENTARIOS"));
+                    expnna.setComentarios(tempexp.getString(8));
                     expnna.setRespLegalNombre(tempexp.getString(9));
                     expnna.setRespLegalP(tempexp.getString(10));
                     expnna.setRespLegalM(tempexp.getString(11));
@@ -620,12 +620,12 @@ public class HiberNna {
                     expnna.setAdoptable(tempexp.getShort(17));
                     expnna.setFechaResolCons(tempexp.getDate(18));
                     expnna.setNacional(tempexp.getShort(19));
-                    expnna.setDiagnostico(tempexp.getString("DIAGNOSTICO"));
+                    expnna.setDiagnostico(tempexp.getString(20));
                     expnna.setCodigoReferencia(tempexp.getString(21));
                     expnna.setNActual(tempexp.getString(22));
                     expnna.setApellidopActual(tempexp.getString(23));
                     expnna.setApellidomActual(tempexp.getString(24));
-                    expnna.setObservaciones(tempexp.getString("OBSERVACIONES"));
+                    expnna.setObservaciones(tempexp.getString(25));
                     expnna.setFechaInvTutelar(tempexp.getDate(26));
                     tempnna = new Nna();
                     tempnna.setIdnna(tempexp.getLong(27));
@@ -666,6 +666,7 @@ public class HiberNna {
                     expnna.setNna(tempnna);
                     Unidad unid = new Unidad();
                     unid.setIdunidad(tempexp.getLong(62));
+                    expnna.setUnidad(unid);
                 }
                 statement.close();
             }

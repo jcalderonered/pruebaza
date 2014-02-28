@@ -573,22 +573,24 @@ public class nna {
         }
         ExpedienteNna tempExp = new ExpedienteNna();
         tempExp = ServicioNna.getExpNna(idNna);
-        String tempfechaString = "";
+        String tempfechaInv = "";
+        String tempfechaIng = "";
+        String tempfechaEst = "";
         try {
-            tempfechaString = df.dateToString(tempExp.getFechaInvTutelar());
+            tempfechaInv = df.dateToString(tempExp.getFechaInvTutelar());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechainv", tempfechaString);
+        map.addAttribute("fechainv", tempfechaInv);
         try {
-            tempfechaString = df.dateToString(tempExp.getFechaIngreso());
+            tempfechaIng = df.dateToString(tempExp.getFechaIngreso());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechaing", tempfechaString);
+        map.addAttribute("fechaing", tempfechaIng);
         try {
-            tempfechaString = df.dateToString(tempExp.getFechaEstado());
+            tempfechaEst = df.dateToString(tempExp.getFechaEstado());
         } catch (Exception ex) {
         }
-        map.addAttribute("fechaest", tempfechaString);
+        map.addAttribute("fechaest", tempfechaEst);
         map.put("expediente", tempExp);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
