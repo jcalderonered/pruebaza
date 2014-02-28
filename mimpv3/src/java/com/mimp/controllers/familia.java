@@ -58,7 +58,7 @@ public class familia {
             return new ModelAndView("login", map);
         }
         usuario = ServicioFamilia.obtenerFormulariosFamilia(usuario.getIdfamilia());
-        
+
         Date fechaactual = new Date();
         Date ultfecha = new Date(10, 0, 01);
         for (Iterator iter = usuario.getFormularioSesions().iterator(); iter.hasNext();) {
@@ -71,12 +71,12 @@ public class familia {
         boolean inscritoTaller = false;
         ArrayList<AsistenciaFR> allReuniones = new ArrayList();
         allReuniones = ServicioFamilia.listaReunionesInscritasFamilia(usuario.getIdfamilia());
-        if(!allReuniones.isEmpty()){
-        for (AsistenciaFR asistenciaFR : allReuniones) {
-            if(fechaactual.before(asistenciaFR.getReunion().getFecha())){
-                inscritoTaller = true;
+        if (!allReuniones.isEmpty()) {
+            for (AsistenciaFR asistenciaFR : allReuniones) {
+                if (fechaactual.before(asistenciaFR.getReunion().getFecha())) {
+                    inscritoTaller = true;
+                }
             }
-        }
         }
         if (ultfecha.getYear() < fechaactual.getYear()) {
             System.out.print(ultfecha);
@@ -90,7 +90,7 @@ public class familia {
 
             //allPersonal = ServicioPersonal.ListaPersonal();
             String fecha = "";
-            if (sesionMasProx.getFecha() != null ) {
+            if (sesionMasProx.getFecha() != null) {
                 fecha = format.dateToString(sesionMasProx.getFecha());
             }
             String hora = sesionMasProx.getHora();
@@ -109,10 +109,10 @@ public class familia {
 
             map.put("listaTalleres", ServicioFamilia.listaTalleresHabilitados());
             map.put("formato", format);
-            if(inscritoTaller) {
+            if (inscritoTaller) {
                 map.put("inscrito", "true");
-                map.put("listaReuniones",allReuniones);
-            }else{
+                map.put("listaReuniones", allReuniones);
+            } else {
                 map.put("inscrito", "false");
             }
             pagina = "/Familia/Inscripcion/inscripcion_Talleres";
@@ -299,7 +299,10 @@ public class familia {
         } else {
             for (Iterator iter = usuario.getInfoFamilias().iterator(); iter.hasNext();) {
                 InfoFamilia ifa = (InfoFamilia) iter.next();
-                String fechaMatri = format.dateToString(ifa.getFechaMatrimonio());
+                String fechaMatri = "";
+                if (ifa.getFechaMatrimonio() != null) {
+                    fechaMatri = format.dateToString(ifa.getFechaMatrimonio());
+                }
                 map.addAttribute("fechaMatri", fechaMatri);
                 map.addAttribute("estCivil", ifa.getEstadoCivil());
                 for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
@@ -327,7 +330,10 @@ public class familia {
         } else {
             for (Iterator iter = usuario.getInfoFamilias().iterator(); iter.hasNext();) {
                 InfoFamilia ifa = (InfoFamilia) iter.next();
-                String fechaMatri = format.dateToString(ifa.getFechaMatrimonio());
+                String fechaMatri = "";
+                if (ifa.getFechaMatrimonio() != null) {
+                    fechaMatri = format.dateToString(ifa.getFechaMatrimonio());
+                }
                 map.addAttribute("fechaMatri", fechaMatri);
                 map.addAttribute("estCivil", ifa.getEstadoCivil());
                 for (Iterator iter2 = ifa.getAdoptantes().iterator(); iter2.hasNext();) {
@@ -630,10 +636,10 @@ public class familia {
                 if (sol.getSexo() == 'M') {
                     map.put("sol", sol);
                     String fechanac = "";
-                    try{
+                    try {
                         fechanac = format.dateToString(sol.getFechaNac());
-                    } catch (Exception ex){
-                        
+                    } catch (Exception ex) {
+
                     }
                     map.addAttribute("fechanac", fechanac);
                 }
@@ -1065,25 +1071,29 @@ public class familia {
         String pagina = "/Familia/Ficha/ficha_inscripcion_adopcion";
         return new ModelAndView(pagina, map);
     }
-    
+
     @RequestMapping("/FamiliaInscripcion")
-    public ModelAndView FamiliaInscripcion(ModelMap map, HttpSession session, 
-                                             @RequestParam("idTurno") long idTurno) {
+    public ModelAndView FamiliaInscripcion(ModelMap map, HttpSession session,
+            @RequestParam("idTurno") long idTurno) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         Turno temp = ServicioMain.getTurno(idTurno);
         int numAsist = ServicioFamilia.AsistentesPorFormulario(usuario.getIdfamilia());
         int cont = 0;
-        if(!temp.getAsistenciaFTs().isEmpty()) cont = numAsist + temp.getAsistenciaFTs().size();
-        if(temp.getAsistenciaFTs().isEmpty()) cont = numAsist;
-        if (cont <= temp.getVacantes()){
-            map.put("mensaje","inscrito");
-            map.put("sesion",temp.getSesion());
+        if (!temp.getAsistenciaFTs().isEmpty()) {
+            cont = numAsist + temp.getAsistenciaFTs().size();
+        }
+        if (temp.getAsistenciaFTs().isEmpty()) {
+            cont = numAsist;
+        }
+        if (cont <= temp.getVacantes()) {
+            map.put("mensaje", "inscrito");
+            map.put("sesion", temp.getSesion());
             FormularioSesion antiguo = ServicioFamilia.ultimoFormulario(usuario.getIdfamilia());
             FormularioSesion nuevo = new FormularioSesion();
             AsistenciaFT aft = new AsistenciaFT();
@@ -1101,9 +1111,9 @@ public class familia {
             Asistente asis1 = new Asistente();
             Asistente asis2 = new Asistente();
             Date now = new Date();
-            if(antiguo.getAsistentes().size() == 1){
+            if (antiguo.getAsistentes().size() == 1) {
                 Asistente tempAsis = antiguo.getAsistentes().iterator().next();
-                
+
                 asis1.setNombre(tempAsis.getNombre());
                 asis1.setApellidoP(tempAsis.getApellidoP());
                 asis1.setApellidoM(tempAsis.getApellidoM());
@@ -1118,7 +1128,7 @@ public class familia {
                 asis1.setProfesion(tempAsis.getProfesion());
                 asis1.setCelular(tempAsis.getCelular());
                 asis1.setCorreo(tempAsis.getCorreo());
-                
+
                 nuevo.setFamilia(usuario);
                 nuevo.setFechaSol(now);
                 nuevo.setSesion(temp.getSesion());
@@ -1129,21 +1139,21 @@ public class familia {
                 nuevo.setDireccionRes(antiguo.getDireccionRes());
                 nuevo.setEstadoCivil(antiguo.getEstadoCivil());
                 nuevo.setTelefono(antiguo.getTelefono());
-                
+
                 ServicioMain.InsertFormInd(asis1, nuevo, aft);
-                
-            }else{
+
+            } else {
                 Asistente elTemp = new Asistente();
                 Asistente ellaTemp = new Asistente();
                 for (Asistente tempAsis : antiguo.getAsistentes()) {
-                        if(tempAsis.getSexo() == 109) {
-                            elTemp = tempAsis;
-                        }
-                        if(tempAsis.getSexo() == 102) {
-                            ellaTemp = tempAsis;
-                        }
+                    if (tempAsis.getSexo() == 109) {
+                        elTemp = tempAsis;
+                    }
+                    if (tempAsis.getSexo() == 102) {
+                        ellaTemp = tempAsis;
+                    }
                 }
-                
+
                 asis1.setNombre(elTemp.getNombre());
                 asis1.setApellidoP(elTemp.getApellidoP());
                 asis1.setApellidoM(elTemp.getApellidoM());
@@ -1158,7 +1168,7 @@ public class familia {
                 asis1.setProfesion(elTemp.getProfesion());
                 asis1.setCelular(elTemp.getCelular());
                 asis1.setCorreo(elTemp.getCorreo());
-                
+
                 asis2.setNombre(ellaTemp.getNombre());
                 asis2.setApellidoP(ellaTemp.getApellidoP());
                 asis2.setApellidoM(ellaTemp.getApellidoM());
@@ -1173,7 +1183,7 @@ public class familia {
                 asis2.setProfesion(ellaTemp.getProfesion());
                 asis2.setCelular(ellaTemp.getCelular());
                 asis2.setCorreo(ellaTemp.getCorreo());
-                
+
                 nuevo.setFamilia(usuario);
                 nuevo.setFechaSol(now);
                 nuevo.setSesion(temp.getSesion());
@@ -1184,98 +1194,96 @@ public class familia {
                 nuevo.setDireccionRes(antiguo.getDireccionRes());
                 nuevo.setEstadoCivil(antiguo.getEstadoCivil());
                 nuevo.setTelefono(antiguo.getTelefono());
-                
+
                 ServicioMain.InsertFormGrp(asis1, asis2, nuevo, aft, aft2);
- 
+
             }
-            
-            
-        }else{
-            map.put("mensaje","fallo");
+
+        } else {
+            map.put("mensaje", "fallo");
         }
-        
+
         String pagina = "/Familia/Inscripcion/inscripcion_sesionInfo_afirm";
-        
-        map.put("df",format);
+
+        map.put("df", format);
         return new ModelAndView(pagina, map);
     }
-    
-    
-    
+
     @RequestMapping("/FamiliaDetalleTaller")
-    public ModelAndView FamiliaDetalleTaller(ModelMap map, HttpSession session, 
-                                             @RequestParam("idTaller") long idTaller,
-                                             @RequestParam("nombreTaller") String nombreTaller) {
+    public ModelAndView FamiliaDetalleTaller(ModelMap map, HttpSession session,
+            @RequestParam("idTaller") long idTaller,
+            @RequestParam("nombreTaller") String nombreTaller) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         String pagina = "/Familia/Inscripcion/inscripcion_Grupos";
         ArrayList<Grupo> allGrupos = new ArrayList();
         allGrupos = ServicioFamilia.listaGruposDeTaller(idTaller);
-        map.put("listaGrupos",allGrupos);
-        map.put("nombreTaller",nombreTaller);
-        map.put("df",format);
+        map.put("listaGrupos", allGrupos);
+        map.put("nombreTaller", nombreTaller);
+        map.put("df", format);
         return new ModelAndView(pagina, map);
     }
+
     @RequestMapping("/FamiliaInscribirTaller")
     public ModelAndView FamiliaInscribirTaller(ModelMap map, HttpSession session,
-                                               @RequestParam("idTurno2") long idTurno2,
-                                               @RequestParam("nombreTaller") String nombreTaller,
-                                               @RequestParam("nombreGrupo") String nombreGrupo,
-                                               @RequestParam("nombreTurno") String nombreTurno) {
+            @RequestParam("idTurno2") long idTurno2,
+            @RequestParam("nombreTaller") String nombreTaller,
+            @RequestParam("nombreGrupo") String nombreGrupo,
+            @RequestParam("nombreTurno") String nombreTurno) {
         Familia usuario = (Familia) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         ArrayList<Reunion> allReuniones = new ArrayList();
         allReuniones = ServicioFamilia.listaReunionesTurno2(idTurno2);
         short numAsistentes = ServicioFamilia.numAsistentesFormulario(usuario.getIdfamilia());
         boolean inscripcion = false;
         for (Reunion reunion : allReuniones) {
-            if(reunion.getAsistenciaFRs().size() + numAsistentes >= reunion.getCapacidad()){
+            if (reunion.getAsistenciaFRs().size() + numAsistentes >= reunion.getCapacidad()) {
                 inscripcion = true;
             }
         }
-        if(!inscripcion){
-        for (Reunion reunion : allReuniones) {
-            AsistenciaFR tempAFR = new AsistenciaFR();
-            tempAFR.setFamilia(usuario);
-            tempAFR.setReunion(reunion);
-            String asistencia = "F";
-            char c = asistencia.charAt(0);
-            tempAFR.setAsistencia(c);
-            tempAFR.setInasJus(Short.parseShort("1"));
-            ServicioFamilia.crearAFR(tempAFR);
-            short x = 2;
-            if (numAsistentes == x) {
-                AsistenciaFR tempAFR2 = new AsistenciaFR();
-                tempAFR2.setFamilia(usuario);
-                tempAFR2.setReunion(reunion);
-                String asistencia2 = "F";
-                char c2 = asistencia2.charAt(0);
-                tempAFR2.setAsistencia(c);
-                tempAFR2.setInasJus(Short.parseShort("1"));
-                ServicioFamilia.crearAFR(tempAFR2);
+        if (!inscripcion) {
+            for (Reunion reunion : allReuniones) {
+                AsistenciaFR tempAFR = new AsistenciaFR();
+                tempAFR.setFamilia(usuario);
+                tempAFR.setReunion(reunion);
+                String asistencia = "F";
+                char c = asistencia.charAt(0);
+                tempAFR.setAsistencia(c);
+                tempAFR.setInasJus(Short.parseShort("1"));
+                ServicioFamilia.crearAFR(tempAFR);
+                short x = 2;
+                if (numAsistentes == x) {
+                    AsistenciaFR tempAFR2 = new AsistenciaFR();
+                    tempAFR2.setFamilia(usuario);
+                    tempAFR2.setReunion(reunion);
+                    String asistencia2 = "F";
+                    char c2 = asistencia2.charAt(0);
+                    tempAFR2.setAsistencia(c);
+                    tempAFR2.setInasJus(Short.parseShort("1"));
+                    ServicioFamilia.crearAFR(tempAFR2);
+                }
             }
         }
-        }
-        if(!inscripcion){
-        map.put("listaReuniones",allReuniones);
-        map.put("nombreTaller",nombreTaller);
-        map.put("nombreGrupo",nombreGrupo);
-        map.put("nombreTurno",nombreTurno);
-        map.put("df",format);
-        }else{
-        map.put("mensaje","negativo");
-        map.put("nombreGrupo",nombreGrupo);
-        map.put("nombreTurno",nombreTurno);
+        if (!inscripcion) {
+            map.put("listaReuniones", allReuniones);
+            map.put("nombreTaller", nombreTaller);
+            map.put("nombreGrupo", nombreGrupo);
+            map.put("nombreTurno", nombreTurno);
+            map.put("df", format);
+        } else {
+            map.put("mensaje", "negativo");
+            map.put("nombreGrupo", nombreGrupo);
+            map.put("nombreTurno", nombreTurno);
         }
         String pagina = "/Familia/Inscripcion/inscripcion_Grupos_afirm";
         return new ModelAndView(pagina, map);
