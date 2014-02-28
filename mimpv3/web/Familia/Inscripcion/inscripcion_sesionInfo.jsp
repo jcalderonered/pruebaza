@@ -72,6 +72,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8 col-md-offset-1">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioFam'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Inscripción a la Sesión Informativa</strong></h1>
                         <br>
                         <p><b>Próxima fecha:</b> ${fecha}</p>
@@ -91,8 +92,8 @@
                                 </thead>
                                 <tbody>
                                     <c:if test="${!listaTurnos.isEmpty()}" >  
-                                    <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
-                                    <tr>
+                                        <c:forEach var="turno" items="${listaTurnos}" varStatus="status">
+                                            <tr>
                                                 <td>Turno ${status.index + 1} </td>
                                                 <td>${ts.DateToString(turno.getInicioInscripcion())} ${ts.HourToString(turno.getInicioInscripcion())}</td>
                                                 <td>${ts.DateToString(turno.getFinInscripcion())} ${ts.HourToString(turno.getFinInscripcion())}</td>
@@ -100,29 +101,29 @@
                                                 <td>
                                                     <c:set var="now" value="<%=new java.util.Date()%>" />
                                                     <c:choose>
-                                                    <c:when test="${turno.getVacantes() > turno.getAsistenciaFTs().size() && turno.getInicioInscripcion() < now && turno.getFinInscripcion() > now }">
-                                                        <form action="${pageContext.servletContext.contextPath}/FamiliaInscripcion" method="post">
-                                                            <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
-                                                            <input hidden name="index" id="index" value="${status.index + 1}">
-                                                            <button type="submit" class="btn btn-default">Registrar</button>
-                                                        </form>
-                                                    </c:when>
-                                                    <c:when test="${turno.getVacantes() <= turno.getAsistenciaFTs().size() || turno.getFinInscripcion() < now }">
-                                                        
-                                                        <p><strong>Se termino la inscripción</strong></p>
-                                                        
-                                                    </c:when>    
-                                                    <c:otherwise>
-                                                         <p><strong>En espera</strong></p>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                      
+                                                        <c:when test="${turno.getVacantes() > turno.getAsistenciaFTs().size() && turno.getInicioInscripcion() < now && turno.getFinInscripcion() > now }">
+                                                            <form action="${pageContext.servletContext.contextPath}/FamiliaInscripcion" method="post">
+                                                                <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
+                                                                <input hidden name="index" id="index" value="${status.index + 1}">
+                                                                <button type="submit" class="btn btn-default">Registrar</button>
+                                                            </form>
+                                                        </c:when>
+                                                        <c:when test="${turno.getVacantes() <= turno.getAsistenciaFTs().size() || turno.getFinInscripcion() < now }">
+
+                                                            <p><strong>Se termino la inscripción</strong></p>
+
+                                                        </c:when>    
+                                                        <c:otherwise>
+                                                            <p><strong>En espera</strong></p>
+                                                        </c:otherwise>
+                                                    </c:choose>
+
                                                 </td>
                                             </tr>
-                                    </c:forEach>
+                                        </c:forEach>
                                     </c:if>     
                                     <c:if test="${!listaTurnos.isEmpty()}" >
-                                        
+
                                     </c:if>        
                                 </tbody>
                             </table>

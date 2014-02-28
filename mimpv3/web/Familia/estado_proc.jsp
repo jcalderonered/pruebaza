@@ -71,6 +71,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8 col-md-offset-1">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioFam'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <!-- AQUI AGREGAR EL CONTENIDO QUE ESTARA AL COSTADO DEL MENU -->
                         <br>
                         <h3><strong>Etapas del proceso por las que ha pasado la familia</strong></h3>

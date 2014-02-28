@@ -72,6 +72,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8 col-md-offset-1">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioFam'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <c:if test="${inscrito == false}">
                         <h1 align="center"><strong>Inscripción a Talleres</strong></h1>
                         <br>
