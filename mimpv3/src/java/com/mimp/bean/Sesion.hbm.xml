@@ -9,7 +9,7 @@
             <generator class="increment" />
         </id>
         <property name="NSesion" type="string">
-            <column name="N_SESION" length="10" />
+            <column name="N_SESION" length="20" />
         </property>
         <property name="habilitado" type="java.lang.Short">
             <column name="HABILITADO" precision="3" scale="0" />
