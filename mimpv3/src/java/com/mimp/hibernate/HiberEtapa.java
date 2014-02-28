@@ -3008,7 +3008,7 @@ public class HiberEtapa {
 
                                 String hql3 = "{call HE_GET_UNIDAD(?, ?)}";
                                 CallableStatement statement3 = connection.prepareCall(hql3);
-                                statement3.setLong(1, temp_personal.getShort(3));
+                                statement3.setLong(1, temp_personal.getLong(2));
                                 statement3.registerOutParameter(2, OracleTypes.CURSOR);
                                 statement3.execute();
                                 temp2 = (ResultSet) statement3.getObject(2);
@@ -3099,7 +3099,7 @@ public class HiberEtapa {
                 statement_infopost.registerOutParameter(2, OracleTypes.CURSOR);
                 statement_infopost.execute();
 
-                temp_infopost = (ResultSet) statement_infopost.getObject(3);
+                temp_infopost = (ResultSet) statement_infopost.getObject(2);
                 while (temp_infopost.next()) {
                     infopost.setIdinformePostAdoptivo(temp_infopost.getShort(1));
                     if (temp_infopost.getShort(2) != 0) {
@@ -4438,43 +4438,244 @@ public class HiberEtapa {
         return allDesig;
     }
 
+//    public ArrayList<PostAdopcion> getListaPostAdopcion() {
+//
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//        ArrayList<PostAdopcion> allPostAdopcion = new ArrayList();
+//        ArrayList<Resolucion> allResoluciones = new ArrayList();
+//
+//        String hql1 = "FROM Resolucion R WHERE R.tipo = :tipo";
+//        Query query1 = session.createQuery(hql1);
+//        query1.setString("tipo", "adopcion");
+//        List tempResoluciones = query1.list();
+//
+//        for (Iterator iter = tempResoluciones.iterator(); iter.hasNext();) {
+//            Resolucion temp = (Resolucion) iter.next();
+//            Hibernate.initialize(temp.getEvaluacion().getExpedienteFamilia());
+//            allResoluciones.add(temp);
+//        }
+//
+//        String hql2 = "FROM PostAdopcion PA ORDER BY PA.idpostAdopcion ASC";
+//        Query query2 = session.createQuery(hql2);
+//        List tempPost = query2.list();
+//
+//        if (!allResoluciones.isEmpty() && !tempPost.isEmpty()) {
+//            for (Iterator iter = tempPost.iterator(); iter.hasNext();) {
+//                PostAdopcion temp2 = (PostAdopcion) iter.next();
+//                for (Resolucion resol : allResoluciones) {
+//                    if (resol.getFechaResol().equals(temp2.getFechaResolucion())) {
+//                        Set<ExpedienteFamilia> tempExpediente = new HashSet<ExpedienteFamilia>(0);
+//                        tempExpediente.add(resol.getEvaluacion().getExpedienteFamilia());
+//                        Hibernate.initialize(temp2.getFamilia());
+//                        Hibernate.initialize(temp2.getInformePostAdoptivos());
+//                        temp2.getFamilia().setExpedienteFamilias(tempExpediente);
+//                    }
+//                }
+//                allPostAdopcion.add(temp2);
+//            }
+//        }
+//
+//        return allPostAdopcion;
+//    }
+    
     public ArrayList<PostAdopcion> getListaPostAdopcion() {
 
-        Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        ArrayList<PostAdopcion> allPostAdopcion = new ArrayList();
-        ArrayList<Resolucion> allResoluciones = new ArrayList();
+        final ArrayList<PostAdopcion> allPostAdopcion = new ArrayList();
 
-        String hql1 = "FROM Resolucion R WHERE R.tipo = :tipo";
-        Query query1 = session.createQuery(hql1);
-        query1.setString("tipo", "adopcion");
-        List tempResoluciones = query1.list();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
 
-        for (Iterator iter = tempResoluciones.iterator(); iter.hasNext();) {
-            Resolucion temp = (Resolucion) iter.next();
-            Hibernate.initialize(temp.getEvaluacion().getExpedienteFamilia());
-            allResoluciones.add(temp);
-        }
+                String hql = "{call REPORTE_POST(?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.registerOutParameter(1, OracleTypes.CURSOR);
+                statement.execute();
 
-        String hql2 = "FROM PostAdopcion PA ORDER BY PA.idpostAdopcion ASC";
-        Query query2 = session.createQuery(hql2);
-        List tempPost = query2.list();
+                ResultSet rs = (ResultSet) statement.getObject(1);
 
-        if (!allResoluciones.isEmpty() && !tempPost.isEmpty()) {
-            for (Iterator iter = tempPost.iterator(); iter.hasNext();) {
-                PostAdopcion temp2 = (PostAdopcion) iter.next();
-                for (Resolucion resol : allResoluciones) {
-                    if (resol.getFechaResol().equals(temp2.getFechaResolucion())) {
-                        Set<ExpedienteFamilia> tempExpediente = new HashSet<ExpedienteFamilia>(0);
-                        tempExpediente.add(resol.getEvaluacion().getExpedienteFamilia());
-                        Hibernate.initialize(temp2.getFamilia());
-                        Hibernate.initialize(temp2.getInformePostAdoptivos());
-                        temp2.getFamilia().setExpedienteFamilias(tempExpediente);
+                if (rs.next()) {
+                    Set<ExpedienteFamilia> listExp = new HashSet<ExpedienteFamilia>();
+                    Set<InfoFamilia> listInfo = new HashSet<InfoFamilia>();
+                    Set<Evaluacion> listEval = new HashSet<Evaluacion>();
+                    Set<Resolucion> listResol = new HashSet<Resolucion>();
+                    Set<InformePostAdoptivo> listInformes = new HashSet<InformePostAdoptivo>();
+
+                    Resolucion tempResol = new Resolucion();
+                    Evaluacion tempEval = new Evaluacion();
+                    ExpedienteFamilia tempExpFam = new ExpedienteFamilia();
+                    Familia tempFam = new Familia();
+                    PostAdopcion tempPost = new PostAdopcion();
+                    Unidad tempUa = new Unidad();
+                    InfoFamilia tempInfo = new InfoFamilia();
+
+                    tempEval.setIdevaluacion(rs.getLong("IDEVALUACION"));
+
+                    tempResol.setIdresolucion(rs.getLong("IDRESOLUCION"));
+                    tempResol.setTipo(rs.getString("TIPO"));
+                    tempResol.setNumero(rs.getString("NUMERO"));
+                    tempResol.setFechaResol(rs.getDate("FECHA_RESOL"));
+                    tempResol.setFechaNotificacion(rs.getDate("FECHA_NOTIFICACION"));
+
+                    tempPost.setIdpostAdopcion(rs.getLong("IDPOST_ADOPCION"));
+                    tempPost.setNumeroInformes(rs.getLong("NUMERO_INFORMES"));
+                    tempPost.setidNna(rs.getLong("IDNNA"));
+                    tempPost.setFechaResolucion(rs.getDate("FECHA_RESOLUCION"));
+
+                    String hql4 = "{call REPORTE_POST_INFORME(?,?)}";
+                    CallableStatement statement4 = connection.prepareCall(hql4);
+                    statement4.setLong(1, tempPost.getIdpostAdopcion());
+                    statement4.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement4.execute();
+
+                    ResultSet rs4 = (ResultSet) statement4.getObject(2);
+
+                    while (rs4.next()) {
+                        InformePostAdoptivo tempInforme = new InformePostAdoptivo();
+                        Personal tempPersonal = new Personal();
+                        tempInforme.setFechaRecepcionProyectado(rs4.getDate("FECHA_RECEPCION_PROYECTADO"));
+                        tempInforme.setFechaRecepcion(rs4.getDate("FECHA_RECEPCION"));
+                        tempPersonal.setNombre(rs4.getString("NOMBRE"));
+                        tempPersonal.setApellidoP(rs4.getString("APELLIDO_P"));
+                        tempInforme.setFechaInforme(rs4.getDate("FECHA_INFORME"));
+                        tempInforme.setEstado(rs4.getString("ESTADO"));
+                        tempInforme.setFechaActa(rs4.getDate("FECHA_ACTA"));
+
+                        tempInforme.setPersonal(tempPersonal);
+                        listInformes.add(tempInforme);
+
                     }
+                    statement4.close();
+                    tempPost.setInformePostAdoptivos(listInformes);
+
+                    Long idEntidad = rs.getLong("IDENTIDAD");
+                    if (!rs.wasNull()) {
+                        Entidad tempEnt = new Entidad();
+                        String query2 = "{call RENAD_ENTIDAD(?,?)}";
+                        CallableStatement statement2 = connection.prepareCall(query2);
+                        statement2.setLong(1, idEntidad);
+                        statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement2.execute();
+                        ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                        while (rs2.next()) {
+                            tempEnt.setIdentidad(rs2.getLong("IDENTIDAD"));
+                            tempEnt.setNombre(rs2.getString("NOMBRE"));
+                            tempEnt.setUser(rs2.getString("USER_"));
+                            tempEnt.setPass(rs2.getString("PASS"));
+                            tempEnt.setDireccion(rs2.getString("DIRECCION"));
+                            tempEnt.setTelefono(rs2.getString("TELEFONO"));
+                            tempEnt.setPais(rs2.getString("PAIS"));
+                            tempEnt.setResolAuto(rs2.getString("RESOL_AUTO"));
+                            tempEnt.setFechaResol(rs2.getDate("FECHA_RESOL"));
+                            tempEnt.setResolRenov(rs2.getString("RESOL_RENOV"));
+                            tempEnt.setFechaRenov(rs2.getDate("FECHA_RENOV"));
+                            tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
+                            tempEnt.setObs(rs2.getString("OBS"));
+                        }
+                        statement2.close();
+                        tempFam.setEntidad(tempEnt);
+                    }
+
+                    tempExpFam.setExpediente(rs.getString("EXPEDIENTE"));
+                    tempExpFam.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
+                    tempUa.setNombre(rs.getString("NOMBRE"));
+
+                    tempInfo.setIdinfoFamilia(rs.getLong("IDINFO_FAMILIA"));
+                    tempInfo.setPaisRes(rs.getString("PAIS_RES"));
+                    tempInfo.setDepRes(rs.getString("DEP_RES"));
+
+                    Set<Adoptante> listadop = new HashSet<Adoptante>();
+                    String query3 = "{call RENAD_ADOPTANTE(?,?)}";
+                    CallableStatement statement3 = connection.prepareCall(query3);
+                    statement3.setLong(1, tempInfo.getIdinfoFamilia());
+                    statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement3.execute();
+                    ResultSet rs3 = (ResultSet) statement3.getObject(2);
+                    while (rs3.next()) {
+                        Adoptante tempAdoptante = new Adoptante();
+                        tempAdoptante.setIdadoptante(rs3.getLong("IDADOPTANTE"));
+                        tempAdoptante.setInfoFamilia(tempInfo);
+                        tempAdoptante.setNombre(rs3.getString("NOMBRE"));
+                        tempAdoptante.setApellidoP(rs3.getString("APELLIDO_P"));
+                        tempAdoptante.setApellidoM(rs3.getString("APELLIDO_M"));
+
+                        String tempsexo = "";
+                        tempsexo = rs3.getString("SEXO");
+                        if (!rs3.wasNull()) {
+                            tempAdoptante.setSexo(tempsexo.charAt(0));
+                        }
+
+                        tempAdoptante.setFechaNac(rs3.getDate("FECHA_NAC"));
+                        tempAdoptante.setLugarNac(rs3.getString("LUGAR_NAC"));
+                        tempAdoptante.setDepaNac(rs3.getString("DEPA_NAC"));
+                        tempAdoptante.setPaisNac(rs3.getString("PAIS_NAC"));
+
+                        String tempTipoDoc = "";
+                        tempTipoDoc = rs3.getString("TIPO_DOC");
+                        if (!rs3.wasNull()) {
+                            tempAdoptante.setTipoDoc(tempTipoDoc.charAt(0));
+                        }
+
+                        tempAdoptante.setNDoc(rs3.getString("N_DOC"));
+                        tempAdoptante.setCelular(rs3.getString("CELULAR"));
+                        tempAdoptante.setCorreo(rs3.getString("CORREO"));
+                        tempAdoptante.setNivelInstruccion(rs3.getString("NIVEL_INSTRUCCION"));
+                        tempAdoptante.setCulminoNivel(rs3.getShort("CULMINO_NIVEL"));
+                        tempAdoptante.setProfesion(rs3.getString("PROFESION"));
+                        tempAdoptante.setTrabajadorDepend(rs3.getShort("TRABAJADOR_DEPEND"));
+                        tempAdoptante.setOcupActualDep(rs3.getString("OCUP_ACTUAL_DEP"));
+                        tempAdoptante.setCentroTrabajo(rs3.getString("CENTRO_TRABAJO"));
+                        tempAdoptante.setDireccionCentro(rs3.getString("DIRECCION_CENTRO"));
+                        tempAdoptante.setTelefonoCentro(rs3.getString("TELEFONO_CENTRO"));
+                        tempAdoptante.setIngresoDep(rs3.getLong("INGRESO_DEP"));
+                        tempAdoptante.setTrabajadorIndepend(rs3.getShort("TRABAJADOR_INDEPEND"));
+                        tempAdoptante.setOcupActualInd(rs3.getString("OCUP_ACTUAL_IND"));
+                        tempAdoptante.setIngresoIndep(rs3.getLong("INGRESO_INDEP"));
+                        tempAdoptante.setSeguroSalud(rs3.getShort("SEGURO_SALUD"));
+                        tempAdoptante.setTipoSeguro(rs3.getString("TIPO_SEGURO"));
+                        tempAdoptante.setSeguroVida(rs3.getShort("SEGURO_VIDA"));
+                        tempAdoptante.setSistPensiones(rs3.getShort("SIST_PENSIONES"));
+                        tempAdoptante.setSaludActual(rs3.getString("SALUD_ACTUAL"));
+
+                        listadop.add(tempAdoptante);
+
+                    }
+                    statement3.close();
+                    tempInfo.setAdoptantes(listadop);
+
+                    tempExpFam.setUnidad(tempUa);
+                    tempExpFam.setFamilia(tempFam);
+                    tempEval.setExpedienteFamilia(tempExpFam);
+                    tempResol.setEvaluacion(tempEval);
+                    listResol.add(tempResol);
+
+                    tempEval.setResolucions(listResol);
+
+                    listEval.add(tempEval);
+
+                    tempExpFam.setEvaluacions(listEval);
+
+                    listExp.add(tempExpFam);
+
+                    tempFam.setExpedienteFamilias(listExp);
+
+                    tempInfo.setFamilia(tempFam);
+                    listInfo.add(tempInfo);
+
+                    tempFam.setInfoFamilias(listInfo);
+
+                    tempPost.setFamilia(tempFam);
+
+                    allPostAdopcion.add(tempPost);
+
                 }
-                allPostAdopcion.add(temp2);
+                statement.close();
             }
-        }
+        };
+
+        session.doWork(work);
 
         return allPostAdopcion;
     }
