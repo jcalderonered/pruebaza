@@ -77,7 +77,7 @@ public class HiberNna {
                 while (temp.next()) {
                     tempnna.setIdnna(idnna);
                     juz = new Juzgado();
-                    juz.setIdjuzgado(temp.getLong(1));
+                    juz.setIdjuzgado(temp.getLong("IDJUZGADO"));
                     tempnna.setJuzgado(juz);
                     tempnna.setNombre(temp.getString(2));
                     tempnna.setApellidoP(temp.getString(3));
@@ -94,7 +94,7 @@ public class HiberNna {
                     tempnna.setPaisNacimiento(temp.getString(14));
                     tempnna.setLugarNac(temp.getString(15));
                     tempnna.setFechaResolAbandono(temp.getDate(16));
-                    tempnna.setFechaResolConsentida(temp.getDate(17));
+                    tempnna.setFechaResolConsentida(temp.getDate("FECHA_RESOL_CONSENTIDA"));
                     tempnna.setClasificacion(temp.getString(18));
                     tempnna.setIncesto(temp.getShort(19));
                     tempnna.setMental(temp.getShort(20));
@@ -112,9 +112,9 @@ public class HiberNna {
                     tempnna.setNn(temp.getShort(32));
                     tempnna.setObservaciones(temp.getString(33));
                     tempnna.setNResolAband(temp.getString(34));
-                    tempnna.setNResolCons(temp.getString(35));
+                    tempnna.setNResolCons(temp.getString("N_RESOL_CONS"));
                     try {
-                        expnna = getExpNna(temp.getLong(1));
+                        expnna = getExpNna(tempnna.getIdnna());
                         if (expnna.getIdexpedienteNna() != 0) {
                             Set<ExpedienteNna> listexp = new HashSet<ExpedienteNna>();
                             listexp.add(expnna);
@@ -124,7 +124,7 @@ public class HiberNna {
 
                     }
                     car = new Car();
-                    car.setIdcar(temp.getShort(36));
+                    car.setIdcar(temp.getLong("IDCAR"));
                     car.setNombre(temp.getString(37));
                     car.setDireccion(temp.getString(38));
                     car.setDepartamento(temp.getString(39));
@@ -298,8 +298,7 @@ public class HiberNna {
                 statement.setString(4, nna.getApellidoP());
                 statement.setString(5, nna.getApellidoM());
                 statement.setString(6, nna.getSexo());
-                java.sql.Date fechanac = new java.sql.Date(nna.getFechaNacimiento().getTime());
-                statement.setDate(7, fechanac);
+                statement.setDate(7, (java.sql.Date) nna.getFechaNacimiento());
                 statement.setShort(8, nna.getEdadAnhos());
                 statement.setShort(9, nna.getEdadMeses());
                 statement.setShort(10, nna.getActaNacimiento());
@@ -309,10 +308,8 @@ public class HiberNna {
                 statement.setString(14, nna.getDistritoNacimiento());
                 statement.setString(15, nna.getPaisNacimiento());
                 statement.setString(16, nna.getLugarNac());
-                java.sql.Date fechaAband = new java.sql.Date(nna.getFechaResolAbandono().getTime());
-                statement.setDate(17, fechaAband);
-                java.sql.Date fechaCons = new java.sql.Date(nna.getFechaResolConsentida().getTime());
-                statement.setDate(18, fechaCons);
+                statement.setDate(17, (java.sql.Date)nna.getFechaResolAbandono());
+                statement.setDate(18, (java.sql.Date) nna.getFechaResolConsentida());
                 statement.setString(19, nna.getClasificacion());
                 statement.setShort(20, nna.getIncesto());
                 statement.setShort(21, nna.getMental());
@@ -367,8 +364,7 @@ public class HiberNna {
                 statement.setString(4, nna.getApellidoP());
                 statement.setString(5, nna.getApellidoM());
                 statement.setString(6, nna.getSexo());
-                java.sql.Date fechanac = new java.sql.Date(nna.getFechaNacimiento().getTime());
-                statement.setDate(7, fechanac);
+                statement.setDate(7, (java.sql.Date) nna.getFechaNacimiento());
                 statement.setShort(8, nna.getEdadAnhos());
                 statement.setShort(9, nna.getEdadMeses());
                 statement.setShort(10, nna.getActaNacimiento());
@@ -378,10 +374,8 @@ public class HiberNna {
                 statement.setString(14, nna.getDistritoNacimiento());
                 statement.setString(15, nna.getPaisNacimiento());
                 statement.setString(16, nna.getLugarNac());
-                java.sql.Date fechaAband = new java.sql.Date(nna.getFechaResolAbandono().getTime());
-                statement.setDate(17, fechaAband);
-                java.sql.Date fechaCons = new java.sql.Date(nna.getFechaResolConsentida().getTime());
-                statement.setDate(18, fechaCons);
+                statement.setDate(17, (java.sql.Date)nna.getFechaResolAbandono());
+                statement.setDate(18, (java.sql.Date) nna.getFechaResolConsentida());
                 statement.setString(19, nna.getClasificacion());
                 statement.setShort(20, nna.getIncesto());
                 statement.setShort(21, nna.getMental());
@@ -614,7 +608,7 @@ public class HiberNna {
                     expnna.setNExpTutelar(tempexp.getString(5));
                     expnna.setProcTutelar(tempexp.getString(6));
                     expnna.setFichaIntegral(tempexp.getShort(7));
-                    expnna.setComentarios(tempexp.getString(8));
+                    expnna.setComentarios(tempexp.getString("COMENTARIOS"));
                     expnna.setRespLegalNombre(tempexp.getString(9));
                     expnna.setRespLegalP(tempexp.getString(10));
                     expnna.setRespLegalM(tempexp.getString(11));
@@ -626,12 +620,12 @@ public class HiberNna {
                     expnna.setAdoptable(tempexp.getShort(17));
                     expnna.setFechaResolCons(tempexp.getDate(18));
                     expnna.setNacional(tempexp.getShort(19));
-                    expnna.setDiagnostico(tempexp.getString(20));
+                    expnna.setDiagnostico(tempexp.getString("DIAGNOSTICO"));
                     expnna.setCodigoReferencia(tempexp.getString(21));
                     expnna.setNActual(tempexp.getString(22));
                     expnna.setApellidopActual(tempexp.getString(23));
                     expnna.setApellidomActual(tempexp.getString(24));
-                    expnna.setObservaciones(tempexp.getString(25));
+                    expnna.setObservaciones(tempexp.getString("OBSERVACIONES"));
                     expnna.setFechaInvTutelar(tempexp.getDate(26));
                     tempnna = new Nna();
                     tempnna.setIdnna(tempexp.getLong(27));
@@ -772,8 +766,7 @@ public class HiberNna {
                 statement.setLong(1, expnna.getNna().getIdnna());
                 statement.setLong(2, expnna.getUnidad().getIdunidad());
                 statement.setString(3, expnna.getNumero());
-                java.sql.Date fechaingreso = new java.sql.Date(expnna.getFechaIngreso().getTime());
-                statement.setDate(4, fechaingreso);
+                statement.setDate(4, (java.sql.Date) expnna.getFechaIngreso());
                 statement.setString(5, expnna.getHt());
                 statement.setString(6, expnna.getNExpTutelar());
                 statement.setString(7, expnna.getProcTutelar());
@@ -786,11 +779,9 @@ public class HiberNna {
                 statement.setString(14, expnna.getRespPiscosocialP());
                 statement.setString(15, expnna.getRespPsicosocialM());
                 statement.setString(16, expnna.getEstado());
-                java.sql.Date fechaEstado = new java.sql.Date(expnna.getFechaEstado().getTime());
-                statement.setDate(17, fechaEstado);
+                statement.setDate(17, (java.sql.Date) expnna.getFechaEstado());
                 statement.setShort(18, expnna.getAdoptable());
-                java.sql.Date fechaResolCons = new java.sql.Date(expnna.getFechaResolCons().getTime());
-                statement.setDate(19, fechaResolCons);
+                statement.setDate(19, (java.sql.Date) expnna.getFechaResolCons());
                 statement.setShort(20, expnna.getNacional());
                 statement.setString(21, expnna.getDiagnostico());
                 statement.setString(22, expnna.getCodigoReferencia());
@@ -798,8 +789,7 @@ public class HiberNna {
                 statement.setString(24, expnna.getApellidopActual());
                 statement.setString(25, expnna.getApellidomActual());
                 statement.setString(26, expnna.getObservaciones());
-                java.sql.Date fechaInvTutelar = new java.sql.Date(expnna.getFechaInvTutelar().getTime());
-                statement.setDate(27, fechaInvTutelar);
+                statement.setDate(27, (java.sql.Date) expnna.getFechaInvTutelar());
                 
                 statement.execute();
                 statement.close();
@@ -832,8 +822,7 @@ public class HiberNna {
                 statement.setLong(1, expnna.getNna().getIdnna());
                 statement.setLong(2, expnna.getUnidad().getIdunidad());
                 statement.setString(3, expnna.getNumero());
-                java.sql.Date fechaingreso = new java.sql.Date(expnna.getFechaIngreso().getTime());
-                statement.setDate(4, fechaingreso);
+                statement.setDate(4, (java.sql.Date) expnna.getFechaIngreso());
                 statement.setString(5, expnna.getHt());
                 statement.setString(6, expnna.getNExpTutelar());
                 statement.setString(7, expnna.getProcTutelar());
@@ -846,11 +835,9 @@ public class HiberNna {
                 statement.setString(14, expnna.getRespPiscosocialP());
                 statement.setString(15, expnna.getRespPsicosocialM());
                 statement.setString(16, expnna.getEstado());
-                java.sql.Date fechaEstado = new java.sql.Date(expnna.getFechaEstado().getTime());
-                statement.setDate(17, fechaEstado);
+                statement.setDate(17, (java.sql.Date) expnna.getFechaEstado());
                 statement.setShort(18, expnna.getAdoptable());
-                java.sql.Date fechaResolCons = new java.sql.Date(expnna.getFechaResolCons().getTime());
-                statement.setDate(19, fechaResolCons);
+                statement.setDate(19, (java.sql.Date) expnna.getFechaResolCons());
                 statement.setShort(20, expnna.getNacional());
                 statement.setString(21, expnna.getDiagnostico());
                 statement.setString(22, expnna.getCodigoReferencia());
@@ -858,8 +845,7 @@ public class HiberNna {
                 statement.setString(24, expnna.getApellidopActual());
                 statement.setString(25, expnna.getApellidomActual());
                 statement.setString(26, expnna.getObservaciones());
-                java.sql.Date fechaInvTutelar = new java.sql.Date(expnna.getFechaInvTutelar().getTime());
-                statement.setDate(27, fechaInvTutelar);
+                statement.setDate(27, (java.sql.Date) expnna.getFechaInvTutelar());
                 statement.setLong(28, expnna.getIdexpedienteNna());
                 
                 statement.execute();
