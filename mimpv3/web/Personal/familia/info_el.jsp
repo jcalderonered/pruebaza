@@ -102,7 +102,7 @@
                     </div>
                     <div class="col-md-8">
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario" onsubmit="return(validar());">
+                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario"> <!--onsubmit="return(validar());">-->
                             <input hidden id="adoptante" name="adoptante" value="el">
                             
                             <c:if test="${estado != 'formativa'}">
@@ -253,7 +253,8 @@
                                                 <input type="radio" name="estadoCivil" id="divorciada" value="divorciado" ${infoFam.getEstadoCivil() == 'divorciado' ? 'checked' : ''}>Divorciado</label>
                                         </div>
                                     </div> 
-                                </div>    
+                                </div>
+                                <!--        
                                 <br>
                                 <h3><strong>Educación, Ocupación e Ingresos Económicos</strong></h3>
                                 <br>
@@ -455,6 +456,7 @@
                                         <input value="${El.getSaludActual()}" id="estadoActual" name="estadoActual" type="text" class="input-xlarge">
                                     </div>
                                 </div>
+                                -->    
                                 <br>
                                 <br>
                                 <div class="control-group">

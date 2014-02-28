@@ -137,7 +137,7 @@
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button ${post.getNumeroInformes() != null ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                        <button ${post.getNumeroInformes() > 0 ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
                                     </div>
                                 </div>
                             </fieldset>

@@ -104,9 +104,9 @@
                     <div class="col-md-8">
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
 
-                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario" onsubmit="return(validar());">
+                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario" ><!--onsubmit="return(validar());" --> 
                             <input hidden id="adoptante" name="adoptante" value="ella">
-                            <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            
                             <c:if test="${estado != 'formativa'}">
                                 <br>
                                 <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
@@ -255,7 +255,8 @@
                                                 <input type="radio" name="estadoCivil" id="divorciada" value="divorciada" ${infoFam.getEstadoCivil() == 'divorciada' ? 'checked' : ''}>Divorciada</label>
                                         </div>
                                     </div> 
-                                </div>    
+                                </div>  
+                                <!--        
                                 <br>
                                 <h3><strong>Educación, Ocupación e Ingresos Económicos</strong></h3>
                                 <br>
@@ -457,6 +458,7 @@
                                         <input value="${Ella.getSaludActual()}" id="estadoActual" name="estadoActual" type="text" class="input-xlarge">
                                     </div>
                                 </div>
+                                -->
                                 <br>
                                 <br>
                                 <div class="control-group">
@@ -464,6 +466,7 @@
                                         <button ${Ella.getIdadoptante() == null || Ella.getIdadoptante() == 0 ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>
+                                    
                             </fieldset>
 
                         </form>
@@ -568,7 +571,7 @@
                         edad.value = curr_year - birth_year;
                     if (curr_year == birth_year)
                         edad.value = 0;
-
+/*
                     var indep = document.getElementById('trabIndep');
                     var ocupInd = document.getElementById('ocupacionInd');
                     var ingInd = document.getElementById('ingresoInd');
@@ -604,6 +607,7 @@
 
 
                     }
+                    */
                 }
 
             </script>

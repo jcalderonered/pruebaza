@@ -1506,7 +1506,8 @@ public class mainEtapas {
         ExpedienteNna tempExpNna = ServicioNna.getExpNna(tempNna.getIdnna());
         tempExpNna.setEstado("desig");
         Date ahora = new Date();
-        tempExpNna.setFechaEstado(ahora);
+        java.sql.Date sql = new java.sql.Date(ahora.getTime());
+        tempExpNna.setFechaEstado(sql);
         ServicioNna.updateExpNna(tempExpNna);
 
         map.put("listaDesignaciones", servicioEtapa.getListaDesignaciones());
@@ -2122,33 +2123,34 @@ public class mainEtapas {
                 PostAdopcion tempPost = new PostAdopcion();
                 tempPost.setFamilia(tempEval.getExpedienteFamilia().getFamilia());
                 tempPost.setidNna(idNna);
-                tempfecha = tempPost.getFechaResolucion();
-                if (fechaResol != null) {
-                    if (fechaResol.contains("ene") || fechaResol.contains("feb") || fechaResol.contains("mar") || fechaResol.contains("abr")
-                            || fechaResol.contains("may") || fechaResol.contains("jun") || fechaResol.contains("jul") || fechaResol.contains("ago")
-                            || fechaResol.contains("set") || fechaResol.contains("oct") || fechaResol.contains("nov") || fechaResol.contains("dic")) {
-                        tempPost.setFechaResolucion(tempfecha);
-                    } else {
-                        if (!fechaResol.equals("")) {
-                            tempPost.setFechaResolucion(df.stringToDate(fechaResol));
-                        } else {
-                            tempPost.setFechaResolucion(null);
-                        }
-                    }
-                } else {
-                    tempPost.setFechaResolucion(null);
-                }
-                /*if (fechaResol != null && !fechaResol.equals("")) {
+                //tempfecha = tempPost.getFechaResolucion();
+//                if (fechaResol != null) {
+//                    if (fechaResol.contains("ene") || fechaResol.contains("feb") || fechaResol.contains("mar") || fechaResol.contains("abr")
+//                            || fechaResol.contains("may") || fechaResol.contains("jun") || fechaResol.contains("jul") || fechaResol.contains("ago")
+//                            || fechaResol.contains("set") || fechaResol.contains("oct") || fechaResol.contains("nov") || fechaResol.contains("dic")) {
+//                        tempPost.setFechaResolucion(tempfecha);
+//                    } else {
+//                        if (!fechaResol.equals("")) {
+//                            tempPost.setFechaResolucion(df.stringToDate(fechaResol));
+//                        } else {
+//                            tempPost.setFechaResolucion(null);
+//                        }
+//                    }
+//                } else {
+//                    tempPost.setFechaResolucion(null);
+//                }
+                if (fechaResol != null && !fechaResol.equals("")) {
                  tempPost.setFechaResolucion(df.stringToDate(fechaResol));
                  }
                  if (fechaResol == null || fechaResol.equals("")) {
                  tempPost.setFechaResolucion(null);
-                 }*/
+                 }
                 servicioEtapa.crearPostAdopcion(tempPost);
                 ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
                 ExpNna.setEstado("arch");
                 Date ahora = new Date();
-                ExpNna.setFechaEstado(ahora);
+                java.sql.Date sql = new java.sql.Date(ahora.getTime());
+                ExpNna.setFechaEstado(sql);
                 ServicioNna.updateExpNna(ExpNna);
                 ArrayList<Designacion> tempDesigs = new ArrayList();
                 tempDesigs = servicioEtapa.getListaDesignaciones2(idNna);
@@ -2429,7 +2431,7 @@ public class mainEtapas {
 
     @RequestMapping(value = "/InsertarInforme", method = RequestMethod.POST)
     public ModelAndView InsertarInforme(ModelMap map, HttpSession session,
-            @RequestParam("idInforme") String idInforme,
+            @RequestParam("idInforme") Long idInforme,
             @RequestParam("num") String num,
             @RequestParam(value = "estado", required = false) String estado,
             @RequestParam(value = "fechaProyectado", required = false) String fechaProyectado,
@@ -2450,8 +2452,8 @@ public class mainEtapas {
             return new ModelAndView("login", map);
         }
 
-        if (!idInforme.equals("")) {
-            long id = Long.parseLong(idInforme);
+        if (idInforme != 0) {
+            long id = idInforme;
             InformePostAdoptivo temp = servicioEtapa.getInformePost(id);
             temp.setNumeroInforme(num);
             temp.setEstado(estado);
