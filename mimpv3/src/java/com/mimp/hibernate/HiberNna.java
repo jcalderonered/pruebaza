@@ -664,6 +664,8 @@ public class HiberNna {
                     tempnna.setNResolAband(tempexp.getString(60));
                     tempnna.setNResolCons(tempexp.getString(61));
                     expnna.setNna(tempnna);
+                    Unidad unid = new Unidad();
+                    unid.setIdunidad(tempexp.getLong(62));
                 }
                 statement.close();
             }
