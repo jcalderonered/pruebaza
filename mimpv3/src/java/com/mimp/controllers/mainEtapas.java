@@ -1115,7 +1115,8 @@ public class mainEtapas {
                 ExpedienteNna tempExpNna = ServicioNna.getExpNna(tempNna.getIdnna());
                 tempExpNna.setEstado("desig");
                 Date ahora = new Date();
-                tempExpNna.setFechaEstado(ahora);
+                java.sql.Date sql = new java.sql.Date(ahora.getTime());
+                tempExpNna.setFechaEstado(sql);
                 ServicioNna.updateExpNna(tempExpNna);
 
             }
