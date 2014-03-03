@@ -164,7 +164,6 @@ public class HiberNna {
 //        Hibernate.initialize(tempNna.getJuzgado());
 //        return tempNna;
 //    }
-    
     //PARA PROBARSE
     public Nna getNnaPostAdopcion(long id) {
         Session session = sessionFactory.getCurrentSession();
@@ -278,18 +277,17 @@ public class HiberNna {
 //        session.save(temp);
 //
 //    }
-
     //PROBADO
     public void crearNna(Nna temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         final Nna nna = temp;
-        
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                
+
                 String hql = "{call HN_SAVE_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, nna.getJuzgado().getIdjuzgado());
@@ -308,7 +306,7 @@ public class HiberNna {
                 statement.setString(14, nna.getDistritoNacimiento());
                 statement.setString(15, nna.getPaisNacimiento());
                 statement.setString(16, nna.getLugarNac());
-                statement.setDate(17, (java.sql.Date)nna.getFechaResolAbandono());
+                statement.setDate(17, (java.sql.Date) nna.getFechaResolAbandono());
                 statement.setDate(18, (java.sql.Date) nna.getFechaResolConsentida());
                 statement.setString(19, nna.getClasificacion());
                 statement.setShort(20, nna.getIncesto());
@@ -328,14 +326,14 @@ public class HiberNna {
                 statement.setString(34, nna.getObservaciones());
                 statement.setString(35, nna.getNResolAband());
                 statement.setString(36, nna.getNResolCons());
-                
+
                 statement.execute();
                 statement.close();
             }
         };
         session.doWork(work);
     }
-    
+
 //    public void updateNna(Nna temp) {
 //
 //        Session session = sessionFactory.getCurrentSession();
@@ -344,18 +342,17 @@ public class HiberNna {
 //        session.update(temp);
 //
 //    }
-    
     //PROBADO Y TERMINASDO
     public void updateNna(Nna temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         final Nna nna = temp;
-        
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                
+
                 String hql = "{call HN_UPDATE_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, nna.getJuzgado().getIdjuzgado());
@@ -374,7 +371,7 @@ public class HiberNna {
                 statement.setString(14, nna.getDistritoNacimiento());
                 statement.setString(15, nna.getPaisNacimiento());
                 statement.setString(16, nna.getLugarNac());
-                statement.setDate(17, (java.sql.Date)nna.getFechaResolAbandono());
+                statement.setDate(17, (java.sql.Date) nna.getFechaResolAbandono());
                 statement.setDate(18, (java.sql.Date) nna.getFechaResolConsentida());
                 statement.setString(19, nna.getClasificacion());
                 statement.setShort(20, nna.getIncesto());
@@ -395,7 +392,7 @@ public class HiberNna {
                 statement.setString(35, nna.getNResolAband());
                 statement.setString(36, nna.getNResolCons());
                 statement.setLong(37, nna.getIdnna());
-                
+
                 statement.execute();
                 statement.close();
             }
@@ -425,7 +422,6 @@ public class HiberNna {
 //        }
 //        return allNna;
 //    }
-    
     //PROBADO Y TERMINADO
     public ArrayList<Nna> ListaNna(String clasificacion) {
         Session session = sessionFactory.getCurrentSession();
@@ -440,9 +436,8 @@ public class HiberNna {
                 ExpedienteNna expnna;
                 Nna tempnna;
                 Designacion desig;
-                
+
                 EstudioCaso est;
-                
 
                 String hql = "{call HN_GET_NNA_CLAS(?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
@@ -512,7 +507,7 @@ public class HiberNna {
                     statement2.setLong(1, auxnna.getIdnna());
                     statement2.registerOutParameter(2, OracleTypes.CURSOR);
                     statement2.execute();
-                    
+
                     ResultSet rs2 = (ResultSet) statement2.getObject(2);
                     while (rs2.next()) {
                         desig = new Designacion();
@@ -559,12 +554,41 @@ public class HiberNna {
                     }
                     allNnaFinal.add(auxnna);
                 }
+
+                //METODO BUBBLESORT PARA ORDENAR POR CODIGO
+                if (clasif.equals("prioritario")) {
+                    Nna auxnna2;
+                    int n = allNnaFinal.size();
+                    for (int i = 0; i < n - 1; i++) {
+                        for (int j = i; j < n - 1; j++) {
+                            if (!allNnaFinal.get(i).getExpedienteNnas().isEmpty()) {
+                                auxnna2 = allNnaFinal.get(i);
+                                allNnaFinal.set(i, allNnaFinal.get(j + 1));
+                                allNnaFinal.set(j + 1, auxnna2);
+                            } else {
+                                Set<ExpedienteNna> listExp1 = allNnaFinal.get(i).getExpedienteNnas();
+                                Set<ExpedienteNna> listExp2 = allNnaFinal.get(i).getExpedienteNnas();
+                                for (ExpedienteNna exp1 : listExp1) {
+                                    for (ExpedienteNna exp2 : listExp2) {
+                                        if (exp1.getCodigoReferencia().compareToIgnoreCase(exp2.getCodigoReferencia()) > 0) {
+                                            auxnna2 = allNnaFinal.get(i);
+                                            allNnaFinal.set(i, allNnaFinal.get(j + 1));
+                                            allNnaFinal.set(j + 1, auxnna2);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         };
         session.doWork(work);
 
         return allNnaFinal;
-    } //    public ExpedienteNna getExpNna(long idNna) {
+    }
+
+//    public ExpedienteNna getExpNna(long idNna) {
     //        Session session = sessionFactory.getCurrentSession();
     //        session.beginTransaction();
     //        ExpedienteNna tempExpNna = new ExpedienteNna();
@@ -579,7 +603,6 @@ public class HiberNna {
     //        Hibernate.initialize(tempExpNna.getNna());
     //        return tempExpNna;
     //    }
-    
     //PROBADO Y TERMINADO
     public ExpedienteNna getExpNna(long idNna) {
         Session session = sessionFactory.getCurrentSession();
@@ -690,7 +713,6 @@ public class HiberNna {
 //        }
 //        return allExpNna;
 //    }
-    
     //PROBADO Y TERMINADO
     public ArrayList<ExpedienteNna> listaExpNna() {
         Session session = sessionFactory.getCurrentSession();
@@ -752,18 +774,17 @@ public class HiberNna {
 //
 //        session.save(temp);
 //    }
-    
     //POR PROBAR
     public void crearExpNna(ExpedienteNna temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         final ExpedienteNna expnna = temp;
-        
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                
+
                 String hql = "{call HN_SAVE_EXP_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, expnna.getNna().getIdnna());
@@ -793,7 +814,7 @@ public class HiberNna {
                 statement.setString(25, expnna.getApellidomActual());
                 statement.setString(26, expnna.getObservaciones());
                 statement.setDate(27, (java.sql.Date) expnna.getFechaInvTutelar());
-                
+
                 statement.execute();
                 statement.close();
             }
@@ -808,18 +829,17 @@ public class HiberNna {
 //
 //        session.update(temp);
 //    }
-    
     //PARA PROBAR
     public void updateExpNna(ExpedienteNna temp) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         final ExpedienteNna expnna = temp;
-        
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                
+
                 String hql = "{call HN_UPDATE_EXP_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, expnna.getNna().getIdnna());
@@ -850,7 +870,7 @@ public class HiberNna {
                 statement.setString(26, expnna.getObservaciones());
                 statement.setDate(27, (java.sql.Date) expnna.getFechaInvTutelar());
                 statement.setLong(28, expnna.getIdexpedienteNna());
-                
+
                 statement.execute();
                 statement.close();
             }
