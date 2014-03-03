@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 23, 2013 3:56:23 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.Revision" table="REVISION" schema="SIRNA">
+        <id name="idrevision" type="long">
+            <column name="IDREVISION" precision="10" scale="0" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="nna" class="com.mimp.bean.Nna" fetch="select">
+            <column name="IDNNA" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="expedienteFamilia" class="com.mimp.bean.ExpedienteFamilia" fetch="select">
+            <column name="IDEXPEDIENTE_FAMILIA" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="numero" type="string">
+            <column name="NUMERO" length="40" />
+        </property>
+        <property name="fechaRevision" type="date">
+            <column name="FECHA_REVISION" length="7" />
+        </property>
+        <property name="comentarios" type="string">
+            <column name="COMENTARIOS" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>
