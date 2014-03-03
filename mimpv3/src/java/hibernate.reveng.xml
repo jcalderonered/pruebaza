@@ -34,6 +34,7 @@
   <table-filter match-name="FICHA_SOLICITUD_ADOPCION"/>
   <table-filter match-name="EXPEDIENTE_FAMILIA"/>
   <table-filter match-name="REUNION"/>
+  <table-filter match-name="REVISION"/>
   <table-filter match-name="UNIDAD"/>
   <table-filter match-name="SOLICITANTE"/>
   <table-filter match-name="NNA"/>
