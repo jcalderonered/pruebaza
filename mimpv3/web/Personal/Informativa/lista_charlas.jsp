@@ -112,6 +112,7 @@
                                     <tr>
                                         <th>Número de sesión</th>
                                         <th>Habilitado</th>
+                                        <th>Eliminar</th>
                                         <th>Modificar</th>
                                         <th>Ver Inscritos</th>
                                         <th>Asistencia</th>
@@ -137,7 +138,12 @@
                                                             <button type="submit" class="btn btn-default">Modificar</button>
                                                         </form>
                                                     </td>
-
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/PersonalEliminarSesion" method="post">
+                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                            <button ${sesion.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Eliminar</button>
+                                                        </form>
+                                                    </td>
                                                     <td>
                                                         <form action="${pageContext.servletContext.contextPath}/PersonalInscritosSesion" method="post">
                                                             <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
@@ -174,6 +180,7 @@
                                         <th>N° de reuniones</th>
                                         <th>Habilitado</th>
                                         <th>Modificar</th>
+                                        <th>Eliminar</th>
                                         <th>Asistencia/Ver inscritos</th>
                                     </tr>
                                 </thead>
@@ -217,7 +224,12 @@
                                                             <button type="submit" class="btn btn-default">Modificar</button>
                                                         </form>
                                                     </td>
-
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/PersonalEliminarTaller" method="post">
+                                                            <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
+                                                            <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Eliminar</button>
+                                                        </form>
+                                                    </td>
                                                     <td>
                                                         <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerInicio" method="post">
                                                             <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">

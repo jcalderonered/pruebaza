@@ -1619,5 +1619,134 @@ public class HiberPersonal {
 
     }
     
+public void EliminarSesion (Long idSesion){
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idS = idSesion;
+    
+    
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                
+                String hql = "{call PERS_LISTA_TURNOS(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idS);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+                
+                ResultSet rs = (ResultSet) statement.getObject(2);
+               
+                while(rs.next()){
+                    Turno tempT2 = new Turno();
+                    tempT2.setIdturno(rs.getLong("IDTURNO"));
+                    String hql2 = "{call PERS_DELETE_TURNO(?)}";
+                    CallableStatement statement2 = connection.prepareCall(hql2);
+                    statement2.setLong(1, tempT2.getIdturno());
+                    statement2.execute();
+                    statement2.close();
+                                
+                }
+                rs.close();
+                statement.close();
+                
+                String hql3 = "{call PERS_DELETE_SESION(?)}";
+                CallableStatement statement3 = connection.prepareCall(hql3);
+                statement3.setLong(1, idS);
+                statement3.execute();
+                statement3.close();
+            }
+        };
+        
+        session.doWork(work);
+}
+    
+public void EliminarTaller (Long idTaller){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idT = idTaller;
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                
+                String hql = "{call PERS_LISTAGRUPOS(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idT);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+                
+                ResultSet rs = (ResultSet) statement.getObject(2);
+               
+                while(rs.next()){
+                    Grupo tempGrp = new Grupo();
+                    tempGrp.setIdgrupo(rs.getLong("IDGRUPO"));
+                    tempGrp.setNombre(rs.getString("NOMBRE"));
+                                String hql2 = "{call PERS_LISTA_TURNO2(?,?)}";
+                                CallableStatement statement2 = connection.prepareCall(hql2);
+                                statement2.setLong(1, tempGrp.getIdgrupo());
+                                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                                statement2.execute();
+
+                                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                                while(rs2.next()){
+                                    Turno2 tempT2 = new Turno2();
+                                    tempT2.setIdturno2(rs2.getLong("IDTURNO2"));
+                                    tempT2.setNombre(rs2.getString("NOMBRE"));
+                                    tempT2.setGrupo(tempGrp);
+                                                    String hql3 = "{call PERS_LISTA_REUNION(?,?)}";
+                                                    CallableStatement statement3 = connection.prepareCall(hql3);
+                                                    statement3.setLong(1, tempT2.getIdturno2());
+                                                    statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                                                    statement3.execute();
+
+                                                    ResultSet rs3 = (ResultSet) statement3.getObject(2);
+
+                                                    while(rs3.next()){
+                                                        Reunion tempR = new Reunion();
+                                                        tempR.setIdreunion(rs3.getLong("IDREUNION"));
+                                                        String hql4 = "{call PERS_DELETE_REUNION(?)}";
+                                                        CallableStatement statement4 = connection.prepareCall(hql4);
+                                                        statement4.setLong(1, tempR.getIdreunion());
+                                                        statement4.execute();
+                                                        statement4.close();
+                                                        
+                                                    }
+                                                    rs3.close();
+                                                    statement3.close();
+                                                    String hql5 = "{call PERS_DELETE_TURNO2(?)}";
+                                                    CallableStatement statement5 = connection.prepareCall(hql5);
+                                                    statement5.setLong(1, tempT2.getIdturno2());
+                                                    statement5.execute();
+                                                    statement5.close();
+                                }
+                                rs2.close();
+                                statement2.close();
+                                String hql6 = "{call PERS_DELETE_GRUPO(?)}";
+                                CallableStatement statement6 = connection.prepareCall(hql6);
+                                statement6.setLong(1, tempGrp.getIdgrupo());
+                                statement6.execute();
+                                statement6.close();
+                }
+                rs.close();
+                statement.close();
+                String hql7 = "{call PERS_DELETE_TALLER(?)}";
+                CallableStatement statement7 = connection.prepareCall(hql7);
+                statement7.setLong(1, idT);
+                statement7.execute();
+                statement7.close();
+            }
+        };
+        
+        session.doWork(work);
+        
+    }
 
 }

@@ -3724,5 +3724,35 @@ public class personal {
         map.put("year", year);
         return new ModelAndView("/Personal/Informativa/lista_historico_sesiones_talleres", map);
     }
+    
+    @RequestMapping(value = "/PersonalEliminarSesion", method = RequestMethod.POST)
+    public ModelAndView PersonalEliminarSesion(ModelMap map, HttpSession session,@RequestParam("idSesion") Long idSesion) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        ServicioPersonal.EliminarSesion(idSesion);
+        map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("formato", format);
+        return new ModelAndView("/Personal/Informativa/lista_charlas", map);
+    }
+    
+    @RequestMapping(value = "/PersonalEliminarTaller", method = RequestMethod.POST)
+    public ModelAndView PersonalEliminarTaller(ModelMap map, HttpSession session,@RequestParam("idTaller") Long idTaller) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        ServicioPersonal.EliminarTaller(idTaller);
+        map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("formato", format);
+        return new ModelAndView("/Personal/Informativa/lista_charlas", map);
+    }
 
 }
