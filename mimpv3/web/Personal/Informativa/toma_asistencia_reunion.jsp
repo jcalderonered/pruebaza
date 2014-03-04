@@ -74,33 +74,42 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                <%}
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                        <c:if test="${idReunion != null}">
+                            <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerInicio?idTaller=${idTaller}&nombreTaller=${nombre}&historial=${historial}" method="post">
+                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            </form>
+                        </c:if>
+                        <c:if test="${idReunion == null}"> 
+                            <form onclick="location.href = '${pageContext.servletContext.contextPath}/inf'" method="post">
+                                <p align="right"><button  id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            </form>
+                        </c:if>
                         <p class="text-left"><h1><strong> Listado de Asistentes</strong> </h1></p>
                         <br>
 
@@ -137,7 +146,7 @@
                         </div>
                         <br>
                         <br>
-                        
+
                         <div class="bs-example">
                             <table class="table table-bordered">
                                 <thead>
@@ -153,8 +162,8 @@
                                     </tr>
                                 </thead>
                                 <c:if test="${!listaFormularios.isEmpty()}">
-                                <tbody>
-                                    <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
+                                    <tbody>
+                                        <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
                                             <tr>
                                                 <c:choose>
                                                     <c:when test="${formulario.getAsistentes().size() == 2}">     
@@ -162,197 +171,221 @@
                                                             <c:choose>
                                                                 <c:when test="${asistente.getSexo() == 109}">
                                                                     <c:set var="el" value="${asistente}" scope="page" />
-                                                                    
+
                                                                 </c:when>
                                                                 <c:when test="${asistente.getSexo() == 102}">
                                                                     <c:set var="ella" value="${asistente}" scope="page" />
                                                                 </c:when> 
                                                             </c:choose>
                                                         </c:forEach>
-                                                                    <td>
-                                                                        ${el.getNombre()}
-                                                                        ${el.getApellidoP()}
-                                                                        ${el.getApellidoM()}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${el.getEdad()}
-                                                                    </td>
-                                                                    
-                                                                    <td>
-                                                                        ${ella.getNombre()}
-                                                                        ${ella.getApellidoP()}
-                                                                        ${ella.getApellidoM()}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${ella.getEdad()}
-                                                                    </td>
+                                                        <td>
+                                                            ${el.getNombre()}
+                                                            ${el.getApellidoP()}
+                                                            ${el.getApellidoM()}
+                                                        </td>
+                                                        <td>
+                                                            ${el.getEdad()}
+                                                        </td>
 
-                                                                    <td>${ella.getCorreo()}</td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
-                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
-                                                                            <button type="submit" class="btn btn-default">Ver</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalAsistenciaReunion" method="post">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
-                                                                            <input hidden name="asistencia" id="asistencia" value="A"> 
-                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
-                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
-                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
-                                                                                    <c:set var="token" value="0" scope="page" />
-                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
-                                                                                        <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                                            <c:if test="${token == '0'}">
-                                                                                                <button ${AFR.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
-                                                                                                 <c:set var="token" value="1" scope="page" />   
-                                                                                            </c:if>        
-                                                                                        </c:if>                 
-                                                                                    </c:forEach>   
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInasistenciaReunion" method="post">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
-                                                                            <input hidden name="justificado" id="user" value="0"> 
-                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
-                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
-                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
-                                                                                    <c:set var="token" value="0" scope="page" />
-                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
-                                                                                        <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                                            <c:if test="${token == '0'}">
-                                                                                                     <button ${AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
-                                                                                             <c:set var="token" value="1" scope="page" />   
-                                                                                            </c:if>        
-                                                                                        </c:if>                
-                                                                                    </c:forEach>   
-                                                                        </form>
-                                                                    </td>
-                                                                    <input hidden type="text" name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
-                                                    </c:when>
-                                                    <c:when test="${formulario.getAsistentes().size() == 1}">
-                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
-                                                            <c:choose>
-                                                                <c:when test="${asistente.getSexo() == 109}">
-                                                                    <td>
-                                                                    ${asistente.getNombre()}    
-                                                                    ${asistente.getApellidoP()}
-                                                                    ${asistente.getApellidoM()}
-                                                                    </td>
-                                                                    <td>${asistente.getEdad()}</td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td>${asistente.getCorreo()}</td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
-                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
-                                                                            <button type="submit" class="btn btn-default">Ver</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalAsistenciaReunion" method="post">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
-                                                                            <input hidden name="asistencia" id="user" value="A"> 
-                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
-                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
-                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
-                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
-                                         
-                                                                                               <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                                                     <button ${AFR.getAsistencia() == 65 ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
-                                                                                                </c:if>      
-                                                                                            
-                                                                                    </c:forEach>   
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInasistenciaReunion" method="post">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
-                                                                            <input hidden name="justificado" id="user" value="0"> 
-                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
-                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
-                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
-                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
-                                                                                            <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                                                     <button ${AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
-                                                                                        </c:if>   
-                                                                                    </c:forEach>   
-                                                                        </form>
-                                                                    </td>
-                                                                </c:when>
-                                                                <c:when test="${asistente.getSexo() == 102}">
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td>
-                                                                    ${asistente.getNombre()}
-                                                                    ${asistente.getApellidoP()}
-                                                                    ${asistente.getApellidoM()}
-                                                                    </td>
-                                                                    <td>${asistente.getEdad()}</td>
-                                                                    <td>${asistente.getCorreo()}</td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
-                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
-                                                                            <button type="submit" class="btn btn-default">Ver</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalAsistenciaReunion" method="post">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
-                                                                            <input hidden name="asistencia" id="user" value="A"> 
-                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
-                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
-                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
-                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
-                                                                                            <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                                                     <button ${AFR.getAsistencia() == 65 ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
-                                                                                         </c:if>  
-                                                                                    </c:forEach>   
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInasistenciaReunion" method="post">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
-                                                                            <input hidden name="justificado" id="user" value="0"> 
-                                                                            <input hidden name="nombre" id="nombre" value="${nombre}"> 
-                                                                            <input hidden name="grupo" id="grupo" value="${grupo}"> 
-                                                                            <input hidden name="turno" id="turno" value="${turno}"> 
-                                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
-                                                                                            <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                                                     <button ${AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
-                                                                                        </c:if>   
-                                                                                    </c:forEach>   
-                                                                        </form>
-                                                                    </td>
-                                                                </c:when>    
-                                                            </c:choose>
-                                                        </c:forEach>
-                                                    </c:when>    
-                                                  <c:otherwise>
-                                                 </c:otherwise>
-                                               </c:choose>
-                                            </tr>
-                                        </c:forEach>
-                                </tbody>
-                               </c:if> 
-                                
+                                                        <td>
+                                                            ${ella.getNombre()}
+                                                            ${ella.getApellidoP()}
+                                                            ${ella.getApellidoM()}
+                                                        </td>
+                                                        <td>
+                                                            ${ella.getEdad()}
+                                                        </td>
+
+                                                        <td>${ella.getCorreo()}</td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion3" method="post">
+                                                                <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                <input hidden name="asistencia" id="asistencia" value="A"> 
+                                                                <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                <input hidden name="historial" id="turno" value="${historial}"> 
+                                                                <button type="submit" class="btn btn-default">Ver</button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalAsistenciaReunion" method="post">
+                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                <input hidden name="asistencia" id="asistencia" value="A"> 
+                                                                <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                <c:set var="token" value="0" scope="page" />
+                                                                <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+                                                                    <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                        <c:if test="${token == '0'}">
+                                                                            <button ${AFR.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
+                                                                            <c:set var="token" value="1" scope="page" />   
+                                                                        </c:if>        
+                                                                    </c:if>                 
+                                                                </c:forEach>   
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalInasistenciaReunion" method="post">
+                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                <input hidden name="justificado" id="user" value="0"> 
+                                                                <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                <c:set var="token" value="0" scope="page" />
+                                                                <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+                                                                    <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                        <c:if test="${token == '0'}">
+                                                                            <button ${AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
+                                                                            <c:set var="token" value="1" scope="page" />   
+                                                                        </c:if>        
+                                                                    </c:if>                
+                                                                </c:forEach>   
+                                                            </form>
+                                                        </td>
+                                                <input hidden type="text" name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                            </c:when>
+                                            <c:when test="${formulario.getAsistentes().size() == 1}">
+                                                <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                    <c:choose>
+                                                        <c:when test="${asistente.getSexo() == 109}">
+                                                            <td>
+                                                                ${asistente.getNombre()}    
+                                                                ${asistente.getApellidoP()}
+                                                                ${asistente.getApellidoM()}
+                                                            </td>
+                                                            <td>${asistente.getEdad()}</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>${asistente.getCorreo()}</td>
+                                                            <td>
+                                                                <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion3" method="post">
+                                                                    <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                    <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                    <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                    <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                    <input hidden name="asistencia" id="asistencia" value="A"> 
+                                                                    <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                    <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                    <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                    <input hidden name="historial" id="turno" value="${historial}"> 
+                                                                    <button type="submit" class="btn btn-default">Ver</button>
+                                                                </form>
+                                                            </td>
+                                                            <td>
+                                                                <form action="${pageContext.servletContext.contextPath}/PersonalAsistenciaReunion" method="post">
+                                                                    <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                    <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                    <input hidden name="asistencia" id="user" value="A"> 
+                                                                    <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                    <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                    <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+
+                                                                        <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                            <button ${AFR.getAsistencia() == 65 ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
+                                                                        </c:if>      
+
+                                                                    </c:forEach>   
+                                                                </form>
+                                                            </td>
+                                                            <td>
+                                                                <form action="${pageContext.servletContext.contextPath}/PersonalInasistenciaReunion" method="post">
+                                                                    <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                    <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                    <input hidden name="justificado" id="user" value="0"> 
+                                                                    <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                    <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                    <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+                                                                        <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                            <button ${AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
+                                                                        </c:if>   
+                                                                    </c:forEach>   
+                                                                </form>
+                                                            </td>
+                                                        </c:when>
+                                                        <c:when test="${asistente.getSexo() == 102}">
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                ${asistente.getNombre()}
+                                                                ${asistente.getApellidoP()}
+                                                                ${asistente.getApellidoM()}
+                                                            </td>
+                                                            <td>${asistente.getEdad()}</td>
+                                                            <td>${asistente.getCorreo()}</td>
+                                                            <td>
+                                                                <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion3" method="post">
+                                                                    <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                    <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                    <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                    <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                    <input hidden name="asistencia" id="asistencia" value="A"> 
+                                                                    <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                    <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                    <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                    <input hidden name="historial" id="turno" value="${historial}"> 
+                                                                    <button type="submit" class="btn btn-default">Ver</button>
+                                                                </form>
+                                                            </td>
+                                                            <td>
+                                                                <form action="${pageContext.servletContext.contextPath}/PersonalAsistenciaReunion" method="post">
+                                                                    <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                    <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                    <input hidden name="asistencia" id="user" value="A"> 
+                                                                    <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                    <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                    <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+                                                                        <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                            <button ${AFR.getAsistencia() == 65 ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
+                                                                        </c:if>  
+                                                                    </c:forEach>   
+                                                                </form>
+                                                            </td>
+                                                            <td>
+                                                                <form action="${pageContext.servletContext.contextPath}/PersonalInasistenciaReunion" method="post">
+                                                                    <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                    <input hidden name="idFamilia" id="idFamilia" value="${formulario.getFamilia().getIdfamilia()}">
+                                                                    <input hidden name="justificado" id="user" value="0"> 
+                                                                    <input hidden name="nombre" id="nombre" value="${nombre}"> 
+                                                                    <input hidden name="grupo" id="grupo" value="${grupo}"> 
+                                                                    <input hidden name="turno" id="turno" value="${turno}"> 
+                                                                    <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
+                                                                        <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
+                                                                            <button ${AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
+                                                                        </c:if>   
+                                                                    </c:forEach>   
+                                                                </form>
+                                                            </td>
+                                                        </c:when>    
+                                                    </c:choose>
+                                                </c:forEach>
+                                            </c:when>    
+                                            <c:otherwise>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </c:if> 
+
                             </table>
                             <c:if test="${listaFormularios.size() == 0}">
-                                    <h3><strong>Aún no hay personas inscritas</strong></h3>
-                                </c:if>
+                                <h3><strong>Aún no hay personas inscritas</strong></h3>
+                            </c:if>
                         </div><!-- /example -->
                         <br>
                         <p>IMPORTANTE: Una vez guardado, no se podrán hacer cambios</p>
                         <br>
-                        
+
                     </div>
                 </div>
             </div>

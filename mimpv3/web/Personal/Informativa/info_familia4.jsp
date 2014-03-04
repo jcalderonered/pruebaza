@@ -102,13 +102,13 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-1">
-                        <c:if test="${idSesion != null}">
-                            <form action="${pageContext.servletContext.contextPath}/PersonalInscritosSesion?idSesion=${idSesion}" method="post">
+                        <c:if test="${idReunion != null}">
+                            <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerReunion?idReunion=${idReunion}&idTaller=${idTaller}&nombreTaller=${nombre}&historial=${historial}" method="post">
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             </form>
                         </c:if>
-                        <c:if test="${idSesion == null}"> 
-                            <form onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" method="post">
+                        <c:if test="${idReunion == null}"> 
+                            <form onclick="location.href = '${pageContext.servletContext.contextPath}/inf'" method="post">
                                 <p align="right"><button  id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             </form>
                         </c:if>

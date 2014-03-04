@@ -186,8 +186,9 @@
 
                                                                     <td>${ella.getCorreo()}</td>
                                                                     <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion2" method="post">
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <input hidden name="idSesion" id="idSesion" value="${idSesion}">   
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>
@@ -232,8 +233,9 @@
                                                                     <td></td>
                                                                     <td></td>
                                                                     <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion2" method="post">
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <input hidden name="idSesion" id="idSesion" value="${idSesion}">   
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>
@@ -268,8 +270,9 @@
                                                                     <td>${asistente.getEdad()}</td>
                                                                     <td>${asistente.getCorreo()}</td>
                                                                     <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion2" method="post">
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <input hidden name="idSesion" id="idSesion" value="${idSesion}">                                                                         
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>

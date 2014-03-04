@@ -103,7 +103,7 @@
                 <div class="row">
                     <div class="col-md-6 col-md-offset-1">
                         <c:if test="${idSesion != null}">
-                            <form action="${pageContext.servletContext.contextPath}/PersonalInscritosSesion?idSesion=${idSesion}" method="post">
+                            <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia2?idSesion=${idSesion}" method="post">
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             </form>
                         </c:if>
