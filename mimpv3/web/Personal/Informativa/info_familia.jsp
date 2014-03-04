@@ -101,18 +101,10 @@
                     </ul>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-md-offset-1">
-                        <c:if test="${idSesion != null}">
+                    <div class="col-md-6 col-md-offset-1">                        
                             <form action="${pageContext.servletContext.contextPath}/PersonalInscritosSesion?idSesion=${idSesion}" method="post">
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                            </form>
-                        </c:if>
-                        <c:if test="${idSesion == null}"> 
-                            <form onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" method="post">
-                                <p align="right"><button  id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                            </form>
-                        </c:if>
-
+                            </form>                           
                         <br>
                         <form class="form-inline" role="form">
                             <!-- Form Name -->

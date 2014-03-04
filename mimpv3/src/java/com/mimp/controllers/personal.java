@@ -2241,8 +2241,7 @@ public class personal {
         allFormularios = ServicioPersonal.InscritosSesion(idSesion);
 
         map.put("listaFormularios", allFormularios);
-        map.addAttribute("idSesion", idSesion);
-        map.addAttribute("volver", "PersonalInscritosSesion");
+        map.addAttribute("idSesion", idSesion);        
         return new ModelAndView("/Personal/Informativa/lista_fam_ins", map);
     }
 
@@ -2272,7 +2271,7 @@ public class personal {
 
     @RequestMapping(value = "/PersonalDetalleFamiliaInscritaSesion", method = RequestMethod.POST)
     public ModelAndView PersonalDetalleFamiliaInscritaSesion(ModelMap map, @RequestParam("idFormulario") long idFormulario,
-            @RequestParam(value = "idSesion", required = false) long idSesion,
+            @RequestParam("idSesion") long idSesion,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {

@@ -155,6 +155,7 @@
                                                         <td>
                                                             <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
                                                                 <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                <input hidden name="idSesion" id="idSesion" value="${idSesion}"> 
                                                                 <button type="submit" class="btn btn-default">Ver</button>
                                                             </form>
                                                         </td>
