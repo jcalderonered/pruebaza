@@ -75,7 +75,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -132,112 +132,133 @@
                                                         <c:set var="numFilasT2" value="${turno2.getReunions().size()}"/>   
                                                         <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
                                                             <c:choose>  
-                                                            <c:when test="${idGrp != grp.getIdgrupo() && idT2 != turno2.getIdturno2()}">
-                                                                <tr>
-                                                                    <td rowspan="${numFilasGrp}" style="vertical-align: middle;"> 
-                                                                        ${grp.getNombre()}
-                                                                    </td>
-                                                                    <td rowspan="${numFilasT2}" style="vertical-align: middle;"> 
-                                                                        ${turno2.getNombre()}
-                                                                    </td>
-                                                                    <td>
-                                                                        <c:if test="${reunion.getFecha() != null}">
-                                                                            ${df.dateToString(reunion.getFecha())}                                                                         
-                                                                        </c:if>
-                                                                    </td>
-                                                                    <td>
-                                                                        ${reunion.getHora()} 
-                                                                    </td>
-                                                                    <td>
-                                                                        ${reunion.getDireccion()} 
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerReunion" method="post">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <button type="submit" class="btn btn-default">Ver</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia" method="post">
-                                                                            <input hidden name="nombre" id="idReunion" value="${taller}">
-                                                                            <input hidden name="grupo" id="idReunion" value="${grp.getNombre()}">
-                                                                            <input hidden name="turno" id="idReunion" value="${turno2.getNombre()}">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <button ${historico == 'true' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
-                                                                        </form> 
-                                                                    </td>
-                                                                </tr>
-                                                                <c:set var="idGrp" value="${grp.getIdgrupo()}"/>    
-                                                                <c:set var="idT2" value="${turno2.getIdturno2()}"/>     
-                                                            </c:when>
-                                                            <c:when test="${idGrp == grp.getIdgrupo() && idT2 != turno2.getIdturno2()}">
-                                                                <tr>
-                                                                    <td rowspan="${numFilasT2}" style="vertical-align: middle;"> 
-                                                                        ${turno2.getNombre()}
-                                                                    </td>
-                                                                    <td>
-                                                                        <c:if test="${reunion.getFecha() != null}">
-                                                                            ${df.dateToString(reunion.getFecha())}                                                                         
-                                                                        </c:if>
-                                                                    </td>
-                                                                    <td>
-                                                                        ${reunion.getHora()} 
-                                                                    </td>
-                                                                    <td>
-                                                                        ${reunion.getDireccion()} 
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerReunion" method="post">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <button type="submit" class="btn btn-default">Ver</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia" method="post">
-                                                                            <input hidden name="nombre" id="idReunion" value="${taller}">
-                                                                            <input hidden name="grupo" id="idReunion" value="${grp.getNombre()}">
-                                                                            <input hidden name="turno" id="idReunion" value="${turno2.getNombre()}">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <button ${historico == 'true' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
-                                                                        </form> 
-                                                                    </td>
-                                                                </tr>
-                                                                <c:set var="idGrp" value="${grp.getIdgrupo()}"/>    
-                                                                <c:set var="idT2" value="${turno2.getIdturno2()}"/>     
-                                                            </c:when>
-                                                            <c:when test="${idGrp == grp.getIdgrupo() && idT2 == turno2.getIdturno2()}">
-                                                                <tr>
-                                                                    <td>
-                                                                        <c:if test="${reunion.getFecha() != null}">
-                                                                            ${df.dateToString(reunion.getFecha())}                                                                         
-                                                                        </c:if>
-                                                                    </td>
-                                                                    <td>
-                                                                        ${reunion.getHora()} 
-                                                                    </td>
-                                                                    <td>
-                                                                        ${reunion.getDireccion()} 
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerReunion" method="post">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <button type="submit" class="btn btn-default">Ver</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia" method="post">
-                                                                            <input hidden name="nombre" id="idReunion" value="${taller}">
-                                                                            <input hidden name="grupo" id="idReunion" value="${grp.getNombre()}">
-                                                                            <input hidden name="turno" id="idReunion" value="${turno2.getNombre()}">
-                                                                            <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                                            <button ${historico == 'true' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
-                                                                        </form> 
-                                                                    </td>
-                                                                </tr>
-                                                                <c:set var="idGrp" value="${grp.getIdgrupo()}"/>    
-                                                                <c:set var="idT2" value="${turno2.getIdturno2()}"/>     
-                                                            </c:when>   
-                                                           </c:choose>
+                                                                <c:when test="${idGrp != grp.getIdgrupo() && idT2 != turno2.getIdturno2()}">
+                                                                    <tr>
+                                                                        <td rowspan="${numFilasGrp}" style="vertical-align: middle;"> 
+                                                                            ${grp.getNombre()}
+                                                                        </td>
+                                                                        <td rowspan="${numFilasT2}" style="vertical-align: middle;"> 
+                                                                            ${turno2.getNombre()}
+                                                                        </td>
+                                                                        <td>
+                                                                            <c:if test="${reunion.getFecha() != null}">
+                                                                                ${df.dateToString(reunion.getFecha())}                                                                         
+                                                                            </c:if>
+                                                                        </td>
+                                                                        <td>
+                                                                            ${reunion.getHora()} 
+                                                                        </td>
+                                                                        <td>
+                                                                            ${reunion.getDireccion()} 
+                                                                        </td>
+                                                                        <td>
+                                                                            <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerReunion" method="post">
+
+                                                                                <input hidden name="grupo" id="idReunion" value="${grp.getNombre()}">
+                                                                                <input hidden name="turno" id="idReunion" value="${turno2.getNombre()}">
+                                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+
+                                                                                <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                                <input hidden name="nombreTaller" id="nombreTaller" value="${taller}">
+                                                                                <input hidden name="historial" id="historial" value="false">
+                                                                                <button type="submit" class="btn btn-default">Ver</button>
+                                                                            </form>
+                                                                        </td>
+                                                                        <td>
+                                                                            <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia" method="post">
+                                                                                <input hidden name="nombre" id="idReunion" value="${taller}">
+                                                                                <input hidden name="grupo" id="idReunion" value="${grp.getNombre()}">
+                                                                                <input hidden name="turno" id="idReunion" value="${turno2.getNombre()}">
+                                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                                <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                                <input hidden name="historial" id="historial" value="false">
+                                                                                <button ${historico == 'true' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
+                                                                            </form> 
+                                                                        </td>
+                                                                    </tr>
+                                                                    <c:set var="idGrp" value="${grp.getIdgrupo()}"/>    
+                                                                    <c:set var="idT2" value="${turno2.getIdturno2()}"/>     
+                                                                </c:when>
+                                                                <c:when test="${idGrp == grp.getIdgrupo() && idT2 != turno2.getIdturno2()}">
+                                                                    <tr>
+                                                                        <td rowspan="${numFilasT2}" style="vertical-align: middle;"> 
+                                                                            ${turno2.getNombre()}
+                                                                        </td>
+                                                                        <td>
+                                                                            <c:if test="${reunion.getFecha() != null}">
+                                                                                ${df.dateToString(reunion.getFecha())}                                                                         
+                                                                            </c:if>
+                                                                        </td>
+                                                                        <td>
+                                                                            ${reunion.getHora()} 
+                                                                        </td>
+                                                                        <td>
+                                                                            ${reunion.getDireccion()} 
+                                                                        </td>
+                                                                        <td>
+                                                                            <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerReunion" method="post">
+                                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+
+                                                                                <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                                <input hidden name="nombreTaller" id="nombreTaller" value="${taller}">
+                                                                                <input hidden name="historial" id="historial" value="false">
+                                                                                <button type="submit" class="btn btn-default">Ver</button>
+                                                                            </form>
+                                                                        </td>
+                                                                        <td>
+                                                                            <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia" method="post">
+                                                                                <input hidden name="nombre" id="nombre" value="${taller}">
+                                                                                <input hidden name="grupo" id="grupo" value="${grp.getNombre()}">
+                                                                                <input hidden name="turno" id="turno" value="${turno2.getNombre()}">
+                                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                                <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                                <input hidden name="historial" id="historial" value="false">
+                                                                                <button ${historico == 'true' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
+                                                                            </form> 
+                                                                        </td>
+                                                                    </tr>
+                                                                    <c:set var="idGrp" value="${grp.getIdgrupo()}"/>    
+                                                                    <c:set var="idT2" value="${turno2.getIdturno2()}"/>     
+                                                                </c:when>
+                                                                <c:when test="${idGrp == grp.getIdgrupo() && idT2 == turno2.getIdturno2()}">
+                                                                    <tr>
+                                                                        <td>
+                                                                            <c:if test="${reunion.getFecha() != null}">
+                                                                                ${df.dateToString(reunion.getFecha())}                                                                         
+                                                                            </c:if>
+                                                                        </td>
+                                                                        <td>
+                                                                            ${reunion.getHora()} 
+                                                                        </td>
+                                                                        <td>
+                                                                            ${reunion.getDireccion()} 
+                                                                        </td>
+                                                                        <td>
+                                                                            <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerReunion" method="post">
+                                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+
+                                                                                <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                                <input hidden name="nombreTaller" id="nombreTaller" value="${taller}">
+                                                                                <input hidden name="historial" id="historial" value="false">
+                                                                                <button type="submit" class="btn btn-default">Ver</button>
+                                                                            </form>
+                                                                        </td>
+                                                                        <td>
+                                                                            <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia" method="post">
+                                                                                <input hidden name="nombre" id="idReunion" value="${taller}">
+                                                                                <input hidden name="grupo" id="idReunion" value="${grp.getNombre()}">
+                                                                                <input hidden name="turno" id="idReunion" value="${turno2.getNombre()}">
+                                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                                                <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                                <input hidden name="historial" id="historial" value="false">
+                                                                                <button ${historico == 'true' ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
+                                                                            </form> 
+                                                                        </td>
+                                                                    </tr>
+                                                                    <c:set var="idGrp" value="${grp.getIdgrupo()}"/>    
+                                                                    <c:set var="idT2" value="${turno2.getIdturno2()}"/>     
+                                                                </c:when>   
+                                                            </c:choose>
                                                         </c:forEach>
                                                     </c:if>
                                                 </c:forEach>

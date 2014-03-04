@@ -75,7 +75,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -100,7 +100,16 @@
                         </ul>
                     </div>
                     <div class="col-md-6 ">
-                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inf'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <c:if test="${idTaller != null}">
+                            <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerInicio?idTaller=${idTaller}&nombreTaller=${nombreTaller}&historial=${historial}" method="post">
+                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            </form>
+                        </c:if>
+                        <c:if test="${idTaller == null}"> 
+                            <form onclick="location.href = '${pageContext.servletContext.contextPath}/inf'" method="post">
+                                <p align="right"><button  id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            </form>
+                        </c:if>
                         <h1 align="center"><strong>Lista de familias Inscritas</strong></h1>
                         <br>
                         <div class="table-responsive">
@@ -153,8 +162,14 @@
 
                                                         <td>${ella.getCorreo()}</td>
                                                         <td>
-                                                            <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion4" method="post">
                                                                 <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+
+                                                                <input hidden name="idReunion" id="idReunion" value="${idReunion}">
+
+                                                                <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                <input hidden name="nombreTaller" id="nombreTaller" value="${taller}">
+                                                                <input hidden name="historial" id="historial" value="false">
                                                                 <button type="submit" class="btn btn-default">Ver</button>
                                                             </form>
                                                         </td>
@@ -173,9 +188,13 @@
                                                                     <td></td>
                                                                     <td>${asistente.getCorreo()}</td>
                                                                     <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion4" method="post">
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
-                                                                            <input hidden name="idSesion" id="idSesion" value="${idSesion}">                                                                         
+                                                                            <input hidden name="idReunion" id="idReunion" value="${idReunion}">
+
+                                                                            <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                            <input hidden name="nombreTaller" id="nombreTaller" value="${taller}">
+                                                                            <input hidden name="historial" id="historial" value="false">                                                                       
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>
@@ -192,9 +211,13 @@
 
                                                                     <td>${asistente.getCorreo()}</td>
                                                                     <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion" method="post">
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion4" method="post">
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
-                                                                            <input hidden name="idSesion" id="idSesion" value="${idSesion}">                                                                            
+                                                                            <input hidden name="idReunion" id="idReunion" value="${idReunion}">
+
+                                                                            <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                                                            <input hidden name="nombreTaller" id="nombreTaller" value="${taller}">
+                                                                            <input hidden name="historial" id="historial" value="false">                                                                             
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>

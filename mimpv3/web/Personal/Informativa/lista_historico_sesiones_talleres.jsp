@@ -103,6 +103,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
+                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inf'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <br>
                         <div class="row">
                             <form action="${pageContext.servletContext.contextPath}/PersonalFiltrarSesionTalleres" method="post">  
