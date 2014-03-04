@@ -4677,5 +4677,217 @@ public class HiberEtapa {
 
         return allPostAdopcion;
     }
+    
+    public void crearRevision(Revision temp) {
 
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idN = temp.getNna().getIdnna();
+        final Long idExp = temp.getExpedienteFamilia().getIdexpedienteFamilia();
+        final String num = temp.getNumero();
+        final Date fechaRev = temp.getFechaRevision();
+        final String coment = temp.getComentarios();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HE_CREAR_REVISION(?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idN);
+                statement.setLong(2, idExp);
+                statement.setString(3, num);
+                statement.setDate(4, (java.sql.Date) fechaRev);
+                statement.setString(5, coment);
+
+                statement.execute();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
+
+    }
+    
+    public ArrayList<Revision> getListaRevision(long idNna) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        final Long idN = idNna;
+        final ArrayList<Revision> allRevision = new ArrayList();
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                ExpedienteNna expnna;
+                
+                String hql = "{call HE_GET_LISTA_REVISION(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1,idN);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+                
+                ResultSet rs = (ResultSet) statement.getObject(2);
+               
+                while(rs.next()){
+                    Revision tempRev = new Revision();
+                    tempRev.setIdrevision(rs.getLong("IDREVISION"));
+                    tempRev.setNumero(rs.getString("NUMERO"));
+                    allRevision.add(tempRev);
+                }
+                rs.close();
+                statement.close();
+            }
+        };
+        
+        session.doWork(work);
+                
+        return allRevision;
+    }
+
+    public void updateRevision(String Num,String comments) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        final String id = Num;
+        final String frase = comments;
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HE_UPDATE_REVISION(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setString(1, id);
+                statement.setString(2, frase);
+                statement.execute();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
+
+    }
+    
+        public ArrayList<Revision> getListaRevisionNumero(final String numero) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        final ArrayList<Revision> allRevision = new ArrayList();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                String hql = "{call HE_GET_LISTA_REVISION_NUM(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setString(1, numero);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+
+                ResultSet rs = (ResultSet) statement.getObject(2);
+                while (rs.next()) {
+                    Revision tempRev = new Revision();
+                    Nna nna = new Nna();
+                    ExpedienteFamilia expFamilia = new ExpedienteFamilia();
+                    Familia fam = new Familia();
+                    Unidad unidad = new Unidad();
+
+                    tempRev.setIdrevision(rs.getLong("IDREVISION"));
+                    if (rs.getLong("IDNNA") != 0) {
+
+                        String hql2 = "{call HE_GET_NNA(?, ?)}";
+                        CallableStatement statement2 = connection.prepareCall(hql2);
+                        statement2.setLong(1, rs.getLong("IDNNA"));
+                        statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement2.execute();
+                        ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                        if (rs2.next()) {
+                            nna.setIdnna(rs2.getLong(1));
+                            tempRev.setNna(nna);
+                        }
+                        statement2.close();
+                    }
+                    if (rs.getLong("IDEXPEDIENTE_FAMILIA") != 0) {
+
+                        String hql3 = "{call HE_GET_EXPEDIENTE_FAMILIA(?, ?)}";
+                        CallableStatement statement3 = connection.prepareCall(hql3);
+                        statement3.setLong(1, rs.getLong("IDEXPEDIENTE_FAMILIA"));
+                        statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement3.execute();
+                        ResultSet rs3 = (ResultSet) statement3.getObject(2);
+                        if (rs3.next()) {
+                            expFamilia.setIdexpedienteFamilia(rs3.getLong(1));
+
+                            if (rs3.getLong(2) != 0) {
+
+                                String hql4 = "{call HE_GETFAMILIA(?, ?)}";
+                                CallableStatement statement4 = connection.prepareCall(hql4);
+                                statement4.setLong(1, rs3.getLong(2));
+                                statement4.registerOutParameter(2, OracleTypes.CURSOR);
+                                statement4.execute();
+                                ResultSet rs4 = (ResultSet) statement4.getObject(2);
+                                if (rs4.next()) {
+                                    fam.setIdfamilia(rs4.getLong(1));
+                                    expFamilia.setFamilia(fam);
+                                }
+                                statement4.close();
+                            }
+
+                            if (rs3.getLong(3) != 0) {
+
+                                String hql5 = "{call HE_GET_UNIDAD(?, ?)}";
+                                CallableStatement statement5 = connection.prepareCall(hql5);
+                                statement5.setLong(1, rs3.getLong(3));
+                                statement5.registerOutParameter(2, OracleTypes.CURSOR);
+                                statement5.execute();
+                                ResultSet rs5 = (ResultSet) statement5.getObject(2);
+                                if (rs5.next()) {
+                                    unidad.setIdunidad(rs5.getLong(1));
+                                    expFamilia.setUnidad(unidad);
+                                }
+                                statement5.close();
+                            }
+
+                            expFamilia.setNumero(rs3.getLong(4));
+                            expFamilia.setExpediente(rs3.getString(5));
+                            expFamilia.setHt(rs3.getString(6));
+                            expFamilia.setNumeroExpediente(rs3.getString(7));
+                            expFamilia.setFechaIngresoDga(rs3.getDate(8));
+                            expFamilia.setEstado(rs3.getString(9));
+                            expFamilia.setTupa(rs3.getDate(10));
+                            expFamilia.setNacionalidad(rs3.getString(11));
+                            expFamilia.setRnsa(rs3.getShort(12));
+                            expFamilia.setRnaa(rs3.getShort(13));
+                            expFamilia.setTipoFamilia(rs3.getString(14));
+                            expFamilia.setTipoListaEspera(rs3.getString(15));
+                            expFamilia.setHtFicha(rs3.getString(16));
+                            expFamilia.setnFicha(rs3.getString(17));
+                            expFamilia.setFechaIngresoFicha(rs3.getDate(18));
+
+                            tempRev.setExpedienteFamilia(expFamilia);
+                        }
+                        statement3.close();
+                    }
+
+                    tempRev.setNumero(rs.getString("NUMERO"));
+                    tempRev.setFechaRevision(rs.getDate("FECHA_REVISION"));
+                    tempRev.setComentarios(rs.getString("COMENTARIOS"));
+
+                    allRevision.add(tempRev);
+
+                }
+
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
+
+        return allRevision;
+    }
+    
+    
+    
 }
