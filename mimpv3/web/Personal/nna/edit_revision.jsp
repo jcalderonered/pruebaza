@@ -1,7 +1,7 @@
 <%-- 
-    Document   : inscripcion_sesion1
-    Created on : 28/10/2013, 05:45:16 AM
-    Author     : Ayner Pérez
+    Document   : reg_desig
+    Created on : 4/12/2013, 11:29:03 AM
+    Author     : User
 --%>
 
 <%@page import="com.mimp.bean.Personal"%>
@@ -99,7 +99,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <p align="right"><button onclick="window.location.href = '${pageContext.servletContext.contextPath}/agregarNna'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Registrar NNA</button></p>
+                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -109,114 +109,52 @@
                         </ul>
                         <br>
                         <br>
-                        <h1 align="center"><strong>Lista de NNA's</strong></h1>
+                        <h1 align="center"><strong>Familias que conforman la Revisión de Expediente</strong></h1>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="col-sm-2 ">Nombre</th>
-                                        <th class="col-sm-2 ">Apellido Paterno</th>
-                                        <th class="col-sm-2 ">Apellido Materno</th>
-                                        <th class="col-sm-2 ">Sexo</th>
-                                        <th class="col-sm-2 ">Código</th>
-                                        <th class="col-sm-2 ">Proceso de adopción</th>
-                                        <th class="col-sm-2 ">Detalles</th> 
-                                        <th class="col-sm-2 ">Expediente</th>
-                                        <th class="col-sm-2 ">Reg. Revisión</th>
-                                        <th class="col-sm-2 ">Edit. Revisión</th>
-                                        <th class="col-sm-2 ">Reg. estudio</th>
-                                        <th class="col-sm-2 ">Edit. estudio</th>
+                                        <th class="col-sm-2 " >Expediente</th>
+                                        <th class="col-sm-2 " >Información</th>
+                                        <th class="col-sm-2 " >Revisión de expediente</th>
                                     </tr>
                                 </thead>
-                                <c:if test="${!listaNna.isEmpty()}"> 
+                                <c:if test="${!listaRevision.isEmpty()}">
                                     <tbody>
-                                        <c:forEach var="nna" items="${listaNna}" varStatus="status">
+                                        <c:forEach var="revision" items="${listaRevision}" varStatus="status">
+                                            <c:set var="comentarios" value="${revision.getComentarios()}" scope="page" />
+                                            <c:set var="idNna" value="${revision.getNna().getIdnna()}" scope="page" />
+                                            <c:set var="num" value="${revision.getNumero()}" scope="page" />
                                             <tr>
-                                                <td>${nna.getNombre()}</td>
-                                                <td>${nna.getApellidoP()}</td>
-                                                <td>${nna.getApellidoM()}</td>
-                                                <td>${nna.getSexo()}</td>
-                                                <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
-                                                    <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">
-                                                        <td>
-
-                                                            ${expediente.getCodigoReferencia()}
-                                                        </td>
-                                                    </c:forEach>
-                                                </c:if>
-                                                <c:if test="${nna.getExpedienteNnas().isEmpty()}">
-                                                    <td>
-                                                        No
-                                                    </td>   
-                                                </c:if>
+                                                <td>${revision.getExpedienteFamilia().getExpediente()}</td>
                                                 <td>
-                                                    <c:set var="tokenAdopcion" value="2" ></c:set>
-                                                    <c:if test="${!nna.getDesignacions().isEmpty()}">
-                                                        <c:forEach var="designacion" items="${nna.getDesignacions()}" varStatus="status">
-                                                            <c:choose>
-                                                                <c:when test="${designacion.getAceptacionConsejo() == 0 || designacion.getAceptacionConsejo() == 1 || designacion.getAceptacionConsejo() == 2}">
-
-                                                                    <c:set var="tokenAdopcion" value="0" ></c:set>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <c:if test="${tokenAdopcion != '0'}">
-                                                                        <c:set var="tokenAdopcion" value="1" ></c:set>
-                                                                    </c:if>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </c:forEach>
-                                                        ${tokenAdopcion == '0' ? 'Si' : 'No' }        
-                                                    </c:if>  
-                                                    <c:if test="${nna.getDesignacions().isEmpty()}">
-                                                        No
-                                                    </c:if>  
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
-                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
+                                                    <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                        <input hidden name="estado" id="estado" value="espera">
+                                                        <input hidden name="idExpediente" id="idExpediente" value="${revision.getExpedienteFamilia().getIdexpedienteFamilia()}">
                                                         <button type="submit" class="btn btn-default">Ver</button>
                                                     </form>
                                                 </td>
-                                                <td>
-                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editarExpedienteNna" method="post">
-                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
-                                                        <button ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Ver</button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarRevision" method="post">
-                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
-                                                        <button ${tokenAdopcion == 0 || nna.getExpedienteNnas().isEmpty() == true? 'disabled' : '' } class="btn btn-default">Registrar</button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/verRevision" method="post">
-                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">  
-                                                        <button ${tokenAdopcion == 0 || nna.getExpedienteNnas().isEmpty() == true? 'disabled' : '' } class="btn btn-default">Editar</button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarEstudio" method="post">
-                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
-                                                        <button ${tokenAdopcion == 0 || nna.getExpedienteNnas().isEmpty() == true? 'disabled' : '' } class="btn btn-default">Registrar</button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/verEstudios" method="post">
-                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">  
-                                                        <button ${nna.getEstudioCasos().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Editar</button>
-                                                    </form>
-                                                </td>
+                                                <td>${revision.getFechaRevision() != null ? df.dateToString(revision.getFechaRevision()) : ''}</td>                                                
                                             </tr>
-                                        </c:forEach>  
+                                        </c:forEach> 
                                     </tbody>
                                 </c:if>
-                                <c:if test="${listaNna.isEmpty()}">
-                                    <h3><strong>No existen Nna en esta clasificación</strong></h3>
-                                </c:if>  
+                                <c:if test="${listaRevision.isEmpty()}">
+                                    <h3><strong>No existen Estudios de Caso</strong></h3>
+                                </c:if> 
                             </table>
                         </div>
+                        <h3><strong>Comentarios</strong></h3>
+                        <form action="${pageContext.servletContext.contextPath}/GuardarRevision" method="post">
+                        <br>
+                        <textarea type="text" id="coments" name="coments" cols="25" rows="5">${comentarios}</textarea>
+                        <input hidden id="idNna" name="idNna" value="${idNna}" />
+                        <input hidden id="numero" name="numero" value="${num}" />
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-default">Guardar</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -230,10 +168,28 @@
                 <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
             </div>
         </div>
-        <!-- core JavaScript
-================================================== -->
+        <!-- Bootstrap core JavaScript
+         ================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-        <!-- Ubicar al final -->
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+        <script type="text/javascript">
+
+                                                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+
+        </script>
+        <script>
+            function resultado(value)
+            {
+                var resul = document.getElementById("resul");
+                //you can get the value from arguments itself
+                //alert(value);
+                resul.value = value;
+                //alert(resul.value);
+            }
+        </script>
+        <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>
