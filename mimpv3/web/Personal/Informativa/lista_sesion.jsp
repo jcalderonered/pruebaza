@@ -226,10 +226,16 @@
                             <br>        
                             <br>
                             <c:choose>
-                                <c:when test="${sesion != null}">
+                                <c:when test="${sesion != null && sesion.getHabilitado() == 1}">
                                     <form action="${pageContext.servletContext.contextPath}/PersonalHabilitarSesion" method="post">
                                         <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
                                         <button type="submit" ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} class="btn btn-default">Habilitar sesión</button>
+                                    </form>
+                                </c:when>
+                                <c:when test="${sesion != null && sesion.getHabilitado() == 0}">
+                                    <form action="${pageContext.servletContext.contextPath}/PersonalDeshabilitarSesion" method="post">
+                                        <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                        <button type="submit" ${sesion != null && sesion.getHabilitado() == 1 ? 'disabled' : ''} class="btn btn-default">Deshabilitar sesión</button>
                                     </form>
                                 </c:when>
                                 <c:otherwise>
@@ -240,7 +246,7 @@
                             <br>
                             <br>
                             <br>
-                            <p>IMPORTANTE: Una vez iniciado el Turno 1 de Inscripción, no es posible Deshabilitar la sesión debido a los inscritos</p>
+                            <p>IMPORTANTE: Una vez iniciado el Turno 1 de Inscripción, no es recomendable Deshabilitar la sesión debido a los inscritos</p>
                     </div>
                 </div>
             </div>

@@ -2439,9 +2439,9 @@ public class personal {
 
     @RequestMapping(value = "/PersonalUpdateTaller", method = RequestMethod.POST)
     public ModelAndView PersonalUpdateTaller(ModelMap map, @RequestParam("idTaller") long idTaller,
-            @RequestParam("nombre") String nombre,
-            @RequestParam("tipo") String tipo,
-            @RequestParam("numSesion") String numSesion,
+            @RequestParam(value="nombre",required=false) String nombre,
+            @RequestParam(value="tipo",required=false) String tipo,
+            @RequestParam(value="numSesion",required=false) String numSesion,
             @RequestParam("habilitado") String habilitado,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -2452,9 +2452,9 @@ public class personal {
         }
         Taller tempTaller = new Taller();
         tempTaller = ServicioPersonal.getTaller(idTaller);
-        tempTaller.setNombre(nombre);
-        tempTaller.setTipoTaller(tipo);
-        tempTaller.setNSesion(numSesion);
+        if (nombre != null && !nombre.equals("")) tempTaller.setNombre(nombre);
+        if (tipo != null && !tipo.equals("")) tempTaller.setTipoTaller(tipo);
+        if (numSesion != null && !numSesion.equals("")) tempTaller.setNSesion(numSesion);
         Short habil = Short.parseShort(habilitado);
         tempTaller.setHabilitado(habil);
 
@@ -3855,6 +3855,27 @@ public class personal {
         ServicioPersonal.EliminarTaller(idTaller);
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("formato", format);
+        return new ModelAndView("/Personal/Informativa/lista_charlas", map);
+    }
+    
+    @RequestMapping(value = "/PersonalDeshabilitarSesion", method = RequestMethod.POST)
+    public ModelAndView PersonalDeshabilitarSesion(ModelMap map, @RequestParam("idSesion") long id, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        Sesion tempSesion = new Sesion();
+        tempSesion = ServicioPersonal.getSesion(id);
+        short habilitado = Byte.valueOf("1");
+        tempSesion.setHabilitado(habilitado);
+
+        ServicioPersonal.PersonalUpdateSesion(tempSesion);
+
+        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("formato", format);
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
