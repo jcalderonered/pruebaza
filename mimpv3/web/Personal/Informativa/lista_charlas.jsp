@@ -112,8 +112,8 @@
                                     <tr>
                                         <th>Número de sesión</th>
                                         <th>Habilitado</th>
-                                        <th>Eliminar</th>
                                         <th>Modificar</th>
+                                        <th>Eliminar</th>
                                         <th>Ver Inscritos</th>
                                         <th>Asistencia</th>
                                     </tr>

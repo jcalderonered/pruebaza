@@ -107,7 +107,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <form action="${pageContext.servletContext.contextPath}/PersonalUpdateTaller" method="post">
-                                        <input ${taller.getHabilitado() == 0 ? 'disabled' : ''} hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">  
+                                        <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">  
                                     </c:otherwise>
                                 </c:choose>
                                 <h1>Edición de taller</h1>
@@ -149,16 +149,16 @@
                                     <label class="control-label" for="radios">Habilitado para inscripción:</label>
                                     <div class="controls">
                                         <label class="radio inline" for="radios-0">
-                                            <input ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="radio" name="habilitado" id="radios-0" value="0" ${taller.getHabilitado() == 0 ? 'checked' : ''}>
+                                            <input type="radio" name="habilitado" id="radios-0" value="0" ${taller.getHabilitado() == 0 ? 'checked' : ''}>
                                             Si
                                         </label>
                                         <label class="radio inline" for="radios-1">
-                                            <input ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="radio" name="habilitado" id="radios-1" value="1" ${taller.getHabilitado() == 1 || taller.getHabilitado() == null ? 'checked' : ''}>
+                                            <input type="radio" name="habilitado" id="radios-1" value="1" ${taller.getHabilitado() == 1 || taller.getHabilitado() == null ? 'checked' : ''}>
                                             No
                                         </label>
                                     </div>
                                 </div>
-                                <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
+                                <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
                             </form>
 
                             <br>
