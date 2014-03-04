@@ -562,20 +562,30 @@ public class HiberNna {
                     for (int i = 0; i < n - 1; i++) {
                         for (int j = i; j < n - 1; j++) {
                             if (allNnaFinal.get(i).getExpedienteNnas().isEmpty()) {
-                                auxnna2 = allNnaFinal.get(i);
-                                allNnaFinal.set(i, allNnaFinal.get(j + 1));
-                                allNnaFinal.set(j + 1, auxnna2);
+                                if (!allNnaFinal.get(j + 1).getExpedienteNnas().isEmpty()) {
+                                    auxnna2 = allNnaFinal.get(i);
+                                    allNnaFinal.set(i, allNnaFinal.get(j + 1));
+                                    allNnaFinal.set(j + 1, auxnna2);
+                                } else {
+                                    if (allNnaFinal.get(i).getApellidoP().compareToIgnoreCase(allNnaFinal.get(j + 1).getApellidoP()) > 0) {
+                                        auxnna2 = allNnaFinal.get(i);
+                                        allNnaFinal.set(i, allNnaFinal.get(j + 1));
+                                        allNnaFinal.set(j + 1, auxnna2);
+                                    }
+                                }
                             } else {
                                 Set<ExpedienteNna> listExp1 = allNnaFinal.get(i).getExpedienteNnas();
-                                Set<ExpedienteNna> listExp2 = allNnaFinal.get(j+1).getExpedienteNnas();
-                                for (ExpedienteNna exp1 : listExp1) {
-                                    for (ExpedienteNna exp2 : listExp2) {
-                                        String codant = exp1.getCodigoReferencia();
-                                        String codpost = exp2.getCodigoReferencia();
-                                        if (codant.compareToIgnoreCase(codpost) > 0) {
-                                            auxnna2 = allNnaFinal.get(i);
-                                            allNnaFinal.set(i, allNnaFinal.get(j + 1));
-                                            allNnaFinal.set(j + 1, auxnna2);
+                                Set<ExpedienteNna> listExp2 = allNnaFinal.get(j + 1).getExpedienteNnas();
+                                if (!listExp2.isEmpty()) {
+                                    for (ExpedienteNna exp1 : listExp1) {
+                                        for (ExpedienteNna exp2 : listExp2) {
+                                            String codant = exp1.getCodigoReferencia();
+                                            String codpost = exp2.getCodigoReferencia();
+                                            if (codant.compareToIgnoreCase(codpost) > 0) {
+                                                auxnna2 = allNnaFinal.get(i);
+                                                allNnaFinal.set(i, allNnaFinal.get(j + 1));
+                                                allNnaFinal.set(j + 1, auxnna2);
+                                            }
                                         }
                                     }
                                 }
