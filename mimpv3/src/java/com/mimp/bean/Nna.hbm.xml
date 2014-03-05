@@ -140,5 +140,11 @@
             </key>
             <one-to-many class="com.mimp.bean.EstudioCaso" />
         </set>
+        <set name="revisions" table="REVISION" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDNNA" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.Revision" />
+        </set>
     </class>
 </hibernate-mapping>

@@ -76,28 +76,29 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>       
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -123,64 +124,74 @@
                                     <input hidden name="idResolucion" id="idResolucion" value="${resolucion.getIdresolucion()}">
                                     <input hidden name="origen" id="origen" value="${origen}">
                                 </c:if>  
-                            <fieldset>
-                                <br>
-                                <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
-                                <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
-                                <br>
-                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
-                                <input hidden name="familia" id="familia" value="${familia}">
-                                <br>
-                                <br>
-                                <h3 align="left"><strong>Detalles de la resolución</strong></h3>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">N° de resolución</label>
-                                    <div class="controls">
+                                <fieldset>
+                                    <br>
+                                    <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
+                                    <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                                    <br>
+                                    <h1 align="center"><strong>Familia "${familia}"</strong></h1>
+                                    <input hidden name="familia" id="familia" value="${familia}">
+                                    <br>
+                                    <br>
+                                    <h3 align="left"><strong>Detalles de la resolución</strong></h3>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">N° de resolución</label>
+                                        <div class="controls">
                                             <input id="numResol" name="numResol" type="text" value="${resolucion.getNumero()}" class="input-xlarge">
                                         </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Tipo de Resolución</label>
-                                    <div class="controls">
-                                        <select id="tipo" name="tipo">
-                                            <option value="apto" ${resolucion.getTipo() == 'apto' ? 'selected' : ''}>Apto</option>
-                                            <option value="improcedente" ${resolucion.getTipo() == 'improcedente' ? 'selected' : ''}>Improcedente</option>
-                                            <option value="fin" ${resolucion.getTipo() == 'fin' ? 'selected' : ''}>Fin de procedimiento</option>
-                                            <option value="observado" ${resolucion.getTipo() == 'observado' ? 'selected' : ''}>Observado</option>
-                                            <option value="prorroga" ${resolucion.getTipo() == 'prorroga' ? 'selected' : ''}>Prórroga</option>
-                                            <option value="reconsideracion" ${resolucion.getTipo() == 'reconsideracion' ? 'selected' : ''}>Reconsideración</option>
-                                            <option value="infundada" ${resolucion.getTipo() == 'infundada' ? 'selected' : ''}>Infundada la reconsideración</option>
-                                            <option value="desistimiento" ${resolucion.getTipo() == 'desistimiento' ? 'selected' : ''}>Desistimiento</option>
-                                        </select>
-                                    </div>    
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha resolución</label>
-                                    <div class="controls">
-                                        <input id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToStringNumeros(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha notificación</label>
-                                    <div class="controls">
-                                        <input id="fechaResul" name="fechaNot" type="text" value="${resolucion.getFechaNotificacion() != null ? df.dateToStringNumeros(resolucion.getFechaNotificacion()) : ''}" class="datepicker input-xlarge">
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Tipo de Resolución</label>
+                                        <div class="controls">
+                                            <select onchange="Resol(this.value)" id="tipo" name="tipo">
+                                                <option value="improcedente" ${resolucion.getTipo() == 'improcedente' ? 'selected' : ''}>Improcedente</option>
+                                                <option value="fin" ${resolucion.getTipo() == 'fin' ? 'selected' : ''}>Fin de procedimiento</option>
+                                                <option value="observado" ${resolucion.getTipo() == 'observado' ? 'selected' : ''}>Observado</option>
+                                                <option value="prorroga" ${resolucion.getTipo() == 'prorroga' ? 'selected' : ''}>Prórroga</option>
+                                                <option value="reconsideracion" ${resolucion.getTipo() == 'reconsideracion' ? 'selected' : ''}>Reconsideración</option>
+                                                <option value="infundada" ${resolucion.getTipo() == 'infundada' ? 'selected' : ''}>Infundada la reconsideración</option>
+                                                <option value="desistimiento" ${resolucion.getTipo() == 'desistimiento' ? 'selected' : ''}>Desistimiento</option>
+                                                <option value="apto" ${resolucion.getTipo() == 'apto' ? 'selected' : ''}>Apto</option>
+                                            </select>
+                                        </div>    
                                     </div>
-                                </div>
-                                <br>
-                                <br>
-                                <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Fecha resolución</label>
+                                        <div class="controls">
+                                            <input id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToStringNumeros(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
-                                <!--FIN DE CONTENIDO-->
-                            </fieldset>
-                        </form>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Fecha notificación</label>
+                                        <div class="controls">
+                                            <input id="fechaResul" name="fechaNot" type="text" value="${resolucion.getFechaNotificacion() != null ? df.dateToStringNumeros(resolucion.getFechaNotificacion()) : ''}" class="datepicker input-xlarge">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">En caso de Resolución de Aptitud escoger:</label>
+                                        <div class="controls">
+                                            <select disabled id="tipoEspera" name="tipoEspera">
+                                                <option></option>
+                                                <option value="espera">Lista de espera para adopciones nacionales</option>
+                                                <option value="esperainter">Lista de espera para adopciones internacionales</option>
+                                            </select>
+                                        </div>    
+                                    </div>
+                                    <br>
+                                    <!-- Button -->
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        </div>
+                                    </div>
+                                    <!--FIN DE CONTENIDO-->
+                                </fieldset>
+                            </form>
                     </div>
                 </div>
             </div>
@@ -201,8 +212,24 @@
     <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
     <script type="text/javascript">
 
-        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
+    </script>
+    <script>
+        function Resol(value)
+        {
+            var tipoLista = document.getElementById("tipoEspera");
+            //you can get the value from arguments itself
+            //alert(value);
+            if (value == 'apto') {
+                tipoLista.disabled = false;
+
+            }
+            if (value != 'apto') {
+                tipoLista.value = '';
+                tipoLista.disabled = true;
+            }
+        }
     </script>
     <!-- Ubicar al final -->
 

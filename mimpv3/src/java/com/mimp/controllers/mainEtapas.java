@@ -794,7 +794,8 @@ public class mainEtapas {
             @RequestParam("numResol") String numResol,
             @RequestParam("tipo") String tipo,
             @RequestParam("fechaResol") String fechaResol,
-            @RequestParam("fechaNot") String fechaNot
+            @RequestParam("fechaNot") String fechaNot,
+            @RequestParam(value="tipoEspera",required = false) String tipoEspera
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -860,12 +861,22 @@ public class mainEtapas {
         if (tipo != null && tipo.equals("apto")) {
             ExpedienteFamilia tempFam = new ExpedienteFamilia();
             tempFam = tempEval.getExpedienteFamilia();
+            if(tipoEspera.equals("espera") || tipoEspera.equals("")){
             tempFam.setEstado("espera");
+            }else{
+            tempFam.setEstado("esperainter");    
+            } 
             tempFam.setRnaa(Short.parseShort("0"));
             servicioEtapa.updateExpedienteFamilia(tempFam);
+            if(tipoEspera.equals("espera") || tipoEspera.equals("")){
             map.put("df", df);
             map.put("listaEspera", servicioEtapa.getListaEspera());
             return new ModelAndView("/Personal/Buscador_etapa/lista_espera", map);
+            }else{
+            map.put("df", df);
+            map.put("listaEspera", servicioEtapa.getListaEsperaAdopcionInter());
+            return new ModelAndView("/Personal/Buscador_etapa/lista_espera_inter", map);
+            }
         }
         map.put("familia", familia);
         map.put("legal", tempEval);
@@ -3130,6 +3141,22 @@ public class mainEtapas {
         return new ModelAndView("/Personal/nna/reg_estudio", map);
     }
 
+    @RequestMapping(value = "/esperaInter", method = RequestMethod.GET)
+    public ModelAndView esperaInter(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
 
+        //ArrayList<Familia> allFamilias = new ArrayList();
+        //allFamilias = servicioEtapa.getListaFamilias();
+//        volver = "/ListaEspera";
+//        map.addAttribute("volver", volver);
+        map.put("df", df);
+        map.put("listaEspera", servicioEtapa.getListaEsperaAdopcionInter());
+        return new ModelAndView("/Personal/Buscador_etapa/lista_espera_inter", map);
+    }
 
 }

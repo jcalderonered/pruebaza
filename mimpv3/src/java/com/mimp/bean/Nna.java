@@ -51,6 +51,7 @@ public class Nna  implements java.io.Serializable {
      private String NResolCons;
      private Set<Designacion> designacions = new HashSet<Designacion>(0);
      private Set<Prioritario> prioritarios = new HashSet<Prioritario>(0);
+     private Set<Revision> revisions = new HashSet<Revision>(0);
      private Set<ExpedienteNna> expedienteNnas = new HashSet<ExpedienteNna>(0);
      private Set<EstudioCaso> estudioCasos = new HashSet<EstudioCaso>(0);
      private String fechaNacimientoString;
@@ -66,7 +67,7 @@ public class Nna  implements java.io.Serializable {
         this.car = car;
         this.juzgado = juzgado;
     }
-    public Nna(long idnna, Car car, Juzgado juzgado, String nombre, String apellidoP, String apellidoM, String sexo, Date fechaNacimiento, Short edadAnhos, Short edadMeses, Short actaNacimiento, String condicionSalud, String departamentoNacimiento, String provinciaNacimiento, String distritoNacimiento, String paisNacimiento, String lugarNac, Date fechaResolAbandono, Date fechaResolConsentida, String clasificacion, Short incesto, Short mental, Short epilepsia, Short abuso, Short sifilis, Short seguiMedico, Short operacion, Short hiperactivo, Short especial, Short enfermo, Short mayor, Short adolescente, Short hermano, Short nn, String observaciones, String NResolAband, String NResolCons, Set<Designacion> designacions, Set<Prioritario> prioritarios, Set<ExpedienteNna> expedienteNnas, Set<EstudioCaso> estudioCasos) {
+    public Nna(long idnna, Car car, Juzgado juzgado, String nombre, String apellidoP, String apellidoM, String sexo, Date fechaNacimiento, Short edadAnhos, Short edadMeses, Short actaNacimiento, String condicionSalud, String departamentoNacimiento, String provinciaNacimiento, String distritoNacimiento, String paisNacimiento, String lugarNac, Date fechaResolAbandono, Date fechaResolConsentida, String clasificacion, Short incesto, Short mental, Short epilepsia, Short abuso, Short sifilis, Short seguiMedico, Short operacion, Short hiperactivo, Short especial, Short enfermo, Short mayor, Short adolescente, Short hermano, Short nn, String observaciones, String NResolAband, String NResolCons, Set<Designacion> designacions, Set<Prioritario> prioritarios, Set<Revision> revisions, Set<ExpedienteNna> expedienteNnas, Set<EstudioCaso> estudioCasos) {
        this.idnna = idnna;
        this.car = car;
        this.juzgado = juzgado;
@@ -106,6 +107,7 @@ public class Nna  implements java.io.Serializable {
        this.NResolCons = NResolCons;
        this.designacions = designacions;
        this.prioritarios = prioritarios;
+       this.revisions = revisions;
        this.expedienteNnas = expedienteNnas;
        this.estudioCasos = estudioCasos;
     }
@@ -383,6 +385,15 @@ public class Nna  implements java.io.Serializable {
     public void setPrioritarios(Set<Prioritario> prioritarios) {
         this.prioritarios = prioritarios;
     }
+    
+    public Set<Revision> getRevisions() {
+        return this.revisions;
+    }
+    
+    public void setRevisions(Set<Revision> revisions) {
+        this.revisions = revisions;
+    }
+    
     public Set<ExpedienteNna> getExpedienteNnas() {
         return this.expedienteNnas;
     }
