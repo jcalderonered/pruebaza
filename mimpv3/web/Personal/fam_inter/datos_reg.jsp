@@ -200,7 +200,8 @@
                                 </div>
                                 <br>
                             </form>
-                            <form role="form" action="${pageContext.servletContext.contextPath}/VerInfoRegInt" method="post">   
+                            <form role="form" action="${pageContext.servletContext.contextPath}/VerInfoRegInt" method="post">  
+                                <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                                 <button ${expediente == null ? 'disabled' : ''} id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Ver información de familia</button>
                             </form>   
                     </div>

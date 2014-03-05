@@ -233,7 +233,7 @@
                                                       || expediente.getNna().getHermano() == 0 ? 'Si' : 'No'} 
                                                 </td>
                                                 <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
+                                                    <form action="${pageContext.servletContext.contextPath}/editarNna2" method="post">
                                                     <input hidden name="idNna" id="idNna" value="${expediente.getNna().getIdnna()}">
                                                     <button type="submit" class="btn btn-default">Ver</button>
                                                     </form>

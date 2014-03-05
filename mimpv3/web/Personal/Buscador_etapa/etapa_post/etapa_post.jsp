@@ -145,6 +145,7 @@
                                                         <input hidden name="estado" id="estado" value="post">
                                                         <input hidden name="idExpediente" id="idExpediente" value="${exp.getIdexpedienteFamilia()}">
                                                         <input hidden name="idNna" id="idNna" value="${post.getidNna()}">
+                                                        <input hidden name="volver" id="volver" value="${volver}">
                                                         <button type="submit" class="btn btn-default">Ver</button>
                                                     </form>
                                                 </td>
@@ -152,6 +153,7 @@
                                                     <form action="${pageContext.servletContext.contextPath}/UpdatePostAdopcion" method="post">
                                                         <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
                                                         <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
+                                                        <input hidden name="volver" id="volver" value="${volver}">
                                                         <button type="submit" class="btn btn-default">Registrar</button>
                                                     </form>  
                                                 </td>
@@ -164,6 +166,7 @@
                                                         <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
                                                         <input hidden name="numInformes" id="numInformes" value="${post.getNumeroInformes()}">
                                                         <input hidden name="fechaAdopcion" id="fechaAdopcion" value="${post.getFechaResolucion()}">
+                                                        <input hidden name="volver" id="volver" value="${volver}">
                                                         <button ${post.getNumeroInformes() == null ? 'disabled' : ''} type="submit" class="btn btn-default">Ver</button>
                                                     </form> 
                                                 </td>

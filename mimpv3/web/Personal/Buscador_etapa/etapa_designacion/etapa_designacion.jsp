@@ -102,7 +102,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 ">
-                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -138,6 +138,7 @@
                                                               <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
                                                                   <input hidden name="estado" id="estado" value="designacion">
                                                                   <input hidden name="idExpediente" id="idExpediente" value="${designacion.getExpedienteFamilia().getIdexpedienteFamilia()}">
+                                                                  <input hidden name="volver" id="volver" value="${volver}">
                                                                   <button type="submit" class="btn btn-default">Ver</button>
                                                               </form>
                                                             </td>
@@ -148,6 +149,7 @@
                                                             <td ${designacion.getTipoPropuesta() == 'dupla' ? 'rowspan="2"' : ''} ${designacion.getTipoPropuesta() == 'terna' ? 'rowspan="3"' : ''} style="vertical-align:middle" >
                                                                  <form action="${pageContext.servletContext.contextPath}/designacionConsejo" method="post">
                                                                     <input hidden name="idNna" id="idNna" value="${designacion.getNna().getIdnna()}">
+                                                                    <input hidden name="volver" id="volver" value="${volver}">
                                                                     <button type="submit" class="btn btn-default">Registrar</button>
                                                                  </form>   
                                                             </td>
@@ -156,6 +158,7 @@
                                                     <c:otherwise>
                                                          <tr>
                                                              <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
+                                                             <input hidden name="volver" id="volver" value="${volver}">
                                                              <td><button href="#" class="btn btn-default">Ver</button></td>
                                                          </tr>  
                                                     </c:otherwise>
