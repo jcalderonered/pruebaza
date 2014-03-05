@@ -74,7 +74,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -111,13 +111,14 @@
                         <br>
                         <h1 align="center"><strong>Familias que conforman la Revisión de Expediente</strong></h1>
                         <br>
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalRevisionEstudio" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th class="col-sm-2 " >Expediente</th>
-                                        <th class="col-sm-2 " >Información</th>
-                                        <th class="col-sm-2 " >Revisión de expediente</th>
+                                        <th class="col-sm-2 " >Fecha de revisión</th>
+                                        <th class="col-sm-2 " >Seleccionar</th>
                                     </tr>
                                 </thead>
                                 <c:if test="${!listaRevision.isEmpty()}">
@@ -128,14 +129,14 @@
                                             <c:set var="num" value="${revision.getNumero()}" scope="page" />
                                             <tr>
                                                 <td>${revision.getExpedienteFamilia().getExpediente()}</td>
+                                                <td>${revision.getFechaRevision() != null ? df.dateToString(revision.getFechaRevision()) : ''}</td>  
                                                 <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
-                                                        <input hidden name="estado" id="estado" value="espera">
-                                                        <input hidden name="idExpediente" id="idExpediente" value="${revision.getExpedienteFamilia().getIdexpedienteFamilia()}">
-                                                        <button type="submit" class="btn btn-default">Ver</button>
-                                                    </form>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input name="idExpediente" value="${revision.getExpedienteFamilia().getIdexpedienteFamilia()}" type="checkbox"> 
+                                                        </label>
+                                                    </div>
                                                 </td>
-                                                <td>${revision.getFechaRevision() != null ? df.dateToString(revision.getFechaRevision()) : ''}</td>                                                
                                             </tr>
                                         </c:forEach> 
                                     </tbody>
@@ -145,15 +146,22 @@
                                 </c:if> 
                             </table>
                         </div>
+                        <br>
+                        <input hidden id="idNna" name="idNna" value="${idNna}" />
+                        <h4><strong>Seleccione la(s) familia(as) que pasaran a estudio de caso</strong></h4>
+                        <br>
+                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar Estudio de Caso</button>
+                        </form>
+                        <br>
                         <h3><strong>Comentarios</strong></h3>
                         <form action="${pageContext.servletContext.contextPath}/GuardarRevision" method="post">
-                        <br>
-                        <textarea type="text" id="coments" name="coments" cols="25" rows="5">${comentarios}</textarea>
-                        <input hidden id="idNna" name="idNna" value="${idNna}" />
-                        <input hidden id="numero" name="numero" value="${num}" />
-                        <br>
-                        <br>
-                        <button type="submit" class="btn btn-default">Guardar</button>
+                            <br>
+                            <textarea type="text" id="coments" name="coments" cols="25" rows="5">${comentarios}</textarea>
+                            <input hidden id="idNna" name="idNna" value="${idNna}" />
+                            <input hidden id="numero" name="numero" value="${num}" />
+                            <br>
+                            <br>
+                            <button type="submit" class="btn btn-default">Guardar</button>
                         </form>
                     </div>
                 </div>
@@ -176,7 +184,7 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-                                                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
 
         </script>

@@ -119,7 +119,7 @@
                                     </tr>
                                 </thead>
                                 <c:if test="${!listaEstudios.isEmpty()}">
-                                      <c:set var="token" value="null"/>
+                                      <c:set var="token" value="${null}"/>
                                 <tbody>
                                     <c:forEach var="estudio" items="${listaEstudios}" varStatus="status">
                                         <c:choose>

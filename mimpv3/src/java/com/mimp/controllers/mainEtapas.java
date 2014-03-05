@@ -3087,7 +3087,31 @@ public class mainEtapas {
 
     }
 
-
+    @RequestMapping(value = "/PersonalRevisionEstudio", method = RequestMethod.POST)
+    public ModelAndView PersonalRevisionEstudio(ModelMap map, HttpSession session,
+            @RequestParam("idNna") long idNna,
+            long[] idExpediente
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        nnaEditarEstudioCaso = idNna;
+        nnaPrioritario = ServicioNna.getNna(idNna);
+        listaEstudioCaso.clear();
+        
+        if (idExpediente != null) {
+            for (long l : idExpediente) {
+                ExpedienteFamilia tempExp = servicioEtapa.getInfoFamilia(l);
+                listaEstudioCaso.add(tempExp);
+            }
+        }
+        map.put("listaEstudioCaso", listaEstudioCaso);
+        map.put("df", df);
+        return new ModelAndView("/Personal/nna/reg_estudio", map);
+    }
 
 
 
