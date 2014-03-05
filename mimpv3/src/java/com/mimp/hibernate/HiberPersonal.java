@@ -1086,61 +1086,134 @@ public class HiberPersonal {
         session.update(temp);
     }
 
+//    public ArrayList<ExpedienteNna> FiltrarNna(ExpedienteNna expNna, Nna datosNna) {
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//
+//        String hql = "";
+//        if (expNna.getEstado().equals("eval") || expNna.getEstado().equals("desig")
+//                || expNna.getEstado().equals("adop") || expNna.getEstado().equals("arch")) {
+//            hql = "from ExpedienteNna E where E.NActual like :nombreAc "
+//                    + "and E.apellidopActual like :apellidoPAct and E.apellidomActual like :apellidoMAct "
+//                    + "and E.estado like :estado";
+//        } else {
+//            hql = "from ExpedienteNna E where E.NActual like :nombreAc "
+//                    + "or E.apellidopActual like :apellidoPAct or E.apellidomActual like :apellidoMAct "
+//                    + "or E.estado like :estado";
+//        }
+//        Query query = session.createQuery(hql);
+//        query.setString("nombreAc", '%' + expNna.getNActual() + '%');
+//        query.setString("apellidoPAct", '%' + expNna.getApellidopActual() + '%');
+//        query.setString("apellidoMAct", '%' + expNna.getApellidomActual() + '%');
+//        query.setString("estado", '%' + expNna.getEstado() + '%');
+//
+//        List expedientes = query.list();
+//        ArrayList<ExpedienteNna> allExpedientes = new ArrayList();
+//        if (!expedientes.isEmpty()) {
+//            for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+//                ExpedienteNna temp = (ExpedienteNna) iter.next();
+//                Hibernate.initialize(temp.getNna());
+//
+//                if (datosNna.getEspecial() == 0 || datosNna.getEnfermo() == 0 || datosNna.getAdolescente() == 0
+//                        || datosNna.getMayor() == 0 || datosNna.getHermano() == 0) {
+//
+//                    if (temp.getNna().getNombre().contains(datosNna.getNombre())
+//                            && temp.getNna().getApellidoP().contains(datosNna.getApellidoP())
+//                            && temp.getNna().getApellidoM().contains(datosNna.getApellidoM())
+//                            && temp.getNna().getEspecial() == datosNna.getEspecial()
+//                            && temp.getNna().getEnfermo() == datosNna.getEnfermo()
+//                            && temp.getNna().getAdolescente() == datosNna.getAdolescente()
+//                            && temp.getNna().getMayor() == datosNna.getMayor()
+//                            && temp.getNna().getHermano() == datosNna.getHermano()) {
+//
+//                        allExpedientes.add(temp);
+//                    }
+//                } else if (temp.getNna().getNombre().contains(datosNna.getNombre())
+//                        && temp.getNna().getApellidoP().contains(datosNna.getApellidoP())
+//                        && temp.getNna().getApellidoM().contains(datosNna.getApellidoM())) {
+//                    allExpedientes.add(temp);
+//                }
+//
+//            }
+//
+//        }
+//
+//        return allExpedientes;
+//
+//    }
+    
     public ArrayList<ExpedienteNna> FiltrarNna(ExpedienteNna expNna, Nna datosNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-
-        String hql = "";
-        if (expNna.getEstado().equals("eval") || expNna.getEstado().equals("desig")
-                || expNna.getEstado().equals("adop") || expNna.getEstado().equals("arch")) {
-            hql = "from ExpedienteNna E where E.NActual like :nombreAc "
-                    + "and E.apellidopActual like :apellidoPAct and E.apellidomActual like :apellidoMAct "
-                    + "and E.estado like :estado";
-        } else {
-            hql = "from ExpedienteNna E where E.NActual like :nombreAc "
-                    + "or E.apellidopActual like :apellidoPAct or E.apellidomActual like :apellidoMAct "
-                    + "or E.estado like :estado";
-        }
-        Query query = session.createQuery(hql);
-        query.setString("nombreAc", '%' + expNna.getNActual() + '%');
-        query.setString("apellidoPAct", '%' + expNna.getApellidopActual() + '%');
-        query.setString("apellidoMAct", '%' + expNna.getApellidomActual() + '%');
-        query.setString("estado", '%' + expNna.getEstado() + '%');
-
-        List expedientes = query.list();
-        ArrayList<ExpedienteNna> allExpedientes = new ArrayList();
-        if (!expedientes.isEmpty()) {
-            for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
-                ExpedienteNna temp = (ExpedienteNna) iter.next();
-                Hibernate.initialize(temp.getNna());
-
-                if (datosNna.getEspecial() == 0 || datosNna.getEnfermo() == 0 || datosNna.getAdolescente() == 0
-                        || datosNna.getMayor() == 0 || datosNna.getHermano() == 0) {
-
-                    if (temp.getNna().getNombre().contains(datosNna.getNombre())
-                            && temp.getNna().getApellidoP().contains(datosNna.getApellidoP())
-                            && temp.getNna().getApellidoM().contains(datosNna.getApellidoM())
-                            && temp.getNna().getEspecial() == datosNna.getEspecial()
-                            && temp.getNna().getEnfermo() == datosNna.getEnfermo()
-                            && temp.getNna().getAdolescente() == datosNna.getAdolescente()
-                            && temp.getNna().getMayor() == datosNna.getMayor()
-                            && temp.getNna().getHermano() == datosNna.getHermano()) {
-
-                        allExpedientes.add(temp);
-                    }
-                } else if (temp.getNna().getNombre().contains(datosNna.getNombre())
-                        && temp.getNna().getApellidoP().contains(datosNna.getApellidoP())
-                        && temp.getNna().getApellidoM().contains(datosNna.getApellidoM())) {
-                    allExpedientes.add(temp);
+        final ArrayList<ExpedienteNna> allExpedientes = new ArrayList();
+        final String strEstado = expNna.getEstado();
+        final String strClas = datosNna.getClasificacion();
+        final String strNombre = datosNna.getNombre();
+        final String strApellidoP = datosNna.getApellidoP();
+        final String strApellidoM = datosNna.getApellidoM();
+        final Short esp = datosNna.getEspecial();
+        final Short enf = datosNna.getEnfermo();
+        final Short mayor = datosNna.getMayor();
+        final Short adoles = datosNna.getAdolescente();
+        final Short hermano = datosNna.getHermano();
+        final String strNombre_Act = expNna.getNActual();
+        final String strApellidoP_Act = expNna.getApellidopActual();
+        final String strApellidoM_Act = expNna.getApellidomActual();
+        
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                
+                String hql = "{call PERS_FILTRAR_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setString(1, strEstado);
+                statement.setString(2, strClas);
+                statement.setString(3, strNombre);
+                statement.setString(4, strApellidoP);
+                statement.setString(5, strApellidoM);
+                statement.setShort(6, esp);
+                statement.setShort(7, enf);
+                statement.setShort(8, mayor);
+                statement.setShort(9, adoles);
+                statement.setShort(10, hermano);
+                statement.setString(11, strNombre_Act);
+                statement.setString(12, strApellidoP_Act);
+                statement.setString(13, strApellidoM_Act);
+                statement.registerOutParameter(14, OracleTypes.CURSOR);
+                statement.execute();
+                
+                ResultSet rs = (ResultSet) statement.getObject(14);
+               
+                while(rs.next()){
+                    ExpedienteNna tempExpNna = new ExpedienteNna();
+                    Nna tempNna = new Nna();
+                    
+                    tempExpNna.setIdexpedienteNna(rs.getLong("IDEXPEDIENTE_NNA"));
+                    tempExpNna.setEstado(rs.getString("ESTADO"));
+                    tempExpNna.setNActual(rs.getString("N_ACTUAL"));
+                    tempExpNna.setApellidopActual(rs.getString("APELLIDOP_ACTUAL"));
+                    tempExpNna.setApellidomActual(rs.getString("APELLIDOM_ACTUAL"));
+                    
+                    tempNna.setIdnna(rs.getLong("IDNNA"));
+                    tempNna.setClasificacion(rs.getString("CLASIFICACION"));
+                    tempNna.setNombre(rs.getString("NOMBRE"));
+                    tempNna.setApellidoP(rs.getString("APELLIDO_P"));
+                    tempNna.setApellidoM(rs.getString("APELLIDO_M"));
+                    
+                    tempExpNna.setNna(tempNna);
+                    allExpedientes.add(tempExpNna);
                 }
-
+                rs.close();
+                statement.close();
             }
-
-        }
-
+        };
+        
+        session.doWork(work);
+        
+        
         return allExpedientes;
-
-    }
+    }    
 
     public ArrayList<ExpedienteFamilia> FiltrarFam(ExpedienteFamilia expFam, Familia datosFam) {
         Session session = sessionFactory.getCurrentSession();

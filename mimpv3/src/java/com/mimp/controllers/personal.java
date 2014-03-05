@@ -186,13 +186,27 @@ public class personal {
         if (estado != null && !estado.equals("none")) {
             datosExp.setEstado(estado);
         }
-        if (estado == null || estado.equals("none")) {
-            datosExp.setEstado("none");
-        }
+//        if (estado == null || estado.equals("none")) {
+//            datosExp.setEstado("none");
+//        }
         datosNna.setNombre(nombre);
         datosNna.setApellidoP(apellidoP);
         datosNna.setApellidoM(apellidoM);
         if (prioritario.equals("none")) {
+            datosNna.setEspecial(Short.parseShort("1"));
+            datosNna.setEnfermo(Short.parseShort("1"));
+            datosNna.setAdolescente(Short.parseShort("1"));
+            datosNna.setMayor(Short.parseShort("1"));
+            datosNna.setHermano(Short.parseShort("1"));
+        } else if (prioritario.equals("reg")) {
+            datosNna.setClasificacion("regular");
+            datosNna.setEspecial(Short.parseShort("1"));
+            datosNna.setEnfermo(Short.parseShort("1"));
+            datosNna.setAdolescente(Short.parseShort("1"));
+            datosNna.setMayor(Short.parseShort("1"));
+            datosNna.setHermano(Short.parseShort("1"));
+        } else if (prioritario.equals("prio")) {
+            datosNna.setClasificacion("prioritario");
             datosNna.setEspecial(Short.parseShort("1"));
             datosNna.setEnfermo(Short.parseShort("1"));
             datosNna.setAdolescente(Short.parseShort("1"));
