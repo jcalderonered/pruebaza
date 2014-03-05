@@ -176,10 +176,12 @@
                                 </div>
                                 <br>
                                 <div>
-                                    <label class="control-label">Condiciones Prioritarias</label>
+                                    <label class="control-label">Condiciones</label>
                                     <div class="controls">
                                         <select id="prioritario" name="prioritario">
                                             <option value="none" >Ninguna</option>
+                                            <option value="reg" >Regular</option>
+                                            <option value="prio" >Prioritario</option>
                                             <option value="ne" >Necesidades Especiales</option>
                                             <option value="ps">Problemas de Salud</option>
                                             <option value="m" >Mayores</option>
@@ -228,9 +230,7 @@
                                                     ${expediente.getEstado() == 'arch' ? 'archivado' : ''}
                                                 </td>
                                                 <td>
-                                                    ${expediente.getNna().getEspecial() == 0 || expediente.getNna().getEnfermo() == 0
-                                                      || expediente.getNna().getAdolescente() == 0 || expediente.getNna().getMayor() == 0
-                                                      || expediente.getNna().getHermano() == 0 ? 'Si' : 'No'} 
+                                                    ${expediente.getNna().getClasificacion() == 'prioritario'  ? 'Si' : 'No'} 
                                                 </td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/editarNna2" method="post">
