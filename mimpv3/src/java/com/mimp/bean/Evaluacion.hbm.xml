@@ -38,6 +38,12 @@
         <property name="numEval" type="string">
             <column name="NUM_EVAL" length="20" />
         </property>
+        <property name="persInt" type="string">
+            <column name="PERS_INT" length="1000" />
+        </property>
+        <property name="numPersInt" type="java.lang.Long">
+            <column name="NUM_PERS_INT" precision="10" scale="0" />
+        </property>
         <set name="evalLegals" table="EVAL_LEGAL" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="IDEVALUACION" precision="10" scale="0" not-null="true" />

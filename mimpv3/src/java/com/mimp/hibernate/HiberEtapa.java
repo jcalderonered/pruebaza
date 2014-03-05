@@ -502,6 +502,8 @@ public class HiberEtapa {
                     tempEval.setSustento(temp.getString(9));
                     tempEval.setNDesignacion(temp.getString(10));
                     tempEval.setNumEval(temp.getString(11));
+                    tempEval.setPersInt(temp.getString("PERS_INT"));
+                    tempEval.setNumPersInt(temp.getLong("NUM_PERS_INT"));
                 }
                 statement.close();
             }
@@ -4888,6 +4890,49 @@ public class HiberEtapa {
         return allRevision;
     }
     
-    
+    public void crearEvaluacionAdopcion(Evaluacion temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idExp = temp.getExpedienteFamilia().getIdexpedienteFamilia();
+        final Long idPer = temp.getPersonal().getIdpersonal();
+        final String tipoEval = temp.getTipo();
+        final Date fechaAsig = temp.getFechaAsignacion();
+        final String result = temp.getResultado();
+        final Date fechaResul = temp.getFechaResultado();
+        final String obs = temp.getObservacion();
+        final String sust = temp.getSustento();
+        final String ndesig = temp.getNDesignacion();
+        final String numEval = temp.getNumEval();
+        final String persInt = temp.getPersInt();
+        final Long numPersInte = temp.getNumPersInt();
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HE_CREAR_EVAL_ADOP(?,?,?,?,?,?,?,?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idExp);
+                statement.setLong(2, idPer);
+                statement.setString(3, tipoEval);
+                statement.setDate(4, (java.sql.Date) fechaAsig);
+                statement.setString(5, result);
+                statement.setDate(6, (java.sql.Date) fechaResul);
+                statement.setString(7, obs);
+                statement.setString(8, sust);
+                statement.setString(9, ndesig);
+                statement.setString(10, numEval);
+                statement.setString(11, persInt);
+                statement.setLong(12,numPersInte);
+                statement.execute();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
+
+    }
     
 }

@@ -23,6 +23,8 @@ public class Evaluacion  implements java.io.Serializable {
      private String sustento;
      private String NDesignacion;
      private String numEval;
+     private String persInt;
+     private Long numPersInt;
      private Set<EvalLegal> evalLegals = new HashSet<EvalLegal>(0);
      private Set<Resolucion> resolucions = new HashSet<Resolucion>(0);
 
@@ -35,7 +37,7 @@ public class Evaluacion  implements java.io.Serializable {
         this.personal = personal;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public Evaluacion(long idevaluacion, Personal personal, ExpedienteFamilia expedienteFamilia, String tipo, Date fechaAsignacion, String resultado, Date fechaResultado, String observacion, String sustento, String NDesignacion, Set<EvalLegal> evalLegals, Set<Resolucion> resolucions) {
+    public Evaluacion(long idevaluacion, Personal personal, ExpedienteFamilia expedienteFamilia, String tipo, Date fechaAsignacion, String resultado, Date fechaResultado, String observacion, String sustento, String NDesignacion, String persInt, Long numPersInt,Set<EvalLegal> evalLegals, Set<Resolucion> resolucions) {
        this.idevaluacion = idevaluacion;
        this.personal = personal;
        this.expedienteFamilia = expedienteFamilia;
@@ -46,6 +48,8 @@ public class Evaluacion  implements java.io.Serializable {
        this.observacion = observacion;
        this.sustento = sustento;
        this.NDesignacion = NDesignacion;
+       this.persInt = persInt;
+       this.numPersInt = numPersInt;
        this.evalLegals = evalLegals;
        this.resolucions = resolucions;
     }
@@ -126,6 +130,22 @@ public class Evaluacion  implements java.io.Serializable {
     
     public void setNumEval(String numEval) {
         this.numEval = numEval;
+    }
+    
+    public String getPersInt() {
+        return this.persInt;
+    }
+    
+    public void setPersInt(String persInt) {
+        this.persInt = persInt;
+    }
+    
+    public Long getNumPersInt() {
+        return this.numPersInt;
+    }
+    
+    public void setNumPersInt(Long numPersInt) {
+        this.numPersInt = numPersInt;
     }
     public Set<EvalLegal> getEvalLegals() {
         return this.evalLegals;
