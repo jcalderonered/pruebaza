@@ -102,7 +102,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 ">
-                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row">

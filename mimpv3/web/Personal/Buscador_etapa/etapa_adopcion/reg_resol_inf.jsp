@@ -102,6 +102,7 @@ if (u==null){
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/EtapaAdopcion'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" >

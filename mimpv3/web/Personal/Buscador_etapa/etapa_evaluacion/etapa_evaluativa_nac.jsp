@@ -77,7 +77,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -161,6 +161,7 @@
                                                     <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
                                                         <input hidden name="estado" id="estado" value="evaluacion">
                                                         <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                        <input hidden name="volver" id="volver" value="${volver}">
                                                         <button type="submit" class="btn btn-default">Ver</button>
                                                     </form>
                                                 </td>
@@ -170,6 +171,7 @@
                                                         <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                         <input hidden name="idPsicologica" id="idPsicologica" value="${psicologica.getIdevaluacion()}">
                                                         <input hidden name="origen" id="origen" value="nacional">
+                                                        <input hidden name="volver" id="volver" value="${volver}">
                                                         <button type="submit" class="btn btn-default">Registrar</button>
                                                     </form>  
                                                 </td>
@@ -189,6 +191,7 @@
                                                         <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                         <input hidden name="idSocial" id="idSocial" value="${social.getIdevaluacion()}">
                                                         <input hidden name="origen" id="origen" value="nacional">
+                                                        <input hidden name="volver" id="volver" value="${volver}">
                                                         <button type="submit" class="btn btn-default">Registrar</button>
                                                     </form>  
                                                 </td>
@@ -208,6 +211,7 @@
                                                         <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                         <input hidden name="idLegal" id="idLegal" value="${legal.getIdevaluacion()}">
                                                         <input hidden name="origen" id="origen" value="nacional">
+                                                        <input hidden name="volver" id="volver" value="${volver}">
                                                         <button type="submit" class="btn btn-default">Registrar</button>
                                                     </form>  
                                                 </td>
@@ -281,7 +285,7 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
         <!-- Placed at the end of the document so the pages load faster -->        

@@ -42,16 +42,20 @@ public class mainEtapas {
     ArrayList<ExpedienteFamilia> listaRevision = new ArrayList();
     ArrayList<Designacion> allDesig = new ArrayList();
     Nna nnaPrioritario = new Nna();
+    String volver;
 
     @RequestMapping(value = "/fametap", method = RequestMethod.GET)
-    public ModelAndView FamEtap(ModelMap map, HttpSession session) {
+    public ModelAndView FamEtap(ModelMap map,
+            @RequestParam(value = "volver", required = false) String volver,
+            HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-
+        volver = "/fametap";
+        map.addAttribute("volver", volver);
         map.put("listaFamilias", servicioEtapa.getListaFamilias());
         return new ModelAndView("/Personal/Buscador_etapa/etapa_formativa", map);
     }
@@ -80,7 +84,9 @@ public class mainEtapas {
     }
 
     @RequestMapping(value = "/EtapaEvalNac", method = RequestMethod.GET)
-    public ModelAndView EtapaEvalNac(ModelMap map, HttpSession session) {
+    public ModelAndView EtapaEvalNac(ModelMap map,
+            @RequestParam(value = "volver", required = false) String volver,
+            HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -90,6 +96,8 @@ public class mainEtapas {
 
         ArrayList<ExpedienteFamilia> allListaExpedientes = new ArrayList();
         allListaExpedientes = servicioEtapa.ListaExpedientes("nacional", "evaluacion");
+        volver = "/EtapaEvalNac";
+        map.addAttribute("volver", volver);
         map.put("ListaExpedientes", allListaExpedientes);
         map.put("df", df);
         return new ModelAndView("/Personal/Buscador_etapa/etapa_evaluacion/etapa_evaluativa_nac", map);
@@ -106,6 +114,8 @@ public class mainEtapas {
         }
 
         ArrayList<ExpedienteFamilia> allListaExpedientes = new ArrayList();
+        volver = "/EtapaEvalInter";
+        map.addAttribute("volver", volver);
         allListaExpedientes = servicioEtapa.ListaExpedientes("internacional", "evaluacion");
         map.put("ListaExpedientes", allListaExpedientes);
         map.put("df", df);
@@ -118,6 +128,7 @@ public class mainEtapas {
             @RequestParam("idExpediente") long idExpediente,
             @RequestParam("familia") String familia,
             @RequestParam("origen") String origen,
+            @RequestParam(value = "volver", required = false) String volver,
             @RequestParam(value = "idPsicologica", required = false) String idPsicologica
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -138,7 +149,7 @@ public class mainEtapas {
         map.put("familia", familia);
         map.put("origen", origen);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
-
+        map.addAttribute("volver", volver);
         map.put("df", df);
         return new ModelAndView("/Personal/Buscador_etapa/etapa_evaluacion/detalle_eval_psic", map);
 
@@ -314,6 +325,7 @@ public class mainEtapas {
             @RequestParam("idExpediente") long idExpediente,
             @RequestParam("familia") String familia,
             @RequestParam("origen") String origen,
+            @RequestParam(value = "volver", required = false) String volver,
             @RequestParam(value = "idSocial", required = false) String idSocial
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -334,6 +346,7 @@ public class mainEtapas {
         map.put("familia", familia);
         map.put("origen", origen);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
+        map.addAttribute("volver", volver);
 
         map.put("df", df);
         return new ModelAndView("/Personal/Buscador_etapa/etapa_evaluacion/detalle_eval_soc", map);
@@ -523,6 +536,7 @@ public class mainEtapas {
             @RequestParam("idExpediente") long idExpediente,
             @RequestParam("familia") String familia,
             @RequestParam("origen") String origen,
+            @RequestParam(value = "volver", required = false) String volver,
             @RequestParam(value = "idLegal", required = false) String idLegal
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -543,7 +557,7 @@ public class mainEtapas {
         map.put("familia", familia);
         map.put("origen", origen);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
-
+        map.addAttribute("volver", volver);
         map.put("df", df);
         return new ModelAndView("/Personal/Buscador_etapa/etapa_evaluacion/detalle_eval_legal", map);
 
@@ -1528,7 +1542,8 @@ public class mainEtapas {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-
+        volver = "/EtapaDesig";
+        map.addAttribute("volver", volver);
         map.put("listaDesignaciones", servicioEtapa.getListaDesignaciones());
         return new ModelAndView("/Personal/Buscador_etapa/etapa_designacion/etapa_designacion", map);
 
@@ -1642,7 +1657,10 @@ public class mainEtapas {
             return new ModelAndView("login", map);
         }
 
+        volver = "/EtapaAdopcion";
+        map.addAttribute("volver", volver);
         map.put("listaAdopciones", servicioEtapa.getListaAdopciones());
+
         return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/etapa_adopcion", map);
 
     }
@@ -2143,11 +2161,11 @@ public class mainEtapas {
 //                    tempPost.setFechaResolucion(null);
 //                }
                 if (fechaResol != null && !fechaResol.equals("")) {
-                 tempPost.setFechaResolucion(df.stringToDate(fechaResol));
-                 }
-                 if (fechaResol == null || fechaResol.equals("")) {
-                 tempPost.setFechaResolucion(null);
-                 }
+                    tempPost.setFechaResolucion(df.stringToDate(fechaResol));
+                }
+                if (fechaResol == null || fechaResol.equals("")) {
+                    tempPost.setFechaResolucion(null);
+                }
                 servicioEtapa.crearPostAdopcion(tempPost);
                 ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
                 ExpNna.setEstado("arch");
@@ -2188,6 +2206,8 @@ public class mainEtapas {
         }
 
         map.put("listaPost", servicioEtapa.getListaPostAdopcion());
+        volver = "/EtapaPostAdopcion";
+        map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/Buscador_etapa/etapa_post/etapa_post", map);
 
     }
@@ -2808,6 +2828,8 @@ public class mainEtapas {
         //allFamilias = servicioEtapa.getListaFamilias();
         map.put("df", df);
         map.put("listaReevaluacion", servicioEtapa.getListaReevaluación());
+        volver = "/Reevaluacion";
+        map.put("volver", volver);
         return new ModelAndView("/Personal/Buscador_etapa/lista_reevaluacion", map);
     }
 
@@ -2822,6 +2844,8 @@ public class mainEtapas {
 
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
+        volver = "/ListaEspera";
+        map.addAttribute("volver", volver);
         map.put("df", df);
         map.put("listaEspera", servicioEtapa.getListaEspera());
         return new ModelAndView("/Personal/Buscador_etapa/lista_espera", map);

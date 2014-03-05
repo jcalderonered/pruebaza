@@ -3141,6 +3141,7 @@ public class personal {
             @RequestParam(value = "fechaIngreso") String fechaIngreso,
             @RequestParam(value = "tupa") String tupa,
             @RequestParam(value = "tipoFamilia") String tipoFamilia,
+            @RequestParam(value = "idExpediente" , required = false) String idExpediente,
             @RequestParam(value = "entAsoc") long entAsoc
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -3187,6 +3188,7 @@ public class personal {
         map.put("df", format);
         map.put("infoFam", infoFam);
         map.put("Ella", Ella);
+        map.addAttribute("idExpediente", idExpediente);
         return new ModelAndView("/Personal/fam_inter/datos_ella", map);
     }
 
@@ -3479,7 +3481,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/VerInfoRegInt", method = RequestMethod.POST)
-    public ModelAndView VerInfoRegInt(ModelMap map, HttpSession session) {
+    public ModelAndView VerInfoRegInt(ModelMap map,@RequestParam(value = "idExpediente" , required = false) String idExpediente, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3491,11 +3493,14 @@ public class personal {
         map.put("df", format);
         map.put("infoFam", infoFam);
         map.put("Ella", Ella);
+        map.addAttribute("idExpediente", idExpediente);
         return new ModelAndView("/Personal/fam_inter/datos_ella", map);
     }
 
     @RequestMapping(value = "/laSolicitanteInt", method = RequestMethod.GET)
-    public ModelAndView laSolicitanteInt(ModelMap map, HttpSession session) {
+    public ModelAndView laSolicitanteInt(ModelMap map,
+            @RequestParam(value = "idExpediente" , required = false) String idExpediente,
+            HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3505,11 +3510,14 @@ public class personal {
         map.put("df", format);
         map.put("infoFam", infoFam);
         map.put("Ella", Ella);
+        map.put("idExpediente", idExpediente);
         return new ModelAndView("/Personal/fam_inter/datos_ella", map);
     }
 
     @RequestMapping(value = "/elSolicitanteInt", method = RequestMethod.GET)
-    public ModelAndView elSolicitanteInt(ModelMap map, HttpSession session) {
+    public ModelAndView elSolicitanteInt(ModelMap map, 
+            @RequestParam(value = "idExpediente" , required = false) String idExpediente,
+            HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3519,11 +3527,14 @@ public class personal {
         map.put("df", format);
         map.put("infoFam", infoFam);
         map.put("El", El);
+        map.put("idExpediente", idExpediente);
         return new ModelAndView("/Personal/fam_inter/datos_el", map);
     }
 
     @RequestMapping(value = "/antNnaInt", method = RequestMethod.GET)
-    public ModelAndView antNnaInt(ModelMap map, HttpSession session) {
+    public ModelAndView antNnaInt(ModelMap map,
+            @RequestParam(value = "idExpediente" , required = false) String idExpediente,
+            HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3533,6 +3544,7 @@ public class personal {
 
         //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
         map.put("infoFam", infoFam);
+        map.put("idExpediente", idExpediente);
         return new ModelAndView("/Personal/fam_inter/datos_nna", map);
     }
 
@@ -3695,6 +3707,13 @@ public class personal {
         listaBusqueda = ServicioPersonal.FiltrarFam(datosExp, datosFam);
 
         map.put("listaBusqueda", listaBusqueda);
+        String volver = "/FiltrarFam";
+        map.addAttribute("volver", volver);
+        map.put("expediente", expediente);
+        map.put("HT", HT);
+        map.put("nacionalidad", nacionalidad);
+        map.put("estado", estado);
+        map.put("tipofamilia", tipofamilia);
         return new ModelAndView("/Personal/Buscador/buscarFamilia", map);
 
     }

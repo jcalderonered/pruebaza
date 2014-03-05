@@ -77,7 +77,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -102,29 +102,30 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
 
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario" ><!--onsubmit="return(validar());" --> 
                             <input hidden id="adoptante" name="adoptante" value="ella">
-                            
+
                             <c:if test="${estado != 'formativa'}">
                                 <br>
-                                <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
+                                <h1 align="center"><strong>Familia "${expediente.getExpediente()}" </strong></h1>
                                 <br>
                             </c:if>
                             <br>
                             <br>
                             <ul class="nav nav-tabs row">
-                                <li class="active"><a href="${pageContext.servletContext.contextPath}/laSolicitante">La Solicitante</a></li>
-                                <li><a href="${pageContext.servletContext.contextPath}/elSolicitante" >El solicitante</a></li>
+                                <li class="active"><a href="${pageContext.servletContext.contextPath}/laSolicitante?volver=${volver}">La Solicitante</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/elSolicitante?volver=${volver}" >El solicitante</a></li>
                                 <!--<li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/compFamiliar" >Composición familiar</a></li>-->
                                 <!--<li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/vivienda" >Vivienda</a></li>-->
-                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/infoExpediente" >Información del Expediente</a></li>
-                                <li><a href="${pageContext.servletContext.contextPath}/procesoAdopcion" >Proceso de adopción</a></li>
-                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna" >Antecedentes del NNA</a></li>
-                                <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' || estado == 'designacion' || estado == 'adopcion' || estado == 'reevaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado" >NNA Adoptado</a></li>
-                                <li><a href="${pageContext.servletContext.contextPath}/atenciones" >Atenciones</a></li>
-                                <li><a href="${pageContext.servletContext.contextPath}/EditUserPass" >Editar Perfil de Familia</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/infoExpediente?volver=${volver}" >Información del Expediente</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/procesoAdopcion?volver=${volver}" >Proceso de adopción</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna?volver=${volver}" >Antecedentes del NNA</a></li>
+                                <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' || estado == 'designacion' || estado == 'adopcion' || estado == 'reevaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado?volver=${volver}" >NNA Adoptado</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/atenciones?volver=${volver}" >Atenciones</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/EditUserPass?volver=${volver}" >Editar Perfil de Familia</a></li>
                             </ul>
                             <br>
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
@@ -466,7 +467,7 @@
                                         <button ${Ella.getIdadoptante() == null || Ella.getIdadoptante() == 0 ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>
-                                    
+
                             </fieldset>
 
                         </form>
@@ -491,35 +492,35 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
-                                                    $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
-                                                    $('#fechaNac').on('changeDate', function(ev) {
+                            $('#fechaNac').on('changeDate', function(ev) {
 
-                                                        var nac = document.getElementById("fechaNac").value;
-                                                        var edad = document.getElementById("edad");
+                                var nac = document.getElementById("fechaNac").value;
+                                var edad = document.getElementById("edad");
 
-                                                        var today = new Date();
-                                                        var curr_date = today.getDate();
-                                                        var curr_month = today.getMonth() + 1;
-                                                        var curr_year = today.getFullYear();
+                                var today = new Date();
+                                var curr_date = today.getDate();
+                                var curr_month = today.getMonth() + 1;
+                                var curr_year = today.getFullYear();
 
-                                                        var pieces = nac.split('/');
-                                                        var birth_date = pieces[0];
-                                                        var birth_month = pieces[1];
-                                                        var birth_year = pieces[2];
-
-
-                                                        if (curr_year != birth_year && birth_month > curr_month)
-                                                            edad.value = curr_year - birth_year - 1;
-                                                        if (curr_year != birth_year && birth_month == curr_month)
-                                                            edad.value = curr_year - birth_year;
-                                                        if (curr_year != birth_year && birth_month < curr_month)
-                                                            edad.value = curr_year - birth_year;
-                                                        if (curr_year == birth_year)
-                                                            edad.value = 0;
+                                var pieces = nac.split('/');
+                                var birth_date = pieces[0];
+                                var birth_month = pieces[1];
+                                var birth_year = pieces[2];
 
 
-                                                    });
+                                if (curr_year != birth_year && birth_month > curr_month)
+                                    edad.value = curr_year - birth_year - 1;
+                                if (curr_year != birth_year && birth_month == curr_month)
+                                    edad.value = curr_year - birth_year;
+                                if (curr_year != birth_year && birth_month < curr_month)
+                                    edad.value = curr_year - birth_year;
+                                if (curr_year == birth_year)
+                                    edad.value = 0;
+
+
+                            });
 
 
             </script>
@@ -571,43 +572,43 @@
                         edad.value = curr_year - birth_year;
                     if (curr_year == birth_year)
                         edad.value = 0;
-/*
-                    var indep = document.getElementById('trabIndep');
-                    var ocupInd = document.getElementById('ocupacionInd');
-                    var ingInd = document.getElementById('ingresoInd');
-
-                    var ocupDep = document.getElementById('ocupacionDep');
-                    var centTra = document.getElementById('centroTrabajo');
-                    var direcTrab = document.getElementById('direccionTrabajo');
-                    var telfTrab = document.getElementById('telefonoTrabajo');
-                    var ingDep = document.getElementById('ingresoDep');
-                    var dep = document.getElementById('trabDep');
-
-                    if (document.getElementById('trabDep').checked) {
-                        indep.checked = false;
-                        ocupInd.disabled = true;
-                        ingInd.disabled = true;
-                        ocupDep.disabled = false;
-                        centTra.disabled = false;
-                        direcTrab.disabled = false;
-                        telfTrab.disabled = false;
-                        ingDep.disabled = false;
-                    }
-
-                    if (document.getElementById('trabIndep').checked) {
-                        dep.checked = false;
-                        ocupInd.disabled = false;
-                        ingInd.disabled = false;
-
-                        ocupDep.disabled = true;
-                        centTra.disabled = true;
-                        direcTrab.disabled = true;
-                        telfTrab.disabled = true;
-                        ingDep.disabled = true;
-
-
-                    }
-                    */
+                    /*
+                     var indep = document.getElementById('trabIndep');
+                     var ocupInd = document.getElementById('ocupacionInd');
+                     var ingInd = document.getElementById('ingresoInd');
+                     
+                     var ocupDep = document.getElementById('ocupacionDep');
+                     var centTra = document.getElementById('centroTrabajo');
+                     var direcTrab = document.getElementById('direccionTrabajo');
+                     var telfTrab = document.getElementById('telefonoTrabajo');
+                     var ingDep = document.getElementById('ingresoDep');
+                     var dep = document.getElementById('trabDep');
+                     
+                     if (document.getElementById('trabDep').checked) {
+                     indep.checked = false;
+                     ocupInd.disabled = true;
+                     ingInd.disabled = true;
+                     ocupDep.disabled = false;
+                     centTra.disabled = false;
+                     direcTrab.disabled = false;
+                     telfTrab.disabled = false;
+                     ingDep.disabled = false;
+                     }
+                     
+                     if (document.getElementById('trabIndep').checked) {
+                     dep.checked = false;
+                     ocupInd.disabled = false;
+                     ingInd.disabled = false;
+                     
+                     ocupDep.disabled = true;
+                     centTra.disabled = true;
+                     direcTrab.disabled = true;
+                     telfTrab.disabled = true;
+                     ingDep.disabled = true;
+                     
+                     
+                     }
+                     */
                 }
 
             </script>

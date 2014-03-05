@@ -76,43 +76,45 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                        <form role="form" action="${pageContext.servletContext.contextPath}/DetallesFamInt?idExpediente=${idExpediente}" method="post">   
+                            <p align="right"><button  id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        </form>                                                
                         <br>
-                        <h1 align="center"><strong>Datos de la familia internacional</strong></h1>                         
+                        <h1 align="center"><strong>Datos de la familia internacional </strong></h1>                         
                         <br>
                         <ul class="nav nav-tabs row"  >
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/laSolicitanteInt" >La Solicitante</a></li>
-                            <li ><a href="${pageContext.servletContext.contextPath}/elSolicitanteInt" >El solicitante</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/laSolicitanteInt?idExpediente=${idExpediente}" >La Solicitante</a></li>
+                            <li ><a href="${pageContext.servletContext.contextPath}/elSolicitanteInt?idExpediente=${idExpediente}" >El solicitante</a></li>
                             <!-- <li><a href="#" data-toggle="tab">Composición familiar</a></li> -->
                             <!-- <li><a href="#" data-toggle="tab">Vivienda</a></li> -->
                             <!--<li><a href="#" data-toggle="tab">Proceso de adopción</a></li> -->
-                            <li><a href="${pageContext.servletContext.contextPath}/antNnaInt" >Antecedentes del niño, niña o adolescente</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/antNnaInt?idExpediente=${idExpediente}" >Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
 
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptanteInt" method="post" name="formulario" onsubmit="return(validar());"> 
@@ -278,35 +280,35 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
-                                                    $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
-                                                    $('#fechaNac').on('changeDate', function(ev) {
+                            $('#fechaNac').on('changeDate', function(ev) {
 
-                                                        var nac = document.getElementById("fechaNac").value;
-                                                        var edad = document.getElementById("edad");
+                                var nac = document.getElementById("fechaNac").value;
+                                var edad = document.getElementById("edad");
 
-                                                        var today = new Date();
-                                                        var curr_date = today.getDate();
-                                                        var curr_month = today.getMonth() + 1;
-                                                        var curr_year = today.getFullYear();
+                                var today = new Date();
+                                var curr_date = today.getDate();
+                                var curr_month = today.getMonth() + 1;
+                                var curr_year = today.getFullYear();
 
-                                                        var pieces = nac.split('/');
-                                                        var birth_date = pieces[0];
-                                                        var birth_month = pieces[1];
-                                                        var birth_year = pieces[2];
-
-
-                                                        if (curr_year != birth_year && birth_month > curr_month)
-                                                            edad.value = curr_year - birth_year - 1;
-                                                        if (curr_year != birth_year && birth_month == curr_month)
-                                                            edad.value = curr_year - birth_year;
-                                                        if (curr_year != birth_year && birth_month < curr_month)
-                                                            edad.value = curr_year - birth_year;
-                                                        if (curr_year == birth_year)
-                                                            edad.value = 0;
+                                var pieces = nac.split('/');
+                                var birth_date = pieces[0];
+                                var birth_month = pieces[1];
+                                var birth_year = pieces[2];
 
 
-                                                    });
+                                if (curr_year != birth_year && birth_month > curr_month)
+                                    edad.value = curr_year - birth_year - 1;
+                                if (curr_year != birth_year && birth_month == curr_month)
+                                    edad.value = curr_year - birth_year;
+                                if (curr_year != birth_year && birth_month < curr_month)
+                                    edad.value = curr_year - birth_year;
+                                if (curr_year == birth_year)
+                                    edad.value = 0;
+
+
+                            });
 
 
             </script>
@@ -456,39 +458,39 @@
                 }
             </script>  
             <script type="text/javascript">
-            function validar()
-            {
-            var numericExpression = /^[0-9]+$/;
-            if(document.getElementById('trabIndep').checked){
-            if(document.formulario.ingresoInd.value.match(numericExpression))
-            {
-             return true
-            }else{
-                
-                alert( "El campo debe contener solo números" );
-                document.formulario.ingresoInd.focus() ;
-                return false;
-            }
-            }
-            if(document.getElementById('trabDep').checked){
-            if( document.formulario.ingresoDep.value.match(numericExpression))
-            {
-             return true
-            }else{
-                
-                alert( "El campo debe contener solo números" );
-                document.formulario.ingresoDep.focus() ;
-                return false;
-            }
-            }
-            if(!document.getElementById('trabDep').checked || !document.getElementById('trabIndep').checked){
-                alert( "Debe elegir al menos un tipo de trabajo" );
-                document.formulario.trabDep.focus() ;
-                return false;
-                
-            }
-            
-            }
-          </script>
+                function validar()
+                {
+                    var numericExpression = /^[0-9]+$/;
+                    if (document.getElementById('trabIndep').checked) {
+                        if (document.formulario.ingresoInd.value.match(numericExpression))
+                        {
+                            return true
+                        } else {
+
+                            alert("El campo debe contener solo números");
+                            document.formulario.ingresoInd.focus();
+                            return false;
+                        }
+                    }
+                    if (document.getElementById('trabDep').checked) {
+                        if (document.formulario.ingresoDep.value.match(numericExpression))
+                        {
+                            return true
+                        } else {
+
+                            alert("El campo debe contener solo números");
+                            document.formulario.ingresoDep.focus();
+                            return false;
+                        }
+                    }
+                    if (!document.getElementById('trabDep').checked || !document.getElementById('trabIndep').checked) {
+                        alert("Debe elegir al menos un tipo de trabajo");
+                        document.formulario.trabDep.focus();
+                        return false;
+
+                    }
+
+                }
+            </script>
     </body>
 </html>

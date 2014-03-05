@@ -77,7 +77,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -102,6 +102,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -156,18 +157,18 @@
                                             </select>
                                         </div>    
                                     </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Resultado</label>
-                                    <div class="controls">
-                                        <select id="resultado" name="resultado" > 
-                                            <option value="favorable" ${psicologica.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
-                                            <option value="desfavorable" ${psicologica.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
-                                            <option value="evaluacion" ${psicologica.getResultado() == 'evaluacion' ? 'selected' : ''}>En evaluación</option>
-                                        </select>
-                                    </div>  
-                                </div>
-                                <br>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Resultado</label>
+                                        <div class="controls">
+                                            <select id="resultado" name="resultado" > 
+                                                <option value="favorable" ${psicologica.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
+                                                <option value="desfavorable" ${psicologica.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
+                                                <option value="evaluacion" ${psicologica.getResultado() == 'evaluacion' ? 'selected' : ''}>En evaluación</option>
+                                            </select>
+                                        </div>  
+                                    </div>
+                                    <br>
                                     <div class="control-group">
                                         <label class="control-label">Número de informe</label>
                                         <div class="controls">

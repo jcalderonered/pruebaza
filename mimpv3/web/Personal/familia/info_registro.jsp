@@ -111,16 +111,16 @@
                             <br>
                             <br>
                             <ul class="nav nav-tabs row">
-                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante">La Solicitante</a></li>
-                                <li><a href="${pageContext.servletContext.contextPath}/elSolicitante" >El solicitante</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/laSolicitante?volver=${volver}">La Solicitante</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/elSolicitante?volver=${volver}" >El solicitante</a></li>
                                 <!--<li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/compFamiliar" >Composición familiar</a></li>-->
                                 <!--<li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/vivienda" >Vivienda</a></li>-->
-                                <li ${estado == 'formativa' ? 'class="hidden"' : 'class="active"'} ><a href="${pageContext.servletContext.contextPath}/infoExpediente" >Información del Expediente</a></li>
-                                <li ><a href="${pageContext.servletContext.contextPath}/procesoAdopcion" >Proceso de adopción</a></li>
-                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna" >Antecedentes del NNA</a></li>
-                                <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' || estado == 'designacion' || estado == 'adopcion' || estado == 'reevaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado" >NNA Adoptado</a></li>
-                                <li ><a href="${pageContext.servletContext.contextPath}/atenciones" >Atenciones</a></li>
-                                <li><a href="${pageContext.servletContext.contextPath}/EditUserPass" >Editar Perfil de Familia</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : 'class="active"'} ><a href="${pageContext.servletContext.contextPath}/infoExpediente?volver=${volver}" >Información del Expediente</a></li>
+                                <li ><a href="${pageContext.servletContext.contextPath}/procesoAdopcion?volver=${volver}" >Proceso de adopción</a></li>
+                                <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna?volver=${volver}" >Antecedentes del NNA</a></li>
+                                <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' || estado == 'designacion' || estado == 'adopcion' || estado == 'reevaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado?volver=${volver}" >NNA Adoptado</a></li>
+                                <li ><a href="${pageContext.servletContext.contextPath}/atenciones?volver=${volver}" >Atenciones</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/EditUserPass?volver=${volver}" >Editar Perfil de Familia</a></li>
                             </ul>
                             <br>
                             <h3><strong>Información de la Ficha de Inscripción de Solicitantes de Adopción</strong></h3>

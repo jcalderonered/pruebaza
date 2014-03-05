@@ -100,17 +100,19 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                        <form role="form" action="${pageContext.servletContext.contextPath}/DetallesFamInt?idExpediente=${idExpediente}" method="post">   
+                            <p align="right"><button  id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        </form>   
                         <br>
                         <h1 align="center"><strong>Datos de la familia internacional</strong></h1>
                         <br>                      
                         <ul class="nav nav-tabs row" >
-                            <li><a href="${pageContext.servletContext.contextPath}/laSolicitanteInt" >La Solicitante</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/elSolicitanteInt" >El solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/laSolicitanteInt?idExpediente=${idExpediente}" >La Solicitante</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/elSolicitanteInt?idExpediente=${idExpediente}" >El solicitante</a></li>
                             <!-- <li><a href="#" data-toggle="tab">Composición familiar</a></li> -->
                             <!-- <li><a href="#" data-toggle="tab">Vivienda</a></li> -->
                             <!--<li><a href="#" data-toggle="tab">Proceso de adopción</a></li> -->
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/antNnaInt" >Antecedentes del niño, niña o adolescente</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/antNnaInt?idExpediente=${idExpediente}" >Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
 
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarInfoFamiliaInt" method="post" name="formulario" onsubmit="return(validar());"> 
