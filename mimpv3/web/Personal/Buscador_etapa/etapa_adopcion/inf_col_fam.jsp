@@ -174,6 +174,20 @@
                                         </div>
                                         <br>
                                         <div class="control-group">
+                                            <label class="control-label">Personas intervenidas</label>
+                                            <div class="controls">
+                                                <textarea ${informe != null ? 'disabled' : ''} id="persInt" name="persInt" type="text" cols="25" rows="5">${informe.getPersInt()}</textarea>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                          <label class="control-label">Número de personas intervenidas</label>
+                                            <div class="controls">
+                                              <input ${informe != null ? 'disabled' : ''} id="numPers" name="numPers" type="text" class="input-xlarge" value="${informe.getNumPersInt()}" >
+                                           </div>
+                                        </div>
+                                        <br> 
+                                        <div class="control-group">
                                             <div class="controls">
                                                 <label class="control-label">Comentarios</label>
                                                 <textarea ${informe != null ? 'disabled' : ''} id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${informe.getObservacion()}</textarea>
@@ -225,7 +239,13 @@
      
             function validar()
             {
-              
+            var numericExpression = /^[0-9]+$/;
+            if(!document.formulario.numPers.value.match(numericExpression))
+            {
+            alert( "Debe ingresar un número" );
+             document.formulario.numPers.focus() ;
+            return false;
+            }  
             if( document.formulario.numEval.value == "" )
             {
             alert( "Debe ingresar un número de informe" );

@@ -1701,7 +1701,10 @@ public class mainEtapas {
             @RequestParam("resultado") String resultado,
             @RequestParam("fechaEval") String fechaEval,
             @RequestParam("numEval") String numEval,
-            @RequestParam("obs") String obs
+            @RequestParam("obs") String obs,
+            @RequestParam("persInt") String persInt,
+            @RequestParam("numPers") long numPers
+            
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1743,8 +1746,14 @@ public class mainEtapas {
          }*/
         tempEval.setNumEval(numEval);
         tempEval.setObservacion(obs);
-
-        servicioEtapa.crearEvaluacion(tempEval);
+        tempEval.setPersInt(persInt);
+        if (numPers != 0){
+            tempEval.setNumPersInt(numPers);
+        }else {
+            long temp = 0;
+            tempEval.setNumPersInt(temp);  
+        }
+        servicioEtapa.crearEvaluacionAdopcion(tempEval);
 
         map.put("listaAdopciones", servicioEtapa.getListaAdopciones());
         return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/etapa_adopcion", map);
@@ -1937,7 +1946,9 @@ public class mainEtapas {
             @RequestParam("resultado") String resultado,
             @RequestParam("fechaEval") String fechaEval,
             @RequestParam("numEval") String numEval,
-            @RequestParam("obs") String obs
+            @RequestParam("obs") String obs,
+            @RequestParam("persInt") String persInt,
+            @RequestParam("numPers") long numPers
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1979,8 +1990,14 @@ public class mainEtapas {
          }*/
         tempEval.setNumEval(numEval);
         tempEval.setObservacion(obs);
-
-        servicioEtapa.crearEvaluacion(tempEval);
+        tempEval.setPersInt(persInt);
+        if (numPers != 0){
+            tempEval.setNumPersInt(numPers);
+        }else {
+            long temp = 0;
+            tempEval.setNumPersInt(temp);  
+        }
+        servicioEtapa.crearEvaluacionAdopcion(tempEval);
 
         map.put("listaAdopciones", servicioEtapa.getListaAdopciones());
         return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/etapa_adopcion", map);
