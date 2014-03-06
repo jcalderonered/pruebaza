@@ -346,7 +346,7 @@
                                     </table>
                                 </div>
                                 <br>
-                                <h3><strong>Designaciones</strong></h3>
+                                <h3><strong>Propuestas de designación</strong></h3>
                                 <br>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped">
