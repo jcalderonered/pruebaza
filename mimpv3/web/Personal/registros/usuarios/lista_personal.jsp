@@ -22,13 +22,98 @@
 
 <html>
     <head>
+        <style type="text/css">  
+            .pg-normal {  
+                color: #000000;  
+                font-weight: normal;  
+                text-decoration: none;  
+                cursor: pointer;  
+            }  
+
+            .pg-selected {  
+                color: #800080;  
+                font-weight: bold;  
+                text-decoration: underline;  
+                cursor: pointer;  
+            }  
+        </style>  
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Sistema de Adopciones</title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
     </head>
+       <script type="text/javascript">
+        function Pager(tableName, itemsPerPage) {
+            this.tableName = tableName;
+            this.itemsPerPage = itemsPerPage;
+            this.currentPage = 1;
+            this.pages = 0;
+            this.inited = false;
 
+            this.showRecords = function(from, to) {
+                var rows = document.getElementById(tableName).rows;
+                // i starts from 1 to skip table header row  
+                for (var i = 1; i < rows.length; i++) {
+                    if (i < from || i > to)
+                        rows[i].style.display = 'none';
+                    else
+                        rows[i].style.display = '';
+                }
+            }
+
+            this.showPage = function(pageNumber) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+
+                var oldPageAnchor = document.getElementById('pg' + this.currentPage);
+                oldPageAnchor.className = 'pg-normal';
+
+                this.currentPage = pageNumber;
+                var newPageAnchor = document.getElementById('pg' + this.currentPage);
+                newPageAnchor.className = 'pg-selected';
+
+                var from = (pageNumber - 1) * itemsPerPage + 1;
+                var to = from + itemsPerPage - 1;
+                this.showRecords(from, to);
+            }
+
+            this.prev = function() {
+                if (this.currentPage > 1)
+                    this.showPage(this.currentPage - 1);
+            }
+
+            this.next = function() {
+                if (this.currentPage < this.pages) {
+                    this.showPage(this.currentPage + 1);
+                }
+            }
+
+            this.init = function() {
+                var rows = document.getElementById(tableName).rows;
+                var records = (rows.length - 1);
+                this.pages = Math.ceil(records / itemsPerPage);
+                this.inited = true;
+            }
+
+            this.showPageNav = function(pagerName, positionId) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+                var element = document.getElementById(positionId);
+
+                var pagerHtml = '<span onclick="' + pagerName + '.prev();" class="pg-normal"> « Ant </span> | ';
+                for (var page = 1; page <= this.pages; page++)
+                    pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName + '.showPage(' + page + ');">' + page + '</span> | ';
+                pagerHtml += '<span onclick="' + pagerName + '.next();" class="pg-normal"> Sig »</span>';
+
+                element.innerHTML = pagerHtml;
+            }
+        }
+    </script>  
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -146,6 +231,15 @@
                                 </tbody>
                             </table>
                         </div>
+                        <br>        
+                        <div class="col-md-offset-4" id="pageNavPosition"></div>  
+
+                        <script type="text/javascript"> 
+                                var pager = new Pager('mi_tabla', 8);
+                            pager.init();
+                            pager.showPageNav('pager', 'pageNavPosition');
+                            pager.showPage(1);
+                        </script>  
                         <br>
                         <div class="control-group">
                             <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/irEditarPersonal'" class="btn btn-default">Registrar Personal</button> 
