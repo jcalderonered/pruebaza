@@ -77,7 +77,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -107,8 +107,10 @@
                         <br>
                         <h1 align="center"><strong>Registro Nacional de Adoptantes para la Adopción en el Extranjero</strong></h1>
                         <br>
+                        <p align="right">Filtrar: <input id="filtrar" type="text" /></p>
+                        <br>
                         <div class="bs-example">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id="mi_tabla">
                                 <thead>
                                     <tr>
                                         <th>Expediente</th>
@@ -186,7 +188,68 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+        </script>
+        <script type="text/javascript">
+
+            function tablefilter(table_selector, input_selector, search_level, colspan) {
+
+                var table = $(table_selector);
+                if (table.length == 0)
+                    return;
+
+                var input = $(input_selector);
+                if (input.length == 0)
+                    return;
+
+                if (search_level == "undefined" || search_level < 1)
+                    search_level = 3;
+
+                if (colspan == "undefined" || colspan < 0)
+                    colspan = 2;
+
+                $(input).val("Buscar…");
+
+                $(input).focus(function() {
+                    if ($(this).val() == "Buscar…") {
+                        $(this).val("");
+                    }
+                    $(this).select();
+                });
+
+                $(input).blur(function() {
+                    if ($(this).val() == "") {
+                        $(this).val("Buscar…");
+                    }
+                });
+
+                $(input).keyup(function() {
+                    if ($(this).val().length >= search_level) {
+                        // Ocultamos las filas que no contienen el contenido del edit.
+                        $(table).find("tbody tr").not(":contains(\"" + $(this).val() + "\")").hide();
+
+                        // Si no hay resultados, lo indicamos.
+                        if ($(table).find("tbody tr:visible").length == 0) {
+                            $(table).find("tbody:first").append('<tr id="noresults" class="aligncenter"><td colspan="' + colspan + '">Lo siento pero no hay resultados para la búsqueda indicada.</td></tr>');
+                        }
+                    } else {
+                        // Borramos la fila de que no hay resultados.
+                        $(table).find("tbody tr#noresults").remove();
+
+                        // Mostramos todas las filas.
+                        $(table).find("tbody tr").show();
+                    }
+                });
+            }
+
+            jQuery.expr[':'].contains = function(a, i, m) {
+                return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+            };
+
+            $(document).ready(function() {
+                tablefilter("table#mi_tabla", "input#filtrar", 2, 2);
+            });
 
         </script>
         <!-- Placed at the end of the document so the pages load faster -->        

@@ -109,6 +109,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
                         </ul>
                         <br>
+                        <br>
                         <p align="right">Filtrar: <input id="filtrar" type="text" /></p>
                         <br>
                         <h1 align="center"><strong>Lista de NNA's</strong></h1>

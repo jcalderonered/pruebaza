@@ -116,8 +116,10 @@
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <br>
+                        <p align="right">Filtrar: <input id="filtrar" type="text" /></p>
+                        <br>
                         <div class="bs-example">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id="mi_tabla">
                                 <thead>
                                     <tr>
                                         <th>Expediente</th>
@@ -217,6 +219,67 @@
         <script type="text/javascript">
 
                             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+        </script>
+        <script type="text/javascript">
+
+            function tablefilter(table_selector, input_selector, search_level, colspan) {
+
+                var table = $(table_selector);
+                if (table.length == 0)
+                    return;
+
+                var input = $(input_selector);
+                if (input.length == 0)
+                    return;
+
+                if (search_level == "undefined" || search_level < 1)
+                    search_level = 3;
+
+                if (colspan == "undefined" || colspan < 0)
+                    colspan = 2;
+
+                $(input).val("Buscar…");
+
+                $(input).focus(function() {
+                    if ($(this).val() == "Buscar…") {
+                        $(this).val("");
+                    }
+                    $(this).select();
+                });
+
+                $(input).blur(function() {
+                    if ($(this).val() == "") {
+                        $(this).val("Buscar…");
+                    }
+                });
+
+                $(input).keyup(function() {
+                    if ($(this).val().length >= search_level) {
+                        // Ocultamos las filas que no contienen el contenido del edit.
+                        $(table).find("tbody tr").not(":contains(\"" + $(this).val() + "\")").hide();
+
+                        // Si no hay resultados, lo indicamos.
+                        if ($(table).find("tbody tr:visible").length == 0) {
+                            $(table).find("tbody:first").append('<tr id="noresults" class="aligncenter"><td colspan="' + colspan + '">Lo siento pero no hay resultados para la búsqueda indicada.</td></tr>');
+                        }
+                    } else {
+                        // Borramos la fila de que no hay resultados.
+                        $(table).find("tbody tr#noresults").remove();
+
+                        // Mostramos todas las filas.
+                        $(table).find("tbody tr").show();
+                    }
+                });
+            }
+
+            jQuery.expr[':'].contains = function(a, i, m) {
+                return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+            };
+
+            $(document).ready(function() {
+                tablefilter("table#mi_tabla", "input#filtrar", 2, 2);
+            });
 
         </script>
         <!-- Placed at the end of the document so the pages load faster -->        
