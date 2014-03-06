@@ -581,6 +581,12 @@ public class HiberNna {
                                         for (ExpedienteNna exp2 : listExp2) {
                                             String codant = exp1.getCodigoReferencia();
                                             String codpost = exp2.getCodigoReferencia();
+                                            if (codant == null){
+                                                codant = "";
+                                            }
+                                            if (codpost == null){
+                                                codpost = "";
+                                            }
                                             if (codant.compareToIgnoreCase(codpost) > 0) {
                                                 auxnna2 = allNnaFinal.get(i);
                                                 allNnaFinal.set(i, allNnaFinal.get(j + 1));
