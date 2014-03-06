@@ -538,7 +538,7 @@ public class HiberMain {
 
         session.beginTransaction();
 
-        String hql = "FROM Taller T";
+        String hql = "FROM Taller T order by T.idtaller ASC";
         Query query = session.createQuery(hql);
         List talleres = query.list();
         ArrayList<Taller> allTalleres = new ArrayList();
@@ -568,7 +568,7 @@ public class HiberMain {
         Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-        String hql = "From Sesion S";
+        String hql = "From Sesion S order by S.fecha ASC";
         Query query = session.createQuery(hql);
         List sesiones = query.list();
         ArrayList<Sesion> allSesiones = new ArrayList();
