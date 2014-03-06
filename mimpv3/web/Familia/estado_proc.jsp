@@ -148,7 +148,7 @@
                                     </c:otherwise>
                                 </c:choose>
                                 -->
-                                <button onclick="location.href = 'http://www.mimp.gob.pe/files/direcciones/dga/FichaInscripcion_Para_Solicitantes_Adopcion.pdf'" id="singlebutton" name="singlebutton" class="btn btn-default">Descargar ficha</button> 
+                                <button onclick="window.open('http://www.mimp.gob.pe/files/direcciones/dga/FichaInscripcion_Para_Solicitantes_Adopcion.pdf')" id="singlebutton" name="singlebutton" class="btn btn-default">Descargar ficha</button> 
                             </div> 
                         </div>  
                         <br>
