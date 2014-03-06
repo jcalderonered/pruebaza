@@ -76,14 +76,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -91,14 +91,14 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -115,232 +115,234 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>    
-                                <br>
-                                <div class="bs-example">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>El asistente</th>
-                                                <th>Edad</th>
-                                                <th>La asistente</th>
-                                                <th>Edad</th>
-                                                <th>Correo</th>
-                                                <th>Información</th>
-                                                <th>¿Culminó taller?</th>
-                                                <th>Número de Constancia</th>
-                                                <th>Generar Expediente</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                   <c:if test="${!listaFamilias.isEmpty()}">
+                        <br>
+                        <p align="right">Filtrar: <input id="filtrar" type="text" /></p>
+                        <br>
+                        <div class="bs-example">
+                            <table class="table table-bordered" id="mi_tabla">
+                                <thead>
+                                    <tr>
+                                        <th>El asistente</th>
+                                        <th>Edad</th>
+                                        <th>La asistente</th>
+                                        <th>Edad</th>
+                                        <th>Correo</th>
+                                        <th>Información</th>
+                                        <th>¿Culminó taller?</th>
+                                        <th>Número de Constancia</th>
+                                        <th>Generar Expediente</th>
+
+                                    </tr>
+                                </thead>
+                                <c:if test="${!listaFamilias.isEmpty()}">
                                     <tbody>
-                                      <c:forEach var="familia" items="${listaFamilias}" varStatus="status"> 
-                                       <c:if test="${!familia.getFormularioSesions().isEmpty()}">
-                                        <c:forEach var="formulario" items="${familia.getFormularioSesions()}" varStatus="status">
-                                            <tr>
-                                                <c:choose>
-                                                    <c:when test="${formulario.getAsistentes().size() == 2}">     
-                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
-                                                            <c:choose>
-                                                                <c:when test="${asistente.getSexo() == 109}">
-                                                                    <c:set var="el" value="${asistente}" scope="page" />
-                                                                    
-                                                                </c:when>
-                                                                <c:when test="${asistente.getSexo() == 102}">
-                                                                    <c:set var="ella" value="${asistente}" scope="page" />
-                                                                </c:when> 
-                                                            </c:choose>
-                                                        </c:forEach>
-                                                                    
-                                                                    <td>
+                                        <c:forEach var="familia" items="${listaFamilias}" varStatus="status"> 
+                                            <c:if test="${!familia.getFormularioSesions().isEmpty()}">
+                                                <c:forEach var="formulario" items="${familia.getFormularioSesions()}" varStatus="status">
+                                                    <tr>
+                                                        <c:choose>
+                                                            <c:when test="${formulario.getAsistentes().size() == 2}">     
+                                                                <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                                    <c:choose>
+                                                                        <c:when test="${asistente.getSexo() == 109}">
+                                                                            <c:set var="el" value="${asistente}" scope="page" />
+
+                                                                        </c:when>
+                                                                        <c:when test="${asistente.getSexo() == 102}">
+                                                                            <c:set var="ella" value="${asistente}" scope="page" />
+                                                                        </c:when> 
+                                                                    </c:choose>
+                                                                </c:forEach>
+
+                                                                <td>
                                                                     ${el.getNombre()}
                                                                     ${el.getApellidoP()}
                                                                     ${el.getApellidoM()}
-                                                                    </td>
-                                                                    <td>${el.getEdad()}</td>
-                                                                    <td>
-                                                                        ${ella.getNombre()}
-                                                                        ${ella.getApellidoP()}
-                                                                        ${ella.getApellidoM()}
-                                                                    </td>
-                                                                    <td>${ella.getEdad()}</td>
+                                                                </td>
+                                                                <td>${el.getEdad()}</td>
+                                                                <td>
+                                                                    ${ella.getNombre()}
+                                                                    ${ella.getApellidoP()}
+                                                                    ${ella.getApellidoM()}
+                                                                </td>
+                                                                <td>${ella.getEdad()}</td>
 
-                                                                    <td>${ella.getCorreo()}</td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
-                                                                            <input hidden name="estado" id="estado" value="formativa">
-                                                                            <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}">
-                                                                            <input hidden name="volver" id="volver" value="${volver}">
-                                                                            <button type="submit" class="btn btn-default">Ver</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <c:set var="flag" value="0" scope="page" />
-                                                                        <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
-                                                                            <c:choose>
-                                                                                <c:when test="${AFR.getAsistencia() != 65 && AFR.getInasJus() == 1}">
-                                                                                    <c:set var="flag" value="1" scope="page" />
-                                                                                </c:when>
-                                                                            </c:choose>
-                                                                        </c:forEach>
+                                                                <td>${ella.getCorreo()}</td>
+                                                                <td>
+                                                                    <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                                        <input hidden name="estado" id="estado" value="formativa">
+                                                                        <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}">
+                                                                        <input hidden name="volver" id="volver" value="${volver}">
+                                                                        <button type="submit" class="btn btn-default">Ver</button>
+                                                                    </form>
+                                                                </td>
+                                                                <td>
+                                                                    <c:set var="flag" value="0" scope="page" />
+                                                                    <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
                                                                         <c:choose>
+                                                                            <c:when test="${AFR.getAsistencia() != 65 && AFR.getInasJus() == 1}">
+                                                                                <c:set var="flag" value="1" scope="page" />
+                                                                            </c:when>
+                                                                        </c:choose>
+                                                                    </c:forEach>
+                                                                    <c:choose>
                                                                         <c:when test="${flag == '0' && !familia.getAsistenciaFRs().isEmpty()}">
-                                                                                    SI
+                                                                            SI
                                                                         </c:when>
                                                                         <c:otherwise>
-                                                                                   NO
+                                                                            NO
                                                                         </c:otherwise>
-                                                                        </c:choose>    
-                                                                    </td>
-                                                                       
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
+                                                                    </c:choose>    
+                                                                </td>
+
+                                                                <td>
+                                                                    <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
                                                                         <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
                                                                         <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
                                                                         <br>
                                                                         <br>
                                                                         <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
+                                                                    </form>
+                                                                </td>
+                                                                <td>
+                                                                    <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
                                                                         <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >     
                                                                         <input hidden name="el" id="el" value="${el.getApellidoP()}"  >   
                                                                         <input hidden name="ella" id="ella" value="${ella.getApellidoP()}"  >   
                                                                         <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
                                                                         ${!familia.getExpedienteFamilias().isEmpty() ? 'La familia ha pasado al módulo de evaluación' : ''}
-                                                                        </form>
-                                                                    </td>
-                                                                    
-                                                    </c:when>
-                                                    <c:when test="${formulario.getAsistentes().size() == 1}">
-                                                        <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
-                                                            <c:choose>
-                                                                <c:when test="${asistente.getSexo() == 109}">
-                                                                    <td>
-                                                                    ${asistente.getNombre()}
-                                                                    ${asistente.getApellidoP()}
-                                                                    ${asistente.getApellidoM()}
-                                                                    </td>
-                                                                    <td>${asistente.getEdad()}</td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td>${asistente.getCorreo()}</td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
-                                                                            <input hidden name="estado" id="estado" value="formativa">
-                                                                            <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}">
-                                                                            <input hidden name="volver" id="volver" value="${volver}">
-                                                                            <button type="submit" class="btn btn-default">Ver</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <c:set var="flag" value="0" scope="page" />
-                                                                        <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
-                                                                            <c:choose>
-                                                                                <c:when test="${AFR.getAsistencia() != 65 && AFR.getInasJus() == 1}">
-                                                                                    <c:set var="flag" value="1" scope="page" />
-                                                                                </c:when>
-                                                                            </c:choose>
-                                                                        </c:forEach>
-                                                                        <c:choose>
-                                                                        <c:when test="${flag == 0 && !familia.getAsistenciaFRs().isEmpty()}">
-                                                                                    SI
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                                   NO
-                                                                        </c:otherwise>
-                                                                        </c:choose>    
-                                                                    </td>
-                                                                 
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
-                                                                        <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
-                                                                        <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
-                                                                        <br>
-                                                                        <br>
-                                                                        <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
-                                                                        <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >   
-                                                                        <input hidden name="el" id="el" value="${asistente.getApellidoP()}"  >  
-                                                                        <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
-                                                                        ${!familia.getExpedienteFamilias().isEmpty() ? 'La familia ha pasado al módulo de evaluación' : ''}
-                                                                        </form>
-                                                                    </td>
-                                                                </c:when>
-                                                                <c:when test="${asistente.getSexo() == 102}">
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td>
-                                                                        ${asistente.getNombre()}
-                                                                        ${asistente.getApellidoP()}
-                                                                        ${asistente.getApellidoM()}
-                                                                    </td>
-                                                                    <td>${asistente.getEdad()}</td>
+                                                                    </form>
+                                                                </td>
 
-                                                                    <td>${asistente.getCorreo()}</td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
-                                                                            <input hidden name="estado" id="estado" value="formativa">
-                                                                            <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}">
-                                                                            <input hidden name="volver" id="volver" value="${volver}">
-                                                                            <button type="submit" class="btn btn-default">Ver</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <c:set var="flag" value="0" scope="page"/>
-                                                                        <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
-                                                                            <c:choose>
-                                                                                <c:when test="${AFR.getAsistencia() != 65 && AFR.getInasJus() == 1}">
-                                                                                    <c:set var="flag" value="1" scope="page" />
-                                                                                </c:when>
-                                                                            </c:choose>
-                                                                        </c:forEach>
-                                                                        <c:choose>
-                                                                        <c:when test="${flag == 0 && !familia.getAsistenciaFRs().isEmpty()}">
-                                                                                    SI
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                                   NO
-                                                                        </c:otherwise>
-                                                                        </c:choose>    
-                                                                    </td>
-                                                                     
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
-                                                                        <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
-                                                                        <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
-                                                                        <br>
-                                                                        <br>
-                                                                        <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
-                                                                        <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >  
-                                                                        <input hidden name="ella" id="ella" value="${asistente.getApellidoP()}"  >  
-                                                                        <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
-                                                                        ${!familia.getExpedienteFamilias().isEmpty() ? 'La familia ha pasado al módulo de evaluación' : ''}
-                                                                        </form>
-                                                                    </td>
-                                                                </c:when>    
+                                                            </c:when>
+                                                            <c:when test="${formulario.getAsistentes().size() == 1}">
+                                                                <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
+                                                                    <c:choose>
+                                                                        <c:when test="${asistente.getSexo() == 109}">
+                                                                            <td>
+                                                                                ${asistente.getNombre()}
+                                                                                ${asistente.getApellidoP()}
+                                                                                ${asistente.getApellidoM()}
+                                                                            </td>
+                                                                            <td>${asistente.getEdad()}</td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td>${asistente.getCorreo()}</td>
+                                                                            <td>
+                                                                                <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                                                    <input hidden name="estado" id="estado" value="formativa">
+                                                                                    <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}">
+                                                                                    <input hidden name="volver" id="volver" value="${volver}">
+                                                                                    <button type="submit" class="btn btn-default">Ver</button>
+                                                                                </form>
+                                                                            </td>
+                                                                            <td>
+                                                                                <c:set var="flag" value="0" scope="page" />
+                                                                                <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
+                                                                                    <c:choose>
+                                                                                        <c:when test="${AFR.getAsistencia() != 65 && AFR.getInasJus() == 1}">
+                                                                                            <c:set var="flag" value="1" scope="page" />
+                                                                                        </c:when>
+                                                                                    </c:choose>
+                                                                                </c:forEach>
+                                                                                <c:choose>
+                                                                                    <c:when test="${flag == 0 && !familia.getAsistenciaFRs().isEmpty()}">
+                                                                                        SI
+                                                                                    </c:when>
+                                                                                    <c:otherwise>
+                                                                                        NO
+                                                                                    </c:otherwise>
+                                                                                </c:choose>    
+                                                                            </td>
 
-                                                            </c:choose>
-                                                        </c:forEach>
-                                                    </c:when>    
-                                                    <c:otherwise>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </tr>
-                                        </c:forEach>
-                                      </c:if>
-                                        <c:if test="${familia.getFormularioSesions() == null}">
-                                            <c:set var="faltaInfo" value="falta" scope="page" />
-                                        </c:if>
-                                       </c:forEach>      
+                                                                            <td>
+                                                                                <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
+                                                                                    <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
+                                                                                    <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
+                                                                                    <br>
+                                                                                    <br>
+                                                                                    <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
+                                                                                </form>
+                                                                            </td>
+                                                                            <td>
+                                                                                <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
+                                                                                    <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >   
+                                                                                    <input hidden name="el" id="el" value="${asistente.getApellidoP()}"  >  
+                                                                                    <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
+                                                                                    ${!familia.getExpedienteFamilias().isEmpty() ? 'La familia ha pasado al módulo de evaluación' : ''}
+                                                                                </form>
+                                                                            </td>
+                                                                        </c:when>
+                                                                        <c:when test="${asistente.getSexo() == 102}">
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td>
+                                                                                ${asistente.getNombre()}
+                                                                                ${asistente.getApellidoP()}
+                                                                                ${asistente.getApellidoM()}
+                                                                            </td>
+                                                                            <td>${asistente.getEdad()}</td>
+
+                                                                            <td>${asistente.getCorreo()}</td>
+                                                                            <td>
+                                                                                <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                                                    <input hidden name="estado" id="estado" value="formativa">
+                                                                                    <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}">
+                                                                                    <input hidden name="volver" id="volver" value="${volver}">
+                                                                                    <button type="submit" class="btn btn-default">Ver</button>
+                                                                                </form>
+                                                                            </td>
+                                                                            <td>
+                                                                                <c:set var="flag" value="0" scope="page"/>
+                                                                                <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
+                                                                                    <c:choose>
+                                                                                        <c:when test="${AFR.getAsistencia() != 65 && AFR.getInasJus() == 1}">
+                                                                                            <c:set var="flag" value="1" scope="page" />
+                                                                                        </c:when>
+                                                                                    </c:choose>
+                                                                                </c:forEach>
+                                                                                <c:choose>
+                                                                                    <c:when test="${flag == 0 && !familia.getAsistenciaFRs().isEmpty()}">
+                                                                                        SI
+                                                                                    </c:when>
+                                                                                    <c:otherwise>
+                                                                                        NO
+                                                                                    </c:otherwise>
+                                                                                </c:choose>    
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
+                                                                                    <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
+                                                                                    <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
+                                                                                    <br>
+                                                                                    <br>
+                                                                                    <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
+                                                                                </form>
+                                                                            </td>
+                                                                            <td>
+                                                                                <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
+                                                                                    <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >  
+                                                                                    <input hidden name="ella" id="ella" value="${asistente.getApellidoP()}"  >  
+                                                                                    <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
+                                                                                    ${!familia.getExpedienteFamilias().isEmpty() ? 'La familia ha pasado al módulo de evaluación' : ''}
+                                                                                </form>
+                                                                            </td>
+                                                                        </c:when>    
+
+                                                                    </c:choose>
+                                                                </c:forEach>
+                                                            </c:when>    
+                                                            <c:otherwise>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </tr>
+                                                </c:forEach>
+                                            </c:if>
+                                            <c:if test="${familia.getFormularioSesions() == null}">
+                                                <c:set var="faltaInfo" value="falta" scope="page" />
+                                            </c:if>
+                                        </c:forEach>      
                                     </tbody>
                                 </c:if>
                                 <c:if test="${listaFamilias == null}">
@@ -349,12 +351,12 @@
                                 <c:if test="${faltaInfo == 'falta'}">
                                     <h3><strong>Algunas Familias no han sido mostradas debido a que no tienen un Formulario asociado</strong></h3>
                                 </c:if>  
-                               </table>
-                                </div>
-                                <br>
-                                <h4><strong>Luego de guardar la constancia no se podrán realizar cambios</strong></h4>
-                                <br>
-                                <!-- Button -->
+                            </table>
+                        </div>
+                        <br>
+                        <h4><strong>Luego de guardar la constancia no se podrán realizar cambios</strong></h4>
+                        <br>
+                        <!-- Button -->
                     </div>
                 </div>
             </div>
@@ -376,7 +378,68 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+        </script>
+        <script type="text/javascript">
+
+            function tablefilter(table_selector, input_selector, search_level, colspan) {
+
+                var table = $(table_selector);
+                if (table.length == 0)
+                    return;
+
+                var input = $(input_selector);
+                if (input.length == 0)
+                    return;
+
+                if (search_level == "undefined" || search_level < 1)
+                    search_level = 3;
+
+                if (colspan == "undefined" || colspan < 0)
+                    colspan = 2;
+
+                $(input).val("Buscar…");
+
+                $(input).focus(function() {
+                    if ($(this).val() == "Buscar…") {
+                        $(this).val("");
+                    }
+                    $(this).select();
+                });
+
+                $(input).blur(function() {
+                    if ($(this).val() == "") {
+                        $(this).val("Buscar…");
+                    }
+                });
+
+                $(input).keyup(function() {
+                    if ($(this).val().length >= search_level) {
+                        // Ocultamos las filas que no contienen el contenido del edit.
+                        $(table).find("tbody tr").not(":contains(\"" + $(this).val() + "\")").hide();
+
+                        // Si no hay resultados, lo indicamos.
+                        if ($(table).find("tbody tr:visible").length == 0) {
+                            $(table).find("tbody:first").append('<tr id="noresults" class="aligncenter"><td colspan="' + colspan + '">Lo siento pero no hay resultados para la búsqueda indicada.</td></tr>');
+                        }
+                    } else {
+                        // Borramos la fila de que no hay resultados.
+                        $(table).find("tbody tr#noresults").remove();
+
+                        // Mostramos todas las filas.
+                        $(table).find("tbody tr").show();
+                    }
+                });
+            }
+
+            jQuery.expr[':'].contains = function(a, i, m) {
+                return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+            };
+
+            $(document).ready(function() {
+                tablefilter("table#mi_tabla", "input#filtrar", 2, 2);
+            });
 
         </script>
         <!-- Placed at the end of the document so the pages load faster -->        
