@@ -22,13 +22,98 @@
 
 <html>
     <head>
+        <style type="text/css">  
+            .pg-normal {  
+                color: #000000;  
+                font-weight: normal;  
+                text-decoration: none;  
+                cursor: pointer;  
+            }  
+
+            .pg-selected {  
+                color: #800080;  
+                font-weight: bold;  
+                text-decoration: underline;  
+                cursor: pointer;  
+            }  
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Sistema de Adopciones</title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
     </head>
+    <script type="text/javascript">
+        function Pager(tableName, itemsPerPage) {
+            this.tableName = tableName;
+            this.itemsPerPage = itemsPerPage;
+            this.currentPage = 1;
+            this.pages = 0;
+            this.inited = false;
 
+            this.showRecords = function(from, to) {
+                var rows = document.getElementById(tableName).rows;
+                // i starts from 1 to skip table header row  
+                for (var i = 1; i < rows.length; i++) {
+                    if (i < from || i > to)
+                        rows[i].style.display = 'none';
+                    else
+                        rows[i].style.display = '';
+                }
+            }
+
+            this.showPage = function(pageNumber) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+
+                var oldPageAnchor = document.getElementById('pg' + this.currentPage);
+                oldPageAnchor.className = 'pg-normal';
+
+                this.currentPage = pageNumber;
+                var newPageAnchor = document.getElementById('pg' + this.currentPage);
+                newPageAnchor.className = 'pg-selected';
+
+                var from = (pageNumber - 1) * itemsPerPage + 1;
+                var to = from + itemsPerPage - 1;
+                this.showRecords(from, to);
+            }
+
+            this.prev = function() {
+                if (this.currentPage > 1)
+                    this.showPage(this.currentPage - 1);
+            }
+
+            this.next = function() {
+                if (this.currentPage < this.pages) {
+                    this.showPage(this.currentPage + 1);
+                }
+            }
+
+            this.init = function() {
+                var rows = document.getElementById(tableName).rows;
+                var records = (rows.length - 1);
+                this.pages = Math.ceil(records / itemsPerPage);
+                this.inited = true;
+            }
+
+            this.showPageNav = function(pagerName, positionId) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+                var element = document.getElementById(positionId);
+
+                var pagerHtml = '<span onclick="' + pagerName + '.prev();" class="pg-normal"> « Ant </span> | ';
+                for (var page = 1; page <= this.pages; page++)
+                    pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName + '.showPage(' + page + ');">' + page + '</span> | ';
+                pagerHtml += '<span onclick="' + pagerName + '.next();" class="pg-normal"> Sig »</span>';
+
+                element.innerHTML = pagerHtml;
+            }
+        }
+    </script>  	
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -109,11 +194,12 @@
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
                         </ul>
                         <br>
+                        <p align="right">Filtrar: <input id="filtrar" type="text" /></p>
                         <br>
                         <h1 align="center"><strong>Lista de NNA's</strong></h1>
                         <br>
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped" id="mi_tabla">
                                 <thead>
                                     <tr>
                                         <th class="col-sm-2 ">Nombre</th>
@@ -183,6 +269,15 @@
                                 </c:if>  
                             </table>
                         </div>
+                        <br>       
+                        <div class="col-md-offset-4" id="pageNavPosition"></div>  
+
+                        <script type="text/javascript"> 
+                                var pager = new Pager('mi_tabla', 8);  
+                            pager.init();
+                            pager.showPageNav('pager', 'pageNavPosition');
+                            pager.showPage(1);
+                        </script>   
                     </div>
                 </div>
             </div>
@@ -200,7 +295,67 @@
 ================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+        <script type="text/javascript">
+	
+	function tablefilter(table_selector, input_selector, search_level, colspan) {
 
+		var table = $(table_selector);
+		if(table.length == 0)
+			return;
+
+		var input = $(input_selector);
+		if(input.length == 0)
+			return;
+
+		if(search_level == "undefined" || search_level < 1)
+			search_level = 3;
+
+		if(colspan == "undefined" || colspan < 0)
+			colspan = 2;
+
+		$(input).val("Buscar…");
+
+		$(input).focus(function() {
+			if($(this).val() == "Buscar…") {
+				$(this).val("");
+			}
+			$(this).select();
+		});
+
+		$(input).blur(function() {
+			if($(this).val() == "") {
+				$(this).val("Buscar…");
+			}
+		});
+
+		$(input).keyup(function() {
+			if($(this).val().length >= search_level) {
+				// Ocultamos las filas que no contienen el contenido del edit.
+				$(table).find("tbody tr").not(":contains(\"" + $(this).val() + "\")").hide();
+				
+				// Si no hay resultados, lo indicamos.
+				if($(table).find("tbody tr:visible").length == 0) {
+					$(table).find("tbody:first").append('<tr id="noresults" class="aligncenter"><td colspan="' + colspan + '">Lo siento pero no hay resultados para la búsqueda indicada.</td></tr>');
+				}
+			} else {
+				// Borramos la fila de que no hay resultados.
+				$(table).find("tbody tr#noresults").remove();
+				
+				// Mostramos todas las filas.
+				$(table).find("tbody tr").show();
+			}
+		});
+	}
+	
+	jQuery.expr[':'].contains = function(a, i, m) { 
+		return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
+	};
+	
+	$(document).ready(function() {
+		tablefilter("table#mi_tabla", "input#filtrar", 2, 2);
+	});
+
+	</script>
 
         <!-- Ubicar al final -->
     </body>

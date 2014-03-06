@@ -23,6 +23,21 @@
 
 <html>
     <head>
+        <style type="text/css">  
+            .pg-normal {  
+                color: #000000;  
+                font-weight: normal;  
+                text-decoration: none;  
+                cursor: pointer;  
+            }  
+
+            .pg-selected {  
+                color: #800080;  
+                font-weight: bold;  
+                text-decoration: underline;  
+                cursor: pointer;  
+            }  
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Sistema de Adopciones</title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
@@ -31,6 +46,78 @@
         <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
+
+    <script type="text/javascript">
+        function Pager(tableName, itemsPerPage) {
+            this.tableName = tableName;
+            this.itemsPerPage = itemsPerPage;
+            this.currentPage = 1;
+            this.pages = 0;
+            this.inited = false;
+
+            this.showRecords = function(from, to) {
+                var rows = document.getElementById(tableName).rows;
+                // i starts from 1 to skip table header row  
+                for (var i = 1; i < rows.length; i++) {
+                    if (i < from || i > to)
+                        rows[i].style.display = 'none';
+                    else
+                        rows[i].style.display = '';
+                }
+            }
+
+            this.showPage = function(pageNumber) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+
+                var oldPageAnchor = document.getElementById('pg' + this.currentPage);
+                oldPageAnchor.className = 'pg-normal';
+
+                this.currentPage = pageNumber;
+                var newPageAnchor = document.getElementById('pg' + this.currentPage);
+                newPageAnchor.className = 'pg-selected';
+
+                var from = (pageNumber - 1) * itemsPerPage + 1;
+                var to = from + itemsPerPage - 1;
+                this.showRecords(from, to);
+            }
+
+            this.prev = function() {
+                if (this.currentPage > 1)
+                    this.showPage(this.currentPage - 1);
+            }
+
+            this.next = function() {
+                if (this.currentPage < this.pages) {
+                    this.showPage(this.currentPage + 1);
+                }
+            }
+
+            this.init = function() {
+                var rows = document.getElementById(tableName).rows;
+                var records = (rows.length - 1);
+                this.pages = Math.ceil(records / itemsPerPage);
+                this.inited = true;
+            }
+
+            this.showPageNav = function(pagerName, positionId) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+                var element = document.getElementById(positionId);
+
+                var pagerHtml = '<span onclick="' + pagerName + '.prev();" class="pg-normal"> « Ant </span> | ';
+                for (var page = 1; page <= this.pages; page++)
+                    pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName + '.showPage(' + page + ');">' + page + '</span> | ';
+                pagerHtml += '<span onclick="' + pagerName + '.next();" class="pg-normal"> Sig »</span>';
+
+                element.innerHTML = pagerHtml;
+            }
+        }
+    </script>  	
 
     <body id="bd" class="bd fs3 com_content">
         <br>
@@ -77,7 +164,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -145,11 +232,22 @@
                                                                 <button type="submit" class="btn btn-default">Ver</button>
                                                             </form>
                                                         </td>
-                                                        <td ${designacion.getTipoPropuesta() == 'dupla' ? 'rowspan="2"' : ''} ${designacion.getTipoPropuesta() == 'terna' ? 'rowspan="3"' : ''} style="vertical-align:middle" >                                                    
+                                                        <c:choose>
+                                                            <c:when test="${designacion.getTipoPropuesta() == 'dupla'}">
+                                                                <c:set var="numFilas" value="2"/>
+                                                            </c:when>
+                                                            <c:when test="${designacion.getTipoPropuesta() == 'terna'}">
+                                                                <c:set var="numFilas" value="3"/>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <c:set var="numFilas" value="1"/>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <td rowspan="${numFilas}" style="vertical-align: middle;" >                                                    
                                                             ${designacion.getNna().getNombre()}
                                                             ${designacion.getNna().getApellidoP()}
                                                         </td>
-                                                        <td ${designacion.getTipoPropuesta() == 'dupla' ? 'rowspan="2"' : ''} ${designacion.getTipoPropuesta() == 'terna' ? 'rowspan="3"' : ''} style="vertical-align:middle" >
+                                                        <td rowspan="${numFilas}" style="vertical-align: middle;" >
                                                             <form action="${pageContext.servletContext.contextPath}/designacionConsejo" method="post">
                                                                 <input hidden name="idNna" id="idNna" value="${designacion.getNna().getIdnna()}">
                                                                 <input hidden name="volver" id="volver" value="${volver}">
@@ -159,14 +257,36 @@
                                                     </tr>   
                                                 </c:when>
                                                 <c:otherwise>
+                                                    <c:set var="numFilas" value="${numFilas - 1}"/>
                                                     <tr>
                                                         <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
-                                                <input hidden name="volver" id="volver" value="${volver}">
-                                                <td><button href="#" class="btn btn-default">Ver</button></td>
-                                                </tr>  
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                                <input hidden name="estado" id="estado" value="designacion">
+                                                                <input hidden name="idExpediente" id="idExpediente" value="${designacion.getExpedienteFamilia().getIdexpedienteFamilia()}">
+                                                                <input hidden name="volver" id="volver" value="${volver}">
+                                                                <button type="submit" class="btn btn-default">Ver</button>
+                                                            </form>
+                                                        </td>
+                                                        <c:if test="${(status.count mod 8) == 1}"> <!-- mod X donde X es el número de filas por página -->
+                                                            <td rowspan="${numFilas}" style="vertical-align: middle;"> 
+                                                                ${designacion.getNna().getNombre()}
+                                                                ${designacion.getNna().getApellidoP()}
+                                                            </td>  
+                                                        </c:if>
+                                                        <c:if test="${(status.count mod 8) == 1}"> <!-- mod X donde X es el número de filas por página -->
+                                                           <td rowspan="${numFilas}" style="vertical-align: middle;" >
+                                                            <form action="${pageContext.servletContext.contextPath}/designacionConsejo" method="post">
+                                                                <input hidden name="idNna" id="idNna" value="${designacion.getNna().getIdnna()}">
+                                                                <input hidden name="volver" id="volver" value="${volver}">
+                                                                <button type="submit" class="btn btn-default">Registrar</button>
+                                                            </form>   
+                                                           </td>       
+                                                        </c:if>
+                                                    </tr>  
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
                                     </tbody>
                                 </c:if>
                                 <c:if test="${listaDesignaciones.isEmpty()}">
@@ -175,6 +295,15 @@
                             </table>
 
                         </div>
+                        <br>       
+                        <div class="col-md-offset-4" id="pageNavPosition"></div>  
+
+                        <script type="text/javascript">
+                            var pager = new Pager('mi_tabla', 8);
+                            pager.init();
+                            pager.showPageNav('pager', 'pageNavPosition');
+                            pager.showPage(1);
+                        </script>   
                         <br>
                         <!-- Button -->
                     </div>
@@ -198,7 +327,7 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-                             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
         <script type="text/javascript">

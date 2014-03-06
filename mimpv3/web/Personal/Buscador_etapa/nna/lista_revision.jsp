@@ -1,7 +1,7 @@
 <%-- 
-    Document   : inscripcion_sesion1
-    Created on : 28/10/2013, 05:45:16 AM
-    Author     : Ayner Pérez
+    Document   : reg_desig
+    Created on : 4/12/2013, 11:29:03 AM
+    Author     : User
 --%>
 
 <%@page import="com.mimp.bean.Personal"%>
@@ -22,13 +22,98 @@
 
 <html>
     <head>
+        <style type="text/css">  
+            .pg-normal {  
+                color: #000000;  
+                font-weight: normal;  
+                text-decoration: none;  
+                cursor: pointer;  
+            }  
+
+            .pg-selected {  
+                color: #800080;  
+                font-weight: bold;  
+                text-decoration: underline;  
+                cursor: pointer;  
+            }  
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Sistema de Adopciones</title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
     </head>
+    <script type="text/javascript">
+        function Pager(tableName, itemsPerPage) {
+            this.tableName = tableName;
+            this.itemsPerPage = itemsPerPage;
+            this.currentPage = 1;
+            this.pages = 0;
+            this.inited = false;
 
+            this.showRecords = function(from, to) {
+                var rows = document.getElementById(tableName).rows;
+                // i starts from 1 to skip table header row  
+                for (var i = 1; i < rows.length; i++) {
+                    if (i < from || i > to)
+                        rows[i].style.display = 'none';
+                    else
+                        rows[i].style.display = '';
+                }
+            }
+
+            this.showPage = function(pageNumber) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+
+                var oldPageAnchor = document.getElementById('pg' + this.currentPage);
+                oldPageAnchor.className = 'pg-normal';
+
+                this.currentPage = pageNumber;
+                var newPageAnchor = document.getElementById('pg' + this.currentPage);
+                newPageAnchor.className = 'pg-selected';
+
+                var from = (pageNumber - 1) * itemsPerPage + 1;
+                var to = from + itemsPerPage - 1;
+                this.showRecords(from, to);
+            }
+
+            this.prev = function() {
+                if (this.currentPage > 1)
+                    this.showPage(this.currentPage - 1);
+            }
+
+            this.next = function() {
+                if (this.currentPage < this.pages) {
+                    this.showPage(this.currentPage + 1);
+                }
+            }
+
+            this.init = function() {
+                var rows = document.getElementById(tableName).rows;
+                var records = (rows.length - 1);
+                this.pages = Math.ceil(records / itemsPerPage);
+                this.inited = true;
+            }
+
+            this.showPageNav = function(pagerName, positionId) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+                var element = document.getElementById(positionId);
+
+                var pagerHtml = '<span onclick="' + pagerName + '.prev();" class="pg-normal"> « Ant </span> | ';
+                for (var page = 1; page <= this.pages; page++)
+                    pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName + '.showPage(' + page + ');">' + page + '</span> | ';
+                pagerHtml += '<span onclick="' + pagerName + '.next();" class="pg-normal"> Sig »</span>';
+
+                element.innerHTML = pagerHtml;
+            }
+        }
+    </script>  	
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -101,47 +186,59 @@
                     </div>
                     <div class="col-md-6 col-md-offset-1">
                         <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
-                        <h1 align="center"><strong>Lista de Familias Propuestas</strong></h1>
+                        <br>
+                        <br>
+                        <ul class="nav nav-tabs row" >
+                            <li ><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
+                        </ul>
+                        <br>
+                        <h1 align="center"><strong>Lista de Revisión de expediente</strong></h1>
                         <br>
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                            <table id="mi_tabla" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="col-sm-2 " colspan="3">El Adoptante</th>
-                                        <th class="col-sm-2 " colspan="3">La Adoptante</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Nombres</th>
-                                        <th>Apellido Paterno</th>
-                                        <th>Apellido Materno</th>
-                                        <th>Nombres</th>
-                                        <th>Apellido Paterno</th>
-                                        <th>Apellido Materno</th>
+                                        <th class="col-sm-2 " >Identificador</th>
+                                        <th class="col-sm-2 " >Editar</th>
                                     </tr>
                                 </thead>
-
+                                <c:if test="${!listaRevision.isEmpty()}">
+                                      <c:set var="token" value="null"/>
                                 <tbody>
-                                    <tr>
-                                        <td>Rodrigo </td>
-                                        <td>Perez</td>
-                                        <td>Segundo</td>
-                                        <td>Gina</td>
-                                        <td>Aragon</td>
-                                        <td>Villanueva</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Marco</td>
-                                        <td>Maldonado</td>
-                                        <td>Guerra</td>
-                                        <td>Marta</td>
-                                        <td>Gadea</td>
-                                        <td>Chavez</td>
-                                    </tr>
+                                    <c:forEach var="revision" items="${listaRevision}" varStatus="status">
+                                        <c:choose>
+                                            <c:when test="${token != revision.getNumero()}">
+                                                        <c:set var="token" value="${revision.getNumero()}"/>
+                                                        <tr>
+                                                          <td>${revision.getNumero()}</td>
+                                                          <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/EditarRevision" method="post">
+                                                              <input hidden name="numero" id="numero" value="${revision.getNumero()}">  
+                                                              <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                                            </form>
+                                                          </td>
+                                                        </tr>
+                                            </c:when>    
+                                        </c:choose>
+                                    </c:forEach>
                                 </tbody>
+                                </c:if>
+                                   <c:if test="${listaRevision.isEmpty()}">
+                                     <h3><strong>No existen Revisiones</strong></h3>
+                               </c:if> 
                             </table>
                         </div>
-                        <br>
+                        <br>       
+                        <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
+                        <script type="text/javascript"> 
+                                var pager = new Pager('mi_tabla', 8);  
+                            pager.init();
+                            pager.showPageNav('pager', 'pageNavPosition');
+                            pager.showPage(1);
+                        </script>   
                     </div>
                 </div>
             </div>
@@ -156,11 +253,16 @@
             </div>
         </div>
         <!-- core JavaScript
-                ================================================== -->
+        ================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+        <script type="text/javascript">
 
+            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
+        </script>
         <!-- Ubicar al final -->
     </body>
 </html>

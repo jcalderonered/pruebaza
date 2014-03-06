@@ -22,13 +22,98 @@
 
 <html>
     <head>
+        <style type="text/css">  
+            .pg-normal {  
+                color: #000000;  
+                font-weight: normal;  
+                text-decoration: none;  
+                cursor: pointer;  
+            }  
+
+            .pg-selected {  
+                color: #800080;  
+                font-weight: bold;  
+                text-decoration: underline;  
+                cursor: pointer;  
+            }  
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Sistema de Adopciones</title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
     </head>
+     <script type="text/javascript">
+        function Pager(tableName, itemsPerPage) {
+            this.tableName = tableName;
+            this.itemsPerPage = itemsPerPage;
+            this.currentPage = 1;
+            this.pages = 0;
+            this.inited = false;
 
+            this.showRecords = function(from, to) {
+                var rows = document.getElementById(tableName).rows;
+                // i starts from 1 to skip table header row  
+                for (var i = 1; i < rows.length; i++) {
+                    if (i < from || i > to)
+                        rows[i].style.display = 'none';
+                    else
+                        rows[i].style.display = '';
+                }
+            }
+
+            this.showPage = function(pageNumber) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+
+                var oldPageAnchor = document.getElementById('pg' + this.currentPage);
+                oldPageAnchor.className = 'pg-normal';
+
+                this.currentPage = pageNumber;
+                var newPageAnchor = document.getElementById('pg' + this.currentPage);
+                newPageAnchor.className = 'pg-selected';
+
+                var from = (pageNumber - 1) * itemsPerPage + 1;
+                var to = from + itemsPerPage - 1;
+                this.showRecords(from, to);
+            }
+
+            this.prev = function() {
+                if (this.currentPage > 1)
+                    this.showPage(this.currentPage - 1);
+            }
+
+            this.next = function() {
+                if (this.currentPage < this.pages) {
+                    this.showPage(this.currentPage + 1);
+                }
+            }
+
+            this.init = function() {
+                var rows = document.getElementById(tableName).rows;
+                var records = (rows.length - 1);
+                this.pages = Math.ceil(records / itemsPerPage);
+                this.inited = true;
+            }
+
+            this.showPageNav = function(pagerName, positionId) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+                var element = document.getElementById(positionId);
+
+                var pagerHtml = '<span onclick="' + pagerName + '.prev();" class="pg-normal"> « Ant </span> | ';
+                for (var page = 1; page <= this.pages; page++)
+                    pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName + '.showPage(' + page + ');">' + page + '</span> | ';
+                pagerHtml += '<span onclick="' + pagerName + '.next();" class="pg-normal"> Sig »</span>';
+
+                element.innerHTML = pagerHtml;
+            }
+        }
+    </script>  	
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -73,14 +158,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -88,14 +173,14 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -113,7 +198,7 @@
                         <h1 align="center"><strong>Lista de NNA's</strong></h1>
                         <br>
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                            <table id="mi_tabla" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th class="col-sm-2 ">Nombre</th>
@@ -124,86 +209,109 @@
                                         <th class="col-sm-2 ">Proceso de adopción</th>
                                         <th class="col-sm-2 ">Detalles</th> 
                                         <th class="col-sm-2 ">Expediente</th>
+                                        <th class="col-sm-2 ">Reg. Revisión</th>
+                                        <th class="col-sm-2 ">Edit. Revisión</th>
                                         <th class="col-sm-2 ">Reg. estudio</th>
                                         <th class="col-sm-2 ">Edit. estudio</th>
                                     </tr>
                                 </thead>
                                 <c:if test="${!listaNna.isEmpty()}"> 
-                                <tbody>
-                                    <c:forEach var="nna" items="${listaNna}" varStatus="status">
-                                    <tr>
-                                        <td>${nna.getNombre()}</td>
-                                        <td>${nna.getApellidoP()}</td>
-                                        <td>${nna.getApellidoM()}</td>
-                                        <td>${nna.getSexo()}</td>
-                                        <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
-                                        <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">
-                                        <td>
-                                            
-                                            ${expediente.getCodigoReferencia()}
-                                        </td>
-                                        </c:forEach>
-                                        </c:if>
-                                        <c:if test="${nna.getExpedienteNnas().isEmpty()}">
-                                            <td>
-                                                No
-                                            </td>   
-                                        </c:if>
-                                        <td>
-                                            <c:set var="tokenAdopcion" value="2" ></c:set>
-                                            <c:if test="${!nna.getDesignacions().isEmpty()}">
-                                               <c:forEach var="designacion" items="${nna.getDesignacions()}" varStatus="status">
-                                                    <c:choose>
-                                                        <c:when test="${designacion.getAceptacionConsejo() == 0 || designacion.getAceptacionConsejo() == 1 || designacion.getAceptacionConsejo() == 2}">
-                                                            
-                                                            <c:set var="tokenAdopcion" value="0" ></c:set>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <c:if test="${tokenAdopcion != '0'}">
-                                                                <c:set var="tokenAdopcion" value="1" ></c:set>
-                                                            </c:if>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </c:forEach>
-                                                ${tokenAdopcion == '0' ? 'Si' : 'No' }        
-                                            </c:if>  
-                                            <c:if test="${nna.getDesignacions().isEmpty()}">
-                                                No
-                                            </c:if>  
-                                        </td>
-                                        <td>
-                                            <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
-                                                <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
-                                                <button type="submit" class="btn btn-default">Ver</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editarExpedienteNna" method="post">
-                                                    <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
-                                                    <button ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Ver</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarEstudio" method="post">
-                                                 <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
-                                                 <button ${tokenAdopcion == 0 || nna.getExpedienteNnas().isEmpty() == true? 'disabled' : '' } class="btn btn-default">Registrar</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/verEstudios" method="post">
-                                                 <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">  
-                                            <button ${nna.getEstudioCasos().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Editar</button>
-                                             </form>
-                                        </td>
-                                    </tr>
-                                    </c:forEach>  
-                                </tbody>
+                                    <tbody>
+                                        <c:forEach var="nna" items="${listaNna}" varStatus="status">
+                                            <tr>
+                                                <td>${nna.getNombre()}</td>
+                                                <td>${nna.getApellidoP()}</td>
+                                                <td>${nna.getApellidoM()}</td>
+                                                <td>${nna.getSexo()}</td>
+                                                <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
+                                                    <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">
+                                                        <td>
+
+                                                            ${expediente.getCodigoReferencia()}
+                                                        </td>
+                                                    </c:forEach>
+                                                </c:if>
+                                                <c:if test="${nna.getExpedienteNnas().isEmpty()}">
+                                                    <td>
+                                                        No
+                                                    </td>   
+                                                </c:if>
+                                                <td>
+                                                    <c:set var="tokenAdopcion" value="2" ></c:set>
+                                                    <c:if test="${!nna.getDesignacions().isEmpty()}">
+                                                        <c:forEach var="designacion" items="${nna.getDesignacions()}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${designacion.getAceptacionConsejo() == 0 || designacion.getAceptacionConsejo() == 1 || designacion.getAceptacionConsejo() == 2}">
+
+                                                                    <c:set var="tokenAdopcion" value="0" ></c:set>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <c:if test="${tokenAdopcion != '0'}">
+                                                                        <c:set var="tokenAdopcion" value="1" ></c:set>
+                                                                    </c:if>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                        ${tokenAdopcion == '0' ? 'Si' : 'No' }        
+                                                    </c:if>  
+                                                    <c:if test="${nna.getDesignacions().isEmpty()}">
+                                                        No
+                                                    </c:if>  
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
+                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
+                                                        <button type="submit" class="btn btn-default">Ver</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editarExpedienteNna" method="post">
+                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
+                                                        <button ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Ver</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarRevision" method="post">
+                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
+                                                        <button ${tokenAdopcion == 0 || nna.getExpedienteNnas().isEmpty() == true? 'disabled' : '' } class="btn btn-default">Registrar</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/verRevision" method="post">
+                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">  
+                                                        <button ${tokenAdopcion == 0 || nna.getExpedienteNnas().isEmpty() == true? 'disabled' : '' } class="btn btn-default">Editar</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarEstudio" method="post">
+                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
+                                                        <button ${tokenAdopcion == 0 || nna.getExpedienteNnas().isEmpty() == true? 'disabled' : '' } class="btn btn-default">Registrar</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/verEstudios" method="post">
+                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">  
+                                                        <button ${nna.getEstudioCasos().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Editar</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>  
+                                    </tbody>
                                 </c:if>
                                 <c:if test="${listaNna.isEmpty()}">
                                     <h3><strong>No existen Nna en esta clasificación</strong></h3>
                                 </c:if>  
                             </table>
                         </div>
+                        <br>       
+                        <div class="col-md-offset-4" id="pageNavPosition"></div>  
+
+                        <script type="text/javascript"> 
+                                var pager = new Pager('mi_tabla', 8);  
+                            pager.init();
+                            pager.showPageNav('pager', 'pageNavPosition');
+                            pager.showPage(1);
+                        </script>   
                     </div>
                 </div>
             </div>
