@@ -41,7 +41,8 @@ public class Adoptante  implements java.io.Serializable {
      private Short seguroVida;
      private Short sistPensiones;
      private String saludActual;
-
+     private String pasaporte;
+     
     public Adoptante() {
     }
 
@@ -50,7 +51,7 @@ public class Adoptante  implements java.io.Serializable {
         this.idadoptante = idadoptante;
         this.infoFamilia = infoFamilia;
     }
-    public Adoptante(long idadoptante, InfoFamilia infoFamilia, String nombre, String apellidoP, String apellidoM, Character sexo, Date fechaNac, String lugarNac, String depaNac, String paisNac, Character tipoDoc, String NDoc, String celular, String correo, String nivelInstruccion, Short culminoNivel, String profesion, Short trabajadorDepend, String ocupActualDep, String centroTrabajo, String direccionCentro, String telefonoCentro, Long ingresoDep, Short trabajadorIndepend, String ocupActualInd, Long ingresoIndep, Short seguroSalud, String tipoSeguro, Short seguroVida, Short sistPensiones, String saludActual) {
+    public Adoptante(long idadoptante, InfoFamilia infoFamilia, String nombre, String apellidoP, String apellidoM, Character sexo, Date fechaNac, String lugarNac, String depaNac, String paisNac, Character tipoDoc, String NDoc, String celular, String correo, String nivelInstruccion, Short culminoNivel, String profesion, Short trabajadorDepend, String ocupActualDep, String centroTrabajo, String direccionCentro, String telefonoCentro, Long ingresoDep, Short trabajadorIndepend, String ocupActualInd, Long ingresoIndep, Short seguroSalud, String tipoSeguro, Short seguroVida, Short sistPensiones, String saludActual, String pasaporte) {
        this.idadoptante = idadoptante;
        this.infoFamilia = infoFamilia;
        this.nombre = nombre;
@@ -82,6 +83,7 @@ public class Adoptante  implements java.io.Serializable {
        this.seguroVida = seguroVida;
        this.sistPensiones = sistPensiones;
        this.saludActual = saludActual;
+       this.pasaporte = pasaporte;
     }
    
     public long getIdadoptante() {
@@ -302,7 +304,13 @@ public class Adoptante  implements java.io.Serializable {
         this.saludActual = saludActual;
     }
 
-
+    public String getPasaporte() {
+        return this.pasaporte;
+    }
+    
+    public void setPasaporte(String pasaporte) {
+        this.pasaporte = pasaporte;
+    }
 
 
 }

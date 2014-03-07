@@ -98,5 +98,8 @@
         <property name="saludActual" type="string">
             <column name="SALUD_ACTUAL" length="45" />
         </property>
+        <property name="pasaporte" type="string">
+            <column name="PASAPORTE" length="50" />
+        </property>
     </class>
 </hibernate-mapping>

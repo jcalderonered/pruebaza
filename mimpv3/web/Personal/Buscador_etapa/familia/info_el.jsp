@@ -210,6 +210,15 @@
                                     </div>
                                 </div>
                                 <br>
+                                <c:if test="${expediente.getNacionalidad() == 'internacional'}">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <label class="control-label">Pasaporte</label>
+                                        <input value="${El.getPasaporte()}" id="pasaporte" name="pasaporte" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                </c:if>
                                 <div class="control-group">
                                     <label class="control-label">Celular</label>
                                     <div class="controls">

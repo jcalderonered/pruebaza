@@ -206,6 +206,13 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
+                                    <div class="controls">
+                                        <label class="control-label">Pasaporte</label>
+                                        <input value="${Ella.getPasaporte()}" id="pasaporte" name="pasaporte" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
                                     <label class="control-label">Celular</label>
                                     <div class="controls">
                                         <input value="${Ella.getCelular()}" id="numCel" name="numCel" type="text" class="input-xlarge">

@@ -113,7 +113,7 @@
                                 <br>
                                 <h1 align="center"><strong>Familia "${expediente.getExpediente()}" </strong></h1>
                                 <br>
-                            </c:if>
+                            </c:if>  
                             <br>
                             <br>
                             <ul class="nav nav-tabs row">
@@ -213,6 +213,15 @@
                                     </div>
                                 </div>
                                 <br>
+                                <c:if test="${expediente.getNacionalidad() == 'internacional'}">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <label class="control-label">Pasaporte</label>
+                                        <input value="${Ella.getPasaporte()}" id="pasaporte" name="pasaporte" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                </c:if>
                                 <div class="control-group">
                                     <label class="control-label">Celular</label>
                                     <div class="controls">
@@ -233,7 +242,7 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="estadoCivil" id="soltera" value="soltera" ${infoFam.getEstadoCivil() == 'soltera' ? 'checked' : ''}>Soltera</label>
+                                                <input type="radio" name="estadoCivil" id="soltera" value="soltera" ${infoFam.getEstadoCivil() == 'soltera' || infoFam.getEstadoCivil() == 'soltero' ? 'checked' : ''}>Soltera</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
@@ -248,13 +257,13 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="estadoCivil" id="viuda" value="viuda" ${infoFam.getEstadoCivil() == 'viuda' ? 'checked' : ''}>Viuda</label>
+                                                <input type="radio" name="estadoCivil" id="viuda" value="viuda" ${infoFam.getEstadoCivil() == 'viuda' || infoFam.getEstadoCivil() == 'viudo' ? 'checked' : ''}>Viuda</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="estadoCivil" id="divorciada" value="divorciada" ${infoFam.getEstadoCivil() == 'divorciada' ? 'checked' : ''}>Divorciada</label>
+                                                <input type="radio" name="estadoCivil" id="divorciada" value="divorciada" ${infoFam.getEstadoCivil() == 'divorciada' || infoFam.getEstadoCivil() == 'divorciado' ? 'checked' : ''}>Divorciada</label>
                                         </div>
                                     </div> 
                                 </div>  
