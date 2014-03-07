@@ -2754,4 +2754,225 @@ public class HiberReporte {
 
         return ultimaDesig;
     }
+    
+    public ArrayList<Familia> getListaAdoptantesExtranjero() {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final ArrayList<Familia> allFamilias = new ArrayList();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                String query = "{call REPORTE_ADOP_EXT(?)}";
+                CallableStatement statement = connection.prepareCall(query);
+                statement.registerOutParameter(1, OracleTypes.CURSOR);
+                statement.execute();
+                ResultSet rs = (ResultSet) statement.getObject(1);
+                while (rs.next()) {
+                    Set<ExpedienteFamilia> listExp = new HashSet<ExpedienteFamilia>();
+                    Set<InfoFamilia> listInf = new HashSet<InfoFamilia>();
+                    Set<Adoptante> listadop = new HashSet<Adoptante>();
+
+                    Familia tempFam = new Familia();
+                    ExpedienteFamilia tempExpFam = new ExpedienteFamilia();
+                    Unidad tempUnidad = new Unidad();
+                    InfoFamilia tempInfo = new InfoFamilia();
+
+                    tempFam.setIdfamilia(rs.getLong("IDFAMILIA"));
+                    Long idEntidad = rs.getLong("IDENTIDAD");
+                    if (!rs.wasNull()) {
+                        Entidad tempEnt = new Entidad();
+                        String query2 = "{call RENAD_ENTIDAD(?,?)}";
+                        CallableStatement statement2 = connection.prepareCall(query2);
+                        statement2.setLong(1, idEntidad);
+                        statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement2.execute();
+                        ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                        while (rs2.next()) {
+                            tempEnt.setIdentidad(rs2.getLong("IDENTIDAD"));
+                            tempEnt.setNombre(rs2.getString("NOMBRE"));
+                            tempEnt.setUser(rs2.getString("USER_"));
+                            tempEnt.setPass(rs2.getString("PASS"));
+                            tempEnt.setDireccion(rs2.getString("DIRECCION"));
+                            tempEnt.setTelefono(rs2.getString("TELEFONO"));
+                            tempEnt.setPais(rs2.getString("PAIS"));
+                            tempEnt.setResolAuto(rs2.getString("RESOL_AUTO"));
+                            tempEnt.setFechaResol(rs2.getDate("FECHA_RESOL"));
+                            tempEnt.setResolRenov(rs2.getString("RESOL_RENOV"));
+                            tempEnt.setFechaRenov(rs2.getDate("FECHA_RENOV"));
+                            tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
+                            tempEnt.setObs(rs2.getString("OBS"));
+                        }
+                        statement2.close();
+                        tempFam.setEntidad(tempEnt);
+                    }
+
+                    tempFam.setUser(rs.getString("USER_"));
+                    tempFam.setPass(rs.getString("PASS"));
+                    tempFam.setCorreo(rs.getString(5));
+                    tempFam.setHabilitado(rs.getShort("HABILITADO"));
+                    tempFam.setConstancia(rs.getString("CONSTANCIA"));
+
+                    tempUnidad.setIdunidad(rs.getLong("IDUNIDAD"));
+                    tempUnidad.setNombre(rs.getString("NOMBRE"));
+                    tempUnidad.setDireccion(rs.getString("DIRECCION"));
+                    tempUnidad.setDepartamento(rs.getString("DEPARTAMENTO"));
+                    tempUnidad.setProvincia(rs.getString("PROVINCIA"));
+                    tempUnidad.setDistrito(rs.getString("DISTRITO"));
+                    tempUnidad.setCompetenciaRegional(rs.getString("COMPETENCIA_REGIONAL"));
+                    tempUnidad.setCorreo(rs.getString("CORREO"));
+                    tempUnidad.setTelefono(rs.getString("TELEFONO"));
+                    tempUnidad.setCelular(rs.getString("CELULAR"));
+                    tempUnidad.setObs(rs.getString("OBS"));
+
+                    tempExpFam.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
+                    tempExpFam.setFamilia(tempFam);
+                    tempExpFam.setUnidad(tempUnidad);
+                    tempExpFam.setNumero(rs.getLong("NUMERO"));
+                    tempExpFam.setExpediente(rs.getString("EXPEDIENTE"));
+                    tempExpFam.setHt(rs.getString("HT"));
+                    tempExpFam.setNumeroExpediente(rs.getString("NUMERO_EXPEDIENTE"));
+                    tempExpFam.setFechaIngresoDga(rs.getDate("FECHA_INGRESO_DGA"));
+                    tempExpFam.setEstado(rs.getString("ESTADO"));
+                    tempExpFam.setTupa(rs.getDate("TUPA"));
+                    tempExpFam.setNacionalidad(rs.getString("NACIONALIDAD"));
+                    tempExpFam.setRnsa(rs.getShort("RNSA"));
+                    tempExpFam.setRnaa(rs.getShort("RNAA"));
+                    tempExpFam.setTipoFamilia(rs.getString("TIPO_FAMILIA"));
+                    tempExpFam.setTipoListaEspera(rs.getString("TIPO_LISTA_ESPERA"));
+                    tempExpFam.setHtFicha(rs.getString("HTFICHA"));
+                    tempExpFam.setnFicha(rs.getString("NFICHA"));
+                    tempExpFam.setFechaIngresoFicha(rs.getDate("FECHA_INGRESO_FICHA"));
+//                     
+//                    
+//                     
+                    tempInfo.setIdinfoFamilia(rs.getLong("IDINFO_FAMILIA"));
+                    tempInfo.setFamilia(tempFam);
+                    tempInfo.setDepRes(rs.getString("DEP_RES"));
+                    tempInfo.setPaisRes(rs.getString("PAIS_RES"));
+                    tempInfo.setDomicilio(rs.getString("DOMICILIO"));
+                    tempInfo.setPropiedadVivienda(rs.getString("PROPIEDAD_VIVIENDA"));
+                    tempInfo.setTipoVivienda(rs.getString("TIPO_VIVIENDA"));
+                    tempInfo.setAreaVivTotal(rs.getLong("AREA_VIV_TOTAL"));
+                    tempInfo.setAreaVivConst(rs.getLong("AREA_VIV_CONST"));
+                    tempInfo.setDistVivienda(rs.getString("DIST_VIVIENDA"));
+                    tempInfo.setLuz(rs.getShort("LUZ"));
+                    tempInfo.setAgua(rs.getShort("AGUA"));
+                    tempInfo.setDesague(rs.getShort("DESAGUE"));
+                    tempInfo.setOtrosServ(rs.getString("OTROS_SERV"));
+                    tempInfo.setMaterConst(rs.getString("MATER_CONST"));
+                    tempInfo.setPared(rs.getString("PARED"));
+                    tempInfo.setTecho(rs.getString("TECHO"));
+                    tempInfo.setPiso(rs.getString("PISO"));
+                    String charValueStr = "";
+                    if (rs.getString("NIVEL_SOCIOECONOMICO") != null) {
+                        charValueStr = rs.getString("NIVEL_SOCIOECONOMICO");
+                    }
+                    if (!charValueStr.equals("") && charValueStr != null) {
+                        tempInfo.setNivelSocioeconomico(charValueStr.charAt(0));
+                    }
+                    tempInfo.setExpectativaEdadMin(rs.getShort("EXPECTATIVA_EDAD_MIN"));
+                    tempInfo.setExpectativaGenero(rs.getString("EXPECTATIVA_GENERO"));
+                    tempInfo.setOrigenHijos(rs.getString("ORIGEN_HIJOS"));
+                    tempInfo.setPuedeViajar(rs.getShort("PUEDE_VIAJAR"));
+                    tempInfo.setPredisposicionAp(rs.getString("PREDISPOSICION_AP"));
+                    tempInfo.setCondicion(rs.getString("CONDICION"));
+                    tempInfo.setAntecedenteFamilia(rs.getString("ANTECEDENTE_FAMILIA"));
+                    tempInfo.setFechaAntecedenteFamilia(rs.getDate("FECHA_ANTECEDENTE_FAMILIA"));
+                    tempInfo.setObservaciones(rs.getString("OBSERVACIONES"));
+                    tempInfo.setNnaIncesto(rs.getShort("NNA_INCESTO"));
+                    tempInfo.setNnaMental(rs.getShort("NNA_MENTAL"));
+                    tempInfo.setNnaEpilepsia(rs.getShort("NNA_EPILEPSIA"));
+                    tempInfo.setNnaAbuso(rs.getShort("NNA_ABUSO"));
+                    tempInfo.setNnaSifilis(rs.getShort("NNA_SIFILIS"));
+                    tempInfo.setNnaSeguiMedico(rs.getShort("NNA_SEGUI_MEDICO"));
+                    tempInfo.setNnaOperacion(rs.getShort("NNA_OPERACION"));
+                    tempInfo.setNnaHiperactivo(rs.getShort("NNA_HIPERACTIVO"));
+                    tempInfo.setNnaEspecial(rs.getShort("NNA_ESPECIAL"));
+                    tempInfo.setNnaEnfermo(rs.getShort("NNA_ENFERMO"));
+                    tempInfo.setNnaMayor(rs.getShort("NNA_MAYOR"));
+                    tempInfo.setNnaAdolescente(rs.getShort("NNA_ADOLESCENTE"));
+                    tempInfo.setNnaHermano(rs.getShort("NNA_HERMANO"));
+                    tempInfo.setEstadoCivil(rs.getString("ESTADO_CIVIL"));
+                    tempInfo.setFechaMatrimonio(rs.getDate("FECHA_MATRIMONIO"));
+                    tempInfo.setTelefono(rs.getString("TELEFONO"));
+                    tempInfo.setExpectativaEdadMax(rs.getShort("EXPECTATIVA_EDAD_MAX"));
+                    tempInfo.setnHijos(rs.getShort("NHIJOS"));
+//                     
+                    String query3 = "{call RENAD_ADOPTANTE(?,?)}";
+                    CallableStatement statement3 = connection.prepareCall(query3);
+                    statement3.setLong(1, tempInfo.getIdinfoFamilia());
+                    statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement3.execute();
+                    ResultSet rs3 = (ResultSet) statement3.getObject(2);
+                    while (rs3.next()) {
+                        Adoptante tempAdoptante = new Adoptante();
+                        tempAdoptante.setIdadoptante(rs3.getLong("IDADOPTANTE"));
+                        tempAdoptante.setInfoFamilia(tempInfo);
+                        tempAdoptante.setNombre(rs3.getString("NOMBRE"));
+                        tempAdoptante.setApellidoP(rs3.getString("APELLIDO_P"));
+                        tempAdoptante.setApellidoM(rs3.getString("APELLIDO_M"));
+
+                        String tempsexo = "";
+                        tempsexo = rs3.getString("SEXO");
+                        if (!rs3.wasNull()) {
+                            tempAdoptante.setSexo(tempsexo.charAt(0));
+                        }
+
+                        tempAdoptante.setFechaNac(rs3.getDate("FECHA_NAC"));
+                        tempAdoptante.setLugarNac(rs3.getString("LUGAR_NAC"));
+                        tempAdoptante.setDepaNac(rs3.getString("DEPA_NAC"));
+                        tempAdoptante.setPaisNac(rs3.getString("PAIS_NAC"));
+
+                        String tempTipoDoc = "";
+                        tempTipoDoc = rs3.getString("TIPO_DOC");
+                        if (!rs3.wasNull()) {
+                            tempAdoptante.setTipoDoc(tempTipoDoc.charAt(0));
+                        }
+
+                        tempAdoptante.setNDoc(rs3.getString("N_DOC"));
+                        tempAdoptante.setCelular(rs3.getString("CELULAR"));
+                        tempAdoptante.setCorreo(rs3.getString("CORREO"));
+                        tempAdoptante.setNivelInstruccion(rs3.getString("NIVEL_INSTRUCCION"));
+                        tempAdoptante.setCulminoNivel(rs3.getShort("CULMINO_NIVEL"));
+                        tempAdoptante.setProfesion(rs3.getString("PROFESION"));
+                        tempAdoptante.setTrabajadorDepend(rs3.getShort("TRABAJADOR_DEPEND"));
+                        tempAdoptante.setOcupActualDep(rs3.getString("OCUP_ACTUAL_DEP"));
+                        tempAdoptante.setCentroTrabajo(rs3.getString("CENTRO_TRABAJO"));
+                        tempAdoptante.setDireccionCentro(rs3.getString("DIRECCION_CENTRO"));
+                        tempAdoptante.setTelefonoCentro(rs3.getString("TELEFONO_CENTRO"));
+                        tempAdoptante.setIngresoDep(rs3.getLong("INGRESO_DEP"));
+                        tempAdoptante.setTrabajadorIndepend(rs3.getShort("TRABAJADOR_INDEPEND"));
+                        tempAdoptante.setOcupActualInd(rs3.getString("OCUP_ACTUAL_IND"));
+                        tempAdoptante.setIngresoIndep(rs3.getLong("INGRESO_INDEP"));
+                        tempAdoptante.setSeguroSalud(rs3.getShort("SEGURO_SALUD"));
+                        tempAdoptante.setTipoSeguro(rs3.getString("TIPO_SEGURO"));
+                        tempAdoptante.setSeguroVida(rs3.getShort("SEGURO_VIDA"));
+                        tempAdoptante.setSistPensiones(rs3.getShort("SIST_PENSIONES"));
+                        tempAdoptante.setSaludActual(rs3.getString("SALUD_ACTUAL"));
+
+                        listadop.add(tempAdoptante);
+
+                    }
+                    statement3.close();
+                    tempInfo.setAdoptantes(listadop);
+//                        
+                    listExp.add(tempExpFam);
+                    listInf.add(tempInfo);
+//                      
+                    tempFam.setExpedienteFamilias(listExp);
+                    tempFam.setInfoFamilias(listInf);
+                    allFamilias.add(tempFam);
+
+                }
+                statement.close();
+            }
+        };
+        session.doWork(work);
+
+        return allFamilias;
+
+    }
 }

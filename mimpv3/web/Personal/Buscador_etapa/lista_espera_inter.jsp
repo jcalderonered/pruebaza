@@ -206,6 +206,8 @@
                                         <th>Fecha de ingreso a DGA</th>
                                         <th>Fecha de Resolución de Aptitud</th>
                                         <th>Detalles</th>
+                                        <th>NNA adoptados</th>
+                                        <th>Registrar NNA</th>
                                     </tr>
                                 </thead>
                                 <c:if test="${listaEspera != null}">   
@@ -243,6 +245,18 @@
                                                         <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                                                         <input hidden name="volver" id="volver" value="${volver}">
                                                         <button type="submit" class="btn btn-default">Ver</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/MainListaNnaAdoptadosExtranjero" method="post">
+                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                        <button type="submit" class="btn btn-default">Ver</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/MainRegistrarAdopcionExtranjero" method="post">
+                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                        <button type="submit" class="btn btn-default">Registrar</button>
                                                     </form>
                                                 </td>
                                             </tr>

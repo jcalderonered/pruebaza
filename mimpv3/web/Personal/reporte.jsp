@@ -147,7 +147,7 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Registro de adopdción en el extranjero</label>
+                                    <label class="control-label">Registro de adopción en el extranjero</label>
                                     <div class="controls">
                                         <a href="${pageContext.servletContext.contextPath}/Reportes/AdopcionExtranjero" class="btn btn-default">Generar Reporte</a>
                                     </div>

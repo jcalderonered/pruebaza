@@ -3102,7 +3102,7 @@ public class personal {
         El = new Adoptante();
         Ella = new Adoptante();
         tempFam.setEntidad(tempEnt);
-        tempFam.setHabilitado(Short.parseShort("1"));
+        tempFam.setHabilitado(Short.parseShort("2"));
         tempFam.setUser(usuario.getApellidoP()); //seteo el usuario por defecto como apellido paterno del usuario que lo registra
         String pass = DigestUtils.sha512Hex(usuario.getApellidoP());
         tempFam.setPass(pass);

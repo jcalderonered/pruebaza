@@ -590,4 +590,65 @@ public class HiberMain {
     
     }
     
+    public void crearAdopcionAdoptantesExtranjero(Nna tempNna, Designacion tempDesig){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.saveOrUpdate(tempNna);
+        session.saveOrUpdate(tempDesig);
+    }
+    
+    public ArrayList<Designacion> getListaDesignacionesAdoptantesExtranjero() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        String hql = "From Designacion D where D.aceptacionConsejo = :aceptacion and D.tipoPropuesta = :tipo order by D.fechaConsejo DESC";
+        Query query = session.createQuery(hql);
+        query.setShort("aceptacion", Short.parseShort("4"));
+        query.setString("tipo", "extranjero");
+        List designaciones = query.list();
+        ArrayList<Designacion> allDesignaciones = new ArrayList();
+        
+        for (Iterator iter = designaciones.iterator(); iter.hasNext();) {
+            Designacion temp = (Designacion) iter.next();
+            Hibernate.initialize(temp.getNna());
+            allDesignaciones.add(temp);
+        }
+        
+        return allDesignaciones;
+
+    }
+    
+    public Nna getNnaAdoptantesExtranjero(long id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Nna tempNna = new Nna();
+        
+        String hqlA = "FROM Nna N WHERE N.idnna = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        tempNna = (Nna) queryResultA;
+        return tempNna;
+        
+    }
+    
+    public Designacion getDesignacionAdoptantesExtranjero(long id){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Designacion tempDesig = new Designacion();
+        
+        String hqlA = "FROM Designacion D WHERE D.iddesignacion = :id";
+        Query queryA = session.createQuery(hqlA);
+        queryA.setLong("id", id);
+        Object queryResultA = queryA.uniqueResult();
+
+        tempDesig = (Designacion) queryResultA;
+        return tempDesig;
+        
+    }
+    
 }
