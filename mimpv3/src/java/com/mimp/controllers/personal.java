@@ -3218,6 +3218,7 @@ public class personal {
             @RequestParam(value = "paisNac", required = false) String paisNac,
             @RequestParam(value = "doc", required = false) String doc,
             @RequestParam(value = "numDoc", required = false) String numDoc,
+            @RequestParam(value = "pasaporte", required = false) String pasaporte,
             @RequestParam(value = "numCel", required = false) String numCel,
             @RequestParam(value = "correo", required = false) String correo,
             @RequestParam(value = "estadoCivil", required = false) String estadoCivil,
@@ -3269,6 +3270,7 @@ public class personal {
                 El.setTipoDoc(d);
             }
             El.setNDoc(numDoc);
+            El.setPasaporte(pasaporte);
             El.setCelular(numCel);
             El.setCorreo(correo);
             infoFam.setEstadoCivil(estadoCivil);
@@ -3390,6 +3392,7 @@ public class personal {
                 Ella.setTipoDoc(d);
             }
             Ella.setNDoc(numDoc);
+            Ella.setPasaporte(pasaporte);
             Ella.setCelular(numCel);
             Ella.setCorreo(correo);
             infoFam.setEstadoCivil(estadoCivil);

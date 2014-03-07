@@ -1753,8 +1753,10 @@ public class main {
             @RequestParam(value = "paisNac", required = false) String paisNac,
             @RequestParam(value = "doc", required = false) String doc,
             @RequestParam(value = "numDoc", required = false) String numDoc,
+            @RequestParam(value = "pasaporte", required = false) String pasaporte,
             @RequestParam(value = "numCel", required = false) String numCel,
             @RequestParam(value = "correo", required = false) String correo,
+            @RequestParam(value = "estadoCivil", required = false) String estadoCivil,
             @RequestParam(value = "fechaMat", required = false) String fechaMat
     //            @RequestParam(value = "nivelInstruccion", required = false) String nivelInstruccion,
     //            @RequestParam(value = "culminoNivel", required = false) String culminoNivel,
@@ -1799,14 +1801,16 @@ public class main {
                 El.setTipoDoc(d);
             }
             El.setNDoc(numDoc);
+            El.setPasaporte(pasaporte);
             El.setCelular(numCel);
             El.setCorreo(correo);
+            infoFam.setEstadoCivil(estadoCivil);
             if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")) {
                 infoFam.setFechaMatrimonio(df.stringToDate(fechaMat));
-                ServicioMain.updateInfoFam(infoFam);
             } else if (fechaMat == null || fechaMat.equals("")) {
                 infoFam.setFechaMatrimonio(null);
             }
+            ServicioMain.updateInfoFam(infoFam);
 //            El.setNivelInstruccion(nivelInstruccion);
 //            if (culminoNivel != null && !culminoNivel.equals("")) {
 //                El.setCulminoNivel(Short.parseShort(culminoNivel));
@@ -1873,11 +1877,11 @@ public class main {
 //            El.setSaludActual(estadoActual);
 
             ServicioMain.updateAdoptante(El);
-            if (El.getApellidoP() != null && Ella.getApellidoP() != null) {
+            if ((El.getApellidoP() != null && !El.getApellidoP().equals("")) && (Ella.getApellidoP() != null && !Ella.getApellidoP().equals(""))) {
                 expediente.setExpediente(El.getApellidoP() + " - " + Ella.getApellidoP());
-            } else if (El.getApellidoP() != null) {
+            } else if (El.getApellidoP() != null && !El.getApellidoP().equals("")) {
                 expediente.setExpediente(El.getApellidoP());
-            } else if (Ella.getApellidoP() != null) {
+            } else if (Ella.getApellidoP() != null && !Ella.getApellidoP().equals("")) {
                 expediente.setExpediente(Ella.getApellidoP());
             }
             servicioEtapa.updateExpedienteFamilia(expediente);
@@ -1906,14 +1910,16 @@ public class main {
                 Ella.setTipoDoc(d);
             }
             Ella.setNDoc(numDoc);
+            Ella.setPasaporte(pasaporte);
             Ella.setCelular(numCel);
             Ella.setCorreo(correo);
+            infoFam.setEstadoCivil(estadoCivil);
             if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")) {
                 infoFam.setFechaMatrimonio(df.stringToDate(fechaMat));
-                ServicioMain.updateInfoFam(infoFam);
             } else if (fechaMat == null || fechaMat.equals("")) {
                 infoFam.setFechaMatrimonio(null);
             }
+            ServicioMain.updateInfoFam(infoFam);
 //            Ella.setNivelInstruccion(nivelInstruccion);
 //            if (culminoNivel != null && !culminoNivel.equals("")) {
 //                Ella.setCulminoNivel(Short.parseShort(culminoNivel));

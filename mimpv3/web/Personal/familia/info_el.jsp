@@ -210,6 +210,15 @@
                                     </div>
                                 </div>
                                 <br>
+                                <c:if test="${expediente.getNacionalidad() == 'internacional'}">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <label class="control-label">Pasaporte</label>
+                                        <input value="${El.getPasaporte()}" id="pasaporte" name="pasaporte" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                </c:if>
                                 <div class="control-group">
                                     <label class="control-label">Celular</label>
                                     <div class="controls">
@@ -230,7 +239,7 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="estadoCivil" id="soltera" value="soltero" ${infoFam.getEstadoCivil() == 'soltero' ? 'checked' : ''}>Soltero</label>
+                                                <input type="radio" name="estadoCivil" id="soltera" value="soltero" ${infoFam.getEstadoCivil() == 'soltero' || infoFam.getEstadoCivil() == 'soltera' ? 'checked' : ''}>Soltero</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
@@ -245,13 +254,13 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="estadoCivil" id="viuda" value="viudo" ${infoFam.getEstadoCivil() == 'viudo' ? 'checked' : ''}>Viudo</label>
+                                                <input type="radio" name="estadoCivil" id="viuda" value="viudo" ${infoFam.getEstadoCivil() == 'viudo' || infoFam.getEstadoCivil() == 'viuda' ? 'checked' : ''}>Viudo</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="estadoCivil" id="divorciada" value="divorciado" ${infoFam.getEstadoCivil() == 'divorciado' ? 'checked' : ''}>Divorciado</label>
+                                                <input type="radio" name="estadoCivil" id="divorciada" value="divorciado" ${infoFam.getEstadoCivil() == 'divorciado' || infoFam.getEstadoCivil() == 'divorciada' ? 'checked' : ''}>Divorciado</label>
                                         </div>
                                     </div> 
                                 </div>
