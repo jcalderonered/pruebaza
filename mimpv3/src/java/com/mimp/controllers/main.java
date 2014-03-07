@@ -2387,5 +2387,291 @@ public class main {
          */
         return new ModelAndView(pagina, map);
     }
+    
+    @RequestMapping(value = "/MainListaNnaAdoptadosExtranjero", method = RequestMethod.POST)
+    public ModelAndView MainListaNnaAdoptadosExtranjero(ModelMap map,
+            @RequestParam("idExpediente") Long idExpediente,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
 
+        map.addAttribute("df", df);
+        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero());
+        return new ModelAndView("/Personal/nna_adop_ext/lista_nna", map);
+    }
+    
+    @RequestMapping(value = "/MainRegistrarAdopcionExtranjero", method = RequestMethod.POST)
+    public ModelAndView MainRegistrarAdopcionExtranjero(ModelMap map,
+            @RequestParam("idExpediente") Long idExpediente,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        map.addAttribute("df", df);
+        map.addAttribute("idExpediente", idExpediente);
+        return new ModelAndView("/Personal/nna_adop_ext/editar_nna", map);
+    }
+    
+    @RequestMapping(value = "/MainCrearNna", method = RequestMethod.POST)
+    public ModelAndView MainCrearNna(ModelMap map, HttpSession session,
+            @RequestParam("idExpediente") Long idExpediente,
+            @RequestParam(value = "nombre", required = false) String nombre,
+            @RequestParam(value = "apellidoP", required = false) String apellidoP,
+            @RequestParam(value = "apellidoM", required = false) String apellidoM,
+            @RequestParam(value = "sexo", required = false) String sexo,
+            @RequestParam(value = "fechaNac", required = false) String fechaNac,
+            @RequestParam(value = "edad", required = false) String edad,
+            @RequestParam(value = "meses", required = false) String meses,
+            @RequestParam(value = "paisNac", required = false) String paisNac,
+            @RequestParam(value = "dep", required = false) String dep,
+            @RequestParam(value = "prov", required = false) String prov,
+            @RequestParam(value = "dist", required = false) String dist,
+            @RequestParam(value = "direccion", required = false) String direccion,
+            
+            @RequestParam(value = "incesto") String incesto,
+            @RequestParam(value = "mental") String mental,
+            @RequestParam(value = "epilepsia") String epilepsia,
+            @RequestParam(value = "abuso") String abuso,
+            @RequestParam(value = "sifilis") String sifilis,
+            @RequestParam(value = "seguimiento") String seguimiento,
+            @RequestParam(value = "operacion") String operacion,
+            @RequestParam(value = "hiperactivo") String hiperactivo,
+            @RequestParam(value = "especial") String especial,
+            @RequestParam(value = "salud") String salud,
+            @RequestParam(value = "mayor") String mayor,
+            @RequestParam(value = "adolescente") String adolescente,
+            @RequestParam(value = "hermanos") String hermanos,
+            
+            @RequestParam(value = "fechaAdopcion", required = false) String fechaAdopcion,
+            @RequestParam(value = "numAdopcion", required = false) String numAdopcion,
+            @RequestParam(value = "obs", required = false) String obs
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        Nna tempNna = new Nna();
+        Designacion tempDesig = new Designacion();
+        ExpedienteFamilia tempExp = new ExpedienteFamilia();
+        
+        tempExp = servicioEtapa.getExpedienteFamilia(idExpediente);
+        tempNna.setNombre(nombre);
+        tempNna.setApellidoP(apellidoP);
+        tempNna.setApellidoM(apellidoM);
+        tempNna.setSexo(sexo);
+        if(fechaNac != null && !fechaNac.equals("")){
+            tempNna.setFechaNacimiento(df.stringToDate(fechaNac));
+        } 
+        short edadtemp = 0;
+        short mesestemp = 0;
+        if (edad != null && !edad.equals("")) edadtemp = Byte.valueOf(edad);
+        if (meses != null && !meses.equals("")) mesestemp = Byte.valueOf(meses);
+        tempNna.setEdadAnhos(edadtemp);
+        tempNna.setEdadMeses(mesestemp);
+
+        tempNna.setJuzgado(ServicioPersonal.ListaJuzgado().iterator().next());
+        tempNna.setCar(ServicioPersonal.ListaCar().iterator().next());
+        tempNna.setPaisNacimiento(paisNac);
+        tempNna.setDepartamentoNacimiento(dep);
+        tempNna.setProvinciaNacimiento(prov);
+        tempNna.setDistritoNacimiento(dist);
+        tempNna.setLugarNac(direccion);
+        
+        tempNna.setIncesto(Short.parseShort(incesto));
+        tempNna.setMental(Short.parseShort(mental));
+        tempNna.setEpilepsia(Short.parseShort(epilepsia));
+        tempNna.setAbuso(Short.parseShort(abuso));
+        tempNna.setSifilis(Short.parseShort(sifilis));
+        tempNna.setSeguiMedico(Short.parseShort(seguimiento));
+        tempNna.setOperacion(Short.parseShort(operacion));
+        tempNna.setHiperactivo(Short.parseShort(hiperactivo));
+
+        
+
+        tempNna.setEspecial(Short.parseShort(especial));
+        tempNna.setEnfermo(Short.parseShort(salud));
+        tempNna.setMayor(Short.parseShort(mayor));
+        tempNna.setAdolescente(Short.parseShort(adolescente));
+        tempNna.setHermano(Short.parseShort(hermanos));
+
+        tempNna.setClasificacion("internacional");
+        tempNna.setObservaciones(obs);
+
+        tempDesig.setAceptacionConsejo(Short.parseShort("4"));
+        if(fechaAdopcion != null && !fechaAdopcion.equals("")){
+            tempDesig.setFechaConsejo(df.stringToDate(fechaAdopcion));
+            tempDesig.setFechaPropuesta(df.stringToDate(fechaAdopcion));
+        }else{
+            tempDesig.setFechaConsejo(null);
+            tempDesig.setFechaPropuesta(null);
+        } 
+        
+        tempDesig.setNDesignacion(numAdopcion);
+        long prioridad = 1;
+        tempDesig.setPrioridad(prioridad);
+        tempDesig.setTipoPropuesta("extranjero");
+        
+        tempDesig.setExpedienteFamilia(tempExp);
+        tempDesig.setNna(tempNna);
+        tempDesig.setPersonal(usuario);
+        
+        ServicioMain.crearAdopcionAdoptantesExtranjero(tempNna, tempDesig);
+        
+        String mensaje_log = "Se registró una nueva Adopción en el extranjero a la base de datos con Nombre del NNA, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+        String Tipo_registro = "NNA";
+
+        //try{
+        String Numero_registro = String.valueOf(tempNna.getIdnna());
+
+        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+
+        
+        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero());
+        return new ModelAndView("/Personal/nna_adop_ext/lista_nna", map);
+        
+
+    }
+
+    @RequestMapping(value = "/MainEditarNna", method = RequestMethod.POST)
+    public ModelAndView MainEditarNna(ModelMap map,
+            @RequestParam("idDesig") Long idDesig,
+            @RequestParam("idNna") Long idNna,
+            @RequestParam("fechaAdopcion") String fechaAdopcion,
+            @RequestParam("numAdopcion") String numAdopcion,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        map.addAttribute("df", df);
+        map.addAttribute("idDesig", idDesig);
+        map.addAttribute("fechaAdopcion", fechaAdopcion);
+        map.addAttribute("numAdopcion", numAdopcion);
+        map.addAttribute("nna", ServicioMain.getNnaAdoptantesExtranjero(idNna));
+        return new ModelAndView("/Personal/nna_adop_ext/editar_nna", map);
+    }
+    
+     @RequestMapping(value = "/MainUpdateNna", method = RequestMethod.POST)
+    public ModelAndView MainUpdateNna(ModelMap map, HttpSession session,
+            @RequestParam("idDesig") Long idDesig,
+            @RequestParam("idNna") Long idNna,
+            @RequestParam(value = "nombre", required = false) String nombre,
+            @RequestParam(value = "apellidoP", required = false) String apellidoP,
+            @RequestParam(value = "apellidoM", required = false) String apellidoM,
+            @RequestParam(value = "sexo", required = false) String sexo,
+            @RequestParam(value = "fechaNac", required = false) String fechaNac,
+            @RequestParam(value = "edad", required = false) String edad,
+            @RequestParam(value = "meses", required = false) String meses,
+            @RequestParam(value = "paisNac", required = false) String paisNac,
+            @RequestParam(value = "dep", required = false) String dep,
+            @RequestParam(value = "prov", required = false) String prov,
+            @RequestParam(value = "dist", required = false) String dist,
+            @RequestParam(value = "direccion", required = false) String direccion,
+            
+            @RequestParam(value = "incesto") String incesto,
+            @RequestParam(value = "mental") String mental,
+            @RequestParam(value = "epilepsia") String epilepsia,
+            @RequestParam(value = "abuso") String abuso,
+            @RequestParam(value = "sifilis") String sifilis,
+            @RequestParam(value = "seguimiento") String seguimiento,
+            @RequestParam(value = "operacion") String operacion,
+            @RequestParam(value = "hiperactivo") String hiperactivo,
+            @RequestParam(value = "especial") String especial,
+            @RequestParam(value = "salud") String salud,
+            @RequestParam(value = "mayor") String mayor,
+            @RequestParam(value = "adolescente") String adolescente,
+            @RequestParam(value = "hermanos") String hermanos,
+            
+            @RequestParam(value = "fechaAdopcion", required = false) String fechaAdopcion,
+            @RequestParam(value = "numAdopcion", required = false) String numAdopcion,
+            @RequestParam(value = "obs", required = false) String obs
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        Nna tempNna = new Nna();
+        Designacion tempDesig = new Designacion();
+        
+        tempNna = ServicioMain.getNnaAdoptantesExtranjero(idNna);
+        tempDesig = ServicioMain.getDesignacionAdoptantesExtranjero(idDesig);
+        
+        tempNna.setNombre(nombre);
+        tempNna.setApellidoP(apellidoP);
+        tempNna.setApellidoM(apellidoM);
+        tempNna.setSexo(sexo);
+        if(fechaNac != null && !fechaNac.equals("")){
+            tempNna.setFechaNacimiento(df.stringToDate(fechaNac));
+        } 
+        short edadtemp = 0;
+        short mesestemp = 0;
+        if (edad != null && !edad.equals("")) edadtemp = Byte.valueOf(edad);
+        if (meses != null && !meses.equals("")) mesestemp = Byte.valueOf(meses);
+        tempNna.setEdadAnhos(edadtemp);
+        tempNna.setEdadMeses(mesestemp);
+        tempNna.setPaisNacimiento(paisNac);
+        tempNna.setDepartamentoNacimiento(dep);
+        tempNna.setProvinciaNacimiento(prov);
+        tempNna.setDistritoNacimiento(dist);
+        tempNna.setLugarNac(direccion);
+        
+        tempNna.setIncesto(Short.parseShort(incesto));
+        tempNna.setMental(Short.parseShort(mental));
+        tempNna.setEpilepsia(Short.parseShort(epilepsia));
+        tempNna.setAbuso(Short.parseShort(abuso));
+        tempNna.setSifilis(Short.parseShort(sifilis));
+        tempNna.setSeguiMedico(Short.parseShort(seguimiento));
+        tempNna.setOperacion(Short.parseShort(operacion));
+        tempNna.setHiperactivo(Short.parseShort(hiperactivo));
+
+        
+
+        tempNna.setEspecial(Short.parseShort(especial));
+        tempNna.setEnfermo(Short.parseShort(salud));
+        tempNna.setMayor(Short.parseShort(mayor));
+        tempNna.setAdolescente(Short.parseShort(adolescente));
+        tempNna.setHermano(Short.parseShort(hermanos));
+        
+        tempNna.setObservaciones(obs);
+
+        if(fechaAdopcion != null && !fechaAdopcion.equals("")){
+            tempDesig.setFechaConsejo(df.stringToDate(fechaAdopcion));
+            tempDesig.setFechaPropuesta(df.stringToDate(fechaAdopcion));
+        }else{
+            tempDesig.setFechaConsejo(null);
+            tempDesig.setFechaPropuesta(null);
+        } 
+        
+        tempDesig.setNDesignacion(numAdopcion);
+        ServicioMain.crearAdopcionAdoptantesExtranjero(tempNna, tempDesig);
+        
+        String mensaje_log = "Se actualizó una Adopción en el extranjero a la base de datos con Nombre del NNA, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+        String Tipo_registro = "NNA";
+
+        String Numero_registro = String.valueOf(tempNna.getIdnna());
+
+        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+
+        map.addAttribute("df", df);
+        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero());
+        return new ModelAndView("/Personal/nna_adop_ext/lista_nna", map);
+        
+
+    }
+    
 }
