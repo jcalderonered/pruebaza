@@ -242,7 +242,7 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="estadoCivil" id="soltera" value="soltera" ${infoFam.getEstadoCivil() == 'soltera' ? 'checked' : ''}>Soltera</label>
+                                                <input type="radio" name="estadoCivil" id="soltera" value="soltera" ${infoFam.getEstadoCivil() == 'soltera' || infoFam.getEstadoCivil() == 'soltero' ? 'checked' : ''}>Soltera</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
@@ -257,13 +257,13 @@
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="estadoCivil" id="viuda" value="viuda" ${infoFam.getEstadoCivil() == 'viuda' ? 'checked' : ''}>Viuda</label>
+                                                <input type="radio" name="estadoCivil" id="viuda" value="viuda" ${infoFam.getEstadoCivil() == 'viuda' || infoFam.getEstadoCivil() == 'viudo'? 'checked' : ''}>Viuda</label>
                                         </div>
                                     </div> 
                                     <div class="col-md-3">  
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="estadoCivil" id="divorciada" value="divorciada" ${infoFam.getEstadoCivil() == 'divorciada' ? 'checked' : ''}>Divorciada</label>
+                                                <input type="radio" name="estadoCivil" id="divorciada" value="divorciada" ${infoFam.getEstadoCivil() == 'divorciada' || infoFam.getEstadoCivil() == 'divorciado' ? 'checked' : ''}>Divorciada</label>
                                         </div>
                                     </div> 
                                 </div>  
