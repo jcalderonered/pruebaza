@@ -194,6 +194,7 @@
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurno2" method="post">
                                                         <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
+                                                        <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
                                                         <input hidden name="index" id="index" value="${status.index + 1}">
                                                         <button ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Modificar</button>
                                                     </form>    

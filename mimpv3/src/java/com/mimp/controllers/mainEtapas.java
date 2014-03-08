@@ -795,7 +795,7 @@ public class mainEtapas {
             @RequestParam("tipo") String tipo,
             @RequestParam("fechaResol") String fechaResol,
             @RequestParam("fechaNot") String fechaNot,
-            @RequestParam(value="tipoEspera",required = false) String tipoEspera
+            @RequestParam(value = "tipoEspera", required = false) String tipoEspera
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -861,21 +861,21 @@ public class mainEtapas {
         if (tipo != null && tipo.equals("apto")) {
             ExpedienteFamilia tempFam = new ExpedienteFamilia();
             tempFam = tempEval.getExpedienteFamilia();
-            if(tipoEspera.equals("espera") || tipoEspera.equals("")){
-            tempFam.setEstado("espera");
-            }else{
-            tempFam.setEstado("esperainter");    
-            } 
+            if (tipoEspera.equals("espera") || tipoEspera.equals("")) {
+                tempFam.setEstado("espera");
+            } else {
+                tempFam.setEstado("esperainter");
+            }
             tempFam.setRnaa(Short.parseShort("0"));
             servicioEtapa.updateExpedienteFamilia(tempFam);
-            if(tipoEspera.equals("espera") || tipoEspera.equals("")){
-            map.put("df", df);
-            map.put("listaEspera", servicioEtapa.getListaEspera());
-            return new ModelAndView("/Personal/Buscador_etapa/lista_espera", map);
-            }else{
-            map.put("df", df);
-            map.put("listaEspera", servicioEtapa.getListaEsperaAdopcionInter());
-            return new ModelAndView("/Personal/Buscador_etapa/lista_espera_inter", map);
+            if (tipoEspera.equals("espera") || tipoEspera.equals("")) {
+                map.put("df", df);
+                map.put("listaEspera", servicioEtapa.getListaEspera());
+                return new ModelAndView("/Personal/Buscador_etapa/lista_espera", map);
+            } else {
+                map.put("df", df);
+                map.put("listaEspera", servicioEtapa.getListaEsperaAdopcionInter());
+                return new ModelAndView("/Personal/Buscador_etapa/lista_espera_inter", map);
             }
         }
         map.put("familia", familia);
@@ -1198,7 +1198,9 @@ public class mainEtapas {
             @RequestParam(value = "registrar", required = false) String registrar,
             int[] delete,
             Long[] prioridad,
-            String[] fecha
+            String[] fecha,
+            @RequestParam(value = "idNna", required = false) String idNna,
+            @RequestParam(value = "numero", required = false) String numero
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1265,6 +1267,8 @@ public class mainEtapas {
                 }
 
             }
+            map.addAttribute("idNna", idNna);
+            map.addAttribute("numero", numero);
             map.put("listaEstudios", servicioEtapa.getListaEstudioCaso(nnaPrioritario.getIdnna()));
             return new ModelAndView("/Personal/nna/lista_estudios", map);
         }
@@ -1715,7 +1719,6 @@ public class mainEtapas {
             @RequestParam("obs") String obs,
             @RequestParam("persInt") String persInt,
             @RequestParam("numPers") long numPers
-            
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1758,11 +1761,11 @@ public class mainEtapas {
         tempEval.setNumEval(numEval);
         tempEval.setObservacion(obs);
         tempEval.setPersInt(persInt);
-        if (numPers != 0){
+        if (numPers != 0) {
             tempEval.setNumPersInt(numPers);
-        }else {
+        } else {
             long temp = 0;
-            tempEval.setNumPersInt(temp);  
+            tempEval.setNumPersInt(temp);
         }
         servicioEtapa.crearEvaluacionAdopcion(tempEval);
 
@@ -2002,11 +2005,11 @@ public class mainEtapas {
         tempEval.setNumEval(numEval);
         tempEval.setObservacion(obs);
         tempEval.setPersInt(persInt);
-        if (numPers != 0){
+        if (numPers != 0) {
             tempEval.setNumPersInt(numPers);
-        }else {
+        } else {
             long temp = 0;
-            tempEval.setNumPersInt(temp);  
+            tempEval.setNumPersInt(temp);
         }
         servicioEtapa.crearEvaluacionAdopcion(tempEval);
 
@@ -2920,9 +2923,8 @@ public class mainEtapas {
         map.put("listaReevaluacion", servicioEtapa.getListaReevaluación());
         return new ModelAndView("/Personal/Buscador_etapa/lista_reevaluacion", map);
     }
-    
+
     // REGISTRAR REVISION DE EXPEDIENTE
-    
     @RequestMapping(value = "/agregarRevision", method = RequestMethod.POST)
     public ModelAndView agregarRevision(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna
@@ -2938,7 +2940,7 @@ public class mainEtapas {
         listaRevision.clear();
         return new ModelAndView("/Personal/nna/reg_revision", map);
     }
-    
+
     @RequestMapping(value = "/insertarRevision", method = RequestMethod.POST)
     public ModelAndView insertarRevision(ModelMap map, HttpSession session,
             @RequestParam(value = "numero", required = false) String numero,
@@ -3019,7 +3021,7 @@ public class mainEtapas {
 
         return new ModelAndView("/Personal/nna/reg_revision", map);
     }
-    
+
     @RequestMapping(value = "/verRevision", method = RequestMethod.POST)
     public ModelAndView verRevision(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna
@@ -3032,10 +3034,11 @@ public class mainEtapas {
         }
         nnaEditarRevision = idNna;
         map.put("listaRevision", servicioEtapa.getListaRevision(idNna));
+        map.addAttribute("idNna", idNna);
         return new ModelAndView("/Personal/nna/lista_revision", map);
 
     }
-    
+
     @RequestMapping(value = "/buscarExpedienteRevision", method = RequestMethod.POST)
     public ModelAndView buscarExpedienteRevision(ModelMap map, HttpSession session,
             @RequestParam("exp") String exp
@@ -3055,7 +3058,7 @@ public class mainEtapas {
         return new ModelAndView("/Personal/nna/agregar_exp_revision", map);
 
     }
-    
+
     @RequestMapping(value = "/agregarExpedienteRevision", method = RequestMethod.POST)
     public ModelAndView agregarExpedienteRevision(ModelMap map, HttpSession session, long[] idExpediente
     ) {
@@ -3078,9 +3081,10 @@ public class mainEtapas {
 
     }
 
-  @RequestMapping(value = "/EditarRevision", method = RequestMethod.POST)
+    @RequestMapping(value = "/EditarRevision", method = RequestMethod.POST)
     public ModelAndView EditarRevision(ModelMap map, HttpSession session,
-            @RequestParam("numero") String numero
+            @RequestParam("numero") String numero,
+            @RequestParam(value = "idNna", required = false) String idNna
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -3091,10 +3095,12 @@ public class mainEtapas {
         map.put("df", df);
         map.put("nna", nnaEditarEstudioCaso);
         map.put("listaRevision", servicioEtapa.getListaRevisionNumero(numero));
+        map.addAttribute("idNna", idNna);
+        map.addAttribute("numero", numero);
         return new ModelAndView("/Personal/nna/edit_revision", map);
 
     }
-    
+
     @RequestMapping(value = "/GuardarRevision", method = RequestMethod.POST)
     public ModelAndView GuardarRevision(ModelMap map, HttpSession session,
             @RequestParam("numero") String numero,
@@ -3107,7 +3113,7 @@ public class mainEtapas {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         servicioEtapa.updateRevision(numero, coments);
         nnaEditarRevision = idNna;
         map.put("listaRevision", servicioEtapa.getListaRevision(idNna));
@@ -3118,6 +3124,7 @@ public class mainEtapas {
     @RequestMapping(value = "/PersonalRevisionEstudio", method = RequestMethod.POST)
     public ModelAndView PersonalRevisionEstudio(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
+            @RequestParam(value = "numero", required = false) String numero,
             long[] idExpediente
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -3129,7 +3136,7 @@ public class mainEtapas {
         nnaEditarEstudioCaso = idNna;
         nnaPrioritario = ServicioNna.getNna(idNna);
         listaEstudioCaso.clear();
-        
+
         if (idExpediente != null) {
             for (long l : idExpediente) {
                 ExpedienteFamilia tempExp = servicioEtapa.getInfoFamilia(l);
@@ -3138,6 +3145,9 @@ public class mainEtapas {
         }
         map.put("listaEstudioCaso", listaEstudioCaso);
         map.put("df", df);
+
+        map.addAttribute("idNna", idNna);
+        map.addAttribute("numero", numero);
         return new ModelAndView("/Personal/nna/reg_estudio", map);
     }
 

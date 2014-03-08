@@ -77,14 +77,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                <%}
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -92,88 +92,100 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurnoGrupo" method="post">
+                            <input hidden name="idTaller" id="idTaller" value="${idTaller}">  
+                            <input hidden name="idGrupo" id="idGrupo" value="${idGrupo}"> 
+                            <input hidden name="idTurno2" id="idGrupo" value="${idTurno2}"> 
+                            <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        </form>
                         <c:choose>
                             <c:when test="${ reunion == null }">
                                 <form action="${pageContext.servletContext.contextPath}/PersonalCrearReunion" method="post" name="formulario" onsubmit="return(validar());">
-                                <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">      
-                            </c:when>
-                            <c:otherwise>
+                                    <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">  
+                                   
+                                </c:when>
+                                <c:otherwise>
                                     <form action="${pageContext.servletContext.contextPath}/PersonalUpdateReunion" method="post" name="formulario" onsubmit="return(validar());">
-                                    <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">  
-                            </c:otherwise>
-                        </c:choose>
-                        <h1>Agregar / Editar Reunión</h1>
-                        <br>
-                        
-                        
-                            <fieldset>
-
-                                <!-- Form Name -->
-                                <legend>Datos de Reunión</legend>
-
-                                <!-- Select Basic -->
-                                <div class="control-group">
-                                    <label class="control-label" for="selectbasic">Asociado a grupo: ${turno2.getGrupo().getNombre()} - Turno ${turno2.getNombre()}</label>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label" for="textinput">Fecha y Hora</label>
-                                    <div class="controls">
-                                        <input id="fecha" name="fecha" value="${fecha}" type="text"  class="datepicker"> &nbsp;<input id="hora" name="hora" type="text" value="${reunion.getHora()}" class="timepicker input-xlarge"> 
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label" for="textinput">Duracion</label>
-                                    <div class="controls">
-                                        <input id="duracion" name="duracion" value="${reunion.getDuracion()}" type="text" class="input-xlarge">                                        
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label" for="textinput">Direccion</label>
-                                    <div class="controls">
-                                        <input id="direccion" name="direccion" value="${reunion.getDireccion()}" type="text" value="Instalaciones del MIMP" class="input-xlarge">                                        
-                                    </div>
-                                </div>       
-
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label" for="textinput">Capacidad Maxima</label>
-                                    <div class="controls">
-                                        <input id="capacidad" name="capacidad" value="${reunion.getCapacidad()}" type="text" value="25" class="input-xlarge">                                        
-                                    </div>
-                                </div>
-
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label" for="textinput">Facilitador</label>
-                                    <div class="controls">
-                                        <textarea id="facilitador" name="facilitador" cols="20" rows="5">${reunion.getFacilitador()}</textarea>
-                                    </div>
-                                </div>
-
-                                <!-- Button -->
+                                        <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                        <input hidden name="idTurno2" id="idTurno2" value="${idTurno2}">
+                                 
+                                    </c:otherwise>
+                                </c:choose>
+                                <h1>Agregar / Editar Reunión</h1>
                                 <br>
-                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar</button>
-                            </fieldset>
-                        </form>
+
+
+                                <fieldset>
+
+                                    <!-- Form Name -->
+                                    <legend>Datos de Reunión</legend>
+
+                                    <!-- Select Basic -->
+                                    <div class="control-group">
+                                        <label class="control-label" for="selectbasic">Asociado a grupo: ${turno2.getGrupo().getNombre()} - Turno ${turno2.getNombre()}</label>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="control-group">
+                                        <label class="control-label" for="textinput">Fecha y Hora</label>
+                                        <div class="controls">
+                                            <input id="fecha" name="fecha" value="${fecha}" type="text"  class="datepicker"> &nbsp;<input id="hora" name="hora" type="text" value="${reunion.getHora()}" class="timepicker input-xlarge"> 
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="control-group">
+                                        <label class="control-label" for="textinput">Duracion</label>
+                                        <div class="controls">
+                                            <input id="duracion" name="duracion" value="${reunion.getDuracion()}" type="text" class="input-xlarge">                                        
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="control-group">
+                                        <label class="control-label" for="textinput">Direccion</label>
+                                        <div class="controls">
+                                            <input id="direccion" name="direccion" value="${reunion.getDireccion()}" type="text" value="Instalaciones del MIMP" class="input-xlarge">                                        
+                                        </div>
+                                    </div>       
+
+                                    <!-- Text input-->
+                                    <div class="control-group">
+                                        <label class="control-label" for="textinput">Capacidad Maxima</label>
+                                        <div class="controls">
+                                            <input id="capacidad" name="capacidad" value="${reunion.getCapacidad()}" type="text" value="25" class="input-xlarge">                                        
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="control-group">
+                                        <label class="control-label" for="textinput">Facilitador</label>
+                                        <div class="controls">
+                                            <textarea id="facilitador" name="facilitador" cols="20" rows="5">${reunion.getFacilitador()}</textarea>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Button -->
+                                    <br>
+                                    <input hidden name="idTaller" id="idTaller" value="${idTaller}">  
+                                    <input hidden name="idGrupo" id="idGrupo" value="${idGrupo}"> 
+                                    
+                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar</button>
+                                </fieldset>
+                            </form>
                     </div>
                 </div>
             </div>
@@ -197,58 +209,58 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery.timepicker.js"></script>
             <script type="text/javascript">
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-                $('.timepicker').timepicker({'timeFormat': 'H:i'});
+                                        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                        $('.timepicker').timepicker({'timeFormat': 'H:i'});
             </script>
             <script type="text/javascript">
-            function validar()
-            {
-            var numericExpression = /^[0-9]+$/;
-            if(!document.formulario.capacidad.value.match(numericExpression))
-            {
-                alert( "El campo debe contener solo números" );
-                document.formulario.capacidad.focus() ;
-                return false;
-            }
-            if( document.formulario.capacidad.value == "" )
-            {
-            alert( "Debe ingresar la capacidad" );
-             document.formulario.capacidad.focus() ;
-            return false;
-            }
-            if( document.formulario.fecha.value == "" )
-            {
-            alert( "Debe ingresar una fecha" );
-             document.formulario.fecha.focus() ;
-            return false;
-            }
-            if( document.formulario.hora.value == "" )
-            {
-            alert( "Debe ingresar una hora" );
-             document.formulario.hora.focus() ;
-            return false;
-            }
-            if( document.formulario.duracion.value == "" )
-            {
-            alert( "Debe ingresar la duración" );
-             document.formulario.duracion.focus() ;
-            return false;
-            }
-            if( document.formulario.direccion.value == "" )
-            {
-            alert( "Debe ingresar la dirección" );
-             document.formulario.direccion.focus() ;
-            return false;
-            }
-            if( document.formulario.capacidad.value == "" )
-            {
-            alert( "Debe ingresar la capacidad" );
-             document.formulario.capacidad.focus() ;
-            return false;
-            }
-             return true;
-            }
-          </script>
+                function validar()
+                {
+                    var numericExpression = /^[0-9]+$/;
+                    if (!document.formulario.capacidad.value.match(numericExpression))
+                    {
+                        alert("El campo debe contener solo números");
+                        document.formulario.capacidad.focus();
+                        return false;
+                    }
+                    if (document.formulario.capacidad.value == "")
+                    {
+                        alert("Debe ingresar la capacidad");
+                        document.formulario.capacidad.focus();
+                        return false;
+                    }
+                    if (document.formulario.fecha.value == "")
+                    {
+                        alert("Debe ingresar una fecha");
+                        document.formulario.fecha.focus();
+                        return false;
+                    }
+                    if (document.formulario.hora.value == "")
+                    {
+                        alert("Debe ingresar una hora");
+                        document.formulario.hora.focus();
+                        return false;
+                    }
+                    if (document.formulario.duracion.value == "")
+                    {
+                        alert("Debe ingresar la duración");
+                        document.formulario.duracion.focus();
+                        return false;
+                    }
+                    if (document.formulario.direccion.value == "")
+                    {
+                        alert("Debe ingresar la dirección");
+                        document.formulario.direccion.focus();
+                        return false;
+                    }
+                    if (document.formulario.capacidad.value == "")
+                    {
+                        alert("Debe ingresar la capacidad");
+                        document.formulario.capacidad.focus();
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
             <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>
