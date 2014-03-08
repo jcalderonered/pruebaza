@@ -73,14 +73,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -88,19 +88,23 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                        <form action="${pageContext.servletContext.contextPath}/EditarRevision" method="post">                            
+                            <input hidden name="idNna" id="idNna" value="${idNna}"> 
+                            <input hidden name="numero" id="numero" value="${numero}"> 
+                            <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        </form>
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -111,85 +115,88 @@
                         <br>
                         <br>
                         <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarEstudio" method="post" name="formulario" onkeypress="return enter(event)">
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label">Orden del Estudio de Caso</label>
-                            <div class="controls">
-                                <input id="orden" name="orden" type="text" value="" >
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Orden del Estudio de Caso</label>
+                                <div class="controls">
+                                    <input id="orden" name="orden" type="text" value="" >
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <br>
-                        <h1 align="center"><strong>Familias que conforman el Estudio de Caso</strong></h1>
-                        <br>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="col-sm-2 " >Expediente</th>
-                                        <th class="col-sm-2 " >Nivel sociec</th>
-                                        <th class="col-sm-2 " >Información</th>
-                                        <th class="col-sm-2 " >Resolución de aptitud</th>
-                                        <th class="col-sm-2 " >Prioridad</th>
-                                        <th class="col-sm-2 " >Fecha estudio caso</th>
-                                        <th class="col-sm-2 " >Eliminar</th>
-                                    </tr>
-                                </thead>
-                                <c:if test="${!listaEstudioCaso.isEmpty()}">
-                                <tbody>
-                                    <c:forEach var="familia" items="${listaEstudioCaso}" varStatus="indexFam">
-                                    <tr>
-                                        <td>${familia.getExpediente()}</td>
-                                        <td>
-                                            <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
-                                                ${info.getNivelSocioeconomico()}
+                            <br>
+                            <br>
+                            <h1 align="center"><strong>Familias que conforman el Estudio de Caso</strong></h1>
+                            <br>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-2 " >Expediente</th>
+                                            <th class="col-sm-2 " >Nivel sociec</th>
+                                            <th class="col-sm-2 " >Información</th>
+                                            <th class="col-sm-2 " >Resolución de aptitud</th>
+                                            <th class="col-sm-2 " >Prioridad</th>
+                                            <th class="col-sm-2 " >Fecha estudio caso</th>
+                                            <th class="col-sm-2 " >Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <c:if test="${!listaEstudioCaso.isEmpty()}">
+                                        <tbody>
+                                            <c:forEach var="familia" items="${listaEstudioCaso}" varStatus="indexFam">
+                                                <tr>
+                                                    <td>${familia.getExpediente()}</td>
+                                                    <td>
+                                                        <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
+                                                            ${info.getNivelSocioeconomico()}
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
+                                                            <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
+                                                                ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
+                                                            </c:forEach>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <select id="prioridad" name="prioridad">
+                                                            <c:forEach var="familia2" items="${listaEstudioCaso}" varStatus="indexPrioridad">
+                                                                <option ${indexFam.count == indexPrioridad.count ? 'selected' : ''} value="${indexPrioridad.count}" >${indexPrioridad.count}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input id="fecha" name="fecha" type="text" class="datepicker" >
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input id="delete" name="delete" value="${indexFam.index}" type="checkbox"> 
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             </c:forEach>
-                                        </td>
-                                        <td>
-                                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button>
-                                        </td>
-                                        <td>
-                                            <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
-                                                    <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
-                                                        ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
-                                                    </c:forEach>
-                                            </c:forEach>
-                                        </td>
-                                        <td>
-                                            <select id="prioridad" name="prioridad">
-                                                <c:forEach var="familia2" items="${listaEstudioCaso}" varStatus="indexPrioridad">
-                                                    <option ${indexFam.count == indexPrioridad.count ? 'selected' : ''} value="${indexPrioridad.count}" >${indexPrioridad.count}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input id="fecha" name="fecha" type="text" class="datepicker" >
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input id="delete" name="delete" value="${indexFam.index}" type="checkbox"> 
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </c:forEach>
-                                </tbody>
-                                </c:if> 
-                               <c:if test="${listaEstudioCaso.isEmpty()}">
-                                    <h3><strong>No existen Familias propuestas</strong></h3>
-                                </c:if>  
-                            </table>
-                        </div>
-                        <br>
-                        <br>
-                        <input type="submit" id="agregar" name="agregar" value="Agregar Familia" class="btn btn-default">
-                        
-                        <input type="submit" id="eliminar" name="eliminar" value="Eliminar Familia" class="btn btn-default">
-                        <br>
-                        <br>
-                        <input type="submit" id="registrar" name="registrar" value="Registrar" class="btn btn-default">
-                        
+                                        </tbody>
+                                    </c:if> 
+                                    <c:if test="${listaEstudioCaso.isEmpty()}">
+                                        <h3><strong>No existen Familias propuestas</strong></h3>
+                                    </c:if>  
+                                </table>
+                            </div>
+                            <br>
+                            <br>
+                            <input hidden name="idNna" id="idNna" value="${idNna}"> 
+                            <input hidden name="numero" id="numero" value="${numero}"> 
+                            <input type="submit" id="agregar" name="agregar" value="Agregar Familia" class="btn btn-default">
+
+
+                            <input type="submit" id="eliminar" name="eliminar" value="Eliminar Familia" class="btn btn-default">
+                            <br>
+                            <br>
+                            <input type="submit" id="registrar" name="registrar" value="Registrar" class="btn btn-default">
+
                         </form>
                     </div>
                 </div>
@@ -212,37 +219,37 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
         <script type="text/javascript">
-                function enter(e) {
-                     if (e.keyCode == 13) {
-                     return false;
-                    }
+            function enter(e) {
+                if (e.keyCode == 13) {
+                    return false;
                 }
-            </script>
-            <script type="text/javascript">
-     
+            }
+        </script>
+        <script type="text/javascript">
+
             function validar()
             {
-              
-            if( document.formulario.orden.value == "" )
-            {
-            alert( "Debe ingresar un número de orden");
-             document.formulario.orden.focus() ;
-            return false;
+
+                if (document.formulario.orden.value == "")
+                {
+                    alert("Debe ingresar un número de orden");
+                    document.formulario.orden.focus();
+                    return false;
+                }
+                if (document.formulario.fechaEval.value == "")
+                {
+                    alert("Debe ingresar la fecha");
+                    document.formulario.fechaEval.focus();
+                    return false;
+                }
+
+                return true;
             }
-            if( document.formulario.fechaEval.value == "" )
-            {
-            alert( "Debe ingresar la fecha" );
-             document.formulario.fechaEval.focus() ;
-            return false;
-            }
-            
-            return true;
-            }
-            </script>
+        </script>
         <!-- Ubicar al final -->
     </body>
 </html>

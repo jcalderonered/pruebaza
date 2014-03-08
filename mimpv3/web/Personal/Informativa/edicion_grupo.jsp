@@ -101,7 +101,11 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarTaller" method="post">
+                            <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                            <input hidden name="idGrupo" id="idGrupo" value="${idGrupo}">
+                            <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        </form>
                         <c:choose>
                             <c:when test="${ grupo == null }">
                                 <form action="${pageContext.servletContext.contextPath}/PersonalCrearGrupo" method="post">
@@ -109,7 +113,8 @@
                             </c:when>
                             <c:otherwise>
                                     <form action="${pageContext.servletContext.contextPath}/PersonalUpdateGrupo" method="post">
-                                    <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">  
+                                    <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}"> 
+                                    <input hidden name="idTaller" id="idTaller" value="${idTaller}">
                             </c:otherwise>
                         </c:choose>
                         <h1>Edición de grupo</h1>
@@ -146,6 +151,8 @@
                                   <td>
                                      <form action="${pageContext.servletContext.contextPath}/PersonalEditarTurnoGrupo" method="post">
                                             <input hidden name="idTurno2" id="idTurno2" value="${turno.getIdturno2()}">
+                                            <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
+                                            <input hidden name="idTaller" id="idTaller" value="${idTaller}">
                                             <button type="submit" class="btn btn-default">Modificar</button>
                                      </form>
                                   </td>
@@ -161,6 +168,7 @@
                         <c:if test="${grupo != null}">  
                          <form action="${pageContext.servletContext.contextPath}/PersonalAgregarTurnoGrupo" method="post">
                                 <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
+                                <input hidden name="idTaller" id="idTaller" value="${idTaller}">
                                 <button id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar Turno</button>
                          </form>                
                         </c:if>

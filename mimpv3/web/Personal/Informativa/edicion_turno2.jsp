@@ -74,14 +74,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                <%}
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -89,116 +89,128 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarGrupo" method="post">
+                            <input hidden name="idTaller" id="idTaller" value="${idTaller}">  
+                            <input hidden name="idGrupo" id="idGrupo" value="${idGrupo}"> 
+                            <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        </form>
                         <c:choose>
                             <c:when test="${ turno2 == null }">
                                 <form action="${pageContext.servletContext.contextPath}/PersonalCrearTurno2" method="post">
-                                <input hidden name="idGrupo" id="idGrupo" value="${idGrupo}">      
-                            </c:when>
-                            <c:otherwise>
+                                    
+                                </c:when>
+                                <c:otherwise>
                                     <form action="${pageContext.servletContext.contextPath}/PersonalUpdateTurno2" method="post">
-                                    <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">  
-                            </c:otherwise>
-                        </c:choose>
-                        
-                        <h1>Edición de Turno</h1>
-                        <br>
-                        
-                            <fieldset>
+                                        <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">                                        
+                                        
+                                    </c:otherwise>
+                                </c:choose>
 
-                                <!-- Text input-->
-                                <div class="control-group">
-                                    <label class="control-label" for="textinput">Nombre del Turno</label>
-                                    <div class="controls">
-                                        <input id="nombreTurno2" name="nombreTurno2" value="${turno2.getNombre()}" type="text" placeholder="nombre" class="input-xlarge">
+                                <h1>Edición de Turno</h1>
+                                <br>
+
+                                <fieldset>
+
+                                    <!-- Text input-->
+                                    <div class="control-group">
+                                        <label class="control-label" for="textinput">Nombre del Turno</label>
+                                        <div class="controls">
+                                            <input id="nombreTurno2" name="nombreTurno2" value="${turno2.getNombre()}" type="text" placeholder="nombre" class="input-xlarge">
+                                        </div>
                                     </div>
+                                    <br>
+                                    <input hidden name="idTaller" id="idTaller" value="${idTaller}"> 
+                                    <input hidden name="idGrupo" id="idGrupo" value="${idGrupo}"> 
+                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
+
+                                </fieldset>
+                            </form>
+                            <br>            
+                            <h1>Listado de Reuniones</h1>
+                            <br>
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Hora</th>
+                                        <th>Facilitador(es)</th>
+                                        <th>Capacidad</th>
+                                        <th>Modificar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:if test="${turno2 != null}">  
+                                        <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
+                                            <tr>
+                                                <td>${formato.dateToString(reunion.getFecha())}  </td>
+                                                <td>${reunion.getHora()}</td>
+                                                <td>
+                                                    ${reunion.getFacilitador()}
+                                                </td>
+                                                <td>
+                                                    ${reunion.getCapacidad()}
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/PersonalEditarReunion" method="post">
+                                                        <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                        <input hidden name="idTaller" id="idTaller" value="${idTaller}">  
+                                                        <input hidden name="idGrupo" id="idGrupo" value="${idGrupo}">   
+                                                        <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">
+                                                        <button type="submit" class="btn btn-default">Modificar</button>
+                                                    </form>
+                                                </td>
+                                            </tr>   
+                                        </c:forEach>
+                                    </c:if>  
+                                </tbody>
+                            </table>                                
+                            <c:if test="${turno2 == null}"> 
+                                <h3><strong>Debe crear un Turno antes de poder agregar las Reuniones</strong></h3>    
+                            </c:if> 
+                            <!-- Button -->
+                            <br>
+                            <c:if test="${turno2 != null}">  
+                                <form action="${pageContext.servletContext.contextPath}/PersonalAgregarReunion" method="post">
+                                    <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">
+                                    <input hidden name="idTaller" id="idTaller" value="${idTaller}">  
+                                    <input hidden name="idGrupo" id="idGrupo" value="${idGrupo}">                                     
+                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar nueva reunión</button>
+                                </form>                
+                            </c:if>
+
+                            <br>
+                            <br>
+
+                            </div>
+                            </div>
+                            </div>
+                            <!--FIN DE CONTENIDO-->
+                            <br>
+                            <br>
+
+                            <div id="footer">
+                                <div id="ja-footer" class="wrap">
+                                    <hr width=80% align="center">
+                                    <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
                                 </div>
-                                <br>
-                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
+                            </div>
+                            <!-- core JavaScript
+                        ================================================== -->
+                            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+                            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
 
-                            </fieldset>
-                        </form>
-                        <br>            
-                                <h1>Listado de Reuniones</h1>
-                                <br>
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Fecha</th>
-                                            <th>Hora</th>
-                                            <th>Facilitador(es)</th>
-                                            <th>Capacidad</th>
-                                            <th>Modificar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:if test="${turno2 != null}">  
-                                          <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
-                                             <tr>
-                                             <td>${formato.dateToString(reunion.getFecha())}  </td>
-                                             <td>${reunion.getHora()}</td>
-                                             <td>
-                                                 ${reunion.getFacilitador()}
-                                             </td>
-                                             <td>
-                                                 ${reunion.getCapacidad()}
-                                             </td>
-                                             <td>
-                                                 <form action="${pageContext.servletContext.contextPath}/PersonalEditarReunion" method="post">
-                                                 <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-                                                 <button type="submit" class="btn btn-default">Modificar</button>
-                                                 </form>
-                                             </td>
-                                             </tr>   
-                                          </c:forEach>
-                                        </c:if>  
-                                    </tbody>
-                                </table>                                
-                                 <c:if test="${turno2 == null}"> 
-                                    <h3><strong>Debe crear un Turno antes de poder agregar las Reuniones</strong></h3>    
-                                 </c:if> 
-                                <!-- Button -->
-                                <br>
-                                 <c:if test="${turno2 != null}">  
-                                    <form action="${pageContext.servletContext.contextPath}/PersonalAgregarReunion" method="post">
-                                      <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">
-                                     <button id="singlebutton" name="singlebutton" class="btn btn-primary">Agregar nueva reunión</button>
-                                  </form>                
-                                 </c:if>
-                                
-                                <br>
-                                <br>
-                                
-                    </div>
-                </div>
-            </div>
-            <!--FIN DE CONTENIDO-->
-            <br>
-            <br>
-
-            <div id="footer">
-                <div id="ja-footer" class="wrap">
-                    <hr width=80% align="center">
-                    <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-                </div>
-            </div>
-            <!-- core JavaScript
-        ================================================== -->
-            <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-            <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-
-            <!-- Ubicar al final -->
-    </body>
-</html>
+                            <!-- Ubicar al final -->
+                            </body>
+                            </html>

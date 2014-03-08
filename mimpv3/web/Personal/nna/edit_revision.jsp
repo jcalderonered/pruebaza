@@ -100,7 +100,10 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                       <form action="${pageContext.servletContext.contextPath}/verRevision" method="post">                            
+                            <input hidden name="idNna" id="idNna" value="${idNna}"> 
+                            <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        </form>
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -149,6 +152,7 @@
                         </div>
                         <br>
                         <input hidden id="idNna" name="idNna" value="${idNna}" />
+                        <input hidden id="numero" name="numero" value="${numero}" />
                         <h4><strong>Seleccione la(s) familia(as) que pasaran a estudio de caso</strong></h4>
                         <br>
                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar Estudio de Caso</button>

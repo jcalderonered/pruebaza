@@ -185,7 +185,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/nnaPrioritarios'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -216,6 +216,7 @@
                                                           <td>
                                                             <form action="${pageContext.servletContext.contextPath}/EditarRevision" method="post">
                                                               <input hidden name="numero" id="numero" value="${revision.getNumero()}">  
+                                                              <input hidden name="idNna" id="idNna" value="${idNna}"> 
                                                               <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
                                                             </form>
                                                           </td>

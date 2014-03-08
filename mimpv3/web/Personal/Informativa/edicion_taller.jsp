@@ -184,6 +184,7 @@
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/PersonalEditarGrupo" method="post">
                                                         <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
+                                                        <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
                                                         <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Modificar</button>
                                                     </form>
                                                 </td>

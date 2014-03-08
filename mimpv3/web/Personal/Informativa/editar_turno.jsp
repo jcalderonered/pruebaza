@@ -104,7 +104,10 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarSesion" method="post">
+                            <input hidden name="idSesion" id="idSesion" value="${idSesion}">
+                            <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        </form>
                         <c:choose>
                             <c:when test="${turno != null }">
                                 <form action="${pageContext.servletContext.contextPath}/PersonalUpdateTurno" method="post">   
