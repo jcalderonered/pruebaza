@@ -2027,11 +2027,11 @@ public class main {
 //            Ella.setSaludActual(estadoActual);
 
             ServicioMain.updateAdoptante(Ella);
-            if (El.getApellidoP() != null && Ella.getApellidoP() != null) {
+            if ((El.getApellidoP() != null && !El.getApellidoP().equals("")) && (Ella.getApellidoP() != null && !Ella.getApellidoP().equals(""))) {
                 expediente.setExpediente(El.getApellidoP() + " - " + Ella.getApellidoP());
-            } else if (El.getApellidoP() != null) {
+            } else if (El.getApellidoP() != null && !El.getApellidoP().equals("")) {
                 expediente.setExpediente(El.getApellidoP());
-            } else if (Ella.getApellidoP() != null) {
+            } else if (Ella.getApellidoP() != null && !Ella.getApellidoP().equals("")) {
                 expediente.setExpediente(Ella.getApellidoP());
             }
             servicioEtapa.updateExpedienteFamilia(expediente);
