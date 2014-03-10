@@ -222,7 +222,7 @@
                                 </tbody>
                                 </c:if> 
                                <c:if test="${listaDesig.isEmpty()}">
-                                    <h3><strong>No existen Nna en esta clasificación</strong></h3>
+                                    <h3><strong>Aún no se ha adoptado un NNA</strong></h3>
                                 </c:if>  
                             </table>
                         </div>

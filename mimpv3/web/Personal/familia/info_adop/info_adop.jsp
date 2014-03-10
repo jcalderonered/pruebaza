@@ -294,6 +294,7 @@
                                         </c:if> 
                                     </table>
                                 </div>
+                                <c:if test="${estado != 'esperainter'}">
                                 <br>
                                 <h3><strong>Estudios del caso</strong></h3>
                                 <br>
@@ -391,6 +392,7 @@
                                         </c:if> 
                                     </table>
                                 </div>
+                                </c:if>
                             </c:if>      
                             <!--FIN DE CONTENIDO-->
                         </fieldset>

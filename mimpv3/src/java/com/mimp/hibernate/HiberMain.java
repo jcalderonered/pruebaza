@@ -494,6 +494,29 @@ public class HiberMain {
 
     }
     
+    public ArrayList<Designacion> getListaNnaAdoptantesAdopcion(long idExp) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+        String hql = "From Designacion D where D.expedienteFamilia = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idExp);
+        List designaciones = query.list();
+        ArrayList<Designacion> allDesignaciones = new ArrayList();
+        
+        for (Iterator iter = designaciones.iterator(); iter.hasNext();) {
+            Designacion temp = (Designacion) iter.next();
+            if (temp.getAceptacionConsejo() == 4){
+                Hibernate.initialize(temp.getNna());
+            }
+            allDesignaciones.add(temp);
+        }
+        
+        return allDesignaciones;
+
+    }
+    
     public ArrayList<EstudioCaso> getListaEstudiosPorExpediente(long idExp) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -597,13 +620,14 @@ public class HiberMain {
         session.saveOrUpdate(tempDesig);
     }
     
-    public ArrayList<Designacion> getListaDesignacionesAdoptantesExtranjero() {
+    public ArrayList<Designacion> getListaDesignacionesAdoptantesExtranjero(long idExp) {
 
         Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-        String hql = "From Designacion D where D.aceptacionConsejo = :aceptacion and D.tipoPropuesta = :tipo order by D.fechaConsejo DESC";
+        String hql = "From Designacion D where D.expedienteFamilia = :idExp and D.aceptacionConsejo = :aceptacion and D.tipoPropuesta = :tipo order by D.fechaConsejo DESC";
         Query query = session.createQuery(hql);
+        query.setLong("idExp", idExp);
         query.setShort("aceptacion", Short.parseShort("4"));
         query.setString("tipo", "extranjero");
         List designaciones = query.list();
@@ -647,6 +671,7 @@ public class HiberMain {
         Object queryResultA = queryA.uniqueResult();
 
         tempDesig = (Designacion) queryResultA;
+        Hibernate.initialize(tempDesig.getExpedienteFamilia());
         return tempDesig;
         
     }
