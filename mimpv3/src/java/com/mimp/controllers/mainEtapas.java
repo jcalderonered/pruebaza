@@ -1187,6 +1187,7 @@ public class mainEtapas {
         nnaEditarEstudioCaso = idNna;
         nnaPrioritario = ServicioNna.getNna(idNna);
         listaEstudioCaso.clear();
+        map.addAttribute("idNna", idNna);
         return new ModelAndView("/Personal/nna/reg_estudio", map);
     }
 
@@ -1210,6 +1211,8 @@ public class mainEtapas {
         }
         if (agregar != null) {
             map.put("df", df);
+            map.addAttribute("idNna", idNna);
+            map.addAttribute("numero", numero);
             return new ModelAndView("/Personal/nna/agregar_exp_prioritario", map);
         }
         if (eliminar != null && delete != null) {
