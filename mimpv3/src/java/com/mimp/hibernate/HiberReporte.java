@@ -2993,7 +2993,7 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(2);
 
-                if (rs.next()) {
+                while(rs.next()) {
                     FormularioSesion form = new FormularioSesion();
                     form.setIdformularioSesion(rs.getLong("IDFORMULARIO_SESION"));
                     form.setFechaSol(rs.getDate("FECHA_SOL"));
