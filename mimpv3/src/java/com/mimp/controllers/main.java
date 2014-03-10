@@ -524,6 +524,26 @@ public class main {
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
 
+        } else if (estado.equals("esperainter")) {
+            Long idExp = Long.parseLong(idExpediente);
+            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+            expediente = tempExp;
+            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+            for (Adoptante adop : infoFam.getAdoptantes()) {
+                if (adop.getSexo() == 'f') {
+                    Ella = adop;
+                }
+                if (adop.getSexo() == 'm') {
+                    El = adop;
+                }
+            }
+            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+            listaDesignaciones = ServicioMain.getListaNnaAdoptantesAdopcion(tempExp.getIdexpedienteFamilia());
+            //listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+
         } else if (estado.equals("designacion")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -698,6 +718,26 @@ public class main {
             listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+
+        } else if (estado.equals("esperainter")) {
+            Long idExp = Long.parseLong(idExpediente);
+            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+            expediente = tempExp;
+            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+            for (Adoptante adop : infoFam.getAdoptantes()) {
+                if (adop.getSexo() == 'f') {
+                    Ella = adop;
+                }
+                if (adop.getSexo() == 'm') {
+                    El = adop;
+                }
+            }
+            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+            listaDesignaciones = ServicioMain.getListaNnaAdoptantesAdopcion(tempExp.getIdexpedienteFamilia());
+            //listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
 
         } else if (estado.equals("designacion")) {
             Long idExp = Long.parseLong(idExpediente);
@@ -1145,6 +1185,7 @@ public class main {
         map.put("expediente", expediente);
         map.put("nna", nnaAdoptado);
         map.put("exp", expNna);
+        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(expediente.getIdexpedienteFamilia()));
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_nna", map);
     }
@@ -1171,7 +1212,7 @@ public class main {
         map.put("nna", nnaAdoptado);
         map.put("exp", expNna);
         map.addAttribute("volver", volver);
-
+        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(expediente.getIdexpedienteFamilia()));
         map.put("expediente2", expediente2);
         map.put("HT", HT);
         map.put("nacionalidad", nacionalidad);
@@ -2400,7 +2441,7 @@ public class main {
         }
 
         map.addAttribute("df", df);
-        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero());
+        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(idExpediente));
         return new ModelAndView("/Personal/nna_adop_ext/lista_nna", map);
     }
     
@@ -2536,7 +2577,7 @@ public class main {
         ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
 
         
-        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero());
+        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(idExpediente));
         return new ModelAndView("/Personal/nna_adop_ext/lista_nna", map);
         
 
@@ -2668,7 +2709,7 @@ public class main {
         ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
 
         map.addAttribute("df", df);
-        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero());
+        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(tempDesig.getExpedienteFamilia().getIdexpedienteFamilia()));
         return new ModelAndView("/Personal/nna_adop_ext/lista_nna", map);
         
 
