@@ -182,6 +182,7 @@
                         </div>
                         <br>
                         <br>
+                        <input hidden name="idNna" id="idNna" value="${idNna}">
                         <input type="submit" id="agregar" name="agregar" value="Agregar Familia" class="btn btn-default">
                         
                         <input type="submit" id="eliminar" name="eliminar" value="Eliminar Familia" class="btn btn-default">

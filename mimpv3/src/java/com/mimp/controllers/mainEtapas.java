@@ -2938,6 +2938,7 @@ public class mainEtapas {
         nnaEditarRevision = idNna;
         nnaPrioritario = ServicioNna.getNna(idNna);
         listaRevision.clear();
+        map.addAttribute("idNna", idNna);
         return new ModelAndView("/Personal/nna/reg_revision", map);
     }
 
@@ -2948,6 +2949,7 @@ public class mainEtapas {
             @RequestParam(value = "agregar", required = false) String agregar,
             @RequestParam(value = "eliminar", required = false) String eliminar,
             @RequestParam(value = "registrar", required = false) String registrar,
+            @RequestParam(value = "idNna", required = false) long idNna,
             int[] delete,
             Long[] prioridad,
             String[] fecha
@@ -2960,6 +2962,7 @@ public class mainEtapas {
         }
         if (agregar != null) {
             map.put("df", df);
+            map.addAttribute("idNna", idNna);
             return new ModelAndView("/Personal/nna/agregar_exp_revision", map);
         }
         if (eliminar != null && delete != null) {
@@ -2969,6 +2972,7 @@ public class mainEtapas {
 
             map.put("df", df);
             map.put("listaRevision", listaRevision);
+            map.addAttribute("idNna", idNna);
             return new ModelAndView("/Personal/nna/reg_revision", map);
         }
         if (registrar != null) {
