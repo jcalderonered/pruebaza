@@ -127,7 +127,7 @@
                         </div>
                         <br>
                         <br>
-                        <h1 align="center"><strong>Familias que conforman el Estudio de Caso</strong></h1>
+                        <h1 align="center"><strong>Familias que conforman la Revisión de Expediente</strong></h1>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
@@ -135,7 +135,6 @@
                                     <tr>
                                         <th class="col-sm-2 " >Expediente</th>
                                         <th class="col-sm-2 " >Nivel sociec</th>
-                                        <th class="col-sm-2 " >Información</th>
                                         <th class="col-sm-2 " >Resolución de aptitud</th>
                                         <th class="col-sm-2 " >Fecha de revisión</th>
                                         <th class="col-sm-2 " >Eliminar</th>
@@ -150,9 +149,6 @@
                                             <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
                                                 ${info.getNivelSocioeconomico()}
                                             </c:forEach>
-                                        </td>
-                                        <td>
-                                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button>
                                         </td>
                                         <td>
                                             <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">

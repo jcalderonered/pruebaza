@@ -225,7 +225,6 @@
                                     <tr>
                                         <th class="col-sm-2 " >Expediente</th>
                                         <th class="col-sm-2 " >Nivel sociec</th>
-                                        <th class="col-sm-2 " >Información</th>
                                         <th class="col-sm-2 " >Resolución de aptitud</th>
                                         <th class="col-sm-2 " >Seleccionar</th>
                                     </tr>
@@ -241,7 +240,6 @@
                                                         ${info.getNivelSocioeconomico()}
                                                     </c:forEach>
                                                 </td>
-                                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
                                                 <td>
                                                     <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
                                                     <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
