@@ -2952,9 +2952,8 @@ public class mainEtapas {
             @RequestParam(value = "agregar", required = false) String agregar,
             @RequestParam(value = "eliminar", required = false) String eliminar,
             @RequestParam(value = "registrar", required = false) String registrar,
-            @RequestParam(value = "idNna", required = false) long idNna,
+            @RequestParam(value = "idNna", required = false) String idNna,
             int[] delete,
-            Long[] prioridad,
             String[] fecha
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -2983,7 +2982,6 @@ public class mainEtapas {
                 Revision tempRev = new Revision();
                 tempRev.setNna(nnaPrioritario);
                 tempRev.setExpedienteFamilia(listaRevision.get(i));
-                ExpedienteFamilia expFam1 = listaRevision.get(i);
                 tempRev.setNumero(numero);
                 tempRev.setComentarios(comentarios);
                 Date tempfecha = tempRev.getFechaRevision();
