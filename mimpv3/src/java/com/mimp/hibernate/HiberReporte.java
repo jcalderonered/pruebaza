@@ -774,7 +774,7 @@ public class HiberReporte {
                     while (rs2.next()) {
                         ExpedienteFamilia tempExpFam = new ExpedienteFamilia();
                         EstudioCaso tempEst = new EstudioCaso();
-                        
+
                         tempEst.setIdestudioCaso(rs2.getLong("IDESTUDIO_CASO"));
                         tempEst.setOrden(rs2.getString("ORDEN"));
                         tempEst.setFechaEstudio(rs2.getDate("FECHA_ESTUDIO"));
@@ -782,18 +782,18 @@ public class HiberReporte {
                         tempEst.setResultado(rs2.getString("RESULTADO"));
                         tempEst.setPrioridad(rs2.getLong("PRIORIDAD"));
                         tempEst.setNSolicitud(rs2.getBigDecimal("N_SOLICITUD"));
-                        
+
                         tempExpFam.setIdexpedienteFamilia(rs2.getLong("IDEXPEDIENTE_FAMILIA"));
                         tempExpFam.setExpediente(rs2.getString("EXPEDIENTE"));
-                        
+
                         tempEst.setExpedienteFamilia(tempExpFam);
-                        
+
                         listEst.add(tempEst);
                     }
                     statement2.close();
 
                     tempNna.setEstudioCasos(listEst);
-                    
+
                     String hql3 = "{call REPORTE_LISTADESIG(?,?)}";
                     CallableStatement statement3 = connection.prepareCall(hql3);
                     statement3.setLong(1, tempNna.getIdnna());
@@ -809,7 +809,7 @@ public class HiberReporte {
                         InfoFamilia tempInfoFam = new InfoFamilia();
                         Familia tempFam = new Familia();
                         Designacion tempDesig = new Designacion();
-                        
+
                         tempDesig.setIddesignacion(rs3.getLong("IDDESIGNACION"));
                         tempDesig.setNDesignacion(rs3.getString("N_DESIGNACION"));
                         tempDesig.setPrioridad(rs3.getLong("PRIORIDAD"));
@@ -818,60 +818,60 @@ public class HiberReporte {
                         tempDesig.setAceptacionConsejo(rs3.getShort("ACEPTACION_CONSEJO"));
                         tempDesig.setTipoPropuesta(rs3.getString("TIPO_PROPUESTA"));
                         tempDesig.setObs(rs3.getString("OBS"));
-                        
+
                         tempExpFam.setIdexpedienteFamilia(rs3.getLong("IDEXPEDIENTE_FAMILIA"));
                         tempExpFam.setExpediente(rs3.getString("EXPEDIENTE"));
-                        
+
                         tempInfoFam.setIdinfoFamilia(rs3.getLong("IDINFO_FAMILIA"));
                         tempInfoFam.setPaisRes(rs3.getString("PAIS_RES"));
                         tempInfoFam.setDepRes(rs3.getString("DEP_RES"));
-                        
+
                         tempFam.setIdfamilia(rs3.getLong("IDFAMILIA"));
                         Long idEn = rs3.getLong("IDENTIDAD");
                         if (!rs.wasNull()) {
-                        Entidad tempEnt = new Entidad();
-                        String query4 = "{call RENAD_ENTIDAD(?,?)}";
-                        CallableStatement statement4 = connection.prepareCall(query4);
-                        statement4.setLong(1, idEn);
-                        statement4.registerOutParameter(2, OracleTypes.CURSOR);
-                        statement4.execute();
-                        ResultSet rs4 = (ResultSet) statement4.getObject(2);
-                        while (rs4.next()) {
-                            tempEnt.setIdentidad(rs4.getLong("IDENTIDAD"));
-                            tempEnt.setNombre(rs4.getString("NOMBRE"));
-                            tempEnt.setUser(rs4.getString("USER_"));
-                            tempEnt.setPass(rs4.getString("PASS"));
-                            tempEnt.setDireccion(rs4.getString("DIRECCION"));
-                            tempEnt.setTelefono(rs4.getString("TELEFONO"));
-                            tempEnt.setPais(rs4.getString("PAIS"));
-                            tempEnt.setResolAuto(rs4.getString("RESOL_AUTO"));
-                            tempEnt.setFechaResol(rs4.getDate("FECHA_RESOL"));
-                            tempEnt.setResolRenov(rs4.getString("RESOL_RENOV"));
-                            tempEnt.setFechaRenov(rs4.getDate("FECHA_RENOV"));
-                            tempEnt.setFechaVenc(rs4.getDate("FECHA_VENC"));
-                            tempEnt.setObs(rs4.getString("OBS"));
+                            Entidad tempEnt = new Entidad();
+                            String query4 = "{call RENAD_ENTIDAD(?,?)}";
+                            CallableStatement statement4 = connection.prepareCall(query4);
+                            statement4.setLong(1, idEn);
+                            statement4.registerOutParameter(2, OracleTypes.CURSOR);
+                            statement4.execute();
+                            ResultSet rs4 = (ResultSet) statement4.getObject(2);
+                            while (rs4.next()) {
+                                tempEnt.setIdentidad(rs4.getLong("IDENTIDAD"));
+                                tempEnt.setNombre(rs4.getString("NOMBRE"));
+                                tempEnt.setUser(rs4.getString("USER_"));
+                                tempEnt.setPass(rs4.getString("PASS"));
+                                tempEnt.setDireccion(rs4.getString("DIRECCION"));
+                                tempEnt.setTelefono(rs4.getString("TELEFONO"));
+                                tempEnt.setPais(rs4.getString("PAIS"));
+                                tempEnt.setResolAuto(rs4.getString("RESOL_AUTO"));
+                                tempEnt.setFechaResol(rs4.getDate("FECHA_RESOL"));
+                                tempEnt.setResolRenov(rs4.getString("RESOL_RENOV"));
+                                tempEnt.setFechaRenov(rs4.getDate("FECHA_RENOV"));
+                                tempEnt.setFechaVenc(rs4.getDate("FECHA_VENC"));
+                                tempEnt.setObs(rs4.getString("OBS"));
+                            }
+                            statement4.close();
+                            tempFam.setEntidad(tempEnt);
                         }
-                        statement4.close();
-                        tempFam.setEntidad(tempEnt);
-                    }
-                        
-                    tempInfoFam.setFamilia(tempFam);
-                    tempExpFam.setFamilia(tempFam);
-                        
-                    listExpFam.add(tempExpFam);
-                    listInfo.add(tempInfoFam);
-                    
-                    tempFam.setExpedienteFamilias(listExpFam);
-                    tempFam.setInfoFamilias(listInfo);
-                    
-                    tempDesig.setExpedienteFamilia(tempExpFam);
-                    
-                    listDes.add(tempDesig);
+
+                        tempInfoFam.setFamilia(tempFam);
+                        tempExpFam.setFamilia(tempFam);
+
+                        listExpFam.add(tempExpFam);
+                        listInfo.add(tempInfoFam);
+
+                        tempFam.setExpedienteFamilias(listExpFam);
+                        tempFam.setInfoFamilias(listInfo);
+
+                        tempDesig.setExpedienteFamilia(tempExpFam);
+
+                        listDes.add(tempDesig);
                     }
                     statement3.close();
-                    
+
                     tempNna.setDesignacions(listDes);
-                    
+
                     allNna.add(tempNna);
 
                 }
@@ -2754,7 +2754,7 @@ public class HiberReporte {
 
         return ultimaDesig;
     }
-    
+
     public ArrayList<Familia> getListaAdoptantesExtranjero() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2973,6 +2973,114 @@ public class HiberReporte {
         session.doWork(work);
 
         return allFamilias;
+    }
 
+    public ArrayList<FormularioSesion> getInscritosSI(Long idsesion) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idsesion_in = idsesion;
+        final ArrayList<FormularioSesion> allFamilias = new ArrayList();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call REPORTE_INSCRITOS_SESION(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idsesion_in);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+
+                ResultSet rs = (ResultSet) statement.getObject(2);
+
+                if (rs.next()) {
+                    FormularioSesion form = new FormularioSesion();
+                    form.setIdformularioSesion(rs.getLong("IDFORMULARIO_SESION"));
+                    form.setFechaSol(rs.getDate("FECHA_SOL"));
+                    form.setPaisRes(rs.getString("PAIS_RES"));
+                    form.setDepRes(rs.getString("DEP_RES"));
+                    form.setProvRes(rs.getString("PROV_RES"));
+                    form.setDistritoRes(rs.getString("DISTRITO_RES"));
+                    form.setDireccionRes(rs.getString("DIRECCION_RES"));
+                    form.setEstadoCivil(rs.getString("ESTADO_CIVIL"));
+                    form.setTelefono(rs.getString("TELEFONO"));
+
+                    Set<Asistente> listAsist = getAsistentes(rs.getLong("IDFORMULARIO_SESION"));
+                    form.setAsistentes(listAsist);
+
+                    allFamilias.add(form);
+                }
+                statement.close();
+            }
+        };
+        session.doWork(work);
+
+        //METODO BUBBLESORT PARA ORDENAR SEGUN EL APELLIDO DE LA ASISTENTE MUJER
+        int n = allFamilias.size();
+        FormularioSesion auxform;
+        for (int i = 0; i < n - 1; i++) {
+            ArrayList<Asistente> asist_temp = new ArrayList(allFamilias.get(i).getAsistentes());
+            for (int j = i; j < n - 1; j++) {
+                ArrayList<Asistente> asist_temp2 = new ArrayList(allFamilias.get(j + 1).getAsistentes());
+                if (asist_temp.get(0).getApellidoP().compareToIgnoreCase(asist_temp2.get(0).getApellidoP()) > 0) {
+                    auxform = allFamilias.get(i);
+                    allFamilias.set(i, allFamilias.get(j + 1));
+                    allFamilias.set(j + 1, auxform);
+                }
+            }
+        }
+
+        return allFamilias;
+    }
+
+    public Set<Asistente> getAsistentes(Long idformulario) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idform = idformulario;
+        final Set<Asistente> listaAsist = new HashSet<Asistente>();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql2 = "{call GET_ASISTENTES(?,?)}";
+                CallableStatement statement2 = connection.prepareCall(hql2);
+                statement2.setLong(1, idform);
+                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                statement2.execute();
+
+                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                Asistente asist;
+                while(rs2.next()) {
+                    asist = new Asistente();
+                    asist.setIdasistente(rs2.getLong("IDASISTENTE"));
+                    asist.setNombre(rs2.getString("NOMBRE"));
+                    asist.setApellidoP(rs2.getString("APELLIDO_P"));
+                    asist.setApellidoM(rs2.getString("APELLIDO_M"));
+                    if (!rs2.wasNull()) {
+                        asist.setSexo(rs2.getString("SEXO").charAt(0));
+                    }
+                    asist.setPaisNac(rs2.getString("PAIS_NAC"));
+                    asist.setDepNac(rs2.getString("DEP_NAC"));
+                    asist.setProvNac(rs2.getString("PROV_NAC"));
+                    asist.setEdad(rs2.getShort("EDAD"));
+                    asist.setFechaNac(rs2.getDate("FECHA_NAC"));
+                    if (!rs2.wasNull()) {
+                        asist.setTipoDoc(rs2.getString("TIPO_DOC").charAt(0));
+                    }
+                    asist.setNDoc(rs2.getString("N_DOC"));
+                    asist.setProfesion(rs2.getString("PROFESION"));
+                    asist.setCelular(rs2.getString("CELULAR"));
+                    asist.setCorreo(rs2.getString("CORREO"));
+
+                    listaAsist.add(asist);
+                }
+                statement2.close();
+            }
+        };
+        session.doWork(work);
+
+        return listaAsist;
     }
 }

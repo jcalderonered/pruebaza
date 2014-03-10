@@ -224,6 +224,7 @@
                                 <c:if test="${listaFormularios != null}">
                                     <tbody>
                                         <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
+                                            <c:set var="idsesion_in" value="${formulario.getIdformularioSesion()}" scope="page" />
                                             <tr>
                                                 <c:choose>
                                                     <c:when test="${formulario.getAsistentes().size() == 2}">     
@@ -320,6 +321,7 @@
                                             </tr>
                                         </c:forEach>
                                     </tbody>
+                                    <a href="${pageContext.servletContext.contextPath}/Reportes/InscritosSI?idsesion=${idsesion_in}" class="btn btn-default">Exportar a Excel</a>
                                 </c:if>
                                 <c:if test="${listaFormularios == null}">
                                     <h3><strong>Aún no hay personas inscritas</strong></h3>

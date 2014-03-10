@@ -116,7 +116,7 @@
             }
         }
     </script>  	
-    
+
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -162,7 +162,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -215,6 +215,7 @@
                                 <c:if test="${listaFormularios != null}">
                                     <tbody>
                                         <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
+                                            <c:set var="idsesion_in" value="${formulario.getIdformularioSesion()}" scope="page" />
                                             <tr>
                                                 <c:choose>
                                                     <c:when test="${formulario.getAsistentes().size() == 2}">     
@@ -298,7 +299,8 @@
                                             </tr>
                                         </c:forEach>
                                     </tbody>
-                                </c:if>
+                                    <a href="${pageContext.servletContext.contextPath}/Reportes/InscritosSI?idsesion=${idsesion_in}" class="btn btn-default">Exportar a Excel</a>
+                                </c:if>                                    
                                 <c:if test="${listaFormularios == null}">
                                     <h3><strong>Aún no hay personas inscritas</strong></h3>
                                 </c:if>
@@ -308,8 +310,8 @@
                         <br>       
                         <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
-                        <script type="text/javascript"> 
-                                var pager = new Pager('mi_tabla', 8);  
+                        <script type="text/javascript">
+                            var pager = new Pager('mi_tabla', 8);
                             pager.init();
                             pager.showPageNav('pager', 'pageNavPosition');
                             pager.showPage(1);
