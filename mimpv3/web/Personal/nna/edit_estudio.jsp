@@ -117,9 +117,8 @@
                                 <thead>
                                     <tr>
                                         <th class="col-sm-2 " >Expediente</th>
-                                        <th class="col-sm-2 " >Información</th>
-                                        <th class="col-sm-2 " >Estudio de Caso</th>
                                         <th class="col-sm-2 " >Prioridad</th>
+                                        <th class="col-sm-2 " >Fecha</th>
                                         <th class="col-sm-2 " >Resultado</th>
                                         <th class="col-sm-2 " >Registrar</th>
                                     </tr>
@@ -136,25 +135,25 @@
                                             <c:set var="tokenDesig" value="designado"/>
                                         </c:if> 
                                         <tr>
-                                        <td>${estudio.getExpedienteFamilia().getExpediente()}</td>
-                                        <td>
-                                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button>
-                                        </td>
-                                        <td>${estudio.getFechaEstudio() != null ? df.dateToString(estudio.getFechaEstudio()) : ''}</td>
+                                        <td>${estudio.getExpedienteFamilia().getExpediente()}</td>   
                                         <td>${estudio.getPrioridad()}</td>
                                         <td>
+                                            <input ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} onchange="SetFecha(this.value)" id="fecha" name="fecha" type="text" class="datepicker" value="${estudio.getFechaEstudio() != null ? df.dateToStringNumeros(estudio.getFechaEstudio()) : ''}">
+                                        </td>
+                                        <td>
                                             <select onchange="resultado(this.value)" ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} id="result" name="result">
-                                                <option ${estudio.getResultado() == 'obs' ? 'selected' : ''} ${estudio.getResultado() == null ? 'selected' : ''} value="obs">Observado</option>
-                                                <option ${estudio.getResultado() == 'noobs' ? 'selected' : ''} value="noobs">No observado</option>
-                                                <option ${estudio.getResultado() == 'acep' ? 'selected' : ''} value="acep">Aceptado</option>
-                                                <option ${estudio.getResultado() == 'noacep' ? 'selected' : ''} value="noacep">No aceptado</option>
+                                                <option ${estudio.getResultado() == 'obs' ? 'selected' : ''} value="obs">En Estudio</option>
+                                                <option ${estudio.getResultado() == 'noobs' ? 'selected' : ''} ${estudio.getResultado() == null ? 'selected' : ''} value="noobs">En Espera</option>
+                                                <option ${estudio.getResultado() == 'acep' ? 'selected' : ''} value="acep">Solicitud de adopción</option>
+                                                <option ${estudio.getResultado() == 'noacep' ? 'selected' : ''} value="noacep">Desistimiento</option>
                                             </select>
                                         </td>
                                         <td>
                                           <form action="${pageContext.servletContext.contextPath}/ActualizarEstudio" method="post">
                                                <input hidden ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'name=""' : 'name="resultado"' }  ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'id=""' : 'id="resul"' }  value="obs" >
                                                <input hidden name="idEstudio" id="idEstudio" value="${estudio.getIdestudioCaso()}">
-                                               <input hidden name="orden" id="orden" value="${estudio.getOrden()}">  
+                                               <input hidden name="orden" id="orden" value="${estudio.getOrden()}"> 
+                                               <input hidden ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'name=""' : 'name="fechaEst"' }  ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'id=""' : 'id="fechaEst"' } value="${estudio.getFechaEstudio() != null ? df.dateToStringNumeros(estudio.getFechaEstudio()) : ''}"> 
                                                <button ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
                                           </form>
                                         </td>
@@ -222,7 +221,7 @@
 
             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
             
-
+           
         </script>
         <script>
                 function resultado(value)
@@ -231,6 +230,17 @@
                         //you can get the value from arguments itself
                         //alert(value);
                         resul.value = value;
+                        //alert(resul.value);
+                    }
+            </script>
+            
+            <script>
+                function SetFecha(value)
+                    {
+                        var fechaEst = document.getElementById("fechaEst");
+                        //you can get the value from arguments itself
+                        //alert(value);
+                        fechaEst.value = value;
                         //alert(resul.value);
                     }
             </script>

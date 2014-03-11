@@ -113,7 +113,7 @@
                         <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarEstudio" method="post" name="formulario" onkeypress="return enter(event)">
                             <br>
                             <div class="control-group">
-                                <label class="control-label">Orden del Estudio de Caso</label>
+                                <label class="control-label">Identificación del Estudio de Caso</label>
                                 <div class="controls">
                                     <input id="orden" name="orden" type="text" value="" >
                                 </div>
@@ -128,10 +128,8 @@
                                         <tr>
                                             <th class="col-sm-2 " >Expediente</th>
                                             <th class="col-sm-2 " >Nivel sociec</th>
-                                            <th class="col-sm-2 " >Información</th>
                                             <th class="col-sm-2 " >Resolución de aptitud</th>
                                             <th class="col-sm-2 " >Prioridad</th>
-                                            <th class="col-sm-2 " >Fecha estudio caso</th>
                                             <th class="col-sm-2 " >Eliminar</th>
                                         </tr>
                                     </thead>
@@ -146,9 +144,6 @@
                                                         </c:forEach>
                                                     </td>
                                                     <td>
-                                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button>
-                                                    </td>
-                                                    <td>
                                                         <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
                                                             <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
                                                                 ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
@@ -161,9 +156,6 @@
                                                                 <option ${indexFam.count == indexPrioridad.count ? 'selected' : ''} value="${indexPrioridad.count}" >${indexPrioridad.count}</option>
                                                             </c:forEach>
                                                         </select>
-                                                    </td>
-                                                    <td>
-                                                        <input id="fecha" name="fecha" type="text" class="datepicker" >
                                                     </td>
                                                     <td>
                                                         <div class="checkbox">

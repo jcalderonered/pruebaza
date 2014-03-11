@@ -1199,7 +1199,6 @@ public class mainEtapas {
             @RequestParam(value = "registrar", required = false) String registrar,
             int[] delete,
             Long[] prioridad,
-            String[] fecha,
             @RequestParam(value = "idNna", required = false) String idNna,
             @RequestParam(value = "numero", required = false) String numero
     ) {
@@ -1233,28 +1232,7 @@ public class mainEtapas {
                 expFam1.setEstado("estudio");
                 servicioEtapa.updateExpedienteFamilia(expFam1);
                 tempEst.setOrden(orden);
-                Date tempfecha = tempEst.getFechaEstudio();
-                if (fecha[i] != null) {
-                    if (fecha[i].contains("ene") || fecha[i].contains("feb") || fecha[i].contains("mar") || fecha[i].contains("abr")
-                            || fecha[i].contains("may") || fecha[i].contains("jun") || fecha[i].contains("jul") || fecha[i].contains("ago")
-                            || fecha[i].contains("set") || fecha[i].contains("oct") || fecha[i].contains("nov") || fecha[i].contains("dic")) {
-                        tempEst.setFechaEstudio(tempfecha);
-                    } else {
-                        if (!fecha[i].equals("")) {
-                            tempEst.setFechaEstudio(df.stringToDate(fecha[i]));
-                        } else {
-                            tempEst.setFechaEstudio(null);
-                        }
-                    }
-                } else {
-                    tempEst.setFechaEstudio(null);
-                }
-                /*if (fecha[i] != null && !fecha[i].equals("")) {
-                 tempEst.setFechaEstudio(df.stringToDate(fecha[i]));
-                 }
-                 if (fecha[i] == null || fecha[i].equals("")) {
-                 tempEst.setFechaEstudio(null);
-                 }*/
+                
                 tempEst.setPrioridad(prioridad[i]);
 
                 servicioEtapa.crearEstudioCaso(tempEst);
@@ -1358,7 +1336,9 @@ public class mainEtapas {
     public ModelAndView ActualizarEstudio(ModelMap map, HttpSession session,
             @RequestParam("orden") String orden,
             @RequestParam("idEstudio") long idEstudio,
-            @RequestParam("resultado") String resultado
+            @RequestParam("resultado") String resultado,
+            @RequestParam("fechaEst") String fechaEst
+            
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1369,6 +1349,11 @@ public class mainEtapas {
         if (resultado.equals("acep")) {
             ArrayList<EstudioCaso> allEstudioCaso = new ArrayList();
             EstudioCaso tempEst = servicioEtapa.getEstudioCaso(idEstudio);
+            if(fechaEst != null && !fechaEst.equals("")){
+                tempEst.setFechaEstudio(df.stringToDate(fechaEst));
+            }else if (fechaEst == null && fechaEst.equals("")){
+                tempEst.setFechaEstudio(null);
+            }
             tempEst.setResultado(resultado);
             servicioEtapa.updateEstudioCaso(tempEst);
             allEstudioCaso = servicioEtapa.getListaEstudioCasoOrden(orden);
@@ -1396,6 +1381,12 @@ public class mainEtapas {
             return new ModelAndView("/Personal/nna/edit_estudio", map);
         } else if (resultado.equals("noacep")) {
             EstudioCaso tempEst = servicioEtapa.getEstudioCaso(idEstudio);
+            if(fechaEst != null && !fechaEst.equals("")){
+                tempEst.setFechaEstudio(df.stringToDate(fechaEst));
+            }else if (fechaEst == null && fechaEst.equals("")){
+                tempEst.setFechaEstudio(null);
+            }
+            
             tempEst.setResultado(resultado);
             servicioEtapa.updateEstudioCaso(tempEst);
             ExpedienteFamilia tempExp = tempEst.getExpedienteFamilia();
@@ -1437,6 +1428,11 @@ public class mainEtapas {
         } else {
 
             EstudioCaso tempEst = servicioEtapa.getEstudioCaso(idEstudio);
+            if(fechaEst != null && !fechaEst.equals("")){
+                tempEst.setFechaEstudio(df.stringToDate(fechaEst));
+            }else if (fechaEst == null && fechaEst.equals("")){
+                tempEst.setFechaEstudio(null);
+            }
             tempEst.setResultado(resultado);
             servicioEtapa.updateEstudioCaso(tempEst);
 

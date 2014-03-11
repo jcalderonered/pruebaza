@@ -3739,20 +3739,18 @@ public class HiberEtapa {
         final Long idN = temp.getNna().getIdnna();
         final Long idExp = temp.getExpedienteFamilia().getIdexpedienteFamilia();
         final String ord = temp.getOrden();
-        final Date fechaEst = temp.getFechaEstudio();
         final Long prior = temp.getPrioridad();
 
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
 
-                String hql = "{call HE_CREAR_ESTUDIO(?,?,?,?,?)}";
+                String hql = "{call HE_CREAR_ESTUDIO(?,?,?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, idN);
                 statement.setLong(2, idExp);
                 statement.setString(3, ord);
-                statement.setDate(4, (java.sql.Date) fechaEst);
-                statement.setLong(5, prior);
+                statement.setLong(4, prior);
 
                 statement.execute();
                 statement.close();
@@ -3776,6 +3774,7 @@ public class HiberEtapa {
         Session session = sessionFactory.getCurrentSession();
 
         final Long idEs = temp.getIdestudioCaso();
+        final Date fechaEst = temp.getFechaEstudio();
         final Date fechaSol = temp.getFechaSolAdop();
         final String res = temp.getResultado();
 
@@ -3783,11 +3782,12 @@ public class HiberEtapa {
             @Override
             public void execute(Connection connection) throws SQLException {
 
-                String hql = "{call HE_UPDATE_ESTUDIO(?,?,?)}";
+                String hql = "{call HE_UPDATE_ESTUDIO(?,?,?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, idEs);
-                statement.setDate(2, (java.sql.Date) fechaSol);
-                statement.setString(3, res);
+                statement.setDate(2, (java.sql.Date) fechaEst);
+                statement.setDate(3, (java.sql.Date) fechaSol);
+                statement.setString(4, res);
 
                 statement.execute();
                 statement.close();
