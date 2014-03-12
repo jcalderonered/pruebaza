@@ -242,6 +242,7 @@
                                                     </c:when> 
                                                 </c:choose>
                                             </c:forEach>
+                                            <c:if test="${usuario.getUnidad().getDepartamento() == expediente.getUnidad().getDepartamento() || usuario.getUnidad().getDepartamento() == 'Lima'}">
                                             <tr>
                                                 <td>${expediente.getExpediente()}</td>
                                                 <td>
@@ -334,6 +335,7 @@
                                                     </td>
                                                 </c:if>
                                             </tr>
+                                            </c:if>
                                             <c:set var="psicologica" value="${null}" scope="page" />
                                             <c:set var="social" value="${null}" scope="page" />
                                             <c:set var="legal" value="${null}" scope="page" />

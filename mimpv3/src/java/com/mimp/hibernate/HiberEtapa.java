@@ -171,7 +171,10 @@ public class HiberEtapa {
 
                     if (rs4.next()) {
                         FormularioSesion tempFS = new FormularioSesion();
+                        Sesion tempSesion = new Sesion();
                         tempFS.setIdformularioSesion(rs4.getLong("IDFORMULARIO_SESION"));
+                        tempSesion.setIdsesion(rs4.getLong("IDSESION"));
+                        tempSesion.setUnidad(rs4.getString("UNIDAD"));
                         Set<Asistente> listA = new HashSet<Asistente>();
 
                         String hql5 = "{call HE_GET_ASIS_BY_IDFS(?,?)}";
@@ -200,6 +203,7 @@ public class HiberEtapa {
                         }
                         statement5.close();
 
+                        tempFS.setSesion(tempSesion);
                         tempFS.setAsistentes(listA);
                         listFS.add(tempFS);
                     }
@@ -1072,7 +1076,10 @@ public class HiberEtapa {
                     Set<Evaluacion> listaEv = new HashSet<Evaluacion>();
 
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
-
+                    Unidad tempUA = new Unidad();
+                    
+                    tempUA.setIdunidad(rs.getLong("IDUNIDAD"));
+                    tempUA.setDepartamento(rs.getString("DEPARTAMENTO"));
                     tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
                     tempEF.setExpediente(rs.getString("EXPEDIENTE"));
                     tempEF.setHt(rs.getString("HT"));
@@ -1144,6 +1151,7 @@ public class HiberEtapa {
 
                     statement2.close();
 
+                    tempEF.setUnidad(tempUA);
                     tempEF.setEvaluacions(listaEv);
                     allExpedienteFamilia.add(tempEF);
                 }
@@ -4050,6 +4058,7 @@ public class HiberEtapa {
                         temp2 = (ResultSet) statement3.getObject(2);
                         while (temp2.next()) {
                             unidad.setIdunidad(temp2.getLong(1));
+                            unidad.setDepartamento(temp2.getString("DEPARTAMENTO"));
                             expFamilia.setUnidad(unidad);
                         }
                         statement3.close();

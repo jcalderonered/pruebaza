@@ -89,5 +89,11 @@
         <property name="fechaInvTutelar" type="date">
             <column name="FECHA_INV_TUTELAR" length="7" />
         </property>
+        <property name="fechaIngPrio" type="date">
+            <column name="FECHA_ING_PRIO" length="7" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
     </class>
 </hibernate-mapping>
