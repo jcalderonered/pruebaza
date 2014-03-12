@@ -1349,8 +1349,8 @@ public class reporte {
 
             //InputStream inp = new FileInputStream("/opt/Plantillas/2.0Registro_de_NNAs_prioritarios_Mensual_por_Grupo_de_Referencia.xlsx");
             //InputStream inp = new FileInputStream("C:\\Plantillas\\2.0Registro de NNAs prioritarios Mensual por Grupo de Referencia.xlsx");
-            //InputStream inp = new FileInputStream("C:\\Plantillas\\NnaGrupos.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/NnaGrupos.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\NnaGrupos.xlsx");
+            //InputStream inp = new FileInputStream("/opt/Plantillas/NnaGrupos.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -1364,7 +1364,10 @@ public class reporte {
             ArrayList<Nna> listahermano = new ArrayList();
             ArrayList<Nna> listaespecial = new ArrayList();
             ArrayList<Nna> listaadolescente = new ArrayList();
-
+            
+            ArrayList<Revision> listaRev = new ArrayList();
+            ArrayList<EstudioCaso> listaEst = new ArrayList();
+            ArrayList<EstudioCaso> listaSol = new ArrayList();
             //Aquí va el query que consigue los datos de la tabla
             //ArrayList<Nna> listanna = ServicioReporte.ListaNnaReporte("prioritario");
             ArrayList<Nna> listanna = ServicioReporte.ListaNnaPriorita();
@@ -1457,77 +1460,149 @@ public class reporte {
                     cell.setCellValue(nna.getObservaciones());
                 } catch (Exception ex) {
                 }
-                int index = 1;
                 int indexcelda = 10;
-                if (!nna.getEstudioCasos().isEmpty()) {
-                    for (Iterator iter2 = nna.getEstudioCasos().iterator(); iter2.hasNext();) {
-                        EstudioCaso est = (EstudioCaso) iter2.next();
-                        if (index > 2) {
-                            break;
-                        }
-                        if (indexcelda == 13) {
-                            cell = row.createCell(indexcelda);
-                            try {
-                                cell.setCellValue(est.getOrden());
-                            } catch (Exception ex) {
+                
+                listaRev.clear();
+                listaRev = ServicioReporte.getRevisionExpMensual(nna.getIdnna());
+                String strFechas = "";
+                String strSolicitante = "";
+                if (!listaRev.isEmpty()) {
+                    for (Revision rev : listaRev) {
+                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                            String date = format.dateToStringNumeros(rev.getFechaRevision());
+                            strFechas = strFechas + "\n" +date;
+                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }
-                            indexcelda++;
+                            strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
-                        cell = row.createCell(indexcelda);
-                        try {
-                            fecha = format.dateToString(est.getFechaEstudio());
-                        } catch (Exception ex) {
-                        }
-                        cell.setCellValue(fecha);
-                        fecha = "";
-                        indexcelda++;
-                        cell = row.createCell(indexcelda);
-                        try {
-                            cell.setCellValue(est.getExpedienteFamilia().getExpediente());
-                        } catch (Exception ex) {
-                        }
-                        indexcelda++;
-                        cell = row.createCell(indexcelda);
-                        try {
-                            cell.setCellValue(est.getNSolicitud().toString());
-                        } catch (Exception ex) {
-                        }
-                        indexcelda++;
-
-                        index++;
                     }
+                    
                 }
-                Date ultfecha = new Date(10, 0, 01);
-                Designacion desig = new Designacion();
-                if (!nna.getDesignacions().isEmpty()) {
-                    for (Iterator iter3 = nna.getDesignacions().iterator(); iter3.hasNext();) {
-                        Designacion daux = (Designacion) iter3.next();
-                        if (daux.getFechaConsejo() != null) {
-                            if (ultfecha.before(daux.getFechaConsejo())) {
-                                ultfecha = daux.getFechaConsejo();
-                                desig = daux;
+                cell = row.createCell(indexcelda);
+                cell.setCellValue(strFechas);
+                cell = row.createCell(11);
+                cell.setCellValue(strSolicitante);
+                
+                listaRev.clear();
+                listaRev = ServicioReporte.getRevisionExpHistorico(nna.getIdnna());
+                String strHistorico = "";
+                if (!listaRev.isEmpty()) {
+                    for (Revision rev : listaRev) {
+                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                            String date = format.dateToStringNumeros(rev.getFechaRevision());
+                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }
+                            strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
                     }
+                    
+                }
+                cell = row.createCell(12);
+                cell.setCellValue(strHistorico);
+//               
+                listaEst.clear();
+                listaEst = ServicioReporte.getEstudioCasoMensual(nna.getIdnna());
+                String strPrioridad = "";
+                String strFechasEstudio = "";
+                String strFamilias = "";
+                if(!listaEst.isEmpty()){
+                    for (EstudioCaso est : listaEst) {
+                      if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){  
+                        strPrioridad = strPrioridad + "\n" + est.getPrioridad();
+                        String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                        strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
+                        String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                         strFamilias = strFamilias + "\n" + Solicitante;   
+                      }
+                    }
+                
+                }
+                cell = row.createCell(13);
+                cell.setCellValue(strPrioridad);
+                cell = row.createCell(14);
+                cell.setCellValue(strFechasEstudio);
+                cell = row.createCell(15);
+                cell.setCellValue(strFamilias);
+                
+                listaEst.clear();
+                listaEst = ServicioReporte.getEstudioCasoHistorico(nna.getIdnna());
+                strHistorico = "";
+                if (!listaEst.isEmpty()) {
+                    for (EstudioCaso est : listaEst) {
+                        if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){
+                            String prioridad = "" + est.getPrioridad();
+                            String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + prioridad + " - " + fechaEst + " - " + Solicitante;
+                        }
+                    }
+                    
+                }
+                cell = row.createCell(16);
+                cell.setCellValue(strHistorico);
+                
+                listaSol.clear();
+                listaSol = ServicioReporte.getSolicitudAdopcionMensual(nna.getIdnna());
+                strFechas = "";
+                strSolicitante = "";
+                
+                if(!listaSol.isEmpty()){
+                    for (EstudioCaso est : listaSol) {
+                      if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){  
+                        String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                        strFechas = strFechas + "\n" + fechaSol;
+                        String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                         strSolicitante = strSolicitante + "\n" + Solicitante;   
+                      }
+                    }
+                
                 }
                 cell = row.createCell(17);
-                try {
-                    cell.setCellValue(desig.getFechaConsejo());
-                } catch (Exception ex) {
-                }
+                cell.setCellValue(strFechas);
                 cell = row.createCell(18);
-                try {
-                    cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
-                } catch (Exception ex) {
+                cell.setCellValue(strSolicitante);
+                
+                listaSol.clear();
+                listaSol = ServicioReporte.getSolicitudAdopcionHistorico(nna.getIdnna());
+                strHistorico = "";
+                if (!listaSol.isEmpty()) {
+                    for (EstudioCaso est : listaSol) {
+                        if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){
+                            String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + fechaSol + " - " + Solicitante;
+                        }
+                    }
+                    
                 }
                 cell = row.createCell(19);
-                try {
-                    cell.setCellValue(desig.getNDesignacion().toString());
-                } catch (Exception ex) {
-                }
+                cell.setCellValue(strHistorico);
+                
                 cell = row.createCell(20);
                 try {
-                    cell.setCellValue(exp.getRespLegalP());
+                    cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
                 } catch (Exception ex) {
                 }
 
@@ -1630,81 +1705,226 @@ public class reporte {
                     cell.setCellValue(nna.getObservaciones());
                 } catch (Exception ex) {
                 }
-                int index = 1;
+//                int index = 1;
+//                int indexcelda = 11;
+//                if (!nna.getEstudioCasos().isEmpty()) {
+//                    for (Iterator iter2 = nna.getEstudioCasos().iterator();
+//                            iter2.hasNext();) {
+//                        EstudioCaso est = (EstudioCaso) iter2.next();
+//                        if (index > 2) {
+//                            break;
+//                        }
+//                        if (indexcelda == 14) {
+//                            cell = row.createCell(indexcelda);
+//                            try {
+//                                cell.setCellValue(est.getOrden());
+//                            } catch (Exception ex) {
+//                            }
+//                            indexcelda++;
+//                        }
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            fecha = format.dateToString(est.getFechaEstudio());
+//                        } catch (Exception ex) {
+//                        }
+//                        cell.setCellValue(fecha);
+//                        fecha = "";
+//                        indexcelda++;
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            cell.setCellValue(est.getExpedienteFamilia().getExpediente());
+//                        } catch (Exception ex) {
+//                        }
+//                        indexcelda++;
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            cell.setCellValue(est.getNSolicitud().toString());
+//                        } catch (Exception ex) {
+//                        }
+//                        indexcelda++;
+//
+//                        index++;
+//                    }
+//                }
+//                Date ultfecha = new Date(10, 0, 01);
+//                Designacion desig = new Designacion();
+//                if (!nna.getDesignacions().isEmpty()) {
+//                    for (Iterator iter3 = nna.getDesignacions().iterator(); iter3.hasNext();) {
+//                        Designacion daux = (Designacion) iter3.next();
+//                        if (daux.getFechaConsejo() != null) {
+//                            if (ultfecha.before(daux.getFechaConsejo())) {
+//                                ultfecha = daux.getFechaConsejo();
+//                                desig = daux;
+//                            }
+//                        }
+//                    }
+//                }
+//                cell = row.createCell(18);
+//                try {
+//                    cell.setCellValue(desig.getFechaConsejo());
+//                } catch (Exception ex) {
+//                }
+//                cell = row.createCell(19);
+//                try {
+//                    cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
+//                } catch (Exception ex) {
+//                }
+//                cell = row.createCell(20);
+//                try {
+//                    cell.setCellValue(desig.getNDesignacion().toString());
+//                } catch (Exception ex) {
+//                }
+//                cell = row.createCell(21);
+//                try {
+//                    cell.setCellValue(exp.getRespLegalP());
+//                } catch (Exception ex) {
+//                }
                 int indexcelda = 11;
-                if (!nna.getEstudioCasos().isEmpty()) {
-                    for (Iterator iter2 = nna.getEstudioCasos().iterator();
-                            iter2.hasNext();) {
-                        EstudioCaso est = (EstudioCaso) iter2.next();
-                        if (index > 2) {
-                            break;
-                        }
-                        if (indexcelda == 14) {
-                            cell = row.createCell(indexcelda);
-                            try {
-                                cell.setCellValue(est.getOrden());
-                            } catch (Exception ex) {
+                
+                listaRev.clear();
+                listaRev = ServicioReporte.getRevisionExpMensual(nna.getIdnna());
+                String strFechas = "";
+                String strSolicitante = "";
+                if (!listaRev.isEmpty()) {
+                    for (Revision rev : listaRev) {
+                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                            String date = format.dateToStringNumeros(rev.getFechaRevision());
+                            strFechas = strFechas + "\n" +date;
+                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }
-                            indexcelda++;
+                            strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
-                        cell = row.createCell(indexcelda);
-                        try {
-                            fecha = format.dateToString(est.getFechaEstudio());
-                        } catch (Exception ex) {
-                        }
-                        cell.setCellValue(fecha);
-                        fecha = "";
-                        indexcelda++;
-                        cell = row.createCell(indexcelda);
-                        try {
-                            cell.setCellValue(est.getExpedienteFamilia().getExpediente());
-                        } catch (Exception ex) {
-                        }
-                        indexcelda++;
-                        cell = row.createCell(indexcelda);
-                        try {
-                            cell.setCellValue(est.getNSolicitud().toString());
-                        } catch (Exception ex) {
-                        }
-                        indexcelda++;
-
-                        index++;
                     }
+                    
                 }
-                Date ultfecha = new Date(10, 0, 01);
-                Designacion desig = new Designacion();
-                if (!nna.getDesignacions().isEmpty()) {
-                    for (Iterator iter3 = nna.getDesignacions().iterator(); iter3.hasNext();) {
-                        Designacion daux = (Designacion) iter3.next();
-                        if (daux.getFechaConsejo() != null) {
-                            if (ultfecha.before(daux.getFechaConsejo())) {
-                                ultfecha = daux.getFechaConsejo();
-                                desig = daux;
+                cell = row.createCell(indexcelda);
+                cell.setCellValue(strFechas);
+                cell = row.createCell(12);
+                cell.setCellValue(strSolicitante);
+                
+                listaRev.clear();
+                listaRev = ServicioReporte.getRevisionExpHistorico(nna.getIdnna());
+                String strHistorico = "";
+                if (!listaRev.isEmpty()) {
+                    for (Revision rev : listaRev) {
+                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                            String date = format.dateToStringNumeros(rev.getFechaRevision());
+                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }
+                            strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
                     }
+                    
+                }
+                cell = row.createCell(13);
+                cell.setCellValue(strHistorico);
+//               
+                listaEst.clear();
+                listaEst = ServicioReporte.getEstudioCasoMensual(nna.getIdnna());
+                String strPrioridad = "";
+                String strFechasEstudio = "";
+                String strFamilias = "";
+                if(!listaEst.isEmpty()){
+                    for (EstudioCaso est : listaEst) {
+                      if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){  
+                        strPrioridad = strPrioridad + "\n" + est.getPrioridad();
+                        String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                        strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
+                        String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                         strFamilias = strFamilias + "\n" + Solicitante;   
+                      }
+                    }
+                
+                }
+                cell = row.createCell(14);
+                cell.setCellValue(strPrioridad);
+                cell = row.createCell(15);
+                cell.setCellValue(strFechasEstudio);
+                cell = row.createCell(16);
+                cell.setCellValue(strFamilias);
+                
+                listaEst.clear();
+                listaEst = ServicioReporte.getEstudioCasoHistorico(nna.getIdnna());
+                strHistorico = "";
+                if (!listaEst.isEmpty()) {
+                    for (EstudioCaso est : listaEst) {
+                        if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){
+                            String prioridad = "" + est.getPrioridad();
+                            String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + prioridad + " - " + fechaEst + " - " + Solicitante;
+                        }
+                    }
+                    
+                }
+                cell = row.createCell(17);
+                cell.setCellValue(strHistorico);
+                
+                listaSol.clear();
+                listaSol = ServicioReporte.getSolicitudAdopcionMensual(nna.getIdnna());
+                strFechas = "";
+                strSolicitante = "";
+                
+                if(!listaSol.isEmpty()){
+                    for (EstudioCaso est : listaSol) {
+                      if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){  
+                        String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                        strFechas = strFechas + "\n" + fechaSol;
+                        String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                         strSolicitante = strSolicitante + "\n" + Solicitante;   
+                      }
+                    }
+                
                 }
                 cell = row.createCell(18);
-                try {
-                    cell.setCellValue(desig.getFechaConsejo());
-                } catch (Exception ex) {
-                }
+                cell.setCellValue(strFechas);
                 cell = row.createCell(19);
-                try {
-                    cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
-                } catch (Exception ex) {
+                cell.setCellValue(strSolicitante);
+                
+                listaSol.clear();
+                listaSol = ServicioReporte.getSolicitudAdopcionHistorico(nna.getIdnna());
+                strHistorico = "";
+                if (!listaSol.isEmpty()) {
+                    for (EstudioCaso est : listaSol) {
+                        if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){
+                            String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + fechaSol + " - " + Solicitante;
+                        }
+                    }
+                    
                 }
                 cell = row.createCell(20);
-                try {
-                    cell.setCellValue(desig.getNDesignacion().toString());
-                } catch (Exception ex) {
-                }
+                cell.setCellValue(strHistorico);
+                
                 cell = row.createCell(21);
                 try {
-                    cell.setCellValue(exp.getRespLegalP());
+                    cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
                 } catch (Exception ex) {
                 }
-
+                
                 i++;
             }
 
@@ -1803,79 +2023,224 @@ public class reporte {
                     cell.setCellValue(nna.getObservaciones());
                 } catch (Exception ex) {
                 }
-                int index = 1;
+//                int index = 1;
+//                int indexcelda = 11;
+//                if (!nna.getEstudioCasos().isEmpty()) {
+//                    for (Iterator iter2 = nna.getEstudioCasos().iterator();
+//                            iter2.hasNext();) {
+//                        EstudioCaso est = (EstudioCaso) iter2.next();
+//                        if (index > 2) {
+//                            break;
+//                        }
+//                        if (indexcelda == 14) {
+//                            cell = row.createCell(indexcelda);
+//                            try {
+//                                cell.setCellValue(est.getOrden());
+//                            } catch (Exception ex) {
+//                            }
+//                            indexcelda++;
+//                        }
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            fecha = format.dateToString(est.getFechaEstudio());
+//                        } catch (Exception ex) {
+//                        }
+//                        cell.setCellValue(fecha);
+//                        fecha = "";
+//                        indexcelda++;
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            cell.setCellValue(est.getExpedienteFamilia().getExpediente());
+//                        } catch (Exception ex) {
+//                        }
+//                        indexcelda++;
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            cell.setCellValue(est.getNSolicitud().toString());//Historico
+//                        } catch (Exception ex) {
+//                        }
+//                        indexcelda++;
+//
+//                        index++;
+//                    }
+//                }
+//                Date ultfecha = new Date(10, 0, 01);
+//                Designacion desig = new Designacion();
+//                if (!nna.getDesignacions().isEmpty()) {
+//                    for (Iterator iter3 = nna.getDesignacions().iterator(); iter3.hasNext();) {
+//                        Designacion daux = (Designacion) iter3.next();
+//                        if (ultfecha.before(daux.getFechaConsejo())) {
+//                            ultfecha = daux.getFechaConsejo();
+//                            desig = daux;
+//                        }
+//                    }
+//                }
+//                cell = row.createCell(18);
+//                try {
+//                    cell.setCellValue(desig.getFechaConsejo());
+//                } catch (Exception ex) {
+//                }
+//                cell = row.createCell(19);
+//                try {
+//                    cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
+//                } catch (Exception ex) {
+//                }
+//                cell = row.createCell(20);
+//                try {
+//                    cell.setCellValue(desig.getNDesignacion().toString());//Historico (revisar)
+//                } catch (Exception ex) {
+//                }
+//                cell = row.createCell(21);
+//                try {
+//                    cell.setCellValue(exp.getRespLegalP());
+//                } catch (Exception ex) {
+//                }
                 int indexcelda = 11;
-                if (!nna.getEstudioCasos().isEmpty()) {
-                    for (Iterator iter2 = nna.getEstudioCasos().iterator();
-                            iter2.hasNext();) {
-                        EstudioCaso est = (EstudioCaso) iter2.next();
-                        if (index > 2) {
-                            break;
-                        }
-                        if (indexcelda == 14) {
-                            cell = row.createCell(indexcelda);
-                            try {
-                                cell.setCellValue(est.getOrden());
-                            } catch (Exception ex) {
+                
+                listaRev.clear();
+                listaRev = ServicioReporte.getRevisionExpMensual(nna.getIdnna());
+                String strFechas = "";
+                String strSolicitante = "";
+                if (!listaRev.isEmpty()) {
+                    for (Revision rev : listaRev) {
+                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                            String date = format.dateToStringNumeros(rev.getFechaRevision());
+                            strFechas = strFechas + "\n" +date;
+                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }
-                            indexcelda++;
+                            strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
-                        cell = row.createCell(indexcelda);
-                        try {
-                            fecha = format.dateToString(est.getFechaEstudio());
-                        } catch (Exception ex) {
-                        }
-                        cell.setCellValue(fecha);
-                        fecha = "";
-                        indexcelda++;
-                        cell = row.createCell(indexcelda);
-                        try {
-                            cell.setCellValue(est.getExpedienteFamilia().getExpediente());
-                        } catch (Exception ex) {
-                        }
-                        indexcelda++;
-                        cell = row.createCell(indexcelda);
-                        try {
-                            cell.setCellValue(est.getNSolicitud().toString());//Historico
-                        } catch (Exception ex) {
-                        }
-                        indexcelda++;
-
-                        index++;
                     }
+                    
                 }
-                Date ultfecha = new Date(10, 0, 01);
-                Designacion desig = new Designacion();
-                if (!nna.getDesignacions().isEmpty()) {
-                    for (Iterator iter3 = nna.getDesignacions().iterator(); iter3.hasNext();) {
-                        Designacion daux = (Designacion) iter3.next();
-                        if (ultfecha.before(daux.getFechaConsejo())) {
-                            ultfecha = daux.getFechaConsejo();
-                            desig = daux;
+                cell = row.createCell(indexcelda);
+                cell.setCellValue(strFechas);
+                cell = row.createCell(12);
+                cell.setCellValue(strSolicitante);
+                
+                listaRev.clear();
+                listaRev = ServicioReporte.getRevisionExpHistorico(nna.getIdnna());
+                String strHistorico = "";
+                if (!listaRev.isEmpty()) {
+                    for (Revision rev : listaRev) {
+                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                            String date = format.dateToStringNumeros(rev.getFechaRevision());
+                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
                     }
+                    
+                }
+                cell = row.createCell(13);
+                cell.setCellValue(strHistorico);
+//               
+                listaEst.clear();
+                listaEst = ServicioReporte.getEstudioCasoMensual(nna.getIdnna());
+                String strPrioridad = "";
+                String strFechasEstudio = "";
+                String strFamilias = "";
+                if(!listaEst.isEmpty()){
+                    for (EstudioCaso est : listaEst) {
+                      if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){  
+                        strPrioridad = strPrioridad + "\n" + est.getPrioridad();
+                        String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                        strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
+                        String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                         strFamilias = strFamilias + "\n" + Solicitante;   
+                      }
+                    }
+                
+                }
+                cell = row.createCell(14);
+                cell.setCellValue(strPrioridad);
+                cell = row.createCell(15);
+                cell.setCellValue(strFechasEstudio);
+                cell = row.createCell(16);
+                cell.setCellValue(strFamilias);
+                
+                listaEst.clear();
+                listaEst = ServicioReporte.getEstudioCasoHistorico(nna.getIdnna());
+                strHistorico = "";
+                if (!listaEst.isEmpty()) {
+                    for (EstudioCaso est : listaEst) {
+                        if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){
+                            String prioridad = "" + est.getPrioridad();
+                            String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + prioridad + " - " + fechaEst + " - " + Solicitante;
+                        }
+                    }
+                    
+                }
+                cell = row.createCell(17);
+                cell.setCellValue(strHistorico);
+                
+                listaSol.clear();
+                listaSol = ServicioReporte.getSolicitudAdopcionMensual(nna.getIdnna());
+                strFechas = "";
+                strSolicitante = "";
+                
+                if(!listaSol.isEmpty()){
+                    for (EstudioCaso est : listaSol) {
+                      if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){  
+                        String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                        strFechas = strFechas + "\n" + fechaSol;
+                        String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                         strSolicitante = strSolicitante + "\n" + Solicitante;   
+                      }
+                    }
+                
                 }
                 cell = row.createCell(18);
-                try {
-                    cell.setCellValue(desig.getFechaConsejo());
-                } catch (Exception ex) {
-                }
+                cell.setCellValue(strFechas);
                 cell = row.createCell(19);
-                try {
-                    cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
-                } catch (Exception ex) {
+                cell.setCellValue(strSolicitante);
+                
+                listaSol.clear();
+                listaSol = ServicioReporte.getSolicitudAdopcionHistorico(nna.getIdnna());
+                strHistorico = "";
+                if (!listaSol.isEmpty()) {
+                    for (EstudioCaso est : listaSol) {
+                        if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){
+                            String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + fechaSol + " - " + Solicitante;
+                        }
+                    }
+                    
                 }
                 cell = row.createCell(20);
-                try {
-                    cell.setCellValue(desig.getNDesignacion().toString());//Historico (revisar)
-                } catch (Exception ex) {
-                }
+                cell.setCellValue(strHistorico);
+                
                 cell = row.createCell(21);
                 try {
-                    cell.setCellValue(exp.getRespLegalP());
+                    cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
                 } catch (Exception ex) {
                 }
-
+                
                 i++;
             }
 
@@ -1980,81 +2345,227 @@ public class reporte {
                     cell.setCellValue(nna.getObservaciones());
                 } catch (Exception ex) {
                 }
-                int index = 1;
-                int indexcelda = 12;
-                if (!nna.getEstudioCasos().isEmpty()) {
-                    for (Iterator iter2 = nna.getEstudioCasos().iterator();
-                            iter2.hasNext();) {
-                        EstudioCaso est = (EstudioCaso) iter2.next();
-                        if (index > 2) {
-                            break;
-                        }
-                        if (indexcelda == 15) {
-                            cell = row.createCell(indexcelda);
-                            try {
-                                cell.setCellValue(est.getOrden());
-                            } catch (Exception ex) {
-                            }
-                            indexcelda++;
-                        }
-                        cell = row.createCell(indexcelda);
-                        try {
-                            fecha = format.dateToString(est.getFechaEstudio());
-                        } catch (Exception ex) {
-                        }
-                        cell.setCellValue(fecha);
-                        fecha = "";
-                        indexcelda++;
-                        cell = row.createCell(indexcelda);
-                        try {
-                            cell.setCellValue(est.getExpedienteFamilia().getExpediente());
-                        } catch (Exception ex) {
-                        }
-                        indexcelda++;
-                        cell = row.createCell(indexcelda);
-                        try {
-                            cell.setCellValue(est.getNSolicitud().toString());
-                        } catch (Exception ex) {
-                        }
-                        indexcelda++;
+//                int index = 1;
+//                int indexcelda = 12;
+//                if (!nna.getEstudioCasos().isEmpty()) {
+//                    for (Iterator iter2 = nna.getEstudioCasos().iterator();
+//                            iter2.hasNext();) {
+//                        EstudioCaso est = (EstudioCaso) iter2.next();
+//                        if (index > 2) {
+//                            break;
+//                        }
+//                        if (indexcelda == 15) {
+//                            cell = row.createCell(indexcelda);
+//                            try {
+//                                cell.setCellValue(est.getOrden());
+//                            } catch (Exception ex) {
+//                            }
+//                            indexcelda++;
+//                        }
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            fecha = format.dateToString(est.getFechaEstudio());
+//                        } catch (Exception ex) {
+//                        }
+//                        cell.setCellValue(fecha);
+//                        fecha = "";
+//                        indexcelda++;
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            cell.setCellValue(est.getExpedienteFamilia().getExpediente());
+//                        } catch (Exception ex) {
+//                        }
+//                        indexcelda++;
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            cell.setCellValue(est.getNSolicitud().toString());
+//                        } catch (Exception ex) {
+//                        }
+//                        indexcelda++;
+//
+//                        index++;
+//                    }
+//                }
+//                Date ultfecha = new Date(10, 0, 01);
+//                Designacion desig = new Designacion();
+//                if (!nna.getDesignacions().isEmpty()) {
+//                    for (Iterator iter3 = nna.getDesignacions().iterator(); iter3.hasNext();) {
+//                        Designacion daux = (Designacion) iter3.next();
+//                        if (daux.getFechaConsejo() != null) {
+//                            if (ultfecha.before(daux.getFechaConsejo())) {
+//                                ultfecha = daux.getFechaConsejo();
+//                                desig = daux;
+//                            }
+//                        }
+//                    }
+//                }
+//                cell = row.createCell(19);
+//                try {
+//                    cell.setCellValue(desig.getFechaConsejo());
+//                } catch (Exception ex) {
+//                }
+//                cell = row.createCell(20);
+//                try {
+//                    cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
+//                } catch (Exception ex) {
+//                }
+//                cell = row.createCell(21);
+//                try {
+//                    cell.setCellValue(desig.getNDesignacion().toString());
+//                } catch (Exception ex) {
+//                }
+//                cell = row.createCell(22);
+//                try {
+//                    cell.setCellValue(exp.getRespLegalP());
+//                } catch (Exception ex) {
+//                }
 
-                        index++;
-                    }
-                }
-                Date ultfecha = new Date(10, 0, 01);
-                Designacion desig = new Designacion();
-                if (!nna.getDesignacions().isEmpty()) {
-                    for (Iterator iter3 = nna.getDesignacions().iterator(); iter3.hasNext();) {
-                        Designacion daux = (Designacion) iter3.next();
-                        if (daux.getFechaConsejo() != null) {
-                            if (ultfecha.before(daux.getFechaConsejo())) {
-                                ultfecha = daux.getFechaConsejo();
-                                desig = daux;
+                int indexcelda = 12;
+                
+                listaRev.clear();
+                listaRev = ServicioReporte.getRevisionExpMensual(nna.getIdnna());
+                String strFechas = "";
+                String strSolicitante = "";
+                if (!listaRev.isEmpty()) {
+                    for (Revision rev : listaRev) {
+                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                            String date = format.dateToStringNumeros(rev.getFechaRevision());
+                            strFechas = strFechas + "\n" +date;
+                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }
+                            strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
                     }
+                    
+                }
+                cell = row.createCell(indexcelda);
+                cell.setCellValue(strFechas);
+                cell = row.createCell(13);
+                cell.setCellValue(strSolicitante);
+                
+                listaRev.clear();
+                listaRev = ServicioReporte.getRevisionExpHistorico(nna.getIdnna());
+                String strHistorico = "";
+                if (!listaRev.isEmpty()) {
+                    for (Revision rev : listaRev) {
+                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                            String date = format.dateToStringNumeros(rev.getFechaRevision());
+                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
+                        }
+                    }
+                    
+                }
+                cell = row.createCell(14);
+                cell.setCellValue(strHistorico);
+//               
+                listaEst.clear();
+                listaEst = ServicioReporte.getEstudioCasoMensual(nna.getIdnna());
+                String strPrioridad = "";
+                String strFechasEstudio = "";
+                String strFamilias = "";
+                if(!listaEst.isEmpty()){
+                    for (EstudioCaso est : listaEst) {
+                      if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){  
+                        strPrioridad = strPrioridad + "\n" + est.getPrioridad();
+                        String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                        strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
+                        String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                         strFamilias = strFamilias + "\n" + Solicitante;   
+                      }
+                    }
+                
+                }
+                cell = row.createCell(15);
+                cell.setCellValue(strPrioridad);
+                cell = row.createCell(16);
+                cell.setCellValue(strFechasEstudio);
+                cell = row.createCell(17);
+                cell.setCellValue(strFamilias);
+                
+                listaEst.clear();
+                listaEst = ServicioReporte.getEstudioCasoHistorico(nna.getIdnna());
+                strHistorico = "";
+                if (!listaEst.isEmpty()) {
+                    for (EstudioCaso est : listaEst) {
+                        if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){
+                            String prioridad = "" + est.getPrioridad();
+                            String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + prioridad + " - " + fechaEst + " - " + Solicitante;
+                        }
+                    }
+                    
+                }
+                cell = row.createCell(18);
+                cell.setCellValue(strHistorico);
+                
+                listaSol.clear();
+                listaSol = ServicioReporte.getSolicitudAdopcionMensual(nna.getIdnna());
+                strFechas = "";
+                strSolicitante = "";
+                
+                if(!listaSol.isEmpty()){
+                    for (EstudioCaso est : listaSol) {
+                      if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){  
+                        String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                        strFechas = strFechas + "\n" + fechaSol;
+                        String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                         strSolicitante = strSolicitante + "\n" + Solicitante;   
+                      }
+                    }
+                
                 }
                 cell = row.createCell(19);
-                try {
-                    cell.setCellValue(desig.getFechaConsejo());
-                } catch (Exception ex) {
-                }
+                cell.setCellValue(strFechas);
                 cell = row.createCell(20);
-                try {
-                    cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
-                } catch (Exception ex) {
+                cell.setCellValue(strSolicitante);
+                
+                listaSol.clear();
+                listaSol = ServicioReporte.getSolicitudAdopcionHistorico(nna.getIdnna());
+                strHistorico = "";
+                if (!listaSol.isEmpty()) {
+                    for (EstudioCaso est : listaSol) {
+                        if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){
+                            String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + fechaSol + " - " + Solicitante;
+                        }
+                    }
+                    
                 }
                 cell = row.createCell(21);
-                try {
-                    cell.setCellValue(desig.getNDesignacion().toString());
-                } catch (Exception ex) {
-                }
+                cell.setCellValue(strHistorico);
+                
                 cell = row.createCell(22);
                 try {
-                    cell.setCellValue(exp.getRespLegalP());
+                    cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
                 } catch (Exception ex) {
                 }
-
+                
                 i++;
             }
 
@@ -2155,76 +2666,222 @@ public class reporte {
                     cell.setCellValue(nna.getObservaciones());
                 } catch (Exception ex) {
                 }
-                int index = 1;
+//                int index = 1;
+//                int indexcelda = 11;
+//                if (!nna.getEstudioCasos().isEmpty()) {
+//                    for (Iterator iter2 = nna.getEstudioCasos().iterator();
+//                            iter2.hasNext();) {
+//                        EstudioCaso est = (EstudioCaso) iter2.next();
+//                        if (index > 2) {
+//                            break;
+//                        }
+//                        if (indexcelda == 14) {
+//                            cell = row.createCell(indexcelda);
+//                            try {
+//                                cell.setCellValue(est.getOrden());
+//                            } catch (Exception ex) {
+//                            }
+//                            indexcelda++;
+//                        }
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            fecha = format.dateToString(est.getFechaEstudio());
+//                        } catch (Exception ex) {
+//                        }
+//                        cell.setCellValue(fecha);
+//                        fecha = "";
+//                        indexcelda++;
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            cell.setCellValue(est.getExpedienteFamilia().getExpediente());
+//                        } catch (Exception ex) {
+//                        }
+//                        indexcelda++;
+//                        cell = row.createCell(indexcelda);
+//                        try {
+//                            cell.setCellValue(est.getNSolicitud().toString());
+//                        } catch (Exception ex) {
+//                        }
+//                        indexcelda++;
+//
+//                        index++;
+//                    }
+//                }
+//                Date ultfecha = new Date(10, 0, 01);
+//                Designacion desig = new Designacion();
+//                if (!nna.getDesignacions().isEmpty()) {
+//                    for (Iterator iter3 = nna.getDesignacions().iterator();
+//                            iter3.hasNext();) {
+//                        Designacion daux = (Designacion) iter3.next();
+//                        if (daux.getFechaConsejo() != null) {
+//                            if (ultfecha.before(daux.getFechaConsejo())) {
+//                                ultfecha = daux.getFechaConsejo();
+//                                desig = daux;
+//                            }
+//                        }
+//                    }
+//                }
+//                cell = row.createCell(18);
+//                cell.setCellValue(desig.getFechaConsejo());
+//                cell = row.createCell(19);
+//                try {
+//                    cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
+//                } catch (Exception ex) {
+//                }
+//                cell = row.createCell(20);
+//                try {
+//                    cell.setCellValue(desig.getNDesignacion().toString());
+//                } catch (Exception ex) {
+//                }
+//
+//                cell = row.createCell(21);
+//                cell.setCellValue(exp.getRespLegalP());
+                
                 int indexcelda = 11;
-                if (!nna.getEstudioCasos().isEmpty()) {
-                    for (Iterator iter2 = nna.getEstudioCasos().iterator();
-                            iter2.hasNext();) {
-                        EstudioCaso est = (EstudioCaso) iter2.next();
-                        if (index > 2) {
-                            break;
-                        }
-                        if (indexcelda == 14) {
-                            cell = row.createCell(indexcelda);
-                            try {
-                                cell.setCellValue(est.getOrden());
-                            } catch (Exception ex) {
+                
+                listaRev.clear();
+                listaRev = ServicioReporte.getRevisionExpMensual(nna.getIdnna());
+                String strFechas = "";
+                String strSolicitante = "";
+                if (!listaRev.isEmpty()) {
+                    for (Revision rev : listaRev) {
+                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                            String date = format.dateToStringNumeros(rev.getFechaRevision());
+                            strFechas = strFechas + "\n" +date;
+                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }
-                            indexcelda++;
+                            strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
-                        cell = row.createCell(indexcelda);
-                        try {
-                            fecha = format.dateToString(est.getFechaEstudio());
-                        } catch (Exception ex) {
-                        }
-                        cell.setCellValue(fecha);
-                        fecha = "";
-                        indexcelda++;
-                        cell = row.createCell(indexcelda);
-                        try {
-                            cell.setCellValue(est.getExpedienteFamilia().getExpediente());
-                        } catch (Exception ex) {
-                        }
-                        indexcelda++;
-                        cell = row.createCell(indexcelda);
-                        try {
-                            cell.setCellValue(est.getNSolicitud().toString());
-                        } catch (Exception ex) {
-                        }
-                        indexcelda++;
-
-                        index++;
                     }
+                    
                 }
-                Date ultfecha = new Date(10, 0, 01);
-                Designacion desig = new Designacion();
-                if (!nna.getDesignacions().isEmpty()) {
-                    for (Iterator iter3 = nna.getDesignacions().iterator();
-                            iter3.hasNext();) {
-                        Designacion daux = (Designacion) iter3.next();
-                        if (daux.getFechaConsejo() != null) {
-                            if (ultfecha.before(daux.getFechaConsejo())) {
-                                ultfecha = daux.getFechaConsejo();
-                                desig = daux;
+                cell = row.createCell(indexcelda);
+                cell.setCellValue(strFechas);
+                cell = row.createCell(12);
+                cell.setCellValue(strSolicitante);
+                
+                listaRev.clear();
+                listaRev = ServicioReporte.getRevisionExpHistorico(nna.getIdnna());
+                String strHistorico = "";
+                if (!listaRev.isEmpty()) {
+                    for (Revision rev : listaRev) {
+                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                            String date = format.dateToStringNumeros(rev.getFechaRevision());
+                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }
+                            strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
                     }
+                    
+                }
+                cell = row.createCell(13);
+                cell.setCellValue(strHistorico);
+//               
+                listaEst.clear();
+                listaEst = ServicioReporte.getEstudioCasoMensual(nna.getIdnna());
+                String strPrioridad = "";
+                String strFechasEstudio = "";
+                String strFamilias = "";
+                if(!listaEst.isEmpty()){
+                    for (EstudioCaso est : listaEst) {
+                      if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){  
+                        strPrioridad = strPrioridad + "\n" + est.getPrioridad();
+                        String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                        strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
+                        String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                         strFamilias = strFamilias + "\n" + Solicitante;   
+                      }
+                    }
+                
+                }
+                cell = row.createCell(14);
+                cell.setCellValue(strPrioridad);
+                cell = row.createCell(15);
+                cell.setCellValue(strFechasEstudio);
+                cell = row.createCell(16);
+                cell.setCellValue(strFamilias);
+                
+                listaEst.clear();
+                listaEst = ServicioReporte.getEstudioCasoHistorico(nna.getIdnna());
+                strHistorico = "";
+                if (!listaEst.isEmpty()) {
+                    for (EstudioCaso est : listaEst) {
+                        if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){
+                            String prioridad = "" + est.getPrioridad();
+                            String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + prioridad + " - " + fechaEst + " - " + Solicitante;
+                        }
+                    }
+                    
+                }
+                cell = row.createCell(17);
+                cell.setCellValue(strHistorico);
+                
+                listaSol.clear();
+                listaSol = ServicioReporte.getSolicitudAdopcionMensual(nna.getIdnna());
+                strFechas = "";
+                strSolicitante = "";
+                
+                if(!listaSol.isEmpty()){
+                    for (EstudioCaso est : listaSol) {
+                      if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){  
+                        String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                        strFechas = strFechas + "\n" + fechaSol;
+                        String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                         strSolicitante = strSolicitante + "\n" + Solicitante;   
+                      }
+                    }
+                
                 }
                 cell = row.createCell(18);
-                cell.setCellValue(desig.getFechaConsejo());
+                cell.setCellValue(strFechas);
                 cell = row.createCell(19);
-                try {
-                    cell.setCellValue(desig.getExpedienteFamilia().getExpediente());
-                } catch (Exception ex) {
+                cell.setCellValue(strSolicitante);
+                
+                listaSol.clear();
+                listaSol = ServicioReporte.getSolicitudAdopcionHistorico(nna.getIdnna());
+                strHistorico = "";
+                if (!listaSol.isEmpty()) {
+                    for (EstudioCaso est : listaSol) {
+                        if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){
+                            String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                                Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            }
+                            strHistorico = strHistorico + "\n" + fechaSol + " - " + Solicitante;
+                        }
+                    }
+                    
                 }
                 cell = row.createCell(20);
+                cell.setCellValue(strHistorico);
+                
+                cell = row.createCell(21);
                 try {
-                    cell.setCellValue(desig.getNDesignacion().toString());
+                    cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
                 } catch (Exception ex) {
                 }
-
-                cell = row.createCell(21);
-                cell.setCellValue(exp.getRespLegalP());
 
                 i++;
             }
