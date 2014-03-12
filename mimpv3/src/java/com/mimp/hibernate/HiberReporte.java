@@ -3083,4 +3083,423 @@ public class HiberReporte {
 
         return listaAsist;
     }
+    
+    public ArrayList<Revision> getRevisionExpMensual(Long idNna) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idN = idNna;
+        final ArrayList<Revision> listaRev = new ArrayList();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call REPORTE_REVISION_MENSUAL(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idN);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+
+                ResultSet rs = (ResultSet) statement.getObject(2);
+
+                while(rs.next()) {
+                    Revision tempRev = new Revision();
+                    ExpedienteFamilia tempEF = new ExpedienteFamilia();
+                    Familia tempFam = new Familia();
+                    Entidad tempEnt = new Entidad();
+                    
+                    tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
+                    tempEF.setExpediente(rs.getString("EXPEDIENTE"));
+                    tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
+
+                    tempFam.setIdfamilia(rs.getLong("IDFAMILIA"));
+                    Long idEntidad = rs.getLong("IDENTIDAD");
+                    if (!rs.wasNull()) {
+                        String query2 = "{call RENAD_ENTIDAD(?,?)}";
+                        CallableStatement statement2 = connection.prepareCall(query2);
+                        statement2.setLong(1, idEntidad);
+                        statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement2.execute();
+                        ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                        while (rs2.next()) {
+                            tempEnt.setIdentidad(rs2.getLong("IDENTIDAD"));
+                            tempEnt.setNombre(rs2.getString("NOMBRE"));
+                            tempEnt.setUser(rs2.getString("USER_"));
+                            tempEnt.setPass(rs2.getString("PASS"));
+                            tempEnt.setDireccion(rs2.getString("DIRECCION"));
+                            tempEnt.setTelefono(rs2.getString("TELEFONO"));
+                            tempEnt.setPais(rs2.getString("PAIS"));
+                            tempEnt.setResolAuto(rs2.getString("RESOL_AUTO"));
+                            tempEnt.setFechaResol(rs2.getDate("FECHA_RESOL"));
+                            tempEnt.setResolRenov(rs2.getString("RESOL_RENOV"));
+                            tempEnt.setFechaRenov(rs2.getDate("FECHA_RENOV"));
+                            tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
+                            tempEnt.setObs(rs2.getString("OBS"));
+                        }
+                        statement2.close();
+                        tempFam.setEntidad(tempEnt);
+                    }
+                    tempEF.setFamilia(tempFam);
+                    tempRev.setExpedienteFamilia(tempEF);
+                    
+                    tempRev.setFechaRevision(rs.getDate("FECHA_REVISION"));
+                    listaRev.add(tempRev);
+                }
+                statement.close();
+            }
+        };
+        session.doWork(work);
+
+        return listaRev;
+    }
+    
+    public ArrayList<Revision> getRevisionExpHistorico(Long idNna) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idN = idNna;
+        final ArrayList<Revision> listaRev = new ArrayList();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call REPORTE_REVISION_HISTORICO(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idN);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+
+                ResultSet rs = (ResultSet) statement.getObject(2);
+
+                while(rs.next()) {
+                    Revision tempRev = new Revision();
+                    ExpedienteFamilia tempEF = new ExpedienteFamilia();
+                    Familia tempFam = new Familia();
+                    Entidad tempEnt = new Entidad();
+                    
+                    tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
+                    tempEF.setExpediente(rs.getString("EXPEDIENTE"));
+                    tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
+
+                    tempFam.setIdfamilia(rs.getLong("IDFAMILIA"));
+                    Long idEntidad = rs.getLong("IDENTIDAD");
+                    if (!rs.wasNull()) {
+                        String query2 = "{call RENAD_ENTIDAD(?,?)}";
+                        CallableStatement statement2 = connection.prepareCall(query2);
+                        statement2.setLong(1, idEntidad);
+                        statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement2.execute();
+                        ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                        while (rs2.next()) {
+                            tempEnt.setIdentidad(rs2.getLong("IDENTIDAD"));
+                            tempEnt.setNombre(rs2.getString("NOMBRE"));
+                            tempEnt.setUser(rs2.getString("USER_"));
+                            tempEnt.setPass(rs2.getString("PASS"));
+                            tempEnt.setDireccion(rs2.getString("DIRECCION"));
+                            tempEnt.setTelefono(rs2.getString("TELEFONO"));
+                            tempEnt.setPais(rs2.getString("PAIS"));
+                            tempEnt.setResolAuto(rs2.getString("RESOL_AUTO"));
+                            tempEnt.setFechaResol(rs2.getDate("FECHA_RESOL"));
+                            tempEnt.setResolRenov(rs2.getString("RESOL_RENOV"));
+                            tempEnt.setFechaRenov(rs2.getDate("FECHA_RENOV"));
+                            tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
+                            tempEnt.setObs(rs2.getString("OBS"));
+                        }
+                        statement2.close();
+                        tempFam.setEntidad(tempEnt);
+                    }
+                    tempEF.setFamilia(tempFam);
+                    tempRev.setExpedienteFamilia(tempEF);
+                    
+                    tempRev.setFechaRevision(rs.getDate("FECHA_REVISION"));
+                    listaRev.add(tempRev);
+                }
+                statement.close();
+            }
+        };
+        session.doWork(work);
+
+        return listaRev;
+    }
+    
+    public ArrayList<EstudioCaso> getEstudioCasoMensual(Long idNna) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idN = idNna;
+        final ArrayList<EstudioCaso> listaEstudio = new ArrayList();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call REPORTE_ESTUDIO_MENSUAL(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idN);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+
+                ResultSet rs = (ResultSet) statement.getObject(2);
+
+                while(rs.next()) {
+                    EstudioCaso tempEst = new EstudioCaso();
+                    ExpedienteFamilia tempEF = new ExpedienteFamilia();
+                    Familia tempFam = new Familia();
+                    Entidad tempEnt = new Entidad();
+                    
+                    tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
+                    tempEF.setExpediente(rs.getString("EXPEDIENTE"));
+                    tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
+
+                    tempFam.setIdfamilia(rs.getLong("IDFAMILIA"));
+                    Long idEntidad = rs.getLong("IDENTIDAD");
+                    if (!rs.wasNull()) {
+                        String query2 = "{call RENAD_ENTIDAD(?,?)}";
+                        CallableStatement statement2 = connection.prepareCall(query2);
+                        statement2.setLong(1, idEntidad);
+                        statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement2.execute();
+                        ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                        while (rs2.next()) {
+                            tempEnt.setIdentidad(rs2.getLong("IDENTIDAD"));
+                            tempEnt.setNombre(rs2.getString("NOMBRE"));
+                            tempEnt.setUser(rs2.getString("USER_"));
+                            tempEnt.setPass(rs2.getString("PASS"));
+                            tempEnt.setDireccion(rs2.getString("DIRECCION"));
+                            tempEnt.setTelefono(rs2.getString("TELEFONO"));
+                            tempEnt.setPais(rs2.getString("PAIS"));
+                            tempEnt.setResolAuto(rs2.getString("RESOL_AUTO"));
+                            tempEnt.setFechaResol(rs2.getDate("FECHA_RESOL"));
+                            tempEnt.setResolRenov(rs2.getString("RESOL_RENOV"));
+                            tempEnt.setFechaRenov(rs2.getDate("FECHA_RENOV"));
+                            tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
+                            tempEnt.setObs(rs2.getString("OBS"));
+                        }
+                        statement2.close();
+                        tempFam.setEntidad(tempEnt);
+                    }
+                    tempEF.setFamilia(tempFam);
+                    tempEst.setExpedienteFamilia(tempEF);
+                    tempEst.setPrioridad(rs.getLong("PRIORIDAD"));
+                    tempEst.setFechaEstudio(rs.getDate("FECHA_ESTUDIO"));
+                    tempEst.setFechaSolAdop(rs.getDate("FECHA_SOL_ADOP"));
+                    listaEstudio.add(tempEst);
+                }
+                statement.close();
+            }
+        };
+        session.doWork(work);
+
+        return listaEstudio;
+    }
+    
+    public ArrayList<EstudioCaso> getEstudioCasoHistorico(Long idNna) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idN = idNna;
+        final ArrayList<EstudioCaso> listaEstudio = new ArrayList();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call REPORTE_ESTUDIO_HISTORICO(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idN);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+
+                ResultSet rs = (ResultSet) statement.getObject(2);
+
+                while(rs.next()) {
+                    EstudioCaso tempEst = new EstudioCaso();
+                    ExpedienteFamilia tempEF = new ExpedienteFamilia();
+                    Familia tempFam = new Familia();
+                    Entidad tempEnt = new Entidad();
+                    
+                    tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
+                    tempEF.setExpediente(rs.getString("EXPEDIENTE"));
+                    tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
+
+                    tempFam.setIdfamilia(rs.getLong("IDFAMILIA"));
+                    Long idEntidad = rs.getLong("IDENTIDAD");
+                    if (!rs.wasNull()) {
+                        String query2 = "{call RENAD_ENTIDAD(?,?)}";
+                        CallableStatement statement2 = connection.prepareCall(query2);
+                        statement2.setLong(1, idEntidad);
+                        statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement2.execute();
+                        ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                        while (rs2.next()) {
+                            tempEnt.setIdentidad(rs2.getLong("IDENTIDAD"));
+                            tempEnt.setNombre(rs2.getString("NOMBRE"));
+                            tempEnt.setUser(rs2.getString("USER_"));
+                            tempEnt.setPass(rs2.getString("PASS"));
+                            tempEnt.setDireccion(rs2.getString("DIRECCION"));
+                            tempEnt.setTelefono(rs2.getString("TELEFONO"));
+                            tempEnt.setPais(rs2.getString("PAIS"));
+                            tempEnt.setResolAuto(rs2.getString("RESOL_AUTO"));
+                            tempEnt.setFechaResol(rs2.getDate("FECHA_RESOL"));
+                            tempEnt.setResolRenov(rs2.getString("RESOL_RENOV"));
+                            tempEnt.setFechaRenov(rs2.getDate("FECHA_RENOV"));
+                            tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
+                            tempEnt.setObs(rs2.getString("OBS"));
+                        }
+                        statement2.close();
+                        tempFam.setEntidad(tempEnt);
+                    }
+                    tempEF.setFamilia(tempFam);
+                    tempEst.setExpedienteFamilia(tempEF);
+                    tempEst.setPrioridad(rs.getLong("PRIORIDAD"));
+                    tempEst.setFechaEstudio(rs.getDate("FECHA_ESTUDIO"));
+                    tempEst.setFechaSolAdop(rs.getDate("FECHA_SOL_ADOP"));
+                    listaEstudio.add(tempEst);
+                }
+                statement.close();
+            }
+        };
+        session.doWork(work);
+
+        return listaEstudio;
+    }
+    
+    public ArrayList<EstudioCaso> getSolicitudAdopcionMensual(Long idNna) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idN = idNna;
+        final ArrayList<EstudioCaso> listaEstudio = new ArrayList();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call REPORTE_SOLICITUD_MENSUAL(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idN);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+
+                ResultSet rs = (ResultSet) statement.getObject(2);
+
+                while(rs.next()) {
+                    EstudioCaso tempEst = new EstudioCaso();
+                    ExpedienteFamilia tempEF = new ExpedienteFamilia();
+                    Familia tempFam = new Familia();
+                    Entidad tempEnt = new Entidad();
+                    
+                    tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
+                    tempEF.setExpediente(rs.getString("EXPEDIENTE"));
+                    tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
+
+                    tempFam.setIdfamilia(rs.getLong("IDFAMILIA"));
+                    Long idEntidad = rs.getLong("IDENTIDAD");
+                    if (!rs.wasNull()) {
+                        String query2 = "{call RENAD_ENTIDAD(?,?)}";
+                        CallableStatement statement2 = connection.prepareCall(query2);
+                        statement2.setLong(1, idEntidad);
+                        statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement2.execute();
+                        ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                        while (rs2.next()) {
+                            tempEnt.setIdentidad(rs2.getLong("IDENTIDAD"));
+                            tempEnt.setNombre(rs2.getString("NOMBRE"));
+                            tempEnt.setUser(rs2.getString("USER_"));
+                            tempEnt.setPass(rs2.getString("PASS"));
+                            tempEnt.setDireccion(rs2.getString("DIRECCION"));
+                            tempEnt.setTelefono(rs2.getString("TELEFONO"));
+                            tempEnt.setPais(rs2.getString("PAIS"));
+                            tempEnt.setResolAuto(rs2.getString("RESOL_AUTO"));
+                            tempEnt.setFechaResol(rs2.getDate("FECHA_RESOL"));
+                            tempEnt.setResolRenov(rs2.getString("RESOL_RENOV"));
+                            tempEnt.setFechaRenov(rs2.getDate("FECHA_RENOV"));
+                            tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
+                            tempEnt.setObs(rs2.getString("OBS"));
+                        }
+                        statement2.close();
+                        tempFam.setEntidad(tempEnt);
+                    }
+                    tempEF.setFamilia(tempFam);
+                    tempEst.setExpedienteFamilia(tempEF);
+                    tempEst.setPrioridad(rs.getLong("PRIORIDAD"));
+                    tempEst.setFechaEstudio(rs.getDate("FECHA_ESTUDIO"));
+                    tempEst.setFechaSolAdop(rs.getDate("FECHA_SOL_ADOP"));
+                    listaEstudio.add(tempEst);
+                }
+                statement.close();
+            }
+        };
+        session.doWork(work);
+
+        return listaEstudio;
+    }
+    
+     public ArrayList<EstudioCaso> getSolicitudAdopcionHistorico(Long idNna) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idN = idNna;
+        final ArrayList<EstudioCaso> listaEstudio = new ArrayList();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call REPORTE_SOLICITUD_HISTORICO(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idN);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+
+                ResultSet rs = (ResultSet) statement.getObject(2);
+
+                while(rs.next()) {
+                    EstudioCaso tempEst = new EstudioCaso();
+                    ExpedienteFamilia tempEF = new ExpedienteFamilia();
+                    Familia tempFam = new Familia();
+                    Entidad tempEnt = new Entidad();
+                    
+                    tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
+                    tempEF.setExpediente(rs.getString("EXPEDIENTE"));
+                    tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
+
+                    tempFam.setIdfamilia(rs.getLong("IDFAMILIA"));
+                    Long idEntidad = rs.getLong("IDENTIDAD");
+                    if (!rs.wasNull()) {
+                        String query2 = "{call RENAD_ENTIDAD(?,?)}";
+                        CallableStatement statement2 = connection.prepareCall(query2);
+                        statement2.setLong(1, idEntidad);
+                        statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement2.execute();
+                        ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                        while (rs2.next()) {
+                            tempEnt.setIdentidad(rs2.getLong("IDENTIDAD"));
+                            tempEnt.setNombre(rs2.getString("NOMBRE"));
+                            tempEnt.setUser(rs2.getString("USER_"));
+                            tempEnt.setPass(rs2.getString("PASS"));
+                            tempEnt.setDireccion(rs2.getString("DIRECCION"));
+                            tempEnt.setTelefono(rs2.getString("TELEFONO"));
+                            tempEnt.setPais(rs2.getString("PAIS"));
+                            tempEnt.setResolAuto(rs2.getString("RESOL_AUTO"));
+                            tempEnt.setFechaResol(rs2.getDate("FECHA_RESOL"));
+                            tempEnt.setResolRenov(rs2.getString("RESOL_RENOV"));
+                            tempEnt.setFechaRenov(rs2.getDate("FECHA_RENOV"));
+                            tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
+                            tempEnt.setObs(rs2.getString("OBS"));
+                        }
+                        statement2.close();
+                        tempFam.setEntidad(tempEnt);
+                    }
+                    tempEF.setFamilia(tempFam);
+                    tempEst.setExpedienteFamilia(tempEF);
+                    tempEst.setPrioridad(rs.getLong("PRIORIDAD"));
+                    tempEst.setFechaEstudio(rs.getDate("FECHA_ESTUDIO"));
+                    tempEst.setFechaSolAdop(rs.getDate("FECHA_SOL_ADOP"));
+                    listaEstudio.add(tempEst);
+                }
+                statement.close();
+            }
+        };
+        session.doWork(work);
+
+        return listaEstudio;
+    }
+     
 }
