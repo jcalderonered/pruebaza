@@ -227,6 +227,7 @@
                                         <c:forEach var="familia" items="${listaFamilias}" varStatus="status"> 
                                             <c:if test="${!familia.getFormularioSesions().isEmpty()}">
                                                 <c:forEach var="formulario" items="${familia.getFormularioSesions()}" varStatus="status">
+                                                   <c:if test="${usuario.getUnidad().getDepartamento() == formulario.getSesion().getUnidad() || usuario.getUnidad().getDepartamento() == 'Lima'}">  
                                                     <tr>
                                                         <c:choose>
                                                             <c:when test="${formulario.getAsistentes().size() == 2}">     
@@ -425,6 +426,7 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </tr>
+                                                    </c:if>
                                                 </c:forEach>
                                             </c:if>
                                             <c:if test="${familia.getFormularioSesions() == null}">

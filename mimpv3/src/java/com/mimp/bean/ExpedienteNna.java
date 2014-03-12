@@ -38,7 +38,8 @@ public class ExpedienteNna  implements java.io.Serializable {
      private String apellidomActual;
      private String observaciones;
      private Date fechaInvTutelar;
-
+     private Date fechaIngPrio;
+     private Date fechaActualizacion;   
     public ExpedienteNna() {
     }
 
@@ -48,7 +49,7 @@ public class ExpedienteNna  implements java.io.Serializable {
         this.nna = nna;
         this.unidad = unidad;
     }
-    public ExpedienteNna(long idexpedienteNna, Nna nna, Unidad unidad, String numero, Date fechaIngreso, String ht, String NExpTutelar, String procTutelar, Short fichaIntegral, String comentarios, String respLegalNombre, String respLegalP, String respLegalM, String respPsicosocialNombre, String respPiscosocialP, String respPsicosocialM, String estado, Date fechaEstado, Short adoptable, Date fechaResolCons, Short nacional, String diagnostico, String codigoReferencia, String NActual, String apellidopActual, String apellidomActual, String observaciones, Date fechaInvTutelar) {
+    public ExpedienteNna(long idexpedienteNna, Nna nna, Unidad unidad, String numero, Date fechaIngreso, String ht, String NExpTutelar, String procTutelar, Short fichaIntegral, String comentarios, String respLegalNombre, String respLegalP, String respLegalM, String respPsicosocialNombre, String respPiscosocialP, String respPsicosocialM, String estado, Date fechaEstado, Short adoptable, Date fechaResolCons, Short nacional, String diagnostico, String codigoReferencia, String NActual, String apellidopActual, String apellidomActual, String observaciones, Date fechaInvTutelar, Date fechaIngPrio, Date fechaActualizacion) {
        this.idexpedienteNna = idexpedienteNna;
        this.nna = nna;
        this.unidad = unidad;
@@ -77,6 +78,8 @@ public class ExpedienteNna  implements java.io.Serializable {
        this.apellidomActual = apellidomActual;
        this.observaciones = observaciones;
        this.fechaInvTutelar = fechaInvTutelar;
+       this.fechaIngPrio = fechaIngPrio;
+       this.fechaActualizacion = fechaActualizacion;
     }
    
     public long getIdexpedienteNna() {
@@ -276,7 +279,21 @@ public class ExpedienteNna  implements java.io.Serializable {
         this.fechaInvTutelar = fechaInvTutelar;
     }
 
+    public Date getFechaIngPrio() {
+        return this.fechaIngPrio;
+    }
+    
+    public void setFechaIngPrio(Date fechaIngPrio) {
+        this.fechaIngPrio = fechaIngPrio;
+    }
 
+    public Date getFechaActualizacion() {
+        return this.fechaActualizacion;
+    }
+    
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
 
 
 }

@@ -222,6 +222,7 @@
                                 <c:if test="${listaEspera != null}">   
                                     <tbody>
                                         <c:forEach var="expediente" items="${listaEspera}" varStatus="status">
+                                            <c:if test="${usuario.getUnidad().getDepartamento() == expediente.getUnidad().getDepartamento() || usuario.getUnidad().getDepartamento() == 'Lima'}">
                                             <tr>
                                                 <td>
                                                     ${expediente.getExpediente()}
@@ -263,6 +264,7 @@
                                                     </form>
                                                 </td>
                                             </tr>
+                                            </c:if>  
                                         </c:forEach>
                                     </tbody>
                                 </c:if> 
