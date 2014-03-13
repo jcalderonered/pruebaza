@@ -244,7 +244,7 @@
                                             </c:if>                                           
                                         </td>
                                         <td>
-                                            <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
+                                            <form action="${pageContext.servletContext.contextPath}/editarNna4" method="post">
                                                 <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
                                                 <button type="submit" class="btn btn-default">Ver</button>
                                             </form>
