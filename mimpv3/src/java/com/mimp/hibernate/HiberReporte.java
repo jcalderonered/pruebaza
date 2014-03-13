@@ -41,6 +41,9 @@ public class HiberReporte {
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
+    
+    @Resource(name = "HiberEtapa")
+    private HiberEtapa servicioEtapa = new HiberEtapa();
 
     public ArrayList<Organismo> ReporteOrganismo() {
 
@@ -2993,7 +2996,7 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(2);
 
-                while(rs.next()) {
+                while (rs.next()) {
                     FormularioSesion form = new FormularioSesion();
                     form.setIdformularioSesion(rs.getLong("IDFORMULARIO_SESION"));
                     form.setFechaSol(rs.getDate("FECHA_SOL"));
@@ -3052,7 +3055,7 @@ public class HiberReporte {
                 ResultSet rs2 = (ResultSet) statement2.getObject(2);
 
                 Asistente asist;
-                while(rs2.next()) {
+                while (rs2.next()) {
                     asist = new Asistente();
                     asist.setIdasistente(rs2.getLong("IDASISTENTE"));
                     asist.setNombre(rs2.getString("NOMBRE"));
@@ -3083,7 +3086,7 @@ public class HiberReporte {
 
         return listaAsist;
     }
-    
+
     public ArrayList<Revision> getRevisionExpMensual(Long idNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -3102,12 +3105,12 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(2);
 
-                while(rs.next()) {
+                while (rs.next()) {
                     Revision tempRev = new Revision();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
                     Familia tempFam = new Familia();
                     Entidad tempEnt = new Entidad();
-                    
+
                     tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
                     tempEF.setExpediente(rs.getString("EXPEDIENTE"));
                     tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
@@ -3141,7 +3144,7 @@ public class HiberReporte {
                     }
                     tempEF.setFamilia(tempFam);
                     tempRev.setExpedienteFamilia(tempEF);
-                    
+
                     tempRev.setFechaRevision(rs.getDate("FECHA_REVISION"));
                     listaRev.add(tempRev);
                 }
@@ -3152,7 +3155,7 @@ public class HiberReporte {
 
         return listaRev;
     }
-    
+
     public ArrayList<Revision> getRevisionExpHistorico(Long idNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -3171,12 +3174,12 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(2);
 
-                while(rs.next()) {
+                while (rs.next()) {
                     Revision tempRev = new Revision();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
                     Familia tempFam = new Familia();
                     Entidad tempEnt = new Entidad();
-                    
+
                     tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
                     tempEF.setExpediente(rs.getString("EXPEDIENTE"));
                     tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
@@ -3210,7 +3213,7 @@ public class HiberReporte {
                     }
                     tempEF.setFamilia(tempFam);
                     tempRev.setExpedienteFamilia(tempEF);
-                    
+
                     tempRev.setFechaRevision(rs.getDate("FECHA_REVISION"));
                     listaRev.add(tempRev);
                 }
@@ -3221,7 +3224,7 @@ public class HiberReporte {
 
         return listaRev;
     }
-    
+
     public ArrayList<EstudioCaso> getEstudioCasoMensual(Long idNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -3240,12 +3243,12 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(2);
 
-                while(rs.next()) {
+                while (rs.next()) {
                     EstudioCaso tempEst = new EstudioCaso();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
                     Familia tempFam = new Familia();
                     Entidad tempEnt = new Entidad();
-                    
+
                     tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
                     tempEF.setExpediente(rs.getString("EXPEDIENTE"));
                     tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
@@ -3291,7 +3294,7 @@ public class HiberReporte {
 
         return listaEstudio;
     }
-    
+
     public ArrayList<EstudioCaso> getEstudioCasoHistorico(Long idNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -3310,12 +3313,12 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(2);
 
-                while(rs.next()) {
+                while (rs.next()) {
                     EstudioCaso tempEst = new EstudioCaso();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
                     Familia tempFam = new Familia();
                     Entidad tempEnt = new Entidad();
-                    
+
                     tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
                     tempEF.setExpediente(rs.getString("EXPEDIENTE"));
                     tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
@@ -3361,7 +3364,7 @@ public class HiberReporte {
 
         return listaEstudio;
     }
-    
+
     public ArrayList<EstudioCaso> getSolicitudAdopcionMensual(Long idNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -3380,12 +3383,12 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(2);
 
-                while(rs.next()) {
+                while (rs.next()) {
                     EstudioCaso tempEst = new EstudioCaso();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
                     Familia tempFam = new Familia();
                     Entidad tempEnt = new Entidad();
-                    
+
                     tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
                     tempEF.setExpediente(rs.getString("EXPEDIENTE"));
                     tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
@@ -3431,8 +3434,8 @@ public class HiberReporte {
 
         return listaEstudio;
     }
-    
-     public ArrayList<EstudioCaso> getSolicitudAdopcionHistorico(Long idNna) {
+
+    public ArrayList<EstudioCaso> getSolicitudAdopcionHistorico(Long idNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
@@ -3450,12 +3453,12 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(2);
 
-                while(rs.next()) {
+                while (rs.next()) {
                     EstudioCaso tempEst = new EstudioCaso();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
                     Familia tempFam = new Familia();
                     Entidad tempEnt = new Entidad();
-                    
+
                     tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
                     tempEF.setExpediente(rs.getString("EXPEDIENTE"));
                     tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
@@ -3501,7 +3504,132 @@ public class HiberReporte {
 
         return listaEstudio;
     }
-     
+
+    public ArrayList<FormularioSesion> getAsistenciaSI(Long idsesion) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idsesion_in = idsesion;
+        final ArrayList<FormularioSesion> allFamilias = new ArrayList();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call REPORTE_ASISTENCIA_SESION(?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, idsesion_in);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.registerOutParameter(3, OracleTypes.CURSOR);
+                statement.execute();
+
+                ResultSet rs2 = (ResultSet) statement.getObject(2);
+                ResultSet rs = (ResultSet) statement.getObject(3);
+                
+                Sesion sesion = new Sesion();
+                
+                while (rs2.next()){
+                    sesion.setIdsesion(rs2.getLong("IDSESION"));
+                    sesion.setNSesion(rs2.getString("N_SESION"));
+                    sesion.setHabilitado(rs2.getShort("HABILITADO"));
+                    sesion.setFecha(rs2.getDate("FECHA"));
+                    sesion.setHora(rs2.getString("HORA"));
+                    sesion.setDireccion(rs2.getString("DIRECCION"));
+                    sesion.setDuracion(rs2.getString("DURACION"));
+                    sesion.setFacilitador(rs2.getString("FACILITADOR"));
+                    sesion.setAsistencia(rs2.getShort("ASISTENCIA"));
+                    sesion.setUnidad(rs2.getString("UNIDAD"));
+                }
+
+                while (rs.next()) {
+                    FormularioSesion form = new FormularioSesion();
+                    form.setSesion(sesion);
+                    form.setIdformularioSesion(rs.getLong("IDFORMULARIO_SESION"));
+                    form.setFechaSol(rs.getDate("FECHA_SOL"));
+                    form.setPaisRes(rs.getString("PAIS_RES"));
+                    form.setDepRes(rs.getString("DEP_RES"));
+                    form.setProvRes(rs.getString("PROV_RES"));
+                    form.setDistritoRes(rs.getString("DISTRITO_RES"));
+                    form.setDireccionRes(rs.getString("DIRECCION_RES"));
+                    form.setEstadoCivil(rs.getString("ESTADO_CIVIL"));
+                    form.setTelefono(rs.getString("TELEFONO"));
+                    
+                    Long idfamilia = rs.getLong("IDFAMILIA");
+                    
+                    if(idfamilia != 0){
+                        form.setFamilia(servicioEtapa.getFamilia(idfamilia));
+                    } else {
+                        Familia fami = new Familia();
+                        fami.setIdfamilia(0);
+                        form.setFamilia(fami);
+                    }
+                    
+                    Set<AsistenciaFT> listAsistencia = getAsistencia(rs.getLong("IDFORMULARIO_SESION"));
+                    form.setAsistenciaFTs(listAsistencia);
+
+                    Set<Asistente> listAsist = getAsistentes(rs.getLong("IDFORMULARIO_SESION"));
+                    form.setAsistentes(listAsist);
+
+                    allFamilias.add(form);
+                }
+                statement.close();
+            }
+        };
+        session.doWork(work);
+
+        //METODO BUBBLESORT PARA ORDENAR SEGUN EL APELLIDO DE LA ASISTENTE MUJER
+        int n = allFamilias.size();
+        FormularioSesion auxform;
+        for (int i = 0; i < n - 1; i++) {
+            ArrayList<Asistente> asist_temp = new ArrayList(allFamilias.get(i).getAsistentes());
+            for (int j = i; j < n - 1; j++) {
+                ArrayList<Asistente> asist_temp2 = new ArrayList(allFamilias.get(j + 1).getAsistentes());
+                if (asist_temp.get(0).getApellidoP().compareToIgnoreCase(asist_temp2.get(0).getApellidoP()) > 0) {
+                    auxform = allFamilias.get(i);
+                    allFamilias.set(i, allFamilias.get(j + 1));
+                    allFamilias.set(j + 1, auxform);
+                }
+            }
+        }
+
+        return allFamilias;
+    }
+    
+    public Set<AsistenciaFT> getAsistencia(Long idformulario) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idform = idformulario;
+        final Set<AsistenciaFT> listaAsist = new HashSet<AsistenciaFT>();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql2 = "{call REPORTE_GET_ASISTENCIA(?,?)}";
+                CallableStatement statement2 = connection.prepareCall(hql2);
+                statement2.setLong(1, idform);
+                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                statement2.execute();
+
+                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                AsistenciaFT asist;
+                while (rs2.next()) {
+                    asist = new AsistenciaFT();
+                    asist.setIdasistenciaFT(rs2.getLong("IDASISTENCIA_F_T"));
+                    if (!rs2.wasNull()) {
+                    asist.setAsistencia(rs2.getString("ASISTENCIA").charAt(0));
+                    }
+                    asist.setInasJus(rs2.getShort("INAS_JUS"));
+
+                    listaAsist.add(asist);
+                }
+                statement2.close();
+            }
+        };
+        session.doWork(work);
+
+        return listaAsist;
+    }
     public Designacion getFamiliaDesignadoNna(Long idNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();

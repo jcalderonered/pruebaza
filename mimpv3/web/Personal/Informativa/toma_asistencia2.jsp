@@ -238,6 +238,7 @@
                                 <c:set var="contador" value="0" scope="page" />    
                                 <tbody>
                                     <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
+                                        <c:set var="idsesion_in" value="${formulario.getIdformularioSesion()}" scope="page" />
                                             <tr>
                                                 <c:choose>
                                                     <c:when test="${formulario.getAsistentes().size() == 2}"> 
@@ -392,7 +393,7 @@
                                             </tr>
                                         </c:forEach>
                                 </tbody>
-                                
+                                <a href="${pageContext.servletContext.contextPath}/Reportes/AsistenciaSI?idsesion=${idsesion_in}" class="btn btn-default">Exportar a Excel</a>
                                 </c:if>
                                 <h3><strong>Número de inscritos : ${contador}</strong></h3>
                             </table>
