@@ -1085,14 +1085,14 @@ public class reporte {
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
-            
+
             //Aquí va el query que consigue los datos de la tabla
             //ArrayList<Nna> listanna = ServicioReporte.ListaNnaReporte("prioritario");
             ArrayList<Nna> listanna = ServicioReporte.ListaNnaPriorita();
             ArrayList<Revision> listaRev = new ArrayList();
             ArrayList<EstudioCaso> listaEst = new ArrayList();
             ArrayList<EstudioCaso> listaSol = new ArrayList();
-            
+
             int i = 2;
             for (Nna nna : listanna) {
                 Row row = sheet.createRow(i);
@@ -1200,7 +1200,7 @@ public class reporte {
                     if (!exp.getCodigoReferencia().contains("NE")) {
                         cell.setCellValue(exp.getCodigoReferencia().substring(0, 1));
                     } else {
-                        cell.setCellValue(exp.getCodigoReferencia().substring(0,2));
+                        cell.setCellValue(exp.getCodigoReferencia().substring(0, 2));
                     }
                 }
                 cell = row.createCell(18);
@@ -1231,31 +1231,31 @@ public class reporte {
                 cell.setCellValue(nna.getObservaciones());
                 cell = row.createCell(22);
                 cell.setCellValue(exp.getComentarios());
-                
+
                 listaRev.clear();
                 listaRev = ServicioReporte.getRevisionExpHistorico(nna.getIdnna());
                 String strFechas = "";
                 String strSolicitantes = "";
                 if (!listaRev.isEmpty()) {
                     for (Revision rev : listaRev) {
-                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                        if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
                             String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }
                             strSolicitantes = strSolicitantes + "\n" + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(23);
                 cell.setCellValue(strFechas);
                 cell = row.createCell(24);
                 cell.setCellValue(strSolicitantes);
-                
+
                 listaEst.clear();
                 listaEst = ServicioReporte.getEstudioCasoHistorico(nna.getIdnna());
                 String strPrioridad = "";
@@ -1263,20 +1263,20 @@ public class reporte {
                 strSolicitantes = "";
                 if (!listaEst.isEmpty()) {
                     for (EstudioCaso est : listaEst) {
-                        if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){
+                        if (est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")) {
                             String prioridad = "" + est.getPrioridad();
                             strPrioridad = strPrioridad + "\n" + prioridad;
                             String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
                             strFechas = strFechas + "\n" + fechaEst;
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }
                             strSolicitantes = strSolicitantes + "\n" + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(25);
                 cell.setCellValue(strPrioridad);
@@ -1284,34 +1284,34 @@ public class reporte {
                 cell.setCellValue(strFechas);
                 cell = row.createCell(27);
                 cell.setCellValue(strSolicitantes);
-                
+
                 listaSol.clear();
                 listaSol = ServicioReporte.getSolicitudAdopcionHistorico(nna.getIdnna());
                 strFechas = "";
                 strSolicitantes = "";
                 if (!listaSol.isEmpty()) {
                     for (EstudioCaso est : listaSol) {
-                        if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){
+                        if (est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")) {
                             String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
                             strFechas = strFechas + "\n" + fechaSol;
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }
                             strSolicitantes = strSolicitantes + "\n" + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(28);
                 cell.setCellValue(strFechas);
                 cell = row.createCell(29);
-                cell.setCellValue(strSolicitantes);	
-                
+                cell.setCellValue(strSolicitantes);
+
                 Designacion desig = new Designacion();
                 desig = ServicioReporte.getFamiliaDesignadoNna(nna.getIdnna());
-                
+
 //                int index = 1;
 //                int indexcelda = 23;
 //                if (!nna.getEstudioCasos().isEmpty()) {
@@ -1388,8 +1388,8 @@ public class reporte {
                     cell.setCellValue(inf.getPaisRes());
                 }
                 cell = row.createCell(33);
-                if (desig.getExpedienteFamilia() != null 
-                        && desig.getExpedienteFamilia().getNacionalidad().equals("nacional") 
+                if (desig.getExpedienteFamilia() != null
+                        && desig.getExpedienteFamilia().getNacionalidad().equals("nacional")
                         && inf.getDepRes() != null) {
                     cell.setCellValue(inf.getDepRes());
                 }
@@ -1451,7 +1451,7 @@ public class reporte {
             ArrayList<Nna> listahermano = new ArrayList();
             ArrayList<Nna> listaespecial = new ArrayList();
             ArrayList<Nna> listaadolescente = new ArrayList();
-            
+
             ArrayList<Revision> listaRev = new ArrayList();
             ArrayList<EstudioCaso> listaEst = new ArrayList();
             ArrayList<EstudioCaso> listaSol = new ArrayList();
@@ -1547,7 +1547,7 @@ public class reporte {
                     cell.setCellValue(nna.getObservaciones());
                 } catch (Exception ex) {
                 }
-                
+
                 listaRev.clear();
                 listaRev = ServicioReporte.getRevisionExpMensual(nna.getIdnna());
                 String strFechas = "";
@@ -1555,12 +1555,12 @@ public class reporte {
                 String Procedencia = "";
                 if (!listaRev.isEmpty()) {
                     for (Revision rev : listaRev) {
-                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                        if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
-                            strFechas = strFechas + "\n" +date;
+                            strFechas = strFechas + "\n" + date;
                             String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
@@ -1568,7 +1568,7 @@ public class reporte {
                             strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(10);
                 cell.setCellValue(strFechas);
@@ -1581,11 +1581,11 @@ public class reporte {
                 String strHistorico = "";
                 if (!listaRev.isEmpty()) {
                     for (Revision rev : listaRev) {
-                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                        if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }else{
                                 Solicitante = Solicitante + "(nacional)";
@@ -1593,7 +1593,7 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(13);
                 cell.setCellValue(strHistorico);
@@ -1606,21 +1606,21 @@ public class reporte {
                 Procedencia = "";
                 if(!listaEst.isEmpty()){
                     for (EstudioCaso est : listaEst) {
-                      if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){  
-                        strPrioridad = strPrioridad + "\n" + est.getPrioridad();
-                        String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
-                        strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
-                        String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                        if (est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")) {
+                            strPrioridad = strPrioridad + "\n" + est.getPrioridad();
+                            String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                            strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
                             }
-                         strFamilias = strFamilias + "\n" + Solicitante;   
-                      }
+                            strFamilias = strFamilias + "\n" + Solicitante;
+                        }
                     }
-                
+
                 }
                 cell = row.createCell(14);
                 cell.setCellValue(strPrioridad);
@@ -1636,12 +1636,12 @@ public class reporte {
                 strHistorico = "";
                 if (!listaEst.isEmpty()) {
                     for (EstudioCaso est : listaEst) {
-                        if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){
+                        if (est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")) {
                             String prioridad = "" + est.getPrioridad();
                             String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }else{
                                 Solicitante = Solicitante + "(nacional)";
@@ -1649,11 +1649,11 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + prioridad + " - " + fechaEst + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(18);
                 cell.setCellValue(strHistorico);
-                
+
                 listaSol.clear();
                 listaSol = ServicioReporte.getSolicitudAdopcionMensual(nna.getIdnna());
                 strFechas = "";
@@ -1661,20 +1661,20 @@ public class reporte {
                 Procedencia = "";
                 if(!listaSol.isEmpty()){
                     for (EstudioCaso est : listaSol) {
-                      if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){  
-                        String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
-                        strFechas = strFechas + "\n" + fechaSol;
-                        String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                        if (est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")) {
+                            String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                            strFechas = strFechas + "\n" + fechaSol;
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
                             }
-                         strSolicitante = strSolicitante + "\n" + Solicitante;   
-                      }
+                            strSolicitante = strSolicitante + "\n" + Solicitante;
+                        }
                     }
-                
+
                 }
                 cell = row.createCell(19);
                 cell.setCellValue(strFechas);
@@ -1687,11 +1687,11 @@ public class reporte {
                 strHistorico = "";
                 if (!listaSol.isEmpty()) {
                     for (EstudioCaso est : listaSol) {
-                        if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){
+                        if (est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")) {
                             String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             } else {
                                 Solicitante = Solicitante + "(nacional)";
@@ -1699,11 +1699,11 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + fechaSol + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(22);
                 cell.setCellValue(strHistorico);
-                
+
                 cell = row.createCell(23);
                 try {
                     cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
@@ -1883,7 +1883,7 @@ public class reporte {
 //                    cell.setCellValue(exp.getRespLegalP());
 //                } catch (Exception ex) {
 //                }
-                
+
                 listaRev.clear();
                 listaRev = ServicioReporte.getRevisionExpMensual(nna.getIdnna());
                 String strFechas = "";
@@ -1891,12 +1891,12 @@ public class reporte {
                 String Procedencia = "";
                 if (!listaRev.isEmpty()) {
                     for (Revision rev : listaRev) {
-                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                        if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
-                            strFechas = strFechas + "\n" +date;
+                            strFechas = strFechas + "\n" + date;
                             String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
@@ -1904,7 +1904,7 @@ public class reporte {
                             strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(11);
                 cell.setCellValue(strFechas);
@@ -1917,11 +1917,11 @@ public class reporte {
                 String strHistorico = "";
                 if (!listaRev.isEmpty()) {
                     for (Revision rev : listaRev) {
-                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                        if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }else{
                                 Solicitante = Solicitante + "(nacional)";
@@ -1929,7 +1929,7 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(14);
                 cell.setCellValue(strHistorico);
@@ -1942,21 +1942,21 @@ public class reporte {
                 Procedencia = "";
                 if(!listaEst.isEmpty()){
                     for (EstudioCaso est : listaEst) {
-                      if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){  
-                        strPrioridad = strPrioridad + "\n" + est.getPrioridad();
-                        String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
-                        strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
-                        String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                        if (est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")) {
+                            strPrioridad = strPrioridad + "\n" + est.getPrioridad();
+                            String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                            strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
                             }
-                         strFamilias = strFamilias + "\n" + Solicitante;   
-                      }
+                            strFamilias = strFamilias + "\n" + Solicitante;
+                        }
                     }
-                
+
                 }
                 cell = row.createCell(15);
                 cell.setCellValue(strPrioridad);
@@ -1972,12 +1972,12 @@ public class reporte {
                 strHistorico = "";
                 if (!listaEst.isEmpty()) {
                     for (EstudioCaso est : listaEst) {
-                        if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){
+                        if (est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")) {
                             String prioridad = "" + est.getPrioridad();
                             String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }else{
                                 Solicitante = Solicitante + "(nacional)";
@@ -1985,11 +1985,11 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + prioridad + " - " + fechaEst + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(19);
                 cell.setCellValue(strHistorico);
-                
+
                 listaSol.clear();
                 listaSol = ServicioReporte.getSolicitudAdopcionMensual(nna.getIdnna());
                 strFechas = "";
@@ -1997,20 +1997,20 @@ public class reporte {
                 Procedencia = "";
                 if(!listaSol.isEmpty()){
                     for (EstudioCaso est : listaSol) {
-                      if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){  
-                        String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
-                        strFechas = strFechas + "\n" + fechaSol;
-                        String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                        if (est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")) {
+                            String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                            strFechas = strFechas + "\n" + fechaSol;
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
                             }
-                         strSolicitante = strSolicitante + "\n" + Solicitante;   
-                      }
+                            strSolicitante = strSolicitante + "\n" + Solicitante;
+                        }
                     }
-                
+
                 }
                 cell = row.createCell(20);
                 cell.setCellValue(strFechas);
@@ -2023,11 +2023,11 @@ public class reporte {
                 strHistorico = "";
                 if (!listaSol.isEmpty()) {
                     for (EstudioCaso est : listaSol) {
-                        if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){
+                        if (est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")) {
                             String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             } else {
                                 Solicitante = Solicitante + "(nacional)";
@@ -2035,17 +2035,17 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + fechaSol + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(23);
                 cell.setCellValue(strHistorico);
-                
+
                 cell = row.createCell(24);
                 try {
                     cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
                 } catch (Exception ex) {
                 }
-                
+
                 i++;
             }
 
@@ -2216,7 +2216,7 @@ public class reporte {
 //                    cell.setCellValue(exp.getRespLegalP());
 //                } catch (Exception ex) {
 //                }
-                
+
                 listaRev.clear();
                 listaRev = ServicioReporte.getRevisionExpMensual(nna.getIdnna());
                 String strFechas = "";
@@ -2224,12 +2224,12 @@ public class reporte {
                 String Procedencia = "";
                 if (!listaRev.isEmpty()) {
                     for (Revision rev : listaRev) {
-                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                        if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
-                            strFechas = strFechas + "\n" +date;
+                            strFechas = strFechas + "\n" + date;
                             String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
@@ -2237,7 +2237,7 @@ public class reporte {
                             strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(11);
                 cell.setCellValue(strFechas);
@@ -2250,11 +2250,11 @@ public class reporte {
                 String strHistorico = "";
                 if (!listaRev.isEmpty()) {
                     for (Revision rev : listaRev) {
-                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                        if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }else{
                                 Solicitante = Solicitante + "(nacional)";
@@ -2262,7 +2262,7 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(14);
                 cell.setCellValue(strHistorico);
@@ -2275,21 +2275,21 @@ public class reporte {
                 Procedencia = "";
                 if(!listaEst.isEmpty()){
                     for (EstudioCaso est : listaEst) {
-                      if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){  
-                        strPrioridad = strPrioridad + "\n" + est.getPrioridad();
-                        String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
-                        strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
-                        String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                        if (est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")) {
+                            strPrioridad = strPrioridad + "\n" + est.getPrioridad();
+                            String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                            strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
                             }
-                         strFamilias = strFamilias + "\n" + Solicitante;   
-                      }
+                            strFamilias = strFamilias + "\n" + Solicitante;
+                        }
                     }
-                
+
                 }
                 cell = row.createCell(15);
                 cell.setCellValue(strPrioridad);
@@ -2305,12 +2305,12 @@ public class reporte {
                 strHistorico = "";
                 if (!listaEst.isEmpty()) {
                     for (EstudioCaso est : listaEst) {
-                        if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){
+                        if (est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")) {
                             String prioridad = "" + est.getPrioridad();
                             String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }else{
                                 Solicitante = Solicitante + "(nacional)";
@@ -2318,11 +2318,11 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + prioridad + " - " + fechaEst + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(19);
                 cell.setCellValue(strHistorico);
-                
+
                 listaSol.clear();
                 listaSol = ServicioReporte.getSolicitudAdopcionMensual(nna.getIdnna());
                 strFechas = "";
@@ -2330,20 +2330,20 @@ public class reporte {
                 Procedencia = "";
                 if(!listaSol.isEmpty()){
                     for (EstudioCaso est : listaSol) {
-                      if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){  
-                        String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
-                        strFechas = strFechas + "\n" + fechaSol;
-                        String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                        if (est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")) {
+                            String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                            strFechas = strFechas + "\n" + fechaSol;
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
                             }
-                         strSolicitante = strSolicitante + "\n" + Solicitante;   
-                      }
+                            strSolicitante = strSolicitante + "\n" + Solicitante;
+                        }
                     }
-                
+
                 }
                 cell = row.createCell(20);
                 cell.setCellValue(strFechas);
@@ -2356,11 +2356,11 @@ public class reporte {
                 strHistorico = "";
                 if (!listaSol.isEmpty()) {
                     for (EstudioCaso est : listaSol) {
-                        if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){
+                        if (est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")) {
                             String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             } else {
                                 Solicitante = Solicitante + "(nacional)";
@@ -2368,17 +2368,17 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + fechaSol + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(23);
                 cell.setCellValue(strHistorico);
-                
+
                 cell = row.createCell(24);
                 try {
                     cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
                 } catch (Exception ex) {
                 }
-                
+
                 i++;
             }
 
@@ -2558,7 +2558,7 @@ public class reporte {
 //                } catch (Exception ex) {
 //                }
 
-                
+
                 listaRev.clear();
                 listaRev = ServicioReporte.getRevisionExpMensual(nna.getIdnna());
                 String strFechas = "";
@@ -2566,12 +2566,12 @@ public class reporte {
                 String Procedencia = "";
                 if (!listaRev.isEmpty()) {
                     for (Revision rev : listaRev) {
-                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                        if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
-                            strFechas = strFechas + "\n" +date;
+                            strFechas = strFechas + "\n" + date;
                             String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
@@ -2579,7 +2579,7 @@ public class reporte {
                             strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(12);
                 cell.setCellValue(strFechas);
@@ -2592,11 +2592,11 @@ public class reporte {
                 String strHistorico = "";
                 if (!listaRev.isEmpty()) {
                     for (Revision rev : listaRev) {
-                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                        if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }else{
                                 Solicitante = Solicitante + "(nacional)";
@@ -2604,7 +2604,7 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(15);
                 cell.setCellValue(strHistorico);
@@ -2617,21 +2617,21 @@ public class reporte {
                 Procedencia = "";
                 if(!listaEst.isEmpty()){
                     for (EstudioCaso est : listaEst) {
-                      if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){  
-                        strPrioridad = strPrioridad + "\n" + est.getPrioridad();
-                        String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
-                        strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
-                        String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                        if (est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")) {
+                            strPrioridad = strPrioridad + "\n" + est.getPrioridad();
+                            String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                            strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
                             }
-                         strFamilias = strFamilias + "\n" + Solicitante;   
-                      }
+                            strFamilias = strFamilias + "\n" + Solicitante;
+                        }
                     }
-                
+
                 }
                 cell = row.createCell(16);
                 cell.setCellValue(strPrioridad);
@@ -2647,12 +2647,12 @@ public class reporte {
                 strHistorico = "";
                 if (!listaEst.isEmpty()) {
                     for (EstudioCaso est : listaEst) {
-                        if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){
+                        if (est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")) {
                             String prioridad = "" + est.getPrioridad();
                             String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }else{
                                 Solicitante = Solicitante + "(nacional)";
@@ -2660,11 +2660,11 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + prioridad + " - " + fechaEst + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(20);
                 cell.setCellValue(strHistorico);
-                
+
                 listaSol.clear();
                 listaSol = ServicioReporte.getSolicitudAdopcionMensual(nna.getIdnna());
                 strFechas = "";
@@ -2672,20 +2672,20 @@ public class reporte {
                 Procedencia = "";
                 if(!listaSol.isEmpty()){
                     for (EstudioCaso est : listaSol) {
-                      if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){  
-                        String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
-                        strFechas = strFechas + "\n" + fechaSol;
-                        String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                        if (est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")) {
+                            String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                            strFechas = strFechas + "\n" + fechaSol;
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
                             }
-                         strSolicitante = strSolicitante + "\n" + Solicitante;   
-                      }
+                            strSolicitante = strSolicitante + "\n" + Solicitante;
+                        }
                     }
-                
+
                 }
                 cell = row.createCell(21);
                 cell.setCellValue(strFechas);
@@ -2698,11 +2698,11 @@ public class reporte {
                 strHistorico = "";
                 if (!listaSol.isEmpty()) {
                     for (EstudioCaso est : listaSol) {
-                        if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){
+                        if (est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")) {
                             String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             } else {
                                 Solicitante = Solicitante + "(nacional)";
@@ -2710,17 +2710,17 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + fechaSol + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(24);
                 cell.setCellValue(strHistorico);
-                
+
                 cell = row.createCell(25);
                 try {
                     cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
                 } catch (Exception ex) {
                 }
-                
+
                 i++;
             }
 
@@ -2891,8 +2891,8 @@ public class reporte {
 //
 //                cell = row.createCell(21);
 //                cell.setCellValue(exp.getRespLegalP());
-                
-                
+
+
                 listaRev.clear();
                 listaRev = ServicioReporte.getRevisionExpMensual(nna.getIdnna());
                 String strFechas = "";
@@ -2900,12 +2900,12 @@ public class reporte {
                 String Procedencia = "";
                 if (!listaRev.isEmpty()) {
                     for (Revision rev : listaRev) {
-                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                        if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
-                            strFechas = strFechas + "\n" +date;
+                            strFechas = strFechas + "\n" + date;
                             String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
@@ -2913,7 +2913,7 @@ public class reporte {
                             strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(11);
                 cell.setCellValue(strFechas);
@@ -2926,11 +2926,11 @@ public class reporte {
                 String strHistorico = "";
                 if (!listaRev.isEmpty()) {
                     for (Revision rev : listaRev) {
-                        if(rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")){
+                        if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if(rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && rev.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }else{
                                 Solicitante = Solicitante + "(nacional)";
@@ -2938,7 +2938,7 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(14);
                 cell.setCellValue(strHistorico);
@@ -2951,21 +2951,21 @@ public class reporte {
                 Procedencia = "";
                 if(!listaEst.isEmpty()){
                     for (EstudioCaso est : listaEst) {
-                      if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){  
-                        strPrioridad = strPrioridad + "\n" + est.getPrioridad();
-                        String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
-                        strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
-                        String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                        if (est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")) {
+                            strPrioridad = strPrioridad + "\n" + est.getPrioridad();
+                            String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
+                            strFechasEstudio = strFechasEstudio + "\n" + fechaEst;
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
                             }
-                         strFamilias = strFamilias + "\n" + Solicitante;   
-                      }
+                            strFamilias = strFamilias + "\n" + Solicitante;
+                        }
                     }
-                
+
                 }
                 cell = row.createCell(15);
                 cell.setCellValue(strPrioridad);
@@ -2981,12 +2981,12 @@ public class reporte {
                 strHistorico = "";
                 if (!listaEst.isEmpty()) {
                     for (EstudioCaso est : listaEst) {
-                        if(est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")){
+                        if (est.getFechaEstudio() != null && !est.getFechaEstudio().equals("")) {
                             String prioridad = "" + est.getPrioridad();
                             String fechaEst = format.dateToStringNumeros(est.getFechaEstudio());
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             }else{
                                 Solicitante = Solicitante + "(nacional)";
@@ -2994,11 +2994,11 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + prioridad + " - " + fechaEst + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(19);
                 cell.setCellValue(strHistorico);
-                
+
                 listaSol.clear();
                 listaSol = ServicioReporte.getSolicitudAdopcionMensual(nna.getIdnna());
                 strFechas = "";
@@ -3006,20 +3006,20 @@ public class reporte {
                 Procedencia = "";
                 if(!listaSol.isEmpty()){
                     for (EstudioCaso est : listaSol) {
-                      if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){  
-                        String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
-                        strFechas = strFechas + "\n" + fechaSol;
-                        String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                        if (est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")) {
+                            String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
+                            strFechas = strFechas + "\n" + fechaSol;
+                            String Solicitante = est.getExpedienteFamilia().getExpediente();
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Procedencia = Procedencia + "\n" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
                             }else{
                                 Procedencia = Procedencia + "\n" + "nacional";
                             }
-                         strSolicitante = strSolicitante + "\n" + Solicitante;   
-                      }
+                            strSolicitante = strSolicitante + "\n" + Solicitante;
+                        }
                     }
-                
+
                 }
                 cell = row.createCell(20);
                 cell.setCellValue(strFechas);
@@ -3032,11 +3032,11 @@ public class reporte {
                 strHistorico = "";
                 if (!listaSol.isEmpty()) {
                     for (EstudioCaso est : listaSol) {
-                        if(est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")){
+                        if (est.getFechaSolAdop() != null && !est.getFechaSolAdop().equals("")) {
                             String fechaSol = format.dateToStringNumeros(est.getFechaSolAdop());
                             String Solicitante = est.getExpedienteFamilia().getExpediente();
-                            if(est.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                               && est.getExpedienteFamilia().getFamilia().getEntidad() != null){
+                            if (est.getExpedienteFamilia().getNacionalidad().equals("internacional")
+                                    && est.getExpedienteFamilia().getFamilia().getEntidad() != null) {
                                 Solicitante = Solicitante + "(" + est.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
                             } else {
                                 Solicitante = Solicitante + "(nacional)";
@@ -3044,11 +3044,11 @@ public class reporte {
                             strHistorico = strHistorico + "\n" + fechaSol + " - " + Solicitante;
                         }
                     }
-                    
+
                 }
                 cell = row.createCell(23);
                 cell.setCellValue(strHistorico);
-                
+
                 
                 cell = row.createCell(24);
                 try {
@@ -5197,12 +5197,11 @@ public class reporte {
         }
     }
 
-    //EN CREACION
+    //PARA PROBAR CON MAS CAMPOS
     @RequestMapping("/Reportes/InscritosSI")
     public void ReporteInscritosSI(ModelMap map, HttpSession session,
             @RequestParam(value = "idsesion", required = false) String idsesion,
             HttpServletResponse response) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
         Workbook wb = new XSSFWorkbook();
         Long idsesion_in = Long.parseLong(idsesion);
         try {
@@ -5247,7 +5246,7 @@ public class reporte {
                         cell.setCellValue(asistaux.getCelular());
                         cell = row.createCell(11);
                         cell.setCellValue(asistaux.getCorreo());
-                    } else if (asistaux.getSexo() == 'm'){
+                    } else if (asistaux.getSexo() == 'm') {
                         cell = row.createCell(12);
                         cell.setCellValue(asistaux.getNombre());
                         cell = row.createCell(13);
@@ -5294,6 +5293,133 @@ public class reporte {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             response.setHeader("Content-Disposition", "attachment; filename=Inscritos a Sesion Informativa.xlsx");
             OutputStream fileOut = response.getOutputStream();
+            wb.write(fileOut);
+            fileOut.flush();
+            fileOut.close();
+        } catch (Exception ex) {
+            //ex.printStackTrace();
+        }
+    }
+
+    //EN PROCESO
+    @RequestMapping("/Reportes/AsistenciaSI")
+    public void ReporteAsistenciaSI(ModelMap map, HttpSession session,
+            @RequestParam(value = "idsesion", required = false) String idsesion,
+            HttpServletResponse response) {
+        Workbook wb = new XSSFWorkbook();
+        Long idsesion_in = Long.parseLong(idsesion);
+        try {
+            //Se llama a la plantilla localizada en la ruta
+            InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteSI.xlsx");
+            //InputStream inp = new FileInputStream("/opt/Plantillas/ReporteSI.xlsx");
+
+            wb = WorkbookFactory.create(inp);
+            Sheet sheet = wb.getSheetAt(0);
+
+            ArrayList<FormularioSesion> listaform = ServicioReporte.getAsistenciaSI(idsesion_in);
+
+            int i = 1;
+            for (FormularioSesion form : listaform) {
+                Row row;
+                Cell cell;
+                String fecha = "";
+                if (i == 1) {
+                    row = sheet.getRow(i);
+                    cell = row.createCell(4);
+                    cell.setCellValue(form.getSesion().getNSesion());
+                    row = sheet.getRow(2);
+                    cell = row.createCell(4);
+                    fecha = "";
+                    try {
+                        fecha = format.dateToString(form.getSesion().getFecha());
+                    } catch (Exception ex) {
+                    }
+                    cell.setCellValue(fecha);
+                    row = sheet.getRow(3);
+                    cell = row.createCell(4);
+                    cell.setCellValue(form.getSesion().getDireccion());
+
+                    i = 7;
+                }
+                row = sheet.createRow(i);
+                cell = row.createCell(1);
+                cell.setCellValue(i - 6);
+                cell = row.createCell(2);
+                cell.setCellValue(form.getEstadoCivil());
+                for (Asistente asistaux : form.getAsistentes()) {
+                    if (asistaux.getSexo() == 'f') {
+                        cell = row.createCell(3);
+                        cell.setCellValue(asistaux.getApellidoP() + " " + asistaux.getApellidoM());
+                        cell = row.createCell(4);
+                        cell.setCellValue(asistaux.getNombre());
+                        cell = row.createCell(5);
+                        Date fechaAct = new Date();
+                        int añoAct = fechaAct.getYear();
+                        int edad = añoAct - asistaux.getFechaNac().getYear();
+                        if ((asistaux.getFechaNac().getMonth() - fechaAct.getMonth())
+                                > 0) {
+                            edad--;
+                        } else if ((asistaux.getFechaNac().getMonth()
+                                - fechaAct.getMonth()) == 0) {
+                            if ((asistaux.getFechaNac().getDate() - fechaAct.getDate())
+                                    > 0) {
+                                edad--;
+                            }
+                        }
+                        cell.setCellValue(edad);
+                    } else if (asistaux.getSexo() == 'm') {
+                        cell = row.createCell(6);
+                        cell.setCellValue(asistaux.getApellidoP() + " " + asistaux.getApellidoM());
+                        cell = row.createCell(7);
+                        cell.setCellValue(asistaux.getNombre());
+                        cell = row.createCell(8);
+                        Date fechaAct = new Date();
+                        int añoAct = fechaAct.getYear();
+                        int edad = añoAct - asistaux.getFechaNac().getYear();
+                        if ((asistaux.getFechaNac().getMonth() - fechaAct.getMonth())
+                                > 0) {
+                            edad--;
+                        } else if ((asistaux.getFechaNac().getMonth()
+                                - fechaAct.getMonth()) == 0) {
+                            if ((asistaux.getFechaNac().getDate() - fechaAct.getDate())
+                                    > 0) {
+                                edad--;
+                            }
+                        }
+                        cell.setCellValue(edad);
+                    }
+                }
+                String asistencia = "";
+                for (AsistenciaFT asistaux : form.getAsistenciaFTs()) {
+                    if(asistaux.getAsistencia() == 'F'){
+                        if(asistaux.getInasJus() == 0){
+                            asistencia = "J";
+                        } else {
+                            asistencia = "F";
+                        }
+                    } else {
+                        asistencia = "A";
+                    }
+                }
+                cell = row.createCell(9);
+                cell.setCellValue(asistencia);
+                if(form.getFamilia().getIdfamilia() != 0){
+                    cell = row.createCell(10);
+                    cell.setCellValue(form.getFamilia().getUser());
+                }
+
+                i++;
+            }
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+
+        try {
+            
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setHeader("Content-Disposition", "attachment; filename=Reporte de Sesion Informativa.xlsx");
+            OutputStream fileOut = response.getOutputStream();
+            //wb.setForceFormulaRecalculation(true);
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
