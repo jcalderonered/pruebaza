@@ -23,7 +23,7 @@
 
 <html>
     <head>
-         <style type="text/css">  
+        <style type="text/css">  
             .pg-normal {  
                 color: #000000;  
                 font-weight: normal;  
@@ -116,7 +116,7 @@
             }
         }
     </script>  	
-    
+
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -463,8 +463,9 @@
                                         </tr>
                                     </c:forEach>
                                     </tbody>
-                                </c:if> 
 
+                                </c:if> 
+                                <a href="${pageContext.servletContext.contextPath}/Reportes/AsistenciaTaller?idtaller=${idTaller}&idgrupo=${reunion.getTurno2().getGrupo().getIdgrupo()}&idturno2=${reunion.getTurno2().getIdturno2()}" class="btn btn-default">Exportar a Excel</a>
                             </table>
                             <c:if test="${listaFormularios.size() == 0}">
                                 <h3><strong>Aún no hay personas inscritas</strong></h3>
@@ -473,8 +474,8 @@
                         <br>       
                         <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
-                        <script type="text/javascript"> 
-                                var pager = new Pager('mi_tabla', 8);  
+                        <script type="text/javascript">
+                            var pager = new Pager('mi_tabla', 8);
                             pager.init();
                             pager.showPageNav('pager', 'pageNavPosition');
                             pager.showPage(1);
