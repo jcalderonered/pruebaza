@@ -41,7 +41,7 @@ public class HiberReporte {
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
-    
+
     @Resource(name = "HiberEtapa")
     private HiberEtapa servicioEtapa = new HiberEtapa();
 
@@ -3524,10 +3524,10 @@ public class HiberReporte {
 
                 ResultSet rs2 = (ResultSet) statement.getObject(2);
                 ResultSet rs = (ResultSet) statement.getObject(3);
-                
+
                 Sesion sesion = new Sesion();
-                
-                while (rs2.next()){
+
+                while (rs2.next()) {
                     sesion.setIdsesion(rs2.getLong("IDSESION"));
                     sesion.setNSesion(rs2.getString("N_SESION"));
                     sesion.setHabilitado(rs2.getShort("HABILITADO"));
@@ -3552,17 +3552,17 @@ public class HiberReporte {
                     form.setDireccionRes(rs.getString("DIRECCION_RES"));
                     form.setEstadoCivil(rs.getString("ESTADO_CIVIL"));
                     form.setTelefono(rs.getString("TELEFONO"));
-                    
+
                     Long idfamilia = rs.getLong("IDFAMILIA");
-                    
-                    if(idfamilia != 0){
+
+                    if (idfamilia != 0) {
                         form.setFamilia(servicioEtapa.getFamilia(idfamilia));
                     } else {
                         Familia fami = new Familia();
                         fami.setIdfamilia(0);
                         form.setFamilia(fami);
                     }
-                    
+
                     Set<AsistenciaFT> listAsistencia = getAsistencia(rs.getLong("IDFORMULARIO_SESION"));
                     form.setAsistenciaFTs(listAsistencia);
 
@@ -3593,7 +3593,7 @@ public class HiberReporte {
 
         return allFamilias;
     }
-    
+
     public Set<AsistenciaFT> getAsistencia(Long idformulario) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -3617,7 +3617,7 @@ public class HiberReporte {
                     asist = new AsistenciaFT();
                     asist.setIdasistenciaFT(rs2.getLong("IDASISTENCIA_F_T"));
                     if (!rs2.wasNull()) {
-                    asist.setAsistencia(rs2.getString("ASISTENCIA").charAt(0));
+                        asist.setAsistencia(rs2.getString("ASISTENCIA").charAt(0));
                     }
                     asist.setInasJus(rs2.getShort("INAS_JUS"));
 
@@ -3630,6 +3630,7 @@ public class HiberReporte {
 
         return listaAsist;
     }
+
     public Designacion getFamiliaDesignadoNna(Long idNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -3648,13 +3649,13 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(2);
 
-                if(rs.next()) {
+                if (rs.next()) {
                     Set<InfoFamilia> listInf = new HashSet<InfoFamilia>();
                     InfoFamilia tempInfo = new InfoFamilia();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
                     Familia tempFam = new Familia();
                     Entidad tempEnt = new Entidad();
-                    
+
                     tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
                     tempEF.setExpediente(rs.getString("EXPEDIENTE"));
                     tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
@@ -3700,7 +3701,340 @@ public class HiberReporte {
         session.doWork(work);
 
         return tempDesig;
-    } 
-     
-     
+    }
+
+    //EN CONSTRUCCION
+    public Turno2 getAsistenciaTaller(Long idtaller, Long idgrupo, Long idturno2) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idtaller_in = idtaller;
+        final Long idgrupo_in = idgrupo;
+        final Long idturno2_in = idturno2;
+        
+        final Taller taller = getTaller(idtaller_in);
+        final Grupo grupo = getGrupo(idgrupo_in);
+        grupo.setTaller(taller);
+        final Turno2 turno2 = getTurno2(idturno2_in);
+        turno2.setGrupo(grupo);
+        turno2.setReunions(getReunion(idturno2_in));
+        
+        final Set<Reunion> listareunionaux = new HashSet<Reunion>();
+        for (Reunion reuaux : turno2.getReunions()){
+            reuaux.setAsistenciaFRs(getAsistenciasFR(reuaux.getIdreunion()));
+            listareunionaux.add(reuaux);
+        }
+        turno2.setReunions(listareunionaux);
+
+        //METODO BUBBLESORT PARA ORDENAR SEGUN EL APELLIDO DE LA ASISTENTE MUJER
+//        int n = turno2.getReunions();
+//        FormularioSesion auxform;
+//        for (int i = 0; i < n - 1; i++) {
+//            ArrayList<Asistente> asist_temp = new ArrayList(allFamilias.get(i).getAsistentes());
+//            for (int j = i; j < n - 1; j++) {
+//                ArrayList<Asistente> asist_temp2 = new ArrayList(allFamilias.get(j + 1).getAsistentes());
+//                if (asist_temp.get(0).getApellidoP().compareToIgnoreCase(asist_temp2.get(0).getApellidoP()) > 0) {
+//                    auxform = allFamilias.get(i);
+//                    allFamilias.set(i, allFamilias.get(j + 1));
+//                    allFamilias.set(j + 1, auxform);
+//                }
+//            }
+//        }
+
+        return turno2;
+    }
+    
+    //LISTO
+    public Taller getTaller(Long idtaller) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idtaller_in = idtaller;
+        final Taller taller = new Taller();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql2 = "{call REPORTE_GET_TALLER(?,?)}";
+                CallableStatement statement2 = connection.prepareCall(hql2);
+                statement2.setLong(1, idtaller_in);
+                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                statement2.execute();
+
+                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                while (rs2.next()) {
+                    taller.setIdtaller(idtaller_in);
+                    taller.setNSesion(rs2.getString("N_SESION"));
+                    taller.setTipoTaller(rs2.getString("TIPO_TALLER"));
+                    taller.setNombre(rs2.getString("NOMBRE"));
+                    taller.setHabilitado(rs2.getShort("HABILITADO"));
+                    taller.setNReunion(rs2.getShort("N_REUNION"));
+                }
+                statement2.close();
+            }
+        };
+        session.doWork(work);
+
+        return taller;
+    }
+    
+    //LISTO
+    public Grupo getGrupo(Long idgrupo) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idgrupo_in = idgrupo;
+        final Grupo grupo = new Grupo();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql2 = "{call REPORTE_GET_GRUPO(?,?)}";
+                CallableStatement statement2 = connection.prepareCall(hql2);
+                statement2.setLong(1, idgrupo_in);
+                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                statement2.execute();
+
+                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                while (rs2.next()) {
+                    grupo.setIdgrupo(idgrupo_in);
+                    grupo.setNombre(rs2.getString("NOMBRE"));
+                }
+                statement2.close();
+            }
+        };
+        session.doWork(work);
+
+        return grupo;
+    }
+    
+    //LISTO
+    public Turno2 getTurno2(Long idturno2) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idturno2_in = idturno2;
+        final Turno2 turno2 = new Turno2();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql2 = "{call REPORTE_GET_TURNO2(?,?)}";
+                CallableStatement statement2 = connection.prepareCall(hql2);
+                statement2.setLong(1, idturno2_in);
+                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                statement2.execute();
+
+                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                while (rs2.next()) {
+                    turno2.setIdturno2(idturno2_in);
+                    turno2.setNombre(rs2.getString("NOMBRE"));
+                }
+                statement2.close();
+            }
+        };
+        session.doWork(work);
+
+        return turno2;
+    }
+    
+    //LISTO
+    public Set<Reunion> getReunion(Long idturno2) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idturno2_in = idturno2;
+        final Set<Reunion> listareunion = new HashSet<Reunion>();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql2 = "{call REPORTE_GET_REUNIONES(?,?)}";
+                CallableStatement statement2 = connection.prepareCall(hql2);
+                statement2.setLong(1, idturno2_in);
+                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                statement2.execute();
+
+                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                Reunion reunion;
+                while (rs2.next()) {
+                    reunion = new Reunion();
+                    reunion.setIdreunion(rs2.getLong("IDREUNION"));
+                    reunion.setFecha(rs2.getDate("FECHA"));
+                    reunion.setHora(rs2.getString("HORA"));
+                    reunion.setDuracion(rs2.getString("DURACION"));
+                    reunion.setDireccion(rs2.getString("DIRECCION"));
+                    reunion.setIdentificador(rs2.getShort("IDENTIFICADOR"));
+                    reunion.setFacilitador(rs2.getString("FACILITADOR"));
+                    reunion.setCapacidad(rs2.getShort("CAPACIDAD"));
+                    reunion.setAsistencia(rs2.getShort("ASISTENCIA"));
+                    reunion.setUnidad(rs2.getString("UNIDAD"));
+                    
+                    listareunion.add(reunion);
+                }
+                statement2.close();
+            }
+        };
+        session.doWork(work);
+
+        return listareunion;
+    }
+    
+    //LISTO
+    public Set<AsistenciaFR> getAsistenciasFR(Long idreunion) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idreunion_in = idreunion;
+        final Set<AsistenciaFR> listaAsist = new HashSet<AsistenciaFR>();
+        final Set<AsistenciaFR> listaAsistAux = new HashSet<AsistenciaFR>();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql2 = "{call REPORTE_GET_ASISTENCIA_REUNION(?,?)}";
+                CallableStatement statement2 = connection.prepareCall(hql2);
+                statement2.setLong(1, idreunion_in);
+                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                statement2.execute();
+
+                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                AsistenciaFR asist;
+                Familia fam;
+                while (rs2.next()) {
+                    asist = new AsistenciaFR();
+                    asist.setIdasistenciaFR(rs2.getLong("IDASISTENCIA_F_R"));
+                    asist.setAsistencia(rs2.getString("ASISTENCIA").charAt(0));
+                    asist.setInasJus(rs2.getShort("INAS_JUS"));
+                    
+                    fam = new Familia();
+                    fam.setIdfamilia(rs2.getLong("IDFAMILIA"));
+                    asist.setFamilia(fam);
+                    
+                    listaAsist.add(asist);
+                }
+                statement2.close();
+            }
+        };
+        session.doWork(work);
+        
+        AsistenciaFR asistaux2;
+        for(AsistenciaFR asistaux : listaAsist){
+            asistaux2 = asistaux;
+            asistaux2.setFamilia(getFamilia(asistaux.getFamilia().getIdfamilia()));
+            listaAsistAux.add(asistaux2);
+        }
+
+        return listaAsistAux;
+    }
+    
+    public Familia getFamilia(Long idfamilia) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idfamilia_in = idfamilia;
+        final Familia fami = new Familia();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql3 = "{call HE_GETFAMILIA(?,?)}";
+                CallableStatement statement3 = connection.prepareCall(hql3);
+                statement3.setLong(1, idfamilia_in);
+                statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                statement3.execute();
+
+                ResultSet rs3 = (ResultSet) statement3.getObject(2);
+
+                while (rs3.next()) {
+                    fami.setIdfamilia(idfamilia_in);
+                    fami.setUser(rs3.getString(3));
+                }
+                statement3.close();
+            }
+        };
+        session.doWork(work);
+        
+        fami.setInfoFamilias(getInfoFam(fami.getIdfamilia()));
+
+        return fami;
+    }
+    
+    public Set<InfoFamilia> getInfoFam(Long idfamilia) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idfamilia_in = idfamilia;
+        final Set<InfoFamilia> InfoFami = new HashSet<InfoFamilia>();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql2 = "{call REPORTE_GET_INFOFAM_POR_IDFAM(?,?)}";
+                CallableStatement statement2 = connection.prepareCall(hql2);
+                statement2.setLong(1, idfamilia_in);
+                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                statement2.execute();
+
+                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                InfoFamilia ifa;
+                while (rs2.next()) {
+                    ifa = new InfoFamilia();
+                    ifa.setEstadoCivil(rs2.getString("ESTADO_CIVIL"));
+                    
+                    InfoFami.add(ifa);
+                }
+                statement2.close();
+            }
+        };
+        session.doWork(work);
+        
+        for(InfoFamilia ifam : InfoFami){
+            ifam.setAdoptantes(getAdoptantes(ifam.getIdinfoFamilia()));
+        }
+
+        return InfoFami;
+    }
+    
+    public Set<Adoptante> getAdoptantes(Long idinfo_fam) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final Long idinfo_fam_in = idinfo_fam;
+        final Set<Adoptante> listaAdop = new HashSet<Adoptante>();
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql2 = "{call REPORTE_GET_ADOPTANTE(?,?)}";
+                CallableStatement statement2 = connection.prepareCall(hql2);
+                statement2.setLong(1, idinfo_fam_in);
+                statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                statement2.execute();
+
+                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+
+                Adoptante adopaux;
+                while (rs2.next()) {
+                    adopaux = new Adoptante();
+                    adopaux.setNombre(rs2.getString("NOMBRE"));
+                    adopaux.setApellidoP(rs2.getString("APELLIDO_P"));
+                    adopaux.setApellidoM(rs2.getString("APELLIDO_M"));
+                    adopaux.setSexo(rs2.getString("SEXO").charAt(0));
+                    
+                    listaAdop.add(adopaux);
+                }
+                statement2.close();
+            }
+        };
+        session.doWork(work);
+        
+        return listaAdop;
+    }
 }
