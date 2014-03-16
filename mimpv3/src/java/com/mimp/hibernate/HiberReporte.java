@@ -3703,7 +3703,7 @@ public class HiberReporte {
         return tempDesig;
     }
 
-    //EN CONSTRUCCION
+    //EN PRUEBAS
     public Turno2 getAsistenciaTaller(Long idtaller, Long idgrupo, Long idturno2) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -3986,6 +3986,7 @@ public class HiberReporte {
                 InfoFamilia ifa;
                 while (rs2.next()) {
                     ifa = new InfoFamilia();
+                    ifa.setIdinfoFamilia(rs2.getLong("IDINFO_FAMILIA"));
                     ifa.setEstadoCivil(rs2.getString("ESTADO_CIVIL"));
                     
                     InfoFami.add(ifa);
