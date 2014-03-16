@@ -5203,8 +5203,8 @@ public class reporte {
         Long idsesion_in = Long.parseLong(idsesion);
         try {
             //Se llama a la plantilla localizada en la ruta
-            //InputStream inp = new FileInputStream("C:\\Plantillas\\InscritosSI.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/InscritosSI.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\InscritosSI.xlsx");
+            //InputStream inp = new FileInputStream("/opt/Plantillas/InscritosSI.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -5307,8 +5307,8 @@ public class reporte {
         Long idsesion_in = Long.parseLong(idsesion);
         try {
             //Se llama a la plantilla localizada en la ruta
-            //InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteSI.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/ReporteSI.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteSI.xlsx");
+            //InputStream inp = new FileInputStream("/opt/Plantillas/ReporteSI.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -5416,7 +5416,8 @@ public class reporte {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             response.setHeader("Content-Disposition", "attachment; filename=Reporte de Sesion Informativa.xlsx");
             OutputStream fileOut = response.getOutputStream();
-            wb.setForceFormulaRecalculation(true);
+            //wb.getCreationHelper().createFormulaEvaluator().evaluateAll();
+            //wb.setForceFormulaRecalculation(true);
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
@@ -5438,8 +5439,8 @@ public class reporte {
         Long idturno2_in = Long.parseLong(idturno2);
         try {
             //Se llama a la plantilla localizada en la ruta
-            //InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteTaller.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/ReporteTaller.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteTaller.xlsx");
+            //InputStream inp = new FileInputStream("/opt/Plantillas/ReporteTaller.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -5511,6 +5512,7 @@ public class reporte {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             response.setHeader("Content-Disposition", "attachment; filename=Reporte de Taller.xlsx");
             OutputStream fileOut = response.getOutputStream();
+            
             wb.setForceFormulaRecalculation(true);
             wb.write(fileOut);
             fileOut.flush();

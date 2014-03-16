@@ -215,7 +215,7 @@
                                 <c:if test="${listaFormularios != null}">
                                     <tbody>
                                         <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
-                                            <c:set var="idsesion_in" value="${formulario.getIdformularioSesion()}" scope="page" />
+                                            <c:set var="idsesion_in" value="${formulario.getSesion().getIdsesion()}" scope="page" />
                                             <tr>
                                                 <c:choose>
                                                     <c:when test="${formulario.getAsistentes().size() == 2}">     
