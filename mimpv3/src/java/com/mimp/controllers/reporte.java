@@ -5290,6 +5290,7 @@ public class reporte {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             response.setHeader("Content-Disposition", "attachment; filename=Inscritos a Sesion Informativa.xlsx");
             OutputStream fileOut = response.getOutputStream();
+            wb.getSheetAt(0).setForceFormulaRecalculation(true);
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
@@ -5417,7 +5418,8 @@ public class reporte {
             response.setHeader("Content-Disposition", "attachment; filename=Reporte de Sesion Informativa.xlsx");
             OutputStream fileOut = response.getOutputStream();
             //wb.getCreationHelper().createFormulaEvaluator().evaluateAll();
-            //wb.setForceFormulaRecalculation(true);
+            wb.getSheetAt(0).setForceFormulaRecalculation(true);
+            wb.getSheetAt(1).setForceFormulaRecalculation(true);
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
@@ -5512,8 +5514,8 @@ public class reporte {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             response.setHeader("Content-Disposition", "attachment; filename=Reporte de Taller.xlsx");
             OutputStream fileOut = response.getOutputStream();
-            
-            wb.setForceFormulaRecalculation(true);
+            wb.getSheetAt(0).setForceFormulaRecalculation(true);
+            wb.getSheetAt(1).setForceFormulaRecalculation(true);
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
