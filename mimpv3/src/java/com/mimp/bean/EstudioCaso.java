@@ -19,7 +19,7 @@ public class EstudioCaso  implements java.io.Serializable {
      private Date fechaSolAdop;
      private String resultado;
      private Long prioridad;
-     private BigDecimal NSolicitud;
+     private Long NSolicitud;
 
     public EstudioCaso() {
     }
@@ -30,7 +30,7 @@ public class EstudioCaso  implements java.io.Serializable {
         this.nna = nna;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public EstudioCaso(long idestudioCaso, Nna nna, ExpedienteFamilia expedienteFamilia, String orden, Date fechaEstudio, Date fechaSolAdop, String resultado, Long prioridad, BigDecimal NSolicitud) {
+    public EstudioCaso(long idestudioCaso, Nna nna, ExpedienteFamilia expedienteFamilia, String orden, Date fechaEstudio, Date fechaSolAdop, String resultado, Long prioridad, Long NSolicitud) {
        this.idestudioCaso = idestudioCaso;
        this.nna = nna;
        this.expedienteFamilia = expedienteFamilia;
@@ -98,11 +98,11 @@ public class EstudioCaso  implements java.io.Serializable {
     public void setPrioridad(Long prioridad) {
         this.prioridad = prioridad;
     }
-    public BigDecimal getNSolicitud() {
+    public Long getNSolicitud() {
         return this.NSolicitud;
     }
     
-    public void setNSolicitud(BigDecimal NSolicitud) {
+    public void setNSolicitud(Long NSolicitud) {
         this.NSolicitud = NSolicitud;
     }
 

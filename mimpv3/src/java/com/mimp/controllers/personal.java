@@ -1965,6 +1965,7 @@ public class personal {
             @RequestParam("duracion") String duracion,
             @RequestParam("direccion") String direccion,
             @RequestParam("capacitador") String capacitador,
+            @RequestParam("ua") String ua,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1992,6 +1993,7 @@ public class personal {
             tempSesion.setFecha(null);
         }
         tempSesion.setHora(hora);
+        tempSesion.setUnidad(ua);
         short habilitado = Byte.valueOf("1");
         short inscritos = Byte.valueOf("0");
         tempSesion.setDuracion(duracion);
@@ -2016,6 +2018,7 @@ public class personal {
             @RequestParam("duracion") String duracion,
             @RequestParam("direccion") String direccion,
             @RequestParam("capacitador") String capacitador,
+            @RequestParam("ua") String ua,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2041,6 +2044,7 @@ public class personal {
         } else {
             tempSesion.setFecha(null);
         }
+        tempSesion.setUnidad(ua);
         tempSesion.setHora(hora);
         tempSesion.setDuracion(duracion);
         tempSesion.setDireccion(direccion);
@@ -2417,6 +2421,7 @@ public class personal {
             @RequestParam("tipo") String tipo,
             @RequestParam("numSesion") String numSesion,
             @RequestParam("habilitado") String habilitado,
+            @RequestParam("ua") String ua,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2425,7 +2430,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
         Taller tempTaller = new Taller();
-
+        tempTaller.setUnidad(ua);
         tempTaller.setNombre(nombre);
         tempTaller.setTipoTaller(tipo);
         tempTaller.setNSesion(numSesion);
@@ -2465,6 +2470,7 @@ public class personal {
             @RequestParam(value = "tipo", required = false) String tipo,
             @RequestParam(value = "numSesion", required = false) String numSesion,
             @RequestParam("habilitado") String habilitado,
+            @RequestParam("ua") String ua,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2485,7 +2491,7 @@ public class personal {
         }
         Short habil = Short.parseShort(habilitado);
         tempTaller.setHabilitado(habil);
-
+        tempTaller.setUnidad(ua);
         ServicioPersonal.PersonalUpdateTaller(tempTaller);
 
         map.put("listaSesiones", ServicioPersonal.listaSesiones());

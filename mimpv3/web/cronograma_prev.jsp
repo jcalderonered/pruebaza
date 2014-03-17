@@ -40,9 +40,9 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicio">Inicio</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/inicio">Inicio</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/SesionInfInicioPrev">Inscripción a Sesión Informativa</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/CronogramaAnualPrev">Ver el cronograma anual</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/CronogramaAnualPrev">Ver el cronograma anual</a></li>
                             <li><a href="#">Información Adicional</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Contacto">Contacto</a></li>
                         </ul>
@@ -53,25 +53,29 @@
             <div id="contenedor1" class="container">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-2">
-                        <form class="form-signin" action="${pageContext.servletContext.contextPath}/login" method="post">
-                            <p align="center"><img src="<%=request.getContextPath()%>/assets/img/logo.png" width="200" border="0"></p>
-                            <h2>Iniciar sesión:</h2>
-                            <br>
-                            <p style="color: red">${mensaje}</p>
-                            <br>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Usuario</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Ingrese el usuario">
+                        <form class="form-signin" action="${pageContext.servletContext.contextPath}/CronogramaAnual" method="post">
+                            <div>
+                                <label class="control-label">Seleccionar Región</label>
+                                <div class="controls">
+                                    <select id="ua" name="ua">
+                                        <option value="Lima">Lima</option>
+                                        <option value="Arequipa">Arequipa</option>
+                                        <option value="Ayacucho">Ayacucho</option>
+                                        <option value="Cusco">Cusco</option>
+                                        <option value="Huanuco">Huanuco</option>
+                                        <option value="Lambayeque">Lambayeque</option>
+                                        <option value="Libertad">La Libertad</option>                                            
+                                        <option value="Loreto">Loreto</option>
+                                        <option value="Piura">Piura</option>
+                                        <option value="Puno">Puno</option>
+                                        <option value="Junin">Junin</option>
+                                    </select>
+                                </div>    
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Contraseña</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
-                            </div>
+                            <br>       
                             <div class="btn-toolbar">  
                                 <button type="submit" class="btn btn-default">Ingresar</button>
-                                <a href="${pageContext.servletContext.contextPath}/recordarContra" class="btn btn-default">Recuperar contraseña</a>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -83,7 +87,7 @@
                 <div id="ja-footer" class="wrap">
                     <hr width=80% align="center">
                     <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-                <p align="right">Versión 1.0.3</p>
+                    <p align="right">Versión 1.0.3</p>
                 </div>
             </div>
             <!-- core JavaScript

@@ -202,7 +202,7 @@
                         <br>
                         <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
                         <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/buscarExpedientePrioritario" method="post">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/MainBuscarExpedientePrioritario" method="post">
                             <fieldset>
                                 <div class="control-group">
                                     <label class="control-label">Expediente (ApellidoEl-ApellidoElla)</label>
@@ -218,14 +218,14 @@
                         <br>
                         <h1 align="center"><strong>Expedientes encontrados</strong></h1>
                         <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarExpedientePrioritario" method="post">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/MainAgregarExpedientePrioritario" method="post">
                             <div class="table-responsive">
                                 <table id="mi_tabla" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th class="col-sm-2 " >Expediente</th>
+                                            <th class="col-sm-2 " >Procedencia</th>
                                             <th class="col-sm-2 " >Nivel sociec</th>
-                                            <th class="col-sm-2 " >Información</th>
                                             <th class="col-sm-2 " >Resolución de aptitud</th>
                                             <th class="col-sm-2 " >Seleccionar</th>
                                         </tr>
@@ -237,11 +237,18 @@
                                                 <tr>
                                                     <td>${familia.getExpediente()}</td>
                                                     <td>
+                                                        <c:if test="${familia.getFamilia().getEntidad().getNombre() != null}">
+                                                            ${familia.getFamilia().getEntidad().getNombre()}
+                                                        </c:if>
+                                                        <c:if test="${familia.getFamilia().getEntidad().getNombre() == null}">
+                                                            Nacional
+                                                        </c:if>
+                                                    </td>
+                                                    <td>
                                                         <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
                                                             ${info.getNivelSocioeconomico()}
                                                         </c:forEach>
-                                                    </td>
-                                                    <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
+                                                    </td>                                                    
                                                     <td>
                                                         <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
                                                             <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">

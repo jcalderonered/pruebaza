@@ -545,7 +545,7 @@ public class HiberNna {
                             est.setFechaSolAdop(rs3.getDate(6));
                             est.setResultado(rs3.getString(7));
                             est.setPrioridad(rs3.getLong(8));
-                            est.setNSolicitud(rs3.getBigDecimal(9));
+                            est.setNSolicitud(rs3.getLong(9));
                             listEst.add(est);
                         }
                         auxnna.setEstudioCasos(listEst);
@@ -606,6 +606,369 @@ public class HiberNna {
         return allNnaFinal;
     }
 
+    public ArrayList<Nna> ListaNnaPrioritarios(String clasificacion) {
+        Session session = sessionFactory.getCurrentSession();
+        final String clasif = clasificacion;
+        final ArrayList<Nna> allNna = new ArrayList();
+        final ArrayList<Nna> allNnaAux = new ArrayList();
+        final ArrayList<Nna> allNnaFinal = new ArrayList();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                ExpedienteNna expnna;
+                Nna tempnna;
+                Designacion desig;
+
+                EstudioCaso est;
+
+                String hql = "{call HN_GET_NNA_PRIO(?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.registerOutParameter(1, OracleTypes.CURSOR);
+                statement.execute();
+
+                temp = (ResultSet) statement.getObject(1);
+
+                while (temp.next()) {
+                    tempnna = new Nna();
+                    tempnna.setIdnna(temp.getLong(1));
+                    tempnna.setNombre(temp.getString(2));
+                    tempnna.setApellidoP(temp.getString(3));
+                    tempnna.setApellidoM(temp.getString(4));
+                    tempnna.setSexo(temp.getString(5));
+                    tempnna.setFechaNacimiento(temp.getDate(6));
+                    tempnna.setEdadAnhos(temp.getShort(7));
+                    tempnna.setEdadMeses(temp.getShort(8));
+                    tempnna.setActaNacimiento(temp.getShort(9));
+                    tempnna.setCondicionSalud(temp.getString(10));
+                    tempnna.setDepartamentoNacimiento(temp.getString(11));
+                    tempnna.setProvinciaNacimiento(temp.getString(12));
+                    tempnna.setDistritoNacimiento(temp.getString(13));
+                    tempnna.setPaisNacimiento(temp.getString(14));
+                    tempnna.setLugarNac(temp.getString(15));
+                    tempnna.setFechaResolAbandono(temp.getDate(16));
+                    tempnna.setFechaResolConsentida(temp.getDate(17));
+                    tempnna.setClasificacion(temp.getString(18));
+                    tempnna.setIncesto(temp.getShort(19));
+                    tempnna.setMental(temp.getShort(20));
+                    tempnna.setEpilepsia(temp.getShort(21));
+                    tempnna.setAbuso(temp.getShort(22));
+                    tempnna.setSifilis(temp.getShort(23));
+                    tempnna.setSeguiMedico(temp.getShort(24));
+                    tempnna.setOperacion(temp.getShort(25));
+                    tempnna.setHiperactivo(temp.getShort(26));
+                    tempnna.setEspecial(temp.getShort(27));
+                    tempnna.setEnfermo(temp.getShort(28));
+                    tempnna.setMayor(temp.getShort(29));
+                    tempnna.setAdolescente(temp.getShort(30));
+                    tempnna.setHermano(temp.getShort(31));
+                    tempnna.setNn(temp.getShort(32));
+                    tempnna.setObservaciones(temp.getString(33));
+                    tempnna.setNResolAband(temp.getString(34));
+                    tempnna.setNResolCons(temp.getString(35));
+                    try {
+                        expnna = getExpNna(temp.getLong(1));
+                        if (expnna.getIdexpedienteNna() != 0) {
+                            Set<ExpedienteNna> listexp = new HashSet<ExpedienteNna>();
+                            listexp.add(expnna);
+                            tempnna.setExpedienteNnas(listexp);
+                        }
+                    } catch (Exception e) {
+
+                    }
+                    allNnaAux.add(tempnna);
+                }
+                statement.close();
+                temp.close();
+
+                //AQUI DESIGNACIONES Y ESTUDIO DE CASOS EN CASO SEA PRIORITARIO
+                for (Nna auxnna : allNnaAux) {
+                    Set<Designacion> listDesig = new HashSet<Designacion>();
+                    String hql2 = "{call HN_GET_DESIGNACIONES(?,?)}";
+                    CallableStatement statement2 = connection.prepareCall(hql2);
+                    statement2.setLong(1, auxnna.getIdnna());
+                    statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement2.execute();
+
+                    ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                    while (rs2.next()) {
+                        desig = new Designacion();
+                        desig.setIddesignacion(rs2.getLong(1));
+                        desig.setNDesignacion(rs2.getString(5));
+                        desig.setPrioridad(rs2.getLong(6));
+                        desig.setFechaPropuesta(rs2.getDate(7));
+                        desig.setFechaConsejo(rs2.getDate(8));
+                        desig.setAceptacionConsejo(rs2.getShort(9));
+                        desig.setTipoPropuesta(rs2.getString(10));
+                        desig.setObs(rs2.getString(11));
+                        listDesig.add(desig);
+                    }
+                    auxnna.setDesignacions(listDesig);
+                    allNna.add(auxnna);
+                    statement2.close();
+                    rs2.close();
+                }
+
+                for (Nna auxnna : allNna) {
+                    if (auxnna.getClasificacion().equals("prioritario")) {
+                        Set<EstudioCaso> listEst = new HashSet<EstudioCaso>();
+                        String hql3 = "{call HN_GET_ESTUDIOS_CASO(?,?)}";
+                        CallableStatement statement3 = connection.prepareCall(hql3);
+                        statement3.setLong(1, auxnna.getIdnna());
+                        statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement3.execute();
+
+                        ResultSet rs3 = (ResultSet) statement3.getObject(2);
+                        while (rs3.next()) {
+                            est = new EstudioCaso();
+                            est.setIdestudioCaso(rs3.getLong(1));
+                            est.setOrden(rs3.getString(4));
+                            est.setFechaEstudio(rs3.getDate(5));
+                            est.setFechaSolAdop(rs3.getDate(6));
+                            est.setResultado(rs3.getString(7));
+                            est.setPrioridad(rs3.getLong(8));
+                            est.setNSolicitud(rs3.getLong(9));
+                            listEst.add(est);
+                        }
+                        auxnna.setEstudioCasos(listEst);
+                        statement3.close();
+                        rs3.close();
+                    }
+                    allNnaFinal.add(auxnna);
+                }
+
+                //METODO BUBBLESORT PARA ORDENAR POR CODIGO
+                if (clasif.equals("prioritario")) {
+                    Nna auxnna2;
+                    int n = allNnaFinal.size();
+                    for (int i = 0; i < n - 1; i++) {
+                        for (int j = i; j < n - 1; j++) {
+                            if (allNnaFinal.get(i).getExpedienteNnas().isEmpty()) {
+                                if (!allNnaFinal.get(j + 1).getExpedienteNnas().isEmpty()) {
+                                    auxnna2 = allNnaFinal.get(i);
+                                    allNnaFinal.set(i, allNnaFinal.get(j + 1));
+                                    allNnaFinal.set(j + 1, auxnna2);
+                                } else {
+                                    if (allNnaFinal.get(i).getApellidoP().compareToIgnoreCase(allNnaFinal.get(j + 1).getApellidoP()) > 0) {
+                                        auxnna2 = allNnaFinal.get(i);
+                                        allNnaFinal.set(i, allNnaFinal.get(j + 1));
+                                        allNnaFinal.set(j + 1, auxnna2);
+                                    }
+                                }
+                            } else {
+                                Set<ExpedienteNna> listExp1 = allNnaFinal.get(i).getExpedienteNnas();
+                                Set<ExpedienteNna> listExp2 = allNnaFinal.get(j + 1).getExpedienteNnas();
+                                if (!listExp2.isEmpty()) {
+                                    for (ExpedienteNna exp1 : listExp1) {
+                                        for (ExpedienteNna exp2 : listExp2) {
+                                            String codant = exp1.getCodigoReferencia();
+                                            String codpost = exp2.getCodigoReferencia();
+                                            if (codant == null){
+                                                codant = "";
+                                            }
+                                            if (codpost == null){
+                                                codpost = "";
+                                            }
+                                            if (codant.compareToIgnoreCase(codpost) > 0) {
+                                                auxnna2 = allNnaFinal.get(i);
+                                                allNnaFinal.set(i, allNnaFinal.get(j + 1));
+                                                allNnaFinal.set(j + 1, auxnna2);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        session.doWork(work);
+
+        return allNnaFinal;
+    }
+    
+    public ArrayList<Nna> ListaNnaSeguimiento(String clasificacion) {
+        Session session = sessionFactory.getCurrentSession();
+        final String clasif = clasificacion;
+        final ArrayList<Nna> allNna = new ArrayList();
+        final ArrayList<Nna> allNnaAux = new ArrayList();
+        final ArrayList<Nna> allNnaFinal = new ArrayList();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                ExpedienteNna expnna;
+                Nna tempnna;
+                Designacion desig;
+
+                EstudioCaso est;
+
+                String hql = "{call HN_GET_NNA_SEG(?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.registerOutParameter(1, OracleTypes.CURSOR);
+                statement.execute();
+
+                temp = (ResultSet) statement.getObject(1);
+
+                while (temp.next()) {
+                    tempnna = new Nna();
+                    tempnna.setIdnna(temp.getLong(1));
+                    tempnna.setNombre(temp.getString(2));
+                    tempnna.setApellidoP(temp.getString(3));
+                    tempnna.setApellidoM(temp.getString(4));
+                    tempnna.setSexo(temp.getString(5));
+                    tempnna.setFechaNacimiento(temp.getDate(6));
+                    tempnna.setEdadAnhos(temp.getShort(7));
+                    tempnna.setEdadMeses(temp.getShort(8));
+                    tempnna.setActaNacimiento(temp.getShort(9));
+                    tempnna.setCondicionSalud(temp.getString(10));
+                    tempnna.setDepartamentoNacimiento(temp.getString(11));
+                    tempnna.setProvinciaNacimiento(temp.getString(12));
+                    tempnna.setDistritoNacimiento(temp.getString(13));
+                    tempnna.setPaisNacimiento(temp.getString(14));
+                    tempnna.setLugarNac(temp.getString(15));
+                    tempnna.setFechaResolAbandono(temp.getDate(16));
+                    tempnna.setFechaResolConsentida(temp.getDate(17));
+                    tempnna.setClasificacion(temp.getString(18));
+                    tempnna.setIncesto(temp.getShort(19));
+                    tempnna.setMental(temp.getShort(20));
+                    tempnna.setEpilepsia(temp.getShort(21));
+                    tempnna.setAbuso(temp.getShort(22));
+                    tempnna.setSifilis(temp.getShort(23));
+                    tempnna.setSeguiMedico(temp.getShort(24));
+                    tempnna.setOperacion(temp.getShort(25));
+                    tempnna.setHiperactivo(temp.getShort(26));
+                    tempnna.setEspecial(temp.getShort(27));
+                    tempnna.setEnfermo(temp.getShort(28));
+                    tempnna.setMayor(temp.getShort(29));
+                    tempnna.setAdolescente(temp.getShort(30));
+                    tempnna.setHermano(temp.getShort(31));
+                    tempnna.setNn(temp.getShort(32));
+                    tempnna.setObservaciones(temp.getString(33));
+                    tempnna.setNResolAband(temp.getString(34));
+                    tempnna.setNResolCons(temp.getString(35));
+                    try {
+                        expnna = getExpNna(temp.getLong(1));
+                        if (expnna.getIdexpedienteNna() != 0) {
+                            Set<ExpedienteNna> listexp = new HashSet<ExpedienteNna>();
+                            listexp.add(expnna);
+                            tempnna.setExpedienteNnas(listexp);
+                        }
+                    } catch (Exception e) {
+
+                    }
+                    allNnaAux.add(tempnna);
+                }
+                statement.close();
+                temp.close();
+
+                //AQUI DESIGNACIONES Y ESTUDIO DE CASOS EN CASO SEA PRIORITARIO
+                for (Nna auxnna : allNnaAux) {
+                    Set<Designacion> listDesig = new HashSet<Designacion>();
+                    String hql2 = "{call HN_GET_DESIGNACIONES(?,?)}";
+                    CallableStatement statement2 = connection.prepareCall(hql2);
+                    statement2.setLong(1, auxnna.getIdnna());
+                    statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement2.execute();
+
+                    ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                    while (rs2.next()) {
+                        desig = new Designacion();
+                        desig.setIddesignacion(rs2.getLong(1));
+                        desig.setNDesignacion(rs2.getString(5));
+                        desig.setPrioridad(rs2.getLong(6));
+                        desig.setFechaPropuesta(rs2.getDate(7));
+                        desig.setFechaConsejo(rs2.getDate(8));
+                        desig.setAceptacionConsejo(rs2.getShort(9));
+                        desig.setTipoPropuesta(rs2.getString(10));
+                        desig.setObs(rs2.getString(11));
+                        listDesig.add(desig);
+                    }
+                    auxnna.setDesignacions(listDesig);
+                    allNna.add(auxnna);
+                    statement2.close();
+                    rs2.close();
+                }
+
+                for (Nna auxnna : allNna) {
+                    if (auxnna.getClasificacion().equals("prioritario")) {
+                        Set<EstudioCaso> listEst = new HashSet<EstudioCaso>();
+                        String hql3 = "{call HN_GET_ESTUDIOS_CASO(?,?)}";
+                        CallableStatement statement3 = connection.prepareCall(hql3);
+                        statement3.setLong(1, auxnna.getIdnna());
+                        statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement3.execute();
+
+                        ResultSet rs3 = (ResultSet) statement3.getObject(2);
+                        while (rs3.next()) {
+                            est = new EstudioCaso();
+                            est.setIdestudioCaso(rs3.getLong(1));
+                            est.setOrden(rs3.getString(4));
+                            est.setFechaEstudio(rs3.getDate(5));
+                            est.setFechaSolAdop(rs3.getDate(6));
+                            est.setResultado(rs3.getString(7));
+                            est.setPrioridad(rs3.getLong(8));
+                            est.setNSolicitud(rs3.getLong(9));
+                            listEst.add(est);
+                        }
+                        auxnna.setEstudioCasos(listEst);
+                        statement3.close();
+                        rs3.close();
+                    }
+                    allNnaFinal.add(auxnna);
+                }
+
+                //METODO BUBBLESORT PARA ORDENAR POR CODIGO
+                if (clasif.equals("prioritario")) {
+                    Nna auxnna2;
+                    int n = allNnaFinal.size();
+                    for (int i = 0; i < n - 1; i++) {
+                        for (int j = i; j < n - 1; j++) {
+                            if (allNnaFinal.get(i).getExpedienteNnas().isEmpty()) {
+                                if (!allNnaFinal.get(j + 1).getExpedienteNnas().isEmpty()) {
+                                    auxnna2 = allNnaFinal.get(i);
+                                    allNnaFinal.set(i, allNnaFinal.get(j + 1));
+                                    allNnaFinal.set(j + 1, auxnna2);
+                                } else {
+                                    if (allNnaFinal.get(i).getApellidoP().compareToIgnoreCase(allNnaFinal.get(j + 1).getApellidoP()) > 0) {
+                                        auxnna2 = allNnaFinal.get(i);
+                                        allNnaFinal.set(i, allNnaFinal.get(j + 1));
+                                        allNnaFinal.set(j + 1, auxnna2);
+                                    }
+                                }
+                            } else {
+                                Set<ExpedienteNna> listExp1 = allNnaFinal.get(i).getExpedienteNnas();
+                                Set<ExpedienteNna> listExp2 = allNnaFinal.get(j + 1).getExpedienteNnas();
+                                if (!listExp2.isEmpty()) {
+                                    for (ExpedienteNna exp1 : listExp1) {
+                                        for (ExpedienteNna exp2 : listExp2) {
+                                            String codant = exp1.getCodigoReferencia();
+                                            String codpost = exp2.getCodigoReferencia();
+                                            if (codant == null){
+                                                codant = "";
+                                            }
+                                            if (codpost == null){
+                                                codpost = "";
+                                            }
+                                            if (codant.compareToIgnoreCase(codpost) > 0) {
+                                                auxnna2 = allNnaFinal.get(i);
+                                                allNnaFinal.set(i, allNnaFinal.get(j + 1));
+                                                allNnaFinal.set(j + 1, auxnna2);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        session.doWork(work);
+
+        return allNnaFinal;
+    }
 //    public ExpedienteNna getExpNna(long idNna) {
     //        Session session = sessionFactory.getCurrentSession();
     //        session.beginTransaction();
@@ -668,6 +1031,7 @@ public class HiberNna {
                     expnna.setApellidomActual(tempexp.getString(24));
                     expnna.setObservaciones(tempexp.getString(25));
                     expnna.setFechaInvTutelar(tempexp.getDate(26));
+                    expnna.setFechaIngPrio(tempexp.getDate("FECHA_ING_PRIO"));
                     tempnna = new Nna();
                     tempnna.setIdnna(tempexp.getLong(27));
                     tempnna.setNombre(tempexp.getString(28));
@@ -803,7 +1167,7 @@ public class HiberNna {
             @Override
             public void execute(Connection connection) throws SQLException {
 
-                String hql = "{call HN_SAVE_EXP_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                String hql = "{call HN_SAVE_EXP_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, expnna.getNna().getIdnna());
                 statement.setLong(2, expnna.getUnidad().getIdunidad());
@@ -832,6 +1196,8 @@ public class HiberNna {
                 statement.setString(25, expnna.getApellidomActual());
                 statement.setString(26, expnna.getObservaciones());
                 statement.setDate(27, (java.sql.Date) expnna.getFechaInvTutelar());
+                statement.setDate(28, (java.sql.Date) expnna.getFechaIngPrio());
+                statement.setDate(29, (java.sql.Date) expnna.getFechaActualizacion());
 
                 statement.execute();
                 statement.close();
@@ -858,7 +1224,7 @@ public class HiberNna {
             @Override
             public void execute(Connection connection) throws SQLException {
 
-                String hql = "{call HN_UPDATE_EXP_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                String hql = "{call HN_UPDATE_EXP_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, expnna.getNna().getIdnna());
                 statement.setLong(2, expnna.getUnidad().getIdunidad());
@@ -888,6 +1254,9 @@ public class HiberNna {
                 statement.setString(26, expnna.getObservaciones());
                 statement.setDate(27, (java.sql.Date) expnna.getFechaInvTutelar());
                 statement.setLong(28, expnna.getIdexpedienteNna());
+                statement.setDate(29, (java.sql.Date) expnna.getFechaIngPrio());
+                statement.setDate(30, (java.sql.Date) expnna.getFechaActualizacion());
+                
 
                 statement.execute();
                 statement.close();

@@ -7,12 +7,8 @@ package com.mimp.controllers;
 
 import java.util.*;
 import com.mimp.bean.*;
-import com.mimp.hibernate.HiberEtapa;
-import com.mimp.hibernate.HiberMail;
 import com.mimp.util.*;
-import com.mimp.hibernate.HiberMain;
-import com.mimp.hibernate.HiberNna;
-import com.mimp.hibernate.HiberPersonal;
+import com.mimp.hibernate.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -53,7 +49,11 @@ public class main {
     ArrayList<Evaluacion> listaEvaluaciones = new ArrayList();
     ArrayList<Designacion> listaDesignaciones = new ArrayList();
     ArrayList<EstudioCaso> listaEstudios = new ArrayList();
+    ArrayList<Nna> listaNnaRevision = new ArrayList();
+    ArrayList<Object> listaRevision = new ArrayList();
+    ArrayList<Nna> listaNnaEstudio = new ArrayList();
 
+    ArrayList<ExpedienteFamilia> listaFamiliasEstudio = new ArrayList();
     InfoFamilia infoFam = new InfoFamilia();
     ExpedienteFamilia expediente = new ExpedienteFamilia();
     Nna nnaAdoptado = new Nna();
@@ -137,14 +137,19 @@ public class main {
         }
         return new ModelAndView(pagina, map);
     }
+    
+    @RequestMapping("/SesionInfInicioPrev")
+    public String SesionInfInicioPrev() {
+        return "/Inscripcion/inscripcion_prev";
+    }
 
     @RequestMapping("/SesionInfInicio")
-    public ModelAndView SesionInfInicio(ModelMap map) {
+    public ModelAndView SesionInfInicio(ModelMap map,@RequestParam("ua") String ua) {
 
         ArrayList<Turno> temp = new ArrayList();
         ArrayList<Turno> temp2 = new ArrayList();
         Date now = new Date();
-        temp = ServicioMain.ListaTurnos();
+        temp = ServicioMain.ListaTurnos(ua);
         String pagina = "";
         //String fecha = ts.TimeToString(temp.get(0).getInicioInscripcion());
         if (temp.isEmpty()) {
@@ -2148,13 +2153,18 @@ public class main {
     }
 
     /*  CRONOGRAMA */
-    @RequestMapping(value = "/CronogramaAnual", method = RequestMethod.GET)
-    public ModelAndView CronogramaAnual(ModelMap map, HttpSession session) {
+    @RequestMapping("/CronogramaAnualPrev")
+    public String CronogramaAnualPrev() {
+        return "cronograma_prev";
+    }
+    
+    @RequestMapping(value = "/CronogramaAnual", method = RequestMethod.POST)
+    public ModelAndView CronogramaAnual(ModelMap map, HttpSession session,@RequestParam(value = "ua") String ua) {
 
         ArrayList<Taller> allTalleres = new ArrayList();
-        allTalleres = ServicioMain.listaTalleresHabilitados();
+        allTalleres = ServicioMain.listaTalleresProgramados(ua);
         ArrayList<Sesion> allSesiones = new ArrayList();
-        allSesiones = ServicioMain.getListaSesionesHabilitadas();
+        allSesiones = ServicioMain.getListaSesionesProgramadas(ua);
         map.put("df", df);
         map.put("listaTalleres", allTalleres);
         map.put("listaSesiones", allSesiones);
@@ -2428,7 +2438,7 @@ public class main {
          */
         return new ModelAndView(pagina, map);
     }
-    
+
     @RequestMapping(value = "/MainListaNnaAdoptadosExtranjero", method = RequestMethod.POST)
     public ModelAndView MainListaNnaAdoptadosExtranjero(ModelMap map,
             @RequestParam("idExpediente") Long idExpediente,
@@ -2444,7 +2454,7 @@ public class main {
         map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(idExpediente));
         return new ModelAndView("/Personal/nna_adop_ext/lista_nna", map);
     }
-    
+
     @RequestMapping(value = "/MainRegistrarAdopcionExtranjero", method = RequestMethod.POST)
     public ModelAndView MainRegistrarAdopcionExtranjero(ModelMap map,
             @RequestParam("idExpediente") Long idExpediente,
@@ -2459,7 +2469,7 @@ public class main {
         map.addAttribute("idExpediente", idExpediente);
         return new ModelAndView("/Personal/nna_adop_ext/editar_nna", map);
     }
-    
+
     @RequestMapping(value = "/MainCrearNna", method = RequestMethod.POST)
     public ModelAndView MainCrearNna(ModelMap map, HttpSession session,
             @RequestParam("idExpediente") Long idExpediente,
@@ -2475,7 +2485,6 @@ public class main {
             @RequestParam(value = "prov", required = false) String prov,
             @RequestParam(value = "dist", required = false) String dist,
             @RequestParam(value = "direccion", required = false) String direccion,
-            
             @RequestParam(value = "incesto") String incesto,
             @RequestParam(value = "mental") String mental,
             @RequestParam(value = "epilepsia") String epilepsia,
@@ -2489,7 +2498,6 @@ public class main {
             @RequestParam(value = "mayor") String mayor,
             @RequestParam(value = "adolescente") String adolescente,
             @RequestParam(value = "hermanos") String hermanos,
-            
             @RequestParam(value = "fechaAdopcion", required = false) String fechaAdopcion,
             @RequestParam(value = "numAdopcion", required = false) String numAdopcion,
             @RequestParam(value = "obs", required = false) String obs
@@ -2504,19 +2512,23 @@ public class main {
         Nna tempNna = new Nna();
         Designacion tempDesig = new Designacion();
         ExpedienteFamilia tempExp = new ExpedienteFamilia();
-        
+
         tempExp = servicioEtapa.getExpedienteFamilia(idExpediente);
         tempNna.setNombre(nombre);
         tempNna.setApellidoP(apellidoP);
         tempNna.setApellidoM(apellidoM);
         tempNna.setSexo(sexo);
-        if(fechaNac != null && !fechaNac.equals("")){
+        if (fechaNac != null && !fechaNac.equals("")) {
             tempNna.setFechaNacimiento(df.stringToDate(fechaNac));
-        } 
+        }
         short edadtemp = 0;
         short mesestemp = 0;
-        if (edad != null && !edad.equals("")) edadtemp = Byte.valueOf(edad);
-        if (meses != null && !meses.equals("")) mesestemp = Byte.valueOf(meses);
+        if (edad != null && !edad.equals("")) {
+            edadtemp = Byte.valueOf(edad);
+        }
+        if (meses != null && !meses.equals("")) {
+            mesestemp = Byte.valueOf(meses);
+        }
         tempNna.setEdadAnhos(edadtemp);
         tempNna.setEdadMeses(mesestemp);
 
@@ -2527,7 +2539,7 @@ public class main {
         tempNna.setProvinciaNacimiento(prov);
         tempNna.setDistritoNacimiento(dist);
         tempNna.setLugarNac(direccion);
-        
+
         tempNna.setIncesto(Short.parseShort(incesto));
         tempNna.setMental(Short.parseShort(mental));
         tempNna.setEpilepsia(Short.parseShort(epilepsia));
@@ -2536,8 +2548,6 @@ public class main {
         tempNna.setSeguiMedico(Short.parseShort(seguimiento));
         tempNna.setOperacion(Short.parseShort(operacion));
         tempNna.setHiperactivo(Short.parseShort(hiperactivo));
-
-        
 
         tempNna.setEspecial(Short.parseShort(especial));
         tempNna.setEnfermo(Short.parseShort(salud));
@@ -2549,25 +2559,25 @@ public class main {
         tempNna.setObservaciones(obs);
 
         tempDesig.setAceptacionConsejo(Short.parseShort("4"));
-        if(fechaAdopcion != null && !fechaAdopcion.equals("")){
+        if (fechaAdopcion != null && !fechaAdopcion.equals("")) {
             tempDesig.setFechaConsejo(df.stringToDate(fechaAdopcion));
             tempDesig.setFechaPropuesta(df.stringToDate(fechaAdopcion));
-        }else{
+        } else {
             tempDesig.setFechaConsejo(null);
             tempDesig.setFechaPropuesta(null);
-        } 
-        
+        }
+
         tempDesig.setNDesignacion(numAdopcion);
         long prioridad = 1;
         tempDesig.setPrioridad(prioridad);
         tempDesig.setTipoPropuesta("extranjero");
-        
+
         tempDesig.setExpedienteFamilia(tempExp);
         tempDesig.setNna(tempNna);
         tempDesig.setPersonal(usuario);
-        
+
         ServicioMain.crearAdopcionAdoptantesExtranjero(tempNna, tempDesig);
-        
+
         String mensaje_log = "Se registró una nueva Adopción en el extranjero a la base de datos con Nombre del NNA, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
         String Tipo_registro = "NNA";
 
@@ -2576,10 +2586,8 @@ public class main {
 
         ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
 
-        
         map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(idExpediente));
         return new ModelAndView("/Personal/nna_adop_ext/lista_nna", map);
-        
 
     }
 
@@ -2603,8 +2611,8 @@ public class main {
         map.addAttribute("nna", ServicioMain.getNnaAdoptantesExtranjero(idNna));
         return new ModelAndView("/Personal/nna_adop_ext/editar_nna", map);
     }
-    
-     @RequestMapping(value = "/MainUpdateNna", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/MainUpdateNna", method = RequestMethod.POST)
     public ModelAndView MainUpdateNna(ModelMap map, HttpSession session,
             @RequestParam("idDesig") Long idDesig,
             @RequestParam("idNna") Long idNna,
@@ -2620,7 +2628,6 @@ public class main {
             @RequestParam(value = "prov", required = false) String prov,
             @RequestParam(value = "dist", required = false) String dist,
             @RequestParam(value = "direccion", required = false) String direccion,
-            
             @RequestParam(value = "incesto") String incesto,
             @RequestParam(value = "mental") String mental,
             @RequestParam(value = "epilepsia") String epilepsia,
@@ -2634,7 +2641,6 @@ public class main {
             @RequestParam(value = "mayor") String mayor,
             @RequestParam(value = "adolescente") String adolescente,
             @RequestParam(value = "hermanos") String hermanos,
-            
             @RequestParam(value = "fechaAdopcion", required = false) String fechaAdopcion,
             @RequestParam(value = "numAdopcion", required = false) String numAdopcion,
             @RequestParam(value = "obs", required = false) String obs
@@ -2648,21 +2654,25 @@ public class main {
 
         Nna tempNna = new Nna();
         Designacion tempDesig = new Designacion();
-        
+
         tempNna = ServicioMain.getNnaAdoptantesExtranjero(idNna);
         tempDesig = ServicioMain.getDesignacionAdoptantesExtranjero(idDesig);
-        
+
         tempNna.setNombre(nombre);
         tempNna.setApellidoP(apellidoP);
         tempNna.setApellidoM(apellidoM);
         tempNna.setSexo(sexo);
-        if(fechaNac != null && !fechaNac.equals("")){
+        if (fechaNac != null && !fechaNac.equals("")) {
             tempNna.setFechaNacimiento(df.stringToDate(fechaNac));
-        } 
+        }
         short edadtemp = 0;
         short mesestemp = 0;
-        if (edad != null && !edad.equals("")) edadtemp = Byte.valueOf(edad);
-        if (meses != null && !meses.equals("")) mesestemp = Byte.valueOf(meses);
+        if (edad != null && !edad.equals("")) {
+            edadtemp = Byte.valueOf(edad);
+        }
+        if (meses != null && !meses.equals("")) {
+            mesestemp = Byte.valueOf(meses);
+        }
         tempNna.setEdadAnhos(edadtemp);
         tempNna.setEdadMeses(mesestemp);
         tempNna.setPaisNacimiento(paisNac);
@@ -2670,7 +2680,7 @@ public class main {
         tempNna.setProvinciaNacimiento(prov);
         tempNna.setDistritoNacimiento(dist);
         tempNna.setLugarNac(direccion);
-        
+
         tempNna.setIncesto(Short.parseShort(incesto));
         tempNna.setMental(Short.parseShort(mental));
         tempNna.setEpilepsia(Short.parseShort(epilepsia));
@@ -2680,27 +2690,25 @@ public class main {
         tempNna.setOperacion(Short.parseShort(operacion));
         tempNna.setHiperactivo(Short.parseShort(hiperactivo));
 
-        
-
         tempNna.setEspecial(Short.parseShort(especial));
         tempNna.setEnfermo(Short.parseShort(salud));
         tempNna.setMayor(Short.parseShort(mayor));
         tempNna.setAdolescente(Short.parseShort(adolescente));
         tempNna.setHermano(Short.parseShort(hermanos));
-        
+
         tempNna.setObservaciones(obs);
 
-        if(fechaAdopcion != null && !fechaAdopcion.equals("")){
+        if (fechaAdopcion != null && !fechaAdopcion.equals("")) {
             tempDesig.setFechaConsejo(df.stringToDate(fechaAdopcion));
             tempDesig.setFechaPropuesta(df.stringToDate(fechaAdopcion));
-        }else{
+        } else {
             tempDesig.setFechaConsejo(null);
             tempDesig.setFechaPropuesta(null);
-        } 
-        
+        }
+
         tempDesig.setNDesignacion(numAdopcion);
         ServicioMain.crearAdopcionAdoptantesExtranjero(tempNna, tempDesig);
-        
+
         String mensaje_log = "Se actualizó una Adopción en el extranjero a la base de datos con Nombre del NNA, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
         String Tipo_registro = "NNA";
 
@@ -2711,8 +2719,875 @@ public class main {
         map.addAttribute("df", df);
         map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(tempDesig.getExpedienteFamilia().getIdexpedienteFamilia()));
         return new ModelAndView("/Personal/nna_adop_ext/lista_nna", map);
+
+    }
+
+    /*  SECCIÓN DEDICADA AL PROCESO DE ADOPCION PRIORITARIOS*/
+    @RequestMapping(value = "/MainPrioritariosInicio", method = RequestMethod.POST)
+    public ModelAndView MainPrioritariosInicio(ModelMap map,
+            @RequestParam("idNna") Long idNna,
+            @RequestParam(value = "editarExpedienteNna", required = false) String editarExpedienteNna,
+            @RequestParam(value = "editarNna", required = false) String editarNna,
+            @RequestParam(value = "registrarRev", required = false) String registrarRev,
+            Long[] listaNna,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        if (editarNna != null) {
+            map.addAttribute("idNna", idNna);
+            return new ModelAndView("forward:/editarNna", map);
+        } else if (editarExpedienteNna != null) {
+            map.addAttribute("idNna", idNna);
+            return new ModelAndView("forward:/editarExpedienteNna", map);
+        } else if (registrarRev != null) {
+            if (listaNna == null) {
+                String mensaje = "Debe elegir al menos un NNA para iniciar el proceso de revisión de expediente";
+                map.put("mensaje", mensaje);
+                map.put("listaNna", ServicioNna.ListaNna("prioritario"));
+                return new ModelAndView("/Personal/nna/lista_nna_prior", map);
+            } else {
+                ArrayList<Nna> tempListaN = new ArrayList();
+                for (Long long1 : listaNna) {
+                    Nna tempN = ServicioNna.getNna(long1);
+                    tempListaN.add(tempN);
+                }
+                listaNnaRevision = tempListaN;
+                listaRevision.clear();
+                map.put("listaNna", listaNnaRevision);
+                return new ModelAndView("/Personal/nna/reg_revision", map);
+            }
+
+        } else {
+            if (listaNna == null) {
+                String mensaje = "Debe elegir al menos un NNA para iniciar el proceso de estudio de caso";
+                map.put("mensaje", mensaje);
+                map.put("listaNna", ServicioNna.ListaNna("prioritario"));
+                return new ModelAndView("/Personal/nna/lista_nna_prior", map);
+            } else {
+                ArrayList<Nna> tempListaN = new ArrayList();
+                for (Long long1 : listaNna) {
+                    Nna tempN = ServicioNna.getNna(long1);
+                    tempListaN.add(tempN);
+                }
+                listaNnaEstudio = tempListaN;
+                listaFamiliasEstudio.clear();
+                map.put("listaNna", listaNnaEstudio);
+                return new ModelAndView("/Personal/nna/reg_estudio", map);
+            }
+        }
+    }
+
+    @RequestMapping(value = "/MainInsertarRevision", method = RequestMethod.POST)
+    public ModelAndView MainInsertarRevision(ModelMap map, HttpSession session,
+            @RequestParam(value = "numero", required = false) String numero,
+            @RequestParam(value = "comentarios", required = false) String comentarios,
+            @RequestParam(value = "agregarFamilia", required = false) String agregarFamilia,
+            @RequestParam(value = "agregarEntidad", required = false) String agregarEntidad,
+            @RequestParam(value = "eliminar", required = false) String eliminar,
+            @RequestParam(value = "registrar", required = false) String registrar,
+            @RequestParam(value = "idNna", required = false) String idNna,
+            String[] delete,
+            String[] fecha
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        if (agregarFamilia != null) {
+            map.put("df", df);
+            map.addAttribute("idNna", idNna);
+            return new ModelAndView("/Personal/nna/agregar_exp_revision", map);
+        }
+        if (agregarEntidad != null) {
+            map.put("df", df);
+            map.addAttribute("idNna", idNna);
+            return new ModelAndView("/Personal/nna/agregar_entidad_revision", map);
+        }
+        if (eliminar != null && delete != null) {
+//            for (int i : delete) {
+//                listaRevision.remove(i);
+//            }
+            for (Iterator<Object> iterator = listaRevision.iterator(); iterator.hasNext();) {
+                Object temp = iterator.next();
+                for (String ident : delete) {
+                    if (temp instanceof Entidad) {
+                        Entidad temporalEnt = (Entidad) temp;
+                        if (temporalEnt.getNombre().equals(ident)) {
+                            iterator.remove();
+                        }
+                    } else if (temp instanceof ExpedienteFamilia) {
+                        ExpedienteFamilia temporalEF = (ExpedienteFamilia) temp;
+                        if (temporalEF.getExpediente().equals(ident)) {
+                            iterator.remove();
+                        }
+                    }
+                }
+
+            }
+            map.put("df", df);
+            map.put("listaNna", listaNnaRevision);
+            map.put("listaRevision", listaRevision);
+            map.addAttribute("idNna", idNna);
+            return new ModelAndView("/Personal/nna/reg_revision", map);
+        }
+        if (registrar != null && numero != null && !numero.equals("")) {
+            String existeRev = ServicioMain.verificarExistenciaIDEstudio(numero);
+            if (existeRev.equals("si")) {
+                String mensaje = "el identificador ingresado ya existe";
+                map.put("mensaje", mensaje);
+                map.put("listaNna", listaNnaRevision);
+                map.put("listaRevision", listaRevision);
+                map.put("df", df);
+                return new ModelAndView("/Personal/nna/reg_revision", map);
+            }
+            if (!listaRevision.isEmpty()) {
+                for (int i = 0; i < listaRevision.size(); i++) {
+                    Object temp = listaRevision.get(i);
+                    if (temp instanceof Entidad) {
+                        Entidad temporalEnt = (Entidad) temp;
+                        for (Nna tempN : listaNnaRevision) {
+                            Revision tempRev = new Revision();
+                            tempRev.setNna(tempN);
+                            tempRev.setIdEntidad(temporalEnt.getIdentidad());
+                            tempRev.setNombre(temporalEnt.getNombre());
+                            tempRev.setNumero(numero);
+                            tempRev.setComentarios(comentarios);
+                            if (fecha[i] != null && !fecha[i].equals("")) {
+                                Date fechaRev = df.stringToDate(fecha[i]);
+                                tempRev.setFechaRevision(fechaRev);
+                            } else {
+                                tempRev.setFechaRevision(null);
+                            }
+                            ServicioMain.crearRevision(tempRev);
+                            String mensaje_log = "Se registró nueva revisión de expediente de NNA con ID: " + String.valueOf(tempN.getNombre() + tempN.getApellidoP() + tempN.getApellidoM());
+                            String Tipo_registro = "Registro";
+
+                            try {
+                                String Numero_registro = tempRev.getNumero();
+
+                                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                            } catch (Exception ex) {
+                            }
+                        }
+
+                    } else if (temp instanceof ExpedienteFamilia) {
+                        ExpedienteFamilia temporalEF = (ExpedienteFamilia) temp;
+                        for (Nna tempN : listaNnaRevision) {
+                            Revision tempRev = new Revision();
+                            tempRev.setNna(tempN);
+                            tempRev.setExpedienteFamilia(temporalEF);
+                            tempRev.setNumero(numero);
+                            tempRev.setComentarios(comentarios);
+                            if (fecha[i] != null && !fecha[i].equals("")) {
+                                Date fechaRev = df.stringToDate(fecha[i]);
+                                tempRev.setFechaRevision(fechaRev);
+                            } else {
+                                tempRev.setFechaRevision(null);
+                            }
+                            ServicioMain.crearRevision(tempRev);
+                            String mensaje_log = "Se registró nueva revisión de expediente de NNA con ID: " + String.valueOf(tempN.getNombre() + tempN.getApellidoP() + tempN.getApellidoM());
+                            String Tipo_registro = "Registro";
+
+                            try {
+                                String Numero_registro = tempRev.getNumero();
+
+                                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                            } catch (Exception ex) {
+                            }
+                        }
+                    }
+                }
+                map.put("listaRevision", ServicioMain.getListaRevisiones());
+                return new ModelAndView("/Personal/nna/lista_revision", map);
+            }
+            if (listaRevision.isEmpty()) {
+                String mensaje = "Debe tener al menos una familia u Organismo en la lista";
+                map.put("mensaje", mensaje);
+            }
+        } else if (registrar != null && (numero == null || numero.equals(""))) {
+            String mensaje = "Debe ingresar el identificador de la Revisión de expediente";
+            map.put("mensaje", mensaje);
+        }
+        map.put("listaNna", listaNnaRevision);
+        map.put("listaRevision", listaRevision);
+        map.put("df", df);
+        return new ModelAndView("/Personal/nna/reg_revision", map);
+    }
+
+    @RequestMapping(value = "/MainBuscarExpedienteRevision", method = RequestMethod.POST)
+    public ModelAndView MainBuscarExpedienteRevision(ModelMap map, HttpSession session,
+            @RequestParam("exp") String exp
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        ArrayList<ExpedienteFamilia> listaBusqueda = new ArrayList();
+        listaBusqueda = servicioEtapa.listaInfoFamilias(exp);
+
+        map.put("df", df);
+        map.put("listaRevision", listaRevision);
+        map.put("listaBusqueda", listaBusqueda);
+        return new ModelAndView("/Personal/nna/agregar_exp_revision", map);
+
+    }
+
+    @RequestMapping(value = "/MainBuscarEntidadRevision", method = RequestMethod.POST)
+    public ModelAndView MainBuscarEntidadRevision(ModelMap map, HttpSession session,
+            @RequestParam("ent") String ent
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        ArrayList<Entidad> listaEntidades = new ArrayList();
+        listaEntidades = servicioEtapa.listaEntidadesRevision(ent);
+
+        map.put("df", df);
+        map.put("listaRevision", listaRevision);
+        map.put("listaEntidades", listaEntidades); //aqui me kede
+        return new ModelAndView("/Personal/nna/agregar_entidad_revision", map);
+
+    }
+
+    @RequestMapping(value = "/MainAgregarExpedienteRevision", method = RequestMethod.POST)
+    public ModelAndView MainAgregarExpedienteRevision(ModelMap map, HttpSession session, long[] idExpediente
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        if (idExpediente != null) {
+            for (long l : idExpediente) {
+                ExpedienteFamilia tempExp = servicioEtapa.getInfoFamilia(l);
+                listaRevision.add(tempExp);
+            }
+        }
+        map.put("listaNna", listaNnaRevision);
+        map.put("listaRevision", listaRevision);
+        map.put("df", df);
+        return new ModelAndView("/Personal/nna/reg_revision", map);
+
+    }
+
+    @RequestMapping(value = "/MainAgregarEntidadRevision", method = RequestMethod.POST)
+    public ModelAndView MainAgregarEntidadRevision(ModelMap map, HttpSession session, long[] idEntidad
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        if (idEntidad != null) {
+            for (long l : idEntidad) {
+                Entidad tempEnt = ServicioPersonal.getEntidad(l);
+                listaRevision.add(tempEnt);
+            }
+        }
+        map.put("listaNna", listaNnaRevision);
+        map.put("listaRevision", listaRevision);
+        map.put("df", df);
+        return new ModelAndView("/Personal/nna/reg_revision", map);
+
+    }
+
+    @RequestMapping(value = "/MainEditarRevision", method = RequestMethod.POST)
+    public ModelAndView EditarRevision(ModelMap map, HttpSession session,
+            @RequestParam("numero") String numero
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        listaFamiliasEstudio.clear();
+        ArrayList<Long> allID = new ArrayList();
+        ArrayList<Nna> listaDeNna = new ArrayList();
+        ArrayList<ExpedienteFamilia> listaDeExpedientes = new ArrayList();
+        ArrayList<Entidad> listaDeEntidades = new ArrayList();
+        allID = servicioEtapa.listaNnaDeRevision(numero);
+        if (!allID.isEmpty()) {
+            for (Long id : allID) {
+                Nna nnaInfo = ServicioMain.getTodosDatosNna(id);
+                listaDeNna.add(nnaInfo);
+            }
+        }
+        allID.clear();
+        allID = servicioEtapa.listaExpedientesDeRevision(numero);
+        if (!allID.isEmpty()) {
+            for (Long id : allID) {
+                ExpedienteFamilia expInfo = ServicioMain.getInformacionRegistro(id);
+                listaDeExpedientes.add(expInfo);
+            }
+        }
+        listaFamiliasEstudio = listaDeExpedientes;
+        allID.clear();
+
+        allID = servicioEtapa.listaOrganismosDeRevision(numero);
+        if (!allID.isEmpty()) {
+            for (Long id : allID) {
+                Entidad entidadInfo = ServicioPersonal.getEntidad(id);
+                listaDeEntidades.add(entidadInfo);
+            }
+        }
+        allID.clear();
         
+        
+
+        map.put("listaNna", listaDeNna);
+        map.put("listaExpedientes", listaFamiliasEstudio);
+        map.put("listaEntidades", listaDeEntidades);
+        ArrayList<Revision> allRevisiones = new ArrayList();
+        allRevisiones = ServicioMain.getListaRevisionesPorNumero(numero);
+        map.put("listaRevisiones", allRevisiones);
+        map.put("df", df);
+        map.addAttribute("numero", numero);
+        return new ModelAndView("/Personal/nna/edit_revision", map);
 
     }
     
+    @RequestMapping(value = "/MainGuardarRevision", method = RequestMethod.POST)
+    public ModelAndView MainGuardarRevision(ModelMap map, HttpSession session,
+            @RequestParam("numero") String numero,
+            @RequestParam("coments") String coments
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        listaFamiliasEstudio.clear();
+        ArrayList<Revision> allRevisiones = new ArrayList();
+        allRevisiones = ServicioMain.getListaRevisionesPorNumero(numero);
+        
+        for (Revision revision : allRevisiones) {
+            revision.setComentarios(coments);
+            ServicioMain.crearRevision(revision);
+        }
+        
+        ArrayList<Long> allID = new ArrayList();
+        ArrayList<Nna> listaDeNna = new ArrayList();
+        ArrayList<ExpedienteFamilia> listaDeExpedientes = new ArrayList();
+        ArrayList<Entidad> listaDeEntidades = new ArrayList();
+        allID = servicioEtapa.listaNnaDeRevision(numero);
+        if (!allID.isEmpty()) {
+            for (Long id : allID) {
+                Nna nnaInfo = ServicioMain.getTodosDatosNna(id);
+                listaDeNna.add(nnaInfo);
+            }
+        }
+        allID.clear();
+        allID = servicioEtapa.listaExpedientesDeRevision(numero);
+        if (!allID.isEmpty()) {
+            for (Long id : allID) {
+                ExpedienteFamilia expInfo = ServicioMain.getInformacionRegistro(id);
+                listaDeExpedientes.add(expInfo);
+            }
+        }
+        listaFamiliasEstudio = listaDeExpedientes;
+        allID.clear();
+
+        allID = servicioEtapa.listaOrganismosDeRevision(numero);
+        if (!allID.isEmpty()) {
+            for (Long id : allID) {
+                Entidad entidadInfo = ServicioPersonal.getEntidad(id);
+                listaDeEntidades.add(entidadInfo);
+            }
+        }
+        allID.clear();
+        
+        
+
+        map.put("listaNna", listaDeNna);
+        map.put("listaExpedientes", listaFamiliasEstudio);
+        map.put("listaEntidades", listaDeEntidades);
+        allRevisiones = ServicioMain.getListaRevisionesPorNumero(numero);
+        map.put("listaRevisiones", allRevisiones);
+        map.put("df", df);
+        map.addAttribute("numero", numero);
+        return new ModelAndView("/Personal/nna/edit_revision", map);
+
+    }
+
+    @RequestMapping(value = "/listaRevision", method = RequestMethod.GET)
+    public ModelAndView listaRevision(ModelMap map, HttpSession session
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        map.put("listaRevision", ServicioMain.getListaRevisiones());
+        return new ModelAndView("/Personal/nna/lista_revision", map);
+
+    }
+
+    @RequestMapping(value = "/listaEstudio", method = RequestMethod.GET)
+    public ModelAndView listaEstudio(ModelMap map, HttpSession session
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        map.put("listaEstudios", ServicioMain.getListaEstudios());
+        return new ModelAndView("/Personal/nna/lista_estudios", map);
+
+    }
+
+    @RequestMapping(value = "/MainInsertarEstudio", method = RequestMethod.POST)
+    public ModelAndView MainInsertarEstudio(ModelMap map, HttpSession session,
+            @RequestParam(value = "orden", required = false) String orden,
+            @RequestParam(value = "agregar", required = false) String agregar,
+            @RequestParam(value = "eliminar", required = false) String eliminar,
+            @RequestParam(value = "registrar", required = false) String registrar,
+            Long[] delete,
+            Long[] prioridad,
+            Long[] idNna,
+            @RequestParam(value = "numero", required = false) String numero
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        if (agregar != null) {
+            map.put("df", df);
+            map.addAttribute("numero", numero);
+            return new ModelAndView("/Personal/nna/agregar_exp_prioritario", map);
+        }
+        if (eliminar != null && delete != null) {
+            for (Iterator<ExpedienteFamilia> iterator = listaFamiliasEstudio.iterator(); iterator.hasNext();) {
+                ExpedienteFamilia temp = iterator.next();
+                for (Long ident : delete) {
+                    if (temp.getIdexpedienteFamilia() == ident) {
+                        iterator.remove();
+                    }
+                }
+            }
+            map.put("df", df);
+            map.put("listaNna", listaNnaEstudio);
+            map.put("listaEstudioCaso", listaFamiliasEstudio);
+            return new ModelAndView("/Personal/nna/reg_estudio", map);
+        }
+        if (registrar != null) {
+            String existencia = ServicioMain.verificarExistenciaIDEstudio(orden);
+            if (existencia.equals("si")) {
+                String mensaje = "El identificador ingresado ya se encuentra en el sistema";
+                map.put("df", df);
+                map.put("mensaje", mensaje);
+                map.put("listaNna", listaNnaEstudio);
+                map.put("listaEstudioCaso", listaFamiliasEstudio);
+                return new ModelAndView("/Personal/nna/reg_estudio", map);
+            }
+            if (orden == null || orden.equals("")) {
+                String mensaje = "Debe ingresar el identificador de este estudio de caso";
+                map.put("df", df);
+                map.put("mensaje", mensaje);
+                map.put("listaNna", listaNnaEstudio);
+                map.put("listaEstudioCaso", listaFamiliasEstudio);
+                return new ModelAndView("/Personal/nna/reg_estudio", map);
+            } else if (listaFamiliasEstudio.isEmpty()) {
+                String mensaje = "Debe tener al menos una familia en la lista";
+                map.put("df", df);
+                map.put("mensaje", mensaje);
+                map.put("listaNna", listaNnaEstudio);
+                map.put("listaEstudioCaso", listaFamiliasEstudio);
+                return new ModelAndView("/Personal/nna/reg_estudio", map);
+            } else {
+                for (int i = 0; i < listaFamiliasEstudio.size(); i++) {
+                    for (int j = 0; j < listaNnaEstudio.size(); j++) {
+                        EstudioCaso tempEst = new EstudioCaso();
+                        tempEst.setNna(listaNnaEstudio.get(j));
+                        tempEst.setExpedienteFamilia(listaFamiliasEstudio.get(i));
+                        ExpedienteFamilia expFam1 = listaFamiliasEstudio.get(i);
+                        expFam1.setEstado("estudio");
+                        servicioEtapa.updateExpedienteFamilia(expFam1);
+                        tempEst.setOrden(orden);
+//                
+                        tempEst.setPrioridad(prioridad[i]);
+                        long nsolicitud = 1;
+                        tempEst.setNSolicitud(nsolicitud);
+                        servicioEtapa.crearEstudioCaso(tempEst);
+//
+                        String mensaje_log = "Se registró nueva familia al estudio de caso del NNA con Nombres: "
+                                + listaNnaEstudio.get(j).getNombre() + listaNnaEstudio.get(j).getApellidoP() + listaNnaEstudio.get(j).getApellidoM();
+                        String Tipo_registro = "Estudio";
+//
+                        try {
+                            String Numero_registro = tempEst.getOrden();
+
+                            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                        } catch (Exception ex) {
+                        }
+                    }
+                }
+                map.addAttribute("idNna", idNna);
+                map.addAttribute("numero", numero);
+                map.put("listaEstudios", ServicioMain.getListaEstudios());
+                return new ModelAndView("/Personal/nna/lista_estudios", map);
+            }
+        }
+        return new ModelAndView("/Personal/nna/reg_estudio", map);
+    }
+
+    @RequestMapping(value = "/MainBuscarExpedientePrioritario", method = RequestMethod.POST)
+    public ModelAndView MainBuscarExpedientePrioritario(ModelMap map, HttpSession session,
+            @RequestParam("exp") String exp
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        ArrayList<ExpedienteFamilia> listaBusqueda = new ArrayList();
+        listaBusqueda = servicioEtapa.listaInfoFamilias(exp);
+
+        map.put("df", df);
+        map.put("listaEstudioCaso", listaFamiliasEstudio);
+        map.put("listaBusqueda", listaBusqueda);
+        return new ModelAndView("/Personal/nna/agregar_exp_prioritario", map);
+
+    }
+
+    @RequestMapping(value = "/MainAgregarExpedientePrioritario", method = RequestMethod.POST)
+    public ModelAndView MainAgregarExpedientePrioritario(ModelMap map, HttpSession session, long[] idExpediente
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        if (idExpediente != null) {
+            for (long l : idExpediente) {
+                ExpedienteFamilia tempExp = servicioEtapa.getInfoFamilia(l);
+                listaFamiliasEstudio.add(tempExp);
+            }
+        }
+        map.put("listaNna", listaNnaEstudio);
+        map.put("listaEstudioCaso", listaFamiliasEstudio);
+        map.put("df", df);
+        return new ModelAndView("/Personal/nna/reg_estudio", map);
+
+    }
+
+    @RequestMapping(value = "/MainEditarEstudio", method = RequestMethod.POST)
+    public ModelAndView EditarEstudio(ModelMap map, HttpSession session,
+            @RequestParam("orden") String orden
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        ArrayList<EstudioCaso> listaEstudiosCaso = new ArrayList();
+        listaEstudiosCaso = servicioEtapa.listaExpedientesDeEstudio(orden);
+
+        map.put("df", df);
+
+        ArrayList<Long> allID = new ArrayList();
+        ArrayList<Nna> listaDeNna = new ArrayList();
+        allID = servicioEtapa.listaNnaDeEstudio(orden);
+        if (!allID.isEmpty()) {
+            for (Long id : allID) {
+                Nna nnaInfo = ServicioMain.getTodosDatosNna(id);
+                listaDeNna.add(nnaInfo);
+            }
+        }
+        allID.clear();
+        map.put("listaNna", listaDeNna);
+        map.put("listaEstudios", listaEstudiosCaso);
+        return new ModelAndView("/Personal/nna/edit_estudio", map);
+
+    }
+
+    @RequestMapping(value = "/MainActualizarEstudio", method = RequestMethod.POST)
+    public ModelAndView MainActualizarEstudio(ModelMap map, HttpSession session,
+            @RequestParam("orden") String orden,
+            @RequestParam("idExpFam") long idExpFam,
+            @RequestParam("resultado") String resultado,
+            @RequestParam("fechaEst") String fechaEst
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        ArrayList<Long> allID = new ArrayList();
+        ArrayList<Nna> listaDeNna = new ArrayList();
+        allID = servicioEtapa.listaNnaDeEstudio(orden);
+        if (!allID.isEmpty()) {
+            for (Long id : allID) {
+                Nna nnaInfo = ServicioMain.getTodosDatosNna(id);
+                listaDeNna.add(nnaInfo);
+            }
+        }
+        allID.clear();
+
+        if (resultado.equals("acep")) {
+
+            for (Nna nna : listaDeNna) {
+                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam, orden);
+                if (fechaEst != null && !fechaEst.equals("")) {
+                    tempEst.setFechaEstudio(df.stringToDate(fechaEst));
+                } else if (fechaEst == null && fechaEst.equals("")) {
+                    tempEst.setFechaEstudio(null);
+                }
+                tempEst.setResultado(resultado);
+                servicioEtapa.updateEstudioCaso(tempEst);
+
+                String mensaje_log = "Se editó el estudio de caso con Orden: " + tempEst.getOrden() + " y ID: " + String.valueOf(tempEst.getIdestudioCaso());
+                String Tipo_registro = "Estu_Caso";
+
+                //try{
+                String Numero_registro = tempEst.getOrden();
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            }
+
+            ArrayList<EstudioCaso> allEstudioCaso = new ArrayList();
+            allEstudioCaso = servicioEtapa.getListaEstudioCasoOrden(orden);
+            for (EstudioCaso estudioCaso : allEstudioCaso) {
+                if (estudioCaso.getResultado() == null) {
+                    estudioCaso.setResultado("noobs");
+                    servicioEtapa.updateEstudioCaso(estudioCaso);
+                    ExpedienteFamilia tempExp = estudioCaso.getExpedienteFamilia();
+                    tempExp = estudioCaso.getExpedienteFamilia();
+                    tempExp.setEstado("espera");
+                    servicioEtapa.updateExpedienteFamilia(tempExp);
+                }
+            }
+
+            map.put("df", df);
+            map.put("listaNna", listaDeNna);
+            map.put("listaEstudios", servicioEtapa.listaExpedientesDeEstudio(orden));
+            return new ModelAndView("/Personal/nna/edit_estudio", map);
+        } else if (resultado.equals("noacep")) {
+            for (Nna nna : listaDeNna) {
+                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam, orden);
+                if (fechaEst != null && !fechaEst.equals("")) {
+                    tempEst.setFechaEstudio(df.stringToDate(fechaEst));
+                } else if (fechaEst == null && fechaEst.equals("")) {
+                    tempEst.setFechaEstudio(null);
+                }
+
+                tempEst.setResultado(resultado);
+                servicioEtapa.updateEstudioCaso(tempEst);
+                ExpedienteFamilia tempExp = tempEst.getExpedienteFamilia();
+                tempExp = tempEst.getExpedienteFamilia();
+                tempExp.setEstado("espera");
+                servicioEtapa.updateExpedienteFamilia(tempExp);
+
+                String mensaje_log = "Se editó el estudio de caso con Orden: " + tempEst.getOrden() + " y ID: " + String.valueOf(tempEst.getIdestudioCaso());
+                String Tipo_registro = "Estu_Caso";
+
+                //try{
+                String Numero_registro = tempEst.getOrden();
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            }
+            map.put("df", df);
+            map.put("listaNna", listaDeNna);
+            map.put("listaEstudios", servicioEtapa.listaExpedientesDeEstudio(orden));
+            return new ModelAndView("/Personal/nna/edit_estudio", map);
+        } else if (resultado.equals("noobs")) {
+            for (Nna nna : listaDeNna) {
+                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam, orden);
+                tempEst.setResultado(resultado);
+                servicioEtapa.updateEstudioCaso(tempEst);
+                ExpedienteFamilia tempExp = tempEst.getExpedienteFamilia();
+                tempExp = tempEst.getExpedienteFamilia();
+                tempExp.setEstado("espera");
+                servicioEtapa.updateExpedienteFamilia(tempExp);
+
+                String mensaje_log = "Se editó el estudio de caso con Orden: " + tempEst.getOrden() + " y ID: " + String.valueOf(tempEst.getIdestudioCaso());
+                String Tipo_registro = "Estu_Caso";
+
+                //try{
+                String Numero_registro = tempEst.getOrden();
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            }
+            map.put("df", df);
+            map.put("listaNna", listaDeNna);
+            map.put("listaEstudios", servicioEtapa.listaExpedientesDeEstudio(orden));
+            return new ModelAndView("/Personal/nna/edit_estudio", map);
+        } else {
+            for (Nna nna : listaDeNna) {
+                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam, orden);
+                if (fechaEst != null && !fechaEst.equals("")) {
+                    tempEst.setFechaEstudio(df.stringToDate(fechaEst));
+                } else if (fechaEst == null && fechaEst.equals("")) {
+                    tempEst.setFechaEstudio(null);
+                }
+                tempEst.setResultado(resultado);
+                servicioEtapa.updateEstudioCaso(tempEst);
+
+                String mensaje_log = "Se editó el estudio de caso con Orden: " + tempEst.getOrden() + " y ID: " + String.valueOf(tempEst.getIdestudioCaso());
+                String Tipo_registro = "Estu_Caso";
+
+                //try{
+                String Numero_registro = tempEst.getOrden();
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            }
+            map.put("df", df);
+            map.put("listaNna", listaDeNna);
+            map.put("listaEstudios", servicioEtapa.listaExpedientesDeEstudio(orden));
+            return new ModelAndView("/Personal/nna/edit_estudio", map);
+        }
+    }
+
+    @RequestMapping(value = "/MainGuardarFechaSolicitud", method = RequestMethod.POST)
+    public ModelAndView MainGuardarFechaSolicitud(ModelMap map, HttpSession session,
+            @RequestParam("orden") String orden,
+            @RequestParam("fechaSolicitud") String fechaSolicitud,
+            @RequestParam("idExpFam") long idExpFam
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        ArrayList<Long> allID = new ArrayList();
+        ArrayList<Nna> listaDeNna = new ArrayList();
+        allID = servicioEtapa.listaNnaDeEstudio(orden);
+        if (!allID.isEmpty()) {
+            for (Long id : allID) {
+                Nna nnaInfo = ServicioMain.getTodosDatosNna(id);
+                listaDeNna.add(nnaInfo);
+            }
+        }
+
+        allID.clear();
+        for (Nna nna : listaDeNna) {
+            EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam, orden);
+            if (fechaSolicitud != null && !fechaSolicitud.equals("")) {
+                tempEst.setFechaSolAdop(df.stringToDate(fechaSolicitud));
+            } else if (fechaSolicitud == null && fechaSolicitud.equals("")) {
+                tempEst.setFechaSolAdop(null);
+            }
+            ServicioMain.updateEstudio(tempEst);
+        }
+        map.put("df", df);
+        map.put("listaNna", listaDeNna);
+        map.put("listaEstudios", servicioEtapa.listaExpedientesDeEstudio(orden));
+        return new ModelAndView("/Personal/nna/edit_estudio", map);
+
+    }
+
+    @RequestMapping(value = "/MainGenerarDesignacionPrioritario", method = RequestMethod.POST)
+    public ModelAndView MainGenerarDesignacionPrioritario(ModelMap map, HttpSession session,
+            @RequestParam("orden") String orden,
+            @RequestParam("numDesig") String numDesig,
+            @RequestParam("idExpFam") long idExpFam,
+            @RequestParam("fechaPropuesta") String fechaPropuesta
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        if (numDesig == null || numDesig.equals("") || fechaPropuesta == null || fechaPropuesta.equals("")) {
+            ArrayList<EstudioCaso> listaEstudiosCaso = new ArrayList();
+            listaEstudiosCaso = servicioEtapa.listaExpedientesDeEstudio(orden);
+
+            ArrayList<Long> allID = new ArrayList();
+            ArrayList<Nna> listaDeNna = new ArrayList();
+            allID = servicioEtapa.listaNnaDeEstudio(orden);
+            if (!allID.isEmpty()) {
+                for (Long id : allID) {
+                    Nna nnaInfo = ServicioMain.getTodosDatosNna(id);
+                    listaDeNna.add(nnaInfo);
+                }
+            }
+
+            allID.clear();
+            map.put("mensaje", "Debe llenar los datos correctamente");
+            map.put("df", df);
+            map.put("listaNna", listaDeNna);
+            map.put("listaEstudios", listaEstudiosCaso);
+            return new ModelAndView("/Personal/nna/edit_estudio", map);
+
+        } else {
+            ArrayList<Long> allID = new ArrayList();
+            ArrayList<Nna> listaDeNna = new ArrayList();
+            allID = servicioEtapa.listaNnaDeEstudio(orden);
+            if (!allID.isEmpty()) {
+                for (Long id : allID) {
+                    Nna nnaInfo = ServicioMain.getTodosDatosNna(id);
+                    listaDeNna.add(nnaInfo);
+                }
+            }
+
+            allID.clear();
+
+            for (Nna nna : listaDeNna) {
+                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam, orden);
+                long nsol = 0;
+                tempEst.setNSolicitud(nsol);
+                ServicioMain.updateEstudio(tempEst);
+            }
+
+            for (Nna nna : listaDeNna) {
+                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam, orden);
+                ExpedienteFamilia tempExp = tempEst.getExpedienteFamilia();
+                Nna tempNna = nna;
+                Designacion tempDesign = new Designacion();
+                tempDesign.setExpedienteFamilia(tempExp);
+                tempDesign.setNna(tempNna);
+                tempDesign.setPersonal(usuario);
+                tempDesign.setNDesignacion(numDesig);
+                tempDesign.setTipoPropuesta("directa");
+                tempDesign.setAceptacionConsejo(Short.parseShort("1"));
+                Date fechaPropuestaDesig = df.stringToDate(fechaPropuesta);
+                tempDesign.setFechaPropuesta(fechaPropuestaDesig);
+                servicioEtapa.crearDesignacion(tempDesign);
+                tempExp.setEstado("designado");
+                servicioEtapa.updateExpedienteFamilia(tempExp);
+                ExpedienteNna tempExpNna = ServicioNna.getExpNna(tempNna.getIdnna());
+                tempExpNna.setEstado("desig");
+                Date ahora = new Date();
+                java.sql.Date sql = new java.sql.Date(ahora.getTime());
+                tempExpNna.setFechaEstado(sql);
+                ServicioNna.updateExpNna(tempExpNna);
+            }
+            map.put("listaDesignaciones", servicioEtapa.getListaDesignaciones());
+            return new ModelAndView("/Personal/Buscador_etapa/etapa_designacion/etapa_designacion", map);
+        }
+    }
+
 }

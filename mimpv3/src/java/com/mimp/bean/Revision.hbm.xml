@@ -23,5 +23,11 @@
         <property name="comentarios" type="string">
             <column name="COMENTARIOS" length="20" />
         </property>
+        <property name="idEntidad" type="java.lang.Long">
+            <column name="IDENTIDAD" precision="10" scale="0" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="40" />
+        </property>
     </class>
 </hibernate-mapping>

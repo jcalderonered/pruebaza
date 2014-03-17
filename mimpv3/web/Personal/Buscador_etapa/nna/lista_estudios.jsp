@@ -194,6 +194,13 @@
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
                         </ul>
                         <br>
+                        <ul class="nav nav-tabs row" >
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >Registro de NNA's</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/listaRevision" >Lista de Revisión de Expediente</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/listaEstudio" >Lista de Estudio de Caso</a></li>
+                        </ul>
+                        <br>
+                        <br>
                         <h1 align="center"><strong>Lista de Estudios de Caso</strong></h1>
                         <br>
                         <div class="table-responsive">
@@ -214,7 +221,7 @@
                                                         <tr>
                                                           <td>${estudio.getOrden()}</td>
                                                           <td>
-                                                            <form action="${pageContext.servletContext.contextPath}/EditarEstudio" method="post">
+                                                            <form action="${pageContext.servletContext.contextPath}/MainEditarEstudio" method="post">
                                                               <input hidden name="orden" id="orden" value="${estudio.getOrden()}">  
                                                               <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
                                                             </form>

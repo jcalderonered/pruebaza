@@ -102,16 +102,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <c:if test="${idNna != null}">
-                            <form action="${pageContext.servletContext.contextPath}${volver2}?volver=${volver}&idNna=${idNna}" method="post">
-                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                            </form>
-                        </c:if>
-                        <c:if test="${idNna == null}"> 
-                            <form onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" method="post">
-                                <p align="right"><button  id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                            </form>
-                        </c:if>                                                
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/nna'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p> 
                         <h1 align="center"><strong>Expediente del NNA</strong></h1>
                         <br>
                         <c:if test="${expediente == null}">
@@ -127,7 +118,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Unidad de adopción</label>
                                     <div class="controls">
-                                        <input id="unidad" name="unidad" value="${u.getUnidad().getNombre()}" type="text" placeholder="LIMA" class="input-xlarge" disabled >
+                                        <input id="unidad" name="unidad" value="${expediente == null ? usuario.getUnidad().getNombre() : unidad.getNombre()}" type="text" class="input-xlarge" disabled >
                                     </div>
                                 </div>
                                 <br>
@@ -137,32 +128,18 @@
                                         <input  id="numero" name="numero" type="text" value="${expediente.getNumero()}" placeholder="" class="input-xlarge" >
                                     </div>
                                 </div>
-                                <br>
+                                <br>                                
                                 <div class="control-group">
-                                    <label class="control-label">Nombre Actual</label>
-                                    <div class="controls">
-                                        <input  id="nombreActual" name="nombreActual" value="${expediente.getNActual()}" type="text" placeholder="" class="input-xlarge" >
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Paterno Actual</label>
-                                    <div class="controls">
-                                        <input  id="apellidoPActual" name="apellidoPActual" value="${expediente.getApellidopActual()}" type="text" placeholder="" class="input-xlarge" >
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Materno Actual</label>
-                                    <div class="controls">
-                                        <input  id="apellidoMActual" name="apellidoMActual" value="${expediente.getApellidomActual()}" type="text" placeholder="" class="input-xlarge" >
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de ingreso</label>
+                                    <label class="control-label">Fecha de ingreso al Sistema</label>
                                     <div class="controls">
                                         <input id="fechaIngreso" name="fechaIngreso" value="${fechaing}" type="text" class="datepicker input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Fecha de ingreso a Prioritarios</label>
+                                    <div class="controls">
+                                        <input id="fechaIngresoPrio" name="fechaIngresoPrio" value="${expediente.getFechaIngPrio() != null ? df.dateToStringNumeros(expediente.getFechaIngPrio()) : ''}" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -242,8 +219,9 @@
                                 <div>
                                     <label class="control-label">Estado</label>
                                     <div class="controls">
-                                        <select id="estado" name="estado">
-                                            <option value="eval" ${expediente.getEstado().equals("eval") ? 'selected' : ''} >Evaluación</option>
+                                        <select ${expediente.getNna().getClasificacion().equals("seguimiento")  ? 'disabled' : ''} id="estado" name="estado">
+                                            <option value="eval" ${expediente.getEstado().equals("eval") || expediente.getNna().getClasificacion().equals("seguimiento") ? 'selected' : ''} >Evaluación</option>
+                                            <option ${expediente.getNna().getClasificacion().equals("regular") ? 'disabled': '' } id="segPrio" value="seg" ${expediente.getEstado().equals("seg") ? 'selected' : ''} >Seguimiento Prioritarios</option>
                                             <option value="adoptable" ${expediente.getEstado().equals("adoptable") ? 'selected' : ''} >Adoptable</option>
                                             <option value="desig" ${expediente.getEstado().equals("desig") ? 'selected' : ''} >Designado</option>
                                             <option value="adop" ${expediente.getEstado().equals("adop") ? 'selected' : ''} >Adoptado</option>
@@ -406,6 +384,28 @@
                                     </div>
                                 </div>
                                 <br>
+                                <h3><strong>LLenar luego que el NNA ha sido adoptado</strong></h3>
+                                <div class="control-group">
+                                    <label class="control-label">Nombre Actual</label>
+                                    <div class="controls">
+                                        <input  id="nombreActual" name="nombreActual" value="${expediente.getNActual()}" type="text" placeholder="" class="input-xlarge" >
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Apellido Paterno Actual</label>
+                                    <div class="controls">
+                                        <input  id="apellidoPActual" name="apellidoPActual" value="${expediente.getApellidopActual()}" type="text" placeholder="" class="input-xlarge" >
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Apellido Materno Actual</label>
+                                    <div class="controls">
+                                        <input  id="apellidoMActual" name="apellidoMActual" value="${expediente.getApellidomActual()}" type="text" placeholder="" class="input-xlarge" >
+                                    </div>
+                                </div>
+                                <br>
                                 <div class="control-group">
                                     <div class="controls">
                                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar</button>     
@@ -442,6 +442,8 @@
             <script>
                 function clasif(value)
                     {
+                        var segPri = document.getElementById("segPrio");
+                        var est = document.getElementById("estado");
                         var op = document.getElementById("grpRef");
                         var histMayores = document.getElementById("histMayores");
                         var mayores = document.getElementById("codMayor");
@@ -456,6 +458,8 @@
                         //you can get the value from arguments itself
                         //alert(value);
                         if (value == 'regular' || value == 'seguimiento'){
+                            segPri.disabled = true;
+                            est.disabled = false;
                             op.value = '';
                             op.disabled = true;
                             mayores.disabled = true;
@@ -480,7 +484,13 @@
                             especiales.value = '';
                         }
                         if (value == 'prioritario'){
+                            segPri.disabled = false;
                             op.disabled = false;
+                            est.disabled = false;
+                        }
+                        if(value == 'seguimiento'){
+                            est.value='eval';
+                            est.disabled = true;
                         }
                     }
             </script>

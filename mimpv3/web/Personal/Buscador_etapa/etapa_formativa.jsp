@@ -206,7 +206,6 @@
                         <p align="right">Filtrar: <input id="filtrar" type="text" /></p>
                         <br>
                         <div class="bs-example">
-                            ${usuario.getUnidad().getDepartamento()}
                             <table class="table table-bordered" id="mi_tabla">
                                 <thead>
                                     <tr>

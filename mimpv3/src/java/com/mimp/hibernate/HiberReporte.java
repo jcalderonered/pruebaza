@@ -232,7 +232,7 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(1);
 
-                if (rs.next()) {
+                while (rs.next()) {
                     Set<ExpedienteFamilia> listExp = new HashSet<ExpedienteFamilia>();
                     Set<InfoFamilia> listInfo = new HashSet<InfoFamilia>();
                     Set<Evaluacion> listEval = new HashSet<Evaluacion>();
@@ -744,7 +744,9 @@ public class HiberReporte {
                     tempExpNna.setApellidomActual(rs.getString("APELLIDOM_ACTUAL"));
                     tempExpNna.setObservaciones(rs.getString(64));
                     tempExpNna.setFechaInvTutelar(rs.getDate("FECHA_INV_TUTELAR"));
-
+                    tempExpNna.setFechaIngPrio(rs.getDate("FECHA_ING_PRIO"));
+                    tempExpNna.setFechaActualizacion(rs.getDate("FECHA_ACTUALIZACION"));
+                    
                     tempCar.setIdcar(rs.getLong(3));
                     tempCar.setNombre(rs.getString("CARN"));
                     tempCar.setDireccion(rs.getString("CARDIR"));
@@ -784,7 +786,7 @@ public class HiberReporte {
                         tempEst.setFechaSolAdop(rs2.getDate("FECHA_SOL_ADOP"));
                         tempEst.setResultado(rs2.getString("RESULTADO"));
                         tempEst.setPrioridad(rs2.getLong("PRIORIDAD"));
-                        tempEst.setNSolicitud(rs2.getBigDecimal("N_SOLICITUD"));
+                        tempEst.setNSolicitud(rs2.getLong("N_SOLICITUD"));
 
                         tempExpFam.setIdexpedienteFamilia(rs2.getLong("IDEXPEDIENTE_FAMILIA"));
                         tempExpFam.setExpediente(rs2.getString("EXPEDIENTE"));
@@ -3282,6 +3284,7 @@ public class HiberReporte {
                     }
                     tempEF.setFamilia(tempFam);
                     tempEst.setExpedienteFamilia(tempEF);
+                    tempEst.setResultado(rs.getString("RESULTADO"));
                     tempEst.setPrioridad(rs.getLong("PRIORIDAD"));
                     tempEst.setFechaEstudio(rs.getDate("FECHA_ESTUDIO"));
                     tempEst.setFechaSolAdop(rs.getDate("FECHA_SOL_ADOP"));

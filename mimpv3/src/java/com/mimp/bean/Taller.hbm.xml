@@ -23,6 +23,9 @@
         <property name="NReunion" type="java.lang.Short">
             <column name="N_REUNION" precision="3" scale="0" />
         </property>
+        <property name="unidad" type="string">
+            <column name="UNIDAD" length="25" />
+        </property>
         <set name="grupos" table="GRUPO" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="IDTALLER" precision="10" scale="0" not-null="true" />

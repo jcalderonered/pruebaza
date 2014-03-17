@@ -120,6 +120,7 @@ if (u==null){
                                 <input hidden name="idInforme" id="idInforme" value="${idInforme}">
                                 <input hidden name="idNna" id="idNna" value="${idNna}">
                                 <input hidden name="idEmpatia" id="idEmpatia" value="${idEmpatia}">
+                                <input hidden name="numDesig" id="idEmpatia" value="${numDesig}">
                             </c:if>  
                             <c:if test="${resolucion.getIdresolucion() != 0}">
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateResolInforme" method="post" onsubmit="return confirm('Desea cambiar la resolución?');"> 
