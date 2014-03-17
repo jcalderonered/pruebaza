@@ -185,7 +185,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/nnaPrioritarios'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -193,6 +193,13 @@
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
                         </ul>
+                        <br>
+                        <ul class="nav nav-tabs row" >
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >Registro de NNA's</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/listaRevision" >Lista de Revisión de Expediente</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/listaEstudio" >Lista de Estudio de Caso</a></li>
+                        </ul>
+                        <br>
                         <br>
                         <h1 align="center"><strong>Lista de Revisión de expediente</strong></h1>
                         <br>
@@ -205,7 +212,7 @@
                                     </tr>
                                 </thead>
                                 <c:if test="${!listaRevision.isEmpty()}">
-                                      <c:set var="token" value="null"/>
+                                      <c:set var="token" value="${null}"/>
                                 <tbody>
                                     <c:forEach var="revision" items="${listaRevision}" varStatus="status">
                                         <c:choose>
@@ -214,7 +221,7 @@
                                                         <tr>
                                                           <td>${revision.getNumero()}</td>
                                                           <td>
-                                                            <form action="${pageContext.servletContext.contextPath}/EditarRevision" method="post">
+                                                            <form action="${pageContext.servletContext.contextPath}/MainEditarRevision" method="post">
                                                               <input hidden name="numero" id="numero" value="${revision.getNumero()}">  
                                                               <button id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
                                                             </form>

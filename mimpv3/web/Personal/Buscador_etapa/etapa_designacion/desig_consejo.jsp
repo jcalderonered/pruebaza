@@ -121,11 +121,16 @@
                                 <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                                 <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                                 <br>
-                                <h1 align="center"><strong>NNA "${nna.getNombre()} ${nna.getApellidoP()} ${nna.getApellidoM()}"</strong></h1>
+                                <h3 align="center"><strong>NNA's</strong></h3>
+                                <c:forEach var="nna" items="${listaNna}" varStatus="status">
+                                <h4 align="center"><strong>"${nna.getNombre()} ${nna.getApellidoP()} ${nna.getApellidoM()}"</strong></h4>
                                 <br>
-                                <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
+                                </c:forEach>
+                                <input hidden name="numDesig" id="numDesig" value="${numDesig}">
                                 <br>
                                 <h3 align="left"><strong>Detalles de decisión de consejo</strong></h3>
+                                <br>
+                                <p class="text-danger"><strong>${mensaje}</strong></p>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Fecha de reunión del consejo</label>
@@ -142,19 +147,17 @@
                                         <thead>
                                             <tr>
                                                 <th class="col-sm-2 " >Expediente</th>
-                                                <th class="col-sm-2 " >Información</th>
                                                 <th class="col-sm-2 " >Prioridad</th>
                                             </tr>
                                         </thead>
                                         <c:if test="${!listaDesignaciones.isEmpty()}">
                                         <tbody>
-                                            <c:forEach var="designacion" items="${listaDesignaciones}" varStatus="status">
+                                            <c:forEach var="familia" items="${listaFamilias}" varStatus="status">
                                             <tr>
                                                 <td>
-                                                    ${designacion.getExpedienteFamilia().getExpediente()}
-                                                    <input hidden id="idExp" name="idExp" value="${designacion.getExpedienteFamilia().getIdexpedienteFamilia()}">                                                    
+                                                    ${familia.getExpediente()}
+                                                    <input hidden id="idExp" name="idExp" value="${familia.getIdexpedienteFamilia()}">                                                    
                                                 </td>
-                                                <td><button id="singlebutton" name="singlebutton" class="btn btn-default">Ver</button></td>
                                                 <td><select id="prioridad" name="prioridad">
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>

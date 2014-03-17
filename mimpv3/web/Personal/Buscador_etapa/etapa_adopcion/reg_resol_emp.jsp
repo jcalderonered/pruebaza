@@ -120,6 +120,7 @@ if (u==null){
                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearResolEmpatia" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)"> 
                                 <input hidden name="idEmpatia" id="idEmpatia" value="${idEmpatia}">
                                 <input hidden name="idNna" id="idNna" value="${idNna}">
+                                <input hidden name="numDesig" id="numDesig" value="${numDesig}">
                             </c:if>  
                             <c:if test="${resolucion.getIdresolucion() != 0}">
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateResolEmpatia" method="post" onsubmit="return confirm('Desea cambiar la resolución?');"> 

@@ -55,7 +55,7 @@ public class nna {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        map.put("listaNna", ServicioNna.ListaNna("prioritario"));
+        map.put("listaNna", ServicioNna.ListaNnaPrioritarios("prioritario"));
         return new ModelAndView("/Personal/nna/lista_nna_prior", map);
     }
 
@@ -68,7 +68,7 @@ public class nna {
             return new ModelAndView("login", map);
         }
 
-        map.put("listaNna", ServicioNna.ListaNna("seguimiento"));
+        map.put("listaNna", ServicioNna.ListaNnaSeguimiento("seguimiento"));
         return new ModelAndView("/Personal/nna/lista_nna_seg", map);
     }
 
@@ -207,7 +207,7 @@ public class nna {
         map.addAttribute("idNna", idNna);
         return new ModelAndView("/Personal/Buscador_etapa/nna/editar_nna", map);
     }
-    
+
     @RequestMapping(value = "/editarNna4", method = RequestMethod.POST)
     public ModelAndView editarNna4(ModelMap map, HttpSession session, @RequestParam("idNna") long idNna) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -725,7 +725,7 @@ public class nna {
         map.addAttribute("volver2", volver2);
         return new ModelAndView("/Personal/Buscador_etapa/nna/editar_expediente", map);
     }
-    
+
     @RequestMapping(value = "/agregarExpedienteNna4", method = RequestMethod.POST)
     public ModelAndView agregarExpedienteNna4(ModelMap map, HttpSession session, @RequestParam("idNna") long idNna) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -755,6 +755,8 @@ public class nna {
         }
         ExpedienteNna tempExp = new ExpedienteNna();
         tempExp = ServicioNna.getExpNna(idNna);
+        Unidad tempUA = new Unidad();
+        tempUA = ServicioPersonal.getUa(tempExp.getUnidad().getIdunidad());
         String tempfechaInv = "";
         String tempfechaIng = "";
         String tempfechaEst = "";
@@ -773,6 +775,8 @@ public class nna {
         } catch (Exception ex) {
         }
         map.addAttribute("fechaest", tempfechaEst);
+        map.put("df",df);
+        map.put("unidad",tempUA);
         map.put("expediente", tempExp);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
@@ -853,7 +857,7 @@ public class nna {
         map.addAttribute("idNna", idNna);
         return new ModelAndView("/Personal/Buscador_etapa/nna/editar_expediente", map);
     }
-    
+
     @RequestMapping(value = "/editarExpedienteNna4", method = RequestMethod.POST)
     public ModelAndView editarExpedienteNna4(ModelMap map,
             @RequestParam(value = "volver2", required = false) String volver2,
@@ -903,6 +907,7 @@ public class nna {
             @RequestParam(value = "apellidoPActual", required = false) String apellidoPActual,
             @RequestParam(value = "apellidoMActual", required = false) String apellidoMActual,
             @RequestParam(value = "fechaIngreso", required = false) String fechaIngreso,
+            @RequestParam(value = "fechaIngresoPrio", required = false) String fechaIngresoPrio,
             @RequestParam(value = "ht", required = false) String ht,
             @RequestParam(value = "nInvTutelar", required = false) String nInvTutelar,
             @RequestParam(value = "fechaInvTutelar", required = false) String fechaInvTutelar,
@@ -951,6 +956,12 @@ public class nna {
             }
         } else {
             tempExp.setFechaIngreso(null);
+        }
+        if (fechaIngresoPrio != null && !fechaIngresoPrio.equals("")) {
+            tempExp.setFechaIngPrio(df.stringToDate(fechaIngresoPrio));
+        }
+        if (fechaIngresoPrio == null || fechaIngresoPrio.equals("")) {
+            tempExp.setFechaIngPrio(null);
         }
         tempExp.setHt(ht);
         tempExp.setNExpTutelar(nInvTutelar);
@@ -1017,18 +1028,43 @@ public class nna {
         if (clasificacion != null && clasificacion.equals("prioritario")) {
             if (codMayor != null) {
                 tempExp.setCodigoReferencia(codMayor);
+                tempNna.setEspecial(Short.parseShort("1"));
+                tempNna.setMayor(Short.parseShort("0"));
+                tempNna.setHermano(Short.parseShort("1"));
+                tempNna.setAdolescente(Short.parseShort("1"));
+                tempNna.setEnfermo(Short.parseShort("1"));
             }
             if (codAdoles != null) {
                 tempExp.setCodigoReferencia(codAdoles);
+                tempNna.setEspecial(Short.parseShort("1"));
+                tempNna.setMayor(Short.parseShort("1"));
+                tempNna.setHermano(Short.parseShort("1"));
+                tempNna.setAdolescente(Short.parseShort("0"));
+                tempNna.setEnfermo(Short.parseShort("1"));
             }
             if (codHermano != null) {
                 tempExp.setCodigoReferencia(codHermano);
+                tempNna.setEspecial(Short.parseShort("1"));
+                tempNna.setMayor(Short.parseShort("1"));
+                tempNna.setHermano(Short.parseShort("0"));
+                tempNna.setAdolescente(Short.parseShort("1"));
+                tempNna.setEnfermo(Short.parseShort("1"));
             }
             if (codSalud != null) {
                 tempExp.setCodigoReferencia(codSalud);
+                tempNna.setEspecial(Short.parseShort("1"));
+                tempNna.setMayor(Short.parseShort("1"));
+                tempNna.setHermano(Short.parseShort("1"));
+                tempNna.setAdolescente(Short.parseShort("1"));
+                tempNna.setEnfermo(Short.parseShort("0"));
             }
             if (codEspeciales != null) {
                 tempExp.setCodigoReferencia(codEspeciales);
+                tempNna.setEspecial(Short.parseShort("0"));
+                tempNna.setMayor(Short.parseShort("1"));
+                tempNna.setHermano(Short.parseShort("1"));
+                tempNna.setAdolescente(Short.parseShort("1"));
+                tempNna.setEnfermo(Short.parseShort("1"));
             }
         }
         tempExp.setNacional(Short.parseShort("0"));
@@ -1044,6 +1080,9 @@ public class nna {
         if (clasificacion.equals("seguimiento")) {
             tempExp.setAdoptable(Short.parseShort("1"));
         }
+        Date utiDate = new Date();
+        java.sql.Date fechaAct = new java.sql.Date(utiDate.getTime());
+        tempExp.setFechaActualizacion(fechaAct);
         tempExp.setNna(tempNna);
         ServicioNna.crearExpNna(tempExp);
 
@@ -1248,7 +1287,7 @@ public class nna {
 
         return new ModelAndView("/Personal/Buscador/nna/editar_nna", map);
     }
-    
+
     @RequestMapping(value = "/crearExpedienteNna4", method = RequestMethod.POST)
     public ModelAndView crearExpedienteNna4(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
@@ -1434,6 +1473,7 @@ public class nna {
             @RequestParam(value = "apellidoPActual", required = false) String apellidoPActual,
             @RequestParam(value = "apellidoMActual", required = false) String apellidoMActual,
             @RequestParam(value = "fechaIngreso", required = false) String fechaIngreso,
+            @RequestParam(value = "fechaIngresoPrio", required = false) String fechaIngresoPrio,
             @RequestParam(value = "ht", required = false) String ht,
             @RequestParam(value = "nInvTutelar", required = false) String nInvTutelar,
             @RequestParam(value = "fechaInvTutelar", required = false) String fechaInvTutelar,
@@ -1464,7 +1504,7 @@ public class nna {
         tempNna = ServicioNna.getNna(idNna);
 
         tempExp.setNumero(numero);
-        tempExp.setNActual(estado);
+        tempExp.setNActual(nombreActual);
         tempExp.setApellidopActual(apellidoPActual);
         tempExp.setApellidomActual(apellidoMActual);
         Date tempfecha = tempExp.getFechaIngreso();
@@ -1482,6 +1522,11 @@ public class nna {
             }
         } else {
             tempExp.setFechaIngreso(null);
+        }
+        if (fechaIngresoPrio != null && !fechaIngresoPrio.equals("")) {
+            tempExp.setFechaIngPrio(df.stringToDate(fechaIngresoPrio));
+        }else if (fechaIngresoPrio == null || fechaIngresoPrio.equals("")) {
+            tempExp.setFechaIngPrio(null);
         }
         tempExp.setHt(ht);
         tempExp.setNExpTutelar(nInvTutelar);
@@ -1544,18 +1589,43 @@ public class nna {
         if (clasificacion != null && clasificacion.equals("prioritario")) {
             if (codMayor != null) {
                 tempExp.setCodigoReferencia(codMayor);
+                tempNna.setEspecial(Short.parseShort("1"));
+                tempNna.setMayor(Short.parseShort("0"));
+                tempNna.setHermano(Short.parseShort("1"));
+                tempNna.setAdolescente(Short.parseShort("1"));
+                tempNna.setEnfermo(Short.parseShort("1"));
             }
             if (codAdoles != null) {
                 tempExp.setCodigoReferencia(codAdoles);
+                tempNna.setEspecial(Short.parseShort("1"));
+                tempNna.setMayor(Short.parseShort("1"));
+                tempNna.setHermano(Short.parseShort("1"));
+                tempNna.setAdolescente(Short.parseShort("0"));
+                tempNna.setEnfermo(Short.parseShort("1"));
             }
             if (codHermano != null) {
                 tempExp.setCodigoReferencia(codHermano);
+                tempNna.setEspecial(Short.parseShort("1"));
+                tempNna.setMayor(Short.parseShort("1"));
+                tempNna.setHermano(Short.parseShort("0"));
+                tempNna.setAdolescente(Short.parseShort("1"));
+                tempNna.setEnfermo(Short.parseShort("1"));
             }
             if (codSalud != null) {
                 tempExp.setCodigoReferencia(codSalud);
+                tempNna.setEspecial(Short.parseShort("1"));
+                tempNna.setMayor(Short.parseShort("1"));
+                tempNna.setHermano(Short.parseShort("1"));
+                tempNna.setAdolescente(Short.parseShort("1"));
+                tempNna.setEnfermo(Short.parseShort("0"));
             }
             if (codEspeciales != null) {
                 tempExp.setCodigoReferencia(codEspeciales);
+                tempNna.setEspecial(Short.parseShort("0"));
+                tempNna.setMayor(Short.parseShort("1"));
+                tempNna.setHermano(Short.parseShort("1"));
+                tempNna.setAdolescente(Short.parseShort("1"));
+                tempNna.setEnfermo(Short.parseShort("1"));
             }
         }
 
@@ -1570,7 +1640,11 @@ public class nna {
         tempExp.setNacional(Short.parseShort("0"));
         if (clasificacion.equals("seguimiento")) {
             tempExp.setAdoptable(Short.parseShort("1"));
+            tempExp.setEstado("eval");
         }
+        Date utiDate = new Date();
+        java.sql.Date fechaAct = new java.sql.Date(utiDate.getTime());
+        tempExp.setFechaActualizacion(fechaAct);
         ServicioNna.updateExpNna(tempExp);
 
         String tempfechaNac = "";
@@ -1767,7 +1841,7 @@ public class nna {
         map.put("nna", ServicioNna.getNna(idNna));
         return new ModelAndView("/Personal/Buscador/nna/editar_nna", map);
     }
-    
+
     @RequestMapping(value = "/updateExpedienteNna4", method = RequestMethod.POST)
     public ModelAndView updateExpedienteNna4(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,

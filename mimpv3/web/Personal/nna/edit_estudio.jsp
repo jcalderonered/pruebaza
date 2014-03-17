@@ -73,14 +73,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -88,14 +88,14 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -108,6 +108,27 @@
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
                         </ul>
+                        <br>
+                        <br>
+                        <ul class="nav nav-tabs row" >
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >Registro de NNA</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/listaRevision" >Lista de Revisión de Expediente</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/listaEstudio" >Lista de Estudio de Caso</a></li>
+                        </ul>
+                        <br>
+                        <br>
+                        <h3><strong>NNA's que forman parte de este estudio</strong></h3>
+                        <c:if test="${!listaNna.isEmpty()}">
+                            <c:forEach var="nna" items="${listaNna}" varStatus="status">
+                                <input hidden id="idNna" name="idNna" type="text" value="${nna.getIdnna()}" > 
+                                <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
+                                    <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">     
+                                        <c:set var="codigo" value="${expediente.getCodigoReferencia()}" ></c:set>
+                                    </c:forEach>
+                                </c:if>
+                                <p> ${nna.getNombre()} ${nna.getApellidoP()} ${nna.getApellidoM()} Código: ${codigo}</p>
+                            </c:forEach>
+                        </c:if>
                         <br>
                         <br>
                         <h1 align="center"><strong>Familias que conforman el Estudio de Caso</strong></h1>
@@ -124,46 +145,48 @@
                                     </tr>
                                 </thead>
                                 <c:if test="${!listaEstudios.isEmpty()}">
-                                <tbody>
-                                    <c:forEach var="estudio" items="${listaEstudios}" varStatus="status">
-                                        <c:if test="${estudio.getResultado() == 'acep'}">
-                                            <c:set var="token" value="aceptado"/>
-                                            <c:set var="idEstudio" value="${estudio.getIdestudioCaso()}"/>
-                                            <c:set var="orden" value="${estudio.getOrden()}"/>
-                                        </c:if> 
-                                        <c:if test="${estudio.getResultado() == 'acep' && estudio.getFechaSolAdop() != null}">
-                                            <c:set var="tokenDesig" value="designado"/>
-                                        </c:if> 
-                                        <tr>
-                                        <td>${estudio.getExpedienteFamilia().getExpediente()}</td>   
-                                        <td>${estudio.getPrioridad()}</td>
-                                        <td>
-                                            <input ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} onchange="SetFecha(this.value)" id="fecha" name="fecha" type="text" class="datepicker" value="${estudio.getFechaEstudio() != null ? df.dateToStringNumeros(estudio.getFechaEstudio()) : ''}">
-                                        </td>
-                                        <td>
-                                            <select onchange="resultado(this.value)" ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} id="result" name="result">
-                                                <option ${estudio.getResultado() == 'obs' ? 'selected' : ''} value="obs">En Estudio</option>
-                                                <option ${estudio.getResultado() == 'noobs' ? 'selected' : ''} ${estudio.getResultado() == null ? 'selected' : ''} value="noobs">En Espera</option>
-                                                <option ${estudio.getResultado() == 'acep' ? 'selected' : ''} value="acep">Solicitud de adopción</option>
-                                                <option ${estudio.getResultado() == 'noacep' ? 'selected' : ''} value="noacep">Desistimiento</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                          <form action="${pageContext.servletContext.contextPath}/ActualizarEstudio" method="post">
-                                               <input hidden ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'name=""' : 'name="resultado"' }  ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'id=""' : 'id="resul"' }  value="obs" >
-                                               <input hidden name="idEstudio" id="idEstudio" value="${estudio.getIdestudioCaso()}">
-                                               <input hidden name="orden" id="orden" value="${estudio.getOrden()}"> 
-                                               <input hidden ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'name=""' : 'name="fechaEst"' }  ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'id=""' : 'id="fechaEst"' } value="${estudio.getFechaEstudio() != null ? df.dateToStringNumeros(estudio.getFechaEstudio()) : ''}"> 
-                                               <button ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
-                                          </form>
-                                        </td>
-                                    </tr>
-                                    </c:forEach> 
-                                </tbody>
+                                    <tbody>
+                                        <c:forEach var="estudio" items="${listaEstudios}" varStatus="status">
+                                            <c:if test="${estudio.getResultado() == 'acep'}">
+                                                <c:set var="token" value="aceptado"/>
+                                                <c:set var="idExpFam" value="${estudio.getExpedienteFamilia().getIdexpedienteFamilia()}"/>
+                                                <c:set var="orden" value="${estudio.getOrden()}"/>
+                                                <c:set var="fechaSol" value="${estudio.getFechaSolAdop() != null ? df.dateToStringNumeros(estudio.getFechaSolAdop()) : ''}"/>
+                                            </c:if> 
+                                            <c:if test="${estudio.getResultado() == 'acep' && estudio.getNSolicitud() == 0}">
+                                                <c:set var="tokenDesig" value="designado"/>
+                                                <c:set var="mensajeDesig" value="ya se ha generado una propuesta de designación a partir de este estudio"/>
+                                            </c:if> 
+                                            <tr>
+                                                <td>${estudio.getExpedienteFamilia().getExpediente()}</td>   
+                                                <td>${estudio.getPrioridad()}</td>
+                                                <td>
+                                                    <input ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} onchange="SetFecha(this.value)" id="fecha" name="fecha" type="text" class="datepicker" value="${estudio.getFechaEstudio() != null ? df.dateToStringNumeros(estudio.getFechaEstudio()) : ''}">
+                                                </td>
+                                                <td>
+                                                    <select onchange="resultado(this.value)" ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} id="result" name="result">
+                                                        <option ${estudio.getResultado() == 'obs' ? 'selected' : ''} value="obs">En Estudio</option>
+                                                        <option ${estudio.getResultado() == 'noobs' ? 'selected' : ''} ${estudio.getResultado() == null ? 'selected' : ''} value="noobs">En Espera</option>
+                                                        <option ${estudio.getResultado() == 'acep' ? 'selected' : ''} value="acep">Solicitud de adopción</option>
+                                                        <option ${estudio.getResultado() == 'noacep' ? 'selected' : ''} value="noacep">Desistimiento</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/MainActualizarEstudio" method="post">
+                                                        <input hidden ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'name=""' : 'name="resultado"' }  ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'id=""' : 'id="resul"' }  value="obs" >
+                                                        <input hidden name="idExpFam" id="idExpFam" value="${estudio.getExpedienteFamilia().getIdexpedienteFamilia()}">
+                                                        <input hidden name="orden" id="orden" value="${estudio.getOrden()}"> 
+                                                        <input hidden ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'name=""' : 'name="fechaEst"' }  ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'id=""' : 'id="fechaEst"' } value="${estudio.getFechaEstudio() != null ? df.dateToStringNumeros(estudio.getFechaEstudio()) : ''}"> 
+                                                        <button ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach> 
+                                    </tbody>
                                 </c:if>
-                                   <c:if test="${listaEstudios.isEmpty()}">
-                                     <h3><strong>No existen Estudios de Caso</strong></h3>
-                               </c:if> 
+                                <c:if test="${listaEstudios.isEmpty()}">
+                                    <h3><strong>No existen Estudios de Caso</strong></h3>
+                                </c:if> 
                             </table>
                         </div>
                         <br>
@@ -171,32 +194,41 @@
                         <p>En caso una familia presente una solicitud de adopción (el resultado sea "Aceptado"), llenar la siguiente información:</p>
                         <br>
                         
-                        <form action="${pageContext.servletContext.contextPath}/generarDesignacionPrioritario" method="post">
-                        <div class="control-group">
-                            <label class="control-label">Fecha de solicitud de adopción</label>
-                            <div class="controls">
-                                <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="fechaSolicitud" name="fechaSolicitud" type="text" class="datepicker input-xlarge">
+                        <form action="${pageContext.servletContext.contextPath}/MainGuardarFechaSolicitud" method="post">
+                            <div class="control-group">
+                                <label class="control-label">Fecha de solicitud de adopción</label>
+                                <div class="controls">
+                                    <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="fechaSolicitud" name="fechaSolicitud" type="text" class="datepicker input-xlarge" value="${fechaSol}">
+                                </div>
+                                <input hidden name="orden" id="orden" value="${orden}">
+                                <input hidden name="idExpFam" id="idExpFam" value="${idExpFam}">
+                                <br>
+                                <button ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="singlebutton" name="singlebutton" class="btn btn-default">Guardar Fecha</button>
                             </div>
-                        </div>
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label">N° de Designación</label>
-                            <div class="controls">
-                                <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="numDesig" name="numDesig" type="text" class="span2" value="" id="designacion" >
+                        </form>
+                        <form action="${pageContext.servletContext.contextPath}/MainGenerarDesignacionPrioritario" method="post">    
+                            <br>
+                            <p class="text-danger"><strong>${mensaje}</strong></p>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">N° de Designación</label>
+                                <div class="controls">
+                                    <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="numDesig" name="numDesig" type="text" class="span2" value="" id="designacion" >
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label">Fecha de propuesta</label>
-                            <div class="controls">
-                                <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="fechaPropuesta" name="fechaPropuesta" type="text" class="datepicker span2" >
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Fecha de propuesta</label>
+                                <div class="controls">
+                                    <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="fechaPropuesta" name="fechaPropuesta" type="text" class="datepicker span2" >
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <br>
-                        <input hidden name="orden" id="orden" value="${orden}">
-                        <input hidden name="idEstudio" id="idEstudio" value="${idEstudio}">
-                        <button ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="singlebutton" name="singlebutton" class="btn btn-default">Generar Propuesta Directa</button>
+                            <br>
+                            <br>
+                            <input hidden name="orden" id="orden" value="${orden}">
+                            <input hidden name="idExpFam" id="idExpFam" value="${idExpFam}">
+                            <p class="text-danger"><strong>${mensajeDesig}</strong></p>
+                            <button ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="singlebutton" name="singlebutton" class="btn btn-default">Generar Propuesta Directa</button>
                         </form>
                     </div>
                 </div>
@@ -219,31 +251,31 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-            
-           
+                                                        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+
+
         </script>
         <script>
-                function resultado(value)
-                    {
-                        var resul = document.getElementById("resul");
-                        //you can get the value from arguments itself
-                        //alert(value);
-                        resul.value = value;
-                        //alert(resul.value);
-                    }
-            </script>
-            
-            <script>
-                function SetFecha(value)
-                    {
-                        var fechaEst = document.getElementById("fechaEst");
-                        //you can get the value from arguments itself
-                        //alert(value);
-                        fechaEst.value = value;
-                        //alert(resul.value);
-                    }
-            </script>
+            function resultado(value)
+            {
+                var resul = document.getElementById("resul");
+                //you can get the value from arguments itself
+                //alert(value);
+                resul.value = value;
+                //alert(resul.value);
+            }
+        </script>
+
+        <script>
+            function SetFecha(value)
+            {
+                var fechaEst = document.getElementById("fechaEst");
+                //you can get the value from arguments itself
+                //alert(value);
+                fechaEst.value = value;
+                //alert(resul.value);
+            }
+        </script>
         <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>

@@ -17,7 +17,9 @@ public class Revision  implements java.io.Serializable {
      private String numero;
      private Date fechaRevision;
      private String comentarios;
-
+     private long identidad;
+     private String nombre;
+     
     public Revision() {
     }
 
@@ -27,13 +29,15 @@ public class Revision  implements java.io.Serializable {
         this.nna = nna;
         this.expedienteFamilia = expedienteFamilia;
     }
-    public Revision(long idrevision, Nna nna, ExpedienteFamilia expedienteFamilia, String numero, Date fechaRevision, String comentarios) {
+    public Revision(long idrevision, Nna nna, ExpedienteFamilia expedienteFamilia, String numero, Date fechaRevision, String comentarios, long identidad, String nombre) {
        this.idrevision = idrevision;
        this.nna = nna;
        this.expedienteFamilia = expedienteFamilia;
        this.numero = numero;
        this.fechaRevision = fechaRevision;
        this.comentarios = comentarios;
+       this.identidad = identidad;
+       this.nombre = nombre;
     }
    
     public long getIdrevision() {
@@ -80,9 +84,20 @@ public class Revision  implements java.io.Serializable {
         this.comentarios = comentarios;
     }
     
-
-
-
+    public long getIdEntidad() {
+        return this.identidad;
+    }
+    
+    public void setIdEntidad(long identidad) {
+        this.identidad = identidad;
+    }
+    public String getNombre() {
+        return this.nombre;
+    }
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
 }
 

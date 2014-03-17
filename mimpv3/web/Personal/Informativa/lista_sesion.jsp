@@ -77,14 +77,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -92,14 +92,14 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -154,7 +154,25 @@
                                     </div>
                                 </div>
                                 <br>
-                                <!-- Text input-->
+                                <div>
+                                    <label class="control-label">Seleccionar UA</label>
+                                    <div class="controls">
+                                        <select ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="ua" name="ua">
+                                            <option value="Lima" ${sesion.getUnidad().equals("Lima") ? 'selected' : ''} >Lima</option>
+                                            <option value="Arequipa" ${sesion.getUnidad().equals("Arequipa") ? 'selected' : ''}>Arequipa</option>
+                                            <option value="Ayacucho" ${sesion.getUnidad().equals("Ayacucho") ? 'selected' : ''} >Ayacucho</option>
+                                            <option value="Cusco" ${sesion.getUnidad().equals("Cusco") ? 'selected' : ''} >Cusco</option>
+                                            <option value="Huanuco" ${sesion.getUnidad().equals("Huanuco") ? 'selected' : ''} >Huanuco</option>
+                                            <option value="Lambayeque" ${sesion.getUnidad().equals("Lambayeque") ? 'selected' : ''} >Lambayeque</option>
+                                            <option value="Libertad" ${sesion.getUnidad().equals("Libertad") ? 'selected' : ''} >La Libertad</option>                                            
+                                            <option value="Loreto" ${sesion.getUnidad().equals("Loreto") ? 'selected' : ''} >Loreto</option>
+                                            <option value="Piura" ${sesion.getUnidad().equals("Piura") ? 'selected' : ''} >Piura</option>
+                                            <option value="Puno" ${sesion.getUnidad().equals("Puno") ? 'selected' : ''} >Puno</option>
+                                            <option value="Junin" ${sesion.getUnidad().equals("Junin") ? 'selected' : ''} >Junin</option>
+                                        </select>
+                                    </div>    
+                                </div>
+                                <br>        
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Dirección/Lugar de Sesión Informativa:</label>
                                     <div class="controls">
@@ -271,8 +289,8 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery.timepicker.js"></script>
             <script type="text/javascript">
 
-                                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-                                            $('.timepicker').timepicker({'timeFormat': 'H:i'});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.timepicker').timepicker({'timeFormat': 'H:i'});
             </script>
             <!-- Placed at the end of the document so the pages load faster -->
     </body>

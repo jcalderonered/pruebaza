@@ -47,7 +47,7 @@
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
 
-     <script type="text/javascript">
+    <script type="text/javascript">
         function Pager(tableName, itemsPerPage) {
             this.tableName = tableName;
             this.itemsPerPage = itemsPerPage;
@@ -118,7 +118,7 @@
             }
         }
     </script>  	
-    
+
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -213,53 +213,55 @@
                                 <c:if test="${listaEspera != null}">   
                                     <tbody>
                                         <c:forEach var="expediente" items="${listaEspera}" varStatus="status">
-                                            <tr>
-                                                <td>
-                                                    ${expediente.getExpediente()}
-                                                </td>
-                                                <td>
-                                                    ${expediente.getHt()}
-                                                </td>
-                                                <td>
-                                                    ${expediente.getNumeroExpediente()}
-                                                </td>
-                                                <td>
-                                                    <c:if test="${expediente.getFechaIngresoDga() != null}">
-                                                        ${df.dateToString(expediente.getFechaIngresoDga())}
-                                                    </c:if>
-                                                </td>
-                                                <td>
-                                                    <c:if test="${!expediente.getEvaluacions().isEmpty()}">
-                                                        <c:forEach var="eval" items="${expediente.getEvaluacions()}" varStatus="status">
-                                                            <c:if test="${!eval.getResolucions().isEmpty()}">
-                                                                <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
-                                                                    ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
-                                                                </c:forEach>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </c:if>
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
-                                                        <input hidden name="estado" id="estado" value="esperainter">
-                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
-                                                        <input hidden name="volver" id="volver" value="${volver}">
-                                                        <button type="submit" class="btn btn-default">Ver</button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/MainListaNnaAdoptadosExtranjero" method="post">
-                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
-                                                        <button type="submit" class="btn btn-default">Ver</button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/MainRegistrarAdopcionExtranjero" method="post">
-                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
-                                                        <button type="submit" class="btn btn-default">Registrar</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            <c:if test="${usuario.getUnidad().getDepartamento() == expediente.getUnidad().getDepartamento() || usuario.getUnidad().getDepartamento() == 'Lima'}">
+                                                <tr>
+                                                    <td>
+                                                        ${expediente.getExpediente()}
+                                                    </td>
+                                                    <td>
+                                                        ${expediente.getHt()}
+                                                    </td>
+                                                    <td>
+                                                        ${expediente.getNumeroExpediente()}
+                                                    </td>
+                                                    <td>
+                                                        <c:if test="${expediente.getFechaIngresoDga() != null}">
+                                                            ${df.dateToString(expediente.getFechaIngresoDga())}
+                                                        </c:if>
+                                                    </td>
+                                                    <td>
+                                                        <c:if test="${!expediente.getEvaluacions().isEmpty()}">
+                                                            <c:forEach var="eval" items="${expediente.getEvaluacions()}" varStatus="status">
+                                                                <c:if test="${!eval.getResolucions().isEmpty()}">
+                                                                    <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
+                                                                        ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
+                                                                    </c:forEach>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </c:if>
+                                                    </td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                            <input hidden name="estado" id="estado" value="esperainter">
+                                                            <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                            <input hidden name="volver" id="volver" value="${volver}">
+                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/MainListaNnaAdoptadosExtranjero" method="post">
+                                                            <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/MainRegistrarAdopcionExtranjero" method="post">
+                                                            <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                            <button type="submit" class="btn btn-default">Registrar</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:if> 
                                         </c:forEach>
                                     </tbody>
                                 </c:if> 
@@ -271,8 +273,8 @@
                         <br>       
                         <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
-                        <script type="text/javascript"> 
-                                var pager = new Pager('mi_tabla', 8);  
+                        <script type="text/javascript">
+                            var pager = new Pager('mi_tabla', 8);
                             pager.init();
                             pager.showPageNav('pager', 'pageNavPosition');
                             pager.showPage(1);
@@ -298,7 +300,7 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
         <script type="text/javascript">

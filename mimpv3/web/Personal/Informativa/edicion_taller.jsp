@@ -122,6 +122,25 @@
                                     </div>
                                 </div>
                                 <br>
+                                <div>
+                                    <label class="control-label">Seleccionar UA</label>
+                                    <div class="controls">
+                                        <select ${taller.getHabilitado() == 0 ? 'disabled' : ''} id="ua" name="ua">
+                                            <option value="Lima" ${taller.getUnidad().equals("Lima") ? 'selected' : ''} >Lima</option>
+                                            <option value="Arequipa" ${taller.getUnidad().equals("Arequipa") ? 'selected' : ''}>Arequipa</option>
+                                            <option value="Ayacucho" ${taller.getUnidad().equals("Ayacucho") ? 'selected' : ''} >Ayacucho</option>
+                                            <option value="Cusco" ${taller.getUnidad().equals("Cusco") ? 'selected' : ''} >Cusco</option>
+                                            <option value="Huanuco" ${taller.getUnidad().equals("Huanuco") ? 'selected' : ''} >Huanuco</option>
+                                            <option value="Lambayeque" ${taller.getUnidad().equals("Lambayeque") ? 'selected' : ''} >Lambayeque</option>
+                                            <option value="Libertad" ${taller.getUnidad().equals("Libertad") ? 'selected' : ''} >La Libertad</option>                                            
+                                            <option value="Loreto" ${taller.getUnidad().equals("Loreto") ? 'selected' : ''} >Loreto</option>
+                                            <option value="Piura" ${taller.getUnidad().equals("Piura") ? 'selected' : ''} >Piura</option>
+                                            <option value="Puno" ${taller.getUnidad().equals("Puno") ? 'selected' : ''} >Puno</option>
+                                            <option value="Junin" ${taller.getUnidad().equals("Junin") ? 'selected' : ''} >Junin</option>
+                                        </select>
+                                    </div>    
+                                </div>
+                                <br>   
                                 <div class="control-group">
                                     <label class="control-label" for="selectbasic">Tipo de Taller</label>
                                     <div class="controls">

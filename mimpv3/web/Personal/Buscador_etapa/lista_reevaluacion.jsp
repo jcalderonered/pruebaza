@@ -118,7 +118,7 @@
             }
         }
     </script>  	
-    
+
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -164,7 +164,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -223,48 +223,50 @@
                                 <c:if test="${listaReevaluacion != null}">   
                                     <tbody>
                                         <c:forEach var="expediente" items="${listaReevaluacion}" varStatus="status">
-                                            <tr>
-                                                <td>
-                                                    ${expediente.getExpediente()}
-                                                </td>
-                                                <td>
-                                                    ${expediente.getHt()}
-                                                </td>
-                                                <td>
-                                                    ${expediente.getNumeroExpediente()}
-                                                </td>
-                                                <td>
-                                                    <c:if test="${expediente.getFechaIngresoDga() != null}">
-                                                        ${df.dateToString(expediente.getFechaIngresoDga())}
-                                                    </c:if>
-                                                </td>
-                                                <td>
-                                                    ${expediente.getTipoFamilia()}
-                                                </td>
-                                                <td>
-                                                    ${expediente.getNacionalidad() == 'nacional' ? 'N' : 'I' }
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
-                                                        <input hidden name="estado" id="estado" value="reevaluacion">
-                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
-                                                        <input hidden name="volver" id="volver" value="${volver}">
-                                                        <button type="submit" class="btn btn-default">Ver</button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/RegresarListaEspera" method="post">
-                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
-                                                        <button type="submit" class="btn btn-default">Regresar</button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/EliminarRegistro" method="post">
-                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
-                                                        <button type="submit" class="btn btn-default">Eliminar</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            <c:if test="${usuario.getUnidad().getDepartamento() == expediente.getUnidad().getDepartamento() || usuario.getUnidad().getDepartamento() == 'Lima'}">  
+                                                <tr>
+                                                    <td>
+                                                        ${expediente.getExpediente()}
+                                                    </td>
+                                                    <td>
+                                                        ${expediente.getHt()}
+                                                    </td>
+                                                    <td>
+                                                        ${expediente.getNumeroExpediente()}
+                                                    </td>
+                                                    <td>
+                                                        <c:if test="${expediente.getFechaIngresoDga() != null}">
+                                                            ${df.dateToString(expediente.getFechaIngresoDga())}
+                                                        </c:if>
+                                                    </td>
+                                                    <td>
+                                                        ${expediente.getTipoFamilia()}
+                                                    </td>
+                                                    <td>
+                                                        ${expediente.getNacionalidad() == 'nacional' ? 'N' : 'I' }
+                                                    </td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                            <input hidden name="estado" id="estado" value="reevaluacion">
+                                                            <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                            <input hidden name="volver" id="volver" value="${volver}">
+                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/RegresarListaEspera" method="post">
+                                                            <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                            <button type="submit" class="btn btn-default">Regresar</button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/EliminarRegistro" method="post">
+                                                            <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                            <button type="submit" class="btn btn-default">Eliminar</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
                                         </c:forEach>
                                     </tbody>
                                 </c:if> 
@@ -273,11 +275,11 @@
                                 </c:if> 
                             </table>
                         </div>
-                                <br>       
+                        <br>       
                         <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
-                        <script type="text/javascript"> 
-                                var pager = new Pager('mi_tabla', 8);  
+                        <script type="text/javascript">
+                            var pager = new Pager('mi_tabla', 8);
                             pager.init();
                             pager.showPageNav('pager', 'pageNavPosition');
                             pager.showPage(1);

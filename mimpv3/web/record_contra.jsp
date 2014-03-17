@@ -42,8 +42,8 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/inicio">Inicio</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/SesionInfInicio">Inscripción a Sesión Informativa</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/CronogramaAnual">Ver el cronograma anual</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/SesionInfInicioPrev">Inscripción a Sesión Informativa</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/CronogramaAnualPrev">Ver el cronograma anual</a></li>
                             <li><a href="#">Información Adicional</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Contacto">Contacto</a></li>
                         </ul>

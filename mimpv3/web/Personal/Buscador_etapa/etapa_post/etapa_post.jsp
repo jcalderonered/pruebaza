@@ -118,7 +118,7 @@
             }
         }
     </script>  	
-    
+
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -164,7 +164,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -218,64 +218,70 @@
                                     </tr>
                                 </thead>
                                 <c:if test="${listaPost != null}">   
+                                    <c:set var="idExpFam" value="0" />  
                                     <tbody>
                                         <c:forEach var="post" items="${listaPost}" varStatus="status">
+                                            <c:forEach var="expediente" items="${post.getFamilia().getExpedienteFamilias()}" varStatus="temp">
+                                                <c:if test="${temp.index == '0'}">
+                                                    <c:set var="exp" value="${expediente}" />
+                                                </c:if>                                               
+                                            </c:forEach>
                                             <c:set var="contador" value="0" />
-                                            <tr>
-                                                <td>
-                                                    <c:forEach var="expediente" items="${post.getFamilia().getExpedienteFamilias()}" varStatus="temp">
-                                                        <c:if test="${temp.index == '0'}">
-                                                            <c:set var="exp" value="${expediente}" />
-                                                        </c:if>
-                                                        ${exp.getExpediente()}
-                                                    </c:forEach>
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
-                                                        <input hidden name="estado" id="estado" value="post">
-                                                        <input hidden name="idExpediente" id="idExpediente" value="${exp.getIdexpedienteFamilia()}">
-                                                        <input hidden name="idNna" id="idNna" value="${post.getidNna()}">
-                                                        <input hidden name="volver" id="volver" value="${volver}">
-                                                        <button type="submit" class="btn btn-default">Ver</button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/UpdatePostAdopcion" method="post">
-                                                        <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
-                                                        <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
-                                                        <input hidden name="volver" id="volver" value="${volver}">
-                                                        <button type="submit" class="btn btn-default">Registrar</button>
-                                                    </form>  
-                                                </td>
-                                                <td>
-                                                    ${post.getNumeroInformes()}
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/verInformesPost" method="post">
-                                                        <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
-                                                        <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
-                                                        <input hidden name="numInformes" id="numInformes" value="${post.getNumeroInformes()}">
-                                                        <input hidden name="fechaAdopcion" id="fechaAdopcion" value="${post.getFechaResolucion()}">
-                                                        <input hidden name="volver" id="volver" value="${volver}">
-                                                        <button ${post.getNumeroInformes() == null ? 'disabled' : ''} type="submit" class="btn btn-default">Ver</button>
-                                                    </form> 
-                                                </td>
-                                                <td>
-                                                    <c:choose>
-                                                        <c:when test="${!post.getInformePostAdoptivos().isEmpty()}">
-                                                            <c:forEach var="informe" items="${post.getInformePostAdoptivos()}">
-                                                                <c:if test="${informe.getEstado() == 'listo'}">  
-                                                                    <c:set var="contador" value="${contador + 1}"/>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            ${contador} 
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            0
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                            </tr>
+                                            <c:if test="${idExpFam != exp.getIdexpedienteFamilia()}"> 
+                                               <c:set var="idExpFam" value="${exp.getIdexpedienteFamilia()}" />  
+                                               <c:if test="${usuario.getUnidad().getDepartamento() == exp.getUnidad().getDepartamento() || usuario.getUnidad().getDepartamento() == 'Lima'}">
+                                                <tr>
+                                                    <td>
+                                                         ${exp.getExpediente()}
+                                                    </td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                            <input hidden name="estado" id="estado" value="post">
+                                                            <input hidden name="idExpediente" id="idExpediente" value="${exp.getIdexpedienteFamilia()}">
+                                                            <input hidden name="idNna" id="idNna" value="${post.getidNna()}">
+                                                            <input hidden name="volver" id="volver" value="${volver}">
+                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/UpdatePostAdopcion" method="post">
+                                                            <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
+                                                            <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
+                                                            <input hidden name="volver" id="volver" value="${volver}">
+                                                            <button type="submit" class="btn btn-default">Registrar</button>
+                                                        </form>  
+                                                    </td>
+                                                    <td>
+                                                        ${post.getNumeroInformes()}
+                                                    </td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/verInformesPost" method="post">
+                                                            <input hidden name="idPost" id="idPost" value="${post.getIdpostAdopcion()}">
+                                                            <input hidden name="familia" id="familia" value="${exp.getExpediente()}">
+                                                            <input hidden name="numInformes" id="numInformes" value="${post.getNumeroInformes()}">
+                                                            <input hidden name="fechaAdopcion" id="fechaAdopcion" value="${post.getFechaResolucion()}">
+                                                            <input hidden name="volver" id="volver" value="${volver}">
+                                                            <button ${post.getNumeroInformes() == null ? 'disabled' : ''} type="submit" class="btn btn-default">Ver</button>
+                                                        </form> 
+                                                    </td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${!post.getInformePostAdoptivos().isEmpty()}">
+                                                                <c:forEach var="informe" items="${post.getInformePostAdoptivos()}">
+                                                                    <c:if test="${informe.getEstado() == 'listo'}">  
+                                                                        <c:set var="contador" value="${contador + 1}"/>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                ${contador} 
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                0
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                </tr>
+                                                </c:if>
+                                            </c:if>
                                         </c:forEach>
                                     </tbody>
                                 </c:if> 
@@ -287,13 +293,13 @@
                         <br>       
                         <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
-                        <script type="text/javascript"> 
-                                var pager = new Pager('mi_tabla', 8);  
+                        <script type="text/javascript">
+                            var pager = new Pager('mi_tabla', 8);
                             pager.init();
                             pager.showPageNav('pager', 'pageNavPosition');
                             pager.showPage(1);
                         </script>   
-	
+
                     </div>
                 </div>
             </div>

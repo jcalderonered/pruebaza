@@ -110,7 +110,29 @@
                         </ul>
                         <br>
                         <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarEstudio" method="post" name="formulario" onkeypress="return enter(event)">
+                        <ul class="nav nav-tabs row" >
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >Registro de NNA</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/listaRevision" >Lista de Revisión de Expediente</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/listaEstudio" >Lista de Estudio de Caso</a></li>
+                        </ul>
+                        <br>
+                        <br>
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/MainInsertarEstudio" method="post" name="formulario" onkeypress="return enter(event)">
+                            <br>
+                            <h3><strong>NNA's que forman parte de este estudio</strong></h3>
+                            <c:if test="${!listaNna.isEmpty()}">
+                                <c:forEach var="nna" items="${listaNna}" varStatus="status">
+                                   <input hidden id="idNna" name="idNna" type="text" value="${nna.getIdnna()}" > 
+                                    <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
+                                        <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">     
+                                            <c:set var="codigo" value="${expediente.getCodigoReferencia()}" ></c:set>
+                                        </c:forEach>
+                                    </c:if>
+                                    <p> ${nna.getNombre()} ${nna.getApellidoP()} ${nna.getApellidoM()} Código: ${codigo}</p>
+                                </c:forEach>
+                            </c:if>
+                            <br>
+                            <p class="text-danger"><strong>${mensaje}</strong></p>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Identificación del Estudio de Caso</label>
@@ -127,6 +149,7 @@
                                     <thead>
                                         <tr>
                                             <th class="col-sm-2 " >Expediente</th>
+                                            <th class="col-sm-2 " >Procedencia</th>
                                             <th class="col-sm-2 " >Nivel sociec</th>
                                             <th class="col-sm-2 " >Resolución de aptitud</th>
                                             <th class="col-sm-2 " >Prioridad</th>
@@ -138,6 +161,14 @@
                                             <c:forEach var="familia" items="${listaEstudioCaso}" varStatus="indexFam">
                                                 <tr>
                                                     <td>${familia.getExpediente()}</td>
+                                                    <td>
+                                                        <c:if test="${familia.getFamilia().getEntidad().getNombre() != null}">
+                                                            ${familia.getFamilia().getEntidad().getNombre()}
+                                                        </c:if>
+                                                        <c:if test="${familia.getFamilia().getEntidad().getNombre() == null}">
+                                                            Nacional
+                                                        </c:if>
+                                                    </td>
                                                     <td>
                                                         <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
                                                             ${info.getNivelSocioeconomico()}
@@ -160,7 +191,7 @@
                                                     <td>
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input id="delete" name="delete" value="${indexFam.index}" type="checkbox"> 
+                                                                <input id="delete" name="delete" value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
                                                             </label>
                                                         </div>
                                                     </td>
@@ -184,7 +215,6 @@
                             <br>
                             <br>
                             <input type="submit" id="registrar" name="registrar" value="Registrar" class="btn btn-default">
-
                         </form>
                     </div>
                 </div>

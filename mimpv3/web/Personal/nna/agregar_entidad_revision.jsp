@@ -1,6 +1,6 @@
 <%-- 
-    Document   : reg_desig
-    Created on : 4/12/2013, 11:29:03 AM
+    Document   : agregar_exp
+    Created on : 4/12/2013, 11:38:32 AM
     Author     : User
 --%>
 
@@ -22,12 +22,99 @@
 
 <html>
     <head>
+        <style type="text/css">  
+            .pg-normal {  
+                color: #000000;  
+                font-weight: normal;  
+                text-decoration: none;  
+                cursor: pointer;  
+            }  
+
+            .pg-selected {  
+                color: #800080;  
+                font-weight: bold;  
+                text-decoration: underline;  
+                cursor: pointer;  
+            }  
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Sistema de Adopciones</title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
     </head>
+
+    <script type="text/javascript">
+        function Pager(tableName, itemsPerPage) {
+            this.tableName = tableName;
+            this.itemsPerPage = itemsPerPage;
+            this.currentPage = 1;
+            this.pages = 0;
+            this.inited = false;
+
+            this.showRecords = function(from, to) {
+                var rows = document.getElementById(tableName).rows;
+                // i starts from 1 to skip table header row  
+                for (var i = 1; i < rows.length; i++) {
+                    if (i < from || i > to)
+                        rows[i].style.display = 'none';
+                    else
+                        rows[i].style.display = '';
+                }
+            }
+
+            this.showPage = function(pageNumber) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+
+                var oldPageAnchor = document.getElementById('pg' + this.currentPage);
+                oldPageAnchor.className = 'pg-normal';
+
+                this.currentPage = pageNumber;
+                var newPageAnchor = document.getElementById('pg' + this.currentPage);
+                newPageAnchor.className = 'pg-selected';
+
+                var from = (pageNumber - 1) * itemsPerPage + 1;
+                var to = from + itemsPerPage - 1;
+                this.showRecords(from, to);
+            }
+
+            this.prev = function() {
+                if (this.currentPage > 1)
+                    this.showPage(this.currentPage - 1);
+            }
+
+            this.next = function() {
+                if (this.currentPage < this.pages) {
+                    this.showPage(this.currentPage + 1);
+                }
+            }
+
+            this.init = function() {
+                var rows = document.getElementById(tableName).rows;
+                var records = (rows.length - 1);
+                this.pages = Math.ceil(records / itemsPerPage);
+                this.inited = true;
+            }
+
+            this.showPageNav = function(pagerName, positionId) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+                var element = document.getElementById(positionId);
+
+                var pagerHtml = '<span onclick="' + pagerName + '.prev();" class="pg-normal"> « Ant </span> | ';
+                for (var page = 1; page <= this.pages; page++)
+                    pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName + '.showPage(' + page + ');">' + page + '</span> | ';
+                pagerHtml += '<span onclick="' + pagerName + '.next();" class="pg-normal"> Sig »</span>';
+
+                element.innerHTML = pagerHtml;
+            }
+        }
+    </script>  	
 
     <body id="bd" class="bd fs3 com_content">
         <br>
@@ -74,7 +161,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                    if (u.getRol().equals("DEIA")) {%>
+                                if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -100,8 +187,8 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <form action="${pageContext.servletContext.contextPath}/verRevision" method="post">                            
-                            <input hidden name="idNna" id="idNna" value="${idNna}"> 
+                        <form action="${pageContext.servletContext.contextPath}/agregarRevision" method="post">
+                            <input hidden name="idNna" id="idNna" value="${idNna}">
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         </form>
                         <br>
@@ -112,120 +199,83 @@
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
                         </ul>
                         <br>
-                        <ul class="nav nav-tabs row" >
-                            <li><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >Lista de NNA</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/listaRevision" >Lista de Revisión de Expediente</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/listaEstudio" >Lista de Estudio de Caso</a></li>
-                        </ul>
                         <br>
-                        <h1 align="center"><strong>NNA que conforman la Revisión de Expediente</strong></h1>
+                        <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
                         <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/MainEdicionRevision" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/MainBuscarEntidadRevision" method="post">
+                            <fieldset>
+                                <div class="control-group">
+                                    <label class="control-label">Nombre de Organismo y/o Autoridad Central</label>
+                                    <br>
+                                    <div class="controls">
+                                        <input id="ent" name="ent" type="text" class="input-xlarge">
+                                    </div>
+                                </div>
+                                <br>
+                                <button id="singlebutton" name="singlebutton" class="btn btn-default">Buscar</button>
+                            </fieldset>
+                        </form>
+                        <br>
+                        <h1 align="center"><strong>Organismo y/o Autoridad Central encontrados</strong></h1>
+                        <br>
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/MainAgregarEntidadRevision" method="post">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="mi_tabla">
+                                <table id="mi_tabla" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="col-sm-2 ">Nombre</th>
-                                            <th class="col-sm-2 ">Apellido Paterno</th>
-                                            <th class="col-sm-2 ">Apellido Materno</th>
-                                            <th class="col-sm-2 ">Código</th>
+                                            <th class="col-sm-2 " >Nombre</th>
+                                            <th class="col-sm-2 " >País</th>
+                                            <th class="col-sm-2 " >Seleccionar</th>
                                         </tr>
                                     </thead>
-                                    <c:if test="${!listaNna.isEmpty()}"> 
+                                    <c:if test="${!listaBusqueda.isEmpty()}"> 
                                         <tbody>
-                                            <c:forEach var="nna" items="${listaNna}" varStatus="status">
+                                            <c:forEach var="entidad" items="${listaEntidades}" varStatus="status">
+                                                <c:set var="agregado" value="1" />
                                                 <tr>
-                                                    <td>${nna.getNombre()}</td>
-                                                    <td>${nna.getApellidoP()}</td>
-                                                    <td>${nna.getApellidoM()}</td>
-                                                    <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
-                                                        <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">
-                                                            <td>
-                                                                ${expediente.getCodigoReferencia()}
-                                                            </td>
-                                                        </c:forEach>
-                                                    </c:if>
-                                                    <c:if test="${nna.getExpedienteNnas().isEmpty()}">
-                                                        <td>
-                                                            No
-                                                        </td>   
-                                                    </c:if>                                                                                                       
+                                                    <td>${entidad.getNombre()}</td>
+                                                    <td>
+                                                        ${entidad.getPais()}
+                                                    </td>
+                                                    <td>
+                                                        <c:if test="${!listaRevision.isEmpty()}">
+                                                            <c:forEach var="objeto" items="${listaRevision}" varStatus="status">
+                                                                <c:if test="${objeto.getClass().name == 'com.mimp.bean.Entidad'}">
+                                                                    <c:if test="${entidad.getIdentidad() == objeto.getIdentidad()}">
+                                                                        <c:set var="agregado" value="0" />
+                                                                    </c:if>
+                                                                </c:if> 
+                                                            </c:forEach>
+                                                        </c:if> 
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input ${agregado == 0 ? 'disabled' : ''} ${agregado == 0 ? 'checked' : ''} name="idEntidad" value="${entidad.getIdentidad()}" type="checkbox"> 
+                                                            </label>
+                                                            <c:if test="${agregado == 0}">
+                                                                <h4><strong>Expediente ya agregado</strong></h4>
+                                                            </c:if>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>  
                                         </tbody>
-                                    </c:if>
-                                    <c:if test="${listaNna.isEmpty()}">
-                                        <h3><strong>No existen Nna en este proceso</strong></h3>
+                                    </c:if> 
+                                    <c:if test="${listaBusqueda.isEmpty()}">
+                                        <h3><strong>No se encontraron Organismos o Autoridades Centrales</strong></h3>
                                     </c:if>  
                                 </table>
                             </div>
+                            <br>       
+                            <div class="col-md-offset-4" id="pageNavPosition"></div>  
+
+                            <script type="text/javascript">
+                                var pager = new Pager('mi_tabla', 8);
+                                pager.init();
+                                pager.showPageNav('pager', 'pageNavPosition');
+                                pager.showPage(1);
+                            </script>   
                             <br>
-                            <h1 align="center"><strong>Familias que conforman la Revisión de Expediente</strong></h1>
-                            <br>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-sm-2 " >Expediente</th>
-                                            <th class="col-sm-2 " >Fecha de revisión</th>
-                                        </tr>
-                                    </thead>
-                                    <c:if test="${!listaExpedientes.isEmpty()}">
-                                        <tbody>
-                                            <c:forEach var="expediente" items="${listaExpedientes}" varStatus="status">
-                                                <tr>
-                                                    <td>${expediente.getExpediente()}</td>
-                                                    <td>
-                                                        <c:forEach var="rev" items="${listaRevisiones}" varStatus="status">
-                                                            <c:if test="${expediente.getIdexpedienteFamilia() == rev.getExpedienteFamilia().getIdexpedienteFamilia()}">
-                                                                <c:if test="${rev.getFechaRevision() != null}">
-                                                                    <c:set var="fechaExp" value="${df.dateToStringNumeros(rev.getFechaRevision())}" ></c:set>  
-                                                                </c:if>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                        ${fechaExp}
-                                                    </td>  
-                                                </tr>
-                                                <c:set var="fechaExp" value="${null}" ></c:set> 
-                                            </c:forEach> 
-                                        </tbody>
-                                    </c:if>
-                                    <c:if test="${listaExpedientes.isEmpty()}">
-                                        <h3><strong>Ninguna Familia solicitó la revisión de expediente</strong></h3>
-                                    </c:if> 
-                                </table>
-                            </div>
-                            <br>
-                            <p class="text-info"><strong>Organismos que solicitaron la revisión de expediente</strong></p>
-                            <br>
-                            <c:if test="${!listaEntidades.isEmpty()}">
-                                <c:forEach var="entidad" items="${listaEntidades}" varStatus="status">
-                                    <c:forEach var="rev" items="${listaRevisiones}" varStatus="status">
-                                        <c:if test="${entidad.getIdentidad() == rev.getIdEntidad()}">
-                                            <c:if test="${rev.getFechaRevision() != null}">
-                                                <c:set var="fecha" value="${df.dateToStringNumeros(rev.getFechaRevision())}" ></c:set>                                                
-                                            </c:if>
-                                        </c:if>
-                                    </c:forEach>
-                                    <h4><strong> Nombre: </strong> ${entidad.getNombre()}<strong> País </strong> ${entidad.getPais()} <strong> Fecha de Revisión </strong> ${fecha}</h4>
-                                    <br>
-                                    <c:set var="fecha" value="${null}" ></c:set>  
-                                </c:forEach>
-                            </c:if>  
-                            <c:if test="${listaEntidades.isEmpty()}">
-                                <h3><strong>Ningún Organismo y/o Autoridad Centrales solicitó la revisión</strong></h3>
-                            </c:if>        
-                        </form>
-                        <br>
-                        <h3><strong>Comentarios</strong></h3>
-                        <form action="${pageContext.servletContext.contextPath}/MainGuardarRevision" method="post">
-                            <br>
-                            <c:set var="comentarios" value="${listaRevisiones.get(0).getComentarios()}" ></c:set>      
-                            <textarea type="text" id="coments" name="coments" cols="25" rows="5">${comentarios}</textarea>
-                            <input hidden id="numero" name="numero" value="${numero}" />
-                            <br>
-                            <br>
-                            <button type="submit" class="btn btn-default">Guardar</button>
+                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar</button>
                         </form>
                     </div>
                 </div>
@@ -240,28 +290,10 @@
                 <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
             </div>
         </div>
-        <!-- Bootstrap core JavaScript
-         ================================================== -->
+        <!-- core JavaScript
+================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
-        <script type="text/javascript">
-
-                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-
-
-        </script>
-        <script>
-            function resultado(value)
-            {
-                var resul = document.getElementById("resul");
-                //you can get the value from arguments itself
-                //alert(value);
-                resul.value = value;
-                //alert(resul.value);
-            }
-        </script>
-        <!-- Placed at the end of the document so the pages load faster -->
+        <!-- Ubicar al final -->
     </body>
 </html>

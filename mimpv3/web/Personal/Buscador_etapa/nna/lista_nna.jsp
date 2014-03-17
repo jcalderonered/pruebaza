@@ -158,14 +158,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                <%}
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -173,14 +173,14 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -193,6 +193,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
                         </ul>
+                        <br>
                         <br>
                         <p align="right">Filtrar: <input id="filtrar" type="text" /></p>
                         <br>
@@ -213,58 +214,69 @@
                                     </tr>
                                 </thead>
                                 <c:if test="${!listaNna.isEmpty()}">  
-                                <tbody>
-                                  <c:forEach var="nna" items="${listaNna}" varStatus="status"> 
-                                    <tr>
-                                        <td>${nna.getNombre()}</td>
-                                        <td>${nna.getApellidoP()}</td>
-                                        <td>${nna.getApellidoM()}</td>
-                                        <td>${nna.getSexo()}</td>
-                                        <td>
-                                            <c:set var="tokenAdopcion" value="2" ></c:set>
-                                            <c:if test="${!nna.getDesignacions().isEmpty()}">
-                                               <c:forEach var="designacion" items="${nna.getDesignacions()}" varStatus="status">
-                                                    <c:choose>
-                                                        <c:when test="${designacion.getAceptacionConsejo() == 0 || designacion.getAceptacionConsejo() == 1 || designacion.getAceptacionConsejo() == 2}">
-                                                            
-                                                            <c:set var="tokenAdopcion" value="0" ></c:set>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <c:if test="${tokenAdopcion != '0'}">
-                                                                <c:set var="tokenAdopcion" value="1" ></c:set>
-                                                            </c:if>
-                                                        </c:otherwise>
-                                                    </c:choose>
+                                    <tbody>
+                                        <c:forEach var="nna" items="${listaNna}" varStatus="status"> 
+                                            <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
+                                                <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">
+                                                    <c:set var="unidad" value="${expediente.getUnidad().getIdunidad()}"></c:set>
                                                 </c:forEach>
-                                                ${tokenAdopcion == '0' ? 'Si' : 'No' }        
-                                            </c:if>  
-                                            <c:if test="${nna.getDesignacions().isEmpty()}">
-                                                No
-                                            </c:if>                                           
-                                        </td>
-                                        <td>
-                                            <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
-                                                <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
-                                                <button type="submit" class="btn btn-default">Ver</button>
-                                            </form>
-                                        </td>        
-                                        <td>
-                                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editarExpedienteNna" method="post">
-                                                    <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
-                                                    <button ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Ver</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/registrarDesignacion" method="post">
-                                                    <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
-                                                    <button ${tokenAdopcion == '0' || nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : '' } class="btn btn-default">Registrar</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                  </c:forEach>  
-                                </tbody>
+                                            </c:if>
+                                            <c:if test="${nna.getExpedienteNnas().isEmpty()}">
+                                                    <c:set var="nuevo" value="recienIngresado"></c:set>
+                                            </c:if>
+                                            <c:if test="${usuario.getUnidad().getIdunidad() == unidad || usuario.getUnidad().getDepartamento() == 'Lima' || nuevo == 'recienIngresado'}">  
+                                            <tr>
+                                                <td>${nna.getNombre()}</td>
+                                                <td>${nna.getApellidoP()}</td>
+                                                <td>${nna.getApellidoM()}</td>
+                                                <td>${nna.getSexo()}</td>
+                                                <td>
+                                                    <c:set var="tokenAdopcion" value="2" ></c:set>
+                                                    <c:if test="${!nna.getDesignacions().isEmpty()}">
+                                                        <c:forEach var="designacion" items="${nna.getDesignacions()}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${designacion.getAceptacionConsejo() == 0 || designacion.getAceptacionConsejo() == 1 || designacion.getAceptacionConsejo() == 2}">
+
+                                                                    <c:set var="tokenAdopcion" value="0" ></c:set>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <c:if test="${tokenAdopcion != '0'}">
+                                                                        <c:set var="tokenAdopcion" value="1" ></c:set>
+                                                                    </c:if>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                        ${tokenAdopcion == '0' ? 'Si' : 'No' }        
+                                                    </c:if>  
+                                                    <c:if test="${nna.getDesignacions().isEmpty()}">
+                                                        No
+                                                    </c:if>                                           
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
+                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
+                                                        <button type="submit" class="btn btn-default">Ver</button>
+                                                    </form>
+                                                </td>        
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editarExpedienteNna" method="post">
+                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
+                                                        <button ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Ver</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/registrarDesignacion" method="post">
+                                                        <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
+                                                        <button ${tokenAdopcion == '0' || nna.getExpedienteNnas().isEmpty() == true || usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : '' } class="btn btn-default">Registrar</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            </c:if>
+                                        </c:forEach>  
+
+                                    </tbody>
                                 </c:if> 
-                               <c:if test="${listaNna.isEmpty()}">
+                                <c:if test="${listaNna.isEmpty()}">
                                     <h3><strong>No existen Nna en esta clasificación</strong></h3>
                                 </c:if>  
                             </table>
@@ -272,8 +284,8 @@
                         <br>       
                         <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
-                        <script type="text/javascript"> 
-                                var pager = new Pager('mi_tabla', 8);  
+                        <script type="text/javascript">
+                            var pager = new Pager('mi_tabla', 8);
                             pager.init();
                             pager.showPageNav('pager', 'pageNavPosition');
                             pager.showPage(1);
@@ -296,66 +308,66 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
         <script type="text/javascript">
-	
-	function tablefilter(table_selector, input_selector, search_level, colspan) {
 
-		var table = $(table_selector);
-		if(table.length == 0)
-			return;
+                            function tablefilter(table_selector, input_selector, search_level, colspan) {
 
-		var input = $(input_selector);
-		if(input.length == 0)
-			return;
+                                var table = $(table_selector);
+                                if (table.length == 0)
+                                    return;
 
-		if(search_level == "undefined" || search_level < 1)
-			search_level = 3;
+                                var input = $(input_selector);
+                                if (input.length == 0)
+                                    return;
 
-		if(colspan == "undefined" || colspan < 0)
-			colspan = 2;
+                                if (search_level == "undefined" || search_level < 1)
+                                    search_level = 3;
 
-		$(input).val("Buscar…");
+                                if (colspan == "undefined" || colspan < 0)
+                                    colspan = 2;
 
-		$(input).focus(function() {
-			if($(this).val() == "Buscar…") {
-				$(this).val("");
-			}
-			$(this).select();
-		});
+                                $(input).val("Buscar…");
 
-		$(input).blur(function() {
-			if($(this).val() == "") {
-				$(this).val("Buscar…");
-			}
-		});
+                                $(input).focus(function() {
+                                    if ($(this).val() == "Buscar…") {
+                                        $(this).val("");
+                                    }
+                                    $(this).select();
+                                });
 
-		$(input).keyup(function() {
-			if($(this).val().length >= search_level) {
-				// Ocultamos las filas que no contienen el contenido del edit.
-				$(table).find("tbody tr").not(":contains(\"" + $(this).val() + "\")").hide();
-				
-				// Si no hay resultados, lo indicamos.
-				if($(table).find("tbody tr:visible").length == 0) {
-					$(table).find("tbody:first").append('<tr id="noresults" class="aligncenter"><td colspan="' + colspan + '">Lo siento pero no hay resultados para la búsqueda indicada.</td></tr>');
-				}
-			} else {
-				// Borramos la fila de que no hay resultados.
-				$(table).find("tbody tr#noresults").remove();
-				
-				// Mostramos todas las filas.
-				$(table).find("tbody tr").show();
-			}
-		});
-	}
-	
-	jQuery.expr[':'].contains = function(a, i, m) { 
-		return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
-	};
-	
-	$(document).ready(function() {
-		tablefilter("table#mi_tabla", "input#filtrar", 2, 2);
-	});
+                                $(input).blur(function() {
+                                    if ($(this).val() == "") {
+                                        $(this).val("Buscar…");
+                                    }
+                                });
 
-	</script>
+                                $(input).keyup(function() {
+                                    if ($(this).val().length >= search_level) {
+                                        // Ocultamos las filas que no contienen el contenido del edit.
+                                        $(table).find("tbody tr").not(":contains(\"" + $(this).val() + "\")").hide();
+
+                                        // Si no hay resultados, lo indicamos.
+                                        if ($(table).find("tbody tr:visible").length == 0) {
+                                            $(table).find("tbody:first").append('<tr id="noresults" class="aligncenter"><td colspan="' + colspan + '">Lo siento pero no hay resultados para la búsqueda indicada.</td></tr>');
+                                        }
+                                    } else {
+                                        // Borramos la fila de que no hay resultados.
+                                        $(table).find("tbody tr#noresults").remove();
+
+                                        // Mostramos todas las filas.
+                                        $(table).find("tbody tr").show();
+                                    }
+                                });
+                            }
+
+                            jQuery.expr[':'].contains = function(a, i, m) {
+                                return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+                            };
+
+                            $(document).ready(function() {
+                                tablefilter("table#mi_tabla", "input#filtrar", 2, 2);
+                            });
+
+        </script>
 
         <!-- Ubicar al final -->
     </body>

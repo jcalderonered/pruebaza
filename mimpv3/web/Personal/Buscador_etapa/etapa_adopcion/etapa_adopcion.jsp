@@ -118,7 +118,7 @@
             }
         }
     </script>  	
-    
+
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -164,7 +164,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -213,7 +213,7 @@
                                         <th>Info</th>
                                         <th>N° Propuesta</th>
                                         <th>Prioridad</th>
-                                        <th>Info NNA</th>
+                                        <th>Nombres del NNA</th>
                                         <th>Informe de Empatía</th>
                                         <th>Resultado</th>
                                         <th>Resolución</th>
@@ -224,11 +224,18 @@
                                 </thead>
                                 <c:if test="${!listaAdopciones.isEmpty()}">
                                     <c:set var="token" value="0"/>
+                                    <c:set var="numDesig" value="${null}"/>
                                     <tbody>
                                         <c:forEach var="adopcion" items="${listaAdopciones}" varStatus="status">
+                                            <c:set var="perteneceUA" value="1"/>
+                                            <c:if test="${usuario.getUnidad().getDepartamento() == adopcion.getExpedienteFamilia().getUnidad().getDepartamento()
+                                                          || usuario.getUnidad().getDepartamento() == 'Lima'}">
+                                                <c:set var="perteneceUA" value="0"/>
+                                            </c:if>  
                                             <c:choose>
-                                                <c:when test="${token != adopcion.getNna().getIdnna()}">
+                                                <c:when test="${token != adopcion.getNna().getIdnna() && numDesig != adopcion.getNDesignacion()}">
                                                     <c:set var="token" value="${adopcion.getNna().getIdnna()}"/>
+                                                    <c:set var="numDesig" value="${adopcion.getNDesignacion()}"/>
                                                     <tr>
                                                         <td>${adopcion.getExpedienteFamilia().getExpediente()}</td>
                                                         <td>
@@ -236,26 +243,35 @@
                                                                 <input hidden name="estado" id="estado" value="adopcion">
                                                                 <input hidden name="idExpediente" id="idExpediente" value="${adopcion.getExpedienteFamilia().getIdexpedienteFamilia()}">
                                                                 <input hidden name="volver" id="volver" value="${volver}">
-                                                                <button type="submit" class="btn btn-default">Ver</button>
+                                                                <button ${perteneceUA == 0 ? '' : 'disabled'} type="submit" class="btn btn-default">Ver</button>
                                                             </form>
                                                         </td>
                                                         <c:set var="numFilas" value="0"/>
-                                                        <c:forEach var="adopcion2" items="${listaAdopciones}" varStatus="status2">
-                                                            <c:if test="${adopcion.getNDesignacion() == adopcion2.getNDesignacion()}">
-                                                                <c:set var="numFilas" value="${numFilas + 1}"/>
-                                                            </c:if>
+                                                        <c:forEach var="adopcion2" items="${listaAdopciones}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${adopcion.getTipoPropuesta() != 'directa'
+                                                                              && adopcion.getNDesignacion() == adopcion2.getNDesignacion()}">
+                                                                    <c:set var="numFilas" value="${numFilas + 1}"/>
+                                                                </c:when>
+                                                                <c:when test="${adopcion.getTipoPropuesta() == 'directa'}">
+                                                                    <c:set var="numFilas" value="${1}"/>
+                                                                </c:when>
+                                                            </c:choose>
                                                         </c:forEach>
                                                         <td rowspan="${numFilas}" style="vertical-align: middle;"> 
                                                             ${adopcion.getNDesignacion()}
                                                         </td>
                                                         <td>${adopcion.getPrioridad()}</td>
                                                         <td rowspan="${numFilas}" style="vertical-align: middle;"> 
-                                                            <form action="${pageContext.servletContext.contextPath}/editarNna3" method="post">
-                                                                <input hidden name="idNna" id="idNna" value="${adopcion.getNna().getIdnna()}">
-                                                                <h3><strong>${adopcion.getNna().getNombre()} ${adopcion.getNna().getApellidoP()}</strong></h3>
-                                                                <input hidden name="volver" id="volver" value="${volver}">
-                                                                <button type="submit" class="btn btn-default">Ver</button>
-                                                            </form>   
+                                                            <c:forEach var="temp" items="${listaAdopciones}" varStatus="status">
+                                                                <c:if test="${adopcion.getNDesignacion() == temp.getNDesignacion()
+                                                                              && adopcion.getExpedienteFamilia().getIdexpedienteFamilia() == temp.getExpedienteFamilia().getIdexpedienteFamilia()
+                                                                      }">
+                                                                    ${temp.getNna().getNombre()}
+                                                                    ${temp.getNna().getApellidoP()}
+                                                                    <br>
+                                                                </c:if>
+                                                            </c:forEach>
                                                         </td>
                                                         <c:set var="expediente" value="${adopcion.getExpedienteFamilia()}"/> 
                                                         <c:forEach var="evaluacion" items="${expediente.getEvaluacions()}" >
@@ -281,7 +297,7 @@
                                                                 <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                                 <input hidden name="idEmpatia" id="idEmpatia" value="${empatia.getIdevaluacion()}">
                                                                 <input hidden name="volver" id="volver" value="${volver}">
-                                                                <button type="submit" class="btn btn-default">Registrar</button>
+                                                                <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} type="submit" class="btn btn-default">Registrar</button>
                                                             </form> 
                                                         </td>
 
@@ -300,8 +316,9 @@
                                                                 <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                                 <input hidden name="idEmpatia" id="idEmpatia" value="${empatia.getIdevaluacion()}">
                                                                 <input hidden name="idNna" id="idNna" value="${adopcion.getNna().getIdnna()}">
+                                                                <input hidden name="numDesig" id="numDesig" value="${adopcion.getNDesignacion()}">
                                                                 <input hidden name="volver" id="volver" value="${volver}">
-                                                                <button ${empatia == null ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar</button>
+                                                                <button ${empatia == null || usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar</button>
                                                             </form> 
                                                         </td>
                                                         <td>
@@ -310,7 +327,7 @@
                                                                 <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                                 <input hidden name="idInforme" id="idInforme" value="${informe.getIdevaluacion()}">
                                                                 <input hidden name="volver" id="volver" value="${volver}">
-                                                                <button ${tokenRes == 'sinefecto' ? 'disabled' : ''} ${tokenRes == null ? 'disabled' : ''} ${empatia == null ? 'disabled' : ''} ${empatia != null && empatia.getResultado() == 'desfavorable' ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar</button>
+                                                                <button ${tokenRes == 'sinefecto' ? 'disabled' : ''} ${tokenRes == null ? 'disabled' : ''} ${empatia == null ? 'disabled' : ''} ${empatia != null && empatia.getResultado() == 'desfavorable' ? 'disabled' : ''} ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} type="submit" class="btn btn-default">Registrar</button>
                                                             </form> 
                                                         </td>
                                                         <td>
@@ -328,15 +345,21 @@
                                                                 <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                                 <input hidden name="idInforme" id="idInforme" value="${informe.getIdevaluacion()}">
                                                                 <input hidden name="idNna" id="idNna" value="${adopcion.getNna().getIdnna()}">
+                                                                <input hidden name="numDesig" id="numDesig" value="${adopcion.getNDesignacion()}">
                                                                 <input hidden name="idEmpatia" id="idEmpatia" value="${empatia.getIdevaluacion()}">
                                                                 <input hidden name="volver" id="volver" value="${volver}">
-                                                                <button ${informe == null ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar</button>
+                                                                <button ${informe == null ? 'disabled' : ''} ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} type="submit" class="btn btn-default">Registrar</button>
                                                             </form> 
                                                         </td>
                                                     </tr>   
+                                                    <c:set var="empatia" value="${null}" scope="page" />
+                                                    <c:set var="informe" value="${null}" scope="page" />
                                                 </c:when>
+                                                <c:when test="${token != adopcion.getNna().getIdnna() && numDesig == adopcion.getNDesignacion()}">
+
+                                                </c:when>    
                                                 <c:otherwise>
-                                                <c:set var="numFilas" value="${numFilas - 1}"/>
+                                                    <c:set var="numFilas" value="${numFilas - 1}"/>
                                                     <tr>
                                                         <td>${adopcion.getExpedienteFamilia().getExpediente()}</td>
                                                 <input hidden name="volver" id="volver" value="${volver}">
@@ -345,23 +368,18 @@
                                                         <input hidden name="estado" id="estado" value="adopcion">
                                                         <input hidden name="idExpediente" id="idExpediente" value="${adopcion.getExpedienteFamilia().getIdexpedienteFamilia()}">
                                                         <input hidden name="volver" id="volver" value="${volver}">
-                                                        <button type="submit" class="btn btn-default">Ver</button>
+                                                        <button ${perteneceUA == 0 ? '' : 'disabled'} type="submit" class="btn btn-default">Ver</button>
                                                     </form>
                                                 </td>
                                                 <c:if test="${(status.count mod 8) == 1}"> <!-- mod X donde X es el número de filas por página -->
                                                     <td rowspan="${numFilas}" style="vertical-align: middle;"> 
-                                                            ${adopcion.getNDesignacion()}
+                                                        ${adopcion.getNDesignacion()}
                                                     </td>  
                                                 </c:if>
                                                 <td>${adopcion.getPrioridad()}</td>
                                                 <c:if test="${(status.count mod 8) == 1}"> <!-- mod X donde X es el número de filas por página -->
                                                     <td rowspan="${numFilas}" style="vertical-align: middle;"> 
-                                                            <form action="${pageContext.servletContext.contextPath}/editarNna3" method="post">
-                                                                <input hidden name="idNna" id="idNna" value="${adopcion.getNna().getIdnna()}">
-                                                                <h3><strong>${adopcion.getNna().getNombre()} ${adopcion.getNna().getApellidoP()}</strong></h3>
-                                                                <input hidden name="volver" id="volver" value="${volver}">
-                                                                <button type="submit" class="btn btn-default">Ver</button>
-                                                            </form>   
+
                                                     </td> 
                                                 </c:if>
                                                 <c:set var="expediente" value="${adopcion.getExpedienteFamilia()}"/> 
@@ -387,7 +405,7 @@
                                                         <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                         <input hidden name="idEmpatia" id="idEmpatia" value="${empatia2.getIdevaluacion()}">
                                                         <input hidden name="volver" id="volver" value="${volver}">
-                                                        <button type="submit" class="btn btn-default">Registrar</button>
+                                                        <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} type="submit" class="btn btn-default">Registrar</button>
                                                     </form> 
                                                 </td>
 
@@ -406,8 +424,9 @@
                                                         <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                         <input hidden name="idEmpatia" id="idEmpatia" value="${empatia2.getIdevaluacion()}">
                                                         <input hidden name="idNna" id="idNna" value="${adopcion.getNna().getIdnna()}">
+                                                        <input hidden name="numDesig" id="numDesig" value="${adopcion.getNDesignacion()}">
                                                         <input hidden name="volver" id="volver" value="${volver}">
-                                                        <button ${empatia2 == null ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar</button>
+                                                        <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} ${empatia2 == null ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar</button>
                                                     </form> 
                                                 </td>
                                                 <td>
@@ -416,7 +435,7 @@
                                                         <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                         <input hidden name="idInforme" id="idInforme" value="${informe2.getIdevaluacion()}">
                                                         <input hidden name="volver" id="volver" value="${volver}">
-                                                        <button ${tokenRes2 == null ? 'disabled' : ''} ${tokenRes2 == 'sinefecto' ? 'disabled' : ''} ${empatia2 == null ? 'disabled' : ''} ${empatia2 != null && empatia2.getResultado() == 'desfavorable' ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar</button>
+                                                        <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} ${tokenRes2 == null ? 'disabled' : ''} ${tokenRes2 == 'sinefecto' ? 'disabled' : ''} ${empatia2 == null ? 'disabled' : ''} ${empatia2 != null && empatia2.getResultado() == 'desfavorable' ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar</button>
                                                     </form> 
                                                 </td>
                                                 <td>
@@ -434,12 +453,15 @@
                                                         <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                         <input hidden name="idInforme" id="idInforme" value="${informe2.getIdevaluacion()}">
                                                         <input hidden name="idNna" id="idNna" value="${adopcion.getNna().getIdnna()}">
+                                                        <input hidden name="numDesig" id="numDesig" value="${adopcion.getNDesignacion()}">
                                                         <input hidden name="idEmpatia" id="idEmpatia" value="${empatia2.getIdevaluacion()}">
                                                         <input hidden name="volver" id="volver" value="${volver}">
-                                                        <button ${informe2 == null ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar</button>
+                                                        <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} ${informe2 == null ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar</button>
                                                     </form> 
                                                 </td>
                                                 </tr>  
+                                                <c:set var="empatia2" value="${null}" scope="page" />
+                                                <c:set var="informe2" value="${null}" scope="page" />
                                             </c:otherwise>
                                         </c:choose>
                                     </c:forEach>
@@ -453,8 +475,8 @@
                         <br>       
                         <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
-                        <script type="text/javascript"> 
-                                var pager = new Pager('mi_tabla', 8);  
+                        <script type="text/javascript">
+                            var pager = new Pager('mi_tabla', 8);
                             pager.init();
                             pager.showPageNav('pager', 'pageNavPosition');
                             pager.showPage(1);

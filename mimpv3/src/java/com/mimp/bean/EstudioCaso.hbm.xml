@@ -29,8 +29,8 @@
         <property name="prioridad" type="java.lang.Long">
             <column name="PRIORIDAD" precision="10" scale="0" />
         </property>
-        <property name="NSolicitud" type="big_decimal">
-            <column name="N_SOLICITUD" precision="24" scale="0" />
+        <property name="NSolicitud" type="java.lang.Long">
+            <column name="N_SOLICITUD" precision="10" scale="0" />
         </property>
     </class>
 </hibernate-mapping>

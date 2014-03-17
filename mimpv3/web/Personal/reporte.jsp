@@ -112,14 +112,14 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Registro de NNAs prioritarios</label>
+                                    <label class="control-label">Registro de NNAs prioritarios histórico</label>
                                     <div class="controls">
                                         <a href="${pageContext.servletContext.contextPath}/Reportes/NNAPrioritarios" class="btn btn-default">Generar Reporte</a>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Registro de NNAs prioritarios por Grupo de Referencia</label>
+                                    <label class="control-label">Registro de NNAs prioritarios mensual</label>
                                     <div class="controls">
                                         <a href="${pageContext.servletContext.contextPath}/Reportes/RegistroNNAsPrioGrupos" class="btn btn-default">Generar Reporte</a>
                                     </div>
