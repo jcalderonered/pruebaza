@@ -52,7 +52,7 @@ public class main {
     ArrayList<Nna> listaNnaRevision = new ArrayList();
     ArrayList<Object> listaRevision = new ArrayList();
     ArrayList<Nna> listaNnaEstudio = new ArrayList();
-
+    ArrayList<Nna> listaNnaAdoptados = new ArrayList();
     ArrayList<ExpedienteFamilia> listaFamiliasEstudio = new ArrayList();
     InfoFamilia infoFam = new InfoFamilia();
     ExpedienteFamilia expediente = new ExpedienteFamilia();
@@ -626,9 +626,16 @@ public class main {
             listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
-            nnaAdoptado = ServicioNna.getNnaPostAdopcion(idNna);
-            expNna = nnaAdoptado.getExpedienteNnas().iterator().next();
-
+            //nnaAdoptado = ServicioNna.getNnaPostAdopcion(idNna);
+            //expNna = nnaAdoptado.getExpedienteNnas().iterator().next();
+            listaNnaAdoptados.clear();
+            for (Designacion tempDesig : listaDesignaciones) {
+                if(tempDesig.getAceptacionConsejo() == 2){
+                    listaNnaAdoptados.add(tempDesig.getNna());
+                }
+            }
+            
+            
             /*
              for (Designacion desig : listaDesignaciones) {
              if(desig.getAceptacionConsejo() == 2){
@@ -1188,8 +1195,8 @@ public class main {
         map.put("df", df);
         map.put("estado", etapaOrigen);
         map.put("expediente", expediente);
-        map.put("nna", nnaAdoptado);
-        map.put("exp", expNna);
+        map.put("listaNna", listaNnaAdoptados);
+        //map.put("exp", expNna);
         map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(expediente.getIdexpedienteFamilia()));
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_nna", map);
@@ -3331,9 +3338,10 @@ public class main {
     @RequestMapping(value = "/MainActualizarEstudio", method = RequestMethod.POST)
     public ModelAndView MainActualizarEstudio(ModelMap map, HttpSession session,
             @RequestParam("orden") String orden,
-            @RequestParam("idExpFam") long idExpFam,
-            @RequestParam("resultado") String resultado,
-            @RequestParam("fechaEst") String fechaEst
+            Long[] idExpFam,
+            String[] resultado,
+            String[] fechaEst,
+            @RequestParam("elegido") int elegido
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -3353,16 +3361,16 @@ public class main {
         }
         allID.clear();
 
-        if (resultado.equals("acep")) {
+        if (resultado[elegido].equals("acep")) {
 
             for (Nna nna : listaDeNna) {
-                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam, orden);
-                if (fechaEst != null && !fechaEst.equals("")) {
-                    tempEst.setFechaEstudio(df.stringToDate(fechaEst));
-                } else if (fechaEst == null && fechaEst.equals("")) {
+                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam[elegido], orden);
+                if (fechaEst[elegido] != null && !fechaEst[elegido].equals("")) {
+                    tempEst.setFechaEstudio(df.stringToDate(fechaEst[elegido]));
+                } else if (fechaEst[elegido] == null && fechaEst[elegido].equals("")) {
                     tempEst.setFechaEstudio(null);
                 }
-                tempEst.setResultado(resultado);
+                tempEst.setResultado(resultado[elegido]);
                 servicioEtapa.updateEstudioCaso(tempEst);
 
                 String mensaje_log = "Se editó el estudio de caso con Orden: " + tempEst.getOrden() + " y ID: " + String.valueOf(tempEst.getIdestudioCaso());
@@ -3378,7 +3386,7 @@ public class main {
             allEstudioCaso = servicioEtapa.getListaEstudioCasoOrden(orden);
             for (EstudioCaso estudioCaso : allEstudioCaso) {
                 if (estudioCaso.getResultado() == null) {
-                    estudioCaso.setResultado("noobs");
+                    estudioCaso.setResultado("noobs");                    
                     servicioEtapa.updateEstudioCaso(estudioCaso);
                     ExpedienteFamilia tempExp = estudioCaso.getExpedienteFamilia();
                     tempExp = estudioCaso.getExpedienteFamilia();
@@ -3391,16 +3399,16 @@ public class main {
             map.put("listaNna", listaDeNna);
             map.put("listaEstudios", servicioEtapa.listaExpedientesDeEstudio(orden));
             return new ModelAndView("/Personal/nna/edit_estudio", map);
-        } else if (resultado.equals("noacep")) {
+        } else if (resultado[elegido].equals("noacep")) {
             for (Nna nna : listaDeNna) {
-                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam, orden);
-                if (fechaEst != null && !fechaEst.equals("")) {
-                    tempEst.setFechaEstudio(df.stringToDate(fechaEst));
-                } else if (fechaEst == null && fechaEst.equals("")) {
+                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam[elegido], orden);
+                if (fechaEst[elegido] != null && !fechaEst[elegido].equals("")) {
+                    tempEst.setFechaEstudio(df.stringToDate(fechaEst[elegido]));
+                } else if (fechaEst[elegido] == null && fechaEst[elegido].equals("")) {
                     tempEst.setFechaEstudio(null);
                 }
 
-                tempEst.setResultado(resultado);
+                tempEst.setResultado(resultado[elegido]);
                 servicioEtapa.updateEstudioCaso(tempEst);
                 ExpedienteFamilia tempExp = tempEst.getExpedienteFamilia();
                 tempExp = tempEst.getExpedienteFamilia();
@@ -3419,10 +3427,10 @@ public class main {
             map.put("listaNna", listaDeNna);
             map.put("listaEstudios", servicioEtapa.listaExpedientesDeEstudio(orden));
             return new ModelAndView("/Personal/nna/edit_estudio", map);
-        } else if (resultado.equals("noobs")) {
+        } else if (resultado[elegido].equals("noobs")) {
             for (Nna nna : listaDeNna) {
-                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam, orden);
-                tempEst.setResultado(resultado);
+                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam[elegido], orden);
+                tempEst.setResultado(resultado[elegido]);
                 servicioEtapa.updateEstudioCaso(tempEst);
                 ExpedienteFamilia tempExp = tempEst.getExpedienteFamilia();
                 tempExp = tempEst.getExpedienteFamilia();
@@ -3443,13 +3451,13 @@ public class main {
             return new ModelAndView("/Personal/nna/edit_estudio", map);
         } else {
             for (Nna nna : listaDeNna) {
-                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam, orden);
-                if (fechaEst != null && !fechaEst.equals("")) {
-                    tempEst.setFechaEstudio(df.stringToDate(fechaEst));
-                } else if (fechaEst == null && fechaEst.equals("")) {
+                EstudioCaso tempEst = ServicioMain.getEstudioCasoEspecifico(nna.getIdnna(), idExpFam[elegido], orden);
+                if (fechaEst[elegido] != null && !fechaEst[elegido].equals("")) {
+                    tempEst.setFechaEstudio(df.stringToDate(fechaEst[elegido]));
+                } else if (fechaEst[elegido] == null && fechaEst[elegido].equals("")) {
                     tempEst.setFechaEstudio(null);
                 }
-                tempEst.setResultado(resultado);
+                tempEst.setResultado(resultado[elegido]);
                 servicioEtapa.updateEstudioCaso(tempEst);
 
                 String mensaje_log = "Se editó el estudio de caso con Orden: " + tempEst.getOrden() + " y ID: " + String.valueOf(tempEst.getIdestudioCaso());

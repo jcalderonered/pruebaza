@@ -196,25 +196,44 @@
                                 </table>
                             </div>
                             <br>
-                            <p class="text-info"><strong>Organismos que solicitaron la revisión de expediente</strong></p>
+                            <h1 align="center"><strong>Organismos que solicitaron la revisión de expediente</strong></h1>
                             <br>
-                            <c:if test="${!listaEntidades.isEmpty()}">
-                                <c:forEach var="entidad" items="${listaEntidades}" varStatus="status">
-                                    <c:forEach var="rev" items="${listaRevisiones}" varStatus="status">
-                                        <c:if test="${entidad.getIdentidad() == rev.getIdEntidad()}">
-                                            <c:if test="${rev.getFechaRevision() != null}">
-                                                <c:set var="fecha" value="${df.dateToStringNumeros(rev.getFechaRevision())}" ></c:set>                                                
-                                            </c:if>
-                                        </c:if>
-                                    </c:forEach>
-                                    <h4><strong> Nombre: </strong> ${entidad.getNombre()}<strong> País </strong> ${entidad.getPais()} <strong> Fecha de Revisión </strong> ${fecha}</h4>
-                                    <br>
-                                    <c:set var="fecha" value="${null}" ></c:set>  
-                                </c:forEach>
-                            </c:if>  
-                            <c:if test="${listaEntidades.isEmpty()}">
-                                <h3><strong>Ningún Organismo y/o Autoridad Centrales solicitó la revisión</strong></h3>
-                            </c:if>        
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-2 " >Nombre</th>
+                                            <th class="col-sm-2 " >País</th>
+                                            <th class="col-sm-2 " >Fecha de Revisión</th>
+                                        </tr>
+                                    </thead>
+                                    <c:if test="${!listaEntidades.isEmpty()}">
+                                        <tbody>
+                                            <c:forEach var="entidad" items="${listaEntidades}" varStatus="status">
+                                                <tr>
+                                                    <td>${entidad.getNombre()}</td>
+                                                    <td>${entidad.getPais()}</td>
+                                                    <td>
+                                                        <c:forEach var="rev" items="${listaRevisiones}" varStatus="status">
+                                                            <c:if test="${entidad.getIdentidad() == rev.getIdEntidad()}">
+                                                                <c:if test="${rev.getFechaRevision() != null}">
+                                                                    <c:set var="fecha" value="${df.dateToStringNumeros(rev.getFechaRevision())}" ></c:set>                                                
+                                                                </c:if>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                        ${fecha}
+                                                    </td>  
+                                                </tr>
+                                                <c:set var="fecha" value="${null}" ></c:set> 
+                                            </c:forEach> 
+                                        </tbody>
+                                    </c:if>
+                                    <c:if test="${listaEntidades.isEmpty()}">
+                                        <h3><strong>Ningún Organismo y/o Autoridad Centrales solicitó la revisión</strong></h3>
+                                    </c:if>    
+                                </table>
+                            </div>
+                            <br>                            
                         </form>
                         <br>
                         <h3><strong>Comentarios</strong></h3>

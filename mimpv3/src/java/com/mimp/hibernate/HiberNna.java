@@ -1032,6 +1032,7 @@ public class HiberNna {
                     expnna.setObservaciones(tempexp.getString(25));
                     expnna.setFechaInvTutelar(tempexp.getDate(26));
                     expnna.setFechaIngPrio(tempexp.getDate("FECHA_ING_PRIO"));
+                    expnna.setFechaActualizacion(tempexp.getDate("FECHA_ACTUALIZACION"));
                     tempnna = new Nna();
                     tempnna.setIdnna(tempexp.getLong(27));
                     tempnna.setNombre(tempexp.getString(28));

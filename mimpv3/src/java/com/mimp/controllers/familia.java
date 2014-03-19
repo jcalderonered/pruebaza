@@ -58,13 +58,16 @@ public class familia {
             return new ModelAndView("login", map);
         }
         usuario = ServicioFamilia.obtenerFormulariosFamilia(usuario.getIdfamilia());
-
+        
+        String departamento = "";
         Date fechaactual = new Date();
         Date ultfecha = new Date(10, 0, 01);
         for (Iterator iter = usuario.getFormularioSesions().iterator(); iter.hasNext();) {
             FormularioSesion form = (FormularioSesion) iter.next();
             if (ultfecha.before(form.getFechaSol())) {
                 ultfecha = form.getFechaSol();
+                Sesion ses = ServicioFamilia.getSesionDeFormulario(form.getIdformularioSesion());
+                departamento = ses.getUnidad();
             }
         }
         String pagina;
@@ -107,7 +110,8 @@ public class familia {
             pagina = "/Familia/Inscripcion/inscripcion_sesionInfo";
         } else {
 
-            map.put("listaTalleres", ServicioFamilia.listaTalleresHabilitados());
+            //map.put("listaTalleres", ServicioFamilia.listaTalleresHabilitados());
+            map.put("listaTalleres", ServicioFamilia.listaTalleresHabilitadosPorDep(departamento));
             map.put("formato", format);
             if (inscritoTaller) {
                 map.put("inscrito", "true");

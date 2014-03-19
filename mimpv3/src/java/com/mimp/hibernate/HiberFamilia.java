@@ -115,6 +115,23 @@ public class HiberFamilia {
          return allTalleres;
     }
     
+    public ArrayList<Taller> listaTalleresHabilitadosPorDep(String ua){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        String hql = "From Taller T WHERE T.habilitado = :hab and T.unidad = :ua order by T.id";
+        Query query = session.createQuery(hql);
+        query.setShort("hab", Short.parseShort("0"));
+        query.setString("ua", ua);
+        List talleres = query.list();
+        ArrayList<Taller> allTalleres = new ArrayList();
+         for (Iterator iter = talleres.iterator(); iter.hasNext();) {
+                Taller temp = (Taller) iter.next();
+                allTalleres.add(temp);
+         }
+         return allTalleres;
+    }
+    
+    
     public ArrayList<Grupo> listaGruposDeTaller(long idTaller){
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -232,4 +249,23 @@ public class HiberFamilia {
         
          return qryResult;
     }
+    
+    public Sesion getSesionDeFormulario(long idForm){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        Sesion tempSesion = new Sesion();
+        String hql = "From FormularioSesion FS WHERE FS.idformularioSesion = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idForm);
+        query.setMaxResults(1);
+        FormularioSesion qryResult = (FormularioSesion) query.uniqueResult();
+        Hibernate.initialize(qryResult.getSesion());
+        
+        tempSesion = qryResult.getSesion();
+        
+         return tempSesion;
+    }
+    
 }

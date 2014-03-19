@@ -73,7 +73,7 @@
                     </div>
                     <div class="col-md-8 col-md-offset-1">
                         <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
-                        <h1 align="center"><strong>Detalles del taller: Taller sobre primeros adoptantes</strong></h1>
+                        <h1 align="center"><strong>Detalles del taller: ${nombreTaller}</strong></h1>
                         <br>
                         <h2>La inscripción al taller implica la asistencia a todas las reuniones establecidas. Puede inscribirse en cualquiera de los grupos de su preferencia</h2>
                         <br>

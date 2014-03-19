@@ -1617,8 +1617,33 @@ public class HiberEtapa {
                     }
                     statement4.close();
 
+                    Set<Designacion> listaDesig = new HashSet<Designacion>();
+                    String hql5 = "{call REPORTE_ULTDESIG(?,?)}";
+                    CallableStatement statement5 = connection.prepareCall(hql5);
+                    statement5.setLong(1, tempEF.getIdexpedienteFamilia());
+                    statement5.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement5.execute();
+
+                    ResultSet rs5 = (ResultSet) statement5.getObject(2);
+                    
+                    if (rs5.next()) {
+                        Designacion tempDesig = new Designacion();
+                        tempDesig.setIddesignacion(rs5.getLong("IDDESIGNACION"));
+                        tempDesig.setNDesignacion(rs5.getString("N_DESIGNACION"));
+                        tempDesig.setPrioridad(rs5.getLong("PRIORIDAD"));
+                        tempDesig.setFechaPropuesta(rs5.getDate("FECHA_PROPUESTA"));
+                        tempDesig.setFechaConsejo(rs5.getDate("FECHA_CONSEJO"));
+                        tempDesig.setAceptacionConsejo(rs5.getShort("ACEPTACION_CONSEJO"));
+                        tempDesig.setTipoPropuesta(rs5.getString("TIPO_PROPUESTA"));
+                        listaDesig.add(tempDesig);
+                        
+                    }
+                    rs5.close();
+                    statement5.close();
+
                     tempFam.setInfoFamilias(listaInf);
 
+                    tempEF.setDesignacions(listaDesig);
                     tempEF.setFamilia(tempFam);
                     tempEF.setUnidad(TempUn);
                     tempEF.setEvaluacions(listaEv);
@@ -1867,9 +1892,35 @@ public class HiberEtapa {
                     }
                     rs5.close();
                     statement5.close();
+
+                    Set<Designacion> listaDesig = new HashSet<Designacion>();
+                    String hql6 = "{call REPORTE_ULTDESIG(?,?)}";
+                    CallableStatement statement6 = connection.prepareCall(hql6);
+                    statement6.setLong(1, tempEF.getIdexpedienteFamilia());
+                    statement6.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement6.execute();
+
+                    ResultSet rs6 = (ResultSet) statement6.getObject(2);
+
+                    if (rs6.next()) {
+                        Designacion tempDesig = new Designacion();
+                        tempDesig.setIddesignacion(rs6.getLong("IDDESIGNACION"));
+                        tempDesig.setNDesignacion(rs6.getString("N_DESIGNACION"));
+                        tempDesig.setPrioridad(rs6.getLong("PRIORIDAD"));
+                        tempDesig.setFechaPropuesta(rs6.getDate("FECHA_PROPUESTA"));
+                        tempDesig.setFechaConsejo(rs6.getDate("FECHA_CONSEJO"));
+                        tempDesig.setAceptacionConsejo(rs6.getShort("ACEPTACION_CONSEJO"));
+                        tempDesig.setTipoPropuesta(rs6.getString("TIPO_PROPUESTA"));
+                        listaDesig.add(tempDesig);
+
+                    }
+                    rs6.close();
+                    statement6.close();
+
                     tempFam.setEntidad(tempEnt);
                     tempFam.setInfoFamilias(listaInf);
 
+                    tempEF.setDesignacions(listaDesig);
                     tempEF.setFamilia(tempFam);
                     tempEF.setUnidad(TempUn);
                     tempEF.setEvaluacions(listaEv);
@@ -2114,10 +2165,35 @@ public class HiberEtapa {
                     }
                     rs5.close();
                     statement5.close();
+
+                    Set<Designacion> listaDesig = new HashSet<Designacion>();
+                    String hql6 = "{call REPORTE_ULTDESIG(?,?)}";
+                    CallableStatement statement6 = connection.prepareCall(hql6);
+                    statement6.setLong(1, expFamilia.getIdexpedienteFamilia());
+                    statement6.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement6.execute();
+
+                    ResultSet rs6 = (ResultSet) statement6.getObject(2);
+
+                    if (rs6.next()) {
+                        Designacion tempDesig = new Designacion();
+                        tempDesig.setIddesignacion(rs6.getLong("IDDESIGNACION"));
+                        tempDesig.setNDesignacion(rs6.getString("N_DESIGNACION"));
+                        tempDesig.setPrioridad(rs6.getLong("PRIORIDAD"));
+                        tempDesig.setFechaPropuesta(rs6.getDate("FECHA_PROPUESTA"));
+                        tempDesig.setFechaConsejo(rs6.getDate("FECHA_CONSEJO"));
+                        tempDesig.setAceptacionConsejo(rs6.getShort("ACEPTACION_CONSEJO"));
+                        tempDesig.setTipoPropuesta(rs6.getString("TIPO_PROPUESTA"));
+                        listaDesig.add(tempDesig);
+
+                    }
+                    rs6.close();
+                    statement6.close();
+
                     tempFam.setEntidad(tempEnt);
 
                     tempFam.setInfoFamilias(listaInf);
-
+                    expFamilia.setDesignacions(listaDesig);
                     expFamilia.setFamilia(tempFam);
                     expFamilia.setUnidad(TempUn);
                     expFamilia.setEvaluacions(listaEv);
@@ -3902,17 +3978,19 @@ public class HiberEtapa {
         final Long idExp = temp.getExpedienteFamilia().getIdexpedienteFamilia();
         final String ord = temp.getOrden();
         final Long prior = temp.getPrioridad();
+        final Long nsol = temp.getNSolicitud();
 
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
 
-                String hql = "{call HE_CREAR_ESTUDIO(?,?,?,?)}";
+                String hql = "{call HE_CREAR_ESTUDIO(?,?,?,?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, idN);
                 statement.setLong(2, idExp);
                 statement.setString(3, ord);
                 statement.setLong(4, prior);
+                statement.setLong(5, nsol);
 
                 statement.execute();
                 statement.close();
@@ -3939,18 +4017,19 @@ public class HiberEtapa {
         final Date fechaEst = temp.getFechaEstudio();
         final Date fechaSol = temp.getFechaSolAdop();
         final String res = temp.getResultado();
+        final Long nsol = temp.getNSolicitud();
 
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
 
-                String hql = "{call HE_UPDATE_ESTUDIO(?,?,?,?)}";
+                String hql = "{call HE_UPDATE_ESTUDIO(?,?,?,?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, idEs);
                 statement.setDate(2, (java.sql.Date) fechaEst);
                 statement.setDate(3, (java.sql.Date) fechaSol);
                 statement.setString(4, res);
-
+                statement.setLong(5, nsol);
                 statement.execute();
                 statement.close();
             }

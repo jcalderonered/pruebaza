@@ -74,14 +74,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -89,14 +89,14 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -114,71 +114,86 @@
                         <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
                         <br>
                         <h3><strong>${mensaje}</strong></h3>
+                        <br>                        
                         <br>
-                        <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/agregarExp'" id="singlebutton" name="singlebutton" class="btn btn-default">Agregar Familia</button>
-                        <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarDesignacion" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label">Fecha de propuesta</label>
-                            <div class="controls">
-                                <input type="text" class="datepicker" id="fecha" name="fecha" >
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarDesignacion" method="post" name="formulario" onkeypress="return enter(event)">                            
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-2 " >Expediente</th>
+                                            <th class="col-sm-2 " >Nivel sociec</th>
+                                            <th class="col-sm-2 " >Resolución de aptitud</th>
+                                            <th class="col-sm-2 " >Actualmente en proceso de Adopción</th>
+                                            <th class="col-sm-2 " >Prioridad</th>
+                                            <th class="col-sm-2 " >Seleccionar</th>
+                                        </tr>
+                                    </thead>
+                                    <c:if test="${!listaMatching.isEmpty()}">   
+                                        <tbody>
+                                            <c:forEach var="familia" items="${listaMatching}" varStatus="status">   
+                                                <tr>
+                                                    <td>${familia.getExpediente()}</td>
+                                                    <td>
+                                                        <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
+                                                            ${info.getNivelSocioeconomico()}
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
+                                                            <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
+                                                                ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
+                                                            </c:forEach>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <c:set var="adopcion" value="no" />
+                                                    <c:set var="prioridad" value="---" />
+                                                    <c:if test="${!familia.getDesignacions().isEmpty()}">
+                                                        <c:forEach var="desig" items="${familia.getDesignacions()}" varStatus="status">
+                                                            <c:if test="${desig.getAceptacionConsejo() == 0}">
+                                                                <c:set var="adopcion" value="si" />
+                                                                <c:set var="prioridad" value="${desig.getPrioridad()}" />
+                                                            </c:if>                                                        
+                                                        </c:forEach>
+                                                    </c:if>
+                                                    <td> ${adopcion} </td>
+                                                    <td> ${prioridad}</td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input name="idExpediente" value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>  
+                                        </tbody>
+                                    </c:if> 
+                                    <c:if test="${listaMatching.isEmpty()}">
+                                        <h3><strong>No existen Familias propuestas</strong></h3>
+                                    </c:if>  
+                                </table>
                             </div>
-                        </div>
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label">N° de Designación</label>
-                            <div class="controls">
-                                <input type="text" class="span2" value="" id="numDesig" name="numDesig" >
+                            <br>
+                            <input type="submit" id="agregar" name="agregar" value="Agregar Expedientes a la Lista" class="btn btn-default">
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Fecha de propuesta</label>
+                                <div class="controls">
+                                    <input type="text" class="datepicker" id="fecha" name="fecha" >
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="col-sm-2 " >Expediente</th>
-                                        <th class="col-sm-2 " >Nivel sociec</th>
-                                        <th class="col-sm-2 " >Resolución de aptitud</th>
-                                        <th class="col-sm-2 " >Seleccionar</th>
-                                    </tr>
-                                </thead>
-                               <c:if test="${!listaMatching.isEmpty()}">   
-                                <tbody>
-                                  <c:forEach var="familia" items="${listaMatching}" varStatus="status">   
-                                    <tr>
-                                        <td>${familia.getExpediente()}</td>
-                                        <td>
-                                            <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
-                                                ${info.getNivelSocioeconomico()}
-                                            </c:forEach>
-                                        </td>
-                                        <td>
-                                            <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
-                                                    <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
-                                                        ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
-                                                    </c:forEach>
-                                            </c:forEach>
-                                        </td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input name="idExpediente" value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                   </c:forEach>  
-                                </tbody>
-                                </c:if> 
-                               <c:if test="${listaMatching.isEmpty()}">
-                                    <h3><strong>No existen Familias propuestas</strong></h3>
-                                </c:if>  
-                            </table>
-                        </div>
-                        <br>
-                        <br> 
-                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">N° de Designación</label>
+                                <div class="controls">
+                                    <input type="text" class="span2" value="" id="numDesig" name="numDesig" >
+                                </div>
+                            </div>
+                            <br>
+                            <h3><strong>No olvidar seleccionar las familias que formaran parte de esta propuesta de Designación</strong></h3>
+                            <br> 
+                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
                         </form>
                     </div>
                 </div>
@@ -201,31 +216,31 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
         <script type="text/javascript">
-                function enter(e) {
-                     if (e.keyCode == 13) {
-                     return false;
-                    }
+            function enter(e) {
+                if (e.keyCode == 13) {
+                    return false;
                 }
-            </script>
-            <script type="text/javascript">
-     
+            }
+        </script>
+        <script type="text/javascript">
+
             function validar()
             {
-            var numericExpression = /^[0-9]+$/;  
-            if( document.formulario.fecha.value == "" )
-            {
-            alert( "Debe ingresar una fecha");
-             document.formulario.fecha.focus() ;
-            return false;
+                var numericExpression = /^[0-9]+$/;
+                if (document.formulario.fecha.value == "")
+                {
+                    alert("Debe ingresar una fecha");
+                    document.formulario.fecha.focus();
+                    return false;
+                }
+
+                return true;
             }
-                        
-            return true;
-            }
-            </script>
+        </script>
         <!-- Ubicar al final -->
     </body>
 </html>

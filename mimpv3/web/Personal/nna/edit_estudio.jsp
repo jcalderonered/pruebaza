@@ -74,7 +74,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -133,67 +133,78 @@
                         <br>
                         <h1 align="center"><strong>Familias que conforman el Estudio de Caso</strong></h1>
                         <br>
+
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="col-sm-2 " >Expediente</th>
-                                        <th class="col-sm-2 " >Prioridad</th>
-                                        <th class="col-sm-2 " >Fecha</th>
-                                        <th class="col-sm-2 " >Resultado</th>
-                                        <th class="col-sm-2 " >Registrar</th>
-                                    </tr>
-                                </thead>
-                                <c:if test="${!listaEstudios.isEmpty()}">
-                                    <tbody>
-                                        <c:forEach var="estudio" items="${listaEstudios}" varStatus="status">
-                                            <c:if test="${estudio.getResultado() == 'acep'}">
-                                                <c:set var="token" value="aceptado"/>
-                                                <c:set var="idExpFam" value="${estudio.getExpedienteFamilia().getIdexpedienteFamilia()}"/>
-                                                <c:set var="orden" value="${estudio.getOrden()}"/>
-                                                <c:set var="fechaSol" value="${estudio.getFechaSolAdop() != null ? df.dateToStringNumeros(estudio.getFechaSolAdop()) : ''}"/>
-                                            </c:if> 
-                                            <c:if test="${estudio.getResultado() == 'acep' && estudio.getNSolicitud() == 0}">
-                                                <c:set var="tokenDesig" value="designado"/>
-                                                <c:set var="mensajeDesig" value="ya se ha generado una propuesta de designación a partir de este estudio"/>
-                                            </c:if> 
-                                            <tr>
-                                                <td>${estudio.getExpedienteFamilia().getExpediente()}</td>   
-                                                <td>${estudio.getPrioridad()}</td>
-                                                <td>
-                                                    <input ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} onchange="SetFecha(this.value)" id="fecha" name="fecha" type="text" class="datepicker" value="${estudio.getFechaEstudio() != null ? df.dateToStringNumeros(estudio.getFechaEstudio()) : ''}">
-                                                </td>
-                                                <td>
-                                                    <select onchange="resultado(this.value)" ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} id="result" name="result">
-                                                        <option ${estudio.getResultado() == 'obs' ? 'selected' : ''} value="obs">En Estudio</option>
-                                                        <option ${estudio.getResultado() == 'noobs' ? 'selected' : ''} ${estudio.getResultado() == null ? 'selected' : ''} value="noobs">En Espera</option>
-                                                        <option ${estudio.getResultado() == 'acep' ? 'selected' : ''} value="acep">Solicitud de adopción</option>
-                                                        <option ${estudio.getResultado() == 'noacep' ? 'selected' : ''} value="noacep">Desistimiento</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/MainActualizarEstudio" method="post">
-                                                        <input hidden ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'name=""' : 'name="resultado"' }  ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'id=""' : 'id="resul"' }  value="obs" >
-                                                        <input hidden name="idExpFam" id="idExpFam" value="${estudio.getExpedienteFamilia().getIdexpedienteFamilia()}">
-                                                        <input hidden name="orden" id="orden" value="${estudio.getOrden()}"> 
-                                                        <input hidden ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'name=""' : 'name="fechaEst"' }  ${estudio.getResultado() != null && estudio.getResultado() != 'obs' ? 'id=""' : 'id="fechaEst"' } value="${estudio.getFechaEstudio() != null ? df.dateToStringNumeros(estudio.getFechaEstudio()) : ''}"> 
-                                                        <button ${estudio.getResultado() != null && estudio.getResultado() != 'obs'  ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        </c:forEach> 
-                                    </tbody>
-                                </c:if>
-                                <c:if test="${listaEstudios.isEmpty()}">
-                                    <h3><strong>No existen Estudios de Caso</strong></h3>
-                                </c:if> 
-                            </table>
+                            <form action="${pageContext.servletContext.contextPath}/MainActualizarEstudio" method="post">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-2 " >Expediente</th>
+                                            <th class="col-sm-2 " >Prioridad</th>
+                                            <th class="col-sm-2 " >Fecha</th>
+                                            <th class="col-sm-2 " >Resultado</th>
+                                            <th class="col-sm-2 " >Registrar</th>
+                                        </tr>
+                                    </thead>
+                                    <c:if test="${!listaEstudios.isEmpty()}">
+                                        <tbody>
+                                            <c:forEach var="estudio" items="${listaEstudios}" varStatus="status">
+                                                <c:if test="${estudio.getResultado() == 'acep'}">
+                                                    <c:set var="token" value="aceptado"/>
+                                                    <c:set var="idExpFam" value="${estudio.getExpedienteFamilia().getIdexpedienteFamilia()}"/>
+                                                    <c:set var="orden" value="${estudio.getOrden()}"/>
+                                                    <c:set var="fechaSol" value="${estudio.getFechaSolAdop() != null ? df.dateToStringNumeros(estudio.getFechaSolAdop()) : ''}"/>
+                                                </c:if> 
+                                                <c:if test="${estudio.getResultado() == 'acep' && estudio.getNSolicitud() == 0}">
+                                                    <c:set var="tokenDesig" value="designado"/>
+                                                    <c:set var="mensajeDesig" value="ya se ha generado una propuesta de designación a partir de este estudio"/>
+                                                </c:if> 
+                                            </c:forEach>
+                                            <c:forEach var="estudio2" items="${listaEstudios}" varStatus="status">
+                                                <tr>
+                                                    <td>${estudio2.getExpedienteFamilia().getExpediente()}</td>   
+                                                    <td>${estudio2.getPrioridad()}</td>
+                                                    <td>
+                                                        <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? 'disabled' : ''} id="fechaEst" name="fechaEst" type="text" class="datepicker" value="${estudio2.getFechaEstudio() != null ? df.dateToStringNumeros(estudio2.getFechaEstudio()) : ''}">
+                                                    </td>
+                                                    <td>
+                                                        <select ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? 'disabled' : ''} id="resultado" name="resultado">
+                                                            <option ${estudio2.getResultado() == 'obs' ? 'selected' : ''} value="obs">En Estudio</option>
+                                                            <option ${estudio2.getResultado() == 'noobs' ? 'selected' : ''} ${estudio.getResultado() == null ? 'selected' : ''} value="noobs">En Espera</option>
+                                                            <option ${estudio2.getResultado() == 'acep' ? 'selected' : ''} value="acep">Solicitud de adopción</option>
+                                                            <option ${estudio2.getResultado() == 'noacep' ? 'selected' : ''} value="noacep">Desistimiento</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input ${token == 'aceptado' ? 'disabled' : ''} id="index" name="index" value="${status.index}" type="checkbox" class="radio" onclick="Eleccion(this.value)"> 
+                                                            </label>
+                                                        </div>
+                                                        <input hidden name="idExpFam" id="idExpFam" value="${estudio2.getExpedienteFamilia().getIdexpedienteFamilia()}">
+                                                        <c:set var="identificador" value="${estudio2.getOrden()}"/>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>                                                                                               
+                                        </tbody>
+                                    </c:if>
+                                    <c:if test="${listaEstudios.isEmpty()}">
+                                        <h3><strong>No existen Estudios de Caso</strong></h3>
+                                    </c:if> 
+                                </table>
+                                <br>
+                                <input hidden name="elegido" id="elegido" > 
+                                <input hidden name="orden" id="orden" value="${identificador}" > 
+                                <h3><strong>Registre los cambios para la opción elegida</strong></h3>
+                                <button disabled id="boton" name="boton" class="btn btn-default">Registrar</button> 
+                            </form>
                         </div>
+
                         <br>
                         <h1>Información para la propuesta de adopción</h1>
                         <p>En caso una familia presente una solicitud de adopción (el resultado sea "Aceptado"), llenar la siguiente información:</p>
                         <br>
-                        
+
                         <form action="${pageContext.servletContext.contextPath}/MainGuardarFechaSolicitud" method="post">
                             <div class="control-group">
                                 <label class="control-label">Fecha de solicitud de adopción</label>
@@ -251,7 +262,25 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-                                                        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                                                    $('.datepicker').datepicker({
+                                                                        "format": "dd/mm/yyyy",
+                                                                        "weekStart": 1,
+                                                                        "autoclose": true,
+                                                                        "language": "es"
+                                                                    });
+
+                                                                    $("input:checkbox").click(function() {
+                                                                        var boton = document.getElementById("boton");
+                                                                        if ($(this).is(":checked")) {
+                                                                            var group = "input:checkbox[name='" + $(this).attr("name") + "']";
+                                                                            $(group).prop("checked", false);
+                                                                            $(this).prop("checked", true);
+                                                                            boton.disabled = false;
+                                                                        } else {
+                                                                            $(this).prop("checked", false);
+                                                                            boton.disabled = true;
+                                                                        }
+                                                                    });
 
 
         </script>
@@ -265,7 +294,16 @@
                 //alert(resul.value);
             }
         </script>
-
+        <script>
+            function Eleccion(value)
+            {
+                var temp = document.getElementById("elegido");
+                //you can get the value from arguments itself
+                //alert(value);
+                temp.value = value;
+                //alert(temp.value);
+            }
+        </script>
         <script>
             function SetFecha(value)
             {
