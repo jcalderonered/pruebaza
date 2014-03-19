@@ -314,8 +314,17 @@ public class nna {
         } else {
             tempNna.setFechaNacimiento(null);
         }
-        short edadtemp = Byte.valueOf(edad);
-        short mesestemp = Byte.valueOf(meses);
+        short edadtemp = 0;
+        if (edad != null && !edad.equals("")){
+        edadtemp = Byte.valueOf(edad);
+        }
+        
+        short mesestemp = 0;
+        if (meses != null && !meses.equals("")){
+        mesestemp = Byte.valueOf(meses);
+        }
+        
+        
         tempNna.setEdadAnhos(edadtemp);
         tempNna.setEdadMeses(mesestemp);
 
@@ -679,6 +688,7 @@ public class nna {
         map.put("nna", ServicioNna.getNna(idNna));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
+        map.put("listaUa", ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/nna/editar_expediente", map);
     }
 
@@ -698,6 +708,7 @@ public class nna {
         map.put("nna", ServicioNna.getNna(idNna));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
+         map.put("listaUa", ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/Buscador/nna/editar_expediente", map);
     }
 
@@ -723,6 +734,7 @@ public class nna {
         map.put("listaExpedientes", ServicioNna.listaExpNna());
         map.addAttribute("volver", volver);
         map.addAttribute("volver2", volver2);
+        map.put("listaUa", ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/Buscador_etapa/nna/editar_expediente", map);
     }
 
@@ -780,6 +792,7 @@ public class nna {
         map.put("expediente", tempExp);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
+        map.put("listaUa", ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/nna/editar_expediente", map);
     }
 
@@ -814,6 +827,7 @@ public class nna {
         map.put("expediente", tempExp);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
+        map.put("listaUa", ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/Buscador/nna/editar_expediente", map);
     }
 
@@ -852,6 +866,7 @@ public class nna {
         map.put("expediente", tempExp);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
+        map.put("listaUa", ServicioPersonal.ListaUa());
         map.addAttribute("volver", volver);
         map.addAttribute("volver2", volver2);
         map.addAttribute("idNna", idNna);
@@ -902,12 +917,14 @@ public class nna {
     @RequestMapping(value = "/crearExpedienteNna", method = RequestMethod.POST)
     public ModelAndView crearExpedienteNna(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
+            @RequestParam("ua") long ua,
             @RequestParam(value = "numero", required = false) String numero,
             @RequestParam(value = "nombreActual", required = false) String nombreActual,
             @RequestParam(value = "apellidoPActual", required = false) String apellidoPActual,
             @RequestParam(value = "apellidoMActual", required = false) String apellidoMActual,
             @RequestParam(value = "fechaIngreso", required = false) String fechaIngreso,
             @RequestParam(value = "fechaIngresoPrio", required = false) String fechaIngresoPrio,
+            @RequestParam(value = "fechaAct", required = false) String fechaAct,
             @RequestParam(value = "ht", required = false) String ht,
             @RequestParam(value = "nInvTutelar", required = false) String nInvTutelar,
             @RequestParam(value = "fechaInvTutelar", required = false) String fechaInvTutelar,
@@ -936,7 +953,9 @@ public class nna {
         Nna tempNna = new Nna();
         ExpedienteNna tempExp = new ExpedienteNna();
         tempNna = ServicioNna.getNna(idNna);
-        tempExp.setUnidad(usuario.getUnidad());
+        Unidad temp2 = new Unidad();
+        temp2 = ServicioPersonal.getUa(ua);
+        tempExp.setUnidad(temp2);
         tempExp.setNumero(numero);
         tempExp.setNActual(nombreActual);
         tempExp.setApellidopActual(apellidoPActual);
@@ -1080,9 +1099,15 @@ public class nna {
         if (clasificacion.equals("seguimiento")) {
             tempExp.setAdoptable(Short.parseShort("1"));
         }
-        Date utiDate = new Date();
-        java.sql.Date fechaAct = new java.sql.Date(utiDate.getTime());
-        tempExp.setFechaActualizacion(fechaAct);
+//        Date utiDate = new Date();
+//        java.sql.Date fechaAct = new java.sql.Date(utiDate.getTime());
+//        tempExp.setFechaActualizacion(fechaAct);
+        if (fechaAct != null && !fechaAct.equals("")) {
+            tempExp.setFechaActualizacion(df.stringToDate(fechaAct));
+        }
+        if (fechaAct == null || fechaAct.equals("")) {
+            tempExp.setFechaActualizacion(null);
+        }
         tempExp.setNna(tempNna);
         ServicioNna.crearExpNna(tempExp);
 
@@ -1468,12 +1493,14 @@ public class nna {
     @RequestMapping(value = "/updateExpedienteNna", method = RequestMethod.POST)
     public ModelAndView updateExpedienteNna(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
+            @RequestParam("ua") long ua, 
             @RequestParam(value = "numero", required = false) String numero,
             @RequestParam(value = "nombreActual", required = false) String nombreActual,
             @RequestParam(value = "apellidoPActual", required = false) String apellidoPActual,
             @RequestParam(value = "apellidoMActual", required = false) String apellidoMActual,
             @RequestParam(value = "fechaIngreso", required = false) String fechaIngreso,
             @RequestParam(value = "fechaIngresoPrio", required = false) String fechaIngresoPrio,
+            @RequestParam(value = "fechaAct", required = false) String fechaAct,
             @RequestParam(value = "ht", required = false) String ht,
             @RequestParam(value = "nInvTutelar", required = false) String nInvTutelar,
             @RequestParam(value = "fechaInvTutelar", required = false) String fechaInvTutelar,
@@ -1502,7 +1529,9 @@ public class nna {
         ExpedienteNna tempExp = new ExpedienteNna();
         tempExp = ServicioNna.getExpNna(idNna);
         tempNna = ServicioNna.getNna(idNna);
-
+        Unidad temp2 = new Unidad();
+        temp2 = ServicioPersonal.getUa(ua);
+        tempExp.setUnidad(temp2);
         tempExp.setNumero(numero);
         tempExp.setNActual(nombreActual);
         tempExp.setApellidopActual(apellidoPActual);
@@ -1642,9 +1671,15 @@ public class nna {
             tempExp.setAdoptable(Short.parseShort("1"));
             tempExp.setEstado("eval");
         }
-        Date utiDate = new Date();
-        java.sql.Date fechaAct = new java.sql.Date(utiDate.getTime());
-        tempExp.setFechaActualizacion(fechaAct);
+//        Date utiDate = new Date();
+//        java.sql.Date fechaAct = new java.sql.Date(utiDate.getTime());
+//        tempExp.setFechaActualizacion(fechaAct);
+        if (fechaAct != null && !fechaAct.equals("")) {
+            tempExp.setFechaActualizacion(df.stringToDate(fechaAct));
+        }else if (fechaAct == null || fechaAct.equals("")) {
+            tempExp.setFechaActualizacion(null);
+        }
+        
         ServicioNna.updateExpNna(tempExp);
 
         String tempfechaNac = "";

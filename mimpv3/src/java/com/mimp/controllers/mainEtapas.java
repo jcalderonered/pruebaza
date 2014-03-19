@@ -32,6 +32,8 @@ public class mainEtapas {
     private HiberPersonal ServicioPersonal = new HiberPersonal();
     @Resource(name = "HiberNna")
     private HiberNna ServicioNna = new HiberNna();
+    @Resource(name = "HiberReporte")
+    private HiberReporte ServicioReporte = new HiberReporte();
     dateFormat df = new dateFormat();
     timeStampFormat ts = new timeStampFormat();
     long tempIdNnaRegular;
@@ -1086,6 +1088,7 @@ public class mainEtapas {
     @RequestMapping(value = "/insertarDesignacion", method = RequestMethod.POST)
     public ModelAndView insertarDesignación(ModelMap map, HttpSession session, long[] idExpediente,
             @RequestParam(value = "fecha", required = false) String fecha,
+            @RequestParam(value = "agregar", required = false) String agregar,
             @RequestParam(value = "numDesig", required = false) String numDesig
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1095,6 +1098,11 @@ public class mainEtapas {
             return new ModelAndView("login", map);
         }
 
+        if (agregar != null) {
+            map.put("df", df);
+            return new ModelAndView("/Personal/nna/agregar_exp", map);
+        }
+        
         if (idExpediente != null && idExpediente.length < 4 && fecha != null && numDesig != null) {
             for (long l : idExpediente) {
                 ExpedienteFamilia tempExp = servicioEtapa.getExpedienteFamilia(l);
@@ -1558,6 +1566,7 @@ public class mainEtapas {
         volver = "/EtapaDesig";
         map.addAttribute("volver", volver);
         map.put("listaDesignaciones", servicioEtapa.getListaDesignaciones());
+        //map.put("listaDesignaciones", ServicioReporte.getListaPropuestaDesignacion());
         return new ModelAndView("/Personal/Buscador_etapa/etapa_designacion/etapa_designacion", map);
 
     }
@@ -1662,7 +1671,7 @@ public class mainEtapas {
             for (Designacion desig : allDesig) {
                 if (desig.getNna().getIdnna() != idNna) {
                     ExpedienteNna tempExpNna = ServicioNna.getExpNna(desig.getNna().getIdnna());
-                    tempExpNna.setEstado("adop");
+                    tempExpNna.setEstado("desig");
                     Date now = new Date();
                     java.sql.Date sql = new java.sql.Date(now.getTime());
                     tempExpNna.setFechaEstado(sql);

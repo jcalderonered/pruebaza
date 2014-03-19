@@ -228,8 +228,7 @@
                                             <c:choose>
                                                 <c:when test="${token != designacion.getNna().getIdnna() && numDesig != designacion.getNDesignacion()}">
                                                     <c:set var="token" value="${designacion.getNna().getIdnna()}"/>
-                                                    <c:set var="numDesig" value="${designacion.getNDesignacion()}"/>
-                                                    <c:if test="${usuario.getUnidad().getDepartamento() == formulario.getSesion().getUnidad() || usuario.getUnidad().getDepartamento() == 'Lima'}">
+                                                    <c:set var="numDesig" value="${designacion.getNDesignacion()}"/>                                                    
                                                         <tr>
                                                             <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
                                                             <td>
@@ -270,7 +269,6 @@
                                                                 </form>   
                                                             </td>
                                                         </tr>   
-                                                    </c:if>  
                                                 </c:when>
                                                 <c:when test="${token != designacion.getNna().getIdnna() && numDesig == designacion.getNDesignacion()}">
 

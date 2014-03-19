@@ -217,7 +217,6 @@
                                             <th class="col-sm-2 ">Sexo</th>
                                             <th class="col-sm-2 ">Código</th>
                                             <th class="col-sm-2 ">Estado</th>
-                                            <th class="col-sm-2 ">Proceso de adopción</th>
                                             <th class="col-sm-2 ">Detalles</th> 
                                             <th class="col-sm-2 ">Expediente</th>
                                             <th class="col-sm-2 ">Seleccionar</th>
@@ -241,14 +240,32 @@
                                                         <td>${nna.getApellidoM()}</td>
                                                         <td>${nna.getSexo()}</td>
                                                         <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
-                                                            <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">
-                                                                <td>
-                                                                    ${expediente.getCodigoReferencia()}
-                                                                </td>
-                                                                <td>
-                                                                    ${expediente.getEstado()}
-                                                                </td>
-                                                            </c:forEach>
+                                                            <c:forEach var="exp" items="${nna.getExpedienteNnas()}" varStatus="status">
+                                                                <c:set var="expediente" value="${exp}"></c:set>
+                                                            </c:forEach>    
+                                                            <td>
+                                                                ${expediente.getCodigoReferencia()}
+                                                            </td>
+                                                            <td>
+                                                                <c:if test="${expediente.getEstado() == 'eval'}">
+                                                                    evaluación
+                                                                </c:if>
+                                                                <c:if test="${expediente.getEstado() == 'seg'}">
+                                                                    seguimiento
+                                                                </c:if>
+                                                                <c:if test="${expediente.getEstado() == 'adoptable'}">
+                                                                    adoptable
+                                                                </c:if>  
+                                                                <c:if test="${expediente.getEstado() == 'desig'}">
+                                                                    designado
+                                                                </c:if>      
+                                                                <c:if test="${expediente.getEstado() == 'adop'}">
+                                                                    adoptado
+                                                                </c:if>     
+                                                                <c:if test="${expediente.getEstado() == 'arch'}">
+                                                                    archivado
+                                                                </c:if>      
+                                                            </td>                                                                                                                            
                                                         </c:if>
                                                         <c:if test="${nna.getExpedienteNnas().isEmpty()}">
                                                             <td>
@@ -258,6 +275,13 @@
                                                                 No definido
                                                             </td>
                                                         </c:if>
+                                                        <td>
+                                                            <input type="submit" id="${nna.getIdnna()}" name="editarNna" value="Ver" class="btn btn-default" onclick="editar(this.id)">
+                                                            <input hidden name="idNna" id="idNna" >
+                                                        </td>
+                                                        <td>   
+                                                            <input ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} type="submit" id="${nna.getIdnna()}" name="editarExpedienteNna" value="Ver" class="btn btn-default" onclick="editar(this.id)">                                                                                                               
+                                                        </td>
                                                         <td>
                                                             <c:set var="tokenAdopcion" value="2" ></c:set>
                                                             <c:if test="${!nna.getDesignacions().isEmpty()}">
@@ -273,25 +297,12 @@
                                                                             </c:if>
                                                                         </c:otherwise>
                                                                     </c:choose>
-                                                                </c:forEach>
-                                                                ${tokenAdopcion == '0' ? 'Si' : 'No' }        
+                                                                </c:forEach>      
                                                             </c:if>  
-                                                            <c:if test="${nna.getDesignacions().isEmpty()}">
-                                                                No
-                                                            </c:if>  
-                                                        </td>
-                                                        <td>
-                                                            <input type="submit" id="${nna.getIdnna()}" name="editarNna" value="Ver" class="btn btn-default" onclick="editar(this.id)">
-                                                            <input hidden name="idNna" id="idNna" >
-                                                        </td>
-                                                        <td>   
-                                                            <input ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} type="submit" id="${nna.getIdnna()}" name="editarExpedienteNna" value="Ver" class="btn btn-default" onclick="editar(this.id)">                                                                                                               
-                                                        </td>
-                                                        <td>
                                                             <div class="checkbox">
                                                                 <label>
                                                                     <input ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} ${tokenAdopcion == '0' ? 'disabled' : '' } id="listaNna" name="listaNna" value="${nna.getIdnna()}" type="checkbox"> 
-                                                                    ${tokenAdopcion == '0' ? 'En proceso de adopción' : '' }
+                                                                    ${tokenAdopcion == '0' ? 'En etapa Designación/Adopción' : '' }
                                                                 </label>
                                                             </div>
                                                         </td>
@@ -319,7 +330,7 @@
                         <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
                         <script type="text/javascript">
-                            var pager = new Pager('mi_tabla', 8);
+                            var pager = new Pager('mi_tabla', 10);
                             pager.init();
                             pager.showPageNav('pager', 'pageNavPosition');
                             pager.showPage(1);

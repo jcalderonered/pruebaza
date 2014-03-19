@@ -174,6 +174,12 @@
                                     </div>
                                 </div>
                                 <br>
+                                <div class="control-group">
+                                    <label class="control-label">Cuadro de Propuestas de designación del Mes</label>
+                                    <div class="controls">
+                                        <a href="${pageContext.servletContext.contextPath}/Reportes/Propuesta" class="btn btn-default">Generar Reporte</a>
+                                    </div>
+                                </div>
                                 <br>
                                 <!-- 
                                 <div class="control-group">
