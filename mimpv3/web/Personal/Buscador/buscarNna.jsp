@@ -73,14 +73,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                <%}
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -88,14 +88,14 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
                             <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -115,85 +115,120 @@
                         <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/FiltrarNna" method="post" name="formulario" onsubmit="return(validar());">
                             <fieldset>
                                 <div class="row">
-                                <div class="col-md-3">
-                                <div class="control-group">
-                                    <label class="control-label">Nombre</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="nombre" type="text" class="input-xlarge">
+                                    <div class="col-md-3">
+                                        <div class="control-group">
+                                            <label class="control-label">Nombre</label>
+                                            <div class="controls">
+                                                <input id="nombre" name="nombre" type="text" class="input-xlarge">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Apellido Paterno</label>
+                                            <div class="controls">
+                                                <input id="apellidoP" name="apellidoP" type="text" class="input-xlarge">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Apellido Materno</label>
+                                            <div class="controls">
+                                                <input id="apellidoM" name="apellidoM" type="text" class="input-xlarge">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <label class="control-label">Grupo etario</label>
+                                            <div class="controls">
+                                                <select id="edad" name="edad">
+                                                    <option value="0"></option>
+                                                    <option value="1">0-8</option>
+                                                    <option value="2">9-11</option>
+                                                    <option value="3">12-18</option>
+                                                </select>
+                                            </div>    
+                                        </div>
+                                        <br>
+                                    </div>   
+                                    <div class="col-md-4 col-md-offset-1">
+                                        <div class="control-group">
+                                            <label class="control-label">Nombre Adoptado</label>
+                                            <div class="controls">
+                                                <input id="nombreAdop" name="nombreAdop" type="text" class="input-xlarge">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Apellido Paterno Adoptado</label>
+                                            <div class="controls">
+                                                <input id="apellidoPAdop" name="apellidoPAdop" type="text" class="input-xlarge">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Apellido Materno Adoptado</label>
+                                            <div class="controls">
+                                                <input id="apellidoMAdop" name="apellidoMAdop" type="text" class="input-xlarge">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">CAR</label>
+                                            <div class="controls">
+                                                <select id="idCar" name="idCar" >
+                                                    <option value="0" selected></option>
+                                                    <c:forEach var="car" items="${listaCar}" > 
+                                                        <option value="${car.getIdcar()}">${car.getNombre()} ${car.getDepartamento()}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>    
+                                        </div>
+                                        <br>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Paterno</label>
-                                    <div class="controls">
-                                        <input id="apellidoP" name="apellidoP" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Materno</label>
-                                    <div class="controls">
-                                        <input id="apellidoM" name="apellidoM" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                </div>   
-                                <div class="col-md-4 col-md-offset-1">
-                                <div class="control-group">
-                                    <label class="control-label">Nombre Adoptado</label>
-                                    <div class="controls">
-                                        <input id="nombreAdop" name="nombreAdop" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Paterno Adoptado</label>
-                                    <div class="controls">
-                                        <input id="apellidoPAdop" name="apellidoPAdop" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Materno Adoptado</label>
-                                    <div class="controls">
-                                        <input id="apellidoMAdop" name="apellidoMAdop" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                </div>
-                                <div class="col-md-4">
-                                <div>
-                                    <label class="control-label">Estado</label>
-                                    <div class="controls">
-                                        <select id="estado" name="estado">
-                                            <option value="none" ></option>
-                                            <option value="eval" >Evaluación</option>
-                                            <option value="adoptable">Adoptable</option>
-                                            <option value="desig">Designado</option>
-                                            <option value="adop" >Adoptado</option>
-                                            <option value="arch" >Archivado</option>
-                                        </select>
+                                    <div class="col-md-4">
+                                        <div>
+                                            <label class="control-label">Estado</label>
+                                            <div class="controls">
+                                                <select id="estado" name="estado">
+                                                    <option value="none" ></option>
+                                                    <option value="eval" >Evaluación</option>
+                                                    <option value="adoptable">Adoptable</option>
+                                                    <option value="desig">Designado</option>
+                                                    <option value="adop" >Adoptado</option>
+                                                    <option value="arch" >Archivado</option>
+                                                </select>
+                                            </div>    
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <label class="control-label">Condiciones</label>
+                                            <div class="controls">
+                                                <select id="prioritario" name="prioritario">
+                                                    <option value="none" >Ninguna</option>
+                                                    <option value="reg" >Regular</option>
+                                                    <option value="prio" >Prioritario</option>
+                                                    <option value="ne" >Necesidades Especiales</option>
+                                                    <option value="ps">Problemas de Salud</option>
+                                                    <option value="m" >Mayores</option>
+                                                    <option value="a" >Adolescentes</option>
+                                                    <option value="h" >Hermanos</option>
+                                                </select>
+                                            </div>    
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <label class="control-label">Sexo</label>
+                                            <div class="controls">
+                                                <select id="sexo" name="sexo">
+                                                    <option value="none"></option>
+                                                    <option value="masculino">Masculino</option>
+                                                    <option value="femenino">Femenino</option>
+                                                </select>
+                                            </div>    
+                                        </div>
+                                        <br>
                                     </div>    
                                 </div>
-                                <br>
-                                <div>
-                                    <label class="control-label">Condiciones</label>
-                                    <div class="controls">
-                                        <select id="prioritario" name="prioritario">
-                                            <option value="none" >Ninguna</option>
-                                            <option value="reg" >Regular</option>
-                                            <option value="prio" >Prioritario</option>
-                                            <option value="ne" >Necesidades Especiales</option>
-                                            <option value="ps">Problemas de Salud</option>
-                                            <option value="m" >Mayores</option>
-                                            <option value="a" >Adolescentes</option>
-                                            <option value="h" >Hermanos</option>
-                                        </select>
-                                    </div>    
-                                </div>        
-                                </div>    
-                                </div>
-                                      
                                 <button id="singlebutton" name="singlebutton" class="btn btn-default">Buscar</button>
                             </fieldset>
                         </form>
@@ -212,8 +247,8 @@
                                     </tr>
                                 </thead>
                                 <c:if test="${!listaBusqueda.isEmpty()}"> 
-                                <tbody>
-                                    <c:forEach var="expediente" items="${listaBusqueda}" varStatus="status">
+                                    <tbody>
+                                        <c:forEach var="expediente" items="${listaBusqueda}" varStatus="status">
                                             <tr>
                                                 <td>${expediente.getNna().getNombre()}
                                                     ${expediente.getNna().getApellidoP()}
@@ -235,15 +270,15 @@
                                                 </td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/editarNna2" method="post">
-                                                    <input hidden name="idNna" id="idNna" value="${expediente.getNna().getIdnna()}">
-                                                    <button type="submit" class="btn btn-default">Ver</button>
+                                                        <input hidden name="idNna" id="idNna" value="${expediente.getNna().getIdnna()}">
+                                                        <button type="submit" class="btn btn-default">Ver</button>
                                                     </form>
                                                 </td>
-                                             </tr>
-                                  </c:forEach>  
-                                </tbody>
-                              </c:if> 
-                               <c:if test="${listaBusqueda.isEmpty()}">
+                                            </tr>
+                                        </c:forEach>  
+                                    </tbody>
+                                </c:if> 
+                                <c:if test="${listaBusqueda.isEmpty()}">
                                     <h3><strong>No se encontraron resultados</strong></h3>
                                 </c:if>  
                             </table>
@@ -266,22 +301,24 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
         <script type="text/javascript">
-     
-            function validar()
-            {
-              
-            if( document.formulario.nombre.value == "" && document.formulario.apellidoP.value == "" 
-                && document.formulario.apellidoM.value == "" && document.formulario.nombreAdop.value == "" 
-                && document.formulario.apellidoPAdop.value == "" && document.formulario.apellidoMAdop.value == ""
-                && document.getElementById("estado").value == "none" && document.getElementById("prioritario").value == "none")
-            {
-            alert( "Debe elegir al menos un filtro de búsqueda" );
-            return false;
-            }
-            
-            return( true );
-            }
-            </script>
+
+                            function validar()
+                            {
+
+                                if (document.formulario.nombre.value == "" && document.formulario.apellidoP.value == ""
+                                        && document.formulario.apellidoM.value == "" && document.formulario.nombreAdop.value == ""
+                                        && document.formulario.apellidoPAdop.value == "" && document.formulario.apellidoMAdop.value == ""
+                                        && document.getElementById("edad").value == "0" && document.getElementById("sexo").value == "none"
+                                        && document.getElementById("idCar").value == "0"
+                                        && document.getElementById("estado").value == "none" && document.getElementById("prioritario").value == "none")
+                                {
+                                    alert("Debe elegir al menos un filtro de búsqueda");
+                                    return false;
+                                }
+
+                                return(true);
+                            }
+        </script>
         <!-- Ubicar al final -->
     </body>
 </html>

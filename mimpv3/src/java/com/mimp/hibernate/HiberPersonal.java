@@ -1141,7 +1141,6 @@ public class HiberPersonal {
 //        return allExpedientes;
 //
 //    }
-    
     public ArrayList<ExpedienteNna> FiltrarNna(ExpedienteNna expNna, Nna datosNna) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -1159,61 +1158,154 @@ public class HiberPersonal {
         final String strNombre_Act = expNna.getNActual();
         final String strApellidoP_Act = expNna.getApellidopActual();
         final String strApellidoM_Act = expNna.getApellidomActual();
-        
-        
+        final String sexo = datosNna.getSexo();  //Agregado 20-03
+        final Long idcar = datosNna.getCar().getIdcar();  //Agregado 20-03
+        final Short edad = datosNna.getEdadAnhos(); //Agregado 20-03
+
+        Short edadinicial = 19;
+        Short edadfinal = 19;
+
+        switch (edad) {
+            case 0:
+                edadinicial = 0;
+                edadfinal = 0;
+                break;
+            case 1:
+                edadinicial = 0;
+                edadfinal = 8;
+                break;
+            case 2:
+                edadinicial = 9;
+                edadfinal = 11;
+                break;
+            case 3:
+                edadinicial = 12;
+                edadfinal = 18;
+                break;
+        }
+        final Short edadini = edadinicial;
+        final Short edadfin = edadfinal;
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                
-                String hql = "{call PERS_FILTRAR_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
-                CallableStatement statement = connection.prepareCall(hql);
-                statement.setString(1, strEstado);
-                statement.setString(2, strClas);
-                statement.setString(3, strNombre);
-                statement.setString(4, strApellidoP);
-                statement.setString(5, strApellidoM);
-                statement.setShort(6, esp);
-                statement.setShort(7, enf);
-                statement.setShort(8, mayor);
-                statement.setShort(9, adoles);
-                statement.setShort(10, hermano);
-                statement.setString(11, strNombre_Act);
-                statement.setString(12, strApellidoP_Act);
-                statement.setString(13, strApellidoM_Act);
-                statement.registerOutParameter(14, OracleTypes.CURSOR);
-                statement.execute();
-                
-                ResultSet rs = (ResultSet) statement.getObject(14);
-               
-                while(rs.next()){
+
+                String hql;
+                CallableStatement statement;
+
+                ResultSet rs;
+                if (idcar != 0) {
+                    hql = "{call PERS_FILTRAR_NNA_CAR(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                    statement = connection.prepareCall(hql);
+                    statement.setString(1, strEstado);
+                    statement.setString(2, strClas);
+                    statement.setString(3, strNombre);
+                    statement.setString(4, strApellidoP);
+                    statement.setString(5, strApellidoM);
+                    statement.setShort(6, esp);
+                    statement.setShort(7, enf);
+                    statement.setShort(8, mayor);
+                    statement.setShort(9, adoles);
+                    statement.setShort(10, hermano);
+                    statement.setString(11, strNombre_Act);
+                    statement.setString(12, strApellidoP_Act);
+                    statement.setString(13, strApellidoM_Act);
+                    statement.setString(14, sexo);
+                    statement.setLong(15, idcar);
+                    statement.registerOutParameter(16, OracleTypes.CURSOR);
+                    statement.execute();
+
+                    rs = (ResultSet) statement.getObject(16);
+                } else {
+                    hql = "{call PERS_FILTRAR_NNA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                    statement = connection.prepareCall(hql);
+                    statement.setString(1, strEstado);
+                    statement.setString(2, strClas);
+                    statement.setString(3, strNombre);
+                    statement.setString(4, strApellidoP);
+                    statement.setString(5, strApellidoM);
+                    statement.setShort(6, esp);
+                    statement.setShort(7, enf);
+                    statement.setShort(8, mayor);
+                    statement.setShort(9, adoles);
+                    statement.setShort(10, hermano);
+                    statement.setString(11, strNombre_Act);
+                    statement.setString(12, strApellidoP_Act);
+                    statement.setString(13, strApellidoM_Act);
+                    statement.setString(14, sexo);
+                    statement.registerOutParameter(15, OracleTypes.CURSOR);
+                    statement.execute();
+
+                    rs = (ResultSet) statement.getObject(15);
+                }
+
+                while (rs.next()) {
                     ExpedienteNna tempExpNna = new ExpedienteNna();
                     Nna tempNna = new Nna();
-                    
+
                     tempExpNna.setIdexpedienteNna(rs.getLong("IDEXPEDIENTE_NNA"));
                     tempExpNna.setEstado(rs.getString("ESTADO"));
                     tempExpNna.setNActual(rs.getString("N_ACTUAL"));
                     tempExpNna.setApellidopActual(rs.getString("APELLIDOP_ACTUAL"));
                     tempExpNna.setApellidomActual(rs.getString("APELLIDOM_ACTUAL"));
-                    
+
                     tempNna.setIdnna(rs.getLong("IDNNA"));
                     tempNna.setClasificacion(rs.getString("CLASIFICACION"));
                     tempNna.setNombre(rs.getString("NOMBRE"));
                     tempNna.setApellidoP(rs.getString("APELLIDO_P"));
                     tempNna.setApellidoM(rs.getString("APELLIDO_M"));
+                    tempNna.setFechaNacimiento(rs.getDate("FECHA_NACIMIENTO"));
+
+                    boolean flag = false;
+                    for (ExpedienteNna aux : allExpedientes) {
+                        if (aux.getNna().getIdnna() == tempNna.getIdnna()) {
+                            flag = true;
+                        }
+                    }
                     
-                    tempExpNna.setNna(tempNna);
-                    allExpedientes.add(tempExpNna);
+                    if(flag){
+                        continue;
+                    }
+
+                    int edad = 0;
+                    if (tempNna.getFechaNacimiento() != null) {
+                        Date fechaAct = new Date();
+                        int añoAct = fechaAct.getYear();
+                        edad = añoAct - tempNna.getFechaNacimiento().getYear();
+                        if ((tempNna.getFechaNacimiento().getMonth() - fechaAct.getMonth())
+                                > 0) {
+                            edad--;
+                        } else if ((tempNna.getFechaNacimiento().getMonth()
+                                - fechaAct.getMonth()) == 0) {
+                            if ((tempNna.getFechaNacimiento().getDate() - fechaAct.getDate())
+                                    > 0) {
+                                edad--;
+                            }
+                        }
+                    }
+
+                    if (edadini != 19 && edadfin != 19) {
+                        if (edadini == 0 && edadfin == 0) {
+                            tempExpNna.setNna(tempNna);
+                            allExpedientes.add(tempExpNna);
+                        } else if (edad >= edadini && edad <= edadfin) {
+                            tempExpNna.setNna(tempNna);
+                            allExpedientes.add(tempExpNna);
+                        }
+                    } else {
+                        tempExpNna.setNna(tempNna);
+                        allExpedientes.add(tempExpNna);
+                    }
                 }
                 rs.close();
                 statement.close();
             }
         };
-        
+
         session.doWork(work);
-        
-        
+
         return allExpedientes;
-    }    
+    }
 
     public ArrayList<ExpedienteFamilia> FiltrarFam(ExpedienteFamilia expFam, Familia datosFam) {
         Session session = sessionFactory.getCurrentSession();
@@ -1536,89 +1628,86 @@ public class HiberPersonal {
 
         return (buffer.toString());
     }
-    
-    public ArrayList<Grupo> listaGruposTurnos2Reuniones (Long idTaller){
-    
+
+    public ArrayList<Grupo> listaGruposTurnos2Reuniones(Long idTaller) {
+
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
         final Long idT = idTaller;
         final ArrayList<Grupo> ListaGrupos = new ArrayList();
-        
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                
-                
+
                 String hql = "{call PERS_LISTAGRUPOS(?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, idT);
                 statement.registerOutParameter(2, OracleTypes.CURSOR);
                 statement.execute();
-                
+
                 ResultSet rs = (ResultSet) statement.getObject(2);
-               
-                while(rs.next()){
+
+                while (rs.next()) {
                     Grupo tempGrp = new Grupo();
                     tempGrp.setIdgrupo(rs.getLong("IDGRUPO"));
                     tempGrp.setNombre(rs.getString("NOMBRE"));
-                                Set<Turno2> listTurno2 = new HashSet<Turno2>(0);
-                                String hql2 = "{call PERS_LISTA_TURNO2(?,?)}";
-                                CallableStatement statement2 = connection.prepareCall(hql2);
-                                statement2.setLong(1, tempGrp.getIdgrupo());
-                                statement2.registerOutParameter(2, OracleTypes.CURSOR);
-                                statement2.execute();
+                    Set<Turno2> listTurno2 = new HashSet<Turno2>(0);
+                    String hql2 = "{call PERS_LISTA_TURNO2(?,?)}";
+                    CallableStatement statement2 = connection.prepareCall(hql2);
+                    statement2.setLong(1, tempGrp.getIdgrupo());
+                    statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement2.execute();
 
-                                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                    ResultSet rs2 = (ResultSet) statement2.getObject(2);
 
-                                while(rs2.next()){
-                                    Turno2 tempT2 = new Turno2();
-                                    tempT2.setIdturno2(rs2.getLong("IDTURNO2"));
-                                    tempT2.setNombre(rs2.getString("NOMBRE"));
-                                    tempT2.setGrupo(tempGrp);
-                                                    Set<Reunion> listR = new HashSet<Reunion>(0);
-                                                    String hql3 = "{call PERS_LISTA_REUNION(?,?)}";
-                                                    CallableStatement statement3 = connection.prepareCall(hql3);
-                                                    statement3.setLong(1, tempT2.getIdturno2());
-                                                    statement3.registerOutParameter(2, OracleTypes.CURSOR);
-                                                    statement3.execute();
+                    while (rs2.next()) {
+                        Turno2 tempT2 = new Turno2();
+                        tempT2.setIdturno2(rs2.getLong("IDTURNO2"));
+                        tempT2.setNombre(rs2.getString("NOMBRE"));
+                        tempT2.setGrupo(tempGrp);
+                        Set<Reunion> listR = new HashSet<Reunion>(0);
+                        String hql3 = "{call PERS_LISTA_REUNION(?,?)}";
+                        CallableStatement statement3 = connection.prepareCall(hql3);
+                        statement3.setLong(1, tempT2.getIdturno2());
+                        statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement3.execute();
 
-                                                    ResultSet rs3 = (ResultSet) statement3.getObject(2);
+                        ResultSet rs3 = (ResultSet) statement3.getObject(2);
 
-                                                    while(rs3.next()){
-                                                        Reunion tempR = new Reunion();
-                                                        tempR.setIdreunion(rs3.getLong("IDREUNION"));
-                                                        tempR.setFecha(rs3.getDate("FECHA"));
-                                                        tempR.setHora(rs3.getString("HORA"));
-                                                        tempR.setDuracion(rs3.getString("DURACION"));
-                                                        tempR.setDireccion(rs3.getString("DIRECCION"));
-                                                        tempR.setTurno2(tempT2);
-                                                        listR.add(tempR);
-                                                        
-                                                    }
-                                                    rs3.close();
-                                                    statement3.close();
-                                                    
-                                      tempT2.setReunions(listR);
-                                      listTurno2.add(tempT2);
-                                }
-                                rs2.close();
-                                statement2.close();
-                          tempGrp.setTurno2s(listTurno2);
-                      ListaGrupos.add(tempGrp);
+                        while (rs3.next()) {
+                            Reunion tempR = new Reunion();
+                            tempR.setIdreunion(rs3.getLong("IDREUNION"));
+                            tempR.setFecha(rs3.getDate("FECHA"));
+                            tempR.setHora(rs3.getString("HORA"));
+                            tempR.setDuracion(rs3.getString("DURACION"));
+                            tempR.setDireccion(rs3.getString("DIRECCION"));
+                            tempR.setTurno2(tempT2);
+                            listR.add(tempR);
+
+                        }
+                        rs3.close();
+                        statement3.close();
+
+                        tempT2.setReunions(listR);
+                        listTurno2.add(tempT2);
+                    }
+                    rs2.close();
+                    statement2.close();
+                    tempGrp.setTurno2s(listTurno2);
+                    ListaGrupos.add(tempGrp);
                 }
                 rs.close();
                 statement.close();
             }
         };
-        
+
         session.doWork(work);
-        
-        
-        
+
         return ListaGrupos;
     }
-    
+
     public ArrayList<FormularioSesion> InscritosReunion(long idReunion) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -1626,21 +1715,20 @@ public class HiberPersonal {
 
         final Long idR = idReunion;
         final ArrayList<FormularioSesion> allFormularios = new ArrayList();
-        
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                
-                
+
                 String hql = "{call PERS_ASIS_REUNION(?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, idR);
                 statement.registerOutParameter(2, OracleTypes.CURSOR);
                 statement.execute();
-                
+
                 ResultSet rs = (ResultSet) statement.getObject(2);
-               
-                while(rs.next()){
+
+                while (rs.next()) {
                     FormularioSesion tempFs = new FormularioSesion();
                     Familia tempF = new Familia();
                     Sesion tempS = new Sesion();
@@ -1649,71 +1737,68 @@ public class HiberPersonal {
                     tempFs.setIdformularioSesion(rs.getLong("IDFORMULARIO_SESION"));
                     tempFs.setFamilia(tempF);
                     tempFs.setSesion(tempS);
-                                Set<Asistente> listAsis = new HashSet<Asistente>(0);
-                                String hql2 = "{call HE_GET_ASIS_BY_IDFS(?,?)}";
-                                CallableStatement statement2 = connection.prepareCall(hql2);
-                                statement2.setLong(1, tempFs.getIdformularioSesion());
-                                statement2.registerOutParameter(2, OracleTypes.CURSOR);
-                                statement2.execute();
+                    Set<Asistente> listAsis = new HashSet<Asistente>(0);
+                    String hql2 = "{call HE_GET_ASIS_BY_IDFS(?,?)}";
+                    CallableStatement statement2 = connection.prepareCall(hql2);
+                    statement2.setLong(1, tempFs.getIdformularioSesion());
+                    statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement2.execute();
 
-                                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                    ResultSet rs2 = (ResultSet) statement2.getObject(2);
 
-                                while(rs2.next()){
-                                    Asistente tempA = new Asistente();
-                                    tempA.setIdasistente(rs2.getLong("IDASISTENTE"));
-                                    tempA.setNombre(rs2.getString("NOMBRE"));
-                                    tempA.setApellidoP(rs2.getString("APELLIDO_P"));
-                                    tempA.setApellidoM(rs2.getString("APELLIDO_M"));
-                                    String tempsexo = "";
-                                    tempsexo = rs2.getString("SEXO");
-                                    if (!rs2.wasNull()) {
-                                            tempA.setSexo(tempsexo.charAt(0));
-                                    }
-                                    tempA.setEdad(rs2.getShort("EDAD"));
-                                    tempA.setCorreo(rs2.getString("CORREO"));
-                                    tempA.setFormularioSesion(tempFs);
-                                    listAsis.add(tempA);
-                                    
-                                    
-                                }
-                                rs2.close();
-                                statement2.close();
-                                tempFs.setAsistentes(listAsis);
-                                allFormularios.add(tempFs);
+                    while (rs2.next()) {
+                        Asistente tempA = new Asistente();
+                        tempA.setIdasistente(rs2.getLong("IDASISTENTE"));
+                        tempA.setNombre(rs2.getString("NOMBRE"));
+                        tempA.setApellidoP(rs2.getString("APELLIDO_P"));
+                        tempA.setApellidoM(rs2.getString("APELLIDO_M"));
+                        String tempsexo = "";
+                        tempsexo = rs2.getString("SEXO");
+                        if (!rs2.wasNull()) {
+                            tempA.setSexo(tempsexo.charAt(0));
+                        }
+                        tempA.setEdad(rs2.getShort("EDAD"));
+                        tempA.setCorreo(rs2.getString("CORREO"));
+                        tempA.setFormularioSesion(tempFs);
+                        listAsis.add(tempA);
+
+                    }
+                    rs2.close();
+                    statement2.close();
+                    tempFs.setAsistentes(listAsis);
+                    allFormularios.add(tempFs);
                 }
                 rs.close();
                 statement.close();
             }
         };
-        
+
         session.doWork(work);
 
         return allFormularios;
 
     }
-    
-public void EliminarSesion (Long idSesion){
+
+    public void EliminarSesion(Long idSesion) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
         final Long idS = idSesion;
-    
-    
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                
-                
+
                 String hql = "{call PERS_LISTA_TURNOS(?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, idS);
                 statement.registerOutParameter(2, OracleTypes.CURSOR);
                 statement.execute();
-                
+
                 ResultSet rs = (ResultSet) statement.getObject(2);
-               
-                while(rs.next()){
+
+                while (rs.next()) {
                     Turno tempT2 = new Turno();
                     tempT2.setIdturno(rs.getLong("IDTURNO"));
                     String hql2 = "{call PERS_DELETE_TURNO(?)}";
@@ -1721,11 +1806,11 @@ public void EliminarSesion (Long idSesion){
                     statement2.setLong(1, tempT2.getIdturno());
                     statement2.execute();
                     statement2.close();
-                                
+
                 }
                 rs.close();
                 statement.close();
-                
+
                 String hql3 = "{call PERS_DELETE_SESION(?)}";
                 CallableStatement statement3 = connection.prepareCall(hql3);
                 statement3.setLong(1, idS);
@@ -1733,80 +1818,79 @@ public void EliminarSesion (Long idSesion){
                 statement3.close();
             }
         };
-        
+
         session.doWork(work);
-}
-    
-public void EliminarTaller (Long idTaller){
-    
+    }
+
+    public void EliminarTaller(Long idTaller) {
+
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
         final Long idT = idTaller;
-        
+
         Work work = new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                
-                
+
                 String hql = "{call PERS_LISTAGRUPOS(?,?)}";
                 CallableStatement statement = connection.prepareCall(hql);
                 statement.setLong(1, idT);
                 statement.registerOutParameter(2, OracleTypes.CURSOR);
                 statement.execute();
-                
+
                 ResultSet rs = (ResultSet) statement.getObject(2);
-               
-                while(rs.next()){
+
+                while (rs.next()) {
                     Grupo tempGrp = new Grupo();
                     tempGrp.setIdgrupo(rs.getLong("IDGRUPO"));
                     tempGrp.setNombre(rs.getString("NOMBRE"));
-                                String hql2 = "{call PERS_LISTA_TURNO2(?,?)}";
-                                CallableStatement statement2 = connection.prepareCall(hql2);
-                                statement2.setLong(1, tempGrp.getIdgrupo());
-                                statement2.registerOutParameter(2, OracleTypes.CURSOR);
-                                statement2.execute();
+                    String hql2 = "{call PERS_LISTA_TURNO2(?,?)}";
+                    CallableStatement statement2 = connection.prepareCall(hql2);
+                    statement2.setLong(1, tempGrp.getIdgrupo());
+                    statement2.registerOutParameter(2, OracleTypes.CURSOR);
+                    statement2.execute();
 
-                                ResultSet rs2 = (ResultSet) statement2.getObject(2);
+                    ResultSet rs2 = (ResultSet) statement2.getObject(2);
 
-                                while(rs2.next()){
-                                    Turno2 tempT2 = new Turno2();
-                                    tempT2.setIdturno2(rs2.getLong("IDTURNO2"));
-                                    tempT2.setNombre(rs2.getString("NOMBRE"));
-                                    tempT2.setGrupo(tempGrp);
-                                                    String hql3 = "{call PERS_LISTA_REUNION(?,?)}";
-                                                    CallableStatement statement3 = connection.prepareCall(hql3);
-                                                    statement3.setLong(1, tempT2.getIdturno2());
-                                                    statement3.registerOutParameter(2, OracleTypes.CURSOR);
-                                                    statement3.execute();
+                    while (rs2.next()) {
+                        Turno2 tempT2 = new Turno2();
+                        tempT2.setIdturno2(rs2.getLong("IDTURNO2"));
+                        tempT2.setNombre(rs2.getString("NOMBRE"));
+                        tempT2.setGrupo(tempGrp);
+                        String hql3 = "{call PERS_LISTA_REUNION(?,?)}";
+                        CallableStatement statement3 = connection.prepareCall(hql3);
+                        statement3.setLong(1, tempT2.getIdturno2());
+                        statement3.registerOutParameter(2, OracleTypes.CURSOR);
+                        statement3.execute();
 
-                                                    ResultSet rs3 = (ResultSet) statement3.getObject(2);
+                        ResultSet rs3 = (ResultSet) statement3.getObject(2);
 
-                                                    while(rs3.next()){
-                                                        Reunion tempR = new Reunion();
-                                                        tempR.setIdreunion(rs3.getLong("IDREUNION"));
-                                                        String hql4 = "{call PERS_DELETE_REUNION(?)}";
-                                                        CallableStatement statement4 = connection.prepareCall(hql4);
-                                                        statement4.setLong(1, tempR.getIdreunion());
-                                                        statement4.execute();
-                                                        statement4.close();
-                                                        
-                                                    }
-                                                    rs3.close();
-                                                    statement3.close();
-                                                    String hql5 = "{call PERS_DELETE_TURNO2(?)}";
-                                                    CallableStatement statement5 = connection.prepareCall(hql5);
-                                                    statement5.setLong(1, tempT2.getIdturno2());
-                                                    statement5.execute();
-                                                    statement5.close();
-                                }
-                                rs2.close();
-                                statement2.close();
-                                String hql6 = "{call PERS_DELETE_GRUPO(?)}";
-                                CallableStatement statement6 = connection.prepareCall(hql6);
-                                statement6.setLong(1, tempGrp.getIdgrupo());
-                                statement6.execute();
-                                statement6.close();
+                        while (rs3.next()) {
+                            Reunion tempR = new Reunion();
+                            tempR.setIdreunion(rs3.getLong("IDREUNION"));
+                            String hql4 = "{call PERS_DELETE_REUNION(?)}";
+                            CallableStatement statement4 = connection.prepareCall(hql4);
+                            statement4.setLong(1, tempR.getIdreunion());
+                            statement4.execute();
+                            statement4.close();
+
+                        }
+                        rs3.close();
+                        statement3.close();
+                        String hql5 = "{call PERS_DELETE_TURNO2(?)}";
+                        CallableStatement statement5 = connection.prepareCall(hql5);
+                        statement5.setLong(1, tempT2.getIdturno2());
+                        statement5.execute();
+                        statement5.close();
+                    }
+                    rs2.close();
+                    statement2.close();
+                    String hql6 = "{call PERS_DELETE_GRUPO(?)}";
+                    CallableStatement statement6 = connection.prepareCall(hql6);
+                    statement6.setLong(1, tempGrp.getIdgrupo());
+                    statement6.execute();
+                    statement6.close();
                 }
                 rs.close();
                 statement.close();
@@ -1817,9 +1901,9 @@ public void EliminarTaller (Long idTaller){
                 statement7.close();
             }
         };
-        
+
         session.doWork(work);
-        
+
     }
 
 }
