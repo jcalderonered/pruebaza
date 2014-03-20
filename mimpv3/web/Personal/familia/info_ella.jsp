@@ -103,11 +103,12 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        
+
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
 
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario" ><!--onsubmit="return(validar());" --> 
                             <input hidden id="adoptante" name="adoptante" value="ella">
+                            <input hidden id="volver" name="volver" value="${volver}">
 
                             <c:if test="${estado != 'formativa'}">
                                 <br>
@@ -214,13 +215,13 @@
                                 </div>
                                 <br>
                                 <c:if test="${expediente.getNacionalidad() == 'internacional'}">
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <label class="control-label">Pasaporte</label>
-                                        <input value="${Ella.getPasaporte()}" id="pasaporte" name="pasaporte" type="text" class="input-xlarge">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Pasaporte</label>
+                                            <input value="${Ella.getPasaporte()}" id="pasaporte" name="pasaporte" type="text" class="input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
+                                    <br>
                                 </c:if>
                                 <div class="control-group">
                                     <label class="control-label">Celular</label>

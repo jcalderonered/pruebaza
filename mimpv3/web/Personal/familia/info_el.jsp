@@ -105,6 +105,7 @@
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario"> <!--onsubmit="return(validar());">-->
                             <input hidden id="adoptante" name="adoptante" value="el">
+                            <input hidden id="volver" name="volver" value="${volver}">
                             
                             <c:if test="${estado != 'formativa'}">
                                 <br>
