@@ -289,7 +289,7 @@
                                                                         <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
                                                                         <br>
                                                                         <br>
-                                                                        <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
+                                                                        <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default" <%if (!u.getRol().equals("admin") && !u.getRol().equals("DCRI")) {%>disabled<%}%>>Guardar</button>
                                                                     </form>
                                                                 </td>
                                                                 <td>
@@ -297,7 +297,7 @@
                                                                         <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >     
                                                                         <input hidden name="el" id="el" value="${el.getApellidoP()}"  >   
                                                                         <input hidden name="ella" id="ella" value="${ella.getApellidoP()}"  >   
-                                                                        <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
+                                                                        <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default" <%if (!u.getRol().equals("admin") && !u.getRol().equals("DEIA")) {%>disabled<%}%>>Generar</button>
                                                                         ${!familia.getExpedienteFamilias().isEmpty() ? 'La familia ha pasado al módulo de evaluación' : ''}
                                                                     </form>
                                                                 </td>
@@ -349,14 +349,14 @@
                                                                                     <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
                                                                                     <br>
                                                                                     <br>
-                                                                                    <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
+                                                                                    <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default" <%if (!u.getRol().equals("admin") && !u.getRol().equals("DCRI")) {%>disabled<%}%>>Guardar</button>
                                                                                 </form>
                                                                             </td>
                                                                             <td>
                                                                                 <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
                                                                                     <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >   
                                                                                     <input hidden name="el" id="el" value="${asistente.getApellidoP()}"  >  
-                                                                                    <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
+                                                                                    <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default" <%if (!u.getRol().equals("admin") && !u.getRol().equals("DEIA")) {%>disabled<%}%>>Generar</button>
                                                                                     ${!familia.getExpedienteFamilias().isEmpty() ? 'La familia ha pasado al módulo de evaluación' : ''}
                                                                                 </form>
                                                                             </td>
@@ -405,14 +405,14 @@
                                                                                     <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
                                                                                     <br>
                                                                                     <br>
-                                                                                    <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar</button>
+                                                                                    <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default" <%if (!u.getRol().equals("admin") && !u.getRol().equals("DCRI")) {%>disabled<%}%>>Guardar</button>
                                                                                 </form>
                                                                             </td>
                                                                             <td>
                                                                                 <form action="${pageContext.servletContext.contextPath}/GenerarExpNac" method="post">
                                                                                     <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >  
                                                                                     <input hidden name="ella" id="ella" value="${asistente.getApellidoP()}"  >  
-                                                                                    <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default">Generar</button>
+                                                                                    <button ${!familia.getExpedienteFamilias().isEmpty() ? 'disabled' : ''} type="submit" class="btn btn-default"  <%if (!u.getRol().equals("admin") && !u.getRol().equals("DEIA")) {%>disabled<%}%>>Generar</button>
                                                                                     ${!familia.getExpedienteFamilias().isEmpty() ? 'La familia ha pasado al módulo de evaluación' : ''}
                                                                                 </form>
                                                                             </td>
