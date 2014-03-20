@@ -1517,7 +1517,8 @@ public class main {
             @RequestParam(value = "hora") String hora,
             @RequestParam(value = "tipo") String tipo,
             @RequestParam(value = "detalle", required = false) String detalle,
-            @RequestParam(value = "obs", required = false) String obs
+            @RequestParam(value = "obs", required = false) String obs,
+            @RequestParam(value = "volver", required = false) String volver
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1546,6 +1547,7 @@ public class main {
         map.put("estado", etapaOrigen);
         map.put("listaAtenciones", listaAtenciones);
         map.put("expediente", expediente);
+        map.put("volver", volver);
         return new ModelAndView("/Personal/familia/info_atencion", map);
     }
 
