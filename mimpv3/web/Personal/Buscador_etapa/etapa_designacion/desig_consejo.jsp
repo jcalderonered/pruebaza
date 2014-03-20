@@ -104,6 +104,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -115,6 +116,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
+                        
                         <form role="form" action="${pageContext.servletContext.contextPath}/aceptacionConsejo" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
                             <fieldset>
                                 <br>
@@ -186,6 +188,7 @@
                                 <!-- Button -->
                                 <div class="control-group">
                                     <div class="controls">
+                                        <input hidden name="volver" id="volver" value="${volver}">
                                         <button id="singlebutton" name="singlebutton" class="btn btn-default">Aceptar </button>
                                     </div>
                                 </div>
@@ -197,6 +200,7 @@
                         </form>
                         <div class="control-group">
                             <div class="controls">
+                                <input hidden name="volver" id="volver" value="${volver}">
                                 <button onclick="window.location.href = '${pageContext.servletContext.contextPath}/EtapaDesig'" id="singlebutton" name="singlebutton" class="btn btn-default">Cancelar </button>
                             </div>
                         </div>
