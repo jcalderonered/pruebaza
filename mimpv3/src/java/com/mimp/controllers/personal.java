@@ -145,7 +145,7 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-
+        map.put("listaCar", ServicioPersonal.ListaCar());
         return new ModelAndView("/Personal/Buscador/buscarNna", map);
     }
 
@@ -158,6 +158,9 @@ public class personal {
             @RequestParam(value = "apellidoPAdop", required = false) String apellidoPAdop,
             @RequestParam(value = "apellidoMAdop", required = false) String apellidoMAdop,
             @RequestParam(value = "estado", required = false) String estado,
+            @RequestParam(value = "edad", required = false) String edad,
+            @RequestParam(value = "idCar", required = false) String car,
+            @RequestParam(value = "sexo", required = false) String sexo,
             @RequestParam(value = "prioritario", required = false) String prioritario
     /*
      @RequestParam(value="incesto",required=false) String incesto,
@@ -186,12 +189,20 @@ public class personal {
         if (estado != null && !estado.equals("none")) {
             datosExp.setEstado(estado);
         }
+        if (sexo != null && !sexo.equals("none")) {
+            datosNna.setSexo(sexo); //Agregado 20-03
+        }
 //        if (estado == null || estado.equals("none")) {
 //            datosExp.setEstado("none");
 //        }
         datosNna.setNombre(nombre);
         datosNna.setApellidoP(apellidoP);
         datosNna.setApellidoM(apellidoM);
+        Car caraux = new Car(); //Agregado 20-03
+        Long idcar = Long.parseLong(car); //Agregado 20-03
+        caraux.setIdcar(idcar); //Agregado 20-03
+        datosNna.setCar(caraux); //Agregado 20-03
+        datosNna.setEdadAnhos(Short.parseShort(edad)); //Agregado 20-03
         if (prioritario.equals("none")) {
             datosNna.setEspecial(Short.parseShort("1"));
             datosNna.setEnfermo(Short.parseShort("1"));
@@ -257,6 +268,7 @@ public class personal {
         listaBusqueda = ServicioPersonal.FiltrarNna(datosExp, datosNna);
 
         map.put("listaBusqueda", listaBusqueda);
+        map.put("listaCar", ServicioPersonal.ListaCar());
         return new ModelAndView("/Personal/Buscador/buscarNna", map);
     }
 
