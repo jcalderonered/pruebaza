@@ -43,7 +43,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
     </head>
-       <script type="text/javascript">
+    <script type="text/javascript">
         function Pager(tableName, itemsPerPage) {
             this.tableName = tableName;
             this.itemsPerPage = itemsPerPage;
@@ -159,7 +159,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -169,7 +169,9 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>       
+                                <%if (!u.getRol().equals("DEIA Prio")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
+                                <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
@@ -234,8 +236,8 @@
                         <br>        
                         <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
-                        <script type="text/javascript"> 
-                                var pager = new Pager('mi_tabla', 8);
+                        <script type="text/javascript">
+                            var pager = new Pager('mi_tabla', 8);
                             pager.init();
                             pager.showPageNav('pager', 'pageNavPosition');
                             pager.showPage(1);
@@ -268,66 +270,66 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
         <script type="text/javascript">
-	
-	function tablefilter(table_selector, input_selector, search_level, colspan) {
 
-		var table = $(table_selector);
-		if(table.length == 0)
-			return;
+                                function tablefilter(table_selector, input_selector, search_level, colspan) {
 
-		var input = $(input_selector);
-		if(input.length == 0)
-			return;
+                                    var table = $(table_selector);
+                                    if (table.length == 0)
+                                        return;
 
-		if(search_level == "undefined" || search_level < 1)
-			search_level = 3;
+                                    var input = $(input_selector);
+                                    if (input.length == 0)
+                                        return;
 
-		if(colspan == "undefined" || colspan < 0)
-			colspan = 2;
+                                    if (search_level == "undefined" || search_level < 1)
+                                        search_level = 3;
 
-		$(input).val("Buscar…");
+                                    if (colspan == "undefined" || colspan < 0)
+                                        colspan = 2;
 
-		$(input).focus(function() {
-			if($(this).val() == "Buscar…") {
-				$(this).val("");
-			}
-			$(this).select();
-		});
+                                    $(input).val("Buscar…");
 
-		$(input).blur(function() {
-			if($(this).val() == "") {
-				$(this).val("Buscar…");
-			}
-		});
+                                    $(input).focus(function() {
+                                        if ($(this).val() == "Buscar…") {
+                                            $(this).val("");
+                                        }
+                                        $(this).select();
+                                    });
 
-		$(input).keyup(function() {
-			if($(this).val().length >= search_level) {
-				// Ocultamos las filas que no contienen el contenido del edit.
-				$(table).find("tbody tr").not(":contains(\"" + $(this).val() + "\")").hide();
-				
-				// Si no hay resultados, lo indicamos.
-				if($(table).find("tbody tr:visible").length == 0) {
-					$(table).find("tbody:first").append('<tr id="noresults" class="aligncenter"><td colspan="' + colspan + '">Lo siento pero no hay resultados para la búsqueda indicada.</td></tr>');
-				}
-			} else {
-				// Borramos la fila de que no hay resultados.
-				$(table).find("tbody tr#noresults").remove();
-				
-				// Mostramos todas las filas.
-				$(table).find("tbody tr").show();
-			}
-		});
-	}
-	
-	jQuery.expr[':'].contains = function(a, i, m) { 
-		return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
-	};
-	
-	$(document).ready(function() {
-		tablefilter("table#mi_tabla", "input#filtrar", 2, 2);
-	});
+                                    $(input).blur(function() {
+                                        if ($(this).val() == "") {
+                                            $(this).val("Buscar…");
+                                        }
+                                    });
 
-	</script>
+                                    $(input).keyup(function() {
+                                        if ($(this).val().length >= search_level) {
+                                            // Ocultamos las filas que no contienen el contenido del edit.
+                                            $(table).find("tbody tr").not(":contains(\"" + $(this).val() + "\")").hide();
+
+                                            // Si no hay resultados, lo indicamos.
+                                            if ($(table).find("tbody tr:visible").length == 0) {
+                                                $(table).find("tbody:first").append('<tr id="noresults" class="aligncenter"><td colspan="' + colspan + '">Lo siento pero no hay resultados para la búsqueda indicada.</td></tr>');
+                                            }
+                                        } else {
+                                            // Borramos la fila de que no hay resultados.
+                                            $(table).find("tbody tr#noresults").remove();
+
+                                            // Mostramos todas las filas.
+                                            $(table).find("tbody tr").show();
+                                        }
+                                    });
+                                }
+
+                                jQuery.expr[':'].contains = function(a, i, m) {
+                                    return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+                                };
+
+                                $(document).ready(function() {
+                                    tablefilter("table#mi_tabla", "input#filtrar", 2, 2);
+                                });
+
+        </script>
         <!-- Ubicar al final -->
     </body>
 </html>

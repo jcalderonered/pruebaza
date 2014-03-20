@@ -2230,13 +2230,11 @@ public class main {
 
     @RequestMapping(value = "/CrearExpNac", method = RequestMethod.POST)
     public ModelAndView CrearExpNac(ModelMap map, HttpSession session,
-            @RequestParam(value = "ht") String ht,
-            @RequestParam(value = "numeroExp") String numeroExp,
-            @RequestParam(value = "fechaIngreso") String fechaIngreso,
-            @RequestParam(value = "tupa") String tupa,
             @RequestParam(value = "idFamilia") long idFamilia,
-            @RequestParam(value = "tipoFamilia") String tipoFamilia,
+            @RequestParam(value = "numeroFicha") String numeroFicha,
+            @RequestParam(value = "ht") String ht,
             @RequestParam(value = "exp") String exp,
+            @RequestParam(value = "fechaIngresoFicha") String fechaIngresoFicha,
             @RequestParam(value = "entAsoc", required = false) Long entAsoc
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -2253,23 +2251,24 @@ public class main {
             Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
             tempFam.setEntidad(tempEnt);
         }
-
+//
+        expediente.setHtFicha(ht);
         expediente.setExpediente(exp);
-        expediente.setHt(ht);
-        expediente.setNumeroExpediente(numeroExp);
-        if (fechaIngreso != null && !fechaIngreso.equals("")) {
-            expediente.setFechaIngresoDga(df.stringToDate(fechaIngreso));
+//        expediente.setHt(ht);
+        expediente.setnFicha(numeroFicha);
+        if (fechaIngresoFicha != null && !fechaIngresoFicha.equals("")) {
+            expediente.setFechaIngresoFicha(df.stringToDate(fechaIngresoFicha));
         }
-        if (fechaIngreso == null && fechaIngreso.equals("")) {
-            expediente.setFechaIngresoDga(null);
+        if (fechaIngresoFicha == null || fechaIngresoFicha.equals("")) {
+            expediente.setFechaIngresoFicha(null);
         }
-        if (tupa != null && !tupa.equals("")) {
-            expediente.setTupa(df.stringToDate(tupa));
-        }
-        if (tupa == null && tupa.equals("")) {
-            expediente.setTupa(null);
-        }
-        expediente.setTipoFamilia(tipoFamilia);
+//        if (tupa != null && !tupa.equals("")) {
+//            expediente.setTupa(df.stringToDate(tupa));
+//        }
+//        if (tupa == null && tupa.equals("")) {
+//            expediente.setTupa(null);
+//        }
+//        expediente.setTipoFamilia(tipoFamilia);
         expediente.setUnidad(usuario.getUnidad());
         expediente.setEstado("evaluacion");
         expediente.setNacionalidad("nacional");

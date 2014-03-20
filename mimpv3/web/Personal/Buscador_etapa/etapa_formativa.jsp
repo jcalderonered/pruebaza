@@ -217,7 +217,7 @@
                                         <th>Información</th>
                                         <th>¿Culminó taller?</th>
                                         <th>Número de Constancia</th>
-                                        <th>Generar Expediente</th>
+                                        <th>Registrar Datos de la Ficha</th>
 
                                     </tr>
                                 </thead>

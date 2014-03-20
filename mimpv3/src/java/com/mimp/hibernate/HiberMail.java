@@ -70,7 +70,7 @@ public class HiberMail {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("formacionadopcion@mimp.gob.pe"));
+            message.setFrom(new InternetAddress("formacionadopcion@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(correo));
             message.setSubject("Sistema de adopciones");
@@ -112,7 +112,7 @@ public class HiberMail {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("formacionadopcion@mimp.gob.pe"));
+            message.setFrom(new InternetAddress("formacionadopcion@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(correo));
             message.setSubject("Sistema de adopciones");
