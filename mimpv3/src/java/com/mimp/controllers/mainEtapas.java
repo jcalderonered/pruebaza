@@ -2536,7 +2536,8 @@ public class mainEtapas {
     @RequestMapping(value = "/UpdatePostAdopcion", method = RequestMethod.POST)
     public ModelAndView UpdatePostAdopcion(ModelMap map, HttpSession session,
             @RequestParam("idPost") long idPost,
-            @RequestParam("familia") String familia
+            @RequestParam("familia") String familia,
+            @RequestParam(value = "volver", required = false) String volver
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2549,6 +2550,7 @@ public class mainEtapas {
         map.put("df", df);
         map.put("post", newPost);
         map.put("familia", familia);
+        map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/Buscador_etapa/etapa_post/expediente_post", map);
 
     }
@@ -2556,7 +2558,8 @@ public class mainEtapas {
     @RequestMapping(value = "/EditarExpedientePost", method = RequestMethod.POST)
     public ModelAndView EditarExpedientePost(ModelMap map, HttpSession session,
             @RequestParam("idPost") long idPost,
-            @RequestParam("numInformes") Long numInformes
+            @RequestParam("numInformes") Long numInformes,
+            @RequestParam(value = "volver", required = false) String volver
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2570,6 +2573,7 @@ public class mainEtapas {
         servicioEtapa.updatePostAdopcion(newPost);
 
         map.put("listaPost", servicioEtapa.getListaPostAdopcion());
+        map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/Buscador_etapa/etapa_post/etapa_post", map);
 
     }
@@ -2579,7 +2583,8 @@ public class mainEtapas {
             @RequestParam("idPost") long idPost,
             @RequestParam("familia") String familia,
             @RequestParam("numInformes") int numInformes,
-            @RequestParam("fechaAdopcion") String fechaAdopcion
+            @RequestParam("fechaAdopcion") String fechaAdopcion,
+            @RequestParam(value = "volver", required = false) String volver
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2724,6 +2729,8 @@ public class mainEtapas {
         map.put("familia", familia);
         map.put("idPost", idPost);
         map.put("numInformes", numInformes);
+        
+        map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/Buscador_etapa/etapa_post/informes_general", map);
 
     }

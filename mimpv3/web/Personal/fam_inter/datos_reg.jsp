@@ -112,6 +112,7 @@
                         <br>
                         <c:if test="${expediente == null}">
                             <form role="form" action="${pageContext.servletContext.contextPath}/CrearRegistroInt" method="post">
+                                <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                             </c:if>  
                             <c:if test="${expediente != null}">
                                 <form role="form" action="${pageContext.servletContext.contextPath}/UpdateRegistroInt" method="post"> 

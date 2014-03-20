@@ -103,6 +103,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Registro Post-adoptivo</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -114,7 +115,8 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/EditarExpedientePost" method="post"> 
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/EditarExpedientePost" method="post">
+                            <input hidden name="volver" id="volver" value="${volver}">
                             <fieldset>
                                 <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                                 <br>

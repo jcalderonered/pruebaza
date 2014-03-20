@@ -3128,7 +3128,8 @@ public class personal {
     /*    FIN DE SESIONES Y TALLERES                      */
     /*    FAMILIAS INTERNACIONALES                        */
     @RequestMapping(value = "/DetallesFamInt", method = RequestMethod.POST)
-    public ModelAndView DetallesFamInt(ModelMap map, HttpSession session, @RequestParam(value = "idExpediente") long idExpediente) {
+    public ModelAndView DetallesFamInt(ModelMap map, HttpSession session,
+            @RequestParam(value = "idExpediente") long idExpediente) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3151,6 +3152,8 @@ public class personal {
         map.put("df", format);
         map.put("expediente", expedienteInt);
         map.put("listaEntidad", ServicioPersonal.ListaEntidades());
+        
+        map.addAttribute("idExpediente", idExpediente);
         return new ModelAndView("/Personal/fam_inter/datos_reg", map);
     }
 
@@ -3329,7 +3332,8 @@ public class personal {
             @RequestParam(value = "seguroVida", required = false) String seguroVida,
             @RequestParam(value = "sisPensiones", required = false) String sisPensiones,
             @RequestParam(value = "estadoActual", required = false) String estadoActual,
-            @RequestParam(value = "volver", required = false) String volver
+            @RequestParam(value = "volver", required = false) String volver,
+            @RequestParam(value = "idExpediente", required = false) String idExpediente
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -3460,6 +3464,7 @@ public class personal {
             map.put("infoFam", infoFam);
             map.put("El", El);
             map.addAttribute("volver", volver);
+            map.addAttribute("idExpediente", idExpediente);
             return new ModelAndView("/Personal/fam_inter/datos_el", map);
         } else {
             Ella.setInfoFamilia(infoFam);
@@ -3583,6 +3588,7 @@ public class personal {
             map.put("infoFam", infoFam);
             map.put("Ella", Ella);
             map.addAttribute("volver", volver);
+            map.addAttribute("idExpediente", idExpediente);
             return new ModelAndView("/Personal/fam_inter/datos_ella", map);
 
         }
@@ -3676,7 +3682,8 @@ public class personal {
             @RequestParam(value = "edadMin") String edadMin,
             @RequestParam(value = "edadMax") String edadMax,
             @RequestParam(value = "genero") String genero,
-            @RequestParam(value = "obs") String obs
+            @RequestParam(value = "obs") String obs,
+            @RequestParam(value = "idExpediente", required = false) String idExpediente
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -3731,6 +3738,7 @@ public class personal {
 
         map.put("df", format);
         map.put("infoFam", infoFam);
+        map.addAttribute("idExpediente", idExpediente);
         return new ModelAndView("/Personal/fam_inter/datos_nna", map);
     }
 
