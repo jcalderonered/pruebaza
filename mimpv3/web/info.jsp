@@ -46,7 +46,7 @@
                             <li><a href="#">Inicio</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/SesionInfInicioPrev">Inscripción a Sesión Informativa</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/CronogramaAnualPrev">Ver el cronograma anual</a></li>
-                            <li class="active"><a href="#">Información Adicional</a></li>
+                            <!--<li><a href="#">Información Adicional</a></li>-->
                             <li><a href="#">Contacto</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->

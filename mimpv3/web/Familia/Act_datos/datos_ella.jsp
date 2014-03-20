@@ -80,7 +80,7 @@
                             <!-- <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc4" data-toggle="tab">Vivienda</a></li> -->
                             <li><a href="${pageContext.servletContext.contextPath}/FactDatos/opc5" data-toggle="tab">Antecedentes del niño, niña o adolescente</a></li>
                         </ul>
-
+                        `
                         <form class="form-horizontal"> 
                             <fieldset>
                                 <br>
@@ -197,7 +197,7 @@
                                                     </label>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="soltero" value="D" disabled>Soltera</label>
+                                                    <input type="radio" name="optionsRadios2" id="soltero" value="D"  disabled>Soltera</label>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
@@ -250,6 +250,7 @@
                                     </div>
                                 </div>
                                 <br>
+                                <!-- 
                                 <h3><strong>Educación, Ocupación e Ingresos Económicos</strong></h3>
                                 <br>
                                 <h3>Nivel de instrucción alcanzado</h3>
@@ -489,6 +490,7 @@
                                         <input id="estado_acutal" value="${adop.getSaludActual()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
+                                -->
                                 <br>
                                 <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUD</p>
                                 <p style="color: red">EN MESA DE PARTES DE LA DGA</p>

@@ -190,11 +190,11 @@
                                     <div class="radio">
                                         <label>
                                             <c:choose>
-                                                    <c:when test="${estCivil == soltero}">
+                                                    <c:when test="${estCivil == 'soltero'}">
                                                         <input type="radio" name="optionsRadios2" id="soltero" value="D" checked disabled>Soltero</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="soltero" value="D" disabled>Soltero</label>
+                                                    <input type="radio" name="optionsRadios2" id="soltero" value="D"  disabled>Soltero</label>
                                                 </c:otherwise>
                                             </c:choose>
                                     </div>
@@ -203,11 +203,11 @@
                                     <div class="radio">
                                         <label>
                                             <c:choose>
-                                                    <c:when test="${estCivil == casados}">
+                                                    <c:when test="${estCivil == 'casados'}">
                                                         <input type="radio" name="optionsRadios2" id="casado" value="C" checked disabled>Casado</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="casado" value="C" disabled>Casado</label>
+                                                    <input type="radio" name="optionsRadios2" id="casado" value="C"  disabled>Casado</label>
                                                 </c:otherwise>
                                             </c:choose>
                                     </div>                            
@@ -220,7 +220,7 @@
                                                         <input type="radio" name="optionsRadios2" id="viudo" value="D" checked disabled>Viudo</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="viudo" value="D" disabled>Viudo</label>
+                                                    <input type="radio" name="optionsRadios2" id="viudo" value="D"  disabled>Viudo</label>
                                                 </c:otherwise>
                                             </c:choose>
                                             
@@ -234,7 +234,7 @@
                                                         <input type="radio" name="optionsRadios2" id="divorciado" value="D" checked disabled>Divorciado</label>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" name="optionsRadios2" id="divorciado" value="D" disabled>Divorciado</label>
+                                                    <input type="radio" name="optionsRadios2" id="divorciado" value="D"  disabled>Divorciado</label>
                                                 </c:otherwise>
                                             </c:choose>
                                     </div>
@@ -248,6 +248,7 @@
                                     </div>
                                 </div>
                                 <br>
+                                <!-- 
                                 <h3><strong>Educación, Ocupación e Ingresos Económicos</strong></h3>
                                 <br>
                                 <div class="control-group">
@@ -485,6 +486,7 @@
                                         <input id="estado_acutal" value="${adop.getSaludActual()}" name="full-name" type="text" class="input-xlarge" disabled>
                                     </div>
                                 </div>
+                                -->    
                                 <br>
                                 <p style="color: red">IMPORTANTE: SI DESEA REALIZAR ALGÚN CAMBIO DEBERÁ PRESENTAR UNA SOLICITUD</p>
                                 <p style="color: red">EN MESA DE PARTES DE LA DGA</p>

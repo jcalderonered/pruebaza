@@ -2470,7 +2470,7 @@ public class personal {
             @RequestParam(value = "tipo", required = false) String tipo,
             @RequestParam(value = "numSesion", required = false) String numSesion,
             @RequestParam("habilitado") String habilitado,
-            @RequestParam("ua") String ua,
+            @RequestParam(value = "ua", required = false) String ua,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
