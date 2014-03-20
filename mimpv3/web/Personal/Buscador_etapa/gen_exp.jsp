@@ -106,67 +106,32 @@
                         <!-- AQUI AGREGAR EL CONTENIDO QUE ESTARA AL COSTADO DEL MENU -->
                         <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                         <br>
-                        <h3><strong>Datos generales del expediente</strong></h3>
+                        <h3><strong>Datos generales de la Ficha</strong></h3>
                         <br>
                         <br>
                             <form role="form" action="${pageContext.servletContext.contextPath}/CrearExpNac" method="post">
                             <input hidden name="idFamilia" id="idFamilia" value="${idFamilia}"  >  
-                            <input hidden name="exp" id="idFamilia" value="${exp}"  >  
+                            <input hidden name="exp" id="exp" value="${exp}"  >  
                             <div class="control-group">
-                                <label class="control-label">Número de Expediente </label>
+                                <label class="control-label">HT Ficha</label>
                                 <div class="controls">
-                                    <input id="numeroExp" name="numeroExp" type="text" class="input-xlarge" value="${expediente.getNumeroExpediente()}">
+                                    <input id="ht" name="ht" type="text" class="input-xlarge" >
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
-                                <label class="control-label">HT </label>
+                                <label class="control-label">Número de Ficha</label>
                                 <div class="controls">
-                                    <input id="ht" name="ht" type="text" class="input-xlarge" value="${expediente.getHt()}">
+                                    <input id="numeroExp" name="numeroFicha" type="text" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
-                                <label class="control-label">Fecha de ingreso</label>
+                                <label class="control-label">Fecha de ingreso de la ficha</label>
                                 <div class="controls">
-                                    <input id="fechaIngreso" name="fechaIngreso" type="text" class="datepicker input-xlarge" value="${expediente.getFechaIngresoDga() != null ? df.dateToStringNumeros(expediente.getFechaIngresoDga()) : ''}">
+                                    <input id="fechaIngresoFicha" name="fechaIngresoFicha" type="text" class="datepicker input-xlarge" >
                                 </div>
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <label> Estado</label>
-                                <div class="controls">
-                                    <select disabled>
-                                        <option value="evaluacion" ${expediente.getEstado() == 'evaluacion' ? 'selected' : ''} >Evaluación</option>
-                                        <option value="espera" ${expediente.getEstado() == 'espera' ? 'selected' : ''} >Lista de espera</option>
-                                        <option value="estudio" ${expediente.getEstado() == 'estudio' ? 'selected' : ''} >Estudio de caso</option>
-                                        <option value="designacion" ${expediente.getEstado() == 'designacion' ? 'selected' : ''} >Designado</option>
-                                        <option value="adopcion" ${expediente.getEstado() == 'adopcion' ? 'selected' : ''} >Adopción</option>
-                                        <option value="post" ${expediente.getEstado() == 'post' ? 'selected' : ''} >Post Adopción</option>
-                                    </select>
-                                </div>   
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">Tupa</label>
-                                <div class="controls">
-                                    <input id="tupa" name="tupa" type="text" class="datepicker input-xlarge" value="${expediente.getTupa() != null ? df.dateToStringNumeros(expediente.getTupa()) : ''}">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <label> Tipo de familia</label>
-                                <div class="controls">
-                                    <select onchange="funcTipoFam(this.value)" id="tipoFamilia" name="tipoFamilia">
-                                        <option value="PP" ${expediente.getTipoFamilia() == 'PP' ? 'selected' : ''} >PP</option>
-                                        <option value="PE" ${expediente.getTipoFamilia() == 'PE' ? 'selected' : ''} >PE</option>
-                                        <option value="MP" ${expediente.getTipoFamilia() == 'MP' ? 'selected' : ''} >MP</option>
-                                        <option value="ME" ${expediente.getTipoFamilia() == 'ME' ? 'selected' : ''} >ME</option>
-                                        <option value="EP" ${expediente.getTipoFamilia() == 'EP' ? 'selected' : ''} >EP</option>
-                                        <option value="EE" ${expediente.getTipoFamilia() == 'EE' ? 'selected' : ''} >EE</option>
-                                    </select>
-                                </div>   
-                            </div>
+                            </div>                      
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Organismo Acreditado y/o Autoridad Central asociado</label>

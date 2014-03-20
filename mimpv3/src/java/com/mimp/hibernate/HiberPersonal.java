@@ -1012,7 +1012,7 @@ public class HiberPersonal {
 
         session.beginTransaction();
 
-        String hql = "FROM Entidad";
+        String hql = "FROM Entidad order by identidad asc";
         Query query = session.createQuery(hql);
         List entidades = query.list();
         ArrayList<Entidad> allEntidades = new ArrayList();

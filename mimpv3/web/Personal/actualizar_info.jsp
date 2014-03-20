@@ -6,16 +6,16 @@
 
 <%@page import="com.mimp.bean.Personal"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
-response.setDateHeader("Expires", 0);
-Personal u=(Personal)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+    response.setDateHeader("Expires", 0);
+    Personal u = (Personal) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -71,144 +71,146 @@ if (u==null){
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>       
+                                <%if (!u.getRol().equals("DEIA Prio")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
+                                <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
                         <h1 align="center"><strong>Actualizar información</strong></h1>
                         <br>
-                         <form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/act_info/act" method="post">
+                        <form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/act_info/act" method="post">
                             <fieldset>
                                 <!-- Text input-->
-                                    <div class="control-group">
-                                         <label class="control-label">Nombre</label>
-                                            <div class="controls">
-                                              <input disabled value="<%=u.getNombre()%>" id="full-name" name="full-name" type="text" class="input-xlarge">
-                                            </div>
+                                <div class="control-group">
+                                    <label class="control-label">Nombre</label>
+                                    <div class="controls">
+                                        <input disabled value="<%=u.getNombre()%>" id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                          <label class="control-label">Apellido Paterno</label>
-                                            <div class="controls">
-                                              <input disabled value="<%=u.getApellidoP()%>" id="full-name" name="full-name" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Apellido Paterno</label>
+                                    <div class="controls">
+                                        <input disabled value="<%=u.getApellidoP()%>" id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Apellido Materno</label>
-                                            <div class="controls">
-                                              <input disabled value="<%=u.getApellidoM()%>" id="full-name" name="full-name" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Apellido Materno</label>
+                                    <div class="controls">
+                                        <input disabled value="<%=u.getApellidoM()%>" id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Usuario</label>
-                                            <div class="controls">
-                                              <input disabled value="<%=u.getUser()%>" id="full-name" name="full-name" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Usuario</label>
+                                    <div class="controls">
+                                        <input disabled value="<%=u.getUser()%>" id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                     <div class="control-group">
-                                          <label class="control-label">Correo Trabajo</label>
-                                            <div class="controls">
-                                                <input id="full-name" value="<%=u.getCorreoTrabajo()%>" name="correo_trabajo" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Correo Trabajo</label>
+                                    <div class="controls">
+                                        <input id="full-name" value="<%=u.getCorreoTrabajo()%>" name="correo_trabajo" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                        <label class="control-label">Correo Personal</label>
-                                            <div class="controls">
-                                              <input id="full-name" value="<%=u.getCorreoPersonal()%>" name="correo_personal" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Correo Personal</label>
+                                    <div class="controls">
+                                        <input id="full-name" value="<%=u.getCorreoPersonal()%>" name="correo_personal" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                        <label class="control-label">Profesión</label>
-                                            <div class="controls">
-                                              <input id="full-name" value="<%=u.getProfesion()%>" name="profesion" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Profesión</label>
+                                    <div class="controls">
+                                        <input id="full-name" value="<%=u.getProfesion()%>" name="profesion" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Grado de instrucción</label>
-                                            <div class="controls">
-                                              <input id="full-name" value="<%=u.getGradoInstruccion()%>" name="grado_instruccion" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Grado de instrucción</label>
+                                    <div class="controls">
+                                        <input id="full-name" value="<%=u.getGradoInstruccion()%>" name="grado_instruccion" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Cargo</label>
-                                            <div class="controls">
-                                              <input id="full-name" value="<%=u.getCargo()%>" name="cargo" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Cargo</label>
+                                    <div class="controls">
+                                        <input id="full-name" value="<%=u.getCargo()%>" name="cargo" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">DNI</label>
-                                            <div class="controls">
-                                              <input disabled value="<%=u.getDni()%>" id="full-name" name="full-name" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">DNI</label>
+                                    <div class="controls">
+                                        <input disabled value="<%=u.getDni()%>" id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                        <label class="control-label">Fecha de nacimiento</label>
-                                            <div class="controls">
-                                              <input disabled value="${fechanac}" id="full-name" name="full-name" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Fecha de nacimiento</label>
+                                    <div class="controls">
+                                        <input disabled value="${fechanac}" id="full-name" name="full-name" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Regimen</label>
-                                            <div class="controls">
-                                              <input value="<%=u.getRegimen()%>" id="full-name" name="regimen" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Regimen</label>
+                                    <div class="controls">
+                                        <input value="<%=u.getRegimen()%>" id="full-name" name="regimen" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                        <label class="control-label">Fecha de ingreso</label>
-                                            <div class="controls">
-                                              <input disabled id="full-name" value="${fechaing}" name="full-name" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Fecha de ingreso</label>
+                                    <div class="controls">
+                                        <input disabled id="full-name" value="${fechaing}" name="full-name" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div class="control-group">
-                                         <label class="control-label">Domicilio</label>
-                                            <div class="controls">
-                                                <input id="full-name" value="<%=u.getDomicilio()%>" name="domicilio" type="text" class="input-xlarge">
-                                            </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <label class="control-label">Domicilio</label>
+                                    <div class="controls">
+                                        <input id="full-name" value="<%=u.getDomicilio()%>" name="domicilio" type="text" class="input-xlarge">
                                     </div>
-                                    <br>
-                                    <div>
-                                      <label class="control-label">Rol: <%=u.getRol()%></label>
-                                    </div>
-                                    <br>
-                                    <div>
-                                      <label class="control-label">Unidad de adopción: <%=u.getUnidad().getNombre()%></label> 
-                                    </div>
-                                    <br>
+                                </div>
+                                <br>
+                                <div>
+                                    <label class="control-label">Rol: <%=u.getRol()%></label>
+                                </div>
+                                <br>
+                                <div>
+                                    <label class="control-label">Unidad de adopción: <%=u.getUnidad().getNombre()%></label> 
+                                </div>
+                                <br>
                                 <br>
                                 <br>
                                 <!-- Button -->
@@ -219,7 +221,7 @@ if (u==null){
                                 </div>
                             </fieldset>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
