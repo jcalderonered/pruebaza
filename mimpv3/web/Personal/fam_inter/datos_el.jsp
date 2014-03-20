@@ -262,6 +262,7 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
+                                        <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
                                         <button  type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>

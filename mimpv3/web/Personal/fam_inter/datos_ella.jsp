@@ -120,6 +120,7 @@
 
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptanteInt" method="post" name="formulario" onsubmit="return(validar());"> 
                             <br>
+                            <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
                             <input hidden id="adoptante" name="adoptante" value="ella">
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                             <fieldset>
