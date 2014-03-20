@@ -52,7 +52,7 @@ public class HiberMail {
     public static void generateAndSendEmail(String correo, String pass_plano, String user) {
 
         final String username = "formacionadopcion@gmail.com";
-        final String password = "s1rn44d0pc10n!";
+        final String password = "cairani.";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -94,7 +94,7 @@ public class HiberMail {
     public static void generateAndSendEmail2(String correo, String pass_plano, String user) {
 
         final String username = "formacionadopcion@gmail.com";
-        final String password = "s1rn44d0pc10n!";
+        final String password = "cairani.";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
