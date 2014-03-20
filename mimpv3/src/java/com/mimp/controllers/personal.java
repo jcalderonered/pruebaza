@@ -2623,7 +2623,7 @@ public class personal {
         tempGrp = ServicioPersonal.getGrupo(idGrupo);
 
         map.put("grupo", tempGrp);
-        
+
         map.addAttribute("idTaller", idTaller);
         map.addAttribute("idGrupo", idGrupo);
         return new ModelAndView("/Personal/Informativa/edicion_grupo", map);
@@ -2858,11 +2858,11 @@ public class personal {
         map.put("turno2", tempT2);
         map.put("formato", format);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
-       
+
         map.addAttribute("idTaller", idTaller);
         map.addAttribute("idGrupo", idGrupo);
         map.addAttribute("idTurno2", idTurno2);
-        
+
         return new ModelAndView("/Personal/Informativa/edicion_turno2", map);
     }
 
@@ -2971,6 +2971,7 @@ public class personal {
         allFormularios = ServicioPersonal.InscritosSesion(idSesion);
 
         map.addAttribute("fecha", fecha);
+        map.addAttribute("idSesion", idSesion);
         map.put("sesion", tempSesion);
         map.put("listaFormularios", allFormularios);
         return new ModelAndView("/Personal/Informativa/toma_asistencia2", map);
@@ -3029,6 +3030,8 @@ public class personal {
             @RequestParam("nombre") String nombre,
             @RequestParam("grupo") String grupo,
             @RequestParam("turno") String turno,
+            @RequestParam(value = "idTaller", required = false) long idTaller,
+            @RequestParam(value = "historial", required = false) String historial,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -3060,6 +3063,10 @@ public class personal {
         map.addAttribute("formato", format);
         map.put("listaFormularios", allFormularios);
         map.put("reunion", tempReun);
+        map.addAttribute("idTaller", idTaller);
+        map.addAttribute("historial", historial);
+        map.addAttribute("idReunion", idReunion);
+
         return new ModelAndView("/Personal/Informativa/toma_asistencia_reunion", map);
     }
 
@@ -3071,6 +3078,8 @@ public class personal {
             @RequestParam("nombre") String nombre,
             @RequestParam("grupo") String grupo,
             @RequestParam("turno") String turno,
+            @RequestParam(value = "idTaller", required = false) String idTaller,
+            @RequestParam(value = "historial", required = false) String historial,
             HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -3096,6 +3105,9 @@ public class personal {
         map.addAttribute("grupo", grupo);
         map.addAttribute("turno", turno);
         map.addAttribute("formato", format);
+        map.addAttribute("idTaller", idTaller);
+        map.addAttribute("historial", historial);
+        map.addAttribute("idReunion", idReunion);
         map.put("listaFormularios", allFormularios);
         map.put("reunion", tempReun);
         return new ModelAndView("/Personal/Informativa/toma_asistencia_reunion", map);
