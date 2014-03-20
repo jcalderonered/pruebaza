@@ -103,7 +103,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <form action="${pageContext.servletContext.contextPath}${volver}?volver=${volver}" method="post">
+                        <form action="${pageContext.servletContext.contextPath}/atenciones?volver=${volver}" method="post">
                                 <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             </form>                         
                         <c:if test="${estado != 'formativa'}">
