@@ -1572,7 +1572,9 @@ public class mainEtapas {
     }
 
     @RequestMapping(value = "/designacionConsejo", method = RequestMethod.POST)
-    public ModelAndView designacionConsejo(ModelMap map, HttpSession session, @RequestParam("numDesig") String numDesig
+    public ModelAndView designacionConsejo(ModelMap map, HttpSession session,
+            @RequestParam("numDesig") String numDesig,
+            @RequestParam(value = "volver", required = false) String volver
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1605,6 +1607,7 @@ public class mainEtapas {
         map.put("listaFamilias", allExpFam);
         map.put("propuesta", propuesta);
         map.put("numDesig", numDesig);
+        map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/Buscador_etapa/etapa_designacion/desig_consejo", map);
 
     }
@@ -1615,7 +1618,8 @@ public class mainEtapas {
             @RequestParam("fechaConsejo") String fechaConsejo,
             @RequestParam("prioridad") long[] prioridad,
             @RequestParam("idExp") long[] idExp,
-            @RequestParam("obs") String obs
+            @RequestParam("obs") String obs,
+            @RequestParam(value = "volver", required = false) String volver
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1649,6 +1653,7 @@ public class mainEtapas {
             map.put("mensaje", mensaje);
             map.put("propuesta", propuesta);
             map.put("numDesig", numDesig);
+            map.addAttribute("volver", volver);
             return new ModelAndView("/Personal/Buscador_etapa/etapa_designacion/desig_consejo", map);
         }
         if (idExp != null) {
@@ -1746,6 +1751,7 @@ public class mainEtapas {
 //                servicioEtapa.updateDesignacion(tempDesg);
 //            }
             map.put("listaAdopciones", servicioEtapa.getListaAdopciones());
+            map.addAttribute("volver", volver);
             return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/etapa_adopcion", map);
         }
 
