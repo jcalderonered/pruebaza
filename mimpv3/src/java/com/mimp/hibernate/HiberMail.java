@@ -51,7 +51,7 @@ public class HiberMail {
 
     public static void generateAndSendEmail(String correo, String pass_plano, String user) {
 
-        final String username = "sssirna@gmail.com";
+        final String username = "formacionadopcion@gmail.com";
         final String password = "s1rn44d0pc10n!";
 
         Properties props = new Properties();
@@ -93,7 +93,7 @@ public class HiberMail {
 
     public static void generateAndSendEmail2(String correo, String pass_plano, String user) {
 
-        final String username = "sssirna@gmail.com";
+        final String username = "formacionadopcion@gmail.com";
         final String password = "s1rn44d0pc10n!";
 
         Properties props = new Properties();

@@ -137,14 +137,14 @@ public class main {
         }
         return new ModelAndView(pagina, map);
     }
-    
+
     @RequestMapping("/SesionInfInicioPrev")
     public String SesionInfInicioPrev() {
         return "/Inscripcion/inscripcion_prev";
     }
 
     @RequestMapping("/SesionInfInicio")
-    public ModelAndView SesionInfInicio(ModelMap map,@RequestParam("ua") String ua) {
+    public ModelAndView SesionInfInicio(ModelMap map, @RequestParam("ua") String ua) {
 
         ArrayList<Turno> temp = new ArrayList();
         ArrayList<Turno> temp2 = new ArrayList();
@@ -630,12 +630,11 @@ public class main {
             //expNna = nnaAdoptado.getExpedienteNnas().iterator().next();
             listaNnaAdoptados.clear();
             for (Designacion tempDesig : listaDesignaciones) {
-                if(tempDesig.getAceptacionConsejo() == 2){
+                if (tempDesig.getAceptacionConsejo() == 2) {
                     listaNnaAdoptados.add(tempDesig.getNna());
                 }
             }
-            
-            
+
             /*
              for (Designacion desig : listaDesignaciones) {
              if(desig.getAceptacionConsejo() == 2){
@@ -1282,7 +1281,8 @@ public class main {
     }
 
     @RequestMapping(value = "/agregarAtencion", method = RequestMethod.GET)
-    public ModelAndView agregarAtencion(ModelMap map, HttpSession session) {
+    public ModelAndView agregarAtencion(ModelMap map, HttpSession session,
+            @RequestParam(value = "volver", required = false) String volver) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -1294,6 +1294,25 @@ public class main {
         map.put("estado", etapaOrigen);
         map.put("expediente", expediente);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
+        map.addAttribute("volver", volver);
+        return new ModelAndView("/Personal/familia/info_atencion_edit", map);
+    }
+
+    @RequestMapping(value = "/agregarAtencion3", method = RequestMethod.POST)
+    public ModelAndView agregarAtencion3(ModelMap map, HttpSession session,
+            @RequestParam(value = "volver", required = false) String volver) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        map.put("df", df);
+        map.put("estado", etapaOrigen);
+        map.put("expediente", expediente);
+        map.put("listaPersonal", ServicioPersonal.ListaPersonal());
+        map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_atencion_edit", map);
     }
 
@@ -1397,7 +1416,8 @@ public class main {
             @RequestParam(value = "hora") String hora,
             @RequestParam(value = "tipo") String tipo,
             @RequestParam(value = "detalle", required = false) String detalle,
-            @RequestParam(value = "obs", required = false) String obs
+            @RequestParam(value = "obs", required = false) String obs,
+            @RequestParam(value = "volver", required = false) String volver
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1429,6 +1449,7 @@ public class main {
         map.put("estado", etapaOrigen);
         map.put("listaAtenciones", listaAtenciones);
         map.put("expediente", expediente);
+        map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_atencion", map);
     }
 
@@ -1669,7 +1690,8 @@ public class main {
             @RequestParam(value = "edadMax") String edadMax,
             @RequestParam(value = "genero") String genero,
             @RequestParam(value = "numHijos") String numHijos,
-            @RequestParam(value = "nivel") String nivel
+            @RequestParam(value = "nivel") String nivel,
+            @RequestParam(value = "volver", required = false) String volver
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1718,6 +1740,7 @@ public class main {
         map.put("estado", etapaOrigen);
         map.put("infoFam", infoFam);
         map.put("expediente", expediente);
+        map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_ant_nna", map);
     }
 
@@ -1737,7 +1760,8 @@ public class main {
             @RequestParam(value = "tipoFamilia") String tipoFamilia,
             @RequestParam(value = "tipoEspera") String tipoEspera,
             @RequestParam(value = "unidad") long unidad,
-            @RequestParam(value = "entAsoc") long entAsoc
+            @RequestParam(value = "entAsoc") long entAsoc,
+            @RequestParam(value = "volver", required = false) String volver
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1791,6 +1815,7 @@ public class main {
         map.put("expediente", expediente);
         map.put("listaUA", ServicioPersonal.ListaUa());
         map.put("listaEntidad", ServicioPersonal.ListaEntidades());
+        map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_registro", map);
     }
 
@@ -1810,7 +1835,8 @@ public class main {
             @RequestParam(value = "numCel", required = false) String numCel,
             @RequestParam(value = "correo", required = false) String correo,
             @RequestParam(value = "estadoCivil", required = false) String estadoCivil,
-            @RequestParam(value = "fechaMat", required = false) String fechaMat
+            @RequestParam(value = "fechaMat", required = false) String fechaMat,
+            @RequestParam(value = "volver", required = false) String volver
     //            @RequestParam(value = "nivelInstruccion", required = false) String nivelInstruccion,
     //            @RequestParam(value = "culminoNivel", required = false) String culminoNivel,
     //            @RequestParam(value = "profesion", required = false) String profesion,
@@ -1942,6 +1968,7 @@ public class main {
             map.put("estado", etapaOrigen);
             map.put("infoFam", infoFam);
             map.put("expediente", expediente);
+            map.addAttribute("volver", volver);
             map.put("El", El);
             return new ModelAndView("/Personal/familia/info_el", map);
         } else {
@@ -2052,6 +2079,7 @@ public class main {
             map.put("infoFam", infoFam);
             map.put("expediente", expediente);
             map.put("Ella", Ella);
+            map.addAttribute("volver", volver);
             return new ModelAndView("/Personal/familia/info_ella", map);
 
         }
@@ -2164,9 +2192,9 @@ public class main {
     public String CronogramaAnualPrev() {
         return "cronograma_prev";
     }
-    
+
     @RequestMapping(value = "/CronogramaAnual", method = RequestMethod.POST)
-    public ModelAndView CronogramaAnual(ModelMap map, HttpSession session,@RequestParam(value = "ua") String ua) {
+    public ModelAndView CronogramaAnual(ModelMap map, HttpSession session, @RequestParam(value = "ua") String ua) {
 
         ArrayList<Taller> allTalleres = new ArrayList();
         allTalleres = ServicioMain.listaTalleresProgramados(ua);
@@ -2307,7 +2335,9 @@ public class main {
     }
 
     @RequestMapping(value = "/generarContrasenaFam", method = RequestMethod.POST)
-    public ModelAndView generarContrasenaFam(ModelMap map, HttpSession session, @RequestParam("password2") String newpass) {
+    public ModelAndView generarContrasenaFam(ModelMap map, HttpSession session,
+            @RequestParam("password2") String newpass,
+            @RequestParam(value = "volver", required = false) String volver) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         String mensaje = "";
         if (usuario == null) {
@@ -2330,6 +2360,7 @@ public class main {
         map.put("estado", etapaOrigen);
         map.put("expediente", expediente);
         map.addAttribute("mensaje", mensaje);
+        map.addAttribute("volver", volver);
         return new ModelAndView(pagina, map);
     }
 
@@ -3055,8 +3086,6 @@ public class main {
             }
         }
         allID.clear();
-        
-        
 
         map.put("listaNna", listaDeNna);
         map.put("listaExpedientes", listaFamiliasEstudio);
@@ -3069,7 +3098,7 @@ public class main {
         return new ModelAndView("/Personal/nna/edit_revision", map);
 
     }
-    
+
     @RequestMapping(value = "/MainGuardarRevision", method = RequestMethod.POST)
     public ModelAndView MainGuardarRevision(ModelMap map, HttpSession session,
             @RequestParam("numero") String numero,
@@ -3084,12 +3113,12 @@ public class main {
         listaFamiliasEstudio.clear();
         ArrayList<Revision> allRevisiones = new ArrayList();
         allRevisiones = ServicioMain.getListaRevisionesPorNumero(numero);
-        
+
         for (Revision revision : allRevisiones) {
             revision.setComentarios(coments);
             ServicioMain.crearRevision(revision);
         }
-        
+
         ArrayList<Long> allID = new ArrayList();
         ArrayList<Nna> listaDeNna = new ArrayList();
         ArrayList<ExpedienteFamilia> listaDeExpedientes = new ArrayList();
@@ -3120,8 +3149,6 @@ public class main {
             }
         }
         allID.clear();
-        
-        
 
         map.put("listaNna", listaDeNna);
         map.put("listaExpedientes", listaFamiliasEstudio);
@@ -3386,7 +3413,7 @@ public class main {
             allEstudioCaso = servicioEtapa.getListaEstudioCasoOrden(orden);
             for (EstudioCaso estudioCaso : allEstudioCaso) {
                 if (estudioCaso.getResultado() == null) {
-                    estudioCaso.setResultado("noobs");                    
+                    estudioCaso.setResultado("noobs");
                     servicioEtapa.updateEstudioCaso(estudioCaso);
                     ExpedienteFamilia tempExp = estudioCaso.getExpedienteFamilia();
                     tempExp = estudioCaso.getExpedienteFamilia();

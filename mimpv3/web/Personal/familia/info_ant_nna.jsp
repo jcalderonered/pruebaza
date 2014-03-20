@@ -104,7 +104,8 @@
                     <div class="col-md-8">
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarInfoFamilia" method="post" name="formulario" onsubmit="return(validar());">
-                            <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->                            
+                            <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->          
+                            <input hidden name="volver" id="volver" value="${volver}">
                             <c:if test="${estado != 'formativa'}">
                                 <br>
                                 <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>

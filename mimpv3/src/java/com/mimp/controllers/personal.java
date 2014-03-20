@@ -3284,7 +3284,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/ActualizarAdoptanteInt", method = RequestMethod.POST)
-    public ModelAndView ActualizarAdoptante(ModelMap map, HttpSession session,
+    public ModelAndView ActualizarAdoptanteInt(ModelMap map, HttpSession session,
             @RequestParam(value = "adoptante") String adoptante,
             @RequestParam(value = "nombre", required = false) String nombre,
             @RequestParam(value = "apellidoP", required = false) String apellidoP,
@@ -3316,7 +3316,8 @@ public class personal {
             @RequestParam(value = "tipoSeguro", required = false) String tipoSeguro,
             @RequestParam(value = "seguroVida", required = false) String seguroVida,
             @RequestParam(value = "sisPensiones", required = false) String sisPensiones,
-            @RequestParam(value = "estadoActual", required = false) String estadoActual
+            @RequestParam(value = "estadoActual", required = false) String estadoActual,
+            @RequestParam(value = "volver", required = false) String volver
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -3446,6 +3447,7 @@ public class personal {
             map.put("df", format);
             map.put("infoFam", infoFam);
             map.put("El", El);
+            map.addAttribute("volver", volver);
             return new ModelAndView("/Personal/fam_inter/datos_el", map);
         } else {
             Ella.setInfoFamilia(infoFam);
@@ -3568,6 +3570,7 @@ public class personal {
             map.put("df", format);
             map.put("infoFam", infoFam);
             map.put("Ella", Ella);
+            map.addAttribute("volver", volver);
             return new ModelAndView("/Personal/fam_inter/datos_ella", map);
 
         }

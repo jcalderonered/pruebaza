@@ -103,7 +103,9 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <form action="${pageContext.servletContext.contextPath}${volver}?volver=${volver}" method="post">
+                                <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            </form>                         
                         <c:if test="${estado != 'formativa'}">
                             <br>
                             <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
@@ -127,10 +129,12 @@
                         <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                         <c:if test="${atencion == null}">
                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearAtencion" method="post"> 
+                                <input hidden name="volver" id="volver" value="${volver}">
                             </c:if>  
                             <c:if test="${atencion != null}">
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateAtencion" method="post"> 
                                     <input hidden name="idAtencion" id="idAtencion" value="${atencion.getIdatencion()}">
+                                    <input hidden name="volver" id="volver" value="${volver}">
                                 </c:if>  
                                 <fieldset>
                                     <br>
