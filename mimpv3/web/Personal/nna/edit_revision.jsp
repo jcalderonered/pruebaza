@@ -100,10 +100,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <form action="${pageContext.servletContext.contextPath}/verRevision" method="post">                            
-                            <input hidden name="idNna" id="idNna" value="${idNna}"> 
-                            <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        </form>
+                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/listaRevision'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" >
