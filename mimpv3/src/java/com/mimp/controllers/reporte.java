@@ -5218,6 +5218,17 @@ public class reporte {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             response.setHeader("Content-Disposition", "attachment; filename=Renad.xlsx");
             OutputStream fileOut = response.getOutputStream();
+            wb.getSheetAt(1).setForceFormulaRecalculation(true);
+            wb.getSheetAt(2).setForceFormulaRecalculation(true);
+            wb.getSheetAt(3).setForceFormulaRecalculation(true);
+            wb.getSheetAt(4).setForceFormulaRecalculation(true);
+            wb.getSheetAt(5).setForceFormulaRecalculation(true);
+            wb.getSheetAt(6).setForceFormulaRecalculation(true);
+            wb.getSheetAt(7).setForceFormulaRecalculation(true);
+            wb.getSheetAt(8).setForceFormulaRecalculation(true);
+            wb.getSheetAt(9).setForceFormulaRecalculation(true);
+            wb.getSheetAt(10).setForceFormulaRecalculation(true);
+            wb.getSheetAt(11).setForceFormulaRecalculation(true);
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
@@ -5226,7 +5237,7 @@ public class reporte {
         }
     }
 
-    //PARA PROBAR CON MAS CAMPOS
+    //LISTO
     @RequestMapping("/Reportes/InscritosSI")
     public void ReporteInscritosSI(ModelMap map, HttpSession session,
             @RequestParam(value = "idsesion", required = false) String idsesion,
