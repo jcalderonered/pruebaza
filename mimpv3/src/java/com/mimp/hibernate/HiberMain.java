@@ -9,11 +9,17 @@ import java.util.*;
 import org.hibernate.Session;
 import com.mimp.bean.*;
 import com.mimp.util.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.annotation.Resource;
+import oracle.jdbc.OracleTypes;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.jdbc.Work;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -123,8 +129,8 @@ public class HiberMain {
             Turno temp = (Turno) iter.next();
             Hibernate.initialize(temp.getSesion());
             Hibernate.initialize(temp.getAsistenciaFTs());
-            if(temp.getSesion().getUnidad().equals(ua)){
-            Turnos.add(temp);
+            if (temp.getSesion().getUnidad().equals(ua)) {
+                Turnos.add(temp);
             }
         }
 
@@ -560,32 +566,77 @@ public class HiberMain {
     public ArrayList<Taller> listaTalleresProgramados(String ua) {
 
         Session session = sessionFactory.getCurrentSession();
-
         session.beginTransaction();
+
+        final String uaN = ua;
+        ArrayList<Taller> allTalleres = new ArrayList();
 
         String hql = "FROM Taller T where T.unidad = :ua order by T.idtaller ASC";
         Query query = session.createQuery(hql);
         query.setString("ua", ua);
         List talleres = query.list();
-        ArrayList<Taller> allTalleres = new ArrayList();
-        for (Iterator iter = talleres.iterator(); iter.hasNext();) {
-            Taller temp = (Taller) iter.next();
-            Hibernate.initialize(temp.getGrupos());
-            Set<Grupo> grupos = new HashSet<Grupo>(0);
-            for (Grupo grp : temp.getGrupos()) {
-                Hibernate.initialize(grp.getTurno2s());
-                Set<Turno2> turno2s = new HashSet<Turno2>(0);
-                for (Turno2 trn : grp.getTurno2s()) {
-                    Hibernate.initialize(trn.getReunions());
-                    turno2s.add(trn);
+        for (Iterator iter1 = talleres.iterator(); iter1.hasNext();) {
+            Taller temp1 = (Taller) iter1.next();
+            String hql2 = "From Grupo G where G.taller = :idT order by G.idgrupo asc";
+            query = session.createQuery(hql2);
+            query.setLong("idT", temp1.getIdtaller());
+            List listaGrupos = query.list();
+            Set<Grupo> allGrupos = new LinkedHashSet<>();
+            for (Iterator iter2 = listaGrupos.iterator(); iter2.hasNext();) {
+                Grupo temp2 = (Grupo) iter2.next();
+                String hql3 = "From Turno2 T where T.grupo = :idG order by T.idturno2 asc";
+                query = session.createQuery(hql3);
+                query.setLong("idG", temp2.getIdgrupo());
+                List listaT2 = query.list();   
+                Set<Turno2> allTurno2 = new LinkedHashSet<>();
+                for (Iterator iter3 = listaT2.iterator(); iter3.hasNext();) {
+                        Turno2 temp3 = (Turno2) iter3.next();
+                        String hql4 = "From Reunion R where R.turno2 = :idT order by R.fecha ASC";
+                        query = session.createQuery(hql4);
+                        query.setLong("idT", temp3.getIdturno2());
+                        List reuniones = query.list();
+                        Set<Reunion> reunions = new LinkedHashSet<>();
+                        for (Iterator iter4 = reuniones.iterator(); iter4.hasNext();) {
+                                 Reunion reu = (Reunion) iter4.next();   
+                                 reunions.add(reu);
+                        }                          
+                        temp3.setReunions(reunions);
+                        allTurno2.add(temp3);
                 }
-                grp.setTurno2s(turno2s);
-                grupos.add(grp);
+                temp2.setTurno2s(allTurno2);
+                allGrupos.add(temp2);
             }
-            temp.setGrupos(grupos);
-            allTalleres.add(temp);
+            temp1.setGrupos(allGrupos);
+            allTalleres.add(temp1);
+            
         }
         return allTalleres;
+//        Session session = sessionFactory.getCurrentSession();
+//
+//        session.beginTransaction();
+//
+//        String hql = "FROM Taller T where T.unidad = :ua order by T.idtaller ASC";
+//        Query query = session.createQuery(hql);
+//        query.setString("ua", ua);
+//        List talleres = query.list();
+//          ArrayList<Taller> allTalleres = new ArrayList();
+//        for (Iterator iter = talleres.iterator(); iter.hasNext();) {
+//            Taller temp = (Taller) iter.next();
+//            Hibernate.initialize(temp.getGrupos());
+//            Set<Grupo> grupos = new HashSet<Grupo>(0);
+//            for (Grupo grp : temp.getGrupos()) {
+//                Hibernate.initialize(grp.getTurno2s());
+//                Set<Turno2> turno2s = new HashSet<Turno2>(0);
+//                for (Turno2 trn : grp.getTurno2s()) {
+//                    Hibernate.initialize(trn.getReunions());
+//                    turno2s.add(trn);
+//                }
+//                grp.setTurno2s(turno2s);
+//                grupos.add(grp);
+//            }
+//            temp.setGrupos(grupos);
+//            allTalleres.add(temp);
+//        }
 
     }
 
@@ -780,7 +831,7 @@ public class HiberMain {
         }
     }
 
-    public EstudioCaso getEstudioCasoEspecifico(Long idNna, Long idExpFam , String orden) {
+    public EstudioCaso getEstudioCasoEspecifico(Long idNna, Long idExpFam, String orden) {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -805,8 +856,8 @@ public class HiberMain {
         session.update(temp);
 
     }
-    
-     public ArrayList<Revision> getListaRevisionesPorNumero(String identificador) {
+
+    public ArrayList<Revision> getListaRevisionesPorNumero(String identificador) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -826,5 +877,5 @@ public class HiberMain {
         return allRevisiones;
 
     }
-    
+
 }

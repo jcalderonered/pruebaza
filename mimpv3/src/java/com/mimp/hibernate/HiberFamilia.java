@@ -118,7 +118,7 @@ public class HiberFamilia {
     public ArrayList<Taller> listaTalleresHabilitadosPorDep(String ua){
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        String hql = "From Taller T WHERE T.habilitado = :hab and T.unidad = :ua order by T.id";
+        String hql = "From Taller T WHERE T.habilitado = :hab and T.unidad = :ua order by T.id asc";
         Query query = session.createQuery(hql);
         query.setShort("hab", Short.parseShort("0"));
         query.setString("ua", ua);
@@ -133,31 +133,62 @@ public class HiberFamilia {
     
     
     public ArrayList<Grupo> listaGruposDeTaller(long idTaller){
+        
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        String hql = "From Grupo G WHERE G.taller = :id order by G.id";
-        Query query = session.createQuery(hql);
-        query.setLong("id", idTaller);
-        List grupos = query.list();
         ArrayList<Grupo> allGrupos = new ArrayList();
-         for (Iterator iter = grupos.iterator(); iter.hasNext();) {
-                Grupo temp = (Grupo) iter.next();
-                Hibernate.initialize(temp.getTurno2s());
-                Set<Turno2> allT2 = new HashSet<Turno2>(0);       
-                for (Turno2 t2 : temp.getTurno2s()) {
-                            Hibernate.initialize(t2.getReunions());
-                            allT2.add(t2);
+        
+        String hql = "From Grupo G where G.taller = :idT order by G.idgrupo asc";
+        Query query = session.createQuery(hql);
+        query.setLong("idT", idTaller);
+        List listaGrupos = query.list();
+        for (Iterator iter2 = listaGrupos.iterator(); iter2.hasNext();) {
+                Grupo temp2 = (Grupo) iter2.next();
+                String hql3 = "From Turno2 T where T.grupo = :idG order by T.idturno2 asc";
+                query = session.createQuery(hql3);
+                query.setLong("idG", temp2.getIdgrupo());
+                List listaT2 = query.list();   
+                Set<Turno2> allTurno2 = new LinkedHashSet<>();
+                for (Iterator iter3 = listaT2.iterator(); iter3.hasNext();) {
+                        Turno2 temp3 = (Turno2) iter3.next();
+                        String hql4 = "From Reunion R where R.turno2 = :idT order by R.fecha ASC";
+                        query = session.createQuery(hql4);
+                        query.setLong("idT", temp3.getIdturno2());
+                        List reuniones = query.list();
+                        Set<Reunion> reunions = new LinkedHashSet<>();
+                        for (Iterator iter4 = reuniones.iterator(); iter4.hasNext();) {
+                                 Reunion reu = (Reunion) iter4.next();   
+                                 reunions.add(reu);
+                        }                          
+                        temp3.setReunions(reunions);
+                        allTurno2.add(temp3);
                 }
-                temp.setTurno2s(allT2);
-                allGrupos.add(temp);
-         }
+                temp2.setTurno2s(allTurno2);
+                allGrupos.add(temp2);
+        }
+//        String hql = "From Grupo G WHERE G.taller = :id order by G.idgrupo asc";
+//        Query query = session.createQuery(hql);
+//        query.setLong("id", idTaller);
+//        List grupos = query.list();
+//        ArrayList<Grupo> allGrupos = new ArrayList();
+//         for (Iterator iter = grupos.iterator(); iter.hasNext();) {
+//                Grupo temp = (Grupo) iter.next();
+//                Hibernate.initialize(temp.getTurno2s());
+//                Set<Turno2> allT2 = new HashSet<Turno2>(0);       
+//                for (Turno2 t2 : temp.getTurno2s()) {
+//                            Hibernate.initialize(t2.getReunions());
+//                            allT2.add(t2);
+//                }
+//                temp.setTurno2s(allT2);
+//                allGrupos.add(temp);
+//         }
          return allGrupos;
     }
     
     public ArrayList<Reunion> listaReunionesTurno2(long idTurno2){
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        String hql = "From Reunion R WHERE R.turno2 = :id order by R.id";
+        String hql = "From Reunion R WHERE R.turno2 = :id order by R.fecha asc";
         Query query = session.createQuery(hql);
         query.setLong("id", idTurno2);
         List reuniones = query.list();
