@@ -156,140 +156,142 @@
                             <li><a href="${pageContext.servletContext.contextPath}/inf"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de sesiones/talleres</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/nna"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNA</a></li>
-                                          <%if (u.getRol().equals("admin")) {%>
-                                <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
+                                <%if (u.getRol().equals("admin")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
-                                        <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                                            <%}
+                            <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
+                                <%}
                                                 if (u.getRol().equals("DEIA")) {%>
-                                        <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
-                                            <%}
+                            <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
+                                <%}
                                                 if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
-                                        <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
-                                            <%}
+                            <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
+                                <%}
                                                 if (!u.getRol().equals("mpartes")) {%>
-                                        <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
-                                            <%}%>
-                                        <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                                        <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>       
-                                            <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
-                                        <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
-                                            <%}
+                            <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
+                                <%}%>
+                            <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
+                                <%if (!u.getRol().equals("DEIA Prio")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
+                                <%}%>
+                                <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
+                                <%}
                                                 if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
-                                        <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
-                                        <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
-                                        <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                                            <%}%>
-                                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
-                                        <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                                            <%}%>
-                                        <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <p align="right"><button id="singlebutton" onclick="location.href = '${pageContext.servletContext.contextPath}/usuarios'" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                            <h1 align="center"><strong>Lista de logs del Personal con ID: ${user.getIdpersonal()}</strong></h1>
+                            <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
+                                <%}%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
+                            <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
+                                <%}%>
+                            <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <p align="right"><button id="singlebutton" onclick="location.href = '${pageContext.servletContext.contextPath}/usuarios'" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <h1 align="center"><strong>Lista de logs del Personal con ID: ${user.getIdpersonal()}</strong></h1>
 
-                            <form action="${pageContext.servletContext.contextPath}/logParticular" method="post">
-                                <div class="row">
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <br>
-                                        <h3><strong>Filtrar por fechas</strong></h3>
-                                        <br>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Seleccionar Dia</label>
-                                                <input id="dia" name="dia" type="text" class="datepicker input-xlarge" value="${dia}">
-                                            </div>
+                        <form action="${pageContext.servletContext.contextPath}/logParticular" method="post">
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-1">
+                                    <br>
+                                    <h3><strong>Filtrar por fechas</strong></h3>
+                                    <br>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Seleccionar Dia</label>
+                                            <input id="dia" name="dia" type="text" class="datepicker input-xlarge" value="${dia}">
                                         </div>
-                                    </div>              
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input hidden name="id" id="id" value="${user.getIdpersonal()}">
-                                        <button type="submit" class="btn btn-default" >Filtrar</button>                            
-                                    </div> 
-                                       
-                            </form>  
-                            <div class="col-md-4 col-md-offset-1">
-                                <form action="${pageContext.servletContext.contextPath}/logParticularFiltroHoy" method="post">  
+                                    </div>
+                                </div>              
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-1">
                                     <input hidden name="id" id="id" value="${user.getIdpersonal()}">
+                                    <button type="submit" class="btn btn-default" >Filtrar</button>                            
+                                </div> 
+
+                        </form>  
+                        <div class="col-md-4 col-md-offset-1">
+                            <form action="${pageContext.servletContext.contextPath}/logParticularFiltroHoy" method="post">  
+                                <input hidden name="id" id="id" value="${user.getIdpersonal()}">
                                 <button type="submit" class="btn btn-default" >Ver Logs de Hoy</button>
                             </form> 
-                           </div>      
-                        </div>                    
-                        <br>
-                        <br>
-                        <div class="table-responsive">
-                            <table id="tablaPag" class="table table-bordered table-striped">
-                                <div>
-                                    <h3><strong>Logs del día: ${dia}</strong></h3>
-                                </div>
-                                <thead>
-                                    <tr>
-                                        <th > Item </th>
-                                        <th >ID del Personal</th>
-                                        <th >fecha</th>
+                        </div>      
+                    </div>                    
+                    <br>
+                    <br>
+                    <div class="table-responsive">
+                        <table id="tablaPag" class="table table-bordered table-striped">
+                            <div>
+                                <h3><strong>Logs del día: ${dia}</strong></h3>
+                            </div>
+                            <thead>
+                                <tr>
+                                    <th > Item </th>
+                                    <th >ID del Personal</th>
+                                    <th >fecha</th>
 
-                                        <th >Tipo de registro</th>
-                                        <th >Número del registro</th>
-                                        <th >Incidencia</th>                                          
-                                    </tr>
-                                </thead>
-                                <c:if test="${!listaParticularLog.isEmpty()}"> 
-                                    <tbody>
-                                        <c:forEach var="log" items="${listaParticularLog}" varStatus="status">
-                                            <tr>
-                                                <td>${status.index + 1}</td>
-                                                <td>${log.getPersonal().getNombre()} ${log.getPersonal().getApellidoP()} ${log.getPersonal().getApellidoM()}</td>
-                                                <td>${log.getFecha()}</td>
-                                                <td>${log.getTipoReg()}</td>
-                                                <td>${log.getNReg()}</td>
-                                                <td>${log.getIncidencia()}</td>                                                                            
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </c:if> 
-                                <c:if test="${listaParticularLog.isEmpty()}">
-                                    <h3><strong>No se encontraron resultados</strong></h3>
-                                </c:if>   
-                            </table>
-                        </div>
-                        <br>                
-                        <div class="col-md-offset-4" id="pageNavPosition"></div>  
-
-                        <script type="text/javascript"> 
-                                var pager = new Pager('tablaPag', 8);
-                            pager.init();
-                            pager.showPageNav('pager', 'pageNavPosition');
-                            pager.showPage(1);
-                        </script>          
-                        <br>
+                                    <th >Tipo de registro</th>
+                                    <th >Número del registro</th>
+                                    <th >Incidencia</th>                                          
+                                </tr>
+                            </thead>
+                            <c:if test="${!listaParticularLog.isEmpty()}"> 
+                                <tbody>
+                                    <c:forEach var="log" items="${listaParticularLog}" varStatus="status">
+                                        <tr>
+                                            <td>${status.index + 1}</td>
+                                            <td>${log.getPersonal().getNombre()} ${log.getPersonal().getApellidoP()} ${log.getPersonal().getApellidoM()}</td>
+                                            <td>${log.getFecha()}</td>
+                                            <td>${log.getTipoReg()}</td>
+                                            <td>${log.getNReg()}</td>
+                                            <td>${log.getIncidencia()}</td>                                                                            
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </c:if> 
+                            <c:if test="${listaParticularLog.isEmpty()}">
+                                <h3><strong>No se encontraron resultados</strong></h3>
+                            </c:if>   
+                        </table>
                     </div>
+                    <br>                
+                    <div class="col-md-offset-4" id="pageNavPosition"></div>  
+
+                    <script type="text/javascript">
+                        var pager = new Pager('tablaPag', 8);
+                        pager.init();
+                        pager.showPageNav('pager', 'pageNavPosition');
+                        pager.showPage(1);
+                    </script>          
+                    <br>
                 </div>
             </div>
-            <!--FIN DE CONTENIDO-->
-            <br>
-            <br>
-        </div>   
-        <div id="footer">
-            <div id="ja-footer" class="wrap">
-                <hr width=80% align="center">
-                <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
-            </div>
         </div>
-        <!-- core JavaScript
-                ================================================== -->
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
-        <script type="text/javascript">
+        <!--FIN DE CONTENIDO-->
+        <br>
+        <br>
+    </div>   
+    <div id="footer">
+        <div id="ja-footer" class="wrap">
+            <hr width=80% align="center">
+            <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
+        </div>
+    </div>
+    <!-- core JavaScript
+            ================================================== -->
+    <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
+    <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
+    <script type="text/javascript">
 
-                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
-        </script>
-        <!-- Ubicar al final -->
-    </body>
+    </script>
+    <!-- Ubicar al final -->
+</body>
 </html>
