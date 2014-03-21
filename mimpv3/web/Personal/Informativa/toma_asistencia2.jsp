@@ -116,7 +116,7 @@
             }
         }
     </script>  	
-    
+
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -161,31 +161,31 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                <%}
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -200,7 +200,7 @@
                             <input id="textinput" name="textinput" disabled type="text" placeholder="Sesión Informativa" class="input-xlarge">
                         </div>
                         <br>
-                        
+
                         <div class="controls">
                             <label class="control-label" for="textinput">Número de evento&nbsp</label>
                             <input id="textinput" name="textinput" value="${sesion.getNSesion()}" disabled type="text" placeholder="Sesión Informativa 2013-2" class="input-xlarge">
@@ -219,7 +219,7 @@
                         </div>
                         <br>
                         <br>
-                        
+
                         <div class="bs-example">
                             <table id="mi_tabla" class="table table-bordered mytable">
                                 <thead>
@@ -237,10 +237,10 @@
                                     </tr>
                                 </thead>
                                 <c:if test="${listaFormularios != null}">
-                                <c:set var="contador" value="0" scope="page" />    
-                                <tbody>
-                                    <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
-                                        <c:set var="idsesion_in" value="${formulario.getSesion().getIdsesion()}" scope="page" />
+                                    <c:set var="contador" value="0" scope="page" />    
+                                    <tbody>
+                                        <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
+                                            <c:set var="idsesion_in" value="${formulario.getSesion().getIdsesion()}" scope="page" />
                                             <tr>
                                                 <c:choose>
                                                     <c:when test="${formulario.getAsistentes().size() == 2}"> 
@@ -249,63 +249,67 @@
                                                             <c:choose>
                                                                 <c:when test="${asistente.getSexo() == 109}">
                                                                     <c:set var="el" value="${asistente}" scope="page" />
-                                                                    
+
                                                                 </c:when>
                                                                 <c:when test="${asistente.getSexo() == 102}">
                                                                     <c:set var="ella" value="${asistente}" scope="page" />
                                                                 </c:when> 
                                                             </c:choose>
                                                         </c:forEach>
-                                                                    <td>${status.index + 1}</td>
-                                                                    <td>
-                                                                        ${el.getNombre()}
-                                                                        ${el.getApellidoP()}
-                                                                        ${el.getApellidoM()}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${el.getEdad()}
-                                                                    </td>
-                                                                    <td>${el.getCorreo()}</td>
-                                                                    <td>
-                                                                        ${ella.getNombre()}
-                                                                        ${ella.getApellidoP()}
-                                                                        ${ella.getApellidoM()}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${ella.getEdad()}
-                                                                    </td>
+                                                        <td>${status.index + 1}</td>
+                                                        <td>
+                                                            ${el.getNombre()}
+                                                            ${el.getApellidoP()}
+                                                            ${el.getApellidoM()}
+                                                        </td>
+                                                        <td>
+                                                            ${el.getEdad()}
+                                                        </td>
+                                                        <td>${el.getCorreo()}</td>
+                                                        <td>
+                                                            ${ella.getNombre()}
+                                                            ${ella.getApellidoP()}
+                                                            ${ella.getApellidoM()}
+                                                        </td>
+                                                        <td>
+                                                            ${ella.getEdad()}
+                                                        </td>
 
-                                                                    <td>${ella.getCorreo()}</td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion2" method="post">
-                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
-                                                                            <input hidden name="idSesion" id="idSesion" value="${idSesion}">   
-                                                                            <button type="submit" class="btn btn-default">Ver</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalAsistioSesion" method="post">
-                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
-                                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                                            <c:set var="token" value="0" scope="page" />
-                                                                            <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">
-                                                                                <c:if test="${token == '0'}">
-                                                                                   <button ${AFT.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
-                                                                                   <c:set var="token" value="1" scope="page" />
-                                                                                </c:if>   
-                                                                            </c:forEach>   
-                                                                            
-                                                                        </form>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalCrearUsuarioFamilia" method="post">
-                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
-                                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                                            <input hidden name="user" id="user" value="${ella.getCorreo()}"> 
-                                                                            <button ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
-                                                                        </form>
-                                                                    </td>
-                                                                    
+                                                        <td>${ella.getCorreo()}</td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalDetalleFamiliaInscritaSesion2" method="post">
+                                                                <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                <input hidden name="idSesion" id="idSesion" value="${idSesion}">   
+                                                                <button type="submit" class="btn btn-default">Ver</button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalAsistioSesion" method="post">
+                                                                <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                <c:set var="token" value="0" scope="page" />
+                                                                <c:set var="tempAsis" value="1" scope="page" />
+                                                                <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">
+                                                                    <c:if test="${token == '0'}">
+                                                                        <button ${AFT.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                        <c:set var="token" value="1" scope="page" />
+                                                                        <c:if test="${AFT.getAsistencia() == 65}">
+                                                                            <c:set var="tempAsis" value="0" scope="page" />
+                                                                        </c:if>
+                                                                    </c:if>   
+                                                                </c:forEach>   
+
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalCrearUsuarioFamilia" method="post">
+                                                                <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                <input hidden name="user" id="user" value="${ella.getCorreo()}"> 
+                                                                <button ${tempAsis != 0 ? 'disabled' : ''} ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
+                                                            </form>
+                                                        </td>
+
                                                     </c:when>
                                                     <c:when test="${formulario.getAsistentes().size() == 1}">
                                                         <c:set var="contador" value="${contador + 1}" scope="page"/>
@@ -314,9 +318,9 @@
                                                                 <c:when test="${asistente.getSexo() == 109}">
                                                                     <td>${status.index + 1}</td>
                                                                     <td>
-                                                                    ${asistente.getNombre()}    
-                                                                    ${asistente.getApellidoP()}
-                                                                    ${asistente.getApellidoM()}
+                                                                        ${asistente.getNombre()}    
+                                                                        ${asistente.getApellidoP()}
+                                                                        ${asistente.getApellidoM()}
                                                                     </td>
                                                                     <td>${asistente.getEdad()}</td>
                                                                     <td>${asistente.getCorreo()}</td>
@@ -334,8 +338,12 @@
                                                                         <form action="${pageContext.servletContext.contextPath}/PersonalAsistioSesion" method="post">
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
                                                                             <input hidden type="text" name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                            <c:set var="tempAsis" value="1" scope="page" />
                                                                             <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">        
-                                                                                                     <button ${AFT.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                                <button ${AFT.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                                <c:if test="${AFT.getAsistencia() == 65}">
+                                                                                    <c:set var="tempAsis" value="0" scope="page" />
+                                                                                </c:if>
                                                                             </c:forEach>
                                                                         </form>
                                                                     </td>
@@ -344,7 +352,7 @@
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
                                                                             <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
                                                                             <input hidden name="user" id="user" value="${asistente.getCorreo()}"> 
-                                                                            <button ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
+                                                                            <button ${tempAsis != 0 ? 'disabled' : ''} ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
                                                                         </form>
                                                                     </td>
                                                                 </c:when>
@@ -354,9 +362,9 @@
                                                                     <td></td>
                                                                     <td></td>
                                                                     <td>
-                                                                    ${asistente.getNombre()}
-                                                                    ${asistente.getApellidoP()}
-                                                                    ${asistente.getApellidoM()}
+                                                                        ${asistente.getNombre()}
+                                                                        ${asistente.getApellidoP()}
+                                                                        ${asistente.getApellidoM()}
                                                                     </td>
                                                                     <td>${asistente.getEdad()}</td>
                                                                     <td>${asistente.getCorreo()}</td>
@@ -371,10 +379,14 @@
                                                                         <form action="${pageContext.servletContext.contextPath}/PersonalAsistioSesion" method="post">
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
                                                                             <input hidden type="text" name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                            <c:set var="tempAsis" value="1" scope="page" />
                                                                             <c:forEach var="AFT" items="${formulario.getAsistenciaFTs()}" varStatus="status">        
-                                                                                                     <button ${AFT.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                                <button ${AFT.getAsistencia() == 65 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistió</button>
+                                                                                <c:if test="${AFT.getAsistencia() == 65}">
+                                                                                    <c:set var="tempAsis" value="0" scope="page" />
+                                                                                </c:if>
                                                                             </c:forEach>
-                                                                            
+
                                                                         </form>
                                                                     </td>
                                                                     <td>
@@ -382,32 +394,32 @@
                                                                             <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
                                                                             <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
                                                                             <input hidden name="user" id="user" value="${asistente.getCorreo()}"> 
-                                                                            <button ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
+                                                                            <button ${tempAsis != 0 ? 'disabled' : ''} ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
                                                                         </form>
                                                                     </td>   
                                                                 </c:when>    
                                                             </c:choose>
                                                         </c:forEach>
                                                     </c:when>    
-                                                  <c:otherwise>
-                                                 </c:otherwise>
-                                               </c:choose>
+                                                    <c:otherwise>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </tr>
                                         </c:forEach>
-                                </tbody>
-                                <a href="${pageContext.servletContext.contextPath}/Reportes/AsistenciaSI?idsesion=${idsesion_in}" class="btn btn-default">Exportar a Excel</a>
+                                    </tbody>
+                                    <a href="${pageContext.servletContext.contextPath}/Reportes/AsistenciaSI?idsesion=${idsesion_in}" class="btn btn-default">Exportar a Excel</a>
                                 </c:if>
                                 <h3><strong>Número de inscritos : ${contador}</strong></h3>
                             </table>
                             <c:if test="${listaFormularios.size() == 0}">
-                               <h3><strong>Aún no hay personas inscritas</strong></h3>
+                                <h3><strong>Aún no hay personas inscritas</strong></h3>
                             </c:if>
                         </div><!-- /example -->
                         <br>       
                         <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
-                        <script type="text/javascript"> 
-                                var pager = new Pager('mi_tabla', 8);  
+                        <script type="text/javascript">
+                            var pager = new Pager('mi_tabla', 8);
                             pager.init();
                             pager.showPageNav('pager', 'pageNavPosition');
                             pager.showPage(1);
@@ -415,7 +427,7 @@
                         <br>
                         <p>IMPORTANTE: Una vez guardado, no se podrán hacer cambios</p>
                         <br>
-                                 
+
                     </div>
                 </div>
             </div>

@@ -1251,7 +1251,7 @@ public class familia {
         short numAsistentes = ServicioFamilia.numAsistentesFormulario(usuario.getIdfamilia());
         boolean inscripcion = false;
         for (Reunion reunion : allReuniones) {
-            if (reunion.getAsistenciaFRs().size() + numAsistentes >= reunion.getCapacidad()) {
+            if ((reunion.getAsistenciaFRs().size() + numAsistentes) > reunion.getCapacidad()) {
                 inscripcion = true;
             }
         }

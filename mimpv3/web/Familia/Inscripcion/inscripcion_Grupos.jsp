@@ -84,7 +84,6 @@
                                         <th class="col-sm-2 ">Grupos</th>
                                         <th class="col-sm-2 ">Turno</th>
                                         <th class="col-sm-2 ">Fechas</th>
-                                        <th class="col-sm-2 ">Duración</th>
                                         <th class="col-sm-2 ">Dirección</th>
                                         <th class="col-sm-2 ">Registro</th>
                                     </tr>
@@ -120,7 +119,6 @@
                                                         <td rowspan="${turno2.getReunions().size()}">${turno2.getNombre()}</td>
                                                         </c:if> 
                                                         <td>${reunion.getFecha() != null ? df.dateToString(reunion.getFecha()) : ''} - ${reunion.getHora()}</td>
-                                                        <td>${reunion.getDuracion()}</td>
                                                         <td>${reunion.getDireccion()}</td>
                                                         <c:if test="${idTurno != turno2.getIdturno2()}">
                                                         <c:set var="idTurno" value="${turno2.getIdturno2()}" />

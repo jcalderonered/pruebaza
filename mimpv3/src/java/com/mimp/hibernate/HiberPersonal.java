@@ -688,13 +688,24 @@ public class HiberPersonal {
         Object queryResult = query.uniqueResult();
 
         taller = (Taller) queryResult;
-        Hibernate.initialize(taller.getGrupos());
-
-        Set<Grupo> allGrupos = new HashSet<Grupo>(0);
-        for (Grupo grup : taller.getGrupos()) {
-            Hibernate.initialize(grup.getTurno2s());
-            allGrupos.add(grup);
+        //Hibernate.initialize(taller.getGrupos());
+        String hql2 = "From Grupo G where G.taller = :idT order by G.idgrupo asc";
+        query = session.createQuery(hql2);
+        query.setLong("idT", taller.getIdtaller());
+        List listaGrupos = query.list();
+        
+        Set<Grupo> allGrupos = new LinkedHashSet<>();
+        
+        for (Iterator iter = listaGrupos.iterator(); iter.hasNext();) {
+            Grupo temp = (Grupo) iter.next();
+            Hibernate.initialize(temp.getTurno2s());
+            allGrupos.add(temp);
         }
+        
+//        for (Grupo grup : taller.getGrupos()) {
+//            Hibernate.initialize(grup.getTurno2s());
+//            allGrupos.add(grup);
+//        }
         taller.setGrupos(allGrupos);
         return taller;
 
@@ -710,15 +721,27 @@ public class HiberPersonal {
         Query query = session.createQuery(hql);
         query.setLong("id", id);
         Object queryResult = query.uniqueResult();
-
+             
         grp = (Grupo) queryResult;
-        Hibernate.initialize(grp.getTurno2s());
         Hibernate.initialize(grp.getTaller());
-        Set<Turno2> allTurno2 = new HashSet<Turno2>(0);
-        for (Turno2 t2 : grp.getTurno2s()) {
-            Hibernate.initialize(t2.getReunions());
-            allTurno2.add(t2);
+        
+        String hql2 = "From Turno2 T where T.grupo = :idG order by T.idturno2 asc";
+        query = session.createQuery(hql2);
+        query.setLong("idG", grp.getIdgrupo());
+        List listaT2 = query.list();
+        
+        //Hibernate.initialize(grp.getTurno2s());
+        
+        Set<Turno2> allTurno2 = new LinkedHashSet<>();
+        for (Iterator iter = listaT2.iterator(); iter.hasNext();) {
+            Turno2 temp = (Turno2) iter.next();
+            Hibernate.initialize(temp.getReunions());
+            allTurno2.add(temp);
         }
+//        for (Turno2 t2 : grp.getTurno2s()) {
+//            Hibernate.initialize(t2.getReunions());
+//            allTurno2.add(t2);
+//        }
         grp.setTurno2s(allTurno2);
         return grp;
 
@@ -736,9 +759,20 @@ public class HiberPersonal {
         Object queryResult = query.uniqueResult();
 
         t2 = (Turno2) queryResult;
-        Hibernate.initialize(t2.getReunions());
-        Hibernate.initialize(t2.getGrupo());
-
+        //Hibernate.initialize(t2.getReunions());
+        
+        String hql2 = "From Reunion R where R.turno2 = :idT order by R.fecha ASC";
+        query = session.createQuery(hql2);
+        query.setLong("idT", t2.getIdturno2());
+        List reuniones = query.list();
+        Set<Reunion> reunions = new LinkedHashSet<>();
+        for (Iterator iter = reuniones.iterator(); iter.hasNext();) {
+                Reunion reu = (Reunion) iter.next();
+                reunions.add(reu);
+        }
+        Hibernate.initialize(t2.getGrupo());                        
+        t2.setReunions(reunions);
+        
         return t2;
 
     }
@@ -1653,7 +1687,7 @@ public class HiberPersonal {
                     Grupo tempGrp = new Grupo();
                     tempGrp.setIdgrupo(rs.getLong("IDGRUPO"));
                     tempGrp.setNombre(rs.getString("NOMBRE"));
-                    Set<Turno2> listTurno2 = new HashSet<Turno2>(0);
+                    Set<Turno2> listTurno2 = new LinkedHashSet<>();
                     String hql2 = "{call PERS_LISTA_TURNO2(?,?)}";
                     CallableStatement statement2 = connection.prepareCall(hql2);
                     statement2.setLong(1, tempGrp.getIdgrupo());
@@ -1667,7 +1701,7 @@ public class HiberPersonal {
                         tempT2.setIdturno2(rs2.getLong("IDTURNO2"));
                         tempT2.setNombre(rs2.getString("NOMBRE"));
                         tempT2.setGrupo(tempGrp);
-                        Set<Reunion> listR = new HashSet<Reunion>(0);
+                        Set<Reunion> listR = new LinkedHashSet<>();
                         String hql3 = "{call PERS_LISTA_REUNION(?,?)}";
                         CallableStatement statement3 = connection.prepareCall(hql3);
                         statement3.setLong(1, tempT2.getIdturno2());
