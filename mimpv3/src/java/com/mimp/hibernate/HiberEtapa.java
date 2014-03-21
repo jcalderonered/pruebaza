@@ -92,7 +92,7 @@ public class HiberEtapa {
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-
+        
         final ArrayList<Familia> allFamilias = new ArrayList();
 
         Work work = new Work() {
