@@ -76,7 +76,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            
+
             //InputStream inp = new FileInputStream("C:\\Plantillas\\OrgAcred.xlsx");
             InputStream inp = new FileInputStream("/opt/Plantillas/OrgAcred.xlsx");
 
@@ -147,7 +147,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            
+
             //InputStream inp = new FileInputStream("C:\\Plantillas\\PostAdop.xlsx");
             InputStream inp = new FileInputStream("/opt/Plantillas/PostAdop.xlsx");
 
@@ -418,7 +418,6 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            
             //InputStream inp = new FileInputStream("C:\\Plantillas\\NnaAbandono.xlsx");
             InputStream inp = new FileInputStream("/opt/Plantillas/NnaAbandono.xlsx");
 
@@ -1110,7 +1109,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-            
+
             //InputStream inp = new FileInputStream("C:\\Plantillas\\NnaPrio.xlsx");
             InputStream inp = new FileInputStream("/opt/Plantillas/NnaPrio.xlsx");
 
@@ -1479,7 +1478,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-           
+
             //InputStream inp = new FileInputStream("C:\\Plantillas\\NnaGrupos.xlsx");
             InputStream inp = new FileInputStream("/opt/Plantillas/NnaGrupos.xlsx");
 
@@ -3481,7 +3480,7 @@ public class reporte {
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
-      
+
             //InputStream inp = new FileInputStream("C:\\Plantillas\\AdopInter.xlsx");
             InputStream inp = new FileInputStream("/opt/Plantillas/AdopInter.xlsx");
 
@@ -5492,47 +5491,138 @@ public class reporte {
 
             int i = 7;
             boolean flag = true;
-            for (Reunion reu : turno.getReunions()) {
-                row = sheet.getRow(i);
-                for (AsistenciaFR asist : reu.getAsistenciaFRs()) {
-                    if (flag) {
-                        for (InfoFamilia ifam : asist.getFamilia().getInfoFamilias()) {
-                            cell = row.getCell(1);
-                            cell.setCellValue(i - 6);
-                            cell = row.getCell(2);
-                            cell.setCellValue(ifam.getEstadoCivil());
-                            for (Adoptante adop : ifam.getAdoptantes()) {
-                                if (adop.getSexo() == 'f') {
-                                    cell = row.getCell(3);
-                                    cell.setCellValue(adop.getApellidoP() + " " + adop.getApellidoM());
-                                    cell = row.getCell(4);
-                                    cell.setCellValue(adop.getNombre());
-                                } else if (adop.getSexo() == 'm') {
-                                    cell = row.getCell(5);
-                                    cell.setCellValue(adop.getApellidoP() + " " + adop.getApellidoM());
-                                    cell = row.getCell(6);
-                                    cell.setCellValue(adop.getNombre());
-                                }
-                            }
-                            flag = false;
-                            break;
-                        }
+
+            //Conseguimos la primera reunion y ordenamos las reuniones por fecha
+            Set<Reunion> listaReunionesSet = turno.getReunions();
+            ArrayList<Reunion> listaReuniones = new ArrayList<Reunion>();
+            for (Reunion reu1 : listaReunionesSet) {
+                listaReuniones.add(reu1);
+            }
+            Reunion primeraReu = new Reunion();
+            int o = listaReuniones.size();
+            Reunion reuaux = new Reunion();
+            for (int k = 0; k < o - 1; k++) {
+                for (int j = k; j < o - 1; j++) {
+                    if (listaReuniones.get(k).getFecha().after(listaReuniones.get(j + 1).getFecha())) {
+                        reuaux = listaReuniones.get(k);
+                        listaReuniones.set(k, listaReuniones.get(j + 1));
+                        listaReuniones.set(j + 1, reuaux);
                     }
-                    String asistencia = "";
-                    if (asist.getAsistencia() == 'F') {
-                        if (asist.getInasJus() == 0) {
-                            asistencia = "FJ";
-                        } else {
-                            asistencia = "F";
-                        }
-                    } else {
-                        asistencia = "A";
-                    }
-                    cell = row.getCell(7);
-                    cell.setCellValue(asistencia);
                 }
+            }
+            primeraReu = listaReuniones.get(0);
+
+            //Sacamos la lista de familias de la primera reunion
+            ArrayList<InfoFamilia> listaFamilias = new ArrayList<InfoFamilia>();
+            for (AsistenciaFR asist : primeraReu.getAsistenciaFRs()) {
+                Set<InfoFamilia> listafam = asist.getFamilia().getInfoFamilias();
+                for (InfoFamilia famaux : listafam) {
+                    listaFamilias.add(famaux);
+                }
+            }
+
+            //METODO BUBBLESORT PARA ORDENAR SEGUN EL APELLIDO DE LA ADOPTANTE MUJER
+            int n = listaFamilias.size();
+            InfoFamilia auxfam;
+            for (int k = 0; k < n - 1; k++) {
+                ArrayList<Adoptante> asist_temp = new ArrayList(listaFamilias.get(k).getAdoptantes());
+                for (int j = k; j < n - 1; j++) {
+                    ArrayList<Adoptante> asist_temp2 = new ArrayList(listaFamilias.get(j + 1).getAdoptantes());
+                    if (asist_temp.get(0).getApellidoP().compareToIgnoreCase(asist_temp2.get(0).getApellidoP()) > 0) {
+                        auxfam = listaFamilias.get(k);
+                        listaFamilias.set(k, listaFamilias.get(j + 1));
+                        listaFamilias.set(j + 1, auxfam);
+                    }
+                }
+            }
+
+            for (InfoFamilia infoFam : listaFamilias) {
+                row = sheet.getRow(i);
+                cell = row.getCell(1);
+                cell.setCellValue(i - 6);
+                cell = row.getCell(2);
+                cell.setCellValue(infoFam.getEstadoCivil());
+                for (Adoptante adop : infoFam.getAdoptantes()) {
+                    if (adop.getSexo() == 'f') {
+                        cell = row.getCell(3);
+                        cell.setCellValue(adop.getApellidoP() + " " + adop.getApellidoM());
+                        cell = row.getCell(4);
+                        cell.setCellValue(adop.getNombre());
+                    } else if (adop.getSexo() == 'm') {
+                        cell = row.getCell(5);
+                        cell.setCellValue(adop.getApellidoP() + " " + adop.getApellidoM());
+                        cell = row.getCell(6);
+                        cell.setCellValue(adop.getNombre());
+                    }
+                }
+                int x = 7;
+                for (Reunion reuaux2 : listaReuniones) {
+                    for (AsistenciaFR asist : reuaux2.getAsistenciaFRs()) {
+                        for (InfoFamilia infofamaux2 : asist.getFamilia().getInfoFamilias()) {
+                            if (infofamaux2.getIdinfoFamilia() == infoFam.getIdinfoFamilia()) {
+                                String asistencia = "";
+                                if (asist.getAsistencia() == 'F') {
+                                    if (asist.getInasJus() == 0) {
+                                        asistencia = "FJ";
+                                    } else {
+                                        asistencia = "F";
+                                    }
+                                } else {
+                                    asistencia = "A";
+                                }
+                                cell = row.getCell(x);
+                                cell.setCellValue(asistencia);
+                            }
+                        }
+                    }
+                    x++;
+                }
+
                 i++;
             }
+
+//            for (Reunion reu : turno.getReunions()) {
+//                row = sheet.getRow(i);
+//                for (AsistenciaFR asist : reu.getAsistenciaFRs()) {
+//                    if (flag) {
+//                        for (InfoFamilia ifam : asist.getFamilia().getInfoFamilias()) {
+//                            cell = row.getCell(1);
+//                            cell.setCellValue(i - 6);
+//                            cell = row.getCell(2);
+//                            cell.setCellValue(ifam.getEstadoCivil());
+//                            for (Adoptante adop : ifam.getAdoptantes()) {
+//                                if (adop.getSexo() == 'f') {
+//                                    cell = row.getCell(3);
+//                                    cell.setCellValue(adop.getApellidoP() + " " + adop.getApellidoM());
+//                                    cell = row.getCell(4);
+//                                    cell.setCellValue(adop.getNombre());
+//                                } else if (adop.getSexo() == 'm') {
+//                                    cell = row.getCell(5);
+//                                    cell.setCellValue(adop.getApellidoP() + " " + adop.getApellidoM());
+//                                    cell = row.getCell(6);
+//                                    cell.setCellValue(adop.getNombre());
+//                                }
+//                            }
+//                            flag = false;
+//                            break;
+//                        }
+//                    }
+//                    String asistencia = "";
+//                    if (asist.getAsistencia() == 'F') {
+//                        if (asist.getInasJus() == 0) {
+//                            asistencia = "FJ";
+//                        } else {
+//                            asistencia = "F";
+//                        }
+//                    } else {
+//                        asistencia = "A";
+//                    }
+//                    cell = row.getCell(7);
+//                    cell.setCellValue(asistencia);
+//                }
+//                i++;
+//            }
+
         } catch (Exception e) {
             //e.printStackTrace();
         }
@@ -5589,7 +5679,7 @@ public class reporte {
                 ExpedienteFamilia tempExp = ServicioReporte.getInfoFamilia(designacion.getExpedienteFamilia().getIdexpedienteFamilia());
                 for (Evaluacion eval : tempExp.getEvaluacions()) {
                     for (Resolucion resol : eval.getResolucions()) {
-                        if(resol.getTipo().equals("apto") && resol.getFechaResol() != null && !resol.getFechaResol().equals("")){
+                        if (resol.getTipo().equals("apto") && resol.getFechaResol() != null && !resol.getFechaResol().equals("")) {
                             fechaApt = "" + format.dateToString(resol.getFechaResol());
                         }
                     }
@@ -5600,8 +5690,8 @@ public class reporte {
                         nivelSoc = "" + (tempInfo.getNivelSocioeconomico().toString());
                     } catch (Exception ex) {
                     }
-                    if(tempInfo.getExpectativaGenero().equals("indistinto")){
-                        ExpEdadSex = ExpEdadSex + "NIÑO O NIÑA DE" + " " + tempInfo.getExpectativaEdadMin() + " A " + tempInfo.getExpectativaEdadMax(); ; 
+                    if (tempInfo.getExpectativaGenero().equals("indistinto")) {
+                        ExpEdadSex = ExpEdadSex + "NIÑO O NIÑA DE" + " " + tempInfo.getExpectativaEdadMin() + " A " + tempInfo.getExpectativaEdadMax();;
                     }
                     if (!tempInfo.getAdoptantes().isEmpty()) {
                         Adoptante el = new Adoptante();
@@ -5672,8 +5762,7 @@ public class reporte {
                 cell.setCellValue(ExpEdadSex);
                 cell = row.createCell(7);
                 cell.setCellValue(fechaApt);
-                
-                
+
                 cell = row.createCell(8);
                 String DatosNna = "";
                 DatosNna = DatosNna + designacion.getNna().getNombre() + " " + designacion.getNna().getApellidoP() + " "
