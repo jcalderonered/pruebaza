@@ -225,7 +225,7 @@ public class HiberFamilia {
     public ArrayList<AsistenciaFR> listaReunionesInscritasFamilia(long idFamilia){
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        String hql = "From AsistenciaFR AFR WHERE AFR.familia = :id order by AFR.id DESC";
+        String hql = "From AsistenciaFR AFR WHERE AFR.familia = :id order by AFR.id ASC";
         Query query = session.createQuery(hql);
         query.setLong("id", idFamilia);
         List reuniones = query.list();

@@ -379,9 +379,9 @@
                         </div>
                         <br>
                         <div class="control-group">
-                            <label class="control-label" for="textinput">Edad <font style="color:red">(*)</font></label>
+                            <!--<label class="control-label" for="textinput">Edad <font style="color:red">(*)</font></label>-->
                             <div class="controls">
-                                <input id="edadEl" name="edadEl" type="text" placeholder="XY" class="input-xlarge">
+                                <input hidden id="edadEl" name="edadEl" type="text" placeholder="XY" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -747,9 +747,9 @@
                         </div>
                         <br>
                         <div class="control-group">
-                            <label class="control-label" for="textinput">Edad <font style="color:red">(*)</font></label>
+                            <!--<label class="control-label" for="textinput">Edad <font style="color:red">(*)</font></label>-->
                             <div class="controls">
-                                <input id="edadElla" name="edadElla" type="text" placeholder="XY" class="input-xlarge">
+                                <input hidden id="edadElla" name="edadElla" type="text" placeholder="XY" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -809,7 +809,8 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <label for="pais">País <font style="color:red">(*)</font></label>
-                            <input id="pais" name="pais" type="text" value="Peru" class="input-xlarge" disabled>
+                            <input type="text" value="Peru" class="input-xlarge" disabled>
+                            <input hidden id="pais" name="pais" value="Peru" type="text" value="Peru" class="input-xlarge"/>
                         </div>
                         <!--
                         <div class="col-lg-3">
