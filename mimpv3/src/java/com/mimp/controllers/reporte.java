@@ -4613,6 +4613,8 @@ public class reporte {
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             response.setHeader("Content-Disposition", "attachment; filename=Registro Nacional de Exp Nacionales e Internacionales.xlsx");
             OutputStream fileOut = response.getOutputStream();
+            wb.getSheetAt(2).setForceFormulaRecalculation(true);
+            wb.getSheetAt(3).setForceFormulaRecalculation(true);
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
