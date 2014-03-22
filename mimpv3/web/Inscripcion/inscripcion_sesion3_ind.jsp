@@ -379,8 +379,8 @@
                                     <input id="fechaNac" name="fechaNac" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
                                 </div>
                                 <div class="col-lg-4">
-                                    <label for="edad">Edad <font style="color:red">(*)</font></label> 
-                                    <input id="edad" name="edad" type="text" placeholder="XY" class="input-xlarge">
+                                    <!--<label for="edad">Edad <font style="color:red">(*)</font></label> -->
+                                    <input hidden id="edad" name="edad" type="text" placeholder="XY" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
@@ -440,7 +440,8 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <label for="pais">País <font style="color:red">(*)</font></label>
-                                    <input id="pais" name="pais" type="text" value="Peru" class="input-xlarge" disabled>
+                                    <input type="text" value="Peru" class="input-xlarge" disabled>
+                                    <input hidden id="pais" name="pais" type="text" value="Peru" class="input-xlarge"/>
                                 </div>
                                 <!--
                                 <div class="col-lg-3">
