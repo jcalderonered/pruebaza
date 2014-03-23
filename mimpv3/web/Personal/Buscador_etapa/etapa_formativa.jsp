@@ -268,7 +268,6 @@
                                                                     </td>
                                                                     <td>
                                                                         <c:set var="flag" value="0" scope="page" />
-                                                                        <c:set var="flag2" value="0" scope="page" />
                                                                         <c:forEach var="AFR" items="${familia.getAsistenciaFRs()}" varStatus="status">
                                                                             <c:choose>
                                                                                 <c:when test="${AFR.getAsistencia() != 65 && AFR.getInasJus() == 1}">
@@ -277,12 +276,12 @@
                                                                             </c:choose>
                                                                         </c:forEach>
                                                                         <c:choose>
-                                                                            <c:when test="${!familia.getAsistenciaFRs().isEmpty()}">
-                                                                                <c:set var="flag2" value="1" scope="page"/>
+                                                                            <c:when test="${familia.getAsistenciaFRs().isEmpty()}">
+                                                                                <c:set var="flag" value="1" scope="page"/>
                                                                             </c:when>
                                                                         </c:choose>
                                                                         <c:choose>
-                                                                            <c:when test="${flag == '0' && flag2 == '1'}">
+                                                                            <c:when test="${flag == '0'}">
                                                                                 SI
                                                                             </c:when>
                                                                             <c:otherwise>
@@ -293,11 +292,11 @@
 
                                                                     <td>
                                                                         <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
-                                                                            <input ${flag == 1 ? 'disabled' : ''} ${flag2 == 0 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
+                                                                            <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
                                                                             <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
                                                                             <br>
                                                                             <br>
-                                                                            <button ${flag == 1 ? 'disabled' : ''} ${flag2 == 0 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default" <%if (!u.getRol().equals("admin") && !u.getRol().equals("DCRI")) {%>disabled<%}%>>Guardar</button>
+                                                                            <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default" <%if (!u.getRol().equals("admin") && !u.getRol().equals("DCRI")) {%>disabled<%}%>>Guardar</button>
                                                                         </form>
                                                                     </td>
                                                                     <td>
@@ -342,12 +341,12 @@
                                                                                         </c:choose>
                                                                                     </c:forEach>
                                                                                     <c:choose>
-                                                                                        <c:when test="${!familia.getAsistenciaFRs().isEmpty()}">
-                                                                                            <c:set var="flag2" value="1" scope="page"/>
+                                                                                        <c:when test="${familia.getAsistenciaFRs().isEmpty()}">
+                                                                                            <c:set var="flag" value="1" scope="page"/>
                                                                                         </c:when>
                                                                                     </c:choose>
                                                                                     <c:choose>
-                                                                                        <c:when test="${flag == 0 && flag2 == 1}">
+                                                                                        <c:when test="${flag == '0'}">
                                                                                             SI
                                                                                         </c:when>
                                                                                         <c:otherwise>
@@ -358,11 +357,11 @@
 
                                                                                 <td>
                                                                                     <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
-                                                                                        <input ${flag == 1 ? 'disabled' : ''} ${flag2 == 0 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
+                                                                                        <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
                                                                                         <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
                                                                                         <br>
                                                                                         <br>
-                                                                                        <button ${flag == 1 ? 'disabled' : ''} ${flag2 == 0 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default" <%if (!u.getRol().equals("admin") && !u.getRol().equals("DCRI")) {%>disabled<%}%>>Guardar</button>
+                                                                                        <button ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} type="submit" class="btn btn-default" <%if (!u.getRol().equals("admin") && !u.getRol().equals("DCRI")) {%>disabled<%}%>>Guardar</button>
                                                                                     </form>
                                                                                 </td>
                                                                                 <td>
@@ -403,7 +402,12 @@
                                                                                         </c:choose>
                                                                                     </c:forEach>
                                                                                     <c:choose>
-                                                                                        <c:when test="${flag == 0 && !familia.getAsistenciaFRs().isEmpty()}">
+                                                                                        <c:when test="${familia.getAsistenciaFRs().isEmpty()}">
+                                                                                            <c:set var="flag" value="1" scope="page"/>
+                                                                                        </c:when>
+                                                                                    </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${flag == '0'}">
                                                                                             SI
                                                                                         </c:when>
                                                                                         <c:otherwise>
