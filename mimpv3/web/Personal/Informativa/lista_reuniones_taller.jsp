@@ -154,7 +154,7 @@
                                                                         <td>
                                                                             ${reunion.getDireccion()} 
                                                                         </td>
-                                                                        <td>
+                                                                        <td rowspan="${numFilasT2}" style="vertical-align: middle;">
                                                                             <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerReunion" method="post">
 
                                                                                 <input hidden name="grupo" id="idReunion" value="${grp.getNombre()}">
@@ -198,7 +198,7 @@
                                                                         <td>
                                                                             ${reunion.getDireccion()} 
                                                                         </td>
-                                                                        <td>
+                                                                        <td rowspan="${numFilasT2}" style="vertical-align: middle;">
                                                                             <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerReunion" method="post">
                                                                                 <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
 
@@ -235,16 +235,6 @@
                                                                         </td>
                                                                         <td>
                                                                             ${reunion.getDireccion()} 
-                                                                        </td>
-                                                                        <td>
-                                                                            <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerReunion" method="post">
-                                                                                <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
-
-                                                                                <input hidden name="idTaller" id="idTaller" value="${idTaller}">
-                                                                                <input hidden name="nombreTaller" id="nombreTaller" value="${taller}">
-                                                                                <input hidden name="historial" id="historial" value="false">
-                                                                                <button type="submit" class="btn btn-default">Ver</button>
-                                                                            </form>
                                                                         </td>
                                                                         <td>
                                                                             <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia" method="post">
