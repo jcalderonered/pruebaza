@@ -6,6 +6,7 @@
     <property name="hibernate.connection.datasource">java:jboss/sirna</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+    <property name="hibernate.statement_cache.size">0</property>
     <mapping resource="com/mimp/bean/Familia.hbm.xml"/>
     <mapping resource="com/mimp/bean/Designacion.hbm.xml"/>
     <mapping resource="com/mimp/bean/AsistenciaFR.hbm.xml"/>
