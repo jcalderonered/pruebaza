@@ -129,6 +129,7 @@ public class HiberReporte {
 
                     allOrganismos.add(tempOrg);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -283,6 +284,7 @@ public class HiberReporte {
                         listInformes.add(tempInforme);
 
                     }
+                    rs4.close();
                     statement4.close();
                     tempPost.setInformePostAdoptivos(listInformes);
 
@@ -310,6 +312,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -378,6 +381,7 @@ public class HiberReporte {
                         listadop.add(tempAdoptante);
 
                     }
+                    rs3.close();
                     statement3.close();
                     tempInfo.setAdoptantes(listadop);
 
@@ -407,6 +411,7 @@ public class HiberReporte {
                     allPostAdopcion.add(tempPost);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -464,6 +469,7 @@ public class HiberReporte {
                     tempDesig.setTipoPropuesta(rs.getString("TIPO_PROPUESTA"));
                     tempDesig.setObs(rs.getString("OBS"));
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -641,6 +647,7 @@ public class HiberReporte {
                     allNna.add(tempNna);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -794,6 +801,7 @@ public class HiberReporte {
 
                         listEst.add(tempEst);
                     }
+                    rs2.close();
                     statement2.close();
 
                     tempNna.setEstudioCasos(listEst);
@@ -855,6 +863,7 @@ public class HiberReporte {
                                 tempEnt.setFechaVenc(rs4.getDate("FECHA_VENC"));
                                 tempEnt.setObs(rs4.getString("OBS"));
                             }
+                            rs4.close();
                             statement4.close();
                             tempFam.setEntidad(tempEnt);
                         }
@@ -872,6 +881,7 @@ public class HiberReporte {
 
                         listDes.add(tempDesig);
                     }
+                    rs3.close();
                     statement3.close();
 
                     tempNna.setDesignacions(listDes);
@@ -879,6 +889,7 @@ public class HiberReporte {
                     allNna.add(tempNna);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -1033,6 +1044,7 @@ public class HiberReporte {
 
                         listEst.add(tempEst);
                     }
+                    rs2.close();
                     statement2.close();
 
                     tempNna.setEstudioCasos(listEst);
@@ -1094,6 +1106,7 @@ public class HiberReporte {
                                 tempEnt.setFechaVenc(rs4.getDate("FECHA_VENC"));
                                 tempEnt.setObs(rs4.getString("OBS"));
                             }
+                            rs4.close();
                             statement4.close();
                             tempFam.setEntidad(tempEnt);
                         }
@@ -1111,6 +1124,7 @@ public class HiberReporte {
 
                         listDes.add(tempDesig);
                     }
+                    rs3.close();
                     statement3.close();
 
                     tempNna.setDesignacions(listDes);
@@ -1118,6 +1132,7 @@ public class HiberReporte {
                     allNna.add(tempNna);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -1231,6 +1246,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -1316,6 +1332,7 @@ public class HiberReporte {
                         listEval.add(tempEval);
 
                     }
+                    rs4.close();
                     statement4.close();
 
                     tempExpFam.setEvaluacions(listEval);
@@ -1430,6 +1447,7 @@ public class HiberReporte {
                         listadop.add(tempAdoptante);
 
                     }
+                    rs3.close();
                     statement3.close();
                     tempInfo.setAdoptantes(listadop);
 //                        
@@ -1441,6 +1459,7 @@ public class HiberReporte {
                     allFamilias.add(tempFam);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -1554,6 +1573,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -1705,6 +1725,7 @@ public class HiberReporte {
                         listadop.add(tempAdoptante);
 
                     }
+                    rs3.close();
                     statement3.close();
                     tempInfo.setAdoptantes(listadop);
 //                        
@@ -1716,6 +1737,7 @@ public class HiberReporte {
                     allFamilias.add(tempFam);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -1830,6 +1852,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -1981,6 +2004,7 @@ public class HiberReporte {
                         listadop.add(tempAdoptante);
 
                     }
+                    rs3.close();
                     statement3.close();
                     tempInfo.setAdoptantes(listadop);
 //                        
@@ -1992,6 +2016,7 @@ public class HiberReporte {
                     allFamilias.add(tempFam);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -2075,6 +2100,7 @@ public class HiberReporte {
                     tempEval.setTipo(rs.getString("TIPO"));
                     listEval.add(tempEval);
                 }
+                rs.close();
                 statement.close();
 
                 if (!listEval.isEmpty()) {
@@ -2098,6 +2124,7 @@ public class HiberReporte {
                                 tempInforme.setFechaResol(rs2.getDate("FECHA_RESOL"));
                                 tempInforme.setFechaNotificacion(rs2.getDate("FECHA_NOTIFICACION"));
                             }
+                            rs2.close();
                             statement2.close();
                         } else if (evaluacion.getTipo().equals("empatia")) {
                             tempEmpatia.setIdresolucion(evaluacion.getIdevaluacion());
@@ -2116,6 +2143,7 @@ public class HiberReporte {
                                 tempEmpatia.setFechaResol(rs3.getDate("FECHA_RESOL"));
                                 tempEmpatia.setFechaNotificacion(rs3.getDate("FECHA_NOTIFICACION"));
                             }
+                            rs3.close();
                             statement3.close();
 
                         } else {
@@ -2135,6 +2163,7 @@ public class HiberReporte {
                                 tempLegal.setFechaResol(rs4.getDate("FECHA_RESOL"));
                                 tempLegal.setFechaNotificacion(rs4.getDate("FECHA_NOTIFICACION"));
                             }
+                            rs4.close();
                             statement4.close();
 
                         }
@@ -2214,6 +2243,7 @@ public class HiberReporte {
                     ultimaResol.setFechaResol(rs.getDate("FECHA_RESOL"));
                     ultimaResol.setFechaNotificacion(rs.getDate("FECHA_NOTIFICACION"));
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -2267,6 +2297,7 @@ public class HiberReporte {
                     ultimaDesig.setFechaPropuesta(rs.getDate("FECHA_PROPUESTA"));
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -2367,6 +2398,7 @@ public class HiberReporte {
                     ultimaDesig.setNna(tempNna);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -2472,6 +2504,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -2623,6 +2656,7 @@ public class HiberReporte {
                         listadop.add(tempAdoptante);
 
                     }
+                    rs3.close();
                     statement3.close();
                     tempInfo.setAdoptantes(listadop);
 //                        
@@ -2634,6 +2668,7 @@ public class HiberReporte {
                     allFamilias.add(tempFam);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -2800,6 +2835,7 @@ public class HiberReporte {
                     ultimaDesig.setNna(tempNna);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -2862,6 +2898,7 @@ public class HiberReporte {
                     tempEval.setNumEval(rs.getString("NUM_EVAL"));
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -2918,6 +2955,7 @@ public class HiberReporte {
                     ultimaResol.setFechaNotificacion(rs.getDate("FECHA_NOTIFICACION"));
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -2955,6 +2993,7 @@ public class HiberReporte {
                     tempNna.setFechaNacimiento(rs.getDate("FECHA_NACIMIENTO"));
                     tempNna.setClasificacion(rs.getString("CLASIFICACION"));
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -2989,6 +3028,7 @@ public class HiberReporte {
                     ultimaDesig.setFechaPropuesta(rs.getDate("FECHA_PROPUESTA"));
                     ultimaDesig.setFechaConsejo(rs.getDate("FECHA_CONSEJO"));
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3048,6 +3088,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -3199,6 +3240,7 @@ public class HiberReporte {
                         listadop.add(tempAdoptante);
 
                     }
+                    rs3.close();
                     statement3.close();
                     tempInfo.setAdoptantes(listadop);
 //                        
@@ -3210,6 +3252,7 @@ public class HiberReporte {
                     allFamilias.add(tempFam);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3253,6 +3296,7 @@ public class HiberReporte {
 
                     allFamilias.add(form);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3319,6 +3363,7 @@ public class HiberReporte {
 
                     listaAsist.add(asist);
                 }
+                rs2.close();
                 statement2.close();
             }
         };
@@ -3379,6 +3424,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -3388,6 +3434,7 @@ public class HiberReporte {
                     tempRev.setFechaRevision(rs.getDate("FECHA_REVISION"));
                     listaRev.add(tempRev);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3448,6 +3495,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -3457,6 +3505,7 @@ public class HiberReporte {
                     tempRev.setFechaRevision(rs.getDate("FECHA_REVISION"));
                     listaRev.add(tempRev);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3517,6 +3566,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -3528,6 +3578,7 @@ public class HiberReporte {
                     tempEst.setFechaSolAdop(rs.getDate("FECHA_SOL_ADOP"));
                     listaEstudio.add(tempEst);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3588,6 +3639,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -3598,6 +3650,7 @@ public class HiberReporte {
                     tempEst.setFechaSolAdop(rs.getDate("FECHA_SOL_ADOP"));
                     listaEstudio.add(tempEst);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3658,6 +3711,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -3668,6 +3722,7 @@ public class HiberReporte {
                     tempEst.setFechaSolAdop(rs.getDate("FECHA_SOL_ADOP"));
                     listaEstudio.add(tempEst);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3728,6 +3783,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -3738,6 +3794,7 @@ public class HiberReporte {
                     tempEst.setFechaSolAdop(rs.getDate("FECHA_SOL_ADOP"));
                     listaEstudio.add(tempEst);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3780,6 +3837,7 @@ public class HiberReporte {
                     sesion.setAsistencia(rs2.getShort("ASISTENCIA"));
                     sesion.setUnidad(rs2.getString("UNIDAD"));
                 }
+                rs2.close();
 
                 while (rs.next()) {
                     FormularioSesion form = new FormularioSesion();
@@ -3812,6 +3870,7 @@ public class HiberReporte {
 
                     allFamilias.add(form);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3864,6 +3923,7 @@ public class HiberReporte {
 
                     listaAsist.add(asist);
                 }
+                rs2.close();
                 statement2.close();
             }
         };
@@ -3929,6 +3989,7 @@ public class HiberReporte {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -3936,6 +3997,7 @@ public class HiberReporte {
                     tempDesig.setExpedienteFamilia(tempEF);
                     tempDesig.setFechaConsejo(rs.getDate("FECHA_CONSEJO"));
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -4011,6 +4073,7 @@ public class HiberReporte {
                     taller.setHabilitado(rs2.getShort("HABILITADO"));
                     taller.setNReunion(rs2.getShort("N_REUNION"));
                 }
+                rs2.close();
                 statement2.close();
             }
         };
@@ -4042,6 +4105,7 @@ public class HiberReporte {
                     grupo.setIdgrupo(idgrupo_in);
                     grupo.setNombre(rs2.getString("NOMBRE"));
                 }
+                rs2.close();
                 statement2.close();
             }
         };
@@ -4073,6 +4137,7 @@ public class HiberReporte {
                     turno2.setIdturno2(idturno2_in);
                     turno2.setNombre(rs2.getString("NOMBRE"));
                 }
+                rs2.close();
                 statement2.close();
             }
         };
@@ -4116,6 +4181,7 @@ public class HiberReporte {
 
                     listareunion.add(reunion);
                 }
+                rs2.close();
                 statement2.close();
             }
         };
@@ -4158,6 +4224,7 @@ public class HiberReporte {
 
                     listaAsist.add(asist);
                 }
+                rs2.close();
                 statement2.close();
             }
         };
@@ -4195,6 +4262,7 @@ public class HiberReporte {
                     fami.setIdfamilia(idfamilia_in);
                     fami.setUser(rs3.getString(3));
                 }
+                rs3.close();
                 statement3.close();
             }
         };
@@ -4231,6 +4299,7 @@ public class HiberReporte {
 
                     InfoFami.add(ifa);
                 }
+                rs2.close();
                 statement2.close();
             }
         };
@@ -4271,6 +4340,7 @@ public class HiberReporte {
 
                     listaAdop.add(adopaux);
                 }
+                rs2.close();
                 statement2.close();
             }
         };
@@ -4327,6 +4397,7 @@ public class HiberReporte {
                                     fam.setIdfamilia(temp2.getLong(1));
                                     expFamilia.setFamilia(fam);
                                 }
+                                temp2.close();
                                 statement2.close();
                             }
                             if (temp_expediente.getShort(3) != 0) {
@@ -4342,6 +4413,7 @@ public class HiberReporte {
                                     unidad.setDepartamento(temp2.getString("DEPARTAMENTO"));
                                     expFamilia.setUnidad(unidad);
                                 }
+                                temp2.close();
                                 statement3.close();
                             }
                             expFamilia.setNumero(temp_expediente.getLong(4));
@@ -4362,6 +4434,7 @@ public class HiberReporte {
 
                             designacion.setExpedienteFamilia(expFamilia);
                         }
+                        temp_expediente.close();
                         statement_designacion_expFamilia.close();
                     }
                     if (temp_designacion.getLong(3) != 0) {
@@ -4388,6 +4461,7 @@ public class HiberReporte {
 
                                     nna.setJuzgado(juzgado);
                                 }
+                                temp_juzgado.close();
                                 statement_designacion_NNA_Juzgado.close();
                             }
 
@@ -4405,6 +4479,7 @@ public class HiberReporte {
                                     car.setDepartamento(temp_car.getString("DEPARTAMENTO"));
                                     nna.setCar(car);
                                 }
+                                temp_car.close();
                                 statement_designacion_NNA_CAR.close();
                             }
 
@@ -4460,11 +4535,13 @@ public class HiberReporte {
                                 expnna.setCodigoReferencia(rs10.getString(21));
                                 listaExpNna.add(expnna);
                             }
+                            rs10.close();
                             statement10.close();
 
                             nna.setExpedienteNnas(listaExpNna);
                             designacion.setNna(nna);
                         }
+                        temp_nna.close();
                         statement_designacion_NNA.close();
                     }
                     if (temp_designacion.getLong(4) != 0) {
@@ -4479,6 +4556,7 @@ public class HiberReporte {
                             personal.setIdpersonal(temp_personal.getLong(1));
                             designacion.setPersonal(personal);
                         }
+                        temp_personal.close();
                         statement_designacion_personal.close();
                     }
                     designacion.setNDesignacion(temp_designacion.getString(5));
@@ -4492,7 +4570,7 @@ public class HiberReporte {
                     allDesig.add(designacion);
 
                 }
-
+                temp_designacion.close();
                 statement.close();
             }
         };
@@ -4592,6 +4670,7 @@ public class HiberReporte {
                                 listaRe.add(tempResol);
 
                             }
+                            rs3.close();
                             statement3.close();
 
                         }
@@ -4600,6 +4679,7 @@ public class HiberReporte {
                         listaEv.add(tempEval);
 
                     }
+                    rs2.close();
                     statement2.close();
 
                     String hql4 = "{call HE_GETINFOFAM_POR_IDFAM(?,?)}";
@@ -4728,6 +4808,7 @@ public class HiberReporte {
 
                         listaInf.add(tempInfo);
                     }
+                    rs4.close();
                     statement4.close();
 
                     Entidad tempEnt = new Entidad();
@@ -4779,6 +4860,7 @@ public class HiberReporte {
                     expFamilia.setEvaluacions(listaEv);
 
                 }
+                rs.close();
                 statement.close();
             }
         };

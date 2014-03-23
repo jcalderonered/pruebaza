@@ -139,6 +139,7 @@ public class HiberNna {
                     car.setObservaciones(temp.getString(48));
                     tempnna.setCar(car);
                 }
+                temp.close();
                 statement.close();
             }
         };
@@ -262,6 +263,7 @@ public class HiberNna {
                     juz.setObservaciones(temp.getString(59));
                     tempnna.setJuzgado(juz);
                 }
+                temp.close();
                 statement.close();
             }
         };
@@ -1074,6 +1076,7 @@ public class HiberNna {
                     unid.setIdunidad(tempexp.getLong(62));
                     expnna.setUnidad(unid);
                 }
+                tempexp.close();
                 statement.close();
             }
         };
@@ -1143,6 +1146,7 @@ public class HiberNna {
                     expnna.setFechaInvTutelar(temp.getDate(28));
                     allExpNna.add(expnna);
                 }
+                temp.close();
                 statement.close();
             }
         };
