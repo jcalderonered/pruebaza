@@ -854,21 +854,33 @@ public class HiberPersonal {
         Object queryResult = query.uniqueResult();
         Reunion tempReun = (Reunion) queryResult;
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
-        Hibernate.initialize(tempReun.getAsistenciaFRs());
+        
+        String hql2 = "FROM AsistenciaFR AFR where AFR.reunion = :id order by AFR.familia asc";
+        Query query2 = session.createQuery(hql2);
+        query2.setLong("id", tempReun.getIdreunion());
+        List asistencias = query2.list();
+        Set<AsistenciaFR> asistenciaFRs = new LinkedHashSet<>();
+        for (Iterator iter2 = asistencias.iterator(); iter2.hasNext();) {
+            AsistenciaFR temp2 = (AsistenciaFR) iter2.next();
+            asistenciaFRs.add(temp2);
+        }
+        //Hibernate.initialize(tempReun.getAsistenciaFRs());
+        tempReun.setAsistenciaFRs(asistenciaFRs);
+        
         long idtemp = 0;
         for (AsistenciaFR afr : tempReun.getAsistenciaFRs()) {
             Hibernate.initialize(afr.getFamilia());
             if (afr.getFamilia().getIdfamilia() != idtemp) {
-                String hql2 = "FROM FormularioSesion F where F.familia = :id order by F.fechaSol DESC";
-                Query query2 = session.createQuery(hql2);
-                query2.setLong("id", afr.getFamilia().getIdfamilia());
-                query2.setMaxResults(1);
-                List resultados = query2.list();
-                for (Iterator iter2 = resultados.iterator(); iter2.hasNext();) {
-                    FormularioSesion temp = (FormularioSesion) iter2.next();
-                    Hibernate.initialize(temp.getAsistentes());
-                    Hibernate.initialize(temp.getFamilia().getAsistenciaFRs());
-                    allFormularios.add(temp);
+                String hql3 = "FROM FormularioSesion F where F.familia = :id order by F.fechaSol DESC";
+                Query query3 = session.createQuery(hql3);
+                query3.setLong("id", afr.getFamilia().getIdfamilia());
+                query3.setMaxResults(1);
+                List resultados = query3.list();
+                for (Iterator iter3 = resultados.iterator(); iter3.hasNext();) {
+                    FormularioSesion temp3 = (FormularioSesion) iter3.next();
+                    Hibernate.initialize(temp3.getAsistentes());
+                    Hibernate.initialize(temp3.getFamilia().getAsistenciaFRs());
+                    allFormularios.add(temp3);
 
                 }
                 idtemp = afr.getFamilia().getIdfamilia();
