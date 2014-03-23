@@ -109,9 +109,37 @@ public class familia {
 
             pagina = "/Familia/Inscripcion/inscripcion_sesionInfo";
         } else {
-
-            //map.put("listaTalleres", ServicioFamilia.listaTalleresHabilitados());
-            map.put("listaTalleres", ServicioFamilia.listaTalleresHabilitadosPorDep(departamento));
+            
+            ExpedienteFamilia tempExp = new ExpedienteFamilia();
+            if(!usuario.getExpedienteFamilias().isEmpty()){
+                tempExp = usuario.getExpedienteFamilias().iterator().next();
+            }
+            
+            ArrayList<Taller> listaTodosTalleres = new ArrayList();      
+            ArrayList<Taller> listaTalleresPermitidos = new ArrayList();     
+            
+            listaTodosTalleres = ServicioFamilia.listaTalleresHabilitadosPorDep(departamento);
+            if (usuario.getConstancia() == null || usuario.getConstancia().equals("")){
+                for (Taller taller : listaTodosTalleres) {
+                     if(taller.getTipoTaller().equals("preparacion")){
+                         listaTalleresPermitidos.add(taller);
+                     }
+                }
+            }else if(tempExp.getIdexpedienteFamilia() != 0 && tempExp.getEstado().equals("espera")){
+                for (Taller taller : listaTodosTalleres) {
+                     if(taller.getTipoTaller().equals("lista")){
+                         listaTalleresPermitidos.add(taller);
+                     }
+                }                
+            }else if(usuario.getPostAdopcions().size() >= 1){
+                for (Taller taller : listaTodosTalleres) {
+                     if(taller.getTipoTaller().equals("post")){
+                         listaTalleresPermitidos.add(taller);
+                     }
+                }   
+            }
+            
+            map.put("listaTalleres", listaTalleresPermitidos);
             map.put("formato", format);
             if (inscritoTaller) {
                 map.put("inscrito", "true");
