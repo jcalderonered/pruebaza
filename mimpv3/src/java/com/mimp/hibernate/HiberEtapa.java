@@ -202,6 +202,7 @@ public class HiberEtapa {
 
                             listA.add(tempAsis);
                         }
+                        rs5.close();
                         statement5.close();
 
                         tempFS.setSesion(tempSesion);
@@ -396,6 +397,7 @@ public class HiberEtapa {
                             fam.setIdfamilia(temp2.getShort(1));
                             expFamilia.setFamilia(fam);
                         }
+                        temp2.close();
                         statement2.close();
                     }
                     if (temp.getShort(3) != 0) {
@@ -410,6 +412,7 @@ public class HiberEtapa {
                             unidad.setIdunidad(temp2.getShort(1));
                             expFamilia.setUnidad(unidad);
                         }
+                        temp2.close();
                         statement3.close();
                     }
                     expFamilia.setNumero(temp.getLong(4));
@@ -429,6 +432,7 @@ public class HiberEtapa {
                     expFamilia.setFechaIngresoFicha(temp.getDate(18));
 
                 }
+                temp.close();
                 statement.close();
             }
         };
@@ -487,6 +491,7 @@ public class HiberEtapa {
                             expFamilia.setIdexpedienteFamilia(temp2.getShort(1));
                             tempEval.setExpedienteFamilia(expFamilia);
                         }
+                        temp2.close();
                         statement2.close();
                     }
                     if (temp.getShort(3) != 0) {
@@ -501,6 +506,7 @@ public class HiberEtapa {
                             personal.setIdpersonal(temp2.getShort(1));
                             tempEval.setPersonal(personal);
                         }
+                        temp2.close();
                         statement3.close();
                     }
                     tempEval.setTipo(temp.getString(4));
@@ -514,6 +520,7 @@ public class HiberEtapa {
                     tempEval.setPersInt(temp.getString("PERS_INT"));
                     tempEval.setNumPersInt(temp.getLong("NUM_PERS_INT"));
                 }
+                temp.close();
                 statement.close();
             }
         };
@@ -597,6 +604,7 @@ public class HiberEtapa {
                                             ent.setIdentidad(temp_entidad.getShort(1));
                                             fam.setEntidad(ent);
                                         }
+                                        temp_entidad.close();
                                         statement_expediente_familia_entidad.close();
                                     }
                                     fam.setUser(temp_familia.getString(3));
@@ -606,6 +614,8 @@ public class HiberEtapa {
                                     fam.setConstancia(temp_familia.getString(7));
                                     expFamilia.setFamilia(fam);
                                 }
+                                temp_familia.close();
+                                statement_expediente_familia.close();
                             }
 
                             if (temp2.getShort(3) != 0) {
@@ -620,6 +630,7 @@ public class HiberEtapa {
                                     unidad.setIdunidad(temp_unidad.getShort(1));
                                     expFamilia.setUnidad(unidad);
                                 }
+                                temp_unidad.close();
                                 statement_expediente_unidad.close();
                             }
 
@@ -641,6 +652,7 @@ public class HiberEtapa {
 
                             tempEval.setExpedienteFamilia(expFamilia);
                         }
+                        temp2.close();
                         statement_expediente.close();
                     }
 
@@ -656,6 +668,7 @@ public class HiberEtapa {
                             personal.setIdpersonal(temp_personal.getShort(1));
                             tempEval.setPersonal(personal);
                         }
+                        temp_personal.close();
                         statement_evaluacion_personal.close();
                     }
                     tempEval.setTipo(temp.getString(4));
@@ -668,6 +681,7 @@ public class HiberEtapa {
                     tempEval.setNumEval(temp.getString(11));
 
                 }
+                temp.close();
                 statement.close();
             }
         };
@@ -750,6 +764,7 @@ public class HiberEtapa {
                                             fam.setIdfamilia(temp_familia.getShort(1));
                                             expFamilia.setFamilia(fam);
                                         }
+                                        temp_familia.close();
                                         statement_resolucion_evaluacion_expediente_familia.close();
                                     }
 
@@ -765,6 +780,7 @@ public class HiberEtapa {
                                             unidad.setIdunidad(temp_unidad.getShort(1));
                                             expFamilia.setUnidad(unidad);
                                         }
+                                        temp_unidad.close();
                                         statement_resolucion_evaluacion_expediente_unidad.close();
                                     }
 
@@ -786,6 +802,7 @@ public class HiberEtapa {
 
                                     evaluacion.setExpedienteFamilia(expFamilia);
                                 }
+                                temp_expediente.close();
                                 statement_resolucion_evaluacion_expediente.close();
                             }
 
@@ -801,6 +818,7 @@ public class HiberEtapa {
                                     personal.setIdpersonal(temp_personal.getShort(1));
                                     evaluacion.setPersonal(personal);
                                 }
+                                temp_personal.close();
                                 statement_evaluacion_personal.close();
                             }
                             evaluacion.setTipo(temp_evaluacion.getString(4));
@@ -814,6 +832,7 @@ public class HiberEtapa {
 
                             resolucion.setEvaluacion(evaluacion);
                         }
+                        temp_evaluacion.close();
                         statement_resolucion_evaluacion.close();
                     }
 
@@ -823,6 +842,7 @@ public class HiberEtapa {
                     resolucion.setFechaNotificacion(temp_resolucion.getDate(6));
 
                 }
+                temp_resolucion.close();
                 statement_resolucion.close();
             }
         };
@@ -878,6 +898,7 @@ public class HiberEtapa {
                             tempEval.setIdevaluacion(temp2.getLong(1));
                             resolucion.setEvaluacion(tempEval);
                         }
+                        temp2.close();
                         statement_resolucion_evaluacion.close();
                     }
 
@@ -887,6 +908,7 @@ public class HiberEtapa {
                     resolucion.setFechaNotificacion(temp_resolucion.getDate(6));
 
                 }
+                temp_resolucion.close();
                 statement_resolucion.close();
             }
         };
@@ -996,12 +1018,13 @@ public class HiberEtapa {
                         listaRe.add(tempRe);
 
                     }
-
+                    rs2.close();
                     statement2.close();
 
                     tempEval.setResolucions(listaRe);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -1145,6 +1168,7 @@ public class HiberEtapa {
                                 listaRe.add(tempResol);
 
                             }
+                            rs3.close();
                             statement3.close();
 
                         }
@@ -1153,13 +1177,14 @@ public class HiberEtapa {
                         listaEv.add(tempEval);
 
                     }
-
+                    rs2.close();
                     statement2.close();
 
                     tempEF.setUnidad(tempUA);
                     tempEF.setEvaluacions(listaEv);
                     allExpedienteFamilia.add(tempEF);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -1546,6 +1571,7 @@ public class HiberEtapa {
                                 listaRe.add(tempResol);
 
                             }
+                            rs3.close();
                             statement3.close();
 
                         }
@@ -1554,6 +1580,7 @@ public class HiberEtapa {
                         listaEv.add(tempEval);
 
                     }
+                    rs2.close();
                     statement2.close();
 
                     String hql4 = "{call HE_GETINFOFAM_POR_IDFAM(?,?)}";
@@ -1620,6 +1647,7 @@ public class HiberEtapa {
                         tempInfo.setnHijos(rs4.getShort("NHIJOS"));
                         listaInf.add(tempInfo);
                     }
+                    rs4.close();
                     statement4.close();
 
                     Set<Designacion> listaDesig = new HashSet<Designacion>();
@@ -1655,6 +1683,7 @@ public class HiberEtapa {
 
                     allInfoFam.add(tempEF);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -1807,6 +1836,7 @@ public class HiberEtapa {
                                 listaRe.add(tempResol);
 
                             }
+                            rs3.close();
                             statement3.close();
 
                         }
@@ -1815,6 +1845,7 @@ public class HiberEtapa {
                         listaEv.add(tempEval);
 
                     }
+                    rs2.close();
                     statement2.close();
 
                     String hql4 = "{call HE_GETINFOFAM_POR_IDFAM(?,?)}";
@@ -1881,6 +1912,7 @@ public class HiberEtapa {
                         tempInfo.setnHijos(rs4.getShort("NHIJOS"));
                         listaInf.add(tempInfo);
                     }
+                    rs4.close();
                     statement4.close();
                     Entidad tempEnt = new Entidad();
                     String hql5 = "{call HE_GETENTIDAD_FAMILIA(?,?)}";
@@ -1932,6 +1964,7 @@ public class HiberEtapa {
 
                     allInfoFam.add(tempEF);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -2079,6 +2112,7 @@ public class HiberEtapa {
                                 listaRe.add(tempResol);
 
                             }
+                            rs3.close();
                             statement3.close();
 
                         }
@@ -2087,6 +2121,7 @@ public class HiberEtapa {
                         listaEv.add(tempEval);
 
                     }
+                    rs2.close();
                     statement2.close();
 
                     String hql4 = "{call HE_GETINFOFAM_POR_IDFAM(?,?)}";
@@ -2153,6 +2188,7 @@ public class HiberEtapa {
                         tempInfo.setnHijos(rs4.getShort("NHIJOS"));
                         listaInf.add(tempInfo);
                     }
+                    rs4.close();
                     statement4.close();
 
                     Entidad tempEnt = new Entidad();
@@ -2204,6 +2240,7 @@ public class HiberEtapa {
                     expFamilia.setEvaluacions(listaEv);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -2279,6 +2316,7 @@ public class HiberEtapa {
                                     fam.setIdfamilia(temp2.getShort(1));
                                     expFamilia.setFamilia(fam);
                                 }
+                                temp2.close();
                                 statement2.close();
                             }
                             if (temp_expediente.getShort(3) != 0) {
@@ -2294,6 +2332,7 @@ public class HiberEtapa {
                                     unidad.setDepartamento(temp2.getString("DEPARTAMENTO"));
                                     expFamilia.setUnidad(unidad);
                                 }
+                                temp2.close();
                                 statement3.close();
                             }
                             expFamilia.setNumero(temp_expediente.getLong(4));
@@ -2314,6 +2353,7 @@ public class HiberEtapa {
 
                             designacion.setExpedienteFamilia(expFamilia);
                         }
+                        temp_expediente.close();
                         statement_designacion_expFamilia.close();
                     }
                     if (temp_designacion.getShort(3) != 0) {
@@ -2340,6 +2380,7 @@ public class HiberEtapa {
 
                                     nna.setJuzgado(juzgado);
                                 }
+                                temp_juzgado.close();
                                 statement_designacion_NNA_Juzgado.close();
                             }
 
@@ -2356,6 +2397,7 @@ public class HiberEtapa {
 
                                     nna.setCar(car);
                                 }
+                                temp_car.close();
                                 statement_designacion_NNA_CAR.close();
                             }
 
@@ -2396,6 +2438,7 @@ public class HiberEtapa {
 
                             designacion.setNna(nna);
                         }
+                        temp_nna.close();
                         statement_designacion_NNA.close();
                     }
                     if (temp_designacion.getShort(4) != 0) {
@@ -2410,6 +2453,7 @@ public class HiberEtapa {
                             personal.setIdpersonal(temp_personal.getShort(1));
                             designacion.setPersonal(personal);
                         }
+                        temp_personal.close();
                         statement_designacion_personal.close();
                     }
                     designacion.setNDesignacion(temp_designacion.getString(5));
@@ -2423,7 +2467,7 @@ public class HiberEtapa {
                     allDesig.add(designacion);
 
                 }
-
+                temp_designacion.close();
                 statement.close();
             }
         };
@@ -2484,6 +2528,7 @@ public class HiberEtapa {
 
                             designacion.setExpedienteFamilia(expFamilia);
                         }
+                        temp_expediente.close();
                         statement_designacion_expFamilia.close();
                     }
                     if (temp_designacion.getShort(3) != 0) {
@@ -2498,6 +2543,7 @@ public class HiberEtapa {
                             nna.setIdnna(temp_nna.getShort(1));
                             designacion.setNna(nna);
                         }
+                        temp_nna.close();
                         statement_designacion_NNA.close();
                     }
                     if (temp_designacion.getShort(4) != 0) {
@@ -2512,6 +2558,7 @@ public class HiberEtapa {
                             personal.setIdpersonal(temp_personal.getShort(1));
                             designacion.setPersonal(personal);
                         }
+                        temp_personal.close();
                         statement_designacion_personal.close();
                     }
                     designacion.setNDesignacion(temp_designacion.getString(5));
@@ -2525,7 +2572,7 @@ public class HiberEtapa {
                     allDesig.add(designacion);
 
                 }
-
+                temp_designacion.close();
                 statement.close();
             }
         };
@@ -2589,6 +2636,7 @@ public class HiberEtapa {
 
                             designacion.setExpedienteFamilia(expFamilia);
                         }
+                        temp_expediente.close();
                         statement_designacion_expFamilia.close();
                     }
                     if (temp_designacion.getShort(3) != 0) {
@@ -2603,6 +2651,7 @@ public class HiberEtapa {
                             nna.setIdnna(temp_nna.getShort(1));
                             designacion.setNna(nna);
                         }
+                        temp_nna.close();
                         statement_designacion_NNA.close();
                     }
                     if (temp_designacion.getShort(4) != 0) {
@@ -2617,6 +2666,7 @@ public class HiberEtapa {
                             personal.setIdpersonal(temp_personal.getShort(1));
                             designacion.setPersonal(personal);
                         }
+                        temp_personal.close();
                         statement_designacion_personal.close();
                     }
                     designacion.setNDesignacion(temp_designacion.getString(5));
@@ -2627,6 +2677,7 @@ public class HiberEtapa {
                     designacion.setTipoPropuesta(temp_designacion.getString(10));
                     designacion.setObs(temp_designacion.getString(11));
                 }
+                temp_designacion.close();
                 statement_designacion.close();
             }
         };
@@ -2687,6 +2738,7 @@ public class HiberEtapa {
                             nna.setIdnna(temp_nna.getShort(1));
                             estudio.setNna(nna);
                         }
+                        temp_nna.close();
                         statement_estudio_NNA.close();
                     }
                     if (temp_estudio.getShort(3) != 0) {
@@ -2702,6 +2754,7 @@ public class HiberEtapa {
 
                             estudio.setExpedienteFamilia(expFamilia);
                         }
+                        temp_expediente.close();
                         statement_estudio_expFamilia.close();
                     }
 
@@ -2715,7 +2768,7 @@ public class HiberEtapa {
                     allEstudioCaso.add(estudio);
 
                 }
-
+                temp_estudio.close();
                 statement.close();
             }
         };
@@ -2777,6 +2830,7 @@ public class HiberEtapa {
                             nna.setIdnna(temp_nna.getLong(1));
                             estudio.setNna(nna);
                         }
+                        temp_nna.close();
                         statement_estudio_NNA.close();
                     }
                     if (temp_estudio.getLong(3) != 0) {
@@ -2802,6 +2856,7 @@ public class HiberEtapa {
                                     fam.setIdfamilia(temp_familia.getLong(1));
                                     expFamilia.setFamilia(fam);
                                 }
+                                temp_familia.close();
                                 statement_designacion_expediente_familia.close();
                             }
 
@@ -2817,6 +2872,7 @@ public class HiberEtapa {
                                     unidad.setIdunidad(temp_unidad.getLong(1));
                                     expFamilia.setUnidad(unidad);
                                 }
+                                temp_unidad.close();
                                 statement_designacion_expediente_unidad.close();
                             }
 
@@ -2838,6 +2894,7 @@ public class HiberEtapa {
 
                             estudio.setExpedienteFamilia(expFamilia);
                         }
+                        temp_expediente.close();
                         statement_estudio_expFamilia.close();
                     }
 
@@ -2851,7 +2908,7 @@ public class HiberEtapa {
                     allEstudioCaso.add(estudio);
 
                 }
-
+                temp_estudio.close();
                 statement.close();
             }
         };
@@ -2916,6 +2973,7 @@ public class HiberEtapa {
                             nna.setIdnna(temp_nna.getLong(1));
                             estudio.setNna(nna);
                         }
+                        temp_nna.close();
                         statement_estudio_NNA.close();
                     }
                     if (temp_estudio.getLong(3) != 0) {
@@ -2941,6 +2999,7 @@ public class HiberEtapa {
                                     fam.setIdfamilia(temp_familia.getLong(1));
                                     expFamilia.setFamilia(fam);
                                 }
+                                temp_familia.close();
                                 statement_designacion_expediente_familia.close();
                             }
 
@@ -2956,6 +3015,7 @@ public class HiberEtapa {
                                     unidad.setIdunidad(temp_unidad.getLong(1));
                                     expFamilia.setUnidad(unidad);
                                 }
+                                temp_unidad.close();
                                 statement_designacion_expediente_unidad.close();
                             }
 
@@ -2977,6 +3037,7 @@ public class HiberEtapa {
 
                             estudio.setExpedienteFamilia(expFamilia);
                         }
+                        temp_expediente.close();
                         statement_estudio_expFamilia.close();
                     }
 
@@ -2987,6 +3048,7 @@ public class HiberEtapa {
                     estudio.setPrioridad(temp_estudio.getLong(8));
                     estudio.setNSolicitud(temp_estudio.getLong(9));
                 }
+                temp_estudio.close();
                 statement_estudio.close();
             }
         };
@@ -3045,6 +3107,7 @@ public class HiberEtapa {
                             fam.setIdfamilia(temp_familia.getLong(1));
                             expFamilia.setFamilia(fam);
                         }
+                        temp_familia.close();
                         statement_postadopcion_familia.close();
                     }
                     postadopcion.setFamilia(fam);
@@ -3053,6 +3116,7 @@ public class HiberEtapa {
                     postadopcion.setidNna(temp_postadopcion.getLong(5));
 
                 }
+                temp_postadopcion.close();
                 statement_postadopcion.close();
             }
         };
@@ -3115,6 +3179,7 @@ public class HiberEtapa {
                             postadopcion.setIdpostAdopcion(temp_postadopcion.getShort(1));
                             infopost.setPostAdopcion(postadopcion);
                         }
+                        temp_postadopcion.close();
                         statement_informepost_postadopcion.close();
                     }
                     if (temp_infopost.getShort(3) != 0) {
@@ -3140,6 +3205,7 @@ public class HiberEtapa {
                                     unidad.setIdunidad(temp2.getShort(1));
                                     personal.setUnidad(unidad);
                                 }
+                                temp2.close();
                                 statement3.close();
                             }
 
@@ -3162,6 +3228,7 @@ public class HiberEtapa {
 
                             infopost.setPersonal(personal);
                         }
+                        temp_personal.close();
                         statement_informepost_personal.close();
                     }
                     infopost.setEstado(temp_infopost.getString(4));
@@ -3175,7 +3242,7 @@ public class HiberEtapa {
                     allInformePostAdoptivo.add(infopost);
 
                 }
-
+                temp_infopost.close();
                 statement_informespost.close();
             }
         };
@@ -3238,6 +3305,7 @@ public class HiberEtapa {
                             postadopcion.setIdpostAdopcion(temp_postadopcion.getShort(1));
                             infopost.setPostAdopcion(postadopcion);
                         }
+                        temp_postadopcion.close();
                         statement_informepost_postadopcion.close();
                     }
                     if (temp_infopost.getShort(3) != 0) {
@@ -3252,6 +3320,7 @@ public class HiberEtapa {
                             personal.setIdpersonal(temp_personal.getShort(1));
                             infopost.setPersonal(personal);
                         }
+                        temp_personal.close();
                         statement_informepost_personal.close();
                     }
                     infopost.setEstado(temp_infopost.getString(4));
@@ -3263,6 +3332,7 @@ public class HiberEtapa {
                     infopost.setObs(temp_infopost.getString(10));
 
                 }
+                temp_infopost.close();
                 statement_infopost.close();
             }
         };
@@ -3322,6 +3392,7 @@ public class HiberEtapa {
                             fam.setIdfamilia(temp2.getShort(1));
                             expFamilia.setFamilia(fam);
                         }
+                        temp2.close();
                         statement2.close();
                     }
                     if (temp.getShort(3) != 0) {
@@ -3337,6 +3408,7 @@ public class HiberEtapa {
                             unidad.setDepartamento(temp2.getString("DEPARTAMENTO"));
                             expFamilia.setUnidad(unidad);
                         }
+                        temp2.close();
                         statement3.close();
                     }
                     expFamilia.setNumero(temp.getLong(4));
@@ -3358,7 +3430,7 @@ public class HiberEtapa {
                     allReevaluacion.add(expFamilia);
 
                 }
-
+                temp.close();
                 statement.close();
             }
         };
@@ -3577,6 +3649,7 @@ public class HiberEtapa {
 
                     allDesig.add(tempDesig);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3682,6 +3755,7 @@ public class HiberEtapa {
 
                     allDesig.add(tempDesig);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -3839,6 +3913,7 @@ public class HiberEtapa {
                                 listaRe.add(tempResol);
 
                             }
+                            rs3.close();
                             statement3.close();
 
                         }
@@ -3847,6 +3922,7 @@ public class HiberEtapa {
                         listaEv.add(tempEval);
 
                     }
+                    rs2.close();
                     statement2.close();
 
                     tempEF.setEvaluacions(listaEv);
@@ -3893,6 +3969,7 @@ public class HiberEtapa {
 
                     allDesig.add(tempDesig);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -4282,6 +4359,7 @@ public class HiberEtapa {
                             fam.setIdfamilia(temp2.getLong(1));
                             expFamilia.setFamilia(fam);
                         }
+                        temp2.close();
                         statement2.close();
                     }
                     if (temp_expediente.getLong(3) != 0) {
@@ -4297,6 +4375,7 @@ public class HiberEtapa {
                             unidad.setDepartamento(temp2.getString("DEPARTAMENTO"));
                             expFamilia.setUnidad(unidad);
                         }
+                        temp2.close();
                         statement3.close();
                     }
                     expFamilia.setNumero(temp_expediente.getLong(4));
@@ -4362,6 +4441,7 @@ public class HiberEtapa {
                                 listaRe.add(tempResol);
 
                             }
+                            rs3.close();
                             statement3.close();
 
                         }
@@ -4370,11 +4450,13 @@ public class HiberEtapa {
                         listaEv.add(tempEval);
 
                     }
+                    rs2.close();
                     statement2.close();
 
                     expFamilia.setEvaluacions(listaEv);
                     allEspera.add(expFamilia);
                 }
+                temp_expediente.close();
                 statement.close();
             }
         };
@@ -4453,6 +4535,7 @@ public class HiberEtapa {
                                     fam.setIdfamilia(temp2.getShort(1));
                                     expFamilia.setFamilia(fam);
                                 }
+                                temp2.close();
                                 statement2.close();
                             }
                             if (temp_expediente.getShort(3) != 0) {
@@ -4467,6 +4550,7 @@ public class HiberEtapa {
                                     unidad.setIdunidad(temp2.getShort(1));
                                     expFamilia.setUnidad(unidad);
                                 }
+                                temp2.close();
                                 statement3.close();
                             }
                             expFamilia.setNumero(temp_expediente.getLong(4));
@@ -4487,6 +4571,7 @@ public class HiberEtapa {
 
                             designacion.setExpedienteFamilia(expFamilia);
                         }
+                        temp_expediente.close();
                         statement_designacion_expFamilia.close();
                     }
                     if (temp_designacion.getShort(3) != 0) {
@@ -4513,6 +4598,8 @@ public class HiberEtapa {
 
                                     nna.setJuzgado(juzgado);
                                 }
+                                temp_juzgado.close();
+                                statement_designacion_NNA_Juzgado.close();
                             }
 
                             if (temp_nna.getShort(3) != 0) {
@@ -4528,6 +4615,8 @@ public class HiberEtapa {
 
                                     nna.setCar(car);
                                 }
+                                temp_car.close();
+                                statement_designacion_NNA_CAR.close();
                             }
 
                             nna.setNombre(temp_nna.getString(4));
@@ -4591,6 +4680,7 @@ public class HiberEtapa {
 
                                         nna.setCar(car);
                                     }
+                                    temp_nna_2.close();
                                     statement_NNA.close();
                                 }
 
@@ -4606,6 +4696,7 @@ public class HiberEtapa {
                                         unidad.setIdunidad(temp2.getShort(1));
                                         expFamilia.setUnidad(unidad);
                                     }
+                                    temp2.close();
                                     statement3.close();
                                 }
 
@@ -4638,13 +4729,14 @@ public class HiberEtapa {
                                 listaExp.add(expNna);
 
                             }
-
+                            temp_expediente.close();
                             statement_listaexp.close();
 
                             nna.setExpedienteNnas(listaExp);
 
                             designacion.setNna(nna);
                         }
+                        temp_nna.close();
                         statement_designacion_NNA.close();
                     }
                     if (temp_designacion.getShort(4) != 0) {
@@ -4659,6 +4751,7 @@ public class HiberEtapa {
                             personal.setIdpersonal(temp_personal.getShort(1));
                             designacion.setPersonal(personal);
                         }
+                        temp_personal.close();
                         statement_designacion_personal.close();
                     }
                     designacion.setNDesignacion(temp_designacion.getString(5));
@@ -4672,7 +4765,7 @@ public class HiberEtapa {
                     allDesig.add(designacion);
 
                 }
-
+                temp_designacion.close();
                 statement.close();
             }
         };
@@ -4789,6 +4882,7 @@ public class HiberEtapa {
                         listInformes.add(tempInforme);
 
                     }
+                    rs4.close();
                     statement4.close();
                     tempPost.setInformePostAdoptivos(listInformes);
 
@@ -4816,6 +4910,7 @@ public class HiberEtapa {
                             tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
                             tempEnt.setObs(rs2.getString("OBS"));
                         }
+                        rs2.close();
                         statement2.close();
                         tempFam.setEntidad(tempEnt);
                     }
@@ -4885,6 +4980,7 @@ public class HiberEtapa {
                         listadop.add(tempAdoptante);
 
                     }
+                    rs3.close();
                     statement3.close();
                     tempInfo.setAdoptantes(listadop);
 
@@ -4914,6 +5010,7 @@ public class HiberEtapa {
                     allPostAdopcion.add(tempPost);
 
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -5077,6 +5174,7 @@ public class HiberEtapa {
                                     fam.setIdfamilia(rs4.getLong(1));
                                     expFamilia.setFamilia(fam);
                                 }
+                                rs4.close();
                                 statement4.close();
                             }
 
@@ -5092,6 +5190,7 @@ public class HiberEtapa {
                                     unidad.setIdunidad(rs5.getLong(1));
                                     expFamilia.setUnidad(unidad);
                                 }
+                                rs5.close();
                                 statement5.close();
                             }
 
@@ -5113,6 +5212,7 @@ public class HiberEtapa {
 
                             tempRev.setExpedienteFamilia(expFamilia);
                         }
+                        rs3.close();
                         statement3.close();
                     }
 
@@ -5123,7 +5223,7 @@ public class HiberEtapa {
                     allRevision.add(tempRev);
 
                 }
-
+                rs.close();
                 statement.close();
             }
         };
@@ -5215,6 +5315,7 @@ public class HiberEtapa {
                             fam.setIdfamilia(temp2.getLong(1));
                             expFamilia.setFamilia(fam);
                         }
+                        temp2.close();
                         statement2.close();
                     }
                     if (temp_expediente.getLong(3) != 0) {
@@ -5230,6 +5331,7 @@ public class HiberEtapa {
                             unidad.setDepartamento(temp2.getString("DEPARTAMENTO"));
                             expFamilia.setUnidad(unidad);
                         }
+                        temp2.close();
                         statement3.close();
                     }
                     expFamilia.setNumero(temp_expediente.getLong(4));
@@ -5295,6 +5397,7 @@ public class HiberEtapa {
                                 listaRe.add(tempResol);
 
                             }
+                            rs3.close();
                             statement3.close();
 
                         }
@@ -5303,11 +5406,13 @@ public class HiberEtapa {
                         listaEv.add(tempEval);
 
                     }
+                    rs2.close();
                     statement2.close();
 
                     expFamilia.setEvaluacions(listaEv);
                     allEspera.add(expFamilia);
                 }
+                temp_expediente.close();
                 statement.close();
             }
         };
