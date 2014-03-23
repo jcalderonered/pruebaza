@@ -5513,13 +5513,35 @@ public class reporte {
             primeraReu = listaReuniones.get(0);
 
             //Sacamos la lista de familias de la primera reunion
-            ArrayList<InfoFamilia> listaFamilias = new ArrayList<InfoFamilia>();
+            ArrayList<InfoFamilia> listaFamiliasAux = new ArrayList<InfoFamilia>();
             for (AsistenciaFR asist : primeraReu.getAsistenciaFRs()) {
                 Set<InfoFamilia> listafam = asist.getFamilia().getInfoFamilias();
                 for (InfoFamilia famaux : listafam) {
-                    if (!listaFamilias.contains(famaux)) {
+                    listaFamiliasAux.add(famaux);
+                }
+            }
+
+            o = listaFamiliasAux.size();
+            InfoFamilia infoaux = new InfoFamilia();
+            for (int k = 0; k < o - 1; k++) {
+                for (int j = k; j < o - 1; j++) {
+                    if (listaFamiliasAux.get(k).getIdinfoFamilia() > listaFamiliasAux.get(j + 1).getIdinfoFamilia()) {
+                        infoaux = listaFamiliasAux.get(k);
+                        listaFamiliasAux.set(k, listaFamiliasAux.get(j + 1));
+                        listaFamiliasAux.set(j + 1, infoaux);
+                    }
+                }
+            }
+
+            ArrayList<InfoFamilia> listaFamilias = new ArrayList<InfoFamilia>();
+            Long idinfoant = Long.parseLong("0");
+            for (AsistenciaFR asist : primeraReu.getAsistenciaFRs()) {
+                Set<InfoFamilia> listafam = asist.getFamilia().getInfoFamilias();
+                for (InfoFamilia famaux : listafam) {
+                    if (idinfoant != famaux.getIdinfoFamilia()) {
                         listaFamilias.add(famaux);
                     }
+                    idinfoant = famaux.getIdinfoFamilia();
                 }
             }
 
@@ -5578,9 +5600,9 @@ public class reporte {
                             }
                         }
                     }
-                    
-                    for(AsistenciaFR asistaux2 : listaAsistAux){
-                        if(idfamiliatemp != asistaux2.getFamilia().getIdfamilia()){
+
+                    for (AsistenciaFR asistaux2 : listaAsistAux) {
+                        if (idfamiliatemp != asistaux2.getFamilia().getIdfamilia()) {
                             listaAsist.add(asistaux2);
                         }
                         idfamiliatemp = asistaux2.getFamilia().getIdfamilia();
