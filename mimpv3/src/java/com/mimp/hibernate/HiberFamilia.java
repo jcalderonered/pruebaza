@@ -299,4 +299,35 @@ public class HiberFamilia {
          return tempSesion;
     }
     
+    public ExpedienteFamilia getExpFam(long idFam){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        ExpedienteFamilia tempExpFam = new ExpedienteFamilia();
+        String hql = "From ExpedienteFamilia EF WHERE EF.familia = :id order by EF.idexpedienteFamilia desc";
+        Query query = session.createQuery(hql);       
+        query.setLong("id", idFam);
+        query.setMaxResults(1);
+        tempExpFam = (ExpedienteFamilia) query.uniqueResult();
+        
+         return tempExpFam;
+    }
+    
+    public ArrayList<PostAdopcion> getListaPostAdopcion(long idFam){
+        
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        String hql = "From PostAdopcion P WHERE P.familia = :id order by P.idpostAdopcion desc";
+        Query query = session.createQuery(hql);       
+        query.setLong("id", idFam);
+        List listPost = query.list();
+        ArrayList<PostAdopcion> allPost = new ArrayList();
+         for (Iterator iter = listPost.iterator(); iter.hasNext();) {
+                PostAdopcion temp = (PostAdopcion) iter.next();
+                allPost.add(temp);
+         }
+         return allPost;
+    }
 }
