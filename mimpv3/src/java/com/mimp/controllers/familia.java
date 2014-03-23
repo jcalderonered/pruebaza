@@ -111,9 +111,11 @@ public class familia {
         } else {
             
             ExpedienteFamilia tempExp = new ExpedienteFamilia();
-            if(!usuario.getExpedienteFamilias().isEmpty()){
-                tempExp = usuario.getExpedienteFamilias().iterator().next();
-            }
+            tempExp = ServicioFamilia.getExpFam(usuario.getIdfamilia());
+            
+            ArrayList<PostAdopcion> allPost = new ArrayList();
+            allPost = ServicioFamilia.getListaPostAdopcion(usuario.getIdfamilia());
+            
             
             ArrayList<Taller> listaTodosTalleres = new ArrayList();      
             ArrayList<Taller> listaTalleresPermitidos = new ArrayList();     
@@ -131,7 +133,7 @@ public class familia {
                          listaTalleresPermitidos.add(taller);
                      }
                 }                
-            }else if(usuario.getPostAdopcions().size() >= 1){
+            }else if(allPost.size() >= 1){
                 for (Taller taller : listaTodosTalleres) {
                      if(taller.getTipoTaller().equals("post")){
                          listaTalleresPermitidos.add(taller);
