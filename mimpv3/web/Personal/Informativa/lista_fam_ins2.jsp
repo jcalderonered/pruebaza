@@ -224,11 +224,12 @@
 
                                 </thead>
                                 <c:if test="${listaFormularios != null}">
+                                    <c:set var="idFam" value="0" scope="page" />
                                     <tbody>
-                                        <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">
+                                        <c:forEach var="formulario" items="${listaFormularios}" varStatus="status">                                            
                                             <tr>
                                                 <c:choose>
-                                                    <c:when test="${formulario.getAsistentes().size() == 2}">     
+                                                    <c:when test="${formulario.getFamilia().getIdfamilia() != idFam && formulario.getAsistentes().size() == 2}">     
                                                         <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
                                                             <c:choose>
                                                                 <c:when test="${asistente.getSexo() == 109}">
@@ -263,8 +264,9 @@
                                                                 <button type="submit" class="btn btn-default">Ver</button>
                                                             </form>
                                                         </td>
+                                                        <c:set var="idFam" value="${formulario.getFamilia().getIdfamilia()}" scope="page" />
                                                     </c:when>
-                                                    <c:when test="${formulario.getAsistentes().size() == 1}">
+                                                    <c:when test="${formulario.getFamilia().getIdfamilia() != idFam && formulario.getAsistentes().size() == 1}">
                                                         <c:forEach var="asistente" items="${formulario.getAsistentes()}" varStatus="status">
                                                             <c:choose>
                                                                 <c:when test="${asistente.getSexo() == 109}">
@@ -288,6 +290,7 @@
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>
+                                                                    <c:set var="idFam" value="${formulario.getFamilia().getIdfamilia()}" scope="page" />
                                                                 </c:when>
                                                                 <c:when test="${asistente.getSexo() == 102}">
                                                                     <td></td>
@@ -311,6 +314,7 @@
                                                                             <button type="submit" class="btn btn-default">Ver</button>
                                                                         </form>
                                                                     </td>
+                                                                    <c:set var="idFam" value="${formulario.getFamilia().getIdfamilia()}" scope="page" />
                                                                 </c:when>    
 
                                                             </c:choose>
