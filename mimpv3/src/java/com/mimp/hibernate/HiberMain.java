@@ -879,5 +879,20 @@ public class HiberMain {
         return allRevisiones;
 
     }
+    
+    public void updateExpFam(ExpedienteFamilia temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.update(temp);
+
+    }
+    
+    public void updateFam(Familia temp) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.update(temp);
+
+    }
+    
 
 }

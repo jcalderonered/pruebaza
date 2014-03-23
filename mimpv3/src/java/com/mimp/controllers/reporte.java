@@ -193,15 +193,24 @@ public class reporte {
                             }
                         }
                     }
+                    int edad = 0;
+                    int añoAct = 0;
+                   if(el.getNombre() != null){
                     cell.setCellValue(el.getNombre());
+                    }
                     cell = row.createCell(3);
+                    if(el.getApellidoP() != null){
                     cell.setCellValue(el.getApellidoP());
+                    }
                     cell = row.createCell(4);
+                    if(el.getApellidoM() != null){
                     cell.setCellValue(el.getApellidoM());
+                    }
                     cell = row.createCell(5);
                     Date fechaAct = new Date();
-                    int añoAct = fechaAct.getYear();
-                    int edad = añoAct - el.getFechaNac().getYear();
+                    if(el.getFechaNac() != null){
+                    añoAct = fechaAct.getYear();
+                    edad = añoAct - el.getFechaNac().getYear();
                     if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                             > 0) {
                         edad--;
@@ -212,16 +221,29 @@ public class reporte {
                             edad--;
                         }
                     }
-                    cell.setCellValue(edad);
+                         cell.setCellValue(edad);
+                    }else {
+                         cell.setCellValue("");
+                    }
+                   
                     cell = row.createCell(6);
+                    if(el.getPaisNac() != null){
                     cell.setCellValue(el.getPaisNac());
+                    }
                     cell = row.createCell(7);
+                    if(ella.getNombre() != null){
                     cell.setCellValue(ella.getNombre());
+                    }
                     cell = row.createCell(8);
+                    if(ella.getApellidoP() != null){
                     cell.setCellValue(ella.getApellidoP());
+                    }
                     cell = row.createCell(9);
+                    if(ella.getApellidoM() != null){
                     cell.setCellValue(ella.getApellidoM());
+                    }
                     cell = row.createCell(10);
+                    if(ella.getFechaNac() != null){
                     edad = añoAct - ella.getFechaNac().getYear();
                     if ((ella.getFechaNac().getMonth() - fechaAct.getMonth()) > 0) {
                         edad--;
@@ -230,9 +252,15 @@ public class reporte {
                             edad--;
                         }
                     }
-                    cell.setCellValue(edad);
+                        cell.setCellValue(edad);
+                    }else {
+                        cell.setCellValue("");
+                    }
+                    
                     cell = row.createCell(11);
-                    cell.setCellValue(ella.getPaisNac());
+                    if(ella.getPaisNac() != null){
+                        cell.setCellValue(ella.getPaisNac());
+                    }
                     //NNA empieza Aqui
                     String nombres = "";
                     String sexo = "";
@@ -3171,7 +3199,9 @@ public class reporte {
                 cell = row.createCell(6);
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
-                int edad = añoAct - el.getFechaNac().getYear();
+                int edad = 0;
+                if(el.getFechaNac() != null){
+                edad = añoAct - el.getFechaNac().getYear();
                 if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                         > 0) {
                     edad--;
@@ -3183,6 +3213,9 @@ public class reporte {
                     }
                 }
                 cell.setCellValue(edad);
+                }else{
+                    cell.setCellValue("");
+                }
                 cell = row.createCell(7);
                 String fecha = "";
                 try {
@@ -3207,6 +3240,7 @@ public class reporte {
                 }
                 cell = row.createCell(11);
                 añoAct = fechaAct.getYear();
+                if(ella.getFechaNac() != null){
                 edad = añoAct - ella.getFechaNac().getYear();
                 if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
                         > 0) {
@@ -3219,6 +3253,9 @@ public class reporte {
                     }
                 }
                 cell.setCellValue(edad);
+                }else{
+                    cell.setCellValue("");
+                }
                 cell = row.createCell(12);
                 fecha = "";
                 try {
@@ -3544,7 +3581,9 @@ public class reporte {
                 cell = row.createCell(6);
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
-                int edad = añoAct - el.getFechaNac().getYear();
+                int edad = 0;
+                if(el.getFechaNac() != null){
+                edad = añoAct - el.getFechaNac().getYear();
                 if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                         > 0) {
                     edad--;
@@ -3556,6 +3595,9 @@ public class reporte {
                     }
                 }
                 cell.setCellValue(edad);
+                }else{
+                    cell.setCellValue("");
+                }
                 cell = row.createCell(7);
                 String fecha = "";
                 try {
@@ -3580,6 +3622,7 @@ public class reporte {
                 }
                 cell = row.createCell(11);
                 añoAct = fechaAct.getYear();
+                if(ella.getFechaNac() != null){
                 edad = añoAct - ella.getFechaNac().getYear();
                 if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
                         > 0) {
@@ -3592,6 +3635,9 @@ public class reporte {
                     }
                 }
                 cell.setCellValue(edad);
+                } else {
+                        cell.setCellValue("");
+                    }
                 cell = row.createCell(12);
                 fecha = "";
                 try {
@@ -3916,7 +3962,9 @@ public class reporte {
                 cell = row.createCell(6);
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
-                int edad = añoAct - el.getFechaNac().getYear();
+                int edad = 0;
+                if(el.getFechaNac() != null){
+                edad = añoAct - el.getFechaNac().getYear();
                 if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                         > 0) {
                     edad--;
@@ -3928,6 +3976,9 @@ public class reporte {
                     }
                 }
                 cell.setCellValue(edad);
+                }else{
+                    cell.setCellValue("");
+                }
                 cell = row.createCell(7);
                 String fecha = "";
                 try {
@@ -3952,6 +4003,7 @@ public class reporte {
                 }
                 cell = row.createCell(11);
                 añoAct = fechaAct.getYear();
+                if(ella.getFechaNac() != null){
                 edad = añoAct - ella.getFechaNac().getYear();
                 if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
                         > 0) {
@@ -3964,6 +4016,9 @@ public class reporte {
                     }
                 }
                 cell.setCellValue(edad);
+                }else{
+                cell.setCellValue("");
+                }
                 cell = row.createCell(12);
                 fecha = "";
                 try {
@@ -4251,7 +4306,9 @@ public class reporte {
                 cell = row.createCell(13);
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
-                int edad = añoAct - el.getFechaNac().getYear();
+                int edad = 0;
+                if(el.getFechaNac() != null){
+                edad = añoAct - el.getFechaNac().getYear();
                 if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                         > 0) {
                     edad--;
@@ -4263,6 +4320,9 @@ public class reporte {
                     }
                 }
                 cell.setCellValue(edad);
+                }else {
+                cell.setCellValue("");
+                }
                 cell = row.createCell(14);
                 try {
                     cell.setCellValue(ella.getNombre());
@@ -4280,6 +4340,7 @@ public class reporte {
                 }
                 cell = row.createCell(17);
                 añoAct = fechaAct.getYear();
+                if(ella.getFechaNac() != null){
                 edad = añoAct - ella.getFechaNac().getYear();
                 if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
                         > 0) {
@@ -4292,6 +4353,9 @@ public class reporte {
                     }
                 }
                 cell.setCellValue(edad);
+                }else {
+                cell.setCellValue("");
+                }
                 cell = row.createCell(18);
                 try {
                     cell.setCellValue(ella.getNombre());
@@ -4717,9 +4781,11 @@ public class reporte {
                 }
                 cell = row.createCell(8);
                 Date fechaAct = new Date();
-                int añoAct = fechaAct.getYear();
-                int edad = añoAct - el.getFechaNac().getYear();
+                int edad = 0;
                 int edadEl = 0;
+                int añoAct = fechaAct.getYear();
+                if(el.getFechaNac() != null){
+                edad = añoAct - el.getFechaNac().getYear();                
                 if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                         > 0) {
                     edad--;
@@ -4729,9 +4795,12 @@ public class reporte {
                             > 0) {
                         edad--;
                     }
-                }
+                }                
                 edadEl = edad;
                 cell.setCellValue(edad);
+                }else{
+                    cell.setCellValue("");
+                }
                 cell = row.createCell(9);
                 if (ella.getNombre() != null) {
                     cell.setCellValue(ella.getNombre());
@@ -4746,6 +4815,7 @@ public class reporte {
                 }
                 cell = row.createCell(12);
                 añoAct = fechaAct.getYear();
+                if(ella.getFechaNac() != null){
                 edad = añoAct - ella.getFechaNac().getYear();
                 if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
                         > 0) {
@@ -4757,7 +4827,11 @@ public class reporte {
                         edad--;
                     }
                 }
-                cell.setCellValue(edad);
+                    cell.setCellValue(edad);
+                }else {
+                    cell.setCellValue("");
+                }
+                
                 cell = row.createCell(13);
                 cell.setCellValue((edadEl + edad) / 2);
                 cell = row.createCell(14);
@@ -4793,6 +4867,7 @@ public class reporte {
                 cell = row.createCell(21);
                 if (exp.getNacionalidad() != null) {
                     cell.setCellValue(exp.getNacionalidad());
+                    //cell.setCellValue(exp.getIdexpedienteFamilia());
                 }
                 cell = row.createCell(22);
                 Designacion desig = new Designacion();
@@ -4800,6 +4875,7 @@ public class reporte {
 //                    desig = ServicioReporte.getUltimaDesignacionNnaCarJuzExp(exp.getIdexpedienteFamilia());
 //                }
                 desig = ServicioReporte.getUltimaDesignacionNnaCarJuzExp2(exp.getIdexpedienteFamilia());
+                //cell.setCellValue(desig.getIddesignacion());
                 if (desig.getIddesignacion() != 0) {
                     if (desig.getNna() != null) {
                         if (desig.getNna().getNombre() != null) {
@@ -4808,7 +4884,7 @@ public class reporte {
                         }
                     }
                 }
-                cell = row.createCell(23);
+                cell = row.createCell(23);                
                 if (desig.getIddesignacion() != 0) {
                     if (desig.getNna() != null) {
                         if (desig.getNna().getApellidoP() != null) {
@@ -5047,7 +5123,7 @@ public class reporte {
                 if (desig.getTipoPropuesta() != null) {
                     cell.setCellValue(desig.getTipoPropuesta());
                 }
-                //
+                
                 Resolucion resol = new Resolucion();
                 //resol = ServicioReporte.getResolucionAptitud(exp.getIdexpedienteFamilia());
                 resol = ServicioReporte.getResolucionAptitud2(exp.getIdexpedienteFamilia());
@@ -5742,6 +5818,12 @@ public class reporte {
                     }
                     if (tempInfo.getExpectativaGenero().equals("indistinto")) {
                         ExpEdadSex = ExpEdadSex + "NIÑO O NIÑA DE" + " " + tempInfo.getExpectativaEdadMin() + " A " + tempInfo.getExpectativaEdadMax();;
+                    }
+                    if (tempInfo.getExpectativaGenero().equals("masculino")) {
+                        ExpEdadSex = ExpEdadSex + "NIÑO DE" + " " + tempInfo.getExpectativaEdadMin() + " A " + tempInfo.getExpectativaEdadMax();;
+                    }
+                    if (tempInfo.getExpectativaGenero().equals("femenino")) {
+                        ExpEdadSex = ExpEdadSex + "NIÑA DE" + " " + tempInfo.getExpectativaEdadMin() + " A " + tempInfo.getExpectativaEdadMax();;
                     }
                     if (!tempInfo.getAdoptantes().isEmpty()) {
                         Adoptante el = new Adoptante();
