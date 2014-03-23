@@ -134,7 +134,7 @@ public class HiberEtapa {
 
                         listExp.add(tempExpFam);
                     }
-
+                    rs2.close();
                     statement2.close();
 
                     String hql3 = "{call HE_AFR_BY_IDFAM(?,?)}";
@@ -159,6 +159,7 @@ public class HiberEtapa {
                         listAFR.add(tempAFR);
 
                     }
+                    rs3.close();
                     statement3.close();
 
                     String hql4 = "{call HE_GET_FS_BY_IDFAM(?,?)}";
@@ -207,6 +208,7 @@ public class HiberEtapa {
                         tempFS.setAsistentes(listA);
                         listFS.add(tempFS);
                     }
+                    rs4.close();
                     statement4.close();
 
                     tempFamp.setExpedienteFamilias(listExp);
@@ -215,6 +217,7 @@ public class HiberEtapa {
 
                     allFamilias.add(tempFamp);
                 }
+                rs.close();
                 statement.close();
             }
         };
@@ -284,6 +287,7 @@ public class HiberEtapa {
                             ent.setCorreo(temp2.getString(14));
                             fam.setEntidad(ent);
                         }
+                        temp2.close();
                         statement2.close();
                     }
                     fam.setUser(temp.getString(3));
@@ -293,6 +297,7 @@ public class HiberEtapa {
                     fam.setConstancia(temp.getString(7));
 
                 }
+                temp.close();
                 statement.close();
             }
         };
