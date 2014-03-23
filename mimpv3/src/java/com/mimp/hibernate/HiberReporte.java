@@ -2719,42 +2719,40 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(2);
 
-                if (!rs.next()) {
-                    //No hay nada
-                } else {
+                if (rs.next()){
                     Nna tempNna = new Nna();
                     ExpedienteNna tempExpNna = new ExpedienteNna();
                     Car tempCar = new Car();
                     Juzgado tempJuzg = new Juzgado();
                     Set<ExpedienteNna> listExp = new HashSet<ExpedienteNna>();
 
-                    ultimaDesig.setIddesignacion(rs.getLong(1));
-                    ultimaDesig.setNDesignacion(rs.getString(5));
-                    ultimaDesig.setPrioridad(rs.getLong(6));
-                    ultimaDesig.setFechaPropuesta(rs.getDate(7));
-                    ultimaDesig.setFechaConsejo(rs.getDate(8));
-                    ultimaDesig.setAceptacionConsejo(rs.getShort(9));
-                    ultimaDesig.setTipoPropuesta(rs.getString(10));
-                    ultimaDesig.setObs(rs.getString(11));
+                    ultimaDesig.setIddesignacion(rs.getLong("IDDESIGNACION"));
+                    ultimaDesig.setNDesignacion(rs.getString("N_DESIGNACION"));
+                    ultimaDesig.setPrioridad(rs.getLong("PRIORIDAD"));
+                    ultimaDesig.setFechaPropuesta(rs.getDate("FECHA_PROPUESTA"));
+                    ultimaDesig.setFechaConsejo(rs.getDate("FECHA_CONSEJO"));
+                    ultimaDesig.setAceptacionConsejo(rs.getShort("ACEPTACION_CONSEJO"));
+                    ultimaDesig.setTipoPropuesta(rs.getString("TIPO_PROPUESTA"));
+                    ultimaDesig.setObs(rs.getString("OBS"));
 
-                    tempNna.setIdnna(rs.getLong(12));
-                    tempNna.setNombre(rs.getString(15));
-                    tempNna.setApellidoP(rs.getString(16));
-                    tempNna.setApellidoM(rs.getString(17));
-                    tempNna.setSexo(rs.getString(18));
-                    tempNna.setFechaNacimiento(rs.getDate(19));
-                    tempNna.setEdadAnhos(rs.getShort(20));
-                    tempNna.setEdadMeses(rs.getShort(21));
-                    tempNna.setActaNacimiento(rs.getShort(22));
-                    tempNna.setCondicionSalud(rs.getString(23));
-                    tempNna.setDepartamentoNacimiento(rs.getString(24));
-                    tempNna.setProvinciaNacimiento(rs.getString(25));
-                    tempNna.setDistritoNacimiento(rs.getString(26));
-                    tempNna.setPaisNacimiento(rs.getString(27));
-                    tempNna.setLugarNac(rs.getString(28));
-                    tempNna.setFechaResolAbandono(rs.getDate(29));
-                    tempNna.setFechaResolConsentida(rs.getDate(30));
-                    tempNna.setClasificacion(rs.getString(31));
+                    tempNna.setIdnna(rs.getLong("IDNNA"));
+                    tempNna.setNombre(rs.getString("NOMBRE"));
+                    tempNna.setApellidoP(rs.getString("APELLIDO_P"));
+                    tempNna.setApellidoM(rs.getString("APELLIDO_M"));
+                    tempNna.setSexo(rs.getString("SEXO"));
+                    tempNna.setFechaNacimiento(rs.getDate("FECHA_NACIMIENTO"));
+                    tempNna.setEdadAnhos(rs.getShort("EDAD_ANHOS"));
+                    tempNna.setEdadMeses(rs.getShort("EDAD_MESES"));
+                    tempNna.setActaNacimiento(rs.getShort("ACTA_NACIMIENTO"));
+                    tempNna.setCondicionSalud(rs.getString("CONDICION_SALUD"));
+                    tempNna.setDepartamentoNacimiento(rs.getString("DEPARTAMENTO_NACIMIENTO"));
+                    tempNna.setProvinciaNacimiento(rs.getString("PROVINCIA_NACIMIENTO"));
+                    tempNna.setDistritoNacimiento(rs.getString("DISTRITO_NACIMIENTO"));
+                    tempNna.setPaisNacimiento(rs.getString("PAIS_NACIMIENTO"));
+                    tempNna.setLugarNac(rs.getString("LUGAR_NAC"));
+                    tempNna.setFechaResolAbandono(rs.getDate("FECHA_RESOL_ABANDONO"));
+                    tempNna.setFechaResolConsentida(rs.getDate("FECHA_RESOL_CONSENTIDA"));
+                    tempNna.setClasificacion(rs.getString("CLASIFICACION"));
                     tempNna.setIncesto(rs.getShort("INCESTO"));
                     tempNna.setMental(rs.getShort("MENTAL"));
                     tempNna.setEpilepsia(rs.getShort("EPILEPSIA"));
@@ -2800,7 +2798,7 @@ public class HiberReporte {
                     tempExpNna.setObservaciones(rs.getString(75));
                     tempExpNna.setFechaInvTutelar(rs.getDate("FECHA_INV_TUTELAR"));
 
-                    tempCar.setIdcar(rs.getLong(77));
+                    tempCar.setIdcar(rs.getLong("IDCAR"));
                     tempCar.setNombre(rs.getString(78));
                     tempCar.setDireccion(rs.getString(79));
                     tempCar.setDepartamento(rs.getString(80));

@@ -1788,14 +1788,12 @@ public class main {
         expediente.setNumeroExpediente(numeroExp);
         if (fechaIngreso != null && !fechaIngreso.equals("")) {
             expediente.setFechaIngresoDga(df.stringToDate(fechaIngreso));
-        }
-        if (fechaIngreso == null || fechaIngreso.equals("")) {
+        }else if (fechaIngreso == null || fechaIngreso.equals("")) {
             expediente.setFechaIngresoDga(null);
         }
         if (tupa != null && !tupa.equals("")) {
             expediente.setTupa(df.stringToDate(tupa));
-        }
-        if (tupa == null || tupa.equals("")) {
+        }else if (tupa == null || tupa.equals("")) {
             expediente.setTupa(null);
         }
 
@@ -1809,8 +1807,8 @@ public class main {
         expediente.setUnidad(tempUa);
         expediente.getFamilia().setEntidad(tempEnt);
 
-        servicioEtapa.updateExpedienteFamilia(expediente);
-        servicioEtapa.UpdateFamilia(expediente.getFamilia());
+        ServicioMain.updateExpFam(expediente);
+        ServicioMain.updateFam(expediente.getFamilia());
 
         map.put("df", df);
         map.put("estado", etapaOrigen);
@@ -2272,7 +2270,7 @@ public class main {
         expediente.setUnidad(usuario.getUnidad());
         expediente.setEstado("evaluacion");
         expediente.setNacionalidad("nacional");
-        expediente.setRnsa(Short.parseShort("1"));
+        expediente.setRnsa(Short.parseShort("0"));
         expediente.setRnaa(Short.parseShort("1"));
         expediente.setFamilia(tempFam);
         ServicioMain.crearUpdateExpFam(expediente);

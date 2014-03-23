@@ -172,7 +172,7 @@
                                                     <td>
                                                         <select ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? 'disabled' : ''} id="resultado" name="resultado">
                                                             <option ${estudio2.getResultado() == 'obs' ? 'selected' : ''} value="obs">En Estudio</option>
-                                                            <option ${estudio2.getResultado() == 'noobs' ? 'selected' : ''} ${estudio.getResultado() == null ? 'selected' : ''} value="noobs">En Espera</option>
+                                                            <option ${estudio2.getResultado() == 'noobs' ? 'selected' : ''} ${estudio2.getResultado() == null ? 'selected' : ''} value="noobs">En Espera</option>
                                                             <option ${estudio2.getResultado() == 'acep' ? 'selected' : ''} value="acep">Solicitud de adopción</option>
                                                             <option ${estudio2.getResultado() == 'noacep' ? 'selected' : ''} value="noacep">Desistimiento</option>
                                                         </select>

@@ -179,8 +179,8 @@
                                         <div class="controls">
                                             <select disabled id="tipoEspera" name="tipoEspera">
                                                 <option></option>
-                                                <option value="espera">Lista de espera para adopciones nacionales</option>
-                                                <option value="esperainter">Lista de espera para adopciones internacionales</option>
+                                                <option value="espera">Lista de espera de adopciones nacionales</option>
+                                                <option value="esperainter">Lista de espera de Adoptantes para la adopción en el extranjero</option>
                                             </select>
                                         </div>    
                                     </div>
