@@ -2443,7 +2443,11 @@ public class personal {
         }
         Taller tempTaller = new Taller();
         tempTaller.setUnidad(ua);
-        tempTaller.setNombre(nombre);
+        if (nombre.length() >= 25) {
+            tempTaller.setNombre(nombre.substring(0, 24));
+        } else {
+            tempTaller.setNombre(nombre);
+        }
         tempTaller.setTipoTaller(tipo);
         tempTaller.setNSesion(numSesion);
         Short habil = Short.parseShort(habilitado);
@@ -2493,7 +2497,11 @@ public class personal {
         Taller tempTaller = new Taller();
         tempTaller = ServicioPersonal.getTaller(idTaller);
         if (nombre != null && !nombre.equals("")) {
-            tempTaller.setNombre(nombre);
+            if (nombre.length() >= 25) {
+                tempTaller.setNombre(nombre.substring(0, 24));
+            } else {
+                tempTaller.setNombre(nombre);
+            }
         }
         if (tipo != null && !tipo.equals("")) {
             tempTaller.setTipoTaller(tipo);
@@ -3152,7 +3160,7 @@ public class personal {
         map.put("df", format);
         map.put("expediente", expedienteInt);
         map.put("listaEntidad", ServicioPersonal.ListaEntidades());
-        
+
         map.addAttribute("idExpediente", idExpediente);
         return new ModelAndView("/Personal/fam_inter/datos_reg", map);
     }
