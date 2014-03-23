@@ -5517,7 +5517,9 @@ public class reporte {
             for (AsistenciaFR asist : primeraReu.getAsistenciaFRs()) {
                 Set<InfoFamilia> listafam = asist.getFamilia().getInfoFamilias();
                 for (InfoFamilia famaux : listafam) {
-                    listaFamilias.add(famaux);
+                    if (!listaFamilias.contains(famaux)) {
+                        listaFamilias.add(famaux);
+                    }
                 }
             }
 
@@ -5557,7 +5559,34 @@ public class reporte {
                 }
                 int x = 7;
                 for (Reunion reuaux2 : listaReuniones) {
+                    long idfamiliatemp = 0;
+
+                    ArrayList<AsistenciaFR> listaAsistAux = new ArrayList<AsistenciaFR>();
+                    ArrayList<AsistenciaFR> listaAsist = new ArrayList<AsistenciaFR>();
                     for (AsistenciaFR asist : reuaux2.getAsistenciaFRs()) {
+                        listaAsistAux.add(asist);
+                    }
+
+                    o = listaAsistAux.size();
+                    AsistenciaFR asistaux = new AsistenciaFR();
+                    for (int k = 0; k < o - 1; k++) {
+                        for (int j = k; j < o - 1; j++) {
+                            if (listaAsistAux.get(k).getFamilia().getIdfamilia() > listaAsistAux.get(j + 1).getFamilia().getIdfamilia()) {
+                                asistaux = listaAsistAux.get(k);
+                                listaAsistAux.set(k, listaAsistAux.get(j + 1));
+                                listaAsistAux.set(j + 1, asistaux);
+                            }
+                        }
+                    }
+                    
+                    for(AsistenciaFR asistaux2 : listaAsistAux){
+                        if(idfamiliatemp != asistaux2.getFamilia().getIdfamilia()){
+                            listaAsist.add(asistaux2);
+                        }
+                        idfamiliatemp = asistaux2.getFamilia().getIdfamilia();
+                    }
+
+                    for (AsistenciaFR asist : listaAsist) {
                         for (InfoFamilia infofamaux2 : asist.getFamilia().getInfoFamilias()) {
                             if (infofamaux2.getIdinfoFamilia() == infoFam.getIdinfoFamilia()) {
                                 String asistencia = "";
@@ -5622,7 +5651,6 @@ public class reporte {
 //                }
 //                i++;
 //            }
-
         } catch (Exception e) {
             //e.printStackTrace();
         }
