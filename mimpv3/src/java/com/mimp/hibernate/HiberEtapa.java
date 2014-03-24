@@ -407,12 +407,12 @@ public class HiberEtapa {
                         statement3.setLong(1, temp.getShort(3));
                         statement3.registerOutParameter(2, OracleTypes.CURSOR);
                         statement3.execute();
-                        temp2 = (ResultSet) statement3.getObject(2);
-                        while (temp2.next()) {
-                            unidad.setIdunidad(temp2.getShort(1));
+                        temp3 = (ResultSet) statement3.getObject(2);
+                        while (temp3.next()) {
+                            unidad.setIdunidad(temp3.getShort(1));
                             expFamilia.setUnidad(unidad);
                         }
-                        temp2.close();
+                        temp3.close();
                         statement3.close();
                     }
                     expFamilia.setNumero(temp.getLong(4));
@@ -501,12 +501,12 @@ public class HiberEtapa {
                         statement3.setLong(1, temp.getShort(3));
                         statement3.registerOutParameter(2, OracleTypes.CURSOR);
                         statement3.execute();
-                        temp2 = (ResultSet) statement3.getObject(2);
-                        while (temp2.next()) {
-                            personal.setIdpersonal(temp2.getShort(1));
+                        temp3 = (ResultSet) statement3.getObject(2);
+                        while (temp3.next()) {
+                            personal.setIdpersonal(temp3.getShort(1));
                             tempEval.setPersonal(personal);
                         }
-                        temp2.close();
+                        temp3.close();
                         statement3.close();
                     }
                     tempEval.setTipo(temp.getString(4));
