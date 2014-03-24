@@ -9,7 +9,7 @@
 response.setHeader( "Pragma", "no-cache" );
 response.addHeader( "Cache-Control", "must-revalidate" );
 response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader( "Cache-Control", "no-store" );
+
 response.setDateHeader("Expires", 0);
 Personal u=(Personal)request.getSession().getAttribute("usuario");
 if (u==null){
