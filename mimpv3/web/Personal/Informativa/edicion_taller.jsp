@@ -9,7 +9,7 @@
     response.setHeader("Pragma", "no-cache");
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -66,7 +66,7 @@
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA") || u.getRol().equals("admin")) {%>
+                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA") || u.getRol().equals("admin") || u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/inf"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de sesiones/talleres</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/nna"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNA</a></li>
@@ -75,7 +75,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -85,7 +85,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -124,23 +124,12 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div>
-                                    <label class="control-label">Seleccionar UA</label>
+                                <div class="control-group">
+                                    <label class="control-label" for="textinput">UA</label>
                                     <div class="controls">
-                                        <select ${taller.getHabilitado() == 0 ? 'disabled' : ''} id="ua" name="ua">
-                                            <option value="Lima" ${taller.getUnidad().equals("Lima") ? 'selected' : ''} >Lima</option>
-                                            <option value="Arequipa" ${taller.getUnidad().equals("Arequipa") ? 'selected' : ''}>Arequipa</option>
-                                            <option value="Ayacucho" ${taller.getUnidad().equals("Ayacucho") ? 'selected' : ''} >Ayacucho</option>
-                                            <option value="Cusco" ${taller.getUnidad().equals("Cusco") ? 'selected' : ''} >Cusco</option>
-                                            <option value="Huanuco" ${taller.getUnidad().equals("Huanuco") ? 'selected' : ''} >Huanuco</option>
-                                            <option value="Lambayeque" ${taller.getUnidad().equals("Lambayeque") ? 'selected' : ''} >Lambayeque</option>
-                                            <option value="Libertad" ${taller.getUnidad().equals("Libertad") ? 'selected' : ''} >La Libertad</option>                                            
-                                            <option value="Loreto" ${taller.getUnidad().equals("Loreto") ? 'selected' : ''} >Loreto</option>
-                                            <option value="Piura" ${taller.getUnidad().equals("Piura") ? 'selected' : ''} >Piura</option>
-                                            <option value="Puno" ${taller.getUnidad().equals("Puno") ? 'selected' : ''} >Puno</option>
-                                            <option value="Junin" ${taller.getUnidad().equals("Junin") ? 'selected' : ''} >Junin</option>
-                                        </select>
-                                    </div>    
+                                        <input disabled placeholder="${taller.getUnidad() != null ? taller.getUnidad() : usuario.getUnidad().getDepartamento()}" class="input-xlarge">
+                                        <input hidden value="${taller.getUnidad() != null ? taller.getUnidad() : usuario.getUnidad().getDepartamento()}" id="ua" name="ua" >
+                                    </div>
                                 </div>
                                 <br>   
                                 <div class="control-group">
@@ -160,7 +149,13 @@
                                         <select ${taller.getHabilitado() == 0 ? 'disabled' : ''} id="numSesion" name="numSesion" class="input-xlarge">
                                             <option value="ninguno" selected >Ninguno</option>
                                             <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
-                                                <option value="${sesion.getNSesion()}" ${taller.getNSesion() == sesion.getNSesion() ? 'selected' : ''}> ${sesion.getNSesion()}</option> 
+                                                <c:set var="fechaSesion" value="${sesion.getFecha()}" /> 
+                                                <fmt:formatDate var="yearSesion" value="${fechaSesion}" pattern="y" />  
+                                                <c:if test="${year == yearSesion}">
+                                                    <c:if test="${sesion.getUnidad() == usuario.getUnidad().getDepartamento()}">
+                                                        <option value="${sesion.getNSesion()}" ${taller.getNSesion() == sesion.getNSesion() ? 'selected' : ''}> ${sesion.getNSesion()}</option> 
+                                                    </c:if> 
+                                                </c:if> 
                                             </c:forEach>
                                         </select>
                                     </div>

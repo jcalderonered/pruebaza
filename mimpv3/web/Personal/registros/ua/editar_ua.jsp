@@ -133,18 +133,32 @@
                                     <div>
                                         <label class="control-label">Departamento</label>
                                         <div class="controls">
-                                            <select id="departamento" name="departamento">
+                                            <select id="departamento" name="departamento">                                                
                                                 <option value="Lima" ${ua.getDepartamento().equals("Lima") ? 'selected' : ''} >Lima</option>
                                                 <option value="Arequipa" ${ua.getDepartamento().equals("Arequipa") ? 'selected' : ''}>Arequipa</option>
                                                 <option value="Ayacucho" ${ua.getDepartamento().equals("Ayacucho") ? 'selected' : ''} >Ayacucho</option>
                                                 <option value="Cusco" ${ua.getDepartamento().equals("Cusco") ? 'selected' : ''} >Cusco</option>
-                                                <option value="Huanuco" ${ua.getDepartamento().equals("Huanuco") ? 'selected' : ''} >Huanuco</option>
+                                                <option value="Huanuco" ${ua.getDepartamento().equals("Huanuco") ? 'selected' : ''} >Huánuco</option>
                                                 <option value="Lambayeque" ${ua.getDepartamento().equals("Lambayeque") ? 'selected' : ''} >Lambayeque</option>
                                                 <option value="Libertad" ${ua.getDepartamento().equals("Libertad") ? 'selected' : ''} >La Libertad</option>                                            
                                                 <option value="Loreto" ${ua.getDepartamento().equals("Loreto") ? 'selected' : ''} >Loreto</option>
                                                 <option value="Piura" ${ua.getDepartamento().equals("Piura") ? 'selected' : ''} >Piura</option>
                                                 <option value="Puno" ${ua.getDepartamento().equals("Puno") ? 'selected' : ''} >Puno</option>
-                                                <option value="Junin" ${ua.getDepartamento().equals("Junin") ? 'selected' : ''} >Junin</option>
+                                                <option value="Junin" ${ua.getDepartamento().equals("Junin") ? 'selected' : ''} >Junín</option>
+                                                <option value="Amazonas" ${ua.getDepartamento().equals("Amazonas") ? 'selected' : ''} >Amazonas</option>
+                                                <option value="Ancash" ${ua.getDepartamento().equals("Ancash") ? 'selected' : ''} >Áncash</option>
+                                                <option value="Apurimac" ${ua.getDepartamento().equals("Apurimac") ? 'selected' : ''} >Apurímac</option>
+                                                <option value="Cajamarca" ${ua.getDepartamento().equals("Cajamarca") ? 'selected' : ''} >Cajamarca</option>
+                                                <option value="Callao" ${ua.getDepartamento().equals("Callao") ? 'selected' : ''} >Callao</option>
+                                                <option value="Huancavelica" ${ua.getDepartamento().equals("Huancavelica") ? 'selected' : ''} >Huancavelica</option>
+                                                <option value="Ica" ${ua.getDepartamento().equals("Ica") ? 'selected' : ''} >Ica</option>
+                                                <option value="Madre de Dios" ${ua.getDepartamento().equals("Madre de Dios") ? 'selected' : ''} >Madre de Dios</option>
+                                                <option value="Moquegua" ${ua.getDepartamento().equals("Moquegua") ? 'selected' : ''} >Moquegua</option>
+                                                <option value="Pasco" ${ua.getDepartamento().equals("Pasco") ? 'selected' : ''} >Pasco</option>
+                                                <option value="San Martin" ${ua.getDepartamento().equals("San Martin") ? 'selected' : ''} >San Martín</option>
+                                                <option value="Tacna" ${ua.getDepartamento().equals("Tacna") ? 'selected' : ''} >Tacna</option>
+                                                <option value="Tumbes" ${ua.getDepartamento().equals("Tumbes") ? 'selected' : ''} >Tumbes</option>
+                                                <option value="Ucayali" ${ua.getDepartamento().equals("Ucayali") ? 'selected' : ''} >Ucayali</option>
                                             </select>
                                         </div>    
                                     </div>

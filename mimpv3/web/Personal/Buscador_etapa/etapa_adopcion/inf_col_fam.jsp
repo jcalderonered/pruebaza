@@ -9,7 +9,7 @@
     response.setHeader("Pragma", "no-cache");
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -68,7 +68,7 @@
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA") || u.getRol().equals("admin")) {%>
+                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA") || u.getRol().equals("admin") || u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/inf"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de sesiones/talleres</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/nna"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNA</a></li>
@@ -76,45 +76,45 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                              <%if (!u.getRol().equals("DEIA Prio")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">                     
 
-<p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/EtapaAdopcion'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/EtapaAdopcion'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Buscador de Registro por Etapa</strong></h1>
                         <br>
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/fametap">Preparación</a></li>
                             <li ><a href="${pageContext.servletContext.contextPath}/EtapaEvalNac" >Evaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ListaEspera" >Lista Espera</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/EtapaDesig">Propuesta de Designación</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
+                            <li ${usuario.getRol().equals("UA") ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/EtapaDesig">Propuesta de Designación</a></li>
+                            <li ${usuario.getRol().equals("UA") ? 'class="hidden"' : ''} class="active"><a href="${pageContext.servletContext.contextPath}/EtapaAdopcion" >Adopción</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
@@ -123,90 +123,90 @@
                         <br>
                         <div class="row">
                             <div class="col-md-2 col-md-offset-2">
-                            <c:if test="${informe == null}">
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearEvalInforme" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)"> 
-                                <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
-                            </c:if>  
-                            <c:if test="${informe != null}">
-                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateEvalInforme" method="post"> 
-                                    <input hidden name="idInforme" id="idInforme" value="${informe.getIdevaluacion()}">
-                                </c:if>  
-                                    <fieldset>
-                                        <!-- Text input-->
-                                        <br>
-                                        <h1 align="center"><strong>Familia "${familia}"</strong></h1>
-                                        <br>
-                                        <h3><strong>Responsable</strong></h3>
-                                        <br>
-                                        <div>
-                                            <label class="control-label">Profesional</label>
-                                            <div class="controls">
-                                                <select ${informe != null ? 'disabled' : ''} id="personal" name="personal" class="input-xlarge">
-                                                    <c:forEach var="personal" items="${listaPersonal}" > 
-                                                        <option value="${personal.getIdpersonal()}" ${informe.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>    
-                                        </div>
-                                        <br>
-                                        <h3><strong>Evaluación</strong></h3>
-                                        <br>
-                                        <div class="control-group">
-                                          <label class="control-label">Número de informe</label>
-                                            <div class="controls">
-                                              <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${informe.getNumEval()}" >
-                                           </div>
-                                        </div>
-                                        <br> 
-                                        <div>
-                                            <label class="control-label">Resultado</label>
-                                            <div class="controls">
-                                                <select ${informe != null ? 'disabled' : ''} id="resultado" name="resultado" >
-                                                    <option value="favorable" ${informe.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
-                                                    <option value="desfavorable" ${informe.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
-                                                </select>
-                                            </div>    
-                                        </div>
+                                <c:if test="${informe == null}">
+                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearEvalInforme" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)"> 
+                                        <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
+                                    </c:if>  
+                                    <c:if test="${informe != null}">
+                                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateEvalInforme" method="post"> 
+                                            <input hidden name="idInforme" id="idInforme" value="${informe.getIdevaluacion()}">
+                                        </c:if>  
+                                        <fieldset>
+                                            <!-- Text input-->
+                                            <br>
+                                            <h1 align="center"><strong>Familia "${familia}"</strong></h1>
+                                            <br>
+                                            <h3><strong>Responsable</strong></h3>
+                                            <br>
+                                            <div>
+                                                <label class="control-label">Profesional</label>
+                                                <div class="controls">
+                                                    <select ${informe != null ? 'disabled' : ''} id="personal" name="personal" class="input-xlarge">
+                                                        <c:forEach var="personal" items="${listaPersonal}" > 
+                                                            <option value="${personal.getIdpersonal()}" ${informe.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>    
+                                            </div>
+                                            <br>
+                                            <h3><strong>Evaluación</strong></h3>
+                                            <br>
+                                            <div class="control-group">
+                                                <label class="control-label">Número de informe</label>
+                                                <div class="controls">
+                                                    <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${informe.getNumEval()}" >
+                                                </div>
+                                            </div>
+                                            <br> 
+                                            <div>
+                                                <label class="control-label">Resultado</label>
+                                                <div class="controls">
+                                                    <select ${informe != null ? 'disabled' : ''} id="resultado" name="resultado" >
+                                                        <option value="favorable" ${informe.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
+                                                        <option value="desfavorable" ${informe.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
+                                                    </select>
+                                                </div>    
+                                            </div>
 
-                                        <br>
-                                        <div class="control-group">
-                                            <label class="control-label">Fecha de evaluación</label>
-                                            <div class="controls">
-                                                <input ${informe != null ? 'disabled' : ''} id="fechaEval" name="fechaEval" type="text" value="${informe.getFechaResultado() != null ? df.dateToString(informe.getFechaResultado()) : ''}" class="datepicker input-xlarge">
+                                            <br>
+                                            <div class="control-group">
+                                                <label class="control-label">Fecha de evaluación</label>
+                                                <div class="controls">
+                                                    <input ${informe != null ? 'disabled' : ''} id="fechaEval" name="fechaEval" type="text" value="${informe.getFechaResultado() != null ? df.dateToString(informe.getFechaResultado()) : ''}" class="datepicker input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <label class="control-label">Personas intervenidas</label>
-                                            <div class="controls">
-                                                <textarea ${informe != null ? 'disabled' : ''} id="persInt" name="persInt" type="text" cols="25" rows="5">${informe.getPersInt()}</textarea>
+                                            <br>
+                                            <div class="control-group">
+                                                <label class="control-label">Personas intervenidas</label>
+                                                <div class="controls">
+                                                    <textarea ${informe != null ? 'disabled' : ''} id="persInt" name="persInt" type="text" cols="25" rows="5">${informe.getPersInt()}</textarea>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                          <label class="control-label">Número de personas intervenidas</label>
-                                            <div class="controls">
-                                              <input ${informe != null ? 'disabled' : ''} id="numPers" name="numPers" type="text" class="input-xlarge" value="${informe.getNumPersInt()}" >
-                                           </div>
-                                        </div>
-                                        <br> 
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Comentarios</label>
-                                                <textarea ${informe != null ? 'disabled' : ''} id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${informe.getObservacion()}</textarea>
+                                            <br>
+                                            <div class="control-group">
+                                                <label class="control-label">Número de personas intervenidas</label>
+                                                <div class="controls">
+                                                    <input ${informe != null ? 'disabled' : ''} id="numPers" name="numPers" type="text" class="input-xlarge" value="${informe.getNumPersInt()}" >
+                                                </div>
                                             </div>
-                                        </div>   
-                                        <br>
+                                            <br> 
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Comentarios</label>
+                                                    <textarea ${informe != null ? 'disabled' : ''} id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${informe.getObservacion()}</textarea>
+                                                </div>
+                                            </div>   
+                                            <br>
 
 
-                                        <!-- Button -->
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <button ${informe != null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                            <!-- Button -->
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <button ${informe != null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </fieldset>
-                                </form>   
+                                        </fieldset>
+                                    </form>   
                             </div>
                         </div>
                     </div>
@@ -228,43 +228,43 @@
                 <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
                 <script type="text/javascript">
 
-                    $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
                 </script>
                 <script type="text/javascript">
-                function enter(e) {
-                     if (e.keyCode == 13) {
-                     return false;
+                    function enter(e) {
+                        if (e.keyCode == 13) {
+                            return false;
+                        }
                     }
-                }
-            </script>
-            <script type="text/javascript">
-     
-            function validar()
-            {
-            var numericExpression = /^[0-9]+$/;
-            if(!document.formulario.numPers.value.match(numericExpression))
-            {
-            alert( "Debe ingresar un número" );
-             document.formulario.numPers.focus() ;
-            return false;
-            }  
-            if( document.formulario.numEval.value == "" )
-            {
-            alert( "Debe ingresar un número de informe" );
-             document.formulario.numEval.focus() ;
-            return false;
-            }
-            if( document.formulario.fechaEval.value == "" )
-            {
-            alert( "Debe ingresar la fecha" );
-             document.formulario.fechaEval.focus() ;
-            return false;
-            }
-            
-            return true;
-            }
-            </script>
+                </script>
+                <script type="text/javascript">
+
+                    function validar()
+                    {
+                        var numericExpression = /^[0-9]+$/;
+                        if (!document.formulario.numPers.value.match(numericExpression))
+                        {
+                            alert("Debe ingresar un número");
+                            document.formulario.numPers.focus();
+                            return false;
+                        }
+                        if (document.formulario.numEval.value == "")
+                        {
+                            alert("Debe ingresar un número de informe");
+                            document.formulario.numEval.focus();
+                            return false;
+                        }
+                        if (document.formulario.fechaEval.value == "")
+                        {
+                            alert("Debe ingresar la fecha");
+                            document.formulario.fechaEval.focus();
+                            return false;
+                        }
+
+                        return true;
+                    }
+                </script>
                 <!-- Placed at the end of the document so the pages load faster -->               
                 </body>
                 </html>

@@ -67,7 +67,7 @@
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA") || u.getRol().equals("admin")) {%>
+                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA") || u.getRol().equals("admin") || u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/inf"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de sesiones/talleres</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/nna"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNA</a></li>
@@ -86,7 +86,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -126,40 +126,42 @@
                                         <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
                                             <c:set var="fechaSesion" value="${sesion.getFecha()}" /> 
                                             <fmt:formatDate var="yearSesion" value="${fechaSesion}" pattern="y" />  
-                                            <c:if test="${year == yearSesion}">    
-                                                <tr>
-                                                    <td>${sesion.getNSesion()}</td>
-                                                    <c:if test="${sesion.getHabilitado() == 0}">
-                                                        <td>Si</td> 
-                                                    </c:if>  
-                                                    <c:if test="${sesion.getHabilitado() == 1}">
-                                                        <td>No</td> 
-                                                    </c:if>     
-                                                    <td>
-                                                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarSesion" method="post">
-                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                            <button type="submit" class="btn btn-default">Modificar</button>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <form action="${pageContext.servletContext.contextPath}/PersonalEliminarSesion" method="post">
-                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                            <button ${sesion.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Eliminar</button>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInscritosSesion" method="post">
-                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                            <button type="submit" class="btn btn-default">Inscritos</button>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia2" method="post">
-                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
-                                                            <button ${sesion.getHabilitado() == 1 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
+                                            <c:if test="${year == yearSesion}"> 
+                                                <c:if test="${sesion.getUnidad() == usuario.getUnidad().getDepartamento()}">
+                                                    <tr>
+                                                        <td>${sesion.getNSesion()}</td>
+                                                        <c:if test="${sesion.getHabilitado() == 0}">
+                                                            <td>Si</td> 
+                                                        </c:if>  
+                                                        <c:if test="${sesion.getHabilitado() == 1}">
+                                                            <td>No</td> 
+                                                        </c:if>     
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalEditarSesion" method="post">
+                                                                <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                <button type="submit" class="btn btn-default">Modificar</button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalEliminarSesion" method="post">
+                                                                <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                <button ${sesion.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Eliminar</button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalInscritosSesion" method="post">
+                                                                <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                <button type="submit" class="btn btn-default">Inscritos</button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalTomaAsistencia2" method="post">
+                                                                <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                <button ${sesion.getHabilitado() == 1 ? 'disabled' : ''} type="submit" class="btn btn-default">Asistencia</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </c:if>   
                                             </c:if> 
                                         </c:forEach>
                                     </c:if>     
@@ -211,37 +213,39 @@
                                                 </c:forEach>
                                             </c:if>  
                                             <c:if test="${mostrar == '0'}">     
-                                                <tr>
-                                                    <td>${taller.getTipoTaller()}</td>
-                                                    <td>${taller.getNombre()}</td> 
-                                                    <td>${taller.getNReunion()}</td> 
-                                                    <c:if test="${taller.getHabilitado() == 0}">
-                                                        <td>Si</td> 
-                                                    </c:if>  
-                                                    <c:if test="${taller.getHabilitado() == 1}">
-                                                        <td>No</td> 
-                                                    </c:if>  
-                                                    <td>
-                                                        <form action="${pageContext.servletContext.contextPath}/PersonalEditarTaller" method="post">
-                                                            <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
-                                                            <button type="submit" class="btn btn-default">Modificar</button>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <form action="${pageContext.servletContext.contextPath}/PersonalEliminarTaller" method="post">
-                                                            <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
-                                                            <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Eliminar</button>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerInicio" method="post">
-                                                            <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
-                                                            <input hidden name="nombreTaller" id="nombreTaller" value="${taller.getNombre()}">
-                                                            <input hidden name="historial" id="historial" value="false">
-                                                            <button type="submit" class="btn btn-default">Detalles</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
+                                                <c:if test="${taller.getUnidad() == usuario.getUnidad().getDepartamento()}">
+                                                    <tr>
+                                                        <td>${taller.getTipoTaller()}</td>
+                                                        <td>${taller.getNombre()}</td> 
+                                                        <td>${taller.getNReunion()}</td> 
+                                                        <c:if test="${taller.getHabilitado() == 0}">
+                                                            <td>Si</td> 
+                                                        </c:if>  
+                                                        <c:if test="${taller.getHabilitado() == 1}">
+                                                            <td>No</td> 
+                                                        </c:if>  
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalEditarTaller" method="post">
+                                                                <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
+                                                                <button type="submit" class="btn btn-default">Modificar</button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalEliminarTaller" method="post">
+                                                                <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
+                                                                <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Eliminar</button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalInscritosTallerInicio" method="post">
+                                                                <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
+                                                                <input hidden name="nombreTaller" id="nombreTaller" value="${taller.getNombre()}">
+                                                                <input hidden name="historial" id="historial" value="false">
+                                                                <button type="submit" class="btn btn-default">Detalles</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </c:if>  
                                             </c:if>
                                         </c:forEach>
                                     </c:if>   

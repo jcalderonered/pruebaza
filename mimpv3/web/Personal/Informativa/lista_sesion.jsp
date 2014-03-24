@@ -69,7 +69,7 @@
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA") || u.getRol().equals("admin")) {%>
+                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA") || u.getRol().equals("admin") || u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/inf"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de sesiones/talleres</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/nna"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNA</a></li>
@@ -88,7 +88,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio")) {%>
+                            <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -156,23 +156,12 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div>
-                                    <label class="control-label">Seleccionar UA</label>
+                                <div class="control-group">
+                                    <label class="control-label" for="textinput">UA</label>
                                     <div class="controls">
-                                        <select ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="ua" name="ua">
-                                            <option value="Lima" ${sesion.getUnidad().equals("Lima") ? 'selected' : ''} >Lima</option>
-                                            <option value="Arequipa" ${sesion.getUnidad().equals("Arequipa") ? 'selected' : ''}>Arequipa</option>
-                                            <option value="Ayacucho" ${sesion.getUnidad().equals("Ayacucho") ? 'selected' : ''} >Ayacucho</option>
-                                            <option value="Cusco" ${sesion.getUnidad().equals("Cusco") ? 'selected' : ''} >Cusco</option>
-                                            <option value="Huanuco" ${sesion.getUnidad().equals("Huanuco") ? 'selected' : ''} >Huanuco</option>
-                                            <option value="Lambayeque" ${sesion.getUnidad().equals("Lambayeque") ? 'selected' : ''} >Lambayeque</option>
-                                            <option value="Libertad" ${sesion.getUnidad().equals("Libertad") ? 'selected' : ''} >La Libertad</option>                                            
-                                            <option value="Loreto" ${sesion.getUnidad().equals("Loreto") ? 'selected' : ''} >Loreto</option>
-                                            <option value="Piura" ${sesion.getUnidad().equals("Piura") ? 'selected' : ''} >Piura</option>
-                                            <option value="Puno" ${sesion.getUnidad().equals("Puno") ? 'selected' : ''} >Puno</option>
-                                            <option value="Junin" ${sesion.getUnidad().equals("Junin") ? 'selected' : ''} >Junin</option>
-                                        </select>
-                                    </div>    
+                                        <input disabled placeholder="${sesion.getUnidad() != null ? sesion.getUnidad() : usuario.getUnidad().getDepartamento()}" class="input-xlarge">
+                                        <input hidden value="${sesion.getUnidad() != null ? sesion.getUnidad() : usuario.getUnidad().getDepartamento()}" id="ua" name="ua" >
+                                    </div>
                                 </div>
                                 <br>        
                                 <div class="control-group">
