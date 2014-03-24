@@ -9,7 +9,7 @@
     response.setHeader("Pragma", "no-cache");
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -65,7 +65,7 @@
                     <div class="col-md-4 ">
                         <ul class="nav nav-list well">
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA") || u.getRol().equals("admin")) {%>
+                                <%if (u.getRol().equals("DCRI") || u.getRol().equals("DGA") || u.getRol().equals("admin") || u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/inf"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de sesiones/talleres</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/nna"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de NNA</a></li>
@@ -74,7 +74,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -84,7 +84,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                              <%if (!u.getRol().equals("DEIA Prio")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -208,32 +208,34 @@
                                     <tbody>
                                         <c:forEach var="familia" items="${listaBusqueda}" varStatus="status">
                                             <c:set var="agregado" value="1" />
-                                            <tr>
-                                                <td>${familia.getExpediente()}</td>                                                                               
-                                                <td>${familia.getNacionalidad()}</td> 
-                                                <td>${familia.getEstado()}</td> 
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia2" method="post">
+                                            <c:if test="${usuario.getUnidad().getDepartamento() == familia.getUnidad().getDepartamento() || usuario.getUnidad().getDepartamento() == 'Lima'}">
+                                                <tr>
+                                                    <td>${familia.getExpediente()}</td>                                                                               
+                                                    <td>${familia.getNacionalidad()}</td> 
+                                                    <td>${familia.getEstado()}</td> 
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia2" method="post">
 
-                                                        <c:if test="${familia.getEstado() == 'post' }" > 
-                                                            <input hidden name="estado" id="estado" value="reevaluacion">
-                                                        </c:if> 
+                                                            <c:if test="${familia.getEstado() == 'post' }" > 
+                                                                <input hidden name="estado" id="estado" value="reevaluacion">
+                                                            </c:if> 
 
-                                                        <c:if test="${familia.getEstado() != 'post' }" > 
-                                                            <input hidden name="estado" id="estado" value="${familia.getEstado()}">
-                                                        </c:if>
+                                                            <c:if test="${familia.getEstado() != 'post' }" > 
+                                                                <input hidden name="estado" id="estado" value="${familia.getEstado()}">
+                                                            </c:if>
 
-                                                        <input hidden name="idExpediente" id="idExpediente" value="${familia.getIdexpedienteFamilia()}">
-                                                        <input hidden name="volver" id="volver" value="${volver}">
-                                                        <input hidden name="expediente" id="expediente" value="${expediente}">
-                                                        <input hidden name="HT" id="HT" value="${HT}">
-                                                        <input hidden name="nacionalidad" id="nacionalidad" value="${nacionalidad}">                                                        
-                                                        <input hidden name="tipofamilia" id="tipofamilia" value="${tipofamilia}">
-                                                        <input hidden name="estado2" id="estado2" value="${estado}">
-                                                        <button type="submit" class="btn btn-default">Ver</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                                            <input hidden name="idExpediente" id="idExpediente" value="${familia.getIdexpedienteFamilia()}">
+                                                            <input hidden name="volver" id="volver" value="${volver}">
+                                                            <input hidden name="expediente" id="expediente" value="${expediente}">
+                                                            <input hidden name="HT" id="HT" value="${HT}">
+                                                            <input hidden name="nacionalidad" id="nacionalidad" value="${nacionalidad}">                                                        
+                                                            <input hidden name="tipofamilia" id="tipofamilia" value="${tipofamilia}">
+                                                            <input hidden name="estado2" id="estado2" value="${estado}">
+                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
                                         </c:forEach>  
                                     </tbody>
                                 </c:if> 

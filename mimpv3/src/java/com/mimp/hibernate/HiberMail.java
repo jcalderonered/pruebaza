@@ -74,7 +74,7 @@ public class HiberMail {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(correo));
             message.setSubject("Sistema de adopciones");
-            message.setText("Estimado adoptante,"
+            message.setText("Estimado solicitante,"
                     + "\n\n Su solicitud de recuperación de contraseña ha sido procesada. Su usuario y contraseña para acceder a la plataforma de adopciones son los siguientes:"
                     + "\n\n Usuario: " + user
                     + "\n\n Contraseña: " + pass_plano
@@ -116,7 +116,7 @@ public class HiberMail {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(correo));
             message.setSubject("Sistema de adopciones");
-            message.setText("Estimado adoptante,"
+            message.setText("Estimado solicitante,"
                     + "\n\n Bienvenido al SISTEMA INFORMÁTICO DEL REGISTRO NACIONAL DE ADOPCIONES, "
                     + "sus credenciales para inscribirse al taller son las siguientes:"
                     + "\n\n Usuario:" + user

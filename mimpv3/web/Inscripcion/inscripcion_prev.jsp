@@ -64,64 +64,31 @@
                                         <th class="col-sm-2 " >COMPETENCIA:</th>
                                     </tr>
                                 </thead>
-                                    <tbody>                                        
+                                <c:if test="${!listaUa.isEmpty()}">
+                                    <tbody>      
+                                        <c:forEach var="ua" items="${listaUa}" varStatus="status">
                                             <tr>
-                                                <td>1</td>
-                                                <td>Arequipa</td>
-                                                <td>(Arequipa, Moquegua y Tacna)</td>
+                                                <td>${status.count}</td>
+                                                <td>${ua.getNombre()}</td>
+                                                <td>${ua.getCompetenciaRegional()}</td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Ayacucho</td>
-                                                <td>(Ayacucho y Huancavelica)</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Cusco</td>
-                                                <td>(Cusco, Apurímac y Madre de Dios)</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Huánuco</td>
-                                                <td>(Huánuco, Pasco y Ucayali)</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>La Libertad</td>
-                                                <td>(La Libertad y Ancash)</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>Lambayeque</td>
-                                                <td>(Lambayeque y Cajamarca)</td>
-                                            </tr>
-                                            <tr>
-                                                <td>8</td>
-                                                <td>Loreto</td>
-                                                <td>(Loreto y San Martín)</td>
-                                            </tr>
-                                            <tr>
-                                                <td>9</td>
-                                                <td>Piura</td>
-                                                <td>(Tumbes y Piura)</td>
-                                            </tr>
-                                            <tr>
-                                                <td>10</td>
-                                                <td>Puno</td>
-                                                <td>(Puno)</td>
-                                            </tr>
-                                            <tr>
-                                                <td>11</td>
-                                                <td>Lima</td>
-                                                <td>(Lima, Callao, Ica, Amazonas)</td>
-                                            </tr>
+                                        </c:forEach>   
                                     </tbody>
+                                </c:if> 
                             </table>
                         </div>
                         <br>
                         <form class="form-signin" action="${pageContext.servletContext.contextPath}/SesionInfInicio" method="post">
                             <div>
                                 <label class="control-label">Seleccionar Unidad de Adopción</label>
+                                <div class="controls">
+                                    <select id="ua" name="ua">
+                                        <c:forEach var="ua" items="${listaUa}" varStatus="status"> 
+                                            <option value="${ua.getDepartamento()}">${ua.getNombre()}</option>
+                                        </c:forEach> 
+                                    </select>
+                                </div>
+                                <!--
                                 <div class="controls">
                                     <select id="ua" name="ua">
                                         <option value="Lima">Lima</option>
@@ -137,6 +104,7 @@
                                         <option value="Junin">Junin</option>
                                     </select>
                                 </div>    
+                                -->
                             </div>
                             <br>       
                             <div class="btn-toolbar">  

@@ -346,7 +346,7 @@ public class HiberPersonal {
 
         session.beginTransaction();
 
-        String hql = "FROM Unidad";
+        String hql = "FROM Unidad U order by U.idunidad asc";
         Query query = session.createQuery(hql);
         List ua = query.list();
         ArrayList<Unidad> allUa = new ArrayList();
@@ -1497,7 +1497,7 @@ public class HiberPersonal {
             for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
                 ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
                 Hibernate.initialize(temp.getFamilia());
-
+                Hibernate.initialize(temp.getUnidad());
                 allExpedientes.add(temp);
 
             }

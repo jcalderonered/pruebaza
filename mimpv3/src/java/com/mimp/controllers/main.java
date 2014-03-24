@@ -139,7 +139,8 @@ public class main {
     }
 
     @RequestMapping("/SesionInfInicioPrev")
-    public String SesionInfInicioPrev() {
+    public String SesionInfInicioPrev(ModelMap map) {
+        map.put("listaUa", ServicioPersonal.ListaUa());
         return "/Inscripcion/inscripcion_prev";
     }
 
@@ -2189,7 +2190,8 @@ public class main {
 
     /*  CRONOGRAMA */
     @RequestMapping("/CronogramaAnualPrev")
-    public String CronogramaAnualPrev() {
+    public String CronogramaAnualPrev(ModelMap map) {
+        map.put("listaUa", ServicioPersonal.ListaUa());
         return "cronograma_prev";
     }
 

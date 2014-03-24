@@ -69,9 +69,10 @@
             <div class="col-md-6">
                 <p><b>IMPORTANTE:</b></p>
                 <p>- Llevar DNI</p>
-                <p>- En caso de parejas casadas, ambos deben asistir a la reunión</p>
+                <p>- En caso de personas casadas es obligatoria la asistencia de ambos integrantes de la pareja</p>                
+                <p>- Asisten únicamente las personas inscritas, no llevar acompañantes ni menores de edad.El espacio es limitado</p>
+                <p>- Tome sus previsiones para llegar a la hora indicada, considere el tráfico, la distancia que tiene que recorrer, buscar una playa de estacionamiento, entre otros.</p>
                 <p>- No se aceptará el ingreso de personas pasada la hora de inicio de la Sesión. Ser puntuales.</p>
-                <p>- No se aceptará el ingreso de acompañantes. Sólo de las personas inscritas a la Sesión.</p>
             </div>
             <div class="col-md-3"></div>
             <!--FIN DE CONTENIDO-->
