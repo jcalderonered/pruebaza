@@ -4004,7 +4004,7 @@ public class HiberReporte {
         return tempDesig;
     }
 
-    //EN PRUEBAS
+    //LISTO
     public Turno2 getAsistenciaTaller(Long idtaller, Long idgrupo, Long idturno2) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -4335,6 +4335,7 @@ public class HiberReporte {
                     adopaux.setApellidoP(rs2.getString("APELLIDO_P"));
                     adopaux.setApellidoM(rs2.getString("APELLIDO_M"));
                     adopaux.setSexo(rs2.getString("SEXO").charAt(0));
+                    adopaux.setFechaNac(rs2.getDate("FECHA_NAC"));
 
                     listaAdop.add(adopaux);
                 }
