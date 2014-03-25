@@ -3784,7 +3784,8 @@ public class personal {
             @RequestParam(value = "HT", required = false) String HT,
             @RequestParam(value = "nacionalidad", required = false) String nacionalidad,
             @RequestParam(value = "estado", required = false) String estado,
-            @RequestParam(value = "tipofamilia", required = false) String tipofamilia
+            @RequestParam(value = "tipofamilia", required = false) String tipofamilia,
+            @RequestParam(value = "resfamilia", required = false) String resfamilia
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -3795,6 +3796,7 @@ public class personal {
 
         ExpedienteFamilia datosExp = new ExpedienteFamilia();
         Familia datosFam = new Familia();
+        InfoFamilia infoFam = new InfoFamilia();
 
         if (expediente != null) {
             datosExp.setExpediente(expediente);
@@ -3827,9 +3829,15 @@ public class personal {
         if (tipofamilia == null || tipofamilia.equals("none")) {
             datosExp.setTipoFamilia("none");
         }
+        if (resfamilia != null && !resfamilia.equals("none")) {
+            infoFam.setDepRes(resfamilia);
+        }
+        if (resfamilia == null || resfamilia.equals("none")) {
+            infoFam.setDepRes("none");
+        }
 
         ArrayList<ExpedienteFamilia> listaBusqueda = new ArrayList();
-        listaBusqueda = ServicioPersonal.FiltrarFam(datosExp, datosFam);
+        listaBusqueda = ServicioPersonal.FiltrarFam(datosExp, datosFam, infoFam);
 
         map.put("listaBusqueda", listaBusqueda);
         String volver = "/FiltrarFam";
