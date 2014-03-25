@@ -77,8 +77,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\OrgAcred.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/OrgAcred.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\OrgAcred.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/OrgAcred.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -148,8 +148,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\PostAdop.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/PostAdop.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\PostAdop.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/PostAdop.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -446,8 +446,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\NnaAbandono.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/NnaAbandono.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\NnaAbandono.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/NnaAbandono.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -1138,8 +1138,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\NnaPrio.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/NnaPrio.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\NnaPrio.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/NnaPrio.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -1507,8 +1507,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\NnaGrupos.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/NnaGrupos.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\NnaGrupos.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/NnaGrupos.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -3122,7 +3122,7 @@ public class reporte {
         }
     }
 
-    //PROBAR
+    //LISTO
     @RequestMapping("/Reportes/AptosNacionales")
     public void ReporteAptosNacionales(ModelMap map, HttpSession session,
             HttpServletResponse response) {
@@ -3136,8 +3136,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopNac.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/AdopNac.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\AdopNac.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/AdopNac.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -3518,8 +3518,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopInter.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/AdopInter.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\AdopInter.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/AdopInter.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -3885,7 +3885,7 @@ public class reporte {
         }
     }
 
-    //PROBAR
+    //LISTO
     @RequestMapping("/Reportes/AdopcionExtranjero")
     public void ReporteAdopcionExtranjero(ModelMap map, HttpSession session,
             HttpServletResponse response) {
@@ -3899,8 +3899,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopExtran.xls");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/AdopExtran.xls");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\AdopExtran.xls");
+            InputStream inp = new FileInputStream("/opt/Plantillas/AdopExtran.xls");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -4177,7 +4177,7 @@ public class reporte {
         }
     }
 
-    //PROBAR
+    //LISTO
     @RequestMapping("/Reportes/Expedientes")
     public void ReporteExpedientes(ModelMap map, HttpSession session,
             HttpServletResponse response) {
@@ -4191,8 +4191,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\Expedientes.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/Expedientes.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\Expedientes.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/Expedientes.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(1);
@@ -4700,8 +4700,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\Renad.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/Renad.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\Renad.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/Renad.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheet("BD");
@@ -5306,8 +5306,8 @@ public class reporte {
         Long idsesion_in = Long.parseLong(idsesion);
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("C:\\Plantillas\\InscritosSI.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/InscritosSI.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\InscritosSI.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/InscritosSI.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -5315,72 +5315,104 @@ public class reporte {
             ArrayList<FormularioSesion> listaform = ServicioReporte.getInscritosSI(idsesion_in);
 
             int i = 7;
+            Row row;
+            Cell cell;
             for (FormularioSesion form : listaform) {
-                Row row = sheet.createRow(i);
-                Cell cell = row.createCell(1);
-                cell.setCellValue(form.getAsistentes().size());
-                cell = row.createCell(2);
+                row = sheet.getRow(i);
+                cell = row.createCell(1);
+                int size = form.getAsistentes().size();
+                cell.setCellValue(size);
+                cell = row.getCell(2);
                 cell.setCellValue(i - 6);
                 for (Asistente asistaux : form.getAsistentes()) {
+                    Date fechaAct = new Date();
+                    int añoAct = fechaAct.getYear();
+                    int edad;
                     if (asistaux.getSexo() == 'f') {
-                        cell = row.createCell(3);
+                        cell = row.getCell(3);
                         cell.setCellValue(asistaux.getNombre());
-                        cell = row.createCell(4);
+                        cell = row.getCell(4);
                         cell.setCellValue(asistaux.getApellidoP() + " " + asistaux.getApellidoM());
-                        cell = row.createCell(5);
+                        cell = row.getCell(5);
                         cell.setCellValue(asistaux.getDepNac());
-                        cell = row.createCell(6);
+                        cell = row.getCell(6);
                         String fecha = "";
                         try {
                             fecha = format.dateToString(asistaux.getFechaNac());
                         } catch (Exception ex) {
                         }
                         cell.setCellValue(fecha);
-                        cell = row.createCell(7);
+                        cell = row.getCell(7);
+                        edad = añoAct - asistaux.getFechaNac().getYear();
+                        if ((asistaux.getFechaNac().getMonth() - fechaAct.getMonth())
+                                > 0) {
+                            edad--;
+                        } else if ((asistaux.getFechaNac().getMonth()
+                                - fechaAct.getMonth()) == 0) {
+                            if ((asistaux.getFechaNac().getDate() - fechaAct.getDate())
+                                    > 0) {
+                                edad--;
+                            }
+                        }
+                        cell.setCellValue(edad);
+                        cell = row.getCell(8);
                         cell.setCellValue(asistaux.getNDoc());
-                        cell = row.createCell(8);
+                        cell = row.getCell(9);
                         cell.setCellValue(form.getEstadoCivil());
-                        cell = row.createCell(9);
+                        cell = row.getCell(10);
                         cell.setCellValue(asistaux.getProfesion());
-                        cell = row.createCell(10);
+                        cell = row.getCell(11);
                         cell.setCellValue(asistaux.getCelular());
-                        cell = row.createCell(11);
+                        cell = row.getCell(12);
                         cell.setCellValue(asistaux.getCorreo());
                     } else if (asistaux.getSexo() == 'm') {
-                        cell = row.createCell(12);
+                        cell = row.getCell(13);
                         cell.setCellValue(asistaux.getNombre());
-                        cell = row.createCell(13);
+                        cell = row.getCell(14);
                         cell.setCellValue(asistaux.getApellidoP() + " " + asistaux.getApellidoM());
-                        cell = row.createCell(14);
+                        cell = row.getCell(15);
                         cell.setCellValue(asistaux.getDepNac());
-                        cell = row.createCell(15);
+                        cell = row.getCell(16);
                         String fecha = "";
                         try {
                             fecha = format.dateToString(asistaux.getFechaNac());
                         } catch (Exception ex) {
                         }
                         cell.setCellValue(fecha);
-                        cell = row.createCell(16);
+                        cell = row.getCell(17);
+                        edad = añoAct - asistaux.getFechaNac().getYear();
+                        if ((asistaux.getFechaNac().getMonth() - fechaAct.getMonth())
+                                > 0) {
+                            edad--;
+                        } else if ((asistaux.getFechaNac().getMonth()
+                                - fechaAct.getMonth()) == 0) {
+                            if ((asistaux.getFechaNac().getDate() - fechaAct.getDate())
+                                    > 0) {
+                                edad--;
+                            }
+                        }
+                        cell.setCellValue(edad);
+                        cell = row.getCell(18);
                         cell.setCellValue(asistaux.getNDoc());
-                        cell = row.createCell(17);
+                        cell = row.getCell(19);
                         cell.setCellValue(form.getEstadoCivil());
-                        cell = row.createCell(18);
+                        cell = row.getCell(20);
                         cell.setCellValue(asistaux.getProfesion());
-                        cell = row.createCell(19);
+                        cell = row.getCell(21);
                         cell.setCellValue(asistaux.getCelular());
-                        cell = row.createCell(20);
+                        cell = row.getCell(22);
                         cell.setCellValue(asistaux.getCorreo());
                     }
                 }
-                cell = row.createCell(21);
+                cell = row.getCell(23);
                 cell.setCellValue(form.getDireccionRes());
-                cell = row.createCell(22);
+                cell = row.getCell(24);
                 cell.setCellValue(form.getDistritoRes());
-                cell = row.createCell(23);
+                cell = row.getCell(25);
                 cell.setCellValue(form.getProvRes());
-                cell = row.createCell(24);
+                cell = row.getCell(26);
                 cell.setCellValue(form.getDepRes());
-                cell = row.createCell(25);
+                cell = row.getCell(27);
                 cell.setCellValue(form.getTelefono());
 
                 i++;
@@ -5411,8 +5443,8 @@ public class reporte {
         Long idsesion_in = Long.parseLong(idsesion);
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteSI.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/ReporteSI.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteSI.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/ReporteSI.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -5544,8 +5576,8 @@ public class reporte {
         Long idturno2_in = Long.parseLong(idturno2);
         try {
             //Se llama a la plantilla localizada en la ruta
-            InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteTaller.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/ReporteTaller.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteTaller.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/ReporteTaller.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -5566,7 +5598,6 @@ public class reporte {
             cell.setCellValue(turno.getNombre());
 
             int i = 7;
-            boolean flag = true;
 
             //Conseguimos la primera reunion y ordenamos las reuniones por fecha
             Set<Reunion> listaReunionesSet = turno.getReunions();
@@ -5648,14 +5679,44 @@ public class reporte {
                         cell.setCellValue(adop.getApellidoP() + " " + adop.getApellidoM());
                         cell = row.getCell(4);
                         cell.setCellValue(adop.getNombre());
-                    } else if (adop.getSexo() == 'm') {
                         cell = row.getCell(5);
-                        cell.setCellValue(adop.getApellidoP() + " " + adop.getApellidoM());
+                        Date fechaAct = new Date();
+                        int añoAct = fechaAct.getYear();
+                        int edad = añoAct - adop.getFechaNac().getYear();
+                        if ((adop.getFechaNac().getMonth() - fechaAct.getMonth())
+                                > 0) {
+                            edad--;
+                        } else if ((adop.getFechaNac().getMonth()
+                                - fechaAct.getMonth()) == 0) {
+                            if ((adop.getFechaNac().getDate() - fechaAct.getDate())
+                                    > 0) {
+                                edad--;
+                            }
+                        }
+                        cell.setCellValue(edad);
+                    } else if (adop.getSexo() == 'm') {
                         cell = row.getCell(6);
+                        cell.setCellValue(adop.getApellidoP() + " " + adop.getApellidoM());
+                        cell = row.getCell(7);
                         cell.setCellValue(adop.getNombre());
+                        cell = row.getCell(8);
+                        Date fechaAct = new Date();
+                        int añoAct = fechaAct.getYear();
+                        int edad = añoAct - adop.getFechaNac().getYear();
+                        if ((adop.getFechaNac().getMonth() - fechaAct.getMonth())
+                                > 0) {
+                            edad--;
+                        } else if ((adop.getFechaNac().getMonth()
+                                - fechaAct.getMonth()) == 0) {
+                            if ((adop.getFechaNac().getDate() - fechaAct.getDate())
+                                    > 0) {
+                                edad--;
+                            }
+                        }
+                        cell.setCellValue(edad);
                     }
                 }
-                int x = 7;
+                int x = 9;
                 for (Reunion reuaux2 : listaReuniones) {
                     long idfamiliatemp = 0;
 
@@ -5775,8 +5836,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\PropDesig.xlsx");
-            //InputStream inp = new FileInputStream("/opt/Plantillas/PropDesig.xlsx");
+            //InputStream inp = new FileInputStream("C:\\Plantillas\\PropDesig.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/PropDesig.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
