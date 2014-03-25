@@ -77,7 +77,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
@@ -87,7 +87,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -216,6 +216,23 @@
                                         </div>
                                     </div>
                                     <br>
+                                    <h3><strong>Registro de informes de evaluación</strong></h3>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Lista de evaluaciones</label>
+                                        <div class="controls">
+                                            <c:choose>
+                                                <c:when test="${expediente == null}">
+                                                    <h3>Debe crear el expediente del NNA antes de ingresar sus informes de evaluación</h3>
+                                                </c:when>
+                                                <c:when test="${expediente != null}">
+                                                    <input hidden name="idExpNna" id="idExpNna" value="${expediente.getIdexpedienteNna()}">
+                                                </c:when>    
+                                            </c:choose> 
+                                            <input ${expediente == null ? 'disabled' : ''} type="submit" id="listaEval" name="listaEval" value="Ver" class="btn btn-default">                                            
+                                        </div>
+                                    </div>
+                                    <br>
                                     <div>
                                         <label class="control-label">Estado</label>
                                         <div class="controls">
@@ -258,7 +275,7 @@
                                             <input id="fechaIngresoPrio" name="fechaIngresoPrio" value="${expediente.getFechaIngPrio() != null ? df.dateToStringNumeros(expediente.getFechaIngPrio()) : ''}" type="text" class="datepicker input-xlarge">
                                         </div>
                                     </div>
-                                        <br>
+                                    <br>
                                     <div class="control-group">
                                         <label class="control-label">Fecha de Actualizacion</label>
                                         <div class="controls">
@@ -448,7 +465,7 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
 
-                                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
             </script>
             <script>

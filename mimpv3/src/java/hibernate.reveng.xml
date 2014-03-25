@@ -39,6 +39,7 @@
   <table-filter match-name="SOLICITANTE"/>
   <table-filter match-name="NNA"/>
   <table-filter match-name="INFO_FAMILIA"/>
+  <table-filter match-name="INFORME_NNA"/>
   <table-filter match-name="HIJO"/>
   <table-filter match-name="ESTUDIO_CASO"/>
   <table-filter match-name="SESION"/>

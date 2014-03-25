@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 23, 2013 3:56:23 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mimp.bean.InformeNna" table="INFORME_NNA" schema="SIRNA">
+        <id name="idinformeNna" type="long">
+            <column name="IDINFORME_NNA" precision="10" scale="0" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="expedienteNna" class="com.mimp.bean.ExpedienteNna" fetch="select">
+            <column name="IDEXPEDIENTE_NNA" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="numero" type="string">
+            <column name="NUMERO" length="50" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="FECHA" length="7" />
+        </property>
+        <property name="resultado" type="string">
+            <column name="RESULTADO" length="1000" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="OBSERVACIONES" length="1000" />
+        </property></class>
+</hibernate-mapping>
