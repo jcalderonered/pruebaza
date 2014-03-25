@@ -109,7 +109,7 @@ public class Nna  implements java.io.Serializable {
        this.prioritarios = prioritarios;
        this.revisions = revisions;
        this.expedienteNnas = expedienteNnas;
-       this.estudioCasos = estudioCasos;
+       this.estudioCasos = estudioCasos;       
     }
    
     public long getIdnna() {
@@ -450,9 +450,6 @@ public class Nna  implements java.io.Serializable {
     public void setFechaResolConsentidaString(String fechaResolConsentidaString) {
         this.fechaResolConsentidaString = fechaResolConsentidaString;
     }
-
-
-
 
 }
 

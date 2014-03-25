@@ -36,6 +36,7 @@
     <mapping resource="com/mimp/bean/Entidad.hbm.xml"/>
     <mapping resource="com/mimp/bean/EvalLegal.hbm.xml"/>
     <mapping resource="com/mimp/bean/InfoFamilia.hbm.xml"/>
+    <mapping resource="com/mimp/bean/InformeNna.hbm.xml"/>
     <mapping resource="com/mimp/bean/HijoAct.hbm.xml"/>
     <mapping resource="com/mimp/bean/Taller.hbm.xml"/>
     <mapping resource="com/mimp/bean/Evaluacion.hbm.xml"/>

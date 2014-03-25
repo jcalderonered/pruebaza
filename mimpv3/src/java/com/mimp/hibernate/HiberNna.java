@@ -1269,4 +1269,132 @@ public class HiberNna {
         };
         session.doWork(work);
     }
+    
+    public ArrayList<InformeNna> listaInformesExpNna(Long idExpNna) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        final Long expNna = idExpNna;
+        final ArrayList<InformeNna> lista = new ArrayList();
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HN_LIST_INF_EVAL(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, expNna);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+                
+                ResultSet rs = (ResultSet) statement.getObject(2);
+               
+                while(rs.next()){
+                    InformeNna tempInf = new InformeNna();
+                    tempInf.setIdinformeNna(rs.getLong("IDINFORME_NNA"));
+                    tempInf.setNumero(rs.getString("NUMERO"));
+                    tempInf.setFecha(rs.getDate("FECHA"));
+                    lista.add(tempInf);
+                    
+                }
+                
+                rs.close();
+                statement.close();
+            }
+        };
+        session.doWork(work);
+        return lista;
+    }
+    
+    public void crearInforme(InformeNna tempInf, Long idExp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        final InformeNna inf = tempInf;
+        final Long id = idExp;
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HN_INSERT_INF(?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, id);
+                statement.setString(2, inf.getNumero());
+                statement.setDate(3, (java.sql.Date) inf.getFecha());
+                statement.setString(4, inf.getResultado());
+                statement.setString(5, inf.getObservaciones());
+                
+                statement.execute();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
+
+    }
+    
+    public InformeNna InformeExpNna(Long idInforme) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        final Long id = idInforme;
+        final InformeNna temp = new InformeNna();
+        
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HN_GET_INF_EVAL(?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, id);
+                statement.registerOutParameter(2, OracleTypes.CURSOR);
+                statement.execute();
+                
+                ResultSet rs = (ResultSet) statement.getObject(2);
+               
+                if(rs.next()){
+                    temp.setIdinformeNna(rs.getLong("IDINFORME_NNA"));
+                    temp.setNumero(rs.getString("NUMERO"));
+                    temp.setFecha(rs.getDate("FECHA"));
+                    temp.setResultado(rs.getString("RESULTADO"));
+                    temp.setObservaciones(rs.getString("OBSERVACIONES"));
+                }
+                
+                rs.close();
+                statement.close();
+            }
+        };
+        session.doWork(work);
+        return temp;
+    }
+    
+    public void updateInforme(InformeNna temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final InformeNna inf = temp;
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HN_UPDATE_INF(?,?,?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, inf.getIdinformeNna());
+                statement.setString(2, inf.getNumero());
+                statement.setDate(3, (java.sql.Date) inf.getFecha());
+                statement.setString(4, inf.getResultado());
+                statement.setString(5, inf.getObservaciones());
+
+                statement.execute();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
+
+    }
 }

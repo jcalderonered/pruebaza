@@ -95,5 +95,11 @@
         <property name="fechaActualizacion" type="date">
             <column name="FECHA_ACTUALIZACION" length="7" />
         </property>
+        <set name="informeNnas" table="INFORME_NNA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDINFORME_NNA" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.mimp.bean.InformeNna" />
+        </set>
     </class>
 </hibernate-mapping>

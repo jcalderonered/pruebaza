@@ -1495,6 +1495,8 @@ public class nna {
             @RequestParam("idNna") long idNna,
             @RequestParam("ua") long ua, 
             @RequestParam(value = "numero", required = false) String numero,
+            @RequestParam(value = "idExpNna", required = false) Long idExpNna,
+            @RequestParam(value = "listaEval", required = false) String listaEval,
             @RequestParam(value = "nombreActual", required = false) String nombreActual,
             @RequestParam(value = "apellidoPActual", required = false) String apellidoPActual,
             @RequestParam(value = "apellidoMActual", required = false) String apellidoMActual,
@@ -1525,6 +1527,11 @@ public class nna {
             return new ModelAndView("login", map);
         }
 
+        if (listaEval != null){
+            map.addAttribute("idExpNna", idExpNna);
+            map.addAttribute("clasificacion", clasificacion);
+            return new ModelAndView("forward:/listaInformes", map);
+        }
         Nna tempNna = new Nna();
         ExpedienteNna tempExp = new ExpedienteNna();
         tempExp = ServicioNna.getExpNna(idNna);
@@ -2047,5 +2054,142 @@ public class nna {
         map.put("nna", ServicioNna.getNna(idNna));
         return new ModelAndView("/Personal/nna/editar_nna_1", map);
     }
-
+    
+    @RequestMapping(value = "/listaInformes", method = RequestMethod.POST)
+    public ModelAndView listaInformes(ModelMap map, HttpSession session,
+            @RequestParam(value = "idExpNna") Long idExpNna,
+            @RequestParam(value = "clasificacion") String clasificacion) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        map.put("df",df);
+        map.put("clasificacion",clasificacion);
+        map.put("listaInformes", ServicioNna.listaInformesExpNna(idExpNna));
+        map.put("idExpNna",idExpNna);
+        return new ModelAndView("/Personal/nna/lista_informes", map);
+    }
+    
+    @RequestMapping(value = "/NnaAgregarInforme", method = RequestMethod.POST)
+    public ModelAndView NnaAgregarInforme(ModelMap map, HttpSession session,@RequestParam(value = "idExpNna") Long idExpNna,@RequestParam(value = "clasificacion") String clasificacion) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        map.put("df",df);
+        map.put("clasificacion",clasificacion);
+        map.put("idExpNna",idExpNna);
+        return new ModelAndView("/Personal/nna/editar_informe", map);
+    }
+    
+    @RequestMapping(value = "/NnaCrearInforme", method = RequestMethod.POST)
+    public ModelAndView NnaCrearInforme(ModelMap map, HttpSession session,
+            @RequestParam(value = "idExpNna") Long idExpNna,
+            @RequestParam(value = "clasificacion") String clasificacion,
+            @RequestParam(value = "numInf") String numInf,
+            @RequestParam(value = "fechaInf",required = false) String fechaInf,
+            @RequestParam(value = "result",required = false) String result,
+            @RequestParam(value = "obs", required = false) String obs) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        if(numInf == null || numInf.equals("")){
+            String mensaje = "Debe ingresar un número de informe";
+            map.put("mensaje",mensaje);
+            map.put("clasificacion",clasificacion);
+            map.put("idExpNna",idExpNna);
+            return new ModelAndView("/Personal/nna/editar_informe", map);
+        }
+        InformeNna informe = new InformeNna();
+        informe.setNumero(numInf);
+        if(fechaInf != null && !fechaInf.equals("")){
+            informe.setFecha(df.stringToDate(fechaInf));
+        }else{
+            informe.setFecha(null);
+        }
+        
+        informe.setResultado(result);
+        informe.setObservaciones(obs);
+        
+        ServicioNna.crearInforme(informe, idExpNna);
+        
+        map.put("df",df);
+        map.put("clasificacion",clasificacion);
+        map.put("idExpNna",idExpNna);
+        map.put("listaInformes", ServicioNna.listaInformesExpNna(idExpNna));
+        return new ModelAndView("/Personal/nna/lista_informes", map);
+    }
+    
+    @RequestMapping(value = "/NnaEditarInforme", method = RequestMethod.POST)
+    public ModelAndView NnaEditarInforme(ModelMap map, HttpSession session,
+            @RequestParam(value = "idInf") Long idInf,
+            @RequestParam(value = "idExpNna") Long idExpNna,
+            @RequestParam(value = "clasificacion") String clasificacion) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        InformeNna tempInf = new InformeNna();
+        tempInf = ServicioNna.InformeExpNna(idInf);
+        map.put("df",df);
+        map.put("informe",tempInf);
+        map.put("clasificacion",clasificacion);
+        map.put("idExpNna",idExpNna);
+        return new ModelAndView("/Personal/nna/editar_informe", map);
+    }
+    
+    @RequestMapping(value = "/NnaUpdateInforme", method = RequestMethod.POST)
+    public ModelAndView NnaUpdateInforme(ModelMap map, HttpSession session,
+            @RequestParam(value = "idExpNna") Long idExpNna,
+            @RequestParam(value = "clasificacion") String clasificacion,
+            @RequestParam(value = "idInf") Long idInf,
+            @RequestParam(value = "numInf") String numInf,
+            @RequestParam(value = "fechaInf",required = false) String fechaInf,
+            @RequestParam(value = "result",required = false) String result,
+            @RequestParam(value = "obs", required = false) String obs) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        if(numInf == null || numInf.equals("")){
+            String mensaje = "Debe ingresar un número de informe";
+            map.put("mensaje",mensaje);
+            map.put("clasificacion",clasificacion);
+            map.put("idExpNna",idExpNna);
+            return new ModelAndView("/Personal/nna/editar_informe", map);
+        }
+        InformeNna informe = new InformeNna();
+        informe = ServicioNna.InformeExpNna(idInf);
+        informe.setNumero(numInf);
+        if(fechaInf != null && !fechaInf.equals("")){
+            informe.setFecha(df.stringToDate(fechaInf));
+        }else{
+            informe.setFecha(null);
+        }
+        
+        informe.setResultado(result);
+        informe.setObservaciones(obs);
+        
+        ServicioNna.updateInforme(informe);
+        
+        map.put("df",df);
+        map.put("clasificacion",clasificacion);
+        map.put("idExpNna",idExpNna);
+        map.put("listaInformes", ServicioNna.listaInformesExpNna(idExpNna));
+        return new ModelAndView("/Personal/nna/lista_informes", map);
+    }
 }
