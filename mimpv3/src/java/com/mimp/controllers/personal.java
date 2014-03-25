@@ -1246,8 +1246,25 @@ public class personal {
         return new ModelAndView("/Personal/registros/juzgado/editar_juzgado", map);
     }
 
+    @RequestMapping(value = "/irEditarJuzgado2", method = RequestMethod.GET)
+    public ModelAndView IrEditarJuzgado2Get(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        Juzgado temp = new Juzgado();
+        
+        temp = ServicioPersonal.getJuzgado((int)session.getAttribute("id"));
+        map.addAttribute("juzgado", temp);
+        //map.addAttribute("id", id);
+
+        return new ModelAndView("/Personal/registros/juzgado/editar_juzgado", map);
+    }
+
     @RequestMapping(value = "/irEditarJuzgado2", method = RequestMethod.POST)
-    public ModelAndView IrEditarJuzgado2(ModelMap map, @RequestParam("id") int id, HttpSession session) {
+    public ModelAndView IrEditarJuzgado2Post(ModelMap map, @RequestParam("id") int id, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -1256,9 +1273,9 @@ public class personal {
         }
         Juzgado temp = new Juzgado();
         temp = ServicioPersonal.getJuzgado(id);
-        map.put("juzgado", temp);
-
-        return new ModelAndView("/Personal/registros/juzgado/editar_juzgado", map);
+        map.put("juzgado", temp);        
+        session.setAttribute("id", id);
+        return new ModelAndView("redirect:/irEditarJuzgado2", map);
     }
 
     @RequestMapping(value = "/editJuzgado", method = RequestMethod.POST)
@@ -1311,6 +1328,8 @@ public class personal {
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         return new ModelAndView("/Personal/registros/juzgado/lista_juzg", map);
     }
+    
+    
 
     @RequestMapping(value = "/updateJuzgado", method = RequestMethod.POST)
     public ModelAndView UpdateJuzgado(ModelMap map,

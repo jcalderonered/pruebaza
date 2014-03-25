@@ -9,7 +9,8 @@
     response.setHeader("Pragma", "no-cache");
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
-    
+    response.addHeader("Cache-Control", "no-store");
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -78,7 +79,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH")) {%>
