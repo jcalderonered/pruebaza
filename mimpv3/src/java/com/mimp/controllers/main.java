@@ -87,53 +87,78 @@ public class main {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(ModelMap map, @RequestParam(value = "email", required = false) String email, @RequestParam(value = "password", required = false) String pass, HttpSession session) {
+    public ModelAndView login_POST(ModelMap map, @RequestParam(value = "email", required = false) String email, @RequestParam(value = "password", required = false) String pass, HttpSession session) {
 
-        String pagina;
-        String mensaje = "El usuario se encuentra Deshabilitado. Favor contactar a la Dirección General de Adopciones para más información";
+        session.setAttribute("email", email);
+        session.setAttribute("password", pass);
 
-        ArrayList aux = ServicioMain.usuario(email, pass);
-        if (aux.get(0) == "personal") {
-            Personal personal = (Personal) aux.get(1);
-            if (!personal.getRol().equals("Inactivo")) {
-                session.setAttribute("usuario", personal);
-                pagina = "/Personal/inicio_personal";
+        return new ModelAndView("redirect:/login", map);
+    }
 
-                String mensaje_log = "El usuario, " + personal.getUser() + " con ID: " + personal.getIdpersonal() + ". Ingresó al sistema.";
-                String Tipo_registro = "Login";
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login_GET(ModelMap map, HttpSession session) {
 
-                try {
-                    String Numero_registro = String.valueOf(personal.getIdpersonal());
+        String email = "";
+        String pass = "";
 
-                    ServicioPersonal.InsertLog(personal, Tipo_registro, Numero_registro, mensaje_log);
-                } catch (Exception ex) {
+        String pagina = "login";
+        
+        if (session.getAttribute("email") != null) {
+
+            email = session.getAttribute("email").toString();
+            pass = session.getAttribute("password").toString();            
+
+            String mensaje = "El usuario se encuentra Deshabilitado. Favor contactar a la Dirección General de Adopciones para más información";
+
+            ArrayList aux = ServicioMain.usuario(email, pass);
+            if (aux.get(0) == "personal") {
+                Personal personal = (Personal) aux.get(1);
+                if (!personal.getRol().equals("Inactivo")) {
+                    session.setAttribute("usuario", personal);
+                    pagina = "/Personal/inicio_personal";
+
+                    String mensaje_log = "El usuario, " + personal.getUser() + " con ID: " + personal.getIdpersonal() + ". Ingresó al sistema.";
+                    String Tipo_registro = "Login";
+
+                    try {
+                        String Numero_registro = String.valueOf(personal.getIdpersonal());
+
+                        ServicioPersonal.InsertLog(personal, Tipo_registro, Numero_registro, mensaje_log);
+                    } catch (Exception ex) {
+                    }
+
+                } else {
+                    map.addAttribute("mensaje", mensaje);
+                    pagina = "login";
                 }
+            } else if (aux.get(0) == "familia") {
+                Familia familia = (Familia) aux.get(1);
+                if (familia.getHabilitado() == 0) {
+                    session.setAttribute("usuario", familia);
+                    pagina = "/Familia/inicio_familia";
+                } else {
+                    map.addAttribute("mensaje", mensaje);
+                    pagina = "login";
+                }
+            } else if (aux.get(0) == "representante" || aux.get(0) == "autoridad") {
+                Entidad entidad = (Entidad) aux.get(1);
+                session.setAttribute("usuario", entidad);
+                pagina = "/Entidad/inicio_ent";
+            } else if (email.equals("") || pass.equals("")) {
+                mensaje = "Por favor llenar ambos campos";
+                map.addAttribute("mensaje", mensaje);
+                pagina = "login";
+            } else {
+                mensaje = "Usuario y/o contraseña incorrectos";
+                map.addAttribute("mensaje", mensaje);
+                pagina = "login";
+            }
 
-            } else {
-                map.addAttribute("mensaje", mensaje);
-                pagina = "login";
-            }
-        } else if (aux.get(0) == "familia") {
-            Familia familia = (Familia) aux.get(1);
-            if (familia.getHabilitado() == 0) {
-                session.setAttribute("usuario", familia);
-                pagina = "/Familia/inicio_familia";
-            } else {
-                map.addAttribute("mensaje", mensaje);
-                pagina = "login";
-            }
-        } else if (aux.get(0) == "representante" || aux.get(0) == "autoridad") {
-            Entidad entidad = (Entidad) aux.get(1);
-            session.setAttribute("usuario", entidad);
-            pagina = "/Entidad/inicio_ent";
-        } else if (email.equals("") || pass.equals("")) {
-            mensaje = "Por favor llenar ambos campos";
-            map.addAttribute("mensaje", mensaje);
-            pagina = "login";
         } else {
-            mensaje = "Usuario y/o contraseña incorrectos";
+            String mensaje = "Su sesión ha finalizado, por favor, re-ingrese los datos";
             map.addAttribute("mensaje", mensaje);
             pagina = "login";
+
         }
         return new ModelAndView(pagina, map);
     }
@@ -1789,12 +1814,12 @@ public class main {
         expediente.setNumeroExpediente(numeroExp);
         if (fechaIngreso != null && !fechaIngreso.equals("")) {
             expediente.setFechaIngresoDga(df.stringToDate(fechaIngreso));
-        }else if (fechaIngreso == null || fechaIngreso.equals("")) {
+        } else if (fechaIngreso == null || fechaIngreso.equals("")) {
             expediente.setFechaIngresoDga(null);
         }
         if (tupa != null && !tupa.equals("")) {
             expediente.setTupa(df.stringToDate(tupa));
-        }else if (tupa == null || tupa.equals("")) {
+        } else if (tupa == null || tupa.equals("")) {
             expediente.setTupa(null);
         }
 

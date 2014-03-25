@@ -1271,9 +1271,7 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        Juzgado temp = new Juzgado();
-        temp = ServicioPersonal.getJuzgado(id);
-        map.put("juzgado", temp);        
+              
         session.setAttribute("id", id);
         return new ModelAndView("redirect:/irEditarJuzgado2", map);
     }
@@ -2111,13 +2109,30 @@ public class personal {
     }
 
     @RequestMapping(value = "/PersonalEditarSesion", method = RequestMethod.POST)
-    public ModelAndView PersonalEditarSesion(ModelMap map, @RequestParam("idSesion") long id, HttpSession session) {
+    public ModelAndView PersonalEditarSesion_POST(ModelMap map, @RequestParam("idSesion") long id, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        
+        session.setAttribute("idSesion", id);
+        
+        return new ModelAndView("redirect:/PersonalEditarSesion", map);
+    }
+    
+    @RequestMapping(value = "/PersonalEditarSesion", method = RequestMethod.GET)
+    public ModelAndView PersonalEditarSesion_GET(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        long id = (long)session.getAttribute("idSesion");
+        
         Sesion temp = new Sesion();
         //ArrayList<Personal> allPersonal = new ArrayList();
         ArrayList<Turno> allTurnos = new ArrayList();
@@ -2140,6 +2155,7 @@ public class personal {
         map.addAttribute("idSesion", id);
         return new ModelAndView("/Personal/Informativa/lista_sesion", map);
     }
+    
 
     @RequestMapping(value = "/PersonalEditarTurno", method = RequestMethod.POST)
     public ModelAndView PersonalEditarTurno(ModelMap map, @RequestParam("idSesion") long idSesion, @RequestParam("index") int index, HttpSession session) {
