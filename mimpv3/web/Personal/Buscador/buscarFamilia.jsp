@@ -156,7 +156,7 @@
                                                     <option value="none" ></option>
                                                     <option value="evaluacion" >En evaluación</option>
                                                     <option value="espera">Lista de espera</option>
-                                                    <option value="estudio" >Asignado a un estudio de caso</option>
+                                                    <option value="estudio" >Asig. a un estudio de caso</option>
                                                     <option value="designado" >Designado</option>
                                                     <option value="adopcion" >En proceso de adopción</option>
                                                     <option value="reevaluacion" >Reevaluación</option>
@@ -168,13 +168,12 @@
                                         <br>                                
                                     </div>
                                     <div class="col-md-4">                                                                                          
-
                                         <div>
                                             <label class="control-label">Tipo Familia</label>
                                             <div class="controls">
                                                 <select id="tipofamilia" name="tipofamilia">
                                                     <option value="none" >Ninguna</option>
-                                                    <option value="PP" >PP</option>
+                                                    <option value="PP">PP</option>
                                                     <option value="PE">PE</option>
                                                     <option value="MP" >MP</option>
                                                     <option value="ME" >ME</option>
@@ -183,10 +182,19 @@
                                                 </select>
                                             </div>    
                                         </div>
-
+                                        <br>
+                                        <br>
+                                        <div>
+                                            <label class="control-label">Residencia familia (para hab. de Peru)</label>
+                                            <div class="controls">
+                                                <select id="resfamilia" name="resfamilia">
+                                                    <option value="none"> </option>
+                                                    <option value="Amazonas">Amazonas</option><option value="Ancash">Ancash</option><option value="Apurimac">Apurimac</option><option value="Arequipa">Arequipa</option><option value="Ayacucho">Ayacucho</option><option value="Cajamarca">Cajamarca</option><option value="Callao">Callao</option><option value="Cusco">Cusco</option><option value="Huancavelica">Huancavelica</option><option value="Huanuco">Huanuco</option><option value="Ica">Ica</option><option value="Junin">Junin</option><option value="La Libertad">La Libertad</option><option value="Lambayeque">Lambayeque</option><option value="Lima">Lima</option><option value="Loreto">Loreto</option><option value="Madre de Dios">Madre de Dios</option><option value="Moquegua">Moquegua</option><option value="Pasco">Pasco</option><option value="Piura">Piura</option><option value="Puno">Puno</option><option value="San Martin">San Martin</option><option value="Tacna">Tacna</option><option value="Tumbes">Tumbes</option><option value="Ucayali">Ucayali</option>
+                                                </select>
+                                            </div>    
+                                        </div>
                                     </div>    
                                 </div>
-
                                 <button id="singlebutton" name="singlebutton" class="btn btn-default">Buscar</button>
                             </fieldset>
                         </form>
@@ -270,7 +278,7 @@
 
                                 if (document.formulario.expediente.value == "" && document.formulario.HT.value == ""
                                         && document.getElementById("nacionalidad").value == "none" && document.getElementById("estado").value == "none"
-                                        && document.getElementById("tipofamilia").value == "none")
+                                        && document.getElementById("tipofamilia").value == "none" && document.getElementById("resfamilia").value == "none")
                                 {
                                     alert("Debe elegir al menos un filtro de búsqueda");
                                     return false;

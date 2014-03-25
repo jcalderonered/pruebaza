@@ -1353,7 +1353,7 @@ public class HiberPersonal {
         return allExpedientes;
     }
 
-    public ArrayList<ExpedienteFamilia> FiltrarFam(ExpedienteFamilia expFam, Familia datosFam) {
+    public ArrayList<ExpedienteFamilia> FiltrarFam(ExpedienteFamilia expFam, Familia datosFam, InfoFamilia infoFam) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
