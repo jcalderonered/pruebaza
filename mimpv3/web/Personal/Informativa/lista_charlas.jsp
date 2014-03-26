@@ -170,7 +170,7 @@
                             </table>
                         </div>
                         <br>
-                        <form action="${pageContext.servletContext.contextPath}/PersonalAgregarSesion" method="post">     
+                        <form action="${pageContext.servletContext.contextPath}/PersonalAgregarSesion" method="get">     
                             <button href="#" class="btn btn-default">Agregar nueva Sesión</button>
                         </form>
                         <br>
