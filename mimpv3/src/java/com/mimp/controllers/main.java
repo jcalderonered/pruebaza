@@ -102,11 +102,11 @@ public class main {
         String pass = "";
 
         String pagina = "login";
-        
+
         if (session.getAttribute("email") != null) {
 
             email = session.getAttribute("email").toString();
-            pass = session.getAttribute("password").toString();            
+            pass = session.getAttribute("password").toString();
 
             String mensaje = "El usuario se encuentra Deshabilitado. Favor contactar a la Dirección General de Adopciones para más información";
 
@@ -160,6 +160,10 @@ public class main {
             pagina = "login";
 
         }
+
+        session.removeAttribute("email");
+        session.removeAttribute("password");
+
         return new ModelAndView(pagina, map);
     }
 

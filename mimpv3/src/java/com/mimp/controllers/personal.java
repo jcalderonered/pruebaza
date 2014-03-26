@@ -2064,6 +2064,16 @@ public class personal {
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
         map.put("formato", format);
+        
+        
+        session.removeAttribute("numSesion");
+        session.removeAttribute("fecha");
+        session.removeAttribute("hora");
+        session.removeAttribute("duracion");
+        session.removeAttribute("direccion");
+        session.removeAttribute("capacitador");
+        session.removeAttribute("ua");
+        
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
     
