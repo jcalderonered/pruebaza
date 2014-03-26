@@ -155,7 +155,7 @@ public class main {
             }
 
         } else {
-            String mensaje = "Su sesión ha finalizado, por favor, re-ingrese los datos";
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             pagina = "login";
 
