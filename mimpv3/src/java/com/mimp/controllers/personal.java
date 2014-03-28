@@ -1112,13 +1112,30 @@ public class personal {
     }
 
     @RequestMapping(value = "/irEditarCar2", method = RequestMethod.POST)
-    public ModelAndView IrEditarCar2(ModelMap map, @RequestParam("id") int id, HttpSession session) {
+    public ModelAndView IrEditarCar2_POST(ModelMap map, @RequestParam("id") int id, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("id", id);
+
+        return new ModelAndView("redirect:/irEditarCar2", map);
+    }
+
+    @RequestMapping(value = "/irEditarCar2", method = RequestMethod.GET)
+    public ModelAndView IrEditarCar2_GET(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        int id = (int) session.getAttribute("id");
+
         Car temp = new Car();
         temp = ServicioPersonal.getCar(id);
         map.put("car", temp);
@@ -1149,38 +1166,86 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        Car car = new Car();
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("departamento", departamento);
+        session.setAttribute("provincia", provincia);
+        session.setAttribute("distrito", distrito);
+        session.setAttribute("director", director);
+        session.setAttribute("correo", correo);
+        session.setAttribute("fax", fax);
+        session.setAttribute("celular", celular);
+        session.setAttribute("telefono", telefono);
+        session.setAttribute("obs", obs);
 
-        car.setNombre(nombre);
-        car.setDireccion(direccion);
-        car.setDepartamento(departamento);
-        car.setProvincia(provincia);
-        car.setDistrito(distrito);
-        car.setDirector(director);
-        car.setCorreo(correo);
-        car.setFax(fax);
-        car.setCelular(celular);
-        car.setTelefono(telefono);
-        car.setObservaciones(obs);
+        return new ModelAndView("redirect:/editCar", map);
+    }
 
-        ServicioPersonal.InsertCar(car);
-
-        String mensaje_log = "Se registró nuevo CAR con Nombre, " + car.getNombre() + " y ID:" + String.valueOf(car.getIdcar());
-        String Tipo_registro = "CAR";
-
-        try {
-            String Numero_registro = String.valueOf(car.getIdcar());;
-
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
+    @RequestMapping(value = "/editCar", method = RequestMethod.GET)
+    public ModelAndView EditarCar_GET(ModelMap map,
+            //datos a ingresar en CAR            
+            HttpSession session
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
         }
 
-        map.put("listaCar", ServicioPersonal.ListaCar());
+        if (session.getAttribute("nombre") != null) {
+
+            String nombre = (String) session.getAttribute("nombre");
+            String direccion = (String) session.getAttribute("direccion");
+            String departamento = (String) session.getAttribute("departamento");
+            String provincia = (String) session.getAttribute("provincia");
+            String distrito = (String) session.getAttribute("distrito");
+            String director = (String) session.getAttribute("director");
+            String correo = (String) session.getAttribute("correo");
+            String fax = (String) session.getAttribute("fax");
+            String celular = (String) session.getAttribute("celular");
+            String telefono = (String) session.getAttribute("telefono");
+            String obs = (String) session.getAttribute("obs");
+
+            Car car = new Car();
+
+            car.setNombre(nombre);
+            car.setDireccion(direccion);
+            car.setDepartamento(departamento);
+            car.setProvincia(provincia);
+            car.setDistrito(distrito);
+            car.setDirector(director);
+            car.setCorreo(correo);
+            car.setFax(fax);
+            car.setCelular(celular);
+            car.setTelefono(telefono);
+            car.setObservaciones(obs);
+
+            ServicioPersonal.InsertCar(car);
+
+            String mensaje_log = "Se registró nuevo CAR con Nombre, " + car.getNombre() + " y ID:" + String.valueOf(car.getIdcar());
+            String Tipo_registro = "CAR";
+
+            try {
+                String Numero_registro = String.valueOf(car.getIdcar());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            map.put("listaCar", ServicioPersonal.ListaCar());
+
+        } else {
+
+            return new ModelAndView("redirect:/car", map);
+
+        }
+
         return new ModelAndView("/Personal/registros/car/lista_car", map);
     }
 
     @RequestMapping(value = "/updateCar", method = RequestMethod.POST)
-    public ModelAndView UpdateCar(ModelMap map,
+    public ModelAndView UpdateCar_POST(ModelMap map,
             //datos a ingresar en CAR
             @RequestParam("id") int id,
             @RequestParam("nombre") String nombre,
@@ -1203,6 +1268,49 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("id", id);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("departamento", departamento);
+        session.setAttribute("provincia", provincia);
+        session.setAttribute("distrito", distrito);
+        session.setAttribute("director", director);
+        session.setAttribute("correo", correo);
+        session.setAttribute("fax", fax);
+        session.setAttribute("celular", celular);
+        session.setAttribute("telefono", telefono);
+        session.setAttribute("obs", obs);
+
+        return new ModelAndView("redirect:/updateCar", map);
+    }
+
+    @RequestMapping(value = "/updateCar", method = RequestMethod.GET)
+    public ModelAndView UpdateCar_GET(ModelMap map,
+            //datos a ingresar en CAR            
+            HttpSession session
+    ) {
+
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        int id = (int) session.getAttribute("id");
+        String nombre = (String) session.getAttribute("nombre");
+        String direccion = (String) session.getAttribute("direccion");
+        String departamento = (String) session.getAttribute("departamento");
+        String provincia = (String) session.getAttribute("provincia");
+        String distrito = (String) session.getAttribute("distrito");
+        String director = (String) session.getAttribute("director");
+        String correo = (String) session.getAttribute("correo");
+        String fax = (String) session.getAttribute("fax");
+        String celular = (String) session.getAttribute("celular");
+        String telefono = (String) session.getAttribute("telefono");
+        String obs = (String) session.getAttribute("obs");
+
         Car car = new Car();
         car = ServicioPersonal.getCar(id);
         car.setNombre(nombre);
@@ -1232,9 +1340,9 @@ public class personal {
         map.put("listaCar", ServicioPersonal.ListaCar());
         return new ModelAndView("/Personal/registros/car/lista_car", map);
     }
+
     /////////////////////////////////////////////////////////////////////////////////
     ////////////////////// REGISTRAR/EDITAR JUZGADOS ////////////////////////////////////
-
     @RequestMapping(value = "/irEditarJuzgado", method = RequestMethod.GET)
     public ModelAndView IrEditarJuzgado(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1246,8 +1354,21 @@ public class personal {
         return new ModelAndView("/Personal/registros/juzgado/editar_juzgado", map);
     }
 
+    @RequestMapping(value = "/irEditarJuzgado2", method = RequestMethod.POST)
+    public ModelAndView IrEditarJuzgado2_Post(ModelMap map, @RequestParam("id") int id, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        session.setAttribute("id", id);
+        return new ModelAndView("redirect:/irEditarJuzgado2", map);
+    }
+
     @RequestMapping(value = "/irEditarJuzgado2", method = RequestMethod.GET)
-    public ModelAndView IrEditarJuzgado2Get(ModelMap map, HttpSession session) {
+    public ModelAndView IrEditarJuzgado2_Get(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -1263,21 +1384,8 @@ public class personal {
         return new ModelAndView("/Personal/registros/juzgado/editar_juzgado", map);
     }
 
-    @RequestMapping(value = "/irEditarJuzgado2", method = RequestMethod.POST)
-    public ModelAndView IrEditarJuzgado2Post(ModelMap map, @RequestParam("id") int id, HttpSession session) {
-        Personal usuario = (Personal) session.getAttribute("usuario");
-        if (usuario == null) {
-            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
-            map.addAttribute("mensaje", mensaje);
-            return new ModelAndView("login", map);
-        }
-
-        session.setAttribute("id", id);
-        return new ModelAndView("redirect:/irEditarJuzgado2", map);
-    }
-
     @RequestMapping(value = "/editJuzgado", method = RequestMethod.POST)
-    public ModelAndView EditarJuzgado(ModelMap map,
+    public ModelAndView EditarJuzgado_POST(ModelMap map,
             //datos a ingresar en  Juzgado
             @RequestParam("nombre") String nombre,
             @RequestParam("denominacion") String denominacion,
@@ -1299,36 +1407,87 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        Juzgado juzg = new Juzgado();
 
-        juzg.setNombre(nombre);
-        juzg.setDenominacion(denominacion);
-        juzg.setEspecialidad(especialidad);
-        juzg.setDireccion(direccion);
-        juzg.setDepartamento(departamento);
-        juzg.setCorteSuperior(corteS);
-        juzg.setDistritoJudicial(distritoJ);
-        juzg.setNombreJuez(nombreJ);
-        juzg.setTelefono(telefono);
-        juzg.setCorreo(correo);
-        juzg.setObservaciones(obs);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("denominacion", denominacion);
+        session.setAttribute("especialidad", especialidad);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("departamento", departamento);
+        session.setAttribute("corteS", corteS);
+        session.setAttribute("distritoJ", distritoJ);
+        session.setAttribute("nombreJ", nombreJ);
+        session.setAttribute("telefono", telefono);
+        session.setAttribute("correo", correo);
+        session.setAttribute("obs", obs);
 
-        ServicioPersonal.InsertJuzgado(juzg);
+        return new ModelAndView("redirect:/editJuzgado", map);
+    }
 
-        String mensaje_log = "Se registró nuevo juzgado con Nombre, " + juzg.getNombre() + " y ID:" + String.valueOf(juzg.getIdjuzgado());
-        String Tipo_registro = "Juzgado";
+    @RequestMapping(value = "/editJuzgado", method = RequestMethod.GET)
+    public ModelAndView EditarJuzgado_GET(ModelMap map,
+            //datos a ingresar en  Juzgado            
+            HttpSession session
+    ) {
 
-        //try{
-        String Numero_registro = String.valueOf(juzg.getIdjuzgado());;
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
 
-        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        if (session.getAttribute("nombre") != null) {
 
-        map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
+            String nombre = (String) session.getAttribute("nombre");
+            String denominacion = (String) session.getAttribute("denominacion");
+            String especialidad = (String) session.getAttribute("especialidad");
+            String direccion = (String) session.getAttribute("direccion");
+            String departamento = (String) session.getAttribute("departamento");
+            String corteS = (String) session.getAttribute("corteS");
+            String distritoJ = (String) session.getAttribute("distritoJ");
+            String nombreJ = (String) session.getAttribute("nombreJ");
+            String telefono = (String) session.getAttribute("telefono");
+            String correo = (String) session.getAttribute("correo");
+            String obs = (String) session.getAttribute("obs");
+
+            Juzgado juzg = new Juzgado();
+
+            juzg.setNombre(nombre);
+            juzg.setDenominacion(denominacion);
+            juzg.setEspecialidad(especialidad);
+            juzg.setDireccion(direccion);
+            juzg.setDepartamento(departamento);
+            juzg.setCorteSuperior(corteS);
+            juzg.setDistritoJudicial(distritoJ);
+            juzg.setNombreJuez(nombreJ);
+            juzg.setTelefono(telefono);
+            juzg.setCorreo(correo);
+            juzg.setObservaciones(obs);
+
+            ServicioPersonal.InsertJuzgado(juzg);
+
+            String mensaje_log = "Se registró nuevo juzgado con Nombre, " + juzg.getNombre() + " y ID:" + String.valueOf(juzg.getIdjuzgado());
+            String Tipo_registro = "Juzgado";
+
+            //try{
+            String Numero_registro = String.valueOf(juzg.getIdjuzgado());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+
+            map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
+
+            session.removeAttribute("nombre");
+
+        } else {
+
+            return new ModelAndView("redirect:/juzgado", map);
+
+        }
         return new ModelAndView("/Personal/registros/juzgado/lista_juzg", map);
     }
 
     @RequestMapping(value = "/updateJuzgado", method = RequestMethod.POST)
-    public ModelAndView UpdateJuzgado(ModelMap map,
+    public ModelAndView UpdateJuzgado_POST(ModelMap map,
             //datos a ingresar en Juzgado
             @RequestParam("id") int id,
             @RequestParam("nombre") String nombre,
@@ -1351,6 +1510,48 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("id", id);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("denominacion", denominacion);
+        session.setAttribute("especialidad", especialidad);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("departamento", departamento);
+        session.setAttribute("corteS", corteS);
+        session.setAttribute("distritoJ", distritoJ);
+        session.setAttribute("nombreJ", nombreJ);
+        session.setAttribute("telefono", telefono);
+        session.setAttribute("correo", correo);
+        session.setAttribute("obs", obs);
+
+        return new ModelAndView("redirect:/updateJuzgado", map);
+    }
+
+    @RequestMapping(value = "/updateJuzgado", method = RequestMethod.GET)
+    public ModelAndView UpdateJuzgado_GET(ModelMap map,
+            HttpSession session
+    ) {
+
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        int id = (int) session.getAttribute("id");
+        String nombre = (String) session.getAttribute("nombre");
+        String denominacion = (String) session.getAttribute("denominacion");
+        String especialidad = (String) session.getAttribute("especialidad");
+        String direccion = (String) session.getAttribute("direccion");
+        String departamento = (String) session.getAttribute("departamento");
+        String corteS = (String) session.getAttribute("corteS");
+        String distritoJ = (String) session.getAttribute("distritoJ");
+        String nombreJ = (String) session.getAttribute("nombreJ");
+        String telefono = (String) session.getAttribute("telefono");
+        String correo = (String) session.getAttribute("correo");
+        String obs = (String) session.getAttribute("obs");
+
         Juzgado juzg = new Juzgado();
         juzg = ServicioPersonal.getJuzgado(id);
         juzg.setNombre(nombre);
@@ -1408,7 +1609,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/editUa", method = RequestMethod.POST)
-    public ModelAndView EditarUa(ModelMap map,
+    public ModelAndView EditarUa_POST(ModelMap map,
             //datos a ingresar en UA
             @RequestParam("nombre") String nombre,
             @RequestParam("direccion") String direccion,
@@ -1428,32 +1629,78 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        Unidad ua = new Unidad();
 
-        ua.setNombre(nombre);
-        ua.setDireccion(direccion);
-        ua.setDepartamento(departamento);
-        ua.setProvincia(provincia);
-        ua.setDistrito(distrito);
-        ua.setCompetenciaRegional(competenciaR);
-        ua.setCorreo(correo);
-        ua.setTelefono(telefono);
-        ua.setCelular(celular);
-        ua.setObs(obs);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("departamento", departamento);
+        session.setAttribute("provincia", provincia);
+        session.setAttribute("distrito", distrito);
+        session.setAttribute("competenciaR", competenciaR);
+        session.setAttribute("correo", correo);
+        session.setAttribute("telefono", telefono);
+        session.setAttribute("celular", celular);
+        session.setAttribute("obs", obs);
 
-        ServicioPersonal.InsertUa(ua);
+        return new ModelAndView("redirect:/editUa", map);
+    }
 
-        String mensaje_log = "Se agregó nuevo UA con Nombre, " + ua.getNombre() + " y ID:" + String.valueOf(ua.getIdunidad());
-        String Tipo_registro = "UA";
-
-        try {
-            String Numero_registro = String.valueOf(ua.getIdunidad());;
-
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
+    @RequestMapping(value = "/editUa", method = RequestMethod.GET)
+    public ModelAndView EditarUa_GET(ModelMap map,
+            //datos a ingresar en UA            
+            HttpSession session
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
         }
 
-        map.put("listaUa", ServicioPersonal.ListaUa());
+        if (session.getAttribute("nombre") != null) {
+
+            String nombre = (String) session.getAttribute("nombre");
+            String direccion = (String) session.getAttribute("direccion");
+            String departamento = (String) session.getAttribute("departamento");
+            String provincia = (String) session.getAttribute("provincia");
+            String distrito = (String) session.getAttribute("distrito");
+            String competenciaR = (String) session.getAttribute("competenciaR");
+            String correo = (String) session.getAttribute("correo");
+            String telefono = (String) session.getAttribute("telefono");            
+            String celular = (String) session.getAttribute("celular");
+            String obs = (String) session.getAttribute("obs");
+
+            Unidad ua = new Unidad();
+
+            ua.setNombre(nombre);
+            ua.setDireccion(direccion);
+            ua.setDepartamento(departamento);
+            ua.setProvincia(provincia);
+            ua.setDistrito(distrito);
+            ua.setCompetenciaRegional(competenciaR);
+            ua.setCorreo(correo);
+            ua.setTelefono(telefono);
+            ua.setCelular(celular);
+            ua.setObs(obs);
+
+            ServicioPersonal.InsertUa(ua);
+
+            String mensaje_log = "Se agregó nuevo UA con Nombre, " + ua.getNombre() + " y ID:" + String.valueOf(ua.getIdunidad());
+            String Tipo_registro = "UA";
+
+            try {
+                String Numero_registro = String.valueOf(ua.getIdunidad());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            map.put("listaUa", ServicioPersonal.ListaUa());
+            session.removeAttribute("nombre");
+        } else {
+
+            return new ModelAndView("redirect:/ua", map);
+
+        }
         return new ModelAndView("/Personal/registros/ua/lista_ua", map);
     }
 
@@ -1512,13 +1759,30 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////PERSONAL DE UA ///////////////////////////////////////////
     @RequestMapping(value = "/irListaPersonalUa", method = RequestMethod.POST)
-    public ModelAndView ListaPersonalUa(ModelMap map, @RequestParam("ïdUA") int idUa, HttpSession session) {
+    public ModelAndView ListaPersonalUa_POST(ModelMap map, @RequestParam("ïdUA") int idUa, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        
+        session.setAttribute("ïdUA", idUa);
+        
+        return new ModelAndView("redirect:/irListaPersonalUa", map);
+    }
+    
+    @RequestMapping(value = "/irListaPersonalUa", method = RequestMethod.GET)
+    public ModelAndView ListaPersonalUa_GET(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        int idUa = (int) session.getAttribute("idUa");
+        
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(idUa));
         return new ModelAndView("/Personal/registros/ua/lista_ua_personal", map);
@@ -1527,13 +1791,30 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////EDITAR PERSONAL UA ///////////////////////////////////////////
     @RequestMapping(value = "/EditarPersonalUa", method = RequestMethod.POST)
-    public ModelAndView EditarPersonalUa(ModelMap map, @RequestParam("id") int id, HttpSession session) {
+    public ModelAndView EditarPersonalUa_POST(ModelMap map, @RequestParam("id") int id, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        
+        session.setAttribute("id", id);
+        
+        return new ModelAndView("redirect:/EditarPersonalUa", map);
+    }
+    
+    @RequestMapping(value = "/EditarPersonalUa", method = RequestMethod.GET)
+    public ModelAndView EditarPersonalUa_GET(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        int id = (int) session.getAttribute("id");
+        
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(id);
         String fechaNac = "";
@@ -1584,6 +1865,61 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        
+        session.setAttribute("idPers", idPers);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("user", user);
+        session.setAttribute("pass", pass);
+        session.setAttribute("correoT", correoT);
+        session.setAttribute("correoP", correoP);
+        session.setAttribute("profesion", profesion);
+        session.setAttribute("grado", grado);
+        session.setAttribute("cargo", cargo);
+        session.setAttribute("dni", dni);
+        session.setAttribute("fechaNac", fechaNac);
+        session.setAttribute("regimen", regimen);
+        session.setAttribute("fechaIng", fechaIng);
+        session.setAttribute("domicilio", domicilio);
+        session.setAttribute("rol", rol);
+        
+        return new ModelAndView("redirect:/updatePersonalUa", map);
+    }
+    
+    @RequestMapping(value = "/updatePersonalUa", method = RequestMethod.GET)
+    public ModelAndView UpdatePersonalUa_GET(ModelMap map,
+            //datos a ingresar en Personal
+            HttpSession session
+    //@RequestParam("ua") int ua
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        
+        
+        long idPers = (long) session.getAttribute("idPers");
+        String nombre = (String) session.getAttribute("nombre");
+        String apellidoP = (String) session.getAttribute("apellidoP");
+        String apellidoM = (String) session.getAttribute("apellidoM");
+        String user = (String) session.getAttribute("user");
+        String pass = (String) session.getAttribute("pass");
+        String correoT = (String) session.getAttribute("correoT");
+        String correoP = (String) session.getAttribute("correoP");
+        String profesion = (String) session.getAttribute("profesion");
+        String grado = (String) session.getAttribute("grado");
+        String cargo = (String) session.getAttribute("cargo");
+        String dni = (String) session.getAttribute("dni");
+        String fechaNac = (String) session.getAttribute("fechaNac");
+        String regimen = (String) session.getAttribute("regimen");
+        String fechaIng = (String) session.getAttribute("fechaIng");
+        String domicilio = (String) session.getAttribute("domicilio");
+        String rol = (String) session.getAttribute("rol");
+        
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(idPers);
 
@@ -1662,13 +1998,30 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////ASIGNAR PERSONAL PASO 1 ///////////////////////////////////////////
     @RequestMapping(value = "/asignarPersonalUa", method = RequestMethod.POST)
-    public ModelAndView asignarPersonalUa(ModelMap map, @RequestParam("idUa") long idUa, HttpSession session) {
+    public ModelAndView asignarPersonalUa_POST(ModelMap map, @RequestParam("idUa") long idUa, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        
+        session.setAttribute("idUa", idUa);
+        
+        return new ModelAndView("redirect:/asignarPersonalUa", map);
+    }
+    
+     @RequestMapping(value = "/asignarPersonalUa", method = RequestMethod.GET)
+    public ModelAndView asignarPersonalUa_GET(ModelMap map,  HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        long idUa = (long) session.getAttribute("idUa");
+        
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalNoUa", ServicioPersonal.ListaPersonalNoUa(idUa));
         return new ModelAndView("/Personal/registros/ua/lista_asign_pers", map);
@@ -1677,7 +2030,8 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////ASIGNAR PERSONAL PASO 2 ///////////////////////////////////////////
     @RequestMapping(value = "/asignarPersonalUa2", method = RequestMethod.POST)
-    public ModelAndView asignarPersonalUa2(ModelMap map, @RequestParam("idUa") long idUa, @RequestParam("idPers") long idPers, HttpSession session) {
+    public ModelAndView asignarPersonalUa2_POST(ModelMap map, @RequestParam("idUa") long idUa, 
+            @RequestParam("idPers") long idPers, HttpSession session) {
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1685,6 +2039,28 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        
+        session.setAttribute("idUa", idUa);
+        session.setAttribute("idPers", idPers);
+        
+        return new ModelAndView("redirect:/asignarPersonalUa2", map);
+    }
+    
+    @RequestMapping(value = "/asignarPersonalUa2", method = RequestMethod.GET)
+    public ModelAndView asignarPersonalUa2_GET(ModelMap map, HttpSession session) {
+
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        if(session.getAttribute("idPers") != null){
+        
+        long idUa = (long) session.getAttribute("idUa");
+        long idPers = (long) session.getAttribute("idPers");
+        
         Personal per = new Personal();
         Unidad ua = new Unidad();
         ua = ServicioPersonal.getUa(idUa);
@@ -1708,6 +2084,14 @@ public class personal {
 
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(idUa));
+        
+        }else{
+        long idUa = (long) session.getAttribute("idUa");
+        session.setAttribute("ïdUA", idUa);
+        
+        return new ModelAndView("redirect:/irListaPersonalUa", map);
+        }
+        
         return new ModelAndView("/Personal/registros/ua/lista_ua_personal", map);
     }
 
@@ -3822,13 +4206,13 @@ public class personal {
 
         } else {
 
-            session.setAttribute("idSesion", idSesion);            
-            
+            session.setAttribute("idSesion", idSesion);
+
             return new ModelAndView("redirect:/PersonalTomaAsistencia2", map);
-            
+
         }
-        
-        session.removeAttribute("user");        
+
+        session.removeAttribute("user");
 
         return new ModelAndView("/Personal/Informativa/toma_asistencia2", map);
     }
