@@ -86,6 +86,7 @@ public class main {
         return "login";
     }
 
+    //LISTO
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login_POST(ModelMap map, @RequestParam(value = "email", required = false) String email, @RequestParam(value = "password", required = false) String pass, HttpSession session) {
 
@@ -115,6 +116,7 @@ public class main {
                 Personal personal = (Personal) aux.get(1);
                 if (!personal.getRol().equals("Inactivo")) {
                     session.setAttribute("usuario", personal);
+                    session.setMaxInactiveInterval(900);
                     pagina = "/Personal/inicio_personal";
 
                     String mensaje_log = "El usuario, " + personal.getUser() + " con ID: " + personal.getIdpersonal() + ". Ingresó al sistema.";
@@ -135,6 +137,7 @@ public class main {
                 Familia familia = (Familia) aux.get(1);
                 if (familia.getHabilitado() == 0) {
                     session.setAttribute("usuario", familia);
+                    session.setMaxInactiveInterval(900);
                     pagina = "/Familia/inicio_familia";
                 } else {
                     map.addAttribute("mensaje", mensaje);
@@ -143,6 +146,7 @@ public class main {
             } else if (aux.get(0) == "representante" || aux.get(0) == "autoridad") {
                 Entidad entidad = (Entidad) aux.get(1);
                 session.setAttribute("usuario", entidad);
+                session.setMaxInactiveInterval(900);
                 pagina = "/Entidad/inicio_ent";
             } else if (email.equals("") || pass.equals("")) {
                 mensaje = "Por favor llenar ambos campos";
@@ -173,8 +177,25 @@ public class main {
         return "/Inscripcion/inscripcion_prev";
     }
 
-    @RequestMapping("/SesionInfInicio")
-    public ModelAndView SesionInfInicio(ModelMap map, @RequestParam("ua") String ua) {
+    //LISTO
+    @RequestMapping(value = "/SesionInfInicio", method = RequestMethod.POST)
+    public ModelAndView SesionInfInicio_POST(ModelMap map, @RequestParam("ua") String ua, HttpSession session) {
+
+        session.setAttribute("ua", ua);
+
+        return new ModelAndView("redirect:/SesionInfInicio", map);
+    }
+
+    @RequestMapping(value = "/SesionInfInicio", method = RequestMethod.GET)
+    public ModelAndView SesionInfInicio_GET(ModelMap map, HttpSession session) {
+
+        String ua = "";
+        try {
+            ua = session.getAttribute("ua").toString();
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/", map);
+        }
+        session.removeAttribute("ua");
 
         ArrayList<Turno> temp = new ArrayList();
         ArrayList<Turno> temp2 = new ArrayList();
@@ -230,8 +251,25 @@ public class main {
         return new ModelAndView(pagina);
     }
 
+    //LISTO
     @RequestMapping(value = "/SesionInfElegirEstado", method = RequestMethod.POST)
-    public ModelAndView SesionInfElegirEstado(ModelMap map, @RequestParam("idTurno") int turno) {
+    public ModelAndView SesionInfElegirEstado_POST(ModelMap map, @RequestParam("idTurno") int turno, HttpSession session) {
+
+        session.setAttribute("idTurno", turno);
+        return new ModelAndView("redirect:/SesionInfElegirEstado", map);
+
+    }
+
+    @RequestMapping(value = "/SesionInfElegirEstado", method = RequestMethod.GET)
+    public ModelAndView SesionInfElegirEstado_GET(ModelMap map, HttpSession session) {
+
+        int turno = 0;
+        try {
+            turno = (int) session.getAttribute("idTurno");
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/", map);
+        }
+        session.removeAttribute("idTurno");
 
         map.addAttribute("idTurno", turno);
         return new ModelAndView("/Inscripcion/inscripcion_sesion2", map);
@@ -239,7 +277,27 @@ public class main {
     }
 
     @RequestMapping(value = "/SesionInfEstado2", method = RequestMethod.POST)
-    public ModelAndView SesionInfElegirEstado2(ModelMap map, @RequestParam("estado") String estado, @RequestParam("idTurno") int turno) {
+    public ModelAndView SesionInfElegirEstado2_POST(ModelMap map, @RequestParam("estado") String estado, @RequestParam("idTurno") int turno, HttpSession session) {
+        
+        session.setAttribute("estado", estado);
+        session.setAttribute("turno",turno);
+        
+        return new ModelAndView("redirect:/SesionInfEstado2", map);
+    }
+    
+    @RequestMapping(value = "/SesionInfEstado2", method = RequestMethod.GET)
+    public ModelAndView SesionInfElegirEstado2_GET(ModelMap map, HttpSession session) {
+        int turno = 0;
+        String estado = "";
+        try {
+            turno = (int) session.getAttribute("turno");
+            estado = session.getAttribute("estado").toString();
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/", map);
+        }
+        session.removeAttribute("estado");
+        session.removeAttribute("turno");
+        
         Turno temp = ServicioMain.getTurno(turno);
 
         if (estado.equals("casados")) {
@@ -2224,13 +2282,30 @@ public class main {
         return "cronograma_prev";
     }
 
+    //LISTO
     @RequestMapping(value = "/CronogramaAnual", method = RequestMethod.POST)
-    public ModelAndView CronogramaAnual(ModelMap map, HttpSession session, @RequestParam(value = "ua") String ua) {
+    public ModelAndView CronogramaAnual_GET(ModelMap map, HttpSession session, @RequestParam(value = "ua") String ua) {
+
+        session.setAttribute("ua", ua);
+        return new ModelAndView("redirect:/CronogramaAnual", map);
+    }
+
+    @RequestMapping(value = "/CronogramaAnual", method = RequestMethod.GET)
+    public ModelAndView CronogramaAnual_POST(ModelMap map, HttpSession session) {
+
+        String ua = "";
+        try {
+            ua = session.getAttribute("ua").toString();
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/", map);
+        }
+        session.removeAttribute(ua);
 
         ArrayList<Taller> allTalleres = new ArrayList();
         allTalleres = ServicioMain.listaTalleresProgramados(ua);
         ArrayList<Sesion> allSesiones = new ArrayList();
         allSesiones = ServicioMain.getListaSesionesProgramadas(ua);
+
         map.put("df", df);
         map.put("listaTalleres", allTalleres);
         map.put("listaSesiones", allSesiones);

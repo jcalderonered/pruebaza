@@ -693,15 +693,15 @@ public class HiberPersonal {
         query = session.createQuery(hql2);
         query.setLong("idT", taller.getIdtaller());
         List listaGrupos = query.list();
-        
+
         Set<Grupo> allGrupos = new LinkedHashSet<>();
-        
+
         for (Iterator iter = listaGrupos.iterator(); iter.hasNext();) {
             Grupo temp = (Grupo) iter.next();
             Hibernate.initialize(temp.getTurno2s());
             allGrupos.add(temp);
         }
-        
+
 //        for (Grupo grup : taller.getGrupos()) {
 //            Hibernate.initialize(grup.getTurno2s());
 //            allGrupos.add(grup);
@@ -721,17 +721,16 @@ public class HiberPersonal {
         Query query = session.createQuery(hql);
         query.setLong("id", id);
         Object queryResult = query.uniqueResult();
-             
+
         grp = (Grupo) queryResult;
         Hibernate.initialize(grp.getTaller());
-        
+
         String hql2 = "From Turno2 T where T.grupo = :idG order by T.idturno2 asc";
         query = session.createQuery(hql2);
         query.setLong("idG", grp.getIdgrupo());
         List listaT2 = query.list();
-        
+
         //Hibernate.initialize(grp.getTurno2s());
-        
         Set<Turno2> allTurno2 = new LinkedHashSet<>();
         for (Iterator iter = listaT2.iterator(); iter.hasNext();) {
             Turno2 temp = (Turno2) iter.next();
@@ -760,19 +759,19 @@ public class HiberPersonal {
 
         t2 = (Turno2) queryResult;
         //Hibernate.initialize(t2.getReunions());
-        
+
         String hql2 = "From Reunion R where R.turno2 = :idT order by R.fecha ASC";
         query = session.createQuery(hql2);
         query.setLong("idT", t2.getIdturno2());
         List reuniones = query.list();
         Set<Reunion> reunions = new LinkedHashSet<>();
         for (Iterator iter = reuniones.iterator(); iter.hasNext();) {
-                Reunion reu = (Reunion) iter.next();
-                reunions.add(reu);
+            Reunion reu = (Reunion) iter.next();
+            reunions.add(reu);
         }
-        Hibernate.initialize(t2.getGrupo());                        
+        Hibernate.initialize(t2.getGrupo());
         t2.setReunions(reunions);
-        
+
         return t2;
 
     }
@@ -854,7 +853,7 @@ public class HiberPersonal {
         Object queryResult = query.uniqueResult();
         Reunion tempReun = (Reunion) queryResult;
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
-        
+
         String hql2 = "FROM AsistenciaFR AFR where AFR.reunion = :id order by AFR.familia asc";
         Query query2 = session.createQuery(hql2);
         query2.setLong("id", tempReun.getIdreunion());
@@ -866,7 +865,7 @@ public class HiberPersonal {
         }
         //Hibernate.initialize(tempReun.getAsistenciaFRs());
         tempReun.setAsistenciaFRs(asistenciaFRs);
-        
+
         long idtemp = 0;
         for (AsistenciaFR afr : tempReun.getAsistenciaFRs()) {
             Hibernate.initialize(afr.getFamilia());
@@ -1308,8 +1307,8 @@ public class HiberPersonal {
                             flag = true;
                         }
                     }
-                    
-                    if(flag){
+
+                    if (flag) {
                         continue;
                     }
 
@@ -1353,7 +1352,7 @@ public class HiberPersonal {
         return allExpedientes;
     }
 
-    public ArrayList<ExpedienteFamilia> FiltrarFam(ExpedienteFamilia expFam, Familia datosFam, InfoFamilia infoFam) {
+    public ArrayList<ExpedienteFamilia> FiltrarFam(ExpedienteFamilia expFam, InfoFamilia infoFam) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
@@ -1491,21 +1490,46 @@ public class HiberPersonal {
             }
         }
 
-        List expedientes = query.list();
         ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
-        if (!expedientes.isEmpty()) {
-            for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
-                ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
-                Hibernate.initialize(temp.getFamilia());
-                Hibernate.initialize(temp.getUnidad());
-                allExpedientes.add(temp);
+        if (!infoFam.getDepRes().equals("none")) {
+            //FALTA
+            if (!hql.equals("from ExpedienteFamilia E where ")) {
+                List expedientes = query.list();
+                if (!expedientes.isEmpty()) {
+                    for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+                        ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+                        Hibernate.initialize(temp.getFamilia());
+                        Hibernate.initialize(temp.getUnidad());
+                        allExpedientes.add(temp);
+                    }
+                }
+            } else {
+                //FALTA
+                hql = "FROM INFO_FAMILIA F WHERE F.DEP_RES = :dep";
+                query = session.createQuery(hql);
+                query.setString("dep", infoFam.getDepRes());
 
+                List listaFamilias = query.list();
+                ArrayList<InfoFamilia> fami = new ArrayList<InfoFamilia>();
+                for (Iterator iter = listaFamilias.iterator(); iter.hasNext();) {
+                    InfoFamilia ifa = (InfoFamilia) iter.next();
+                    Hibernate.initialize(ifa.getFamilia());
+                    fami.add(ifa);
+                }
+                
             }
-
+        } else {
+            List expedientes = query.list();
+            if (!expedientes.isEmpty()) {
+                for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+                    ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+                    Hibernate.initialize(temp.getFamilia());
+                    Hibernate.initialize(temp.getUnidad());
+                    allExpedientes.add(temp);
+                }
+            }
         }
-
         return allExpedientes;
-
     }
 
     public void InsertLog(Personal personal, String Tipo_registro, String Numero_registro, String mensaje) {

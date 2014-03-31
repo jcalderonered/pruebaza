@@ -4995,7 +4995,6 @@ public class personal {
         }
 
         ExpedienteFamilia datosExp = new ExpedienteFamilia();
-        Familia datosFam = new Familia();
         InfoFamilia infoFam = new InfoFamilia();
 
         if (expediente != null) {
@@ -5037,7 +5036,7 @@ public class personal {
         }
 
         ArrayList<ExpedienteFamilia> listaBusqueda = new ArrayList();
-        listaBusqueda = ServicioPersonal.FiltrarFam(datosExp, datosFam, infoFam);
+        listaBusqueda = ServicioPersonal.FiltrarFam(datosExp, infoFam);
 
         map.put("listaBusqueda", listaBusqueda);
         String volver = "/FiltrarFam";
