@@ -6349,4 +6349,146 @@ public class personal {
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
 
+    ///ULTIMAS FUNCIONES INGRESADAS 01/04/2014 ////
+    @RequestMapping(value = "/PersonalEliminarTurno", method = RequestMethod.POST)
+    public ModelAndView PersonalEliminarTurno(ModelMap map,
+            @RequestParam("idTurno") long idTurno,
+            @RequestParam(value = "idSesion", required = false) long idSesion,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        String mensaje = "";
+        Turno tempT = new Turno();
+        tempT = ServicioPersonal.getTurnoAsistencias(idTurno);
+        if (tempT.getAsistenciaFTs().isEmpty()) {
+            ServicioPersonal.DeleteTurnoSesion(tempT);
+        } else {
+            mensaje = "El turno no se pudo eliminar debido a que hay personas inscritas";
+        }
+        Sesion temp = new Sesion();
+        //ArrayList<Personal> allPersonal = new ArrayList();
+        ArrayList<Turno> allTurnos = new ArrayList();
+        allTurnos = ServicioMain.turnosSesion(idSesion);
+        temp = ServicioPersonal.getSesion(idSesion);
+        //allPersonal = ServicioPersonal.ListaPersonal();
+        String fecha = "";
+        try {
+            fecha = format.dateToString(temp.getFecha());
+        } catch (Exception ex) {
+        }
+        String hora = temp.getHora();
+
+        map.put("listaTurnos", allTurnos);
+        map.put("sesion", temp);
+        //map.put("listaPersonal", allPersonal);
+        map.addAttribute("ts", ts);
+        map.addAttribute("fecha", fecha);
+        map.addAttribute("hora", hora);
+        map.addAttribute("idSesion", idSesion);
+        map.addAttribute("mensaje", mensaje);
+        return new ModelAndView("/Personal/Informativa/lista_sesion", map);
+    }
+
+    @RequestMapping(value = "/PersonalEliminarGrupo", method = RequestMethod.POST)
+    public ModelAndView PersonalEliminarGrupo(ModelMap map,
+            @RequestParam("idTaller") long idTaller,
+            @RequestParam("idGrupo") long idGrupo,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        String mensaje = "";
+        Grupo tempG = new Grupo();
+        tempG = ServicioPersonal.getGrupo(idGrupo);
+        if (tempG.getTurno2s().isEmpty()) {
+            ServicioPersonal.DeleteGrupoTaller(tempG);
+        } else {
+            mensaje = "El grupo no se pudo eliminar debido a que hay turnos creados";
+        }
+
+        Taller tempTaller = new Taller();
+        tempTaller = ServicioPersonal.getTaller(idTaller);
+
+        map.put("mensaje", mensaje);
+        map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        map.put("taller", tempTaller);
+        map.addAttribute("idTaller", idTaller);
+        return new ModelAndView("/Personal/Informativa/edicion_taller", map);
+    }
+
+    @RequestMapping(value = "/PersonalEliminarTurnoGrupo", method = RequestMethod.POST)
+    public ModelAndView PersonalEliminarTurnoGrupo(ModelMap map,
+            @RequestParam("idTurno2") long idTurno2,
+            @RequestParam(value = "idTaller", required = false) long idTaller,
+            @RequestParam(value = "idGrupo", required = false) long idGrupo,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        String mensaje = "";
+        Turno2 tempT2 = new Turno2();
+        tempT2 = ServicioPersonal.getTurno2(idTurno2);
+        if (tempT2.getReunions().isEmpty()) {
+            ServicioPersonal.DeleteTurno2Grupo(tempT2);
+        } else {
+            mensaje = "No se puede eliminar el turno debido a que hay reuniones creadas";
+        }
+        Grupo tempGrp = new Grupo();
+        tempGrp = ServicioPersonal.getGrupo(idGrupo);
+        map.put("mensaje",mensaje);
+        map.put("grupo", tempGrp);
+        map.addAttribute("idTaller", idTaller);
+        map.addAttribute("idGrupo", idGrupo);
+        return new ModelAndView("/Personal/Informativa/edicion_grupo", map);
+    }
+
+    @RequestMapping(value = "/PersonalEliminarReunion", method = RequestMethod.POST)
+    public ModelAndView PersonalEliminarReunion(ModelMap map,
+            @RequestParam("idReunion") long idReunion,
+            @RequestParam(value = "idTaller", required = false) long idTaller,
+            @RequestParam(value = "idGrupo", required = false) long idGrupo,
+            @RequestParam(value = "idTurno2", required = false) long idTurno2,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        String mensaje ="";
+        Reunion tempReun = new Reunion();
+        tempReun = ServicioPersonal.getReunion(idReunion);
+
+        if (tempReun.getAsistenciaFRs().isEmpty()) {
+            ServicioPersonal.DeleteReunionTurno2(tempReun);
+        } else {
+            mensaje = "No se puede eliminar la reunión debido a que hay personas inscritas";
+        }
+
+        Turno2 tempT2 = new Turno2();
+        tempT2 = ServicioPersonal.getTurno2(idTurno2);
+        map.put("mensaje",mensaje);
+        map.put("turno2", tempT2);
+        map.put("formato", format);
+        map.put("listaPersonal", ServicioPersonal.ListaPersonal());
+        map.addAttribute("idTaller", idTaller);
+        map.addAttribute("idGrupo", idGrupo);
+        map.addAttribute("idTurno2", idTurno2);
+        return new ModelAndView("/Personal/Informativa/edicion_turno2", map);
+    }
+    
+
 }

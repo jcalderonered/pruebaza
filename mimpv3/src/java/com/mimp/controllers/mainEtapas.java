@@ -63,7 +63,7 @@ public class mainEtapas {
     }
 
     @RequestMapping(value = "/ConstanciaInformativa", method = RequestMethod.POST)
-    public ModelAndView ConstanciaInformativa(ModelMap map,
+    public ModelAndView ConstanciaInformativa_POST(ModelMap map,
             @RequestParam("idFamilia") long idFamilia,
             @RequestParam("constancia") String constancia,
             HttpSession session) {
@@ -73,16 +73,41 @@ public class mainEtapas {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        session.setAttribute("idFamilia", idFamilia);
+        session.setAttribute("constancia", constancia);
+
+        return new ModelAndView("redirect:/ConstanciaInformativa", map);
+    }
+
+    @RequestMapping(value = "/ConstanciaInformativa", method = RequestMethod.GET)
+    public ModelAndView ConstanciaInformativa_GET(ModelMap map,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
         Familia tempFam = new Familia();
-        tempFam = servicioEtapa.getFamilia(idFamilia);
-        tempFam.setConstancia(constancia);
+        if (session.getAttribute("idFamilia") != null) {
 
-        servicioEtapa.UpdateFamilia(tempFam);
+            tempFam = servicioEtapa.getFamilia((long) session.getAttribute("idFamilia"));
+            tempFam.setConstancia((String) session.getAttribute("constancia"));
 
-        ArrayList<Familia> allFamilias = new ArrayList();
-        allFamilias = servicioEtapa.getListaFamilias();
-        map.put("listaFamilias", allFamilias);
-        return new ModelAndView("/Personal/Buscador_etapa/etapa_formativa", map);
+            servicioEtapa.UpdateFamilia(tempFam);
+
+            ArrayList<Familia> allFamilias = new ArrayList();
+            allFamilias = servicioEtapa.getListaFamilias();
+            map.put("listaFamilias", allFamilias);
+            session.removeAttribute("idFamilia");
+            session.removeAttribute("constancia");
+            return new ModelAndView("/Personal/Buscador_etapa/etapa_formativa", map);
+        } else {
+            ArrayList<Familia> allFamilias = new ArrayList();
+            allFamilias = servicioEtapa.getListaFamilias();
+            map.put("listaFamilias", allFamilias);
+            return new ModelAndView("/Personal/Buscador_etapa/etapa_formativa", map);
+        }
     }
 
     @RequestMapping(value = "/EtapaEvalNac", method = RequestMethod.GET)
@@ -126,7 +151,7 @@ public class mainEtapas {
     }
 
     @RequestMapping(value = "/PersonalAgregarEvalPsicologica", method = RequestMethod.POST)
-    public ModelAndView PersonalAgregarEvalPsicologica(ModelMap map, HttpSession session,
+    public ModelAndView PersonalAgregarEvalPsicologica_POST(ModelMap map, HttpSession session,
             @RequestParam("idExpediente") long idExpediente,
             @RequestParam("familia") String familia,
             @RequestParam("origen") String origen,
@@ -140,25 +165,63 @@ public class mainEtapas {
             return new ModelAndView("login", map);
         }
 
-        Evaluacion tempEval = new Evaluacion();
-        if (!idPsicologica.equals("")) {
-            long temp = Long.parseLong(idPsicologica);
-            tempEval = servicioEtapa.getEvaluacion(temp);
-            map.put("psicologica", tempEval);
+        session.setAttribute("idExpediente", idExpediente);
+        session.setAttribute("familia", familia);
+        session.setAttribute("origen", origen);
+        session.setAttribute("volver", volver);
+        session.setAttribute("idPsicologica", idPsicologica);
+
+        return new ModelAndView("redirect:/PersonalAgregarEvalPsicologica", map);
+
+    }
+
+    @RequestMapping(value = "/PersonalAgregarEvalPsicologica", method = RequestMethod.GET)
+    public ModelAndView PersonalAgregarEvalPsicologica_GET(ModelMap map, HttpSession session
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
         }
 
-        map.put("idExpediente", idExpediente);
-        map.put("familia", familia);
-        map.put("origen", origen);
-        map.put("listaPersonal", ServicioPersonal.ListaPersonal());
-        map.addAttribute("volver", volver);
-        map.put("df", df);
-        return new ModelAndView("/Personal/Buscador_etapa/etapa_evaluacion/detalle_eval_psic", map);
+        if (session.getAttribute("idPsicologica") != null && session.getAttribute("idExpediente") != null) {
+            Evaluacion tempEval = new Evaluacion();
+            if (!session.getAttribute("idPsicologica").equals("")) {
+                long temp = Long.parseLong((String) session.getAttribute("idPsicologica"));
+                tempEval = servicioEtapa.getEvaluacion(temp);
+                map.put("psicologica", tempEval);
+            }
+
+            map.put("idExpediente", session.getAttribute("idExpediente"));
+            map.put("familia", session.getAttribute("familia"));
+            map.put("origen", session.getAttribute("origen"));
+            map.put("listaPersonal", ServicioPersonal.ListaPersonal());
+            map.addAttribute("volver", volver);
+            map.put("df", df);
+
+            session.removeAttribute("idExpediente");
+            session.removeAttribute("familia");
+            session.removeAttribute("origen");
+            session.removeAttribute("volver");
+            session.removeAttribute("idPsicologica");
+
+            return new ModelAndView("/Personal/Buscador_etapa/etapa_evaluacion/detalle_eval_psic", map);
+        } else {
+            ArrayList<ExpedienteFamilia> allListaExpedientes = new ArrayList();
+            allListaExpedientes = servicioEtapa.ListaExpedientes("nacional", "evaluacion");
+            volver = "/EtapaEvalNac";
+            map.addAttribute("volver", volver);
+            map.put("ListaExpedientes", allListaExpedientes);
+            map.put("df", df);
+            return new ModelAndView("/Personal/Buscador_etapa/etapa_evaluacion/etapa_evaluativa_nac", map);
+
+        }
 
     }
 
     @RequestMapping(value = "/PersonalCrearEvalPsicologicaNac", method = RequestMethod.POST)
-    public ModelAndView PersonalCrearEvalPsicologicaNac(ModelMap map, HttpSession session,
+    public ModelAndView PersonalCrearEvalPsicologicaNac_POST(ModelMap map, HttpSession session,
             @ModelAttribute("idExpediente") long idExpediente,
             @RequestParam(value = "fechaAsig", required = false) String fechaAsig,
             @RequestParam(value = "personal", required = false) long personal,
@@ -175,61 +238,111 @@ public class mainEtapas {
             return new ModelAndView("login", map);
         }
 
-        Evaluacion tempEval = new Evaluacion();
-        tempEval.setExpedienteFamilia(servicioEtapa.getExpedienteFamilia(idExpediente));
-        Date tempfecha = tempEval.getFechaAsignacion();
-        if (fechaAsig != null) {
-            if (fechaAsig.contains("ene") || fechaAsig.contains("feb") || fechaAsig.contains("mar") || fechaAsig.contains("abr")
-                    || fechaAsig.contains("may") || fechaAsig.contains("jun") || fechaAsig.contains("jul") || fechaAsig.contains("ago")
-                    || fechaAsig.contains("set") || fechaAsig.contains("oct") || fechaAsig.contains("nov") || fechaAsig.contains("dic")) {
-                tempEval.setFechaAsignacion(tempfecha);
-            } else {
-                if (!fechaAsig.equals("")) {
-                    tempEval.setFechaAsignacion(df.stringToDate(fechaAsig));
+        session.setAttribute("idExpediente", idExpediente);
+        session.setAttribute("fechaAsig", fechaAsig);
+        session.setAttribute("personal", personal);
+        session.setAttribute("resultado", resultado);
+        session.setAttribute("numEval", numEval);
+        session.setAttribute("fechaResul", fechaResul);
+        session.setAttribute("obs", obs);
+        session.setAttribute("origen", origen);
+
+        return new ModelAndView("redirect:/PersonalCrearEvalPsicologicaNac", map);
+    }
+
+    @RequestMapping(value = "/PersonalCrearEvalPsicologicaNac", method = RequestMethod.GET)
+    public ModelAndView PersonalCrearEvalPsicologicaNac_GET(ModelMap map, HttpSession session
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        if (session.getAttribute("idExpediente") != null && session.getAttribute("personal") != null) {
+            Evaluacion tempEval = new Evaluacion();
+            tempEval.setExpedienteFamilia(servicioEtapa.getExpedienteFamilia((long) session.getAttribute("idExpediente")));
+            String fechaAsig = (String) session.getAttribute("fechaAsig");
+            Date tempfecha = tempEval.getFechaAsignacion();
+            if (fechaAsig != null) {
+                if (fechaAsig.contains("ene") || fechaAsig.contains("feb") || fechaAsig.contains("mar") || fechaAsig.contains("abr")
+                        || fechaAsig.contains("may") || fechaAsig.contains("jun") || fechaAsig.contains("jul") || fechaAsig.contains("ago")
+                        || fechaAsig.contains("set") || fechaAsig.contains("oct") || fechaAsig.contains("nov") || fechaAsig.contains("dic")) {
+                    tempEval.setFechaAsignacion(tempfecha);
                 } else {
-                    tempEval.setFechaAsignacion(null);
+                    if (!fechaAsig.equals("")) {
+                        tempEval.setFechaAsignacion(df.stringToDate(fechaAsig));
+                    } else {
+                        tempEval.setFechaAsignacion(null);
+                    }
                 }
+            } else {
+                tempEval.setFechaAsignacion(null);
+            }
+            tempEval.setPersonal(ServicioPersonal.getPersonal((long) session.getAttribute("personal")));
+            tempEval.setResultado((String) session.getAttribute("resultado"));
+            String fechaResul = (String) session.getAttribute("fechaResul");
+            tempfecha = tempEval.getFechaResultado();
+            if (fechaResul != null) {
+                if (fechaResul.contains("ene") || fechaResul.contains("feb") || fechaResul.contains("mar") || fechaResul.contains("abr")
+                        || fechaResul.contains("may") || fechaResul.contains("jun") || fechaResul.contains("jul") || fechaResul.contains("ago")
+                        || fechaResul.contains("set") || fechaResul.contains("oct") || fechaResul.contains("nov") || fechaResul.contains("dic")) {
+                    tempEval.setFechaResultado(tempfecha);
+                } else {
+                    if (!fechaResul.equals("")) {
+                        tempEval.setFechaResultado(df.stringToDate(fechaResul));
+                    } else {
+                        tempEval.setFechaResultado(null);
+                    }
+                }
+            } else {
+                tempEval.setFechaResultado(null);
+            }
+            tempEval.setNumEval((String) session.getAttribute("numEval"));
+            tempEval.setObservacion((String) session.getAttribute("obs"));
+            tempEval.setTipo("psicologica");
+
+            servicioEtapa.crearEvaluacion(tempEval);
+            String origen = (String) session.getAttribute("origen");
+            if (origen.equals("nacional")) {
+                session.removeAttribute("idExpediente");
+                session.removeAttribute("fechaAsig");
+                session.removeAttribute("personal");
+                session.removeAttribute("resultado");
+                session.removeAttribute("numEval");
+                session.removeAttribute("fechaResul");
+                session.removeAttribute("obs");
+                session.removeAttribute("origen");
+
+                ArrayList<ExpedienteFamilia> allListaExpedientes = new ArrayList();
+                allListaExpedientes = servicioEtapa.ListaExpedientes("nacional", "evaluacion");
+                map.put("ListaExpedientes", allListaExpedientes);
+                map.put("df", df);
+                return new ModelAndView("/Personal/Buscador_etapa/etapa_evaluacion/etapa_evaluativa_nac", map);
+            } else {
+                session.removeAttribute("idExpediente");
+                session.removeAttribute("fechaAsig");
+                session.removeAttribute("personal");
+                session.removeAttribute("resultado");
+                session.removeAttribute("numEval");
+                session.removeAttribute("fechaResul");
+                session.removeAttribute("obs");
+                session.removeAttribute("origen");
+                ArrayList<ExpedienteFamilia> allListaExpedientes = new ArrayList();
+                allListaExpedientes = servicioEtapa.ListaExpedientes("internacional", "evaluacion");
+                map.put("ListaExpedientes", allListaExpedientes);
+                map.put("df", df);
+                return new ModelAndView("/Personal/Buscador_etapa/etapa_evaluacion/etapa_evaluativa_int", map);
             }
         } else {
-            tempEval.setFechaAsignacion(null);
-        }
-        tempEval.setPersonal(ServicioPersonal.getPersonal(personal));
-        tempEval.setResultado(resultado);
-        tempfecha = tempEval.getFechaResultado();
-        if (fechaResul != null) {
-            if (fechaResul.contains("ene") || fechaResul.contains("feb") || fechaResul.contains("mar") || fechaResul.contains("abr")
-                    || fechaResul.contains("may") || fechaResul.contains("jun") || fechaResul.contains("jul") || fechaResul.contains("ago")
-                    || fechaResul.contains("set") || fechaResul.contains("oct") || fechaResul.contains("nov") || fechaResul.contains("dic")) {
-                tempEval.setFechaResultado(tempfecha);
-            } else {
-                if (!fechaResul.equals("")) {
-                    tempEval.setFechaResultado(df.stringToDate(fechaResul));
-                } else {
-                    tempEval.setFechaResultado(null);
-                }
-            }
-        } else {
-            tempEval.setFechaResultado(null);
-        }
-        tempEval.setNumEval(numEval);
-        tempEval.setObservacion(obs);
-        tempEval.setTipo("psicologica");
-
-        servicioEtapa.crearEvaluacion(tempEval);
-
-        if (origen.equals("nacional")) {
             ArrayList<ExpedienteFamilia> allListaExpedientes = new ArrayList();
             allListaExpedientes = servicioEtapa.ListaExpedientes("nacional", "evaluacion");
             map.put("ListaExpedientes", allListaExpedientes);
             map.put("df", df);
             return new ModelAndView("/Personal/Buscador_etapa/etapa_evaluacion/etapa_evaluativa_nac", map);
-        } else {
-            ArrayList<ExpedienteFamilia> allListaExpedientes = new ArrayList();
-            allListaExpedientes = servicioEtapa.ListaExpedientes("internacional", "evaluacion");
-            map.put("ListaExpedientes", allListaExpedientes);
-            map.put("df", df);
-            return new ModelAndView("/Personal/Buscador_etapa/etapa_evaluacion/etapa_evaluativa_int", map);
         }
+
     }
 
     @RequestMapping(value = "/PersonalUpdateEvalPsicologicaNac", method = RequestMethod.POST)
@@ -1102,7 +1215,7 @@ public class mainEtapas {
             map.put("df", df);
             return new ModelAndView("/Personal/nna/agregar_exp", map);
         }
-        
+
         if (idExpediente != null && idExpediente.length < 4 && fecha != null && numDesig != null) {
             for (long l : idExpediente) {
                 ExpedienteFamilia tempExp = servicioEtapa.getExpedienteFamilia(l);
@@ -2729,7 +2842,7 @@ public class mainEtapas {
         map.put("familia", familia);
         map.put("idPost", idPost);
         map.put("numInformes", numInformes);
-        
+
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/Buscador_etapa/etapa_post/informes_general", map);
 

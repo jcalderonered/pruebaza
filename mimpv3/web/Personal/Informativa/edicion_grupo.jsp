@@ -136,13 +136,15 @@
                         <br>
                         <h1>Listado de Turnos</h1>
                         <br>
-                        
+                        <h3><strong>${mensaje}</strong></h3>
+                        <br>
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>Turno</th>
                                     <th>N° de Reuniones</th>
                                     <th>Edición</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -157,6 +159,14 @@
                                             <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
                                             <input hidden name="idTaller" id="idTaller" value="${idTaller}">
                                             <button type="submit" class="btn btn-default">Modificar</button>
+                                     </form>
+                                  </td>
+                                  <td>
+                                     <form action="${pageContext.servletContext.contextPath}/PersonalEliminarTurnoGrupo" method="post">
+                                            <input hidden name="idTurno2" id="idTurno2" value="${turno.getIdturno2()}">
+                                            <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
+                                            <input hidden name="idTaller" id="idTaller" value="${idTaller}">
+                                            <button type="submit" class="btn btn-default">Eliminar</button>
                                      </form>
                                   </td>
                                   </tr>   

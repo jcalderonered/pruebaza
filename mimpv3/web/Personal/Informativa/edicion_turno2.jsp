@@ -143,6 +143,8 @@
                             <br>            
                             <h1>Listado de Reuniones</h1>
                             <br>
+                            <h3><strong>${mensaje}</strong></h3>
+                            <br>
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -151,6 +153,7 @@
                                         <th>Facilitador(es)</th>
                                         <th>Capacidad</th>
                                         <th>Modificar</th>
+                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -172,6 +175,15 @@
                                                         <input hidden name="idGrupo" id="idGrupo" value="${idGrupo}">   
                                                         <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">
                                                         <button type="submit" class="btn btn-default">Modificar</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/PersonalEliminarReunion" method="post">
+                                                        <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
+                                                        <input hidden name="idTaller" id="idTaller" value="${idTaller}">  
+                                                        <input hidden name="idGrupo" id="idGrupo" value="${idGrupo}">   
+                                                        <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">
+                                                        <button type="submit" class="btn btn-default">Eliminar</button>
                                                     </form>
                                                 </td>
                                             </tr>   

@@ -917,6 +917,20 @@ public class HiberPersonal {
 
         return tempTurno;
     }
+    
+    public Turno getTurnoAsistencias(long idTurno) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String hql = "FROM Turno T where T.id = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idTurno);
+        Object queryResult = query.uniqueResult();
+        Turno tempTurno = (Turno) queryResult;
+        Hibernate.initialize(tempTurno.getAsistenciaFTs());
+        return tempTurno;
+    }
 
     public void marcarAsistenciaSesion(AsistenciaFT aft) {
 
@@ -1975,5 +1989,41 @@ public class HiberPersonal {
         session.doWork(work);
 
     }
+    
+    public void DeleteTurnoSesion(Turno temp){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.delete(temp);
+        
+    }
+    
+    public void DeleteGrupoTaller(Grupo temp){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.delete(temp);
+        
+    }
+    
+    public void DeleteTurno2Grupo(Turno2 temp){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.delete(temp);
+        
+    }
 
+    public void DeleteReunionTurno2(Reunion temp){
+    
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        session.delete(temp);
+        
+    }
+    
 }

@@ -63,7 +63,7 @@
             <h2 align="center">Ud. se encuentra inscrito(a) en la Sesión Informativa del día:</h2>
             <br>
             <h2 align="center">${ts.DateToString(turno.getSesion().getFecha())} a las ${turno.getSesion().getHora()} (Hora exacta)</h2>
-            <p align="center"><b>Dirección:</b> ${turno.getSesion().getDireccion()}</p>
+            <h2 align="center"><b>Dirección:</b> ${turno.getSesion().getDireccion()}</h2>
             <br>
             <div class="col-md-3"></div>
             <div class="col-md-6">
@@ -72,7 +72,7 @@
                 <p>- En caso de personas casadas es obligatoria la asistencia de ambos integrantes de la pareja</p>                
                 <p>- Asisten únicamente las personas inscritas, no llevar acompañantes ni menores de edad.El espacio es limitado</p>
                 <p>- Tome sus previsiones para llegar a la hora indicada, considere el tráfico, la distancia que tiene que recorrer, buscar una playa de estacionamiento, entre otros.</p>
-                <p>- No se aceptará el ingreso de personas pasada la hora de inicio de la Sesión. Ser puntuales.</p>
+                <p>- Se dará 15 minutos para el Registro de Asistencia. No se aceptará el ingreso de personas pasada la hora de inicio de la Sesión. Ser puntuales.</p>
             </div>
             <div class="col-md-3"></div>
             <!--FIN DE CONTENIDO-->
