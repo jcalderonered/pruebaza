@@ -276,6 +276,7 @@ public class main {
 
     }
 
+    //LISTO
     @RequestMapping(value = "/SesionInfEstado2", method = RequestMethod.POST)
     public ModelAndView SesionInfElegirEstado2_POST(ModelMap map, @RequestParam("estado") String estado, @RequestParam("idTurno") int turno, HttpSession session) {
         
@@ -317,8 +318,9 @@ public class main {
 
     }
 
+    //LISTO
     @RequestMapping(value = "/inscSesInd", method = RequestMethod.POST)
-    public ModelAndView inscSesInd(ModelMap map,
+    public ModelAndView inscSesInd_POST(ModelMap map,
             @RequestParam("nombre") String nombre,
             @RequestParam("apellidoP") String apellidoP,
             @RequestParam("apellidoM") String apellidoM,
@@ -339,9 +341,106 @@ public class main {
             @RequestParam("dir") String dir,
             @RequestParam("telf") String telf,
             @RequestParam("estado") String estado,
-            @RequestParam("idTurno") long turno
+            @RequestParam("idTurno") long turno,
+            HttpSession session
     ) {
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("paisNac", paisNac);
+        session.setAttribute("depNac", depNac);
+        session.setAttribute("proNac", proNac);
+        session.setAttribute("fechaNac", fechaNac);
+        session.setAttribute("edad", edad);
+        session.setAttribute("doc", doc);
+        session.setAttribute("numDoc",numDoc);
+        session.setAttribute("profesion", profesion);
+        session.setAttribute("cel",cel);
+        session.setAttribute("correo",correo);
+        session.setAttribute("pais",pais);
+        session.setAttribute("dep",dep);
+        session.setAttribute("prov",prov);
+        session.setAttribute("dist",dist);
+        session.setAttribute("dir",dir);
+        session.setAttribute("telf",telf);
+        session.setAttribute("estado",estado);
+        session.setAttribute("turno",turno);
 
+        return new ModelAndView("redirect:/inscSesInd", map);
+    }
+    
+    @RequestMapping(value = "/inscSesInd", method = RequestMethod.GET)
+    public ModelAndView inscSesInd_GET(ModelMap map,
+            HttpSession session
+    ) {
+        long turno = 0;
+        String estado = "";
+        String nombre = "";
+        String apellidoP = "";
+        String apellidoM = "";
+        String paisNac = "";
+        String depNac = "";
+        String proNac = "";
+        String fechaNac = "";
+        String edad = "";
+        String doc = "";
+        String numDoc = "";
+        String profesion = "";
+        String cel = "";
+        String correo = "";
+        String pais = "";
+        String dep = "";
+        String prov = "";
+        String dist = "";
+        String dir = "";
+        String telf = "";
+        try {
+            turno = (long) session.getAttribute("turno");
+            estado = session.getAttribute("estado").toString();
+            nombre = session.getAttribute("nombre").toString();
+            apellidoP = session.getAttribute("apellidoP").toString();
+            apellidoM = session.getAttribute("apellidoM").toString();
+            paisNac = session.getAttribute("paisNac").toString();
+            depNac = session.getAttribute("depNac").toString();
+            proNac = session.getAttribute("proNac").toString();
+            fechaNac = session.getAttribute("fechaNac").toString();
+            edad = session.getAttribute("edad").toString();
+            doc = session.getAttribute("doc").toString();
+            numDoc = session.getAttribute("numDoc").toString();
+            profesion = session.getAttribute("profesion").toString();
+            cel = session.getAttribute("cel").toString();
+            correo = session.getAttribute("correo").toString();
+            pais = session.getAttribute("pais").toString();
+            dep = session.getAttribute("dep").toString();
+            prov = session.getAttribute("prov").toString();
+            dist = session.getAttribute("dist").toString();
+            dir = session.getAttribute("dir").toString();
+            telf = session.getAttribute("telf").toString();
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/", map);
+        }
+        session.removeAttribute("estado");
+        session.removeAttribute("turno");
+        session.removeAttribute("nombre");
+        session.removeAttribute("apellidoP");
+        session.removeAttribute("apellidoM");
+        session.removeAttribute("paisNac");
+        session.removeAttribute("depNac");
+        session.removeAttribute("proNac");
+        session.removeAttribute("fechaNac");
+        session.removeAttribute("edad");
+        session.removeAttribute("doc");
+        session.removeAttribute("numDoc");
+        session.removeAttribute("profesion");
+        session.removeAttribute("cel");
+        session.removeAttribute("correo");
+        session.removeAttribute("pais");
+        session.removeAttribute("dep");
+        session.removeAttribute("prov");
+        session.removeAttribute("dist");
+        session.removeAttribute("dir");
+        session.removeAttribute("telf");
+        
         Turno temp = ServicioMain.getTurno(turno);
         FormularioSesion fs = new FormularioSesion();
         Asistente asis = new Asistente();
@@ -452,8 +551,157 @@ public class main {
             @RequestParam("dir") String dir,
             @RequestParam("telf") String telf,
             @RequestParam("estado") String estado,
-            @RequestParam("idTurno") int turno
+            @RequestParam("idTurno") int turno,
+            HttpSession session
     ) {
+        session.setAttribute("nombreEl", nombreEl);
+        session.setAttribute("apellidoPEl", apellidoPEl);
+        session.setAttribute("apellidoMEl", apellidoMEl);
+        session.setAttribute("paisNacEl", paisNacEl);
+        session.setAttribute("depNacEl", depNacEl);
+        session.setAttribute("proNacEl", proNacEl);
+        session.setAttribute("fechaNacEl", fechaNacEl);
+        session.setAttribute("edadEl", edadEl);
+        session.setAttribute("docEl", docEl);
+        session.setAttribute("numDocEl",numDocEl);
+        session.setAttribute("profesionEl", profesionEl);
+        session.setAttribute("celEl",celEl);
+        session.setAttribute("correoEl",correoEl);
+        session.setAttribute("nombreElla", nombreElla);
+        session.setAttribute("apellidoPElla", apellidoPElla);
+        session.setAttribute("apellidoMElla", apellidoMElla);
+        session.setAttribute("paisNacElla", paisNacElla);
+        session.setAttribute("depNacElla", depNacElla);
+        session.setAttribute("proNacElla", proNacElla);
+        session.setAttribute("fechaNacElla", fechaNacElla);
+        session.setAttribute("edadElla", edadElla);
+        session.setAttribute("docElla", docElla);
+        session.setAttribute("numDocElla",numDocElla);
+        session.setAttribute("profesionElla", profesionElla);
+        session.setAttribute("celElla",celElla);
+        session.setAttribute("correoElla",correoElla);
+        session.setAttribute("pais",pais);
+        session.setAttribute("dep",dep);
+        session.setAttribute("prov",prov);
+        session.setAttribute("dist",dist);
+        session.setAttribute("dir",dir);
+        session.setAttribute("telf",telf);
+        session.setAttribute("estado",estado);
+        session.setAttribute("turno",turno);
+
+        return new ModelAndView("redirect:/inscSesGrp", map);
+    }
+    
+    @RequestMapping(value = "/inscSesGrp", method = RequestMethod.GET)
+    public ModelAndView inscSesGrp(ModelMap map,
+            HttpSession session
+    ) {
+        long turno = 0;
+        String estado = "";
+        String nombreEl = "";
+        String apellidoPEl = "";
+        String apellidoMEl = "";
+        String paisNacEl = "";
+        String depNacEl = "";
+        String proNacEl = "";
+        String fechaNacEl = "";
+        String edadEl = "";
+        String docEl = "";
+        String numDocEl = "";
+        String profesionEl = "";
+        String celEl = "";
+        String correoEl = "";
+        String nombreElla = "";
+        String apellidoPElla = "";
+        String apellidoMElla = "";
+        String paisNacElla = "";
+        String depNacElla = "";
+        String proNacElla = "";
+        String fechaNacElla = "";
+        String edadElla = "";
+        String docElla = "";
+        String numDocElla = "";
+        String profesionElla = "";
+        String celElla = "";
+        String correoElla = "";
+        String pais = "";
+        String dep = "";
+        String prov = "";
+        String dist = "";
+        String dir = "";
+        String telf = "";
+        try {
+            turno = (long) session.getAttribute("turno");
+            estado = session.getAttribute("estado").toString();
+            nombreEl = session.getAttribute("nombreEl").toString();
+            apellidoPEl = session.getAttribute("apellidoPEl").toString();
+            apellidoMEl = session.getAttribute("apellidoMEl").toString();
+            paisNacEl = session.getAttribute("paisNacEl").toString();
+            depNacEl = session.getAttribute("depNacEl").toString();
+            proNacEl = session.getAttribute("proNacEl").toString();
+            fechaNacEl = session.getAttribute("fechaNacEl").toString();
+            edadEl = session.getAttribute("edadEl").toString();
+            docEl = session.getAttribute("docEl").toString();
+            numDocEl = session.getAttribute("numDocEl").toString();
+            profesionEl = session.getAttribute("profesionEl").toString();
+            celEl = session.getAttribute("celEl").toString();
+            correoEl = session.getAttribute("correoEl").toString();
+            nombreElla = session.getAttribute("nombreElla").toString();
+            apellidoPElla = session.getAttribute("apellidoPElla").toString();
+            apellidoMElla = session.getAttribute("apellidoMElla").toString();
+            paisNacElla = session.getAttribute("paisNacElla").toString();
+            depNacElla = session.getAttribute("depNacElla").toString();
+            proNacElla = session.getAttribute("proNacElla").toString();
+            fechaNacElla = session.getAttribute("fechaNacElla").toString();
+            edadElla = session.getAttribute("edadElla").toString();
+            docElla = session.getAttribute("docElla").toString();
+            numDocElla = session.getAttribute("numDocElla").toString();
+            profesionElla = session.getAttribute("profesionElla").toString();
+            celElla = session.getAttribute("celElla").toString();
+            correoElla = session.getAttribute("correoElla").toString();
+            pais = session.getAttribute("pais").toString();
+            dep = session.getAttribute("dep").toString();
+            prov = session.getAttribute("prov").toString();
+            dist = session.getAttribute("dist").toString();
+            dir = session.getAttribute("dir").toString();
+            telf = session.getAttribute("telf").toString();
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/", map);
+        }
+        session.removeAttribute("estado");
+        session.removeAttribute("turno");
+        session.removeAttribute("nombreEl");
+        session.removeAttribute("apellidoPEl");
+        session.removeAttribute("apellidoMEl");
+        session.removeAttribute("paisNacEl");
+        session.removeAttribute("depNacEl");
+        session.removeAttribute("proNacEl");
+        session.removeAttribute("fechaNacEl");
+        session.removeAttribute("edadEl");
+        session.removeAttribute("docEl");
+        session.removeAttribute("numDocEl");
+        session.removeAttribute("profesionEl");
+        session.removeAttribute("celEl");
+        session.removeAttribute("correoEl");
+        session.removeAttribute("nombreElla");
+        session.removeAttribute("apellidoPElla");
+        session.removeAttribute("apellidoMElla");
+        session.removeAttribute("paisNacElla");
+        session.removeAttribute("depNacElla");
+        session.removeAttribute("proNacElla");
+        session.removeAttribute("fechaNacElla");
+        session.removeAttribute("edadElla");
+        session.removeAttribute("docElla");
+        session.removeAttribute("numDocElla");
+        session.removeAttribute("profesionElla");
+        session.removeAttribute("celElla");
+        session.removeAttribute("correoElla");
+        session.removeAttribute("pais");
+        session.removeAttribute("dep");
+        session.removeAttribute("prov");
+        session.removeAttribute("dist");
+        session.removeAttribute("dir");
+        session.removeAttribute("telf");
 
         String m = "m";
         String f = "f";
@@ -549,6 +797,7 @@ public class main {
      * ESTA SECCION ES USADA PARA ACTUALIZAR LOS DATOS DE LA FAMILIA POR PARTE
      * DEL PERSONAL*
      */
+    
     @RequestMapping(value = "/IrPersonalFamilia", method = RequestMethod.POST)
     public ModelAndView IrPersonalFamilia(ModelMap map, HttpSession session,
             @RequestParam(value = "estado", required = false) String estado,
@@ -557,6 +806,8 @@ public class main {
             @RequestParam(value = "volver", required = false) String volver,
             @RequestParam(value = "idNna", required = false) Long idNna
     ) {
+        
+        
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -744,6 +995,202 @@ public class main {
 
         return new ModelAndView("/Personal/familia/info_ella", map);
     }
+    
+//    @RequestMapping(value = "/IrPersonalFamilia", method = RequestMethod.GET)
+//    public ModelAndView IrPersonalFamilia(ModelMap map, HttpSession session,
+//            @RequestParam(value = "estado", required = false) String estado,
+//            @RequestParam(value = "idFamilia", required = false) String idFamilia,
+//            @RequestParam(value = "idExpediente", required = false) String idExpediente,
+//            @RequestParam(value = "volver", required = false) String volver,
+//            @RequestParam(value = "idNna", required = false) Long idNna
+//    ) {
+//        Personal usuario = (Personal) session.getAttribute("usuario");
+//        if (usuario == null) {
+//            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+//            map.addAttribute("mensaje", mensaje);
+//            return new ModelAndView("login", map);
+//        }
+//
+//        if (estado.equals("formativa")) {
+//            Long idFam = Long.parseLong(idFamilia);
+//            infoFam = ServicioMain.getInfoFamPorIdFamilia(idFam);
+//            for (Adoptante adop : infoFam.getAdoptantes()) {
+//                if (adop.getSexo() == 'f') {
+//                    Ella = adop;
+//                }
+//                if (adop.getSexo() == 'm') {
+//                    El = adop;
+//                }
+//            }
+//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(idFam);
+//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(idFam);
+//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(idFam);
+//        } else if (estado.equals("evaluacion")) {
+//            Long idExp = Long.parseLong(idExpediente);
+//            System.out.print(estado);
+//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+//            expediente = tempExp;
+//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+//            for (Adoptante adop : infoFam.getAdoptantes()) {
+//                if (adop.getSexo() == 'f') {
+//                    Ella = adop;
+//                }
+//                if (adop.getSexo() == 'm') {
+//                    El = adop;
+//                }
+//            }
+//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//
+//        } else if (estado.equals("espera")) {
+//            Long idExp = Long.parseLong(idExpediente);
+//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+//            expediente = tempExp;
+//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+//            for (Adoptante adop : infoFam.getAdoptantes()) {
+//                if (adop.getSexo() == 'f') {
+//                    Ella = adop;
+//                }
+//                if (adop.getSexo() == 'm') {
+//                    El = adop;
+//                }
+//            }
+//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+//
+//        } else if (estado.equals("esperainter")) {
+//            Long idExp = Long.parseLong(idExpediente);
+//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+//            expediente = tempExp;
+//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+//            for (Adoptante adop : infoFam.getAdoptantes()) {
+//                if (adop.getSexo() == 'f') {
+//                    Ella = adop;
+//                }
+//                if (adop.getSexo() == 'm') {
+//                    El = adop;
+//                }
+//            }
+//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//            listaDesignaciones = ServicioMain.getListaNnaAdoptantesAdopcion(tempExp.getIdexpedienteFamilia());
+//            //listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+//
+//        } else if (estado.equals("designacion")) {
+//            Long idExp = Long.parseLong(idExpediente);
+//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+//            expediente = tempExp;
+//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+//            for (Adoptante adop : infoFam.getAdoptantes()) {
+//                if (adop.getSexo() == 'f') {
+//                    Ella = adop;
+//                }
+//                if (adop.getSexo() == 'm') {
+//                    El = adop;
+//                }
+//            }
+//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+//        } else if (estado.equals("adopcion")) {
+//            Long idExp = Long.parseLong(idExpediente);
+//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+//            expediente = tempExp;
+//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+//            for (Adoptante adop : infoFam.getAdoptantes()) {
+//                if (adop.getSexo() == 'f') {
+//                    Ella = adop;
+//                }
+//                if (adop.getSexo() == 'm') {
+//                    El = adop;
+//                }
+//            }
+//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+//        } else if (estado.equals("reevaluacion")) {
+//            Long idExp = Long.parseLong(idExpediente);
+//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+//            expediente = tempExp;
+//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+//            for (Adoptante adop : infoFam.getAdoptantes()) {
+//                if (adop.getSexo() == 'f') {
+//                    Ella = adop;
+//                }
+//                if (adop.getSexo() == 'm') {
+//                    El = adop;
+//                }
+//            }
+//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+//
+//        } else if (estado.equals("post")) {
+//            Long idExp = Long.parseLong(idExpediente);
+//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
+//            expediente = tempExp;
+//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+//            for (Adoptante adop : infoFam.getAdoptantes()) {
+//                if (adop.getSexo() == 'f') {
+//                    Ella = adop;
+//                }
+//                if (adop.getSexo() == 'm') {
+//                    El = adop;
+//                }
+//            }
+//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
+//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
+//            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+//            //nnaAdoptado = ServicioNna.getNnaPostAdopcion(idNna);
+//            //expNna = nnaAdoptado.getExpedienteNnas().iterator().next();
+//            listaNnaAdoptados.clear();
+//            for (Designacion tempDesig : listaDesignaciones) {
+//                if (tempDesig.getAceptacionConsejo() == 2) {
+//                    listaNnaAdoptados.add(tempDesig.getNna());
+//                }
+//            }
+//
+//            /*
+//             for (Designacion desig : listaDesignaciones) {
+//             if(desig.getAceptacionConsejo() == 2){
+//             nnaAdoptado = desig.getNna();
+//             expNna = desig.getNna().getExpedienteNnas().iterator().next();
+//             }
+//             }
+//             */
+//        }
+//
+//        etapaOrigen = estado;
+//
+//        map.put("df", df);
+//        map.put("infoFam", infoFam);
+//        map.put("estado", etapaOrigen);
+//        map.put("expediente", expediente);
+//        map.put("Ella", Ella);
+//        map.addAttribute("volver", volver);
+//
+//        return new ModelAndView("/Personal/familia/info_ella", map);
+//    }
 
     @RequestMapping(value = "/IrPersonalFamilia2", method = RequestMethod.POST)
     public ModelAndView IrPersonalFamilia2(ModelMap map, HttpSession session,
