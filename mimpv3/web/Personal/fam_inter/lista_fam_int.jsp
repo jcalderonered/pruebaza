@@ -247,7 +247,7 @@
                         </script>   
                         <div class="control-group">
                             <div class="controls">
-                                <form role="form" action="${pageContext.servletContext.contextPath}/AgregarFamInt" method="post">
+                                <form role="form" action="${pageContext.servletContext.contextPath}/AgregarFamInt" method="get">
                                 <button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar</button>
                                 </form>
                             </div>
