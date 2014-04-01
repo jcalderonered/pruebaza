@@ -89,7 +89,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -183,6 +183,7 @@
                                 <button ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Guardar Cambios</button>
                             </form>
                             <br>
+                            <h3><strong>${mensaje}</strong></h3>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead>
@@ -192,6 +193,7 @@
                                             <th>Fin Inscripción</th>
                                             <th>Vacantes</th>
                                             <th>Modificar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -207,6 +209,13 @@
                                                         <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
                                                         <input hidden name="index" id="index" value="${status.index + 1}">
                                                         <button ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Modificar</button>
+                                                    </form>    
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/PersonalEliminarTurno" method="post">
+                                                        <input hidden name="idTurno" id="idTurno" value="${turno.getIdturno()}">
+                                                        <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                        <button ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Eliminar</button>
                                                     </form>    
                                                 </td>
                                             </tr>

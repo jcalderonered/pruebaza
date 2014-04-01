@@ -106,7 +106,7 @@
                         <p>- Llevar DNI</p>
                         <p>- En caso de parejas casadas, ambos deben asistir a la reunión</p>
                         <p>- No se aceptará el ingreso de personas pasada la hora de inicio de la Reunión. Ser puntuales.</p>
-                        <p>- No se aceptará el ingreso de acompañantes. Sólo de las personas inscritas a la Reunión.</p>
+                        <p>- Se dará 15 minutos para el Registro de Asistencia. No se aceptará el ingreso de acompañantes. Sólo de las personas inscritas a la Reunión.</p>
                         </c:if>
                         <c:if test="${mensaje == 'negativo'}">
                             <h1 align="center"><strong>Inscripción No Exitosa</strong></h1>

@@ -178,10 +178,11 @@
                                 </div>
                                 <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar cambios</button>
                             </form>
-
                             <br>
                             <h1>Listado de Grupos</h1>
                             <br>
+                            <h3><strong>${mensaje}</strong></h3>
+                            <br>                            
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -189,6 +190,7 @@
                                         <th>Grupo</th>
                                         <th>N° de Turnos Habilitados</th>
                                         <th>Edicion</th>
+                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -203,6 +205,13 @@
                                                         <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
                                                         <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
                                                         <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Modificar</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/PersonalEliminarGrupo" method="post">
+                                                        <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}">
+                                                        <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">
+                                                        <button ${taller.getHabilitado() == 0 ? 'disabled' : ''} type="submit" class="btn btn-default">Eliminar</button>
                                                     </form>
                                                 </td>
                                             </tr>   

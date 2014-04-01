@@ -573,8 +573,9 @@ public class HiberMain {
         final String uaN = ua;
         ArrayList<Taller> allTalleres = new ArrayList();
 
-        String hql = "FROM Taller T where T.unidad = :ua order by T.idtaller ASC";
+        String hql = "FROM Taller T where T.tipoTaller = :tipo and T.unidad = :ua order by T.idtaller ASC";
         Query query = session.createQuery(hql);
+        query.setString("tipo", "preparacion");
         query.setString("ua", ua);
         List talleres = query.list();
         for (Iterator iter1 = talleres.iterator(); iter1.hasNext();) {
