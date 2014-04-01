@@ -409,13 +409,30 @@ public class personal {
     }
 
     @RequestMapping(value = "/irEditarAut2", method = RequestMethod.POST)
-    public ModelAndView IrEditarAut2(ModelMap map, @RequestParam("id") int id, HttpSession session) {
+    public ModelAndView IrEditarAut2_POST(ModelMap map, @RequestParam("id") int id, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("id", id);
+
+        return new ModelAndView("redirect:/irEditarAut2", map);
+    }
+
+    @RequestMapping(value = "/irEditarAut2", method = RequestMethod.GET)
+    public ModelAndView IrEditarAut2_GET(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        int id = (int) session.getAttribute("id");
+
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
         Autoridad temp = new Autoridad();
@@ -443,7 +460,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/editAut", method = RequestMethod.POST)
-    public ModelAndView EditarAut(ModelMap map,
+    public ModelAndView EditarAut_POST(ModelMap map,
             @RequestParam("nombre") String nombre,
             @RequestParam("tipo") String tipo,
             @RequestParam("pais") String pais,
@@ -465,101 +482,156 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        Autoridad aut = new Autoridad();
-        Entidad ent = new Entidad();
 
-        ent.setNombre(nombre);
-        ent.setDireccion(direccion);
-        ent.setTelefono(telefono);
-        ent.setPais(pais);
-        ent.setResolAuto(resol_aut);
-        Date tempfecha = ent.getFechaResol();
-        if (fecha_emis_resol != null) {
-            if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
-                    || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
-                    || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
-                ent.setFechaResol(tempfecha);
-            } else {
-                if (!fecha_emis_resol.equals("")) {
-                    ent.setFechaResol(format.stringToDate(fecha_emis_resol));
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("tipo", tipo);
+        session.setAttribute("pais", pais);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("telefono", telefono);
+        session.setAttribute("user", user);
+        session.setAttribute("pass", pass);
+        session.setAttribute("correo", correo);
+        session.setAttribute("resol_aut", resol_aut);
+        session.setAttribute("fecha_emis_resol", fecha_emis_resol);
+        session.setAttribute("resol_renov", resol_renov);
+        session.setAttribute("fecha_renov", fecha_renov);
+        session.setAttribute("fecha_venc_aut", fecha_venc_aut);
+        session.setAttribute("obs", obs);
+
+        return new ModelAndView("redirect:/editAut", map);
+    }
+
+    @RequestMapping(value = "/editAut", method = RequestMethod.GET)
+    public ModelAndView EditarAut_GET(ModelMap map,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        if (session.getAttribute("nombre") != null) {
+
+            String nombre = (String) session.getAttribute("nombre");
+            String tipo = (String) session.getAttribute("tipo");
+            String pais = (String) session.getAttribute("pais");
+            String direccion = (String) session.getAttribute("direccion");
+            String telefono = (String) session.getAttribute("telefono");
+            String user = (String) session.getAttribute("user");
+            String pass = (String) session.getAttribute("pass");
+            String correo = (String) session.getAttribute("correo");
+            String resol_aut = (String) session.getAttribute("resol_aut");
+            String fecha_emis_resol = (String) session.getAttribute("fecha_emis_resol");
+            String resol_renov = (String) session.getAttribute("resol_renov");
+            String fecha_renov = (String) session.getAttribute("fecha_renov");
+            String fecha_venc_aut = (String) session.getAttribute("fecha_venc_aut");
+            String obs = (String) session.getAttribute("obs");
+
+            Autoridad aut = new Autoridad();
+            Entidad ent = new Entidad();
+
+            ent.setNombre(nombre);
+            ent.setDireccion(direccion);
+            ent.setTelefono(telefono);
+            ent.setPais(pais);
+            ent.setResolAuto(resol_aut);
+            Date tempfecha = ent.getFechaResol();
+            if (fecha_emis_resol != null) {
+                if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
+                        || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
+                        || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
+                    ent.setFechaResol(tempfecha);
                 } else {
-                    ent.setFechaResol(null);
+                    if (!fecha_emis_resol.equals("")) {
+                        ent.setFechaResol(format.stringToDate(fecha_emis_resol));
+                    } else {
+                        ent.setFechaResol(null);
+                    }
                 }
-            }
-        } else {
-            ent.setFechaResol(null);
-        }
-        ent.setResolRenov(resol_renov);
-        tempfecha = ent.getFechaRenov();
-        if (fecha_renov != null) {
-            if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
-                    || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
-                    || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
-                ent.setFechaRenov(tempfecha);
             } else {
-                if (!fecha_renov.equals("")) {
-                    ent.setFechaRenov(format.stringToDate(fecha_renov));
-                } else {
-                    ent.setFechaRenov(null);
-                }
+                ent.setFechaResol(null);
             }
-        } else {
-            ent.setFechaRenov(null);
-        }
-        tempfecha = ent.getFechaVenc();
-        if (fecha_venc_aut != null) {
-            if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
-                    || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
-                    || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
-                ent.setFechaVenc(tempfecha);
+            ent.setResolRenov(resol_renov);
+            tempfecha = ent.getFechaRenov();
+            if (fecha_renov != null) {
+                if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
+                        || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
+                        || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
+                    ent.setFechaRenov(tempfecha);
+                } else {
+                    if (!fecha_renov.equals("")) {
+                        ent.setFechaRenov(format.stringToDate(fecha_renov));
+                    } else {
+                        ent.setFechaRenov(null);
+                    }
+                }
             } else {
-                if (!fecha_venc_aut.equals("")) {
-                    ent.setFechaVenc(format.stringToDate(fecha_venc_aut));
-                } else {
-                    ent.setFechaVenc(null);
-                }
+                ent.setFechaRenov(null);
             }
+            tempfecha = ent.getFechaVenc();
+            if (fecha_venc_aut != null) {
+                if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
+                        || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
+                        || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
+                    ent.setFechaVenc(tempfecha);
+                } else {
+                    if (!fecha_venc_aut.equals("")) {
+                        ent.setFechaVenc(format.stringToDate(fecha_venc_aut));
+                    } else {
+                        ent.setFechaVenc(null);
+                    }
+                }
+            } else {
+                ent.setFechaVenc(null);
+            }
+            ent.setObs(obs);
+            ent.setUser(user);
+            ent.setCorreo(correo);
+            if (!pass.equals("")) {
+                pass = DigestUtils.sha512Hex(pass);
+                ent.setPass(pass);
+            }
+            aut.setTipo(tipo);
+
+            if (ServicioPersonal.usuario(ent.getUser())) {
+
+                String mensaje_error = "El nombre de usuario ya existe en la base de datos. Por favor, ingresar nuevamente";
+
+                map.put("listaOrganismos", ServicioPersonal.ListaAutoridades());
+                map.put("mensaje", mensaje_error);
+                return new ModelAndView("/Personal/registros/autoridad/editar_aut", map);
+            }
+
+            ServicioPersonal.InsertAut(ent, aut);
+
+            String mensaje_log = "Se creó la autoridad con nombre: " + ent.getNombre()
+                    + " con ID: " + aut.getIdautoridad();
+
+            String Tipo_registro = "Autoridad";
+
+            try {
+                String Numero_registro = String.valueOf(aut.getIdautoridad());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+
+            session.removeAttribute("nombre");
+
         } else {
-            ent.setFechaVenc(null);
-        }
-        ent.setObs(obs);
-        ent.setUser(user);
-        ent.setCorreo(correo);
-        if (!pass.equals("")) {
-            pass = DigestUtils.sha512Hex(pass);
-            ent.setPass(pass);
-        }
-        aut.setTipo(tipo);
 
-        if (ServicioPersonal.usuario(ent.getUser())) {
+            return new ModelAndView("redirect:/autoridad", map);
 
-            String mensaje_error = "El nombre de usuario ya existe en la base de datos. Por favor, ingresar nuevamente";
-
-            map.put("listaOrganismos", ServicioPersonal.ListaAutoridades());
-            map.put("mensaje", mensaje_error);
-            return new ModelAndView("/Personal/registros/autoridad/editar_aut", map);
         }
 
-        ServicioPersonal.InsertAut(ent, aut);
-
-        String mensaje_log = "Se creó la autoridad con nombre: " + ent.getNombre()
-                + " con ID: " + aut.getIdautoridad();
-
-        String Tipo_registro = "Autoridad";
-
-        try {
-            String Numero_registro = String.valueOf(aut.getIdautoridad());;
-
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
-        }
-
-        map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
         return new ModelAndView("/Personal/registros/autoridad/lista_aut", map);
     }
 
     @RequestMapping(value = "/updateAut", method = RequestMethod.POST)
-    public ModelAndView UpdateAut(ModelMap map,
+    public ModelAndView UpdateAut_POST(ModelMap map,
             @RequestParam("id") long id,
             @RequestParam("nombre") String nombre,
             @RequestParam("tipo") String tipo,
@@ -580,90 +652,143 @@ public class personal {
         if (usuario == null) {
             return new ModelAndView("login", map);
         }
-        Autoridad temp = new Autoridad();
-        temp = ServicioPersonal.getAutoridad(id);
-        temp.setTipo(tipo);
 
-        temp.getEntidad().setNombre(nombre);
-        temp.getEntidad().setPais(pais);
-        temp.getEntidad().setUser(user);
-        if (!pass.equals("")) {
-            pass = DigestUtils.sha512Hex(pass);
-            temp.getEntidad().setPass(pass);
+        session.setAttribute("id", id);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("tipo", tipo);
+        session.setAttribute("pais", pais);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("telefono", telefono);
+        session.setAttribute("user", user);
+        session.setAttribute("pass", pass);
+        session.setAttribute("resol_aut", resol_aut);
+        session.setAttribute("fecha_emis_resol", fecha_emis_resol);
+        session.setAttribute("resol_renov", resol_renov);
+        session.setAttribute("fecha_renov", fecha_renov);
+        session.setAttribute("fecha_venc_aut", fecha_venc_aut);
+        session.setAttribute("obs", obs);
+
+        return new ModelAndView("redirect:/updateAut", map);
+    }
+
+    @RequestMapping(value = "/updateAut", method = RequestMethod.GET)
+    public ModelAndView UpdateAut_GET(ModelMap map,
+            HttpSession session) {
+
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            return new ModelAndView("login", map);
         }
-        temp.getEntidad().setDireccion(direccion);
-        temp.getEntidad().setTelefono(telefono);
-        temp.getEntidad().setResolAuto(resol_aut);
-        Date tempfecha = temp.getEntidad().getFechaResol();
-        if (fecha_emis_resol != null) {
-            if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
-                    || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
-                    || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
-                temp.getEntidad().setFechaResol(tempfecha);
-            } else {
-                if (!fecha_emis_resol.equals("")) {
-                    temp.getEntidad().setFechaResol(format.stringToDate(fecha_emis_resol));
-                } else {
-                    temp.getEntidad().setFechaResol(null);
-                }
+
+        if (session.getAttribute("nombre") != null) {
+
+            long id = (long) session.getAttribute("id");
+            String nombre = (String) session.getAttribute("nombre");
+            String tipo = (String) session.getAttribute("tipo");
+            String pais = (String) session.getAttribute("pais");
+            String direccion = (String) session.getAttribute("direccion");
+            String telefono = (String) session.getAttribute("telefono");
+            String user = (String) session.getAttribute("user");
+            String pass = (String) session.getAttribute("pass");
+            String resol_aut = (String) session.getAttribute("resol_aut");
+            String fecha_emis_resol = (String) session.getAttribute("fecha_emis_resol");
+            String resol_renov = (String) session.getAttribute("resol_renov");
+            String fecha_renov = (String) session.getAttribute("fecha_renov");
+            String fecha_venc_aut = (String) session.getAttribute("fecha_venc_aut");
+            String obs = (String) session.getAttribute("obs");
+
+            Autoridad temp = new Autoridad();
+            temp = ServicioPersonal.getAutoridad(id);
+            temp.setTipo(tipo);
+
+            temp.getEntidad().setNombre(nombre);
+            temp.getEntidad().setPais(pais);
+            temp.getEntidad().setUser(user);
+            if (!pass.equals("")) {
+                pass = DigestUtils.sha512Hex(pass);
+                temp.getEntidad().setPass(pass);
             }
-        } else {
-            temp.getEntidad().setFechaResol(null);
-        }
-        temp.getEntidad().setFechaResol(format.stringToDate(fecha_emis_resol));
-        temp.getEntidad().setResolRenov(resol_renov);
-        tempfecha = temp.getEntidad().getFechaRenov();
-        if (fecha_renov != null) {
-            if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
-                    || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
-                    || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
-                temp.getEntidad().setFechaRenov(tempfecha);
-            } else {
-                if (!fecha_renov.equals("")) {
-                    temp.getEntidad().setFechaRenov(format.stringToDate(fecha_renov));
+            temp.getEntidad().setDireccion(direccion);
+            temp.getEntidad().setTelefono(telefono);
+            temp.getEntidad().setResolAuto(resol_aut);
+            Date tempfecha = temp.getEntidad().getFechaResol();
+            if (fecha_emis_resol != null) {
+                if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
+                        || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
+                        || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
+                    temp.getEntidad().setFechaResol(tempfecha);
                 } else {
-                    temp.getEntidad().setFechaRenov(null);
+                    if (!fecha_emis_resol.equals("")) {
+                        temp.getEntidad().setFechaResol(format.stringToDate(fecha_emis_resol));
+                    } else {
+                        temp.getEntidad().setFechaResol(null);
+                    }
                 }
-            }
-        } else {
-            temp.getEntidad().setFechaRenov(null);
-        }
-        tempfecha = temp.getEntidad().getFechaVenc();
-        if (fecha_venc_aut != null) {
-            if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
-                    || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
-                    || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
-                temp.getEntidad().setFechaVenc(tempfecha);
             } else {
-                if (!fecha_venc_aut.equals("")) {
-                    temp.getEntidad().setFechaVenc(format.stringToDate(fecha_venc_aut));
-                } else {
-                    temp.getEntidad().setFechaVenc(null);
-                }
+                temp.getEntidad().setFechaResol(null);
             }
+            temp.getEntidad().setFechaResol(format.stringToDate(fecha_emis_resol));
+            temp.getEntidad().setResolRenov(resol_renov);
+            tempfecha = temp.getEntidad().getFechaRenov();
+            if (fecha_renov != null) {
+                if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
+                        || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
+                        || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
+                    temp.getEntidad().setFechaRenov(tempfecha);
+                } else {
+                    if (!fecha_renov.equals("")) {
+                        temp.getEntidad().setFechaRenov(format.stringToDate(fecha_renov));
+                    } else {
+                        temp.getEntidad().setFechaRenov(null);
+                    }
+                }
+            } else {
+                temp.getEntidad().setFechaRenov(null);
+            }
+            tempfecha = temp.getEntidad().getFechaVenc();
+            if (fecha_venc_aut != null) {
+                if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
+                        || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
+                        || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
+                    temp.getEntidad().setFechaVenc(tempfecha);
+                } else {
+                    if (!fecha_venc_aut.equals("")) {
+                        temp.getEntidad().setFechaVenc(format.stringToDate(fecha_venc_aut));
+                    } else {
+                        temp.getEntidad().setFechaVenc(null);
+                    }
+                }
+            } else {
+                temp.getEntidad().setFechaVenc(null);
+            }
+            temp.getEntidad().setObs(obs);
+            ServicioPersonal.UpdateAut(temp.getEntidad(), temp);
+
+            String mensaje_log = "Se editó la Autoridad con nombre: " + temp.getEntidad().getNombre()
+                    + " con ID: " + ServicioPersonal.getAutoridad(temp.getIdautoridad()).getIdautoridad();
+
+            String Tipo_registro = "Autoridad";
+
+            try {
+                String Numero_registro = String.valueOf(ServicioPersonal.getAutoridad(temp.getIdautoridad()).getIdautoridad());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+
+            session.removeAttribute("nombre");
+
         } else {
-            temp.getEntidad().setFechaVenc(null);
-        }
-        temp.getEntidad().setObs(obs);
-        ServicioPersonal.UpdateAut(temp.getEntidad(), temp);
 
-        String mensaje_log = "Se editó la Autoridad con nombre: " + temp.getEntidad().getNombre()
-                + " con ID: " + ServicioPersonal.getAutoridad(temp.getIdautoridad()).getIdautoridad();
-
-        String Tipo_registro = "Autoridad";
-
-        try {
-            String Numero_registro = String.valueOf(ServicioPersonal.getAutoridad(temp.getIdautoridad()).getIdautoridad());;
-
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
+            return new ModelAndView("redirect:/autoridad", map);
         }
 
-        map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
         return new ModelAndView("/Personal/registros/autoridad/lista_aut", map);
     }
-    /////////////////////////////////////////////////////////////////////////////////
 
+    /////////////////////////////////////////////////////////////////////////////////
     ////////////////////// REGISTRAR/EDITAR ORGANISMO ////////////////////////////////////
     @RequestMapping(value = "/irEditarOrg", method = RequestMethod.GET)
     public ModelAndView IrEditarOrg(ModelMap map, HttpSession session) {
@@ -677,13 +802,30 @@ public class personal {
     }
 
     @RequestMapping(value = "/irEditarOrg2", method = RequestMethod.POST)
-    public ModelAndView IrEditarOrg2(ModelMap map, @RequestParam("id") int id, HttpSession session) {
+    public ModelAndView IrEditarOrg2_POST(ModelMap map, @RequestParam("id") int id, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("id", id);
+
+        return new ModelAndView("redirect:/irEditarOrg2", map);
+    }
+
+    @RequestMapping(value = "/irEditarOrg2", method = RequestMethod.GET)
+    public ModelAndView IrEditarOrg2_GET(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        int id = (int) session.getAttribute("id");
+
         Organismo temp = new Organismo();
         temp = ServicioPersonal.getOrganismo(id);
 
@@ -732,7 +874,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/editOrg", method = RequestMethod.POST)
-    public ModelAndView EditarOrg(ModelMap map,
+    public ModelAndView EditarOrg_POST(ModelMap map,
             //datos a ingresar en entidad
             @RequestParam("nombre") String nombre,
             @RequestParam("direccion") String direccion,
@@ -768,158 +910,229 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        Organismo org = new Organismo();
-        Representante rep = new Representante();
-        Entidad ent = new Entidad();
 
-        org.setCompetencia(competencia);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("telefono", telefono);
+        session.setAttribute("pais", pais);
+        session.setAttribute("resol_aut", resol_aut);
+        session.setAttribute("fecha_emis_resol", fecha_emis_resol);
+        session.setAttribute("resol_renov", resol_renov);
+        session.setAttribute("fecha_renov", fecha_renov);
+        session.setAttribute("fecha_venc_aut", fecha_venc_aut);
+        session.setAttribute("obs", obs);
+        session.setAttribute("competencia", competencia);
+        session.setAttribute("nombreR", nombreR);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("user", user);
+        session.setAttribute("pass", pass);
+        session.setAttribute("fechaAutR", fechaAutR);
+        session.setAttribute("fechaRenovR", fechaRenovR);
+        session.setAttribute("fechaVencR", fechaVencR);
+        session.setAttribute("correo", correo);
+        session.setAttribute("celular", celular);
+        session.setAttribute("direccionR", direccionR);
+        session.setAttribute("obsR", obsR);
 
-        rep.setNombre(nombreR);
-        rep.setApellidoP(apellidoP);
-        rep.setApelldoM(apellidoM);
-        Date tempfecha = rep.getFechaAuto();
-        if (fechaAutR != null) {
-            if (fechaAutR.contains("ene") || fechaAutR.contains("feb") || fechaAutR.contains("mar") || fechaAutR.contains("abr")
-                    || fechaAutR.contains("may") || fechaAutR.contains("jun") || fechaAutR.contains("jul") || fechaAutR.contains("ago")
-                    || fechaAutR.contains("set") || fechaAutR.contains("oct") || fechaAutR.contains("nov") || fechaAutR.contains("dic")) {
-                rep.setFechaAuto(tempfecha);
-            } else {
-                if (!fechaAutR.equals("")) {
-                    rep.setFechaAuto(format.stringToDate(fechaAutR));
-                } else {
-                    rep.setFechaAuto(null);
-                }
-            }
-        } else {
-            rep.setFechaAuto(null);
-        }
-        tempfecha = rep.getFechaRenov();
-        if (fechaRenovR != null) {
-            if (fechaRenovR.contains("ene") || fechaRenovR.contains("feb") || fechaRenovR.contains("mar") || fechaRenovR.contains("abr")
-                    || fechaRenovR.contains("may") || fechaRenovR.contains("jun") || fechaRenovR.contains("jul") || fechaRenovR.contains("ago")
-                    || fechaRenovR.contains("set") || fechaRenovR.contains("oct") || fechaRenovR.contains("nov") || fechaRenovR.contains("dic")) {
-                rep.setFechaRenov(tempfecha);
-            } else {
-                if (!fechaAutR.equals("")) {
-                    rep.setFechaRenov(format.stringToDate(fechaRenovR));
-                } else {
-                    rep.setFechaRenov(null);
-                }
-            }
-        } else {
-            rep.setFechaRenov(null);
-        }
-        tempfecha = rep.getFechaVencAuto();
-        if (fechaAutR != null) {
-            if (fechaVencR.contains("ene") || fechaVencR.contains("feb") || fechaVencR.contains("mar") || fechaVencR.contains("abr")
-                    || fechaVencR.contains("may") || fechaVencR.contains("jun") || fechaVencR.contains("jul") || fechaVencR.contains("ago")
-                    || fechaVencR.contains("set") || fechaVencR.contains("oct") || fechaVencR.contains("nov") || fechaVencR.contains("dic")) {
-                rep.setFechaVencAuto(tempfecha);
-            } else {
-                if (!fechaAutR.equals("")) {
-                    rep.setFechaVencAuto(format.stringToDate(fechaVencR));
-                } else {
-                    rep.setFechaVencAuto(null);
-                }
-            }
-        } else {
-            rep.setFechaVencAuto(null);
-        }
-        rep.setCorreo(correo);
-        rep.setDireccion(direccionR);
-        rep.setCelular(celular);
-        rep.setObs(obsR);
+        return new ModelAndView("redirect:/editOrg", map);
+    }
 
-        ent.setNombre(nombre);
-        ent.setDireccion(direccion);
-        ent.setTelefono(telefono);
-        ent.setPais(pais);
-        ent.setUser(user);
-        if (!pass.equals("")) {
-            pass = DigestUtils.sha512Hex(pass);
-            ent.setPass(pass);
-        }
-        ent.setResolAuto(resol_aut);
-        tempfecha = ent.getFechaResol();
-        if (fecha_emis_resol != null) {
-            if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
-                    || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
-                    || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
-                ent.setFechaResol(tempfecha);
-            } else {
-                if (!fecha_emis_resol.equals("")) {
-                    ent.setFechaResol(format.stringToDate(fecha_emis_resol));
-                } else {
-                    ent.setFechaResol(null);
-                }
-            }
-        } else {
-            ent.setFechaResol(null);
-        }
-        ent.setResolRenov(resol_renov);
-        tempfecha = ent.getFechaRenov();
-        if (fecha_renov != null) {
-            if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
-                    || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
-                    || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
-                ent.setFechaRenov(tempfecha);
-            } else {
-                if (!fecha_renov.equals("")) {
-                    ent.setFechaRenov(format.stringToDate(fecha_renov));
-                } else {
-                    ent.setFechaRenov(null);
-                }
-            }
-        } else {
-            ent.setFechaRenov(null);
-        }
-        tempfecha = ent.getFechaVenc();
-        if (fecha_venc_aut != null) {
-            if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
-                    || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
-                    || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
-                ent.setFechaVenc(tempfecha);
-            } else {
-                if (!fecha_venc_aut.equals("")) {
-                    ent.setFechaVenc(format.stringToDate(fecha_venc_aut));
-                } else {
-                    ent.setFechaVenc(null);
-                }
-            }
-        } else {
-            ent.setFechaVenc(null);
-        }
-        ent.setObs(obs);
+    @RequestMapping(value = "/editOrg", method = RequestMethod.GET)
+    public ModelAndView EditarOrg_GET(ModelMap map,
+            HttpSession session
+    ) {
 
-        if (ServicioPersonal.usuario(ent.getUser())) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
 
-            String mensaje_error = "El nombre de usuario ya existe en la base de datos. Por favor, ingresar nuevamente";
+        if (session.getAttribute("nombre") != null) {
+
+            String nombre = (String) session.getAttribute("nombre");
+            String direccion = (String) session.getAttribute("direccion");
+            String telefono = (String) session.getAttribute("telefono");
+            String pais = (String) session.getAttribute("pais");
+            String resol_aut = (String) session.getAttribute("resol_aut");
+            String fecha_emis_resol = (String) session.getAttribute("fecha_emis_resol");
+            String resol_renov = (String) session.getAttribute("resol_renov");
+            String fecha_renov = (String) session.getAttribute("fecha_renov");
+            String fecha_venc_aut = (String) session.getAttribute("fecha_venc_aut");
+            String obs = (String) session.getAttribute("obs");
+            String competencia = (String) session.getAttribute("competencia");
+            String nombreR = (String) session.getAttribute("nombreR");
+            String apellidoP = (String) session.getAttribute("apellidoP");
+            String apellidoM = (String) session.getAttribute("apellidoM");
+            String user = (String) session.getAttribute("user");
+            String pass = (String) session.getAttribute("pass");
+            String fechaAutR = (String) session.getAttribute("fechaAutR");
+            String fechaRenovR = (String) session.getAttribute("fechaRenovR");
+            String fechaVencR = (String) session.getAttribute("fechaVencR");
+            String correo = (String) session.getAttribute("correo");
+            String celular = (String) session.getAttribute("celular");
+            String direccionR = (String) session.getAttribute("direccionR");
+            String obsR = (String) session.getAttribute("obsR");
+
+            Organismo org = new Organismo();
+            Representante rep = new Representante();
+            Entidad ent = new Entidad();
+
+            org.setCompetencia(competencia);
+
+            rep.setNombre(nombreR);
+            rep.setApellidoP(apellidoP);
+            rep.setApelldoM(apellidoM);
+            Date tempfecha = rep.getFechaAuto();
+            if (fechaAutR != null) {
+                if (fechaAutR.contains("ene") || fechaAutR.contains("feb") || fechaAutR.contains("mar") || fechaAutR.contains("abr")
+                        || fechaAutR.contains("may") || fechaAutR.contains("jun") || fechaAutR.contains("jul") || fechaAutR.contains("ago")
+                        || fechaAutR.contains("set") || fechaAutR.contains("oct") || fechaAutR.contains("nov") || fechaAutR.contains("dic")) {
+                    rep.setFechaAuto(tempfecha);
+                } else {
+                    if (!fechaAutR.equals("")) {
+                        rep.setFechaAuto(format.stringToDate(fechaAutR));
+                    } else {
+                        rep.setFechaAuto(null);
+                    }
+                }
+            } else {
+                rep.setFechaAuto(null);
+            }
+            tempfecha = rep.getFechaRenov();
+            if (fechaRenovR != null) {
+                if (fechaRenovR.contains("ene") || fechaRenovR.contains("feb") || fechaRenovR.contains("mar") || fechaRenovR.contains("abr")
+                        || fechaRenovR.contains("may") || fechaRenovR.contains("jun") || fechaRenovR.contains("jul") || fechaRenovR.contains("ago")
+                        || fechaRenovR.contains("set") || fechaRenovR.contains("oct") || fechaRenovR.contains("nov") || fechaRenovR.contains("dic")) {
+                    rep.setFechaRenov(tempfecha);
+                } else {
+                    if (!fechaAutR.equals("")) {
+                        rep.setFechaRenov(format.stringToDate(fechaRenovR));
+                    } else {
+                        rep.setFechaRenov(null);
+                    }
+                }
+            } else {
+                rep.setFechaRenov(null);
+            }
+            tempfecha = rep.getFechaVencAuto();
+            if (fechaAutR != null) {
+                if (fechaVencR.contains("ene") || fechaVencR.contains("feb") || fechaVencR.contains("mar") || fechaVencR.contains("abr")
+                        || fechaVencR.contains("may") || fechaVencR.contains("jun") || fechaVencR.contains("jul") || fechaVencR.contains("ago")
+                        || fechaVencR.contains("set") || fechaVencR.contains("oct") || fechaVencR.contains("nov") || fechaVencR.contains("dic")) {
+                    rep.setFechaVencAuto(tempfecha);
+                } else {
+                    if (!fechaAutR.equals("")) {
+                        rep.setFechaVencAuto(format.stringToDate(fechaVencR));
+                    } else {
+                        rep.setFechaVencAuto(null);
+                    }
+                }
+            } else {
+                rep.setFechaVencAuto(null);
+            }
+            rep.setCorreo(correo);
+            rep.setDireccion(direccionR);
+            rep.setCelular(celular);
+            rep.setObs(obsR);
+
+            ent.setNombre(nombre);
+            ent.setDireccion(direccion);
+            ent.setTelefono(telefono);
+            ent.setPais(pais);
+            ent.setUser(user);
+            if (!pass.equals("")) {
+                pass = DigestUtils.sha512Hex(pass);
+                ent.setPass(pass);
+            }
+            ent.setResolAuto(resol_aut);
+            tempfecha = ent.getFechaResol();
+            if (fecha_emis_resol != null) {
+                if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
+                        || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
+                        || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
+                    ent.setFechaResol(tempfecha);
+                } else {
+                    if (!fecha_emis_resol.equals("")) {
+                        ent.setFechaResol(format.stringToDate(fecha_emis_resol));
+                    } else {
+                        ent.setFechaResol(null);
+                    }
+                }
+            } else {
+                ent.setFechaResol(null);
+            }
+            ent.setResolRenov(resol_renov);
+            tempfecha = ent.getFechaRenov();
+            if (fecha_renov != null) {
+                if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
+                        || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
+                        || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
+                    ent.setFechaRenov(tempfecha);
+                } else {
+                    if (!fecha_renov.equals("")) {
+                        ent.setFechaRenov(format.stringToDate(fecha_renov));
+                    } else {
+                        ent.setFechaRenov(null);
+                    }
+                }
+            } else {
+                ent.setFechaRenov(null);
+            }
+            tempfecha = ent.getFechaVenc();
+            if (fecha_venc_aut != null) {
+                if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
+                        || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
+                        || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
+                    ent.setFechaVenc(tempfecha);
+                } else {
+                    if (!fecha_venc_aut.equals("")) {
+                        ent.setFechaVenc(format.stringToDate(fecha_venc_aut));
+                    } else {
+                        ent.setFechaVenc(null);
+                    }
+                }
+            } else {
+                ent.setFechaVenc(null);
+            }
+            ent.setObs(obs);
+
+            if (ServicioPersonal.usuario(ent.getUser())) {
+
+                String mensaje_error = "El nombre de usuario ya existe en la base de datos. Por favor, ingresar nuevamente";
+
+                map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());
+                map.put("mensaje", mensaje_error);
+                return new ModelAndView("/Personal/registros/organismo/editar_org", map);
+            }
+
+            ServicioPersonal.InsertOrg(ent, rep, org);
+
+            String mensaje_log = "Se creó el Organismo con nombre: " + org.getEntidad().getNombre()
+                    + " con ID: " + org.getIdorganismo();
+
+            String Tipo_registro = "Organismo";
+
+            try {
+                String Numero_registro = String.valueOf(org.getIdorganismo());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
 
             map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());
-            map.put("mensaje", mensaje_error);
-            return new ModelAndView("/Personal/registros/organismo/editar_org", map);
+            session.removeAttribute("nombre");
+        } else {
+
+            return new ModelAndView("redirect:/organismo", map);
         }
-
-        ServicioPersonal.InsertOrg(ent, rep, org);
-
-        String mensaje_log = "Se creó el Organismo con nombre: " + org.getEntidad().getNombre()
-                + " con ID: " + org.getIdorganismo();
-
-        String Tipo_registro = "Organismo";
-
-        try {
-            String Numero_registro = String.valueOf(org.getIdorganismo());;
-
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
-        }
-
-        map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());
         return new ModelAndView("/Personal/registros/organismo/lista_org", map);
     }
 
     @RequestMapping(value = "/updateOrg", method = RequestMethod.POST)
-    public ModelAndView UpdateOrg(ModelMap map,
+    public ModelAndView UpdateOrg_POST(ModelMap map,
             @RequestParam("id") int id,
             //datos a ingresar en entidad
             @RequestParam("nombre") String nombre,
@@ -956,145 +1169,219 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        Organismo org = new Organismo();
 
-        org = ServicioPersonal.getOrganismo(id);
+        session.setAttribute("id", id);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("telefono", telefono);
+        session.setAttribute("pais", pais);
+        session.setAttribute("resol_aut", resol_aut);
+        session.setAttribute("fecha_emis_resol", fecha_emis_resol);
+        session.setAttribute("resol_renov", resol_renov);
+        session.setAttribute("fecha_renov", fecha_renov);
+        session.setAttribute("fecha_venc_aut", fecha_venc_aut);
+        session.setAttribute("obs", obs);
+        session.setAttribute("competencia", competencia);
+        session.setAttribute("nombreR", nombreR);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("user", user);
+        session.setAttribute("pass", pass);
+        session.setAttribute("fechaAutR", fechaAutR);
+        session.setAttribute("fechaRenovR", fechaRenovR);
+        session.setAttribute("fechaVencR", fechaVencR);
+        session.setAttribute("correo", correo);
+        session.setAttribute("celular", celular);
+        session.setAttribute("direccionR", direccionR);
+        session.setAttribute("obsR", obsR);
 
-        org.setCompetencia(competencia);
+        return new ModelAndView("redirect:/updateOrg", map);
+    }
 
-        org.getRepresentantes().iterator().next().setNombre(nombreR);
-        org.getRepresentantes().iterator().next().setApellidoP(apellidoP);
-        org.getRepresentantes().iterator().next().setApelldoM(apellidoM);
+    @RequestMapping(value = "/updateOrg", method = RequestMethod.GET)
+    public ModelAndView UpdateOrg_GET(ModelMap map,
+            HttpSession session
+    ) {
 
-        Date tempfecha = org.getRepresentantes().iterator().next().getFechaAuto();
-        if (fechaAutR != null) {
-            if (fechaAutR.contains("ene") || fechaAutR.contains("feb") || fechaAutR.contains("mar") || fechaAutR.contains("abr")
-                    || fechaAutR.contains("may") || fechaAutR.contains("jun") || fechaAutR.contains("jul") || fechaAutR.contains("ago")
-                    || fechaAutR.contains("set") || fechaAutR.contains("oct") || fechaAutR.contains("nov") || fechaAutR.contains("dic")) {
-                org.getRepresentantes().iterator().next().setFechaAuto(tempfecha);
-            } else {
-                if (!fechaAutR.equals("")) {
-                    org.getRepresentantes().iterator().next().setFechaAuto(format.stringToDate(fechaAutR));
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        if (session.getAttribute("nombre") != null) {
+
+            int id = (int) session.getAttribute("id");
+            String nombre = (String) session.getAttribute("nombre");
+            String direccion = (String) session.getAttribute("direccion");
+            String telefono = (String) session.getAttribute("telefono");
+            String pais = (String) session.getAttribute("pais");
+            String resol_aut = (String) session.getAttribute("resol_aut");
+            String fecha_emis_resol = (String) session.getAttribute("fecha_emis_resol");
+            String resol_renov = (String) session.getAttribute("resol_renov");
+            String fecha_renov = (String) session.getAttribute("fecha_renov");
+            String fecha_venc_aut = (String) session.getAttribute("fecha_venc_aut");
+            String obs = (String) session.getAttribute("obs");
+            String competencia = (String) session.getAttribute("competencia");
+            String nombreR = (String) session.getAttribute("nombreR");
+            String apellidoP = (String) session.getAttribute("apellidoP");
+            String apellidoM = (String) session.getAttribute("apellidoM");
+            String user = (String) session.getAttribute("user");
+            String pass = (String) session.getAttribute("pass");
+            String fechaAutR = (String) session.getAttribute("fechaAutR");
+            String fechaRenovR = (String) session.getAttribute("fechaRenovR");
+            String fechaVencR = (String) session.getAttribute("fechaVencR");
+            String correo = (String) session.getAttribute("correo");
+            String celular = (String) session.getAttribute("celular");
+            String direccionR = (String) session.getAttribute("direccionR");
+            String obsR = (String) session.getAttribute("obsR");
+
+            Organismo org = new Organismo();
+
+            org = ServicioPersonal.getOrganismo(id);
+
+            org.setCompetencia(competencia);
+
+            org.getRepresentantes().iterator().next().setNombre(nombreR);
+            org.getRepresentantes().iterator().next().setApellidoP(apellidoP);
+            org.getRepresentantes().iterator().next().setApelldoM(apellidoM);
+
+            Date tempfecha = org.getRepresentantes().iterator().next().getFechaAuto();
+            if (fechaAutR != null) {
+                if (fechaAutR.contains("ene") || fechaAutR.contains("feb") || fechaAutR.contains("mar") || fechaAutR.contains("abr")
+                        || fechaAutR.contains("may") || fechaAutR.contains("jun") || fechaAutR.contains("jul") || fechaAutR.contains("ago")
+                        || fechaAutR.contains("set") || fechaAutR.contains("oct") || fechaAutR.contains("nov") || fechaAutR.contains("dic")) {
+                    org.getRepresentantes().iterator().next().setFechaAuto(tempfecha);
                 } else {
-                    org.getRepresentantes().iterator().next().setFechaAuto(null);
+                    if (!fechaAutR.equals("")) {
+                        org.getRepresentantes().iterator().next().setFechaAuto(format.stringToDate(fechaAutR));
+                    } else {
+                        org.getRepresentantes().iterator().next().setFechaAuto(null);
+                    }
                 }
-            }
-        } else {
-            org.getRepresentantes().iterator().next().setFechaAuto(null);
-        }
-        tempfecha = org.getRepresentantes().iterator().next().getFechaRenov();
-        if (fechaRenovR != null) {
-            if (fechaRenovR.contains("ene") || fechaRenovR.contains("feb") || fechaRenovR.contains("mar") || fechaRenovR.contains("abr")
-                    || fechaRenovR.contains("may") || fechaRenovR.contains("jun") || fechaRenovR.contains("jul") || fechaRenovR.contains("ago")
-                    || fechaRenovR.contains("set") || fechaRenovR.contains("oct") || fechaRenovR.contains("nov") || fechaRenovR.contains("dic")) {
-                org.getRepresentantes().iterator().next().setFechaRenov(tempfecha);
             } else {
-                if (!fechaRenovR.equals("")) {
-                    org.getRepresentantes().iterator().next().setFechaRenov(format.stringToDate(fechaRenovR));
-                } else {
-                    org.getRepresentantes().iterator().next().setFechaRenov(null);
-                }
+                org.getRepresentantes().iterator().next().setFechaAuto(null);
             }
-        } else {
-            org.getRepresentantes().iterator().next().setFechaRenov(null);
-        }
-        tempfecha = org.getRepresentantes().iterator().next().getFechaVencAuto();
-        if (fechaVencR != null) {
-            if (fechaVencR.contains("ene") || fechaVencR.contains("feb") || fechaVencR.contains("mar") || fechaVencR.contains("abr")
-                    || fechaVencR.contains("may") || fechaVencR.contains("jun") || fechaVencR.contains("jul") || fechaVencR.contains("ago")
-                    || fechaVencR.contains("set") || fechaVencR.contains("oct") || fechaVencR.contains("nov") || fechaVencR.contains("dic")) {
-                org.getRepresentantes().iterator().next().setFechaVencAuto(tempfecha);
+            tempfecha = org.getRepresentantes().iterator().next().getFechaRenov();
+            if (fechaRenovR != null) {
+                if (fechaRenovR.contains("ene") || fechaRenovR.contains("feb") || fechaRenovR.contains("mar") || fechaRenovR.contains("abr")
+                        || fechaRenovR.contains("may") || fechaRenovR.contains("jun") || fechaRenovR.contains("jul") || fechaRenovR.contains("ago")
+                        || fechaRenovR.contains("set") || fechaRenovR.contains("oct") || fechaRenovR.contains("nov") || fechaRenovR.contains("dic")) {
+                    org.getRepresentantes().iterator().next().setFechaRenov(tempfecha);
+                } else {
+                    if (!fechaRenovR.equals("")) {
+                        org.getRepresentantes().iterator().next().setFechaRenov(format.stringToDate(fechaRenovR));
+                    } else {
+                        org.getRepresentantes().iterator().next().setFechaRenov(null);
+                    }
+                }
             } else {
-                if (!fechaRenovR.equals("")) {
-                    org.getRepresentantes().iterator().next().setFechaVencAuto(format.stringToDate(fechaVencR));
-                } else {
-                    org.getRepresentantes().iterator().next().setFechaVencAuto(null);
-                }
+                org.getRepresentantes().iterator().next().setFechaRenov(null);
             }
-        } else {
-            org.getRepresentantes().iterator().next().setFechaVencAuto(null);
-        }
-        org.getRepresentantes().iterator().next().setCorreo(correo);
-        org.getRepresentantes().iterator().next().setDireccion(direccionR);
-        org.getRepresentantes().iterator().next().setCelular(celular);
-        org.getRepresentantes().iterator().next().setObs(obsR);
-
-        org.getEntidad().setNombre(nombre);
-        org.getEntidad().setUser(user);
-        if (!pass.equals("")) {
-            pass = DigestUtils.sha512Hex(pass);
-            org.getEntidad().setPass(pass);
-        }
-        org.getEntidad().setDireccion(direccion);
-        org.getEntidad().setTelefono(telefono);
-        org.getEntidad().setPais(pais);
-        org.getEntidad().setResolAuto(resol_aut);
-        tempfecha = org.getEntidad().getFechaResol();
-        if (fecha_emis_resol != null) {
-            if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
-                    || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
-                    || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
-                org.getEntidad().setFechaResol(tempfecha);
+            tempfecha = org.getRepresentantes().iterator().next().getFechaVencAuto();
+            if (fechaVencR != null) {
+                if (fechaVencR.contains("ene") || fechaVencR.contains("feb") || fechaVencR.contains("mar") || fechaVencR.contains("abr")
+                        || fechaVencR.contains("may") || fechaVencR.contains("jun") || fechaVencR.contains("jul") || fechaVencR.contains("ago")
+                        || fechaVencR.contains("set") || fechaVencR.contains("oct") || fechaVencR.contains("nov") || fechaVencR.contains("dic")) {
+                    org.getRepresentantes().iterator().next().setFechaVencAuto(tempfecha);
+                } else {
+                    if (!fechaRenovR.equals("")) {
+                        org.getRepresentantes().iterator().next().setFechaVencAuto(format.stringToDate(fechaVencR));
+                    } else {
+                        org.getRepresentantes().iterator().next().setFechaVencAuto(null);
+                    }
+                }
             } else {
-                if (!fecha_emis_resol.equals("")) {
-                    org.getEntidad().setFechaResol(format.stringToDate(fecha_emis_resol));
-                } else {
-                    org.getEntidad().setFechaResol(null);
-                }
+                org.getRepresentantes().iterator().next().setFechaVencAuto(null);
             }
-        } else {
-            org.getEntidad().setFechaResol(null);
-        }
-        org.getEntidad().setResolRenov(resol_renov);
-        tempfecha = org.getEntidad().getFechaRenov();
-        if (fecha_renov != null) {
-            if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
-                    || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
-                    || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
-                org.getEntidad().setFechaRenov(tempfecha);
+            org.getRepresentantes().iterator().next().setCorreo(correo);
+            org.getRepresentantes().iterator().next().setDireccion(direccionR);
+            org.getRepresentantes().iterator().next().setCelular(celular);
+            org.getRepresentantes().iterator().next().setObs(obsR);
+
+            org.getEntidad().setNombre(nombre);
+            org.getEntidad().setUser(user);
+            if (!pass.equals("")) {
+                pass = DigestUtils.sha512Hex(pass);
+                org.getEntidad().setPass(pass);
+            }
+            org.getEntidad().setDireccion(direccion);
+            org.getEntidad().setTelefono(telefono);
+            org.getEntidad().setPais(pais);
+            org.getEntidad().setResolAuto(resol_aut);
+            tempfecha = org.getEntidad().getFechaResol();
+            if (fecha_emis_resol != null) {
+                if (fecha_emis_resol.contains("ene") || fecha_emis_resol.contains("feb") || fecha_emis_resol.contains("mar") || fecha_emis_resol.contains("abr")
+                        || fecha_emis_resol.contains("may") || fecha_emis_resol.contains("jun") || fecha_emis_resol.contains("jul") || fecha_emis_resol.contains("ago")
+                        || fecha_emis_resol.contains("set") || fecha_emis_resol.contains("oct") || fecha_emis_resol.contains("nov") || fecha_emis_resol.contains("dic")) {
+                    org.getEntidad().setFechaResol(tempfecha);
+                } else {
+                    if (!fecha_emis_resol.equals("")) {
+                        org.getEntidad().setFechaResol(format.stringToDate(fecha_emis_resol));
+                    } else {
+                        org.getEntidad().setFechaResol(null);
+                    }
+                }
             } else {
-                if (!fecha_renov.equals("")) {
-                    org.getEntidad().setFechaRenov(format.stringToDate(fecha_renov));
-                } else {
-                    org.getEntidad().setFechaRenov(null);
-                }
+                org.getEntidad().setFechaResol(null);
             }
-        } else {
-            org.getEntidad().setFechaRenov(null);
-        }
-        tempfecha = org.getEntidad().getFechaVenc();
-        if (fecha_venc_aut != null) {
-            if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
-                    || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
-                    || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
-                org.getEntidad().setFechaVenc(tempfecha);
+            org.getEntidad().setResolRenov(resol_renov);
+            tempfecha = org.getEntidad().getFechaRenov();
+            if (fecha_renov != null) {
+                if (fecha_renov.contains("ene") || fecha_renov.contains("feb") || fecha_renov.contains("mar") || fecha_renov.contains("abr")
+                        || fecha_renov.contains("may") || fecha_renov.contains("jun") || fecha_renov.contains("jul") || fecha_renov.contains("ago")
+                        || fecha_renov.contains("set") || fecha_renov.contains("oct") || fecha_renov.contains("nov") || fecha_renov.contains("dic")) {
+                    org.getEntidad().setFechaRenov(tempfecha);
+                } else {
+                    if (!fecha_renov.equals("")) {
+                        org.getEntidad().setFechaRenov(format.stringToDate(fecha_renov));
+                    } else {
+                        org.getEntidad().setFechaRenov(null);
+                    }
+                }
             } else {
-                if (!fecha_venc_aut.equals("")) {
-                    org.getEntidad().setFechaVenc(format.stringToDate(fecha_venc_aut));
-                } else {
-                    org.getEntidad().setFechaVenc(null);
-                }
+                org.getEntidad().setFechaRenov(null);
             }
+            tempfecha = org.getEntidad().getFechaVenc();
+            if (fecha_venc_aut != null) {
+                if (fecha_venc_aut.contains("ene") || fecha_venc_aut.contains("feb") || fecha_venc_aut.contains("mar") || fecha_venc_aut.contains("abr")
+                        || fecha_venc_aut.contains("may") || fecha_venc_aut.contains("jun") || fecha_venc_aut.contains("jul") || fecha_venc_aut.contains("ago")
+                        || fecha_venc_aut.contains("set") || fecha_venc_aut.contains("oct") || fecha_venc_aut.contains("nov") || fecha_venc_aut.contains("dic")) {
+                    org.getEntidad().setFechaVenc(tempfecha);
+                } else {
+                    if (!fecha_venc_aut.equals("")) {
+                        org.getEntidad().setFechaVenc(format.stringToDate(fecha_venc_aut));
+                    } else {
+                        org.getEntidad().setFechaVenc(null);
+                    }
+                }
+            } else {
+                org.getEntidad().setFechaVenc(null);
+            }
+            org.getEntidad().setObs(obs);
+
+            ServicioPersonal.UpdateOrg(org.getEntidad(), org.getRepresentantes().iterator().next(), org);
+
+            String mensaje_log = "Se editó el Organismo con nombre: " + org.getEntidad().getNombre()
+                    + " con ID: " + org.getIdorganismo();
+
+            String Tipo_registro = "Organismo";
+
+            try {
+                String Numero_registro = String.valueOf(org.getIdorganismo());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());
+
+            session.removeAttribute("nombre");
         } else {
-            org.getEntidad().setFechaVenc(null);
+
+            return new ModelAndView("redirect:/organismo", map);
         }
-        org.getEntidad().setObs(obs);
-
-        ServicioPersonal.UpdateOrg(org.getEntidad(), org.getRepresentantes().iterator().next(), org);
-
-        String mensaje_log = "Se editó el Organismo con nombre: " + org.getEntidad().getNombre()
-                + " con ID: " + org.getIdorganismo();
-
-        String Tipo_registro = "Organismo";
-
-        try {
-            String Numero_registro = String.valueOf(org.getIdorganismo());;
-
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
-        }
-
-        map.put("listaOrganismos", ServicioPersonal.ListaOrganismos());
         return new ModelAndView("/Personal/registros/organismo/lista_org", map);
     }
 
@@ -1144,7 +1431,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/editCar", method = RequestMethod.POST)
-    public ModelAndView EditarCar(ModelMap map,
+    public ModelAndView EditarCar_POST(ModelMap map,
             //datos a ingresar en CAR
             @RequestParam("nombre") String nombre,
             @RequestParam("direccion") String direccion,
@@ -1234,6 +1521,7 @@ public class personal {
             }
 
             map.put("listaCar", ServicioPersonal.ListaCar());
+            session.removeAttribute("nombre");
 
         } else {
 
@@ -1594,13 +1882,30 @@ public class personal {
     }
 
     @RequestMapping(value = "/irEditarUa2", method = RequestMethod.POST)
-    public ModelAndView IrEditarUa2(ModelMap map, @RequestParam("id") int id, HttpSession session) {
+    public ModelAndView IrEditarUa2_POST(ModelMap map, @RequestParam("id") int id, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("id", id);
+
+        return new ModelAndView("redirect:/irEditarUa2", map);
+    }
+
+    @RequestMapping(value = "/irEditarUa2", method = RequestMethod.GET)
+    public ModelAndView IrEditarUa2_GET(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        int id = (int) session.getAttribute("id");
+
         Unidad temp = new Unidad();
         temp = ServicioPersonal.getUa(id);
         map.put("ua", temp);
@@ -1665,7 +1970,7 @@ public class personal {
             String distrito = (String) session.getAttribute("distrito");
             String competenciaR = (String) session.getAttribute("competenciaR");
             String correo = (String) session.getAttribute("correo");
-            String telefono = (String) session.getAttribute("telefono");            
+            String telefono = (String) session.getAttribute("telefono");
             String celular = (String) session.getAttribute("celular");
             String obs = (String) session.getAttribute("obs");
 
@@ -1705,7 +2010,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/updateUa", method = RequestMethod.POST)
-    public ModelAndView UpdateUa(ModelMap map,
+    public ModelAndView UpdateUa_POST(ModelMap map,
             //datos a ingresar en UA
             @RequestParam("id") int id,
             @RequestParam("nombre") String nombre,
@@ -1727,32 +2032,82 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        Unidad ua = new Unidad();
-        ua = ServicioPersonal.getUa(id);
-        ua.setNombre(nombre);
-        ua.setDireccion(direccion);
-        ua.setDepartamento(departamento);
-        ua.setProvincia(provincia);
-        ua.setDistrito(distrito);
-        ua.setCompetenciaRegional(competenciaR);
-        ua.setCorreo(correo);
-        ua.setTelefono(telefono);
-        ua.setCelular(celular);
-        ua.setObs(obs);
 
-        ServicioPersonal.UpdateUa(ua);
+        session.setAttribute("id", id);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("departamento", departamento);
+        session.setAttribute("provincia", provincia);
+        session.setAttribute("distrito", distrito);
+        session.setAttribute("competenciaR", competenciaR);
+        session.setAttribute("correo", correo);
+        session.setAttribute("telefono", telefono);
+        session.setAttribute("celular", celular);
+        session.setAttribute("obs", obs);
 
-        String mensaje_log = "Se editó el UA con Nombre, " + ua.getNombre() + " y ID:" + String.valueOf(ua.getIdunidad());
-        String Tipo_registro = "UA";
+        return new ModelAndView("redirect:/updateUa", map);
+    }
 
-        try {
-            String Numero_registro = String.valueOf(ua.getIdunidad());;
+    @RequestMapping(value = "/updateUa", method = RequestMethod.GET)
+    public ModelAndView UpdateUa_GET(ModelMap map,
+            //datos a ingresar en UA            
+            HttpSession session
+    ) {
 
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
         }
 
-        map.put("listaUa", ServicioPersonal.ListaUa());
+        if (session.getAttribute("nombre") != null) {
+
+            int id = (int) session.getAttribute("id");
+            String nombre = (String) session.getAttribute("nombre");
+            String direccion = (String) session.getAttribute("direccion");
+            String departamento = (String) session.getAttribute("departamento");
+            String provincia = (String) session.getAttribute("provincia");
+            String distrito = (String) session.getAttribute("distrito");
+            String competenciaR = (String) session.getAttribute("competenciaR");
+            String correo = (String) session.getAttribute("correo");
+            String telefono = (String) session.getAttribute("telefono");
+            String celular = (String) session.getAttribute("celular");
+            String obs = (String) session.getAttribute("obs");
+
+            Unidad ua = new Unidad();
+            ua = ServicioPersonal.getUa(id);
+            ua.setNombre(nombre);
+            ua.setDireccion(direccion);
+            ua.setDepartamento(departamento);
+            ua.setProvincia(provincia);
+            ua.setDistrito(distrito);
+            ua.setCompetenciaRegional(competenciaR);
+            ua.setCorreo(correo);
+            ua.setTelefono(telefono);
+            ua.setCelular(celular);
+            ua.setObs(obs);
+
+            ServicioPersonal.UpdateUa(ua);
+
+            String mensaje_log = "Se editó el UA con Nombre, " + ua.getNombre() + " y ID:" + String.valueOf(ua.getIdunidad());
+            String Tipo_registro = "UA";
+
+            try {
+                String Numero_registro = String.valueOf(ua.getIdunidad());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            map.put("listaUa", ServicioPersonal.ListaUa());
+
+            session.removeAttribute("nombre");
+        } else {
+
+            return new ModelAndView("redirect:/ua", map);
+        }
+
         return new ModelAndView("/Personal/registros/ua/lista_ua", map);
     }
 
@@ -1766,12 +2121,12 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         session.setAttribute("ïdUA", idUa);
-        
+
         return new ModelAndView("redirect:/irListaPersonalUa", map);
     }
-    
+
     @RequestMapping(value = "/irListaPersonalUa", method = RequestMethod.GET)
     public ModelAndView ListaPersonalUa_GET(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1780,9 +2135,9 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         int idUa = (int) session.getAttribute("idUa");
-        
+
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(idUa));
         return new ModelAndView("/Personal/registros/ua/lista_ua_personal", map);
@@ -1798,12 +2153,12 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         session.setAttribute("id", id);
-        
+
         return new ModelAndView("redirect:/EditarPersonalUa", map);
     }
-    
+
     @RequestMapping(value = "/EditarPersonalUa", method = RequestMethod.GET)
     public ModelAndView EditarPersonalUa_GET(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1812,9 +2167,9 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         int id = (int) session.getAttribute("id");
-        
+
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(id);
         String fechaNac = "";
@@ -1837,7 +2192,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/updatePersonalUa", method = RequestMethod.POST)
-    public ModelAndView UpdatePersonalUa(ModelMap map,
+    public ModelAndView UpdatePersonalUa_POST(ModelMap map,
             //datos a ingresar en Personal
             @RequestParam("idPers") long idPers,
             @RequestParam("nombre") String nombre,
@@ -1865,7 +2220,7 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         session.setAttribute("idPers", idPers);
         session.setAttribute("nombre", nombre);
         session.setAttribute("apellidoP", apellidoP);
@@ -1883,10 +2238,10 @@ public class personal {
         session.setAttribute("fechaIng", fechaIng);
         session.setAttribute("domicilio", domicilio);
         session.setAttribute("rol", rol);
-        
+
         return new ModelAndView("redirect:/updatePersonalUa", map);
     }
-    
+
     @RequestMapping(value = "/updatePersonalUa", method = RequestMethod.GET)
     public ModelAndView UpdatePersonalUa_GET(ModelMap map,
             //datos a ingresar en Personal
@@ -1899,9 +2254,7 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
-        
-        
+
         long idPers = (long) session.getAttribute("idPers");
         String nombre = (String) session.getAttribute("nombre");
         String apellidoP = (String) session.getAttribute("apellidoP");
@@ -1919,7 +2272,7 @@ public class personal {
         String fechaIng = (String) session.getAttribute("fechaIng");
         String domicilio = (String) session.getAttribute("domicilio");
         String rol = (String) session.getAttribute("rol");
-        
+
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(idPers);
 
@@ -2005,23 +2358,23 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         session.setAttribute("idUa", idUa);
-        
+
         return new ModelAndView("redirect:/asignarPersonalUa", map);
     }
-    
-     @RequestMapping(value = "/asignarPersonalUa", method = RequestMethod.GET)
-    public ModelAndView asignarPersonalUa_GET(ModelMap map,  HttpSession session) {
+
+    @RequestMapping(value = "/asignarPersonalUa", method = RequestMethod.GET)
+    public ModelAndView asignarPersonalUa_GET(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         long idUa = (long) session.getAttribute("idUa");
-        
+
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalNoUa", ServicioPersonal.ListaPersonalNoUa(idUa));
         return new ModelAndView("/Personal/registros/ua/lista_asign_pers", map);
@@ -2030,7 +2383,7 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////ASIGNAR PERSONAL PASO 2 ///////////////////////////////////////////
     @RequestMapping(value = "/asignarPersonalUa2", method = RequestMethod.POST)
-    public ModelAndView asignarPersonalUa2_POST(ModelMap map, @RequestParam("idUa") long idUa, 
+    public ModelAndView asignarPersonalUa2_POST(ModelMap map, @RequestParam("idUa") long idUa,
             @RequestParam("idPers") long idPers, HttpSession session) {
 
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -2039,13 +2392,13 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         session.setAttribute("idUa", idUa);
         session.setAttribute("idPers", idPers);
-        
+
         return new ModelAndView("redirect:/asignarPersonalUa2", map);
     }
-    
+
     @RequestMapping(value = "/asignarPersonalUa2", method = RequestMethod.GET)
     public ModelAndView asignarPersonalUa2_GET(ModelMap map, HttpSession session) {
 
@@ -2055,43 +2408,43 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
-        if(session.getAttribute("idPers") != null){
-        
-        long idUa = (long) session.getAttribute("idUa");
-        long idPers = (long) session.getAttribute("idPers");
-        
-        Personal per = new Personal();
-        Unidad ua = new Unidad();
-        ua = ServicioPersonal.getUa(idUa);
-        per = ServicioPersonal.getPersonal(idPers);
 
-        per.setUnidad(ua);
-        ServicioPersonal.UpdatePersonal(per);
+        if (session.getAttribute("idPers") != null) {
 
-        String mensaje_log = "Se asignó nuevo personal con nombre " + per.getNombre() + " " + per.getApellidoP()
-                + " " + per.getApellidoM()
-                + "con ID, " + per.getIdpersonal() + ". A la Unidad de adopción: "
-                + ua.getNombre() + " y ID: " + ua.getIdunidad();
-        String Tipo_registro = "UA";
+            long idUa = (long) session.getAttribute("idUa");
+            long idPers = (long) session.getAttribute("idPers");
 
-        try {
-            String Numero_registro = String.valueOf(ua.getIdunidad());;
+            Personal per = new Personal();
+            Unidad ua = new Unidad();
+            ua = ServicioPersonal.getUa(idUa);
+            per = ServicioPersonal.getPersonal(idPers);
 
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
+            per.setUnidad(ua);
+            ServicioPersonal.UpdatePersonal(per);
+
+            String mensaje_log = "Se asignó nuevo personal con nombre " + per.getNombre() + " " + per.getApellidoP()
+                    + " " + per.getApellidoM()
+                    + "con ID, " + per.getIdpersonal() + ". A la Unidad de adopción: "
+                    + ua.getNombre() + " y ID: " + ua.getIdunidad();
+            String Tipo_registro = "UA";
+
+            try {
+                String Numero_registro = String.valueOf(ua.getIdunidad());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            map.put("ua", ServicioPersonal.getUa(idUa));
+            map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(idUa));
+
+        } else {
+            long idUa = (long) session.getAttribute("idUa");
+            session.setAttribute("ïdUA", idUa);
+
+            return new ModelAndView("redirect:/irListaPersonalUa", map);
         }
 
-        map.put("ua", ServicioPersonal.getUa(idUa));
-        map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(idUa));
-        
-        }else{
-        long idUa = (long) session.getAttribute("idUa");
-        session.setAttribute("ïdUA", idUa);
-        
-        return new ModelAndView("redirect:/irListaPersonalUa", map);
-        }
-        
         return new ModelAndView("/Personal/registros/ua/lista_ua_personal", map);
     }
 
@@ -2110,13 +2463,30 @@ public class personal {
     }
 
     @RequestMapping(value = "/irEditarPersonal2", method = RequestMethod.POST)
-    public ModelAndView IrEditarPersonal2(ModelMap map, @RequestParam("id") long id, HttpSession session) {
+    public ModelAndView IrEditarPersonal2_POST(ModelMap map, @RequestParam("id") long id, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("id", id);
+
+        return new ModelAndView("redirect:/irEditarPersonal2", map);
+    }
+
+    @RequestMapping(value = "/irEditarPersonal2", method = RequestMethod.GET)
+    public ModelAndView IrEditarPersonal2_GET(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        long id = (long) session.getAttribute("id");
+
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(id);
         String fechaNac = "";
@@ -2135,7 +2505,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/editPersonal", method = RequestMethod.POST)
-    public ModelAndView EditarPersonal(ModelMap map,
+    public ModelAndView EditarPersonal_POST(ModelMap map,
             //datos a ingresar en Personal
             @RequestParam("nombre") String nombre,
             @RequestParam("apellidoP") String apellidoP,
@@ -2163,92 +2533,152 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        Personal temp = new Personal();
 
-        temp.setNombre(nombre);
-        temp.setApellidoP(apellidoP);
-        temp.setApellidoM(apellidoM);
-        temp.setUser(user);
-        if (!pass.equals("")) {
-            pass = DigestUtils.sha512Hex(pass);
-            temp.setPass(pass);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("user", user);
+        session.setAttribute("pass", pass);
+        session.setAttribute("correoT", correoT);
+        session.setAttribute("correoP", correoP);
+        session.setAttribute("profesion", profesion);
+        session.setAttribute("grado", grado);
+        session.setAttribute("cargo", cargo);
+        session.setAttribute("dni", dni);
+        session.setAttribute("fechaNac", fechaNac);
+        session.setAttribute("regimen", regimen);
+        session.setAttribute("fechaIng", fechaIng);
+        session.setAttribute("domicilio", domicilio);
+        session.setAttribute("rol", rol);
+        session.setAttribute("ua", ua);
+
+        return new ModelAndView("redirect:/editPersonal", map);
+    }
+
+    @RequestMapping(value = "/editPersonal", method = RequestMethod.GET)
+    public ModelAndView EditarPersonal_GET(ModelMap map,
+            HttpSession session
+    ) {
+
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
         }
-        temp.setCorreoTrabajo(correoT);
-        temp.setCorreoPersonal(correoP);
-        temp.setProfesion(profesion);
-        temp.setGradoInstruccion(grado);
-        temp.setCargo(cargo);
-        temp.setDni(dni);
-        Date tempfecha = temp.getFechaNacimiento();
-        if (fechaNac != null) {
-            if (fechaNac.contains("ene") || fechaNac.contains("feb") || fechaNac.contains("mar") || fechaNac.contains("abr")
-                    || fechaNac.contains("may") || fechaNac.contains("jun") || fechaNac.contains("jul") || fechaNac.contains("ago")
-                    || fechaNac.contains("set") || fechaNac.contains("oct") || fechaNac.contains("nov") || fechaNac.contains("dic")) {
-                temp.setFechaNacimiento(tempfecha);
-            } else {
-                if (!fechaNac.equals("")) {
-                    temp.setFechaNacimiento(format.stringToDate(fechaNac));
-                } else {
-                    temp.setFechaNacimiento(null);
-                }
+
+        if (session.getAttribute("nombre") != null) {
+
+            String nombre = (String) session.getAttribute("nombre");
+            String apellidoP = (String) session.getAttribute("apellidoP");
+            String apellidoM = (String) session.getAttribute("apellidoM");
+            String user = (String) session.getAttribute("user");
+            String pass = (String) session.getAttribute("pass");
+            String correoT = (String) session.getAttribute("correoT");
+            String correoP = (String) session.getAttribute("correoP");
+            String profesion = (String) session.getAttribute("profesion");
+            String grado = (String) session.getAttribute("grado");
+            String cargo = (String) session.getAttribute("cargo");
+            String dni = (String) session.getAttribute("dni");
+            String fechaNac = (String) session.getAttribute("fechaNac");
+            String regimen = (String) session.getAttribute("regimen");
+            String fechaIng = (String) session.getAttribute("fechaIng");
+            String domicilio = (String) session.getAttribute("domicilio");
+            String rol = (String) session.getAttribute("rol");
+            long ua = (long) session.getAttribute("ua");
+
+            Personal temp = new Personal();
+
+            temp.setNombre(nombre);
+            temp.setApellidoP(apellidoP);
+            temp.setApellidoM(apellidoM);
+            temp.setUser(user);
+            if (!pass.equals("")) {
+                pass = DigestUtils.sha512Hex(pass);
+                temp.setPass(pass);
             }
-        } else {
-            temp.setFechaNacimiento(null);
-        }
-        temp.setRegimen(regimen);
-        tempfecha = temp.getFechaIngreso();
-        if (fechaIng != null) {
-            if (fechaIng.contains("ene") || fechaIng.contains("feb") || fechaIng.contains("mar") || fechaIng.contains("abr")
-                    || fechaIng.contains("may") || fechaIng.contains("jun") || fechaIng.contains("jul") || fechaIng.contains("ago")
-                    || fechaIng.contains("set") || fechaIng.contains("oct") || fechaIng.contains("nov") || fechaIng.contains("dic")) {
-                temp.setFechaIngreso(tempfecha);
-            } else {
-                if (!fechaNac.equals("")) {
-                    temp.setFechaIngreso(format.stringToDate(fechaIng));
+            temp.setCorreoTrabajo(correoT);
+            temp.setCorreoPersonal(correoP);
+            temp.setProfesion(profesion);
+            temp.setGradoInstruccion(grado);
+            temp.setCargo(cargo);
+            temp.setDni(dni);
+            Date tempfecha = temp.getFechaNacimiento();
+            if (fechaNac != null) {
+                if (fechaNac.contains("ene") || fechaNac.contains("feb") || fechaNac.contains("mar") || fechaNac.contains("abr")
+                        || fechaNac.contains("may") || fechaNac.contains("jun") || fechaNac.contains("jul") || fechaNac.contains("ago")
+                        || fechaNac.contains("set") || fechaNac.contains("oct") || fechaNac.contains("nov") || fechaNac.contains("dic")) {
+                    temp.setFechaNacimiento(tempfecha);
                 } else {
-                    temp.setFechaIngreso(null);
+                    if (!fechaNac.equals("")) {
+                        temp.setFechaNacimiento(format.stringToDate(fechaNac));
+                    } else {
+                        temp.setFechaNacimiento(null);
+                    }
                 }
+            } else {
+                temp.setFechaNacimiento(null);
             }
+            temp.setRegimen(regimen);
+            tempfecha = temp.getFechaIngreso();
+            if (fechaIng != null) {
+                if (fechaIng.contains("ene") || fechaIng.contains("feb") || fechaIng.contains("mar") || fechaIng.contains("abr")
+                        || fechaIng.contains("may") || fechaIng.contains("jun") || fechaIng.contains("jul") || fechaIng.contains("ago")
+                        || fechaIng.contains("set") || fechaIng.contains("oct") || fechaIng.contains("nov") || fechaIng.contains("dic")) {
+                    temp.setFechaIngreso(tempfecha);
+                } else {
+                    if (!fechaNac.equals("")) {
+                        temp.setFechaIngreso(format.stringToDate(fechaIng));
+                    } else {
+                        temp.setFechaIngreso(null);
+                    }
+                }
+            } else {
+                temp.setFechaIngreso(null);
+            }
+            temp.setDomicilio(domicilio);
+            temp.setRol(rol);
+
+            Unidad temp2 = new Unidad();
+            temp2 = ServicioPersonal.getUa(ua);
+
+            temp.setUnidad(temp2);
+
+            if (ServicioPersonal.usuario(temp.getUser())) {
+
+                String mensaje_error = "El nombre de usuario ya existe en la base de datos. Por favor, ingresar nuevamente los datos";
+
+                map.put("mensaje", mensaje_error);
+                map.put("listaUa", ServicioPersonal.ListaUa());
+                return new ModelAndView("/Personal/registros/usuarios/editar_personal", map);
+            }
+
+            ServicioPersonal.InsertPersonal(temp);
+
+            String mensaje_log = "Se creó nuevo usuario con nombre: " + temp.getNombre() + " " + temp.getApellidoP()
+                    + " con ID: " + temp.getIdpersonal();
+
+            String Tipo_registro = "Personal";
+
+            try {
+                String Numero_registro = String.valueOf(temp.getIdpersonal());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            map.put("listaPersonal", ServicioPersonal.ListaPersonal());
+            session.removeAttribute("nombre");
         } else {
-            temp.setFechaIngreso(null);
-        }
-        temp.setDomicilio(domicilio);
-        temp.setRol(rol);
 
-        Unidad temp2 = new Unidad();
-        temp2 = ServicioPersonal.getUa(ua);
-
-        temp.setUnidad(temp2);
-
-        if (ServicioPersonal.usuario(temp.getUser())) {
-
-            String mensaje_error = "El nombre de usuario ya existe en la base de datos. Por favor, ingresar nuevamente los datos";
-
-            map.put("mensaje", mensaje_error);
-            map.put("listaUa", ServicioPersonal.ListaUa());
-            return new ModelAndView("/Personal/registros/usuarios/editar_personal", map);
+            return new ModelAndView("redirect:/usuarios", map);
         }
 
-        ServicioPersonal.InsertPersonal(temp);
-
-        String mensaje_log = "Se creó nuevo usuario con nombre: " + temp.getNombre() + " " + temp.getApellidoP()
-                + " con ID: " + temp.getIdpersonal();
-
-        String Tipo_registro = "Personal";
-
-        try {
-            String Numero_registro = String.valueOf(temp.getIdpersonal());;
-
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
-        }
-
-        map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         return new ModelAndView("/Personal/registros/usuarios/lista_personal", map);
     }
 
     @RequestMapping(value = "/updatePersonal", method = RequestMethod.POST)
-    public ModelAndView UpdatePersonal(ModelMap map,
+    public ModelAndView UpdatePersonal_POST(ModelMap map,
             //datos a ingresar en Personal
             @RequestParam("idPers") long idPers,
             @RequestParam("nombre") String nombre,
@@ -2277,79 +2707,140 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        Personal temp = new Personal();
-        temp = ServicioPersonal.getPersonal(idPers);
 
-        temp.setNombre(nombre);
-        temp.setApellidoP(apellidoP);
-        temp.setApellidoM(apellidoM);
-        temp.setUser(user);
-        if (!pass.equals("")) {
-            pass = DigestUtils.sha512Hex(pass);
-            temp.setPass(pass);
+        session.setAttribute("idPers", idPers);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("user", user);
+        session.setAttribute("pass", pass);
+        session.setAttribute("correoT", correoT);
+        session.setAttribute("correoP", correoP);
+        session.setAttribute("profesion", profesion);
+        session.setAttribute("grado", grado);
+        session.setAttribute("cargo", cargo);
+        session.setAttribute("dni", dni);
+        session.setAttribute("fechaNac", fechaNac);
+        session.setAttribute("regimen", regimen);
+        session.setAttribute("fechaIng", fechaIng);
+        session.setAttribute("domicilio", domicilio);
+        session.setAttribute("rol", rol);
+        session.setAttribute("ua", ua);
+
+        return new ModelAndView("redirect:/updatePersonal", map);
+    }
+
+    @RequestMapping(value = "/updatePersonal", method = RequestMethod.GET)
+    public ModelAndView UpdatePersonal_GET(ModelMap map,
+            HttpSession session
+    ) {
+
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
         }
-        temp.setCorreoTrabajo(correoT);
-        temp.setCorreoPersonal(correoP);
-        temp.setProfesion(profesion);
-        temp.setGradoInstruccion(grado);
-        temp.setCargo(cargo);
-        temp.setDni(dni);
-        Date tempfecha = temp.getFechaNacimiento();
-        if (fechaNac != null) {
-            if (fechaNac.contains("ene") || fechaNac.contains("feb") || fechaNac.contains("mar") || fechaNac.contains("abr")
-                    || fechaNac.contains("may") || fechaNac.contains("jun") || fechaNac.contains("jul") || fechaNac.contains("ago")
-                    || fechaNac.contains("set") || fechaNac.contains("oct") || fechaNac.contains("nov") || fechaNac.contains("dic")) {
-                temp.setFechaNacimiento(tempfecha);
-            } else {
-                if (!fechaNac.equals("")) {
-                    temp.setFechaNacimiento(format.stringToDate(fechaNac));
-                } else {
-                    temp.setFechaNacimiento(null);
-                }
+
+        if (session.getAttribute("nombre") != null) {
+
+            long idPers = (long) session.getAttribute("idPers");
+            String nombre = (String) session.getAttribute("nombre");
+            String apellidoP = (String) session.getAttribute("apellidoP");
+            String apellidoM = (String) session.getAttribute("apellidoM");
+            String user = (String) session.getAttribute("user");
+            String pass = (String) session.getAttribute("pass");
+            String correoT = (String) session.getAttribute("correoT");
+            String correoP = (String) session.getAttribute("correoP");
+            String profesion = (String) session.getAttribute("profesion");
+            String grado = (String) session.getAttribute("grado");
+            String cargo = (String) session.getAttribute("cargo");
+            String dni = (String) session.getAttribute("dni");
+            String fechaNac = (String) session.getAttribute("fechaNac");
+            String regimen = (String) session.getAttribute("regimen");
+            String fechaIng = (String) session.getAttribute("fechaIng");
+            String domicilio = (String) session.getAttribute("domicilio");
+            String rol = (String) session.getAttribute("rol");
+            long ua = (long) session.getAttribute("ua");
+
+            Personal temp = new Personal();
+            temp = ServicioPersonal.getPersonal(idPers);
+
+            temp.setNombre(nombre);
+            temp.setApellidoP(apellidoP);
+            temp.setApellidoM(apellidoM);
+            temp.setUser(user);
+            if (!pass.equals("")) {
+                pass = DigestUtils.sha512Hex(pass);
+                temp.setPass(pass);
             }
-        } else {
-            temp.setFechaNacimiento(null);
-        }
-        temp.setRegimen(regimen);
-        tempfecha = temp.getFechaIngreso();
-        if (fechaIng != null) {
-            if (fechaIng.contains("ene") || fechaIng.contains("feb") || fechaIng.contains("mar") || fechaIng.contains("abr")
-                    || fechaIng.contains("may") || fechaIng.contains("jun") || fechaIng.contains("jul") || fechaIng.contains("ago")
-                    || fechaIng.contains("set") || fechaIng.contains("oct") || fechaIng.contains("nov") || fechaIng.contains("dic")) {
-                temp.setFechaIngreso(tempfecha);
-            } else {
-                if (!fechaNac.equals("")) {
-                    temp.setFechaIngreso(format.stringToDate(fechaIng));
+            temp.setCorreoTrabajo(correoT);
+            temp.setCorreoPersonal(correoP);
+            temp.setProfesion(profesion);
+            temp.setGradoInstruccion(grado);
+            temp.setCargo(cargo);
+            temp.setDni(dni);
+            Date tempfecha = temp.getFechaNacimiento();
+            if (fechaNac != null) {
+                if (fechaNac.contains("ene") || fechaNac.contains("feb") || fechaNac.contains("mar") || fechaNac.contains("abr")
+                        || fechaNac.contains("may") || fechaNac.contains("jun") || fechaNac.contains("jul") || fechaNac.contains("ago")
+                        || fechaNac.contains("set") || fechaNac.contains("oct") || fechaNac.contains("nov") || fechaNac.contains("dic")) {
+                    temp.setFechaNacimiento(tempfecha);
                 } else {
-                    temp.setFechaIngreso(null);
+                    if (!fechaNac.equals("")) {
+                        temp.setFechaNacimiento(format.stringToDate(fechaNac));
+                    } else {
+                        temp.setFechaNacimiento(null);
+                    }
                 }
+            } else {
+                temp.setFechaNacimiento(null);
             }
+            temp.setRegimen(regimen);
+            tempfecha = temp.getFechaIngreso();
+            if (fechaIng != null) {
+                if (fechaIng.contains("ene") || fechaIng.contains("feb") || fechaIng.contains("mar") || fechaIng.contains("abr")
+                        || fechaIng.contains("may") || fechaIng.contains("jun") || fechaIng.contains("jul") || fechaIng.contains("ago")
+                        || fechaIng.contains("set") || fechaIng.contains("oct") || fechaIng.contains("nov") || fechaIng.contains("dic")) {
+                    temp.setFechaIngreso(tempfecha);
+                } else {
+                    if (!fechaNac.equals("")) {
+                        temp.setFechaIngreso(format.stringToDate(fechaIng));
+                    } else {
+                        temp.setFechaIngreso(null);
+                    }
+                }
+            } else {
+                temp.setFechaIngreso(null);
+            }
+            temp.setDomicilio(domicilio);
+            temp.setRol(rol);
+
+            Unidad temp2 = new Unidad();
+            temp2 = ServicioPersonal.getUa(ua);
+
+            temp.setUnidad(temp2);
+
+            ServicioPersonal.UpdatePersonal(temp);
+
+            String mensaje_log = "Se editó el usuario con nombre: " + temp.getNombre() + " " + temp.getApellidoP()
+                    + " con ID: " + temp.getIdpersonal();
+
+            String Tipo_registro = "Personal";
+
+            try {
+                String Numero_registro = String.valueOf(temp.getIdpersonal());;
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            map.put("listaPersonal", ServicioPersonal.ListaPersonal());
+            session.removeAttribute("nombre");
         } else {
-            temp.setFechaIngreso(null);
+
+            return new ModelAndView("redirect:/usuarios", map);
         }
-        temp.setDomicilio(domicilio);
-        temp.setRol(rol);
-
-        Unidad temp2 = new Unidad();
-        temp2 = ServicioPersonal.getUa(ua);
-
-        temp.setUnidad(temp2);
-
-        ServicioPersonal.UpdatePersonal(temp);
-
-        String mensaje_log = "Se editó el usuario con nombre: " + temp.getNombre() + " " + temp.getApellidoP()
-                + " con ID: " + temp.getIdpersonal();
-
-        String Tipo_registro = "Personal";
-
-        try {
-            String Numero_registro = String.valueOf(temp.getIdpersonal());;
-
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
-        }
-
-        map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         return new ModelAndView("/Personal/registros/usuarios/lista_personal", map);
     }
 
@@ -2801,7 +3292,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/PersonalUpdateTurno", method = RequestMethod.POST)
-    public ModelAndView PersonalUpdateTurno(ModelMap map, @RequestParam("idTurno") long idTurno,
+    public ModelAndView PersonalUpdateTurno_POST(ModelMap map, @RequestParam("idTurno") long idTurno,
             @RequestParam("fechaInicio") String fechaInicio,
             @RequestParam("fechaFin") String fechaFin,
             @RequestParam("horaInicio") String horaInicio,
@@ -2912,8 +3403,8 @@ public class personal {
     }
 
     @RequestMapping(value = "/PersonalInscritosTallerInicio", method = RequestMethod.POST)
-    public ModelAndView PersonalInscritosTallerInicio(ModelMap map,
-            @RequestParam("idTaller") Long idTaller,
+    public ModelAndView PersonalInscritosTallerInicio_POST(ModelMap map,
+            @RequestParam("idTaller") long idTaller,
             @RequestParam("nombreTaller") String taller,
             @RequestParam("historial") String historico,
             HttpSession session) {
@@ -2923,6 +3414,28 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("idTaller", idTaller);
+        session.setAttribute("nombreTaller", taller);
+        session.setAttribute("historial", historico);
+
+        return new ModelAndView("redirect:/PersonalInscritosTallerInicio", map);
+    }
+
+    @RequestMapping(value = "/PersonalInscritosTallerInicio", method = RequestMethod.GET)
+    public ModelAndView PersonalInscritosTallerInicio_GET(ModelMap map,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        long idTaller = (long) session.getAttribute("idTaller");
+        String taller = (String) session.getAttribute("nombreTaller");
+        String historico = (String) session.getAttribute("historial");
+
         ArrayList<Grupo> allGrupos = new ArrayList();
         allGrupos = ServicioPersonal.listaGruposTurnos2Reuniones(idTaller);
         map.put("historico", historico);
@@ -3085,7 +3598,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/PersonalDetalleFamiliaInscritaSesion4", method = RequestMethod.POST)
-    public ModelAndView PersonalDetalleFamiliaInscritaSesion4(ModelMap map,
+    public ModelAndView PersonalDetalleFamiliaInscritaSesion4_POST(ModelMap map,
             @RequestParam("idFormulario") long idFormulario,
             @RequestParam("idReunion") long idReunion,
             @RequestParam("idTaller") long idTaller,
@@ -3098,6 +3611,32 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("idFormulario", idFormulario);
+        session.setAttribute("idReunion", idReunion);
+        session.setAttribute("idTaller", idTaller);
+        session.setAttribute("nombreTaller", nombre);
+        session.setAttribute("historial", historial);
+
+        return new ModelAndView("redirect:/PersonalDetalleFamiliaInscritaSesion4", map);
+    }
+
+    @RequestMapping(value = "/PersonalDetalleFamiliaInscritaSesion4", method = RequestMethod.GET)
+    public ModelAndView PersonalDetalleFamiliaInscritaSesion4_GET(ModelMap map,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        long idFormulario = (long) session.getAttribute("idFormulario");
+        long idReunion = (long) session.getAttribute("idReunion");
+        long idTaller = (long) session.getAttribute("idTaller");
+        String nombre = (String) session.getAttribute("nombreTaller");
+        String historial = (String) session.getAttribute("historial");
+
         ArrayList<Asistente> allAsistentes = new ArrayList();
         allAsistentes = ServicioPersonal.asistentePorFormulario(idFormulario);
 
@@ -3453,7 +3992,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/PersonalUpdateGrupo", method = RequestMethod.POST)
-    public ModelAndView PersonalUpdateGrupo(ModelMap map,
+    public ModelAndView PersonalUpdateGrupo_POST(ModelMap map,
             @RequestParam("idGrupo") long idGrupo,
             @RequestParam("nombreGrupo") String nombreGrupo,
             HttpSession session) {
@@ -3463,6 +4002,26 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("idGrupo", idGrupo);
+        session.setAttribute("nombreGrupo", nombreGrupo);
+
+        return new ModelAndView("redirect:/PersonalUpdateGrupo", map);
+    }
+
+    @RequestMapping(value = "/PersonalUpdateGrupo", method = RequestMethod.GET)
+    public ModelAndView PersonalUpdateGrupo_GET(ModelMap map,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        long idGrupo = (long) session.getAttribute("idGrupo");
+        String nombreGrupo = (String) session.getAttribute("nombreGrupo");
+
         Grupo tempGrp = new Grupo();
         tempGrp = ServicioPersonal.getGrupo(idGrupo);
         tempGrp.setNombre(nombreGrupo);
@@ -4069,7 +4628,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/PersonalAsistioSesion", method = RequestMethod.POST)
-    public ModelAndView PersonalAsistioSesion(ModelMap map,
+    public ModelAndView PersonalAsistioSesion_POST(ModelMap map,
             @RequestParam("idSesion") long idSesion,
             @RequestParam("idFormulario") long idFormulario,
             HttpSession session) {
@@ -4311,7 +4870,7 @@ public class personal {
     /*    FIN DE SESIONES Y TALLERES                      */
     /*    FAMILIAS INTERNACIONALES                        */
     @RequestMapping(value = "/DetallesFamInt", method = RequestMethod.POST)
-    public ModelAndView DetallesFamInt(ModelMap map, HttpSession session,
+    public ModelAndView DetallesFamInt_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "idExpediente") long idExpediente) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -4320,27 +4879,48 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExpediente);
-        expedienteInt = tempExp;
-        infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
-        for (Adoptante adop : infoFam.getAdoptantes()) {
-            if (adop.getSexo() == 'f') {
-                Ella = adop;
-            }
-            if (adop.getSexo() == 'm') {
-                El = adop;
-            }
+        session.setAttribute("idExpediente", idExpediente);
+
+        return new ModelAndView("redirect:/DetallesFamInt", map);
+    }
+
+    @RequestMapping(value = "/DetallesFamInt", method = RequestMethod.GET)
+    public ModelAndView DetallesFamInt_GET(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
         }
+        if (session.getAttribute("idExpediente") != null) {
+            long idExpediente = (long) session.getAttribute("idExpediente");
 
-        map.put("df", format);
-        map.put("expediente", expedienteInt);
-        map.put("listaEntidad", ServicioPersonal.ListaEntidades());
+            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExpediente);
+            expedienteInt = tempExp;
+            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+            for (Adoptante adop : infoFam.getAdoptantes()) {
+                if (adop.getSexo() == 'f') {
+                    Ella = adop;
+                }
+                if (adop.getSexo() == 'm') {
+                    El = adop;
+                }
+            }
 
-        map.addAttribute("idExpediente", idExpediente);
+            map.put("df", format);
+            map.put("expediente", expedienteInt);
+            map.put("listaEntidad", ServicioPersonal.ListaEntidades());
+
+            map.addAttribute("idExpediente", idExpediente);
+
+        } else {
+
+            return new ModelAndView("redirect:/famint", map);
+        }
         return new ModelAndView("/Personal/fam_inter/datos_reg", map);
     }
 
-    @RequestMapping(value = "/AgregarFamInt", method = RequestMethod.POST)
+    @RequestMapping(value = "/AgregarFamInt", method = RequestMethod.GET)
     public ModelAndView AgregarFamInt(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -4482,7 +5062,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/ActualizarAdoptanteInt", method = RequestMethod.POST)
-    public ModelAndView ActualizarAdoptanteInt(ModelMap map, HttpSession session,
+    public ModelAndView ActualizarAdoptanteInt_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "adoptante") String adoptante,
             @RequestParam(value = "nombre", required = false) String nombre,
             @RequestParam(value = "apellidoP", required = false) String apellidoP,
@@ -4525,261 +5105,51 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        if (adoptante.equals("el")) {
-            El.setInfoFamilia(infoFam);
-            String genero = "m";
-            char sexo = genero.charAt(0);
-            El.setSexo(sexo);
-            El.setNombre(nombre);
-            El.setApellidoP(apellidoP);
-            El.setApellidoM(apellidoM);
-            if (fechaNac != null && !fechaNac.equals("")) {
-                El.setFechaNac(format.stringToDate(fechaNac));
-            }
-            if (fechaNac == null || fechaNac.equals("")) {
-                El.setFechaNac(null);
-            }
-            El.setLugarNac(lugarNac);
-            El.setDepaNac(depNac);
-            El.setPaisNac(paisNac);
-            if (doc != null && !doc.equals("")) {
-                char d = doc.charAt(0);
-                El.setTipoDoc(d);
-            }
-            El.setNDoc(numDoc);
-            El.setPasaporte(pasaporte);
-            El.setCelular(numCel);
-            El.setCorreo(correo);
-            infoFam.setEstadoCivil(estadoCivil);
-            if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")) {
-                infoFam.setFechaMatrimonio(format.stringToDate(fechaMat));
-            } else if (fechaMat == null || fechaMat.equals("")) {
-                infoFam.setFechaMatrimonio(null);
-            }
-            El.setNivelInstruccion(nivelInstruccion);
-            if (culminoNivel != null && !culminoNivel.equals("")) {
-                El.setCulminoNivel(Short.parseShort(culminoNivel));
-            }
-            El.setProfesion(profesion);
-            /*Trabajo*/
-            if (trabDep != null && !trabDep.equals("")) {
-                El.setTrabajadorDepend(Short.parseShort(trabDep));
-            } else {
-                El.setTrabajadorDepend(null);
-            }
-            if (ocupacionDep != null && !ocupacionDep.equals("")) {
-                El.setOcupActualDep(ocupacionDep);
-            } else {
-                El.setOcupActualDep(null);
-            }
-            if (centroTrabajo != null && !centroTrabajo.equals("")) {
-                El.setCentroTrabajo(centroTrabajo);
-            } else {
-                El.setCentroTrabajo(null);
-            }
-            if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
-                El.setDireccionCentro(direccionTrabajo);
-            } else {
-                El.setDireccionCentro(null);
-            }
-            if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
-                El.setTelefonoCentro(telefonoTrabajo);
-            } else {
-                El.setTelefonoCentro(null);
-            }
-            if (ingresoDep != null && !ingresoDep.equals("")) {
-                El.setIngresoDep(Long.parseLong(ingresoDep));
-            } else {
-                El.setIngresoDep(null);
-            }
-            if (trabIndep != null && !trabIndep.equals("")) {
-                El.setTrabajadorIndepend(Short.parseShort(trabIndep));
-            } else {
-                El.setTrabajadorIndepend(null);
-            }
-            if (ocupacionInd != null && !ocupacionInd.equals("")) {
-                El.setOcupActualInd(ocupacionInd);
-            } else {
-                El.setOcupActualInd(null);
-            }
+        session.setAttribute("adoptante", adoptante);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("fechaNac", fechaNac);
+        session.setAttribute("lugarNac", lugarNac);
+        session.setAttribute("depNac", depNac);
+        session.setAttribute("paisNac", paisNac);
+        session.setAttribute("doc", doc);
+        session.setAttribute("numDoc", numDoc);
+        session.setAttribute("pasaporte", pasaporte);
 
-            if (ingresoInd != null && !ocupacionInd.equals("")) {
-                El.setIngresoIndep(Long.parseLong(ingresoInd));
-            } else {
-                El.setIngresoIndep(null);
-            }
-            /*Fin Trabajo*/
-            if (seguroSalud != null && !seguroSalud.equals("")) {
-                El.setSeguroSalud(Short.parseShort(seguroSalud));
-            }
-            El.setTipoSeguro(tipoSeguro);
-            if (seguroVida != null && !seguroVida.equals("")) {
-                El.setSeguroVida(Short.parseShort(seguroVida));
-            }
-            if (sisPensiones != null && !sisPensiones.equals("")) {
-                El.setSistPensiones(Short.parseShort(sisPensiones));
-            }
-            El.setSaludActual(estadoActual);
+        session.setAttribute("numCel", numCel);
+        session.setAttribute("correo", correo);
+        session.setAttribute("estadoCivil", estadoCivil);
+        session.setAttribute("fechaMat", fechaMat);
+        session.setAttribute("nivelInstruccion", nivelInstruccion);
+        session.setAttribute("culminoNivel", culminoNivel);
+        session.setAttribute("profesion", profesion);
+        session.setAttribute("trabDep", trabDep);
+        session.setAttribute("ocupacionDep", ocupacionDep);
+        session.setAttribute("centroTrabajo", centroTrabajo);
 
-            ServicioMain.updateInfoFam(infoFam);
-            ServicioPersonal.crearActualizarAdoptante(El);
-            if (El.getApellidoP() != null && Ella.getApellidoP() != null) {
-                expedienteInt.setExpediente(El.getApellidoP() + "-" + Ella.getApellidoP());
-            } else if (El.getApellidoP() != null) {
-                expedienteInt.setExpediente(El.getApellidoP());
-            } else if (Ella.getApellidoP() != null) {
-                expedienteInt.setExpediente(Ella.getApellidoP());
-            }
-            servicioEtapa.updateExpedienteFamilia(expedienteInt);
+        session.setAttribute("direccionTrabajo", direccionTrabajo);
+        session.setAttribute("telefonoTrabajo", telefonoTrabajo);
+        session.setAttribute("ingresoDep", ingresoDep);
+        session.setAttribute("trabIndep", trabIndep);
+        session.setAttribute("ocupacionInd", ocupacionInd);
+        session.setAttribute("ingresoInd", ingresoInd);
+        session.setAttribute("seguroSalud", seguroSalud);
+        session.setAttribute("tipoSeguro", tipoSeguro);
+        session.setAttribute("seguroVida", seguroVida);
+        session.setAttribute("sisPensiones", sisPensiones);
 
-            String mensaje_log = "Se editó el Adoptante con nombre, " + El.getNombre() + " " + El.getApellidoP()
-                    + " y ID:" + String.valueOf(El.getIdadoptante());
-            String Tipo_registro = "Adoptante";
+        session.setAttribute("estadoActual", estadoActual);
+        session.setAttribute("volver", volver);
+        session.setAttribute("idExpediente", idExpediente);
 
-            try {
-                String Numero_registro = String.valueOf(El.getIdadoptante());;
-
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
-
-            map.put("df", format);
-            map.put("infoFam", infoFam);
-            map.put("El", El);
-            map.addAttribute("volver", volver);
-            map.addAttribute("idExpediente", idExpediente);
-            return new ModelAndView("/Personal/fam_inter/datos_el", map);
-        } else {
-            Ella.setInfoFamilia(infoFam);
-            String genero = "f";
-            char sexo = genero.charAt(0);
-            Ella.setSexo(sexo);
-            Ella.setNombre(nombre);
-            Ella.setApellidoP(apellidoP);
-            Ella.setApellidoM(apellidoM);
-            if (fechaNac != null && !fechaNac.equals("")) {
-                Ella.setFechaNac(format.stringToDate(fechaNac));
-            }
-            if (fechaNac == null || fechaNac.equals("")) {
-                Ella.setFechaNac(null);
-            }
-            Ella.setLugarNac(lugarNac);
-            Ella.setDepaNac(depNac);
-            Ella.setPaisNac(paisNac);
-            if (doc != null && !doc.equals("")) {
-                char d = doc.charAt(0);
-                Ella.setTipoDoc(d);
-            }
-            Ella.setNDoc(numDoc);
-            Ella.setPasaporte(pasaporte);
-            Ella.setCelular(numCel);
-            Ella.setCorreo(correo);
-            infoFam.setEstadoCivil(estadoCivil);
-            if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")) {
-                infoFam.setFechaMatrimonio(format.stringToDate(fechaMat));
-            } else if (fechaMat == null || fechaMat.equals("")) {
-                infoFam.setFechaMatrimonio(null);
-            }
-            Ella.setNivelInstruccion(nivelInstruccion);
-            if (culminoNivel != null && !culminoNivel.equals("")) {
-                Ella.setCulminoNivel(Short.parseShort(culminoNivel));
-            }
-            Ella.setProfesion(profesion);
-            /*Trabajo*/
-            if (trabDep != null && !trabDep.equals("")) {
-                Ella.setTrabajadorDepend(Short.parseShort(trabDep));
-            } else {
-                Ella.setTrabajadorDepend(null);
-            }
-            if (ocupacionDep != null && !ocupacionDep.equals("")) {
-                Ella.setOcupActualDep(ocupacionDep);
-            } else {
-                Ella.setOcupActualDep(null);
-            }
-            if (centroTrabajo != null && !centroTrabajo.equals("")) {
-                Ella.setCentroTrabajo(centroTrabajo);
-            } else {
-                Ella.setCentroTrabajo(null);
-            }
-            if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
-                Ella.setDireccionCentro(direccionTrabajo);
-            } else {
-                Ella.setDireccionCentro(null);
-            }
-            if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
-                Ella.setTelefonoCentro(telefonoTrabajo);
-            } else {
-                Ella.setTelefonoCentro(null);
-            }
-            if (ingresoDep != null && !ingresoDep.equals("")) {
-                Ella.setIngresoDep(Long.parseLong(ingresoDep));
-            } else {
-                Ella.setIngresoDep(null);
-            }
-            if (trabIndep != null && !trabIndep.equals("")) {
-                Ella.setTrabajadorIndepend(Short.parseShort(trabIndep));
-            } else {
-                Ella.setTrabajadorIndepend(null);
-            }
-            if (ocupacionInd != null && !ocupacionInd.equals("")) {
-                Ella.setOcupActualInd(ocupacionInd);
-            } else {
-                Ella.setOcupActualInd(null);
-            }
-
-            if (ingresoInd != null && !ocupacionInd.equals("")) {
-                Ella.setIngresoIndep(Long.parseLong(ingresoInd));
-            } else {
-                Ella.setIngresoIndep(null);
-            }
-            /*Fin Trabajo*/
-            if (seguroSalud != null && !seguroSalud.equals("")) {
-                Ella.setSeguroSalud(Short.parseShort(seguroSalud));
-            }
-            Ella.setTipoSeguro(tipoSeguro);
-            if (seguroVida != null && !seguroVida.equals("")) {
-                Ella.setSeguroVida(Short.parseShort(seguroVida));
-            }
-            if (sisPensiones != null && !sisPensiones.equals("")) {
-                Ella.setSistPensiones(Short.parseShort(sisPensiones));
-            }
-            Ella.setSaludActual(estadoActual);
-
-            ServicioPersonal.crearActualizarAdoptante(Ella);
-            ServicioMain.updateInfoFam(infoFam);
-            if (El.getApellidoP() != null && Ella.getApellidoP() != null) {
-                expedienteInt.setExpediente(El.getApellidoP() + "-" + Ella.getApellidoP());
-            } else if (El.getApellidoP() != null) {
-                expedienteInt.setExpediente(El.getApellidoP());
-            } else if (Ella.getApellidoP() != null) {
-                expedienteInt.setExpediente(Ella.getApellidoP());
-            }
-            servicioEtapa.updateExpedienteFamilia(expedienteInt);
-
-            String mensaje_log = "Se editó la Adoptante con nombre, " + Ella.getNombre() + " " + Ella.getApellidoP()
-                    + " y ID:" + String.valueOf(Ella.getIdadoptante());
-            String Tipo_registro = "Adoptante";
-
-            try {
-                String Numero_registro = String.valueOf(Ella.getIdadoptante());;
-
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
-
-            map.put("df", format);
-            map.put("infoFam", infoFam);
-            map.put("Ella", Ella);
-            map.addAttribute("volver", volver);
-            map.addAttribute("idExpediente", idExpediente);
-            return new ModelAndView("/Personal/fam_inter/datos_ella", map);
-
-        }
+        return new ModelAndView("redirect:/ActualizarAdoptanteInt", map);
 
     }
 
-    @RequestMapping(value = "/VerInfoRegInt", method = RequestMethod.POST)
-    public ModelAndView VerInfoRegInt(ModelMap map, @RequestParam(value = "idExpediente", required = false) String idExpediente, HttpSession session) {
+    @RequestMapping(value = "/ActualizarAdoptanteInt", method = RequestMethod.GET)
+    public ModelAndView ActualizarAdoptanteInt_GET(ModelMap map, HttpSession session
+    ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -4787,11 +5157,344 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
-        map.put("df", format);
-        map.put("infoFam", infoFam);
-        map.put("Ella", Ella);
-        map.addAttribute("idExpediente", idExpediente);
+        if (session.getAttribute("adoptante") != null) {
+
+            String adoptante = (String) session.getAttribute("adoptante");
+            String nombre = (String) session.getAttribute("nombre");
+            String apellidoP = (String) session.getAttribute("apellidoP");
+            String apellidoM = (String) session.getAttribute("apellidoM");
+            String fechaNac = (String) session.getAttribute("fechaNac");
+            String lugarNac = (String) session.getAttribute("lugarNac");
+            String depNac = (String) session.getAttribute("depNac");
+            String paisNac = (String) session.getAttribute("paisNac");
+            String doc = (String) session.getAttribute("doc");
+            String numDoc = (String) session.getAttribute("numDoc");
+
+            String pasaporte = (String) session.getAttribute("pasaporte");
+            String numCel = (String) session.getAttribute("numCel");
+            String correo = (String) session.getAttribute("correo");
+            String estadoCivil = (String) session.getAttribute("estadoCivil");
+            String fechaMat = (String) session.getAttribute("fechaMat");
+            String nivelInstruccion = (String) session.getAttribute("nivelInstruccion");
+            String culminoNivel = (String) session.getAttribute("culminoNivel");
+            String profesion = (String) session.getAttribute("profesion");
+            String trabDep = (String) session.getAttribute("trabDep");
+            String ocupacionDep = (String) session.getAttribute("ocupacionDep");
+
+            String centroTrabajo = (String) session.getAttribute("centroTrabajo");
+            String direccionTrabajo = (String) session.getAttribute("direccionTrabajo");
+            String telefonoTrabajo = (String) session.getAttribute("telefonoTrabajo");
+            String ingresoDep = (String) session.getAttribute("ingresoDep");
+            String trabIndep = (String) session.getAttribute("trabIndep");
+            String ocupacionInd = (String) session.getAttribute("ocupacionInd");
+            String ingresoInd = (String) session.getAttribute("ingresoInd");
+            String seguroSalud = (String) session.getAttribute("seguroSalud");
+            String tipoSeguro = (String) session.getAttribute("tipoSeguro");
+            String seguroVida = (String) session.getAttribute("seguroVida");
+
+            String sisPensiones = (String) session.getAttribute("sisPensiones");
+            String estadoActual = (String) session.getAttribute("estadoActual");
+            String volver = (String) session.getAttribute("volver");
+            String idExpediente = (String) session.getAttribute("idExpediente");
+
+            if (adoptante.equals("el")) {
+                El.setInfoFamilia(infoFam);
+                String genero = "m";
+                char sexo = genero.charAt(0);
+                El.setSexo(sexo);
+                El.setNombre(nombre);
+                El.setApellidoP(apellidoP);
+                El.setApellidoM(apellidoM);
+                if (fechaNac != null && !fechaNac.equals("")) {
+                    El.setFechaNac(format.stringToDate(fechaNac));
+                }
+                if (fechaNac == null || fechaNac.equals("")) {
+                    El.setFechaNac(null);
+                }
+                El.setLugarNac(lugarNac);
+                El.setDepaNac(depNac);
+                El.setPaisNac(paisNac);
+                if (doc != null && !doc.equals("")) {
+                    char d = doc.charAt(0);
+                    El.setTipoDoc(d);
+                }
+                El.setNDoc(numDoc);
+                El.setPasaporte(pasaporte);
+                El.setCelular(numCel);
+                El.setCorreo(correo);
+                infoFam.setEstadoCivil(estadoCivil);
+                if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")) {
+                    infoFam.setFechaMatrimonio(format.stringToDate(fechaMat));
+                } else if (fechaMat == null || fechaMat.equals("")) {
+                    infoFam.setFechaMatrimonio(null);
+                }
+                El.setNivelInstruccion(nivelInstruccion);
+                if (culminoNivel != null && !culminoNivel.equals("")) {
+                    El.setCulminoNivel(Short.parseShort(culminoNivel));
+                }
+                El.setProfesion(profesion);
+                /*Trabajo*/
+                if (trabDep != null && !trabDep.equals("")) {
+                    El.setTrabajadorDepend(Short.parseShort(trabDep));
+                } else {
+                    El.setTrabajadorDepend(null);
+                }
+                if (ocupacionDep != null && !ocupacionDep.equals("")) {
+                    El.setOcupActualDep(ocupacionDep);
+                } else {
+                    El.setOcupActualDep(null);
+                }
+                if (centroTrabajo != null && !centroTrabajo.equals("")) {
+                    El.setCentroTrabajo(centroTrabajo);
+                } else {
+                    El.setCentroTrabajo(null);
+                }
+                if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
+                    El.setDireccionCentro(direccionTrabajo);
+                } else {
+                    El.setDireccionCentro(null);
+                }
+                if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
+                    El.setTelefonoCentro(telefonoTrabajo);
+                } else {
+                    El.setTelefonoCentro(null);
+                }
+                if (ingresoDep != null && !ingresoDep.equals("")) {
+                    El.setIngresoDep(Long.parseLong(ingresoDep));
+                } else {
+                    El.setIngresoDep(null);
+                }
+                if (trabIndep != null && !trabIndep.equals("")) {
+                    El.setTrabajadorIndepend(Short.parseShort(trabIndep));
+                } else {
+                    El.setTrabajadorIndepend(null);
+                }
+                if (ocupacionInd != null && !ocupacionInd.equals("")) {
+                    El.setOcupActualInd(ocupacionInd);
+                } else {
+                    El.setOcupActualInd(null);
+                }
+
+                if (ingresoInd != null && !ocupacionInd.equals("")) {
+                    El.setIngresoIndep(Long.parseLong(ingresoInd));
+                } else {
+                    El.setIngresoIndep(null);
+                }
+                /*Fin Trabajo*/
+                if (seguroSalud != null && !seguroSalud.equals("")) {
+                    El.setSeguroSalud(Short.parseShort(seguroSalud));
+                }
+                El.setTipoSeguro(tipoSeguro);
+                if (seguroVida != null && !seguroVida.equals("")) {
+                    El.setSeguroVida(Short.parseShort(seguroVida));
+                }
+                if (sisPensiones != null && !sisPensiones.equals("")) {
+                    El.setSistPensiones(Short.parseShort(sisPensiones));
+                }
+                El.setSaludActual(estadoActual);
+
+                ServicioMain.updateInfoFam(infoFam);
+                ServicioPersonal.crearActualizarAdoptante(El);
+                if (El.getApellidoP() != null && Ella.getApellidoP() != null) {
+                    expedienteInt.setExpediente(El.getApellidoP() + "-" + Ella.getApellidoP());
+                } else if (El.getApellidoP() != null) {
+                    expedienteInt.setExpediente(El.getApellidoP());
+                } else if (Ella.getApellidoP() != null) {
+                    expedienteInt.setExpediente(Ella.getApellidoP());
+                }
+                servicioEtapa.updateExpedienteFamilia(expedienteInt);
+
+                String mensaje_log = "Se editó el Adoptante con nombre, " + El.getNombre() + " " + El.getApellidoP()
+                        + " y ID:" + String.valueOf(El.getIdadoptante());
+                String Tipo_registro = "Adoptante";
+
+                try {
+                    String Numero_registro = String.valueOf(El.getIdadoptante());;
+
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
+                }
+
+                map.put("df", format);
+                map.put("infoFam", infoFam);
+                map.put("El", El);
+                map.addAttribute("volver", volver);
+                map.addAttribute("idExpediente", idExpediente);
+
+                session.removeAttribute("adoptante");
+                return new ModelAndView("/Personal/fam_inter/datos_el", map);
+
+            } else {
+                Ella.setInfoFamilia(infoFam);
+                String genero = "f";
+                char sexo = genero.charAt(0);
+                Ella.setSexo(sexo);
+                Ella.setNombre(nombre);
+                Ella.setApellidoP(apellidoP);
+                Ella.setApellidoM(apellidoM);
+                if (fechaNac != null && !fechaNac.equals("")) {
+                    Ella.setFechaNac(format.stringToDate(fechaNac));
+                }
+                if (fechaNac == null || fechaNac.equals("")) {
+                    Ella.setFechaNac(null);
+                }
+                Ella.setLugarNac(lugarNac);
+                Ella.setDepaNac(depNac);
+                Ella.setPaisNac(paisNac);
+                if (doc != null && !doc.equals("")) {
+                    char d = doc.charAt(0);
+                    Ella.setTipoDoc(d);
+                }
+                Ella.setNDoc(numDoc);
+                Ella.setPasaporte(pasaporte);
+                Ella.setCelular(numCel);
+                Ella.setCorreo(correo);
+                infoFam.setEstadoCivil(estadoCivil);
+                if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")) {
+                    infoFam.setFechaMatrimonio(format.stringToDate(fechaMat));
+                } else if (fechaMat == null || fechaMat.equals("")) {
+                    infoFam.setFechaMatrimonio(null);
+                }
+                Ella.setNivelInstruccion(nivelInstruccion);
+                if (culminoNivel != null && !culminoNivel.equals("")) {
+                    Ella.setCulminoNivel(Short.parseShort(culminoNivel));
+                }
+                Ella.setProfesion(profesion);
+                /*Trabajo*/
+                if (trabDep != null && !trabDep.equals("")) {
+                    Ella.setTrabajadorDepend(Short.parseShort(trabDep));
+                } else {
+                    Ella.setTrabajadorDepend(null);
+                }
+                if (ocupacionDep != null && !ocupacionDep.equals("")) {
+                    Ella.setOcupActualDep(ocupacionDep);
+                } else {
+                    Ella.setOcupActualDep(null);
+                }
+                if (centroTrabajo != null && !centroTrabajo.equals("")) {
+                    Ella.setCentroTrabajo(centroTrabajo);
+                } else {
+                    Ella.setCentroTrabajo(null);
+                }
+                if (direccionTrabajo != null && !direccionTrabajo.equals("")) {
+                    Ella.setDireccionCentro(direccionTrabajo);
+                } else {
+                    Ella.setDireccionCentro(null);
+                }
+                if (telefonoTrabajo != null && !telefonoTrabajo.equals("")) {
+                    Ella.setTelefonoCentro(telefonoTrabajo);
+                } else {
+                    Ella.setTelefonoCentro(null);
+                }
+                if (ingresoDep != null && !ingresoDep.equals("")) {
+                    Ella.setIngresoDep(Long.parseLong(ingresoDep));
+                } else {
+                    Ella.setIngresoDep(null);
+                }
+                if (trabIndep != null && !trabIndep.equals("")) {
+                    Ella.setTrabajadorIndepend(Short.parseShort(trabIndep));
+                } else {
+                    Ella.setTrabajadorIndepend(null);
+                }
+                if (ocupacionInd != null && !ocupacionInd.equals("")) {
+                    Ella.setOcupActualInd(ocupacionInd);
+                } else {
+                    Ella.setOcupActualInd(null);
+                }
+
+                if (ingresoInd != null && !ocupacionInd.equals("")) {
+                    Ella.setIngresoIndep(Long.parseLong(ingresoInd));
+                } else {
+                    Ella.setIngresoIndep(null);
+                }
+                /*Fin Trabajo*/
+                if (seguroSalud != null && !seguroSalud.equals("")) {
+                    Ella.setSeguroSalud(Short.parseShort(seguroSalud));
+                }
+                Ella.setTipoSeguro(tipoSeguro);
+                if (seguroVida != null && !seguroVida.equals("")) {
+                    Ella.setSeguroVida(Short.parseShort(seguroVida));
+                }
+                if (sisPensiones != null && !sisPensiones.equals("")) {
+                    Ella.setSistPensiones(Short.parseShort(sisPensiones));
+                }
+                Ella.setSaludActual(estadoActual);
+
+                ServicioPersonal.crearActualizarAdoptante(Ella);
+                ServicioMain.updateInfoFam(infoFam);
+                if (El.getApellidoP() != null && Ella.getApellidoP() != null) {
+                    expedienteInt.setExpediente(El.getApellidoP() + "-" + Ella.getApellidoP());
+                } else if (El.getApellidoP() != null) {
+                    expedienteInt.setExpediente(El.getApellidoP());
+                } else if (Ella.getApellidoP() != null) {
+                    expedienteInt.setExpediente(Ella.getApellidoP());
+                }
+                servicioEtapa.updateExpedienteFamilia(expedienteInt);
+
+                String mensaje_log = "Se editó la Adoptante con nombre, " + Ella.getNombre() + " " + Ella.getApellidoP()
+                        + " y ID:" + String.valueOf(Ella.getIdadoptante());
+                String Tipo_registro = "Adoptante";
+
+                try {
+                    String Numero_registro = String.valueOf(Ella.getIdadoptante());;
+
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
+                }
+
+                map.put("df", format);
+                map.put("infoFam", infoFam);
+                map.put("Ella", Ella);
+                map.addAttribute("volver", volver);
+                map.addAttribute("idExpediente", idExpediente);
+                session.removeAttribute("adoptante");
+                return new ModelAndView("/Personal/fam_inter/datos_ella", map);
+
+            }
+
+        } else {
+
+            return new ModelAndView("redirect:/famint", map);
+        }
+
+    }
+
+    @RequestMapping(value = "/VerInfoRegInt", method = RequestMethod.POST)
+    public ModelAndView VerInfoRegInt_POST(ModelMap map,
+            @RequestParam(value = "idExpediente", required = false) String idExpediente, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        session.setAttribute("idExpediente", idExpediente);
+
+        return new ModelAndView("redirect:/VerInfoRegInt", map);
+    }
+
+    @RequestMapping(value = "/VerInfoRegInt", method = RequestMethod.GET)
+    public ModelAndView VerInfoRegInt_GET(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        if (session.getAttribute("idExpediente") != null) {
+            String idExpediente = (String) session.getAttribute("idExpediente");
+
+            //map.put("listaAutoridades", ServicioPersonal.ListaAutoridades());
+            map.put("df", format);
+            map.put("infoFam", infoFam);
+            map.put("Ella", Ella);
+            map.addAttribute("idExpediente", idExpediente);
+        } else {
+            return new ModelAndView("redirect:/famint", map);
+
+        }
         return new ModelAndView("/Personal/fam_inter/datos_ella", map);
     }
 
@@ -5218,7 +5921,7 @@ public class personal {
         return new ModelAndView("/Personal/Informativa/lista_fam_ins2", map);
     }
 
-    @RequestMapping(value = "/HistorioSesionesTalleres", method = RequestMethod.POST)
+    @RequestMapping(value = "/HistorioSesionesTalleres", method = RequestMethod.GET)
     public ModelAndView HistorioSesionesTalleres(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -5234,13 +5937,32 @@ public class personal {
     }
 
     @RequestMapping(value = "/PersonalFiltrarSesionTalleres", method = RequestMethod.POST)
-    public ModelAndView PersonalFiltrarSesionTalleres(ModelMap map, HttpSession session, @RequestParam("year") Long year) {
+    public ModelAndView PersonalFiltrarSesionTalleres_POST(ModelMap map,
+            HttpSession session, @RequestParam("year") long year) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("year", year);
+
+        return new ModelAndView("redirect:/PersonalFiltrarSesionTalleres", map);
+    }
+
+    @RequestMapping(value = "/PersonalFiltrarSesionTalleres", method = RequestMethod.GET)
+    public ModelAndView PersonalFiltrarSesionTalleres_GET(ModelMap map,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        long year = (long) session.getAttribute("year");
+
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
         map.put("formato", format);
