@@ -2144,7 +2144,9 @@ public class main {
     }
 
     @RequestMapping(value = "/DetalleSesion", method = RequestMethod.POST)
-    public ModelAndView DetalleSesion(ModelMap map, HttpSession session, @RequestParam(value = "idSesion") long idSesion) {
+    public ModelAndView DetalleSesion(ModelMap map, HttpSession session,
+            @RequestParam(value = "idSesion") long idSesion, 
+            @RequestParam(value = "volver", required = false) String volver) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -2158,6 +2160,7 @@ public class main {
         map.put("estado", etapaOrigen);
         map.put("expediente", expediente);
         map.put("sesion", tempSes);
+        map.put("volver", volver);
         return new ModelAndView("/Personal/familia/info_adop/detalle_sesion", map);
     }
 
@@ -2167,7 +2170,8 @@ public class main {
             @RequestParam(value = "tipoTaller") String tipoTaller,
             @RequestParam(value = "nombreTaller") String nombreTaller,
             @RequestParam(value = "nombreGrupo") String nombreGrupo,
-            @RequestParam(value = "nombreTurno") String nombreTurno
+            @RequestParam(value = "nombreTurno") String nombreTurno,
+            @RequestParam(value = "volver", required = false) String volver            
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2190,6 +2194,8 @@ public class main {
         map.put("df", df);
         map.put("estado", etapaOrigen);
         map.put("expediente", expediente);
+        map.put("volver", volver);
+        
         return new ModelAndView("/Personal/familia/info_adop/detalle_taller", map);
     }
 

@@ -150,6 +150,7 @@ response.addHeader("Cache-Control", "no-store");
                                                     <td>
                                                         <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleSesion" method="post">
                                                             <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}" >
+                                                            <input hidden id="volver" name="volver" value="${volver}">
                                                             <button class="btn btn-default">Detalles</button>
                                                         </form>
                                                     </td>
@@ -197,6 +198,7 @@ response.addHeader("Cache-Control", "no-store");
                                                                 <input hidden name="nombreGrupo" id="nombreGrupo" value="${reunion.getReunion().getTurno2().getGrupo().getNombre()}" > 
                                                                 <input hidden name="nombreTurno" id="nombreTurno" value="${reunion.getReunion().getTurno2().getNombre()}" >
                                                                 <input hidden name="idTurno" id="idTurno" value="${reunion.getReunion().getTurno2().getIdturno2()}" >
+                                                                <input hidden id="volver" name="volver" value="${volver}">
                                                                 <button class="btn btn-default">Detalles</button>
                                                             </form>
                                                         </td>
