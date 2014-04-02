@@ -2026,4 +2026,22 @@ public class HiberPersonal {
         
     }
     
+    public Taller getTallerByIdReunion(long id) {
+
+        Session session = sessionFactory.getCurrentSession();
+        Reunion reun = new Reunion();
+
+        session.beginTransaction();
+        String hql = "From Reunion R where R.id = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", id);
+        Object queryResult = query.uniqueResult();
+
+        reun = (Reunion) queryResult;
+        Hibernate.initialize(reun.getTurno2().getGrupo().getTaller());
+        Taller tempT = reun.getTurno2().getGrupo().getTaller();
+        return tempT;
+
+    }
+    
 }

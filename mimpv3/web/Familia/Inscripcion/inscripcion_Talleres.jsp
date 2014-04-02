@@ -111,7 +111,7 @@
                         </div>
                         </c:if>
                         <c:if test="${inscrito == true}">
-                            <h3><strong>Usted se ha inscrito a las siguientes Reuniones como parte del taller</strong></h3>
+                            <h3><strong>Usted se ha inscrito a las siguientes Reuniones como parte del taller: "${nombreTaller}"</strong></h3>
                             <br>
                             <div class="table-responsive">
                             <table class="table table-bordered table-striped">
