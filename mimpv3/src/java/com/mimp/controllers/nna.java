@@ -1098,6 +1098,7 @@ public class nna {
         ServicioNna.updateNna(tempNna);
         if (clasificacion.equals("seguimiento")) {
             tempExp.setAdoptable(Short.parseShort("1"));
+            tempExp.setEstado("eval");
         }
 //        Date utiDate = new Date();
 //        java.sql.Date fechaAct = new java.sql.Date(utiDate.getTime());
@@ -1284,6 +1285,7 @@ public class nna {
         ServicioNna.updateNna(tempNna);
         if (clasificacion.equals("seguimiento")) {
             tempExp.setAdoptable(Short.parseShort("1"));
+            tempExp.setEstado("eval");
         }
         tempExp.setNna(tempNna);
         ServicioNna.crearExpNna(tempExp);
@@ -1461,6 +1463,7 @@ public class nna {
         ServicioNna.updateNna(tempNna);
         if (clasificacion.equals("seguimiento")) {
             tempExp.setAdoptable(Short.parseShort("1"));
+            tempExp.setEstado("eval");
         }
         tempExp.setNna(tempNna);
         ServicioNna.crearExpNna(tempExp);
@@ -1857,6 +1860,7 @@ public class nna {
         tempExp.setNacional(Short.parseShort("0"));
         if (clasificacion.equals("seguimiento")) {
             tempExp.setAdoptable(Short.parseShort("1"));
+            tempExp.setEstado("eval");
         }
         ServicioNna.updateExpNna(tempExp);
 
@@ -2028,6 +2032,7 @@ public class nna {
         tempExp.setNacional(Short.parseShort("0"));
         if (clasificacion.equals("seguimiento")) {
             tempExp.setAdoptable(Short.parseShort("1"));
+            tempExp.setEstado("eval");
         }
         ServicioNna.updateExpNna(tempExp);
 

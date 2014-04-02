@@ -221,10 +221,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="selectbasic">Profesión/Ocupación</label>
                                         <div class="controls">
-                                            <select disabled id="selectbasic" name="selectbasic" class="input-xlarge">
-                                                <option ${el.getProfesion() == 'ingeniero' ? 'selected' : ''}>Ingeniero</option>
-                                                <option ${el.getProfesion() == 'abogado' ? 'selected' : ''}>Abogado</option>
-                                            </select>
+                                            <input disabled id="textinput" name="textinput" value="${el.getProfesion()}" type="text" placeholder="Numero Documento" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -339,10 +336,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="selectbasic">Profesión/Ocupación</label>
                                         <div class="controls">
-                                            <select disabled id="selectbasic" name="selectbasic" class="input-xlarge">
-                                                <option ${ella.getProfesion() == 'ingeniero' ? 'selected' : ''}>Ingeniero</option>
-                                                <option ${ella.getProfesion() == 'abogado' ? 'selected' : ''}>Abogado</option>
-                                            </select>
+                                            <input disabled id="textinput" name="textinput" value="${ella.getProfesion()}" type="text" placeholder="Numero Documento" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>

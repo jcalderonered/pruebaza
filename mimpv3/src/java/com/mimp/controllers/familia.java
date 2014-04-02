@@ -9,6 +9,7 @@ import java.util.*;
 import com.mimp.bean.*;
 import com.mimp.hibernate.HiberFamilia;
 import com.mimp.hibernate.HiberMain;
+import com.mimp.hibernate.HiberPersonal;
 import com.mimp.util.dateFormat;
 import com.mimp.util.timeStampFormat;
 import javax.annotation.Resource;
@@ -36,7 +37,9 @@ public class familia {
     private HiberFamilia ServicioFamilia = new HiberFamilia();
     @Resource(name = "HiberMain")
     private HiberMain ServicioMain = new HiberMain();
-
+    @Resource(name = "HiberPersonal")
+    private HiberPersonal ServicioPersonal = new HiberPersonal();
+    
     @RequestMapping("/inicioFam")
     public ModelAndView InicioFam(ModelMap map, HttpSession session) {
         Familia usuario = (Familia) session.getAttribute("usuario");
@@ -70,11 +73,14 @@ public class familia {
                 departamento = ses.getUnidad();
             }
         }
+        String nombreTaller = "";
         String pagina;
         boolean inscritoTaller = false;
         ArrayList<AsistenciaFR> allReuniones = new ArrayList();
         allReuniones = ServicioFamilia.listaReunionesInscritasFamilia(usuario.getIdfamilia());
         if (!allReuniones.isEmpty()) {
+            Taller temp = ServicioPersonal.getTallerByIdReunion(allReuniones.get(0).getReunion().getIdreunion()); 
+            nombreTaller = temp.getNombre();
             for (AsistenciaFR asistenciaFR : allReuniones) {
                 if (fechaactual.before(asistenciaFR.getReunion().getFecha())) {
                     inscritoTaller = true;
@@ -146,6 +152,7 @@ public class familia {
             if (inscritoTaller) {
                 map.put("inscrito", "true");
                 map.put("listaReuniones", allReuniones);
+                map.put("nombreTaller",nombreTaller);
             } else {
                 map.put("inscrito", "false");
             }
