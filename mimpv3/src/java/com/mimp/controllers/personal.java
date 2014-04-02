@@ -150,7 +150,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/FiltrarNna", method = RequestMethod.POST)
-    public ModelAndView FiltrarNna(ModelMap map, HttpSession session,
+    public ModelAndView FiltrarNna_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "nombre", required = false) String nombre,
             @RequestParam(value = "apellidoP", required = false) String apellidoP,
             @RequestParam(value = "apellidoM", required = false) String apellidoM,
@@ -180,11 +180,48 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("nombreAdop", nombreAdop);
+        session.setAttribute("apellidoPAdop", apellidoPAdop);
+        session.setAttribute("apellidoMAdop", apellidoMAdop);
+        session.setAttribute("estado", estado);
+        session.setAttribute("edad", edad);
+        session.setAttribute("idCar", car);
+        session.setAttribute("sexo", sexo);
+        session.setAttribute("prioritario", prioritario);
+        
+        return new ModelAndView("redirect:/FiltrarNna", map);
+    }
+
+    @RequestMapping(value = "/FiltrarNna", method = RequestMethod.GET)
+    public ModelAndView FiltrarNna_GET(ModelMap map, HttpSession session
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        String nombre = (String) session.getAttribute("nombre");
+        String apellidoP = (String) session.getAttribute("apellidoP");
+        String apellidoM = (String) session.getAttribute("apellidoM");
+        String nombreAdop = (String) session.getAttribute("nombreAdop");
+        String apellidoPAdop = (String) session.getAttribute("apellidoPAdop");
+        String apellidoMAdop = (String) session.getAttribute("apellidoMAdop");
+        String estado = (String) session.getAttribute("estado");
+        String edad = (String) session.getAttribute("edad");
+        String car = (String) session.getAttribute("idCar");
+        String sexo = (String) session.getAttribute("sexo");
+        String prioritario = (String) session.getAttribute("prioritario");
+
         ExpedienteNna datosExp = new ExpedienteNna();
         Nna datosNna = new Nna();
 
         datosExp.setNActual(nombreAdop);
-        datosExp.setApellidopActual(apellidoMAdop);
+        datosExp.setApellidopActual(apellidoPAdop);
         datosExp.setApellidomActual(apellidoMAdop);
         if (estado != null && !estado.equals("none")) {
             datosExp.setEstado(estado);
@@ -4018,11 +4055,11 @@ public class personal {
 
             session.setAttribute("idGrupo", idGrupo);
             session.setAttribute("idTaller", idTaller);
-        }else {
-        
-        long idTaller = (long) session.getAttribute("idTaller");
-        session.setAttribute("idTaller", idTaller);
-        return new ModelAndView("redirect:/PersonalEditarTaller", map);
+        } else {
+
+            long idTaller = (long) session.getAttribute("idTaller");
+            session.setAttribute("idTaller", idTaller);
+            return new ModelAndView("redirect:/PersonalEditarTaller", map);
         }
         return new ModelAndView("/Personal/Informativa/edicion_grupo", map);
     }
@@ -5936,7 +5973,7 @@ public class personal {
     }
 
     @RequestMapping(value = "/FiltrarFam", method = RequestMethod.POST)
-    public ModelAndView FiltrarFam(ModelMap map, HttpSession session,
+    public ModelAndView FiltrarFam_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "expediente", required = false) String expediente,
             @RequestParam(value = "HT", required = false) String HT,
             @RequestParam(value = "nacionalidad", required = false) String nacionalidad,
@@ -5950,6 +5987,34 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+
+        session.setAttribute("expediente", expediente);
+        session.setAttribute("HT", HT);
+        session.setAttribute("nacionalidad", nacionalidad);
+        session.setAttribute("estado", estado);
+        session.setAttribute("tipofamilia", tipofamilia);
+        session.setAttribute("resfamilia", resfamilia);
+        
+        return new ModelAndView("redirect:/FiltrarFam", map);
+
+    }
+    
+    @RequestMapping(value = "/FiltrarFam", method = RequestMethod.GET)
+    public ModelAndView FiltrarFam_GET(ModelMap map, HttpSession session            
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        
+        String expediente = (String) session.getAttribute("expediente");
+        String HT = (String) session.getAttribute("HT");
+        String nacionalidad = (String) session.getAttribute("nacionalidad");
+        String estado = (String) session.getAttribute("estado");
+        String tipofamilia = (String) session.getAttribute("tipofamilia");
+        String resfamilia = (String) session.getAttribute("resfamilia");
 
         ExpedienteFamilia datosExp = new ExpedienteFamilia();
         InfoFamilia infoFam = new InfoFamilia();
