@@ -819,12 +819,14 @@ public class main {
         String idExpediente = "";
         String volver = "";
         String estado = "";
-       
-            idFamilia = session.getAttribute("idFamilia").toString();
-            idExpediente = session.getAttribute("idExpediente").toString();
-            volver = session.getAttribute("volver").toString();
-            estado = session.getAttribute("estado").toString();
-       
+       // try {
+            idFamilia = (String) session.getAttribute("idFamilia");
+            idExpediente = (String)session.getAttribute("idExpediente");
+            volver =(String) session.getAttribute("volver");
+            estado = (String)session.getAttribute("estado");
+       // } catch (Exception ex) {
+         //   return new ModelAndView("redirect:/inicioper", map);
+       // }
        
 
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1055,20 +1057,18 @@ public class main {
         String nacionalidad = "";
         String tipofamilia = "";
         String estado2 = "";
-        try {
+        
             idNna = Long.parseLong(session.getAttribute("idNna").toString());
-            idFamilia = session.getAttribute("idFamilia").toString();
-            idExpediente = session.getAttribute("idExpediente").toString();
-            volver = session.getAttribute("volver").toString();
-            estado = session.getAttribute("estado").toString();
-            expediente2 = session.getAttribute("expediente2").toString();
-            HT = session.getAttribute("HT").toString();
-            nacionalidad = session.getAttribute("nacionalidad").toString();
-            tipofamilia = session.getAttribute("tipofamilia").toString();
-            estado2 = session.getAttribute("estado2").toString();
-        } catch (Exception ex) {
-            return new ModelAndView("redirect:/inicioper", map);
-        }
+            idFamilia = (String) session.getAttribute("idFamilia");
+            idExpediente = (String) session.getAttribute("idExpediente");
+            volver = (String) session.getAttribute("volver");
+            estado = (String) session.getAttribute("estado");
+            expediente2 = (String) session.getAttribute("expediente2");
+            HT = (String) session.getAttribute("HT");
+            nacionalidad = (String) session.getAttribute("nacionalidad");
+            tipofamilia = (String) session.getAttribute("tipofamilia");
+            estado2 = (String) session.getAttribute("estado2");
+        
         session.removeAttribute("estado");
         session.removeAttribute("idFamilia");
         session.removeAttribute("idExpediente");
