@@ -5057,7 +5057,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
         if (session.getAttribute("idExpediente") != null) {
-            long idExpediente = (long) session.getAttribute("idExpediente");
+            long idExpediente = Long.parseLong(session.getAttribute("idExpediente").toString());
 
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExpediente);
             expedienteInt = tempExp;
