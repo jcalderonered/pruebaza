@@ -803,27 +803,23 @@ public class main {
             @RequestParam(value = "estado", required = false) String estado,
             @RequestParam(value = "idFamilia", required = false) String idFamilia,
             @RequestParam(value = "idExpediente", required = false) String idExpediente,
-            @RequestParam(value = "volver", required = false) String volver,
-            @RequestParam(value = "idNna", required = false) Long idNna
+            @RequestParam(value = "volver", required = false) String volver
     ) {
         session.setAttribute("estado", estado);
         session.setAttribute("idFamilia",idFamilia);
         session.setAttribute("idExpediente",idExpediente);
-        session.setAttribute("volver",volver);
-        session.setAttribute("idNna",idNna);        
+        session.setAttribute("volver",volver);     
         
         return new ModelAndView("redirect:/IrPersonalFamilia", map);
     }
     
     @RequestMapping(value = "/IrPersonalFamilia", method = RequestMethod.GET)
     public ModelAndView IrPersonalFamilia_GET(ModelMap map, HttpSession session) {
-        long idNna = 0;
         String idFamilia = "";
         String idExpediente = "";
         String volver = "";
         String estado = "";
         try {
-            idNna = (long) session.getAttribute("idNna");
             idFamilia = session.getAttribute("idFamilia").toString();
             idExpediente = session.getAttribute("idExpediente").toString();
             volver = session.getAttribute("volver").toString();
@@ -835,7 +831,6 @@ public class main {
         session.removeAttribute("idFamilia");
         session.removeAttribute("idExpediente");
         session.removeAttribute("volver");
-        session.removeAttribute("idNna");
         
         
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1344,7 +1339,7 @@ public class main {
     }
 
     //
-    @RequestMapping(value = "/elSolicitante2", method = RequestMethod.GET)
+    @RequestMapping(value = "/elSolicitante2", method = RequestMethod.POST)
     public ModelAndView elSolicitante2(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
             @RequestParam(value = "expediente", required = false) String expediente2,
@@ -1353,6 +1348,42 @@ public class main {
             @RequestParam(value = "nacionalidad", required = false) String nacionalidad,
             @RequestParam(value = "tipofamilia", required = false) String tipofamilia,
             HttpSession session) {
+        session.setAttribute("volver",volver);
+        session.setAttribute("expediente2",expediente2);
+        session.setAttribute("estado2",estado2);
+        session.setAttribute("HT",HT);
+        session.setAttribute("nacionalidad",nacionalidad);
+        session.setAttribute("tipofamilia",tipofamilia);
+        
+        return new ModelAndView("redirect:/elSolicitante2", map);
+    }
+    
+    @RequestMapping(value = "/elSolicitante2", method = RequestMethod.GET)
+    public ModelAndView elSolicitante2(ModelMap map,
+            HttpSession session) {
+        String volver = "";
+        String expediente2 = "";
+        String estado2 = "";
+        String HT = "";
+        String nacionalidad = "";
+        String tipofamilia = "";
+        try {
+            volver = session.getAttribute("volver").toString();
+            expediente2 = session.getAttribute("expediente2").toString();
+            estado2 = session.getAttribute("estado2").toString();
+            HT = session.getAttribute("HT").toString();
+            nacionalidad = session.getAttribute("nacionalidad").toString();
+            tipofamilia = session.getAttribute("tipofamilia").toString();
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("volver");
+        session.removeAttribute("expediente2");
+        session.removeAttribute("estado2");
+        session.removeAttribute("HT");
+        session.removeAttribute("nacionalidad");
+        session.removeAttribute("tipofamilia");
+        
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
