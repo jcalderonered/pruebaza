@@ -517,7 +517,7 @@ public class main {
     }
 
     @RequestMapping(value = "/inscSesGrp", method = RequestMethod.POST)
-    public ModelAndView inscSesGrp(ModelMap map,
+    public ModelAndView inscSesGrp_POST(ModelMap map,
             @RequestParam("nombreEl") String nombreEl,
             @RequestParam("apellidoPEl") String apellidoPEl,
             @RequestParam("apellidoMEl") String apellidoMEl,
@@ -593,7 +593,7 @@ public class main {
     }
     
     @RequestMapping(value = "/inscSesGrp", method = RequestMethod.GET)
-    public ModelAndView inscSesGrp(ModelMap map,
+    public ModelAndView inscSesGrp_GET(ModelMap map,
             HttpSession session
     ) {
         long turno = 0;
@@ -797,15 +797,45 @@ public class main {
      * ESTA SECCION ES USADA PARA ACTUALIZAR LOS DATOS DE LA FAMILIA POR PARTE
      * DEL PERSONAL*
      */
-    
+    //PROBAR
     @RequestMapping(value = "/IrPersonalFamilia", method = RequestMethod.POST)
-    public ModelAndView IrPersonalFamilia(ModelMap map, HttpSession session,
+    public ModelAndView IrPersonalFamilia_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "estado", required = false) String estado,
             @RequestParam(value = "idFamilia", required = false) String idFamilia,
             @RequestParam(value = "idExpediente", required = false) String idExpediente,
             @RequestParam(value = "volver", required = false) String volver,
             @RequestParam(value = "idNna", required = false) Long idNna
     ) {
+        session.setAttribute("estado", estado);
+        session.setAttribute("idFamilia",idFamilia);
+        session.setAttribute("idExpediente",idExpediente);
+        session.setAttribute("volver",volver);
+        session.setAttribute("idNna",idNna);        
+        
+        return new ModelAndView("redirect:/IrPersonalFamilia", map);
+    }
+    
+    @RequestMapping(value = "/IrPersonalFamilia", method = RequestMethod.GET)
+    public ModelAndView IrPersonalFamilia_GET(ModelMap map, HttpSession session) {
+        long idNna = 0;
+        String idFamilia = "";
+        String idExpediente = "";
+        String volver = "";
+        String estado = "";
+        try {
+            idNna = (long) session.getAttribute("idNna");
+            idFamilia = session.getAttribute("idFamilia").toString();
+            idExpediente = session.getAttribute("idExpediente").toString();
+            volver = session.getAttribute("volver").toString();
+            estado = session.getAttribute("estado").toString();
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("estado");
+        session.removeAttribute("idFamilia");
+        session.removeAttribute("idExpediente");
+        session.removeAttribute("volver");
+        session.removeAttribute("idNna");
         
         
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -995,205 +1025,10 @@ public class main {
 
         return new ModelAndView("/Personal/familia/info_ella", map);
     }
-    
-//    @RequestMapping(value = "/IrPersonalFamilia", method = RequestMethod.GET)
-//    public ModelAndView IrPersonalFamilia(ModelMap map, HttpSession session,
-//            @RequestParam(value = "estado", required = false) String estado,
-//            @RequestParam(value = "idFamilia", required = false) String idFamilia,
-//            @RequestParam(value = "idExpediente", required = false) String idExpediente,
-//            @RequestParam(value = "volver", required = false) String volver,
-//            @RequestParam(value = "idNna", required = false) Long idNna
-//    ) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
-//        if (usuario == null) {
-//            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
-//            map.addAttribute("mensaje", mensaje);
-//            return new ModelAndView("login", map);
-//        }
-//
-//        if (estado.equals("formativa")) {
-//            Long idFam = Long.parseLong(idFamilia);
-//            infoFam = ServicioMain.getInfoFamPorIdFamilia(idFam);
-//            for (Adoptante adop : infoFam.getAdoptantes()) {
-//                if (adop.getSexo() == 'f') {
-//                    Ella = adop;
-//                }
-//                if (adop.getSexo() == 'm') {
-//                    El = adop;
-//                }
-//            }
-//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(idFam);
-//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(idFam);
-//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(idFam);
-//        } else if (estado.equals("evaluacion")) {
-//            Long idExp = Long.parseLong(idExpediente);
-//            System.out.print(estado);
-//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
-//            expediente = tempExp;
-//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
-//            for (Adoptante adop : infoFam.getAdoptantes()) {
-//                if (adop.getSexo() == 'f') {
-//                    Ella = adop;
-//                }
-//                if (adop.getSexo() == 'm') {
-//                    El = adop;
-//                }
-//            }
-//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//
-//        } else if (estado.equals("espera")) {
-//            Long idExp = Long.parseLong(idExpediente);
-//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
-//            expediente = tempExp;
-//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
-//            for (Adoptante adop : infoFam.getAdoptantes()) {
-//                if (adop.getSexo() == 'f') {
-//                    Ella = adop;
-//                }
-//                if (adop.getSexo() == 'm') {
-//                    El = adop;
-//                }
-//            }
-//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
-//
-//        } else if (estado.equals("esperainter")) {
-//            Long idExp = Long.parseLong(idExpediente);
-//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
-//            expediente = tempExp;
-//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
-//            for (Adoptante adop : infoFam.getAdoptantes()) {
-//                if (adop.getSexo() == 'f') {
-//                    Ella = adop;
-//                }
-//                if (adop.getSexo() == 'm') {
-//                    El = adop;
-//                }
-//            }
-//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//            listaDesignaciones = ServicioMain.getListaNnaAdoptantesAdopcion(tempExp.getIdexpedienteFamilia());
-//            //listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
-//
-//        } else if (estado.equals("designacion")) {
-//            Long idExp = Long.parseLong(idExpediente);
-//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
-//            expediente = tempExp;
-//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
-//            for (Adoptante adop : infoFam.getAdoptantes()) {
-//                if (adop.getSexo() == 'f') {
-//                    Ella = adop;
-//                }
-//                if (adop.getSexo() == 'm') {
-//                    El = adop;
-//                }
-//            }
-//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
-//        } else if (estado.equals("adopcion")) {
-//            Long idExp = Long.parseLong(idExpediente);
-//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
-//            expediente = tempExp;
-//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
-//            for (Adoptante adop : infoFam.getAdoptantes()) {
-//                if (adop.getSexo() == 'f') {
-//                    Ella = adop;
-//                }
-//                if (adop.getSexo() == 'm') {
-//                    El = adop;
-//                }
-//            }
-//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
-//        } else if (estado.equals("reevaluacion")) {
-//            Long idExp = Long.parseLong(idExpediente);
-//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
-//            expediente = tempExp;
-//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
-//            for (Adoptante adop : infoFam.getAdoptantes()) {
-//                if (adop.getSexo() == 'f') {
-//                    Ella = adop;
-//                }
-//                if (adop.getSexo() == 'm') {
-//                    El = adop;
-//                }
-//            }
-//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
-//
-//        } else if (estado.equals("post")) {
-//            Long idExp = Long.parseLong(idExpediente);
-//            ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
-//            expediente = tempExp;
-//            infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
-//            for (Adoptante adop : infoFam.getAdoptantes()) {
-//                if (adop.getSexo() == 'f') {
-//                    Ella = adop;
-//                }
-//                if (adop.getSexo() == 'm') {
-//                    El = adop;
-//                }
-//            }
-//            listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaSesiones = ServicioMain.getListaSesionesPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
-//            listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//            listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
-//            listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
-//            //nnaAdoptado = ServicioNna.getNnaPostAdopcion(idNna);
-//            //expNna = nnaAdoptado.getExpedienteNnas().iterator().next();
-//            listaNnaAdoptados.clear();
-//            for (Designacion tempDesig : listaDesignaciones) {
-//                if (tempDesig.getAceptacionConsejo() == 2) {
-//                    listaNnaAdoptados.add(tempDesig.getNna());
-//                }
-//            }
-//
-//            /*
-//             for (Designacion desig : listaDesignaciones) {
-//             if(desig.getAceptacionConsejo() == 2){
-//             nnaAdoptado = desig.getNna();
-//             expNna = desig.getNna().getExpedienteNnas().iterator().next();
-//             }
-//             }
-//             */
-//        }
-//
-//        etapaOrigen = estado;
-//
-//        map.put("df", df);
-//        map.put("infoFam", infoFam);
-//        map.put("estado", etapaOrigen);
-//        map.put("expediente", expediente);
-//        map.put("Ella", Ella);
-//        map.addAttribute("volver", volver);
-//
-//        return new ModelAndView("/Personal/familia/info_ella", map);
-//    }
 
+    //PROBAR
     @RequestMapping(value = "/IrPersonalFamilia2", method = RequestMethod.POST)
-    public ModelAndView IrPersonalFamilia2(ModelMap map, HttpSession session,
+    public ModelAndView IrPersonalFamilia2_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "estado", required = false) String estado,
             @RequestParam(value = "idFamilia", required = false) String idFamilia,
             @RequestParam(value = "idExpediente", required = false) String idExpediente,
@@ -1205,6 +1040,57 @@ public class main {
             @RequestParam(value = "tipofamilia", required = false) String tipofamilia,
             @RequestParam(value = "estado2", required = false) String estado2
     ) {
+        session.setAttribute("estado", estado);
+        session.setAttribute("idFamilia",idFamilia);
+        session.setAttribute("idExpediente",idExpediente);
+        session.setAttribute("volver",volver);
+        session.setAttribute("idNna",idNna);        
+        session.setAttribute("expediente2",expediente2);
+        session.setAttribute("HT",HT);
+        session.setAttribute("nacionalidad",nacionalidad);
+        session.setAttribute("tipofamilia",tipofamilia);
+        session.setAttribute("estado2",estado2);
+        
+        return new ModelAndView("redirect:/IrPersonalFamilia2", map);
+    }
+    
+    @RequestMapping(value = "/IrPersonalFamilia2", method = RequestMethod.GET)
+    public ModelAndView IrPersonalFamilia2_GET(ModelMap map, HttpSession session) {
+        long idNna = 0;
+        String idFamilia = "";
+        String idExpediente = "";
+        String volver = "";
+        String estado = "";
+        String expediente2 = "";
+        String HT = "";
+        String nacionalidad = "";
+        String tipofamilia = "";
+        String estado2 = "";
+        try {
+            idNna = (long) session.getAttribute("idNna");
+            idFamilia = session.getAttribute("idFamilia").toString();
+            idExpediente = session.getAttribute("idExpediente").toString();
+            volver = session.getAttribute("volver").toString();
+            estado = session.getAttribute("estado").toString();
+            expediente2 = session.getAttribute("expediente2").toString();
+            HT = session.getAttribute("HT").toString();
+            nacionalidad = session.getAttribute("nacionalidad").toString();
+            tipofamilia = session.getAttribute("tipofamilia").toString();
+            estado2 = session.getAttribute("estado2").toString();
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("estado");
+        session.removeAttribute("idFamilia");
+        session.removeAttribute("idExpediente");
+        session.removeAttribute("volver");
+        session.removeAttribute("idNna");
+        session.removeAttribute("expediente2");
+        session.removeAttribute("HT");
+        session.removeAttribute("nacionalidad");
+        session.removeAttribute("tipofamilia");
+        session.removeAttribute("estado2");
+        
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -1393,6 +1279,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_ella", map);
     }
 
+    //NO SE HA HECHO CAMBIOS
     @RequestMapping(value = "/Habilitacion", method = RequestMethod.GET)
     public ModelAndView Habilitacion(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1417,10 +1304,27 @@ public class main {
         return new ModelAndView(pagina, map);
     }
 
-    @RequestMapping(value = "/elSolicitante", method = RequestMethod.GET)
-    public ModelAndView elSolicitante(ModelMap map,
+    //PROBAR
+    @RequestMapping(value = "/elSolicitante", method = RequestMethod.POST)
+    public ModelAndView elSolicitante_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
             HttpSession session) {
+        session.setAttribute("volver",volver);
+        
+        return new ModelAndView("redirect:/elSolicitante", map);
+    }
+    
+    @RequestMapping(value = "/elSolicitante", method = RequestMethod.GET)
+    public ModelAndView elSolicitante_GET(ModelMap map,
+            HttpSession session) {
+        String volver = "";
+        try {
+            volver = session.getAttribute("volver").toString();
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("volver");
+        
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -1439,6 +1343,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_el", map);
     }
 
+    //
     @RequestMapping(value = "/elSolicitante2", method = RequestMethod.GET)
     public ModelAndView elSolicitante2(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
