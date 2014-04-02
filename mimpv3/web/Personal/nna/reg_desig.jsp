@@ -31,7 +31,8 @@
         <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
-    <body id="bd" class="bd fs3 com_content">
+    <body onload="noBack();"
+    onpageshow="if (event.persisted) noBack();" onunload="" id="bd" class="bd fs3 com_content">
         <br>
         <br>
         <div id="wrap">
@@ -244,6 +245,12 @@
                 return true;
             }
         </script>
+        <SCRIPT type="text/javascript">
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+        </SCRIPT>
         <!-- Ubicar al final -->
     </body>
 </html>

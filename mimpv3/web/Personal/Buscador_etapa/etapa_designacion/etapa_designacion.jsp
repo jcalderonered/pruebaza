@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -120,7 +120,8 @@
         }
     </script>  	
 
-    <body id="bd" class="bd fs3 com_content">
+    <body onload="noBack();"
+    onpageshow="if (event.persisted) noBack();" onunload="" id="bd" class="bd fs3 com_content">
         <br>
         <br>
         <div id="wrap">
@@ -175,7 +176,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                              <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -232,46 +233,46 @@
                                                 <c:when test="${token != designacion.getNna().getIdnna() && numDesig != designacion.getNDesignacion()}">
                                                     <c:set var="token" value="${designacion.getNna().getIdnna()}"/>
                                                     <c:set var="numDesig" value="${designacion.getNDesignacion()}"/>                                                    
-                                                        <tr>
-                                                            <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
-                                                            <td>
-                                                                <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
-                                                                    <input hidden name="estado" id="estado" value="designacion">
-                                                                    <input hidden name="idExpediente" id="idExpediente" value="${designacion.getExpedienteFamilia().getIdexpedienteFamilia()}">
-                                                                    <input hidden name="volver" id="volver" value="${volver}">
-                                                                    <button ${perteneceUA == 0 ? '' : 'disabled'} type="submit" class="btn btn-default">Ver</button>
-                                                                </form>
-                                                            </td>
-                                                            <c:choose>
-                                                                <c:when test="${designacion.getTipoPropuesta() == 'dupla'}">
-                                                                    <c:set var="numFilas" value="2"/>
-                                                                </c:when>
-                                                                <c:when test="${designacion.getTipoPropuesta() == 'terna'}">
-                                                                    <c:set var="numFilas" value="3"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <c:set var="numFilas" value="1"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                            <td rowspan="${numFilas}" style="vertical-align: middle;" >   
-                                                                <c:forEach var="temp" items="${listaDesignaciones}" varStatus="status">
-                                                                    <c:if test="${designacion.getNDesignacion() == temp.getNDesignacion()
-                                                                                  && designacion.getExpedienteFamilia().getIdexpedienteFamilia() == temp.getExpedienteFamilia().getIdexpedienteFamilia()
-                                                                          }">
-                                                                        ${temp.getNna().getNombre()}
-                                                                        ${temp.getNna().getApellidoP()}
-                                                                        <br>
-                                                                    </c:if>
-                                                                </c:forEach>
-                                                            </td>
-                                                            <td rowspan="${numFilas}" style="vertical-align: middle;" >
-                                                                <form action="${pageContext.servletContext.contextPath}/designacionConsejo" method="post">
-                                                                    <input hidden name="numDesig" id="numDesig" value="${designacion.getNDesignacion()}">
-                                                                    <input hidden name="volver" id="volver" value="${volver}">
-                                                                    <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} type="submit" class="btn btn-default">Registrar</button>
-                                                                </form>   
-                                                            </td>
-                                                        </tr>   
+                                                    <tr>
+                                                        <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                                <input hidden name="estado" id="estado" value="designacion">
+                                                                <input hidden name="idExpediente" id="idExpediente" value="${designacion.getExpedienteFamilia().getIdexpedienteFamilia()}">
+                                                                <input hidden name="volver" id="volver" value="${volver}">
+                                                                <button ${perteneceUA == 0 ? '' : 'disabled'} type="submit" class="btn btn-default">Ver</button>
+                                                            </form>
+                                                        </td>
+                                                        <c:choose>
+                                                            <c:when test="${designacion.getTipoPropuesta() == 'dupla'}">
+                                                                <c:set var="numFilas" value="2"/>
+                                                            </c:when>
+                                                            <c:when test="${designacion.getTipoPropuesta() == 'terna'}">
+                                                                <c:set var="numFilas" value="3"/>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <c:set var="numFilas" value="1"/>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <td rowspan="${numFilas}" style="vertical-align: middle;" >   
+                                                            <c:forEach var="temp" items="${listaDesignaciones}" varStatus="status">
+                                                                <c:if test="${designacion.getNDesignacion() == temp.getNDesignacion()
+                                                                              && designacion.getExpedienteFamilia().getIdexpedienteFamilia() == temp.getExpedienteFamilia().getIdexpedienteFamilia()
+                                                                      }">
+                                                                    ${temp.getNna().getNombre()}
+                                                                    ${temp.getNna().getApellidoP()}
+                                                                    <br>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </td>
+                                                        <td rowspan="${numFilas}" style="vertical-align: middle;" >
+                                                            <form action="${pageContext.servletContext.contextPath}/designacionConsejo" method="post">
+                                                                <input hidden name="numDesig" id="numDesig" value="${designacion.getNDesignacion()}">
+                                                                <input hidden name="volver" id="volver" value="${volver}">
+                                                                <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} type="submit" class="btn btn-default">Registrar</button>
+                                                            </form>   
+                                                        </td>
+                                                    </tr>   
                                                 </c:when>
                                                 <c:when test="${token != designacion.getNna().getIdnna() && numDesig == designacion.getNDesignacion()}">
 
@@ -411,6 +412,12 @@
             });
 
         </script>
+        <SCRIPT type="text/javascript">
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+        </SCRIPT>
         <!-- Placed at the end of the document so the pages load faster -->        
     </body>
 </html>

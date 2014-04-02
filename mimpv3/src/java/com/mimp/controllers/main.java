@@ -3325,7 +3325,7 @@ public class main {
     /*  SECCIÓN DEDICADA AL PROCESO DE ADOPCION PRIORITARIOS*/
     @RequestMapping(value = "/MainPrioritariosInicio", method = RequestMethod.POST)
     public ModelAndView MainPrioritariosInicio(ModelMap map,
-            @RequestParam("idNna") Long idNna,
+            @RequestParam(value = "idNna", required = false) String idNna,
             @RequestParam(value = "editarExpedienteNna", required = false) String editarExpedienteNna,
             @RequestParam(value = "editarNna", required = false) String editarNna,
             @RequestParam(value = "registrarRev", required = false) String registrarRev,
