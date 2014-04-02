@@ -28,9 +28,11 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
+        <!-- Datepicker -->
+        <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
-
-    <body id="bd" class="bd fs3 com_content">
+    <body onload="noBack();"
+    onpageshow="if (event.persisted) noBack();" onunload="" id="bd" class="bd fs3 com_content">
         <br>
         <br>
         <div id="wrap">
@@ -103,28 +105,22 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/nnaPrioritarios'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" >
-                            <li><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
                         </ul>
                         <br>
                         <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarEstudio" method="post" name="formulario" onkeypress="return enter(event)">
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">Identificación del Estudio de Caso</label>
-                                <div class="controls">
-                                    <input id="orden" name="orden" type="text" value="" >
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <h1 align="center"><strong>Familias que conforman el Estudio de Caso</strong></h1>
-                            <br>
+                        <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
+                        <br>
+                        <h3><strong>${mensaje}</strong></h3>
+                        <br>                        
+                        <br>
+                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/insertarDesignacion" method="post" name="formulario" onkeypress="return enter(event)">                            
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead>
@@ -132,13 +128,14 @@
                                             <th class="col-sm-2 " >Expediente</th>
                                             <th class="col-sm-2 " >Nivel sociec</th>
                                             <th class="col-sm-2 " >Resolución de aptitud</th>
+                                            <th class="col-sm-2 " >Actualmente en proceso de Adopción</th>
                                             <th class="col-sm-2 " >Prioridad</th>
-                                            <th class="col-sm-2 " >Eliminar</th>
+                                            <th class="col-sm-2 " >Seleccionar</th>
                                         </tr>
                                     </thead>
-                                    <c:if test="${!listaEstudioCaso.isEmpty()}">
+                                    <c:if test="${!listaMatching.isEmpty()}">   
                                         <tbody>
-                                            <c:forEach var="familia" items="${listaEstudioCaso}" varStatus="indexFam">
+                                            <c:forEach var="familia" items="${listaMatching}" varStatus="status">   
                                                 <tr>
                                                     <td>${familia.getExpediente()}</td>
                                                     <td>
@@ -153,41 +150,54 @@
                                                             </c:forEach>
                                                         </c:forEach>
                                                     </td>
-                                                    <td>
-                                                        <select id="prioridad" name="prioridad">
-                                                            <c:forEach var="familia2" items="${listaEstudioCaso}" varStatus="indexPrioridad">
-                                                                <option ${indexFam.count == indexPrioridad.count ? 'selected' : ''} value="${indexPrioridad.count}" >${indexPrioridad.count}</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </td>
+                                                    <c:set var="adopcion" value="no" />
+                                                    <c:set var="prioridad" value="---" />
+                                                    <c:if test="${!familia.getDesignacions().isEmpty()}">
+                                                        <c:forEach var="desig" items="${familia.getDesignacions()}" varStatus="status">
+                                                            <c:if test="${desig.getAceptacionConsejo() == 0}">
+                                                                <c:set var="adopcion" value="si" />
+                                                                <c:set var="prioridad" value="${desig.getPrioridad()}" />
+                                                            </c:if>                                                        
+                                                        </c:forEach>
+                                                    </c:if>
+                                                    <td> ${adopcion} </td>
+                                                    <td> ${prioridad}</td>
                                                     <td>
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input id="delete" name="delete" value="${indexFam.index}" type="checkbox"> 
+                                                                <input name="idExpediente" value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
                                                             </label>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            </c:forEach>
+                                            </c:forEach>  
                                         </tbody>
                                     </c:if> 
-                                    <c:if test="${listaEstudioCaso.isEmpty()}">
+                                    <c:if test="${listaMatching.isEmpty()}">
                                         <h3><strong>No existen Familias propuestas</strong></h3>
                                     </c:if>  
                                 </table>
                             </div>
                             <br>
+                            <input type="submit" id="agregar" name="agregar" value="Agregar Expedientes a la Lista" class="btn btn-default">
                             <br>
-                            <input hidden name="idNna" id="idNna" value="${idNna}"> 
-                            <input hidden name="numero" id="numero" value="${numero}"> 
-                            <input type="submit" id="agregar" name="agregar" value="Agregar Familia" class="btn btn-default">
-
-
-                            <input type="submit" id="eliminar" name="eliminar" value="Eliminar Familia" class="btn btn-default">
+                            <div class="control-group">
+                                <label class="control-label">Fecha de propuesta</label>
+                                <div class="controls">
+                                    <input type="text" class="datepicker" id="fecha" name="fecha" >
+                                </div>
+                            </div>
                             <br>
+                            <div class="control-group">
+                                <label class="control-label">N° de Designación</label>
+                                <div class="controls">
+                                    <input type="text" class="span2" value="" id="numDesig" name="numDesig" >
+                                </div>
+                            </div>
                             <br>
-                            <input type="submit" id="registrar" name="registrar" value="Registrar" class="btn btn-default">
-
+                            <h3><strong>No olvidar seleccionar las familias que formaran parte de esta propuesta de Designación</strong></h3>
+                            <br> 
+                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Registrar</button>
                         </form>
                     </div>
                 </div>
@@ -224,23 +234,23 @@
 
             function validar()
             {
-
-                if (document.formulario.orden.value == "")
+                var numericExpression = /^[0-9]+$/;
+                if (document.formulario.fecha.value == "")
                 {
-                    alert("Debe ingresar un número de orden");
-                    document.formulario.orden.focus();
-                    return false;
-                }
-                if (document.formulario.fechaEval.value == "")
-                {
-                    alert("Debe ingresar la fecha");
-                    document.formulario.fechaEval.focus();
+                    alert("Debe ingresar una fecha");
+                    document.formulario.fecha.focus();
                     return false;
                 }
 
                 return true;
             }
         </script>
+        <SCRIPT type="text/javascript">
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+        </SCRIPT>
         <!-- Ubicar al final -->
     </body>
 </html>
