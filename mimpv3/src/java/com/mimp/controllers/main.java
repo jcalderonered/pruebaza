@@ -819,18 +819,13 @@ public class main {
         String idExpediente = "";
         String volver = "";
         String estado = "";
-        try {
+       
             idFamilia = session.getAttribute("idFamilia").toString();
             idExpediente = session.getAttribute("idExpediente").toString();
             volver = session.getAttribute("volver").toString();
             estado = session.getAttribute("estado").toString();
-        } catch (Exception ex) {
-            return new ModelAndView("redirect:/inicioper", map);
-        }
-        session.removeAttribute("estado");
-        session.removeAttribute("idFamilia");
-        session.removeAttribute("idExpediente");
-        session.removeAttribute("volver");
+       
+       
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {

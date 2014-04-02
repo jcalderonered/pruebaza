@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 /**
  *
  * @author john
@@ -191,7 +192,7 @@ public class personal {
         session.setAttribute("idCar", car);
         session.setAttribute("sexo", sexo);
         session.setAttribute("prioritario", prioritario);
-        
+
         return new ModelAndView("redirect:/FiltrarNna", map);
     }
 
@@ -204,7 +205,7 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         String nombre = (String) session.getAttribute("nombre");
         String apellidoP = (String) session.getAttribute("apellidoP");
         String apellidoM = (String) session.getAttribute("apellidoM");
@@ -445,6 +446,19 @@ public class personal {
         } catch (Exception ex) {
         }
         map.addAttribute("fechaing", fechaing);
+
+        String mensaje_log = "Se creó la actualizó el perfil del usuario con nombre: " + usuario.getNombre()
+                + " con ID: " + usuario.getIdpersonal();
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         return new ModelAndView("/Personal/actualizar_info", map);
     }
 
@@ -749,7 +763,7 @@ public class personal {
 
         if (session.getAttribute("nombre") != null) {
 
-            long id = (long) session.getAttribute("id");
+            long id = Long.parseLong(session.getAttribute("id").toString());
             String nombre = (String) session.getAttribute("nombre");
             String tipo = (String) session.getAttribute("tipo");
             String pais = (String) session.getAttribute("pais");
@@ -1923,7 +1937,7 @@ public class personal {
 
         ServicioPersonal.UpdateJuzgado(juzg);
 
-        String mensaje_log = "Se registró nuevo juzgado con Nombre, " + juzg.getNombre() + " y ID:" + String.valueOf(juzg.getIdjuzgado());
+        String mensaje_log = "Se registró editó juzgado con Nombre, " + juzg.getNombre() + " y ID:" + String.valueOf(juzg.getIdjuzgado());
         String Tipo_registro = "Juzgado";
 
         //try{
@@ -2322,7 +2336,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idPers = (long) session.getAttribute("idPers");
+        long idPers = Long.parseLong( session.getAttribute("idPers").toString());
         String nombre = (String) session.getAttribute("nombre");
         String apellidoP = (String) session.getAttribute("apellidoP");
         String apellidoM = (String) session.getAttribute("apellidoM");
@@ -2440,7 +2454,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idUa = (long) session.getAttribute("idUa");
+        long idUa = Long.parseLong( session.getAttribute("idUa").toString());
 
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalNoUa", ServicioPersonal.ListaPersonalNoUa(idUa));
@@ -2478,8 +2492,8 @@ public class personal {
 
         if (session.getAttribute("idPers") != null) {
 
-            long idUa = (long) session.getAttribute("idUa");
-            long idPers = (long) session.getAttribute("idPers");
+            long idUa = Long.parseLong( session.getAttribute("idUa").toString());
+            long idPers = Long.parseLong( session.getAttribute("idPers").toString());
 
             Personal per = new Personal();
             Unidad ua = new Unidad();
@@ -2506,7 +2520,7 @@ public class personal {
             map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(idUa));
 
         } else {
-            long idUa = (long) session.getAttribute("idUa");
+            long idUa = Long.parseLong( session.getAttribute("idUa").toString());
             session.setAttribute("ïdUA", idUa);
 
             return new ModelAndView("redirect:/irListaPersonalUa", map);
@@ -2552,7 +2566,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long id = (long) session.getAttribute("id");
+        long id = Long.parseLong(session.getAttribute("id").toString());
 
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(id);
@@ -2652,7 +2666,7 @@ public class personal {
             String fechaIng = (String) session.getAttribute("fechaIng");
             String domicilio = (String) session.getAttribute("domicilio");
             String rol = (String) session.getAttribute("rol");
-            long ua = (long) session.getAttribute("ua");
+            long ua = Long.parseLong( session.getAttribute("ua").toString());
 
             Personal temp = new Personal();
 
@@ -2811,7 +2825,7 @@ public class personal {
 
         if (session.getAttribute("nombre") != null) {
 
-            long idPers = (long) session.getAttribute("idPers");
+            long idPers =  Long.parseLong(session.getAttribute("idPers").toString());
             String nombre = (String) session.getAttribute("nombre");
             String apellidoP = (String) session.getAttribute("apellidoP");
             String apellidoM = (String) session.getAttribute("apellidoM");
@@ -2828,7 +2842,7 @@ public class personal {
             String fechaIng = (String) session.getAttribute("fechaIng");
             String domicilio = (String) session.getAttribute("domicilio");
             String rol = (String) session.getAttribute("rol");
-            long ua = (long) session.getAttribute("ua");
+            long ua = Long.parseLong(session.getAttribute("ua").toString());
 
             Personal temp = new Personal();
             temp = ServicioPersonal.getPersonal(idPers);
@@ -3007,6 +3021,18 @@ public class personal {
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
         map.put("formato", format);
 
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Creo una nueva Sesión informativa con número: " + numSesion;
+
+        String Tipo_registro = "Sesión";
+
+        try {
+            String Numero_registro = String.valueOf(numSesion);
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         session.removeAttribute("numSesion");
         session.removeAttribute("fecha");
         session.removeAttribute("hora");
@@ -3057,7 +3083,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long id = (long) session.getAttribute("idSesion");
+        long id = Long.parseLong(session.getAttribute("idSesion").toString());
         String numSesion = (String) session.getAttribute("numSesion");
         String fecha = (String) session.getAttribute("fecha");
         String hora = (String) session.getAttribute("hora");
@@ -3095,6 +3121,19 @@ public class personal {
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
         map.put("formato", format);
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Editó una Sesión con número: " + numSesion;
+
+        String Tipo_registro = "Sesión";
+
+        try {
+            String Numero_registro = String.valueOf(numSesion);
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
 
@@ -3121,7 +3160,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long id = (long) session.getAttribute("idSesion");
+        long id = Long.parseLong(session.getAttribute("idSesion").toString());
 
         Sesion tempSesion = new Sesion();
         tempSesion = ServicioPersonal.getSesion(id);
@@ -3133,6 +3172,19 @@ public class personal {
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("formato", format);
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Habilitó la Sesión con número: " + tempSesion.getNSesion();
+
+        String Tipo_registro = "Sesión";
+
+        try {
+            String Numero_registro = String.valueOf(tempSesion.getNSesion());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
 
@@ -3159,7 +3211,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long id = (long) session.getAttribute("idSesion");
+        long id = Long.parseLong(session.getAttribute("idSesion").toString());
 
         Sesion temp = new Sesion();
         //ArrayList<Personal> allPersonal = new ArrayList();
@@ -3209,7 +3261,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idSesion = (long) session.getAttribute("idSesion");
+        long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
         int index = (int) session.getAttribute("index");
 
         Sesion tempSesion = new Sesion();
@@ -3256,7 +3308,7 @@ public class personal {
         }
 
         try {
-            long idSesion = (long) session.getAttribute("idSesion");
+            long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
             String fechaInicio = (String) session.getAttribute("fechaInicio");
             String fechaFin = (String) session.getAttribute("fechaFin");
             String horaInicio = (String) session.getAttribute("horaInicio");
@@ -3299,6 +3351,18 @@ public class personal {
             map.addAttribute("fecha", fecha);
             map.addAttribute("hora", hora);
 
+            String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Creó un nuevo turno para la Sesión con número: " + temp2.getNSesion();
+
+            String Tipo_registro = "Turno";
+
+            try {
+                String Numero_registro = String.valueOf(temp2.getNSesion());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
             session.removeAttribute("fechaInicio");
             session.removeAttribute("fechaFin");
             session.removeAttribute("horaInicio");
@@ -3306,7 +3370,7 @@ public class personal {
             session.removeAttribute("vacantes");
 
         } catch (Exception ex) {
-            long idSesion = (long) session.getAttribute("idSesion");
+            long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
             session.setAttribute("idSesion", idSesion);
 
             return new ModelAndView("redirect:/PersonalEditarSesion", map);
@@ -3344,9 +3408,9 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTurno = (long) session.getAttribute("idTurno");
+        long idTurno = Long.parseLong(session.getAttribute("idTurno").toString());
         int index = (int) session.getAttribute("index");
-        long idSesion = (long) session.getAttribute("idSesion");
+        long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
 
         Turno temp = new Turno();
         temp = ServicioMain.getTurno(idTurno);
@@ -3393,7 +3457,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTurno = (long) session.getAttribute("idTurno");
+        long idTurno = Long.parseLong(session.getAttribute("idTurno").toString());
         String fechaInicio = (String) session.getAttribute("fechaInicio");
         String fechaFin = (String) session.getAttribute("fechaFin");
         String horaInicio = (String) session.getAttribute("horaInicio");
@@ -3435,6 +3499,19 @@ public class personal {
         map.addAttribute("ts", ts);
         map.addAttribute("fecha", fecha);
         map.addAttribute("hora", hora);
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Editó el turno: " + temp.getIdturno() + ". Perteneciente a la Sesión con número: " + temp2.getNSesion();
+
+        String Tipo_registro = "Turno";
+
+        try {
+            String Numero_registro = String.valueOf(temp2.getNSesion());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         return new ModelAndView("/Personal/Informativa/lista_sesion", map);
     }
 
@@ -3459,7 +3536,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idSesion = (long) session.getAttribute("idSesion");
+        long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
 
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
         allFormularios = ServicioPersonal.InscritosSesion(idSesion);
@@ -3499,7 +3576,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
         String taller = (String) session.getAttribute("nombreTaller");
         String historico = (String) session.getAttribute("historial");
 
@@ -3543,8 +3620,8 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idFormulario = (long) session.getAttribute("idFormulario");
-        long idSesion = (long) session.getAttribute("idSesion");
+        long idFormulario = Long.parseLong(session.getAttribute("idFormulario").toString());
+        long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
 
         ArrayList<Asistente> allAsistentes = new ArrayList();
         allAsistentes = ServicioPersonal.asistentePorFormulario(idFormulario);
@@ -3586,8 +3663,8 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idFormulario = (long) session.getAttribute("idFormulario");
-        long idSesion = (long) session.getAttribute("idSesion");
+        long idFormulario = Long.parseLong(session.getAttribute("idFormulario").toString());
+        long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
 
         ArrayList<Asistente> allAsistentes = new ArrayList();
         allAsistentes = ServicioPersonal.asistentePorFormulario(idFormulario);
@@ -3639,9 +3716,9 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idFormulario = (long) session.getAttribute("idFormulario");
-        long idReunion = (long) session.getAttribute("idReunion");
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idFormulario = Long.parseLong(session.getAttribute("idFormulario").toString());
+        long idReunion = Long.parseLong(session.getAttribute("idReunion").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
         String nombre = (String) session.getAttribute("nombre");
         String historial = (String) session.getAttribute("historial");
         String grupo = (String) session.getAttribute("grupo");
@@ -3698,9 +3775,9 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idFormulario = (long) session.getAttribute("idFormulario");
-        long idReunion = (long) session.getAttribute("idReunion");
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idFormulario = Long.parseLong(session.getAttribute("idFormulario").toString());
+        long idReunion = Long.parseLong(session.getAttribute("idReunion").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
         String nombre = (String) session.getAttribute("nombreTaller");
         String historial = (String) session.getAttribute("historial");
 
@@ -3806,6 +3883,18 @@ public class personal {
             map.put("listaTalleres", ServicioPersonal.listaTalleres());
             map.put("formato", format);
 
+            String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Creó un nuevo taller con nombre: " + nombre;
+
+            String Tipo_registro = "Taller";
+
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
             session.removeAttribute("nombre");
             session.removeAttribute("tipo");
             session.removeAttribute("numSesion");
@@ -3843,7 +3932,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
 
         Taller tempTaller = new Taller();
         tempTaller = ServicioPersonal.getTaller(idTaller);
@@ -3889,7 +3978,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
         String nombre = (String) session.getAttribute("nombre");
         String tipo = (String) session.getAttribute("tipo");
         String numSesion = (String) session.getAttribute("numSesion");
@@ -3915,6 +4004,18 @@ public class personal {
         tempTaller.setHabilitado(habil);
         tempTaller.setUnidad(ua);
         ServicioPersonal.PersonalUpdateTaller(tempTaller);
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Editó el taller: " + idTaller;
+
+        String Tipo_registro = "Taller";
+
+        try {
+            String Numero_registro = String.valueOf(idTaller);
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
@@ -3949,7 +4050,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
 
         map.addAttribute("idTaller", idTaller);
         return new ModelAndView("/Personal/Informativa/edicion_grupo", map);
@@ -3986,7 +4087,7 @@ public class personal {
         try {
 
             if (session.getAttribute("nombreGrupo") != null) {
-                long idTaller = (long) session.getAttribute("idTaller");
+                long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
                 String nombreGrupo = (String) session.getAttribute("nombreGrupo");
 
                 Grupo tempGrp = new Grupo();
@@ -4000,10 +4101,22 @@ public class personal {
                 map.put("listaSesiones", ServicioPersonal.listaSesiones());
                 map.put("taller", tempTaller);
                 map.addAttribute("idTaller", idTaller);
+                
+                String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Creó un nuevo grupo para el taller: " + tempTaller.getIdtaller();
+
+            String Tipo_registro = "Taller";
+
+            try {
+                String Numero_registro = String.valueOf(idTaller);
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
 
                 session.removeAttribute("nombreGrupo");
             } else {
-                long idTaller = (long) session.getAttribute("idTaller");
+                long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
                 session.setAttribute("idTaller", idTaller);
                 return new ModelAndView("redirect:/PersonalEditarTaller", map);
             }
@@ -4043,8 +4156,8 @@ public class personal {
         }
 
         if (session.getAttribute("idGrupo") != null) {
-            long idGrupo = (long) session.getAttribute("idGrupo");
-            long idTaller = (long) session.getAttribute("idTaller");
+            long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
 
             Grupo tempGrp = new Grupo();
             tempGrp = ServicioPersonal.getGrupo(idGrupo);
@@ -4052,12 +4165,25 @@ public class personal {
             map.put("grupo", tempGrp);
             map.addAttribute("idTaller", idTaller);
             map.addAttribute("idGrupo", idGrupo);
+            
+            String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Editó el grupo con ID: " + idGrupo + ". Perteneciente al taller con ID: "
+                    + idTaller;
+
+            String Tipo_registro = "Grupo";
+
+            try {
+                String Numero_registro = String.valueOf(idGrupo);
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
 
             session.setAttribute("idGrupo", idGrupo);
             session.setAttribute("idTaller", idTaller);
         } else {
 
-            long idTaller = (long) session.getAttribute("idTaller");
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
             session.setAttribute("idTaller", idTaller);
             return new ModelAndView("redirect:/PersonalEditarTaller", map);
         }
@@ -4092,13 +4218,25 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idGrupo = (long) session.getAttribute("idGrupo");
+        long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
         String nombreGrupo = (String) session.getAttribute("nombreGrupo");
 
         Grupo tempGrp = new Grupo();
         tempGrp = ServicioPersonal.getGrupo(idGrupo);
         tempGrp.setNombre(nombreGrupo);
         ServicioPersonal.PersonalUpdateGrupo(tempGrp);
+        
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Editó el grupo con ID: " + idGrupo;
+
+            String Tipo_registro = "Grupo";
+
+            try {
+                String Numero_registro = String.valueOf(idGrupo);
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
 
         map.put("taller", ServicioPersonal.getTaller(tempGrp.getTaller().getIdtaller()));
         return new ModelAndView("/Personal/Informativa/edicion_taller", map);
@@ -4132,8 +4270,8 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idGrupo = (long) session.getAttribute("idGrupo");
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
 
         map.addAttribute("formato", format);
         map.put("idGrupo", idGrupo);
@@ -4174,9 +4312,9 @@ public class personal {
 
         if (session.getAttribute("nombreTurno2") != null) {
 
-            long idGrupo = (long) session.getAttribute("idGrupo");
+            long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
             String nombreTurno2 = (String) session.getAttribute("nombreTurno2");
-            long idTaller = (long) session.getAttribute("idTaller");
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
 
             Turno2 tempT2 = new Turno2();
             tempT2.setGrupo(ServicioPersonal.getGrupo(idGrupo));
@@ -4193,9 +4331,9 @@ public class personal {
             map.addAttribute("idGrupo", idGrupo);
 
         } else {
-            long idGrupo = (long) session.getAttribute("idGrupo");
+            long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
             session.setAttribute("idSesion", idGrupo);
-            long idTaller = (long) session.getAttribute("idTaller");
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
             session.setAttribute("idTaller", idTaller);
 
             return new ModelAndView("redirect:/PersonalEditarGrupo", map);
@@ -4236,9 +4374,9 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTurno2 = (long) session.getAttribute("idTurno2");
-        long idTaller = (long) session.getAttribute("idTaller");
-        long idGrupo = (long) session.getAttribute("idGrupo");
+        long idTurno2 = Long.parseLong(session.getAttribute("idTurno2").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+        long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
 
         Turno2 tempT2 = new Turno2();
         tempT2 = ServicioPersonal.getTurno2(idTurno2);
@@ -4284,10 +4422,10 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTurno2 = (long) session.getAttribute("idTurno2");
+        long idTurno2 = Long.parseLong(session.getAttribute("idTurno2").toString());
         String nombreTurno2 = (String) session.getAttribute("nombreTurno2");
-        long idTaller = (long) session.getAttribute("idTaller");
-        long idGrupo = (long) session.getAttribute("idGrupo");
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+        long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
 
         Turno2 tempT2 = new Turno2();
         tempT2 = ServicioPersonal.getTurno2(idTurno2);
@@ -4335,9 +4473,9 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTurno2 = (long) session.getAttribute("idTurno2");
-        long idTaller = (long) session.getAttribute("idTaller");
-        long idGrupo = (long) session.getAttribute("idGrupo");
+        long idTurno2 = Long.parseLong(session.getAttribute("idTurno2").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+        long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
 
         Turno2 tempT2 = new Turno2();
         tempT2 = ServicioPersonal.getTurno2(idTurno2);
@@ -4383,10 +4521,10 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idReunion = (long) session.getAttribute("idReunion");
-        long idTaller = (long) session.getAttribute("idTaller");
-        long idGrupo = (long) session.getAttribute("idGrupo");
-        long idTurno2 = (long) session.getAttribute("idTurno2");
+        long idReunion = Long.parseLong(session.getAttribute("idReunion").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+        long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
+        long idTurno2 = Long.parseLong(session.getAttribute("idTurno2").toString());
 
         Reunion tempReun = new Reunion();
         tempReun = ServicioPersonal.getReunion(idReunion);
@@ -4450,15 +4588,15 @@ public class personal {
         }
 
         if (session.getAttribute("fecha") != null) {
-            long idTurno2 = (long) session.getAttribute("idTurno2");
+            long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
             String fecha = (String) session.getAttribute("fecha");
             String hora = (String) session.getAttribute("hora");
             String duracion = (String) session.getAttribute("duracion");
             String direccion = (String) session.getAttribute("direccion");
             String capacidad = (String) session.getAttribute("capacidad");
             String facilitador = (String) session.getAttribute("facilitador");
-            long idTaller = (long) session.getAttribute("idTaller");
-            long idGrupo = (long) session.getAttribute("idGrupo");
+            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
 
             Turno2 tempTurno = new Turno2();
             tempTurno = ServicioPersonal.getTurno2(idTurno2);
@@ -4512,9 +4650,9 @@ public class personal {
             session.removeAttribute("facilitador");
 
         } else {
-            long idTurno2 = (long) session.getAttribute("idTurno2");
-            long idTaller = (long) session.getAttribute("idTaller");
-            long idGrupo = (long) session.getAttribute("idGrupo");
+            long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
+            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
 
             session.setAttribute("idTurno2", idTurno2);
             session.setAttribute("idTaller", idTaller);
@@ -4571,16 +4709,16 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idReunion = (long) session.getAttribute("idReunion");
+        long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
         String fecha = (String) session.getAttribute("fecha");
         String hora = (String) session.getAttribute("hora");
         String duracion = (String) session.getAttribute("duracion");
         String direccion = (String) session.getAttribute("direccion");
         String capacidad = (String) session.getAttribute("capacidad");
         String facilitador = (String) session.getAttribute("facilitador");
-        long idTaller = (long) session.getAttribute("idTaller");
-        long idGrupo = (long) session.getAttribute("idGrupo");
-        long idTurno2 = (long) session.getAttribute("idTurno2");
+        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+        long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
+        long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
 
         Reunion tempReun = new Reunion();
         tempReun = ServicioPersonal.getReunion(idReunion);
@@ -4659,8 +4797,8 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idReunion = (long) session.getAttribute("idReunion");
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
+        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
         String nombre = (String) session.getAttribute("nombre");
         String historial = (String) session.getAttribute("historial");
         String grupo = (String) session.getAttribute("grupo");
@@ -4709,7 +4847,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idSesion = (long) session.getAttribute("idSesion");
+        long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
 
         Sesion tempSesion = new Sesion();
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
@@ -4755,8 +4893,8 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idSesion = (long) session.getAttribute("idSesion");
-        long idFormulario = (long) session.getAttribute("idFormulario");
+        long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
+        long idFormulario = Long.parseLong( session.getAttribute("idFormulario").toString());
 
         FormularioSesion fs = new FormularioSesion();
         fs = ServicioPersonal.getFormulario(idFormulario);
@@ -4827,8 +4965,8 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idSesion = (long) session.getAttribute("idSesion");
-        long idFormulario = (long) session.getAttribute("idFormulario");
+        long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
+        long idFormulario = Long.parseLong( session.getAttribute("idFormulario").toString());
         String user = (String) session.getAttribute("user");
 
         if (session.getAttribute("user") != null) {
@@ -4916,13 +5054,13 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idReunion = (long) session.getAttribute("idReunion");
-        long idFamilia = (long) session.getAttribute("idFamilia");
+        long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
+        long idFamilia = Long.parseLong( session.getAttribute("idFamilia").toString());
         String asistencia = (String) session.getAttribute("asistencia");
         String nombre = (String) session.getAttribute("nombre");
         String grupo = (String) session.getAttribute("grupo");
         String turno = (String) session.getAttribute("turno");
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
         String historial = (String) session.getAttribute("historial");
 
         ArrayList<AsistenciaFR> allAsistencias = new ArrayList();
@@ -4996,13 +5134,13 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idReunion = (long) session.getAttribute("idReunion");
-        long idFamilia = (long) session.getAttribute("idFamilia");
+        long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
+        long idFamilia = Long.parseLong( session.getAttribute("idFamilia").toString());
         String justificado = (String) session.getAttribute("justificado");
         String nombre = (String) session.getAttribute("nombre");
         String grupo = (String) session.getAttribute("grupo");
         String turno = (String) session.getAttribute("turno");
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
         String historial = (String) session.getAttribute("historial");
 
         ArrayList<AsistenciaFR> allAsistencias = new ArrayList();
@@ -5140,7 +5278,7 @@ public class personal {
             String fechaIngreso = (String) session.getAttribute("fechaIngreso");
             String tupa = (String) session.getAttribute("tupa");
             String tipoFamilia = (String) session.getAttribute("tipoFamilia");
-            long entAsoc = (long) session.getAttribute("entAsoc");
+            long entAsoc = Long.parseLong( session.getAttribute("entAsoc").toString());
 
             Familia tempFam = new Familia();
             ExpedienteFamilia expediente = new ExpedienteFamilia();
@@ -5248,7 +5386,7 @@ public class personal {
         String tupa = (String) session.getAttribute("tupa");
         String tipoFamilia = (String) session.getAttribute("tipoFamilia");
         String idExpediente = (String) session.getAttribute("idExpediente");
-        long entAsoc = (long) session.getAttribute("entAsoc");
+        long entAsoc = Long.parseLong( session.getAttribute("entAsoc").toString());
 
         Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
 
@@ -5994,13 +6132,13 @@ public class personal {
         session.setAttribute("estado", estado);
         session.setAttribute("tipofamilia", tipofamilia);
         session.setAttribute("resfamilia", resfamilia);
-        
+
         return new ModelAndView("redirect:/FiltrarFam", map);
 
     }
-    
+
     @RequestMapping(value = "/FiltrarFam", method = RequestMethod.GET)
-    public ModelAndView FiltrarFam_GET(ModelMap map, HttpSession session            
+    public ModelAndView FiltrarFam_GET(ModelMap map, HttpSession session
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -6008,7 +6146,7 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         String expediente = (String) session.getAttribute("expediente");
         String HT = (String) session.getAttribute("HT");
         String nacionalidad = (String) session.getAttribute("nacionalidad");
@@ -6098,7 +6236,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idpersonal = (long) session.getAttribute("id");
+        long idpersonal = Long.parseLong( session.getAttribute("id").toString());
         String dia = (String) session.getAttribute("dia");
 
         Personal personal = new Personal();
@@ -6137,7 +6275,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idpersonal = (long) session.getAttribute("id");
+        long idpersonal = Long.parseLong( session.getAttribute("id").toString());
 
         //List<Personal> lista = Servicio.listaPersonal();
         Date diatemp = new Date();
@@ -6247,10 +6385,10 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
         String taller = (String) session.getAttribute("nombreTaller");
         String historico = (String) session.getAttribute("historial");
-        long idReunion = (long) session.getAttribute("idReunion");
+        long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
 
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
         allFormularios = ServicioPersonal.InscritosReunion(idReunion);
@@ -6303,7 +6441,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long year = (long) session.getAttribute("year");
+        long year = Long.parseLong( session.getAttribute("year").toString());
 
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
@@ -6335,7 +6473,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idSesion = (long) session.getAttribute("idSesion");
+        long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
 
         ServicioPersonal.EliminarSesion(idSesion);
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
@@ -6369,7 +6507,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTaller = (long) session.getAttribute("idTaller");
+        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
 
         ServicioPersonal.EliminarTaller(idTaller);
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
@@ -6403,7 +6541,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long id = (long) session.getAttribute("idSesion");
+        long id = Long.parseLong( session.getAttribute("idSesion").toString());
 
         Sesion tempSesion = new Sesion();
         tempSesion = ServicioPersonal.getSesion(id);
@@ -6458,8 +6596,8 @@ public class personal {
 
         if (session.getAttribute("idTurno") != null) {
 
-            long idTurno = (long) session.getAttribute("idTurno");
-            long idSesion = (long) session.getAttribute("idSesion");
+            long idTurno = Long.parseLong( session.getAttribute("idTurno").toString());
+            long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
 
             String mensaje = "";
             Turno tempT = new Turno();
@@ -6494,7 +6632,7 @@ public class personal {
             session.removeAttribute("idTurno");
         } else {
 
-            long idSesion = (long) session.getAttribute("idSesion");
+            long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
             session.setAttribute("idSesion", idSesion);
 
             return new ModelAndView("redirect:/PersonalEditarSesion", map);
@@ -6533,8 +6671,8 @@ public class personal {
 
         if (session.getAttribute("idGrupo") != null) {
 
-            long idTaller = (long) session.getAttribute("idTaller");
-            long idGrupo = (long) session.getAttribute("idGrupo");
+            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
 
             String mensaje = "";
             Grupo tempG = new Grupo();
@@ -6555,7 +6693,7 @@ public class personal {
 
             session.removeAttribute("idGrupo");
         } else {
-            long idTaller = (long) session.getAttribute("idTaller");
+            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
             session.setAttribute("idTaller", idTaller);
 
             return new ModelAndView("redirect:/PersonalEditarTaller", map);
@@ -6595,9 +6733,9 @@ public class personal {
         }
 
         if (session.getAttribute("idTurno2") != null) {
-            long idTurno2 = (long) session.getAttribute("idTurno2");
-            long idTaller = (long) session.getAttribute("idTaller");
-            long idGrupo = (long) session.getAttribute("idGrupo");
+            long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
+            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
 
             String mensaje = "";
             Turno2 tempT2 = new Turno2();
@@ -6617,8 +6755,8 @@ public class personal {
             session.removeAttribute("idTurno2");
         } else {
 
-            long idTaller = (long) session.getAttribute("idTaller");
-            long idGrupo = (long) session.getAttribute("idGrupo");
+            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
 
             session.setAttribute("idTaller", idTaller);
             session.setAttribute("idGrupo", idGrupo);
@@ -6664,10 +6802,10 @@ public class personal {
 
         if (session.getAttribute("idReunion") != null) {
 
-            long idReunion = (long) session.getAttribute("idReunion");
-            long idTaller = (long) session.getAttribute("idTaller");
-            long idGrupo = (long) session.getAttribute("idGrupo");
-            long idTurno2 = (long) session.getAttribute("idTurno2");
+            long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
+            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
+            long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
 
             String mensaje = "";
             Reunion tempReun = new Reunion();
@@ -6692,9 +6830,9 @@ public class personal {
             session.removeAttribute("idReunion");
 
         } else {
-            long idTaller = (long) session.getAttribute("idTaller");
-            long idGrupo = (long) session.getAttribute("idGrupo");
-            long idTurno2 = (long) session.getAttribute("idTurno2");
+            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
+            long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
 
             session.setAttribute("idTaller", idTaller);
             session.setAttribute("idGrupo", idGrupo);
