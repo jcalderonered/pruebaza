@@ -569,7 +569,15 @@ public class HiberNna {
                                     allNnaFinal.set(i, allNnaFinal.get(j + 1));
                                     allNnaFinal.set(j + 1, auxnna2);
                                 } else {
-                                    if (allNnaFinal.get(i).getApellidoP().compareToIgnoreCase(allNnaFinal.get(j + 1).getApellidoP()) > 0) {
+                                    String apellidoPrev = "";
+                                    String apellidoNext = "";
+                                    try{
+                                        apellidoPrev = allNnaFinal.get(i).getApellidoP();
+                                        apellidoNext = allNnaFinal.get(j + 1).getApellidoP();
+                                    } catch (Exception ex){
+                                        
+                                    }
+                                    if (apellidoPrev.compareToIgnoreCase(apellidoNext) > 0) {
                                         auxnna2 = allNnaFinal.get(i);
                                         allNnaFinal.set(i, allNnaFinal.get(j + 1));
                                         allNnaFinal.set(j + 1, auxnna2);
