@@ -315,16 +315,15 @@ public class nna {
             tempNna.setFechaNacimiento(null);
         }
         short edadtemp = 0;
-        if (edad != null && !edad.equals("")){
-        edadtemp = Byte.valueOf(edad);
+        if (edad != null && !edad.equals("")) {
+            edadtemp = Byte.valueOf(edad);
         }
-        
+
         short mesestemp = 0;
-        if (meses != null && !meses.equals("")){
-        mesestemp = Byte.valueOf(meses);
+        if (meses != null && !meses.equals("")) {
+            mesestemp = Byte.valueOf(meses);
         }
-        
-        
+
         tempNna.setEdadAnhos(edadtemp);
         tempNna.setEdadMeses(mesestemp);
 
@@ -452,13 +451,17 @@ public class nna {
 
         ServicioNna.crearNna(tempNna);
 
-        String mensaje_log = "Se registró un nuevo NNA a la base de datos con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Registró un nuevo NNA a la base de datos con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+
         String Tipo_registro = "NNA";
 
-        //try{
-        String Numero_registro = String.valueOf(tempNna.getIdnna());
+        try {
+            String Numero_registro = String.valueOf(tempNna.getIdnna());
 
-        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         if (prioritarios != null) {
             map.put("listaNna", ServicioNna.ListaNna("prioritario"));
@@ -651,13 +654,17 @@ public class nna {
 
         ServicioNna.updateNna(tempNna);
 
-        String mensaje_log = "Se editó el perfil del NNA con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Se editó el perfil del NNA con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+
         String Tipo_registro = "NNA";
 
-        //try{
-        String Numero_registro = String.valueOf(tempNna.getIdnna());
+        try {
+            String Numero_registro = String.valueOf(tempNna.getIdnna());
 
-        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         if (tempNna.getClasificacion().equals("prioritario")) {
             map.put("listaNna", ServicioNna.ListaNna("prioritario"));
@@ -708,7 +715,7 @@ public class nna {
         map.put("nna", ServicioNna.getNna(idNna));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
-         map.put("listaUa", ServicioPersonal.ListaUa());
+        map.put("listaUa", ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/Buscador/nna/editar_expediente", map);
     }
 
@@ -787,8 +794,8 @@ public class nna {
         } catch (Exception ex) {
         }
         map.addAttribute("fechaest", tempfechaEst);
-        map.put("df",df);
-        map.put("unidad",tempUA);
+        map.put("df", df);
+        map.put("unidad", tempUA);
         map.put("expediente", tempExp);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
@@ -1134,6 +1141,18 @@ public class nna {
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
 
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Creó un nuevo expediente del NNA con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+
+        String Tipo_registro = "NNA";
+
+        try {
+            String Numero_registro = String.valueOf(tempNna.getIdnna());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         return new ModelAndView("/Personal/nna/editar_nna", map);
     }
 
@@ -1311,6 +1330,18 @@ public class nna {
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Creó un nuevo expediente del NNA con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+
+        String Tipo_registro = "NNA";
+
+        try {
+            String Numero_registro = String.valueOf(tempNna.getIdnna());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         return new ModelAndView("/Personal/Buscador/nna/editar_nna", map);
     }
@@ -1490,13 +1521,25 @@ public class nna {
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
 
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Creó un nuevo expediente del NNA con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+
+        String Tipo_registro = "NNA";
+
+        try {
+            String Numero_registro = String.valueOf(tempNna.getIdnna());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         return new ModelAndView("/Personal/nna/editar_nna_1", map);
     }
 
     @RequestMapping(value = "/updateExpedienteNna", method = RequestMethod.POST)
     public ModelAndView updateExpedienteNna(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
-            @RequestParam("ua") long ua, 
+            @RequestParam("ua") long ua,
             @RequestParam(value = "numero", required = false) String numero,
             @RequestParam(value = "idExpNna", required = false) Long idExpNna,
             @RequestParam(value = "listaEval", required = false) String listaEval,
@@ -1530,7 +1573,7 @@ public class nna {
             return new ModelAndView("login", map);
         }
 
-        if (listaEval != null){
+        if (listaEval != null) {
             map.addAttribute("idExpNna", idExpNna);
             map.addAttribute("clasificacion", clasificacion);
             return new ModelAndView("forward:/listaInformes", map);
@@ -1564,7 +1607,7 @@ public class nna {
         }
         if (fechaIngresoPrio != null && !fechaIngresoPrio.equals("")) {
             tempExp.setFechaIngPrio(df.stringToDate(fechaIngresoPrio));
-        }else if (fechaIngresoPrio == null || fechaIngresoPrio.equals("")) {
+        } else if (fechaIngresoPrio == null || fechaIngresoPrio.equals("")) {
             tempExp.setFechaIngPrio(null);
         }
         tempExp.setHt(ht);
@@ -1686,10 +1729,10 @@ public class nna {
 //        tempExp.setFechaActualizacion(fechaAct);
         if (fechaAct != null && !fechaAct.equals("")) {
             tempExp.setFechaActualizacion(df.stringToDate(fechaAct));
-        }else if (fechaAct == null || fechaAct.equals("")) {
+        } else if (fechaAct == null || fechaAct.equals("")) {
             tempExp.setFechaActualizacion(null);
         }
-        
+
         ServicioNna.updateExpNna(tempExp);
 
         String tempfechaNac = "";
@@ -1713,6 +1756,19 @@ public class nna {
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Editó el expediente (" + tempExp.getIdexpedienteNna() + ") del NNA con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+
+        String Tipo_registro = "NNA";
+
+        try {
+            String Numero_registro = String.valueOf(tempNna.getIdnna());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         return new ModelAndView("/Personal/nna/editar_nna", map);
     }
 
@@ -1885,6 +1941,19 @@ public class nna {
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Editó el expediente (" + tempExp.getIdexpedienteNna() + ") del NNA con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+
+        String Tipo_registro = "NNA";
+
+        try {
+            String Numero_registro = String.valueOf(tempNna.getIdnna());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         return new ModelAndView("/Personal/Buscador/nna/editar_nna", map);
     }
 
@@ -2057,9 +2126,21 @@ public class nna {
         map.put("listaJuzgados", ServicioPersonal.ListaJuzgado());
         map.put("listaCar", ServicioPersonal.ListaCar());
         map.put("nna", ServicioNna.getNna(idNna));
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Editó el expediente (" + tempExp.getIdexpedienteNna() + ") del NNA con Nombre, " + tempNna.getNombre() + " y ID: " + String.valueOf(tempNna.getIdnna());
+
+        String Tipo_registro = "NNA";
+
+        try {
+            String Numero_registro = String.valueOf(tempNna.getIdnna());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
         return new ModelAndView("/Personal/nna/editar_nna_1", map);
     }
-    
+
     @RequestMapping(value = "/listaInformes", method = RequestMethod.POST)
     public ModelAndView listaInformes(ModelMap map, HttpSession session,
             @RequestParam(value = "idExpNna") Long idExpNna,
@@ -2070,36 +2151,36 @@ public class nna {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
-        map.put("df",df);
-        map.put("clasificacion",clasificacion);
+
+        map.put("df", df);
+        map.put("clasificacion", clasificacion);
         map.put("listaInformes", ServicioNna.listaInformesExpNna(idExpNna));
-        map.put("idExpNna",idExpNna);
+        map.put("idExpNna", idExpNna);
         return new ModelAndView("/Personal/nna/lista_informes", map);
     }
-    
+
     @RequestMapping(value = "/NnaAgregarInforme", method = RequestMethod.POST)
-    public ModelAndView NnaAgregarInforme(ModelMap map, HttpSession session,@RequestParam(value = "idExpNna") Long idExpNna,@RequestParam(value = "clasificacion") String clasificacion) {
+    public ModelAndView NnaAgregarInforme(ModelMap map, HttpSession session, @RequestParam(value = "idExpNna") Long idExpNna, @RequestParam(value = "clasificacion") String clasificacion) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
-        map.put("df",df);
-        map.put("clasificacion",clasificacion);
-        map.put("idExpNna",idExpNna);
+
+        map.put("df", df);
+        map.put("clasificacion", clasificacion);
+        map.put("idExpNna", idExpNna);
         return new ModelAndView("/Personal/nna/editar_informe", map);
     }
-    
+
     @RequestMapping(value = "/NnaCrearInforme", method = RequestMethod.POST)
     public ModelAndView NnaCrearInforme(ModelMap map, HttpSession session,
             @RequestParam(value = "idExpNna") Long idExpNna,
             @RequestParam(value = "clasificacion") String clasificacion,
             @RequestParam(value = "numInf") String numInf,
-            @RequestParam(value = "fechaInf",required = false) String fechaInf,
-            @RequestParam(value = "result",required = false) String result,
+            @RequestParam(value = "fechaInf", required = false) String fechaInf,
+            @RequestParam(value = "result", required = false) String result,
             @RequestParam(value = "obs", required = false) String obs) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2107,33 +2188,45 @@ public class nna {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        if(numInf == null || numInf.equals("")){
+        if (numInf == null || numInf.equals("")) {
             String mensaje = "Debe ingresar un número de informe";
-            map.put("mensaje",mensaje);
-            map.put("clasificacion",clasificacion);
-            map.put("idExpNna",idExpNna);
+            map.put("mensaje", mensaje);
+            map.put("clasificacion", clasificacion);
+            map.put("idExpNna", idExpNna);
             return new ModelAndView("/Personal/nna/editar_informe", map);
         }
         InformeNna informe = new InformeNna();
         informe.setNumero(numInf);
-        if(fechaInf != null && !fechaInf.equals("")){
+        if (fechaInf != null && !fechaInf.equals("")) {
             informe.setFecha(df.stringToDate(fechaInf));
-        }else{
+        } else {
             informe.setFecha(null);
         }
-        
+
         informe.setResultado(result);
         informe.setObservaciones(obs);
-        
+
         ServicioNna.crearInforme(informe, idExpNna);
         
-        map.put("df",df);
-        map.put("clasificacion",clasificacion);
-        map.put("idExpNna",idExpNna);
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Agregó un informe al expediente del NNA con  ID de expediente: " + idExpNna;
+
+        String Tipo_registro = "NNA";
+
+        try {
+            String Numero_registro = String.valueOf(idExpNna);
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
+        map.put("df", df);
+        map.put("clasificacion", clasificacion);
+        map.put("idExpNna", idExpNna);
         map.put("listaInformes", ServicioNna.listaInformesExpNna(idExpNna));
         return new ModelAndView("/Personal/nna/lista_informes", map);
     }
-    
+
     @RequestMapping(value = "/NnaEditarInforme", method = RequestMethod.POST)
     public ModelAndView NnaEditarInforme(ModelMap map, HttpSession session,
             @RequestParam(value = "idInf") Long idInf,
@@ -2145,24 +2238,24 @@ public class nna {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         InformeNna tempInf = new InformeNna();
         tempInf = ServicioNna.InformeExpNna(idInf);
-        map.put("df",df);
-        map.put("informe",tempInf);
-        map.put("clasificacion",clasificacion);
-        map.put("idExpNna",idExpNna);
+        map.put("df", df);
+        map.put("informe", tempInf);
+        map.put("clasificacion", clasificacion);
+        map.put("idExpNna", idExpNna);
         return new ModelAndView("/Personal/nna/editar_informe", map);
     }
-    
+
     @RequestMapping(value = "/NnaUpdateInforme", method = RequestMethod.POST)
     public ModelAndView NnaUpdateInforme(ModelMap map, HttpSession session,
             @RequestParam(value = "idExpNna") Long idExpNna,
             @RequestParam(value = "clasificacion") String clasificacion,
             @RequestParam(value = "idInf") Long idInf,
             @RequestParam(value = "numInf") String numInf,
-            @RequestParam(value = "fechaInf",required = false) String fechaInf,
-            @RequestParam(value = "result",required = false) String result,
+            @RequestParam(value = "fechaInf", required = false) String fechaInf,
+            @RequestParam(value = "result", required = false) String result,
             @RequestParam(value = "obs", required = false) String obs) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2170,30 +2263,42 @@ public class nna {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        if(numInf == null || numInf.equals("")){
+        if (numInf == null || numInf.equals("")) {
             String mensaje = "Debe ingresar un número de informe";
-            map.put("mensaje",mensaje);
-            map.put("clasificacion",clasificacion);
-            map.put("idExpNna",idExpNna);
+            map.put("mensaje", mensaje);
+            map.put("clasificacion", clasificacion);
+            map.put("idExpNna", idExpNna);
             return new ModelAndView("/Personal/nna/editar_informe", map);
         }
         InformeNna informe = new InformeNna();
         informe = ServicioNna.InformeExpNna(idInf);
         informe.setNumero(numInf);
-        if(fechaInf != null && !fechaInf.equals("")){
+        if (fechaInf != null && !fechaInf.equals("")) {
             informe.setFecha(df.stringToDate(fechaInf));
-        }else{
+        } else {
             informe.setFecha(null);
         }
-        
+
         informe.setResultado(result);
         informe.setObservaciones(obs);
-        
+
         ServicioNna.updateInforme(informe);
         
-        map.put("df",df);
-        map.put("clasificacion",clasificacion);
-        map.put("idExpNna",idExpNna);
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Editó un informe al expediente del NNA con  ID de expediente: " + idExpNna;
+
+        String Tipo_registro = "NNA";
+
+        try {
+            String Numero_registro = String.valueOf(idExpNna);
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        } 
+
+        map.put("df", df);
+        map.put("clasificacion", clasificacion);
+        map.put("idExpNna", idExpNna);
         map.put("listaInformes", ServicioNna.listaInformesExpNna(idExpNna));
         return new ModelAndView("/Personal/nna/lista_informes", map);
     }
