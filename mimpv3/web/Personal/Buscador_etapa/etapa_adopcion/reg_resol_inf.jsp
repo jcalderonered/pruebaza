@@ -6,17 +6,17 @@
 
 <%@page import="com.mimp.bean.Personal"%>
 <%
-response.setHeader( "Pragma", "no-cache" );
-response.addHeader( "Cache-Control", "must-revalidate" );
-response.addHeader( "Cache-Control", "no-cache" );
-response.addHeader("Cache-Control", "no-store");
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
 
-response.setDateHeader("Expires", 0);
-Personal u=(Personal)request.getSession().getAttribute("usuario");
-if (u==null){
+    response.setDateHeader("Expires", 0);
+    Personal u = (Personal) request.getSession().getAttribute("usuario");
+    if (u == null) {
 %>
 <jsp:forward page="/salir"/>
-<% } %>
+<% }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -33,7 +33,7 @@ if (u==null){
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
 
-    <body id="bd" class="bd fs3 com_content">
+    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" id="bd" class="bd fs3 com_content">
         <br>
         <br>
         <div id="wrap">
@@ -77,31 +77,31 @@ if (u==null){
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                              <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -129,56 +129,56 @@ if (u==null){
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateResolInforme" method="post" onsubmit="return confirm('Desea cambiar la resolución?');"> 
                                     <input hidden name="idResolucion" id="idResolucion" value="${resolucion.getIdresolucion()}">
                                 </c:if> 
-                            <fieldset>
-                                <br>
-                                <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
-                                <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
-                                <br>
-                                <h1 align="center"><strong>Familia "${familia}"</strong></h1>
-                                <br>
-                                <br>
-                                <h3 align="left"><strong>Detalles de la resolución</strong></h3>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">N° de resolución</label>
-                                    <div class="controls">
-                                        <input ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="numResol" name="numResol" type="text" value="${resolucion.getNumero()}" class="input-xlarge">
+                                <fieldset>
+                                    <br>
+                                    <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
+                                    <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
+                                    <br>
+                                    <h1 align="center"><strong>Familia "${familia}"</strong></h1>
+                                    <br>
+                                    <br>
+                                    <h3 align="left"><strong>Detalles de la resolución</strong></h3>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">N° de resolución</label>
+                                        <div class="controls">
+                                            <input ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="numResol" name="numResol" type="text" value="${resolucion.getNumero()}" class="input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Tipo de Resolución</label>
-                                    <div class="controls">
-                                        <select ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="tipo" name="tipo">
-                                            <option value="adopcion" ${resolucion.getTipo() == 'adopcion' ? 'selected' : ''} >Resolución de adopción</option>
-                                            <option value="revocacion" ${resolucion.getTipo() == 'revocacion' ? 'selected' : ''} >Resolución que revoca la integración familiar</option>
-                                        </select>
-                                    </div>    
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha resolución</label>
-                                    <div class="controls">
-                                        <input ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Tipo de Resolución</label>
+                                        <div class="controls">
+                                            <select ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="tipo" name="tipo">
+                                                <option value="adopcion" ${resolucion.getTipo() == 'adopcion' ? 'selected' : ''} >Resolución de adopción</option>
+                                                <option value="revocacion" ${resolucion.getTipo() == 'revocacion' ? 'selected' : ''} >Resolución que revoca la integración familiar</option>
+                                            </select>
+                                        </div>    
                                     </div>
-                                </div>
-                                <br>
-                                <h3><strong>En caso de tener un Fin de Procedimiento</strong></h3>
-                                <div class="checkbox">
-                                    <label>
-                                        <input onclick="confirmar()" ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} value="eliminar" id="eliminar" name="eliminar" type="checkbox"> Eliminar del Registro Nacional de Adoptantes para la Adopción
-                                    </label>
-                                </div>
-                                <br>
-                                <!-- Button -->
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Fecha resolución</label>
+                                        <div class="controls">
+                                            <input ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
-                                <!--FIN DE CONTENIDO-->
-                            </fieldset>
-                        </form>
+                                    <br>
+                                    <h3><strong>En caso de tener un Fin de Procedimiento</strong></h3>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input onclick="confirmar()" ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} value="eliminar" id="eliminar" name="eliminar" type="checkbox"> Eliminar del Registro Nacional de Adoptantes para la Adopción
+                                        </label>
+                                    </div>
+                                    <br>
+                                    <!-- Button -->
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        </div>
+                                    </div>
+                                    <!--FIN DE CONTENIDO-->
+                                </fieldset>
+                            </form>
                     </div>
                 </div>
             </div>
@@ -198,50 +198,56 @@ if (u==null){
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
             </script>
             <script>
                 function confirmar()
-                    {
-                        if (document.getElementById('eliminar').checked) {
-                            
-                            alert("Al seleccionar esta opción el expediente será retirado del sistema")
-                       } else {
-                            //alert("checked");
-                       }
-                       // alert("Al seleccionar esta opción el expediente será retirado del sistema");
+                {
+                    if (document.getElementById('eliminar').checked) {
+
+                        alert("Al seleccionar esta opción el expediente será retirado del sistema")
+                    } else {
+                        //alert("checked");
                     }
-        </script>  
-        <script type="text/javascript">
+                    // alert("Al seleccionar esta opción el expediente será retirado del sistema");
+                }
+            </script>  
+            <script type="text/javascript">
                 function enter(e) {
-                     if (e.keyCode == 13) {
-                     return false;
+                    if (e.keyCode == 13) {
+                        return false;
                     }
                 }
-        </script>
-        <script type="text/javascript">
-     
-            function validar()
-            {
-              
-            if( document.formulario.numResol.value == "" )
-            {
-            alert( "Debe ingresar un número de resolución" );
-             document.formulario.numResol.focus() ;
-            return false;
-            }
-            if( document.formulario.fechaResol.value == "" )
-            {
-            alert( "Debe ingresar la fecha" );
-             document.formulario.fechaResol.focus() ;
-            return false;
-            }
-            
-            return confirm('Desea crear la resolución?');
-            
-            }
-         </script>
+            </script>
+            <script type="text/javascript">
+
+                function validar()
+                {
+
+                    if (document.formulario.numResol.value == "")
+                    {
+                        alert("Debe ingresar un número de resolución");
+                        document.formulario.numResol.focus();
+                        return false;
+                    }
+                    if (document.formulario.fechaResol.value == "")
+                    {
+                        alert("Debe ingresar la fecha");
+                        document.formulario.fechaResol.focus();
+                        return false;
+                    }
+
+                    return confirm('Desea crear la resolución?');
+
+                }
+            </script>
+            <SCRIPT type="text/javascript">
+                window.history.forward();
+                function noBack() {
+                    window.history.forward();
+                }
+            </SCRIPT>
             <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>
