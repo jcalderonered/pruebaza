@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -33,7 +33,7 @@
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
 
-    <body id="bd" class="bd fs3 com_content">
+    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" id="bd" class="bd fs3 com_content">
         <br>
         <br>
         <div id="wrap">
@@ -77,31 +77,31 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                              <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -119,95 +119,95 @@
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <br>
-                        
+
                         <h1 align="center"><strong>Evaluación de Empatia</strong></h1>
                         <br>
                         <div class="row">
                             <div class="col-md-2 col-md-offset-2">
-                            <c:if test="${empatia == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearEvalEmpatia" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)"> 
-                                <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
-                            </c:if>  
-                            <c:if test="${empatia != null}">
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateEvalEmpatia" method="post"> 
-                                    <input hidden name="idEmpatia" id="idEmpatia" value="${empatia.getIdevaluacion()}">
-                                </c:if>  
-                                    <fieldset>
-                                        <br>
-                                        <h1 align="center"><strong>Familia "${familia}"</strong></h1>
-                                        
-                                        <br>
-                                        <h3><strong>Responsable</strong></h3>
-                                        <br>
-                                        <div>
-                                            <label class="control-label">Profesional</label>
-                                            <div class="controls">
-                                                <select ${empatia != null ? 'disabled' : ''} id="personal" name="personal" class="input-xlarge">
-                                                    <c:forEach var="personal" items="${listaPersonal}" > 
-                                                        <option value="${personal.getIdpersonal()}" ${empatia.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>    
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <h3><strong>Evaluación</strong></h3>
-                                        <br>
-                                        <div>
-                                            <label class="control-label">Resultado</label>
-                                            <div class="controls">
-                                                <select ${empatia != null ? 'disabled' : ''} id="resultado" name="resultado" > 
-                                                    <option value="favorable" ${empatia.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
-                                                    <option value="desfavorable" ${empatia.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
-                                                </select>
-                                            </div>    
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                          <label class="control-label">Número de informe</label>
-                                            <div class="controls">
-                                              <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${empatia.getNumEval()}" >
-                                           </div>
-                                        </div>
-                                        <br> 
-                                        <div class="control-group">
-                                            <label class="control-label">Fecha de evaluación</label>
-                                            <div class="controls">
-                                               <input ${empatia != null ? 'disabled' : ''} id="fechaEval" name="fechaEval" type="text" value="${empatia.getFechaResultado() != null ? df.dateToString(empatia.getFechaResultado()) : ''}" class="datepicker input-xlarge">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                            <label class="control-label">Personas intervenidas</label>
-                                            <div class="controls">
-                                                <textarea ${empatia != null ? 'disabled' : ''} id="persInt" name="persInt" type="text" cols="25" rows="5">${empatia.getPersInt()}</textarea>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="control-group">
-                                          <label class="control-label">Número de personas intervenidas</label>
-                                            <div class="controls">
-                                              <input ${empatia != null ? 'disabled' : ''} id="numPers" name="numPers" type="text" class="input-xlarge" value="${empatia.getNumPersInt()}" >
-                                           </div>
-                                        </div>
-                                        <br> 
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <label class="control-label">Comentarios</label>
+                                <c:if test="${empatia == null}">
+                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearEvalEmpatia" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)"> 
+                                        <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
+                                    </c:if>  
+                                    <c:if test="${empatia != null}">
+                                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateEvalEmpatia" method="post"> 
+                                            <input hidden name="idEmpatia" id="idEmpatia" value="${empatia.getIdevaluacion()}">
+                                        </c:if>  
+                                        <fieldset>
+                                            <br>
+                                            <h1 align="center"><strong>Familia "${familia}"</strong></h1>
+
+                                            <br>
+                                            <h3><strong>Responsable</strong></h3>
+                                            <br>
+                                            <div>
+                                                <label class="control-label">Profesional</label>
                                                 <div class="controls">
-                                                    <textarea ${empatia != null ? 'disabled' : ''} id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${empatia.getObservacion()}</textarea>
+                                                    <select ${empatia != null ? 'disabled' : ''} id="personal" name="personal" class="input-xlarge">
+                                                        <c:forEach var="personal" items="${listaPersonal}" > 
+                                                            <option value="${personal.getIdpersonal()}" ${empatia.getPersonal().getIdpersonal() == personal.getIdpersonal() ? 'selected' : ''}>${personal.getNombre()} ${personal.getApellidoP()} ${personal.getApellidoM()}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>    
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <h3><strong>Evaluación</strong></h3>
+                                            <br>
+                                            <div>
+                                                <label class="control-label">Resultado</label>
+                                                <div class="controls">
+                                                    <select ${empatia != null ? 'disabled' : ''} id="resultado" name="resultado" > 
+                                                        <option value="favorable" ${empatia.getResultado() == 'favorable' ? 'selected' : ''}>Favorable</option>
+                                                        <option value="desfavorable" ${empatia.getResultado() == 'desfavorable' ? 'selected' : ''}>Desfavorable</option>
+                                                    </select>
+                                                </div>    
+                                            </div>
+                                            <br>
+                                            <div class="control-group">
+                                                <label class="control-label">Número de informe</label>
+                                                <div class="controls">
+                                                    <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${empatia.getNumEval()}" >
                                                 </div>
                                             </div>
-                                        </div>   
-                                        <br>       
-                                        <!-- Button -->
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <button ${empatia != null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                            <br> 
+                                            <div class="control-group">
+                                                <label class="control-label">Fecha de evaluación</label>
+                                                <div class="controls">
+                                                    <input ${empatia != null ? 'disabled' : ''} id="fechaEval" name="fechaEval" type="text" value="${empatia.getFechaResultado() != null ? df.dateToString(empatia.getFechaResultado()) : ''}" class="datepicker input-xlarge">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </fieldset>
-                                </form>   
+                                            <br>
+                                            <div class="control-group">
+                                                <label class="control-label">Personas intervenidas</label>
+                                                <div class="controls">
+                                                    <textarea ${empatia != null ? 'disabled' : ''} id="persInt" name="persInt" type="text" cols="25" rows="5">${empatia.getPersInt()}</textarea>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="control-group">
+                                                <label class="control-label">Número de personas intervenidas</label>
+                                                <div class="controls">
+                                                    <input ${empatia != null ? 'disabled' : ''} id="numPers" name="numPers" type="text" class="input-xlarge" value="${empatia.getNumPersInt()}" >
+                                                </div>
+                                            </div>
+                                            <br> 
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <label class="control-label">Comentarios</label>
+                                                    <div class="controls">
+                                                        <textarea ${empatia != null ? 'disabled' : ''} id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${empatia.getObservacion()}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>   
+                                            <br>       
+                                            <!-- Button -->
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <button ${empatia != null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Editar</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>   
                             </div>
                         </div>
                     </div>
@@ -229,43 +229,49 @@
                 <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
                 <script type="text/javascript">
 
-                    $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
                 </script>
                 <script type="text/javascript">
-                function enter(e) {
-                     if (e.keyCode == 13) {
-                     return false;
+                    function enter(e) {
+                        if (e.keyCode == 13) {
+                            return false;
+                        }
                     }
-                }
-            </script>
-            <script type="text/javascript">
-     
-            function validar()
-            {
-            var numericExpression = /^[0-9]+$/;
-            if(!document.formulario.numPers.value.match(numericExpression))
-            {
-            alert( "Debe ingresar un número" );
-             document.formulario.numPers.focus() ;
-            return false;
-            }
-            if( document.formulario.numEval.value == "" )
-            {
-            alert( "Debe ingresar un número de informe" );
-             document.formulario.numEval.focus() ;
-            return false;
-            }
-            if( document.formulario.fechaEval.value == "" )
-            {
-            alert( "Debe ingresar la fecha" );
-             document.formulario.fechaEval.focus() ;
-            return false;
-            }
-            
-            return true;
-            }
-            </script>
+                </script>
+                <script type="text/javascript">
+
+                    function validar()
+                    {
+                        var numericExpression = /^[0-9]+$/;
+                        if (!document.formulario.numPers.value.match(numericExpression))
+                        {
+                            alert("Debe ingresar un número");
+                            document.formulario.numPers.focus();
+                            return false;
+                        }
+                        if (document.formulario.numEval.value == "")
+                        {
+                            alert("Debe ingresar un número de informe");
+                            document.formulario.numEval.focus();
+                            return false;
+                        }
+                        if (document.formulario.fechaEval.value == "")
+                        {
+                            alert("Debe ingresar la fecha");
+                            document.formulario.fechaEval.focus();
+                            return false;
+                        }
+
+                        return true;
+                    }
+                </script>
+                <SCRIPT type="text/javascript">
+                    window.history.forward();
+                    function noBack() {
+                        window.history.forward();
+                    }
+                </SCRIPT>
                 <!-- Placed at the end of the document so the pages load faster -->               
                 </body>
                 </html>

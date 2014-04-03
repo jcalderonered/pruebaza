@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -33,7 +33,7 @@
         <!-- Datepicker -->
         <link href="${pageContext.servletContext.contextPath}/assets/css/datepicker3.css" rel="stylesheet">
     </head>
-    <body id="bd" class="bd fs3 com_content">
+    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" id="bd" class="bd fs3 com_content">
         <br>
         <br>
         <div id="wrap">
@@ -77,31 +77,31 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                              <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -136,7 +136,7 @@
                                         <h3><strong>Número de informe: ${num}</strong></h3>
                                     </c:otherwise>
                                 </c:choose>
-                                
+
                                 <br>
                                 <!-- Text input-->
                                 <div class="control-group">
@@ -181,13 +181,13 @@
                                     </div>
                                 </div>
                                 <c:if test="${ultimo != null}">
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de acta</label>
-                                    <div class="controls">
-                                        <input ${informe.getEstado() == 'listo' ? 'disabled' : ''} value="${informe.getFechaActa() != null ? df.dateToString(informe.getFechaActa()) : ''}" id="fechaActa" name="fechaActa" type="text" class="datepicker input-xlarge">
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Fecha de acta</label>
+                                        <div class="controls">
+                                            <input ${informe.getEstado() == 'listo' ? 'disabled' : ''} value="${informe.getFechaActa() != null ? df.dateToString(informe.getFechaActa()) : ''}" id="fechaActa" name="fechaActa" type="text" class="datepicker input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
                                 </c:if>
                                 <br>
                                 <div class="control-group">
@@ -226,9 +226,15 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
 
-                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
             </script>
+            <SCRIPT type="text/javascript">
+                window.history.forward();
+                function noBack() {
+                    window.history.forward();
+                }
+            </SCRIPT>
             <!-- Ubicar al final -->
     </body>
 </html>
