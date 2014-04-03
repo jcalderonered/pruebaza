@@ -72,7 +72,7 @@ public class reporte {
     @RequestMapping("/Reportes/OrganismosAcreditados")
     public void ReporteOrganismo(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
+        Personal usuario = (Personal) session.getAttribute("usuario");
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
@@ -132,13 +132,25 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Organismos Acreditados' ";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
     }
 
     //PROBAR
     @RequestMapping("/Reportes/PostAdopcion")
     public void ReportePostAdopcion(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
+        Personal usuario = (Personal) session.getAttribute("usuario");
 //        if (usuario == null) {
 //            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
 //            map.addAttribute("mensaje", mensaje);
@@ -195,70 +207,70 @@ public class reporte {
                     }
                     int edad = 0;
                     int añoAct = 0;
-                   if(el.getNombre() != null){
-                    cell.setCellValue(el.getNombre());
+                    if (el.getNombre() != null) {
+                        cell.setCellValue(el.getNombre());
                     }
                     cell = row.createCell(3);
-                    if(el.getApellidoP() != null){
-                    cell.setCellValue(el.getApellidoP());
+                    if (el.getApellidoP() != null) {
+                        cell.setCellValue(el.getApellidoP());
                     }
                     cell = row.createCell(4);
-                    if(el.getApellidoM() != null){
-                    cell.setCellValue(el.getApellidoM());
+                    if (el.getApellidoM() != null) {
+                        cell.setCellValue(el.getApellidoM());
                     }
                     cell = row.createCell(5);
                     Date fechaAct = new Date();
-                    if(el.getFechaNac() != null){
-                    añoAct = fechaAct.getYear();
-                    edad = añoAct - el.getFechaNac().getYear();
-                    if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
-                            > 0) {
-                        edad--;
-                    } else if ((el.getFechaNac().getMonth()
-                            - fechaAct.getMonth()) == 0) {
-                        if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                    if (el.getFechaNac() != null) {
+                        añoAct = fechaAct.getYear();
+                        edad = añoAct - el.getFechaNac().getYear();
+                        if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                                 > 0) {
                             edad--;
+                        } else if ((el.getFechaNac().getMonth()
+                                - fechaAct.getMonth()) == 0) {
+                            if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                                    > 0) {
+                                edad--;
+                            }
                         }
-                    }
-                         cell.setCellValue(edad);
-                    }else {
-                         cell.setCellValue("");
-                    }
-                   
-                    cell = row.createCell(6);
-                    if(el.getPaisNac() != null){
-                    cell.setCellValue(el.getPaisNac());
-                    }
-                    cell = row.createCell(7);
-                    if(ella.getNombre() != null){
-                    cell.setCellValue(ella.getNombre());
-                    }
-                    cell = row.createCell(8);
-                    if(ella.getApellidoP() != null){
-                    cell.setCellValue(ella.getApellidoP());
-                    }
-                    cell = row.createCell(9);
-                    if(ella.getApellidoM() != null){
-                    cell.setCellValue(ella.getApellidoM());
-                    }
-                    cell = row.createCell(10);
-                    if(ella.getFechaNac() != null){
-                    edad = añoAct - ella.getFechaNac().getYear();
-                    if ((ella.getFechaNac().getMonth() - fechaAct.getMonth()) > 0) {
-                        edad--;
-                    } else if ((ella.getFechaNac().getMonth() - fechaAct.getMonth()) == 0) {
-                        if ((ella.getFechaNac().getDate() - fechaAct.getDate()) > 0) {
-                            edad--;
-                        }
-                    }
                         cell.setCellValue(edad);
-                    }else {
+                    } else {
                         cell.setCellValue("");
                     }
-                    
+
+                    cell = row.createCell(6);
+                    if (el.getPaisNac() != null) {
+                        cell.setCellValue(el.getPaisNac());
+                    }
+                    cell = row.createCell(7);
+                    if (ella.getNombre() != null) {
+                        cell.setCellValue(ella.getNombre());
+                    }
+                    cell = row.createCell(8);
+                    if (ella.getApellidoP() != null) {
+                        cell.setCellValue(ella.getApellidoP());
+                    }
+                    cell = row.createCell(9);
+                    if (ella.getApellidoM() != null) {
+                        cell.setCellValue(ella.getApellidoM());
+                    }
+                    cell = row.createCell(10);
+                    if (ella.getFechaNac() != null) {
+                        edad = añoAct - ella.getFechaNac().getYear();
+                        if ((ella.getFechaNac().getMonth() - fechaAct.getMonth()) > 0) {
+                            edad--;
+                        } else if ((ella.getFechaNac().getMonth() - fechaAct.getMonth()) == 0) {
+                            if ((ella.getFechaNac().getDate() - fechaAct.getDate()) > 0) {
+                                edad--;
+                            }
+                        }
+                        cell.setCellValue(edad);
+                    } else {
+                        cell.setCellValue("");
+                    }
+
                     cell = row.createCell(11);
-                    if(ella.getPaisNac() != null){
+                    if (ella.getPaisNac() != null) {
                         cell.setCellValue(ella.getPaisNac());
                     }
                     //NNA empieza Aqui
@@ -430,13 +442,25 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+        
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registros Post-Adopción' ";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
     }
 
     //PROBAR + ARREGLAR
     @RequestMapping("/Reportes/NNAs")
     public void ReporteNNAs(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
+        Personal usuario = (Personal) session.getAttribute("usuario");
 //        if (usuario == null) {
 //            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
 //            map.addAttribute("mensaje", mensaje);
@@ -1122,13 +1146,24 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro Nacional de NNAs declarados Judicialmente en Abandono' ";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
     }
 
     //PROBAR
     @RequestMapping("/Reportes/NNAPrioritarios")
     public void ReporteNNAPrioritario(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
+        Personal usuario = (Personal) session.getAttribute("usuario");
 //        if (usuario == null) {
 //            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
 //            map.addAttribute("mensaje", mensaje);
@@ -1492,12 +1527,23 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro de NNAs prioritarios' ";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
     }
 
     @RequestMapping("/Reportes/RegistroNNAsPrioGrupos")
     public void ReporteNnaPrioGrupos(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
+        Personal usuario = (Personal) session.getAttribute("usuario");
 //        if (usuario == null) {
 //            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
 //            map.addAttribute("mensaje", mensaje);
@@ -3120,13 +3166,25 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+        
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro de NNAs prioritarios Mensual por Grupo de Referencia' ";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
     }
 
     //LISTO
     @RequestMapping("/Reportes/AptosNacionales")
     public void ReporteAptosNacionales(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
+       Personal usuario = (Personal) session.getAttribute("usuario");
 //        if (usuario == null) {
 //            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
 //            map.addAttribute("mensaje", mensaje);
@@ -3200,20 +3258,20 @@ public class reporte {
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
                 int edad = 0;
-                if(el.getFechaNac() != null){
-                edad = añoAct - el.getFechaNac().getYear();
-                if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
-                        > 0) {
-                    edad--;
-                } else if ((el.getFechaNac().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                if (el.getFechaNac() != null) {
+                    edad = añoAct - el.getFechaNac().getYear();
+                    if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                             > 0) {
                         edad--;
+                    } else if ((el.getFechaNac().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
                     }
-                }
-                cell.setCellValue(edad);
-                }else{
+                    cell.setCellValue(edad);
+                } else {
                     cell.setCellValue("");
                 }
                 cell = row.createCell(7);
@@ -3240,20 +3298,20 @@ public class reporte {
                 }
                 cell = row.createCell(11);
                 añoAct = fechaAct.getYear();
-                if(ella.getFechaNac() != null){
-                edad = añoAct - ella.getFechaNac().getYear();
-                if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
-                        > 0) {
-                    edad--;
-                } else if ((ella.getFechaNac().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                if (ella.getFechaNac() != null) {
+                    edad = añoAct - ella.getFechaNac().getYear();
+                    if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
                             > 0) {
                         edad--;
+                    } else if ((ella.getFechaNac().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
                     }
-                }
-                cell.setCellValue(edad);
-                }else{
+                    cell.setCellValue(edad);
+                } else {
                     cell.setCellValue("");
                 }
                 cell = row.createCell(12);
@@ -3502,13 +3560,26 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+        
+         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro de Adoptantes Aptos Nacionales' ";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+        
     }
 
     //PROBAR
     @RequestMapping("/Reportes/AptosInternacionales")
     public void ReporteAptosInternacionales(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
+        Personal usuario = (Personal) session.getAttribute("usuario");
 //        if (usuario == null) {
 //            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
 //            map.addAttribute("mensaje", mensaje);
@@ -3582,20 +3653,20 @@ public class reporte {
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
                 int edad = 0;
-                if(el.getFechaNac() != null){
-                edad = añoAct - el.getFechaNac().getYear();
-                if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
-                        > 0) {
-                    edad--;
-                } else if ((el.getFechaNac().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                if (el.getFechaNac() != null) {
+                    edad = añoAct - el.getFechaNac().getYear();
+                    if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                             > 0) {
                         edad--;
+                    } else if ((el.getFechaNac().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
                     }
-                }
-                cell.setCellValue(edad);
-                }else{
+                    cell.setCellValue(edad);
+                } else {
                     cell.setCellValue("");
                 }
                 cell = row.createCell(7);
@@ -3622,22 +3693,22 @@ public class reporte {
                 }
                 cell = row.createCell(11);
                 añoAct = fechaAct.getYear();
-                if(ella.getFechaNac() != null){
-                edad = añoAct - ella.getFechaNac().getYear();
-                if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
-                        > 0) {
-                    edad--;
-                } else if ((ella.getFechaNac().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                if (ella.getFechaNac() != null) {
+                    edad = añoAct - ella.getFechaNac().getYear();
+                    if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
                             > 0) {
                         edad--;
+                    } else if ((ella.getFechaNac().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
                     }
-                }
-                cell.setCellValue(edad);
+                    cell.setCellValue(edad);
                 } else {
-                        cell.setCellValue("");
-                    }
+                    cell.setCellValue("");
+                }
                 cell = row.createCell(12);
                 fecha = "";
                 try {
@@ -3883,13 +3954,26 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+        
+         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro de Adoptantes Aptos Internacionales' ";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+        
     }
 
     //LISTO
     @RequestMapping("/Reportes/AdopcionExtranjero")
     public void ReporteAdopcionExtranjero(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
+        Personal usuario = (Personal) session.getAttribute("usuario");
 //        if (usuario == null) {
 //            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
 //            map.addAttribute("mensaje", mensaje);
@@ -3963,20 +4047,20 @@ public class reporte {
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
                 int edad = 0;
-                if(el.getFechaNac() != null){
-                edad = añoAct - el.getFechaNac().getYear();
-                if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
-                        > 0) {
-                    edad--;
-                } else if ((el.getFechaNac().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                if (el.getFechaNac() != null) {
+                    edad = añoAct - el.getFechaNac().getYear();
+                    if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                             > 0) {
                         edad--;
+                    } else if ((el.getFechaNac().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
                     }
-                }
-                cell.setCellValue(edad);
-                }else{
+                    cell.setCellValue(edad);
+                } else {
                     cell.setCellValue("");
                 }
                 cell = row.createCell(7);
@@ -4003,21 +4087,21 @@ public class reporte {
                 }
                 cell = row.createCell(11);
                 añoAct = fechaAct.getYear();
-                if(ella.getFechaNac() != null){
-                edad = añoAct - ella.getFechaNac().getYear();
-                if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
-                        > 0) {
-                    edad--;
-                } else if ((ella.getFechaNac().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                if (ella.getFechaNac() != null) {
+                    edad = añoAct - ella.getFechaNac().getYear();
+                    if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
                             > 0) {
                         edad--;
+                    } else if ((ella.getFechaNac().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
                     }
-                }
-                cell.setCellValue(edad);
-                }else{
-                cell.setCellValue("");
+                    cell.setCellValue(edad);
+                } else {
+                    cell.setCellValue("");
                 }
                 cell = row.createCell(12);
                 fecha = "";
@@ -4175,13 +4259,25 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+        
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro de Adopcion en el Extranjero' ";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
     }
 
     //LISTO
     @RequestMapping("/Reportes/Expedientes")
     public void ReporteExpedientes(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
+        Personal usuario = (Personal) session.getAttribute("usuario");
 //        if (usuario == null) {
 //            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
 //            map.addAttribute("mensaje", mensaje);
@@ -4307,21 +4403,21 @@ public class reporte {
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
                 int edad = 0;
-                if(el.getFechaNac() != null){
-                edad = añoAct - el.getFechaNac().getYear();
-                if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
-                        > 0) {
-                    edad--;
-                } else if ((el.getFechaNac().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                if (el.getFechaNac() != null) {
+                    edad = añoAct - el.getFechaNac().getYear();
+                    if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                             > 0) {
                         edad--;
+                    } else if ((el.getFechaNac().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
                     }
-                }
-                cell.setCellValue(edad);
-                }else {
-                cell.setCellValue("");
+                    cell.setCellValue(edad);
+                } else {
+                    cell.setCellValue("");
                 }
                 cell = row.createCell(14);
                 try {
@@ -4340,21 +4436,21 @@ public class reporte {
                 }
                 cell = row.createCell(17);
                 añoAct = fechaAct.getYear();
-                if(ella.getFechaNac() != null){
-                edad = añoAct - ella.getFechaNac().getYear();
-                if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
-                        > 0) {
-                    edad--;
-                } else if ((ella.getFechaNac().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                if (ella.getFechaNac() != null) {
+                    edad = añoAct - ella.getFechaNac().getYear();
+                    if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
                             > 0) {
                         edad--;
+                    } else if ((ella.getFechaNac().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
                     }
-                }
-                cell.setCellValue(edad);
-                }else {
-                cell.setCellValue("");
+                    cell.setCellValue(edad);
+                } else {
+                    cell.setCellValue("");
                 }
                 cell = row.createCell(18);
                 try {
@@ -4684,13 +4780,25 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+        
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro Nacional de Exp Nacionales e Internacionales' ";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
     }
 
     //PROBAR
     @RequestMapping("/Reportes/RENAD")
     public void ReporteRENAD(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-//        Personal usuario = (Personal) session.getAttribute("usuario");
+        Personal usuario = (Personal) session.getAttribute("usuario");
 //        if (usuario == null) {
 //            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
 //            map.addAttribute("mensaje", mensaje);
@@ -4784,21 +4892,21 @@ public class reporte {
                 int edad = 0;
                 int edadEl = 0;
                 int añoAct = fechaAct.getYear();
-                if(el.getFechaNac() != null){
-                edad = añoAct - el.getFechaNac().getYear();                
-                if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
-                        > 0) {
-                    edad--;
-                } else if ((el.getFechaNac().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                if (el.getFechaNac() != null) {
+                    edad = añoAct - el.getFechaNac().getYear();
+                    if ((el.getFechaNac().getMonth() - fechaAct.getMonth())
                             > 0) {
                         edad--;
+                    } else if ((el.getFechaNac().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((el.getFechaNac().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
                     }
-                }                
-                edadEl = edad;
-                cell.setCellValue(edad);
-                }else{
+                    edadEl = edad;
+                    cell.setCellValue(edad);
+                } else {
                     cell.setCellValue("");
                 }
                 cell = row.createCell(9);
@@ -4815,23 +4923,23 @@ public class reporte {
                 }
                 cell = row.createCell(12);
                 añoAct = fechaAct.getYear();
-                if(ella.getFechaNac() != null){
-                edad = añoAct - ella.getFechaNac().getYear();
-                if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
-                        > 0) {
-                    edad--;
-                } else if ((ella.getFechaNac().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                if (ella.getFechaNac() != null) {
+                    edad = añoAct - ella.getFechaNac().getYear();
+                    if ((ella.getFechaNac().getMonth() - fechaAct.getMonth())
                             > 0) {
                         edad--;
+                    } else if ((ella.getFechaNac().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((ella.getFechaNac().getDate() - fechaAct.getDate())
+                                > 0) {
+                            edad--;
+                        }
                     }
-                }
                     cell.setCellValue(edad);
-                }else {
+                } else {
                     cell.setCellValue("");
                 }
-                
+
                 cell = row.createCell(13);
                 cell.setCellValue((edadEl + edad) / 2);
                 cell = row.createCell(14);
@@ -4884,7 +4992,7 @@ public class reporte {
                         }
                     }
                 }
-                cell = row.createCell(23);                
+                cell = row.createCell(23);
                 if (desig.getIddesignacion() != 0) {
                     if (desig.getNna() != null) {
                         if (desig.getNna().getApellidoP() != null) {
@@ -5123,7 +5231,7 @@ public class reporte {
                 if (desig.getTipoPropuesta() != null) {
                     cell.setCellValue(desig.getTipoPropuesta());
                 }
-                
+
                 Resolucion resol = new Resolucion();
                 //resol = ServicioReporte.getResolucionAptitud(exp.getIdexpedienteFamilia());
                 resol = ServicioReporte.getResolucionAptitud2(exp.getIdexpedienteFamilia());
@@ -5295,6 +5403,18 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+        
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Renad'.";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
     }
 
     //LISTO
@@ -5302,6 +5422,7 @@ public class reporte {
     public void ReporteInscritosSI(ModelMap map, HttpSession session,
             @RequestParam(value = "idsesion", required = false) String idsesion,
             HttpServletResponse response) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
         Workbook wb = new XSSFWorkbook();
         Long idsesion_in = Long.parseLong(idsesion);
         try {
@@ -5432,6 +5553,17 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Inscritos a Sesion Informativa'.";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
     }
 
     //LISTO
@@ -5439,6 +5571,7 @@ public class reporte {
     public void ReporteAsistenciaSI(ModelMap map, HttpSession session,
             @RequestParam(value = "idsesion", required = false) String idsesion,
             HttpServletResponse response) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
         Workbook wb = new XSSFWorkbook();
         Long idsesion_in = Long.parseLong(idsesion);
         try {
@@ -5561,6 +5694,18 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+        
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Reporte de Sesion Informativa'.";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
     }
 
     //LISTO
@@ -5570,6 +5715,7 @@ public class reporte {
             @RequestParam(value = "idgrupo", required = false) String idgrupo,
             @RequestParam(value = "idturno2", required = false) String idturno2,
             HttpServletResponse response) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
         Workbook wb = new XSSFWorkbook();
         Long idtaller_in = Long.parseLong(idtaller);
         Long idgrupo_in = Long.parseLong(idgrupo);
@@ -5827,11 +5973,23 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Reporte de Taller'.";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
     }
 
     @RequestMapping("/Reportes/Propuesta")
     public void ReportesPropuesta(ModelMap map, HttpSession session,
             HttpServletResponse response) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
         Workbook wb = new XSSFWorkbook();
         try {
             //Se llama a la plantilla localizada en la ruta
@@ -5986,6 +6144,17 @@ public class reporte {
             fileOut.close();
         } catch (Exception ex) {
             //ex.printStackTrace();
+        }
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Cuadro de Propuestas de designación'.";
+
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
         }
     }
 }
