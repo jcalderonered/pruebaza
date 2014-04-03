@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
 /**
  *
  * @author john
@@ -2336,7 +2335,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idPers = Long.parseLong( session.getAttribute("idPers").toString());
+        long idPers = Long.parseLong(session.getAttribute("idPers").toString());
         String nombre = (String) session.getAttribute("nombre");
         String apellidoP = (String) session.getAttribute("apellidoP");
         String apellidoM = (String) session.getAttribute("apellidoM");
@@ -2454,7 +2453,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idUa = Long.parseLong( session.getAttribute("idUa").toString());
+        long idUa = Long.parseLong(session.getAttribute("idUa").toString());
 
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalNoUa", ServicioPersonal.ListaPersonalNoUa(idUa));
@@ -2492,8 +2491,8 @@ public class personal {
 
         if (session.getAttribute("idPers") != null) {
 
-            long idUa = Long.parseLong( session.getAttribute("idUa").toString());
-            long idPers = Long.parseLong( session.getAttribute("idPers").toString());
+            long idUa = Long.parseLong(session.getAttribute("idUa").toString());
+            long idPers = Long.parseLong(session.getAttribute("idPers").toString());
 
             Personal per = new Personal();
             Unidad ua = new Unidad();
@@ -2520,7 +2519,7 @@ public class personal {
             map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(idUa));
 
         } else {
-            long idUa = Long.parseLong( session.getAttribute("idUa").toString());
+            long idUa = Long.parseLong(session.getAttribute("idUa").toString());
             session.setAttribute("ïdUA", idUa);
 
             return new ModelAndView("redirect:/irListaPersonalUa", map);
@@ -2666,7 +2665,7 @@ public class personal {
             String fechaIng = (String) session.getAttribute("fechaIng");
             String domicilio = (String) session.getAttribute("domicilio");
             String rol = (String) session.getAttribute("rol");
-            long ua = Long.parseLong( session.getAttribute("ua").toString());
+            long ua = Long.parseLong(session.getAttribute("ua").toString());
 
             Personal temp = new Personal();
 
@@ -2825,7 +2824,7 @@ public class personal {
 
         if (session.getAttribute("nombre") != null) {
 
-            long idPers =  Long.parseLong(session.getAttribute("idPers").toString());
+            long idPers = Long.parseLong(session.getAttribute("idPers").toString());
             String nombre = (String) session.getAttribute("nombre");
             String apellidoP = (String) session.getAttribute("apellidoP");
             String apellidoM = (String) session.getAttribute("apellidoM");
@@ -4101,18 +4100,18 @@ public class personal {
                 map.put("listaSesiones", ServicioPersonal.listaSesiones());
                 map.put("taller", tempTaller);
                 map.addAttribute("idTaller", idTaller);
-                
+
                 String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Creó un nuevo grupo para el taller: " + tempTaller.getIdtaller();
+                        + " con ID: " + usuario.getIdpersonal() + ". Creó un nuevo grupo para el taller: " + tempTaller.getIdtaller();
 
-            String Tipo_registro = "Taller";
+                String Tipo_registro = "Taller";
 
-            try {
-                String Numero_registro = String.valueOf(idTaller);
+                try {
+                    String Numero_registro = String.valueOf(idTaller);
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
+                }
 
                 session.removeAttribute("nombreGrupo");
             } else {
@@ -4165,7 +4164,7 @@ public class personal {
             map.put("grupo", tempGrp);
             map.addAttribute("idTaller", idTaller);
             map.addAttribute("idGrupo", idGrupo);
-            
+
             String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                     + " con ID: " + usuario.getIdpersonal() + ". Editó el grupo con ID: " + idGrupo + ". Perteneciente al taller con ID: "
                     + idTaller;
@@ -4218,25 +4217,25 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
+        long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
         String nombreGrupo = (String) session.getAttribute("nombreGrupo");
 
         Grupo tempGrp = new Grupo();
         tempGrp = ServicioPersonal.getGrupo(idGrupo);
         tempGrp.setNombre(nombreGrupo);
         ServicioPersonal.PersonalUpdateGrupo(tempGrp);
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Editó el grupo con ID: " + idGrupo;
+                + " con ID: " + usuario.getIdpersonal() + ". Editó el grupo con ID: " + idGrupo;
 
-            String Tipo_registro = "Grupo";
+        String Tipo_registro = "Grupo";
 
-            try {
-                String Numero_registro = String.valueOf(idGrupo);
+        try {
+            String Numero_registro = String.valueOf(idGrupo);
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         map.put("taller", ServicioPersonal.getTaller(tempGrp.getTaller().getIdtaller()));
         return new ModelAndView("/Personal/Informativa/edicion_taller", map);
@@ -4330,6 +4329,20 @@ public class personal {
             map.addAttribute("idTaller", idTaller);
             map.addAttribute("idGrupo", idGrupo);
 
+            String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Agregó un nuevo turno con el nombre: " + nombreTurno2 + ". "
+                    + "Perteneciente al grupo con ID: " + idGrupo;
+
+            String Tipo_registro = "Turno";
+
+            try {
+                String Numero_registro = String.valueOf(idGrupo);
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            session.removeAttribute("nombreTurno2");
         } else {
             long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
             session.setAttribute("idSesion", idGrupo);
@@ -4338,8 +4351,6 @@ public class personal {
 
             return new ModelAndView("redirect:/PersonalEditarGrupo", map);
         }
-
-        session.removeAttribute("nombreTurno2");
 
         return new ModelAndView("/Personal/Informativa/edicion_grupo", map);
     }
@@ -4434,6 +4445,19 @@ public class personal {
 
         Grupo tempGrp = new Grupo();
         tempGrp = ServicioPersonal.getGrupo(tempT2.getGrupo().getIdgrupo());
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Edito el turno con ID: " + idTurno2 + ". "
+                + "Perteneciente al grupo con ID: " + idGrupo + ". Del taller con ID: " + idTaller;
+
+        String Tipo_registro = "Turno";
+
+        try {
+            String Numero_registro = String.valueOf(idGrupo);
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         map.put("grupo", tempGrp);
 
@@ -4588,15 +4612,15 @@ public class personal {
         }
 
         if (session.getAttribute("fecha") != null) {
-            long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
+            long idTurno2 = Long.parseLong(session.getAttribute("idTurno2").toString());
             String fecha = (String) session.getAttribute("fecha");
             String hora = (String) session.getAttribute("hora");
             String duracion = (String) session.getAttribute("duracion");
             String direccion = (String) session.getAttribute("direccion");
             String capacidad = (String) session.getAttribute("capacidad");
             String facilitador = (String) session.getAttribute("facilitador");
-            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
-            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
 
             Turno2 tempTurno = new Turno2();
             tempTurno = ServicioPersonal.getTurno2(idTurno2);
@@ -4633,6 +4657,19 @@ public class personal {
 
             ServicioPersonal.PersonalCrearReunion(tempReun);
 
+            String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Creó una nueva reunión para el día: " + fecha + ". "
+                    + "Perteneciente al grupo con ID: " + idGrupo + ". Del taller con ID: " + idTaller;
+
+            String Tipo_registro = "Turno";
+
+            try {
+                String Numero_registro = String.valueOf(idGrupo);
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
             Turno2 tempT2 = new Turno2();
             tempT2 = ServicioPersonal.getTurno2(idTurno2);
             map.put("turno2", tempT2);
@@ -4650,9 +4687,9 @@ public class personal {
             session.removeAttribute("facilitador");
 
         } else {
-            long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
-            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
-            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
+            long idTurno2 = Long.parseLong(session.getAttribute("idTurno2").toString());
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
 
             session.setAttribute("idTurno2", idTurno2);
             session.setAttribute("idTaller", idTaller);
@@ -4709,16 +4746,16 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
+        long idReunion = Long.parseLong(session.getAttribute("idReunion").toString());
         String fecha = (String) session.getAttribute("fecha");
         String hora = (String) session.getAttribute("hora");
         String duracion = (String) session.getAttribute("duracion");
         String direccion = (String) session.getAttribute("direccion");
         String capacidad = (String) session.getAttribute("capacidad");
         String facilitador = (String) session.getAttribute("facilitador");
-        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
-        long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
-        long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+        long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
+        long idTurno2 = Long.parseLong(session.getAttribute("idTurno2").toString());
 
         Reunion tempReun = new Reunion();
         tempReun = ServicioPersonal.getReunion(idReunion);
@@ -4747,6 +4784,21 @@ public class personal {
         tempReun.setCapacidad(capac);
 
         ServicioPersonal.PersonalUpdateReunion(tempReun);
+
+        ServicioPersonal.PersonalCrearReunion(tempReun);
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ".Editó la reunión con ID: " + idReunion + ". "
+                + "Perteneciente al grupo con ID: " + idGrupo + ". Del taller con ID: " + idTaller;
+
+        String Tipo_registro = "Turno";
+
+        try {
+            String Numero_registro = String.valueOf(idGrupo);
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         Turno2 tempT2 = new Turno2();
         tempT2 = ServicioPersonal.getTurno2(tempReun.getTurno2().getIdturno2());
@@ -4797,8 +4849,8 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
-        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+        long idReunion = Long.parseLong(session.getAttribute("idReunion").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
         String nombre = (String) session.getAttribute("nombre");
         String historial = (String) session.getAttribute("historial");
         String grupo = (String) session.getAttribute("grupo");
@@ -4847,7 +4899,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
+        long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
 
         Sesion tempSesion = new Sesion();
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
@@ -4893,8 +4945,8 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
-        long idFormulario = Long.parseLong( session.getAttribute("idFormulario").toString());
+        long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
+        long idFormulario = Long.parseLong(session.getAttribute("idFormulario").toString());
 
         FormularioSesion fs = new FormularioSesion();
         fs = ServicioPersonal.getFormulario(idFormulario);
@@ -4965,8 +5017,8 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
-        long idFormulario = Long.parseLong( session.getAttribute("idFormulario").toString());
+        long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
+        long idFormulario = Long.parseLong(session.getAttribute("idFormulario").toString());
         String user = (String) session.getAttribute("user");
 
         if (session.getAttribute("user") != null) {
@@ -4996,6 +5048,18 @@ public class personal {
             hibermail.generateAndSendEmail2(user, pass_plano, user);
 
             allFormularios = ServicioPersonal.InscritosSesion(idSesion);
+
+            String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ".Creó una cuenta para la familia con cuenta: " + user + ".";
+
+            String Tipo_registro = "Familia";
+
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
 
             map.addAttribute("fecha", fecha);
             map.put("sesion", tempSesion);
@@ -5054,13 +5118,13 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
-        long idFamilia = Long.parseLong( session.getAttribute("idFamilia").toString());
+        long idReunion = Long.parseLong(session.getAttribute("idReunion").toString());
+        long idFamilia = Long.parseLong(session.getAttribute("idFamilia").toString());
         String asistencia = (String) session.getAttribute("asistencia");
         String nombre = (String) session.getAttribute("nombre");
         String grupo = (String) session.getAttribute("grupo");
         String turno = (String) session.getAttribute("turno");
-        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
         String historial = (String) session.getAttribute("historial");
 
         ArrayList<AsistenciaFR> allAsistencias = new ArrayList();
@@ -5134,13 +5198,13 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
-        long idFamilia = Long.parseLong( session.getAttribute("idFamilia").toString());
+        long idReunion = Long.parseLong(session.getAttribute("idReunion").toString());
+        long idFamilia = Long.parseLong(session.getAttribute("idFamilia").toString());
         String justificado = (String) session.getAttribute("justificado");
         String nombre = (String) session.getAttribute("nombre");
         String grupo = (String) session.getAttribute("grupo");
         String turno = (String) session.getAttribute("turno");
-        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
         String historial = (String) session.getAttribute("historial");
 
         ArrayList<AsistenciaFR> allAsistencias = new ArrayList();
@@ -5154,6 +5218,18 @@ public class personal {
             Short sh = Short.valueOf(justificado);
             asistFR.setInasJus(sh);
             ServicioPersonal.updateAsistenciaFR(asistFR);
+        }
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                + " con ID: " + usuario.getIdpersonal() + ". Tomó asistencia a la familia con ID: " + idFamilia + ".";
+
+        String Tipo_registro = "Familia";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
         }
 
         allFormularios = ServicioPersonal.formulariosReunion(idReunion);
@@ -5278,7 +5354,7 @@ public class personal {
             String fechaIngreso = (String) session.getAttribute("fechaIngreso");
             String tupa = (String) session.getAttribute("tupa");
             String tipoFamilia = (String) session.getAttribute("tipoFamilia");
-            long entAsoc = Long.parseLong( session.getAttribute("entAsoc").toString());
+            long entAsoc = Long.parseLong(session.getAttribute("entAsoc").toString());
 
             Familia tempFam = new Familia();
             ExpedienteFamilia expediente = new ExpedienteFamilia();
@@ -5386,7 +5462,7 @@ public class personal {
         String tupa = (String) session.getAttribute("tupa");
         String tipoFamilia = (String) session.getAttribute("tipoFamilia");
         String idExpediente = (String) session.getAttribute("idExpediente");
-        long entAsoc = Long.parseLong( session.getAttribute("entAsoc").toString());
+        long entAsoc = Long.parseLong(session.getAttribute("entAsoc").toString());
 
         Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
 
@@ -5677,7 +5753,8 @@ public class personal {
                 servicioEtapa.updateExpedienteFamilia(expedienteInt);
 
                 String mensaje_log = "Se editó el Adoptante con nombre, " + El.getNombre() + " " + El.getApellidoP()
-                        + " y ID:" + String.valueOf(El.getIdadoptante());
+                        + " y ID:" + String.valueOf(El.getIdadoptante()) + "Por el Usuario: " + usuario.getApellidoP()
+                        + usuario.getApellidoM();
                 String Tipo_registro = "Adoptante";
 
                 try {
@@ -6098,6 +6175,19 @@ public class personal {
                     usuario.setPass(newpass);
                     ServicioPersonal.CambiaPass(usuario);
                     mensaje = "La contraseña se ha cambiado con exito.";
+
+                    String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                            + " con ID: " + usuario.getIdpersonal() + ". Cambió su contrasena. ";
+
+                    String Tipo_registro = "Personal";
+
+                    try {
+                        String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                    } catch (Exception ex) {
+                    }
+
                 } else {
                     mensaje = "Las contraseñas no coinciden. Favor de reescribir la nueva contraseña.";
                 }
@@ -6236,7 +6326,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idpersonal = Long.parseLong( session.getAttribute("id").toString());
+        long idpersonal = Long.parseLong(session.getAttribute("id").toString());
         String dia = (String) session.getAttribute("dia");
 
         Personal personal = new Personal();
@@ -6275,7 +6365,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idpersonal = Long.parseLong( session.getAttribute("id").toString());
+        long idpersonal = Long.parseLong(session.getAttribute("id").toString());
 
         //List<Personal> lista = Servicio.listaPersonal();
         Date diatemp = new Date();
@@ -6385,10 +6475,10 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
         String taller = (String) session.getAttribute("nombreTaller");
         String historico = (String) session.getAttribute("historial");
-        long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
+        long idReunion = Long.parseLong(session.getAttribute("idReunion").toString());
 
         ArrayList<FormularioSesion> allFormularios = new ArrayList();
         allFormularios = ServicioPersonal.InscritosReunion(idReunion);
@@ -6441,7 +6531,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long year = Long.parseLong( session.getAttribute("year").toString());
+        long year = Long.parseLong(session.getAttribute("year").toString());
 
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
@@ -6473,9 +6563,22 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
+        long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
 
         ServicioPersonal.EliminarSesion(idSesion);
+        
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó la sesión con ID: " + idSesion;
+        
+            String Tipo_registro = "Sesión";
+
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+        
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
         map.put("formato", format);
@@ -6507,9 +6610,22 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+        long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
 
         ServicioPersonal.EliminarTaller(idTaller);
+        
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó el taller con ID: " + idTaller;
+        
+            String Tipo_registro = "Taller";
+
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+        
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
         map.put("formato", format);
@@ -6541,7 +6657,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long id = Long.parseLong( session.getAttribute("idSesion").toString());
+        long id = Long.parseLong(session.getAttribute("idSesion").toString());
 
         Sesion tempSesion = new Sesion();
         tempSesion = ServicioPersonal.getSesion(id);
@@ -6567,16 +6683,7 @@ public class personal {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
-        }
-
-        String mensaje = "";
-        Turno tempT = new Turno();
-        tempT = ServicioPersonal.getTurnoAsistencias(idTurno);
-        if (tempT.getAsistenciaFTs().isEmpty()) {
-            ServicioPersonal.DeleteTurnoSesion(tempT);
-        } else {
-            mensaje = "El turno no se pudo eliminar debido a que hay personas inscritas";
-        }
+        }       
 
         session.setAttribute("idTurno", idTurno);
         session.setAttribute("idSesion", idSesion);
@@ -6596,14 +6703,25 @@ public class personal {
 
         if (session.getAttribute("idTurno") != null) {
 
-            long idTurno = Long.parseLong( session.getAttribute("idTurno").toString());
-            long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
+            long idTurno = Long.parseLong(session.getAttribute("idTurno").toString());
+            long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
 
             String mensaje = "";
             Turno tempT = new Turno();
             tempT = ServicioPersonal.getTurnoAsistencias(idTurno);
             if (tempT.getAsistenciaFTs().isEmpty()) {
                 ServicioPersonal.DeleteTurnoSesion(tempT);
+                String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó el Turno con ID: " + idTurno;
+
+            String Tipo_registro = "Turno";
+
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
             } else {
                 mensaje = "El turno no se pudo eliminar debido a que hay personas inscritas";
             }
@@ -6632,7 +6750,7 @@ public class personal {
             session.removeAttribute("idTurno");
         } else {
 
-            long idSesion = Long.parseLong( session.getAttribute("idSesion").toString());
+            long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
             session.setAttribute("idSesion", idSesion);
 
             return new ModelAndView("redirect:/PersonalEditarSesion", map);
@@ -6671,14 +6789,27 @@ public class personal {
 
         if (session.getAttribute("idGrupo") != null) {
 
-            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
-            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
 
             String mensaje = "";
             Grupo tempG = new Grupo();
             tempG = ServicioPersonal.getGrupo(idGrupo);
             if (tempG.getTurno2s().isEmpty()) {
                 ServicioPersonal.DeleteGrupoTaller(tempG);
+                
+                String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó el Grupo con ID: " + idGrupo;
+
+            String Tipo_registro = "Grupo";
+
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+                
             } else {
                 mensaje = "El grupo no se pudo eliminar debido a que hay turnos creados";
             }
@@ -6693,7 +6824,7 @@ public class personal {
 
             session.removeAttribute("idGrupo");
         } else {
-            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
             session.setAttribute("idTaller", idTaller);
 
             return new ModelAndView("redirect:/PersonalEditarTaller", map);
@@ -6733,15 +6864,27 @@ public class personal {
         }
 
         if (session.getAttribute("idTurno2") != null) {
-            long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
-            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
-            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
+            long idTurno2 = Long.parseLong(session.getAttribute("idTurno2").toString());
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
 
             String mensaje = "";
             Turno2 tempT2 = new Turno2();
             tempT2 = ServicioPersonal.getTurno2(idTurno2);
             if (tempT2.getReunions().isEmpty()) {
                 ServicioPersonal.DeleteTurno2Grupo(tempT2);
+                
+                String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó el Turno con ID: " + idTurno2;
+
+            String Tipo_registro = "Grupo";
+
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
             } else {
                 mensaje = "No se puede eliminar el turno debido a que hay reuniones creadas";
             }
@@ -6755,8 +6898,8 @@ public class personal {
             session.removeAttribute("idTurno2");
         } else {
 
-            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
-            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
 
             session.setAttribute("idTaller", idTaller);
             session.setAttribute("idGrupo", idGrupo);
@@ -6802,10 +6945,10 @@ public class personal {
 
         if (session.getAttribute("idReunion") != null) {
 
-            long idReunion = Long.parseLong( session.getAttribute("idReunion").toString());
-            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
-            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
-            long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
+            long idReunion = Long.parseLong(session.getAttribute("idReunion").toString());
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
+            long idTurno2 = Long.parseLong(session.getAttribute("idTurno2").toString());
 
             String mensaje = "";
             Reunion tempReun = new Reunion();
@@ -6813,6 +6956,19 @@ public class personal {
 
             if (tempReun.getAsistenciaFRs().isEmpty()) {
                 ServicioPersonal.DeleteReunionTurno2(tempReun);
+                
+                 String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó la Reunión con ID: " + idReunion;
+
+            String Tipo_registro = "Reunion";
+
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+            
             } else {
                 mensaje = "No se puede eliminar la reunión debido a que hay personas inscritas";
             }
@@ -6830,9 +6986,9 @@ public class personal {
             session.removeAttribute("idReunion");
 
         } else {
-            long idTaller = Long.parseLong( session.getAttribute("idTaller").toString());
-            long idGrupo = Long.parseLong( session.getAttribute("idGrupo").toString());
-            long idTurno2 = Long.parseLong( session.getAttribute("idTurno2").toString());
+            long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
+            long idGrupo = Long.parseLong(session.getAttribute("idGrupo").toString());
+            long idTurno2 = Long.parseLong(session.getAttribute("idTurno2").toString());
 
             session.setAttribute("idTaller", idTaller);
             session.setAttribute("idGrupo", idGrupo);
