@@ -200,6 +200,7 @@
                             <li ><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaCol" >NNA en Acogimiento Familiar o Colocación Familiar</a></li>
                         </ul>
                         <br>
                         <br>
@@ -230,6 +231,8 @@
                                             <th class="col-sm-2 " >Procedencia</th>
                                             <th class="col-sm-2 " >Nivel sociec</th>
                                             <th class="col-sm-2 " >Resolución de aptitud</th>
+                                            <th class="col-sm-2 " >Actualmente en proceso de Adopción</th>
+                                            <th class="col-sm-2 " >Prioridad</th>
                                             <th class="col-sm-2 " >Seleccionar</th>
                                         </tr>
                                     </thead>
@@ -259,6 +262,18 @@
                                                             </c:forEach>
                                                         </c:forEach>
                                                     </td>
+                                                    <c:set var="adopcion" value="no" />
+                                                    <c:set var="prioridad" value="---" />
+                                                    <c:if test="${!familia.getDesignacions().isEmpty()}">
+                                                        <c:forEach var="desig" items="${familia.getDesignacions()}" varStatus="status">
+                                                            <c:if test="${desig.getAceptacionConsejo() == 0}">
+                                                                <c:set var="adopcion" value="si" />
+                                                                <c:set var="prioridad" value="${desig.getPrioridad()}" />
+                                                            </c:if>                                                        
+                                                        </c:forEach>
+                                                    </c:if>
+                                                    <td> ${adopcion} </td>
+                                                    <td> ${prioridad}</td>
                                                     <td>
                                                         <c:if test="${!listaEstudioCaso.isEmpty()}">
                                                             <c:forEach var="familia2" items="${listaEstudioCaso}" varStatus="status">

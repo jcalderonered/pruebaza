@@ -236,13 +236,14 @@
                                     <div>
                                         <label class="control-label">Estado</label>
                                         <div class="controls">
-                                            <select ${expediente.getNna().getClasificacion().equals("seguimiento")  ? 'disabled' : ''} id="estado" name="estado">
+                                            <select id="estado" name="estado">
                                                 <option value="eval" ${expediente.getEstado().equals("eval") || expediente.getNna().getClasificacion().equals("seguimiento") ? 'selected' : ''} >Evaluación</option>
                                                 <option ${expediente.getNna().getClasificacion().equals("regular") ? 'disabled': '' } id="segPrio" value="seg" ${expediente.getEstado().equals("seg") ? 'selected' : ''} >Seguimiento Prioritarios</option>
                                                 <option value="adoptable" ${expediente.getEstado().equals("adoptable") ? 'selected' : ''} >Adoptable</option>
                                                 <option value="desig" ${expediente.getEstado().equals("desig") ? 'selected' : ''} >Designado</option>
                                                 <option value="adop" ${expediente.getEstado().equals("adop") ? 'selected' : ''} >Adoptado</option>
                                                 <option value="arch" ${expediente.getEstado().equals("arch") ? 'selected' : ''} >Archivado</option>
+                                                <option value="noadop" ${expediente.getEstado().equals("noadop") ? 'selected' : ''} >No adoptable</option>
                                             </select>
                                         </div>    
                                     </div>
@@ -261,6 +262,7 @@
                                                 <option value="prioritario" ${expediente.getNna().getClasificacion().equals("prioritario") || nna.getClasificacion().equals("prioritario") ? 'selected' : ''} >Prioritario</option>
                                                 <option value="seguimiento" ${expediente.getNna().getClasificacion().equals("seguimiento") || nna.getClasificacion().equals("seguimiento") ? 'selected' : ''} >Seguimiento</option>
                                                 <option value="regular" ${expediente.getNna().getClasificacion().equals("regular") || nna.getClasificacion().equals("regular") ? 'selected' : ''} >Regular</option>
+                                                <option value="colocacion" ${expediente.getNna().getClasificacion().equals("colocacion") || nna.getClasificacion().equals("colocacion") ? 'selected' : ''} >Acogimiento o colocación familiar</option>
                                             </select>
                                         </div>    
                                     </div>
@@ -517,10 +519,10 @@
                         op.disabled = false;
                         est.disabled = false;
                     }
-                    if (value == 'seguimiento') {
-                        est.value = 'eval';
-                        est.disabled = true;
-                    }
+                    //if (value == 'seguimiento') {
+                    //    est.value = 'eval';
+                    //    est.disabled = true;
+                    //}
                 }
             </script>
             <script>

@@ -195,6 +195,7 @@
                             <li ><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaCol" >NNA en Acogimiento Familiar o Colocación Familiar</a></li>
                         </ul>
                         <br>
                         <br>
@@ -254,7 +255,7 @@
                                                                     evaluación
                                                                 </c:if>
                                                                 <c:if test="${expediente.getEstado() == 'seg'}">
-                                                                    seguimiento
+                                                                    seguimiento prioritarios
                                                                 </c:if>
                                                                 <c:if test="${expediente.getEstado() == 'adoptable'}">
                                                                     adoptable
@@ -267,7 +268,10 @@
                                                                 </c:if>     
                                                                 <c:if test="${expediente.getEstado() == 'arch'}">
                                                                     archivado
-                                                                </c:if>      
+                                                                </c:if>
+                                                                <c:if test="${expediente.getEstado() == 'noadop'}">
+                                                                    no adoptable
+                                                                </c:if>
                                                             </td>                                                                                                                            
                                                         </c:if>
                                                         <c:if test="${nna.getExpedienteNnas().isEmpty()}">

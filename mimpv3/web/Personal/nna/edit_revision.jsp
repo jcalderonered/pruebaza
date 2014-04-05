@@ -116,6 +116,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >Lista de NNA</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/listaRevision" >Lista de Revisión de Expediente</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/listaEstudio" >Lista de Estudio de Caso</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaCol" >NNA en Acogimiento Familiar o Colocación Familiar</a></li>
                         </ul>
                         <br>
                         <h1 align="center"><strong>NNA que conforman la Revisión de Expediente</strong></h1>

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : agregar_exp
-    Created on : 4/12/2013, 11:38:32 AM
-    Author     : User
+    Document   : inscripcion_sesion1
+    Created on : 28/10/2013, 05:45:16 AM
+    Author     : Ayner Pérez
 --%>
 
 <%@page import="com.mimp.bean.Personal"%>
@@ -44,7 +44,6 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
     </head>
-
     <script type="text/javascript">
         function Pager(tableName, itemsPerPage) {
             this.tableName = tableName;
@@ -116,7 +115,6 @@
             }
         }
     </script>  	
-
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -162,7 +160,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
@@ -190,128 +188,121 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <form action="${pageContext.servletContext.contextPath}/agregarEstudio" method="post">                            
-                            <input hidden name="idNna" id="idNna" value="${idNna}"> 
-                            <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        </form>
+                        <p align="right"><button onclick="window.location.href = '${pageContext.servletContext.contextPath}/agregarNna'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Registrar NNA</button></p>
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" >
                             <li ><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
-                            <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/nnaCol" >NNA en Acogimiento Familiar o Colocación Familiar</a></li>
+                            <li ><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
+                            <li ><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaCol" >NNA en Acogimiento Familiar o Colocación Familiar</a></li>
                         </ul>
                         <br>
                         <br>
-                        <h1 align="center"><strong>Lista de Familias Afines</strong></h1>
+                        <p align="right">Filtrar: <input id="filtrar" type="text" /></p>
                         <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/MainBuscarExpedientePrioritario" method="post">
-                            <fieldset>
-                                <div class="control-group">
-                                    <label class="control-label">Expediente (ApellidoEl-ApellidoElla)</label>
-                                    <br>
-                                    <div class="controls">
-                                        <input id="exp" name="exp" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <button id="singlebutton" name="singlebutton" class="btn btn-default">Buscar</button>
-                            </fieldset>
-                        </form>
+                        <h1 align="center"><strong>Lista de NNA's</strong></h1>
                         <br>
-                        <h1 align="center"><strong>Expedientes encontrados</strong></h1>
-                        <br>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/MainAgregarExpedientePrioritario" method="post">
-                            <div class="table-responsive">
-                                <table id="mi_tabla" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-sm-2 " >Expediente</th>
-                                            <th class="col-sm-2 " >Procedencia</th>
-                                            <th class="col-sm-2 " >Nivel sociec</th>
-                                            <th class="col-sm-2 " >Resolución de aptitud</th>
-                                            <th class="col-sm-2 " >Actualmente en proceso de Adopción</th>
-                                            <th class="col-sm-2 " >Prioridad</th>
-                                            <th class="col-sm-2 " >Seleccionar</th>
-                                        </tr>
-                                    </thead>
-                                    <c:if test="${!listaBusqueda.isEmpty()}"> 
-                                        <tbody>
-                                            <c:forEach var="familia" items="${listaBusqueda}" varStatus="status">
-                                                <c:set var="agregado" value="1" />
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="mi_tabla">
+                                <thead>
+                                    <tr>
+                                        <th class="col-sm-2 ">Nombre</th>
+                                        <th class="col-sm-2 ">Apellido Paterno</th>
+                                        <th class="col-sm-2 ">Apellido Materno</th>
+                                        <th class="col-sm-2 ">Sexo</th>
+                                        <th class="col-sm-2 ">Código</th>
+                                        <th class="col-sm-2 ">Estado</th>
+                                        <th class="col-sm-2 ">Detalles</th> 
+                                        <th class="col-sm-2 ">Expediente</th>
+                                    </tr>
+                                </thead>
+                                <c:if test="${!listaNna.isEmpty()}">
+                                    <tbody>
+                                        <c:forEach var="nna" items="${listaNna}" varStatus="status">
+                                            <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
+                                                <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">
+                                                    <c:set var="unidad" value="${expediente.getUnidad().getIdunidad()}"></c:set>
+                                                </c:forEach>
+                                            </c:if>
+                                            <c:if test="${nna.getExpedienteNnas().isEmpty()}">
+                                                <c:set var="nuevo" value="recienIngresado"></c:set>
+                                            </c:if>
+                                            <c:if test="${usuario.getUnidad().getIdunidad() == unidad || usuario.getUnidad().getDepartamento() == 'Lima' || nuevo == 'recienIngresado'}">  
                                                 <tr>
-                                                    <td>${familia.getExpediente()}</td>
-                                                    <td>
-                                                        <c:if test="${familia.getFamilia().getEntidad().getNombre() != null}">
-                                                            ${familia.getFamilia().getEntidad().getNombre()}
-                                                        </c:if>
-                                                        <c:if test="${familia.getFamilia().getEntidad().getNombre() == null}">
-                                                            Nacional
-                                                        </c:if>
-                                                    </td>
-                                                    <td>
-                                                        <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
-                                                            ${info.getNivelSocioeconomico()}
-                                                        </c:forEach>
-                                                    </td>                                                    
-                                                    <td>
-                                                        <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
-                                                            <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
-                                                                ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <c:set var="adopcion" value="no" />
-                                                    <c:set var="prioridad" value="---" />
-                                                    <c:if test="${!familia.getDesignacions().isEmpty()}">
-                                                        <c:forEach var="desig" items="${familia.getDesignacions()}" varStatus="status">
-                                                            <c:if test="${desig.getAceptacionConsejo() == 0}">
-                                                                <c:set var="adopcion" value="si" />
-                                                                <c:set var="prioridad" value="${desig.getPrioridad()}" />
-                                                            </c:if>                                                        
+                                                    <td>${nna.getNombre()}</td>
+                                                    <td>${nna.getApellidoP()}</td>
+                                                    <td>${nna.getApellidoM()}</td>
+                                                    <td>${nna.getSexo()}</td>
+                                                    <c:if test="${!nna.getExpedienteNnas().isEmpty()}">
+                                                        <c:forEach var="expediente" items="${nna.getExpedienteNnas()}" varStatus="status">
+                                                            <td>
+                                                                ${expediente.getCodigoReferencia()}
+                                                            </td>
+                                                            <td>
+                                                                <c:if test="${expediente.getEstado() == 'eval'}">
+                                                                    evaluación
+                                                                </c:if>
+                                                                <c:if test="${expediente.getEstado() == 'seg'}">
+                                                                    seguimiento prioritarios
+                                                                </c:if>
+                                                                <c:if test="${expediente.getEstado() == 'adoptable'}">
+                                                                    adoptable
+                                                                </c:if>  
+                                                                <c:if test="${expediente.getEstado() == 'desig'}">
+                                                                    designado
+                                                                </c:if>      
+                                                                <c:if test="${expediente.getEstado() == 'adop'}">
+                                                                    adoptado
+                                                                </c:if>     
+                                                                <c:if test="${expediente.getEstado() == 'arch'}">
+                                                                    archivado
+                                                                </c:if>
+                                                                <c:if test="${expediente.getEstado() == 'noadop'}">
+                                                                    no adoptable
+                                                                </c:if>
+                                                            </td>    
                                                         </c:forEach>
                                                     </c:if>
-                                                    <td> ${adopcion} </td>
-                                                    <td> ${prioridad}</td>
+                                                    <c:if test="${nna.getExpedienteNnas().isEmpty()}">
+                                                        <td>
+                                                            No definido
+                                                        </td>
+                                                        <td>
+                                                            No definido
+                                                        </td>
+                                                    </c:if>
                                                     <td>
-                                                        <c:if test="${!listaEstudioCaso.isEmpty()}">
-                                                            <c:forEach var="familia2" items="${listaEstudioCaso}" varStatus="status">
-                                                                <c:if test="${familia.getIdexpedienteFamilia() == familia2.getIdexpedienteFamilia()}">
-                                                                    <c:set var="agregado" value="0" />
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:if> 
-                                                        <div class="checkbox">
-                                                            <label>
-                                                                <input ${agregado == 0 ? 'disabled' : ''} ${agregado == 0 ? 'checked' : ''} name="idExpediente" value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
-                                                            </label>
-                                                            <c:if test="${agregado == 0}">
-                                                                <h4><strong>Expediente ya agregado</strong></h4>
-                                                            </c:if>
-                                                        </div>
+                                                        <form action="${pageContext.servletContext.contextPath}/editarNna" method="post">
+                                                            <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
+                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editarExpedienteNna" method="post">
+                                                            <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
+                                                            <button ${nna.getExpedienteNnas().isEmpty() == true ? 'disabled' : ''} class="btn btn-default">Ver</button>
+                                                        </form>
                                                     </td>
                                                 </tr>
-                                            </c:forEach>  
-                                        </tbody>
-                                    </c:if> 
-                                    <c:if test="${listaBusqueda.isEmpty()}">
-                                        <h3><strong>No se encontraron expedientes</strong></h3>
-                                    </c:if>  
-                                </table>
-                            </div>
-                            <br>       
-                            <div class="col-md-offset-4" id="pageNavPosition"></div>  
+                                            </c:if>
+                                        </c:forEach> 
+                                    </tbody>
+                                </c:if>
+                                <c:if test="${listaNna.isEmpty()}">
+                                    <h3><strong>No existen Nna en esta clasificación</strong></h3>
+                                </c:if>
+                            </table>
+                        </div>
+                        <br>       
+                        <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
-                            <script type="text/javascript">
-                                var pager = new Pager('mi_tabla', 8);
-                                pager.init();
-                                pager.showPageNav('pager', 'pageNavPosition');
-                                pager.showPage(1);
-                            </script>   
-                            <br>
-                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar</button>
-                        </form>
+                        <script type="text/javascript">
+                            var pager = new Pager('mi_tabla', 8);
+                            pager.init();
+                            pager.showPageNav('pager', 'pageNavPosition');
+                            pager.showPage(1);
+                        </script>   
                     </div>
                 </div>
             </div>
@@ -329,6 +320,67 @@
 ================================================== -->
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
         <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+        <script type="text/javascript">
+
+                            function tablefilter(table_selector, input_selector, search_level, colspan) {
+
+                                var table = $(table_selector);
+                                if (table.length == 0)
+                                    return;
+
+                                var input = $(input_selector);
+                                if (input.length == 0)
+                                    return;
+
+                                if (search_level == "undefined" || search_level < 1)
+                                    search_level = 3;
+
+                                if (colspan == "undefined" || colspan < 0)
+                                    colspan = 2;
+
+                                $(input).val("Buscar…");
+
+                                $(input).focus(function() {
+                                    if ($(this).val() == "Buscar…") {
+                                        $(this).val("");
+                                    }
+                                    $(this).select();
+                                });
+
+                                $(input).blur(function() {
+                                    if ($(this).val() == "") {
+                                        $(this).val("Buscar…");
+                                    }
+                                });
+
+                                $(input).keyup(function() {
+                                    if ($(this).val().length >= search_level) {
+                                        // Ocultamos las filas que no contienen el contenido del edit.
+                                        $(table).find("tbody tr").not(":contains(\"" + $(this).val() + "\")").hide();
+
+                                        // Si no hay resultados, lo indicamos.
+                                        if ($(table).find("tbody tr:visible").length == 0) {
+                                            $(table).find("tbody:first").append('<tr id="noresults" class="aligncenter"><td colspan="' + colspan + '">Lo siento pero no hay resultados para la búsqueda indicada.</td></tr>');
+                                        }
+                                    } else {
+                                        // Borramos la fila de que no hay resultados.
+                                        $(table).find("tbody tr#noresults").remove();
+
+                                        // Mostramos todas las filas.
+                                        $(table).find("tbody tr").show();
+                                    }
+                                });
+                            }
+
+                            jQuery.expr[':'].contains = function(a, i, m) {
+                                return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+                            };
+
+                            $(document).ready(function() {
+                                tablefilter("table#mi_tabla", "input#filtrar", 2, 2);
+                            });
+
+        </script>
         <!-- Ubicar al final -->
     </body>
 </html>

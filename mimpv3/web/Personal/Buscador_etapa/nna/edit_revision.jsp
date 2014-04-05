@@ -103,10 +103,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <form action="${pageContext.servletContext.contextPath}/verRevision" method="post">                            
-                            <input hidden name="idNna" id="idNna" value="${idNna}"> 
-                            <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        </form>
+                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/listaRevision'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <br>
                         <br>
                         <ul class="nav nav-tabs row" >
@@ -119,6 +116,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >Lista de NNA</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/listaRevision" >Lista de Revisión de Expediente</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/listaEstudio" >Lista de Estudio de Caso</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaCol" >NNA en Acogimiento Familiar o Colocación Familiar</a></li>
                         </ul>
                         <br>
                         <h1 align="center"><strong>NNA que conforman la Revisión de Expediente</strong></h1>
@@ -199,25 +197,44 @@
                                 </table>
                             </div>
                             <br>
-                            <p class="text-info"><strong>Organismos que solicitaron la revisión de expediente</strong></p>
+                            <h1 align="center"><strong>Organismos que solicitaron la revisión de expediente</strong></h1>
                             <br>
-                            <c:if test="${!listaEntidades.isEmpty()}">
-                                <c:forEach var="entidad" items="${listaEntidades}" varStatus="status">
-                                    <c:forEach var="rev" items="${listaRevisiones}" varStatus="status">
-                                        <c:if test="${entidad.getIdentidad() == rev.getIdEntidad()}">
-                                            <c:if test="${rev.getFechaRevision() != null}">
-                                                <c:set var="fecha" value="${df.dateToStringNumeros(rev.getFechaRevision())}" ></c:set>                                                
-                                            </c:if>
-                                        </c:if>
-                                    </c:forEach>
-                                    <h4><strong> Nombre: </strong> ${entidad.getNombre()}<strong> País </strong> ${entidad.getPais()} <strong> Fecha de Revisión </strong> ${fecha}</h4>
-                                    <br>
-                                    <c:set var="fecha" value="${null}" ></c:set>  
-                                </c:forEach>
-                            </c:if>  
-                            <c:if test="${listaEntidades.isEmpty()}">
-                                <h3><strong>Ningún Organismo y/o Autoridad Centrales solicitó la revisión</strong></h3>
-                            </c:if>        
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-2 " >Nombre</th>
+                                            <th class="col-sm-2 " >País</th>
+                                            <th class="col-sm-2 " >Fecha de Revisión</th>
+                                        </tr>
+                                    </thead>
+                                    <c:if test="${!listaEntidades.isEmpty()}">
+                                        <tbody>
+                                            <c:forEach var="entidad" items="${listaEntidades}" varStatus="status">
+                                                <tr>
+                                                    <td>${entidad.getNombre()}</td>
+                                                    <td>${entidad.getPais()}</td>
+                                                    <td>
+                                                        <c:forEach var="rev" items="${listaRevisiones}" varStatus="status">
+                                                            <c:if test="${entidad.getIdentidad() == rev.getIdEntidad()}">
+                                                                <c:if test="${rev.getFechaRevision() != null}">
+                                                                    <c:set var="fecha" value="${df.dateToStringNumeros(rev.getFechaRevision())}" ></c:set>                                                
+                                                                </c:if>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                        ${fecha}
+                                                    </td>  
+                                                </tr>
+                                                <c:set var="fecha" value="${null}" ></c:set> 
+                                            </c:forEach> 
+                                        </tbody>
+                                    </c:if>
+                                    <c:if test="${listaEntidades.isEmpty()}">
+                                        <h3><strong>Ningún Organismo y/o Autoridad Centrales solicitó la revisión</strong></h3>
+                                    </c:if>    
+                                </table>
+                            </div>
+                            <br>                            
                         </form>
                         <br>
                         <h3><strong>Comentarios</strong></h3>
