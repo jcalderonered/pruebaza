@@ -65,13 +65,14 @@ public class HiberFamilia {
     
     }
     
-    public Sesion sesionMasProx (Date fechaActual){
+    public Sesion sesionMasProx (Date fechaActual,String Departamento){
         
     Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-        String hql = "From Sesion S order by S.fecha";
+        String hql = "From Sesion S where S.unidad = :dep order by S.fecha";
         Query query = session.createQuery(hql);
+        query.setString("dep", Departamento);
         List sesiones = query.list();
         ArrayList<Sesion> allSesiones = new ArrayList();
         

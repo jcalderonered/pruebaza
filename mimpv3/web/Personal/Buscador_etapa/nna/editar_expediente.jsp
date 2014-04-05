@@ -236,7 +236,7 @@
                                     <div>
                                         <label class="control-label">Estado</label>
                                         <div class="controls">
-                                            <select ${expediente.getNna().getClasificacion().equals("seguimiento")  ? 'disabled' : ''} id="estado" name="estado">
+                                            <select id="estado" name="estado">
                                                 <option value="eval" ${expediente.getEstado().equals("eval") || expediente.getNna().getClasificacion().equals("seguimiento") ? 'selected' : ''} >Evaluación</option>
                                                 <option ${expediente.getNna().getClasificacion().equals("regular") ? 'disabled': '' } id="segPrio" value="seg" ${expediente.getEstado().equals("seg") ? 'selected' : ''} >Seguimiento Prioritarios</option>
                                                 <option value="adoptable" ${expediente.getEstado().equals("adoptable") ? 'selected' : ''} >Adoptable</option>
@@ -517,10 +517,10 @@
                         op.disabled = false;
                         est.disabled = false;
                     }
-                    if (value == 'seguimiento') {
-                        est.value = 'eval';
-                        est.disabled = true;
-                    }
+                    //if (value == 'seguimiento') {
+                      //  est.value = 'eval';
+                        //est.disabled = true;
+                    //}
                 }
             </script>
             <script>

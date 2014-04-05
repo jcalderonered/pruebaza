@@ -224,6 +224,7 @@
                             <br>
                             <p class="text-danger"><strong>${mensaje}</strong></p>
                             <br>
+                            <h3><strong>ASEGÚRESE QUE EL NÚMERO DE DESIGNACIÓN INCLUYA LA FECHA DE LA PROPUESTA(EJM: J - 03/04/2014)</strong></h3>
                             <div class="control-group">
                                 <label class="control-label">N° de Designación</label>
                                 <div class="controls">

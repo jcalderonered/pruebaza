@@ -217,7 +217,7 @@
                                                     ${df.dateToString(expediente.getFechaIngresoDga())}
                                                     </c:if>
                                         </td>
-                                        <td>EE</td>
+                                        <td>${expediente.getTipoFamilia()}</td>
                                         <td>I</td>
                                         <td>
                                             <form action="${pageContext.servletContext.contextPath}/DetallesFamInt" method="post">
