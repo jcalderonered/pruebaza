@@ -71,6 +71,19 @@ public class nna {
         map.put("listaNna", ServicioNna.ListaNnaSeguimiento("seguimiento"));
         return new ModelAndView("/Personal/nna/lista_nna_seg", map);
     }
+    
+    @RequestMapping(value = "/nnaCol", method = RequestMethod.GET)
+    public ModelAndView nnaColocacion(ModelMap map, HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        map.put("listaNna", ServicioNna.ListaNna("colocacion"));
+        return new ModelAndView("/Personal/nna/lista_nna_col", map);
+    }
 
     @RequestMapping(value = "/agregarNna", method = RequestMethod.GET)
     public ModelAndView agregarNna(ModelMap map, HttpSession session) {

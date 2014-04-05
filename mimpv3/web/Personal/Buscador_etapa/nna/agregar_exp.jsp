@@ -116,7 +116,7 @@
             }
         }
     </script>  	
-    
+
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -143,6 +143,7 @@
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper">Inicio</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/act_info">Actualizar Información</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaCol" >NNA en Acogimiento Familiar o Colocación Familiar</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -161,14 +162,14 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
@@ -178,14 +179,14 @@
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -219,71 +220,85 @@
                         <h1 align="center"><strong>Expedientes encontrados</strong></h1>
                         <br>
                         <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/agregarExpediente" method="post">
-                        <div class="table-responsive">
-                            <table id="mi_tabla" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="col-sm-2 " >Expediente</th>
-                                        <th class="col-sm-2 " >Nivel sociec</th>
-                                        <th class="col-sm-2 " >Resolución de aptitud</th>
-                                        <th class="col-sm-2 " >Seleccionar</th>
-                                    </tr>
-                                </thead>
-                                <c:if test="${!listaBusqueda.isEmpty()}"> 
-                                <tbody>
-                                    <c:forEach var="familia" items="${listaBusqueda}" varStatus="status">
-                                        <c:set var="agregado" value="1" />
-                                            <tr>
-                                                <td>${familia.getExpediente()}</td>
-                                                <td>
-                                                    <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
-                                                        ${info.getNivelSocioeconomico()}
-                                                    </c:forEach>
-                                                </td>
-                                                <td>
-                                                    <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
-                                                    <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
-                                                        ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
-                                                    </c:forEach>
-                                                    </c:forEach>
-                                                </td>
-                                                <td>
-                                                    <c:if test="${!listaMatching.isEmpty()}">
-                                                        <c:forEach var="familia2" items="${listaMatching}" varStatus="status">
-                                                            <c:if test="${familia.getIdexpedienteFamilia() == familia2.getIdexpedienteFamilia()}">
-                                                                <c:set var="agregado" value="0" />
-                                                            </c:if>
+                            <div class="table-responsive">
+                                <table id="mi_tabla" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-sm-2 " >Expediente</th>
+                                            <th class="col-sm-2 " >Nivel sociec</th>
+                                            <th class="col-sm-2 " >Resolución de aptitud</th>
+                                            <th class="col-sm-2 " >Actualmente en proceso de Adopción</th>
+                                            <th class="col-sm-2 " >Prioridad</th>
+                                            <th class="col-sm-2 " >Seleccionar</th>
+                                        </tr>
+                                    </thead>
+                                    <c:if test="${!listaBusqueda.isEmpty()}"> 
+                                        <tbody>
+                                            <c:forEach var="familia" items="${listaBusqueda}" varStatus="status">
+                                                <c:set var="agregado" value="1" />
+                                                <tr>
+                                                    <td>${familia.getExpediente()}</td>
+                                                    <td>
+                                                        <c:forEach var="info" items="${familia.getFamilia().getInfoFamilias()}" varStatus="status">
+                                                            ${info.getNivelSocioeconomico()}
                                                         </c:forEach>
-                                                    </c:if> 
-                                                    <div class="checkbox">
-                                                    <label>
-                                                        <input ${agregado == 0 ? 'disabled' : ''} ${agregado == 0 ? 'checked' : ''} name="idExpediente" value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
-                                                    </label>
-                                                        <c:if test="${agregado == 0}">
-                                                            <h4><strong>Expediente ya agregado</strong></h4>
-                                                        </c:if>
-                                                    </div>
-                                                </td>
-                                             </tr>
-                                  </c:forEach>  
-                                </tbody>
-                              </c:if> 
-                               <c:if test="${listaBusqueda.isEmpty()}">
-                                    <h3><strong>No se encontraron expedientes</strong></h3>
-                                </c:if>  
-                            </table>
-                        </div>
-                        <br>       
-                        <div class="col-md-offset-4" id="pageNavPosition"></div>  
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach var="eval" items="${familia.getEvaluacions()}" varStatus="status">
+                                                            <c:forEach var="resolucion" items="${eval.getResolucions()}" varStatus="status">
+                                                                ${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}
+                                                            </c:forEach>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <c:set var="adopcion" value="no" />
+                                                    <c:set var="prioridad" value="---" />
+                                                    <c:if test="${!familia.getDesignacions().isEmpty()}">
+                                                        <c:forEach var="desig" items="${familia.getDesignacions()}" varStatus="status">
+                                                            <c:if test="${desig.getAceptacionConsejo() == 0}">
+                                                                <c:set var="adopcion" value="si" />
+                                                                <c:set var="prioridad" value="${desig.getPrioridad()}" />
+                                                            </c:if>                                                        
+                                                        </c:forEach>
+                                                    </c:if>
+                                                    <td> ${adopcion} </td>
+                                                    <td> ${prioridad}</td>
+                                                    <td>
+                                                        <c:if test="${!listaMatching.isEmpty()}">
+                                                            <c:forEach var="familia2" items="${listaMatching}" varStatus="status">
+                                                                <c:if test="${familia.getIdexpedienteFamilia() == familia2.getIdexpedienteFamilia()}">
+                                                                    <c:set var="agregado" value="0" />
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </c:if> 
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input ${agregado == 0 ? 'disabled' : ''} ${agregado == 0 ? 'checked' : ''} name="idExpediente" value="${familia.getIdexpedienteFamilia()}" type="checkbox"> 
+                                                            </label>
+                                                            <c:if test="${agregado == 0}">
+                                                                <h4><strong>Expediente ya agregado</strong></h4>
+                                                            </c:if>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>  
+                                        </tbody>
+                                    </c:if> 
+                                    <c:if test="${listaBusqueda.isEmpty()}">
+                                        <h3><strong>No se encontraron expedientes</strong></h3>
+                                    </c:if>  
+                                </table>
+                            </div>
+                            <br>       
+                            <div class="col-md-offset-4" id="pageNavPosition"></div>  
 
-                        <script type="text/javascript"> 
-                                var pager = new Pager('mi_tabla', 8);  
-                            pager.init();
-                            pager.showPageNav('pager', 'pageNavPosition');
-                            pager.showPage(1);
-                        </script>   
-                        <br>
-                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar</button>
+                            <script type="text/javascript">
+                                var pager = new Pager('mi_tabla', 8);
+                                pager.init();
+                                pager.showPageNav('pager', 'pageNavPosition');
+                                pager.showPage(1);
+                            </script>   
+                            <br>
+                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Agregar</button>
                         </form>
                     </div>
                 </div>
@@ -305,3 +320,4 @@
         <!-- Ubicar al final -->
     </body>
 </html>
+

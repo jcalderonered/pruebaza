@@ -110,6 +110,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaCol" >NNA en Acogimiento Familiar o Colocación Familiar</a></li>
                         </ul>
                         <br>
                         <br>
@@ -135,14 +136,7 @@
                                 </c:forEach>
                             </c:if>
                             <br>
-                            <p class="text-danger"><strong>${mensaje}</strong></p>
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">Identificación del Estudio de Caso</label>
-                                <div class="controls">
-                                    <input id="orden" name="orden" type="text" value="" >
-                                </div>
-                            </div>
+                            <p class="text-danger"><strong>${mensaje}</strong></p>                                                        
                             <br>
                             <br>
                             <h1 align="center"><strong>Familias que conforman el Estudio de Caso</strong></h1>
@@ -208,6 +202,12 @@
                                 </table>
                             </div>
                             <br>
+                            <div class="control-group">
+                                <label class="control-label">Identificación del Estudio de Caso</label>
+                                <div class="controls">
+                                    <input id="orden" name="orden" type="text" value="" >
+                                </div>
+                            </div>
                             <br>
                             <input hidden name="idNna" id="idNna" value="${idNna}"> 
                             <input hidden name="numero" id="numero" value="${numero}"> 

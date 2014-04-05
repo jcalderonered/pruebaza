@@ -1329,11 +1329,13 @@ public class reporte {
                     cell.setCellValue("archivado");
                 } else if (exp.getEstado().equals("seg")) {
                     cell.setCellValue("seguimiento");
+                } else if (exp.getEstado().equals("noadop")) {
+                    cell.setCellValue("no adoptable");
                 }
 
                 cell = row.createCell(21);
                 if (exp.getRespLegalP() != null) {
-                    cell.setCellValue(exp.getRespLegalP());
+                    cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
                 }
                 cell = row.createCell(22);
                 cell.setCellValue(nna.getObservaciones());
@@ -2184,7 +2186,7 @@ public class reporte {
                     CellStyle style = wb.createCellStyle();
                     style.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());
                     style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                    for (int j = 0; j < 24; j++) {
+                    for (int j = 0; j < 25; j++) {
                         row.getCell(j).setCellStyle(style);
                     }
 
@@ -2194,7 +2196,7 @@ public class reporte {
                     CellStyle style = wb.createCellStyle();
                     style.setFillForegroundColor(IndexedColors.ORANGE.getIndex());
                     style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                    for (int j = 0; j < 24; j++) {
+                    for (int j = 0; j < 25; j++) {
                         row.getCell(j).setCellStyle(style);
                     }
                 }
@@ -2499,7 +2501,7 @@ public class reporte {
                     CellStyle style = wb.createCellStyle();
                     style.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());
                     style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                    for (int j = 0; j < 24; j++) {
+                    for (int j = 0; j < 25; j++) {
                         row.getCell(j).setCellStyle(style);
                     }
 
@@ -2509,7 +2511,7 @@ public class reporte {
                     CellStyle style = wb.createCellStyle();
                     style.setFillForegroundColor(IndexedColors.ORANGE.getIndex());
                     style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                    for (int j = 0; j < 24; j++) {
+                    for (int j = 0; j < 25; j++) {
                         row.getCell(j).setCellStyle(style);
                     }
                 }
@@ -2819,7 +2821,7 @@ public class reporte {
                     CellStyle style = wb.createCellStyle();
                     style.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());
                     style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                    for (int j = 0; j < 24; j++) {
+                    for (int j = 0; j < 26; j++) {
                         row.getCell(j).setCellStyle(style);
                     }
 
@@ -2829,7 +2831,7 @@ public class reporte {
                     CellStyle style = wb.createCellStyle();
                     style.setFillForegroundColor(IndexedColors.ORANGE.getIndex());
                     style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                    for (int j = 0; j < 24; j++) {
+                    for (int j = 0; j < 26; j++) {
                         row.getCell(j).setCellStyle(style);
                     }
                 }
@@ -3135,7 +3137,7 @@ public class reporte {
                     CellStyle style = wb.createCellStyle();
                     style.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());
                     style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                    for (int j = 0; j < 24; j++) {
+                    for (int j = 0; j < 25; j++) {
                         row.getCell(j).setCellStyle(style);
                     }
 
@@ -3145,7 +3147,7 @@ public class reporte {
                     CellStyle style = wb.createCellStyle();
                     style.setFillForegroundColor(IndexedColors.ORANGE.getIndex());
                     style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                    for (int j = 0; j < 24; j++) {
+                    for (int j = 0; j < 25; j++) {
                         row.getCell(j).setCellStyle(style);
                     }
                 }

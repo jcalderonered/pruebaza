@@ -110,6 +110,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaCol" >NNA en Acogimiento Familiar o Colocación Familiar</a></li>
                         </ul>
                         <br>
                         <br>
@@ -134,22 +135,7 @@
                                 </c:forEach>
                             </c:if>
                             <br>
-                            <p class="text-danger"><strong>${mensaje}</strong></p>
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">Identificación de la revisión</label>
-                                <div class="controls">
-                                    <input id="numero" name="numero" type="text" value="" >
-                                </div>
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <label class="control-label">Comentarios</label>
-                                <div class="controls">
-                                    <textarea id="comentarios" name="comentarios" cols="25" rows="5"></textarea>
-                                </div>
-                            </div>
-                            <br>
+                            <p class="text-danger"><strong>${mensaje}</strong></p>                            
                             <br>
                             <h1 align="center"><strong>Familias/Organismo que conforman la Revisión de Expediente</strong></h1>
                             <br>
@@ -224,6 +210,22 @@
                                         <h3><strong>No existen Familias o Organismo y/o Autoridad Central propuestas(os)</strong></h3>
                                     </c:if>  
                                 </table>
+                            </div>
+                            <br>
+                            <h3><strong>Elija primero las familias que conforman el estudio de caso</strong></h3>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Identificación de la revisión</label>
+                                <div class="controls">
+                                    <input id="numero" name="numero" type="text" value="" >
+                                </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <label class="control-label">Comentarios</label>
+                                <div class="controls">
+                                    <textarea id="comentarios" name="comentarios" cols="25" rows="5"></textarea>
+                                </div>
                             </div>
                             <br>
                             <br>

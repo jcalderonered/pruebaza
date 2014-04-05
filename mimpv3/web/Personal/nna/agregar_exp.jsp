@@ -143,6 +143,7 @@
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioper">Inicio</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/act_info">Actualizar Información</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/salir">Salir</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaCol" >NNA en Acogimiento Familiar o Colocación Familiar</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>

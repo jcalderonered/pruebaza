@@ -243,6 +243,7 @@
                                                 <option value="desig" ${expediente.getEstado().equals("desig") ? 'selected' : ''} >Designado</option>
                                                 <option value="adop" ${expediente.getEstado().equals("adop") ? 'selected' : ''} >Adoptado</option>
                                                 <option value="arch" ${expediente.getEstado().equals("arch") ? 'selected' : ''} >Archivado</option>
+                                                <option value="noadop" ${expediente.getEstado().equals("noadop") ? 'selected' : ''} >No adoptable</option>
                                             </select>
                                         </div>    
                                     </div>
@@ -261,6 +262,7 @@
                                                 <option value="prioritario" ${expediente.getNna().getClasificacion().equals("prioritario") || nna.getClasificacion().equals("prioritario") ? 'selected' : ''} >Prioritario</option>
                                                 <option value="seguimiento" ${expediente.getNna().getClasificacion().equals("seguimiento") || nna.getClasificacion().equals("seguimiento") ? 'selected' : ''} >Seguimiento</option>
                                                 <option value="regular" ${expediente.getNna().getClasificacion().equals("regular") || nna.getClasificacion().equals("regular") ? 'selected' : ''} >Regular</option>
+                                                <option value="colocacion" ${expediente.getNna().getClasificacion().equals("colocacion") || nna.getClasificacion().equals("colocacion") ? 'selected' : ''} >Acogimiento o colocación familiar</option>
                                             </select>
                                         </div>    
                                     </div>
@@ -518,8 +520,8 @@
                         est.disabled = false;
                     }
                     //if (value == 'seguimiento') {
-                      //  est.value = 'eval';
-                        //est.disabled = true;
+                    //    est.value = 'eval';
+                    //    est.disabled = true;
                     //}
                 }
             </script>

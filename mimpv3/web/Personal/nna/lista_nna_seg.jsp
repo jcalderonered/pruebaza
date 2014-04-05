@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -170,7 +170,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -195,6 +195,7 @@
                             <li ><a href="${pageContext.servletContext.contextPath}/nna" >NNA Regulares</a></li>
                             <li ><a href="${pageContext.servletContext.contextPath}/nnaPrioritarios" >NNA Prioritarios</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/nnaSeguimiento" >NNA en Seguimiento</a></li>
+                            <li><a href="${pageContext.servletContext.contextPath}/nnaCol" >NNA en Acogimiento Familiar o Colocación Familiar</a></li>
                         </ul>
                         <br>
                         <br>
@@ -239,8 +240,28 @@
                                                                 ${expediente.getCodigoReferencia()}
                                                             </td>
                                                             <td>
-                                                                ${expediente.getEstado()}
-                                                            </td>
+                                                                <c:if test="${expediente.getEstado() == 'eval'}">
+                                                                    evaluación
+                                                                </c:if>
+                                                                <c:if test="${expediente.getEstado() == 'seg'}">
+                                                                    seguimiento prioritarios
+                                                                </c:if>
+                                                                <c:if test="${expediente.getEstado() == 'adoptable'}">
+                                                                    adoptable
+                                                                </c:if>  
+                                                                <c:if test="${expediente.getEstado() == 'desig'}">
+                                                                    designado
+                                                                </c:if>      
+                                                                <c:if test="${expediente.getEstado() == 'adop'}">
+                                                                    adoptado
+                                                                </c:if>     
+                                                                <c:if test="${expediente.getEstado() == 'arch'}">
+                                                                    archivado
+                                                                </c:if>
+                                                                <c:if test="${expediente.getEstado() == 'noadop'}">
+                                                                    no adoptable
+                                                                </c:if>
+                                                            </td>     
                                                         </c:forEach>
                                                     </c:if>
                                                     <c:if test="${nna.getExpedienteNnas().isEmpty()}">
