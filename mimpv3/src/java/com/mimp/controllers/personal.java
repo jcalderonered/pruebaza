@@ -4785,7 +4785,7 @@ public class personal {
 
         ServicioPersonal.PersonalUpdateReunion(tempReun);
 
-        ServicioPersonal.PersonalCrearReunion(tempReun);
+        //ServicioPersonal.PersonalCrearReunion(tempReun);
 
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ".Editó la reunión con ID: " + idReunion + ". "

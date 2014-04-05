@@ -71,14 +71,39 @@ public class organismo {
     }
 
     @RequestMapping("/Orgcambiarcontra")
-    public ModelAndView Orgcambiarcontra(ModelMap map, HttpSession session, @RequestParam("oldpass") String oldpass, @RequestParam("newpass") String newpass, @RequestParam("newpassconf") String newpassconf) {
+    public ModelAndView Orgcambiarcontra_POST(ModelMap map, HttpSession session,
+            @RequestParam("oldpass") String oldpass,
+            @RequestParam("newpass") String newpass,
+            @RequestParam("newpassconf") String newpassconf) {
         Entidad usuario = (Entidad) session.getAttribute("usuario");
         String mensaje = "";
         if (usuario == null) {
             mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
-        } else {
+        }
+        session.setAttribute("oldpass", oldpass);
+        session.setAttribute("newpass", newpass);
+        session.setAttribute("newpassconf", newpassconf);
+
+        return new ModelAndView("redirect:/Orgcambiarcontra", map);
+    }
+
+    @RequestMapping(value = "/Orgcambiarcontra", method = RequestMethod.GET)
+    public ModelAndView Orgcambiarcontra_GET(ModelMap map, HttpSession session) {
+        Entidad usuario = (Entidad) session.getAttribute("usuario");
+        String mensaje = "";
+        if (usuario == null) {
+            mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        if (session.getAttribute("oldpass") != null && session.getAttribute("newpass") != null
+                && session.getAttribute("newpassconf") != null) {
+            String oldpass = (String) session.getAttribute("oldpass");
+            String newpass = (String) session.getAttribute("newpass");
+            String newpassconf = (String) session.getAttribute("newpassconf");
+
             oldpass = DigestUtils.sha512Hex(oldpass);
             if (usuario.getPass().equals(oldpass)) {
                 if (newpass.equals(newpassconf)) {
@@ -92,10 +117,20 @@ public class organismo {
             } else {
                 mensaje = "Contraseña de usuario incorrecta. Ingrese nuevamente.";
             }
+
+            String pagina = "/Entidad/contra_ent";
+            map.addAttribute("mensaje", mensaje);
+            
+            session.removeAttribute("oldpass");
+            session.removeAttribute("newpass");
+            session.removeAttribute("newpassconf");
+            
+            return new ModelAndView(pagina, map);
+        } else {
+            return new ModelAndView("/Entidad/inicio_ent", map);
+
         }
-        String pagina = "/Entidad/contra_ent";
-        map.addAttribute("mensaje", mensaje);
-        return new ModelAndView(pagina, map);
+
     }
 
     @RequestMapping(value = "/listaFam", method = RequestMethod.GET)
@@ -163,11 +198,11 @@ public class organismo {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "f");
         Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "m");
         String doc = String.valueOf(LaAdop.getTipoDoc());
-        
+
         map.put("LaAdop", LaAdop);
         map.put("ElAdop", ElAdop);
         map.put("idInfo", idInfo);
@@ -184,12 +219,12 @@ public class organismo {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        
+
         Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "f");
         Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "m");
         String doc = String.valueOf(LaAdop.getTipoDoc());
         InfoFamilia infoNNA = ServicioOrganismo.InfoFamilia(idInfo);
-        
+
         map.put("LaAdop", LaAdop);
         map.put("ElAdop", ElAdop);
         map.put("InfoNNA", infoNNA);
