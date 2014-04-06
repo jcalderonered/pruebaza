@@ -825,7 +825,7 @@ public class main {
         idExpediente = (String) session.getAttribute("idExpediente");
         volver = (String) session.getAttribute("volver");
         estado = (String) session.getAttribute("estado");
-       // } catch (Exception ex) {
+        // } catch (Exception ex) {
         //   return new ModelAndView("redirect:/inicioper", map);
         // }
 
@@ -1307,11 +1307,7 @@ public class main {
     public ModelAndView elSolicitante_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
-        try {
-            volver = session.getAttribute("volver").toString();
-        } catch (Exception ex) {
-            return new ModelAndView("redirect:/inicioper", map);
-        }
+        volver = session.getAttribute("volver").toString();
         session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1361,15 +1357,23 @@ public class main {
         String HT = "";
         String nacionalidad = "";
         String tipofamilia = "";
-        try {
+        if (session.getAttribute("volver") != null) {
             volver = session.getAttribute("volver").toString();
+        }
+        if (session.getAttribute("expediente2") != null) {
             expediente2 = session.getAttribute("expediente2").toString();
+        }
+        if (session.getAttribute("estado2") != null) {
             estado2 = session.getAttribute("estado2").toString();
+        }
+        if (session.getAttribute("HT") != null) {
             HT = session.getAttribute("HT").toString();
+        }
+        if (session.getAttribute("nacionalidad") != null) {
             nacionalidad = session.getAttribute("nacionalidad").toString();
+        }
+        if (session.getAttribute("tipofamilia") != null) {
             tipofamilia = session.getAttribute("tipofamilia").toString();
-        } catch (Exception ex) {
-            return new ModelAndView("redirect:/inicioper", map);
         }
         session.removeAttribute("volver");
         session.removeAttribute("expediente2");
@@ -1416,11 +1420,7 @@ public class main {
     public ModelAndView laSolicitante_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
-        try {
-            volver = session.getAttribute("volver").toString();
-        } catch (Exception ex) {
-            return new ModelAndView("redirect:/inicioper", map);
-        }
+        volver = session.getAttribute("volver").toString();
         session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1470,15 +1470,23 @@ public class main {
         String nacionalidad = "";
         String tipofamilia = "";
         String estado2 = "";
-        try {
+        if (session.getAttribute("volver") != null) {
             volver = session.getAttribute("volver").toString();
+        }
+        if (session.getAttribute("expediente2") != null) {
             expediente2 = session.getAttribute("expediente2").toString();
+        }
+        if (session.getAttribute("HT") != null) {
             HT = session.getAttribute("HT").toString();
+        }
+        if (session.getAttribute("nacionalidad") != null) {
             nacionalidad = session.getAttribute("nacionalidad").toString();
+        }
+        if (session.getAttribute("tipofamilia") != null) {
             tipofamilia = session.getAttribute("tipofamilia").toString();
+        }
+        if (session.getAttribute("estado2") != null) {
             estado2 = session.getAttribute("estado2").toString();
-        } catch (Exception ex) {
-            return new ModelAndView("redirect:/inicioper", map);
         }
         session.removeAttribute("volver");
         session.removeAttribute("expediente2");
@@ -1558,11 +1566,7 @@ public class main {
     public ModelAndView infoExpediente_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
-        try {
-            volver = session.getAttribute("volver").toString();
-        } catch (Exception ex) {
-            return new ModelAndView("redirect:/inicioper", map);
-        }
+        volver = session.getAttribute("volver").toString();
         session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1610,15 +1614,23 @@ public class main {
         String nacionalidad = "";
         String estado2 = "";
         String tipofamilia = "";
-        try {
+        if (session.getAttribute("volver") != null) {
             volver = session.getAttribute("volver").toString();
+        }
+        if (session.getAttribute("expediente2") != null) {
             expediente2 = session.getAttribute("expediente2").toString();
+        }
+        if (session.getAttribute("HT") != null) {
             HT = session.getAttribute("HT").toString();
+        }
+        if (session.getAttribute("nacionalidad") != null) {
             nacionalidad = session.getAttribute("nacionalidad").toString();
-            estado2 = session.getAttribute("estado2").toString();
+        }
+        if (session.getAttribute("tipofamilia") != null) {
             tipofamilia = session.getAttribute("tipofamilia").toString();
-        } catch (Exception ex) {
-            return new ModelAndView("redirect:/inicioper", map);
+        }
+        if (session.getAttribute("estado2") != null) {
+            estado2 = session.getAttribute("estado2").toString();
         }
         session.removeAttribute("volver");
         session.removeAttribute("expediente2");
@@ -1862,7 +1874,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_atencion", map);
     }
 
-    //N OSE HAN HECHO CAMBIOS
+    //NO SE HAN HECHO CAMBIOS
     @RequestMapping(value = "/agregarAtencion", method = RequestMethod.GET)
     public ModelAndView agregarAtencion(ModelMap map, HttpSession session,
             @RequestParam(value = "volver", required = false) String volver) {
@@ -2032,9 +2044,15 @@ public class main {
             fecha = (String) session.getAttribute("fecha");
             hora = (String) session.getAttribute("hora");
             tipo = (String) session.getAttribute("tipo");
-            detalle = (String) session.getAttribute("detalle");
-            obs = (String) session.getAttribute("obs");
-            volver = (String) session.getAttribute("volver");
+            if (session.getAttribute("detalle") != null) {
+                detalle = (String) session.getAttribute("detalle");
+            }
+            if (session.getAttribute("obs") != null) {
+                obs = (String) session.getAttribute("obs");
+            }
+            if (session.getAttribute("volver") != null) {
+                volver = (String) session.getAttribute("volver");
+            }
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
         }
@@ -2080,7 +2098,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_atencion", map);
     }
 
-    //
+    //PROBAR
     @RequestMapping(value = "/crearAtencion2", method = RequestMethod.POST)
     public ModelAndView crearAtencion2_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "personal") long personal,
@@ -2131,14 +2149,30 @@ public class main {
             fecha = (String) session.getAttribute("fecha");
             hora = (String) session.getAttribute("hora");
             tipo = (String) session.getAttribute("tipo");
-            detalle = (String) session.getAttribute("detalle");
-            obs = (String) session.getAttribute("obs");
-            expediente2 = (String) session.getAttribute("expediente2");
-            HT = (String) session.getAttribute("HT");
-            nacionalidad = (String) session.getAttribute("nacionalidad");
-            estado2 = (String) session.getAttribute("estado2");
-            tipofamilia = (String) session.getAttribute("tipofamilia");
-            volver = (String) session.getAttribute("volver");
+            if (session.getAttribute("detalle") != null) {
+                detalle = (String) session.getAttribute("detalle");
+            }
+            if (session.getAttribute("obs") != null) {
+                obs = (String) session.getAttribute("obs");
+            }
+            if (session.getAttribute("expediente2") != null) {
+                expediente2 = (String) session.getAttribute("expediente2");
+            }
+            if (session.getAttribute("HT") != null) {
+                HT = (String) session.getAttribute("HT");
+            }
+            if (session.getAttribute("nacionalidad") != null) {
+                nacionalidad = (String) session.getAttribute("nacionalidad");
+            }
+            if (session.getAttribute("estado2") != null) {
+                estado2 = (String) session.getAttribute("estado2");
+            }
+            if (session.getAttribute("tipofamilia") != null) {
+                tipofamilia = (String) session.getAttribute("tipofamilia");
+            }
+            if (session.getAttribute("volver") != null) {
+                volver = (String) session.getAttribute("volver");
+            }
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
         }
@@ -2236,9 +2270,15 @@ public class main {
             fecha = (String) session.getAttribute("fecha");
             hora = (String) session.getAttribute("hora");
             tipo = (String) session.getAttribute("tipo");
-            detalle = (String) session.getAttribute("detalle");
-            obs = (String) session.getAttribute("obs");
-            volver = (String) session.getAttribute("volver");
+            if (session.getAttribute("detalle") != null) {
+                detalle = (String) session.getAttribute("detalle");
+            }
+            if (session.getAttribute("obs") != null) {
+                obs = (String) session.getAttribute("obs");
+            }
+            if (session.getAttribute("volver") != null) {
+                volver = (String) session.getAttribute("volver");
+            }
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
         }
@@ -2337,66 +2377,120 @@ public class main {
             fecha = (String) session.getAttribute("fecha");
             hora = (String) session.getAttribute("hora");
             tipo = (String) session.getAttribute("tipo");
-            detalle = (String) session.getAttribute("detalle");
-            obs = (String) session.getAttribute("obs");
-            expediente2 = (String) session.getAttribute("expediente2");
-            HT = (String) session.getAttribute("HT");
-            nacionalidad = (String) session.getAttribute("nacionalidad");
-            estado2 = (String) session.getAttribute("estado2");
-            tipofamilia = (String) session.getAttribute("tipofamilia");
-            volver = (String) session.getAttribute("volver");
+            if (session.getAttribute("detalle") != null) {
+                detalle = (String) session.getAttribute("detalle");
+            }
+            if (session.getAttribute("obs") != null) {
+                obs = (String) session.getAttribute("obs");
+            }
+            if (session.getAttribute("expediente2") != null) {
+                expediente2 = (String) session.getAttribute("expediente2");
+            }
+            if (session.getAttribute("HT") != null) {
+                HT = (String) session.getAttribute("HT");
+            }
+            if (session.getAttribute("nacionalidad") != null) {
+                nacionalidad = (String) session.getAttribute("nacionalidad");
+            }
+            if (session.getAttribute("estado2") != null) {
+                estado2 = (String) session.getAttribute("estado2");
+            }
+            if (session.getAttribute("tipofamilia") != null) {
+                tipofamilia = (String) session.getAttribute("tipofamilia");
+            }
+            if (session.getAttribute("volver") != null) {
+                volver = (String) session.getAttribute("volver");
+            }
+
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
         }
-        session.removeAttribute("idAtencion");
-        session.removeAttribute("personal");
-        session.removeAttribute("fecha");
-        session.removeAttribute("hora");
-        session.removeAttribute("tipo");
-        session.removeAttribute("detalle");
-        session.removeAttribute("obs");
-        session.removeAttribute("expediente2");
-        session.removeAttribute("HT");
-        session.removeAttribute("nacionalidad");
-        session.removeAttribute("estado2");
-        session.removeAttribute("tipofamilia");
-        session.removeAttribute("volver");
+
+        session.removeAttribute(
+                "idAtencion");
+        session.removeAttribute(
+                "personal");
+        session.removeAttribute(
+                "fecha");
+        session.removeAttribute(
+                "hora");
+        session.removeAttribute(
+                "tipo");
+        session.removeAttribute(
+                "detalle");
+        session.removeAttribute(
+                "obs");
+        session.removeAttribute(
+                "expediente2");
+        session.removeAttribute(
+                "HT");
+        session.removeAttribute(
+                "nacionalidad");
+        session.removeAttribute(
+                "estado2");
+        session.removeAttribute(
+                "tipofamilia");
+        session.removeAttribute(
+                "volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
-        if (usuario == null) {
+        if (usuario
+                == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
         Atencion tempAtn = ServicioMain.getAtencion(idAtencion);
         Personal tempPer = ServicioPersonal.getPersonal(personal);
+
         tempAtn.setPersonal(tempPer);
-        if (fecha != null && !fecha.equals("")) {
+        if (fecha
+                != null && !fecha.equals(
+                        "")) {
             tempAtn.setFecha(df.stringToDate(fecha));
         }
-        if (fecha == null || fecha.equals("")) {
+        if (fecha
+                == null || fecha.equals(
+                        "")) {
             tempAtn.setFecha(null);
         }
+
         tempAtn.setHora(hora);
+
         tempAtn.setTipoAtencion(tipo);
+
         tempAtn.setDetalle(detalle);
+
         tempAtn.setObservacion(obs);
 
         ServicioMain.updateAtencion(tempAtn);
+
         listaAtenciones.clear();
         listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(expediente.getFamilia().getIdfamilia());
-        map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("listaAtenciones", listaAtenciones);
-        map.put("expediente", expediente);
 
-        map.put("expediente2", expediente2);
-        map.put("HT", HT);
-        map.put("nacionalidad", nacionalidad);
-        map.put("tipofamilia", tipofamilia);
-        map.put("estado2", estado2);
-        map.put("volver", volver);
-        return new ModelAndView("/Personal/Buscador/familia/info_atencion", map);
+        map.put(
+                "df", df);
+        map.put(
+                "estado", etapaOrigen);
+        map.put(
+                "listaAtenciones", listaAtenciones);
+        map.put(
+                "expediente", expediente);
+
+        map.put(
+                "expediente2", expediente2);
+        map.put(
+                "HT", HT);
+        map.put(
+                "nacionalidad", nacionalidad);
+        map.put(
+                "tipofamilia", tipofamilia);
+        map.put(
+                "estado2", estado2);
+        map.put(
+                "volver", volver);
+        return new ModelAndView(
+                "/Personal/Buscador/familia/info_atencion", map);
     }
 
     @RequestMapping(value = "/DetalleSesion", method = RequestMethod.POST)
@@ -2563,7 +2657,9 @@ public class main {
             genero = (String) session.getAttribute("genero");
             numHijos = (String) session.getAttribute("numHijos");
             nivel = (String) session.getAttribute("nivel");
-            volver = (String) session.getAttribute("volver");
+            if (session.getAttribute("volver") != null) {
+                volver = (String) session.getAttribute("volver");
+            }
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
         }
@@ -2675,7 +2771,7 @@ public class main {
 
         return new ModelAndView("redirect:/ActualizarRegistro", map);
     }
-    
+
     @RequestMapping(value = "/ActualizarRegistro", method = RequestMethod.GET)
     public ModelAndView ActualizarRegistro_GET(ModelMap map, HttpSession session) {
         String htFicha = "";
@@ -2691,7 +2787,7 @@ public class main {
         long unidad = 0;
         long entAsoc = 0;
         String volver = "";
-        try{
+        try {
             htFicha = (String) session.getAttribute("htFicha");
             nFicha = (String) session.getAttribute("nFicha");
             fechaIngresoFicha = (String) session.getAttribute("fechaIngresoFicha");
@@ -2704,8 +2800,10 @@ public class main {
             tipoEspera = (String) session.getAttribute("tipoEspera");
             unidad = Long.parseLong(session.getAttribute("unidad").toString());
             entAsoc = Long.parseLong(session.getAttribute("entAsoc").toString());
-            volver = (String) session.getAttribute("volver");
-        }catch (Exception ex){
+            if (session.getAttribute("volver") != null) {
+                volver = (String) session.getAttribute("volver");
+            }
+        } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
         }
         session.removeAttribute("htFicha");
@@ -2721,7 +2819,7 @@ public class main {
         session.removeAttribute("unidad");
         session.removeAttribute("entAsoc");
         session.removeAttribute("volver");
-        
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -2776,9 +2874,9 @@ public class main {
         return new ModelAndView("/Personal/familia/info_registro", map);
     }
 
-    //CONSTRUCCION
+    //PROBAR
     @RequestMapping(value = "/ActualizarAdoptante", method = RequestMethod.POST)
-    public ModelAndView ActualizarAdoptante(ModelMap map, HttpSession session,
+    public ModelAndView ActualizarAdoptante_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "adoptante") String adoptante,
             @RequestParam(value = "nombre", required = false) String nombre,
             @RequestParam(value = "apellidoP", required = false) String apellidoP,
@@ -2813,6 +2911,82 @@ public class main {
     //            @RequestParam(value = "sisPensiones", required = false) String sisPensiones,
     //            @RequestParam(value = "estadoActual", required = false) String estadoActual
     ) {
+        session.setAttribute("adoptante", adoptante);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("fechaNac", fechaNac);
+        session.setAttribute("lugarNac", lugarNac);
+        session.setAttribute("depNac", depNac);
+        session.setAttribute("paisNac", paisNac);
+        session.setAttribute("doc", doc);
+        session.setAttribute("numDoc", numDoc);
+        session.setAttribute("pasaporte", pasaporte);
+        session.setAttribute("numCel", numCel);
+        session.setAttribute("correo", correo);
+        session.setAttribute("estadoCivil", estadoCivil);
+        session.setAttribute("fechaMat", fechaMat);
+        session.setAttribute("volver", volver);
+
+        return new ModelAndView("redirect:/ActualizarAdoptante", map);
+
+    }
+
+    @RequestMapping(value = "/ActualizarAdoptante", method = RequestMethod.GET)
+    public ModelAndView ActualizarAdoptante_GET(ModelMap map, HttpSession session) {
+        String adoptante = "";
+        String nombre = "";
+        String apellidoP = "";
+        String apellidoM = "";
+        String fechaNac = "";
+        String lugarNac = "";
+        String depNac = "";
+        String paisNac = "";
+        String doc = "";
+        String numDoc = "";
+        String pasaporte = "";
+        String numCel = "";
+        String correo = "";
+        String estadoCivil = "";
+        String fechaMat = "";
+        String volver = "";
+        try {
+            adoptante = (String) session.getAttribute("adoptante");
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        nombre = (String) session.getAttribute("nombre");
+        apellidoP = (String) session.getAttribute("apellidoP");
+        apellidoM = (String) session.getAttribute("apellidoM");
+        fechaNac = (String) session.getAttribute("fechaNac");
+        lugarNac = (String) session.getAttribute("lugarNac");
+        depNac = (String) session.getAttribute("depNac");
+        paisNac = (String) session.getAttribute("paisNac");
+        doc = (String) session.getAttribute("doc");
+        numDoc = (String) session.getAttribute("numDoc");
+        pasaporte = (String) session.getAttribute("pasaporte");
+        numCel = (String) session.getAttribute("numCel");
+        correo = (String) session.getAttribute("correo");
+        estadoCivil = (String) session.getAttribute("estadoCivil");
+        fechaMat = (String) session.getAttribute("fechaMat");
+        volver = (String) session.getAttribute("volver");
+        session.removeAttribute("adoptante");
+        session.removeAttribute("nombre");
+        session.removeAttribute("apellidoP");
+        session.removeAttribute("apellidoM");
+        session.removeAttribute("fechaNac");
+        session.removeAttribute("lugarNac");
+        session.removeAttribute("depNac");
+        session.removeAttribute("paisNac");
+        session.removeAttribute("doc");
+        session.removeAttribute("numDoc");
+        session.removeAttribute("pasaporte");
+        session.removeAttribute("numCel");
+        session.removeAttribute("correo");
+        session.removeAttribute("estadoCivil");
+        session.removeAttribute("fechaMat");
+        session.removeAttribute("volver");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3044,8 +3218,9 @@ public class main {
 
     }
 
+    //CONSTRUCCION
     @RequestMapping(value = "/ActualizarVivienda", method = RequestMethod.POST)
-    public ModelAndView ActualizarVivienda(ModelMap map, HttpSession session,
+    public ModelAndView ActualizarVivienda_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "propiedadVivienda", required = false) String propiedadVivienda,
             @RequestParam(value = "propiedadDescrip", required = false) String propiedadDescrip,
             @RequestParam(value = "tipoVivienda", required = false) String tipoVivienda,
@@ -3070,6 +3245,105 @@ public class main {
             @RequestParam(value = "piso", required = false) String piso,
             @RequestParam(value = "pisoDesc", required = false) String pisoDesc
     ) {
+        session.setAttribute("propiedadVivienda", propiedadVivienda);
+        session.setAttribute("propiedadDescrip", propiedadDescrip);
+        session.setAttribute("tipoVivienda", tipoVivienda);
+        session.setAttribute("tipoDescrip", tipoDescrip);
+        session.setAttribute("domicilio", domicilio);
+        session.setAttribute("DepRes", DepRes);
+        session.setAttribute("PaisRes", PaisRes);
+        session.setAttribute("telefono", telefono);
+        session.setAttribute("areaVivTotal", areaVivTotal);
+        session.setAttribute("areaVivConst", areaVivConst);
+        session.setAttribute("distViv", distViv);
+        session.setAttribute("luz", luz);
+        session.setAttribute("agua", agua);
+        session.setAttribute("desague", desague);
+        session.setAttribute("otrosServ", otrosServ);
+        session.setAttribute("materConst", materConst);
+        session.setAttribute("materConstDesc", materConstDesc);
+        session.setAttribute("pared", pared);
+        session.setAttribute("paredDesc", paredDesc);
+        session.setAttribute("techo", techo);
+        session.setAttribute("techoDesc", techoDesc);
+        session.setAttribute("piso", piso);
+        session.setAttribute("pisoDesc", pisoDesc);
+
+        return new ModelAndView("redirect:/ActualizarVivienda", map);
+    }
+
+    @RequestMapping(value = "/ActualizarVivienda", method = RequestMethod.GET)
+    public ModelAndView ActualizarVivienda_GET(ModelMap map, HttpSession session) {
+        String propiedadVivienda = "";
+        String propiedadDescrip = "";
+        String tipoVivienda = "";
+        String tipoDescrip = "";
+        String domicilio = "";
+        String DepRes = "";
+        String PaisRes = "";
+        String telefono = "";
+        String areaVivTotal = "";
+        String areaVivConst = "";
+        String distViv = "";
+        String luz = "";
+        String agua = "";
+        String desague = "";
+        String otrosServ = "";
+        String materConst = "";
+        String materConstDesc = "";
+        String pared = "";
+        String paredDesc = "";
+        String techo = "";
+        String techoDesc = "";
+        String piso = "";
+        String pisoDesc = "";
+        propiedadVivienda = (String) session.getAttribute("propiedadVivienda");
+        propiedadDescrip = (String) session.getAttribute("propiedadDescrip");
+        tipoVivienda = (String) session.getAttribute("tipoVivienda");
+        tipoDescrip = (String) session.getAttribute("tipoDescrip");
+        domicilio = (String) session.getAttribute("domicilio");
+        DepRes = (String) session.getAttribute("DepRes");
+        PaisRes = (String) session.getAttribute("PaisRes");
+        telefono = (String) session.getAttribute("telefono");
+        areaVivTotal = (String) session.getAttribute("areaVivTotal");
+        areaVivConst = (String) session.getAttribute("areaVivConst");
+        distViv = (String) session.getAttribute("distViv");
+        luz = (String) session.getAttribute("luz");
+        agua = (String) session.getAttribute("agua");
+        desague = (String) session.getAttribute("desague");
+        otrosServ = (String) session.getAttribute("otrosServ");
+        materConst = (String) session.getAttribute("materConst");
+        materConstDesc = (String) session.getAttribute("materConstDesc");
+        pared = (String) session.getAttribute("pared");
+        paredDesc = (String) session.getAttribute("paredDesc");
+        techo = (String) session.getAttribute("techo");
+        techoDesc = (String) session.getAttribute("techoDesc");
+        piso = (String) session.getAttribute("piso");
+        pisoDesc = (String) session.getAttribute("pisoDesc");
+        session.removeAttribute("propiedadVivienda");
+        session.removeAttribute("propiedadDescrip");
+        session.removeAttribute("tipoVivienda");
+        session.removeAttribute("tipoDescrip");
+        session.removeAttribute("domicilio");
+        session.removeAttribute("DepRes");
+        session.removeAttribute("PaisRes");
+        session.removeAttribute("telefono");
+        session.removeAttribute("areaVivTotal");
+        session.removeAttribute("areaVivConst");
+        session.removeAttribute("distViv");
+        session.removeAttribute("luz");
+        session.removeAttribute("agua");
+        session.removeAttribute("desague");
+        session.removeAttribute("otrosServ");
+        session.removeAttribute("materConst");
+        session.removeAttribute("materConstDesc");
+        session.removeAttribute("pared");
+        session.removeAttribute("paredDesc");
+        session.removeAttribute("techo");
+        session.removeAttribute("techoDesc");
+        session.removeAttribute("piso");
+        session.removeAttribute("pisoDesc");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3202,8 +3476,9 @@ public class main {
 
     }
 
+    //PROBAR
     @RequestMapping(value = "/CrearExpNac", method = RequestMethod.POST)
-    public ModelAndView CrearExpNac(ModelMap map, HttpSession session,
+    public ModelAndView CrearExpNac_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "idFamilia") long idFamilia,
             @RequestParam(value = "numeroFicha") String numeroFicha,
             @RequestParam(value = "ht") String ht,
@@ -3211,6 +3486,43 @@ public class main {
             @RequestParam(value = "fechaIngresoFicha") String fechaIngresoFicha,
             @RequestParam(value = "entAsoc", required = false) Long entAsoc
     ) {
+        session.setAttribute("idFamilia", idFamilia);
+        session.setAttribute("numeroFicha", numeroFicha);
+        session.setAttribute("ht", ht);
+        session.setAttribute("exp", exp);
+        session.setAttribute("fechaIngresoFicha", fechaIngresoFicha);
+        session.setAttribute("entAsoc", entAsoc);
+
+        return new ModelAndView("redirect:/CrearExpNac", map);
+    }
+
+    @RequestMapping(value = "/CrearExpNac", method = RequestMethod.GET)
+    public ModelAndView CrearExpNac_GET(ModelMap map, HttpSession session) {
+        long idFamilia = 0;
+        String numeroFicha = "";
+        String ht = "";
+        String exp = "";
+        String fechaIngresoFicha = "";
+        String entAsoc = "";
+        try {
+            idFamilia = Long.parseLong(session.getAttribute("idFamilia").toString());
+            numeroFicha = (String) session.getAttribute("numeroFicha");
+            ht = (String) session.getAttribute("ht");
+            exp = (String) session.getAttribute("exp");
+            fechaIngresoFicha = (String) session.getAttribute("fechaIngresoFicha");
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        if (session.getAttribute("entAsoc") != null) {
+            entAsoc = (String) session.getAttribute("entAsoc");
+        }
+        session.removeAttribute("idFamilia");
+        session.removeAttribute("numeroFicha");
+        session.removeAttribute("ht");
+        session.removeAttribute("exp");
+        session.removeAttribute("fechaIngresoFicha");
+        session.removeAttribute("entAsoc");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3222,7 +3534,8 @@ public class main {
         tempFam = servicioEtapa.getFamilia(idFamilia);
         ExpedienteFamilia expediente = new ExpedienteFamilia();
         if (entAsoc != null && !entAsoc.equals("")) {
-            Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
+            long entAsoc1 = Long.parseLong(entAsoc);
+            Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc1);
             tempFam.setEntidad(tempEnt);
         }
 //
@@ -3309,10 +3622,32 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_user_pass", map);
     }
 
+    //PROBAR
     @RequestMapping(value = "/generarContrasenaFam", method = RequestMethod.POST)
-    public ModelAndView generarContrasenaFam(ModelMap map, HttpSession session,
+    public ModelAndView generarContrasenaFam_POST(ModelMap map, HttpSession session,
             @RequestParam("password2") String newpass,
             @RequestParam(value = "volver", required = false) String volver) {
+        session.setAttribute("newpass", newpass);
+        session.setAttribute("volver", volver);
+
+        return new ModelAndView("redirect:/generarContrasenaFam", map);
+    }
+
+    @RequestMapping(value = "/generarContrasenaFam", method = RequestMethod.GET)
+    public ModelAndView generarContrasenaFam_GET(ModelMap map, HttpSession session) {
+        String newpass = "";
+        String volver = "";
+        try {
+            newpass = (String) session.getAttribute("newpass");
+            if (session.getAttribute("volver") != null) {
+                volver = (String) session.getAttribute("volver");
+            }
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("newpass");
+        session.removeAttribute("volver");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         String mensaje = "";
         if (usuario == null) {
@@ -3346,6 +3681,7 @@ public class main {
         return new ModelAndView(pagina);
     }
 
+    //DEBIDO A QUE SIEMPRE SACA LA INFORMACION DEL USUARIO
     @RequestMapping(value = "/recordarContraEnvio", method = RequestMethod.POST)
     public ModelAndView recordarContraEnvio(ModelMap map, HttpSession session, @RequestParam("usuario") String user) {
 
@@ -3484,7 +3820,7 @@ public class main {
     }
 
     @RequestMapping(value = "/MainCrearNna", method = RequestMethod.POST)
-    public ModelAndView MainCrearNna(ModelMap map, HttpSession session,
+    public ModelAndView MainCrearNna_POST(ModelMap map, HttpSession session,
             @RequestParam("idExpediente") Long idExpediente,
             @RequestParam(value = "nombre", required = false) String nombre,
             @RequestParam(value = "apellidoP", required = false) String apellidoP,
@@ -3515,6 +3851,163 @@ public class main {
             @RequestParam(value = "numAdopcion", required = false) String numAdopcion,
             @RequestParam(value = "obs", required = false) String obs
     ) {
+        session.setAttribute("idExpediente", idExpediente);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("sexo", sexo);
+        session.setAttribute("fechaNac", fechaNac);
+        session.setAttribute("edad", edad);
+        session.setAttribute("meses", meses);
+        session.setAttribute("paisNac", paisNac);
+        session.setAttribute("dep", dep);
+        session.setAttribute("prov", prov);
+        session.setAttribute("dist", dist);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("incesto", incesto);
+        session.setAttribute("mental", mental);
+        session.setAttribute("epilepsia", epilepsia);
+        session.setAttribute("abuso", abuso);
+        session.setAttribute("sifilis", sifilis);
+        session.setAttribute("seguimiento", seguimiento);
+        session.setAttribute("operacion", operacion);
+        session.setAttribute("hiperactivo", hiperactivo);
+        session.setAttribute("especial", especial);
+        session.setAttribute("salud", salud);
+        session.setAttribute("mayor", mayor);
+        session.setAttribute("adolescente", adolescente);
+        session.setAttribute("hermanos", hermanos);
+        session.setAttribute("fechaAdopcion", fechaAdopcion);
+        session.setAttribute("numAdopcion", numAdopcion);
+        session.setAttribute("obs", obs);
+
+        return new ModelAndView("redirect:/MainCrearNna", map);
+    }
+
+    @RequestMapping(value = "/MainCrearNna", method = RequestMethod.GET)
+    public ModelAndView MainCrearNna_GET(ModelMap map, HttpSession session) {
+        long idExpediente = 0;
+        String nombre = "";
+        String apellidoP = "";
+        String apellidoM = "";
+        String sexo = "";
+        String fechaNac = "";
+        String edad = "";
+        String meses = "";
+        String paisNac = "";
+        String dep = "";
+        String prov = "";
+        String dist = "";
+        String direccion = "";
+        String incesto = "";
+        String mental = "";
+        String epilepsia = "";
+        String abuso = "";
+        String sifilis = "";
+        String seguimiento = "";
+        String operacion = "";
+        String hiperactivo = "";
+        String especial = "";
+        String salud = "";
+        String mayor = "";
+        String adolescente = "";
+        String hermanos = "";
+        String fechaAdopcion = "";
+        String numAdopcion = "";
+        String obs = "";
+        try {
+            idExpediente = Long.parseLong(session.getAttribute("idExpediente").toString());
+            if (session.getAttribute("nombre") != null) {
+                nombre = (String) session.getAttribute("nombre");
+            }
+            if (session.getAttribute("apellidoP") != null) {
+                apellidoP = (String) session.getAttribute("apellidoP");
+            }
+            if (session.getAttribute("apellidoM") != null) {
+                apellidoM = (String) session.getAttribute("apellidoM");
+            }
+            if (session.getAttribute("sexo") != null) {
+                sexo = (String) session.getAttribute("sexo");
+            }
+            if (session.getAttribute("fechaNac") != null) {
+                fechaNac = (String) session.getAttribute("fechaNac");
+            }
+            if (session.getAttribute("edad") != null) {
+                edad = (String) session.getAttribute("edad");
+            }
+            if (session.getAttribute("meses") != null) {
+                meses = (String) session.getAttribute("meses");
+            }
+            if (session.getAttribute("paisNac") != null) {
+                paisNac = (String) session.getAttribute("paisNac");
+            }
+            if (session.getAttribute("dep") != null) {
+                dep = (String) session.getAttribute("dep");
+            }
+            if (session.getAttribute("prov") != null) {
+                prov = (String) session.getAttribute("prov");
+            }
+            if (session.getAttribute("dist") != null) {
+                dist = (String) session.getAttribute("dist");
+            }
+            if (session.getAttribute("direccion") != null) {
+                direccion = (String) session.getAttribute("direccion");
+            }
+            incesto = (String) session.getAttribute("incesto");
+            mental = (String) session.getAttribute("mental");
+            epilepsia = (String) session.getAttribute("epilepsia");
+            abuso = (String) session.getAttribute("abuso");
+            sifilis = (String) session.getAttribute("sifilis");
+            seguimiento = (String) session.getAttribute("seguimiento");
+            operacion = (String) session.getAttribute("operacion");
+            hiperactivo = (String) session.getAttribute("hiperactivo");
+            especial = (String) session.getAttribute("especial");
+            salud = (String) session.getAttribute("salud");
+            mayor = (String) session.getAttribute("mayor");
+            adolescente = (String) session.getAttribute("adolescente");
+            hermanos = (String) session.getAttribute("hermanos");
+            if (session.getAttribute("fechaAdopcion") != null) {
+                fechaAdopcion = (String) session.getAttribute("fechaAdopcion");
+            }
+            if (session.getAttribute("numAdopcion") != null) {
+                numAdopcion = (String) session.getAttribute("numAdopcion");
+            }
+            if (session.getAttribute("obs") != null) {
+                obs = (String) session.getAttribute("obs");
+            }
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("idExpediente");
+        session.removeAttribute("nombre");
+        session.removeAttribute("apellidoP");
+        session.removeAttribute("apellidoM");
+        session.removeAttribute("sexo");
+        session.removeAttribute("fechaNac");
+        session.removeAttribute("edad");
+        session.removeAttribute("meses");
+        session.removeAttribute("paisNac");
+        session.removeAttribute("dep");
+        session.removeAttribute("prov");
+        session.removeAttribute("dist");
+        session.removeAttribute("direccion");
+        session.removeAttribute("incesto");
+        session.removeAttribute("mental");
+        session.removeAttribute("epilepsia");
+        session.removeAttribute("abuso");
+        session.removeAttribute("sifilis");
+        session.removeAttribute("seguimiento");
+        session.removeAttribute("operacion");
+        session.removeAttribute("hiperactivo");
+        session.removeAttribute("especial");
+        session.removeAttribute("salud");
+        session.removeAttribute("mayor");
+        session.removeAttribute("adolescente");
+        session.removeAttribute("hermanos");
+        session.removeAttribute("fechaAdopcion");
+        session.removeAttribute("numAdopcion");
+        session.removeAttribute("obs");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3625,8 +4118,9 @@ public class main {
         return new ModelAndView("/Personal/nna_adop_ext/editar_nna", map);
     }
 
+    //PROBAR
     @RequestMapping(value = "/MainUpdateNna", method = RequestMethod.POST)
-    public ModelAndView MainUpdateNna(ModelMap map, HttpSession session,
+    public ModelAndView MainUpdateNna_POST(ModelMap map, HttpSession session,
             @RequestParam("idDesig") Long idDesig,
             @RequestParam("idNna") Long idNna,
             @RequestParam(value = "nombre", required = false) String nombre,
@@ -3658,6 +4152,167 @@ public class main {
             @RequestParam(value = "numAdopcion", required = false) String numAdopcion,
             @RequestParam(value = "obs", required = false) String obs
     ) {
+        session.setAttribute("idDesig", idDesig);
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("sexo", sexo);
+        session.setAttribute("fechaNac", fechaNac);
+        session.setAttribute("edad", edad);
+        session.setAttribute("meses", meses);
+        session.setAttribute("paisNac", paisNac);
+        session.setAttribute("dep", dep);
+        session.setAttribute("prov", prov);
+        session.setAttribute("dist", dist);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("incesto", incesto);
+        session.setAttribute("mental", mental);
+        session.setAttribute("epilepsia", epilepsia);
+        session.setAttribute("abuso", abuso);
+        session.setAttribute("sifilis", sifilis);
+        session.setAttribute("seguimiento", seguimiento);
+        session.setAttribute("operacion", operacion);
+        session.setAttribute("hiperactivo", hiperactivo);
+        session.setAttribute("especial", especial);
+        session.setAttribute("salud", salud);
+        session.setAttribute("mayor", mayor);
+        session.setAttribute("adolescente", adolescente);
+        session.setAttribute("hermanos", hermanos);
+        session.setAttribute("fechaAdopcion", fechaAdopcion);
+        session.setAttribute("numAdopcion", numAdopcion);
+        session.setAttribute("obs", obs);
+
+        return new ModelAndView("redirect:/MainUpdateNna", map);
+
+    }
+
+    @RequestMapping(value = "/MainUpdateNna", method = RequestMethod.GET)
+    public ModelAndView MainUpdateNna_GET(ModelMap map, HttpSession session) {
+        long idDesig = 0;
+        long idNna = 0;
+        String nombre = "";
+        String apellidoP = "";
+        String apellidoM = "";
+        String sexo = "";
+        String fechaNac = "";
+        String edad = "";
+        String meses = "";
+        String paisNac = "";
+        String dep = "";
+        String prov = "";
+        String dist = "";
+        String direccion = "";
+        String incesto = "";
+        String mental = "";
+        String epilepsia = "";
+        String abuso = "";
+        String sifilis = "";
+        String seguimiento = "";
+        String operacion = "";
+        String hiperactivo = "";
+        String especial = "";
+        String salud = "";
+        String mayor = "";
+        String adolescente = "";
+        String hermanos = "";
+        String fechaAdopcion = "";
+        String numAdopcion = "";
+        String obs = "";
+        try {
+            idNna = Long.parseLong(session.getAttribute("idNna").toString());
+            idDesig = Long.parseLong(session.getAttribute("idDesi").toString());
+            if (session.getAttribute("nombre") != null) {
+                nombre = (String) session.getAttribute("nombre");
+            }
+            if (session.getAttribute("apellidoP") != null) {
+                apellidoP = (String) session.getAttribute("apellidoP");
+            }
+            if (session.getAttribute("apellidoM") != null) {
+                apellidoM = (String) session.getAttribute("apellidoM");
+            }
+            if (session.getAttribute("sexo") != null) {
+                sexo = (String) session.getAttribute("sexo");
+            }
+            if (session.getAttribute("fechaNac") != null) {
+                fechaNac = (String) session.getAttribute("fechaNac");
+            }
+            if (session.getAttribute("edad") != null) {
+                edad = (String) session.getAttribute("edad");
+            }
+            if (session.getAttribute("meses") != null) {
+                meses = (String) session.getAttribute("meses");
+            }
+            if (session.getAttribute("paisNac") != null) {
+                paisNac = (String) session.getAttribute("paisNac");
+            }
+            if (session.getAttribute("dep") != null) {
+                dep = (String) session.getAttribute("dep");
+            }
+            if (session.getAttribute("prov") != null) {
+                prov = (String) session.getAttribute("prov");
+            }
+            if (session.getAttribute("dist") != null) {
+                dist = (String) session.getAttribute("dist");
+            }
+            if (session.getAttribute("direccion") != null) {
+                direccion = (String) session.getAttribute("direccion");
+            }
+            incesto = (String) session.getAttribute("incesto");
+            mental = (String) session.getAttribute("mental");
+            epilepsia = (String) session.getAttribute("epilepsia");
+            abuso = (String) session.getAttribute("abuso");
+            sifilis = (String) session.getAttribute("sifilis");
+            seguimiento = (String) session.getAttribute("seguimiento");
+            operacion = (String) session.getAttribute("operacion");
+            hiperactivo = (String) session.getAttribute("hiperactivo");
+            especial = (String) session.getAttribute("especial");
+            salud = (String) session.getAttribute("salud");
+            mayor = (String) session.getAttribute("mayor");
+            adolescente = (String) session.getAttribute("adolescente");
+            hermanos = (String) session.getAttribute("hermanos");
+            if (session.getAttribute("fechaAdopcion") != null) {
+                fechaAdopcion = (String) session.getAttribute("fechaAdopcion");
+            }
+            if (session.getAttribute("numAdopcion") != null) {
+                numAdopcion = (String) session.getAttribute("numAdopcion");
+            }
+            if (session.getAttribute("obs") != null) {
+                obs = (String) session.getAttribute("obs");
+            }
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("idExpediente");
+        session.removeAttribute("nombre");
+        session.removeAttribute("apellidoP");
+        session.removeAttribute("apellidoM");
+        session.removeAttribute("sexo");
+        session.removeAttribute("fechaNac");
+        session.removeAttribute("edad");
+        session.removeAttribute("meses");
+        session.removeAttribute("paisNac");
+        session.removeAttribute("dep");
+        session.removeAttribute("prov");
+        session.removeAttribute("dist");
+        session.removeAttribute("direccion");
+        session.removeAttribute("incesto");
+        session.removeAttribute("mental");
+        session.removeAttribute("epilepsia");
+        session.removeAttribute("abuso");
+        session.removeAttribute("sifilis");
+        session.removeAttribute("seguimiento");
+        session.removeAttribute("operacion");
+        session.removeAttribute("hiperactivo");
+        session.removeAttribute("especial");
+        session.removeAttribute("salud");
+        session.removeAttribute("mayor");
+        session.removeAttribute("adolescente");
+        session.removeAttribute("hermanos");
+        session.removeAttribute("fechaAdopcion");
+        session.removeAttribute("numAdopcion");
+        session.removeAttribute("obs");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -3795,8 +4450,9 @@ public class main {
         }
     }
 
+    //Probar
     @RequestMapping(value = "/MainInsertarRevision", method = RequestMethod.POST)
-    public ModelAndView MainInsertarRevision(ModelMap map, HttpSession session,
+    public ModelAndView MainInsertarRevision_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "numero", required = false) String numero,
             @RequestParam(value = "comentarios", required = false) String comentarios,
             @RequestParam(value = "agregarFamilia", required = false) String agregarFamilia,
@@ -3807,6 +4463,67 @@ public class main {
             String[] delete,
             String[] fecha
     ) {
+        session.setAttribute("numero", numero);
+        session.setAttribute("comentarios", comentarios);
+        session.setAttribute("agregarFamilia", agregarFamilia);
+        session.setAttribute("agregarEntidad", agregarEntidad);
+        session.setAttribute("eliminar", eliminar);
+        session.setAttribute("registrar", registrar);
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("delete", delete);
+        session.setAttribute("fecha", fecha);
+
+        return new ModelAndView("redirect:/MainInsertarRevision", map);
+    }
+
+    @RequestMapping(value = "/MainInsertarRevision", method = RequestMethod.GET)
+    public ModelAndView MainInsertarRevision_GET(ModelMap map, HttpSession session) {
+        String numero = "";
+        String comentarios = "";
+        String agregarFamilia = "";
+        String agregarEntidad = "";
+        String eliminar = "";
+        String registrar = "";
+        String idNna = "";
+        String[] delete;
+        String[] fecha;
+        try {
+            if (session.getAttribute("numero") != null) {
+                numero = (String) session.getAttribute("numero");
+            }
+            if (session.getAttribute("comentarios") != null) {
+                comentarios = (String) session.getAttribute("comentarios");
+            }
+            if (session.getAttribute("agregarFamilia") != null) {
+                agregarFamilia = (String) session.getAttribute("agregarFamilia");
+            }
+            if (session.getAttribute("agregarEntidad") != null) {
+                agregarEntidad = (String) session.getAttribute("agregarEntidad");
+            }
+            if (session.getAttribute("eliminar") != null) {
+                agregarFamilia = (String) session.getAttribute("eliminar");
+            }
+            if (session.getAttribute("registrar") != registrar) {
+                agregarFamilia = (String) session.getAttribute("agregarFamilia");
+            }
+            if (session.getAttribute("idNna") != null) {
+                idNna = (String) session.getAttribute("idNna");
+            }
+            delete = (String[]) session.getAttribute("delete");
+            fecha = (String[]) session.getAttribute("fecha");
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("numero");
+        session.removeAttribute("comentarios");
+        session.removeAttribute("agregarFamilia");
+        session.removeAttribute("agregarEntidad");
+        session.removeAttribute("eliminar");
+        session.removeAttribute("registrar");
+        session.removeAttribute("idNna");
+        session.removeAttribute("delete");
+        session.removeAttribute("fecha");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -4074,11 +4791,32 @@ public class main {
 
     }
 
+    //
     @RequestMapping(value = "/MainGuardarRevision", method = RequestMethod.POST)
     public ModelAndView MainGuardarRevision(ModelMap map, HttpSession session,
             @RequestParam("numero") String numero,
             @RequestParam("coments") String coments
     ) {
+        session.setAttribute("numero", numero);
+        session.setAttribute("coments", coments);
+
+        return new ModelAndView("redirect:/MainGuardarRevision", map);
+    }
+
+    @RequestMapping(value = "/MainGuardarRevision", method = RequestMethod.GET)
+    public ModelAndView MainGuardarRevision(ModelMap map, HttpSession session
+    ) {
+        String numero = "";
+        String coments = "";
+        try {
+            numero = (String) session.getAttribute("numero");
+            coments = (String) session.getAttribute("coments");
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("numero");
+        session.removeAttribute("coments");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -4165,8 +4903,9 @@ public class main {
 
     }
 
+    //PROBAR
     @RequestMapping(value = "/MainInsertarEstudio", method = RequestMethod.POST)
-    public ModelAndView MainInsertarEstudio(ModelMap map, HttpSession session,
+    public ModelAndView MainInsertarEstudio_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "orden", required = false) String orden,
             @RequestParam(value = "agregar", required = false) String agregar,
             @RequestParam(value = "eliminar", required = false) String eliminar,
@@ -4176,6 +4915,59 @@ public class main {
             Long[] idNna,
             @RequestParam(value = "numero", required = false) String numero
     ) {
+        session.setAttribute("orden", orden);
+        session.setAttribute("agregar", agregar);
+        session.setAttribute("eliminar", eliminar);
+        session.setAttribute("registrar", registrar);
+        session.setAttribute("delete", delete);
+        session.setAttribute("prioridad", prioridad);
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("numero", numero);
+
+        return new ModelAndView("redirect:/MainInsertarEstudio", map);
+    }
+
+    @RequestMapping(value = "/MainInsertarEstudio", method = RequestMethod.POST)
+    public ModelAndView MainInsertarEstudio_GET(ModelMap map, HttpSession session) {
+        String orden = "";
+        String agregar = "";
+        String eliminar = "";
+        String registrar = "";
+        Long[] delete = null;
+        Long[] prioridad = null;
+        Long[] idNna = null;
+        String numero = "";
+        try {
+            if (session.getAttribute("orden") != null) {
+                orden = (String) session.getAttribute("orden");
+            }
+            if (session.getAttribute("agregar") != null) {
+                agregar = (String) session.getAttribute("agregar");
+            }
+            if (session.getAttribute("eliminar") != null) {
+                eliminar = (String) session.getAttribute("eliminar");
+            }
+            if (session.getAttribute("registrar") != null) {
+                registrar = (String) session.getAttribute("registrar");
+            }
+            delete = (Long[]) session.getAttribute("delete");
+            prioridad = (Long[]) session.getAttribute("prioridad");
+            idNna = (Long[]) session.getAttribute("idNna");
+            if (session.getAttribute("numero") != null) {
+                numero = (String) session.getAttribute("numero");
+            }
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("orden");
+        session.removeAttribute("agregar");
+        session.removeAttribute("eliminar");
+        session.removeAttribute("registrar");
+        session.removeAttribute("delete");
+        session.removeAttribute("prioridad");
+        session.removeAttribute("idNna");
+        session.removeAttribute("numero");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -4337,14 +5129,46 @@ public class main {
 
     }
 
+    //PROBAR
     @RequestMapping(value = "/MainActualizarEstudio", method = RequestMethod.POST)
-    public ModelAndView MainActualizarEstudio(ModelMap map, HttpSession session,
+    public ModelAndView MainActualizarEstudio_POST(ModelMap map, HttpSession session,
             @RequestParam("orden") String orden,
             Long[] idExpFam,
             String[] resultado,
             String[] fechaEst,
             @RequestParam("elegido") int elegido
     ) {
+        session.setAttribute("orden", orden);
+        session.setAttribute("idExpFam", idExpFam);
+        session.setAttribute("resultado", resultado);
+        session.setAttribute("fechaEst", fechaEst);
+        session.setAttribute("elegido", elegido);
+
+        return new ModelAndView("redirect:/MainActualizarEstudio", map);
+    }
+
+    @RequestMapping(value = "/MainActualizarEstudio", method = RequestMethod.GET)
+    public ModelAndView MainActualizarEstudio_GET(ModelMap map, HttpSession session) {
+        String orden = "";
+        Long[] idExpFam = null;
+        String[] resultado = null;
+        String[] fechaEst = null;
+        int elegido = 0;
+        try {
+            orden = (String) session.getAttribute("orden");
+            idExpFam = (Long[]) session.getAttribute("idExpFam");
+            fechaEst = (String[]) session.getAttribute("fechaEst");
+            resultado = (String[]) session.getAttribute("Resultado");
+            elegido = (int) session.getAttribute("elegido");
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("orden");
+        session.removeAttribute("idExpFam");
+        session.removeAttribute("resultado");
+        session.removeAttribute("fechaEst");
+        session.removeAttribute("elegido");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -4477,12 +5301,36 @@ public class main {
         }
     }
 
+    //PROBAR
     @RequestMapping(value = "/MainGuardarFechaSolicitud", method = RequestMethod.POST)
-    public ModelAndView MainGuardarFechaSolicitud(ModelMap map, HttpSession session,
+    public ModelAndView MainGuardarFechaSolicitud_POST(ModelMap map, HttpSession session,
             @RequestParam("orden") String orden,
             @RequestParam("fechaSolicitud") String fechaSolicitud,
             @RequestParam("idExpFam") long idExpFam
     ) {
+        session.setAttribute("orden", orden);
+        session.setAttribute("fechaSolicitud", fechaSolicitud);
+        session.setAttribute("idExpFam", idExpFam);
+
+        return new ModelAndView("redirect:/MainGuardarFechaSolicitud", map);
+    }
+
+    @RequestMapping(value = "/MainGuardarFechaSolicitud", method = RequestMethod.GET)
+    public ModelAndView MainGuardarFechaSolicitud_GET(ModelMap map, HttpSession session) {
+        String orden = "";
+        String fechaSolicitud = "";
+        long idExpFam = 0;
+        try {
+            orden = (String) session.getAttribute("orden");
+            fechaSolicitud = (String) session.getAttribute("fechaSolicitud");
+            idExpFam = (long) session.getAttribute("idExpFam");
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("orden");
+        session.removeAttribute("fechaSolicitud");
+        session.removeAttribute("idExpFam");
+        
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -4517,13 +5365,41 @@ public class main {
 
     }
 
+    //PROBAR
     @RequestMapping(value = "/MainGenerarDesignacionPrioritario", method = RequestMethod.POST)
-    public ModelAndView MainGenerarDesignacionPrioritario(ModelMap map, HttpSession session,
+    public ModelAndView MainGenerarDesignacionPrioritario_POST(ModelMap map, HttpSession session,
             @RequestParam("orden") String orden,
             @RequestParam("numDesig") String numDesig,
             @RequestParam("idExpFam") long idExpFam,
             @RequestParam("fechaPropuesta") String fechaPropuesta
     ) {
+        session.setAttribute("orden", orden);
+        session.setAttribute("numDesig", numDesig);
+        session.setAttribute("idExpFam", idExpFam);
+        session.setAttribute("fechaPropuesta", fechaPropuesta);
+
+        return new ModelAndView("redirect:/MainGenerarDesignacionPrioritario", map);
+    }
+
+    @RequestMapping(value = "/MainGenerarDesignacionPrioritario", method = RequestMethod.GET)
+    public ModelAndView MainGenerarDesignacionPrioritario_GET(ModelMap map, HttpSession session) {
+        String orden = "";
+        String numDesig = "";
+        long idExpFam = 0;
+        String fechaPropuesta = "";
+        try {
+            orden = (String) session.getAttribute("orden");
+            numDesig = (String) session.getAttribute("numDesig");
+            idExpFam = (long) session.getAttribute("idExpFam");
+            fechaPropuesta = (String) session.getAttribute("fechaPropuesta");
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        session.removeAttribute("orden");
+        session.removeAttribute("numDesig");
+        session.removeAttribute("idExpFam");
+        session.removeAttribute("fechaPropuesta");
+        
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -4599,5 +5475,4 @@ public class main {
             return new ModelAndView("/Personal/Buscador_etapa/etapa_designacion/etapa_designacion", map);
         }
     }
-
 }
