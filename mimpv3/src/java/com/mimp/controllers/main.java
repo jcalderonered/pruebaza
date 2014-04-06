@@ -835,7 +835,10 @@ public class main {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-
+        /*LIMPIANDO LOS ANTIGUOS VALORES DE LOS ADOPTANTES */
+        Ella = new Adoptante();
+        El = new Adoptante();
+        
         if (estado.equals("formativa")) {
             Long idFam = Long.parseLong(idFamilia);
             infoFam = ServicioMain.getInfoFamPorIdFamilia(idFam);
@@ -1087,6 +1090,10 @@ public class main {
             return new ModelAndView("login", map);
         }
 
+        /*LIMPIANDO LOS ANTIGUOS VALORES DE LOS ADOPTANTES */
+        Ella = new Adoptante();
+        El = new Adoptante();
+        
         if (estado.equals("formativa")) {
             Long idFam = Long.parseLong(idFamilia);
             infoFam = ServicioMain.getInfoFamPorIdFamilia(idFam);
