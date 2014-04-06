@@ -203,7 +203,7 @@
                             </div>
                             <br>
                             <div class="control-group">
-                                <label class="control-label">Nacionalidad</label>
+                                <label class="control-label">Tipo de solicitud</label>
                                 <div class="controls">
                                     <select onchange="funcNacion(this.value)" id="nacionalidad" name="nacionalidad">
                                         <option value="nacional" ${expediente.getNacionalidad() == 'nacional' ? 'selected' : ''} >N</option>
@@ -212,6 +212,7 @@
                                 </div>
                             </div>
                             <br>
+                            <!--
                             <div class="control-group">
                                 <label class="control-label">Pertenece al RNSA:</label>
                                 <select id="rnsa" name="rnsa" disabled>
@@ -228,6 +229,7 @@
                                 </select>
                             </div>
                             <br>
+                            -->
                             <div class="control-group">
                                 <label class="control-label">Tipo de familia</label>
                                 <div class="controls">
