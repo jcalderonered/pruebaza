@@ -217,7 +217,7 @@
                                             <td>${ua.getCorreo()}</td>
                                             <td>
                                                 <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post">
-                                                    <input hidden name="ïdUA" id="ïdUA" value="${ua.getIdunidad()}">
+                                                    <input hidden name="idUA" id="idUA" value="${ua.getIdunidad()}">
                                                     <button type="submit" class="btn btn-default">Ver</button>
                                                 </form>
                                             </td>
