@@ -5034,7 +5034,7 @@ public class main {
         return new ModelAndView("redirect:/MainInsertarEstudio", map);
     }
 
-    @RequestMapping(value = "/MainInsertarEstudio", method = RequestMethod.POST)
+    @RequestMapping(value = "/MainInsertarEstudio", method = RequestMethod.GET)
     public ModelAndView MainInsertarEstudio_GET(ModelMap map, HttpSession session) {
         String orden = "";
         String agregar = "";

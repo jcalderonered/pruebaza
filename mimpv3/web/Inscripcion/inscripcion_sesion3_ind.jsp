@@ -63,7 +63,7 @@
                 <br>  
                 <br>
                 <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
+                    <div class="col-md-8 col-md-offset-3">
                         <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesInd" role="form" method="post"  name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
                             <input hidden id="idTurno" name="idTurno" value="${turno.getIdturno()}">
                             <input hidden id="estado" name="estado" value="${estado}">
