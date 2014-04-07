@@ -3617,7 +3617,7 @@ public class main {
             @RequestParam(value = "ht") String ht,
             @RequestParam(value = "exp") String exp,
             @RequestParam(value = "fechaIngresoFicha") String fechaIngresoFicha,
-            @RequestParam(value = "entAsoc", required = false) Long entAsoc
+            @RequestParam(value = "entAsoc", required = false) String entAsoc
     ) {
         session.setAttribute("idFamilia", idFamilia);
         session.setAttribute("numeroFicha", numeroFicha);
@@ -4353,8 +4353,8 @@ public class main {
         String numAdopcion = "";
         String obs = "";
         try {
-            idNna = Long.parseLong(session.getAttribute("idNna").toString());
-            idDesig = Long.parseLong(session.getAttribute("idDesig").toString());
+            idNna = (long) session.getAttribute("idNna");
+            idDesig = (long) session.getAttribute("idDesig");
             if (session.getAttribute("nombre") != null) {
                 nombre = (String) session.getAttribute("nombre");
             }
@@ -4416,7 +4416,8 @@ public class main {
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
         }
-        session.removeAttribute("idExpediente");
+        session.removeAttribute("idDesig");
+        session.removeAttribute("idNna");
         session.removeAttribute("nombre");
         session.removeAttribute("apellidoP");
         session.removeAttribute("apellidoM");
@@ -4611,13 +4612,13 @@ public class main {
 
     @RequestMapping(value = "/MainInsertarRevision", method = RequestMethod.GET)
     public ModelAndView MainInsertarRevision_GET(ModelMap map, HttpSession session) {
-        String numero = "";
-        String comentarios = "";
-        String agregarFamilia = "";
-        String agregarEntidad = "";
-        String eliminar = "";
-        String registrar = "";
-        String idNna = "";
+        String numero = null;
+        String comentarios = null;
+        String agregarFamilia = null;
+        String agregarEntidad = null;
+        String eliminar = null;
+        String registrar = null;
+        String idNna = null;
         String[] delete;
         String[] fecha;
         try {
@@ -4634,10 +4635,10 @@ public class main {
                 agregarEntidad = (String) session.getAttribute("agregarEntidad");
             }
             if (session.getAttribute("eliminar") != null) {
-                agregarFamilia = (String) session.getAttribute("eliminar");
+                eliminar = (String) session.getAttribute("eliminar");
             }
-            if (session.getAttribute("registrar") != registrar) {
-                agregarFamilia = (String) session.getAttribute("agregarFamilia");
+            if (session.getAttribute("registrar") != null) {
+                registrar = (String) session.getAttribute("registrar");
             }
             if (session.getAttribute("idNna") != null) {
                 idNna = (String) session.getAttribute("idNna");
@@ -5073,14 +5074,14 @@ public class main {
 
     @RequestMapping(value = "/MainInsertarEstudio", method = RequestMethod.GET)
     public ModelAndView MainInsertarEstudio_GET(ModelMap map, HttpSession session) {
-        String orden = "";
-        String agregar = "";
-        String eliminar = "";
-        String registrar = "";
+        String orden = null;
+        String agregar = null;
+        String eliminar = null;
+        String registrar= null;
         Long[] delete = null;
         Long[] prioridad = null;
         Long[] idNna = null;
-        String numero = "";
+        String numero = null;
         try {
             if (session.getAttribute("orden") != null) {
                 orden = (String) session.getAttribute("orden");
@@ -5302,7 +5303,7 @@ public class main {
             orden = (String) session.getAttribute("orden");
             idExpFam = (Long[]) session.getAttribute("idExpFam");
             fechaEst = (String[]) session.getAttribute("fechaEst");
-            resultado = (String[]) session.getAttribute("Resultado");
+            resultado = (String[]) session.getAttribute("resultado");
             elegido = Integer.parseInt(session.getAttribute("elegido").toString());
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
