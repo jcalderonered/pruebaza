@@ -220,6 +220,7 @@
                                             <td>
                                                 <form action="${pageContext.servletContext.contextPath}/EditarPersonalUa" method="post">
                                                     <input hidden name="id" id="id" value="${personalUa.getIdpersonal()}">
+                                                    <input hidden name="idUA" id="idUA" value="${idUA}">
                                                     <button type="submit" class="btn btn-default">Editar</button>
                                                     </form>
                                                 </td>

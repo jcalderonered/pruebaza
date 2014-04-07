@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -105,18 +105,24 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <c:if test="${personal.getIdpersonal() == null}">
-                            <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/usuarios'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                        
+                        <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post" >
+                                <input hidden name="idUA" id="idUA" value="${idUA}">
+                                <p align="right"><button type="submit" class="btn btn-default" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            </form>
+
+                        <c:if test="${personal.getIdpersonal() == null}">     
+                            <form action="${pageContext.servletContext.contextPath}/ua" method="post" >
+                                <input hidden name="idUA" id="idUA" value="${idUA}">
+                                <p align="right"><button type="submit" class="btn btn-default" style="background: black; color: white" class="btn btn-default">Volver</button></p>
+                            </form>
                             <h1 align="center"><strong>Editar Personal</strong></h1>
                             <p style="color: red">${mensaje}</p>
                             <br>
                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editPersonal" method="post"  onsubmit="return(validar());" onkeypress="return enter(event)"> 
                             </c:if>  
                             <c:if test="${personal.getIdpersonal() != null && disabled == 'deshabilitar'}">
-                                <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post" onsubmit="return(validar());" onkeypress="return enter(event)">
-                                    <input hidden name="ïdUA" id="ïdUA" value="${personal.getUnidad().getIdunidad()}">
-                                    <p align="right"><button type="submit" class="btn btn-default" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                                </form>
+
                                 <h1 align="center"><strong>Editar Personal</strong></h1>
 
                                 <br>

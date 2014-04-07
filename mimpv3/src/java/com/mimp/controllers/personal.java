@@ -2219,6 +2219,7 @@ public class personal {
         int idUa = Integer.parseInt(session.getAttribute("idUA").toString());
 
         map.put("ua", ServicioPersonal.getUa(idUa));
+        map.addAttribute("idUA", idUa);
         map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(idUa));
         return new ModelAndView("/Personal/registros/ua/lista_ua_personal", map);
     }
@@ -2226,7 +2227,7 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////EDITAR PERSONAL UA ///////////////////////////////////////////
     @RequestMapping(value = "/EditarPersonalUa", method = RequestMethod.POST)
-    public ModelAndView EditarPersonalUa_POST(ModelMap map, @RequestParam("id") int id, HttpSession session) {
+    public ModelAndView EditarPersonalUa_POST(ModelMap map, @RequestParam("id") int id,  @RequestParam("idUA") int idUA, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -2235,6 +2236,7 @@ public class personal {
         }
 
         session.setAttribute("id", id);
+        session.setAttribute("idUA", idUA);
 
         return new ModelAndView("redirect:/EditarPersonalUa", map);
     }
@@ -2249,6 +2251,7 @@ public class personal {
         }
 
         int id = (int) session.getAttribute("id");
+        int idUA = (int) session.getAttribute("idUA");
 
         Personal temp = new Personal();
         temp = ServicioPersonal.getPersonal(id);
@@ -2266,6 +2269,7 @@ public class personal {
         map.addAttribute("fechaNac", fechaNac);
         map.addAttribute("fechaIng", fechaIng);
         map.addAttribute("disabled", noUa);
+        map.addAttribute("idUA", idUA);
         map.put("personal", temp);
         map.put("listaUa", ServicioPersonal.ListaUa());
         return new ModelAndView("/Personal/registros/usuarios/editar_personal", map);
@@ -2453,9 +2457,10 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idUa = Long.parseLong(session.getAttribute("idUa").toString());
+        long idUa = Long.parseLong(session.getAttribute("idUa").toString());        
 
         map.put("ua", ServicioPersonal.getUa(idUa));
+        map.addAttribute("idUA", idUa);
         map.put("listaPersonalNoUa", ServicioPersonal.ListaPersonalNoUa(idUa));
         return new ModelAndView("/Personal/registros/ua/lista_asign_pers", map);
     }
