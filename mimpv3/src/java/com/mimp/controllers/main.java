@@ -2095,6 +2095,17 @@ public class main {
         tempAtn.setObservacion(obs);
 
         ServicioMain.crearAtencion(tempAtn);
+        
+        String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Agregó una nueva "
+                + "atención perteneciente a la familia con ID: " + tempFam.getIdfamilia();
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
         listaAtenciones.clear();
         listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(expediente.getFamilia().getIdfamilia());
         map.put("df", df);
@@ -2220,6 +2231,18 @@ public class main {
         tempAtn.setObservacion(obs);
 
         ServicioMain.crearAtencion(tempAtn);
+        
+         String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Agregó una nueva "
+                + "atención perteneciente a la familia con ID: " + tempFam.getIdfamilia();
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+        
         listaAtenciones.clear();
         listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(expediente.getFamilia().getIdfamilia());
         map.put("df", df);
@@ -2319,6 +2342,17 @@ public class main {
         tempAtn.setObservacion(obs);
 
         ServicioMain.updateAtencion(tempAtn);
+        
+         String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
+                + "atención con ID: " + idAtencion;
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
         listaAtenciones.clear();
         listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(expediente.getFamilia().getIdfamilia());
         map.put("df", df);
@@ -2471,7 +2505,17 @@ public class main {
         tempAtn.setObservacion(obs);
 
         ServicioMain.updateAtencion(tempAtn);
+        
+        String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
+                + "atención con ID: " + idAtencion;
+        String Tipo_registro = "Personal";
 
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
         listaAtenciones.clear();
         listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(expediente.getFamilia().getIdfamilia());
 
@@ -2733,6 +2777,17 @@ public class main {
         }
 
         ServicioMain.updateInfoFam(infoFam);
+        
+        String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
+                + "información de la familia con ID: " + infoFam.getFamilia().getIdfamilia();
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         map.put("df", df);
         map.put("estado", etapaOrigen);
@@ -2871,6 +2926,17 @@ public class main {
 
         ServicioMain.updateExpFam(expediente);
         ServicioMain.updateFam(expediente.getFamilia());
+        
+        String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
+                + "información de la familia con ID: " + expediente.getFamilia().getIdfamilia();
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
         map.put("df", df);
         map.put("estado", etapaOrigen);
@@ -3103,6 +3169,18 @@ public class main {
                 expediente.setExpediente(Ella.getApellidoP());
             }
             servicioEtapa.updateExpedienteFamilia(expediente);
+            
+            String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
+                + "información del adoptante con ID: " + El.getIdadoptante();
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+            
             map.put("df", df);
             map.put("estado", etapaOrigen);
             map.put("infoFam", infoFam);
@@ -3213,6 +3291,17 @@ public class main {
                 expediente.setExpediente(Ella.getApellidoP());
             }
             servicioEtapa.updateExpedienteFamilia(expediente);
+            
+            String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
+                + "información del adoptante con ID: " + Ella.getIdadoptante();
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
             map.put("df", df);
             map.put("estado", etapaOrigen);
             map.put("infoFam", infoFam);
@@ -4837,6 +4926,17 @@ public class main {
         for (Revision revision : allRevisiones) {
             revision.setComentarios(coments);
             ServicioMain.crearRevision(revision);
+            
+            String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Guardó la "
+                + "revisión con número: " + numero;
+        String Tipo_registro = "Personal";
+
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
         }
 
         ArrayList<Long> allID = new ArrayList();
