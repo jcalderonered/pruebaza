@@ -191,7 +191,7 @@ public class main {
 
         String ua = "";
         try {
-            ua = (String) session.getAttribute("ua");
+            ua = session.getAttribute("ua").toString();
         } catch (Exception ex) {
             return new ModelAndView("redirect:/", map);
         }
@@ -265,8 +265,10 @@ public class main {
 
         int turno = 0;
         try {
-            turno = Integer.parseInt((String) session.getAttribute("idTurno"));
+            turno = Integer.parseInt(session.getAttribute("idTurno").toString());
         } catch (Exception ex) {
+            session.removeAttribute("idTurno");
+            
             return new ModelAndView("redirect:/", map);
         }
         session.removeAttribute("idTurno");
@@ -291,8 +293,8 @@ public class main {
         int turno = 0;
         String estado = "";
         try {
-            turno = Integer.parseInt((String) session.getAttribute("turno"));
-            estado = (String) session.getAttribute("estado");
+            turno = Integer.parseInt(session.getAttribute("turno").toString());
+            estado = session.getAttribute("estado").toString();
         } catch (Exception ex) {
             return new ModelAndView("redirect:/", map);
         }
@@ -395,7 +397,7 @@ public class main {
         String dir = "";
         String telf = "";
         try {
-            turno = (long) session.getAttribute("turno");
+            turno = Long.parseLong(session.getAttribute("turno").toString());
             estado = session.getAttribute("estado").toString();
             nombre = session.getAttribute("nombre").toString();
             apellidoP = session.getAttribute("apellidoP").toString();
@@ -798,7 +800,7 @@ public class main {
      * ESTA SECCION ES USADA PARA ACTUALIZAR LOS DATOS DE LA FAMILIA POR PARTE
      * DEL PERSONAL*
      */
-    //PROBAR
+    //LISTO
     @RequestMapping(value = "/IrPersonalFamilia", method = RequestMethod.POST)
     public ModelAndView IrPersonalFamilia_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "estado", required = false) String estado,
@@ -821,10 +823,10 @@ public class main {
         String volver = "";
         String estado = "";
         // try {
-        idFamilia = (String) session.getAttribute("idFamilia");
-        idExpediente = (String) session.getAttribute("idExpediente");
-        volver = (String) session.getAttribute("volver");
-        estado = (String) session.getAttribute("estado");
+        idFamilia = session.getAttribute("idFamilia").toString();
+        idExpediente = session.getAttribute("idExpediente").toString();
+        volver = session.getAttribute("volver").toString();
+        estado = session.getAttribute("estado").toString();
         // } catch (Exception ex) {
         //   return new ModelAndView("redirect:/inicioper", map);
         // }
@@ -1020,7 +1022,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_ella", map);
     }
 
-    //PROBAR
+    //LISTO
     @RequestMapping(value = "/IrPersonalFamilia2", method = RequestMethod.POST)
     public ModelAndView IrPersonalFamilia2_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "estado", required = false) String estado,
@@ -1061,16 +1063,16 @@ public class main {
         String tipofamilia = "";
         String estado2 = "";
 
-        idNna = (long) session.getAttribute("idNna");
-        idFamilia = (String) session.getAttribute("idFamilia");
-        idExpediente = (String) session.getAttribute("idExpediente");
-        volver = (String) session.getAttribute("volver");
-        estado = (String) session.getAttribute("estado");
-        expediente2 = (String) session.getAttribute("expediente2");
-        HT = (String) session.getAttribute("HT");
-        nacionalidad = (String) session.getAttribute("nacionalidad");
-        tipofamilia = (String) session.getAttribute("tipofamilia");
-        estado2 = (String) session.getAttribute("estado2");
+        idNna = Long.parseLong(session.getAttribute("idNna").toString());
+        idFamilia = session.getAttribute("idFamilia").toString();
+        idExpediente = session.getAttribute("idExpediente").toString();
+        volver = session.getAttribute("volver").toString();
+        estado = session.getAttribute("estado").toString();
+        expediente2 = session.getAttribute("expediente2").toString();
+        HT = session.getAttribute("HT").toString();
+        nacionalidad = session.getAttribute("nacionalidad").toString();
+        tipofamilia = session.getAttribute("tipofamilia").toString();
+        estado2 = session.getAttribute("estado2").toString();
 
         session.removeAttribute("estado");
         session.removeAttribute("idFamilia");
@@ -1300,7 +1302,7 @@ public class main {
         return new ModelAndView(pagina, map);
     }
 
-    //PROBAR
+    //LISTO*
     @RequestMapping(value = "/elSolicitante", method = RequestMethod.POST)
     public ModelAndView elSolicitante_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1314,7 +1316,7 @@ public class main {
     public ModelAndView elSolicitante_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
-        volver = (String) session.getAttribute("volver");
+        volver = session.getAttribute("volver").toString();
         session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1335,7 +1337,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_el", map);
     }
 
-    //PROBAR
+    //LISTO*
     @RequestMapping(value = "/elSolicitante2", method = RequestMethod.POST)
     public ModelAndView elSolicitante2_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1427,7 +1429,7 @@ public class main {
     public ModelAndView laSolicitante_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
-        volver = (String) session.getAttribute("volver");
+        volver = session.getAttribute("volver").toString();
         session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1573,7 +1575,7 @@ public class main {
     public ModelAndView infoExpediente_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
-        volver = (String) session.getAttribute("volver");
+        volver = session.getAttribute("volver").toString();
         session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -2047,18 +2049,18 @@ public class main {
         String obs = "";
         String volver = "";
         try {
-            personal = (long) session.getAttribute("personal");
-            fecha = (String) session.getAttribute("fecha");
-            hora = (String) session.getAttribute("hora");
-            tipo = (String) session.getAttribute("tipo");
+            personal = Long.parseLong(session.getAttribute("personal").toString());
+            fecha = session.getAttribute("fecha").toString();
+            hora = session.getAttribute("hora").toString();
+            tipo = session.getAttribute("tipo").toString();
             if (session.getAttribute("detalle") != null) {
-                detalle = (String) session.getAttribute("detalle");
+                detalle = session.getAttribute("detalle").toString();
             }
             if (session.getAttribute("obs") != null) {
-                obs = (String) session.getAttribute("obs");
+                obs = session.getAttribute("obs").toString();
             }
             if (session.getAttribute("volver") != null) {
-                volver = (String) session.getAttribute("volver");
+                volver = session.getAttribute("volver").toString();
             }
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
@@ -2163,33 +2165,33 @@ public class main {
         String tipofamilia = "";
         String volver = "";
         try {
-            personal = (long) session.getAttribute("personal");
-            fecha = (String) session.getAttribute("fecha");
-            hora = (String) session.getAttribute("hora");
-            tipo = (String) session.getAttribute("tipo");
+            personal = Long.parseLong(session.getAttribute("personal").toString());
+            fecha = session.getAttribute("fecha").toString();
+            hora = session.getAttribute("hora").toString();
+            tipo = session.getAttribute("tipo").toString();
             if (session.getAttribute("detalle") != null) {
-                detalle = (String) session.getAttribute("detalle");
+                detalle = session.getAttribute("detalle").toString();
             }
             if (session.getAttribute("obs") != null) {
-                obs = (String) session.getAttribute("obs");
+                obs = session.getAttribute("obs").toString();
             }
             if (session.getAttribute("expediente2") != null) {
-                expediente2 = (String) session.getAttribute("expediente2");
+                expediente2 = session.getAttribute("expediente2").toString();
             }
             if (session.getAttribute("HT") != null) {
-                HT = (String) session.getAttribute("HT");
+                HT = session.getAttribute("HT").toString();
             }
             if (session.getAttribute("nacionalidad") != null) {
-                nacionalidad = (String) session.getAttribute("nacionalidad");
+                nacionalidad = session.getAttribute("nacionalidad").toString();
             }
             if (session.getAttribute("estado2") != null) {
-                estado2 = (String) session.getAttribute("estado2");
+                estado2 = session.getAttribute("estado2").toString();
             }
             if (session.getAttribute("tipofamilia") != null) {
-                tipofamilia = (String) session.getAttribute("tipofamilia");
+                tipofamilia = session.getAttribute("tipofamilia").toString();
             }
             if (session.getAttribute("volver") != null) {
-                volver = (String) session.getAttribute("volver");
+                volver = session.getAttribute("volver").toString();
             }
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
@@ -2295,8 +2297,8 @@ public class main {
         String obs = "";
         String volver = "";
         try {
-            idAtencion = (long) session.getAttribute("idAtencion");
-            personal = (long) session.getAttribute("personal");
+            idAtencion = Long.parseLong(session.getAttribute("idAtencion").toString());
+            personal = Long.parseLong(session.getAttribute("personal").toString());
             fecha = (String) session.getAttribute("fecha");
             hora = (String) session.getAttribute("hora");
             tipo = (String) session.getAttribute("tipo");
@@ -2413,8 +2415,8 @@ public class main {
         String tipofamilia = "";
         String volver = "";
         try {
-            idAtencion = (long) session.getAttribute("idAtencion");
-            personal = (long) session.getAttribute("personal");
+            idAtencion = Long.parseLong(session.getAttribute("idAtencion").toString());
+            personal = Long.parseLong(session.getAttribute("personal").toString());
             fecha = (String) session.getAttribute("fecha");
             hora = (String) session.getAttribute("hora");
             tipo = (String) session.getAttribute("tipo");
@@ -2887,8 +2889,8 @@ public class main {
         nacionalidad = (String) session.getAttribute("nacionalidad");
         tipoFamilia = (String) session.getAttribute("tipoFamilia");
         tipoEspera = (String) session.getAttribute("tipoEspera");
-        unidad = (long) session.getAttribute("unidad");
-        entAsoc = (long) session.getAttribute("entAsoc");
+        unidad = Long.parseLong(session.getAttribute("unidad").toString());
+        entAsoc = Long.parseLong(session.getAttribute("entAsoc").toString());
         if (session.getAttribute("volver") != null) {
             volver = (String) session.getAttribute("volver");
         }
@@ -3636,7 +3638,7 @@ public class main {
         String fechaIngresoFicha = "";
         String entAsoc = "";
         try {
-            idFamilia = (long) session.getAttribute("idFamilia");
+            idFamilia = Long.parseLong(session.getAttribute("idFamilia").toString());
             numeroFicha = (String) session.getAttribute("numeroFicha");
             ht = (String) session.getAttribute("ht");
             exp = (String) session.getAttribute("exp");
@@ -4047,7 +4049,7 @@ public class main {
         String numAdopcion = "";
         String obs = "";
         try {
-            idExpediente = (long) session.getAttribute("idExpediente");
+            idExpediente = Long.parseLong(session.getAttribute("idExpediente").toString());
             if (session.getAttribute("nombre") != null) {
                 nombre = (String) session.getAttribute("nombre");
             }
@@ -4351,8 +4353,8 @@ public class main {
         String numAdopcion = "";
         String obs = "";
         try {
-            idNna = (long) session.getAttribute("idNna");
-            idDesig = (long) session.getAttribute("idDesi");
+            idNna = Long.parseLong(session.getAttribute("idNna").toString());
+            idDesig = Long.parseLong(session.getAttribute("idDesig").toString());
             if (session.getAttribute("nombre") != null) {
                 nombre = (String) session.getAttribute("nombre");
             }
@@ -5301,7 +5303,7 @@ public class main {
             idExpFam = (Long[]) session.getAttribute("idExpFam");
             fechaEst = (String[]) session.getAttribute("fechaEst");
             resultado = (String[]) session.getAttribute("Resultado");
-            elegido = (int) session.getAttribute("elegido");
+            elegido = Integer.parseInt(session.getAttribute("elegido").toString());
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
         }
@@ -5465,7 +5467,7 @@ public class main {
         try {
             orden = (String) session.getAttribute("orden");
             fechaSolicitud = (String) session.getAttribute("fechaSolicitud");
-            idExpFam = (long) session.getAttribute("idExpFam");
+            idExpFam = Long.parseLong(session.getAttribute("idExpFam").toString());
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
         }
@@ -5532,7 +5534,7 @@ public class main {
         try {
             orden = (String) session.getAttribute("orden");
             numDesig = (String) session.getAttribute("numDesig");
-            idExpFam = (long) session.getAttribute("idExpFam");
+            idExpFam = Long.parseLong(session.getAttribute("idExpFam").toString());
             fechaPropuesta = (String) session.getAttribute("fechaPropuesta");
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
