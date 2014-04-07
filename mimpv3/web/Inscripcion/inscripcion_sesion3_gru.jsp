@@ -61,7 +61,7 @@
         <br>  
         <br>
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-8 col-md-offset-3">
                 <form class="form-inline" action="${pageContext.servletContext.contextPath}/inscSesGrp" role="form" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)">
                     <!-- Form Name -->
                     <input hidden id="idTurno" name="idTurno" value="${turno.getIdturno()}">
@@ -435,7 +435,7 @@
                         <br>
                         <br>  
                     </div>
-                    <div class="col-md-4 col-md-offset-1">
+                    <div class="col-md-4">
                         <p class="text-left"><legend>Información Personal <br>(ELLA) </legend></p>
                         <br>
                         <!-- Text input-->
