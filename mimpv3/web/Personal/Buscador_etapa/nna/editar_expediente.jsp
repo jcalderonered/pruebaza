@@ -106,7 +106,7 @@
                     </div>
                     <div class="col-md-6 col-md-offset-1">
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/nna'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p> 
-                        <h1 align="center"><strong>Expediente del NNA</strong></h1>
+                        <h1 align="center"><strong>Expediente del NNA ${expediente == null ? nna.getNombre() : expediente.getNna().getNombre()} ${expediente == null ? nna.getApellidoP() : expediente.getNna().getApellidoP() } ${expediente == null ? nna.getApellidoM() : expediente.getNna().getApellidoM()}</strong></h1>
                         <br>
                         <c:if test="${expediente == null}">
                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearExpedienteNna" method="post">
@@ -130,9 +130,9 @@
                                     </div>
                                     <br>
                                     <div class="control-group">
-                                        <label class="control-label">Número</label>
+                                        <!--<label class="control-label">Número</label>-->
                                         <div class="controls">
-                                            <input  id="numero" name="numero" type="text" value="${expediente.getNumero()}" placeholder="" class="input-xlarge" >
+                                            <input hidden id="numero" name="numero" type="text" value="${""}" placeholder="" class="input-xlarge" >
                                         </div>
                                     </div>
                                     <br>                                
@@ -417,6 +417,7 @@
                                         </div>
                                     </div>
                                     <br>
+                                    <c:if test="${usuario.getRol() == 'DAPA'}">
                                     <h3><strong>LLenar luego que el NNA ha sido adoptado</strong></h3>
                                     <div class="control-group">
                                         <label class="control-label">Nombre Actual</label>
@@ -439,6 +440,7 @@
                                         </div>
                                     </div>
                                     <br>
+                                    </c:if>
                                     <div class="control-group">
                                         <div class="controls">
                                             <button ${usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Guardar</button>     
