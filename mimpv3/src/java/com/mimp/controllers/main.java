@@ -395,7 +395,7 @@ public class main {
         String dir = "";
         String telf = "";
         try {
-            turno = Long.parseLong(session.getAttribute("turno").toString());
+            turno = (long) session.getAttribute("turno");
             estado = session.getAttribute("estado").toString();
             nombre = session.getAttribute("nombre").toString();
             apellidoP = session.getAttribute("apellidoP").toString();
@@ -838,7 +838,7 @@ public class main {
         /*LIMPIANDO LOS ANTIGUOS VALORES DE LOS ADOPTANTES */
         Ella = new Adoptante();
         El = new Adoptante();
-        
+
         if (estado.equals("formativa")) {
             Long idFam = Long.parseLong(idFamilia);
             infoFam = ServicioMain.getInfoFamPorIdFamilia(idFam);
@@ -1061,7 +1061,7 @@ public class main {
         String tipofamilia = "";
         String estado2 = "";
 
-        idNna = Long.parseLong((String) session.getAttribute("idNna"));
+        idNna = (long) session.getAttribute("idNna");
         idFamilia = (String) session.getAttribute("idFamilia");
         idExpediente = (String) session.getAttribute("idExpediente");
         volver = (String) session.getAttribute("volver");
@@ -1093,7 +1093,7 @@ public class main {
         /*LIMPIANDO LOS ANTIGUOS VALORES DE LOS ADOPTANTES */
         Ella = new Adoptante();
         El = new Adoptante();
-        
+
         if (estado.equals("formativa")) {
             Long idFam = Long.parseLong(idFamilia);
             infoFam = ServicioMain.getInfoFamPorIdFamilia(idFam);
@@ -2047,7 +2047,7 @@ public class main {
         String obs = "";
         String volver = "";
         try {
-            personal = Long.parseLong((String) session.getAttribute("personal"));
+            personal = (long) session.getAttribute("personal");
             fecha = (String) session.getAttribute("fecha");
             hora = (String) session.getAttribute("hora");
             tipo = (String) session.getAttribute("tipo");
@@ -2095,7 +2095,7 @@ public class main {
         tempAtn.setObservacion(obs);
 
         ServicioMain.crearAtencion(tempAtn);
-        
+
         String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Agregó una nueva "
                 + "atención perteneciente a la familia con ID: " + tempFam.getIdfamilia();
         String Tipo_registro = "Personal";
@@ -2163,7 +2163,7 @@ public class main {
         String tipofamilia = "";
         String volver = "";
         try {
-            personal = Long.parseLong((String) session.getAttribute("personal"));
+            personal = (long) session.getAttribute("personal");
             fecha = (String) session.getAttribute("fecha");
             hora = (String) session.getAttribute("hora");
             tipo = (String) session.getAttribute("tipo");
@@ -2231,8 +2231,8 @@ public class main {
         tempAtn.setObservacion(obs);
 
         ServicioMain.crearAtencion(tempAtn);
-        
-         String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Agregó una nueva "
+
+        String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Agregó una nueva "
                 + "atención perteneciente a la familia con ID: " + tempFam.getIdfamilia();
         String Tipo_registro = "Personal";
 
@@ -2242,7 +2242,7 @@ public class main {
             ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
         } catch (Exception ex) {
         }
-        
+
         listaAtenciones.clear();
         listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(expediente.getFamilia().getIdfamilia());
         map.put("df", df);
@@ -2295,8 +2295,8 @@ public class main {
         String obs = "";
         String volver = "";
         try {
-            idAtencion = Long.parseLong((String) session.getAttribute("idAtencion"));
-            personal = Long.parseLong((String) session.getAttribute("personal"));
+            idAtencion = (long) session.getAttribute("idAtencion");
+            personal = (long) session.getAttribute("personal");
             fecha = (String) session.getAttribute("fecha");
             hora = (String) session.getAttribute("hora");
             tipo = (String) session.getAttribute("tipo");
@@ -2342,8 +2342,8 @@ public class main {
         tempAtn.setObservacion(obs);
 
         ServicioMain.updateAtencion(tempAtn);
-        
-         String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
+
+        String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
                 + "atención con ID: " + idAtencion;
         String Tipo_registro = "Personal";
 
@@ -2413,8 +2413,8 @@ public class main {
         String tipofamilia = "";
         String volver = "";
         try {
-            idAtencion = Long.parseLong(session.getAttribute("idAtencion").toString());
-            personal = Long.parseLong(session.getAttribute("personal").toString());
+            idAtencion = (long) session.getAttribute("idAtencion");
+            personal = (long) session.getAttribute("personal");
             fecha = (String) session.getAttribute("fecha");
             hora = (String) session.getAttribute("hora");
             tipo = (String) session.getAttribute("tipo");
@@ -2505,7 +2505,7 @@ public class main {
         tempAtn.setObservacion(obs);
 
         ServicioMain.updateAtencion(tempAtn);
-        
+
         String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
                 + "atención con ID: " + idAtencion;
         String Tipo_registro = "Personal";
@@ -2741,20 +2741,46 @@ public class main {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-
-        infoFam.setNnaIncesto(Short.parseShort(incesto));
-        infoFam.setNnaMental(Short.parseShort(mental));
-        infoFam.setNnaEpilepsia(Short.parseShort(epilepsia));
-        infoFam.setNnaAbuso(Short.parseShort(abuso));
-        infoFam.setNnaSifilis(Short.parseShort(sifilis));
-        infoFam.setNnaSeguiMedico(Short.parseShort(seguimiento));
-        infoFam.setNnaOperacion(Short.parseShort(operacion));
-        infoFam.setNnaHiperactivo(Short.parseShort(hiperactivo));
-        infoFam.setNnaEspecial(Short.parseShort(especial));
-        infoFam.setNnaEnfermo(Short.parseShort(salud));
-        infoFam.setNnaMayor(Short.parseShort(mayor));
-        infoFam.setNnaAdolescente(Short.parseShort(adolescente));
-        infoFam.setNnaHermano(Short.parseShort(hermanos));
+        if (incesto != null && !incesto.equals("")) {
+            infoFam.setNnaIncesto(Short.parseShort(incesto));
+        }
+        if (mental != null && !mental.equals("")) {
+            infoFam.setNnaMental(Short.parseShort(mental));
+        }
+        if (epilepsia != null && !epilepsia.equals("")) {
+             infoFam.setNnaEpilepsia(Short.parseShort(epilepsia));
+        }
+        if (abuso != null && !abuso.equals("")) {
+             infoFam.setNnaAbuso(Short.parseShort(abuso));
+        }
+        if (sifilis != null && !sifilis.equals("")) {
+             infoFam.setNnaSifilis(Short.parseShort(sifilis));
+        }
+        if (seguimiento != null && !seguimiento.equals("")) {
+             infoFam.setNnaSeguiMedico(Short.parseShort(seguimiento));
+        }
+        if (operacion != null && !operacion.equals("")) {
+             infoFam.setNnaOperacion(Short.parseShort(operacion));
+        }
+        if (hiperactivo != null && !hiperactivo.equals("")) {
+             infoFam.setNnaHiperactivo(Short.parseShort(hiperactivo));
+        }
+        if (especial != null && !especial.equals("")) {
+             infoFam.setNnaEspecial(Short.parseShort(especial));
+        }
+        if (salud != null && !salud.equals("")) {
+             infoFam.setNnaEnfermo(Short.parseShort(salud));
+        }
+        if (mayor != null && !mayor.equals("")) {
+              infoFam.setNnaMayor(Short.parseShort(mayor));
+        }
+        if (adolescente != null && !adolescente.equals("")) {
+              infoFam.setNnaAdolescente(Short.parseShort(adolescente));
+        }
+        if (hermanos != null && !hermanos.equals("")) {
+              infoFam.setNnaHermano(Short.parseShort(hermanos));
+        }
+        
 
         if (viajar != null && !viajar.equals("")) {
             infoFam.setPuedeViajar(Short.parseShort(viajar));
@@ -2777,7 +2803,7 @@ public class main {
         }
 
         ServicioMain.updateInfoFam(infoFam);
-        
+
         String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
                 + "información de la familia con ID: " + infoFam.getFamilia().getIdfamilia();
         String Tipo_registro = "Personal";
@@ -2849,22 +2875,23 @@ public class main {
         long unidad = 0;
         long entAsoc = 0;
         String volver = "";
+
         try {
-            htFicha = (String) session.getAttribute("htFicha");
-            nFicha = (String) session.getAttribute("nFicha");
-            fechaIngresoFicha = (String) session.getAttribute("fechaIngresoFicha");
-            ht = (String) session.getAttribute("ht");
-            numeroExp = (String) session.getAttribute("numeroExp");
-            fechaIngreso = (String) session.getAttribute("fechaIngreso");
-            tupa = (String) session.getAttribute("tupa");
-            nacionalidad = (String) session.getAttribute("nacionalidad");
-            tipoFamilia = (String) session.getAttribute("tipoFamilia");
-            tipoEspera = (String) session.getAttribute("tipoEspera");
-            unidad = Long.parseLong((String) session.getAttribute("unidad"));
-            entAsoc = Long.parseLong((String) session.getAttribute("entAsoc"));
-            if (session.getAttribute("volver") != null) {
-                volver = (String) session.getAttribute("volver");
-            }
+        htFicha = (String) session.getAttribute("htFicha");
+        nFicha = (String) session.getAttribute("nFicha");
+        fechaIngresoFicha = (String) session.getAttribute("fechaIngresoFicha");
+        ht = (String) session.getAttribute("ht");
+        numeroExp = (String) session.getAttribute("numeroExp");
+        fechaIngreso = (String) session.getAttribute("fechaIngreso");
+        tupa = (String) session.getAttribute("tupa");
+        nacionalidad = (String) session.getAttribute("nacionalidad");
+        tipoFamilia = (String) session.getAttribute("tipoFamilia");
+        tipoEspera = (String) session.getAttribute("tipoEspera");
+        unidad = (long) session.getAttribute("unidad");
+        entAsoc = (long) session.getAttribute("entAsoc");
+        if (session.getAttribute("volver") != null) {
+            volver = (String) session.getAttribute("volver");
+        }
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
         }
@@ -2926,7 +2953,7 @@ public class main {
 
         ServicioMain.updateExpFam(expediente);
         ServicioMain.updateFam(expediente.getFamilia());
-        
+
         String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
                 + "información de la familia con ID: " + expediente.getFamilia().getIdfamilia();
         String Tipo_registro = "Personal";
@@ -3067,7 +3094,7 @@ public class main {
             return new ModelAndView("login", map);
         }
 
-        if (adoptante.equals("el")) {
+        if (adoptante != null && adoptante.equals("el")) {
             El.setNombre(nombre);
             El.setApellidoP(apellidoP);
             El.setApellidoM(apellidoM);
@@ -3169,18 +3196,18 @@ public class main {
                 expediente.setExpediente(Ella.getApellidoP());
             }
             servicioEtapa.updateExpedienteFamilia(expediente);
-            
+
             String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
-                + "información del adoptante con ID: " + El.getIdadoptante();
-        String Tipo_registro = "Personal";
+                    + "información del adoptante con ID: " + El.getIdadoptante();
+            String Tipo_registro = "Personal";
 
-        try {
-            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
 
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
-        }
-            
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
             map.put("df", df);
             map.put("estado", etapaOrigen);
             map.put("infoFam", infoFam);
@@ -3188,7 +3215,7 @@ public class main {
             map.addAttribute("volver", volver);
             map.put("El", El);
             return new ModelAndView("/Personal/familia/info_el", map);
-        } else {
+        } else if (adoptante != null) {
 
             Ella.setNombre(nombre);
             Ella.setApellidoP(apellidoP);
@@ -3291,17 +3318,17 @@ public class main {
                 expediente.setExpediente(Ella.getApellidoP());
             }
             servicioEtapa.updateExpedienteFamilia(expediente);
-            
+
             String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
-                + "información del adoptante con ID: " + Ella.getIdadoptante();
-        String Tipo_registro = "Personal";
+                    + "información del adoptante con ID: " + Ella.getIdadoptante();
+            String Tipo_registro = "Personal";
 
-        try {
-            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
 
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
-        }
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
             map.put("df", df);
             map.put("estado", etapaOrigen);
             map.put("infoFam", infoFam);
@@ -3310,6 +3337,14 @@ public class main {
             map.addAttribute("volver", volver);
             return new ModelAndView("/Personal/familia/info_ella", map);
 
+        } else {
+            map.put("df", df);
+            map.put("estado", etapaOrigen);
+            map.put("infoFam", infoFam);
+            map.put("expediente", expediente);
+            map.put("Ella", Ella);
+            map.addAttribute("volver", volver);
+            return new ModelAndView("/Personal/familia/info_ella", map);
         }
 
     }
@@ -3601,7 +3636,7 @@ public class main {
         String fechaIngresoFicha = "";
         String entAsoc = "";
         try {
-            idFamilia = Long.parseLong((String) session.getAttribute("idFamilia"));
+            idFamilia = (long) session.getAttribute("idFamilia");
             numeroFicha = (String) session.getAttribute("numeroFicha");
             ht = (String) session.getAttribute("ht");
             exp = (String) session.getAttribute("exp");
@@ -4012,7 +4047,7 @@ public class main {
         String numAdopcion = "";
         String obs = "";
         try {
-            idExpediente = Long.parseLong((String) session.getAttribute("idExpediente"));
+            idExpediente = (long) session.getAttribute("idExpediente");
             if (session.getAttribute("nombre") != null) {
                 nombre = (String) session.getAttribute("nombre");
             }
@@ -4316,8 +4351,8 @@ public class main {
         String numAdopcion = "";
         String obs = "";
         try {
-            idNna = Long.parseLong((String) session.getAttribute("idNna"));
-            idDesig = Long.parseLong((String) session.getAttribute("idDesi"));
+            idNna = (long) session.getAttribute("idNna");
+            idDesig = (long) session.getAttribute("idDesi");
             if (session.getAttribute("nombre") != null) {
                 nombre = (String) session.getAttribute("nombre");
             }
@@ -4926,17 +4961,17 @@ public class main {
         for (Revision revision : allRevisiones) {
             revision.setComentarios(coments);
             ServicioMain.crearRevision(revision);
-            
+
             String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Guardó la "
-                + "revisión con número: " + numero;
-        String Tipo_registro = "Personal";
+                    + "revisión con número: " + numero;
+            String Tipo_registro = "Personal";
 
-        try {
-            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
 
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
-        }
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
         }
 
         ArrayList<Long> allID = new ArrayList();
@@ -5437,7 +5472,7 @@ public class main {
         session.removeAttribute("orden");
         session.removeAttribute("fechaSolicitud");
         session.removeAttribute("idExpFam");
-        
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -5506,7 +5541,7 @@ public class main {
         session.removeAttribute("numDesig");
         session.removeAttribute("idExpFam");
         session.removeAttribute("fechaPropuesta");
-        
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
