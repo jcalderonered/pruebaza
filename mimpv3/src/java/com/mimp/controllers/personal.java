@@ -2194,7 +2194,7 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////PERSONAL DE UA ///////////////////////////////////////////
     @RequestMapping(value = "/irListaPersonalUa", method = RequestMethod.POST)
-    public ModelAndView ListaPersonalUa_POST(ModelMap map, @RequestParam("ïdUA") int idUa, HttpSession session) {
+    public ModelAndView ListaPersonalUa_POST(ModelMap map, @RequestParam("idUA") String idUa, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -2202,7 +2202,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        session.setAttribute("ïdUA", idUa);
+        session.setAttribute("idUA", idUa);
 
         return new ModelAndView("redirect:/irListaPersonalUa", map);
     }
@@ -2216,7 +2216,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        int idUa = (int) session.getAttribute("idUa");
+        int idUa = Integer.parseInt(session.getAttribute("idUA").toString());
 
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.put("listaPersonalUa", ServicioPersonal.ListaPersonalUa(idUa));
