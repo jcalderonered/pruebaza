@@ -167,7 +167,7 @@
                                                                 <c:when test="${idGrp != grp.getIdgrupo() && idTaller != taller.getIdtaller()}">
                                                                     <tr>
                                                                         <td rowspan="${numFilasTaller}" style="vertical-align: middle;"> 
-                                                                            ${taller.getNombre()}
+                                                                            ${status1.count}
                                                                         </td>
                                                                         <td rowspan="${numFilasGrp}" style="vertical-align: middle;"> 
                                                                             ${grp.getNombre()}
