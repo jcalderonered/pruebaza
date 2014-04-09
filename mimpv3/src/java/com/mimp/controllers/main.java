@@ -2103,7 +2103,7 @@ public class main {
             return new ModelAndView("login", map);
         }
         Atencion tempAtn = new Atencion();
-        Familia tempFam = expediente.getFamilia();
+        Familia tempFam = infoFam.getFamilia();
         Personal tempPer = ServicioPersonal.getPersonal(personal);
 
         tempAtn.setFamilia(tempFam);
@@ -2132,7 +2132,7 @@ public class main {
         } catch (Exception ex) {
         }
         listaAtenciones.clear();
-        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(expediente.getFamilia().getIdfamilia());
+        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(infoFam.getFamilia().getIdfamilia());
         map.put("df", df);
         map.put("estado", etapaOrigen);
         map.put("listaAtenciones", listaAtenciones);
@@ -2238,7 +2238,7 @@ public class main {
             return new ModelAndView("login", map);
         }
         Atencion tempAtn = new Atencion();
-        Familia tempFam = expediente.getFamilia();
+        Familia tempFam = infoFam.getFamilia();
         Personal tempPer = ServicioPersonal.getPersonal(personal);
 
         tempAtn.setFamilia(tempFam);
@@ -2268,7 +2268,7 @@ public class main {
         }
 
         listaAtenciones.clear();
-        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(expediente.getFamilia().getIdfamilia());
+        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(infoFam.getFamilia().getIdfamilia());
         map.put("df", df);
         map.put("estado", etapaOrigen);
         map.put("listaAtenciones", listaAtenciones);
@@ -2377,7 +2377,7 @@ public class main {
         } catch (Exception ex) {
         }
         listaAtenciones.clear();
-        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(expediente.getFamilia().getIdfamilia());
+        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(infoFam.getFamilia().getIdfamilia());
         map.put("df", df);
         map.put("estado", etapaOrigen);
         map.put("listaAtenciones", listaAtenciones);
@@ -2540,7 +2540,7 @@ public class main {
         } catch (Exception ex) {
         }
         listaAtenciones.clear();
-        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(expediente.getFamilia().getIdfamilia());
+        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(infoFam.getFamilia().getIdfamilia());
 
         map.put(
                 "df", df);

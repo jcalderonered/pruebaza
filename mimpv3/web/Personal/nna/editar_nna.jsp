@@ -459,7 +459,7 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Observaciones</label>
+                                    <label class="control-label">Comentarios</label>
                                     <div class="controls">
                                         <textarea id="obs" name="obs" cols="25" rows="5">${nna.getObservaciones()}</textarea>
                                     </div>

@@ -406,14 +406,14 @@
                                     <div class="control-group">
                                         <label class="control-label">Diagnóstico</label>
                                         <div class="controls">
-                                            <textarea id="diagnostico" name="diagnostico" type="text" class="input-xlarge">${expediente.getComentarios()}</textarea>
+                                            <textarea id="diagnostico" name="diagnostico" type="text" class="input-xlarge">${expediente.getDiagnostico()}</textarea>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
-                                        <label class="control-label">Comentario</label>
+                                        <label class="control-label">Observaciones</label>
                                         <div class="controls">
-                                            <textarea id="comentario" name="comentario" type="text" class="input-xlarge">${expediente.getDiagnostico()}</textarea>
+                                            <textarea id="comentario" name="comentario" type="text" class="input-xlarge">${expediente.getObservaciones()}</textarea>
                                         </div>
                                     </div>
                                     <br>
