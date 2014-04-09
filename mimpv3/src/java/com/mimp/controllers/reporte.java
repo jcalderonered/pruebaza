@@ -1338,9 +1338,9 @@ public class reporte {
                     cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
                 }
                 cell = row.createCell(22);
-                cell.setCellValue(nna.getObservaciones());
+                cell.setCellValue(exp.getObservaciones());
                 cell = row.createCell(23);
-                cell.setCellValue(exp.getComentarios());
+                cell.setCellValue(nna.getObservaciones());
 
                 listaRev.clear();
                 listaRev = ServicioReporte.getRevisionExpHistorico(nna.getIdnna());
@@ -1351,10 +1351,16 @@ public class reporte {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
-                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
-                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
+                            String Solicitante = "";
+                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                                Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            }else{
+                                Solicitante = "";
+                            }
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
+                                Solicitante = Solicitante + "(nacional)";
+                            } else {
+                                Solicitante = Solicitante + "(" + rev.getNombre() + ")";
                             }
                             strSolicitantes = strSolicitantes + "\n" + Solicitante;
                         }
@@ -1691,7 +1697,7 @@ public class reporte {
                 }
                 cell = row.createCell(9);
                 try {
-                    cell.setCellValue(nna.getObservaciones());
+                    cell.setCellValue(exp.getObservaciones());
                 } catch (Exception ex) {
                 }
 
@@ -1705,12 +1711,16 @@ public class reporte {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
-                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
-                                Procedencia = Procedencia + "\n" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
-                            } else {
+                            String Solicitante = "";
+                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                                Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            }else{
+                                Solicitante = "- - -";
+                            }
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Procedencia = Procedencia + "\n" + "nacional";
+                            } else {
+                                Procedencia = Procedencia + "\n" + rev.getNombre();
                             }
                             strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
@@ -1730,12 +1740,16 @@ public class reporte {
                     for (Revision rev : listaRev) {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
-                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
-                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
-                            } else {
+                            String Solicitante = "";
+                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                                Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            }else{
+                                Solicitante = "";
+                            }
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = Solicitante + "(nacional)";
+                            } else {
+                                Solicitante = Solicitante + "(" + rev.getNombre() + ")";
                             }
                             strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
@@ -2008,7 +2022,12 @@ public class reporte {
                 }
                 cell = row.createCell(10);
                 try {
-                    cell.setCellValue(nna.getObservaciones());
+                    cell.setCellValue(exp.getDiagnostico());
+                } catch (Exception ex) {
+                }
+                cell = row.createCell(11);
+                try {
+                    cell.setCellValue(exp.getObservaciones());
                 } catch (Exception ex) {
                 }
 
@@ -2022,23 +2041,27 @@ public class reporte {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
-                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
-                                Procedencia = Procedencia + "\n" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
-                            } else {
+                            String Solicitante = "";
+                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                                Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            }else{
+                                Solicitante = "- - -";
+                            }
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Procedencia = Procedencia + "\n" + "nacional";
+                            } else {
+                                Procedencia = Procedencia + "\n" + rev.getNombre();
                             }
                             strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
                     }
 
                 }
-                cell = row.createCell(11);
-                cell.setCellValue(strFechas);
                 cell = row.createCell(12);
-                cell.setCellValue(strSolicitante);
+                cell.setCellValue(strFechas);
                 cell = row.createCell(13);
+                cell.setCellValue(strSolicitante);
+                cell = row.createCell(14);
                 cell.setCellValue(Procedencia);
                 listaRev.clear();
                 listaRev = ServicioReporte.getRevisionExpHistorico(nna.getIdnna());
@@ -2047,19 +2070,23 @@ public class reporte {
                     for (Revision rev : listaRev) {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
-                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
-                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
-                            } else {
+                            String Solicitante = "";
+                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                                Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            }else{
+                                Solicitante = "";
+                            }
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = Solicitante + "(nacional)";
+                            } else {
+                                Solicitante = Solicitante + "(" + rev.getNombre() + ")";
                             }
                             strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
                     }
 
                 }
-                cell = row.createCell(14);
+                cell = row.createCell(15);
                 cell.setCellValue(strHistorico);
 //               
                 listaEst.clear();
@@ -2093,13 +2120,13 @@ public class reporte {
                     }
 
                 }
-                cell = row.createCell(15);
-                cell.setCellValue(strPrioridad);
                 cell = row.createCell(16);
-                cell.setCellValue(strFechasEstudio);
+                cell.setCellValue(strPrioridad);
                 cell = row.createCell(17);
-                cell.setCellValue(strFamilias);
+                cell.setCellValue(strFechasEstudio);
                 cell = row.createCell(18);
+                cell.setCellValue(strFamilias);
+                cell = row.createCell(19);
                 cell.setCellValue(Procedencia);
 
                 listaEst.clear();
@@ -2122,7 +2149,7 @@ public class reporte {
                     }
 
                 }
-                cell = row.createCell(19);
+                cell = row.createCell(20);
                 cell.setCellValue(strHistorico);
 
                 listaSol.clear();
@@ -2147,11 +2174,11 @@ public class reporte {
                     }
 
                 }
-                cell = row.createCell(20);
-                cell.setCellValue(strFechas);
                 cell = row.createCell(21);
-                cell.setCellValue(strSolicitante);
+                cell.setCellValue(strFechas);
                 cell = row.createCell(22);
+                cell.setCellValue(strSolicitante);
+                cell = row.createCell(23);
                 cell.setCellValue(Procedencia);
                 listaSol.clear();
                 listaSol = ServicioReporte.getSolicitudAdopcionHistorico(nna.getIdnna());
@@ -2172,10 +2199,10 @@ public class reporte {
                     }
 
                 }
-                cell = row.createCell(23);
+                cell = row.createCell(24);
                 cell.setCellValue(strHistorico);
 
-                cell = row.createCell(24);
+                cell = row.createCell(25);
                 try {
                     cell.setCellValue(exp.getRespLegalP() + exp.getRespLegalM());
                 } catch (Exception ex) {
@@ -2186,7 +2213,7 @@ public class reporte {
                     CellStyle style = wb.createCellStyle();
                     style.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());
                     style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                    for (int j = 0; j < 25; j++) {
+                    for (int j = 0; j < 26; j++) {
                         row.getCell(j).setCellStyle(style);
                     }
 
@@ -2196,7 +2223,7 @@ public class reporte {
                     CellStyle style = wb.createCellStyle();
                     style.setFillForegroundColor(IndexedColors.ORANGE.getIndex());
                     style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                    for (int j = 0; j < 25; j++) {
+                    for (int j = 0; j < 26; j++) {
                         row.getCell(j).setCellStyle(style);
                     }
                 }
@@ -2323,7 +2350,7 @@ public class reporte {
                 }
                 cell = row.createCell(10);
                 try {
-                    cell.setCellValue(nna.getObservaciones());
+                    cell.setCellValue(exp.getObservaciones());
                 } catch (Exception ex) {
                 }
 
@@ -2337,12 +2364,16 @@ public class reporte {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
-                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
-                                Procedencia = Procedencia + "\n" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
-                            } else {
+                            String Solicitante = "";
+                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                                Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            }else{
+                                Solicitante = "- - -";
+                            }
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Procedencia = Procedencia + "\n" + "nacional";
+                            } else {
+                                Procedencia = Procedencia + "\n" + rev.getNombre();
                             }
                             strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
@@ -2362,12 +2393,16 @@ public class reporte {
                     for (Revision rev : listaRev) {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
-                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
-                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
-                            } else {
+                            String Solicitante = "";
+                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                                Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            }else{
+                                Solicitante = "";
+                            }
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = Solicitante + "(nacional)";
+                            } else {
+                                Solicitante = Solicitante + "(" + rev.getNombre() + ")";
                             }
                             strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
@@ -2644,7 +2679,7 @@ public class reporte {
                 }
                 cell = row.createCell(11);
                 try {
-                    cell.setCellValue(nna.getObservaciones());
+                    cell.setCellValue(exp.getObservaciones());
                 } catch (Exception ex) {
                 }
                 listaRev.clear();
@@ -2657,12 +2692,16 @@ public class reporte {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
-                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
-                                Procedencia = Procedencia + "\n" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
-                            } else {
+                            String Solicitante = "";
+                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                                Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            }else{
+                                Solicitante = "- - -";
+                            }
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Procedencia = Procedencia + "\n" + "nacional";
+                            } else {
+                                Procedencia = Procedencia + "\n" + rev.getNombre();
                             }
                             strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
@@ -2682,12 +2721,16 @@ public class reporte {
                     for (Revision rev : listaRev) {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
-                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
-                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
-                            } else {
+                            String Solicitante = "";
+                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                                Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            }else{
+                                Solicitante = "";
+                            }
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = Solicitante + "(nacional)";
+                            } else {
+                                Solicitante = Solicitante + "(" + rev.getNombre() + ")";
                             }
                             strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }
@@ -2960,7 +3003,7 @@ public class reporte {
                 }
                 cell = row.createCell(10);
                 try {
-                    cell.setCellValue(nna.getObservaciones());
+                    cell.setCellValue(exp.getObservaciones());
                 } catch (Exception ex) {
                 }
 
@@ -2974,12 +3017,16 @@ public class reporte {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
-                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
-                                Procedencia = Procedencia + "\n" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre();
-                            } else {
+                            String Solicitante = "";
+                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                                Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            }else{
+                                Solicitante = "- - -";
+                            }
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Procedencia = Procedencia + "\n" + "nacional";
+                            } else {
+                                Procedencia = Procedencia + "\n" + rev.getNombre();
                             }
                             strSolicitante = strSolicitante + "\n" + Solicitante;
                         }
@@ -2999,12 +3046,16 @@ public class reporte {
                     for (Revision rev : listaRev) {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
-                            String Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            if (rev.getExpedienteFamilia().getNacionalidad().equals("internacional")
-                                    && rev.getExpedienteFamilia().getFamilia().getEntidad() != null) {
-                                Solicitante = Solicitante + "(" + rev.getExpedienteFamilia().getFamilia().getEntidad().getNombre() + ")";
-                            } else {
+                            String Solicitante = "";
+                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                                Solicitante = rev.getExpedienteFamilia().getExpediente();
+                            }else{
+                                Solicitante = "";
+                            }
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = Solicitante + "(nacional)";
+                            } else {
+                                Solicitante = Solicitante + "(" + rev.getNombre() + ")";
                             }
                             strHistorico = strHistorico + "\n" + date + " - " + Solicitante;
                         }

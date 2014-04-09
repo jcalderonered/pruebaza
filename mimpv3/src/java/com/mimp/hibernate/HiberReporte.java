@@ -3391,45 +3391,29 @@ public class HiberReporte {
                 while (rs.next()) {
                     Revision tempRev = new Revision();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
-                    Familia tempFam = new Familia();
-                    Entidad tempEnt = new Entidad();
-
-                    tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
-                    tempEF.setExpediente(rs.getString("EXPEDIENTE"));
-                    tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
-
-                    tempFam.setIdfamilia(rs.getLong("IDFAMILIA"));
-                    Long idEntidad = rs.getLong("IDENTIDAD");
+                    
+                    Long idExpFam = rs.getLong("IDEXPEDIENTE_FAMILIA");
                     if (!rs.wasNull()) {
-                        String query2 = "{call RENAD_ENTIDAD(?,?)}";
+                        String query2 = "{call HE_GET_EXPEDIENTE_FAMILIA(?,?)}";
                         CallableStatement statement2 = connection.prepareCall(query2);
-                        statement2.setLong(1, idEntidad);
+                        statement2.setLong(1, idExpFam);
                         statement2.registerOutParameter(2, OracleTypes.CURSOR);
                         statement2.execute();
                         ResultSet rs2 = (ResultSet) statement2.getObject(2);
                         while (rs2.next()) {
-                            tempEnt.setIdentidad(rs2.getLong("IDENTIDAD"));
-                            tempEnt.setNombre(rs2.getString("NOMBRE"));
-                            tempEnt.setUser(rs2.getString("USER_"));
-                            tempEnt.setPass(rs2.getString("PASS"));
-                            tempEnt.setDireccion(rs2.getString("DIRECCION"));
-                            tempEnt.setTelefono(rs2.getString("TELEFONO"));
-                            tempEnt.setPais(rs2.getString("PAIS"));
-                            tempEnt.setResolAuto(rs2.getString("RESOL_AUTO"));
-                            tempEnt.setFechaResol(rs2.getDate("FECHA_RESOL"));
-                            tempEnt.setResolRenov(rs2.getString("RESOL_RENOV"));
-                            tempEnt.setFechaRenov(rs2.getDate("FECHA_RENOV"));
-                            tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
-                            tempEnt.setObs(rs2.getString("OBS"));
+                            tempEF.setIdexpedienteFamilia(rs2.getLong("IDEXPEDIENTE_FAMILIA"));
+                            tempEF.setExpediente(rs2.getString("EXPEDIENTE"));
+                            tempEF.setNacionalidad(rs2.getString("NACIONALIDAD"));                            
                         }
                         rs2.close();
                         statement2.close();
-                        tempFam.setEntidad(tempEnt);
                     }
-                    tempEF.setFamilia(tempFam);
                     tempRev.setExpedienteFamilia(tempEF);
-
+                    
                     tempRev.setFechaRevision(rs.getDate("FECHA_REVISION"));
+                    tempRev.setIdEntidad(rs.getLong("IDENTIDAD"));
+                    tempRev.setNombre(rs.getString("NOMBRE"));
+                
                     listaRev.add(tempRev);
                 }
                 rs.close();
@@ -3462,45 +3446,29 @@ public class HiberReporte {
                 while (rs.next()) {
                     Revision tempRev = new Revision();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
-                    Familia tempFam = new Familia();
-                    Entidad tempEnt = new Entidad();
-
-                    tempEF.setIdexpedienteFamilia(rs.getLong("IDEXPEDIENTE_FAMILIA"));
-                    tempEF.setExpediente(rs.getString("EXPEDIENTE"));
-                    tempEF.setNacionalidad(rs.getString("NACIONALIDAD"));
-
-                    tempFam.setIdfamilia(rs.getLong("IDFAMILIA"));
-                    Long idEntidad = rs.getLong("IDENTIDAD");
+                    
+                    Long idExpFam = rs.getLong("IDEXPEDIENTE_FAMILIA");
                     if (!rs.wasNull()) {
-                        String query2 = "{call RENAD_ENTIDAD(?,?)}";
+                        String query2 = "{call HE_GET_EXPEDIENTE_FAMILIA(?,?)}";
                         CallableStatement statement2 = connection.prepareCall(query2);
-                        statement2.setLong(1, idEntidad);
+                        statement2.setLong(1, idExpFam);
                         statement2.registerOutParameter(2, OracleTypes.CURSOR);
                         statement2.execute();
                         ResultSet rs2 = (ResultSet) statement2.getObject(2);
                         while (rs2.next()) {
-                            tempEnt.setIdentidad(rs2.getLong("IDENTIDAD"));
-                            tempEnt.setNombre(rs2.getString("NOMBRE"));
-                            tempEnt.setUser(rs2.getString("USER_"));
-                            tempEnt.setPass(rs2.getString("PASS"));
-                            tempEnt.setDireccion(rs2.getString("DIRECCION"));
-                            tempEnt.setTelefono(rs2.getString("TELEFONO"));
-                            tempEnt.setPais(rs2.getString("PAIS"));
-                            tempEnt.setResolAuto(rs2.getString("RESOL_AUTO"));
-                            tempEnt.setFechaResol(rs2.getDate("FECHA_RESOL"));
-                            tempEnt.setResolRenov(rs2.getString("RESOL_RENOV"));
-                            tempEnt.setFechaRenov(rs2.getDate("FECHA_RENOV"));
-                            tempEnt.setFechaVenc(rs2.getDate("FECHA_VENC"));
-                            tempEnt.setObs(rs2.getString("OBS"));
+                            tempEF.setIdexpedienteFamilia(rs2.getLong("IDEXPEDIENTE_FAMILIA"));
+                            tempEF.setExpediente(rs2.getString("EXPEDIENTE"));
+                            tempEF.setNacionalidad(rs2.getString("NACIONALIDAD"));                            
                         }
                         rs2.close();
                         statement2.close();
-                        tempFam.setEntidad(tempEnt);
                     }
-                    tempEF.setFamilia(tempFam);
                     tempRev.setExpedienteFamilia(tempEF);
-
+                    
                     tempRev.setFechaRevision(rs.getDate("FECHA_REVISION"));
+                    tempRev.setIdEntidad(rs.getLong("IDENTIDAD"));
+                    tempRev.setNombre(rs.getString("NOMBRE"));
+                
                     listaRev.add(tempRev);
                 }
                 rs.close();
