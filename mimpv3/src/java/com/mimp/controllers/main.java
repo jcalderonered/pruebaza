@@ -268,7 +268,7 @@ public class main {
             turno = Integer.parseInt(session.getAttribute("idTurno").toString());
         } catch (Exception ex) {
             session.removeAttribute("idTurno");
-            
+
             return new ModelAndView("redirect:/", map);
         }
         session.removeAttribute("idTurno");
@@ -822,14 +822,19 @@ public class main {
         String idExpediente = "";
         String volver = "";
         String estado = "";
-        // try {
-        idFamilia = session.getAttribute("idFamilia").toString();
-        idExpediente = session.getAttribute("idExpediente").toString();
-        volver = session.getAttribute("volver").toString();
-        estado = session.getAttribute("estado").toString();
-        // } catch (Exception ex) {
-        //   return new ModelAndView("redirect:/inicioper", map);
-        // }
+
+        if (session.getAttribute("idFamilia") != null) {
+            idFamilia = session.getAttribute("idFamilia").toString();
+        }
+        if (session.getAttribute("idExpediente") != null) {
+            idExpediente = session.getAttribute("idExpediente").toString();
+        }
+        if (session.getAttribute("volver") != null) {
+            volver = session.getAttribute("volver").toString();
+        }
+        if (session.getAttribute("estado") != null) {
+            estado = session.getAttribute("estado").toString();
+        }
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1063,21 +1068,40 @@ public class main {
         String tipofamilia = "";
         String estado2 = "";
 
-        idNna = Long.parseLong(session.getAttribute("idNna").toString());
-        idFamilia = session.getAttribute("idFamilia").toString();
-        idExpediente = session.getAttribute("idExpediente").toString();
+        if (session.getAttribute("idNna") != null) {
+            idNna = Long.parseLong(session.getAttribute("idNna").toString());
+        }
+        if (session.getAttribute("idFamilia") != null) {
+            idFamilia = session.getAttribute("idFamilia").toString();
+        }
+        if (session.getAttribute("idExpediente") != null) {
+            idExpediente = session.getAttribute("idExpediente").toString();
+        }
+        if (session.getAttribute("volver") != null) {
         volver = session.getAttribute("volver").toString();
+        }
+        if (session.getAttribute("estado") != null) {
         estado = session.getAttribute("estado").toString();
+        }
+        if (session.getAttribute("expediente2") != null) {
         expediente2 = session.getAttribute("expediente2").toString();
+        }
+        if (session.getAttribute("HT") != null) {
         HT = session.getAttribute("HT").toString();
+        }
+        if (session.getAttribute("nacionalidad") != null) {
         nacionalidad = session.getAttribute("nacionalidad").toString();
+        }
+        if (session.getAttribute("tipofamilia") != null) {
         tipofamilia = session.getAttribute("tipofamilia").toString();
+        }
+        if (session.getAttribute("estado2") != null) {
         estado2 = session.getAttribute("estado2").toString();
+        }
 
         session.removeAttribute("estado");
         session.removeAttribute("idFamilia");
         session.removeAttribute("idExpediente");
-        session.removeAttribute("volver");
         session.removeAttribute("idNna");
         session.removeAttribute("expediente2");
         session.removeAttribute("HT");
@@ -1302,7 +1326,7 @@ public class main {
         return new ModelAndView(pagina, map);
     }
 
-    //LISTO*
+    //LISTO
     @RequestMapping(value = "/elSolicitante", method = RequestMethod.POST)
     public ModelAndView elSolicitante_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1316,8 +1340,9 @@ public class main {
     public ModelAndView elSolicitante_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
+        if(session.getAttribute("volver") != null){
         volver = session.getAttribute("volver").toString();
-        session.removeAttribute("volver");
+        }
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1337,7 +1362,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_el", map);
     }
 
-    //LISTO*
+    //LISTO
     @RequestMapping(value = "/elSolicitante2", method = RequestMethod.POST)
     public ModelAndView elSolicitante2_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1384,7 +1409,6 @@ public class main {
         if (session.getAttribute("tipofamilia") != null) {
             tipofamilia = session.getAttribute("tipofamilia").toString();
         }
-        session.removeAttribute("volver");
         session.removeAttribute("expediente2");
         session.removeAttribute("estado2");
         session.removeAttribute("HT");
@@ -1415,7 +1439,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_el", map);
     }
 
-    //PROBAR
+    //LISTO
     @RequestMapping(value = "/laSolicitante", method = RequestMethod.POST)
     public ModelAndView laSolicitante_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1429,8 +1453,9 @@ public class main {
     public ModelAndView laSolicitante_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
+        if(session.getAttribute("volver") != null){
         volver = session.getAttribute("volver").toString();
-        session.removeAttribute("volver");
+        }
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1450,7 +1475,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_ella", map);
     }
 
-    //PROBAR
+    //LISTO
     @RequestMapping(value = "/laSolicitante2", method = RequestMethod.POST)
     public ModelAndView laSolicitante2_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1497,7 +1522,6 @@ public class main {
         if (session.getAttribute("estado2") != null) {
             estado2 = session.getAttribute("estado2").toString();
         }
-        session.removeAttribute("volver");
         session.removeAttribute("expediente2");
         session.removeAttribute("HT");
         session.removeAttribute("nacionalidad");
@@ -1561,7 +1585,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_vivienda", map);
     }
 
-    //PROBAR
+    //LISTO
     @RequestMapping(value = "/infoExpediente", method = RequestMethod.POST)
     public ModelAndView infoExpediente_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1575,8 +1599,9 @@ public class main {
     public ModelAndView infoExpediente_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
+        if(session.getAttribute("volver") != null){
         volver = session.getAttribute("volver").toString();
-        session.removeAttribute("volver");
+        }
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -1594,7 +1619,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_registro", map);
     }
 
-    //PROBAR
+    //LISTO
     @RequestMapping(value = "/infoExpediente2", method = RequestMethod.POST)
     public ModelAndView infoExpediente2_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1641,7 +1666,6 @@ public class main {
         if (session.getAttribute("estado2") != null) {
             estado2 = session.getAttribute("estado2").toString();
         }
-        session.removeAttribute("volver");
         session.removeAttribute("expediente2");
         session.removeAttribute("HT");
         session.removeAttribute("nacionalidad");
@@ -2071,7 +2095,6 @@ public class main {
         session.removeAttribute("tipo");
         session.removeAttribute("detalle");
         session.removeAttribute("obs");
-        session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2207,7 +2230,6 @@ public class main {
         session.removeAttribute("nacionalidad");
         session.removeAttribute("estado2");
         session.removeAttribute("tipofamilia");
-        session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2321,7 +2343,6 @@ public class main {
         session.removeAttribute("tipo");
         session.removeAttribute("detalle");
         session.removeAttribute("obs");
-        session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2735,7 +2756,6 @@ public class main {
         session.removeAttribute("genero");
         session.removeAttribute("numHijos");
         session.removeAttribute("nivel");
-        session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -2750,39 +2770,38 @@ public class main {
             infoFam.setNnaMental(Short.parseShort(mental));
         }
         if (epilepsia != null && !epilepsia.equals("")) {
-             infoFam.setNnaEpilepsia(Short.parseShort(epilepsia));
+            infoFam.setNnaEpilepsia(Short.parseShort(epilepsia));
         }
         if (abuso != null && !abuso.equals("")) {
-             infoFam.setNnaAbuso(Short.parseShort(abuso));
+            infoFam.setNnaAbuso(Short.parseShort(abuso));
         }
         if (sifilis != null && !sifilis.equals("")) {
-             infoFam.setNnaSifilis(Short.parseShort(sifilis));
+            infoFam.setNnaSifilis(Short.parseShort(sifilis));
         }
         if (seguimiento != null && !seguimiento.equals("")) {
-             infoFam.setNnaSeguiMedico(Short.parseShort(seguimiento));
+            infoFam.setNnaSeguiMedico(Short.parseShort(seguimiento));
         }
         if (operacion != null && !operacion.equals("")) {
-             infoFam.setNnaOperacion(Short.parseShort(operacion));
+            infoFam.setNnaOperacion(Short.parseShort(operacion));
         }
         if (hiperactivo != null && !hiperactivo.equals("")) {
-             infoFam.setNnaHiperactivo(Short.parseShort(hiperactivo));
+            infoFam.setNnaHiperactivo(Short.parseShort(hiperactivo));
         }
         if (especial != null && !especial.equals("")) {
-             infoFam.setNnaEspecial(Short.parseShort(especial));
+            infoFam.setNnaEspecial(Short.parseShort(especial));
         }
         if (salud != null && !salud.equals("")) {
-             infoFam.setNnaEnfermo(Short.parseShort(salud));
+            infoFam.setNnaEnfermo(Short.parseShort(salud));
         }
         if (mayor != null && !mayor.equals("")) {
-              infoFam.setNnaMayor(Short.parseShort(mayor));
+            infoFam.setNnaMayor(Short.parseShort(mayor));
         }
         if (adolescente != null && !adolescente.equals("")) {
-              infoFam.setNnaAdolescente(Short.parseShort(adolescente));
+            infoFam.setNnaAdolescente(Short.parseShort(adolescente));
         }
         if (hermanos != null && !hermanos.equals("")) {
-              infoFam.setNnaHermano(Short.parseShort(hermanos));
+            infoFam.setNnaHermano(Short.parseShort(hermanos));
         }
-        
 
         if (viajar != null && !viajar.equals("")) {
             infoFam.setPuedeViajar(Short.parseShort(viajar));
@@ -2879,21 +2898,21 @@ public class main {
         String volver = "";
 
         try {
-        htFicha = (String) session.getAttribute("htFicha");
-        nFicha = (String) session.getAttribute("nFicha");
-        fechaIngresoFicha = (String) session.getAttribute("fechaIngresoFicha");
-        ht = (String) session.getAttribute("ht");
-        numeroExp = (String) session.getAttribute("numeroExp");
-        fechaIngreso = (String) session.getAttribute("fechaIngreso");
-        tupa = (String) session.getAttribute("tupa");
-        nacionalidad = (String) session.getAttribute("nacionalidad");
-        tipoFamilia = (String) session.getAttribute("tipoFamilia");
-        tipoEspera = (String) session.getAttribute("tipoEspera");
-        unidad = Long.parseLong(session.getAttribute("unidad").toString());
-        entAsoc = Long.parseLong(session.getAttribute("entAsoc").toString());
-        if (session.getAttribute("volver") != null) {
-            volver = (String) session.getAttribute("volver");
-        }
+            htFicha = (String) session.getAttribute("htFicha");
+            nFicha = (String) session.getAttribute("nFicha");
+            fechaIngresoFicha = (String) session.getAttribute("fechaIngresoFicha");
+            ht = (String) session.getAttribute("ht");
+            numeroExp = (String) session.getAttribute("numeroExp");
+            fechaIngreso = (String) session.getAttribute("fechaIngreso");
+            tupa = (String) session.getAttribute("tupa");
+            nacionalidad = (String) session.getAttribute("nacionalidad");
+            tipoFamilia = (String) session.getAttribute("tipoFamilia");
+            tipoEspera = (String) session.getAttribute("tipoEspera");
+            unidad = Long.parseLong(session.getAttribute("unidad").toString());
+            entAsoc = Long.parseLong(session.getAttribute("entAsoc").toString());
+            if (session.getAttribute("volver") != null) {
+                volver = (String) session.getAttribute("volver");
+            }
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
         }
@@ -2909,7 +2928,6 @@ public class main {
         session.removeAttribute("tipoEspera");
         session.removeAttribute("unidad");
         session.removeAttribute("entAsoc");
-        session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -3087,7 +3105,6 @@ public class main {
         session.removeAttribute("correo");
         session.removeAttribute("estadoCivil");
         session.removeAttribute("fechaMat");
-        session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
@@ -3779,7 +3796,6 @@ public class main {
             return new ModelAndView("redirect:/inicioper", map);
         }
         session.removeAttribute("newpass");
-        session.removeAttribute("volver");
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         String mensaje = "";
@@ -5077,7 +5093,7 @@ public class main {
         String orden = null;
         String agregar = null;
         String eliminar = null;
-        String registrar= null;
+        String registrar = null;
         Long[] delete = null;
         Long[] prioridad = null;
         Long[] idNna = null;
