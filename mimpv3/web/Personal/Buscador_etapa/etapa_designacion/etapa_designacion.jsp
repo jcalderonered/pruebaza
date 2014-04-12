@@ -213,6 +213,7 @@
                             <table class="table table-bordered" id="mi_tabla">
                                 <thead>
                                     <tr>
+                                        <th>ITEM</th>
                                         <th>Expediente</th>
                                         <th>Información</th>
                                         <th>Nombre del(los) NNA(s)</th>
@@ -234,15 +235,6 @@
                                                     <c:set var="token" value="${designacion.getNna().getIdnna()}"/>
                                                     <c:set var="numDesig" value="${designacion.getNDesignacion()}"/>                                                    
                                                     <tr>
-                                                        <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
-                                                        <td>
-                                                            <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
-                                                                <input hidden name="estado" id="estado" value="designacion">
-                                                                <input hidden name="idExpediente" id="idExpediente" value="${designacion.getExpedienteFamilia().getIdexpedienteFamilia()}">
-                                                                <input hidden name="volver" id="volver" value="${volver}">
-                                                                <button ${perteneceUA == 0 ? '' : 'disabled'} type="submit" class="btn btn-default">Ver</button>
-                                                            </form>
-                                                        </td>
                                                         <c:choose>
                                                             <c:when test="${designacion.getTipoPropuesta() == 'dupla'}">
                                                                 <c:set var="numFilas" value="2"/>
@@ -254,6 +246,18 @@
                                                                 <c:set var="numFilas" value="1"/>
                                                             </c:otherwise>
                                                         </c:choose>
+                                                        <td rowspan="${numFilas}" style="vertical-align: middle;" >
+                                                            ${designacion.getNDesignacion()}
+                                                        </td>
+                                                        <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
+                                                                <input hidden name="estado" id="estado" value="designacion">
+                                                                <input hidden name="idExpediente" id="idExpediente" value="${designacion.getExpedienteFamilia().getIdexpedienteFamilia()}">
+                                                                <input hidden name="volver" id="volver" value="${volver}">
+                                                                <button ${perteneceUA == 0 ? '' : 'disabled'} type="submit" class="btn btn-default">Ver</button>
+                                                            </form>
+                                                        </td>                                                        
                                                         <td rowspan="${numFilas}" style="vertical-align: middle;" >   
                                                             <c:forEach var="temp" items="${listaDesignaciones}" varStatus="status">
                                                                 <c:if test="${designacion.getNDesignacion() == temp.getNDesignacion()
@@ -280,6 +284,11 @@
                                                 <c:otherwise>
                                                     <c:set var="numFilas" value="${numFilas - 1}"/>
                                                     <tr>
+                                                        <c:if test="${(status.count mod 8) == 1}"> <!-- mod X donde X es el número de filas por página -->
+                                                            <td rowspan="${numFilas}" style="vertical-align: middle;"> 
+                                                                ${designacion.getNDesignacion()}
+                                                            </td>  
+                                                        </c:if>
                                                         <td>${designacion.getExpedienteFamilia().getExpediente()}</td>
                                                         <td>
                                                             <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
