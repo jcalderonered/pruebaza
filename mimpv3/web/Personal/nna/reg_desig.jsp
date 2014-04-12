@@ -189,6 +189,8 @@
                                 </div>
                             </div>
                             <br>
+                            <h3><strong>ASEGÚRESE QUE EL NÚMERO DE DESIGNACIÓN INCLUYA LA FECHA DE LA PROPUESTA(EJM: 1 - 03/04/2014)</strong></h3>
+                            <br>
                             <div class="control-group">
                                 <label class="control-label">N° de Designación</label>
                                 <div class="controls">

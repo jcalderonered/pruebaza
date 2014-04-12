@@ -321,7 +321,7 @@ public class mainEtapas {
 
             String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                     + " con ID: " + usuario.getIdpersonal() + ". Agregó una Evaluación Psicologica a la familia con ID Expediente"
-                    + ": " + session.getAttribute("idExpediente") ;
+                    + ": " + session.getAttribute("idExpediente");
 
             String Tipo_registro = "Familia";
 
@@ -470,10 +470,10 @@ public class mainEtapas {
             evalPsicologica.setObservacion((String) session.getAttribute("obs"));
 
             servicioEtapa.updateEvaluacion(evalPsicologica);
-            
-             String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+
+            String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                     + " con ID: " + usuario.getIdpersonal() + ". Editó la Evaluación Psicologica a la familia con ID Expediente"
-                    + ": " + session.getAttribute("idExpediente") ;
+                    + ": " + session.getAttribute("idExpediente");
 
             String Tipo_registro = "Familia";
 
@@ -483,7 +483,7 @@ public class mainEtapas {
                 ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
             } catch (Exception ex) {
             }
-            
+
             String origen = (String) session.getAttribute("origen");
             if (origen.equals("nacional")) {
 
@@ -693,10 +693,10 @@ public class mainEtapas {
             tempEval.setTipo("social");
 
             servicioEtapa.crearEvaluacion(tempEval);
-            
+
             String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                     + " con ID: " + usuario.getIdpersonal() + ". Creó la Evaluación Social a la familia con ID Expediente"
-                    + ": " + session.getAttribute("idExpediente") ;
+                    + ": " + session.getAttribute("idExpediente");
 
             String Tipo_registro = "Familia";
 
@@ -706,7 +706,7 @@ public class mainEtapas {
                 ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
             } catch (Exception ex) {
             }
-            
+
             String origen = (String) session.getAttribute("origen");
             if (origen.equals("nacional")) {
 
@@ -846,10 +846,10 @@ public class mainEtapas {
             evalSocial.setObservacion((String) session.getAttribute("obs"));
 
             servicioEtapa.updateEvaluacion(evalSocial);
-            
+
             String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                     + " con ID: " + usuario.getIdpersonal() + ". Editó la Evaluación Social a la familia con ID Expediente"
-                    + ": " + session.getAttribute("idExpediente") ;
+                    + ": " + session.getAttribute("idExpediente");
 
             String Tipo_registro = "Familia";
 
@@ -859,7 +859,7 @@ public class mainEtapas {
                 ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
             } catch (Exception ex) {
             }
-            
+
             String origen = (String) session.getAttribute("origen");
             if (origen.equals("nacional")) {
 
@@ -1066,10 +1066,10 @@ public class mainEtapas {
             tempEval.setTipo("legal");
 
             servicioEtapa.crearEvaluacion(tempEval);
-            
+
             String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                     + " con ID: " + usuario.getIdpersonal() + ". Creó la Evaluación Legal a la familia con ID Expediente"
-                    + ": " + session.getAttribute("idExpediente") ;
+                    + ": " + session.getAttribute("idExpediente");
 
             String Tipo_registro = "Familia";
 
@@ -1079,7 +1079,7 @@ public class mainEtapas {
                 ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
             } catch (Exception ex) {
             }
-            
+
             String origen = (String) session.getAttribute("origen");
             if (origen.equals("nacional")) {
 
@@ -1219,10 +1219,10 @@ public class mainEtapas {
             evalLegal.setObservacion((String) session.getAttribute("obs"));
 
             servicioEtapa.updateEvaluacion(evalLegal);
-            
-             String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+
+            String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                     + " con ID: " + usuario.getIdpersonal() + ". Editó la Evaluación Legal a la familia con ID Expediente"
-                    + ": " + session.getAttribute("idExpediente") ;
+                    + ": " + session.getAttribute("idExpediente");
 
             String Tipo_registro = "Familia";
 
@@ -1476,10 +1476,10 @@ public class mainEtapas {
              }*/
 
             servicioEtapa.crearResolEvaluacion(tempResol);
-            
-             String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+
+            String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                     + " con ID: " + usuario.getIdpersonal() + ". Creó la Resolucion de Evaluación con ID"
-                    + ": " + tempResol.getIdresolucion() ;
+                    + ": " + tempResol.getIdresolucion();
 
             String Tipo_registro = "Familia";
 
@@ -1489,7 +1489,7 @@ public class mainEtapas {
                 ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
             } catch (Exception ex) {
             }
-            
+
             tempEval = servicioEtapa.getLegal((long) session.getAttribute("idLegal"));
             String tipo = (String) session.getAttribute("tipo");
             String tipoEspera = (String) session.getAttribute("tipoEspera");
@@ -1629,10 +1629,10 @@ public class mainEtapas {
              }*/
 
             servicioEtapa.updateResolEvaluacion(tempResol);
-            
+
             String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                     + " con ID: " + usuario.getIdpersonal() + ". Editó la Resolución con ID"
-                    + ": " + session.getAttribute("idResolucion") ;
+                    + ": " + session.getAttribute("idResolucion");
 
             String Tipo_registro = "Familia";
 
@@ -1642,7 +1642,7 @@ public class mainEtapas {
                 ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
             } catch (Exception ex) {
             }
-            
+
             tempResol = servicioEtapa.getResolucion((long) session.getAttribute("idResolucion"));
             String tipo = (String) session.getAttribute("tipo");
             if (tipo != null && tipo.equals("apto")) {
@@ -1919,19 +1919,18 @@ public class mainEtapas {
                 java.sql.Date sql = new java.sql.Date(ahora.getTime());
                 tempExpNna.setFechaEstado(sql);
                 ServicioNna.updateExpNna(tempExpNna);
-                
+
                 String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Insertó una nueva designación en el sistema.";
+                        + " con ID: " + usuario.getIdpersonal() + ". Insertó una nueva designación en el sistema.";
 
-            String Tipo_registro = "Personal";
+                String Tipo_registro = "Personal";
 
-            try {
-                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+                try {
+                    String Numero_registro = String.valueOf(usuario.getIdpersonal());
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
-            
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
+                }
 
             }
             session.removeAttribute("idExpediente");
@@ -2615,7 +2614,7 @@ public class mainEtapas {
 //                servicioEtapa.updateExpedienteFamilia(tempExpFam);
 //                servicioEtapa.updateDesignacion(tempDesg);
 //            }
-            map.put("listaAdopciones", servicioEtapa.getListaAdopciones());
+            //map.put("listaAdopciones", servicioEtapa.getListaAdopciones());
             map.addAttribute("volver", volver);
 
             session.removeAttribute("numDesig");
@@ -2625,7 +2624,8 @@ public class mainEtapas {
             session.removeAttribute("obs");
             session.removeAttribute("volver");
 
-            return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/etapa_adopcion", map);
+            map.put("listaDesignaciones", servicioEtapa.getListaDesignaciones());
+            return new ModelAndView("/Personal/Buscador_etapa/etapa_designacion/etapa_designacion", map);
         }
 
         session.removeAttribute("numDesig");
@@ -2659,6 +2659,328 @@ public class mainEtapas {
 
     }
 
+    //CAMBIOS AL 12/04/2014
+    @RequestMapping(value = "/evalAceptacion", method = RequestMethod.POST)
+    public ModelAndView evalAceptacion_POST(ModelMap map, HttpSession session,
+            @RequestParam("idExpediente") long idExpediente,
+            @RequestParam("respuesta") String respuesta
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        session.setAttribute("idExpediente", idExpediente);
+        session.setAttribute("respuesta", respuesta);
+
+        return new ModelAndView("redirect:/evalAceptacion", map);
+
+    }
+
+    @RequestMapping(value = "/evalAceptacion", method = RequestMethod.GET)
+    public ModelAndView evalAceptacion_GET(ModelMap map, HttpSession session
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        if (session.getAttribute("idExpediente") != null && session.getAttribute("respuesta") != null) {
+            long idExpediente = (long) session.getAttribute("idExpediente");
+            String respuesta = (String) session.getAttribute("respuesta");
+
+            ExpedienteFamilia EF = new ExpedienteFamilia();
+            Personal tempP = new Personal();
+            EF = servicioEtapa.getExpedienteFamilia(idExpediente);
+            tempP = ServicioPersonal.getPersonal(usuario.getIdpersonal());
+            Evaluacion tempEval = new Evaluacion();
+            tempEval.setExpedienteFamilia(EF);
+            tempEval.setPersonal(tempP);
+            tempEval.setTipo("aceptacion");
+            tempEval.setResultado(respuesta);
+            Date tempfecha = new Date();
+            java.sql.Date sql = new java.sql.Date(tempfecha.getTime());
+            tempEval.setFechaResultado(sql);
+
+            /*if (fechaEval != null && !fechaEval.equals("")) {
+             tempEval.setFechaResultado(df.stringToDate(fechaEval));
+             }
+             if (fechaEval == null || fechaEval.equals("")) {
+             tempEval.setFechaResultado(null);
+             }*/
+            tempEval.setNumEval(null);
+            tempEval.setObservacion(null);
+            tempEval.setPersInt(null);
+            long numPers = 0;
+            tempEval.setNumPersInt(numPers);
+
+            servicioEtapa.crearEvaluacionAdopcion(tempEval);
+
+            String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ". Creó una Evaluación de adopción para el expediente"
+                    + " con ID: " + session.getAttribute("idExpediente");
+
+            String Tipo_registro = "Familia";
+
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            session.removeAttribute("idExpediente");
+            session.removeAttribute("respuesta");
+//        map.put("listaAdopciones", servicioEtapa.getListaAdopciones());
+//        return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/etapa_adopcion", map);
+            return new ModelAndView("redirect:/EtapaAdopcion");
+        } else {
+            return new ModelAndView("redirect:/EtapaAdopcion");
+        }
+
+    }
+
+    @RequestMapping(value = "/resolEvalAceptacion", method = RequestMethod.POST)
+    public ModelAndView resolEvalAceptacion_POST(ModelMap map, HttpSession session,
+            @RequestParam("familia") String familia,
+            @RequestParam("idNna") long idNna,
+            @RequestParam("idAceptacion") String idAceptacion,
+            @RequestParam("numDesig") String numDesig
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        session.setAttribute("familia", familia);
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("idAceptacion", idAceptacion);
+        session.setAttribute("numDesig", numDesig);
+
+        return new ModelAndView("redirect:/resolEvalAceptacion", map);
+
+    }
+
+    @RequestMapping(value = "/resolEvalAceptacion", method = RequestMethod.GET)
+    public ModelAndView resolEvalAceptacion_GET(ModelMap map, HttpSession session
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        if (session.getAttribute("familia") != null && session.getAttribute("idNna") != null
+                && session.getAttribute("idAceptacion") != null
+                && session.getAttribute("numDesig") != null) {
+            String familia = (String) session.getAttribute("familia");
+            long idNna = (long) session.getAttribute("idNna");
+            String idAceptacion = (String) session.getAttribute("idAceptacion");
+            String numDesig = (String) session.getAttribute("numDesig");
+
+            Evaluacion tempEval = new Evaluacion();
+            if (!idAceptacion.equals("")) {
+                long temp = Long.parseLong(idAceptacion);
+                if (servicioEtapa.getResolucion2(temp) != null) {
+                    Resolucion tempResol = servicioEtapa.getResolucion2(temp);
+                    map.put("resolucion", tempResol);
+                }
+            }
+            map.put("numDesig", numDesig);
+            map.put("idAceptacion", idAceptacion);
+            map.put("idNna", idNna);
+            map.put("familia", familia);
+            map.put("df", df);
+
+            session.removeAttribute("familia");
+            session.removeAttribute("idAceptacion");
+            session.removeAttribute("numDesig");
+            session.removeAttribute("idNna");
+
+            return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/reg_resol_acep", map);
+        } else {
+            return new ModelAndView("redirect:/EtapaAdopcion");
+        }
+    }
+
+    @RequestMapping(value = "/crearResolAceptacion", method = RequestMethod.POST)
+    public ModelAndView crearResolAceptacion_POST(ModelMap map, HttpSession session,
+            @RequestParam("idNna") long idNna,
+            @RequestParam("idAceptacion") long idAceptacion,
+            @RequestParam("numDesig") String numDesig,
+            @RequestParam("numResol") String numResol,
+            @RequestParam("tipo") String tipo,
+            @RequestParam("fechaResol") String fechaResol
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("idAceptacion", idAceptacion);
+        session.setAttribute("numDesig", numDesig);
+        session.setAttribute("numResol", numResol);
+        session.setAttribute("tipo", tipo);
+        session.setAttribute("fechaResol", fechaResol);
+
+        return new ModelAndView("redirect:/crearResolAceptacion", map);
+
+    }
+
+    @RequestMapping(value = "/crearResolAceptacion", method = RequestMethod.GET)
+    public ModelAndView crearResolAceptacion_GET(ModelMap map, HttpSession session
+    ) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        if (session.getAttribute("idAceptacion") != null && session.getAttribute("idNna") != null) {
+            
+            long idAceptacion = (long) session.getAttribute("idAceptacion");
+            long idNna = (long) session.getAttribute("idNna");
+            String numDesig = (String) session.getAttribute("numDesig");
+            String numResol = (String) session.getAttribute("numResol");
+            String fechaResol = (String) session.getAttribute("fechaResol");
+            String tipo = (String) session.getAttribute("tipo");
+            
+            Evaluacion tempEval = new Evaluacion();
+            tempEval = servicioEtapa.getEvaluacion2(idAceptacion);
+            Designacion tempDesig = new Designacion();
+            tempDesig = servicioEtapa.getDesignacion(tempEval.getExpedienteFamilia().getIdexpedienteFamilia(), idNna);
+
+            ArrayList<Nna> allNna = new ArrayList();
+            ArrayList<Designacion> allDesignaciones = new ArrayList();
+            long idN = 0;
+            allDesignaciones = servicioEtapa.getListaDesignacionesEstadoAdopcion(numDesig);
+            for (Designacion desig : allDesignaciones) {
+                if (desig.getNna().getIdnna() != idN) {
+                    allNna.add(desig.getNna());
+                    idN = desig.getNna().getIdnna();
+                }
+            }
+            
+                if (tipo.equals("sinefecto")) {
+                    if (allNna.size() > 1) {
+                        servicioEtapa.deleteEvaluacion(tempEval);
+                        ExpedienteFamilia tempExpFam = tempEval.getExpedienteFamilia();
+                        tempExpFam.setEstado("reevaluacion");
+                        servicioEtapa.updateExpedienteFamilia(tempExpFam);
+                        for (Nna tempNna : allNna) {
+                            ExpedienteNna ExpNna = ServicioNna.getExpNna(tempNna.getIdnna());
+                            ExpNna.setEstado("adoptable");
+                            Date ahora = new Date();
+                            java.sql.Date sql = new java.sql.Date(ahora.getTime());
+                            ExpNna.setFechaEstado(sql);
+                            ServicioNna.updateExpNna(ExpNna);
+                            tempDesig = servicioEtapa.getDesignacion(tempEval.getExpedienteFamilia().getIdexpedienteFamilia(), tempNna.getIdnna());
+                            tempDesig.setAceptacionConsejo(Short.parseShort("3"));
+                            servicioEtapa.updateDesignacion(tempDesig);
+
+                        }
+
+                    } else {
+                        servicioEtapa.deleteEvaluacion(tempEval);
+                        ExpedienteFamilia tempExpFam = tempEval.getExpedienteFamilia();
+                        tempExpFam.setEstado("reevaluacion");
+                        servicioEtapa.updateExpedienteFamilia(tempExpFam);
+                        tempDesig.setAceptacionConsejo(Short.parseShort("3"));
+                        servicioEtapa.updateDesignacion(tempDesig);
+                        if (tempDesig.getTipoPropuesta().equals("directa")) {
+                            ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
+                            ExpNna.setEstado("adoptable");
+                            Date ahora = new Date();
+                            ExpNna.setFechaEstado(ahora);
+                            ServicioNna.updateExpNna(ExpNna);
+                        }
+                        if (tempDesig.getTipoPropuesta().equals("dupla") && tempDesig.getPrioridad() == 2) {
+                            ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
+                            ExpNna.setEstado("adoptable");
+                            Date ahora = new Date();
+                            ExpNna.setFechaEstado(ahora);
+                            ServicioNna.updateExpNna(ExpNna);
+                        }
+                        if (tempDesig.getTipoPropuesta().equals("terna") && tempDesig.getPrioridad() == 3) {
+                            ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
+                            ExpNna.setEstado("adoptable");
+                            Date ahora = new Date();
+                            ExpNna.setFechaEstado(ahora);
+                            ServicioNna.updateExpNna(ExpNna);
+                        }
+                    }
+                } else {
+                    Resolucion tempResol = new Resolucion();
+                    tempResol.setEvaluacion(tempEval);
+                    tempResol.setNumero(numResol);
+                    tempResol.setTipo(tipo);
+                    Date tempfecha = tempResol.getFechaResol();
+                    if (fechaResol != null) {
+                        if (fechaResol.contains("ene") || fechaResol.contains("feb") || fechaResol.contains("mar") || fechaResol.contains("abr")
+                                || fechaResol.contains("may") || fechaResol.contains("jun") || fechaResol.contains("jul") || fechaResol.contains("ago")
+                                || fechaResol.contains("set") || fechaResol.contains("oct") || fechaResol.contains("nov") || fechaResol.contains("dic")) {
+                            tempResol.setFechaResol(tempfecha);
+                        } else {
+                            if (!fechaResol.equals("")) {
+                                tempResol.setFechaResol(df.stringToDate(fechaResol));
+                            } else {
+                                tempResol.setFechaResol(null);
+                            }
+                        }
+                    } else {
+                        tempResol.setFechaResol(null);
+                    }
+                    /*if (fechaResol != null && !fechaResol.equals("")) {
+                     tempResol.setFechaResol(df.stringToDate(fechaResol));
+                     }
+                     if (fechaResol == null || fechaResol.equals("")) {
+                     tempResol.setFechaResol(null);
+                     }*/
+                    servicioEtapa.crearResolEvaluacion(tempResol);
+
+                    String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                            + " con ID: " + usuario.getIdpersonal() + ". Creó la Resolución de evaluación con ID"
+                            + ": " + session.getAttribute("idEmpatia");
+
+                    String Tipo_registro = "Familia";
+
+                    try {
+                        String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                    } catch (Exception ex) {
+                    }
+
+                }
+                
+                
+                session.removeAttribute("idAceptacion");
+                session.removeAttribute("idNna");
+                session.removeAttribute("numDesig");
+                session.removeAttribute("numResol");
+                session.removeAttribute("fechaResol");
+                session.removeAttribute("tipo");
+
+//        map.put("listaAdopciones", servicioEtapa.getListaAdopciones());
+//        return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/etapa_adopcion", map);
+            return new ModelAndView("redirect:/EtapaAdopcion");
+        } else {
+            return new ModelAndView("redirect:/EtapaAdopcion");
+        }
+
+    }
+
+    // FINAL DE CAMBIOS
     @RequestMapping(value = "/evalEmpatia", method = RequestMethod.POST)
     public ModelAndView evalEmpatia_POST(ModelMap map, HttpSession session,
             @RequestParam("idExpediente") long idExpediente,
@@ -2776,20 +3098,19 @@ public class mainEtapas {
             tempEval.setNumPersInt(temp);
         }
         servicioEtapa.crearEvaluacionAdopcion(tempEval);
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Creó una Evaluación de adopción para el expediente"
-                + " con ID: " + session.getAttribute("idExpediente") ;
+                + " con ID: " + usuario.getIdpersonal() + ". Creó una Evaluación de adopción para el expediente"
+                + " con ID: " + session.getAttribute("idExpediente");
 
-            String Tipo_registro = "Familia";
+        String Tipo_registro = "Familia";
 
-            try {
-                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
-            
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
 //        map.put("listaAdopciones", servicioEtapa.getListaAdopciones());
 //        return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/etapa_adopcion", map);
@@ -3031,20 +3352,19 @@ public class mainEtapas {
                  tempResol.setFechaResol(null);
                  }*/
                 servicioEtapa.crearResolEvaluacion(tempResol);
-                
+
                 String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Creó la Resolución de evaluación con ID"
-                    + ": " + session.getAttribute("idEmpatia") ;
+                        + " con ID: " + usuario.getIdpersonal() + ". Creó la Resolución de evaluación con ID"
+                        + ": " + session.getAttribute("idEmpatia");
 
-            String Tipo_registro = "Familia";
+                String Tipo_registro = "Familia";
 
-            try {
-                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+                try {
+                    String Numero_registro = String.valueOf(usuario.getIdpersonal());
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
-            
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
+                }
 
             }
 
@@ -3174,19 +3494,19 @@ public class mainEtapas {
             tempEval.setNumPersInt(temp);
         }
         servicioEtapa.crearEvaluacionAdopcion(tempEval);
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Creó evaluación de adopción en el expediente con ID"
-                    + ": " + session.getAttribute("idExpediente") ;
+                + " con ID: " + usuario.getIdpersonal() + ". Creó evaluación de adopción en el expediente con ID"
+                + ": " + session.getAttribute("idExpediente");
 
-            String Tipo_registro = "Personal";
+        String Tipo_registro = "Personal";
 
-            try {
-                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
 
 //        map.put("listaAdopciones", servicioEtapa.getListaAdopciones());
 //        return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/etapa_adopcion", map);
@@ -3246,7 +3566,7 @@ public class mainEtapas {
             if (!idInforme.equals("")) {
                 long temp = Long.parseLong(idInforme);
                 if (servicioEtapa.getResolucion2(temp) != null) {
-                    Resolucion tempResol = servicioEtapa.getResolucion(temp);
+                    Resolucion tempResol = servicioEtapa.getResolucion2(temp);
                     map.put("resolucion", tempResol);
                 }
             }
@@ -4259,18 +4579,18 @@ public class mainEtapas {
                 tempPostAdopcion = servicioEtapa.getPostAdopcion(idPost);
                 tempPost.setPostAdopcion(tempPostAdopcion);
                 servicioEtapa.crearInformePost(tempPost);
-                
+
                 String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Creó informe Post Adopción." ;
+                        + " con ID: " + usuario.getIdpersonal() + ". Creó informe Post Adopción.";
 
-            String Tipo_registro = "Familia";
+                String Tipo_registro = "Familia";
 
-            try {
-                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+                try {
+                    String Numero_registro = String.valueOf(usuario.getIdpersonal());
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
+                }
             }
 
             ArrayList<InformePostAdoptivo> allInformePostAdoptivo = new ArrayList<InformePostAdoptivo>(numInformes);
@@ -4539,7 +4859,7 @@ public class mainEtapas {
             servicioEtapa.updateExpedienteFamilia(tempExp);
             String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                     + " con ID: " + usuario.getIdpersonal() + ". Eliminó registro ligado al expediente con ID"
-                    + ": " + session.getAttribute("idExpediente") ;
+                    + ": " + session.getAttribute("idExpediente");
 
             String Tipo_registro = "Personal";
 
@@ -4549,7 +4869,7 @@ public class mainEtapas {
                 ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
             } catch (Exception ex) {
             }
-            
+
             map.put("df", df);
             map.put("listaReevaluacion", servicioEtapa.getListaReevaluación());
             map.put("df", df);

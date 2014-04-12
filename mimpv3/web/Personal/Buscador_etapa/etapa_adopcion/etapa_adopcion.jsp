@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -175,7 +175,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                              <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -186,7 +186,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI")|| u.getRol().equals("DEIA Prio")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
@@ -217,6 +217,8 @@
                                         <th>N° Propuesta</th>
                                         <th>Prioridad</th>
                                         <th>Nombres del NNA</th>
+                                        <th>Acepta la Designación</th>
+                                        <th>En caso de no aceptar la Designación</th>
                                         <th>Informe de Empatía</th>
                                         <th>Resultado</th>
                                         <th>Resolución</th>
@@ -253,7 +255,7 @@
                                                         <c:forEach var="adopcion2" items="${listaAdopciones}" varStatus="status">
                                                             <c:choose>
                                                                 <c:when test="${adopcion.getTipoPropuesta() != 'directa'
-                                                                              && adopcion.getNDesignacion() == adopcion2.getNDesignacion()}">
+                                                                                && adopcion.getNDesignacion() == adopcion2.getNDesignacion()}">
                                                                     <c:set var="numFilas" value="${numFilas + 1}"/>
                                                                 </c:when>
                                                                 <c:when test="${adopcion.getTipoPropuesta() == 'directa'}">
@@ -279,6 +281,9 @@
                                                         <c:set var="expediente" value="${adopcion.getExpedienteFamilia()}"/> 
                                                         <c:forEach var="evaluacion" items="${expediente.getEvaluacions()}" >
                                                             <c:choose>
+                                                                <c:when test="${evaluacion.getTipo() == 'aceptacion'}">
+                                                                    <c:set var="aceptacion" value="${evaluacion}" scope="page" />
+                                                                </c:when>
                                                                 <c:when test="${evaluacion.getTipo() == 'empatia'}">
                                                                     <c:set var="empatia" value="${evaluacion}" scope="page" />
                                                                     <c:if test="${!empatia.getResolucions().isEmpty()}">
@@ -295,12 +300,35 @@
                                                             </c:choose>
                                                         </c:forEach>
                                                         <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/evalAceptacion" method="post">
+                                                                <div class="controls">
+                                                                    <select ${aceptacion != null ? 'disabled' : ''} id="respuesta" name="respuesta">
+                                                                        <option value="si" ${aceptacion != null && aceptacion.getResultado() == 'si' ? 'selected' : ''}>Si</option>
+                                                                        <option value="no" ${aceptacion != null && aceptacion.getResultado() == 'no' ? 'selected' : ''}>No</option>
+                                                                    </select>
+                                                                </div>  
+                                                                <br>    
+                                                                <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                                <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} ${aceptacion == null ? '' : 'disabled'} type="submit" class="btn btn-default btn-sm">Registrar</button>
+                                                            </form> 
+                                                        </td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/resolEvalAceptacion" method="post">
+                                                                <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
+                                                                <input hidden name="idAceptacion" id="idAceptacion" value="${aceptacion.getIdevaluacion()}">
+                                                                <input hidden name="idNna" id="idNna" value="${adopcion.getNna().getIdnna()}">
+                                                                <input hidden name="numDesig" id="numDesig" value="${adopcion.getNDesignacion()}">
+                                                                <input hidden name="volver" id="volver" value="${volver}">
+                                                                <button ${aceptacion == null || usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} ${aceptacion != null && aceptacion.getResultado() == 'no' ? '' : 'disabled'} type="submit" class="btn btn-default btn-sm">Registrar Resolución</button>
+                                                            </form> 
+                                                        </td>
+                                                        <td>
                                                             <form action="${pageContext.servletContext.contextPath}/evalEmpatia" method="post">
                                                                 <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                                                                 <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                                 <input hidden name="idEmpatia" id="idEmpatia" value="${empatia.getIdevaluacion()}">
                                                                 <input hidden name="volver" id="volver" value="${volver}">
-                                                                <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} type="submit" class="btn btn-default">Registrar</button>
+                                                                <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} ${aceptacion == null ? 'disabled' : ''} ${aceptacion != null && aceptacion.getResultado() == 'no' ? 'disabled' : ''}  type="submit" class="btn btn-default">Registrar</button>
                                                             </form> 
                                                         </td>
 
@@ -355,6 +383,7 @@
                                                             </form> 
                                                         </td>
                                                     </tr>   
+                                                    <c:set var="aceptacion" value="${null}" scope="page" />
                                                     <c:set var="empatia" value="${null}" scope="page" />
                                                     <c:set var="informe" value="${null}" scope="page" />
                                                 </c:when>
@@ -388,6 +417,9 @@
                                                 <c:set var="expediente" value="${adopcion.getExpedienteFamilia()}"/> 
                                                 <c:forEach var="evaluacion2" items="${expediente.getEvaluacions()}" >
                                                     <c:choose>
+                                                        <c:when test="${evaluacion2.getTipo() == 'aceptacion'}">
+                                                            <c:set var="aceptacion2" value="${evaluacion2}" scope="page" />
+                                                        </c:when>
                                                         <c:when test="${evaluacion2.getTipo() == 'empatia'}">
                                                             <c:set var="empatia2" value="${evaluacion2}" scope="page" />
                                                             <c:if test="${!empatia2.getResolucions().isEmpty()}">
@@ -403,12 +435,36 @@
                                                 </c:forEach>
 
                                                 <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/evalAceptacion" method="post">
+                                                        <div class="controls">
+                                                            <select ${aceptacion2 != null ? 'disabled' : ''} id="respuesta" name="respuesta">
+                                                                <option value="si" ${aceptacion2 != null && aceptacion2.getResultado() == 'si' ? 'selected' : ''}>Si</option>
+                                                                <option value="no" ${aceptacion2 != null && aceptacion2.getResultado() == 'no' ? 'selected' : ''}>No</option>
+                                                            </select>
+                                                        </div>  
+                                                        <br>    
+                                                        <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
+                                                        <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} ${aceptacion2 == null ? '' : 'disabled'} type="submit" class="btn btn-default btn-sm">Registrar</button>
+                                                    </form> 
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/resolEvalAceptacion" method="post">
+                                                        <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
+                                                        <input hidden name="idAceptacion" id="idAceptacion" value="${aceptacion.getIdevaluacion()}">
+                                                        <input hidden name="idNna" id="idNna" value="${adopcion.getNna().getIdnna()}">
+                                                        <input hidden name="numDesig" id="numDesig" value="${adopcion.getNDesignacion()}">
+                                                        <input hidden name="volver" id="volver" value="${volver}">
+                                                        <button ${aceptacion2 == null || usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} ${aceptacion2 != null && aceptacion2.getResultado() == 'no' ? '' : 'disabled'} type="submit" class="btn btn-default btn-sm">Registrar Resolución</button>
+                                                    </form> 
+                                                </td>
+
+                                                <td>
                                                     <form action="${pageContext.servletContext.contextPath}/evalEmpatia" method="post">
                                                         <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                                                         <input hidden name="familia" id="familia" value="${expediente.getExpediente()}">
                                                         <input hidden name="idEmpatia" id="idEmpatia" value="${empatia2.getIdevaluacion()}">
                                                         <input hidden name="volver" id="volver" value="${volver}">
-                                                        <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} type="submit" class="btn btn-default">Registrar</button>
+                                                        <button ${usuario.getUnidad().getDepartamento() == 'Lima' ? '' : 'disabled'} ${aceptacion2 == null ? 'disabled' : ''} ${aceptacion2 != null && aceptacion2.getResultado() == 'no' ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar</button>
                                                     </form> 
                                                 </td>
 
@@ -463,6 +519,7 @@
                                                     </form> 
                                                 </td>
                                                 </tr>  
+                                                <c:set var="aceptacion2" value="${null}" scope="page" />
                                                 <c:set var="empatia2" value="${null}" scope="page" />
                                                 <c:set var="informe2" value="${null}" scope="page" />
                                             </c:otherwise>

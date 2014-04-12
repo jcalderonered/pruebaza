@@ -6088,13 +6088,13 @@ public class reporte {
                         nivelSoc = "" + (tempInfo.getNivelSocioeconomico().toString());
                     } catch (Exception ex) {
                     }
-                    if (tempInfo.getExpectativaGenero().equals("indistinto")) {
+                    if (tempInfo.getExpectativaGenero() != null && tempInfo.getExpectativaGenero().equals("indistinto")) {
                         ExpEdadSex = ExpEdadSex + "NIÑO O NIÑA DE" + " " + tempInfo.getExpectativaEdadMin() + " A " + tempInfo.getExpectativaEdadMax();;
                     }
-                    if (tempInfo.getExpectativaGenero().equals("masculino")) {
+                    if (tempInfo.getExpectativaGenero() != null && tempInfo.getExpectativaGenero().equals("masculino")) {
                         ExpEdadSex = ExpEdadSex + "NIÑO DE" + " " + tempInfo.getExpectativaEdadMin() + " A " + tempInfo.getExpectativaEdadMax();;
                     }
-                    if (tempInfo.getExpectativaGenero().equals("femenino")) {
+                    if (tempInfo.getExpectativaGenero() != null && tempInfo.getExpectativaGenero().equals("femenino")) {
                         ExpEdadSex = ExpEdadSex + "NIÑA DE" + " " + tempInfo.getExpectativaEdadMin() + " A " + tempInfo.getExpectativaEdadMax();;
                     }
                     if (!tempInfo.getAdoptantes().isEmpty()) {
