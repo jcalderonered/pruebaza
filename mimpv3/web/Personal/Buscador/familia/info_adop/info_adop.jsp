@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -76,31 +76,31 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
+                                <%}
                                 if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                              <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -232,18 +232,20 @@
                                         <c:if test="${!listaEvaluaciones.isEmpty()}">
                                             <tbody>
                                                 <c:forEach var="evaluacion" items="${listaEvaluaciones}" varStatus="status">
-                                                    <tr>
-                                                        <td>${evaluacion.getTipo() == 'informe' ? 'integracion familiar' : evaluacion.getTipo()}</td>
-                                                        <td>${evaluacion.getNumEval()}</td>
-                                                        <td>${evaluacion.getFechaAsignacion() != null ? df.dateToString(evaluacion.getFechaAsignacion()) : ''}</td>
-                                                        <td>${evaluacion.getResultado()}</td>
-                                                        <td>
-                                                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleEvaluacion" method="post">
-                                                                <input hidden name="idEval" id="idEval" value="${evaluacion.getIdevaluacion()}" >    
-                                                                <button class="btn btn-default">Detalles</button>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
+                                                    <c:if test="${evaluacion.getTipo() != 'aceptacion'}">
+                                                        <tr>
+                                                            <td>${evaluacion.getTipo() == 'informe' ? 'integracion familiar' : evaluacion.getTipo()}</td>
+                                                            <td>${evaluacion.getNumEval()}</td>
+                                                            <td>${evaluacion.getFechaAsignacion() != null ? df.dateToString(evaluacion.getFechaAsignacion()) : ''}</td>
+                                                            <td>${evaluacion.getResultado()}</td>
+                                                            <td>
+                                                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/DetalleEvaluacion" method="post">
+                                                                    <input hidden name="idEval" id="idEval" value="${evaluacion.getIdevaluacion()}" >    
+                                                                    <button class="btn btn-default">Detalles</button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
                                                 </c:forEach> 
                                             </tbody>
                                         </c:if>   

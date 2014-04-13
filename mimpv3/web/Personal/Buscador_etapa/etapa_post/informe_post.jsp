@@ -150,9 +150,9 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Fecha de recepción proyectado</label>
+                                    <label class="control-label">Fecha de recepción proyectado </label>
                                     <div class="controls">
-                                        <input ${informe.getEstado() == 'listo' ? 'disabled' : ''} value="${informe.getFechaRecepcionProyectado() != null ? df.dateToString(informe.getFechaRecepcionProyectado()) : ''}" id="fechaProyectado" name="fechaProyectado" type="text" class="datepicker input-xlarge">
+                                        <input ${informe.getEstado() == 'listo' ? 'disabled' : ''} value="${informe.getFechaRecepcionProyectado() != null ? df.dateToString(informe.getFechaRecepcionProyectado()) : fechaApRecep}" id="fechaProyectado" name="fechaProyectado" type="text" class="datepicker input-xlarge">
                                     </div>
                                 </div>
                                 <br>

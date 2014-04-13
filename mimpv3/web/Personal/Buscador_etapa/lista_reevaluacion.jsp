@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -175,7 +175,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -257,13 +257,13 @@
                                                         </form>
                                                     </td>
                                                     <td>
-                                                        <form action="${pageContext.servletContext.contextPath}/RegresarListaEspera" method="post">
+                                                        <form action="${pageContext.servletContext.contextPath}/RegresarListaEspera" method="post" onsubmit="return(espera());">
                                                             <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                                                             <button type="submit" class="btn btn-default">Regresar</button>
                                                         </form>
                                                     </td>
                                                     <td>
-                                                        <form action="${pageContext.servletContext.contextPath}/EliminarRegistro" method="post">
+                                                        <form action="${pageContext.servletContext.contextPath}/EliminarRegistro" method="post" onsubmit="return(eliminar());">
                                                             <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                                                             <button type="submit" class="btn btn-default">Eliminar</button>
                                                         </form>
@@ -310,6 +310,20 @@
 
                             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
+        </script>
+        <script type="text/javascript">
+
+            function espera()
+            {
+                return confirm('Desea regresar el expediente a la lista de espera?');
+            }
+        </script>
+        <script type="text/javascript">
+
+            function eliminar()
+            {
+                return confirm('Desea eliminar el expediente de los registros?');
+            }
         </script>
         <script type="text/javascript">
 
