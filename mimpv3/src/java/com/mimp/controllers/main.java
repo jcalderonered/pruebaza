@@ -2041,7 +2041,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_atencion_edit", map);
     }
 
-    //PROBAR
+    //FALTA PARA ETAPA FORMATIVA (CUANDO NO HAY EXPEDIENTE AUN)
     @RequestMapping(value = "/crearAtencion", method = RequestMethod.POST)
     public ModelAndView crearAtencion_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "personal") long personal,
@@ -2386,7 +2386,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_atencion", map);
     }
 
-    //
+    //PROBAR
     @RequestMapping(value = "/updateAtencion2", method = RequestMethod.POST)
     public ModelAndView updateAtencion2_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "idAtencion") long idAtencion,
