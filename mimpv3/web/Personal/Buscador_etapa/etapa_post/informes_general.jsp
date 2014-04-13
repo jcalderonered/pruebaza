@@ -155,6 +155,7 @@
                                                           <input hidden name="idPost" id="idPost" value="${idPost}">
                                                           <input hidden name="fechaAdopcion" id="fechaAdopcion" value="${fechaAdopcion}">
                                                           <input hidden name="numInformes" id="numInformes" value="${numInformes}">
+                                                          <input hidden name="fechaAproxRecep" id="fechaAproxRecep" value="${listaFechas.get(status.index)}">
                                                           <c:if test="${status.last}">
                                                               <input hidden name="ultimo" id="ultimo" value="ultimo">
                                                           </c:if>

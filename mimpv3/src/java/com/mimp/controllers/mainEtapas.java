@@ -2847,14 +2847,14 @@ public class mainEtapas {
         }
 
         if (session.getAttribute("idAceptacion") != null && session.getAttribute("idNna") != null) {
-            
+
             long idAceptacion = (long) session.getAttribute("idAceptacion");
             long idNna = (long) session.getAttribute("idNna");
             String numDesig = (String) session.getAttribute("numDesig");
             String numResol = (String) session.getAttribute("numResol");
             String fechaResol = (String) session.getAttribute("fechaResol");
             String tipo = (String) session.getAttribute("tipo");
-            
+
             Evaluacion tempEval = new Evaluacion();
             tempEval = servicioEtapa.getEvaluacion2(idAceptacion);
             Designacion tempDesig = new Designacion();
@@ -2870,106 +2870,105 @@ public class mainEtapas {
                     idN = desig.getNna().getIdnna();
                 }
             }
-            
-                if (tipo.equals("sinefecto")) {
-                    if (allNna.size() > 1) {
-                        servicioEtapa.deleteEvaluacion(tempEval);
-                        ExpedienteFamilia tempExpFam = tempEval.getExpedienteFamilia();
-                        tempExpFam.setEstado("reevaluacion");
-                        servicioEtapa.updateExpedienteFamilia(tempExpFam);
-                        for (Nna tempNna : allNna) {
-                            ExpedienteNna ExpNna = ServicioNna.getExpNna(tempNna.getIdnna());
-                            ExpNna.setEstado("adoptable");
-                            Date ahora = new Date();
-                            java.sql.Date sql = new java.sql.Date(ahora.getTime());
-                            ExpNna.setFechaEstado(sql);
-                            ServicioNna.updateExpNna(ExpNna);
-                            tempDesig = servicioEtapa.getDesignacion(tempEval.getExpedienteFamilia().getIdexpedienteFamilia(), tempNna.getIdnna());
-                            tempDesig.setAceptacionConsejo(Short.parseShort("3"));
-                            servicioEtapa.updateDesignacion(tempDesig);
 
-                        }
-
-                    } else {
-                        servicioEtapa.deleteEvaluacion(tempEval);
-                        ExpedienteFamilia tempExpFam = tempEval.getExpedienteFamilia();
-                        tempExpFam.setEstado("reevaluacion");
-                        servicioEtapa.updateExpedienteFamilia(tempExpFam);
+            if (tipo.equals("sinefecto")) {
+                if (allNna.size() > 1) {
+                    servicioEtapa.deleteEvaluacion(tempEval);
+                    ExpedienteFamilia tempExpFam = tempEval.getExpedienteFamilia();
+                    tempExpFam.setEstado("reevaluacion");
+                    servicioEtapa.updateExpedienteFamilia(tempExpFam);
+                    for (Nna tempNna : allNna) {
+                        ExpedienteNna ExpNna = ServicioNna.getExpNna(tempNna.getIdnna());
+                        ExpNna.setEstado("adoptable");
+                        Date ahora = new Date();
+                        java.sql.Date sql = new java.sql.Date(ahora.getTime());
+                        ExpNna.setFechaEstado(sql);
+                        ServicioNna.updateExpNna(ExpNna);
+                        tempDesig = servicioEtapa.getDesignacion(tempEval.getExpedienteFamilia().getIdexpedienteFamilia(), tempNna.getIdnna());
                         tempDesig.setAceptacionConsejo(Short.parseShort("3"));
                         servicioEtapa.updateDesignacion(tempDesig);
-                        if (tempDesig.getTipoPropuesta().equals("directa")) {
-                            ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
-                            ExpNna.setEstado("adoptable");
-                            Date ahora = new Date();
-                            ExpNna.setFechaEstado(ahora);
-                            ServicioNna.updateExpNna(ExpNna);
-                        }
-                        if (tempDesig.getTipoPropuesta().equals("dupla") && tempDesig.getPrioridad() == 2) {
-                            ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
-                            ExpNna.setEstado("adoptable");
-                            Date ahora = new Date();
-                            ExpNna.setFechaEstado(ahora);
-                            ServicioNna.updateExpNna(ExpNna);
-                        }
-                        if (tempDesig.getTipoPropuesta().equals("terna") && tempDesig.getPrioridad() == 3) {
-                            ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
-                            ExpNna.setEstado("adoptable");
-                            Date ahora = new Date();
-                            ExpNna.setFechaEstado(ahora);
-                            ServicioNna.updateExpNna(ExpNna);
+
+                    }
+
+                } else {
+                    servicioEtapa.deleteEvaluacion(tempEval);
+                    ExpedienteFamilia tempExpFam = tempEval.getExpedienteFamilia();
+                    tempExpFam.setEstado("reevaluacion");
+                    servicioEtapa.updateExpedienteFamilia(tempExpFam);
+                    tempDesig.setAceptacionConsejo(Short.parseShort("3"));
+                    servicioEtapa.updateDesignacion(tempDesig);
+                    if (tempDesig.getTipoPropuesta().equals("directa")) {
+                        ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
+                        ExpNna.setEstado("adoptable");
+                        Date ahora = new Date();
+                        ExpNna.setFechaEstado(ahora);
+                        ServicioNna.updateExpNna(ExpNna);
+                    }
+                    if (tempDesig.getTipoPropuesta().equals("dupla") && tempDesig.getPrioridad() == 2) {
+                        ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
+                        ExpNna.setEstado("adoptable");
+                        Date ahora = new Date();
+                        ExpNna.setFechaEstado(ahora);
+                        ServicioNna.updateExpNna(ExpNna);
+                    }
+                    if (tempDesig.getTipoPropuesta().equals("terna") && tempDesig.getPrioridad() == 3) {
+                        ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
+                        ExpNna.setEstado("adoptable");
+                        Date ahora = new Date();
+                        ExpNna.setFechaEstado(ahora);
+                        ServicioNna.updateExpNna(ExpNna);
+                    }
+                }
+            } else {
+                Resolucion tempResol = new Resolucion();
+                tempResol.setEvaluacion(tempEval);
+                tempResol.setNumero(numResol);
+                tempResol.setTipo(tipo);
+                Date tempfecha = tempResol.getFechaResol();
+                if (fechaResol != null) {
+                    if (fechaResol.contains("ene") || fechaResol.contains("feb") || fechaResol.contains("mar") || fechaResol.contains("abr")
+                            || fechaResol.contains("may") || fechaResol.contains("jun") || fechaResol.contains("jul") || fechaResol.contains("ago")
+                            || fechaResol.contains("set") || fechaResol.contains("oct") || fechaResol.contains("nov") || fechaResol.contains("dic")) {
+                        tempResol.setFechaResol(tempfecha);
+                    } else {
+                        if (!fechaResol.equals("")) {
+                            tempResol.setFechaResol(df.stringToDate(fechaResol));
+                        } else {
+                            tempResol.setFechaResol(null);
                         }
                     }
                 } else {
-                    Resolucion tempResol = new Resolucion();
-                    tempResol.setEvaluacion(tempEval);
-                    tempResol.setNumero(numResol);
-                    tempResol.setTipo(tipo);
-                    Date tempfecha = tempResol.getFechaResol();
-                    if (fechaResol != null) {
-                        if (fechaResol.contains("ene") || fechaResol.contains("feb") || fechaResol.contains("mar") || fechaResol.contains("abr")
-                                || fechaResol.contains("may") || fechaResol.contains("jun") || fechaResol.contains("jul") || fechaResol.contains("ago")
-                                || fechaResol.contains("set") || fechaResol.contains("oct") || fechaResol.contains("nov") || fechaResol.contains("dic")) {
-                            tempResol.setFechaResol(tempfecha);
-                        } else {
-                            if (!fechaResol.equals("")) {
-                                tempResol.setFechaResol(df.stringToDate(fechaResol));
-                            } else {
-                                tempResol.setFechaResol(null);
-                            }
-                        }
-                    } else {
-                        tempResol.setFechaResol(null);
-                    }
-                    /*if (fechaResol != null && !fechaResol.equals("")) {
-                     tempResol.setFechaResol(df.stringToDate(fechaResol));
-                     }
-                     if (fechaResol == null || fechaResol.equals("")) {
-                     tempResol.setFechaResol(null);
-                     }*/
-                    servicioEtapa.crearResolEvaluacion(tempResol);
-
-                    String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                            + " con ID: " + usuario.getIdpersonal() + ". Creó la Resolución de evaluación con ID"
-                            + ": " + session.getAttribute("idEmpatia");
-
-                    String Tipo_registro = "Familia";
-
-                    try {
-                        String Numero_registro = String.valueOf(usuario.getIdpersonal());
-
-                        ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-                    } catch (Exception ex) {
-                    }
-
+                    tempResol.setFechaResol(null);
                 }
-                
-                
-                session.removeAttribute("idAceptacion");
-                session.removeAttribute("idNna");
-                session.removeAttribute("numDesig");
-                session.removeAttribute("numResol");
-                session.removeAttribute("fechaResol");
-                session.removeAttribute("tipo");
+                /*if (fechaResol != null && !fechaResol.equals("")) {
+                 tempResol.setFechaResol(df.stringToDate(fechaResol));
+                 }
+                 if (fechaResol == null || fechaResol.equals("")) {
+                 tempResol.setFechaResol(null);
+                 }*/
+                servicioEtapa.crearResolEvaluacion(tempResol);
+
+                String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                        + " con ID: " + usuario.getIdpersonal() + ". Creó la Resolución de evaluación con ID"
+                        + ": " + session.getAttribute("idEmpatia");
+
+                String Tipo_registro = "Familia";
+
+                try {
+                    String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
+                }
+
+            }
+
+            session.removeAttribute("idAceptacion");
+            session.removeAttribute("idNna");
+            session.removeAttribute("numDesig");
+            session.removeAttribute("numResol");
+            session.removeAttribute("fechaResol");
+            session.removeAttribute("tipo");
 
 //        map.put("listaAdopciones", servicioEtapa.getListaAdopciones());
 //        return new ModelAndView("/Personal/Buscador_etapa/etapa_adopcion/etapa_adopcion", map);
@@ -4213,6 +4212,7 @@ public class mainEtapas {
             @RequestParam("num") String num,
             @RequestParam("idPost") long idPost,
             @RequestParam("numInformes") int numInformes,
+            @RequestParam("fechaAproxRecep") String fechaAproxRecep,
             @RequestParam("fechaAdopcion") String fechaAdopcion
     ) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -4228,6 +4228,7 @@ public class mainEtapas {
         session.setAttribute("num", num);
         session.setAttribute("idPost", idPost);
         session.setAttribute("numInformes", numInformes);
+        session.setAttribute("fechaAproxRecep", fechaAproxRecep);
         session.setAttribute("fechaAdopcion", fechaAdopcion);
 
         return new ModelAndView("redirect:/EditarInforme", map);
@@ -4259,9 +4260,10 @@ public class mainEtapas {
             String num = (String) session.getAttribute("num");
             long idPost = (long) session.getAttribute("idPost");
             int numInformes = (int) session.getAttribute("numInformes");
+            String fechaAproxRecep = (String) session.getAttribute("fechaAproxRecep");
             String fechaAdopcion = (String) session.getAttribute("fechaAdopcion");
 
-            if (!idInforme.equals("")) {
+            if (idInforme != null && !idInforme.equals("")) {
                 long id = Long.parseLong(idInforme);
                 InformePostAdoptivo temp = servicioEtapa.getInformePost(id);
                 map.put("informe", temp);
@@ -4273,7 +4275,70 @@ public class mainEtapas {
                 map.put("idPost", idPost);
                 map.put("numInformes", numInformes);
                 map.put("fechaAdopcion", fechaAdopcion);
+                String[] parts = fechaAproxRecep.split("/");
+                String mes = parts[0];
+                int anho = Integer.parseInt(parts[1]);
+                
+                String fechaApRecep = "";
+                if(mes.equals("Ene")){
+                   fechaApRecep = "01" + "/" + "01" + "/" + anho;
+                }else if(mes.equals("Feb")){
+                   fechaApRecep = "01" + "/" + "02" + "/" + anho;
+                }else if(mes.equals("Mar")){
+                   fechaApRecep = "01" + "/" + "03" + "/" + anho;
+                }else if(mes.equals("Abr")){
+                   fechaApRecep = "01" + "/" + "04" + "/" + anho;
+                }else if(mes.equals("May")){
+                   fechaApRecep = "01" + "/" + "05" + "/" + anho;
+                }else if(mes.equals("Jun")){
+                   fechaApRecep = "01" + "/" + "06" + "/" + anho;
+                }else if(mes.equals("Jul")){
+                   fechaApRecep = "01" + "/" + "07" + "/" + anho;
+                }else if(mes.equals("Ago")){
+                   fechaApRecep = "01" + "/" + "08" + "/" + anho;
+                }else if(mes.equals("Sep")){
+                   fechaApRecep = "01" + "/" + "09" + "/" + anho;
+                }else if(mes.equals("Oct")){
+                   fechaApRecep = "01" + "/" + "10" + "/" + anho;
+                }else if(mes.equals("Nov")){
+                   fechaApRecep = "01" + "/" + "11" + "/" + anho;
+                }else {
+                   fechaApRecep = "01" + "/" + "12" + "/" + anho;
+                }
+                map.put("fechaApRecep", fechaApRecep);
+                
             } else {
+                String[] parts = fechaAproxRecep.split("/");
+                String mes = parts[0];
+                int anho = Integer.parseInt(parts[1]);
+                
+                String fechaApRecep = "";
+                if(mes.equals("Ene")){
+                   fechaApRecep = "01" + "/" + "01" + "/" + anho;
+                }else if(mes.equals("Feb")){
+                   fechaApRecep = "01" + "/" + "02" + "/" + anho;
+                }else if(mes.equals("Mar")){
+                   fechaApRecep = "01" + "/" + "03" + "/" + anho;
+                }else if(mes.equals("Abr")){
+                   fechaApRecep = "01" + "/" + "04" + "/" + anho;
+                }else if(mes.equals("May")){
+                   fechaApRecep = "01" + "/" + "05" + "/" + anho;
+                }else if(mes.equals("Jun")){
+                   fechaApRecep = "01" + "/" + "06" + "/" + anho;
+                }else if(mes.equals("Jul")){
+                   fechaApRecep = "01" + "/" + "07" + "/" + anho;
+                }else if(mes.equals("Ago")){
+                   fechaApRecep = "01" + "/" + "08" + "/" + anho;
+                }else if(mes.equals("Sep")){
+                   fechaApRecep = "01" + "/" + "09" + "/" + anho;
+                }else if(mes.equals("Oct")){
+                   fechaApRecep = "01" + "/" + "10" + "/" + anho;
+                }else if(mes.equals("Nov")){
+                   fechaApRecep = "01" + "/" + "11" + "/" + anho;
+                }else {
+                   fechaApRecep = "01" + "/" + "12" + "/" + anho;
+                }
+                map.put("fechaApRecep", fechaApRecep);
                 map.put("familia", familia);
                 map.put("ultimo", ultimo);
                 map.put("num", num);

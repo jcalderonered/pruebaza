@@ -178,7 +178,7 @@
                                             </div>
                                             <br>
                                             <div class="control-group">
-                                                <label class="control-label">Personas intervenidas</label>
+                                                <label class="control-label">Personas Evaluadas(incluye niño/a)</label>
                                                 <div class="controls">
                                                     <textarea ${empatia != null ? 'disabled' : ''} id="persInt" name="persInt" type="text" cols="25" rows="5">${empatia.getPersInt()}</textarea>
                                                 </div>
