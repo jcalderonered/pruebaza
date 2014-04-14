@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -88,7 +88,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -106,7 +106,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        
+
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
 
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario" ><!--onsubmit="return(validar());" --> 
@@ -128,8 +128,12 @@
                                 <li><a href="${pageContext.servletContext.contextPath}/procesoAdopcion?volver=${volver}" >Historial de la Familia</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna" >Antecedentes del NNA</a></li>
                                 <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' || estado == 'designacion' || estado == 'adopcion' || estado == 'reevaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado" >NNA Adoptado</a></li>
+                                    <% if (!u.getRol().equals("DEIA")) {%>
                                 <li><a href="${pageContext.servletContext.contextPath}/atenciones?volver=${volver}" >Atenciones</a></li>
+                                    <%}%>
+                                    <% if (u.getRol().equals("DCRI")) {%>
                                 <li><a href="${pageContext.servletContext.contextPath}/EditUserPass?volver=${volver}" >Editar Perfil de Familia</a></li>
+                                    <%}%>
                             </ul>
                             <br>
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
@@ -217,13 +221,13 @@
                                 </div>
                                 <br>
                                 <c:if test="${expediente.getNacionalidad() == 'internacional'}">
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <label class="control-label">Pasaporte</label>
-                                        <input value="${Ella.getPasaporte()}" id="pasaporte" name="pasaporte" type="text" class="input-xlarge">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Pasaporte</label>
+                                            <input value="${Ella.getPasaporte()}" id="pasaporte" name="pasaporte" type="text" class="input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
+                                    <br>
                                 </c:if>
                                 <div class="control-group">
                                     <label class="control-label">Celular</label>

@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -77,7 +77,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
@@ -87,7 +87,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                              <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -127,8 +127,12 @@
                                 <li><a href="${pageContext.servletContext.contextPath}/procesoAdopcion2?volver=${volver}&expediente=${expediente2}&HT=${HT}&nacionalidad=${nacionalidad}&estado=${estado2}&tipofamilia=${tipofamilia}" >Proceso de adopción</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna2?volver=${volver}&expediente=${expediente2}&HT=${HT}&nacionalidad=${nacionalidad}&estado=${estado2}&tipofamilia=${tipofamilia}" >Antecedentes del NNA</a></li>
                                 <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' || estado == 'designacion' || estado == 'adopcion' || estado == 'reevaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado2?volver=${volver}&expediente=${expediente2}&HT=${HT}&nacionalidad=${nacionalidad}&estado=${estado2}&tipofamilia=${tipofamilia}" >NNA Adoptado</a></li>
+                                    <% if (!u.getRol().equals("DEIA")) {%>
                                 <li><a href="${pageContext.servletContext.contextPath}/atenciones2?volver=${volver}&expediente=${expediente2}&HT=${HT}&nacionalidad=${nacionalidad}&estado=${estado2}&tipofamilia=${tipofamilia}" >Atenciones</a></li>
+                                    <%}%>
+                                    <% if (u.getRol().equals("DCRI")) {%>
                                 <li><a href="${pageContext.servletContext.contextPath}/EditUserPass2?volver=${volver}&expediente=${expediente2}&HT=${HT}&nacionalidad=${nacionalidad}&estado=${estado2}&tipofamilia=${tipofamilia}" >Editar Perfil de Familia</a></li>
+                                    <%}%>
                             </ul>
                             <br>
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
