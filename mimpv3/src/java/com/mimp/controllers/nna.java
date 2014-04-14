@@ -637,7 +637,7 @@ public class nna {
         tempNna.setAdolescente(adolescentes);
         tempNna.setHermano(hermanos);
 
-        if (prioritarios != null) {
+        if (prioritarios != null && !prioritarios.equals("")) {
             tempNna.setClasificacion("prioritario");
         } else {
             tempNna.setClasificacion("regular");

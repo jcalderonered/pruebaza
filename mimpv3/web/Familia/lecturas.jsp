@@ -1,6 +1,6 @@
 <%-- 
-    Document   : inscripcion_sesion1
-    Created on : 28/10/2013, 05:45:16 AM
+    Document   : inicio_familia
+    Created on : 28/10/2013, 09:41:50 AM
     Author     : Ayner Pérez
 --%>
 
@@ -30,7 +30,6 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/index_002.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mimp_css.css">
     </head>
-
     <body id="bd" class="bd fs3 com_content">
         <br>
         <br>
@@ -66,52 +65,62 @@
                 <div class="row">
                     <div class="col-md-3 ">
                         <ul class="nav nav-list well">
-                            <li><a href="${pageContext.servletContext.contextPath}/inicioFam"><span class="glyphicon glyphicon-home"></span>Inicio</a></li>
+                            <li class="active"><a href="${pageContext.servletContext.contextPath}/inicioFam"><span class="glyphicon glyphicon-home"></span>Inicio</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Finscripcion"><span class="glyphicon glyphicon-chevron-right"></span> Inscripción a talleres</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Flecturas"><span class="glyphicon glyphicon-chevron-right"></span> Lecturas </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Festado"><span class="glyphicon glyphicon-chevron-right"></span> Estado del proceso de Adopción</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/Fcontra"><span class="glyphicon glyphicon-chevron-right"></span> Cambio Contraseña</a></li>               
                         </ul>
                     </div>
-                    <c:if test="${mensaje == 'inscrito'}" >
                     <div class="col-md-8 col-md-offset-1">
-                        <h1 align="center"><strong>Inscripción Existosa</strong></h1>
+                        <c:set var='apellido_h' value=''/>
+                        <c:set var='apellido_m' value=''/>
+                        <c:forEach items="${usuario.getInfoFamilias()}" varStatus="status" var="infofam">
+                            <c:forEach items="${infofam.getAdoptantes()}" varStatus="status" var="item">
+                                <c:choose>
+                                    <c:when test="${item.getSexo() == 109}">
+                                        <c:set var='apellido_h' value='${item.getApellidoP()}'/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:set var='apellido_m' value='${item.getApellidoP()}'/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </c:forEach>
+                        <c:set var='mensaje' value='${apellido_h} - ${apellido_m}'/>
+                        <c:choose>
+                            <c:when test="${apellido_h == ''}">
+                                <c:set var='mensaje' value='${apellido_m}'/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:if test="${apellido_m == ''}">
+                                    <c:set var='mensaje' value='${apellido_h}'/>
+                                </c:if>
+                            </c:otherwise>
+                        </c:choose>
+                        <h1 align="center">Lista de enlaces</h1>
                         <br>
-                        <p class="lead">
-                            Sus datos han sido registrados, queda inscrita/o para asistir a la Sesión Informativa sobre Adopciones que se realizará el: 
-                            <br>
-                            DÍA: ${sesion.getFecha() != null ? df.dateToString(sesion.getFecha()) : ''}
-                            <br>
-                            HORA: ${sesion.getHora()}
-                            <br>
-                            LUGAR: ${sesion.getDireccion()}.
-                            <br>
-
-                        </p>
+                        <br>
+                        <button onclick="window.open('http://www.mimp.gob.pe/files/direcciones/dga/sirna/lecturas-de-taller_Preparacion.pdf')" id="singlebutton" name="singlebutton" class="btn btn-default">Taller de preparación</button> 
+                        <br>
+                        <br>
+                        <button onclick="window.open('http://www.mimp.gob.pe/files/direcciones/dga/sirna/lecturas-de-taller_Lista-de-Espera.pdf')" id="singlebutton" name="singlebutton" class="btn btn-default">Lista de espera</button>
+                        <br>
+                        <br>
+                        <button onclick="window.open('http://www.mimp.gob.pe/files/direcciones/dga/sirna/lecturas-de-taller_PostAdopcion.pdf')" id="singlebutton" name="singlebutton" class="btn btn-default">Post-adopción</button>
+                        <br>
+                        <br>
                     </div>
-                    </c:if>
-                            <c:if test="${mensaje == 'fallo'}" >
-                                <h1 align="center"><strong>Inscripción No Existosa</strong></h1>
-                                <h2>Debe inscribirse en otro Turno</h2>
-                        <br>
-                            </c:if>    
                 </div>
             </div>
             <!--FIN DE CONTENIDO-->
             <br>
             <br>
-        </div>   
-        <div id="footer">
-            <div id="ja-footer" class="wrap">
-                <hr width=80% align="center">
-                <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
+            <div id="footer">
+                <div id="ja-footer" class="wrap">
+                    <hr width=80% align="center">
+                    <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
+                </div>
             </div>
-        </div>
-        <!-- core JavaScript
-================================================== -->
-        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
-        <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
-
-        <!-- Ubicar al final -->
     </body>
 </html>
