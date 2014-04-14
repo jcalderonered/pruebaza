@@ -165,16 +165,16 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Lugar de nacimiento</label>
+                                    <label class="control-label">Dirección de nacimiento</label>
                                     <div class="controls">
                                         <input value="${El.getLugarNac()}" id="lugarNac" name="lugarNac" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">Departamento de nacimiento</label>
+                                    <!--<label class="control-label">Departamento de nacimiento</label>-->
                                     <div class="controls">
-                                        <input value="${El.getDepaNac()}" id="depNac" name="depNac" type="text" class="input-xlarge">
+                                        <input hidden value="" id="depNac" name="depNac" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>

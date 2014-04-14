@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -76,31 +76,31 @@
                             <li><a href="${pageContext.servletContext.contextPath}/juzgado"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de juzgado</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
-                            <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                <%}
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
-                                if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
+                                    if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/famint"><span class="glyphicon glyphicon-chevron-right"></span> Ingreso de familias internacionales</a></li>
                                 <%}
-                                if (!u.getRol().equals("mpartes")) {%>
+                                    if (!u.getRol().equals("mpartes")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/usuarios"><span class="glyphicon glyphicon-chevron-right"></span> Administración de usuarios</a></li>
                                 <%}
-                                if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("admin") || u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/organismo"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de organismo acreditado </a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
-                            <%}%>
+                                <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
                         </ul>
                     </div>
@@ -108,7 +108,7 @@
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario"> <!--onsubmit="return(validar());">-->
                             <input hidden id="adoptante" name="adoptante" value="el">
-                            
+
                             <c:if test="${estado != 'formativa'}">
                                 <br>
                                 <h1 align="center"><strong>Familia "${expediente.getExpediente()}"</strong></h1>
@@ -125,8 +125,12 @@
                                 <li><a href="${pageContext.servletContext.contextPath}/procesoAdopcion" >Historial de la Familia</a></li>
                                 <li ${estado == 'formativa' ? 'class="hidden"' : ''}><a href="${pageContext.servletContext.contextPath}/antNna" >Antecedentes del NNA</a></li>
                                 <li ${estado == 'formativa' || estado == 'evaluacion' || estado == 'espera' || estado == 'designacion' || estado == 'adopcion' || estado == 'reevaluacion' ? 'class="hidden"' : ''} ><a href="${pageContext.servletContext.contextPath}/nnaAsociado" >NNA Adoptado</a></li>
+                                    <% if (!u.getRol().equals("DEIA")) {%>
                                 <li><a href="${pageContext.servletContext.contextPath}/atenciones" >Atenciones</a></li>
+                                    <%}%>
+                                    <% if (u.getRol().equals("DCRI")) {%>
                                 <li><a href="${pageContext.servletContext.contextPath}/EditUserPass" >Editar Perfil de Familia</a></li>
+                                    <%}%>
                             </ul>
                             <br>
                             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
@@ -214,13 +218,13 @@
                                 </div>
                                 <br>
                                 <c:if test="${expediente.getNacionalidad() == 'internacional'}">
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <label class="control-label">Pasaporte</label>
-                                        <input value="${El.getPasaporte()}" id="pasaporte" name="pasaporte" type="text" class="input-xlarge">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="control-label">Pasaporte</label>
+                                            <input value="${El.getPasaporte()}" id="pasaporte" name="pasaporte" type="text" class="input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
+                                    <br>
                                 </c:if>
                                 <div class="control-group">
                                     <label class="control-label">Celular</label>
@@ -499,34 +503,34 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
 
-                                                    $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
-                                                    $('#fechaNac').on('changeDate', function(ev) {
+                            $('#fechaNac').on('changeDate', function(ev) {
 
-                                                        var nac = document.getElementById("fechaNac").value;
-                                                        var edad = document.getElementById("edad");
+                                var nac = document.getElementById("fechaNac").value;
+                                var edad = document.getElementById("edad");
 
-                                                        var today = new Date();
-                                                        var curr_date = today.getDate();
-                                                        var curr_month = today.getMonth() + 1;
-                                                        var curr_year = today.getFullYear();
+                                var today = new Date();
+                                var curr_date = today.getDate();
+                                var curr_month = today.getMonth() + 1;
+                                var curr_year = today.getFullYear();
 
-                                                        var pieces = nac.split('/');
-                                                        var birth_date = pieces[0];
-                                                        var birth_month = pieces[1];
-                                                        var birth_year = pieces[2];
+                                var pieces = nac.split('/');
+                                var birth_date = pieces[0];
+                                var birth_month = pieces[1];
+                                var birth_year = pieces[2];
 
 
-                                                        if (curr_year != birth_year && birth_month > curr_month)
-                                                            edad.value = curr_year - birth_year - 1;
-                                                        if (curr_year != birth_year && birth_month == curr_month)
-                                                            edad.value = curr_year - birth_year;
-                                                        if (curr_year != birth_year && birth_month < curr_month)
-                                                            edad.value = curr_year - birth_year;
-                                                        if (curr_year == birth_year)
-                                                            edad.value = 0;
+                                if (curr_year != birth_year && birth_month > curr_month)
+                                    edad.value = curr_year - birth_year - 1;
+                                if (curr_year != birth_year && birth_month == curr_month)
+                                    edad.value = curr_year - birth_year;
+                                if (curr_year != birth_year && birth_month < curr_month)
+                                    edad.value = curr_year - birth_year;
+                                if (curr_year == birth_year)
+                                    edad.value = 0;
 
-                                                    });
+                            });
             </script>
             <script type="text/javascript">
                 function funct() {
