@@ -71,7 +71,7 @@ public class nna {
         map.put("listaNna", ServicioNna.ListaNnaSeguimiento("seguimiento"));
         return new ModelAndView("/Personal/nna/lista_nna_seg", map);
     }
-    
+
     @RequestMapping(value = "/nnaCol", method = RequestMethod.GET)
     public ModelAndView nnaColocacion(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -259,8 +259,9 @@ public class nna {
         return new ModelAndView("/Personal/nna/editar_nna_1", map);
     }
 
+    //PROBAR
     @RequestMapping(value = "/crearNna", method = RequestMethod.POST)
-    public ModelAndView crearNna(ModelMap map, HttpSession session,
+    public ModelAndView crearNna_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "nn", required = false) String nn,
             @RequestParam(value = "nombre", required = false) String nombre,
             @RequestParam(value = "apellidoP", required = false) String apellidoP,
@@ -291,6 +292,187 @@ public class nna {
             @RequestParam(value = "prioritarios", required = false) String prioritarios,
             @RequestParam(value = "obs", required = false) String obs
     ) {
+        session.setAttribute("nn", nn);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("sexo", sexo);
+        session.setAttribute("fechaNac", fechaNac);
+        session.setAttribute("edad", edad);
+        session.setAttribute("meses", meses);
+        session.setAttribute("idJuzgado", idJuzgado);
+        session.setAttribute("idCar", idCar);
+        session.setAttribute("actaNac", actaNac);
+        session.setAttribute("dep", dep);
+        session.setAttribute("prov", prov);
+        session.setAttribute("dist", dist);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("numResolAband", numResolAband);
+        session.setAttribute("fechaResolAband", fechaResolAband);
+        session.setAttribute("numResolConsen", numResolConsen);
+        session.setAttribute("fechaResolConsen", fechaResolConsen);
+        session.setAttribute("incesto", incesto);
+        session.setAttribute("psiquiatrica", psiquiatrica);
+        session.setAttribute("epilepsia", epilepsia);
+        session.setAttribute("abuso", abuso);
+        session.setAttribute("sifilis", sifilis);
+        session.setAttribute("estable", estable);
+        session.setAttribute("intervencion", intervencion);
+        session.setAttribute("trastorno", trastorno);
+        session.setAttribute("prioritarios", prioritarios);
+        session.setAttribute("obs", obs);
+
+        return new ModelAndView("redirect:/crearNna", map);
+    }
+
+    @RequestMapping(value = "/crearNna", method = RequestMethod.GET)
+    public ModelAndView crearNna_GET(ModelMap map, HttpSession session) {
+        String nn = "";
+        String nombre = "";
+        String apellidoP = "";
+        String apellidoM = "";
+        String sexo = "";
+        String fechaNac = "";
+        String edad = "";
+        String meses = "";
+        long idJuzgado = 0;
+        long idCar = 0;
+        String actaNac = "";
+        String dep = "";
+        String prov = "";
+        String dist = "";
+        String direccion = "";
+        String numResolAband = "";
+        String fechaResolAband = "";
+        String numResolConsen = "";
+        String fechaResolConsen = "";
+        String incesto = "";
+        String psiquiatrica = "";
+        String epilepsia = "";
+        String abuso = "";
+        String sifilis = "";
+        String estable = "";
+        String intervencion = "";
+        String trastorno = "";
+        String prioritarios = "";
+        String obs = "";
+        if (session.getAttribute("nn") != null) {
+            nn = session.getAttribute("nn").toString();
+        }
+        if (session.getAttribute("nombre") != null) {
+            nombre = session.getAttribute("nombre").toString();
+        }
+        if (session.getAttribute("apellidoP") != null) {
+            apellidoP = session.getAttribute("apellidoP").toString();
+        }
+        if (session.getAttribute("apellidoM") != null) {
+            apellidoM = session.getAttribute("apellidoM").toString();
+        }
+        if (session.getAttribute("sexo") != null) {
+            sexo = session.getAttribute("sexo").toString();
+        }
+        if (session.getAttribute("fechaNac") != null) {
+            fechaNac = session.getAttribute("fechaNac").toString();
+        }
+        if (session.getAttribute("edad") != null) {
+            edad = session.getAttribute("edad").toString();
+        }
+        if (session.getAttribute("meses") != null) {
+            meses = session.getAttribute("meses").toString();
+        }
+        if (session.getAttribute("idJuzgado") != null) {
+            idJuzgado = Long.parseLong(session.getAttribute("idJuzgado").toString());
+        }
+        if (session.getAttribute("idCar") != null) {
+            idCar = Long.parseLong(session.getAttribute("idCar").toString());
+        }
+        if (session.getAttribute("actaNac") != null) {
+            actaNac = session.getAttribute("actaNac").toString();
+        }
+        if (session.getAttribute("dep") != null) {
+            dep = session.getAttribute("dep").toString();
+        }
+        if (session.getAttribute("prov") != null) {
+            prov = session.getAttribute("prov").toString();
+        }
+        if (session.getAttribute("dist") != null) {
+            dist = session.getAttribute("dist").toString();
+        }
+        if (session.getAttribute("direccion") != null) {
+            direccion = session.getAttribute("direccion").toString();
+        }
+        if (session.getAttribute("numResolAband") != null) {
+            numResolAband = session.getAttribute("numResolAband").toString();
+        }
+        if (session.getAttribute("fechaResolAband") != null) {
+            fechaResolAband = session.getAttribute("fechaResolAband").toString();
+        }
+        if (session.getAttribute("numResolConsen") != null) {
+            numResolConsen = session.getAttribute("numResolConsen").toString();
+        }
+        if (session.getAttribute("fechaResolConsen") != null) {
+            fechaResolConsen = session.getAttribute("fechaResolConsen").toString();
+        }
+        if (session.getAttribute("incesto") != null) {
+            incesto = session.getAttribute("incesto").toString();
+        }
+        if (session.getAttribute("psiquiatrica") != null) {
+            psiquiatrica = session.getAttribute("psiquiatrica").toString();
+        }
+        if (session.getAttribute("epilepsia") != null) {
+            epilepsia = session.getAttribute("epilepsia").toString();
+        }
+        if (session.getAttribute("abuso") != null) {
+            abuso = session.getAttribute("abuso").toString();
+        }
+        if (session.getAttribute("sifilis") != null) {
+            sifilis = session.getAttribute("sifilis").toString();
+        }
+        if (session.getAttribute("estable") != null) {
+            estable = session.getAttribute("estable").toString();
+        }
+        if (session.getAttribute("intervencion") != null) {
+            intervencion = session.getAttribute("intervencion").toString();
+        }
+        if (session.getAttribute("trastorno") != null) {
+            trastorno = session.getAttribute("trastorno").toString();
+        }
+        if (session.getAttribute("prioritarios") != null) {
+            prioritarios = session.getAttribute("prioritarios").toString();
+        }
+        if (session.getAttribute("obs") != null) {
+            obs = session.getAttribute("obs").toString();
+        }
+        session.removeAttribute("nn");
+        session.removeAttribute("nombre");
+        session.removeAttribute("apellidoP");
+        session.removeAttribute("apellidoM");
+        session.removeAttribute("sexo");
+        session.removeAttribute("fechaNac");
+        session.removeAttribute("edad");
+        session.removeAttribute("meses");
+        session.removeAttribute("idJuzgado");
+        session.removeAttribute("idCar");
+        session.removeAttribute("actaNac");
+        session.removeAttribute("dep");
+        session.removeAttribute("prov");
+        session.removeAttribute("dist");
+        session.removeAttribute("direccion");
+        session.removeAttribute("numResolAband");
+        session.removeAttribute("fechaResolAband");
+        session.removeAttribute("numResolConsen");
+        session.removeAttribute("fechaResolConsen");
+        session.removeAttribute("incesto");
+        session.removeAttribute("psiquiatrica");
+        session.removeAttribute("epilepsia");
+        session.removeAttribute("abuso");
+        session.removeAttribute("sifilis");
+        session.removeAttribute("estable");
+        session.removeAttribute("intervencion");
+        session.removeAttribute("trastorno");
+        session.removeAttribute("prioritarios");
+        session.removeAttribute("obs");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -486,8 +668,9 @@ public class nna {
 
     }
 
+    //PROBAR
     @RequestMapping(value = "/updateNna", method = RequestMethod.POST)
-    public ModelAndView updateNna(ModelMap map, HttpSession session,
+    public ModelAndView updateNna_POST(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
             @RequestParam(value = "nn", required = false) String nn,
             @RequestParam(value = "nombre", required = false) String nombre,
@@ -519,6 +702,229 @@ public class nna {
             @RequestParam(value = "prioritarios", required = false) String prioritarios,
             @RequestParam(value = "obs", required = false) String obs
     ) {
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("nn", nn);
+        session.setAttribute("nombre", nombre);
+        session.setAttribute("apellidoP", apellidoP);
+        session.setAttribute("apellidoM", apellidoM);
+        session.setAttribute("sexo", sexo);
+        session.setAttribute("fechaNac", fechaNac);
+        session.setAttribute("edad", edad);
+        session.setAttribute("meses", meses);
+        session.setAttribute("idJuzgado", idJuzgado);
+        session.setAttribute("idCar", idCar);
+        session.setAttribute("actaNac", actaNac);
+        session.setAttribute("dep", dep);
+        session.setAttribute("prov", prov);
+        session.setAttribute("dist", dist);
+        session.setAttribute("direccion", direccion);
+        session.setAttribute("numResolAband", numResolAband);
+        session.setAttribute("fechaResolAband", fechaResolAband);
+        session.setAttribute("numResolConsen", numResolConsen);
+        session.setAttribute("fechaResolConsen", fechaResolConsen);
+        session.setAttribute("incesto", incesto);
+        session.setAttribute("psiquiatrica", psiquiatrica);
+        session.setAttribute("epilepsia", epilepsia);
+        session.setAttribute("abuso", abuso);
+        session.setAttribute("sifilis", sifilis);
+        session.setAttribute("estable", estable);
+        session.setAttribute("intervencion", intervencion);
+        session.setAttribute("trastorno", trastorno);
+        session.setAttribute("prioritarios", prioritarios);
+        session.setAttribute("obs", obs);
+
+        return new ModelAndView("redirect:/updateNna", map);
+    }
+
+    @RequestMapping(value = "/updateNna", method = RequestMethod.GET)
+    public ModelAndView updateNna_GET(ModelMap map, HttpSession session) {
+        long idNna = 0;
+        String nn = "";
+        String nombre = "";
+        String apellidoP = "";
+        String apellidoM = "";
+        String sexo = "";
+        String fechaNac = "";
+        String edad = "";
+        String meses = "";
+        long idJuzgado = 0;
+        long idCar = 0;
+        String actaNac = "";
+        String dep = "";
+        String prov = "";
+        String dist = "";
+        String direccion = "";
+        String numResolAband = "";
+        String fechaResolAband = "";
+        String numResolConsen = "";
+        String fechaResolConsen = "";
+        String incesto = "";
+        String psiquiatrica = "";
+        String epilepsia = "";
+        String abuso = "";
+        String sifilis = "";
+        String estable = "";
+        String intervencion = "";
+        String trastorno = "";
+        String prioritarios = "";
+        String obs = "";
+        try {
+            idNna = Long.parseLong(session.getAttribute("idNna").toString());
+        } catch (Exception ex) {
+            session.removeAttribute("idNna");
+            session.removeAttribute("nn");
+            session.removeAttribute("nombre");
+            session.removeAttribute("apellidoP");
+            session.removeAttribute("apellidoM");
+            session.removeAttribute("sexo");
+            session.removeAttribute("fechaNac");
+            session.removeAttribute("edad");
+            session.removeAttribute("meses");
+            session.removeAttribute("idJuzgado");
+            session.removeAttribute("idCar");
+            session.removeAttribute("actaNac");
+            session.removeAttribute("dep");
+            session.removeAttribute("prov");
+            session.removeAttribute("dist");
+            session.removeAttribute("direccion");
+            session.removeAttribute("numResolAband");
+            session.removeAttribute("fechaResolAband");
+            session.removeAttribute("numResolConsen");
+            session.removeAttribute("fechaResolConsen");
+            session.removeAttribute("incesto");
+            session.removeAttribute("psiquiatrica");
+            session.removeAttribute("epilepsia");
+            session.removeAttribute("abuso");
+            session.removeAttribute("sifilis");
+            session.removeAttribute("estable");
+            session.removeAttribute("intervencion");
+            session.removeAttribute("trastorno");
+            session.removeAttribute("prioritarios");
+            session.removeAttribute("obs");
+
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        if (session.getAttribute("idJuzgado") != null) {
+            idJuzgado = Long.parseLong(session.getAttribute("idJuzgado").toString());
+        }
+        if (session.getAttribute("nn") != null) {
+            nn = session.getAttribute("nn").toString();
+        }
+        if (session.getAttribute("nombre") != null) {
+            nombre = session.getAttribute("nombre").toString();
+        }
+        if (session.getAttribute("apellidoP") != null) {
+            apellidoP = session.getAttribute("apellidoP").toString();
+        }
+        if (session.getAttribute("apellidoM") != null) {
+            apellidoM = session.getAttribute("apellidoM").toString();
+        }
+        if (session.getAttribute("sexo") != null) {
+            sexo = session.getAttribute("sexo").toString();
+        }
+        if (session.getAttribute("fechaNac") != null) {
+            fechaNac = session.getAttribute("fechaNac").toString();
+        }
+        if (session.getAttribute("edad") != null) {
+            edad = session.getAttribute("edad").toString();
+        }
+        if (session.getAttribute("meses") != null) {
+            meses = session.getAttribute("meses").toString();
+        }
+        if (session.getAttribute("idJuzgado") != null) {
+            idJuzgado = Long.parseLong(session.getAttribute("idJuzgado").toString());
+        }
+        if (session.getAttribute("idCar") != null) {
+            idCar = Long.parseLong(session.getAttribute("idCar").toString());
+        }
+        if (session.getAttribute("actaNac") != null) {
+            actaNac = session.getAttribute("actaNac").toString();
+        }
+        if (session.getAttribute("dep") != null) {
+            dep = session.getAttribute("dep").toString();
+        }
+        if (session.getAttribute("prov") != null) {
+            prov = session.getAttribute("prov").toString();
+        }
+        if (session.getAttribute("dist") != null) {
+            dist = session.getAttribute("dist").toString();
+        }
+        if (session.getAttribute("direccion") != null) {
+            direccion = session.getAttribute("direccion").toString();
+        }
+        if (session.getAttribute("numResolAband") != null) {
+            numResolAband = session.getAttribute("numResolAband").toString();
+        }
+        if (session.getAttribute("fechaResolAband") != null) {
+            fechaResolAband = session.getAttribute("fechaResolAband").toString();
+        }
+        if (session.getAttribute("numResolConsen") != null) {
+            numResolConsen = session.getAttribute("numResolConsen").toString();
+        }
+        if (session.getAttribute("fechaResolConsen") != null) {
+            fechaResolConsen = session.getAttribute("fechaResolConsen").toString();
+        }
+        if (session.getAttribute("incesto") != null) {
+            incesto = session.getAttribute("incesto").toString();
+        }
+        if (session.getAttribute("psiquiatrica") != null) {
+            psiquiatrica = session.getAttribute("psiquiatrica").toString();
+        }
+        if (session.getAttribute("epilepsia") != null) {
+            epilepsia = session.getAttribute("epilepsia").toString();
+        }
+        if (session.getAttribute("abuso") != null) {
+            abuso = session.getAttribute("abuso").toString();
+        }
+        if (session.getAttribute("sifilis") != null) {
+            sifilis = session.getAttribute("sifilis").toString();
+        }
+        if (session.getAttribute("estable") != null) {
+            estable = session.getAttribute("estable").toString();
+        }
+        if (session.getAttribute("intervencion") != null) {
+            intervencion = session.getAttribute("intervencion").toString();
+        }
+        if (session.getAttribute("trastorno") != null) {
+            trastorno = session.getAttribute("trastorno").toString();
+        }
+        if (session.getAttribute("prioritarios") != null) {
+            prioritarios = session.getAttribute("prioritarios").toString();
+        }
+        if (session.getAttribute("obs") != null) {
+            obs = session.getAttribute("obs").toString();
+        }
+        session.removeAttribute("idNna");
+        session.removeAttribute("nn");
+        session.removeAttribute("nombre");
+        session.removeAttribute("apellidoP");
+        session.removeAttribute("apellidoM");
+        session.removeAttribute("sexo");
+        session.removeAttribute("fechaNac");
+        session.removeAttribute("edad");
+        session.removeAttribute("meses");
+        session.removeAttribute("idJuzgado");
+        session.removeAttribute("idCar");
+        session.removeAttribute("actaNac");
+        session.removeAttribute("dep");
+        session.removeAttribute("prov");
+        session.removeAttribute("dist");
+        session.removeAttribute("direccion");
+        session.removeAttribute("numResolAband");
+        session.removeAttribute("fechaResolAband");
+        session.removeAttribute("numResolConsen");
+        session.removeAttribute("fechaResolConsen");
+        session.removeAttribute("incesto");
+        session.removeAttribute("psiquiatrica");
+        session.removeAttribute("epilepsia");
+        session.removeAttribute("abuso");
+        session.removeAttribute("sifilis");
+        session.removeAttribute("estable");
+        session.removeAttribute("intervencion");
+        session.removeAttribute("trastorno");
+        session.removeAttribute("prioritarios");
+        session.removeAttribute("obs");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -934,6 +1340,7 @@ public class nna {
         return new ModelAndView("/Personal/nna/editar_expediente_1", map);
     }
 
+    //PROBAR
     @RequestMapping(value = "/crearExpedienteNna", method = RequestMethod.POST)
     public ModelAndView crearExpedienteNna(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
@@ -963,6 +1370,203 @@ public class nna {
             @RequestParam(value = "codEspeciales", required = false) String codEspeciales,
             @RequestParam(value = "diagnostico", required = false) String diagnostico,
             @RequestParam(value = "comentario", required = false) String comentario) {
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("ua", ua);
+        session.setAttribute("numero", numero);
+        session.setAttribute("nombreActual", nombreActual);
+        session.setAttribute("apellidoPActual", apellidoPActual);
+        session.setAttribute("apellidoMActual", apellidoMActual);
+        session.setAttribute("fechaIngreso", fechaIngreso);
+        session.setAttribute("fechaIngresoPrio", fechaIngresoPrio);
+        session.setAttribute("fechaAct", fechaAct);
+        session.setAttribute("ht", ht);
+        session.setAttribute("nInvTutelar", nInvTutelar);
+        session.setAttribute("fechaInvTutelar", fechaInvTutelar);
+        session.setAttribute("procTutelar", procTutelar);
+        session.setAttribute("fichaInt", fichaInt);
+        session.setAttribute("respLegal", respLegal);
+        session.setAttribute("respPsico", respPsico);
+        session.setAttribute("estado", estado);
+        session.setAttribute("fechaEstado", fechaEstado);
+        session.setAttribute("clasificacion", clasificacion);
+        session.setAttribute("grpRef", grpRef);
+        session.setAttribute("codMayor", codMayor);
+        session.setAttribute("codAdoles", codAdoles);
+        session.setAttribute("codHermano", codHermano);
+        session.setAttribute("codSalud", codSalud);
+        session.setAttribute("codEspeciales", codEspeciales);
+        session.setAttribute("diagnostico", diagnostico);
+        session.setAttribute("comentario", comentario);
+
+        return new ModelAndView("redirect:/crearExpedienteNna", map);
+    }
+
+    @RequestMapping(value = "/crearExpedienteNna", method = RequestMethod.GET)
+    public ModelAndView crearExpedienteNna(ModelMap map, HttpSession session) {
+        long idNna = 0;
+        long ua = 0;
+        String numero = "";
+        String nombreActual = "";
+        String apellidoPActual = "";
+        String apellidoMActual = "";
+        String fechaIngreso = "";
+        String fechaIngresoPrio = "";
+        String fechaAct = "";
+        String ht = "";
+        String nInvTutelar = "";
+        String fechaInvTutelar = "";
+        String procTutelar = "";
+        String fichaInt = "";
+        String respLegal = "";
+        String respPsico = "";
+        String estado = "";
+        String fechaEstado = "";
+        String clasificacion = "";
+        String grpRef = "";
+        String codMayor = "";
+        String codAdoles = "";
+        String codHermano = "";
+        String codSalud = "";
+        String codEspeciales = "";
+        String diagnostico = "";
+        String comentario = "";
+        try {
+            idNna = Long.parseLong(session.getAttribute("idNna").toString());
+            ua = Long.parseLong(session.getAttribute("ua").toString());
+        } catch (Exception ex) {
+            session.removeAttribute("idNna");
+            session.removeAttribute("ua");
+            session.removeAttribute("numero");
+            session.removeAttribute("nombreActual");
+            session.removeAttribute("apellidoPActual");
+            session.removeAttribute("apellidoMActual");
+            session.removeAttribute("fechaIngreso");
+            session.removeAttribute("fechaIngresoPrio");
+            session.removeAttribute("fechaAct");
+            session.removeAttribute("ht");
+            session.removeAttribute("nInvTutelar");
+            session.removeAttribute("fechaInvTutelar");
+            session.removeAttribute("procTutelar");
+            session.removeAttribute("fichaInt");
+            session.removeAttribute("respLegal");
+            session.removeAttribute("respPsico");
+            session.removeAttribute("estado");
+            session.removeAttribute("fechaEstado");
+            session.removeAttribute("clasificacion");
+            session.removeAttribute("grpRef");
+            session.removeAttribute("codMayor");
+            session.removeAttribute("codAdoles");
+            session.removeAttribute("codHermano");
+            session.removeAttribute("codSalud");
+            session.removeAttribute("codEspeciales");
+            session.removeAttribute("diagnostico");
+            session.removeAttribute("comentario");
+
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        if (session.getAttribute("numero") != null) {
+            numero = session.getAttribute("numero").toString();
+        }
+        if (session.getAttribute("nombreActual") != null) {
+            nombreActual = session.getAttribute("nombreActual").toString();
+        }
+        if (session.getAttribute("apellidoPActual") != null) {
+            apellidoPActual = session.getAttribute("apellidoPActual").toString();
+        }
+        if (session.getAttribute("apellidoMActual") != null) {
+            apellidoMActual = session.getAttribute("apellidoMActual").toString();
+        }
+        if (session.getAttribute("fechaIngreso") != null) {
+            fechaIngreso = session.getAttribute("fechaIngreso").toString();
+        }
+        if (session.getAttribute("fechaIngresoPrio") != null) {
+            fechaIngresoPrio = session.getAttribute("fechaIngresoPrio").toString();
+        }
+        if (session.getAttribute("fechaAct") != null) {
+            fechaAct = session.getAttribute("fechaAct").toString();
+        }
+        if (session.getAttribute("ht") != null) {
+            ht = session.getAttribute("ht").toString();
+        }
+        if (session.getAttribute("nInvTutelar") != null) {
+            nInvTutelar = session.getAttribute("nInvTutelar").toString();
+        }
+        if (session.getAttribute("fechaInvTutelar") != null) {
+            fechaInvTutelar = session.getAttribute("fechaInvTutelar").toString();
+        }
+        if (session.getAttribute("procTutelar") != null) {
+            procTutelar = session.getAttribute("procTutelar").toString();
+        }
+        if (session.getAttribute("fichaInt") != null) {
+            fichaInt = session.getAttribute("fichaInt").toString();
+        }
+        if (session.getAttribute("respLegal") != null) {
+            respLegal = session.getAttribute("respLegal").toString();
+        }
+        if (session.getAttribute("respPsico") != null) {
+            respPsico = session.getAttribute("respPsico").toString();
+        }
+        if (session.getAttribute("estado") != null) {
+            estado = session.getAttribute("estado").toString();
+        }
+        if (session.getAttribute("fechaEstado") != null) {
+            fechaEstado = session.getAttribute("fechaEstado").toString();
+        }
+        if (session.getAttribute("clasificacion") != null) {
+            clasificacion = session.getAttribute("clasificacion").toString();
+        }
+        if (session.getAttribute("grpRef") != null) {
+            grpRef = session.getAttribute("grpRef").toString();
+        }
+        if (session.getAttribute("codMayor") != null) {
+            codMayor = session.getAttribute("codMayor").toString();
+        }
+        if (session.getAttribute("codAdoles") != null) {
+            codAdoles = session.getAttribute("codAdoles").toString();
+        }
+        if (session.getAttribute("codHermano") != null) {
+            codHermano = session.getAttribute("codHermano").toString();
+        }
+        if (session.getAttribute("codSalud") != null) {
+            codSalud = session.getAttribute("codSalud").toString();
+        }
+        if (session.getAttribute("codEspeciales") != null) {
+            codEspeciales = session.getAttribute("codEspeciales").toString();
+        }
+        if (session.getAttribute("diagnostico") != null) {
+            diagnostico = session.getAttribute("diagnostico").toString();
+        }
+        if (session.getAttribute("comentario") != null) {
+            comentario = session.getAttribute("comentario").toString();
+        }
+        session.removeAttribute("idNna");
+        session.removeAttribute("ua");
+        session.removeAttribute("numero");
+        session.removeAttribute("nombreActual");
+        session.removeAttribute("apellidoPActual");
+        session.removeAttribute("apellidoMActual");
+        session.removeAttribute("fechaIngreso");
+        session.removeAttribute("fechaIngresoPrio");
+        session.removeAttribute("fechaAct");
+        session.removeAttribute("ht");
+        session.removeAttribute("nInvTutelar");
+        session.removeAttribute("fechaInvTutelar");
+        session.removeAttribute("procTutelar");
+        session.removeAttribute("fichaInt");
+        session.removeAttribute("respLegal");
+        session.removeAttribute("respPsico");
+        session.removeAttribute("estado");
+        session.removeAttribute("fechaEstado");
+        session.removeAttribute("clasificacion");
+        session.removeAttribute("grpRef");
+        session.removeAttribute("codMayor");
+        session.removeAttribute("codAdoles");
+        session.removeAttribute("codHermano");
+        session.removeAttribute("codSalud");
+        session.removeAttribute("codEspeciales");
+        session.removeAttribute("diagnostico");
+        session.removeAttribute("comentario");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -1118,7 +1722,7 @@ public class nna {
         ServicioNna.updateNna(tempNna);
         if (clasificacion.equals("seguimiento")) {
             tempExp.setAdoptable(Short.parseShort("1"));
-           // tempExp.setEstado("eval");
+            // tempExp.setEstado("eval");
         }
 //        Date utiDate = new Date();
 //        java.sql.Date fechaAct = new java.sql.Date(utiDate.getTime());
@@ -1169,6 +1773,7 @@ public class nna {
         return new ModelAndView("/Personal/nna/editar_nna", map);
     }
 
+    //PROBAR
     @RequestMapping(value = "/crearExpedienteNna2", method = RequestMethod.POST)
     public ModelAndView crearExpedienteNna2(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
@@ -1195,6 +1800,184 @@ public class nna {
             @RequestParam(value = "codEspeciales", required = false) String codEspeciales,
             @RequestParam(value = "diagnostico", required = false) String diagnostico,
             @RequestParam(value = "comentario", required = false) String comentario) {
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("numero", numero);
+        session.setAttribute("nombreActual", nombreActual);
+        session.setAttribute("apellidoPActual", apellidoPActual);
+        session.setAttribute("apellidoMActual", apellidoMActual);
+        session.setAttribute("fechaIngreso", fechaIngreso);
+        session.setAttribute("ht", ht);
+        session.setAttribute("nInvTutelar", nInvTutelar);
+        session.setAttribute("fechaInvTutelar", fechaInvTutelar);
+        session.setAttribute("procTutelar", procTutelar);
+        session.setAttribute("fichaInt", fichaInt);
+        session.setAttribute("respLegal", respLegal);
+        session.setAttribute("respPsico", respPsico);
+        session.setAttribute("estado", estado);
+        session.setAttribute("fechaEstado", fechaEstado);
+        session.setAttribute("clasificacion", clasificacion);
+        session.setAttribute("grpRef", grpRef);
+        session.setAttribute("codMayor", codMayor);
+        session.setAttribute("codAdoles", codAdoles);
+        session.setAttribute("codHermano", codHermano);
+        session.setAttribute("codSalud", codSalud);
+        session.setAttribute("codEspeciales", codEspeciales);
+        session.setAttribute("diagnostico", diagnostico);
+        session.setAttribute("comentario", comentario);
+
+        return new ModelAndView("redirect:/crearExpedienteNna2", map);
+    }
+
+    @RequestMapping(value = "/crearExpedienteNna2", method = RequestMethod.GET)
+    public ModelAndView crearExpedienteNna2(ModelMap map, HttpSession session) {
+        long idNna = 0;
+        String numero = "";
+        String nombreActual = "";
+        String apellidoPActual = "";
+        String apellidoMActual = "";
+        String fechaIngreso = "";
+        String ht = "";
+        String nInvTutelar = "";
+        String fechaInvTutelar = "";
+        String procTutelar = "";
+        String fichaInt = "";
+        String respLegal = "";
+        String respPsico = "";
+        String estado = "";
+        String fechaEstado = "";
+        String clasificacion = "";
+        String grpRef = "";
+        String codMayor = "";
+        String codAdoles = "";
+        String codHermano = "";
+        String codSalud = "";
+        String codEspeciales = "";
+        String diagnostico = "";
+        String comentario = "";
+        try {
+            idNna = Long.parseLong(session.getAttribute("idNna").toString());
+        } catch (Exception ex) {
+            session.removeAttribute("idNna");
+            session.removeAttribute("numero");
+            session.removeAttribute("nombreActual");
+            session.removeAttribute("apellidoPActual");
+            session.removeAttribute("apellidoMActual");
+            session.removeAttribute("fechaIngreso");
+            session.removeAttribute("ht");
+            session.removeAttribute("nInvTutelar");
+            session.removeAttribute("fechaInvTutelar");
+            session.removeAttribute("procTutelar");
+            session.removeAttribute("fichaInt");
+            session.removeAttribute("respLegal");
+            session.removeAttribute("respPsico");
+            session.removeAttribute("estado");
+            session.removeAttribute("fechaEstado");
+            session.removeAttribute("clasificacion");
+            session.removeAttribute("grpRef");
+            session.removeAttribute("codMayor");
+            session.removeAttribute("codAdoles");
+            session.removeAttribute("codHermano");
+            session.removeAttribute("codSalud");
+            session.removeAttribute("codEspeciales");
+            session.removeAttribute("diagnostico");
+            session.removeAttribute("comentario");
+
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        if (session.getAttribute("numero") != null) {
+            numero = session.getAttribute("numero").toString();
+        }
+        if (session.getAttribute("nombreActual") != null) {
+            nombreActual = session.getAttribute("nombreActual").toString();
+        }
+        if (session.getAttribute("apellidoPActual") != null) {
+            apellidoPActual = session.getAttribute("apellidoPActual").toString();
+        }
+        if (session.getAttribute("apellidoMActual") != null) {
+            apellidoMActual = session.getAttribute("apellidoMActual").toString();
+        }
+        if (session.getAttribute("fechaIngreso") != null) {
+            fechaIngreso = session.getAttribute("fechaIngreso").toString();
+        }
+        if (session.getAttribute("ht") != null) {
+            ht = session.getAttribute("ht").toString();
+        }
+        if (session.getAttribute("nInvTutelar") != null) {
+            nInvTutelar = session.getAttribute("nInvTutelar").toString();
+        }
+        if (session.getAttribute("fechaInvTutelar") != null) {
+            fechaInvTutelar = session.getAttribute("fechaInvTutelar").toString();
+        }
+        if (session.getAttribute("procTutelar") != null) {
+            procTutelar = session.getAttribute("procTutelar").toString();
+        }
+        if (session.getAttribute("fichaInt") != null) {
+            fichaInt = session.getAttribute("fichaInt").toString();
+        }
+        if (session.getAttribute("respLegal") != null) {
+            respLegal = session.getAttribute("respLegal").toString();
+        }
+        if (session.getAttribute("respPsico") != null) {
+            respPsico = session.getAttribute("respPsico").toString();
+        }
+        if (session.getAttribute("estado") != null) {
+            estado = session.getAttribute("estado").toString();
+        }
+        if (session.getAttribute("fechaEstado") != null) {
+            fechaEstado = session.getAttribute("fechaEstado").toString();
+        }
+        if (session.getAttribute("clasificacion") != null) {
+            clasificacion = session.getAttribute("clasificacion").toString();
+        }
+        if (session.getAttribute("grpRef") != null) {
+            grpRef = session.getAttribute("grpRef").toString();
+        }
+        if (session.getAttribute("codMayor") != null) {
+            codMayor = session.getAttribute("codMayor").toString();
+        }
+        if (session.getAttribute("codAdoles") != null) {
+            codAdoles = session.getAttribute("codAdoles").toString();
+        }
+        if (session.getAttribute("codHermano") != null) {
+            codHermano = session.getAttribute("codHermano").toString();
+        }
+        if (session.getAttribute("codSalud") != null) {
+            codSalud = session.getAttribute("codSalud").toString();
+        }
+        if (session.getAttribute("codEspeciales") != null) {
+            codEspeciales = session.getAttribute("codEspeciales").toString();
+        }
+        if (session.getAttribute("diagnostico") != null) {
+            diagnostico = session.getAttribute("diagnostico").toString();
+        }
+        if (session.getAttribute("comentario") != null) {
+            comentario = session.getAttribute("comentario").toString();
+        }
+        session.removeAttribute("idNna");
+        session.removeAttribute("numero");
+        session.removeAttribute("nombreActual");
+        session.removeAttribute("apellidoPActual");
+        session.removeAttribute("apellidoMActual");
+        session.removeAttribute("fechaIngreso");
+        session.removeAttribute("ht");
+        session.removeAttribute("nInvTutelar");
+        session.removeAttribute("fechaInvTutelar");
+        session.removeAttribute("procTutelar");
+        session.removeAttribute("fichaInt");
+        session.removeAttribute("respLegal");
+        session.removeAttribute("respPsico");
+        session.removeAttribute("estado");
+        session.removeAttribute("fechaEstado");
+        session.removeAttribute("clasificacion");
+        session.removeAttribute("grpRef");
+        session.removeAttribute("codMayor");
+        session.removeAttribute("codAdoles");
+        session.removeAttribute("codHermano");
+        session.removeAttribute("codSalud");
+        session.removeAttribute("codEspeciales");
+        session.removeAttribute("diagnostico");
+        session.removeAttribute("comentario");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -1359,8 +2142,9 @@ public class nna {
         return new ModelAndView("/Personal/Buscador/nna/editar_nna", map);
     }
 
+    //PROBAR
     @RequestMapping(value = "/crearExpedienteNna4", method = RequestMethod.POST)
-    public ModelAndView crearExpedienteNna4(ModelMap map, HttpSession session,
+    public ModelAndView crearExpedienteNna4_POST(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
             @RequestParam(value = "numero", required = false) String numero,
             @RequestParam(value = "nombreActual", required = false) String nombreActual,
@@ -1385,6 +2169,184 @@ public class nna {
             @RequestParam(value = "codEspeciales", required = false) String codEspeciales,
             @RequestParam(value = "diagnostico", required = false) String diagnostico,
             @RequestParam(value = "comentario", required = false) String comentario) {
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("numero", numero);
+        session.setAttribute("nombreActual", nombreActual);
+        session.setAttribute("apellidoPActual", apellidoPActual);
+        session.setAttribute("apellidoMActual", apellidoMActual);
+        session.setAttribute("fechaIngreso", fechaIngreso);
+        session.setAttribute("ht", ht);
+        session.setAttribute("nInvTutelar", nInvTutelar);
+        session.setAttribute("fechaInvTutelar", fechaInvTutelar);
+        session.setAttribute("procTutelar", procTutelar);
+        session.setAttribute("fichaInt", fichaInt);
+        session.setAttribute("respLegal", respLegal);
+        session.setAttribute("respPsico", respPsico);
+        session.setAttribute("estado", estado);
+        session.setAttribute("fechaEstado", fechaEstado);
+        session.setAttribute("clasificacion", clasificacion);
+        session.setAttribute("grpRef", grpRef);
+        session.setAttribute("codMayor", codMayor);
+        session.setAttribute("codAdoles", codAdoles);
+        session.setAttribute("codHermano", codHermano);
+        session.setAttribute("codSalud", codSalud);
+        session.setAttribute("codEspeciales", codEspeciales);
+        session.setAttribute("diagnostico", diagnostico);
+        session.setAttribute("comentario", comentario);
+
+        return new ModelAndView("redirect:/crearExpedienteNna4", map);
+    }
+
+    @RequestMapping(value = "/crearExpedienteNna4", method = RequestMethod.GET)
+    public ModelAndView crearExpedienteNna4_GET(ModelMap map, HttpSession session) {
+        long idNna = 0;
+        String numero = "";
+        String nombreActual = "";
+        String apellidoPActual = "";
+        String apellidoMActual = "";
+        String fechaIngreso = "";
+        String ht = "";
+        String nInvTutelar = "";
+        String fechaInvTutelar = "";
+        String procTutelar = "";
+        String fichaInt = "";
+        String respLegal = "";
+        String respPsico = "";
+        String estado = "";
+        String fechaEstado = "";
+        String clasificacion = "";
+        String grpRef = "";
+        String codMayor = "";
+        String codAdoles = "";
+        String codHermano = "";
+        String codSalud = "";
+        String codEspeciales = "";
+        String diagnostico = "";
+        String comentario = "";
+        try {
+            idNna = Long.parseLong(session.getAttribute("idNna").toString());
+        } catch (Exception ex) {
+            session.removeAttribute("idNna");
+            session.removeAttribute("numero");
+            session.removeAttribute("nombreActual");
+            session.removeAttribute("apellidoPActual");
+            session.removeAttribute("apellidoMActual");
+            session.removeAttribute("fechaIngreso");
+            session.removeAttribute("ht");
+            session.removeAttribute("nInvTutelar");
+            session.removeAttribute("fechaInvTutelar");
+            session.removeAttribute("procTutelar");
+            session.removeAttribute("fichaInt");
+            session.removeAttribute("respLegal");
+            session.removeAttribute("respPsico");
+            session.removeAttribute("estado");
+            session.removeAttribute("fechaEstado");
+            session.removeAttribute("clasificacion");
+            session.removeAttribute("grpRef");
+            session.removeAttribute("codMayor");
+            session.removeAttribute("codAdoles");
+            session.removeAttribute("codHermano");
+            session.removeAttribute("codSalud");
+            session.removeAttribute("codEspeciales");
+            session.removeAttribute("diagnostico");
+            session.removeAttribute("comentario");
+
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        if (session.getAttribute("numero") != null) {
+            numero = session.getAttribute("numero").toString();
+        }
+        if (session.getAttribute("nombreActual") != null) {
+            nombreActual = session.getAttribute("nombreActual").toString();
+        }
+        if (session.getAttribute("apellidoPActual") != null) {
+            apellidoPActual = session.getAttribute("apellidoPActual").toString();
+        }
+        if (session.getAttribute("apellidoMActual") != null) {
+            apellidoMActual = session.getAttribute("apellidoMActual").toString();
+        }
+        if (session.getAttribute("fechaIngreso") != null) {
+            fechaIngreso = session.getAttribute("fechaIngreso").toString();
+        }
+        if (session.getAttribute("ht") != null) {
+            ht = session.getAttribute("ht").toString();
+        }
+        if (session.getAttribute("nInvTutelar") != null) {
+            nInvTutelar = session.getAttribute("nInvTutelar").toString();
+        }
+        if (session.getAttribute("fechaInvTutelar") != null) {
+            fechaInvTutelar = session.getAttribute("fechaInvTutelar").toString();
+        }
+        if (session.getAttribute("procTutelar") != null) {
+            procTutelar = session.getAttribute("procTutelar").toString();
+        }
+        if (session.getAttribute("fichaInt") != null) {
+            fichaInt = session.getAttribute("fichaInt").toString();
+        }
+        if (session.getAttribute("respLegal") != null) {
+            respLegal = session.getAttribute("respLegal").toString();
+        }
+        if (session.getAttribute("respPsico") != null) {
+            respPsico = session.getAttribute("respPsico").toString();
+        }
+        if (session.getAttribute("estado") != null) {
+            estado = session.getAttribute("estado").toString();
+        }
+        if (session.getAttribute("fechaEstado") != null) {
+            fechaEstado = session.getAttribute("fechaEstado").toString();
+        }
+        if (session.getAttribute("clasificacion") != null) {
+            clasificacion = session.getAttribute("clasificacion").toString();
+        }
+        if (session.getAttribute("grpRef") != null) {
+            grpRef = session.getAttribute("grpRef").toString();
+        }
+        if (session.getAttribute("codMayor") != null) {
+            codMayor = session.getAttribute("codMayor").toString();
+        }
+        if (session.getAttribute("codAdoles") != null) {
+            codAdoles = session.getAttribute("codAdoles").toString();
+        }
+        if (session.getAttribute("codHermano") != null) {
+            codHermano = session.getAttribute("codHermano").toString();
+        }
+        if (session.getAttribute("codSalud") != null) {
+            codSalud = session.getAttribute("codSalud").toString();
+        }
+        if (session.getAttribute("codEspeciales") != null) {
+            codEspeciales = session.getAttribute("codEspeciales").toString();
+        }
+        if (session.getAttribute("diagnostico") != null) {
+            diagnostico = session.getAttribute("diagnostico").toString();
+        }
+        if (session.getAttribute("comentario") != null) {
+            comentario = session.getAttribute("comentario").toString();
+        }
+        session.removeAttribute("idNna");
+        session.removeAttribute("numero");
+        session.removeAttribute("nombreActual");
+        session.removeAttribute("apellidoPActual");
+        session.removeAttribute("apellidoMActual");
+        session.removeAttribute("fechaIngreso");
+        session.removeAttribute("ht");
+        session.removeAttribute("nInvTutelar");
+        session.removeAttribute("fechaInvTutelar");
+        session.removeAttribute("procTutelar");
+        session.removeAttribute("fichaInt");
+        session.removeAttribute("respLegal");
+        session.removeAttribute("respPsico");
+        session.removeAttribute("estado");
+        session.removeAttribute("fechaEstado");
+        session.removeAttribute("clasificacion");
+        session.removeAttribute("grpRef");
+        session.removeAttribute("codMayor");
+        session.removeAttribute("codAdoles");
+        session.removeAttribute("codHermano");
+        session.removeAttribute("codSalud");
+        session.removeAttribute("codEspeciales");
+        session.removeAttribute("diagnostico");
+        session.removeAttribute("comentario");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -1549,8 +2511,9 @@ public class nna {
         return new ModelAndView("/Personal/nna/editar_nna_1", map);
     }
 
+    //CONSTRUCCION
     @RequestMapping(value = "/updateExpedienteNna", method = RequestMethod.POST)
-    public ModelAndView updateExpedienteNna(ModelMap map, HttpSession session,
+    public ModelAndView updateExpedienteNna_POST(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
             @RequestParam("ua") long ua,
             @RequestParam(value = "numero", required = false) String numero,
@@ -1579,6 +2542,210 @@ public class nna {
             @RequestParam(value = "codEspeciales", required = false) String codEspeciales,
             @RequestParam(value = "diagnostico", required = false) String diagnostico,
             @RequestParam(value = "comentario", required = false) String comentario) {
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("ua", ua);
+        session.setAttribute("numero", numero);
+        session.setAttribute("idExpNna", idExpNna);
+        session.setAttribute("listaEval", listaEval);
+        session.setAttribute("nombreActual", nombreActual);
+        session.setAttribute("apellidoPActual", apellidoPActual);
+        session.setAttribute("apellidoMActual", apellidoMActual);
+        session.setAttribute("fechaIngreso", fechaIngreso);
+        session.setAttribute("fechaIngresoPrio", fechaIngresoPrio);
+        session.setAttribute("fechaAct", fechaAct);
+        session.setAttribute("ht", ht);
+        session.setAttribute("nInvTutelar", nInvTutelar);
+        session.setAttribute("fechaInvTutelar", fechaInvTutelar);
+        session.setAttribute("procTutelar", procTutelar);
+        session.setAttribute("respLegal", respLegal);
+        session.setAttribute("respPsico", respPsico);
+        session.setAttribute("estado", estado);
+        session.setAttribute("fechaEstado", fechaEstado);
+        session.setAttribute("clasificacion", clasificacion);
+        session.setAttribute("grpRef", grpRef);
+        session.setAttribute("codMayor", codMayor);
+        session.setAttribute("codAdoles", codAdoles);
+        session.setAttribute("codHermano", codHermano);
+        session.setAttribute("codSalud", codSalud);
+        session.setAttribute("codEspeciales", codEspeciales);
+        session.setAttribute("diagnostico", diagnostico);
+        session.setAttribute("comentario", comentario);
+
+        return new ModelAndView("redirect:/updateExpedienteNna", map);
+    }
+
+    @RequestMapping(value = "/updateExpedienteNna", method = RequestMethod.GET)
+    public ModelAndView updateExpedienteNna_GET(ModelMap map, HttpSession session) {
+        long idNna = 0;
+        long ua = 0;
+        String numero = "";
+        String idExpNna = "";
+        String listaEval = "";
+        String nombreActual = "";
+        String apellidoPActual = "";
+        String apellidoMActual = "";
+        String fechaIngreso = "";
+        String fechaIngresoPrio = "";
+        String fechaAct = "";
+        String ht = "";
+        String nInvTutelar = "";
+        String fechaInvTutelar = "";
+        String procTutelar = "";
+        String respLegal = "";
+        String respPsico = "";
+        String estado = "";
+        String fechaEstado = "";
+        String clasificacion = "";
+        String grpRef = "";
+        String codMayor = "";
+        String codAdoles = "";
+        String codHermano = "";
+        String codSalud = "";
+        String codEspeciales = "";
+        String diagnostico = "";
+        String comentario = "";
+        try {
+            idNna = Long.parseLong(session.getAttribute("idNna").toString());
+            ua = Long.parseLong(session.getAttribute("ua").toString());
+        } catch (Exception ex) {
+            session.removeAttribute("idNna");
+            session.removeAttribute("ua");
+            session.removeAttribute("numero");
+            session.removeAttribute("idExpNna");
+            session.removeAttribute("listaEval");
+            session.removeAttribute("nombreActual");
+            session.removeAttribute("apellidoPActual");
+            session.removeAttribute("apellidoMActual");
+            session.removeAttribute("fechaIngreso");
+            session.removeAttribute("fechaIngresoPrio");
+            session.removeAttribute("fechaAct");
+            session.removeAttribute("ht");
+            session.removeAttribute("nInvTutelar");
+            session.removeAttribute("fechaInvTutelar");
+            session.removeAttribute("procTutelar");
+            session.removeAttribute("respLegal");
+            session.removeAttribute("respPsico");
+            session.removeAttribute("estado");
+            session.removeAttribute("fechaEstado");
+            session.removeAttribute("clasificacion");
+            session.removeAttribute("grpRef");
+            session.removeAttribute("codMayor");
+            session.removeAttribute("codAdoles");
+            session.removeAttribute("codHermano");
+            session.removeAttribute("codSalud");
+            session.removeAttribute("codEspeciales");
+            session.removeAttribute("diagnostico");
+            session.removeAttribute("comentario");
+
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        if (session.getAttribute("numero") != null) {
+            numero = session.getAttribute("numero").toString();
+        }
+        if (session.getAttribute("idExpNna") != null) {
+            idExpNna = session.getAttribute("idExpNna").toString();
+        }
+        if (session.getAttribute("listaEval") != null) {
+            listaEval = session.getAttribute("listaEval").toString();
+        }
+        if (session.getAttribute("nombreActual") != null) {
+            nombreActual = session.getAttribute("nombreActual").toString();
+        }
+        if (session.getAttribute("apellidoPActual") != null) {
+            apellidoPActual = session.getAttribute("apellidoPActual").toString();
+        }
+        if (session.getAttribute("apellidoMActual") != null) {
+            apellidoMActual = session.getAttribute("apellidoMActual").toString();
+        }
+        if (session.getAttribute("fechaIngreso") != null) {
+            fechaIngreso = session.getAttribute("fechaIngreso").toString();
+        }
+        if (session.getAttribute("fechaIngresoPrio") != null) {
+            fechaIngresoPrio = session.getAttribute("fechaIngresoPrio").toString();
+        }
+        if (session.getAttribute("fechaAct") != null) {
+            fechaAct = session.getAttribute("fechaAct").toString();
+        }
+        if (session.getAttribute("ht") != null) {
+            ht = session.getAttribute("ht").toString();
+        }
+        if (session.getAttribute("nInvTutelar") != null) {
+            nInvTutelar = session.getAttribute("nInvTutelar").toString();
+        }
+        if (session.getAttribute("fechaInvTutelar") != null) {
+            fechaInvTutelar = session.getAttribute("fechaInvTutelar").toString();
+        }
+        if (session.getAttribute("procTutelar") != null) {
+            procTutelar = session.getAttribute("procTutelar").toString();
+        }
+        if (session.getAttribute("respLegal") != null) {
+            respLegal = session.getAttribute("respLegal").toString();
+        }
+        if (session.getAttribute("respPsico") != null) {
+            respPsico = session.getAttribute("respPsico").toString();
+        }
+        if (session.getAttribute("estado") != null) {
+            estado = session.getAttribute("estado").toString();
+        }
+        if (session.getAttribute("fechaEstado") != null) {
+            fechaEstado = session.getAttribute("fechaEstado").toString();
+        }
+        if (session.getAttribute("clasificacion") != null) {
+            clasificacion = session.getAttribute("clasificacion").toString();
+        }
+        if (session.getAttribute("grpRef") != null) {
+            grpRef = session.getAttribute("grpRef").toString();
+        }
+        if (session.getAttribute("codMayor") != null) {
+            codMayor = session.getAttribute("codMayor").toString();
+        }
+        if (session.getAttribute("codAdoles") != null) {
+            codAdoles = session.getAttribute("codAdoles").toString();
+        }
+        if (session.getAttribute("codHermano") != null) {
+            codHermano = session.getAttribute("codHermano").toString();
+        }
+        if (session.getAttribute("codSalud") != null) {
+            codSalud = session.getAttribute("codSalud").toString();
+        }
+        if (session.getAttribute("codEspeciales") != null) {
+            codEspeciales = session.getAttribute("codEspeciales").toString();
+        }
+        if (session.getAttribute("diagnostico") != null) {
+            diagnostico = session.getAttribute("diagnostico").toString();
+        }
+        if (session.getAttribute("comentario") != null) {
+            comentario = session.getAttribute("comentario").toString();
+        }
+        session.removeAttribute("idNna");
+        session.removeAttribute("ua");
+        session.removeAttribute("numero");
+        session.removeAttribute("idExpNna");
+        session.removeAttribute("listaEval");
+        session.removeAttribute("nombreActual");
+        session.removeAttribute("apellidoPActual");
+        session.removeAttribute("apellidoMActual");
+        session.removeAttribute("fechaIngreso");
+        session.removeAttribute("fechaIngresoPrio");
+        session.removeAttribute("fechaAct");
+        session.removeAttribute("ht");
+        session.removeAttribute("nInvTutelar");
+        session.removeAttribute("fechaInvTutelar");
+        session.removeAttribute("procTutelar");
+        session.removeAttribute("respLegal");
+        session.removeAttribute("respPsico");
+        session.removeAttribute("estado");
+        session.removeAttribute("fechaEstado");
+        session.removeAttribute("clasificacion");
+        session.removeAttribute("grpRef");
+        session.removeAttribute("codMayor");
+        session.removeAttribute("codAdoles");
+        session.removeAttribute("codHermano");
+        session.removeAttribute("codSalud");
+        session.removeAttribute("codEspeciales");
+        session.removeAttribute("diagnostico");
+        session.removeAttribute("comentario");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -1785,8 +2952,9 @@ public class nna {
         return new ModelAndView("/Personal/nna/editar_nna", map);
     }
 
+    //PROBAR
     @RequestMapping(value = "/updateExpedienteNna2", method = RequestMethod.POST)
-    public ModelAndView updateExpedienteNna2(ModelMap map, HttpSession session,
+    public ModelAndView updateExpedienteNna2_POST(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
             @RequestParam(value = "numero", required = false) String numero,
             @RequestParam(value = "nombreActual", required = false) String nombreActual,
@@ -1810,6 +2978,177 @@ public class nna {
             @RequestParam(value = "codEspeciales", required = false) String codEspeciales,
             @RequestParam(value = "diagnostico", required = false) String diagnostico,
             @RequestParam(value = "comentario", required = false) String comentario) {
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("numero", numero);
+        session.setAttribute("nombreActual", nombreActual);
+        session.setAttribute("apellidoPActual", apellidoPActual);
+        session.setAttribute("apellidoMActual", apellidoMActual);
+        session.setAttribute("fechaIngreso", fechaIngreso);
+        session.setAttribute("ht", ht);
+        session.setAttribute("nInvTutelar", nInvTutelar);
+        session.setAttribute("fechaInvTutelar", fechaInvTutelar);
+        session.setAttribute("procTutelar", procTutelar);
+        session.setAttribute("respLegal", respLegal);
+        session.setAttribute("respPsico", respPsico);
+        session.setAttribute("estado", estado);
+        session.setAttribute("fechaEstado", fechaEstado);
+        session.setAttribute("clasificacion", clasificacion);
+        session.setAttribute("grpRef", grpRef);
+        session.setAttribute("codMayor", codMayor);
+        session.setAttribute("codAdoles", codAdoles);
+        session.setAttribute("codHermano", codHermano);
+        session.setAttribute("codSalud", codSalud);
+        session.setAttribute("codEspeciales", codEspeciales);
+        session.setAttribute("diagnostico", diagnostico);
+        session.setAttribute("comentario", comentario);
+
+        return new ModelAndView("redirect:/updateExpedienteNna2", map);
+    }
+
+    @RequestMapping(value = "/updateExpedienteNna2", method = RequestMethod.GET)
+    public ModelAndView updateExpedienteNna2_GET(ModelMap map, HttpSession session) {
+        long idNna = 0;
+        String numero = "";
+        String nombreActual = "";
+        String apellidoPActual = "";
+        String apellidoMActual = "";
+        String fechaIngreso = "";
+        String ht = "";
+        String nInvTutelar = "";
+        String fechaInvTutelar = "";
+        String procTutelar = "";
+        String respLegal = "";
+        String respPsico = "";
+        String estado = "";
+        String fechaEstado = "";
+        String clasificacion = "";
+        String grpRef = "";
+        String codMayor = "";
+        String codAdoles = "";
+        String codHermano = "";
+        String codSalud = "";
+        String codEspeciales = "";
+        String diagnostico = "";
+        String comentario = "";
+        try {
+            idNna = Long.parseLong(session.getAttribute("idNna").toString());
+        } catch (Exception ex) {
+            session.removeAttribute("idNna");
+            session.removeAttribute("numero");
+            session.removeAttribute("nombreActual");
+            session.removeAttribute("apellidoPActual");
+            session.removeAttribute("apellidoMActual");
+            session.removeAttribute("fechaIngreso");
+            session.removeAttribute("ht");
+            session.removeAttribute("nInvTutelar");
+            session.removeAttribute("fechaInvTutelar");
+            session.removeAttribute("procTutelar");
+            session.removeAttribute("respLegal");
+            session.removeAttribute("respPsico");
+            session.removeAttribute("estado");
+            session.removeAttribute("fechaEstado");
+            session.removeAttribute("clasificacion");
+            session.removeAttribute("grpRef");
+            session.removeAttribute("codMayor");
+            session.removeAttribute("codAdoles");
+            session.removeAttribute("codHermano");
+            session.removeAttribute("codSalud");
+            session.removeAttribute("codEspeciales");
+            session.removeAttribute("diagnostico");
+            session.removeAttribute("comentario");
+
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        if (session.getAttribute("numero") != null) {
+            numero = session.getAttribute("numero").toString();
+        }
+        if (session.getAttribute("nombreActual") != null) {
+            nombreActual = session.getAttribute("nombreActual").toString();
+        }
+        if (session.getAttribute("apellidoPActual") != null) {
+            apellidoPActual = session.getAttribute("apellidoPActual").toString();
+        }
+        if (session.getAttribute("apellidoMActual") != null) {
+            apellidoMActual = session.getAttribute("apellidoMActual").toString();
+        }
+        if (session.getAttribute("fechaIngreso") != null) {
+            fechaIngreso = session.getAttribute("fechaIngreso").toString();
+        }
+        if (session.getAttribute("ht") != null) {
+            ht = session.getAttribute("ht").toString();
+        }
+        if (session.getAttribute("nInvTutelar") != null) {
+            nInvTutelar = session.getAttribute("nInvTutelar").toString();
+        }
+        if (session.getAttribute("fechaInvTutelar") != null) {
+            fechaInvTutelar = session.getAttribute("fechaInvTutelar").toString();
+        }
+        if (session.getAttribute("procTutelar") != null) {
+            procTutelar = session.getAttribute("procTutelar").toString();
+        }
+        if (session.getAttribute("respLegal") != null) {
+            respLegal = session.getAttribute("respLegal").toString();
+        }
+        if (session.getAttribute("respPsico") != null) {
+            respPsico = session.getAttribute("respPsico").toString();
+        }
+        if (session.getAttribute("estado") != null) {
+            estado = session.getAttribute("estado").toString();
+        }
+        if (session.getAttribute("fechaEstado") != null) {
+            fechaEstado = session.getAttribute("fechaEstado").toString();
+        }
+        if (session.getAttribute("clasificacion") != null) {
+            clasificacion = session.getAttribute("clasificacion").toString();
+        }
+        if (session.getAttribute("grpRef") != null) {
+            grpRef = session.getAttribute("grpRef").toString();
+        }
+        if (session.getAttribute("codMayor") != null) {
+            codMayor = session.getAttribute("codMayor").toString();
+        }
+        if (session.getAttribute("codAdoles") != null) {
+            codAdoles = session.getAttribute("codAdoles").toString();
+        }
+        if (session.getAttribute("codHermano") != null) {
+            codHermano = session.getAttribute("codHermano").toString();
+        }
+        if (session.getAttribute("codSalud") != null) {
+            codSalud = session.getAttribute("codSalud").toString();
+        }
+        if (session.getAttribute("codEspeciales") != null) {
+            codEspeciales = session.getAttribute("codEspeciales").toString();
+        }
+        if (session.getAttribute("diagnostico") != null) {
+            diagnostico = session.getAttribute("diagnostico").toString();
+        }
+        if (session.getAttribute("comentario") != null) {
+            comentario = session.getAttribute("comentario").toString();
+        }
+        session.removeAttribute("idNna");
+        session.removeAttribute("numero");
+        session.removeAttribute("nombreActual");
+        session.removeAttribute("apellidoPActual");
+        session.removeAttribute("apellidoMActual");
+        session.removeAttribute("fechaIngreso");
+        session.removeAttribute("ht");
+        session.removeAttribute("nInvTutelar");
+        session.removeAttribute("fechaInvTutelar");
+        session.removeAttribute("procTutelar");
+        session.removeAttribute("respLegal");
+        session.removeAttribute("respPsico");
+        session.removeAttribute("estado");
+        session.removeAttribute("fechaEstado");
+        session.removeAttribute("clasificacion");
+        session.removeAttribute("grpRef");
+        session.removeAttribute("codMayor");
+        session.removeAttribute("codAdoles");
+        session.removeAttribute("codHermano");
+        session.removeAttribute("codSalud");
+        session.removeAttribute("codEspeciales");
+        session.removeAttribute("diagnostico");
+        session.removeAttribute("comentario");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -1970,8 +3309,9 @@ public class nna {
         return new ModelAndView("/Personal/Buscador/nna/editar_nna", map);
     }
 
+    //PROBAR
     @RequestMapping(value = "/updateExpedienteNna4", method = RequestMethod.POST)
-    public ModelAndView updateExpedienteNna4(ModelMap map, HttpSession session,
+    public ModelAndView updateExpedienteNna4_POST(ModelMap map, HttpSession session,
             @RequestParam("idNna") long idNna,
             @RequestParam(value = "numero", required = false) String numero,
             @RequestParam(value = "nombreActual", required = false) String nombreActual,
@@ -1995,6 +3335,177 @@ public class nna {
             @RequestParam(value = "codEspeciales", required = false) String codEspeciales,
             @RequestParam(value = "diagnostico", required = false) String diagnostico,
             @RequestParam(value = "comentario", required = false) String comentario) {
+        session.setAttribute("idNna", idNna);
+        session.setAttribute("numero", numero);
+        session.setAttribute("nombreActual", nombreActual);
+        session.setAttribute("apellidoPActual", apellidoPActual);
+        session.setAttribute("apellidoMActual", apellidoMActual);
+        session.setAttribute("fechaIngreso", fechaIngreso);
+        session.setAttribute("ht", ht);
+        session.setAttribute("nInvTutelar", nInvTutelar);
+        session.setAttribute("fechaInvTutelar", fechaInvTutelar);
+        session.setAttribute("procTutelar", procTutelar);
+        session.setAttribute("respLegal", respLegal);
+        session.setAttribute("respPsico", respPsico);
+        session.setAttribute("estado", estado);
+        session.setAttribute("fechaEstado", fechaEstado);
+        session.setAttribute("clasificacion", clasificacion);
+        session.setAttribute("grpRef", grpRef);
+        session.setAttribute("codMayor", codMayor);
+        session.setAttribute("codAdoles", codAdoles);
+        session.setAttribute("codHermano", codHermano);
+        session.setAttribute("codSalud", codSalud);
+        session.setAttribute("codEspeciales", codEspeciales);
+        session.setAttribute("diagnostico", diagnostico);
+        session.setAttribute("comentario", comentario);
+
+        return new ModelAndView("redirect:/updateExpedienteNna4", map);
+    }
+
+    @RequestMapping(value = "/updateExpedienteNna4", method = RequestMethod.GET)
+    public ModelAndView updateExpedienteNna4_GET(ModelMap map, HttpSession session) {
+        long idNna = 0;
+        String numero = "";
+        String nombreActual = "";
+        String apellidoPActual = "";
+        String apellidoMActual = "";
+        String fechaIngreso = "";
+        String ht = "";
+        String nInvTutelar = "";
+        String fechaInvTutelar = "";
+        String procTutelar = "";
+        String respLegal = "";
+        String respPsico = "";
+        String estado = "";
+        String fechaEstado = "";
+        String clasificacion = "";
+        String grpRef = "";
+        String codMayor = "";
+        String codAdoles = "";
+        String codHermano = "";
+        String codSalud = "";
+        String codEspeciales = "";
+        String diagnostico = "";
+        String comentario = "";
+        try {
+            idNna = Long.parseLong(session.getAttribute("idNna").toString());
+        } catch (Exception ex) {
+            session.removeAttribute("idNna");
+            session.removeAttribute("numero");
+            session.removeAttribute("nombreActual");
+            session.removeAttribute("apellidoPActual");
+            session.removeAttribute("apellidoMActual");
+            session.removeAttribute("fechaIngreso");
+            session.removeAttribute("ht");
+            session.removeAttribute("nInvTutelar");
+            session.removeAttribute("fechaInvTutelar");
+            session.removeAttribute("procTutelar");
+            session.removeAttribute("respLegal");
+            session.removeAttribute("respPsico");
+            session.removeAttribute("estado");
+            session.removeAttribute("fechaEstado");
+            session.removeAttribute("clasificacion");
+            session.removeAttribute("grpRef");
+            session.removeAttribute("codMayor");
+            session.removeAttribute("codAdoles");
+            session.removeAttribute("codHermano");
+            session.removeAttribute("codSalud");
+            session.removeAttribute("codEspeciales");
+            session.removeAttribute("diagnostico");
+            session.removeAttribute("comentario");
+
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        if (session.getAttribute("numero") != null) {
+            numero = session.getAttribute("numero").toString();
+        }
+        if (session.getAttribute("nombreActual") != null) {
+            nombreActual = session.getAttribute("nombreActual").toString();
+        }
+        if (session.getAttribute("apellidoPActual") != null) {
+            apellidoPActual = session.getAttribute("apellidoPActual").toString();
+        }
+        if (session.getAttribute("apellidoMActual") != null) {
+            apellidoMActual = session.getAttribute("apellidoMActual").toString();
+        }
+        if (session.getAttribute("fechaIngreso") != null) {
+            fechaIngreso = session.getAttribute("fechaIngreso").toString();
+        }
+        if (session.getAttribute("ht") != null) {
+            ht = session.getAttribute("ht").toString();
+        }
+        if (session.getAttribute("nInvTutelar") != null) {
+            nInvTutelar = session.getAttribute("nInvTutelar").toString();
+        }
+        if (session.getAttribute("fechaInvTutelar") != null) {
+            fechaInvTutelar = session.getAttribute("fechaInvTutelar").toString();
+        }
+        if (session.getAttribute("procTutelar") != null) {
+            procTutelar = session.getAttribute("procTutelar").toString();
+        }
+        if (session.getAttribute("respLegal") != null) {
+            respLegal = session.getAttribute("respLegal").toString();
+        }
+        if (session.getAttribute("respPsico") != null) {
+            respPsico = session.getAttribute("respPsico").toString();
+        }
+        if (session.getAttribute("estado") != null) {
+            estado = session.getAttribute("estado").toString();
+        }
+        if (session.getAttribute("fechaEstado") != null) {
+            fechaEstado = session.getAttribute("fechaEstado").toString();
+        }
+        if (session.getAttribute("clasificacion") != null) {
+            clasificacion = session.getAttribute("clasificacion").toString();
+        }
+        if (session.getAttribute("grpRef") != null) {
+            grpRef = session.getAttribute("grpRef").toString();
+        }
+        if (session.getAttribute("codMayor") != null) {
+            codMayor = session.getAttribute("codMayor").toString();
+        }
+        if (session.getAttribute("codAdoles") != null) {
+            codAdoles = session.getAttribute("codAdoles").toString();
+        }
+        if (session.getAttribute("codHermano") != null) {
+            codHermano = session.getAttribute("codHermano").toString();
+        }
+        if (session.getAttribute("codSalud") != null) {
+            codSalud = session.getAttribute("codSalud").toString();
+        }
+        if (session.getAttribute("codEspeciales") != null) {
+            codEspeciales = session.getAttribute("codEspeciales").toString();
+        }
+        if (session.getAttribute("diagnostico") != null) {
+            diagnostico = session.getAttribute("diagnostico").toString();
+        }
+        if (session.getAttribute("comentario") != null) {
+            comentario = session.getAttribute("comentario").toString();
+        }
+        session.removeAttribute("idNna");
+        session.removeAttribute("numero");
+        session.removeAttribute("nombreActual");
+        session.removeAttribute("apellidoPActual");
+        session.removeAttribute("apellidoMActual");
+        session.removeAttribute("fechaIngreso");
+        session.removeAttribute("ht");
+        session.removeAttribute("nInvTutelar");
+        session.removeAttribute("fechaInvTutelar");
+        session.removeAttribute("procTutelar");
+        session.removeAttribute("respLegal");
+        session.removeAttribute("respPsico");
+        session.removeAttribute("estado");
+        session.removeAttribute("fechaEstado");
+        session.removeAttribute("clasificacion");
+        session.removeAttribute("grpRef");
+        session.removeAttribute("codMayor");
+        session.removeAttribute("codAdoles");
+        session.removeAttribute("codHermano");
+        session.removeAttribute("codSalud");
+        session.removeAttribute("codEspeciales");
+        session.removeAttribute("diagnostico");
+        session.removeAttribute("comentario");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -2187,14 +3698,63 @@ public class nna {
         return new ModelAndView("/Personal/nna/editar_informe", map);
     }
 
+    //PROBAR
     @RequestMapping(value = "/NnaCrearInforme", method = RequestMethod.POST)
-    public ModelAndView NnaCrearInforme(ModelMap map, HttpSession session,
+    public ModelAndView NnaCrearInforme_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "idExpNna") Long idExpNna,
             @RequestParam(value = "clasificacion") String clasificacion,
             @RequestParam(value = "numInf") String numInf,
             @RequestParam(value = "fechaInf", required = false) String fechaInf,
             @RequestParam(value = "result", required = false) String result,
             @RequestParam(value = "obs", required = false) String obs) {
+        session.setAttribute("idExpNna", idExpNna);
+        session.setAttribute("clasificacion", clasificacion);
+        session.setAttribute("numInf", numInf);
+        session.setAttribute("fechaInf", fechaInf);
+        session.setAttribute("result", result);
+        session.setAttribute("obs", obs);
+
+        return new ModelAndView("redirect:/NnaCrearInforme", map);
+    }
+
+    @RequestMapping(value = "/NnaCrearInforme", method = RequestMethod.GET)
+    public ModelAndView NnaCrearInforme_GET(ModelMap map, HttpSession session) {
+        long idExpNna = 0;
+        String clasificacion = "";
+        String numInf = "";
+        String fechaInf = "";
+        String result = "";
+        String obs = "";
+        try {
+            idExpNna = Long.parseLong(session.getAttribute("idExpNna").toString());
+            clasificacion = session.getAttribute("clasificacion").toString();
+            numInf = session.getAttribute("numInf").toString();
+        } catch (Exception ex) {
+            session.removeAttribute("idExpNna");
+            session.removeAttribute("clasificacion");
+            session.removeAttribute("numInf");
+            session.removeAttribute("fechaInf");
+            session.removeAttribute("result");
+            session.removeAttribute("obs");
+
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        if (session.getAttribute("fechaInf") != null) {
+            fechaInf = session.getAttribute("fechaInf").toString();
+        }
+        if (session.getAttribute("result") != null) {
+            result = session.getAttribute("result").toString();
+        }
+        if (session.getAttribute("obs") != null) {
+            obs = session.getAttribute("obs").toString();
+        }
+        session.removeAttribute("idExpNna");
+        session.removeAttribute("clasificacion");
+        session.removeAttribute("numInf");
+        session.removeAttribute("fechaInf");
+        session.removeAttribute("result");
+        session.removeAttribute("obs");
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -2220,7 +3780,7 @@ public class nna {
         informe.setObservaciones(obs);
 
         ServicioNna.crearInforme(informe, idExpNna);
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ". Agregó un informe al expediente del NNA con  ID de expediente: " + idExpNna;
 
@@ -2261,8 +3821,9 @@ public class nna {
         return new ModelAndView("/Personal/nna/editar_informe", map);
     }
 
+    //PROBAR
     @RequestMapping(value = "/NnaUpdateInforme", method = RequestMethod.POST)
-    public ModelAndView NnaUpdateInforme(ModelMap map, HttpSession session,
+    public ModelAndView NnaUpdateInforme_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "idExpNna") Long idExpNna,
             @RequestParam(value = "clasificacion") String clasificacion,
             @RequestParam(value = "idInf") Long idInf,
@@ -2270,6 +3831,59 @@ public class nna {
             @RequestParam(value = "fechaInf", required = false) String fechaInf,
             @RequestParam(value = "result", required = false) String result,
             @RequestParam(value = "obs", required = false) String obs) {
+        session.setAttribute("idExpNna", idExpNna);
+        session.setAttribute("clasificacion", clasificacion);
+        session.setAttribute("idInf",idInf);
+        session.setAttribute("numInf", numInf);
+        session.setAttribute("fechaInf", fechaInf);
+        session.setAttribute("result", result);
+        session.setAttribute("obs", obs);
+
+        return new ModelAndView("redirect:/NnaUpdateInforme", map);
+    }
+    
+    @RequestMapping(value = "/NnaUpdateInforme", method = RequestMethod.GET)
+    public ModelAndView NnaUpdateInforme_GET(ModelMap map, HttpSession session) {
+        long idExpNna = 0;
+        String clasificacion = "";
+        long idInf = 0;
+        String numInf = "";
+        String fechaInf = "";
+        String result = "";
+        String obs = "";
+        try {
+            idExpNna = Long.parseLong(session.getAttribute("idExpNna").toString());
+            clasificacion = session.getAttribute("clasificacion").toString();
+            idInf =Long.parseLong(session.getAttribute("idEInf").toString());
+            numInf = session.getAttribute("numInf").toString();
+        } catch (Exception ex) {
+            session.removeAttribute("idExpNna");
+            session.removeAttribute("clasificacion");
+            session.removeAttribute("idInf");
+            session.removeAttribute("numInf");
+            session.removeAttribute("fechaInf");
+            session.removeAttribute("result");
+            session.removeAttribute("obs");
+
+            return new ModelAndView("redirect:/inicioper", map);
+        }
+        if (session.getAttribute("fechaInf") != null) {
+            fechaInf = session.getAttribute("fechaInf").toString();
+        }
+        if (session.getAttribute("result") != null) {
+            result = session.getAttribute("result").toString();
+        }
+        if (session.getAttribute("obs") != null) {
+            obs = session.getAttribute("obs").toString();
+        }
+        session.removeAttribute("idExpNna");
+        session.removeAttribute("clasificacion");
+        session.removeAttribute("idInf");
+        session.removeAttribute("numInf");
+        session.removeAttribute("fechaInf");
+        session.removeAttribute("result");
+        session.removeAttribute("obs");
+        
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -2296,7 +3910,7 @@ public class nna {
         informe.setObservaciones(obs);
 
         ServicioNna.updateInforme(informe);
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ". Editó un informe al expediente del NNA con  ID de expediente: " + idExpNna;
 
@@ -2307,7 +3921,7 @@ public class nna {
 
             ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
         } catch (Exception ex) {
-        } 
+        }
 
         map.put("df", df);
         map.put("clasificacion", clasificacion);
