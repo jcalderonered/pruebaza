@@ -1422,4 +1422,16 @@ public class familia {
         }
 
     }
+    
+    @RequestMapping(value = "/Flecturas", method = RequestMethod.GET)
+    public ModelAndView Flecturas(ModelMap map, HttpSession session) {
+        Familia usuario = (Familia) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+        return new ModelAndView("/Familia/lecturas", map);
+    }
+    
 }
