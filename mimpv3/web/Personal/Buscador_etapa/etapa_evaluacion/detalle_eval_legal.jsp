@@ -89,7 +89,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                              <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA")) {%>
+                              <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA") && !u.getRol().equals("DAPA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
