@@ -179,10 +179,245 @@
                                 </div>
                                 <br>
                                 <div class="control-group">
-                                    <label class="control-label">País de nacimiento</label>
+                                    <label class="control-label">País de Nacimiento<font style="color:red">(*)</font></label>
                                     <div class="controls">
-                                        <input value="${El.getPaisNac()}" id="paisNac" name="paisNac" type="text" class="input-xlarge">
-                                    </div>
+                                        <select id="paisNac" name="paisNac">
+                                            <option value="AF" <c:when test="${El.getPaisNac() == 'AF'}">selected</c:when>>Afganistán</option>
+                                            <option value="AL" <c:when test="${El.getPaisNac() == 'AL'}">selected</c:when>>Albania</option>
+                                            <option value="DE" <c:when test="${El.getPaisNac() == 'DE'}">selected</c:when>>Alemania</option>
+                                            <option value="AD" <c:when test="${El.getPaisNac() == 'AD'}">selected</c:when>>Andorra</option>
+                                            <option value="AO" <c:when test="${El.getPaisNac() == 'AO'}">selected</c:when>>Angola</option>
+                                            <option value="AI" <c:when test="${El.getPaisNac() == 'AI'}">selected</c:when>>Anguilla</option>
+                                            <option value="AQ" <c:when test="${El.getPaisNac() == 'AQ'}">selected</c:when>>Antártida</option>
+                                            <option value="AG" <c:when test="${El.getPaisNac() == 'AG'}">selected</c:when>>Antigua y Barbuda</option>
+                                            <option value="AN" <c:when test="${El.getPaisNac() == 'AN'}">selected</c:when>>Antillas Holandesas</option>
+                                            <option value="SA" <c:when test="${El.getPaisNac() == 'SA'}">selected</c:when>>Arabia Saudí</option>
+                                            <option value="DZ" <c:when test="${El.getPaisNac() == 'DZ'}">selected</c:when>>Argelia</option>
+                                            <option value="AR" <c:when test="${El.getPaisNac() == 'AR'}">selected</c:when>>Argentina</option>
+                                            <option value="AM" <c:when test="${El.getPaisNac() == 'AM'}">selected</c:when>>Armenia</option>
+                                            <option value="AW" <c:when test="${El.getPaisNac() == 'AW'}">selected</c:when>>Aruba</option>
+                                            <option value="AU" <c:when test="${El.getPaisNac() == 'AU'}">selected</c:when>>Australia</option>
+                                            <option value="AT" <c:when test="${El.getPaisNac() == 'AT'}">selected</c:when>>Austria</option>
+                                            <option value="AZ" <c:when test="${El.getPaisNac() == 'AZ'}">selected</c:when>>Azerbaiyán</option>
+                                            <option value="BS" <c:when test="${El.getPaisNac() == 'BS'}">selected</c:when>>Bahamas</option>
+                                            <option value="BH" <c:when test="${El.getPaisNac() == 'BH'}">selected</c:when>>Bahrein</option>
+                                            <option value="BD" <c:when test="${El.getPaisNac() == 'BD'}">selected</c:when>>Bangladesh</option>
+                                            <option value="BB" <c:when test="${El.getPaisNac() == 'BB'}">selected</c:when>>Barbados</option>
+                                            <option value="BE" <c:when test="${El.getPaisNac() == 'BE'}">selected</c:when>>Bélgica</option>
+                                            <option value="BZ" <c:when test="${El.getPaisNac() == 'BZ'}">selected</c:when>>Belice</option>
+                                            <option value="BJ" <c:when test="${El.getPaisNac() == 'BJ'}">selected</c:when>>Benin</option>
+                                            <option value="BM" <c:when test="${El.getPaisNac() == 'BM'}">selected</c:when>>Bermudas</option>
+                                            <option value="BY" <c:when test="${El.getPaisNac() == 'BY'}">selected</c:when>>Bielorrusia</option>
+                                            <option value="MM" <c:when test="${El.getPaisNac() == 'MM'}">selected</c:when>>Birmania</option>
+                                            <option value="BO" <c:when test="${El.getPaisNac() == 'BO'}">selected</c:when>>Bolivia</option>
+                                            <option value="BA" <c:when test="${El.getPaisNac() == 'BA'}">selected</c:when>>Bosnia y Herzegovina</option>
+                                            <option value="BW" <c:when test="${El.getPaisNac() == 'BW'}">selected</c:when>>Botswana</option>
+                                            <option value="BR" <c:when test="${El.getPaisNac() == 'BR'}">selected</c:when>>Brasil</option>
+                                            <option value="BN" <c:when test="${El.getPaisNac() == 'BN'}">selected</c:when>>Brunei</option>
+                                            <option value="BG" <c:when test="${El.getPaisNac() == 'BG'}">selected</c:when>>Bulgaria</option>
+                                            <option value="BF" <c:when test="${El.getPaisNac() == 'BF'}">selected</c:when>>Burkina Faso</option>
+                                            <option value="BI" <c:when test="${El.getPaisNac() == 'BI'}">selected</c:when>>Burundi</option>
+                                            <option value="BT" <c:when test="${El.getPaisNac() == 'BT'}">selected</c:when>>Bután</option>
+                                            <option value="CV" <c:when test="${El.getPaisNac() == 'CV'}">selected</c:when>>Cabo Verde</option>
+                                            <option value="KH" <c:when test="${El.getPaisNac() == 'KH'}">selected</c:when>>Camboya</option>
+                                            <option value="CM" <c:when test="${El.getPaisNac() == 'CM'}">selected</c:when>>Camerún</option>
+                                            <option value="CA" <c:when test="${El.getPaisNac() == 'CA'}">selected</c:when>>Canadá</option>
+                                            <option value="TD" <c:when test="${El.getPaisNac() == 'TD'}">selected</c:when>>Chad</option>
+                                            <option value="CL" <c:when test="${El.getPaisNac() == 'CL'}">selected</c:when>>Chile</option>
+                                            <option value="CN" <c:when test="${El.getPaisNac() == 'CN'}">selected</c:when>>China</option>
+                                            <option value="CY" <c:when test="${El.getPaisNac() == 'CY'}">selected</c:when>>Chipre</option>
+                                            <option value="VA" <c:when test="${El.getPaisNac() == 'VA'}">selected</c:when>>Ciudad del Vaticano (Santa Sede)</option>
+                                            <option value="CO" <c:when test="${El.getPaisNac() == 'CO'}">selected</c:when>>Colombia</option>
+                                            <option value="KM" <c:when test="${El.getPaisNac() == 'KM'}">selected</c:when>>Comores</option>
+                                            <option value="CG" <c:when test="${El.getPaisNac() == 'CG'}">selected</c:when>>Congo</option>
+                                            <option value="CD" <c:when test="${El.getPaisNac() == 'CD'}">selected</c:when>>Congo, República Democrática del</option>
+                                            <option value="KR" <c:when test="${El.getPaisNac() == 'KR'}">selected</c:when>>Corea</option>
+                                            <option value="KP" <c:when test="${El.getPaisNac() == 'KP'}">selected</c:when>>Corea del Norte</option>
+                                            <option value="CI" <c:when test="${El.getPaisNac() == 'CI'}">selected</c:when>>Costa de Marfíl</option>
+                                            <option value="CR" <c:when test="${El.getPaisNac() == 'CR'}">selected</c:when>>Costa Rica</option>
+                                            <option value="HR" <c:when test="${El.getPaisNac() == 'HR'}">selected</c:when>>Croacia (Hrvatska)</option>
+                                            <option value="CU" <c:when test="${El.getPaisNac() == 'CU'}">selected</c:when>>Cuba</option>
+                                            <option value="DK" <c:when test="${El.getPaisNac() == 'DK'}">selected</c:when>>Dinamarca</option>
+                                            <option value="DJ" <c:when test="${El.getPaisNac() == 'DJ'}">selected</c:when>>Djibouti</option>
+                                            <option value="DM" <c:when test="${El.getPaisNac() == 'DM'}">selected</c:when>>Dominica</option>
+                                            <option value="EC" <c:when test="${El.getPaisNac() == 'EC'}">selected</c:when>>Ecuador</option>
+                                            <option value="EG" <c:when test="${El.getPaisNac() == 'EG'}">selected</c:when>>Egipto</option>
+                                            <option value="SV" <c:when test="${El.getPaisNac() == 'SV'}">selected</c:when>>El Salvador</option>
+                                            <option value="AE" <c:when test="${El.getPaisNac() == 'AE'}">selected</c:when>>Emiratos Árabes Unidos</option>
+                                            <option value="ER" <c:when test="${El.getPaisNac() == 'ER'}">selected</c:when>>Eritrea</option>
+                                            <option value="SI" <c:when test="${El.getPaisNac() == 'SI'}">selected</c:when>>Eslovenia</option>
+                                            <option value="ES" <c:when test="${El.getPaisNac() == 'ES'}">selected</c:when>>España</option>
+                                            <option value="US" <c:when test="${El.getPaisNac() == 'US'}">selected</c:when>>Estados Unidos</option>
+                                            <option value="EE" <c:when test="${El.getPaisNac() == 'EE'}">selected</c:when>>Estonia</option>
+                                            <option value="ET" <c:when test="${El.getPaisNac() == 'ET'}">selected</c:when>>Etiopía</option>
+                                            <option value="FJ" <c:when test="${El.getPaisNac() == 'FJ'}">selected</c:when>>Fiji</option>
+                                            <option value="PH" <c:when test="${El.getPaisNac() == 'PH'}">selected</c:when>>Filipinas</option>
+                                            <option value="FI" <c:when test="${El.getPaisNac() == 'FI'}">selected</c:when>>Finlandia</option>
+                                            <option value="FR" <c:when test="${El.getPaisNac() == 'FR'}">selected</c:when>>Francia</option>
+                                            <option value="GA" <c:when test="${El.getPaisNac() == 'GA'}">selected</c:when>>Gabón</option>
+                                            <option value="GM" <c:when test="${El.getPaisNac() == 'GM'}">selected</c:when>>Gambia</option>
+                                            <option value="GE" <c:when test="${El.getPaisNac() == 'GE'}">selected</c:when>>Georgia</option>
+                                            <option value="GH" <c:when test="${El.getPaisNac() == 'GH'}">selected</c:when>>Ghana</option>
+                                            <option value="GI" <c:when test="${El.getPaisNac() == 'GI'}">selected</c:when>>Gibraltar</option>
+                                            <option value="GD" <c:when test="${El.getPaisNac() == 'GD'}">selected</c:when>>Granada</option>
+                                            <option value="GR" <c:when test="${El.getPaisNac() == 'GR'}">selected</c:when>>Grecia</option>
+                                            <option value="GL" <c:when test="${El.getPaisNac() == 'GL'}">selected</c:when>>Groenlandia</option>
+                                            <option value="GP" <c:when test="${El.getPaisNac() == 'GP'}">selected</c:when>>Guadalupe</option>
+                                            <option value="GU" <c:when test="${El.getPaisNac() == 'GU'}">selected</c:when>>Guam</option>
+                                            <option value="GT" <c:when test="${El.getPaisNac() == 'GT'}">selected</c:when>>Guatemala</option>
+                                            <option value="GY" <c:when test="${El.getPaisNac() == 'GY'}">selected</c:when>>Guayana</option>
+                                            <option value="GF" <c:when test="${El.getPaisNac() == 'GF'}">selected</c:when>>Guayana Francesa</option>
+                                            <option value="GN" <c:when test="${El.getPaisNac() == 'GN'}">selected</c:when>>Guinea</option>
+                                            <option value="GQ" <c:when test="${El.getPaisNac() == 'GQ'}">selected</c:when>>Guinea Ecuatorial</option>
+                                            <option value="GW" <c:when test="${El.getPaisNac() == 'GW'}">selected</c:when>>Guinea-Bissau</option>
+                                            <option value="HT" <c:when test="${El.getPaisNac() == 'HT'}">selected</c:when>>Haití</option>
+                                            <option value="HN" <c:when test="${El.getPaisNac() == 'HN'}">selected</c:when>>Honduras</option>
+                                            <option value="HU" <c:when test="${El.getPaisNac() == 'HU'}">selected</c:when>>Hungría</option>
+                                            <option value="IN" <c:when test="${El.getPaisNac() == 'IN'}">selected</c:when>>India</option>
+                                            <option value="ID" <c:when test="${El.getPaisNac() == 'ID'}">selected</c:when>>Indonesia</option>
+                                            <option value="IQ" <c:when test="${El.getPaisNac() == 'IQ'}">selected</c:when>>Irak</option>
+                                            <option value="IR" <c:when test="${El.getPaisNac() == 'IR'}">selected</c:when>>Irán</option>
+                                            <option value="IE" <c:when test="${El.getPaisNac() == 'IE'}">selected</c:when>>Irlanda</option>
+                                            <option value="BV" <c:when test="${El.getPaisNac() == 'BV'}">selected</c:when>>Isla Bouvet</option>
+                                            <option value="CX" <c:when test="${El.getPaisNac() == 'CX'}">selected</c:when>>Isla de Christmas</option>
+                                            <option value="IS" <c:when test="${El.getPaisNac() == 'IS'}">selected</c:when>>Islandia</option>
+                                            <option value="KY" <c:when test="${El.getPaisNac() == 'KY'}">selected</c:when>>Islas Caimán</option>
+                                            <option value="CK" <c:when test="${El.getPaisNac() == 'CK'}">selected</c:when>>Islas Cook</option>
+                                            <option value="CC" <c:when test="${El.getPaisNac() == 'CC'}">selected</c:when>>Islas de Cocos o Keeling</option>
+                                            <option value="FO" <c:when test="${El.getPaisNac() == 'FO'}">selected</c:when>>Islas Faroe</option>
+                                            <option value="HM" <c:when test="${El.getPaisNac() == 'HM'}">selected</c:when>>Islas Heard y McDonald</option>
+                                            <option value="FK" <c:when test="${El.getPaisNac() == 'FK'}">selected</c:when>>Islas Malvinas</option>
+                                            <option value="MP" <c:when test="${El.getPaisNac() == 'MP'}">selected</c:when>>Islas Marianas del Norte</option>
+                                            <option value="MH" <c:when test="${El.getPaisNac() == 'MH'}">selected</c:when>>Islas Marshall</option>
+                                            <option value="UM" <c:when test="${El.getPaisNac() == 'UM'}">selected</c:when>>Islas menores de Estados Unidos</option>
+                                            <option value="PW" <c:when test="${El.getPaisNac() == 'PW'}">selected</c:when>>Islas Palau</option>
+                                            <option value="SB" <c:when test="${El.getPaisNac() == 'SB'}">selected</c:when>>Islas Salomón</option>
+                                            <option value="SJ" <c:when test="${El.getPaisNac() == 'SJ'}">selected</c:when>>Islas Svalbard y Jan Mayen</option>
+                                            <option value="TK" <c:when test="${El.getPaisNac() == 'TK'}">selected</c:when>>Islas Tokelau</option>
+                                            <option value="TC" <c:when test="${El.getPaisNac() == 'TC'}">selected</c:when>>Islas Turks y Caicos</option>
+                                            <option value="VI" <c:when test="${El.getPaisNac() == 'VI'}">selected</c:when>>Islas Vírgenes (EEUU)</option>
+                                            <option value="VG" <c:when test="${El.getPaisNac() == 'VG'}">selected</c:when>>Islas Vírgenes (Reino Unido)</option>
+                                            <option value="WF" <c:when test="${El.getPaisNac() == 'WF'}">selected</c:when>>Islas Wallis y Futuna</option>
+                                            <option value="IL" <c:when test="${El.getPaisNac() == 'IL'}">selected</c:when>>Israel</option>
+                                            <option value="IT" <c:when test="${El.getPaisNac() == 'IT'}">selected</c:when>>Italia</option>
+                                            <option value="JM" <c:when test="${El.getPaisNac() == 'JM'}">selected</c:when>>Jamaica</option>
+                                            <option value="JP" <c:when test="${El.getPaisNac() == 'JP'}">selected</c:when>>Japón</option>
+                                            <option value="JO" <c:when test="${El.getPaisNac() == 'JO'}">selected</c:when>>Jordania</option>
+                                            <option value="KZ" <c:when test="${El.getPaisNac() == 'KZ'}">selected</c:when>>Kazajistán</option>
+                                            <option value="KE" <c:when test="${El.getPaisNac() == 'KE'}">selected</c:when>>Kenia</option>
+                                            <option value="KG" <c:when test="${El.getPaisNac() == 'KG'}">selected</c:when>>Kirguizistán</option>
+                                            <option value="KI" <c:when test="${El.getPaisNac() == 'KI'}">selected</c:when>>Kiribati</option>
+                                            <option value="KW" <c:when test="${El.getPaisNac() == 'KW'}">selected</c:when>>Kuwait</option>
+                                            <option value="LA" <c:when test="${El.getPaisNac() == 'LA'}">selected</c:when>>Laos</option>
+                                            <option value="LS" <c:when test="${El.getPaisNac() == 'LS'}">selected</c:when>>Lesotho</option>
+                                            <option value="LV" <c:when test="${El.getPaisNac() == 'LV'}">selected</c:when>>Letonia</option>
+                                            <option value="LB" <c:when test="${El.getPaisNac() == 'LB'}">selected</c:when>>Líbano</option>
+                                            <option value="LR" <c:when test="${El.getPaisNac() == 'LR'}">selected</c:when>>Liberia</option>
+                                            <option value="LY" <c:when test="${El.getPaisNac() == 'LY'}">selected</c:when>>Libia</option>
+                                            <option value="LI" <c:when test="${El.getPaisNac() == 'LI'}">selected</c:when>>Liechtenstein</option>
+                                            <option value="LT" <c:when test="${El.getPaisNac() == 'LT'}">selected</c:when>>Lituania</option>
+                                            <option value="LU" <c:when test="${El.getPaisNac() == 'LU'}">selected</c:when>>Luxemburgo</option>
+                                            <option value="MK" <c:when test="${El.getPaisNac() == 'MK'}">selected</c:when>>Macedonia, Ex-República Yugoslava de</option>
+                                            <option value="MG" <c:when test="${El.getPaisNac() == 'MG'}">selected</c:when>>Madagascar</option>
+                                            <option value="MY" <c:when test="${El.getPaisNac() == 'MY'}">selected</c:when>>Malasia</option>
+                                            <option value="MW" <c:when test="${El.getPaisNac() == 'MW'}">selected</c:when>>Malawi</option>
+                                            <option value="MV" <c:when test="${El.getPaisNac() == 'MV'}">selected</c:when>>Maldivas</option>
+                                            <option value="ML" <c:when test="${El.getPaisNac() == 'ML'}">selected</c:when>>Malí</option>
+                                            <option value="MT" <c:when test="${El.getPaisNac() == 'MT'}">selected</c:when>>Malta</option>
+                                            <option value="MA" <c:when test="${El.getPaisNac() == 'MA'}">selected</c:when>>Marruecos</option>
+                                            <option value="MQ" <c:when test="${El.getPaisNac() == 'MQ'}">selected</c:when>>Martinica</option>
+                                            <option value="MU" <c:when test="${El.getPaisNac() == 'MU'}">selected</c:when>>Mauricio</option>
+                                            <option value="MR" <c:when test="${El.getPaisNac() == 'MR'}">selected</c:when>>Mauritania</option>
+                                            <option value="YT" <c:when test="${El.getPaisNac() == 'YT'}">selected</c:when>>Mayotte</option>
+                                            <option value="MX" <c:when test="${El.getPaisNac() == 'MX'}">selected</c:when>>México</option>
+                                            <option value="FM" <c:when test="${El.getPaisNac() == 'FM'}">selected</c:when>>Micronesia</option>
+                                            <option value="MD" <c:when test="${El.getPaisNac() == 'MD'}">selected</c:when>>Moldavia</option>
+                                            <option value="MC" <c:when test="${El.getPaisNac() == 'MC'}">selected</c:when>>Mónaco</option>
+                                            <option value="MN" <c:when test="${El.getPaisNac() == 'MN'}">selected</c:when>>Mongolia</option>
+                                            <option value="MS" <c:when test="${El.getPaisNac() == 'MS'}">selected</c:when>>Montserrat</option>
+                                            <option value="MZ" <c:when test="${El.getPaisNac() == 'MZ'}">selected</c:when>>Mozambique</option>
+                                            <option value="NA" <c:when test="${El.getPaisNac() == 'NA'}">selected</c:when>>Namibia</option>
+                                            <option value="NR" <c:when test="${El.getPaisNac() == 'NR'}">selected</c:when>>Nauru</option>
+                                            <option value="NP" <c:when test="${El.getPaisNac() == 'NP'}">selected</c:when>>Nepal</option>
+                                            <option value="NI" <c:when test="${El.getPaisNac() == 'NI'}">selected</c:when>>Nicaragua</option>
+                                            <option value="NE" <c:when test="${El.getPaisNac() == 'NE'}">selected</c:when>>Níger</option>
+                                            <option value="NG" <c:when test="${El.getPaisNac() == 'NG'}">selected</c:when>>Nigeria</option>
+                                            <option value="NU" <c:when test="${El.getPaisNac() == 'NU'}">selected</c:when>>Niue</option>
+                                            <option value="NF" <c:when test="${El.getPaisNac() == 'NF'}">selected</c:when>>Norfolk</option>
+                                            <option value="NO" <c:when test="${El.getPaisNac() == 'NO'}">selected</c:when>>Noruega</option>
+                                            <option value="NC" <c:when test="${El.getPaisNac() == 'NC'}">selected</c:when>>Nueva Caledonia</option>
+                                            <option value="NZ" <c:when test="${El.getPaisNac() == 'NZ'}">selected</c:when>>Nueva Zelanda</option>
+                                            <option value="OM" <c:when test="${El.getPaisNac() == 'OM'}">selected</c:when>>Omán</option>
+                                            <option value="NL" <c:when test="${El.getPaisNac() == 'NL'}">selected</c:when>>Países Bajos</option>
+                                            <option value="PA" <c:when test="${El.getPaisNac() == 'PA'}">selected</c:when>>Panamá</option>
+                                            <option value="PG" <c:when test="${El.getPaisNac() == 'PG'}">selected</c:when>>Papúa Nueva Guinea</option>
+                                            <option value="PK" <c:when test="${El.getPaisNac() == 'PK'}">selected</c:when>>Paquistán</option>
+                                            <option value="PY" <c:when test="${El.getPaisNac() == 'PY'}">selected</c:when>>Paraguay</option>
+                                            <option value="Peru" <c:when test="${El.getPaisNac() == 'Peru'}">selected</c:when>>Perú</option>
+                                            <option value="PN" <c:when test="${El.getPaisNac() == 'PN'}">selected</c:when>>Pitcairn</option>
+                                            <option value="PF" <c:when test="${El.getPaisNac() == 'PF'}">selected</c:when>>Polinesia Francesa</option>
+                                            <option value="PL" <c:when test="${El.getPaisNac() == 'PL'}">selected</c:when>>Polonia</option>
+                                            <option value="PT" <c:when test="${El.getPaisNac() == 'PT'}">selected</c:when>>Portugal</option>
+                                            <option value="PR" <c:when test="${El.getPaisNac() == 'PR'}">selected</c:when>>Puerto Rico</option>
+                                            <option value="QA" <c:when test="${El.getPaisNac() == 'QA'}">selected</c:when>>Qatar</option>
+                                            <option value="UK" <c:when test="${El.getPaisNac() == 'UK'}">selected</c:when>>Reino Unido</option>
+                                            <option value="CF" <c:when test="${El.getPaisNac() == 'CF'}">selected</c:when>>República Centroafricana</option>
+                                            <option value="CZ" <c:when test="${El.getPaisNac() == 'CZ'}">selected</c:when>>República Checa</option>
+                                            <option value="ZA" <c:when test="${El.getPaisNac() == 'ZA'}">selected</c:when>>República de Sudáfrica</option>
+                                            <option value="DO" <c:when test="${El.getPaisNac() == 'DO'}">selected</c:when>>República Dominicana</option>
+                                            <option value="SK" <c:when test="${El.getPaisNac() == 'SK'}">selected</c:when>>República Eslovaca</option>
+                                            <option value="RE" <c:when test="${El.getPaisNac() == 'RE'}">selected</c:when>>Reunión</option>
+                                            <option value="RW" <c:when test="${El.getPaisNac() == 'RW'}">selected</c:when>>Ruanda</option>
+                                            <option value="RO" <c:when test="${El.getPaisNac() == 'RO'}">selected</c:when>>Rumania</option>
+                                            <option value="RU" <c:when test="${El.getPaisNac() == 'RU'}">selected</c:when>>Rusia</option>
+                                            <option value="EH" <c:when test="${El.getPaisNac() == 'EH'}">selected</c:when>>Sahara Occidental</option>
+                                            <option value="KN" <c:when test="${El.getPaisNac() == 'KN'}">selected</c:when>>Saint Kitts y Nevis</option>
+                                            <option value="WS" <c:when test="${El.getPaisNac() == 'WS'}">selected</c:when>>Samoa</option>
+                                            <option value="AS" <c:when test="${El.getPaisNac() == 'AS'}">selected</c:when>>Samoa Americana</option>
+                                            <option value="SM" <c:when test="${El.getPaisNac() == 'SM'}">selected</c:when>>San Marino</option>
+                                            <option value="VC" <c:when test="${El.getPaisNac() == 'VC'}">selected</c:when>>San Vicente y Granadinas</option>
+                                            <option value="SH" <c:when test="${El.getPaisNac() == 'SH'}">selected</c:when>>Santa Helena</option>
+                                            <option value="LC" <c:when test="${El.getPaisNac() == 'LC'}">selected</c:when>>Santa Lucía</option>
+                                            <option value="ST" <c:when test="${El.getPaisNac() == 'ST'}">selected</c:when>>Santo Tomé y Príncipe</option>
+                                            <option value="SN" <c:when test="${El.getPaisNac() == 'SN'}">selected</c:when>>Senegal</option>
+                                            <option value="SC" <c:when test="${El.getPaisNac() == 'SC'}">selected</c:when>>Seychelles</option>
+                                            <option value="SL" <c:when test="${El.getPaisNac() == 'SL'}">selected</c:when>>Sierra Leona</option>
+                                            <option value="SG" <c:when test="${El.getPaisNac() == 'SG'}">selected</c:when>>Singapur</option>
+                                            <option value="SY" <c:when test="${El.getPaisNac() == 'SY'}">selected</c:when>>Siria</option>
+                                            <option value="SO" <c:when test="${El.getPaisNac() == 'SO'}">selected</c:when>>Somalia</option>
+                                            <option value="LK" <c:when test="${El.getPaisNac() == 'LK'}">selected</c:when>>Sri Lanka</option>
+                                            <option value="PM" <c:when test="${El.getPaisNac() == 'PM'}">selected</c:when>>St Pierre y Miquelon</option>
+                                            <option value="SZ" <c:when test="${El.getPaisNac() == 'SZ'}">selected</c:when>>Suazilandia</option>
+                                            <option value="SD" <c:when test="${El.getPaisNac() == 'SD'}">selected</c:when>>Sudán</option>
+                                            <option value="SE" <c:when test="${El.getPaisNac() == 'SE'}">selected</c:when>>Suecia</option>
+                                            <option value="CH" <c:when test="${El.getPaisNac() == 'CH'}">selected</c:when>>Suiza</option>
+                                            <option value="SR" <c:when test="${El.getPaisNac() == 'SR'}">selected</c:when>>Surinam</option>
+                                            <option value="TH" <c:when test="${El.getPaisNac() == 'TH'}">selected</c:when>>Tailandia</option>
+                                            <option value="TW" <c:when test="${El.getPaisNac() == 'TW'}">selected</c:when>>Taiwán</option>
+                                            <option value="TZ" <c:when test="${El.getPaisNac() == 'TZ'}">selected</c:when>>Tanzania</option>
+                                            <option value="TJ" <c:when test="${El.getPaisNac() == 'TJ'}">selected</c:when>>Tayikistán</option>
+                                            <option value="TF" <c:when test="${El.getPaisNac() == 'TF'}">selected</c:when>>Territorios franceses del Sur</option>
+                                            <option value="TP" <c:when test="${El.getPaisNac() == 'TP'}">selected</c:when>>Timor Oriental</option>
+                                            <option value="TG" <c:when test="${El.getPaisNac() == 'TG'}">selected</c:when>>Togo</option>
+                                            <option value="TO" <c:when test="${El.getPaisNac() == 'TO'}">selected</c:when>>Tonga</option>
+                                            <option value="TT" <c:when test="${El.getPaisNac() == 'TT'}">selected</c:when>>Trinidad y Tobago</option>
+                                            <option value="TN" <c:when test="${El.getPaisNac() == 'TN'}">selected</c:when>>Túnez</option>
+                                            <option value="TM" <c:when test="${El.getPaisNac() == 'TM'}">selected</c:when>>Turkmenistán</option>
+                                            <option value="TR" <c:when test="${El.getPaisNac() == 'TR'}">selected</c:when>>Turquía</option>
+                                            <option value="TV" <c:when test="${El.getPaisNac() == 'TV'}">selected</c:when>>Tuvalu</option>
+                                            <option value="UA" <c:when test="${El.getPaisNac() == 'UA'}">selected</c:when>>Ucrania</option>
+                                            <option value="UG" <c:when test="${El.getPaisNac() == 'UG'}">selected</c:when>>Uganda</option>
+                                            <option value="UY" <c:when test="${El.getPaisNac() == 'UY'}">selected</c:when>>Uruguay</option>
+                                            <option value="UZ" <c:when test="${El.getPaisNac() == 'UZ'}">selected</c:when>>Uzbekistán</option>
+                                            <option value="VU" <c:when test="${El.getPaisNac() == 'VU'}">selected</c:when>>Vanuatu</option>
+                                            <option value="VE" <c:when test="${El.getPaisNac() == 'VE'}">selected</c:when>>Venezuela</option>
+                                            <option value="VN" <c:when test="${El.getPaisNac() == 'VN'}">selected</c:when>>Vietnam</option>
+                                            <option value="YE" <c:when test="${El.getPaisNac() == 'YE'}">selected</c:when>>Yemen</option>
+                                            <option value="YU" <c:when test="${El.getPaisNac() == 'YU'}">selected</c:when>>Yugoslavia</option>
+                                            <option value="ZM" <c:when test="${El.getPaisNac() == 'ZM'}">selected</c:when>>Zambia</option>
+                                            <option value="ZW" <c:when test="${El.getPaisNac() == 'ZW'}">selected</c:when>>Zimbabue</option>
+                                        </select>
+                                    </div>    
                                 </div>
                                 <br>
                                 <div class="row">

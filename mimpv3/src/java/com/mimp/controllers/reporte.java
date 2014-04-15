@@ -442,7 +442,7 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registros Post-Adopción' ";
 
@@ -1352,9 +1352,9 @@ public class reporte {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
                             String Solicitante = "";
-                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            }else{
+                            } else {
                                 Solicitante = "";
                             }
                             if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
@@ -1566,9 +1566,9 @@ public class reporte {
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
-            Row row = sheet.createRow(11);
+            Row row = sheet.getRow(12);
             Date fechaAct = new Date();
-            Cell cell = row.createCell(0);
+            Cell cell = row.getCell(0);
             cell.setCellValue("Reporte al " + format.dateToString(fechaAct));
             sheet = wb.getSheetAt(1);
             ArrayList<Nna> listamayor = new ArrayList();
@@ -1712,9 +1712,9 @@ public class reporte {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
                             String Solicitante = "";
-                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            }else{
+                            } else {
                                 Solicitante = "- - -";
                             }
                             if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
@@ -1741,9 +1741,9 @@ public class reporte {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             String Solicitante = "";
-                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            }else{
+                            } else {
                                 Solicitante = "";
                             }
                             if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
@@ -2042,9 +2042,9 @@ public class reporte {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
                             String Solicitante = "";
-                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            }else{
+                            } else {
                                 Solicitante = "- - -";
                             }
                             if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
@@ -2071,9 +2071,9 @@ public class reporte {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             String Solicitante = "";
-                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            }else{
+                            } else {
                                 Solicitante = "";
                             }
                             if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
@@ -2231,13 +2231,71 @@ public class reporte {
                 i++;
             }
 
-            sheet = wb.getSheetAt(3);
-
             for (Nna nnaAux : listanna) {
                 if (nnaAux.getHermano() == 0) {
                     listahermano.add(nnaAux);
                 }
             }
+
+            //METODO BUBBLESORT PARA ORDENAR LA LISTA POR CODIGO DE REFERENCIA
+            int n = listahermano.size();
+            Nna auxnna;
+            for (int k = 0; k < n - 1; k++) {
+                ArrayList<ExpedienteNna> exp_temp = new ArrayList(listahermano.get(k).getExpedienteNnas());
+                if (exp_temp != null && !exp_temp.isEmpty()) {
+                    for (int j = k; j < n - 1; j++) {
+                        ArrayList<ExpedienteNna> exp_temp2 = new ArrayList(listahermano.get(j + 1).getExpedienteNnas());
+                        if (exp_temp2 != null && !exp_temp2.isEmpty()) {
+                            String codant = "";
+                            String codpost = "";
+                            try {
+                                codant = exp_temp.get(0).getCodigoReferencia();
+                            } catch (Exception ex) {
+                            }
+                            try {
+                                codpost = exp_temp2.get(0).getCodigoReferencia();
+                            } catch (Exception ex) {
+                            }
+                            if (codant.compareToIgnoreCase(codpost) > 0) {
+                                auxnna = listahermano.get(k);
+                                listahermano.set(k, listahermano.get(j + 1));
+                                listahermano.set(j + 1, auxnna);
+                            }
+                        } else {
+                            auxnna = listahermano.get(k);
+                            listahermano.set(k, listahermano.get(j + 1));
+                            listahermano.set(j + 1, auxnna);
+                        }
+                    }
+                }
+            }
+
+            //CONTAMOS LOS GRUPOS DE HERMANOS
+            int n_grupos = 0;
+            String codant = "";
+            String codpost = "";
+            ArrayList<ExpedienteNna> aux_exp;
+            for (Nna hermano : listahermano) {
+                aux_exp = new ArrayList(hermano.getExpedienteNnas());
+                try{
+                    codpost = aux_exp.get(0).getCodigoReferencia();
+                }catch(Exception ex){
+                }
+                if(!codpost.equals("")){
+                    if(!codpost.equals(codant)){
+                        n_grupos++;
+                    }
+                }
+                codant = codpost;
+            }
+
+            //INGRESAMOS EL DATO A LA PAGINA
+            sheet = wb.getSheetAt(0);
+            row = sheet.getRow(6);
+            cell = row.getCell(1);
+            cell.setCellValue("" + n_grupos);
+            
+            sheet = wb.getSheetAt(3);
 
             i = 2;
             for (Nna nna : listahermano) {
@@ -2365,9 +2423,9 @@ public class reporte {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
                             String Solicitante = "";
-                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            }else{
+                            } else {
                                 Solicitante = "- - -";
                             }
                             if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
@@ -2394,9 +2452,9 @@ public class reporte {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             String Solicitante = "";
-                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            }else{
+                            } else {
                                 Solicitante = "";
                             }
                             if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
@@ -2693,9 +2751,9 @@ public class reporte {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
                             String Solicitante = "";
-                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            }else{
+                            } else {
                                 Solicitante = "- - -";
                             }
                             if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
@@ -2722,9 +2780,9 @@ public class reporte {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             String Solicitante = "";
-                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            }else{
+                            } else {
                                 Solicitante = "";
                             }
                             if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
@@ -3018,9 +3076,9 @@ public class reporte {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             strFechas = strFechas + "\n" + date;
                             String Solicitante = "";
-                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            }else{
+                            } else {
                                 Solicitante = "- - -";
                             }
                             if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
@@ -3047,9 +3105,9 @@ public class reporte {
                         if (rev.getFechaRevision() != null && !rev.getFechaRevision().equals("")) {
                             String date = format.dateToStringNumeros(rev.getFechaRevision());
                             String Solicitante = "";
-                            if(rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0){
+                            if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
                                 Solicitante = rev.getExpedienteFamilia().getExpediente();
-                            }else{
+                            } else {
                                 Solicitante = "";
                             }
                             if (rev.getExpedienteFamilia().getIdexpedienteFamilia() != 0) {
@@ -3219,7 +3277,7 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro de NNAs prioritarios Mensual por Grupo de Referencia' ";
 
@@ -3237,7 +3295,7 @@ public class reporte {
     @RequestMapping("/Reportes/AptosNacionales")
     public void ReporteAptosNacionales(ModelMap map, HttpSession session,
             HttpServletResponse response) {
-       Personal usuario = (Personal) session.getAttribute("usuario");
+        Personal usuario = (Personal) session.getAttribute("usuario");
 //        if (usuario == null) {
 //            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
 //            map.addAttribute("mensaje", mensaje);
@@ -3613,8 +3671,8 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
-        
-         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro de Adoptantes Aptos Nacionales' ";
 
         String Tipo_registro = "Personal";
@@ -3625,7 +3683,7 @@ public class reporte {
             ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
         } catch (Exception ex) {
         }
-        
+
     }
 
     //PROBAR
@@ -4007,8 +4065,8 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
-        
-         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro de Adoptantes Aptos Internacionales' ";
 
         String Tipo_registro = "Personal";
@@ -4019,7 +4077,7 @@ public class reporte {
             ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
         } catch (Exception ex) {
         }
-        
+
     }
 
     //LISTO
@@ -4312,7 +4370,7 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro de Adopcion en el Extranjero' ";
 
@@ -4833,7 +4891,7 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Registro Nacional de Exp Nacionales e Internacionales' ";
 
@@ -5456,7 +5514,7 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Renad'.";
 
@@ -5606,7 +5664,7 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
-         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+        String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Inscritos a Sesion Informativa'.";
 
         String Tipo_registro = "Personal";
@@ -5747,7 +5805,7 @@ public class reporte {
         } catch (Exception ex) {
             //ex.printStackTrace();
         }
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ". Descargó el Reporte 'Reporte de Sesion Informativa'.";
 
