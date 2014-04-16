@@ -202,6 +202,8 @@
                                 </table>
                             </div>
                             <br>
+                            <h3><strong>No olvidar seleccionar las familias que formaran parte del estudio de Caso</strong></h3>
+                            <br>
                             <div class="control-group">
                                 <label class="control-label">Identificación del Estudio de Caso</label>
                                 <div class="controls">

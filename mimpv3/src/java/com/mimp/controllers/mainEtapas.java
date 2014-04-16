@@ -2901,21 +2901,24 @@ public class mainEtapas {
                         ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
                         ExpNna.setEstado("adoptable");
                         Date ahora = new Date();
-                        ExpNna.setFechaEstado(ahora);
+                        java.sql.Date sql = new java.sql.Date(ahora.getTime());
+                        ExpNna.setFechaEstado(sql);
                         ServicioNna.updateExpNna(ExpNna);
                     }
                     if (tempDesig.getTipoPropuesta().equals("dupla") && tempDesig.getPrioridad() == 2) {
                         ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
                         ExpNna.setEstado("adoptable");
                         Date ahora = new Date();
-                        ExpNna.setFechaEstado(ahora);
+                        java.sql.Date sql = new java.sql.Date(ahora.getTime());
+                        ExpNna.setFechaEstado(sql);
                         ServicioNna.updateExpNna(ExpNna);
                     }
                     if (tempDesig.getTipoPropuesta().equals("terna") && tempDesig.getPrioridad() == 3) {
                         ExpedienteNna ExpNna = ServicioNna.getExpNna(idNna);
                         ExpNna.setEstado("adoptable");
                         Date ahora = new Date();
-                        ExpNna.setFechaEstado(ahora);
+                        java.sql.Date sql = new java.sql.Date(ahora.getTime());
+                        ExpNna.setFechaEstado(sql);
                         ServicioNna.updateExpNna(ExpNna);
                     }
                 }

@@ -1625,7 +1625,7 @@ public class nna {
             tempExp.setFechaInvTutelar(null);
         }
         tempExp.setProcTutelar(procTutelar);
-        if (fichaInt == null) {
+        if (fichaInt == null || fichaInt.equals("")) {
             fichaInt = "2";
         }
         tempExp.setFichaIntegral(Short.parseShort(fichaInt));
@@ -2753,7 +2753,7 @@ public class nna {
             return new ModelAndView("login", map);
         }
 
-        if (listaEval != null) {
+        if (listaEval != null && !listaEval.equals("")) {
             map.addAttribute("idExpNna", idExpNna);
             map.addAttribute("clasificacion", clasificacion);
             return new ModelAndView("forward:/listaInformes", map);
@@ -2849,7 +2849,7 @@ public class nna {
         tempExp.setObservaciones(comentario);
 
         if (clasificacion != null && clasificacion.equals("prioritario")) {
-            if (codMayor != null) {
+            if (codMayor != null && !codMayor.equals("")) {
                 tempExp.setCodigoReferencia(codMayor);
                 tempNna.setEspecial(Short.parseShort("1"));
                 tempNna.setMayor(Short.parseShort("0"));
@@ -2857,7 +2857,7 @@ public class nna {
                 tempNna.setAdolescente(Short.parseShort("1"));
                 tempNna.setEnfermo(Short.parseShort("1"));
             }
-            if (codAdoles != null) {
+            if (codAdoles != null && !codAdoles.equals("")) {
                 tempExp.setCodigoReferencia(codAdoles);
                 tempNna.setEspecial(Short.parseShort("1"));
                 tempNna.setMayor(Short.parseShort("1"));
@@ -2865,7 +2865,7 @@ public class nna {
                 tempNna.setAdolescente(Short.parseShort("0"));
                 tempNna.setEnfermo(Short.parseShort("1"));
             }
-            if (codHermano != null) {
+            if (codHermano != null && !codHermano.equals("")) {
                 tempExp.setCodigoReferencia(codHermano);
                 tempNna.setEspecial(Short.parseShort("1"));
                 tempNna.setMayor(Short.parseShort("1"));
@@ -2873,7 +2873,7 @@ public class nna {
                 tempNna.setAdolescente(Short.parseShort("1"));
                 tempNna.setEnfermo(Short.parseShort("1"));
             }
-            if (codSalud != null) {
+            if (codSalud != null && !codSalud.equals("")) {
                 tempExp.setCodigoReferencia(codSalud);
                 tempNna.setEspecial(Short.parseShort("1"));
                 tempNna.setMayor(Short.parseShort("1"));
@@ -2881,7 +2881,7 @@ public class nna {
                 tempNna.setAdolescente(Short.parseShort("1"));
                 tempNna.setEnfermo(Short.parseShort("0"));
             }
-            if (codEspeciales != null) {
+            if (codEspeciales != null && !codEspeciales.equals("")) {
                 tempExp.setCodigoReferencia(codEspeciales);
                 tempNna.setEspecial(Short.parseShort("0"));
                 tempNna.setMayor(Short.parseShort("1"));
@@ -3666,7 +3666,25 @@ public class nna {
     }
 
     @RequestMapping(value = "/listaInformes", method = RequestMethod.POST)
-    public ModelAndView listaInformes(ModelMap map, HttpSession session,
+    public ModelAndView listaInformes_POST(ModelMap map, HttpSession session,
+            @RequestParam(value = "idExpNna") Long idExpNna,
+            @RequestParam(value = "clasificacion") String clasificacion) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        map.put("df", df);
+        map.put("clasificacion", clasificacion);
+        map.put("listaInformes", ServicioNna.listaInformesExpNna(idExpNna));
+        map.put("idExpNna", idExpNna);
+        return new ModelAndView("/Personal/nna/lista_informes", map);
+    }
+    
+    @RequestMapping(value = "/listaInformes", method = RequestMethod.GET)
+    public ModelAndView listaInformes_GET(ModelMap map, HttpSession session,
             @RequestParam(value = "idExpNna") Long idExpNna,
             @RequestParam(value = "clasificacion") String clasificacion) {
         Personal usuario = (Personal) session.getAttribute("usuario");

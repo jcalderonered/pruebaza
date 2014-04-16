@@ -73,7 +73,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Nombres <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="nombreEl" name="nombreEl" type="text" placeholder="Nombres" class="input-xlarge">
+                                <input id="nombreEl" name="nombreEl" onkeyup="return(limitar());" type="text" placeholder="Nombres" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -81,7 +81,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Apellido Paterno <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="apellidoPEl" name="apellidoPEl" type="text" placeholder="Apellido Paterno" class="input-xlarge">
+                                <input id="apellidoPEl" name="apellidoPEl" onkeyup="return(limitar());"  type="text" placeholder="Apellido Paterno" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -89,7 +89,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Apellido Materno <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="apellidoMEl" name="apellidoMEl" type="text" placeholder="Apellido Materno" class="input-xlarge">
+                                <input id="apellidoMEl" name="apellidoMEl" onkeyup="return(limitar());"  type="text" placeholder="Apellido Materno" class="input-xlarge">
                             </div>
                         </div>
                         <!--
@@ -367,7 +367,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Provincia de nacimiento <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="proNacEl" name="proNacEl" type="text" placeholder="Provincia" class="input-xlarge">
+                                <input id="proNacEl" name="proNacEl" onkeyup="return(limitar());"  type="text" placeholder="Provincia" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -405,7 +405,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">N° documento <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="numDocEl" name="numDocEl" type="text" placeholder="Numero Documento" class="input-xlarge">
+                                <input id="numDocEl" name="numDocEl" onkeyup="return(limitar());"  type="text" placeholder="Numero Documento" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -413,7 +413,7 @@
                         <div class="control-group">
                             <label class="control-label" for="selectbasic">Profesión/Ocupación <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="profesionEl" name="profesionEl" type="text" placeholder="Profesión" class="input-xlarge">
+                                <input id="profesionEl" name="profesionEl" onkeyup="return(limitar());"  type="text" placeholder="Profesión" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -421,7 +421,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Celular <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="celEl" name="celEl" type="text" placeholder="Celular" class="input-xlarge">
+                                <input id="celEl" name="celEl" onkeyup="return(limitar());"  type="text" placeholder="Celular" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -429,7 +429,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Correo Electrónico <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="correoEl" name="correoEl" type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
+                                <input id="correoEl" name="correoEl" onkeyup="return(limitar());"  type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -442,7 +442,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Nombres <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="nombreElla" name="nombreElla" type="text" placeholder="Nombres" class="input-xlarge">
+                                <input id="nombreElla" name="nombreElla" onkeyup="return(limitar());"  type="text" placeholder="Nombres" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -450,7 +450,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Apellido Paterno <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="apellidoPElla" name="apellidoPElla" type="text" placeholder="Apellido Paterno" class="input-xlarge">
+                                <input id="apellidoPElla" name="apellidoPElla" onkeyup="return(limitar());"  type="text" placeholder="Apellido Paterno" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -458,7 +458,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Apellido Materno <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="apellidoMElla" name="apellidoMElla" type="text" placeholder="Apellido Materno" class="input-xlarge">
+                                <input id="apellidoMElla" name="apellidoMElla" onkeyup="return(limitar());"  type="text" placeholder="Apellido Materno" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -735,7 +735,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Provincia de nacimiento <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="proNacElla" name="proNacElla" type="text" placeholder="Provincia" class="input-xlarge">
+                                <input id="proNacElla" name="proNacElla" onkeyup="return(limitar());"  type="text" placeholder="Provincia" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -773,7 +773,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">N° documento <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="numDocElla" name="numDocElla" type="text" placeholder="Numero Documento" class="input-xlarge">
+                                <input id="numDocElla" name="numDocElla" onkeyup="return(limitar());"  type="text" placeholder="Numero Documento" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -781,7 +781,7 @@
                         <div class="control-group">
                             <label class="control-label" for="selectbasic">Profesión/Ocupación <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="profesionElla" name="profesionElla" type="text" placeholder="Profesión" class="input-xlarge">
+                                <input id="profesionElla" name="profesionElla" onkeyup="return(limitar());"  type="text" placeholder="Profesión" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -789,7 +789,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Celular <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="celElla" name="celELla" type="text" placeholder="Celular" class="input-xlarge">
+                                <input id="celElla" name="celELla" type="text" onkeyup="return(limitar());"  placeholder="Celular" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -797,7 +797,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Correo Electrónico <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="correoElla" name="correoElla" type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
+                                <input id="correoElla" name="correoElla" onkeyup="return(limitar());"  type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
                             </div>
                         </div> 
                     </div>
@@ -829,22 +829,22 @@
                         </div>
                         <div class="col-lg-3">
                             <label for="prov">Provincia <font style="color:red">(*)</font></label> 
-                            <input id="prov" name="prov" type="text" placeholder="Provincia" class="input-xlarge">
+                            <input id="prov" name="prov" onkeyup="return(limitar());"  type="text" placeholder="Provincia" class="input-xlarge">
                         </div>
                         <div class="col-lg-3">
                             <label for="dist">Distrito <font style="color:red">(*)</font></label> 
-                            <input id="dist" name="dist" type="text" placeholder="Distrito" class="input-xlarge">
+                            <input id="dist" name="dist" onkeyup="return(limitar());"  type="text" placeholder="Distrito" class="input-xlarge">
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-lg-4">
                             <label for="dir">Dirección domiciliaria <font style="color:red">(*)</font></label> 
-                            <input id="dir" name="dir" type="text" placeholder="Dirección Domiciliaria" class="input-xlarge">
+                            <input id="dir" name="dir" onkeyup="return(limitar());"  type="text" placeholder="Dirección Domiciliaria" class="input-xlarge">
                         </div>
                         <div class="col-lg-4">
                             <label for="telf">Teléfono fijo <font style="color:red">(*)</font></label> 
-                            <input id="telf" name="telf" type="text" placeholder="Teléfono fijo" class="input-xlarge">
+                            <input id="telf" name="telf" onkeyup="return(limitar());"  type="text" placeholder="Teléfono fijo" class="input-xlarge">
                         </div>
                     </div>
                     <br>
@@ -1152,6 +1152,86 @@
             }
         }
     </script>
+    <script type="text/javascript">
+                function limitar()
+                {                    
+                    var nombreEl = document.getElementById('nombreEl');
+                    var apellidoPEl = document.getElementById('apellidoPEl');
+                    var apellidoMEl = document.getElementById('apellidoMEl');
+                    var proNacEl = document.getElementById('proNacEl');
+                    var numDocEl = document.getElementById('numDocEl');
+                    var profesionEl = document.getElementById('profesionEl');
+                    var correoEl = document.getElementById('correoEl');
+                    var celEl = document.getElementById('cel');
+                    
+                     var nombreElla = document.getElementById('nombreElla');
+                    var apellidoPElla = document.getElementById('apellidoPElla');
+                    var apellidoMElla = document.getElementById('apellidoMElla');
+                    var proNacElla = document.getElementById('proNacElla');
+                    var numDocElla = document.getElementById('numDocElla');
+                    var profesionElla = document.getElementById('profesionElla');
+                    var correoElla = document.getElementById('correoElla');
+                    var celElla = document.getElementById('celElla');
+                    
+                    var prov = document.getElementById('prov');
+                    var dist = document.getElementById('dist');
+                    var dir = document.getElementById('dir');
+                    var telf = document.getElementById('telf');
+                    
+                    
+                    if (nombre.value.length < 0 || nombre.value.length > 30) {
+                        alert("solo puede ingresar 30 caracteres");
+                        nombre.value = nombre.value.substring(0, 30);
+                        return false;
+                    }else if (apellidoP.value.length < 0 || apellidoP.value.length > 30) {
+                        alert("solo puede ingresar 30 caracteres");
+                        apellidoP.value = apellidoP.value.substring(0, 30);
+                        return false;
+                    }else if (apellidoM.value.length < 0 || apellidoM.value.length > 30) {
+                        alert("solo puede ingresar 30 caracteres");
+                        apellidoM.value = apellidoM.value.substring(0, 30);
+                        return false;
+                    }else if (numDoc.value.length < 0 || numDoc.value.length > 15) {
+                        alert("solo puede ingresar 15 caracteres");
+                        numDoc.value = numDoc.value.substring(0, 15);
+                        return false;
+                    }else if (proNac.value.length < 0 || proNac.value.length > 50) {
+                        alert("solo puede ingresar 50 caracteres");
+                        proNac.value = proNac.value.substring(0, 50);
+                        return false;
+                    }else if (correo.value.length < 0 || correo.value.length > 50) {
+                        alert("solo puede ingresar 50 caracteres");
+                        correo.value = correo.value.substring(0, 50);
+                        return false;
+                    }else if (profesion.value.length < 0 || profesion.value.length > 50) {
+                        alert("solo puede ingresar 50 caracteres");
+                        profesion.value = profesion.value.substring(0, 50);
+                        return false;
+                    }else if (cel.value.length < 0 || cel.value.length > 15) {
+                        alert("solo puede ingresar 15 caracteres");
+                        cel.value = cel.value.substring(0, 15);
+                        return false;
+                    }else if (prov.value.length < 0 || prov.value.length > 30) {
+                        alert("solo puede ingresar 30 caracteres");
+                        prov.value = prov.value.substring(0, 30);
+                        return false;
+                    }else if (dist.value.length < 0 || dist.value.length > 90) {
+                        alert("solo puede ingresar 90 caracteres");
+                        dist.value = dist.value.substring(0, 90);
+                        return false;
+                    }else if (dir.value.length < 0 || dir.value.length > 90) {
+                        alert("solo puede ingresar 90 caracteres");
+                        dir.value = dir.value.substring(0, 90);
+                        return false;
+                    }else if (telf.value.length < 0 || telf.value.length > 15) {
+                        alert("solo puede ingresar 15 caracteres");
+                        telf.value = telf.value.substring(0, 15);
+                        return false;
+                    }
+                    
+
+                }
+            </script>
     <!-- Ubicar al final -->
 </body>
 </html>

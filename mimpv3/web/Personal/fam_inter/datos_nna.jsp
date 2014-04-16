@@ -321,7 +321,7 @@ response.addHeader("Cache-Control", "no-store");
                             <div class="control-group">
                                 <label class="control-label">Observaciones</label>
                                 <div class="controls">
-                                    <textarea class="input-xlarge" id="obs" name="obs" placeholder="Ingrese sus observaciones" rows="5" >${infoFam.getObservaciones()}</textarea>
+                                    <textarea onkeyup="return(limitar());" class="input-xlarge" id="obs" name="obs" placeholder="Ingrese sus observaciones" rows="5" >${infoFam.getObservaciones()}</textarea>
                                 </div>
                             </div> 
                             <br>
@@ -446,6 +446,20 @@ response.addHeader("Cache-Control", "no-store");
 
                     }
                     return true
+                }
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {
+                    var obs = document.getElementById('obs');
+
+                    if (obs.value.length < 0 || obs.value.length > 39)
+                    {
+                        alert("solo puede ingresar 40 caracteres");
+                        obs.value = obs.value.substring(0, 40);
+                        return false;
+                    } 
+
                 }
             </script>
             <!-- Ubicar al final -->
