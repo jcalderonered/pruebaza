@@ -2274,11 +2274,11 @@ public class reporte {
             int n_grupos = 0;
             String codant = "";
             String codpost = "";
-            ArrayList<ExpedienteNna> aux_exp;
+            ExpedienteNna aux_exp;
             for (Nna hermano : listahermano) {
-                aux_exp = new ArrayList(hermano.getExpedienteNnas());
+                aux_exp = hermano.getExpedienteNnas().iterator().next();
                 try{
-                    codpost = aux_exp.get(0).getCodigoReferencia();
+                    codpost = aux_exp.getCodigoReferencia();
                 }catch(Exception ex){
                 }
                 if(!codpost.equals("")){
@@ -2291,7 +2291,7 @@ public class reporte {
 
             //INGRESAMOS EL DATO A LA PAGINA
             sheet = wb.getSheetAt(0);
-            row = sheet.getRow(6);
+            row = sheet.getRow(7);
             cell = row.getCell(1);
             cell.setCellValue("" + n_grupos);
             
