@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -78,7 +78,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
@@ -88,7 +88,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA") && !u.getRol().equals("DAPA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA") && !u.getRol().equals("DAPA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -232,7 +232,34 @@
         <script type="text/javascript">
 
                                             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                            $('#fechaIngreso').on('changeDate', function(ev) {
 
+                                                var ingreso = document.getElementById("fechaIngreso").value;
+                                                var tupa = document.getElementById("tupa");
+
+                                                var dia = 0;
+                                                var mes = 0;
+                                                var anho = 0;
+
+                                                var pieces = ingreso.split('/');
+                                                var date = parseInt(pieces[0]);
+                                                var month = parseInt(pieces[1]);
+                                                var year = parseInt(pieces[2]);
+                                                //alert(opcion);
+
+                                                dia = date;
+                                                mes = month + 3;
+                                                if (mes > 12) {
+                                                    mes = mes - 12;
+                                                    anho = year + 1;
+                                                } else {
+                                                    anho = year;
+                                                }
+
+                                                tupa.value = dia + "/" + mes + "/" + anho;
+
+
+                                            });
         </script>
         <!-- Ubicar al final -->
     </body>

@@ -9,8 +9,8 @@
     response.setHeader("Pragma", "no-cache");
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
-response.addHeader("Cache-Control", "no-store");
-    
+    response.addHeader("Cache-Control", "no-store");
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -78,7 +78,7 @@ response.addHeader("Cache-Control", "no-store");
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/ua"><span class="glyphicon glyphicon-chevron-right"></span> Administración de UA</a></li>
                                 <%}
-                                if (u.getRol().equals("DEIA")) {%>
+                                    if (u.getRol().equals("DEIA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/car"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de CAR</a></li> 
                                 <%}
                                     if (!u.getRol().equals("DAPA") && !u.getRol().equals("MATCH") && !u.getRol().equals("UA")) {%>
@@ -88,7 +88,7 @@ response.addHeader("Cache-Control", "no-store");
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                            <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA") && !u.getRol().equals("DAPA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA") && !u.getRol().equals("DAPA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -134,21 +134,21 @@ response.addHeader("Cache-Control", "no-store");
                                 <div class="control-group">
                                     <label class="control-label">Nombre</label>
                                     <div class="controls">
-                                        <input value="${Ella.getNombre()}" id="nombre" name="nombre" type="text" class="input-xlarge">
+                                        <input value="${Ella.getNombre()}" id="nombre" name="nombre" onkeyup="return(limitar());" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Paterno</label>
                                     <div class="controls">
-                                        <input value="${Ella.getApellidoP()}" id="apellidoP" name="apellidoP" type="text" class="input-xlarge">
+                                        <input value="${Ella.getApellidoP()}" id="apellidoP" name="apellidoP" onkeyup="return(limitar());" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Materno</label>
                                     <div class="controls">
-                                        <input value="${Ella.getApellidoM()}" id="apellidoM" name="apellidoM" type="text" class="input-xlarge">
+                                        <input value="${Ella.getApellidoM()}" id="apellidoM" name="apellidoM" onkeyup="return(limitar());" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -169,7 +169,7 @@ response.addHeader("Cache-Control", "no-store");
                                 <div class="control-group">
                                     <label class="control-label">Dirección de nacimiento</label>
                                     <div class="controls">
-                                        <input value="${Ella.getLugarNac()}" id="lugarNac" name="lugarNac" type="text" class="input-xlarge">
+                                        <input value="${Ella.getLugarNac()}" id="lugarNac" name="lugarNac" onkeyup="return(limitar());" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -184,249 +184,249 @@ response.addHeader("Cache-Control", "no-store");
                                     <label class="control-label">País de Nacimiento<font style="color:red">(*)</font></label>
                                     <div class="controls">
                                         <select id="paisNac" name="paisNac">
-                                            <option value="AF" <c:when test="${Ella.getPaisNac() == 'AF'}">selected</c:when>>Afganistán</option>
-                                            <option value="AL" <c:when test="${Ella.getPaisNac() == 'AL'}">selected</c:when>>Albania</option>
-                                            <option value="DE" <c:when test="${Ella.getPaisNac() == 'DE'}">selected</c:when>>Alemania</option>
-                                            <option value="AD" <c:when test="${Ella.getPaisNac() == 'AD'}">selected</c:when>>Andorra</option>
-                                            <option value="AO" <c:when test="${Ella.getPaisNac() == 'AO'}">selected</c:when>>Angola</option>
-                                            <option value="AI" <c:when test="${Ella.getPaisNac() == 'AI'}">selected</c:when>>Anguilla</option>
-                                            <option value="AQ" <c:when test="${Ella.getPaisNac() == 'AQ'}">selected</c:when>>Antártida</option>
-                                            <option value="AG" <c:when test="${Ella.getPaisNac() == 'AG'}">selected</c:when>>Antigua y Barbuda</option>
-                                            <option value="AN" <c:when test="${Ella.getPaisNac() == 'AN'}">selected</c:when>>Antillas Holandesas</option>
-                                            <option value="SA" <c:when test="${Ella.getPaisNac() == 'SA'}">selected</c:when>>Arabia Saudí</option>
-                                            <option value="DZ" <c:when test="${Ella.getPaisNac() == 'DZ'}">selected</c:when>>Argelia</option>
-                                            <option value="AR" <c:when test="${Ella.getPaisNac() == 'AR'}">selected</c:when>>Argentina</option>
-                                            <option value="AM" <c:when test="${Ella.getPaisNac() == 'AM'}">selected</c:when>>Armenia</option>
-                                            <option value="AW" <c:when test="${Ella.getPaisNac() == 'AW'}">selected</c:when>>Aruba</option>
-                                            <option value="AU" <c:when test="${Ella.getPaisNac() == 'AU'}">selected</c:when>>Australia</option>
-                                            <option value="AT" <c:when test="${Ella.getPaisNac() == 'AT'}">selected</c:when>>Austria</option>
-                                            <option value="AZ" <c:when test="${Ella.getPaisNac() == 'AZ'}">selected</c:when>>Azerbaiyán</option>
-                                            <option value="BS" <c:when test="${Ella.getPaisNac() == 'BS'}">selected</c:when>>Bahamas</option>
-                                            <option value="BH" <c:when test="${Ella.getPaisNac() == 'BH'}">selected</c:when>>Bahrein</option>
-                                            <option value="BD" <c:when test="${Ella.getPaisNac() == 'BD'}">selected</c:when>>Bangladesh</option>
-                                            <option value="BB" <c:when test="${Ella.getPaisNac() == 'BB'}">selected</c:when>>Barbados</option>
-                                            <option value="BE" <c:when test="${Ella.getPaisNac() == 'BE'}">selected</c:when>>Bélgica</option>
-                                            <option value="BZ" <c:when test="${Ella.getPaisNac() == 'BZ'}">selected</c:when>>Belice</option>
-                                            <option value="BJ" <c:when test="${Ella.getPaisNac() == 'BJ'}">selected</c:when>>Benin</option>
-                                            <option value="BM" <c:when test="${Ella.getPaisNac() == 'BM'}">selected</c:when>>Bermudas</option>
-                                            <option value="BY" <c:when test="${Ella.getPaisNac() == 'BY'}">selected</c:when>>Bielorrusia</option>
-                                            <option value="MM" <c:when test="${Ella.getPaisNac() == 'MM'}">selected</c:when>>Birmania</option>
-                                            <option value="BO" <c:when test="${Ella.getPaisNac() == 'BO'}">selected</c:when>>Bolivia</option>
-                                            <option value="BA" <c:when test="${Ella.getPaisNac() == 'BA'}">selected</c:when>>Bosnia y Herzegovina</option>
-                                            <option value="BW" <c:when test="${Ella.getPaisNac() == 'BW'}">selected</c:when>>Botswana</option>
-                                            <option value="BR" <c:when test="${Ella.getPaisNac() == 'BR'}">selected</c:when>>Brasil</option>
-                                            <option value="BN" <c:when test="${Ella.getPaisNac() == 'BN'}">selected</c:when>>Brunei</option>
-                                            <option value="BG" <c:when test="${Ella.getPaisNac() == 'BG'}">selected</c:when>>Bulgaria</option>
-                                            <option value="BF" <c:when test="${Ella.getPaisNac() == 'BF'}">selected</c:when>>Burkina Faso</option>
-                                            <option value="BI" <c:when test="${Ella.getPaisNac() == 'BI'}">selected</c:when>>Burundi</option>
-                                            <option value="BT" <c:when test="${Ella.getPaisNac() == 'BT'}">selected</c:when>>Bután</option>
-                                            <option value="CV" <c:when test="${Ella.getPaisNac() == 'CV'}">selected</c:when>>Cabo Verde</option>
-                                            <option value="KH" <c:when test="${Ella.getPaisNac() == 'KH'}">selected</c:when>>Camboya</option>
-                                            <option value="CM" <c:when test="${Ella.getPaisNac() == 'CM'}">selected</c:when>>Camerún</option>
-                                            <option value="CA" <c:when test="${Ella.getPaisNac() == 'CA'}">selected</c:when>>Canadá</option>
-                                            <option value="TD" <c:when test="${Ella.getPaisNac() == 'TD'}">selected</c:when>>Chad</option>
-                                            <option value="CL" <c:when test="${Ella.getPaisNac() == 'CL'}">selected</c:when>>Chile</option>
-                                            <option value="CN" <c:when test="${Ella.getPaisNac() == 'CN'}">selected</c:when>>China</option>
-                                            <option value="CY" <c:when test="${Ella.getPaisNac() == 'CY'}">selected</c:when>>Chipre</option>
-                                            <option value="VA" <c:when test="${Ella.getPaisNac() == 'VA'}">selected</c:when>>Ciudad del Vaticano (Santa Sede)</option>
-                                            <option value="CO" <c:when test="${Ella.getPaisNac() == 'CO'}">selected</c:when>>Colombia</option>
-                                            <option value="KM" <c:when test="${Ella.getPaisNac() == 'KM'}">selected</c:when>>Comores</option>
-                                            <option value="CG" <c:when test="${Ella.getPaisNac() == 'CG'}">selected</c:when>>Congo</option>
-                                            <option value="CD" <c:when test="${Ella.getPaisNac() == 'CD'}">selected</c:when>>Congo, República Democrática del</option>
-                                            <option value="KR" <c:when test="${Ella.getPaisNac() == 'KR'}">selected</c:when>>Corea</option>
-                                            <option value="KP" <c:when test="${Ella.getPaisNac() == 'KP'}">selected</c:when>>Corea del Norte</option>
-                                            <option value="CI" <c:when test="${Ella.getPaisNac() == 'CI'}">selected</c:when>>Costa de Marfíl</option>
-                                            <option value="CR" <c:when test="${Ella.getPaisNac() == 'CR'}">selected</c:when>>Costa Rica</option>
-                                            <option value="HR" <c:when test="${Ella.getPaisNac() == 'HR'}">selected</c:when>>Croacia (Hrvatska)</option>
-                                            <option value="CU" <c:when test="${Ella.getPaisNac() == 'CU'}">selected</c:when>>Cuba</option>
-                                            <option value="DK" <c:when test="${Ella.getPaisNac() == 'DK'}">selected</c:when>>Dinamarca</option>
-                                            <option value="DJ" <c:when test="${Ella.getPaisNac() == 'DJ'}">selected</c:when>>Djibouti</option>
-                                            <option value="DM" <c:when test="${Ella.getPaisNac() == 'DM'}">selected</c:when>>Dominica</option>
-                                            <option value="EC" <c:when test="${Ella.getPaisNac() == 'EC'}">selected</c:when>>Ecuador</option>
-                                            <option value="EG" <c:when test="${Ella.getPaisNac() == 'EG'}">selected</c:when>>Egipto</option>
-                                            <option value="SV" <c:when test="${Ella.getPaisNac() == 'SV'}">selected</c:when>>El Salvador</option>
-                                            <option value="AE" <c:when test="${Ella.getPaisNac() == 'AE'}">selected</c:when>>Emiratos Árabes Unidos</option>
-                                            <option value="ER" <c:when test="${Ella.getPaisNac() == 'ER'}">selected</c:when>>Eritrea</option>
-                                            <option value="SI" <c:when test="${Ella.getPaisNac() == 'SI'}">selected</c:when>>Eslovenia</option>
-                                            <option value="ES" <c:when test="${Ella.getPaisNac() == 'ES'}">selected</c:when>>España</option>
-                                            <option value="US" <c:when test="${Ella.getPaisNac() == 'US'}">selected</c:when>>Estados Unidos</option>
-                                            <option value="EE" <c:when test="${Ella.getPaisNac() == 'EE'}">selected</c:when>>Estonia</option>
-                                            <option value="ET" <c:when test="${Ella.getPaisNac() == 'ET'}">selected</c:when>>Etiopía</option>
-                                            <option value="FJ" <c:when test="${Ella.getPaisNac() == 'FJ'}">selected</c:when>>Fiji</option>
-                                            <option value="PH" <c:when test="${Ella.getPaisNac() == 'PH'}">selected</c:when>>Filipinas</option>
-                                            <option value="FI" <c:when test="${Ella.getPaisNac() == 'FI'}">selected</c:when>>Finlandia</option>
-                                            <option value="FR" <c:when test="${Ella.getPaisNac() == 'FR'}">selected</c:when>>Francia</option>
-                                            <option value="GA" <c:when test="${Ella.getPaisNac() == 'GA'}">selected</c:when>>Gabón</option>
-                                            <option value="GM" <c:when test="${Ella.getPaisNac() == 'GM'}">selected</c:when>>Gambia</option>
-                                            <option value="GE" <c:when test="${Ella.getPaisNac() == 'GE'}">selected</c:when>>Georgia</option>
-                                            <option value="GH" <c:when test="${Ella.getPaisNac() == 'GH'}">selected</c:when>>Ghana</option>
-                                            <option value="GI" <c:when test="${Ella.getPaisNac() == 'GI'}">selected</c:when>>Gibraltar</option>
-                                            <option value="GD" <c:when test="${Ella.getPaisNac() == 'GD'}">selected</c:when>>Granada</option>
-                                            <option value="GR" <c:when test="${Ella.getPaisNac() == 'GR'}">selected</c:when>>Grecia</option>
-                                            <option value="GL" <c:when test="${Ella.getPaisNac() == 'GL'}">selected</c:when>>Groenlandia</option>
-                                            <option value="GP" <c:when test="${Ella.getPaisNac() == 'GP'}">selected</c:when>>Guadalupe</option>
-                                            <option value="GU" <c:when test="${Ella.getPaisNac() == 'GU'}">selected</c:when>>Guam</option>
-                                            <option value="GT" <c:when test="${Ella.getPaisNac() == 'GT'}">selected</c:when>>Guatemala</option>
-                                            <option value="GY" <c:when test="${Ella.getPaisNac() == 'GY'}">selected</c:when>>Guayana</option>
-                                            <option value="GF" <c:when test="${Ella.getPaisNac() == 'GF'}">selected</c:when>>Guayana Francesa</option>
-                                            <option value="GN" <c:when test="${Ella.getPaisNac() == 'GN'}">selected</c:when>>Guinea</option>
-                                            <option value="GQ" <c:when test="${Ella.getPaisNac() == 'GQ'}">selected</c:when>>Guinea Ecuatorial</option>
-                                            <option value="GW" <c:when test="${Ella.getPaisNac() == 'GW'}">selected</c:when>>Guinea-Bissau</option>
-                                            <option value="HT" <c:when test="${Ella.getPaisNac() == 'HT'}">selected</c:when>>Haití</option>
-                                            <option value="HN" <c:when test="${Ella.getPaisNac() == 'HN'}">selected</c:when>>Honduras</option>
-                                            <option value="HU" <c:when test="${Ella.getPaisNac() == 'HU'}">selected</c:when>>Hungría</option>
-                                            <option value="IN" <c:when test="${Ella.getPaisNac() == 'IN'}">selected</c:when>>India</option>
-                                            <option value="ID" <c:when test="${Ella.getPaisNac() == 'ID'}">selected</c:when>>Indonesia</option>
-                                            <option value="IQ" <c:when test="${Ella.getPaisNac() == 'IQ'}">selected</c:when>>Irak</option>
-                                            <option value="IR" <c:when test="${Ella.getPaisNac() == 'IR'}">selected</c:when>>Irán</option>
-                                            <option value="IE" <c:when test="${Ella.getPaisNac() == 'IE'}">selected</c:when>>Irlanda</option>
-                                            <option value="BV" <c:when test="${Ella.getPaisNac() == 'BV'}">selected</c:when>>Isla Bouvet</option>
-                                            <option value="CX" <c:when test="${Ella.getPaisNac() == 'CX'}">selected</c:when>>Isla de Christmas</option>
-                                            <option value="IS" <c:when test="${Ella.getPaisNac() == 'IS'}">selected</c:when>>Islandia</option>
-                                            <option value="KY" <c:when test="${Ella.getPaisNac() == 'KY'}">selected</c:when>>Islas Caimán</option>
-                                            <option value="CK" <c:when test="${Ella.getPaisNac() == 'CK'}">selected</c:when>>Islas Cook</option>
-                                            <option value="CC" <c:when test="${Ella.getPaisNac() == 'CC'}">selected</c:when>>Islas de Cocos o Keeling</option>
-                                            <option value="FO" <c:when test="${Ella.getPaisNac() == 'FO'}">selected</c:when>>Islas Faroe</option>
-                                            <option value="HM" <c:when test="${Ella.getPaisNac() == 'HM'}">selected</c:when>>Islas Heard y McDonald</option>
-                                            <option value="FK" <c:when test="${Ella.getPaisNac() == 'FK'}">selected</c:when>>Islas Malvinas</option>
-                                            <option value="MP" <c:when test="${Ella.getPaisNac() == 'MP'}">selected</c:when>>Islas Marianas del Norte</option>
-                                            <option value="MH" <c:when test="${Ella.getPaisNac() == 'MH'}">selected</c:when>>Islas Marshall</option>
-                                            <option value="UM" <c:when test="${Ella.getPaisNac() == 'UM'}">selected</c:when>>Islas menores de Estados Unidos</option>
-                                            <option value="PW" <c:when test="${Ella.getPaisNac() == 'PW'}">selected</c:when>>Islas Palau</option>
-                                            <option value="SB" <c:when test="${Ella.getPaisNac() == 'SB'}">selected</c:when>>Islas Salomón</option>
-                                            <option value="SJ" <c:when test="${Ella.getPaisNac() == 'SJ'}">selected</c:when>>Islas Svalbard y Jan Mayen</option>
-                                            <option value="TK" <c:when test="${Ella.getPaisNac() == 'TK'}">selected</c:when>>Islas Tokelau</option>
-                                            <option value="TC" <c:when test="${Ella.getPaisNac() == 'TC'}">selected</c:when>>Islas Turks y Caicos</option>
-                                            <option value="VI" <c:when test="${Ella.getPaisNac() == 'VI'}">selected</c:when>>Islas Vírgenes (EEUU)</option>
-                                            <option value="VG" <c:when test="${Ella.getPaisNac() == 'VG'}">selected</c:when>>Islas Vírgenes (Reino Unido)</option>
-                                            <option value="WF" <c:when test="${Ella.getPaisNac() == 'WF'}">selected</c:when>>Islas Wallis y Futuna</option>
-                                            <option value="IL" <c:when test="${Ella.getPaisNac() == 'IL'}">selected</c:when>>Israel</option>
-                                            <option value="IT" <c:when test="${Ella.getPaisNac() == 'IT'}">selected</c:when>>Italia</option>
-                                            <option value="JM" <c:when test="${Ella.getPaisNac() == 'JM'}">selected</c:when>>Jamaica</option>
-                                            <option value="JP" <c:when test="${Ella.getPaisNac() == 'JP'}">selected</c:when>>Japón</option>
-                                            <option value="JO" <c:when test="${Ella.getPaisNac() == 'JO'}">selected</c:when>>Jordania</option>
-                                            <option value="KZ" <c:when test="${Ella.getPaisNac() == 'KZ'}">selected</c:when>>Kazajistán</option>
-                                            <option value="KE" <c:when test="${Ella.getPaisNac() == 'KE'}">selected</c:when>>Kenia</option>
-                                            <option value="KG" <c:when test="${Ella.getPaisNac() == 'KG'}">selected</c:when>>Kirguizistán</option>
-                                            <option value="KI" <c:when test="${Ella.getPaisNac() == 'KI'}">selected</c:when>>Kiribati</option>
-                                            <option value="KW" <c:when test="${Ella.getPaisNac() == 'KW'}">selected</c:when>>Kuwait</option>
-                                            <option value="LA" <c:when test="${Ella.getPaisNac() == 'LA'}">selected</c:when>>Laos</option>
-                                            <option value="LS" <c:when test="${Ella.getPaisNac() == 'LS'}">selected</c:when>>Lesotho</option>
-                                            <option value="LV" <c:when test="${Ella.getPaisNac() == 'LV'}">selected</c:when>>Letonia</option>
-                                            <option value="LB" <c:when test="${Ella.getPaisNac() == 'LB'}">selected</c:when>>Líbano</option>
-                                            <option value="LR" <c:when test="${Ella.getPaisNac() == 'LR'}">selected</c:when>>Liberia</option>
-                                            <option value="LY" <c:when test="${Ella.getPaisNac() == 'LY'}">selected</c:when>>Libia</option>
-                                            <option value="LI" <c:when test="${Ella.getPaisNac() == 'LI'}">selected</c:when>>Liechtenstein</option>
-                                            <option value="LT" <c:when test="${Ella.getPaisNac() == 'LT'}">selected</c:when>>Lituania</option>
-                                            <option value="LU" <c:when test="${Ella.getPaisNac() == 'LU'}">selected</c:when>>Luxemburgo</option>
-                                            <option value="MK" <c:when test="${Ella.getPaisNac() == 'MK'}">selected</c:when>>Macedonia, Ex-República Yugoslava de</option>
-                                            <option value="MG" <c:when test="${Ella.getPaisNac() == 'MG'}">selected</c:when>>Madagascar</option>
-                                            <option value="MY" <c:when test="${Ella.getPaisNac() == 'MY'}">selected</c:when>>Malasia</option>
-                                            <option value="MW" <c:when test="${Ella.getPaisNac() == 'MW'}">selected</c:when>>Malawi</option>
-                                            <option value="MV" <c:when test="${Ella.getPaisNac() == 'MV'}">selected</c:when>>Maldivas</option>
-                                            <option value="ML" <c:when test="${Ella.getPaisNac() == 'ML'}">selected</c:when>>Malí</option>
-                                            <option value="MT" <c:when test="${Ella.getPaisNac() == 'MT'}">selected</c:when>>Malta</option>
-                                            <option value="MA" <c:when test="${Ella.getPaisNac() == 'MA'}">selected</c:when>>Marruecos</option>
-                                            <option value="MQ" <c:when test="${Ella.getPaisNac() == 'MQ'}">selected</c:when>>Martinica</option>
-                                            <option value="MU" <c:when test="${Ella.getPaisNac() == 'MU'}">selected</c:when>>Mauricio</option>
-                                            <option value="MR" <c:when test="${Ella.getPaisNac() == 'MR'}">selected</c:when>>Mauritania</option>
-                                            <option value="YT" <c:when test="${Ella.getPaisNac() == 'YT'}">selected</c:when>>Mayotte</option>
-                                            <option value="MX" <c:when test="${Ella.getPaisNac() == 'MX'}">selected</c:when>>México</option>
-                                            <option value="FM" <c:when test="${Ella.getPaisNac() == 'FM'}">selected</c:when>>Micronesia</option>
-                                            <option value="MD" <c:when test="${Ella.getPaisNac() == 'MD'}">selected</c:when>>Moldavia</option>
-                                            <option value="MC" <c:when test="${Ella.getPaisNac() == 'MC'}">selected</c:when>>Mónaco</option>
-                                            <option value="MN" <c:when test="${Ella.getPaisNac() == 'MN'}">selected</c:when>>Mongolia</option>
-                                            <option value="MS" <c:when test="${Ella.getPaisNac() == 'MS'}">selected</c:when>>Montserrat</option>
-                                            <option value="MZ" <c:when test="${Ella.getPaisNac() == 'MZ'}">selected</c:when>>Mozambique</option>
-                                            <option value="NA" <c:when test="${Ella.getPaisNac() == 'NA'}">selected</c:when>>Namibia</option>
-                                            <option value="NR" <c:when test="${Ella.getPaisNac() == 'NR'}">selected</c:when>>Nauru</option>
-                                            <option value="NP" <c:when test="${Ella.getPaisNac() == 'NP'}">selected</c:when>>Nepal</option>
-                                            <option value="NI" <c:when test="${Ella.getPaisNac() == 'NI'}">selected</c:when>>Nicaragua</option>
-                                            <option value="NE" <c:when test="${Ella.getPaisNac() == 'NE'}">selected</c:when>>Níger</option>
-                                            <option value="NG" <c:when test="${Ella.getPaisNac() == 'NG'}">selected</c:when>>Nigeria</option>
-                                            <option value="NU" <c:when test="${Ella.getPaisNac() == 'NU'}">selected</c:when>>Niue</option>
-                                            <option value="NF" <c:when test="${Ella.getPaisNac() == 'NF'}">selected</c:when>>Norfolk</option>
-                                            <option value="NO" <c:when test="${Ella.getPaisNac() == 'NO'}">selected</c:when>>Noruega</option>
-                                            <option value="NC" <c:when test="${Ella.getPaisNac() == 'NC'}">selected</c:when>>Nueva Caledonia</option>
-                                            <option value="NZ" <c:when test="${Ella.getPaisNac() == 'NZ'}">selected</c:when>>Nueva Zelanda</option>
-                                            <option value="OM" <c:when test="${Ella.getPaisNac() == 'OM'}">selected</c:when>>Omán</option>
-                                            <option value="NL" <c:when test="${Ella.getPaisNac() == 'NL'}">selected</c:when>>Países Bajos</option>
-                                            <option value="PA" <c:when test="${Ella.getPaisNac() == 'PA'}">selected</c:when>>Panamá</option>
-                                            <option value="PG" <c:when test="${Ella.getPaisNac() == 'PG'}">selected</c:when>>Papúa Nueva Guinea</option>
-                                            <option value="PK" <c:when test="${Ella.getPaisNac() == 'PK'}">selected</c:when>>Paquistán</option>
-                                            <option value="PY" <c:when test="${Ella.getPaisNac() == 'PY'}">selected</c:when>>Paraguay</option>
-                                            <option value="Peru" <c:when test="${Ella.getPaisNac() == 'Peru'}">selected</c:when>>Perú</option>
-                                            <option value="PN" <c:when test="${Ella.getPaisNac() == 'PN'}">selected</c:when>>Pitcairn</option>
-                                            <option value="PF" <c:when test="${Ella.getPaisNac() == 'PF'}">selected</c:when>>Polinesia Francesa</option>
-                                            <option value="PL" <c:when test="${Ella.getPaisNac() == 'PL'}">selected</c:when>>Polonia</option>
-                                            <option value="PT" <c:when test="${Ella.getPaisNac() == 'PT'}">selected</c:when>>Portugal</option>
-                                            <option value="PR" <c:when test="${Ella.getPaisNac() == 'PR'}">selected</c:when>>Puerto Rico</option>
-                                            <option value="QA" <c:when test="${Ella.getPaisNac() == 'QA'}">selected</c:when>>Qatar</option>
-                                            <option value="UK" <c:when test="${Ella.getPaisNac() == 'UK'}">selected</c:when>>Reino Unido</option>
-                                            <option value="CF" <c:when test="${Ella.getPaisNac() == 'CF'}">selected</c:when>>República Centroafricana</option>
-                                            <option value="CZ" <c:when test="${Ella.getPaisNac() == 'CZ'}">selected</c:when>>República Checa</option>
-                                            <option value="ZA" <c:when test="${Ella.getPaisNac() == 'ZA'}">selected</c:when>>República de Sudáfrica</option>
-                                            <option value="DO" <c:when test="${Ella.getPaisNac() == 'DO'}">selected</c:when>>República Dominicana</option>
-                                            <option value="SK" <c:when test="${Ella.getPaisNac() == 'SK'}">selected</c:when>>República Eslovaca</option>
-                                            <option value="RE" <c:when test="${Ella.getPaisNac() == 'RE'}">selected</c:when>>Reunión</option>
-                                            <option value="RW" <c:when test="${Ella.getPaisNac() == 'RW'}">selected</c:when>>Ruanda</option>
-                                            <option value="RO" <c:when test="${Ella.getPaisNac() == 'RO'}">selected</c:when>>Rumania</option>
-                                            <option value="RU" <c:when test="${Ella.getPaisNac() == 'RU'}">selected</c:when>>Rusia</option>
-                                            <option value="EH" <c:when test="${Ella.getPaisNac() == 'EH'}">selected</c:when>>Sahara Occidental</option>
-                                            <option value="KN" <c:when test="${Ella.getPaisNac() == 'KN'}">selected</c:when>>Saint Kitts y Nevis</option>
-                                            <option value="WS" <c:when test="${Ella.getPaisNac() == 'WS'}">selected</c:when>>Samoa</option>
-                                            <option value="AS" <c:when test="${Ella.getPaisNac() == 'AS'}">selected</c:when>>Samoa Americana</option>
-                                            <option value="SM" <c:when test="${Ella.getPaisNac() == 'SM'}">selected</c:when>>San Marino</option>
-                                            <option value="VC" <c:when test="${Ella.getPaisNac() == 'VC'}">selected</c:when>>San Vicente y Granadinas</option>
-                                            <option value="SH" <c:when test="${Ella.getPaisNac() == 'SH'}">selected</c:when>>Santa Helena</option>
-                                            <option value="LC" <c:when test="${Ella.getPaisNac() == 'LC'}">selected</c:when>>Santa Lucía</option>
-                                            <option value="ST" <c:when test="${Ella.getPaisNac() == 'ST'}">selected</c:when>>Santo Tomé y Príncipe</option>
-                                            <option value="SN" <c:when test="${Ella.getPaisNac() == 'SN'}">selected</c:when>>Senegal</option>
-                                            <option value="SC" <c:when test="${Ella.getPaisNac() == 'SC'}">selected</c:when>>Seychelles</option>
-                                            <option value="SL" <c:when test="${Ella.getPaisNac() == 'SL'}">selected</c:when>>Sierra Leona</option>
-                                            <option value="SG" <c:when test="${Ella.getPaisNac() == 'SG'}">selected</c:when>>Singapur</option>
-                                            <option value="SY" <c:when test="${Ella.getPaisNac() == 'SY'}">selected</c:when>>Siria</option>
-                                            <option value="SO" <c:when test="${Ella.getPaisNac() == 'SO'}">selected</c:when>>Somalia</option>
-                                            <option value="LK" <c:when test="${Ella.getPaisNac() == 'LK'}">selected</c:when>>Sri Lanka</option>
-                                            <option value="PM" <c:when test="${Ella.getPaisNac() == 'PM'}">selected</c:when>>St Pierre y Miquelon</option>
-                                            <option value="SZ" <c:when test="${Ella.getPaisNac() == 'SZ'}">selected</c:when>>Suazilandia</option>
-                                            <option value="SD" <c:when test="${Ella.getPaisNac() == 'SD'}">selected</c:when>>Sudán</option>
-                                            <option value="SE" <c:when test="${Ella.getPaisNac() == 'SE'}">selected</c:when>>Suecia</option>
-                                            <option value="CH" <c:when test="${Ella.getPaisNac() == 'CH'}">selected</c:when>>Suiza</option>
-                                            <option value="SR" <c:when test="${Ella.getPaisNac() == 'SR'}">selected</c:when>>Surinam</option>
-                                            <option value="TH" <c:when test="${Ella.getPaisNac() == 'TH'}">selected</c:when>>Tailandia</option>
-                                            <option value="TW" <c:when test="${Ella.getPaisNac() == 'TW'}">selected</c:when>>Taiwán</option>
-                                            <option value="TZ" <c:when test="${Ella.getPaisNac() == 'TZ'}">selected</c:when>>Tanzania</option>
-                                            <option value="TJ" <c:when test="${Ella.getPaisNac() == 'TJ'}">selected</c:when>>Tayikistán</option>
-                                            <option value="TF" <c:when test="${Ella.getPaisNac() == 'TF'}">selected</c:when>>Territorios franceses del Sur</option>
-                                            <option value="TP" <c:when test="${Ella.getPaisNac() == 'TP'}">selected</c:when>>Timor Oriental</option>
-                                            <option value="TG" <c:when test="${Ella.getPaisNac() == 'TG'}">selected</c:when>>Togo</option>
-                                            <option value="TO" <c:when test="${Ella.getPaisNac() == 'TO'}">selected</c:when>>Tonga</option>
-                                            <option value="TT" <c:when test="${Ella.getPaisNac() == 'TT'}">selected</c:when>>Trinidad y Tobago</option>
-                                            <option value="TN" <c:when test="${Ella.getPaisNac() == 'TN'}">selected</c:when>>Túnez</option>
-                                            <option value="TM" <c:when test="${Ella.getPaisNac() == 'TM'}">selected</c:when>>Turkmenistán</option>
-                                            <option value="TR" <c:when test="${Ella.getPaisNac() == 'TR'}">selected</c:when>>Turquía</option>
-                                            <option value="TV" <c:when test="${Ella.getPaisNac() == 'TV'}">selected</c:when>>Tuvalu</option>
-                                            <option value="UA" <c:when test="${Ella.getPaisNac() == 'UA'}">selected</c:when>>Ucrania</option>
-                                            <option value="UG" <c:when test="${Ella.getPaisNac() == 'UG'}">selected</c:when>>Uganda</option>
-                                            <option value="UY" <c:when test="${Ella.getPaisNac() == 'UY'}">selected</c:when>>Uruguay</option>
-                                            <option value="UZ" <c:when test="${Ella.getPaisNac() == 'UZ'}">selected</c:when>>Uzbekistán</option>
-                                            <option value="VU" <c:when test="${Ella.getPaisNac() == 'VU'}">selected</c:when>>Vanuatu</option>
-                                            <option value="VE" <c:when test="${Ella.getPaisNac() == 'VE'}">selected</c:when>>Venezuela</option>
-                                            <option value="VN" <c:when test="${Ella.getPaisNac() == 'VN'}">selected</c:when>>Vietnam</option>
-                                            <option value="YE" <c:when test="${Ella.getPaisNac() == 'YE'}">selected</c:when>>Yemen</option>
-                                            <option value="YU" <c:when test="${Ella.getPaisNac() == 'YU'}">selected</c:when>>Yugoslavia</option>
-                                            <option value="ZM" <c:when test="${Ella.getPaisNac() == 'ZM'}">selected</c:when>>Zambia</option>
-                                            <option value="ZW" <c:when test="${Ella.getPaisNac() == 'ZW'}">selected</c:when>>Zimbabue</option>
-                                        </select>
-                                    </div>    
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-2">  
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="doc" id="optionsRadios1" value="d" ${Ella.getTipoDoc() == 100 ? 'checked' : ''}>DNI</label>
+                                            <option value="AF" ${Ella.getPaisNac() == "AF" ? 'selected' : ''} >Afganistán</option>
+                                            <option value="AL" ${Ella.getPaisNac() == "AL" ? 'selected' : ''} >Albania</option>
+                                            <option value="DE" ${Ella.getPaisNac() == "DE" ? 'selected' : ''} >Alemania</option>
+                                            <option value="AD" ${Ella.getPaisNac() == "AD" ? 'selected' : ''} >Andorra</option>
+                                            <option value="AO" ${Ella.getPaisNac() == "AO" ? 'selected' : ''} >Angola</option>
+                                            <option value="AI" ${Ella.getPaisNac() == "AI" ? 'selected' : ''} >Anguilla</option>
+                                            <option value="AQ" ${Ella.getPaisNac() == "AQ" ? 'selected' : ''} >Antártida</option>
+                                            <option value="AG" ${Ella.getPaisNac() == "AG" ? 'selected' : ''} >Antigua y Barbuda</option>
+                                            <option value="AN" ${Ella.getPaisNac() == "AN" ? 'selected' : ''} >Antillas Holandesas</option>
+                                            <option value="SA" ${Ella.getPaisNac() == "SA" ? 'selected' : ''} >Arabia Saudí</option>
+                                            <option value="DZ" ${Ella.getPaisNac() == "DZ" ? 'selected' : ''} >Argelia</option>
+                                            <option value="AR" ${Ella.getPaisNac() == "AR" ? 'selected' : ''} >Argentina</option>
+                                            <option value="AM" ${Ella.getPaisNac() == "AM" ? 'selected' : ''} >Armenia</option>
+                                            <option value="AW" ${Ella.getPaisNac() == "AW" ? 'selected' : ''} >Aruba</option>
+                                            <option value="AU" ${Ella.getPaisNac() == "AU" ? 'selected' : ''} >Australia</option>
+                                            <option value="AT" ${Ella.getPaisNac() == "AT" ? 'selected' : ''} >Austria</option>
+                                            <option value="AZ" ${Ella.getPaisNac() == "AZ" ? 'selected' : ''} >Azerbaiyán</option>
+                                            <option value="BS" ${Ella.getPaisNac() == "BS" ? 'selected' : ''} >Bahamas</option>
+                                            <option value="BH" ${Ella.getPaisNac() == "BH" ? 'selected' : ''} >Bahrein</option>
+                                            <option value="BD" ${Ella.getPaisNac() == "BD" ? 'selected' : ''} >Bangladesh</option>
+                                            <option value="BB" ${Ella.getPaisNac() == "BB" ? 'selected' : ''} >Barbados</option>
+                                            <option value="BE" ${Ella.getPaisNac() == "BE" ? 'selected' : ''} >Bélgica</option>
+                                            <option value="BZ" ${Ella.getPaisNac() == "BZ" ? 'selected' : ''} >Belice</option>
+                                            <option value="BJ" ${Ella.getPaisNac() == "BJ" ? 'selected' : ''} >Benin</option>
+                                            <option value="BM" ${Ella.getPaisNac() == "BM" ? 'selected' : ''} >Bermudas</option>
+                                            <option value="BY" ${Ella.getPaisNac() == "BY" ? 'selected' : ''} >Bielorrusia</option>
+                                            <option value="MM" ${Ella.getPaisNac() == "MM" ? 'selected' : ''} >Birmania</option>
+                                            <option value="BO" ${Ella.getPaisNac() == "BO" ? 'selected' : ''} >Bolivia</option>
+                                            <option value="BA" ${Ella.getPaisNac() == "BA" ? 'selected' : ''} >Bosnia y Herzegovina</option>
+                                            <option value="BW" ${Ella.getPaisNac() == "BW" ? 'selected' : ''} >Botswana</option>
+                                            <option value="BR" ${Ella.getPaisNac() == "BR" ? 'selected' : ''} >Brasil</option>
+                                            <option value="BN" ${Ella.getPaisNac() == "BN" ? 'selected' : ''} >Brunei</option>
+                                            <option value="BG" ${Ella.getPaisNac() == "BG" ? 'selected' : ''} >Bulgaria</option>
+                                            <option value="BF" ${Ella.getPaisNac() == "BF" ? 'selected' : ''} >Burkina Faso</option>
+                                            <option value="BI" ${Ella.getPaisNac() == "BI" ? 'selected' : ''} >Burundi</option>
+                                            <option value="BT" ${Ella.getPaisNac() == "BT" ? 'selected' : ''} >Bután</option>
+                                            <option value="CV" ${Ella.getPaisNac() == "CV" ? 'selected' : ''} >Cabo Verde</option>
+                                            <option value="KH" ${Ella.getPaisNac() == "KH" ? 'selected' : ''} >Camboya</option>
+                                            <option value="CM" ${Ella.getPaisNac() == "CM" ? 'selected' : ''} >Camerún</option>
+                                            <option value="CA" ${Ella.getPaisNac() == "CA" ? 'selected' : ''} >Canadá</option>
+                                            <option value="TD" ${Ella.getPaisNac() == "TD" ? 'selected' : ''} >Chad</option>
+                                            <option value="CL" ${Ella.getPaisNac() == "CL" ? 'selected' : ''} >Chile</option>
+                                            <option value="CN" ${Ella.getPaisNac() == "CN" ? 'selected' : ''} >China</option>
+                                            <option value="CY" ${Ella.getPaisNac() == "CY" ? 'selected' : ''} >Chipre</option>
+                                            <option value="VA" ${Ella.getPaisNac() == "VA" ? 'selected' : ''} >Ciudad del Vaticano (Santa Sede)</option>
+                                            <option value="CO" ${Ella.getPaisNac() == "CO" ? 'selected' : ''} >Colombia</option>
+                                            <option value="KM" ${Ella.getPaisNac() == "KM" ? 'selected' : ''} >Comores</option>
+                                            <option value="CG" ${Ella.getPaisNac() == "CG" ? 'selected' : ''} >Congo</option>
+                                            <option value="CD" ${Ella.getPaisNac() == "CD" ? 'selected' : ''} >Congo, República Democrática del</option>
+                                            <option value="KR" ${Ella.getPaisNac() == "KR" ? 'selected' : ''} >Corea</option>
+                                            <option value="KP" ${Ella.getPaisNac() == "KP" ? 'selected' : ''} >Corea del Norte</option>
+                                            <option value="CI" ${Ella.getPaisNac() == "CI" ? 'selected' : ''} >Costa de Marfíl</option>
+                                            <option value="CR" ${Ella.getPaisNac() == "CR" ? 'selected' : ''} >Costa Rica</option>
+                                            <option value="HR" ${Ella.getPaisNac() == "HR" ? 'selected' : ''} >Croacia (Hrvatska)</option>
+                                            <option value="CU" ${Ella.getPaisNac() == "CU" ? 'selected' : ''} >Cuba</option>
+                                            <option value="DK" ${Ella.getPaisNac() == "DK" ? 'selected' : ''} >Dinamarca</option>
+                                            <option value="DJ" ${Ella.getPaisNac() == "DJ" ? 'selected' : ''} >Djibouti</option>
+                                            <option value="DM" ${Ella.getPaisNac() == "DM" ? 'selected' : ''} >Dominica</option>
+                                            <option value="EC" ${Ella.getPaisNac() == "EC" ? 'selected' : ''} >Ecuador</option>
+                                            <option value="EG" ${Ella.getPaisNac() == "EG" ? 'selected' : ''} >Egipto</option>
+                                            <option value="SV" ${Ella.getPaisNac() == "SV" ? 'selected' : ''} >El Salvador</option>
+                                            <option value="AE" ${Ella.getPaisNac() == "AE" ? 'selected' : ''} >Emiratos Árabes Unidos</option>
+                                            <option value="ER" ${Ella.getPaisNac() == "ER" ? 'selected' : ''} >Eritrea</option>
+                                            <option value="SI" ${Ella.getPaisNac() == "SI" ? 'selected' : ''} >Eslovenia</option>
+                                            <option value="ES" ${Ella.getPaisNac() == "ES" ? 'selected' : ''} >España</option>
+                                            <option value="US" ${Ella.getPaisNac() == "US" ? 'selected' : ''} >Estados Unidos</option>
+                                            <option value="EE" ${Ella.getPaisNac() == "EE" ? 'selected' : ''} >Estonia</option>
+                                            <option value="ET" ${Ella.getPaisNac() == "ET" ? 'selected' : ''} >Etiopía</option>
+                                            <option value="FJ" ${Ella.getPaisNac() == "FJ" ? 'selected' : ''} >Fiji</option>
+                                            <option value="PH" ${Ella.getPaisNac() == "PH" ? 'selected' : ''} >Filipinas</option>
+                                            <option value="FI" ${Ella.getPaisNac() == "FI" ? 'selected' : ''} >Finlandia</option>
+                                            <option value="FR" ${Ella.getPaisNac() == "FR" ? 'selected' : ''} >Francia</option>
+                                            <option value="GA" ${Ella.getPaisNac() == "GA" ? 'selected' : ''} >Gabón</option>
+                                            <option value="GM" ${Ella.getPaisNac() == "GM" ? 'selected' : ''} >Gambia</option>
+                                            <option value="GE" ${Ella.getPaisNac() == "GE" ? 'selected' : ''} >Georgia</option>
+                                            <option value="GH" ${Ella.getPaisNac() == "GH" ? 'selected' : ''} >Ghana</option>
+                                            <option value="GI" ${Ella.getPaisNac() == "GI" ? 'selected' : ''} >Gibraltar</option>
+                                            <option value="GD" ${Ella.getPaisNac() == "GD" ? 'selected' : ''} >Granada</option>
+                                            <option value="GR" ${Ella.getPaisNac() == "GR" ? 'selected' : ''} >Grecia</option>
+                                            <option value="GL" ${Ella.getPaisNac() == "GL" ? 'selected' : ''} >Groenlandia</option>
+                                            <option value="GP" ${Ella.getPaisNac() == "GP" ? 'selected' : ''} >Guadalupe</option>
+                                            <option value="GU" ${Ella.getPaisNac() == "GU" ? 'selected' : ''} >Guam</option>
+                                            <option value="GT" ${Ella.getPaisNac() == "GT" ? 'selected' : ''} >Guatemala</option>
+                                            <option value="GY" ${Ella.getPaisNac() == "GY" ? 'selected' : ''} >Guayana</option>
+                                            <option value="GF" ${Ella.getPaisNac() == "GF" ? 'selected' : ''} >Guayana Francesa</option>
+                                            <option value="GN" ${Ella.getPaisNac() == "GN" ? 'selected' : ''} >Guinea</option>
+                                            <option value="GQ" ${Ella.getPaisNac() == "GQ" ? 'selected' : ''} >Guinea Ecuatorial</option>
+                                            <option value="GW" ${Ella.getPaisNac() == "GW" ? 'selected' : ''} >Guinea-Bissau</option>
+                                            <option value="HT" ${Ella.getPaisNac() == "HT" ? 'selected' : ''} >Haití</option>
+                                            <option value="HN" ${Ella.getPaisNac() == "HN" ? 'selected' : ''} >Honduras</option>
+                                            <option value="HU" ${Ella.getPaisNac() == "HU" ? 'selected' : ''} >Hungría</option>
+                                            <option value="IN" ${Ella.getPaisNac() == "IN" ? 'selected' : ''} >India</option>
+                                            <option value="ID" ${Ella.getPaisNac() == "ID" ? 'selected' : ''} >Indonesia</option>
+                                            <option value="IQ" ${Ella.getPaisNac() == "IQ" ? 'selected' : ''} >Irak</option>
+                                            <option value="IR" ${Ella.getPaisNac() == "IR" ? 'selected' : ''} >Irán</option>
+                                            <option value="IE" ${Ella.getPaisNac() == "IE" ? 'selected' : ''} >Irlanda</option>
+                                            <option value="BV" ${Ella.getPaisNac() == "BV" ? 'selected' : ''} >Isla Bouvet</option>
+                                            <option value="CX" ${Ella.getPaisNac() == "CX" ? 'selected' : ''} >Isla de Christmas</option>
+                                            <option value="IS" ${Ella.getPaisNac() == "IS" ? 'selected' : ''} >Islandia</option>
+                                            <option value="KY" ${Ella.getPaisNac() == "KY" ? 'selected' : ''} >Islas Caimán</option>
+                                            <option value="CK" ${Ella.getPaisNac() == "CK" ? 'selected' : ''} >Islas Cook</option>
+                                            <option value="CC" ${Ella.getPaisNac() == "CC" ? 'selected' : ''} >Islas de Cocos o Keeling</option>
+                                            <option value="FO" ${Ella.getPaisNac() == "FO" ? 'selected' : ''} >Islas Faroe</option>
+                                            <option value="HM" ${Ella.getPaisNac() == "HM" ? 'selected' : ''} >Islas Heard y McDonald</option>
+                                            <option value="FK" ${Ella.getPaisNac() == "FK" ? 'selected' : ''} >Islas Malvinas</option>
+                                            <option value="MP" ${Ella.getPaisNac() == "MP" ? 'selected' : ''} >Islas Marianas del Norte</option>
+                                            <option value="MH" ${Ella.getPaisNac() == "MH" ? 'selected' : ''} >Islas Marshall</option>
+                                            <option value="UM" ${Ella.getPaisNac() == "UM" ? 'selected' : ''} >Islas menores de Estados Unidos</option>
+                                            <option value="PW" ${Ella.getPaisNac() == "PW" ? 'selected' : ''} >Islas Palau</option>
+                                            <option value="SB" ${Ella.getPaisNac() == "SB" ? 'selected' : ''} >Islas Salomón</option>
+                                            <option value="SJ" ${Ella.getPaisNac() == "SJ" ? 'selected' : ''} >Islas Svalbard y Jan Mayen</option>
+                                            <option value="TK" ${Ella.getPaisNac() == "TK" ? 'selected' : ''} >Islas Tokelau</option>
+                                            <option value="TC" ${Ella.getPaisNac() == "TC" ? 'selected' : ''} >Islas Turks y Caicos</option>
+                                            <option value="VI" ${Ella.getPaisNac() == "VI" ? 'selected' : ''} >Islas Vírgenes (EEUU)</option>
+                                            <option value="VG" ${Ella.getPaisNac() == "VG" ? 'selected' : ''} >Islas Vírgenes (Reino Unido)</option>
+                                            <option value="WF" ${Ella.getPaisNac() == "WF" ? 'selected' : ''} >Islas Wallis y Futuna</option>
+                                            <option value="IL" ${Ella.getPaisNac() == "IL" ? 'selected' : ''} >Israel</option>
+                                            <option value="IT" ${Ella.getPaisNac() == "IT" ? 'selected' : ''} >Italia</option>
+                                            <option value="JM" ${Ella.getPaisNac() == "JM" ? 'selected' : ''} >Jamaica</option>
+                                            <option value="JP" ${Ella.getPaisNac() == "JP" ? 'selected' : ''} >Japón</option>
+                                            <option value="JO" ${Ella.getPaisNac() == "JO" ? 'selected' : ''} >Jordania</option>
+                                            <option value="KZ" ${Ella.getPaisNac() == "KZ" ? 'selected' : ''} >Kazajistán</option>
+                                            <option value="KE" ${Ella.getPaisNac() == "KE" ? 'selected' : ''} >Kenia</option>
+                                            <option value="KG" ${Ella.getPaisNac() == "KG" ? 'selected' : ''} >Kirguizistán</option>
+                                            <option value="KI" ${Ella.getPaisNac() == "KI" ? 'selected' : ''} >Kiribati</option>
+                                            <option value="KW" ${Ella.getPaisNac() == "KW" ? 'selected' : ''} >Kuwait</option>
+                                            <option value="LA" ${Ella.getPaisNac() == "LA" ? 'selected' : ''} >Laos</option>
+                                            <option value="LS" ${Ella.getPaisNac() == "LS" ? 'selected' : ''} >Lesotho</option>
+                                            <option value="LV" ${Ella.getPaisNac() == "LV" ? 'selected' : ''} >Letonia</option>
+                                            <option value="LB" ${Ella.getPaisNac() == "LB" ? 'selected' : ''} >Líbano</option>
+                                            <option value="LR" ${Ella.getPaisNac() == "LR" ? 'selected' : ''} >Liberia</option>
+                                            <option value="LY" ${Ella.getPaisNac() == "LY" ? 'selected' : ''} >Libia</option>
+                                            <option value="LI" ${Ella.getPaisNac() == "LI" ? 'selected' : ''} >Liechtenstein</option>
+                                            <option value="LT" ${Ella.getPaisNac() == "LT" ? 'selected' : ''} >Lituania</option>
+                                            <option value="LU" ${Ella.getPaisNac() == "LU" ? 'selected' : ''} >Luxemburgo</option>
+                                            <option value="MK" ${Ella.getPaisNac() == "MK" ? 'selected' : ''} >Macedonia, Ex-República Yugoslava de</option>
+                                            <option value="MG" ${Ella.getPaisNac() == "MG" ? 'selected' : ''} >Madagascar</option>
+                                            <option value="MY" ${Ella.getPaisNac() == "MY" ? 'selected' : ''} >Malasia</option>
+                                            <option value="MW" ${Ella.getPaisNac() == "MW" ? 'selected' : ''} >Malawi</option>
+                                            <option value="MV" ${Ella.getPaisNac() == "MV" ? 'selected' : ''} >Maldivas</option>
+                                            <option value="ML" ${Ella.getPaisNac() == "ML" ? 'selected' : ''} >Malí</option>
+                                            <option value="MT" ${Ella.getPaisNac() == "MT" ? 'selected' : ''} >Malta</option>
+                                            <option value="MA" ${Ella.getPaisNac() == "MA" ? 'selected' : ''} >Marruecos</option>
+                                            <option value="MQ" ${Ella.getPaisNac() == "MQ" ? 'selected' : ''} >Martinica</option>
+                                            <option value="MU" ${Ella.getPaisNac() == "MU" ? 'selected' : ''} >Mauricio</option>
+                                            <option value="MR" ${Ella.getPaisNac() == "MR" ? 'selected' : ''} >Mauritania</option>
+                                            <option value="YT" ${Ella.getPaisNac() == "YT" ? 'selected' : ''} >Mayotte</option>
+                                            <option value="MX" ${Ella.getPaisNac() == "MX" ? 'selected' : ''} >México</option>
+                                            <option value="FM" ${Ella.getPaisNac() == "FM" ? 'selected' : ''} >Micronesia</option>
+                                            <option value="MD" ${Ella.getPaisNac() == "MD" ? 'selected' : ''} >Moldavia</option>
+                                            <option value="MC" ${Ella.getPaisNac() == "MC" ? 'selected' : ''} >Mónaco</option>
+                                            <option value="MN" ${Ella.getPaisNac() == "MN" ? 'selected' : ''} >Mongolia</option>
+                                            <option value="MS" ${Ella.getPaisNac() == "MS" ? 'selected' : ''} >Montserrat</option>
+                                            <option value="MZ" ${Ella.getPaisNac() == "MZ" ? 'selected' : ''} >Mozambique</option>
+                                            <option value="NA" ${Ella.getPaisNac() == "NA" ? 'selected' : ''} >Namibia</option>
+                                            <option value="NR" ${Ella.getPaisNac() == "NR" ? 'selected' : ''} >Nauru</option>
+                                            <option value="NP" ${Ella.getPaisNac() == "NP" ? 'selected' : ''} >Nepal</option>
+                                            <option value="NI" ${Ella.getPaisNac() == "NI" ? 'selected' : ''} >Nicaragua</option>
+                                            <option value="NE" ${Ella.getPaisNac() == "NE" ? 'selected' : ''} >Níger</option>
+                                            <option value="NG" ${Ella.getPaisNac() == "NG" ? 'selected' : ''} >Nigeria</option>
+                                            <option value="NU" ${Ella.getPaisNac() == "NU" ? 'selected' : ''} >Niue</option>
+                                            <option value="NF" ${Ella.getPaisNac() == "NF" ? 'selected' : ''} >Norfolk</option>
+                                            <option value="NO" ${Ella.getPaisNac() == "NO" ? 'selected' : ''} >Noruega</option>
+                                            <option value="NC" ${Ella.getPaisNac() == "NC" ? 'selected' : ''} >Nueva Caledonia</option>
+                                            <option value="NZ" ${Ella.getPaisNac() == "NZ" ? 'selected' : ''} >Nueva Zelanda</option>
+                                            <option value="OM" ${Ella.getPaisNac() == "OM" ? 'selected' : ''} >Omán</option>
+                                            <option value="NL" ${Ella.getPaisNac() == "NL" ? 'selected' : ''} >Países Bajos</option>
+                                            <option value="PA" ${Ella.getPaisNac() == "PA" ? 'selected' : ''} >Panamá</option>
+                                            <option value="PG" ${Ella.getPaisNac() == "PG" ? 'selected' : ''} >Papúa Nueva Guinea</option>
+                                            <option value="PK" ${Ella.getPaisNac() == "PK" ? 'selected' : ''} >Paquistán</option>
+                                            <option value="PY" ${Ella.getPaisNac() == "PY" ? 'selected' : ''} >Paraguay</option>
+                                            <option value="Peru" ${Ella.getPaisNac() == "Peru" ? 'selected' : ''} >Perú</option>
+                                            <option value="PN" ${Ella.getPaisNac() == "PN" ? 'selected' : ''} >Pitcairn</option>
+                                            <option value="PF" ${Ella.getPaisNac() == "PF" ? 'selected' : ''} >Polinesia Francesa</option>
+                                            <option value="PL" ${Ella.getPaisNac() == "PL" ? 'selected' : ''} >Polonia</option>
+                                            <option value="PT" ${Ella.getPaisNac() == "PT" ? 'selected' : ''} >Portugal</option>
+                                            <option value="PR" ${Ella.getPaisNac() == "PR" ? 'selected' : ''} >Puerto Rico</option>
+                                            <option value="QA" ${Ella.getPaisNac() == "QA" ? 'selected' : ''} >Qatar</option>
+                                            <option value="UK" ${Ella.getPaisNac() == "UK" ? 'selected' : ''} >Reino Unido</option>
+                                            <option value="CF" ${Ella.getPaisNac() == "CF" ? 'selected' : ''} >República Centroafricana</option>
+                                            <option value="CZ" ${Ella.getPaisNac() == "CZ" ? 'selected' : ''} >República Checa</option>
+                                            <option value="ZA" ${Ella.getPaisNac() == "ZA" ? 'selected' : ''} >República de Sudáfrica</option>
+                                            <option value="DO" ${Ella.getPaisNac() == "DO" ? 'selected' : ''} >República Dominicana</option>
+                                            <option value="SK" ${Ella.getPaisNac() == "SK" ? 'selected' : ''} >República Eslovaca</option>
+                                            <option value="RE" ${Ella.getPaisNac() == "RE" ? 'selected' : ''} >Reunión</option>
+                                            <option value="RW" ${Ella.getPaisNac() == "RW" ? 'selected' : ''} >Ruanda</option>
+                                            <option value="RO" ${Ella.getPaisNac() == "RO" ? 'selected' : ''} >Rumania</option>
+                                            <option value="RU" ${Ella.getPaisNac() == "RU" ? 'selected' : ''} >Rusia</option>
+                                            <option value="EH" ${Ella.getPaisNac() == "EH" ? 'selected' : ''} >Sahara Occidental</option>
+                                            <option value="KN" ${Ella.getPaisNac() == "KN" ? 'selected' : ''} >Saint Kitts y Nevis</option>
+                                            <option value="WS" ${Ella.getPaisNac() == "WS" ? 'selected' : ''} >Samoa</option>
+                                            <option value="AS" ${Ella.getPaisNac() == "AS" ? 'selected' : ''} >Samoa Americana</option>
+                                            <option value="SM" ${Ella.getPaisNac() == "SM" ? 'selected' : ''} >San Marino</option>
+                                            <option value="VC" ${Ella.getPaisNac() == "VC" ? 'selected' : ''} >San Vicente y Granadinas</option>
+                                            <option value="SH" ${Ella.getPaisNac() == "SH" ? 'selected' : ''} >Santa Helena</option>
+                                            <option value="LC" ${Ella.getPaisNac() == "LC" ? 'selected' : ''} >Santa Lucía</option>
+                                            <option value="ST" ${Ella.getPaisNac() == "ST" ? 'selected' : ''} >Santo Tomé y Príncipe</option>
+                                            <option value="SN" ${Ella.getPaisNac() == "SN" ? 'selected' : ''} >Senegal</option>
+                                            <option value="SC" ${Ella.getPaisNac() == "SC" ? 'selected' : ''} >Seychelles</option>
+                                            <option value="SL" ${Ella.getPaisNac() == "SL" ? 'selected' : ''} >Sierra Leona</option>
+                                            <option value="SG" ${Ella.getPaisNac() == "SG" ? 'selected' : ''} >Singapur</option>
+                                            <option value="SY" ${Ella.getPaisNac() == "SY" ? 'selected' : ''} >Siria</option>
+                                            <option value="SO" ${Ella.getPaisNac() == "SO" ? 'selected' : ''} >Somalia</option>
+                                            <option value="LK" ${Ella.getPaisNac() == "LK" ? 'selected' : ''} >Sri Lanka</option>
+                                            <option value="PM" ${Ella.getPaisNac() == "PM" ? 'selected' : ''} >St Pierre y Miquelon</option>
+                                            <option value="SZ" ${Ella.getPaisNac() == "SZ" ? 'selected' : ''} >Suazilandia</option>
+                                            <option value="SD" ${Ella.getPaisNac() == "SD" ? 'selected' : ''} >Sudán</option>
+                                            <option value="SE" ${Ella.getPaisNac() == "SE" ? 'selected' : ''} >Suecia</option>
+                                            <option value="CH" ${Ella.getPaisNac() == "CH" ? 'selected' : ''} >Suiza</option>
+                                            <option value="SR" ${Ella.getPaisNac() == "SR" ? 'selected' : ''} >Surinam</option>
+                                            <option value="TH" ${Ella.getPaisNac() == "TH" ? 'selected' : ''} >Tailandia</option>
+                                            <option value="TW" ${Ella.getPaisNac() == "TW" ? 'selected' : ''} >Taiwán</option>
+                                            <option value="TZ" ${Ella.getPaisNac() == "TZ" ? 'selected' : ''} >Tanzania</option>
+                                            <option value="TJ" ${Ella.getPaisNac() == "TJ" ? 'selected' : ''} >Tayikistán</option>
+                                            <option value="TF" ${Ella.getPaisNac() == "TF" ? 'selected' : ''} >Territorios franceses del Sur</option>
+                                            <option value="TP" ${Ella.getPaisNac() == "TP" ? 'selected' : ''} >Timor Oriental</option>
+                                            <option value="TG" ${Ella.getPaisNac() == "TG" ? 'selected' : ''} >Togo</option>
+                                            <option value="TO" ${Ella.getPaisNac() == "TO" ? 'selected' : ''} >Tonga</option>
+                                            <option value="TT" ${Ella.getPaisNac() == "TT" ? 'selected' : ''} >Trinidad y Tobago</option>
+                                            <option value="TN" ${Ella.getPaisNac() == "TN" ? 'selected' : ''} >Túnez</option>
+                                            <option value="TM" ${Ella.getPaisNac() == "TM" ? 'selected' : ''} >Turkmenistán</option>
+                                            <option value="TR" ${Ella.getPaisNac() == "TR" ? 'selected' : ''} >Turquía</option>
+                                            <option value="TV" ${Ella.getPaisNac() == "TV" ? 'selected' : ''} >Tuvalu</option>
+                                            <option value="UA" ${Ella.getPaisNac() == "UA" ? 'selected' : ''} >Ucrania</option>
+                                            <option value="UG" ${Ella.getPaisNac() == "UG" ? 'selected' : ''} >Uganda</option>
+                                            <option value="UY" ${Ella.getPaisNac() == "UY" ? 'selected' : ''} >Uruguay</option>
+                                            <option value="UZ" ${Ella.getPaisNac() == "UZ" ? 'selected' : ''} >Uzbekistán</option>
+                                            <option value="VU" ${Ella.getPaisNac() == "VU" ? 'selected' : ''} >Vanuatu</option>
+                                            <option value="VE" ${Ella.getPaisNac() == "VE" ? 'selected' : ''} >Venezuela</option>
+                                            <option value="VN" ${Ella.getPaisNac() == "VN" ? 'selected' : ''} >Vietnam</option>
+                                            <option value="YE" ${Ella.getPaisNac() == "YE" ? 'selected' : ''} >Yemen</option>
+                                            <option value="YU" ${Ella.getPaisNac() == "YU" ? 'selected' : ''} >Yugoslavia</option>
+                                            <option value="ZM" ${Ella.getPaisNac() == "ZM" ? 'selected' : ''} >Zambia</option>
+                                            <option value="ZW" ${Ella.getPaisNac() == "ZW" ? 'selected' : ''} >Zimbabue</option>
+                                            </select>
+                                        </div>    
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-2">  
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="doc" id="optionsRadios1" value="d" ${Ella.getTipoDoc() == 100 ? 'checked' : ''}>DNI</label>
                                         </div>
                                     </div>   
                                     <div class="col-md-3">   
@@ -440,28 +440,28 @@ response.addHeader("Cache-Control", "no-store");
                                 <div class="control-group">
                                     <div class="controls">
                                         <label class="control-label">N° de Documento</label>
-                                        <input value="${Ella.getNDoc()}" id="numDoc" name="numDoc" type="text" class="input-xlarge">
+                                        <input value="${Ella.getNDoc()}" id="numDoc" name="numDoc" onkeyup="return(limitar());" type="text"  class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
                                         <label class="control-label">Pasaporte</label>
-                                        <input value="${Ella.getPasaporte()}" id="pasaporte" name="pasaporte" type="text" class="input-xlarge">
+                                        <input value="${Ella.getPasaporte()}" id="pasaporte" name="pasaporte" onkeyup="return(limitar());" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Celular</label>
                                     <div class="controls">
-                                        <input value="${Ella.getCelular()}" id="numCel" name="numCel" type="text" class="input-xlarge">
+                                        <input value="${Ella.getCelular()}" id="numCel" name="numCel" onkeyup="return(limitar());" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Correo Electrónico</label>
                                     <div class="controls">
-                                        <input value="${Ella.getCorreo()}" id="correo" name="correo" type="text" class="input-xlarge">
+                                        <input value="${Ella.getCorreo()}" id="correo" name="correo" onkeyup="return(limitar());" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -527,35 +527,35 @@ response.addHeader("Cache-Control", "no-store");
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
-                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
-                            $('#fechaNac').on('changeDate', function(ev) {
+                                            $('#fechaNac').on('changeDate', function(ev) {
 
-                                var nac = document.getElementById("fechaNac").value;
-                                var edad = document.getElementById("edad");
+                                                var nac = document.getElementById("fechaNac").value;
+                                                var edad = document.getElementById("edad");
 
-                                var today = new Date();
-                                var curr_date = today.getDate();
-                                var curr_month = today.getMonth() + 1;
-                                var curr_year = today.getFullYear();
+                                                var today = new Date();
+                                                var curr_date = today.getDate();
+                                                var curr_month = today.getMonth() + 1;
+                                                var curr_year = today.getFullYear();
 
-                                var pieces = nac.split('/');
-                                var birth_date = pieces[0];
-                                var birth_month = pieces[1];
-                                var birth_year = pieces[2];
-
-
-                                if (curr_year != birth_year && birth_month > curr_month)
-                                    edad.value = curr_year - birth_year - 1;
-                                if (curr_year != birth_year && birth_month == curr_month)
-                                    edad.value = curr_year - birth_year;
-                                if (curr_year != birth_year && birth_month < curr_month)
-                                    edad.value = curr_year - birth_year;
-                                if (curr_year == birth_year)
-                                    edad.value = 0;
+                                                var pieces = nac.split('/');
+                                                var birth_date = pieces[0];
+                                                var birth_month = pieces[1];
+                                                var birth_year = pieces[2];
 
 
-                            });
+                                                if (curr_year != birth_year && birth_month > curr_month)
+                                                    edad.value = curr_year - birth_year - 1;
+                                                if (curr_year != birth_year && birth_month == curr_month)
+                                                    edad.value = curr_year - birth_year;
+                                                if (curr_year != birth_year && birth_month < curr_month)
+                                                    edad.value = curr_year - birth_year;
+                                                if (curr_year == birth_year)
+                                                    edad.value = 0;
+
+
+                                            });
 
 
             </script>
@@ -708,6 +708,14 @@ response.addHeader("Cache-Control", "no-store");
                 function validar()
                 {
                     var numericExpression = /^[0-9]+$/;
+                    var address = document.getElementById('lugarNac');
+
+                    if (address.length < 0 || address.length > 10)
+                    {
+                        alert("La dirección debe contener como máximo 10 caracteres");
+                        return false;
+                    }
+
                     if (document.getElementById('trabIndep').checked) {
                         if (document.formulario.ingresoInd.value.match(numericExpression))
                         {
@@ -738,6 +746,76 @@ response.addHeader("Cache-Control", "no-store");
                     }
 
                 }
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {
+                    var address = document.getElementById('lugarNac');
+                    var nombre = document.getElementById('nombre');
+                    var apellidoP = document.getElementById('apellidoP');
+                    var apellidoM = document.getElementById('apellidoM');
+                    var numDoc = document.getElementById('numDoc');
+                    var pasaporte = document.getElementById('pasaporte');
+                    var correo = document.getElementById('correo');
+                    var celular = document.getElementById('numCel');
+
+                    if (address.value.length < 0 || address.value.length > 50)
+                    {
+                        alert("solo puede ingresar 50 caracteres");
+                        address.value = address.value.substring(0, 50);
+                        return false;
+                    } else if (nombre.value.length < 0 || nombre.value.length > 30) {
+                        alert("solo puede ingresar 30 caracteres");
+                        nombre.value = nombre.value.substring(0, 30);
+                        return false;
+                    }else if (apellidoP.value.length < 0 || apellidoP.value.length > 30) {
+                        alert("solo puede ingresar 30 caracteres");
+                        apellidoP.value = apellidoP.value.substring(0, 30);
+                        return false;
+                    }else if (apellidoM.value.length < 0 || apellidoM.value.length > 30) {
+                        alert("solo puede ingresar 30 caracteres");
+                        apellidoM.value = apellidoM.value.substring(0, 30);
+                        return false;
+                    }else if (numDoc.value.length < 0 || numDoc.value.length > 15) {
+                        alert("solo puede ingresar 15 caracteres");
+                        numDoc.value = numDoc.value.substring(0, 15);
+                        return false;
+                    }else if (celular.value.length < 0 || celular.value.length > 15) {
+                        alert("solo puede ingresar 15 caracteres");
+                        celular.value = celular.value.substring(0, 15);
+                        return false;
+                    }else if (correo.value.length < 0 || correo.value.length > 50) {
+                        alert("solo puede ingresar 50 caracteres");
+                        correo.value = correo.value.substring(0, 50);
+                        return false;
+                    }else if (pasaporte.value.length < 0 || pasaporte.value.length > 50) {
+                        alert("solo puede ingresar 50 caracteres");
+                        pasaporte.value = pasaporte.value.substring(0, 50);
+                        return false;
+                    }
+
+                }
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("input[type='radio']").click(function()
+                    {
+                        var previousValue = $(this).attr('previousValue');
+                        var name = $(this).attr('name');
+
+                        if (previousValue == 'checked')
+                        {
+                            $(this).removeAttr('checked');
+                            $(this).attr('previousValue', false);
+                        }
+                        else
+                        {
+                            $("input[name=" + name + "]:radio").attr('previousValue', false);
+                            $(this).attr('previousValue', 'checked');
+                        }
+                    });
+                });
+
             </script>
     </body>
 </html>
