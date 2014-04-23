@@ -917,7 +917,7 @@ public class HiberPersonal {
 
         return tempTurno;
     }
-    
+
     public Turno getTurnoAsistencias(long idTurno) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -1047,6 +1047,22 @@ public class HiberPersonal {
         session.update(temp);
     }
 
+    public void updateExpFamInt(ExpedienteFamilia temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        session.update(temp);
+    }
+
+    public void updateFam(Familia temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        session.update(temp);
+    }
+
     public ArrayList<AsistenciaFR> getAsistFR(long idFamilia, long idReunion) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -1104,9 +1120,10 @@ public class HiberPersonal {
 
         session.beginTransaction();
 
-        String hql = "FROM ExpedienteFamilia EF WHERE EF.nacionalidad = :nac";
+        String hql = "FROM ExpedienteFamilia EF WHERE EF.nacionalidad = :nac and EF.estado != :est order by EF.numeroExpediente DESC";
         Query query = session.createQuery(hql);
         query.setString("nac", "internacional");
+        query.setString("est", "init");
         List entidades = query.list();
         ArrayList<ExpedienteFamilia> allExpedientesInt = new ArrayList();
         if (!query.list().isEmpty()) {
@@ -1530,7 +1547,7 @@ public class HiberPersonal {
                     Hibernate.initialize(ifa.getFamilia());
                     fami.add(ifa);
                 }
-                
+
             }
         } else {
             List expedientes = query.list();
@@ -1989,43 +2006,43 @@ public class HiberPersonal {
         session.doWork(work);
 
     }
-    
-    public void DeleteTurnoSesion(Turno temp){
-    
+
+    public void DeleteTurnoSesion(Turno temp) {
+
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        
+
         session.delete(temp);
-        
-    }
-    
-    public void DeleteGrupoTaller(Grupo temp){
-    
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-        
-        session.delete(temp);
-        
-    }
-    
-    public void DeleteTurno2Grupo(Turno2 temp){
-    
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-        
-        session.delete(temp);
-        
+
     }
 
-    public void DeleteReunionTurno2(Reunion temp){
-    
+    public void DeleteGrupoTaller(Grupo temp) {
+
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        
+
         session.delete(temp);
-        
+
     }
-    
+
+    public void DeleteTurno2Grupo(Turno2 temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        session.delete(temp);
+
+    }
+
+    public void DeleteReunionTurno2(Reunion temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        session.delete(temp);
+
+    }
+
     public Taller getTallerByIdReunion(long id) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2043,5 +2060,75 @@ public class HiberPersonal {
         return tempT;
 
     }
-    
+
+    public ArrayList<ExpedienteFamilia> ListaFamiliasInternacionales() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "FROM ExpedienteFamilia EF order by EF.numeroExpediente ASC";
+        Query query = session.createQuery(hql);
+        List exp = query.list();
+        ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
+
+        for (Iterator iter = exp.iterator(); iter.hasNext();) {
+            ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+
+            allExpedientes.add(temp);
+        }
+
+        return allExpedientes;
+    }
+
+    public void EliminarFamiliasInternacionales() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "FROM ExpedienteFamilia EF where EF.nacionalidad = :tipo and EF.estado = :est";
+        Query query = session.createQuery(hql);
+        query.setString("tipo", "internacional");
+        query.setString("est", "init");
+        List exp = query.list();
+        ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
+
+        for (Iterator iter = exp.iterator(); iter.hasNext();) {
+            ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+            Hibernate.initialize(temp.getFamilia().getInfoFamilias());
+            allExpedientes.add(temp);
+        }
+
+        for (ExpedienteFamilia expedienteFamilia : allExpedientes) {
+            Familia tempFam = expedienteFamilia.getFamilia();
+            Set<InfoFamilia> infoFamilias = new HashSet<InfoFamilia>(0);
+            infoFamilias = tempFam.getInfoFamilias();
+            for (InfoFamilia infoFamilia : infoFamilias) {
+                session.delete(infoFamilia);
+            }
+            session.delete(expedienteFamilia);
+            session.delete(tempFam);
+        }
+
+    }
+
+    public boolean VerificarNumExp(String num) {
+        Session session = sessionFactory.getCurrentSession();
+        Organismo org = new Organismo();
+
+        session.beginTransaction();
+        String hqlO = "FROM ExpedienteFamilia EF where EF.numeroExpediente = :idExp";
+        Query queryO = session.createQuery(hqlO);
+        queryO.setString("idExp", num);
+        Object queryResultA = queryO.uniqueResult();
+
+        if (queryResultA != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }

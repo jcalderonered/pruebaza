@@ -8,7 +8,8 @@ package com.mimp.controllers;
 import com.mimp.util.*;
 import com.mimp.bean.*;
 import com.mimp.hibernate.*;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -2227,7 +2228,7 @@ public class personal {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////EDITAR PERSONAL UA ///////////////////////////////////////////
     @RequestMapping(value = "/EditarPersonalUa", method = RequestMethod.POST)
-    public ModelAndView EditarPersonalUa_POST(ModelMap map, @RequestParam("id") int id,  @RequestParam("idUA") int idUA, HttpSession session) {
+    public ModelAndView EditarPersonalUa_POST(ModelMap map, @RequestParam("id") int id, @RequestParam("idUA") int idUA, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
@@ -2457,7 +2458,7 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        long idUa = Long.parseLong(session.getAttribute("idUa").toString());        
+        long idUa = Long.parseLong(session.getAttribute("idUa").toString());
 
         map.put("ua", ServicioPersonal.getUa(idUa));
         map.addAttribute("idUA", idUa);
@@ -4791,7 +4792,6 @@ public class personal {
         ServicioPersonal.PersonalUpdateReunion(tempReun);
 
         //ServicioPersonal.PersonalCrearReunion(tempReun);
-
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
                 + " con ID: " + usuario.getIdpersonal() + ".Editó la reunión con ID: " + idReunion + ". "
                 + "Perteneciente al grupo con ID: " + idGrupo + ". Del taller con ID: " + idTaller;
@@ -5281,6 +5281,8 @@ public class personal {
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExpediente);
             expedienteInt = tempExp;
             infoFam = ServicioMain.getInfoFamPorIdFamilia(tempExp.getFamilia().getIdfamilia());
+            El = new Adoptante();
+            Ella = new Adoptante();
             for (Adoptante adop : infoFam.getAdoptantes()) {
                 if (adop.getSexo() == 'f') {
                     Ella = adop;
@@ -5312,6 +5314,83 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
+        String ID = "";
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        
+        //Luego debo generar un nuevo ID
+        ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
+        allExpedientes = ServicioPersonal.ListaFamiliasInternacionales();
+        if (!allExpedientes.isEmpty()) {
+            int numElem = allExpedientes.size();
+            int cont = 0;
+            int idAct = 0;
+            int idSig = 0;
+
+            for (ExpedienteFamilia expedienteFamilia : allExpedientes) {
+                numElem--;
+                String[] parts = expedienteFamilia.getNumeroExpediente().split("-");
+                idAct = Integer.parseInt(parts[0]);
+                cont++;
+                idSig = cont;
+                map.put("idAct", idAct);
+                map.put("idSig", idSig);
+                if (idAct == idSig) {                    
+                    if (numElem == 0) {
+                        cont++;
+                        String idGen = String.format("%04d", cont);
+                        ID = idGen + "-" + year + "-MIMP/DGA-S";
+                        map.put("idGen", idGen);
+                    }
+                } else {
+                    String idGen = String.format("%04d", idSig);
+                    ID = idGen + "-" + year + "-MIMP/DGA-S";
+                    map.put("idGen", idGen);
+                    break;
+                }
+
+            }
+        } else {
+
+            ID = "0001-" + year + "-MIMP/DGA-S";
+        }
+
+        Familia tempFam = new Familia();
+        ExpedienteFamilia expediente = new ExpedienteFamilia();
+        Entidad tempEnt = ServicioPersonal.ListaEntidades().get(0);
+        infoFam = new InfoFamilia();
+
+        El = new Adoptante();
+        Ella = new Adoptante();
+            
+        tempFam.setEntidad(tempEnt);
+        tempFam.setHabilitado(Short.parseShort("2"));
+        tempFam.setUser(usuario.getApellidoP()); //seteo el usuario por defecto como apellido paterno del usuario que lo registra
+        String pass = DigestUtils.sha512Hex(usuario.getApellidoP());
+        tempFam.setPass(pass);
+
+        expediente.setUnidad(usuario.getUnidad());
+        expediente.setNumeroExpediente(ID);
+        expediente.setNacionalidad("internacional");
+        expediente.setEstado("init");
+        expediente.setRnsa(Short.parseShort("0"));
+        expediente.setRnaa(Short.parseShort("1"));
+
+        ServicioPersonal.crearFamInt(tempFam, expediente, infoFam);
+        expedienteInt = expediente;
+
+        String mensaje_log = "Se creó nuevo expediente internacional con número: " + expedienteInt.getNumeroExpediente()
+                + " con ID: " + expedienteInt.getIdexpedienteFamilia();
+
+        String Tipo_registro = "Familia";
+
+        try {
+            String Numero_registro = String.valueOf(expedienteInt.getNumeroExpediente());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
+        map.put("expediente", expedienteInt);
         map.put("listaEntidad", ServicioPersonal.ListaEntidades());
         return new ModelAndView("/Personal/fam_inter/datos_reg", map);
     }
@@ -5471,26 +5550,40 @@ public class personal {
 
         Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
 
+        boolean verificar = ServicioPersonal.VerificarNumExp(numeroExp);
+        if(!verificar){        
+                map.addAttribute("msg","Error, el ID generado ya esta siendo usado por otro usuario. Por favor, ingrese nuevamente los datos");
+                return new ModelAndView("forward:/famint", map);
+        }
+        
         expedienteInt.getFamilia().setEntidad(tempEnt);
         expedienteInt.setHt(ht);
         expedienteInt.setNumeroExpediente(numeroExp);
+        
         expedienteInt.setTipoFamilia(tipoFamilia);
+        if (expedienteInt.getEstado().equals("init")) {
+            expedienteInt.setEstado("evaluacion");
+        }
         if (fechaIngreso != null && !fechaIngreso.equals("")) {
             expedienteInt.setFechaIngresoDga(format.stringToDate(fechaIngreso));
         }
-        if (fechaIngreso == null && fechaIngreso.equals("")) {
+        if (fechaIngreso == null || fechaIngreso.equals("")) {
             expedienteInt.setFechaIngresoDga(null);
         }
         if (tupa != null && !tupa.equals("")) {
             expedienteInt.setTupa(format.stringToDate(tupa));
         }
-        if (tupa == null && tupa.equals("")) {
+        if (tupa == null || tupa.equals("")) {
             expedienteInt.setTupa(null);
         }
 
-        servicioEtapa.UpdateFamilia(expedienteInt.getFamilia());
-        servicioEtapa.updateExpedienteFamilia(expedienteInt);
+        ServicioPersonal.updateFam(expedienteInt.getFamilia());
+        ServicioPersonal.updateExpFamInt(expedienteInt);
 
+        //Hay que eliminar los expedientes que no hayan sido guardados (Estado init)
+
+        ServicioPersonal.EliminarFamiliasInternacionales();
+        
         String mensaje_log = "Se editó los datos del expediente "
                 + "con familia con Usuario, " + expedienteInt.getFamilia().getUser() + " y ID de expediente:"
                 + String.valueOf(expedienteInt.getIdexpedienteFamilia());
@@ -5507,6 +5600,7 @@ public class personal {
         map.put("infoFam", infoFam);
         map.put("Ella", Ella);
         map.addAttribute("idExpediente", idExpediente);
+//        map.addAttribute("fechaIngreso", fechaIngreso);
         return new ModelAndView("/Personal/fam_inter/datos_ella", map);
     }
 
@@ -6571,19 +6665,19 @@ public class personal {
         long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
 
         ServicioPersonal.EliminarSesion(idSesion);
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó la sesión con ID: " + idSesion;
-        
-            String Tipo_registro = "Sesión";
+                + " con ID: " + usuario.getIdpersonal() + ". Eliminó la sesión con ID: " + idSesion;
 
-            try {
-                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+        String Tipo_registro = "Sesión";
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
-        
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
         map.put("formato", format);
@@ -6618,19 +6712,19 @@ public class personal {
         long idTaller = Long.parseLong(session.getAttribute("idTaller").toString());
 
         ServicioPersonal.EliminarTaller(idTaller);
-        
+
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó el taller con ID: " + idTaller;
-        
-            String Tipo_registro = "Taller";
+                + " con ID: " + usuario.getIdpersonal() + ". Eliminó el taller con ID: " + idTaller;
 
-            try {
-                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+        String Tipo_registro = "Taller";
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
-        
+        try {
+            String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+
         map.put("listaSesiones", ServicioPersonal.listaSesiones());
         map.put("listaTalleres", ServicioPersonal.listaTalleres());
         map.put("formato", format);
@@ -6688,7 +6782,7 @@ public class personal {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
-        }       
+        }
 
         session.setAttribute("idTurno", idTurno);
         session.setAttribute("idSesion", idSesion);
@@ -6717,16 +6811,16 @@ public class personal {
             if (tempT.getAsistenciaFTs().isEmpty()) {
                 ServicioPersonal.DeleteTurnoSesion(tempT);
                 String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó el Turno con ID: " + idTurno;
+                        + " con ID: " + usuario.getIdpersonal() + ". Eliminó el Turno con ID: " + idTurno;
 
-            String Tipo_registro = "Turno";
+                String Tipo_registro = "Turno";
 
-            try {
-                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+                try {
+                    String Numero_registro = String.valueOf(usuario.getIdpersonal());
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
+                }
             } else {
                 mensaje = "El turno no se pudo eliminar debido a que hay personas inscritas";
             }
@@ -6802,19 +6896,19 @@ public class personal {
             tempG = ServicioPersonal.getGrupo(idGrupo);
             if (tempG.getTurno2s().isEmpty()) {
                 ServicioPersonal.DeleteGrupoTaller(tempG);
-                
+
                 String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó el Grupo con ID: " + idGrupo;
+                        + " con ID: " + usuario.getIdpersonal() + ". Eliminó el Grupo con ID: " + idGrupo;
 
-            String Tipo_registro = "Grupo";
+                String Tipo_registro = "Grupo";
 
-            try {
-                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+                try {
+                    String Numero_registro = String.valueOf(usuario.getIdpersonal());
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
-                
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
+                }
+
             } else {
                 mensaje = "El grupo no se pudo eliminar debido a que hay turnos creados";
             }
@@ -6878,18 +6972,18 @@ public class personal {
             tempT2 = ServicioPersonal.getTurno2(idTurno2);
             if (tempT2.getReunions().isEmpty()) {
                 ServicioPersonal.DeleteTurno2Grupo(tempT2);
-                
+
                 String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó el Turno con ID: " + idTurno2;
+                        + " con ID: " + usuario.getIdpersonal() + ". Eliminó el Turno con ID: " + idTurno2;
 
-            String Tipo_registro = "Grupo";
+                String Tipo_registro = "Grupo";
 
-            try {
-                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+                try {
+                    String Numero_registro = String.valueOf(usuario.getIdpersonal());
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
+                }
             } else {
                 mensaje = "No se puede eliminar el turno debido a que hay reuniones creadas";
             }
@@ -6961,19 +7055,19 @@ public class personal {
 
             if (tempReun.getAsistenciaFRs().isEmpty()) {
                 ServicioPersonal.DeleteReunionTurno2(tempReun);
-                
-                 String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
-                    + " con ID: " + usuario.getIdpersonal() + ". Eliminó la Reunión con ID: " + idReunion;
 
-            String Tipo_registro = "Reunion";
+                String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                        + " con ID: " + usuario.getIdpersonal() + ". Eliminó la Reunión con ID: " + idReunion;
 
-            try {
-                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+                String Tipo_registro = "Reunion";
 
-                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-            } catch (Exception ex) {
-            }
-            
+                try {
+                    String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                    ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+                } catch (Exception ex) {
+                }
+
             } else {
                 mensaje = "No se puede eliminar la reunión debido a que hay personas inscritas";
             }

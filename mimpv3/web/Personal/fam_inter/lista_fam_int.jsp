@@ -193,6 +193,8 @@
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Lista de Familias Internacionales </strong></h1>
                         <br>
+                        <p class="bg-danger">${msg}</p>
+                        <br>
                         <p align="right">Filtrar: <input id="filtrar" type="text" /></p>
                         <br>
                         <div class="table-responsive">
