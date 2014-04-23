@@ -206,6 +206,8 @@
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>    
                         <br>
+                        <h3><strong>${msg}</strong></h3>
+                        <br>
                         <p align="right">Filtrar: <input id="filtrar" type="text" /></p>
                         <br>
                         <div class="bs-example">

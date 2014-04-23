@@ -5319,7 +5319,7 @@ public class personal {
         
         //Luego debo generar un nuevo ID
         ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
-        allExpedientes = ServicioPersonal.ListaFamiliasInternacionales();
+        allExpedientes = ServicioPersonal.ListaExpedientesActuales();
         if (!allExpedientes.isEmpty()) {
             int numElem = allExpedientes.size();
             int cont = 0;

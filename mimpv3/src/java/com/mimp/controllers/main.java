@@ -3609,7 +3609,10 @@ public class main {
     @RequestMapping(value = "/GenerarExpNac", method = RequestMethod.POST)
     public ModelAndView GenerarExpNac(ModelMap map, @RequestParam(value = "idFamilia") long idFamilia,
             @RequestParam(value = "el", required = false) String el,
-            @RequestParam(value = "ella", required = false) String ella) {
+            @RequestParam(value = "ella", required = false) String ella,
+            HttpSession session) {
+        
+        Personal usuario = (Personal) session.getAttribute("usuario");
 
         String exp = el + " - " + ella;
         if (el == null || el.equals("")) {
@@ -3618,47 +3621,115 @@ public class main {
         if (ella == null || ella.equals("")) {
             exp = el;
         }
+        
+        String ID = "";
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        
+        //Luego debo generar un nuevo ID
+        ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
+        allExpedientes = ServicioPersonal.ListaExpedientesActuales();
+        if (!allExpedientes.isEmpty()) {
+            int numElem = allExpedientes.size();
+            int cont = 0;
+            int idAct = 0;
+            int idSig = 0;
+
+            for (ExpedienteFamilia expedienteFamilia : allExpedientes) {
+                numElem--;
+                String[] parts = expedienteFamilia.getNumeroExpediente().split("-");
+                idAct = Integer.parseInt(parts[0]);
+                cont++;
+                idSig = cont;
+                map.put("idAct", idAct);
+                map.put("idSig", idSig);
+                if (idAct == idSig) {                    
+                    if (numElem == 0) {
+                        cont++;
+                        String idGen = String.format("%04d", cont);
+                        ID = idGen + "-" + year + "-MIMP/DGA-S";
+                        map.put("idGen", idGen);
+                    }
+                } else {
+                    String idGen = String.format("%04d", idSig);
+                    ID = idGen + "-" + year + "-MIMP/DGA-S";
+                    map.put("idGen", idGen);
+                    break;
+                }
+
+            }
+        } else {
+
+            ID = "0001-" + year + "-MIMP/DGA-S";
+        }
+        
+        Familia tempFam = new Familia();
+        tempFam = servicioEtapa.getFamilia(idFamilia);
+        ExpedienteFamilia expediente = new ExpedienteFamilia();
+        
+        
+        expediente.setExpediente(exp);
+        expediente.setUnidad(usuario.getUnidad());
+        expediente.setNumeroExpediente(ID);
+        expediente.setEstado("init");
+        expediente.setNacionalidad("nacional");
+        expediente.setRnsa(Short.parseShort("0"));
+        expediente.setRnaa(Short.parseShort("1"));
+        expediente.setFamilia(tempFam);
+        ServicioMain.crearUpdateExpFam(expediente);
+        
+        String mensaje_log = "Se creó nuevo expediente internacional con número: " + expediente.getNumeroExpediente()
+                + " con ID: " + expediente.getIdexpedienteFamilia();
+
+        String Tipo_registro = "Familia";
+
+        try {
+            String Numero_registro = String.valueOf(expediente.getNumeroExpediente());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+        
         map.put("df", df);
         map.put("idFamilia", idFamilia);
-        map.put("exp", exp);
+        map.put("expediente", expediente);
         map.put("listaEntidad", ServicioPersonal.ListaEntidades());
         return new ModelAndView("/Personal/Buscador_etapa/gen_exp", map);
 
     }
 
     //PROBAR
-    @RequestMapping(value = "/CrearExpNac", method = RequestMethod.POST)
-    public ModelAndView CrearExpNac_POST(ModelMap map, HttpSession session,
-            @RequestParam(value = "idFamilia") long idFamilia,
+    @RequestMapping(value = "/UpdateExpNac", method = RequestMethod.POST)
+    public ModelAndView UpdateExpNac_POST(ModelMap map, HttpSession session,
+            @RequestParam(value = "idExpFam") long idExpFam,
             @RequestParam(value = "numeroFicha") String numeroFicha,
+            @RequestParam(value = "numeroExp") String numeroExp,
             @RequestParam(value = "ht") String ht,
-            @RequestParam(value = "exp") String exp,
-            @RequestParam(value = "fechaIngresoFicha") String fechaIngresoFicha,
+            @RequestParam(value = "fechaIngresoFicha") String fechaIngresoFicha,            
             @RequestParam(value = "entAsoc", required = false) String entAsoc
     ) {
-        session.setAttribute("idFamilia", idFamilia);
+        session.setAttribute("idExpFam", idExpFam);
         session.setAttribute("numeroFicha", numeroFicha);
+        session.setAttribute("numeroExp", numeroExp);
         session.setAttribute("ht", ht);
-        session.setAttribute("exp", exp);
         session.setAttribute("fechaIngresoFicha", fechaIngresoFicha);
         session.setAttribute("entAsoc", entAsoc);
 
-        return new ModelAndView("redirect:/CrearExpNac", map);
+        return new ModelAndView("redirect:/UpdateExpNac", map);
     }
 
-    @RequestMapping(value = "/CrearExpNac", method = RequestMethod.GET)
-    public ModelAndView CrearExpNac_GET(ModelMap map, HttpSession session) {
-        long idFamilia = 0;
+    @RequestMapping(value = "/UpdateExpNac", method = RequestMethod.GET)
+    public ModelAndView UpdateExpNac_GET(ModelMap map, HttpSession session) {
+        long idExpFam = 0;
         String numeroFicha = "";
+        String numeroExp = "";
         String ht = "";
-        String exp = "";
         String fechaIngresoFicha = "";
         String entAsoc = "";
         try {
-            idFamilia = Long.parseLong(session.getAttribute("idFamilia").toString());
+            idExpFam = Long.parseLong(session.getAttribute("idExpFam").toString());
             numeroFicha = (String) session.getAttribute("numeroFicha");
+            numeroExp = (String) session.getAttribute("numeroExp");
             ht = (String) session.getAttribute("ht");
-            exp = (String) session.getAttribute("exp");
             fechaIngresoFicha = (String) session.getAttribute("fechaIngresoFicha");
         } catch (Exception ex) {
             return new ModelAndView("redirect:/inicioper", map);
@@ -3666,10 +3737,10 @@ public class main {
         if (session.getAttribute("entAsoc") != null) {
             entAsoc = (String) session.getAttribute("entAsoc");
         }
-        session.removeAttribute("idFamilia");
+        session.removeAttribute("idExpFam");
         session.removeAttribute("numeroFicha");
+        session.removeAttribute("numeroExp");
         session.removeAttribute("ht");
-        session.removeAttribute("exp");
         session.removeAttribute("fechaIngresoFicha");
         session.removeAttribute("entAsoc");
 
@@ -3680,18 +3751,20 @@ public class main {
             return new ModelAndView("login", map);
         }
 
-        Familia tempFam = new Familia();
-        tempFam = servicioEtapa.getFamilia(idFamilia);
-        ExpedienteFamilia expediente = new ExpedienteFamilia();
+        boolean verificar = ServicioPersonal.VerificarNumExp(numeroExp);
+        if(!verificar){        
+                map.addAttribute("msg","Error, el ID generado ya esta siendo usado por otro usuario. Por favor, ingrese nuevamente los datos");
+                return new ModelAndView("forward:/fametap", map);
+        }
+        
+        ExpedienteFamilia expediente = servicioEtapa.getExpedienteFamilia(idExpFam);
         if (entAsoc != null && !entAsoc.equals("")) {
             long entAsoc1 = Long.parseLong(entAsoc);
             Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc1);
-            tempFam.setEntidad(tempEnt);
+            expediente.getFamilia().setEntidad(tempEnt);
         }
-//
+
         expediente.setHtFicha(ht);
-        expediente.setExpediente(exp);
-//        expediente.setHt(ht);
         expediente.setnFicha(numeroFicha);
         if (fechaIngresoFicha != null && !fechaIngresoFicha.equals("")) {
             expediente.setFechaIngresoFicha(df.stringToDate(fechaIngresoFicha));
@@ -3699,21 +3772,23 @@ public class main {
         if (fechaIngresoFicha == null || fechaIngresoFicha.equals("")) {
             expediente.setFechaIngresoFicha(null);
         }
-//        if (tupa != null && !tupa.equals("")) {
-//            expediente.setTupa(df.stringToDate(tupa));
-//        }
-//        if (tupa == null && tupa.equals("")) {
-//            expediente.setTupa(null);
-//        }
-//        expediente.setTipoFamilia(tipoFamilia);
         expediente.setUnidad(usuario.getUnidad());
         expediente.setEstado("evaluacion");
-        expediente.setNacionalidad("nacional");
-        expediente.setRnsa(Short.parseShort("0"));
-        expediente.setRnaa(Short.parseShort("1"));
-        expediente.setFamilia(tempFam);
         ServicioMain.crearUpdateExpFam(expediente);
 
+        String mensaje_log = "Se editó los datos del expediente "
+                + "con familia con Usuario, " + expediente.getFamilia().getUser() + " y ID de expediente:"
+                + String.valueOf(expediente.getIdexpedienteFamilia());
+        String Tipo_registro = "Familia";
+
+        try {
+            String Numero_registro = String.valueOf(expediente.getIdexpedienteFamilia());;
+
+            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+        } catch (Exception ex) {
+        }
+//        Eliminar los registros nacionales que se tengan hasta el momento
+        ServicioPersonal.EliminarExpedientesNacionales();
         map.put("listaFamilias", servicioEtapa.getListaFamilias());
         return new ModelAndView("Personal/Buscador_etapa/etapa_formativa", map);
 
