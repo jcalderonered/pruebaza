@@ -2061,7 +2061,7 @@ public class HiberPersonal {
 
     }
 
-    public ArrayList<ExpedienteFamilia> ListaFamiliasInternacionales() {
+    public ArrayList<ExpedienteFamilia> ListaExpedientesActuales() {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -2113,9 +2113,34 @@ public class HiberPersonal {
 
     }
 
+    public void EliminarExpedientesNacionales() {
+    Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "FROM ExpedienteFamilia EF where EF.nacionalidad = :tipo and EF.estado = :est";
+        Query query = session.createQuery(hql);
+        query.setString("tipo", "nacional");
+        query.setString("est", "init");
+        List exp = query.list();
+        ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
+
+        for (Iterator iter = exp.iterator(); iter.hasNext();) {
+            ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+            allExpedientes.add(temp);
+        }
+        
+        for (ExpedienteFamilia expedienteFamilia : allExpedientes) {
+            session.delete(expedienteFamilia);
+        }
+        
+                
+    }
+    
+    
+    
     public boolean VerificarNumExp(String num) {
         Session session = sessionFactory.getCurrentSession();
-        Organismo org = new Organismo();
 
         session.beginTransaction();
         String hqlO = "FROM ExpedienteFamilia EF where EF.numeroExpediente = :idExp";
