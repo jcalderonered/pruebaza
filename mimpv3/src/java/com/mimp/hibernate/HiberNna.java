@@ -36,6 +36,7 @@ public class HiberNna {
 
     ResultSet temp;
     ResultSet tempexp;
+    String numero_last = "";
 
 //    public Nna getNna(long id) {
 //        Session session = sessionFactory.getCurrentSession();
@@ -1421,4 +1422,58 @@ public class HiberNna {
         session.doWork(work);
 
     }
+    
+    
+    ///////////// Creación de ID's Automáticos /////////////////
+    
+    public String get_Last_numero_expediente() {
+        Session session = sessionFactory.getCurrentSession();
+        Work work;
+        work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                numero_last = null;
+                ResultSet temp_numero;
+                String hql = "{call HN_GET_LAST_EXPEDIENTE_NNA(?)}";
+                CallableStatement statement = connection.prepareCall(hql);                
+                statement.registerOutParameter(1, OracleTypes.CURSOR);
+                statement.execute();
+                
+                temp_numero = (ResultSet) statement.getObject(1); 
+                while(temp_numero.next()){
+                numero_last = temp_numero.getString(1);
+                }
+                temp_numero.close();
+                statement.close();
+            }
+        };
+        session.doWork(work);
+
+        return numero_last;
+    }
+    
+    
+    public void crearExpNna2(ExpedienteNna temp) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        final ExpedienteNna expnna = temp;
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call HN_SAVE_EXP_NNA2(?,?,?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.setLong(1, expnna.getNna().getIdnna());
+                statement.setLong(2, expnna.getUnidad().getIdunidad());
+                statement.setString(3, expnna.getNumero());                
+
+                statement.execute();
+                statement.close();
+            }
+        };
+        session.doWork(work);
+    }
+    
 }

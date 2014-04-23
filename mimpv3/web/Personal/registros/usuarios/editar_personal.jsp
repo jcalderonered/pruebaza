@@ -105,7 +105,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <c:if test="${idUA == 0}">
+                        <c:if test="${idUA != 0}">
                             <form action="${pageContext.servletContext.contextPath}/irListaPersonalUa" method="post" >
                                 <input hidden name="idUA" id="idUA" value="${idUA}">
                                 <p align="right"><button type="submit" class="btn btn-default" style="background: black; color: white" class="btn btn-default">Volver</button></p>
