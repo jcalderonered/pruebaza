@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -114,7 +114,7 @@
                             </c:if>  
                             <c:if test="${expediente != null}">
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateExpedienteNna" method="post">
-                                    <input hidden name="idNna" id="idNna" value="${expediente.getNna().getIdnna()}">    
+                                    <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">     
                                 </c:if>   
                                 <fieldset>
                                     <!-- Text input-->
@@ -130,9 +130,17 @@
                                     </div>
                                     <br>
                                     <div class="control-group">
-                                        <!--<label class="control-label">Número</label>-->
+                                        <label class="control-label">Número</label>
                                         <div class="controls">
-                                            <input hidden id="numero" name="numero" type="text" value="${""}" placeholder="" class="input-xlarge" >
+                                            <c:choose >
+                                                <c:when test="${expediente != null}">
+                                                    <input readonly id="numero" name="numero" type="text" value="${expediente.getNumero()}" placeholder="" class="input-xlarge" >
+                                                </c:when> 
+                                                <c:otherwise>
+                                                    <input readonly id="numero" name="numero" type="text" value="${numero}" placeholder="" class="input-xlarge" >
+                                                </c:otherwise>
+
+                                            </c:choose>
                                         </div>
                                     </div>
                                     <br>                                
@@ -418,28 +426,28 @@
                                     </div>
                                     <br>
                                     <c:if test="${usuario.getRol() == 'DAPA'}">
-                                    <h3><strong>LLenar luego que el NNA ha sido adoptado</strong></h3>
-                                    <div class="control-group">
-                                        <label class="control-label">Nombre Actual</label>
-                                        <div class="controls">
-                                            <input  id="nombreActual" name="nombreActual" value="${expediente.getNActual()}" type="text" placeholder="" class="input-xlarge" >
+                                        <h3><strong>LLenar luego que el NNA ha sido adoptado</strong></h3>
+                                        <div class="control-group">
+                                            <label class="control-label">Nombre Actual</label>
+                                            <div class="controls">
+                                                <input  id="nombreActual" name="nombreActual" value="${expediente.getNActual()}" type="text" placeholder="" class="input-xlarge" >
+                                            </div>
                                         </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                        <label class="control-label">Apellido Paterno Actual</label>
-                                        <div class="controls">
-                                            <input  id="apellidoPActual" name="apellidoPActual" value="${expediente.getApellidopActual()}" type="text" placeholder="" class="input-xlarge" >
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Apellido Paterno Actual</label>
+                                            <div class="controls">
+                                                <input  id="apellidoPActual" name="apellidoPActual" value="${expediente.getApellidopActual()}" type="text" placeholder="" class="input-xlarge" >
+                                            </div>
                                         </div>
-                                    </div>
-                                    <br>
-                                    <div class="control-group">
-                                        <label class="control-label">Apellido Materno Actual</label>
-                                        <div class="controls">
-                                            <input  id="apellidoMActual" name="apellidoMActual" value="${expediente.getApellidomActual()}" type="text" placeholder="" class="input-xlarge" >
+                                        <br>
+                                        <div class="control-group">
+                                            <label class="control-label">Apellido Materno Actual</label>
+                                            <div class="controls">
+                                                <input  id="apellidoMActual" name="apellidoMActual" value="${expediente.getApellidomActual()}" type="text" placeholder="" class="input-xlarge" >
+                                            </div>
                                         </div>
-                                    </div>
-                                    <br>
+                                        <br>
                                     </c:if>
                                     <div class="control-group">
                                         <div class="controls">

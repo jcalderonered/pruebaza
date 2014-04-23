@@ -1108,6 +1108,38 @@ public class nna {
         }
 
         String tempfechaString = "";
+        String numero = ServicioNna.get_Last_numero_expediente();
+        String ID = null;
+        ExpedienteNna tempExp = new ExpedienteNna();
+
+        int anho_actual = Calendar.getInstance().get(Calendar.YEAR);
+
+        if (numero == null) {
+
+            ID = "0001-" + anho_actual + "-MIMP/DGA-NNA";
+
+        } else {
+            String[] parts = numero.split("-");
+            int id_anual_previo = Integer.parseInt(parts[0]);
+            int anho_previo = Integer.parseInt(parts[1]);
+
+            if (anho_actual == anho_previo) {
+                int id_anual_actual = id_anual_previo + 1;
+                ID = String.format("%04d", id_anual_actual) + "-" + anho_actual + "-MIMP/DGA-NNA";
+
+            } else if (anho_actual > anho_previo) {
+
+                ID = "0001-" + anho_actual + "-MIMP/DGA-NNA";
+            }
+        }
+
+        tempExp.setNumero(ID);
+        tempExp.setNna(ServicioNna.getNna(idNna));
+        tempExp.setUnidad(ServicioPersonal.getUa(1));
+
+        ServicioNna.crearExpNna2(tempExp);
+
+        map.put("numero", ID);
         map.addAttribute("fechainv", tempfechaString);
         map.addAttribute("fechaing", tempfechaString);
         map.addAttribute("fechaest", tempfechaString);
@@ -1115,6 +1147,8 @@ public class nna {
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
         map.put("listaUa", ServicioPersonal.ListaUa());
+        map.put("expediente", tempExp);
+
         return new ModelAndView("/Personal/nna/editar_expediente", map);
     }
 
@@ -1128,6 +1162,39 @@ public class nna {
         }
 
         String tempfechaString = "";
+        String numero = ServicioNna.get_Last_numero_expediente();
+        String ID = null;
+        ExpedienteNna tempExp = new ExpedienteNna();
+
+        int anho_actual = Calendar.getInstance().get(Calendar.YEAR);
+
+        if (numero == null) {
+
+            ID = "0001-" + anho_actual + "-MIMP/DGA-NNA";
+
+        } else {
+            String[] parts = numero.split("-");
+            int id_anual_previo = Integer.parseInt(parts[0]);
+            int anho_previo = Integer.parseInt(parts[1]);
+
+            if (anho_actual == anho_previo) {
+                int id_anual_actual = id_anual_previo + 1;
+                ID = String.format("%04d", id_anual_actual) + "-" + anho_actual + "-MIMP/DGA-NNA";
+
+            } else if (anho_actual > anho_previo) {
+
+                ID = "0001-" + anho_actual + "-MIMP/DGA-NNA";
+            }
+        }
+
+        tempExp.setNumero(ID);
+        tempExp.setNna(ServicioNna.getNna(idNna));
+        tempExp.setUnidad(ServicioPersonal.getUa(1));
+
+        ServicioNna.crearExpNna2(tempExp);
+
+        map.put("numero", ID);
+        map.put("expediente", tempExp);
         map.addAttribute("fechainv", tempfechaString);
         map.addAttribute("fechaing", tempfechaString);
         map.addAttribute("fechaest", tempfechaString);
@@ -1152,6 +1219,39 @@ public class nna {
         }
 
         String tempfechaString = "";
+        String numero = ServicioNna.get_Last_numero_expediente();
+        String ID = null;
+        ExpedienteNna tempExp = new ExpedienteNna();
+
+        int anho_actual = Calendar.getInstance().get(Calendar.YEAR);
+
+        if (numero == null) {
+
+            ID = "0001-" + anho_actual + "-MIMP/DGA-NNA";
+
+        } else {
+            String[] parts = numero.split("-");
+            int id_anual_previo = Integer.parseInt(parts[0]);
+            int anho_previo = Integer.parseInt(parts[1]);
+
+            if (anho_actual == anho_previo) {
+                int id_anual_actual = id_anual_previo + 1;
+                ID = String.format("%04d", id_anual_actual) + "-" + anho_actual + "-MIMP/DGA-NNA";
+
+            } else if (anho_actual > anho_previo) {
+
+                ID = "0001-" + anho_actual + "-MIMP/DGA-NNA";
+            }
+        }
+
+        tempExp.setNumero(ID);
+        tempExp.setNna(ServicioNna.getNna(idNna));
+        tempExp.setUnidad(ServicioPersonal.getUa(1));
+
+        ServicioNna.crearExpNna2(tempExp);
+
+        map.put("numero", ID);
+        map.put("expediente", tempExp);
         map.addAttribute("fechainv", tempfechaString);
         map.addAttribute("fechaing", tempfechaString);
         map.addAttribute("fechaest", tempfechaString);
@@ -1174,6 +1274,39 @@ public class nna {
         }
 
         String tempfechaString = "";
+        String numero = ServicioNna.get_Last_numero_expediente();
+        String ID = null;
+        ExpedienteNna tempExp = new ExpedienteNna();
+
+        int anho_actual = Calendar.getInstance().get(Calendar.YEAR);
+
+        if (numero == null) {
+
+            ID = "0001-" + anho_actual + "-MIMP/DGA-NNA";
+
+        } else {
+            String[] parts = numero.split("-");
+            int id_anual_previo = Integer.parseInt(parts[0]);
+            int anho_previo = Integer.parseInt(parts[1]);
+
+            if (anho_actual == anho_previo) {
+                int id_anual_actual = id_anual_previo + 1;
+                ID = String.format("%04d", id_anual_actual) + "-" + anho_actual + "-MIMP/DGA-NNA";
+
+            } else if (anho_actual > anho_previo) {
+
+                ID = "0001-" + anho_actual + "-MIMP/DGA-NNA";
+            }
+        }
+
+        tempExp.setNumero(ID);
+        tempExp.setNna(ServicioNna.getNna(idNna));
+        tempExp.setUnidad(ServicioPersonal.getUa(1));
+
+        ServicioNna.crearExpNna2(tempExp);
+
+        map.put("numero", ID);
+        map.put("expediente", tempExp);
         map.addAttribute("fechainv", tempfechaString);
         map.addAttribute("fechaing", tempfechaString);
         map.addAttribute("fechaest", tempfechaString);
@@ -1216,6 +1349,7 @@ public class nna {
         map.put("df", df);
         map.put("unidad", tempUA);
         map.put("expediente", tempExp);
+        map.put("nna", ServicioNna.getNna(idNna));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
         map.put("listaUa", ServicioPersonal.ListaUa());
@@ -1251,6 +1385,7 @@ public class nna {
         }
         map.addAttribute("fechaest", tempfechaEst);
         map.put("expediente", tempExp);
+        map.put("nna", ServicioNna.getNna(idNna));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
         map.put("listaUa", ServicioPersonal.ListaUa());
@@ -1290,6 +1425,7 @@ public class nna {
         }
         map.addAttribute("fechaest", tempfechaEst);
         map.put("expediente", tempExp);
+        map.put("nna", ServicioNna.getNna(idNna));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
         map.put("listaUa", ServicioPersonal.ListaUa());
@@ -1332,6 +1468,7 @@ public class nna {
         }
         map.addAttribute("fechaest", tempfechaEst);
         map.put("expediente", tempExp);
+        map.put("nna", ServicioNna.getNna(idNna));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.put("listaExpedientes", ServicioNna.listaExpNna());
         map.addAttribute("volver", volver);
@@ -3682,7 +3819,7 @@ public class nna {
         map.put("idExpNna", idExpNna);
         return new ModelAndView("/Personal/nna/lista_informes", map);
     }
-    
+
     @RequestMapping(value = "/listaInformes", method = RequestMethod.GET)
     public ModelAndView listaInformes_GET(ModelMap map, HttpSession session,
             @RequestParam(value = "idExpNna") Long idExpNna,
@@ -3851,7 +3988,7 @@ public class nna {
             @RequestParam(value = "obs", required = false) String obs) {
         session.setAttribute("idExpNna", idExpNna);
         session.setAttribute("clasificacion", clasificacion);
-        session.setAttribute("idInf",idInf);
+        session.setAttribute("idInf", idInf);
         session.setAttribute("numInf", numInf);
         session.setAttribute("fechaInf", fechaInf);
         session.setAttribute("result", result);
@@ -3859,7 +3996,7 @@ public class nna {
 
         return new ModelAndView("redirect:/NnaUpdateInforme", map);
     }
-    
+
     @RequestMapping(value = "/NnaUpdateInforme", method = RequestMethod.GET)
     public ModelAndView NnaUpdateInforme_GET(ModelMap map, HttpSession session) {
         long idExpNna = 0;
@@ -3872,7 +4009,7 @@ public class nna {
         try {
             idExpNna = Long.parseLong(session.getAttribute("idExpNna").toString());
             clasificacion = session.getAttribute("clasificacion").toString();
-            idInf =Long.parseLong(session.getAttribute("idEInf").toString());
+            idInf = Long.parseLong(session.getAttribute("idEInf").toString());
             numInf = session.getAttribute("numInf").toString();
         } catch (Exception ex) {
             session.removeAttribute("idExpNna");
@@ -3901,7 +4038,7 @@ public class nna {
         session.removeAttribute("fechaInf");
         session.removeAttribute("result");
         session.removeAttribute("obs");
-        
+
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
