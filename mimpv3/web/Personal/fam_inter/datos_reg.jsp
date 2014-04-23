@@ -122,9 +122,9 @@
                                     <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
                                 </c:if> 
                                 <div class="control-group">
-                                    <label class="control-label">Número de Expediente </label>
+                                    <label class="control-label">Número de Expediente ${idAct} -- ${idSig} -- ${idGen}</label>
                                     <div class="controls">
-                                        <input id="numeroExp" name="numeroExp" type="text" class="input-xlarge" value="${expediente.getNumeroExpediente()}">
+                                        <input readonly id="numeroExp" name="numeroExp" type="text" class="input-xlarge" value="${expediente.getNumeroExpediente()}">
                                     </div>
                                 </div>
                                 <br>
@@ -207,7 +207,7 @@
                             </form>
                             <form role="form" action="${pageContext.servletContext.contextPath}/VerInfoRegInt" method="post">  
                                 <input hidden name="idExpediente" id="idExpediente" value="${expediente.getIdexpedienteFamilia()}">
-                                <button ${expediente == null ? 'disabled' : ''} id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Ver información de familia</button>
+                                <button ${expediente == null || expediente.getEstado() == 'init' ? 'disabled' : ''} id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Ver información de familia</button>
                             </form>   
                     </div>
 
