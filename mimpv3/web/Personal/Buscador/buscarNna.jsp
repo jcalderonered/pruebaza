@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -85,7 +85,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/fametap"><span class="glyphicon glyphicon-chevron-right"></span> Registro de familias por etapa</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/reg"><span class="glyphicon glyphicon-chevron-right"></span> Buscador de registros</a></li>
-                              <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA") && !u.getRol().equals("DAPA")) {%>
+                                <%if (!u.getRol().equals("DEIA Prio") && !u.getRol().equals("UA") && !u.getRol().equals("DAPA")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/esperaInter"><span class="glyphicon glyphicon-chevron-right"></span>Adoptantes para la adopción en el extranjero</a></li>
                                 <%}%>
                                 <%if (u.getRol().equals("admin") || u.getRol().equals("DCRI")) {%>
@@ -96,7 +96,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/autoridad"><span class="glyphicon glyphicon-chevron-right"></span> Gestión de autoridad central</a></li>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
-                            <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
+                                <%if (u.getRol().equals("DAPA") || u.getRol().equals("DCRI") || u.getRol().equals("DEIA Prio")) {%>
                             <li><a href="${pageContext.servletContext.contextPath}/reporte"><span class="glyphicon glyphicon-chevron-right"></span> Reportes</a></li>
                                 <%}%>
                             <li><a href="${pageContext.servletContext.contextPath}/password"><span class="glyphicon glyphicon-chevron-right"></span> Cambio contraseña</a></li>    
@@ -253,31 +253,31 @@
                                     <tbody>
                                         <c:forEach var="expediente" items="${listaBusqueda}" varStatus="status">
                                             <tr>
-                                                <td>${expediente.getNna().getNombre()}
-                                                    ${expediente.getNna().getApellidoP()}
-                                                    ${expediente.getNna().getApellidoM()}
-                                                </td>
-                                                <td>${expediente.getNActual()}
-                                                    ${expediente.getApellidopActual()}
-                                                    ${expediente.getApellidomActual()}
-                                                </td>
-                                                <td>
-                                                    ${expediente.getEstado() == 'eval' ? 'evaluación' : ''}
-                                                    ${expediente.getEstado() == 'adoptable' ? 'adoptable' : ''}
-                                                    ${expediente.getEstado() == 'desig' ? 'designado' : ''}
-                                                    ${expediente.getEstado() == 'adop' ? 'adoptado' : ''}
-                                                    ${expediente.getEstado() == 'arch' ? 'archivado' : ''}
-                                                </td>
-                                                <td>
-                                                    ${expediente.getNna().getClasificacion() == 'prioritario'  ? 'Si' : 'No'} 
-                                                </td>
-                                                <td>
-                                                    <form action="${pageContext.servletContext.contextPath}/editarNna2" method="post">
-                                                        <input hidden name="idNna" id="idNna" value="${expediente.getNna().getIdnna()}">
-                                                        <button type="submit" class="btn btn-default">Ver</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                                    <td>${expediente.getNna().getNombre()}
+                                                        ${expediente.getNna().getApellidoP()}
+                                                        ${expediente.getNna().getApellidoM()}
+                                                    </td>
+                                                    <td>${expediente.getNActual()}
+                                                        ${expediente.getApellidopActual()}
+                                                        ${expediente.getApellidomActual()}
+                                                    </td>
+                                                    <td>
+                                                        ${expediente.getEstado() == 'eval' ? 'evaluación' : ''}
+                                                        ${expediente.getEstado() == 'adoptable' ? 'adoptable' : ''}
+                                                        ${expediente.getEstado() == 'desig' ? 'designado' : ''}
+                                                        ${expediente.getEstado() == 'adop' ? 'adoptado' : ''}
+                                                        ${expediente.getEstado() == 'arch' ? 'archivado' : ''}
+                                                    </td>
+                                                    <td>
+                                                        ${expediente.getNna().getClasificacion() == 'prioritario'  ? 'Si' : 'No'} 
+                                                    </td>
+                                                    <td>
+                                                        <form action="${pageContext.servletContext.contextPath}/editarNna2" method="post">
+                                                            <input hidden name="idNna" id="idNna" value="${expediente.getNna().getIdnna()}">
+                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
                                         </c:forEach>  
                                     </tbody>
                                 </c:if> 

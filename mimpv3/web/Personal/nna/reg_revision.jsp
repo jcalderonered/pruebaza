@@ -212,7 +212,7 @@
                                 </table>
                             </div>
                             <br>
-                            <h3><strong>Elija primero las familias que conforman el estudio de caso</strong></h3>
+                            <h3><strong>Elija primero las familias y/o organismos que conforman la revisión de expediente</strong></h3>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Identificación de la revisión</label>

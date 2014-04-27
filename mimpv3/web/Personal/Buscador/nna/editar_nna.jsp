@@ -469,7 +469,7 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar Cambios</button>
+                                        <button ${usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Guardar Cambios</button>
                                       </div>
                                  </div>   
                                   </fieldset>
@@ -483,7 +483,7 @@
                                                     <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editarExpedienteNna2" method="post">
                                                     <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">    
                                                 </c:if>                                                   
-                                                <button ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Agregar/Editar Expediente</button>
+                                                <button ${usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Agregar/Editar Expediente</button>
                                        </form>  
                                         &nbsp;
                                        <!-- 

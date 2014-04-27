@@ -469,7 +469,7 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar Cambios</button>
+                                        <button ${usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Guardar Cambios</button>
                                       </div>
                                  </div>   
                                   </fieldset>
@@ -487,7 +487,7 @@
                                                     <input hidden name="volver" id="volver" value="${volver}">
                                                     <input hidden name="volver2" id="volver2" value="${volver2}">
                                                 </c:if>                                                   
-                                                <button ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Agregar/Editar Expediente</button>
+                                                <button ${usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} ${nna == null ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Agregar/Editar Expediente</button>
                                        </form>  
                                         &nbsp;
                                        <!-- 
