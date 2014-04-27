@@ -162,6 +162,7 @@
                                             <input ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="fechaResol" name="fechaResol" type="text" value="${resolucion.getFechaResol() != null ? df.dateToString(resolucion.getFechaResol()) : ''}" class="datepicker input-xlarge">
                                         </div>
                                     </div>
+                                    <!--  
                                     <br>
                                     <h3><strong>En caso de tener un Fin de Procedimiento</strong></h3>
                                     <div class="checkbox">
@@ -169,6 +170,7 @@
                                             <input onclick="confirmar()" ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} value="eliminar" id="eliminar" name="eliminar" type="checkbox"> Eliminar del Registro Nacional de Adoptantes para la Adopción
                                         </label>
                                     </div>
+                                    -->
                                     <br>
                                     <!-- Button -->
                                     <div class="control-group">

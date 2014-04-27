@@ -482,7 +482,7 @@ public class nna {
 
         Nna tempNna = new Nna();
         short tempNn;
-        if (nn == null) {
+        if (nn == null || nn.equals("")) {
             tempNn = Byte.valueOf("1");
         } else {
             tempNn = Byte.valueOf("0");
@@ -658,7 +658,7 @@ public class nna {
         } catch (Exception ex) {
         }
 
-        if (prioritarios != null) {
+        if (prioritarios != null && !prioritarios.equals("")) {
             map.put("listaNna", ServicioNna.ListaNna("prioritario"));
             return new ModelAndView("/Personal/nna/lista_nna_prior", map);
         } else {

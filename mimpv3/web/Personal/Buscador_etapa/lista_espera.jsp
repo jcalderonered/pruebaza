@@ -256,7 +256,10 @@
                                                     ${expediente.getNacionalidad() == 'nacional' ? 'N' : 'I' }
                                                 </td>
                                                 <td>
-                                                    ${expediente.getTipoListaEspera()}
+                                                    ${expediente.getTipoListaEspera() == 'nac' ? 'Nacionales' : ''}
+                                                    ${expediente.getTipoListaEspera() == 'pre' ? 'Peruanos Residentes en el Extranjero' : ''}
+                                                    ${expediente.getTipoListaEspera() == 'mix' ? 'Mixtos' : ''}
+                                                    ${expediente.getTipoListaEspera() == 'ext' ? 'Extranjeros' : ''}                                                    
                                                 </td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
