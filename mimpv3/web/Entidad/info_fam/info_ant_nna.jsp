@@ -121,7 +121,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <h4>Padres con enfermedad psiquiátrica (esquizofrenia, paranoia, etc</h4>
+                                                <h4>Padres con enfermedad psiquiátrica (esquizofrenia, paranoia, etc)</h4>
                                             </td>
                                             <td>
                                                 <select disabled>

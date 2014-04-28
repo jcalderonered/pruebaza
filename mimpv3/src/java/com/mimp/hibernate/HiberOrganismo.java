@@ -49,6 +49,42 @@ public class HiberOrganismo {
         return allFam;
     }
 
+    public ArrayList<Familia> ListaFamDeEnt(long idEnt) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        session.beginTransaction();
+
+        String hql = "FROM Familia F WHERE F.entidad = :id";
+        Query query = session.createQuery(hql);
+        query.setLong("id", idEnt);
+        List fam = query.list();
+        ArrayList<Familia> allFam = new ArrayList();
+
+        for (Iterator iter = fam.iterator(); iter.hasNext();) {
+            Familia temp = (Familia) iter.next();
+            Hibernate.initialize(temp.getEntidad());
+            Hibernate.initialize(temp.getExpedienteFamilias());
+
+            String hql2 = "FROM InfoFamilia IF WHERE IF.familia = :idFam order by IF.idinfoFamilia DESC";
+            Query query2 = session.createQuery(hql2);
+            query2.setLong("idFam", temp.getIdfamilia());
+            query2.setMaxResults(1);
+            List infoFam = query2.list();
+
+            Set<InfoFamilia> infoFamilias = new HashSet<InfoFamilia>(0);
+            for (Iterator iter2 = infoFam.iterator(); iter2.hasNext();) {
+                InfoFamilia tempInf = (InfoFamilia) iter2.next();
+                Hibernate.initialize(tempInf.getAdoptantes());
+                infoFamilias.add(tempInf);
+            }
+            temp.setInfoFamilias(infoFamilias);
+            allFam.add(temp);
+        }
+
+        return allFam;
+    }
+
     public ArrayList<Adoptante> ListaAdopPorEnt(long idEnt) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -63,12 +99,13 @@ public class HiberOrganismo {
         for (Iterator iter = Adop.iterator(); iter.hasNext();) {
             Adoptante temp = (Adoptante) iter.next();
             Hibernate.initialize(temp.getInfoFamilia());
-            try{
-            if (temp.getInfoFamilia().getFamilia().getEntidad().getIdentidad() == idEnt) {
-                Hibernate.initialize(temp.getInfoFamilia().getFamilia().getEntidad());
-                allAdop.add(temp);
-            } 
-            } catch(Exception ex){}
+            try {
+                if (temp.getInfoFamilia().getFamilia().getEntidad().getIdentidad() == idEnt) {
+                    Hibernate.initialize(temp.getInfoFamilia().getFamilia().getEntidad());
+                    allAdop.add(temp);
+                }
+            } catch (Exception ex) {
+            }
         }
         return allAdop;
     }
@@ -87,13 +124,14 @@ public class HiberOrganismo {
         for (Iterator iter = Exp.iterator(); iter.hasNext();) {
             ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
             Hibernate.initialize(temp.getFamilia());
-            try{
-            if (temp.getFamilia().getEntidad().getIdentidad() == idEnt) {
-                Hibernate.initialize(temp.getFamilia().getEntidad());
-                allExp.add(temp);
+            try {
+                if (temp.getFamilia().getEntidad().getIdentidad() == idEnt) {
+                    Hibernate.initialize(temp.getFamilia().getEntidad());
+                    allExp.add(temp);
 
+                }
+            } catch (Exception ex) {
             }
-            } catch(Exception ex){}
         }
         return allExp;
     }
@@ -110,8 +148,10 @@ public class HiberOrganismo {
         queryO.setString("sexo", sexo);
         Object queryResultA = queryO.uniqueResult();
 
-        AdopPorIdFamPorSex = (Adoptante) queryResultA;
-        Hibernate.initialize(AdopPorIdFamPorSex.getInfoFamilia());        
+        if (queryResultA != null) {
+            AdopPorIdFamPorSex = (Adoptante) queryResultA;
+            Hibernate.initialize(AdopPorIdFamPorSex.getInfoFamilia());
+        }
         return AdopPorIdFamPorSex;
     }
 
@@ -165,11 +205,10 @@ public class HiberOrganismo {
         familia = (Familia) queryResultA;
         Hibernate.initialize(familia.getEntidad());
         Hibernate.initialize(familia.getExpedienteFamilias());
-        
 
         return familia;
     }
-    
+
     public Evaluacion EvalPorIDEval(long idEval) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -184,7 +223,7 @@ public class HiberOrganismo {
         eval = (Evaluacion) queryResultA;
         Hibernate.initialize(eval.getEvalLegals());
         Hibernate.initialize(eval.getResolucions());
-        
+
         return eval;
     }
 

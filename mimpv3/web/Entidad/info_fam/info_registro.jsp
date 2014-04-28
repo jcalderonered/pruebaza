@@ -92,13 +92,6 @@
                         <h3><strong>Información del Expediente</strong></h3>
                         <br>
                         <div class="control-group">
-                            <label class="control-label">Número</label>
-                            <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="${InfoExp.getNumero()}" type="text" class="input-xlarge">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="control-group">
                             <label class="control-label">Expediente</label>
                             <div class="controls">
                                 <input disabled id="full-name" name="full-name" value="${ElAdop.getApellidoP()}  ${LaAdop.getApellidoP()}" type="text" class="input-xlarge">
@@ -148,31 +141,9 @@
                         </div>
                         <br>
                         <div class="control-group">
-                            <label class="control-label">Pertenece al Registro Nacional de Solicitantes para la Adopción: 
-                                <c:if test="${InfoExp.getRnsa() == '0' }"  >
-                                    SI
-                                </c:if>
-                                <c:if test="${InfoExp.getRnsa() == '1' }"  >
-                                    NO
-                                </c:if>
-                            </label>
-                        </div>
-                        <br>
-                        <div class="control-group">
-                            <label class="control-label">Pertenece al Registro Nacional de Adoptantes para la Adopción: 
-                                <c:if test="${InfoExp.getRnaa() == '0' }"  >
-                                    SI
-                                </c:if>
-                                <c:if test="${InfoExp.getRnaa() == '1' }"  >
-                                    NO
-                                </c:if>
-                            </label>
-                        </div>
-                        <br>
-                        <div class="control-group">
                             <label class="control-label">Tipo de lista de espera</label>
                             <div class="controls">
-                                <input disabled id="full-name" name="full-name" value="${InfoExp.getTipoListaEspera()}" type="text" class="input-xlarge">
+                                <input disabled id="full-name" name="full-name" value="${InfoExp.getTipoListaEspera()== 'nac' ? 'Nacionales' : ''} ${InfoExp.getTipoListaEspera()== 'pre' ? 'Peruanos Residentes en el Extranjero' : ''} ${InfoExp.getTipoListaEspera() == 'mix' ? 'Mixtos' : ''} ${InfoExp.getTipoListaEspera() == 'ext' ? 'Extranjeros' : ''}" type="text" class="input-xlarge">
                             </div>
                         </div>
                         <br>

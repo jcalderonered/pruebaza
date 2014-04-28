@@ -8,7 +8,7 @@
 <%
     response.setHeader("Pragma", "no-cache");
     response.addHeader("Cache-Control", "must-revalidate");
-    response.addHeader("Cache-Control", "no-cache");  
+    response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
     response.setDateHeader("Expires", 0);
     Entidad u = (Entidad) request.getSession().getAttribute("usuario");
@@ -87,43 +87,62 @@
                                     </tr>
                                 </thead>
                                 <c:if test="${!listaFam.isEmpty()}">
-                                <tbody>
-                                    <c:forEach var="fam" items="${listaFam}" varStatus="status">
-                                        <tr> 
-                                            <c:forEach var="Adop" items="${listaAdop}" varStatus="status">
-                                                <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() && Adop.getSexo() == '109' }"  >
-                                                    <td>${Adop.getNombre()}</td>
-                                                </c:if>
-                                        <form action="${pageContext.servletContext.contextPath}/Einfo" method="post">
-
-                                            <c:if test="${Adop.getInfoFamilia().getFamilia().getIdfamilia() == fam.getIdfamilia() && Adop.getSexo() == '102' }"  >
-                                                <td>${Adop.getNombre()}</td>
-                                                <input hidden name="idInfo" id="idInfo" value="${Adop.getInfoFamilia().getIdinfoFamilia()}">
+                                    <tbody>
+                                        <c:forEach var="fam" items="${listaFam}" varStatus="status">
+                                            <c:if test="${!fam.getInfoFamilias().isEmpty()}">
+                                                <c:forEach var="infoFam" items="${fam.getInfoFamilias()}" varStatus="status">
+                                                    <c:if test="${!infoFam.getAdoptantes().isEmpty()}">
+                                                        <c:set var="idInfo" value="${infoFam.getIdinfoFamilia()}" scope="page" />
+                                                        <c:forEach var="adop" items="${infoFam.getAdoptantes()}" varStatus="status">
+                                                            <c:choose>
+                                                                <c:when test="${adop.getSexo() == 109}">
+                                                                    <c:set var="el" value="${adop}" scope="page" />
+                                                                </c:when>
+                                                                <c:when test="${adop.getSexo() == 102}">
+                                                                    <c:set var="ella" value="${adop}" scope="page" />
+                                                                </c:when> 
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:if>      
+                                            <c:if test="${!fam.getExpedienteFamilias().isEmpty()}">
+                                                <c:forEach var="TempExpFam" items="${fam.getExpedienteFamilias()}" varStatus="status">
+                                                    <c:set var="ExpFam" value="${TempExpFam}" scope="page" />
+                                                </c:forEach>
                                             </c:if>
+                                            <tr>
+                                                <td>
+                                                    ${el.getNombre()}
+                                                    ${el.getApellidoP()}
+                                                    ${el.getApellidoM()}
+                                                </td>
+                                                <td>
+                                                    ${ella.getNombre()}
+                                                    ${ella.getApellidoP()}
+                                                    ${ella.getApellidoM()}
+                                                </td>
+                                                <td>${ExpFam.getNumeroExpediente()}</td>
+                                                <td>${ella.getCorreo()}</td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/Einfo" method="post">
+                                                        <input hidden name="idInfo" id="idInfo" value="${idInfo}">
+                                                        <button type="submit" class="btn btn-default">Info</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="${pageContext.servletContext.contextPath}/Entestado" method="post">
+                                                        <input hidden name="idfam" id="idfam" value="${fam.getIdfamilia()}">
+                                                        <button type="submit" class="btn btn-default">Ver</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            <c:set var="el" value="${null}" scope="page" />
+                                            <c:set var="ella" value="${null}" scope="page" />
+                                            <c:set var="ExpFam" value="${null}" scope="page" />
+                                            <c:set var="idInfo" value="${null}" scope="page" />
                                         </c:forEach>
-                                        <c:forEach var="Exp" items="${listaExp}" varStatus="status">
-                                            <c:if test="${Exp.getFamilia().getIdfamilia() == fam.getIdfamilia()}"  >
-                                                <td>${Exp.getNumeroExpediente()}</td>
-                                            </c:if>
-
-                                        </c:forEach>
-                                        <td>${fam.getCorreo()}</td>
-                                        <td>
-
-                                            <input hidden name="idfam" id="idfam" value="${fam.getIdfamilia()}">
-
-                                            <button type="submit" class="btn btn-default">Info</button>
-                                    </form>
-                                    </td>
-                                    <td>
-                                        <form action="${pageContext.servletContext.contextPath}/Entestado" method="post">
-                                            <input hidden name="idfam" id="idfam" value="${fam.getIdfamilia()}">
-                                            <button type="submit" class="btn btn-default">Ver</button>
-                                        </form>
-                                    </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
+                                    </tbody>
                                 </c:if>
                                 <c:if test="${listaFam.isEmpty()}">
                                     <h3><strong>No existen familias asociadas</strong></h3>    
