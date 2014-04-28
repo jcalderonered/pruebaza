@@ -120,11 +120,11 @@ public class organismo {
 
             String pagina = "/Entidad/contra_ent";
             map.addAttribute("mensaje", mensaje);
-            
+
             session.removeAttribute("oldpass");
             session.removeAttribute("newpass");
             session.removeAttribute("newpassconf");
-            
+
             return new ModelAndView(pagina, map);
         } else {
             return new ModelAndView("/Entidad/inicio_ent", map);
@@ -142,9 +142,7 @@ public class organismo {
             return new ModelAndView("login", map);
         }
 
-        map.put("listaFam", ServicioOrganismo.ListaFam(usuario.getIdentidad()));
-        map.put("listaAdop", ServicioOrganismo.ListaAdopPorEnt(usuario.getIdentidad()));
-        map.put("listaExp", ServicioOrganismo.ListaExpFamPorEnt(usuario.getIdentidad()));
+        map.put("listaFam", ServicioOrganismo.ListaFamDeEnt(usuario.getIdentidad()));
         return new ModelAndView("/Entidad/lista_fam", map);
     }
 
@@ -159,13 +157,17 @@ public class organismo {
 
         Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "f");
         Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "m");
-        String doc = String.valueOf(LaAdop.getTipoDoc());
-
+        String doc = "";
+        if (LaAdop.getTipoDoc() != null) {
+            doc = String.valueOf(LaAdop.getTipoDoc());
+        }
         map.put("LaAdop", LaAdop);
         map.put("ElAdop", ElAdop);
         map.put("idInfo", idInfo);
         map.put("doc", doc);
-        map.addAttribute("estCivil", LaAdop.getInfoFamilia().getEstadoCivil().charAt(0));
+        if (LaAdop.getIdadoptante() != 0) {
+            map.addAttribute("estCivil", LaAdop.getInfoFamilia().getEstadoCivil().charAt(0));
+        }
         return new ModelAndView("/Entidad/info_fam/info_ella", map);
     }
 
@@ -180,13 +182,18 @@ public class organismo {
 
         Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "f");
         Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "m");
-        String doc = String.valueOf(ElAdop.getTipoDoc());
+        String doc = "";
+        if (ElAdop.getTipoDoc() != null) {
+            doc = String.valueOf(ElAdop.getTipoDoc());
+        }
 
         map.put("LaAdop", LaAdop);
         map.put("ElAdop", ElAdop);
         map.put("idInfo", idInfo);
         map.put("doc", doc);
-        map.addAttribute("estCivil", ElAdop.getInfoFamilia().getEstadoCivil().charAt(0));
+        if (ElAdop.getIdadoptante() != 0) {
+            map.addAttribute("estCivil", ElAdop.getInfoFamilia().getEstadoCivil().charAt(0));
+        }
         return new ModelAndView("/Entidad/info_fam/info_el", map);
     }
 
@@ -201,13 +208,17 @@ public class organismo {
 
         Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "f");
         Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "m");
-        String doc = String.valueOf(LaAdop.getTipoDoc());
-
+        String doc = "";
+        if (LaAdop.getTipoDoc() != null) {
+            doc = String.valueOf(LaAdop.getTipoDoc());
+        }
         map.put("LaAdop", LaAdop);
         map.put("ElAdop", ElAdop);
         map.put("idInfo", idInfo);
         map.put("doc", doc);
-        map.addAttribute("estCivil", LaAdop.getInfoFamilia().getEstadoCivil().charAt(0));
+        if (LaAdop.getIdadoptante() != 0) {
+            map.addAttribute("estCivil", LaAdop.getInfoFamilia().getEstadoCivil().charAt(0));
+        }
         return new ModelAndView("/Entidad/info_fam/info_ella", map);
     }
 
@@ -222,14 +233,19 @@ public class organismo {
 
         Adoptante LaAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "f");
         Adoptante ElAdop = ServicioOrganismo.AdopPorIdFamPorSex(idInfo, "m");
-        String doc = String.valueOf(LaAdop.getTipoDoc());
+        String doc = "";
+        if (LaAdop.getTipoDoc() != null) {
+            doc = String.valueOf(LaAdop.getTipoDoc());
+        }
         InfoFamilia infoNNA = ServicioOrganismo.InfoFamilia(idInfo);
 
         map.put("LaAdop", LaAdop);
         map.put("ElAdop", ElAdop);
         map.put("InfoNNA", infoNNA);
         map.put("idInfo", idInfo);
-        map.put("Genero", infoNNA.getExpectativaGenero().charAt(0));
+        if (infoNNA.getExpectativaGenero() != null) {
+            map.put("Genero", infoNNA.getExpectativaGenero());
+        }                
         return new ModelAndView("/Entidad/info_fam/info_ant_nna", map);
     }
 
@@ -269,65 +285,89 @@ public class organismo {
 
             Familia fam = ServicioOrganismo.FamiliaPorID(idFam);
 
-            for (Iterator iter3 = fam.getExpedienteFamilias().iterator(); iter3.hasNext();) {
-                ExpedienteFamilia exp = (ExpedienteFamilia) iter3.next();
-
-                ExpedienteFamilia expTemp = ServicioOrganismo.ExpPorIDFamilia(idFam);
-                Boolean flag = false;
-                for (Iterator iter4 = expTemp.getEvaluacions().iterator(); iter4.hasNext();) {
-                    Evaluacion eval = (Evaluacion) iter4.next();
-                    Evaluacion eval2 = ServicioOrganismo.EvalPorIDEval(eval.getIdevaluacion());
-                    if (!eval2.getEvalLegals().isEmpty()) {
-                        flag = true;
-                    }
-                }
-                if (!expTemp.getEstado().isEmpty() || expTemp.getEstado().equals("") || expTemp.getEstado().equals("Null")) {
-                    if (expTemp.getEstado().equals("Apto") || flag) {
-                        map.addAttribute("eval", si);
-                        map.addAttribute("espera", si);
-                        if (!expTemp.getDesignacions().isEmpty()) {
-                            for (Iterator iter5 = expTemp.getDesignacions().iterator(); iter5.hasNext();) {
-                                Designacion deg = (Designacion) iter5.next();
-                                if (deg.getAceptacionConsejo() == 1) {
-                                    map.addAttribute("adop", no);
-                                    map.addAttribute("postadop", no);
-                                } else {
-                                    map.addAttribute("adop", si);
-                                    Boolean flag2 = false;
-                                    for (Iterator iter6 = expTemp.getEvaluacions().iterator(); iter6.hasNext();) {
-                                        Evaluacion eval = (Evaluacion) iter6.next();
-                                        Evaluacion eval3 = ServicioOrganismo.EvalPorIDEval(eval.getIdevaluacion());
-                                        for (Iterator iter7 = eval3.getResolucions().iterator(); iter7.hasNext();) {
-                                            Resolucion resol = (Resolucion) iter7.next();
-                                            if (resol.getTipo().equals("Adopción")) {
-                                                flag2 = true;
-                                            }
-                                        }
-                                    }
-                                    if (flag2) {
-                                        map.addAttribute("postadop", si);
-                                    } else {
-                                        map.addAttribute("postadop", no);
-                                    }
-                                }
-                            }
-                        } else {
-                            map.addAttribute("adop", no);
-                            map.addAttribute("postadop", no);
-                        }
-                    } else {
-                        map.addAttribute("eval", no);
-                        map.addAttribute("espera", no);
-                        map.addAttribute("adop", no);
-                        map.addAttribute("postadop", no);
-                    }
-                } else {
-                    map.addAttribute("eval", no);
-                    map.addAttribute("espera", no);
-                    map.addAttribute("adop", no);
-                    map.addAttribute("postadop", no);
+            if (!fam.getExpedienteFamilias().isEmpty()){
+                ExpedienteFamilia exp = fam.getExpedienteFamilias().iterator().next();
+                if(exp.getEstado().equals("evaluacion")){
+                    map.addAttribute("eval", si);
+                }else if(exp.getEstado().equals("espera")){
+                    map.addAttribute("eval", si);
+                    map.addAttribute("espera", si);
+                }else if(exp.getEstado().equals("estudio")){
+                    map.addAttribute("eval", si);
+                    map.addAttribute("espera", si);
+                }else if(exp.getEstado().equals("designacion")){
+                    map.addAttribute("eval", si);
+                    map.addAttribute("espera", si);
+                }else if(exp.getEstado().equals("adopcion")){
+                    map.addAttribute("eval", si);
+                    map.addAttribute("espera", si);
+                    map.addAttribute("adop", si);
+                }else if(exp.getEstado().equals("post")){
+                    map.addAttribute("eval", si);
+                    map.addAttribute("espera", si);
+                    map.addAttribute("adop", si);
+                    map.addAttribute("postadop", si);
                 }
             }
+//            for (Iterator iter3 = fam.getExpedienteFamilias().iterator(); iter3.hasNext();) {
+//                ExpedienteFamilia exp = (ExpedienteFamilia) iter3.next();
+//
+//                ExpedienteFamilia expTemp = ServicioOrganismo.ExpPorIDFamilia(idFam);
+//                Boolean flag = false;
+//                for (Iterator iter4 = expTemp.getEvaluacions().iterator(); iter4.hasNext();) {
+//                    Evaluacion eval = (Evaluacion) iter4.next();
+//                    Evaluacion eval2 = ServicioOrganismo.EvalPorIDEval(eval.getIdevaluacion());
+//                    if (!eval2.getEvalLegals().isEmpty()) {
+//                        flag = true;
+//                    }
+//                }
+//                if (!expTemp.getEstado().isEmpty() || expTemp.getEstado().equals("") || expTemp.getEstado().equals("Null")) {
+//                    if (expTemp.getEstado().equals("Apto") || flag) {
+//                        map.addAttribute("eval", si);
+//                        map.addAttribute("espera", si);
+//                        if (!expTemp.getDesignacions().isEmpty()) {
+//                            for (Iterator iter5 = expTemp.getDesignacions().iterator(); iter5.hasNext();) {
+//                                Designacion deg = (Designacion) iter5.next();
+//                                if (deg.getAceptacionConsejo() == 1) {
+//                                    map.addAttribute("adop", no);
+//                                    map.addAttribute("postadop", no);
+//                                } else {
+//                                    map.addAttribute("adop", si);
+//                                    Boolean flag2 = false;
+//                                    for (Iterator iter6 = expTemp.getEvaluacions().iterator(); iter6.hasNext();) {
+//                                        Evaluacion eval = (Evaluacion) iter6.next();
+//                                        Evaluacion eval3 = ServicioOrganismo.EvalPorIDEval(eval.getIdevaluacion());
+//                                        for (Iterator iter7 = eval3.getResolucions().iterator(); iter7.hasNext();) {
+//                                            Resolucion resol = (Resolucion) iter7.next();
+//                                            if (resol.getTipo().equals("Adopción")) {
+//                                                flag2 = true;
+//                                            }
+//                                        }
+//                                    }
+//                                    if (flag2) {
+//                                        map.addAttribute("postadop", si);
+//                                    } else {
+//                                        map.addAttribute("postadop", no);
+//                                    }
+//                                }
+//                            }
+//                        } else {
+//                            map.addAttribute("adop", no);
+//                            map.addAttribute("postadop", no);
+//                        }
+//                    } else {
+//                        map.addAttribute("eval", no);
+//                        map.addAttribute("espera", no);
+//                        map.addAttribute("adop", no);
+//                        map.addAttribute("postadop", no);
+//                    }
+//                } else {
+//                    map.addAttribute("eval", no);
+//                    map.addAttribute("espera", no);
+//                    map.addAttribute("adop", no);
+//                    map.addAttribute("postadop", no);
+//                }
+//            }
 
         }
         String pagina = "/Entidad/estado_proc";
