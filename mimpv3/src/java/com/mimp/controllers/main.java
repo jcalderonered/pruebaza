@@ -1078,25 +1078,25 @@ public class main {
             idExpediente = session.getAttribute("idExpediente").toString();
         }
         if (session.getAttribute("volver") != null) {
-        volver = session.getAttribute("volver").toString();
+            volver = session.getAttribute("volver").toString();
         }
         if (session.getAttribute("estado") != null) {
-        estado = session.getAttribute("estado").toString();
+            estado = session.getAttribute("estado").toString();
         }
         if (session.getAttribute("expediente2") != null) {
-        expediente2 = session.getAttribute("expediente2").toString();
+            expediente2 = session.getAttribute("expediente2").toString();
         }
         if (session.getAttribute("HT") != null) {
-        HT = session.getAttribute("HT").toString();
+            HT = session.getAttribute("HT").toString();
         }
         if (session.getAttribute("nacionalidad") != null) {
-        nacionalidad = session.getAttribute("nacionalidad").toString();
+            nacionalidad = session.getAttribute("nacionalidad").toString();
         }
         if (session.getAttribute("tipofamilia") != null) {
-        tipofamilia = session.getAttribute("tipofamilia").toString();
+            tipofamilia = session.getAttribute("tipofamilia").toString();
         }
         if (session.getAttribute("estado2") != null) {
-        estado2 = session.getAttribute("estado2").toString();
+            estado2 = session.getAttribute("estado2").toString();
         }
 
         session.removeAttribute("estado");
@@ -1340,8 +1340,8 @@ public class main {
     public ModelAndView elSolicitante_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
-        if(session.getAttribute("volver") != null){
-        volver = session.getAttribute("volver").toString();
+        if (session.getAttribute("volver") != null) {
+            volver = session.getAttribute("volver").toString();
         }
 
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1453,8 +1453,8 @@ public class main {
     public ModelAndView laSolicitante_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
-        if(session.getAttribute("volver") != null){
-        volver = session.getAttribute("volver").toString();
+        if (session.getAttribute("volver") != null) {
+            volver = session.getAttribute("volver").toString();
         }
 
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1599,8 +1599,8 @@ public class main {
     public ModelAndView infoExpediente_GET(ModelMap map,
             HttpSession session) {
         String volver = "";
-        if(session.getAttribute("volver") != null){
-        volver = session.getAttribute("volver").toString();
+        if (session.getAttribute("volver") != null) {
+            volver = session.getAttribute("volver").toString();
         }
 
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -2852,6 +2852,7 @@ public class main {
             @RequestParam(value = "nFicha") String nFicha,
             @RequestParam(value = "fechaIngresoFicha") String fechaIngresoFicha,
             @RequestParam(value = "ht") String ht,
+            @RequestParam(value = "genNumExp", required = false) String genNumExp,
             @RequestParam(value = "numeroExp") String numeroExp,
             @RequestParam(value = "fechaIngreso") String fechaIngreso,
             @RequestParam(value = "tupa") String tupa,
@@ -2868,6 +2869,7 @@ public class main {
         session.setAttribute("nFicha", nFicha);
         session.setAttribute("fechaIngresoFicha", fechaIngresoFicha);
         session.setAttribute("ht", ht);
+        session.setAttribute("genNumExp", genNumExp);
         session.setAttribute("numeroExp", numeroExp);
         session.setAttribute("fechaIngreso", fechaIngreso);
         session.setAttribute("tupa", tupa);
@@ -2887,6 +2889,7 @@ public class main {
         String nFicha = "";
         String fechaIngresoFicha = "";
         String ht = "";
+        String genNumExp = "";
         String numeroExp = "";
         String fechaIngreso = "";
         String tupa = "";
@@ -2902,6 +2905,7 @@ public class main {
             nFicha = (String) session.getAttribute("nFicha");
             fechaIngresoFicha = (String) session.getAttribute("fechaIngresoFicha");
             ht = (String) session.getAttribute("ht");
+            genNumExp = (String) session.getAttribute("genNumExp");
             numeroExp = (String) session.getAttribute("numeroExp");
             fechaIngreso = (String) session.getAttribute("fechaIngreso");
             tupa = (String) session.getAttribute("tupa");
@@ -2920,6 +2924,7 @@ public class main {
         session.removeAttribute("nFicha");
         session.removeAttribute("fechaIngresoFicha");
         session.removeAttribute("ht");
+        session.removeAttribute("genNumExp");
         session.removeAttribute("numeroExp");
         session.removeAttribute("fechaIngreso");
         session.removeAttribute("tupa");
@@ -2934,6 +2939,70 @@ public class main {
             String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
+        }
+
+        if (genNumExp != null && !genNumExp.equals("")) {
+
+            String ID = "";
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+
+            //Luego debo generar un nuevo ID
+            ArrayList<String> allExpedientes = new ArrayList();
+            allExpedientes = ServicioPersonal.listaNumExpActuales();
+            if (!allExpedientes.isEmpty()) {
+                int numElem = allExpedientes.size();
+                int cont = 0;
+                int idAct = 0;
+                int idSig = 0;
+
+                for (String expedienteFamilia : allExpedientes) {
+                    numElem--;
+                    String[] parts = expedienteFamilia.split("-");
+                    idAct = Integer.parseInt(parts[0]);
+                    cont++;
+                    idSig = cont;
+                    map.put("idAct", idAct);
+                    map.put("idSig", idSig);
+                    if (idAct == idSig) {
+                        if (numElem == 0) {
+                            cont++;
+                            String idGen = String.format("%04d", cont);
+                            ID = idGen + "-" + year + "-MIMP/DGA-S";
+                            map.put("idGen", idGen);
+                        }
+                    } else {
+                        String idGen = String.format("%04d", idSig);
+                        ID = idGen + "-" + year + "-MIMP/DGA-S";
+                        map.put("idGen", idGen);
+                        break;
+                    }
+
+                }
+            } else {
+
+                ID = "0001-" + year + "-MIMP/DGA-S";
+            }
+
+            expediente.setNumeroExpediente(ID);
+            ServicioMain.updateExpFam(expediente);
+            String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
+                    + "información de la familia con ID: " + expediente.getFamilia().getIdfamilia();
+            String Tipo_registro = "Personal";
+
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            map.put("df", df);
+            map.put("estado", etapaOrigen);
+            map.put("expediente", expediente);
+            map.put("listaUA", ServicioPersonal.ListaUa());
+            map.put("listaEntidad", ServicioPersonal.ListaEntidades());
+            map.addAttribute("volver", volver);
+            return new ModelAndView("/Personal/familia/info_registro", map);
         }
 
         Unidad tempUa = ServicioPersonal.getUa(unidad);
@@ -3611,7 +3680,7 @@ public class main {
             @RequestParam(value = "el", required = false) String el,
             @RequestParam(value = "ella", required = false) String ella,
             HttpSession session) {
-        
+
         Personal usuario = (Personal) session.getAttribute("usuario");
 
         String exp = el + " - " + ella;
@@ -3621,60 +3690,90 @@ public class main {
         if (ella == null || ella.equals("")) {
             exp = el;
         }
-        
-        String ID = "";
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        
-        //Luego debo generar un nuevo ID
-        ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
-        allExpedientes = ServicioPersonal.ListaExpedientesActuales();
-        if (!allExpedientes.isEmpty()) {
-            int numElem = allExpedientes.size();
-            int cont = 0;
-            int idAct = 0;
-            int idSig = 0;
 
-            for (ExpedienteFamilia expedienteFamilia : allExpedientes) {
-                numElem--;
-                String[] parts = expedienteFamilia.getNumeroExpediente().split("-");
-                idAct = Integer.parseInt(parts[0]);
-                cont++;
-                idSig = cont;
-                map.put("idAct", idAct);
-                map.put("idSig", idSig);
-                if (idAct == idSig) {                    
-                    if (numElem == 0) {
-                        cont++;
-                        String idGen = String.format("%04d", cont);
-                        ID = idGen + "-" + year + "-MIMP/DGA-S";
-                        map.put("idGen", idGen);
-                    }
-                } else {
-                    String idGen = String.format("%04d", idSig);
-                    ID = idGen + "-" + year + "-MIMP/DGA-S";
-                    map.put("idGen", idGen);
-                    break;
-                }
+        map.put("df", df);
+        map.put("idFamilia", idFamilia);
+        map.put("exp", exp);
+        map.put("listaEntidad", ServicioPersonal.ListaEntidades());
+        return new ModelAndView("/Personal/Buscador_etapa/gen_exp", map);
 
-            }
-        } else {
+    }
 
-            ID = "0001-" + year + "-MIMP/DGA-S";
+    //PROBAR
+    @RequestMapping(value = "/CrearExpNac", method = RequestMethod.POST)
+    public ModelAndView CrearExpNac_POST(ModelMap map, HttpSession session,
+            @RequestParam(value = "idFamilia") long idFamilia,
+            @RequestParam(value = "numeroFicha") String numeroFicha,
+            @RequestParam(value = "ht") String ht,
+            @RequestParam(value = "exp") String exp,
+            @RequestParam(value = "fechaIngresoFicha") String fechaIngresoFicha,
+            @RequestParam(value = "entAsoc", required = false) String entAsoc
+    ) {
+        session.setAttribute("idFamilia", idFamilia);
+        session.setAttribute("numeroFicha", numeroFicha);
+        session.setAttribute("ht", ht);
+        session.setAttribute("exp", exp);
+        session.setAttribute("fechaIngresoFicha", fechaIngresoFicha);
+        session.setAttribute("entAsoc", entAsoc);
+
+        return new ModelAndView("redirect:/CrearExpNac", map);
+    }
+
+    @RequestMapping(value = "/CrearExpNac", method = RequestMethod.GET)
+    public ModelAndView CrearExpNac_GET(ModelMap map, HttpSession session) {
+        long idFamilia = 0;
+        String numeroFicha = "";
+        String exp = "";
+        String ht = "";
+        String fechaIngresoFicha = "";
+        String entAsoc = "";
+        try {
+            idFamilia = Long.parseLong(session.getAttribute("idFamilia").toString());
+            numeroFicha = (String) session.getAttribute("numeroFicha");
+            exp = (String) session.getAttribute("exp");
+            ht = (String) session.getAttribute("ht");
+            fechaIngresoFicha = (String) session.getAttribute("fechaIngresoFicha");
+        } catch (Exception ex) {
+            return new ModelAndView("redirect:/inicioper", map);
         }
-        
+        if (session.getAttribute("entAsoc") != null) {
+            entAsoc = (String) session.getAttribute("entAsoc");
+        }
+        session.removeAttribute("idFamilia");
+        session.removeAttribute("numeroFicha");
+        session.removeAttribute("exp");
+        session.removeAttribute("ht");
+        session.removeAttribute("fechaIngresoFicha");
+        session.removeAttribute("entAsoc");
+
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
         Familia tempFam = new Familia();
+        Entidad tempEnt = new Entidad();
+        tempEnt = ServicioPersonal.getEntidad(Long.parseLong(entAsoc));
         tempFam = servicioEtapa.getFamilia(idFamilia);
         ExpedienteFamilia expediente = new ExpedienteFamilia();
-        
+
+        tempFam.setEntidad(tempEnt);
+        expediente.setHtFicha(ht);
+        expediente.setnFicha(numeroFicha);
+        if(fechaIngresoFicha != null && !fechaIngresoFicha.equals("")){
+            expediente.setFechaIngresoFicha(df.stringToDate(fechaIngresoFicha));
+        }        
         
         expediente.setExpediente(exp);
         expediente.setUnidad(usuario.getUnidad());
-        expediente.setNumeroExpediente(ID);
-        expediente.setEstado("init");
+        expediente.setEstado("evaluacion");
         expediente.setNacionalidad("nacional");
         expediente.setRnsa(Short.parseShort("0"));
         expediente.setRnaa(Short.parseShort("1"));
         expediente.setFamilia(tempFam);
+
         ServicioMain.crearUpdateExpFam(expediente);
         
         String mensaje_log = "Se creó nuevo expediente internacional con número: " + expediente.getNumeroExpediente()
@@ -3689,106 +3788,6 @@ public class main {
         } catch (Exception ex) {
         }
         
-        map.put("df", df);
-        map.put("idFamilia", idFamilia);
-        map.put("expediente", expediente);
-        map.put("listaEntidad", ServicioPersonal.ListaEntidades());
-        return new ModelAndView("/Personal/Buscador_etapa/gen_exp", map);
-
-    }
-
-    //PROBAR
-    @RequestMapping(value = "/UpdateExpNac", method = RequestMethod.POST)
-    public ModelAndView UpdateExpNac_POST(ModelMap map, HttpSession session,
-            @RequestParam(value = "idExpFam") long idExpFam,
-            @RequestParam(value = "numeroFicha") String numeroFicha,
-            @RequestParam(value = "numeroExp") String numeroExp,
-            @RequestParam(value = "ht") String ht,
-            @RequestParam(value = "fechaIngresoFicha") String fechaIngresoFicha,            
-            @RequestParam(value = "entAsoc", required = false) String entAsoc
-    ) {
-        session.setAttribute("idExpFam", idExpFam);
-        session.setAttribute("numeroFicha", numeroFicha);
-        session.setAttribute("numeroExp", numeroExp);
-        session.setAttribute("ht", ht);
-        session.setAttribute("fechaIngresoFicha", fechaIngresoFicha);
-        session.setAttribute("entAsoc", entAsoc);
-
-        return new ModelAndView("redirect:/UpdateExpNac", map);
-    }
-
-    @RequestMapping(value = "/UpdateExpNac", method = RequestMethod.GET)
-    public ModelAndView UpdateExpNac_GET(ModelMap map, HttpSession session) {
-        long idExpFam = 0;
-        String numeroFicha = "";
-        String numeroExp = "";
-        String ht = "";
-        String fechaIngresoFicha = "";
-        String entAsoc = "";
-        try {
-            idExpFam = Long.parseLong(session.getAttribute("idExpFam").toString());
-            numeroFicha = (String) session.getAttribute("numeroFicha");
-            numeroExp = (String) session.getAttribute("numeroExp");
-            ht = (String) session.getAttribute("ht");
-            fechaIngresoFicha = (String) session.getAttribute("fechaIngresoFicha");
-        } catch (Exception ex) {
-            return new ModelAndView("redirect:/inicioper", map);
-        }
-        if (session.getAttribute("entAsoc") != null) {
-            entAsoc = (String) session.getAttribute("entAsoc");
-        }
-        session.removeAttribute("idExpFam");
-        session.removeAttribute("numeroFicha");
-        session.removeAttribute("numeroExp");
-        session.removeAttribute("ht");
-        session.removeAttribute("fechaIngresoFicha");
-        session.removeAttribute("entAsoc");
-
-        Personal usuario = (Personal) session.getAttribute("usuario");
-        if (usuario == null) {
-            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
-            map.addAttribute("mensaje", mensaje);
-            return new ModelAndView("login", map);
-        }
-
-        boolean verificar = ServicioPersonal.VerificarNumExp(numeroExp);
-        if(!verificar){        
-                map.addAttribute("msg","Error, el ID generado ya esta siendo usado por otro usuario. Por favor, ingrese nuevamente los datos");
-                return new ModelAndView("forward:/fametap", map);
-        }
-        
-        ExpedienteFamilia expediente = servicioEtapa.getExpedienteFamilia(idExpFam);
-        if (entAsoc != null && !entAsoc.equals("")) {
-            long entAsoc1 = Long.parseLong(entAsoc);
-            Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc1);
-            expediente.getFamilia().setEntidad(tempEnt);
-        }
-
-        expediente.setHtFicha(ht);
-        expediente.setnFicha(numeroFicha);
-        if (fechaIngresoFicha != null && !fechaIngresoFicha.equals("")) {
-            expediente.setFechaIngresoFicha(df.stringToDate(fechaIngresoFicha));
-        }
-        if (fechaIngresoFicha == null || fechaIngresoFicha.equals("")) {
-            expediente.setFechaIngresoFicha(null);
-        }
-        expediente.setUnidad(usuario.getUnidad());
-        expediente.setEstado("evaluacion");
-        ServicioMain.crearUpdateExpFam(expediente);
-
-        String mensaje_log = "Se editó los datos del expediente "
-                + "con familia con Usuario, " + expediente.getFamilia().getUser() + " y ID de expediente:"
-                + String.valueOf(expediente.getIdexpedienteFamilia());
-        String Tipo_registro = "Familia";
-
-        try {
-            String Numero_registro = String.valueOf(expediente.getIdexpedienteFamilia());;
-
-            ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
-        } catch (Exception ex) {
-        }
-//        Eliminar los registros nacionales que se tengan hasta el momento
-        ServicioPersonal.EliminarExpedientesNacionales();
         map.put("listaFamilias", servicioEtapa.getListaFamilias());
         return new ModelAndView("Personal/Buscador_etapa/etapa_formativa", map);
 

@@ -112,16 +112,9 @@
                         <h3><strong>Datos generales de la Ficha</strong></h3>
                         <br>
                         <br>
-                        <form role="form" action="${pageContext.servletContext.contextPath}/UpdateExpNac" method="post">
+                        <form role="form" action="${pageContext.servletContext.contextPath}/CrearExpNac" method="post">
                             <input hidden name="idFamilia" id="idFamilia" value="${idFamilia}"  >  
-                            <input hidden name="idExpFam" id="idExpFam" value="${expediente.getIdexpedienteFamilia()}"  > 
-                            
-                            <div class="control-group">
-                                <label class="control-label">Número de Expediente Generado ${expediente.getIdexpedienteFamilia()}</label>
-                                <div class="controls">
-                                    <input readonly id="numeroExp" name="numeroExp" type="text" class="input-xlarge" value="${expediente.getNumeroExpediente()}">
-                                </div>
-                            </div>
+                            <input hidden name="exp" id="exp" value="${exp}"  >                             
                             <br>
                             <div class="control-group">
                                 <label class="control-label">HT Ficha</label>

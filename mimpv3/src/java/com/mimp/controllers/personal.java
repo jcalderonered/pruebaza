@@ -5318,17 +5318,17 @@ public class personal {
         int year = Calendar.getInstance().get(Calendar.YEAR);
         
         //Luego debo generar un nuevo ID
-        ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
-        allExpedientes = ServicioPersonal.ListaExpedientesActuales();
+        ArrayList<String> allExpedientes = new ArrayList();
+        allExpedientes = ServicioPersonal.listaNumExpActuales();
         if (!allExpedientes.isEmpty()) {
             int numElem = allExpedientes.size();
             int cont = 0;
             int idAct = 0;
             int idSig = 0;
 
-            for (ExpedienteFamilia expedienteFamilia : allExpedientes) {
+            for (String expedienteFamilia : allExpedientes) {
                 numElem--;
-                String[] parts = expedienteFamilia.getNumeroExpediente().split("-");
+                String[] parts = expedienteFamilia.split("-");
                 idAct = Integer.parseInt(parts[0]);
                 cont++;
                 idSig = cont;

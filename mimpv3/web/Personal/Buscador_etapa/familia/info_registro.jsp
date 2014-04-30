@@ -170,12 +170,15 @@
                                 </div>
                             </div>
                             <br>
+                            <input ${expediente.getNumeroExpediente() == null && !usuario.getRol().equals("UA") ? '' : 'disabled'} type="submit" id="genNumExp" name="genNumExp" value="Generar un número de expediente" class="btn btn-default" onclick="Alerta();" >
+                            <br>
                             <div class="control-group">
                                 <label class="control-label">Número de Expediente</label>
                                 <div class="controls">
-                                    <input id="numeroExp" name="numeroExp" value="${expediente.getNumeroExpediente()}" type="text" class="input-xlarge">
+                                    <input readonly id="numeroExp" name="numeroExp" value="${expediente.getNumeroExpediente()}" type="text" class="input-xlarge">
                                 </div>
                             </div>
+                            <br>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Fecha ingreso a DGA</label>
@@ -405,6 +408,12 @@
                 }
 
 
+            </script>
+            <script>
+                function Alerta()
+                {
+                     return confirm('Desea generar el número de expediente?');
+                }
             </script>
             <!-- Ubicar al final -->
     </body>
