@@ -935,7 +935,7 @@ public class nna {
         Nna tempNna = new Nna();
         tempNna = ServicioNna.getNna(idNna);
         short tempNn;
-        if (nn == null) {
+        if (nn == null || nn.equals("")) {
             tempNn = Byte.valueOf("1");
         } else {
             tempNn = Byte.valueOf("0");

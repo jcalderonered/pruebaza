@@ -216,6 +216,7 @@
                                         </div>
                                     </div>
                                     <br>
+                                    <!--
                                     <h3><strong>Registro de informes de evaluación</strong></h3>
                                     <br>
                                     <div class="control-group">
@@ -233,6 +234,7 @@
                                         </div>
                                     </div>
                                     <br>
+                                    -->
                                     <div>
                                         <label class="control-label">Estado</label>
                                         <div class="controls">

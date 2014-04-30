@@ -2080,6 +2080,37 @@ public class HiberPersonal {
 
         return allExpedientes;
     }
+    
+    public ArrayList<String> listaNumExpActuales() {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        final ArrayList<String> lista = new ArrayList();
+
+        Work work = new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+
+                String hql = "{call LISTANUMEXPACT(?)}";
+                CallableStatement statement = connection.prepareCall(hql);
+                statement.registerOutParameter(1, OracleTypes.CURSOR);
+                statement.execute();
+
+                ResultSet rs = (ResultSet) statement.getObject(1);
+
+                while (rs.next()) {
+                    lista.add(rs.getString("NUMERO_EXPEDIENTE"));
+                }
+                rs.close();
+                statement.close();
+            }
+        };
+
+        session.doWork(work);
+
+        return lista;
+    }
 
     public void EliminarFamiliasInternacionales() {
 
