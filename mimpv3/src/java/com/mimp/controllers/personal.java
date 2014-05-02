@@ -6590,7 +6590,7 @@ public class personal {
         return new ModelAndView("/Personal/Informativa/lista_fam_ins2", map);
     }
 
-    @RequestMapping(value = "/HistorioSesionesTalleres", method = RequestMethod.GET)
+    @RequestMapping(value = "/HistorioSesionesTalleres", method = RequestMethod.POST)
     public ModelAndView HistorioSesionesTalleres(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
         if (usuario == null) {
