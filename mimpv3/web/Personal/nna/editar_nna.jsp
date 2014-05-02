@@ -469,7 +469,7 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button ${usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default">Guardar Cambios</button>
+                                        <button ${usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default" onclick="Alerta();" >Guardar Cambios</button>
                                       </div>
                                  </div>   
                                   </fieldset>
@@ -571,6 +571,12 @@
                      });   
               });
 
+            </script>
+            <script>
+                function Alerta()
+                {
+                     return confirm('Estas seguro(a) de que desas crear el NNA ?');
+                }
             </script>
             <!-- Ubicar al final -->
     </body>
