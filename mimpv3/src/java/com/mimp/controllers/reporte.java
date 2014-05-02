@@ -4919,8 +4919,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\Renad.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/Renad.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\Renad.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/Renad.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheet("BD");
@@ -5457,9 +5457,10 @@ public class reporte {
                 cell = row.createCell(65);
                 try {
                     fecha = format.dateToString(resol.getFechaResol());
+                    cell.setCellValue(resol.getFechaResol());
                 } catch (Exception ex) {
+                    cell.setCellValue("");
                 }
-                cell.setCellValue(fecha);
                 fecha = "";
                 cell = row.createCell(66);
                 if (resol.getTipo() != null) {
