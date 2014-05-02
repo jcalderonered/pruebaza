@@ -574,9 +574,19 @@ public class HiberNna {
                                     String apellidoNext = "";
                                     try{
                                         apellidoPrev = allNnaFinal.get(i).getApellidoP();
+                                        if(apellidoPrev == null){
+                                            apellidoPrev = "";
+                                        }
+                                    } catch (Exception ex){         
+                                        apellidoPrev = "";
+                                    }
+                                    try{
                                         apellidoNext = allNnaFinal.get(j + 1).getApellidoP();
-                                    } catch (Exception ex){
-                                        
+                                        if(apellidoNext == null){
+                                            apellidoNext = "";
+                                        }
+                                    } catch (Exception ex){         
+                                        apellidoNext = "";
                                     }
                                     if (apellidoPrev.compareToIgnoreCase(apellidoNext) > 0) {
                                         auxnna2 = allNnaFinal.get(i);
@@ -764,10 +774,21 @@ public class HiberNna {
                                     String apellidoNext = "";
                                     try{
                                         apellidoPrev = allNnaFinal.get(i).getApellidoP();
-                                        apellidoNext = allNnaFinal.get(j + 1).getApellidoP();
-                                    } catch (Exception ex){
-                                        
+                                        if(apellidoPrev == null){
+                                            apellidoPrev = "";
+                                        }
+                                    } catch (Exception ex){         
+                                        apellidoPrev = "";
                                     }
+                                    try{
+                                        apellidoNext = allNnaFinal.get(j + 1).getApellidoP();
+                                        if(apellidoNext == null){
+                                            apellidoNext = "";
+                                        }
+                                    } catch (Exception ex){         
+                                        apellidoNext = "";
+                                    }
+                                    
                                     if (apellidoPrev.compareToIgnoreCase(apellidoNext) > 0) {
                                         auxnna2 = allNnaFinal.get(i);
                                         allNnaFinal.set(i, allNnaFinal.get(j + 1));
