@@ -575,7 +575,7 @@
             <script>
                 function Alerta()
                 {
-                     return confirm('Estas seguro(a) de que desas crear el NNA ?');
+                     return confirm('Estas seguro(a) de que desas crear/editar el NNA ?');
                 }
             </script>
             <!-- Ubicar al final -->
