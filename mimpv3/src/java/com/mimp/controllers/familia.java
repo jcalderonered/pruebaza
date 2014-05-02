@@ -210,76 +210,56 @@ public class familia {
                     map.addAttribute("postadop", no);
                 } else {
                     map.addAttribute("taller", si);
-                    if (!usuario.getFichaSolicitudAdopcions().isEmpty()) {
-                        for (Iterator iter2 = usuario.getFichaSolicitudAdopcions().iterator(); iter2.hasNext();) {
-                            FichaSolicitudAdopcion form = (FichaSolicitudAdopcion) iter2.next();
-                            if (form == null) {
-                                map.addAttribute("ficha", no);
-                                map.addAttribute("boton", 1);
-                                map.addAttribute("eval", no);
-                                map.addAttribute("espera", no);
-                                map.addAttribute("adop", no);
-                                map.addAttribute("postadop", no);
-                            } else {
-                                map.addAttribute("ficha", si);
-                                map.addAttribute("boton", 0);
-                                map.addAttribute("eval", si);
-                                for (Iterator iter3 = usuario.getExpedienteFamilias().iterator(); iter3.hasNext();) {
-                                    ExpedienteFamilia exp = (ExpedienteFamilia) iter3.next();
-                                    Boolean flag = false;
-                                    for (Iterator iter4 = exp.getEvaluacions().iterator(); iter4.hasNext();) {
-                                        Evaluacion eval = (Evaluacion) iter4.next();
-                                        if (!eval.getEvalLegals().isEmpty()) {
-                                            flag = true;
-                                        }
-                                    }
-                                    if (exp.getEstado().equals("Apto") || flag) {
-                                        map.addAttribute("espera", si);
-                                        if (!exp.getDesignacions().isEmpty()) {
-                                            for (Iterator iter5 = exp.getDesignacions().iterator(); iter5.hasNext();) {
-                                                Designacion deg = (Designacion) iter5.next();
-                                                if (deg.getAceptacionConsejo() == 1) {
-                                                    map.addAttribute("adop", no);
-                                                    map.addAttribute("postadop", no);
-                                                } else {
-                                                    map.addAttribute("adop", si);
-                                                    Boolean flag2 = false;
-                                                    for (Iterator iter6 = exp.getEvaluacions().iterator(); iter6.hasNext();) {
-                                                        Evaluacion eval = (Evaluacion) iter6.next();
-                                                        for (Iterator iter7 = eval.getResolucions().iterator(); iter7.hasNext();) {
-                                                            Resolucion resol = (Resolucion) iter7.next();
-                                                            if (resol.getTipo().equals("Adopción")) {
-                                                                flag2 = true;
-                                                            }
-                                                        }
-                                                    }
-                                                    if (flag2) {
-                                                        map.addAttribute("postadop", si);
-                                                    } else {
-                                                        map.addAttribute("postadop", no);
-                                                    }
-                                                }
-                                            }
-                                        } else {
-                                            map.addAttribute("adop", no);
-                                            map.addAttribute("postadop", no);
-                                        }
-                                    } else {
-                                        map.addAttribute("espera", no);
-                                        map.addAttribute("adop", no);
-                                        map.addAttribute("postadop", no);
-                                    }
-                                }
+                    map.addAttribute("ficha", si);
+                    map.addAttribute("boton", 0);
+                    map.addAttribute("eval", si);
+                    for (Iterator iter3 = usuario.getExpedienteFamilias().iterator(); iter3.hasNext();) {
+                        ExpedienteFamilia exp = (ExpedienteFamilia) iter3.next();
+                        Boolean flag = false;
+                        for (Iterator iter4 = exp.getEvaluacions().iterator(); iter4.hasNext();) {
+                            Evaluacion eval = (Evaluacion) iter4.next();
+                            if (!eval.getEvalLegals().isEmpty()) {
+                                flag = true;
                             }
                         }
-                    } else {
-                        map.addAttribute("ficha", no);
-                        map.addAttribute("boton", 1);
-                        map.addAttribute("eval", no);
-                        map.addAttribute("espera", no);
-                        map.addAttribute("adop", no);
-                        map.addAttribute("postadop", no);
+                        if (exp.getEstado().equals("Apto") || flag) {
+                            map.addAttribute("espera", si);
+                            if (!exp.getDesignacions().isEmpty()) {
+                                for (Iterator iter5 = exp.getDesignacions().iterator(); iter5.hasNext();) {
+                                    Designacion deg = (Designacion) iter5.next();
+                                    if (deg.getAceptacionConsejo() == 1) {
+                                        map.addAttribute("adop", no);
+                                        map.addAttribute("postadop", no);
+                                    } else {
+                                        map.addAttribute("adop", si);
+                                        Boolean flag2 = false;
+                                        for (Iterator iter6 = exp.getEvaluacions().iterator(); iter6.hasNext();) {
+                                            Evaluacion eval = (Evaluacion) iter6.next();
+                                            for (Iterator iter7 = eval.getResolucions().iterator(); iter7.hasNext();) {
+                                                Resolucion resol = (Resolucion) iter7.next();
+                                                if (resol.getTipo().equals("Adopción")) {
+                                                    flag2 = true;
+                                                }
+                                            }
+                                        }
+                                        if (flag2) {
+                                            map.addAttribute("postadop", si);
+                                        } else {
+                                            map.addAttribute("postadop", no);
+                                        }
+                                    }
+                                }
+                            } else {
+                                map.addAttribute("adop", no);
+                                map.addAttribute("postadop", no);
+                            }
+                        } else {
+                            map.addAttribute("espera", no);
+                            map.addAttribute("adop", no);
+                            map.addAttribute("postadop", no);
+                        }
                     }
+
                 }
             }
         }
@@ -287,6 +267,132 @@ public class familia {
         return new ModelAndView(pagina, map);
     }
 
+//    @RequestMapping("/Festado")
+//    public ModelAndView Festado(ModelMap map, HttpSession session) {
+//        Familia usuario = (Familia) session.getAttribute("usuario");
+//        if (usuario == null) {
+//            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+//            map.addAttribute("mensaje", mensaje);
+//            return new ModelAndView("login", map);
+//        } else {
+//            String si = "SI";
+//            String no = "NO";
+//
+//            //Inicialmente seteamos todos los valores en no
+//            map.addAttribute("sesion", no);
+//            map.addAttribute("taller", no);
+//            map.addAttribute("ficha", no);
+//            map.addAttribute("boton", 0);
+//            map.addAttribute("eval", no);
+//            map.addAttribute("espera", no);
+//            map.addAttribute("adop", no);
+//            map.addAttribute("postadop", no);
+//
+//            Date fechaactual = new Date();
+//            Date ultfecha = new Date(10, 0, 01);
+//            for (Iterator iter = usuario.getFormularioSesions().iterator(); iter.hasNext();) {
+//                FormularioSesion form = (FormularioSesion) iter.next();
+//                if (ultfecha.before(form.getFechaSol())) {
+//                    ultfecha = form.getFechaSol();
+//                }
+//            }
+//            if ((ultfecha.getYear() < fechaactual.getYear()) && (usuario.getConstancia() == null)) {
+//                map.addAttribute("sesion", no);
+//                map.addAttribute("taller", no);
+//                map.addAttribute("ficha", no);
+//                map.addAttribute("boton", 0);
+//                map.addAttribute("eval", no);
+//                map.addAttribute("espera", no);
+//                map.addAttribute("adop", no);
+//                map.addAttribute("postadop", no);
+//            } else {
+//                map.addAttribute("sesion", si);
+//                if (usuario.getConstancia() == null) {
+//                    map.addAttribute("taller", no);
+//                    map.addAttribute("ficha", no);
+//                    map.addAttribute("boton", 0);
+//                    map.addAttribute("eval", no);
+//                    map.addAttribute("espera", no);
+//                    map.addAttribute("adop", no);
+//                    map.addAttribute("postadop", no);
+//                } else {
+//                    map.addAttribute("taller", si);
+//                    if (!usuario.getFichaSolicitudAdopcions().isEmpty()) {
+//                        for (Iterator iter2 = usuario.getFichaSolicitudAdopcions().iterator(); iter2.hasNext();) {
+//                            FichaSolicitudAdopcion form = (FichaSolicitudAdopcion) iter2.next();
+//                            if (form == null) {
+//                                map.addAttribute("ficha", no);
+//                                map.addAttribute("boton", 1);
+//                                map.addAttribute("eval", no);
+//                                map.addAttribute("espera", no);
+//                                map.addAttribute("adop", no);
+//                                map.addAttribute("postadop", no);
+//                            } else {
+//                                map.addAttribute("ficha", si);
+//                                map.addAttribute("boton", 0);
+//                                map.addAttribute("eval", si);
+//                                for (Iterator iter3 = usuario.getExpedienteFamilias().iterator(); iter3.hasNext();) {
+//                                    ExpedienteFamilia exp = (ExpedienteFamilia) iter3.next();
+//                                    Boolean flag = false;
+//                                    for (Iterator iter4 = exp.getEvaluacions().iterator(); iter4.hasNext();) {
+//                                        Evaluacion eval = (Evaluacion) iter4.next();
+//                                        if (!eval.getEvalLegals().isEmpty()) {
+//                                            flag = true;
+//                                        }
+//                                    }
+//                                    if (exp.getEstado().equals("Apto") || flag) {
+//                                        map.addAttribute("espera", si);
+//                                        if (!exp.getDesignacions().isEmpty()) {
+//                                            for (Iterator iter5 = exp.getDesignacions().iterator(); iter5.hasNext();) {
+//                                                Designacion deg = (Designacion) iter5.next();
+//                                                if (deg.getAceptacionConsejo() == 1) {
+//                                                    map.addAttribute("adop", no);
+//                                                    map.addAttribute("postadop", no);
+//                                                } else {
+//                                                    map.addAttribute("adop", si);
+//                                                    Boolean flag2 = false;
+//                                                    for (Iterator iter6 = exp.getEvaluacions().iterator(); iter6.hasNext();) {
+//                                                        Evaluacion eval = (Evaluacion) iter6.next();
+//                                                        for (Iterator iter7 = eval.getResolucions().iterator(); iter7.hasNext();) {
+//                                                            Resolucion resol = (Resolucion) iter7.next();
+//                                                            if (resol.getTipo().equals("Adopción")) {
+//                                                                flag2 = true;
+//                                                            }
+//                                                        }
+//                                                    }
+//                                                    if (flag2) {
+//                                                        map.addAttribute("postadop", si);
+//                                                    } else {
+//                                                        map.addAttribute("postadop", no);
+//                                                    }
+//                                                }
+//                                            }
+//                                        } else {
+//                                            map.addAttribute("adop", no);
+//                                            map.addAttribute("postadop", no);
+//                                        }
+//                                    } else {
+//                                        map.addAttribute("espera", no);
+//                                        map.addAttribute("adop", no);
+//                                        map.addAttribute("postadop", no);
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        map.addAttribute("ficha", no);
+//                        map.addAttribute("boton", 1);
+//                        map.addAttribute("eval", no);
+//                        map.addAttribute("espera", no);
+//                        map.addAttribute("adop", no);
+//                        map.addAttribute("postadop", no);
+//                    }
+//                }
+//            }
+//        }
+//        String pagina = "/Familia/estado_proc";
+//        return new ModelAndView(pagina, map);
+//    }
     @RequestMapping("/Fcontra")
     public ModelAndView Fcontra(ModelMap map, HttpSession session) {
         Familia usuario = (Familia) session.getAttribute("usuario");
@@ -1357,14 +1463,14 @@ public class familia {
         }
 
         if (session.getAttribute("idTurno2") != null && session.getAttribute("nombreTaller") != null
-            && session.getAttribute("nombreGrupo") != null
-            && session.getAttribute("nombreTurno") != null) {
-            
+                && session.getAttribute("nombreGrupo") != null
+                && session.getAttribute("nombreTurno") != null) {
+
             long idTurno2 = (long) session.getAttribute("idTurno2");
             String nombreTaller = (String) session.getAttribute("nombreTaller");
             String nombreGrupo = (String) session.getAttribute("nombreGrupo");
             String nombreTurno = (String) session.getAttribute("nombreTurno");
-            
+
             ArrayList<Reunion> allReuniones = new ArrayList();
             allReuniones = ServicioFamilia.listaReunionesTurno2(idTurno2);
             short numAsistentes = ServicioFamilia.numAsistentesFormulario(usuario.getIdfamilia());
@@ -1409,12 +1515,12 @@ public class familia {
                 map.put("nombreTurno", nombreTurno);
             }
             String pagina = "/Familia/Inscripcion/inscripcion_Grupos_afirm";
-            
+
             session.removeAttribute("idTurno2");
             session.removeAttribute("nombreTaller");
             session.removeAttribute("nombreGrupo");
             session.removeAttribute("nombreTurno");
-            
+
             return new ModelAndView(pagina, map);
         } else {
             String pagina = "/Familia/inicio_familia";
@@ -1422,7 +1528,7 @@ public class familia {
         }
 
     }
-    
+
     @RequestMapping(value = "/Flecturas", method = RequestMethod.GET)
     public ModelAndView Flecturas(ModelMap map, HttpSession session) {
         Familia usuario = (Familia) session.getAttribute("usuario");
@@ -1433,5 +1539,5 @@ public class familia {
         }
         return new ModelAndView("/Familia/lecturas", map);
     }
-    
+
 }
