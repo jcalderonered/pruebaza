@@ -108,10 +108,10 @@
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/ua'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Editar Unidad de Adopción</strong></h1>
                         <br>
-                        <c:if test="${ua.getIdunidad() == null}">
+                        <c:if test="${ua == null}">
                             <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editUa" method="post">
                             </c:if>  
-                            <c:if test="${ua.getIdunidad() != null}">
+                            <c:if test="${ua != null}">
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateUa" method="post"> 
                                     <input hidden name="id" id="id" value="${ua.getIdunidad()}">
                                 </c:if>  

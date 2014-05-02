@@ -160,7 +160,7 @@
                                     <c:if test="${turno2 != null}">  
                                         <c:forEach var="reunion" items="${turno2.getReunions()}" varStatus="status">
                                             <tr>
-                                                <td>${formato.dateToString(reunion.getFecha())}  </td>
+                                                <td>${reunion.getFecha() != null ? formato.dateToString(reunion.getFecha()) : ''}  </td>
                                                 <td>${reunion.getHora()}</td>
                                                 <td>
                                                     ${reunion.getFacilitador()}
