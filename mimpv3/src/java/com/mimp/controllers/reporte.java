@@ -2277,12 +2277,12 @@ public class reporte {
             ExpedienteNna aux_exp;
             for (Nna hermano : listahermano) {
                 aux_exp = hermano.getExpedienteNnas().iterator().next();
-                try{
+                try {
                     codpost = aux_exp.getCodigoReferencia();
-                }catch(Exception ex){
+                } catch (Exception ex) {
                 }
-                if(!codpost.equals("")){
-                    if(!codpost.equals(codant)){
+                if (!codpost.equals("")) {
+                    if (!codpost.equals(codant)) {
                         n_grupos++;
                     }
                 }
@@ -2294,7 +2294,7 @@ public class reporte {
             row = sheet.getRow(7);
             cell = row.getCell(1);
             cell.setCellValue("" + n_grupos);
-            
+
             sheet = wb.getSheetAt(3);
 
             i = 2;
@@ -4925,6 +4925,9 @@ public class reporte {
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheet("BD");
 
+            ArrayList<ArrayList> tabla1 = new ArrayList<ArrayList>();
+            ArrayList<String> fila_pais = new ArrayList<String>();
+
             //Aquí va el query que consigue los datos de la tabla
             //ArrayList<Familia> listafam = ServicioReporte.getRenad();
             ArrayList<Familia> listafam = ServicioReporte.getRenad_Parte1();
@@ -5489,6 +5492,142 @@ public class reporte {
 
                 i++;
             }
+//
+//            //Se selecciona la Hoja donde se va a trabajar
+//            Sheet sheet2 = wb.getSheet("Adop_RecidPadres");
+//
+//            //Se coloca el encabezado de la primera tabla
+//            Row row2_encabezado = sheet2.getRow(4);
+//            Cell cell2 = row2_encabezado.getCell(8);
+//            Date fecha_act = new Date();
+//            int anho_act = fecha_act.getYear();
+//            cell2.setCellValue(anho_act);
+//            anho_act--;
+//            cell2 = row2_encabezado.getCell(7);
+//            cell2.setCellValue(anho_act);
+//            anho_act--;
+//            cell2 = row2_encabezado.getCell(6);
+//            cell2.setCellValue(anho_act);
+//            anho_act--;
+//            cell2 = row2_encabezado.getCell(5);
+//            cell2.setCellValue(anho_act);
+//            anho_act--;
+//            cell2 = row2_encabezado.getCell(4);
+//            cell2.setCellValue(anho_act);
+//            anho_act--;
+//            cell2 = row2_encabezado.getCell(3);
+//            cell2.setCellValue(anho_act);
+//            anho_act--;
+//            cell2 = row2_encabezado.getCell(2);
+//            cell2.setCellValue(anho_act);
+//
+//            //Se escoge la fila donde se iniiará la tabla (REVISAR A PARTIR DE ACA)
+//            int row_index = 5;
+//            Row row2;
+//            cell2 = null;
+//
+//            //Se llenan las tablas
+//            for (ArrayList<String> filita : tabla1) {
+//                row2 = sheet2.getRow(row_index);
+//                if (row_index != 5) {
+//                    copyRow(sheet2,row_index + 2,row_index + 3); //Paso los totales a una fila mas abajo
+//                    copyRow(sheet2,row_index + 1,row_index + 2); //Paso los totales a una fila mas abajo
+//                    copyRowStyle(sheet2,row_index, row_index + 1); //Paso el formato de la columna
+//                }
+//                
+//                //Se llena una fila de la primera tabla
+//                cell2 = row2.getCell(1);
+//                cell2.setCellValue(filita.get(0)); //La información está en orden
+//                cell2 = row2.getCell(2);
+//                cell2.setCellValue(filita.get(1));
+//                cell2 = row2.getCell(3);
+//                cell2.setCellValue(filita.get(2));
+//                cell2 = row2.getCell(4);
+//                cell2.setCellValue(filita.get(3));
+//                cell2 = row2.getCell(5);
+//                cell2.setCellValue(filita.get(4));
+//                cell2 = row2.getCell(6);
+//                cell2.setCellValue(filita.get(5));
+//                cell2 = row2.getCell(7);
+//                cell2.setCellValue(filita.get(6));
+//                cell2 = row2.getCell(8);
+//                cell2.setCellValue(filita.get(7));
+//                
+//                //Se llena la segunda tabla
+//                cell2 = row2.getCell(11);
+//                cell2.setCellValue(filita.get(0));
+//                cell2 = row2.getCell(12);
+//                cell2.setCellValue(filita.get(8));
+//                cell2 = row2.getCell(13);
+//                cell2.setCellValue(filita.get(9));
+//                int num1 = Integer.parseInt(filita.get(8));
+//                int num2 = Integer.parseInt(filita.get(9));
+//                cell2 = row2.getCell(14);
+//                cell2.setCellValue(num1 + num2);
+//                
+//                //Se llena la tercera tabla   42
+//                cell2 = row2.getCell(18);
+//                cell2.setCellValue(filita.get(0));
+//                cell2 = row2.getCell(19);
+//                cell2.setCellValue(filita.get(10));
+//                cell2 = row2.getCell(20);
+//                cell2.setCellValue(filita.get(11));
+//                cell2 = row2.getCell(21);
+//                cell2.setCellValue(filita.get(12));
+//                cell2 = row2.getCell(22);
+//                cell2.setCellValue(filita.get(13));
+//                cell2 = row2.getCell(23);
+//                cell2.setCellValue(filita.get(14));
+//                cell2 = row2.getCell(24);
+//                cell2.setCellValue(filita.get(15));
+//                cell2 = row2.getCell(25);
+//                cell2.setCellValue(filita.get(16));
+//                cell2 = row2.getCell(26);
+//                cell2.setCellValue(filita.get(17));
+//                cell2 = row2.getCell(27);
+//                cell2.setCellValue(filita.get(18));
+//                cell2 = row2.getCell(28);
+//                cell2.setCellValue(filita.get(19));
+//                cell2 = row2.getCell(29);
+//                cell2.setCellValue(filita.get(20));
+//                cell2 = row2.getCell(30);
+//                cell2.setCellValue(filita.get(21));
+//                cell2 = row2.getCell(31);
+//                cell2.setCellValue(filita.get(22));
+//                cell2 = row2.getCell(32);
+//                cell2.setCellValue(filita.get(23));
+//                cell2 = row2.getCell(33);
+//                cell2.setCellValue(filita.get(24));
+//                cell2 = row2.getCell(34);
+//                cell2.setCellValue(filita.get(25));
+//                cell2 = row2.getCell(35);
+//                cell2.setCellValue(filita.get(26));
+//                cell2 = row2.getCell(36);
+//                cell2.setCellValue(filita.get(27));
+//                cell2 = row2.getCell(37);
+//                cell2.setCellValue(filita.get(28));
+//                cell2 = row2.getCell(38);
+//                cell2.setCellValue(filita.get(29));
+//                cell2 = row2.getCell(39);
+//                cell2.setCellValue(filita.get(30));
+//                cell2 = row2.getCell(40);
+//                cell2.setCellValue(filita.get(31));
+//                cell2 = row2.getCell(41);
+//                cell2.setCellValue(filita.get(32));
+//                cell2 = row2.getCell(42);
+//                cell2.setCellValue(filita.get(33));
+//                //Cálculo del subtotal
+//                num1 = Integer.parseInt(filita.get(10)) + Integer.parseInt(filita.get(11)) +
+//                        Integer.parseInt(filita.get(12)) + Integer.parseInt(filita.get(13)) +
+//                        Integer.parseInt(filita.get(14));
+//                cell2 = row2.getCell(43);
+//                cell2.setCellValue(num1);
+//                
+//                row_index++;
+//            }
+//            
+//            
+
         } catch (Exception e) {
             //e.printStackTrace();
         }
@@ -5508,6 +5647,14 @@ public class reporte {
             wb.getSheetAt(9).setForceFormulaRecalculation(true);
             wb.getSheetAt(10).setForceFormulaRecalculation(true);
             wb.getSheetAt(11).setForceFormulaRecalculation(true);
+            wb.getSheetAt(12).setForceFormulaRecalculation(true);
+            wb.getSheetAt(13).setForceFormulaRecalculation(true);
+            wb.getSheetAt(14).setForceFormulaRecalculation(true);
+            wb.getSheetAt(15).setForceFormulaRecalculation(true);
+            wb.getSheetAt(16).setForceFormulaRecalculation(true);
+            wb.getSheetAt(17).setForceFormulaRecalculation(true);
+            wb.getSheetAt(18).setForceFormulaRecalculation(true);
+            wb.getSheetAt(19).setForceFormulaRecalculation(true);
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
@@ -6266,6 +6413,112 @@ public class reporte {
 
             ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
         } catch (Exception ex) {
+        }
+    }
+
+    private static void copyRowStyle(Sheet worksheet, int sourceRowNum, int destinationRowNum) {
+        // Coge la fila antigua y nueva
+        Row newRow = worksheet.getRow(destinationRowNum);
+        Row sourceRow = worksheet.getRow(sourceRowNum);
+
+        //Si existe una fila en el detino, pasa todas las filas 1 más abajo antes de crear la nueva columna
+        if (newRow != null) {
+            worksheet.shiftRows(destinationRowNum, worksheet.getLastRowNum(), 1);
+        } else {
+            newRow = worksheet.createRow(destinationRowNum);
+        }
+
+        // Hace un loop entre las celdas de cada columna para añadir una por una a la nueva
+        for (int i = 0; i < sourceRow.getLastCellNum(); i++) {
+            // Copia la antigua y nueva celda
+            Cell oldCell = sourceRow.getCell(i);
+            Cell newCell = newRow.createCell(i);
+
+            // Si la anterior celda es null, evalua la siguiente celda defrente
+            if (oldCell == null) {
+                newCell = null;
+                continue;
+            }
+
+            // Usa el estilo de la celda antigua
+            newCell.setCellStyle(oldCell.getCellStyle());
+
+            // Establece el tipo de valor de la celda
+            newCell.setCellType(oldCell.getCellType());
+
+            // Establece el valor de la celda
+//            switch (oldCell.getCellType()) {
+//                case Cell.CELL_TYPE_BLANK:
+//                    break;
+//                case Cell.CELL_TYPE_BOOLEAN:
+//                    newCell.setCellValue(oldCell.getBooleanCellValue());
+//                    break;
+//                case Cell.CELL_TYPE_ERROR:
+//                    newCell.setCellErrorValue(oldCell.getErrorCellValue());
+//                    break;
+//                case Cell.CELL_TYPE_FORMULA:
+//                    newCell.setCellFormula(oldCell.getCellFormula());
+//                    break;
+//                case Cell.CELL_TYPE_NUMERIC:
+//                    newCell.setCellValue(oldCell.getNumericCellValue());
+//                    break;
+//                case Cell.CELL_TYPE_STRING:
+//                    newCell.setCellValue(oldCell.getRichStringCellValue());
+//                    break;
+//            }
+        }
+    }
+
+    private static void copyRow(Sheet worksheet, int sourceRowNum, int destinationRowNum) {
+        // Coge la fila antigua y nueva
+        Row newRow = worksheet.getRow(destinationRowNum);
+        Row sourceRow = worksheet.getRow(sourceRowNum);
+
+        //Si existe una fila en el detino, pasa todas las filas 1 más abajo antes de crear la nueva columna
+        if (newRow != null) {
+            worksheet.shiftRows(destinationRowNum, worksheet.getLastRowNum(), 1);
+        } else {
+            newRow = worksheet.createRow(destinationRowNum);
+        }
+
+        // Hace un loop entre las celdas de cada columna para añadir una por una a la nueva
+        for (int i = 0; i < sourceRow.getLastCellNum(); i++) {
+            // Copia la antigua y nueva celda
+            Cell oldCell = sourceRow.getCell(i);
+            Cell newCell = newRow.createCell(i);
+
+            // Si la anterior celda es null, evalua la siguiente celda defrente
+            if (oldCell == null) {
+                newCell = null;
+                continue;
+            }
+
+            // Usa el estilo de la celda antigua
+            newCell.setCellStyle(oldCell.getCellStyle());
+
+            // Establece el tipo de valor de la celda
+            newCell.setCellType(oldCell.getCellType());
+
+            // Establece el valor de la celda
+            switch (oldCell.getCellType()) {
+                case Cell.CELL_TYPE_BLANK:
+                    break;
+                case Cell.CELL_TYPE_BOOLEAN:
+                    newCell.setCellValue(oldCell.getBooleanCellValue());
+                    break;
+                case Cell.CELL_TYPE_ERROR:
+                    newCell.setCellErrorValue(oldCell.getErrorCellValue());
+                    break;
+                case Cell.CELL_TYPE_FORMULA:
+                    newCell.setCellFormula(oldCell.getCellFormula());
+                    break;
+                case Cell.CELL_TYPE_NUMERIC:
+                    newCell.setCellValue(oldCell.getNumericCellValue());
+                    break;
+                case Cell.CELL_TYPE_STRING:
+                    newCell.setCellValue(oldCell.getRichStringCellValue());
+                    break;
+            }
         }
     }
 }
