@@ -185,6 +185,7 @@
                                         </div>
                                         <br>
                                         <br>
+                                        <!--
                                         <div>
                                             <label class="control-label">Residencia familia (para hab. de Peru)</label>
                                             <div class="controls">
@@ -194,6 +195,7 @@
                                                 </select>
                                             </div>    
                                         </div>
+                                        -->
                                     </div>    
                                 </div>
                                 <button id="singlebutton" name="singlebutton" class="btn btn-default">Buscar</button>
