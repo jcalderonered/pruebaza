@@ -1048,15 +1048,15 @@ public class nna {
         short adolescentes = Byte.valueOf("1");
         short hermanos = Byte.valueOf("1");
 
-        if (prioritarios != null && prioritarios.equals("e")) {
+        if (prioritarios != null && !prioritarios.equals("") && prioritarios.equals("e")) {
             especial = Byte.valueOf("0");
-        } else if (prioritarios != null && prioritarios.equals("s")) {
+        } else if (prioritarios != null && !prioritarios.equals("") && prioritarios.equals("s")) {
             enfermo = Byte.valueOf("0");
-        } else if (prioritarios != null && prioritarios.equals("m")) {
+        } else if (prioritarios != null && !prioritarios.equals("") && prioritarios.equals("m")) {
             mayores = Byte.valueOf("0");
-        } else if (prioritarios != null && prioritarios.equals("a")) {
+        } else if (prioritarios != null && !prioritarios.equals("") && prioritarios.equals("a")) {
             adolescentes = Byte.valueOf("0");
-        } else if (prioritarios != null && prioritarios.equals("h")) {
+        } else if (prioritarios != null && !prioritarios.equals("") && prioritarios.equals("h")) {
             hermanos = Byte.valueOf("0");
         }
 
@@ -1066,7 +1066,7 @@ public class nna {
         tempNna.setAdolescente(adolescentes);
         tempNna.setHermano(hermanos);
 
-        if (prioritarios != null) {
+        if (prioritarios != null && !prioritarios.equals("")) {
             tempNna.setClasificacion("prioritario");
         }
         tempNna.setObservaciones(obs);
