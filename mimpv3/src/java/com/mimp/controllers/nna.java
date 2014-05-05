@@ -536,7 +536,7 @@ public class nna {
         tempNna.setDepartamentoNacimiento(dep);
         tempNna.setProvinciaNacimiento(prov);
         tempNna.setDistritoNacimiento(dist);
-        tempNna.setDistritoNacimiento(direccion);
+        tempNna.setLugarNac(direccion);
         tempNna.setNResolAband(numResolAband);
         tempfecha = tempNna.getFechaResolAbandono();
         if (fechaResolAband != null) {
@@ -988,7 +988,7 @@ public class nna {
         tempNna.setDepartamentoNacimiento(dep);
         tempNna.setProvinciaNacimiento(prov);
         tempNna.setDistritoNacimiento(dist);
-        tempNna.setDistritoNacimiento(direccion);
+        tempNna.setLugarNac(direccion);
         tempNna.setNResolAband(numResolAband);
         tempfecha = tempNna.getFechaResolAbandono();
         if (fechaResolAband != null) {

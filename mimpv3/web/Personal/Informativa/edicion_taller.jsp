@@ -152,10 +152,8 @@
                                             <c:forEach var="sesion" items="${listaSesiones}" varStatus="status">
                                                 <c:set var="fechaSesion" value="${sesion.getFecha()}" /> 
                                                 <fmt:formatDate var="yearSesion" value="${fechaSesion}" pattern="y" />  
-                                                <c:if test="${year == yearSesion}">
-                                                    <c:if test="${sesion.getUnidad() == usuario.getUnidad().getDepartamento()}">
-                                                        <option value="${sesion.getNSesion()}" ${taller.getNSesion() == sesion.getNSesion() ? 'selected' : ''}> ${sesion.getNSesion()}</option> 
-                                                    </c:if> 
+                                                <c:if test="${year == yearSesion}">                                                
+                                                        <option value="${sesion.getNSesion()}" ${taller.getNSesion() == sesion.getNSesion() ? 'selected' : ''}> ${sesion.getNSesion()}</option>                                                     
                                                 </c:if> 
                                             </c:forEach>
                                         </select>

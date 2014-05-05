@@ -470,13 +470,14 @@ public class HiberPersonal {
         return pers;
     }
 
-    public ArrayList<Sesion> listaSesiones() {
+    public ArrayList<Sesion> listaSesiones(String ua) {
 
         Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-        String hql = "From Sesion S order by S.fecha";
+        String hql = "From Sesion S where S.unidad = :departamento order by S.fecha ASC";
         Query query = session.createQuery(hql);
+        query.setString("departamento", ua);
         List sesiones = query.list();
         ArrayList<Sesion> allSesiones = new ArrayList();
         for (Iterator iter = sesiones.iterator(); iter.hasNext();) {
@@ -636,7 +637,7 @@ public class HiberPersonal {
 
     }
 
-    public ArrayList<Taller> listaTalleres() {
+    public ArrayList<Taller> listaTalleres(String ua) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -645,8 +646,9 @@ public class HiberPersonal {
         String size;
 
         session.beginTransaction();
-        String hql = "From Taller T order by T.id";
+        String hql = "From Taller T where T.unidad = :dep order by T.id ASC";
         Query query = session.createQuery(hql);
+        query.setString("dep", ua);
         List talleres = query.list();
         ArrayList<Taller> allTalleres = new ArrayList();
 
