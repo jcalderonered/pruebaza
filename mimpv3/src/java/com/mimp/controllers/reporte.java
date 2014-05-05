@@ -77,8 +77,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-////            InputStream inp = new FileInputStream("C:\\Plantillas\\OrgAcred.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/OrgAcred.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\OrgAcred.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/OrgAcred.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -160,8 +160,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\PostAdop.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/PostAdop.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\PostAdop.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/PostAdop.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -470,8 +470,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\NnaAbandono.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/NnaAbandono.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\NnaAbandono.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/NnaAbandono.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -1173,8 +1173,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\NnaPrio.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/NnaPrio.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\NnaPrio.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/NnaPrio.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -1561,8 +1561,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\NnaGrupos.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/NnaGrupos.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\NnaGrupos.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/NnaGrupos.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -3305,8 +3305,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopNac.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/AdopNac.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopNac.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/AdopNac.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -3700,8 +3700,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopInter.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/AdopInter.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopInter.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/AdopInter.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -4094,8 +4094,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopExtran.xls");
-            InputStream inp = new FileInputStream("/opt/Plantillas/AdopExtran.xls");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopExtran.xls");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/AdopExtran.xls");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -4398,8 +4398,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\Expedientes.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/Expedientes.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\Expedientes.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/Expedientes.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(1);
@@ -4919,8 +4919,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\Renad.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/Renad.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\Renad.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/Renad.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheet("BD");
@@ -5686,8 +5686,8 @@ public class reporte {
         Long idsesion_in = Long.parseLong(idsesion);
         try {
             //Se llama a la plantilla localizada en la ruta
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\InscritosSI.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/InscritosSI.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\InscritosSI.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/InscritosSI.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -5835,8 +5835,8 @@ public class reporte {
         Long idsesion_in = Long.parseLong(idsesion);
         try {
             //Se llama a la plantilla localizada en la ruta
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteSI.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/ReporteSI.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteSI.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/ReporteSI.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -5981,8 +5981,8 @@ public class reporte {
         Long idturno2_in = Long.parseLong(idturno2);
         try {
             //Se llama a la plantilla localizada en la ruta
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteTaller.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/ReporteTaller.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\ReporteTaller.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/ReporteTaller.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -6253,8 +6253,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-//            InputStream inp = new FileInputStream("C:\\Plantillas\\PropDesig.xlsx");
-            InputStream inp = new FileInputStream("/opt/Plantillas/PropDesig.xlsx");
+            InputStream inp = new FileInputStream("C:\\Plantillas\\PropDesig.xlsx");
+//            InputStream inp = new FileInputStream("/opt/Plantillas/PropDesig.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);

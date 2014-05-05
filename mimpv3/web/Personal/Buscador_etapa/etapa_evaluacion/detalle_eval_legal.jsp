@@ -244,7 +244,7 @@
                                       <input hidden name="idLegal" id="idLegal" value="${legal.getIdevaluacion()}">
                                       <input hidden name="familia" id="familia" value="${familia}">
                                       <input hidden name="origen" id="origen" value="${origen}">
-                                      <button type="submit" class="btn btn-default">Registrar nueva resolución</button>
+                                      <button ${usuario.getRol().equals("UA") ? 'disabled' : ''} type="submit" class="btn btn-default">Registrar nueva resolución</button>
                                 </form>
                                 </c:if>      
                                 <br>
