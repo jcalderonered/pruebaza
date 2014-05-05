@@ -331,4 +331,52 @@ public class HiberFamilia {
          }
          return allPost;
     }
+    
+    public ArrayList<Evaluacion> getEvaluaciones(long idExpFam){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        String hql = "From Evaluacion E WHERE E.expedienteFamilia = :id";
+        Query query = session.createQuery(hql);       
+        query.setLong("id", idExpFam);
+        List listEv = query.list();
+        ArrayList<Evaluacion> allEv = new ArrayList();
+         for (Iterator iter = listEv.iterator(); iter.hasNext();) {
+                Evaluacion temp = (Evaluacion) iter.next();
+                allEv.add(temp);
+         }
+         return allEv;
+    }
+    
+    public ArrayList<Designacion> getDesignaciones(long idExpFam){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        String hql = "From Designacion E WHERE E.expedienteFamilia = :id";
+        Query query = session.createQuery(hql);       
+        query.setLong("id", idExpFam);
+        List listDeg = query.list();
+        ArrayList<Designacion> allDeg = new ArrayList();
+         for (Iterator iter = listDeg.iterator(); iter.hasNext();) {
+                Designacion temp = (Designacion) iter.next();
+                allDeg.add(temp);
+         }
+         return allDeg;
+    }
+    
+    public ArrayList<Resolucion> getResoluciones(long idExpFam){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        String hql = "From Resolucion R WHERE R.evaluacion = :id";
+        Query query = session.createQuery(hql);       
+        query.setLong("id", idExpFam);
+        List listRes = query.list();
+        ArrayList<Resolucion> allRes = new ArrayList();
+         for (Iterator iter = listRes.iterator(); iter.hasNext();) {
+                Resolucion temp = (Resolucion) iter.next();
+                allRes.add(temp);
+         }
+         return allRes;
+    }
 }
