@@ -173,7 +173,7 @@
                                 </div>
                             </div>
                             <br>
-                            <input ${expediente.getNumeroExpediente() == null && !usuario.getRol().equals("UA") ? '' : 'disabled'} type="submit" id="genNumExp" name="genNumExp" value="Generar un número de expediente" class="btn btn-default" onclick="Alerta();" >
+                            <input ${expediente.getNumeroExpediente() == null ? '' : 'disabled'} type="submit" id="genNumExp" name="genNumExp" value="Generar un número de expediente" class="btn btn-default" onclick="Alerta();" >
                             <br>
                             <br>
                             <div class="control-group">

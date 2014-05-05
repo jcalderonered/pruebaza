@@ -218,6 +218,8 @@
                                 <thead>
                                     <tr>
                                         <th>Expediente</th>
+                                        <th>Número</th>
+                                        <th>UA</th>
                                         <th>Información</th>
                                         <th>Evaluación Legal</th>
                                         <th>Resultado</th>
@@ -248,6 +250,8 @@
                                             <c:if test="${usuario.getUnidad().getDepartamento() == expediente.getUnidad().getDepartamento() || usuario.getUnidad().getDepartamento() == 'Lima'}">
                                             <tr>
                                                 <td>${expediente.getExpediente()}</td>
+                                                <td>${expediente.getNumeroExpediente() != null ? expediente.getNumeroExpediente() : '---'}</td>
+                                                <td>${expediente.getUnidad().getDepartamento()}</td>
                                                 <td>
                                                     <form action="${pageContext.servletContext.contextPath}/IrPersonalFamilia" method="post">
                                                         <input hidden name="estado" id="estado" value="evaluacion">
