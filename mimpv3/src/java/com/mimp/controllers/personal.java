@@ -69,8 +69,8 @@ public class personal {
         }
         //List<Personal> lista = Servicio.listaPersonal();
         //map.addAttribute("id", temp);
-        map.put("listaSesiones", ServicioPersonal.listaSesiones());
-        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
+        map.put("listaTalleres", ServicioPersonal.listaTalleres(usuario.getUnidad().getDepartamento()));
         map.put("formato", format);
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
@@ -3022,8 +3022,8 @@ public class personal {
 
         ServicioPersonal.PersonalCrearSesion(tempSesion);
 
-        map.put("listaSesiones", ServicioPersonal.listaSesiones());
-        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
+        map.put("listaTalleres", ServicioPersonal.listaTalleres(usuario.getUnidad().getDepartamento()));
         map.put("formato", format);
 
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
@@ -3123,8 +3123,8 @@ public class personal {
 
         ServicioPersonal.PersonalUpdateSesion(tempSesion);
 
-        map.put("listaSesiones", ServicioPersonal.listaSesiones());
-        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
+        map.put("listaTalleres", ServicioPersonal.listaTalleres(usuario.getUnidad().getDepartamento()));
         map.put("formato", format);
 
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
@@ -3174,8 +3174,8 @@ public class personal {
 
         ServicioPersonal.PersonalUpdateSesion(tempSesion);
 
-        map.put("listaTalleres", ServicioPersonal.listaTalleres());
-        map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        map.put("listaTalleres", ServicioPersonal.listaTalleres(usuario.getUnidad().getDepartamento()));
+        map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
         map.put("formato", format);
 
         String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
@@ -3822,7 +3822,7 @@ public class personal {
         }
 
         ArrayList<Sesion> allSesiones = new ArrayList();
-        allSesiones = ServicioPersonal.listaSesiones();
+        allSesiones = ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento());
         map.put("listaSesiones", allSesiones);
         return new ModelAndView("/Personal/Informativa/edicion_taller", map);
     }
@@ -3884,8 +3884,8 @@ public class personal {
             tempTaller.setNReunion(numReu);
             ServicioPersonal.PersonalCrearTaller(tempTaller);
 
-            map.put("listaSesiones", ServicioPersonal.listaSesiones());
-            map.put("listaTalleres", ServicioPersonal.listaTalleres());
+            map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
+            map.put("listaTalleres", ServicioPersonal.listaTalleres(usuario.getUnidad().getDepartamento()));
             map.put("formato", format);
 
             String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
@@ -3942,7 +3942,7 @@ public class personal {
         Taller tempTaller = new Taller();
         tempTaller = ServicioPersonal.getTaller(idTaller);
 
-        map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
         map.put("taller", tempTaller);
         map.addAttribute("idTaller", idTaller);
         return new ModelAndView("/Personal/Informativa/edicion_taller", map);
@@ -4022,8 +4022,8 @@ public class personal {
         } catch (Exception ex) {
         }
 
-        map.put("listaSesiones", ServicioPersonal.listaSesiones());
-        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
+        map.put("listaTalleres", ServicioPersonal.listaTalleres(usuario.getUnidad().getDepartamento()));
         map.put("formato", format);
 
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
@@ -4103,7 +4103,7 @@ public class personal {
                 Taller tempTaller = new Taller();
                 tempTaller = ServicioPersonal.getTaller(idTaller);
 
-                map.put("listaSesiones", ServicioPersonal.listaSesiones());
+                map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
                 map.put("taller", tempTaller);
                 map.addAttribute("idTaller", idTaller);
 
@@ -6598,8 +6598,8 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-        map.put("listaSesiones", ServicioPersonal.listaSesiones());
-        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
+        map.put("listaTalleres", ServicioPersonal.listaTalleres(usuario.getUnidad().getDepartamento()));
         map.put("formato", format);
 
         return new ModelAndView("/Personal/Informativa/lista_historico_sesiones_talleres", map);
@@ -6632,8 +6632,8 @@ public class personal {
 
         long year = Long.parseLong(session.getAttribute("year").toString());
 
-        map.put("listaSesiones", ServicioPersonal.listaSesiones());
-        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
+        map.put("listaTalleres", ServicioPersonal.listaTalleres(usuario.getUnidad().getDepartamento()));
         map.put("formato", format);
         map.put("year", year);
         return new ModelAndView("/Personal/Informativa/lista_historico_sesiones_talleres", map);
@@ -6678,8 +6678,8 @@ public class personal {
         } catch (Exception ex) {
         }
 
-        map.put("listaSesiones", ServicioPersonal.listaSesiones());
-        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
+        map.put("listaTalleres", ServicioPersonal.listaTalleres(usuario.getUnidad().getDepartamento()));
         map.put("formato", format);
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
@@ -6725,8 +6725,8 @@ public class personal {
         } catch (Exception ex) {
         }
 
-        map.put("listaSesiones", ServicioPersonal.listaSesiones());
-        map.put("listaTalleres", ServicioPersonal.listaTalleres());
+        map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
+        map.put("listaTalleres", ServicioPersonal.listaTalleres(usuario.getUnidad().getDepartamento()));
         map.put("formato", format);
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
@@ -6765,8 +6765,8 @@ public class personal {
 
         ServicioPersonal.PersonalUpdateSesion(tempSesion);
 
-        map.put("listaTalleres", ServicioPersonal.listaTalleres());
-        map.put("listaSesiones", ServicioPersonal.listaSesiones());
+        map.put("listaTalleres", ServicioPersonal.listaTalleres(usuario.getUnidad().getDepartamento()));
+        map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
         map.put("formato", format);
         return new ModelAndView("/Personal/Informativa/lista_charlas", map);
     }
@@ -6917,7 +6917,7 @@ public class personal {
             tempTaller = ServicioPersonal.getTaller(idTaller);
 
             map.put("mensaje", mensaje);
-            map.put("listaSesiones", ServicioPersonal.listaSesiones());
+            map.put("listaSesiones", ServicioPersonal.listaSesiones(usuario.getUnidad().getDepartamento()));
             map.put("taller", tempTaller);
             map.addAttribute("idTaller", idTaller);
 
