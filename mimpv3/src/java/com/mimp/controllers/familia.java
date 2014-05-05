@@ -216,27 +216,26 @@ public class familia {
                     for (Iterator iter3 = usuario.getExpedienteFamilias().iterator(); iter3.hasNext();) {
                         ExpedienteFamilia exp = (ExpedienteFamilia) iter3.next();
                         Boolean flag = false;
-                        for (Iterator iter4 = exp.getEvaluacions().iterator(); iter4.hasNext();) {
-                            Evaluacion eval = (Evaluacion) iter4.next();
-                            if (!eval.getEvalLegals().isEmpty()) {
+                        ArrayList<Evaluacion> listaEval = ServicioFamilia.getEvaluaciones(exp.getIdexpedienteFamilia());
+                        for (Evaluacion eval : listaEval) {
+                            if (eval.getTipo().equals("legal") && eval.getResultado().equals("favorable")) {
                                 flag = true;
                             }
                         }
                         if (exp.getEstado().equals("Apto") || flag) {
                             map.addAttribute("espera", si);
-                            if (!exp.getDesignacions().isEmpty()) {
-                                for (Iterator iter5 = exp.getDesignacions().iterator(); iter5.hasNext();) {
-                                    Designacion deg = (Designacion) iter5.next();
+                            ArrayList<Designacion> listaDeg = ServicioFamilia.getDesignaciones(exp.getIdexpedienteFamilia());
+                            if (!listaDeg.isEmpty()) {
+                                for (Designacion deg : listaDeg) {
                                     if (deg.getAceptacionConsejo() == 1) {
                                         map.addAttribute("adop", no);
                                         map.addAttribute("postadop", no);
                                     } else {
                                         map.addAttribute("adop", si);
                                         Boolean flag2 = false;
-                                        for (Iterator iter6 = exp.getEvaluacions().iterator(); iter6.hasNext();) {
-                                            Evaluacion eval = (Evaluacion) iter6.next();
-                                            for (Iterator iter7 = eval.getResolucions().iterator(); iter7.hasNext();) {
-                                                Resolucion resol = (Resolucion) iter7.next();
+                                        for (Evaluacion eval : listaEval) {
+                                            ArrayList<Resolucion> listaRes = ServicioFamilia.getResoluciones(eval.getIdevaluacion());
+                                            for (Resolucion resol : listaRes) {
                                                 if (resol.getTipo().equals("Adopción")) {
                                                     flag2 = true;
                                                 }
