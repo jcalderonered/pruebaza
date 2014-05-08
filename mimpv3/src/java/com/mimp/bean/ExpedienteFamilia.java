@@ -28,6 +28,7 @@ public class ExpedienteFamilia  implements java.io.Serializable {
      private String nacionalidad;
      private Short rnsa;
      private Short rnaa;
+     private Short valor;
      private String tipoFamilia;
      private String tipoListaEspera;
      private Set<Designacion> designacions = new HashSet<Designacion>(0);
@@ -43,7 +44,7 @@ public class ExpedienteFamilia  implements java.io.Serializable {
         this.unidad = unidad;
         this.familia = familia;
     }
-    public ExpedienteFamilia(long idexpedienteFamilia, Unidad unidad, Familia familia, Long numero, String expediente, String ht, String htFicha,String nFicha,String numeroExpediente, Date fechaIngresoDga, Date fechaIngresoFicha, String estado, Date tupa, String nacionalidad, Short rnsa, Short rnaa, String tipoFamilia, String tipoListaEspera, Set<Designacion> designacions, Set<Evaluacion> evaluacions, Set<EstudioCaso> estudioCasos) {
+    public ExpedienteFamilia(long idexpedienteFamilia, Unidad unidad, Familia familia, Long numero, String expediente, String ht, String htFicha,String nFicha,String numeroExpediente, Date fechaIngresoDga, Date fechaIngresoFicha, String estado, Date tupa, String nacionalidad, Short rnsa, Short rnaa, Short valor,String tipoFamilia, String tipoListaEspera, Set<Designacion> designacions, Set<Evaluacion> evaluacions, Set<EstudioCaso> estudioCasos) {
        this.idexpedienteFamilia = idexpedienteFamilia;
        this.unidad = unidad;
        this.familia = familia;
@@ -60,6 +61,7 @@ public class ExpedienteFamilia  implements java.io.Serializable {
        this.nacionalidad = nacionalidad;
        this.rnsa = rnsa;
        this.rnaa = rnaa;
+       this.valor = valor;
        this.tipoFamilia = tipoFamilia;
        this.tipoListaEspera = tipoListaEspera;
        this.designacions = designacions;
@@ -213,6 +215,20 @@ public class ExpedienteFamilia  implements java.io.Serializable {
     
     public void setEstudioCasos(Set<EstudioCaso> estudioCasos) {
         this.estudioCasos = estudioCasos;
+    }
+
+    /**
+     * @return the valor
+     */
+    public Short getValor() {
+        return valor;
+    }
+
+    /**
+     * @param valor the valor to set
+     */
+    public void setValor(Short valor) {
+        this.valor = valor;
     }
 
 
