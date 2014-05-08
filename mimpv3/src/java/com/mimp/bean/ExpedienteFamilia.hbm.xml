@@ -59,6 +59,9 @@
         <property name="tipoListaEspera" type="string">
             <column name="TIPO_LISTA_ESPERA" length="30" />
         </property>
+        <property name="valor" type="java.lang.Short">
+            <column name="VALOR" precision="3" scale="0" />
+        </property>
         <set name="designacions" table="DESIGNACION" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="IDEXPEDIENTE_FAMILIA" precision="10" scale="0" not-null="true" />
