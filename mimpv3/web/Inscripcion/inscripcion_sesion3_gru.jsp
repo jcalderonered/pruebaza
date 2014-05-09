@@ -795,7 +795,7 @@
                         <br>
                         <!-- Text input-->
                         <div class="control-group">
-                            <label class="control-label" for="textinput">Correo Electrónico <font style="color:red">(*)</font></label>
+                            <label class="control-label" for="textinput">Correo Electrónico (Este correo será usado para futuras comunicaciones)<font style="color:red">(*)</font></label>
                             <div class="controls">
                                 <input id="correoElla" name="correoElla" onkeyup="return(limitar());"  type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
                             </div>
@@ -1026,6 +1026,18 @@
                 document.formulario.correoEl.focus();
                 return false;
             }
+            if (document.formulario.correoEl.value != "")
+            {
+                if (validateEmail(document.formulario.correoEl.value)) {
+
+                } else {
+                    alert("Debe ingresar un correo válido");
+                    document.formulario.correoEl.focus();
+                    return false;
+                }
+
+
+            }
             //Ella
             if (document.formulario.nombreElla.value == "")
             {
@@ -1105,6 +1117,19 @@
                 document.formulario.correoElla.focus();
                 return false;
             }
+            
+            if (document.formulario.correoElla.value != "")
+            {
+                if (validateEmail(document.formulario.correoElla.value)) {
+
+                } else {
+                    alert("Debe ingresar un correo válido");
+                    document.formulario.correoElla.focus();
+                    return false;
+                }
+
+
+            }
 
             if (document.formulario.pais.value == "")
             {
@@ -1152,86 +1177,92 @@
             }
         }
     </script>
-    <script type="text/javascript">
-                function limitar()
-                {                    
-                    var nombreEl = document.getElementById('nombreEl');
-                    var apellidoPEl = document.getElementById('apellidoPEl');
-                    var apellidoMEl = document.getElementById('apellidoMEl');
-                    var proNacEl = document.getElementById('proNacEl');
-                    var numDocEl = document.getElementById('numDocEl');
-                    var profesionEl = document.getElementById('profesionEl');
-                    var correoEl = document.getElementById('correoEl');
-                    var celEl = document.getElementById('cel');
-                    
-                     var nombreElla = document.getElementById('nombreElla');
-                    var apellidoPElla = document.getElementById('apellidoPElla');
-                    var apellidoMElla = document.getElementById('apellidoMElla');
-                    var proNacElla = document.getElementById('proNacElla');
-                    var numDocElla = document.getElementById('numDocElla');
-                    var profesionElla = document.getElementById('profesionElla');
-                    var correoElla = document.getElementById('correoElla');
-                    var celElla = document.getElementById('celElla');
-                    
-                    var prov = document.getElementById('prov');
-                    var dist = document.getElementById('dist');
-                    var dir = document.getElementById('dir');
-                    var telf = document.getElementById('telf');
-                    
-                    
-                    if (nombre.value.length < 0 || nombre.value.length > 30) {
-                        alert("solo puede ingresar 30 caracteres");
-                        nombre.value = nombre.value.substring(0, 30);
-                        return false;
-                    }else if (apellidoP.value.length < 0 || apellidoP.value.length > 30) {
-                        alert("solo puede ingresar 30 caracteres");
-                        apellidoP.value = apellidoP.value.substring(0, 30);
-                        return false;
-                    }else if (apellidoM.value.length < 0 || apellidoM.value.length > 30) {
-                        alert("solo puede ingresar 30 caracteres");
-                        apellidoM.value = apellidoM.value.substring(0, 30);
-                        return false;
-                    }else if (numDoc.value.length < 0 || numDoc.value.length > 15) {
-                        alert("solo puede ingresar 15 caracteres");
-                        numDoc.value = numDoc.value.substring(0, 15);
-                        return false;
-                    }else if (proNac.value.length < 0 || proNac.value.length > 50) {
-                        alert("solo puede ingresar 50 caracteres");
-                        proNac.value = proNac.value.substring(0, 50);
-                        return false;
-                    }else if (correo.value.length < 0 || correo.value.length > 50) {
-                        alert("solo puede ingresar 50 caracteres");
-                        correo.value = correo.value.substring(0, 50);
-                        return false;
-                    }else if (profesion.value.length < 0 || profesion.value.length > 50) {
-                        alert("solo puede ingresar 50 caracteres");
-                        profesion.value = profesion.value.substring(0, 50);
-                        return false;
-                    }else if (cel.value.length < 0 || cel.value.length > 15) {
-                        alert("solo puede ingresar 15 caracteres");
-                        cel.value = cel.value.substring(0, 15);
-                        return false;
-                    }else if (prov.value.length < 0 || prov.value.length > 30) {
-                        alert("solo puede ingresar 30 caracteres");
-                        prov.value = prov.value.substring(0, 30);
-                        return false;
-                    }else if (dist.value.length < 0 || dist.value.length > 90) {
-                        alert("solo puede ingresar 90 caracteres");
-                        dist.value = dist.value.substring(0, 90);
-                        return false;
-                    }else if (dir.value.length < 0 || dir.value.length > 90) {
-                        alert("solo puede ingresar 90 caracteres");
-                        dir.value = dir.value.substring(0, 90);
-                        return false;
-                    }else if (telf.value.length < 0 || telf.value.length > 15) {
-                        alert("solo puede ingresar 15 caracteres");
-                        telf.value = telf.value.substring(0, 15);
-                        return false;
-                    }
-                    
-
+    <script>
+                function validateEmail(email) {
+                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(email);
                 }
             </script>
+    <script type="text/javascript">
+        function limitar()
+        {
+            var nombreEl = document.getElementById('nombreEl');
+            var apellidoPEl = document.getElementById('apellidoPEl');
+            var apellidoMEl = document.getElementById('apellidoMEl');
+            var proNacEl = document.getElementById('proNacEl');
+            var numDocEl = document.getElementById('numDocEl');
+            var profesionEl = document.getElementById('profesionEl');
+            var correoEl = document.getElementById('correoEl');
+            var celEl = document.getElementById('cel');
+
+            var nombreElla = document.getElementById('nombreElla');
+            var apellidoPElla = document.getElementById('apellidoPElla');
+            var apellidoMElla = document.getElementById('apellidoMElla');
+            var proNacElla = document.getElementById('proNacElla');
+            var numDocElla = document.getElementById('numDocElla');
+            var profesionElla = document.getElementById('profesionElla');
+            var correoElla = document.getElementById('correoElla');
+            var celElla = document.getElementById('celElla');
+
+            var prov = document.getElementById('prov');
+            var dist = document.getElementById('dist');
+            var dir = document.getElementById('dir');
+            var telf = document.getElementById('telf');
+
+
+            if (nombre.value.length < 0 || nombre.value.length > 30) {
+                alert("solo puede ingresar 30 caracteres");
+                nombre.value = nombre.value.substring(0, 30);
+                return false;
+            } else if (apellidoP.value.length < 0 || apellidoP.value.length > 30) {
+                alert("solo puede ingresar 30 caracteres");
+                apellidoP.value = apellidoP.value.substring(0, 30);
+                return false;
+            } else if (apellidoM.value.length < 0 || apellidoM.value.length > 30) {
+                alert("solo puede ingresar 30 caracteres");
+                apellidoM.value = apellidoM.value.substring(0, 30);
+                return false;
+            } else if (numDoc.value.length < 0 || numDoc.value.length > 15) {
+                alert("solo puede ingresar 15 caracteres");
+                numDoc.value = numDoc.value.substring(0, 15);
+                return false;
+            } else if (proNac.value.length < 0 || proNac.value.length > 50) {
+                alert("solo puede ingresar 50 caracteres");
+                proNac.value = proNac.value.substring(0, 50);
+                return false;
+            } else if (correo.value.length < 0 || correo.value.length > 50) {
+                alert("solo puede ingresar 50 caracteres");
+                correo.value = correo.value.substring(0, 50);
+                return false;
+            } else if (profesion.value.length < 0 || profesion.value.length > 50) {
+                alert("solo puede ingresar 50 caracteres");
+                profesion.value = profesion.value.substring(0, 50);
+                return false;
+            } else if (cel.value.length < 0 || cel.value.length > 15) {
+                alert("solo puede ingresar 15 caracteres");
+                cel.value = cel.value.substring(0, 15);
+                return false;
+            } else if (prov.value.length < 0 || prov.value.length > 30) {
+                alert("solo puede ingresar 30 caracteres");
+                prov.value = prov.value.substring(0, 30);
+                return false;
+            } else if (dist.value.length < 0 || dist.value.length > 90) {
+                alert("solo puede ingresar 90 caracteres");
+                dist.value = dist.value.substring(0, 90);
+                return false;
+            } else if (dir.value.length < 0 || dir.value.length > 90) {
+                alert("solo puede ingresar 90 caracteres");
+                dir.value = dir.value.substring(0, 90);
+                return false;
+            } else if (telf.value.length < 0 || telf.value.length > 15) {
+                alert("solo puede ingresar 15 caracteres");
+                telf.value = telf.value.substring(0, 15);
+                return false;
+            }
+
+
+        }
+    </script>
     <!-- Ubicar al final -->
 </body>
 </html>
