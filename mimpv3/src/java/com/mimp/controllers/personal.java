@@ -1764,7 +1764,8 @@ public class personal {
             @RequestParam("corteS") String corteS,
             @RequestParam("distritoJ") String distritoJ,
             @RequestParam("nombreJ") String nombreJ,
-            @RequestParam(value="telefono",required=false) String telefono,
+//            @RequestParam(value="telefono",required=false) String telefono,
+            @RequestParam("telefono") String telefono,
             @RequestParam("correo") String correo,
             @RequestParam("obs") String obs,
             HttpSession session
