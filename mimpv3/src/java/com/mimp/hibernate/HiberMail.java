@@ -79,6 +79,7 @@ public class HiberMail {
                     + "\n\n Usuario: " + user
                     + "\n\n Contraseña: " + pass_plano
                     + "\n\n Saludos cordiales, ");
+                    
 
             Transport.send(message);
 
@@ -121,7 +122,39 @@ public class HiberMail {
                     + "sus credenciales para inscribirse al taller son las siguientes:"
                     + "\n\n Usuario:" + user
                     + "\n\n Contraseña:" + pass_plano
-                    + "\n\n Saludos cordiales, ");
+                    + "\n\n Para ingresar al sistema realizar lo siguiente, "
+                    + "\n\n"
+                    + "\n\n"
+                    + "\n\n A. Click directamente en el siguiente link: "
+                    + "\n\n"
+                    + "\n\n       1. Click: http://app.mimp.gob.pe:8080/sirna "
+                    + "\n\n       2. Ingresar con el usuario y contraseña mencionadas líneas arriba. "
+                    + "\n\n"
+                    + "\n\n B. En caso no funcione el link, ingresar al sistema desde la página web: "
+                    + "\n\n"
+                    + "\n\n       1. Ingresar a la página web: www.mimp.gob.pe "
+                    + "\n\n       2. En la barra de menú “Direcciones Generales” submenú “Vicemin. Pob. Vulnerables” seleccionar “Adopciones” "
+                    + "\n\n       3. Click en SIRNA “Sistema Informático del Registro Nacional de Adopciones” "
+                    + "\n\n       4. Ingresar con el usuario y contraseña mencionadas líneas arriba. "
+                    + "\n\n"
+                    + "\n\n A través del SIRNA usted podrá realizar las siguientes acciones: "
+                    + "\n\n"
+                    + "\n\n       - Inscribirse a uno de los talleres programados. "
+                    + "\n\n       - Descargar las lecturas de su taller. "
+                    + "\n\n       - Revisar el estado del proceso de adopción. "
+                    + "\n\n       - Cambiar su contraseña. "
+                    + "\n\n"
+                    + "\n\n Para continuar con el proceso, por favor ingresar al sistema e inscribirse a uno de los talleres programados, hasta un día antes de inicio del taller y/o las bacantes se  "
+                    + "\n\n encuentres disponibles. "
+                    + "\n\n"
+                    + "\n\n De tener alguna complicación y no fue posible su ingreso al sistema, comunicarse inmediatamente con la unidad de adopción correspondiente.  "
+                    + "\n\n"
+                    + "\n\n Atentamente, "
+                    + "\n\n"
+                    + "\n\n Dirección General de Adopciones "
+                    + "\n\n"
+                    + "\n\n Ministerio de la Mujer y Poblaciones Vulnerables "
+                    + "\n\n ");
 
             Transport.send(message);
 
