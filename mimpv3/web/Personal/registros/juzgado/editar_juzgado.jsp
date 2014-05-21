@@ -112,10 +112,10 @@
                         <h1 align="center"><strong>Editar juzgado</strong></h1>
                         <br>
                         <c:if test="${juzgado.getIdjuzgado() == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editJuzgado" method="post"> 
+                            <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/editJuzgado" method="post"> 
                             </c:if>  
                             <c:if test="${juzgado.getIdjuzgado() != null}">
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateJuzgado" method="post"> 
+                                <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateJuzgado" method="post"> 
                                     <input hidden name="id" id="id" value="${juzgado.getIdjuzgado()}">
                                 </c:if>  
                                 <fieldset>
@@ -124,77 +124,77 @@
                                     <div class="control-group">
                                         <label class="control-label">Nombre</label>
                                         <div class="controls">
-                                            <input id="nombre" name="nombre" type="text" value="${juzgado.getNombre()}" class="input-xlarge">
+                                            <input id="nombre" name="nombre" type="text" value="${juzgado.getNombre()}" onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Denominación</label>
                                         <div class="controls">
-                                            <input id="denominacion" name="denominacion" type="text" value="${juzgado.getDenominacion()}" class="input-xlarge">
+                                            <input id="denominacion" name="denominacion" type="text" value="${juzgado.getDenominacion()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Especialidad</label>
                                         <div class="controls">
-                                            <input id="especialidad" name="especialidad" type="text" value="${juzgado.getEspecialidad()}" class="input-xlarge">
+                                            <input id="especialidad" name="especialidad" type="text" value="${juzgado.getEspecialidad()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Dirección</label>
                                         <div class="controls">
-                                            <input id="direccion" name="direccion" type="text" value="${juzgado.getDireccion()}" class="input-xlarge">
+                                            <input id="direccion" name="direccion" type="text" value="${juzgado.getDireccion()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Departamento</label>
                                         <div class="controls">
-                                            <input id="departamento" name="departamento" type="text" value="${juzgado.getDepartamento()}" class="input-xlarge">
+                                            <input id="departamento" name="departamento" type="text" value="${juzgado.getDepartamento()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Corte Superior</label>
                                         <div class="controls">
-                                            <input id="corteS" name="corteS" type="text" value="${juzgado.getCorteSuperior()}" class="input-xlarge">
+                                            <input id="corteS" name="corteS" type="text" value="${juzgado.getCorteSuperior()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Distrito Judicial</label>
                                         <div class="controls">
-                                            <input id="distritoJ" name="distritoJ" type="text" value="${juzgado.getDistritoJudicial()}" class="input-xlarge">
+                                            <input id="distritoJ" name="distritoJ" type="text" value="${juzgado.getDistritoJudicial()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Nombre de Juez</label>
                                         <div class="controls">
-                                            <input id="nombre J" name="nombreJ" type="text" value="${juzgado.getNombreJuez()}" class="input-xlarge">
+                                            <input id="nombreJ" name="nombreJ" type="text" value="${juzgado.getNombreJuez()}"  onkeyup="return(limitar());"  class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Teléfono</label>
                                         <div class="controls">
-                                            <input id="telefono" name="telefono" type="text" value="${juzgado.getTelefono()}" class="input-xlarge">
+                                            <input id="telefono" name="telefono" type="text" value="${juzgado.getTelefono()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Correo</label>
                                         <div class="controls">
-                                            <input id="correo" name="correo" type="text" value="${juzgado.getCorreo()}" class="input-xlarge">
+                                            <input id="correo" name="correo" type="text" value="${juzgado.getCorreo()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Observaciones</label>
                                         <div class="controls">
-                                            <textarea class="input-xlarge" name="obs" id="obs" placeholder="" rows="5" cols="25">${juzgado.getObservaciones()}</textarea>
+                                            <textarea class="input-xlarge" name="obs" id="obs" placeholder="" rows="5"  onkeyup="return(limitar());" cols="25">${juzgado.getObservaciones()}</textarea>
                                         </div>
                                     </div>
                                     <br>
@@ -233,5 +233,80 @@
 
             </script>
             <!-- Ubicar al final -->
+            <script type="text/javascript">
+                function limitar()
+                {                    
+                    var nombre = document.getElementById('nombre');
+                    var denominacion = document.getElementById('denominacion');
+                    var especialidad = document.getElementById('especialidad');
+                    var direccion = document.getElementById('direccion');
+                    var departamento = document.getElementById('departamento');
+                    var corteS = document.getElementById('corteS');
+                    var distritoJ = document.getElementById('distritoJ');
+                    var nombreJ = document.getElementById('nombreJ');
+                    var telefono = document.getElementById('telefono');
+                    var correo = document.getElementById('correo');
+                    var obs = document.getElementById('obs');
+
+                    if (nombre.value.length < 0 || nombre.value.length > 39)
+                    {
+                        alert("solo puede ingresar 40 caracteres");
+                        nombre.value = nombre.value.substring(0, 40);
+                        document.formulario.nombre.focus();
+                        return false;
+                    } else if (denominacion.value.length < 0 || denominacion.value.length > 39) {
+                        alert("solo puede ingresar 40 caracteres");
+                        denominacion.value = denominacion.value.substring(0, 40);
+                        document.formulario.denominacion.focus();
+                        return false;
+                    }else if (especialidad.value.length < 0 || especialidad.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        especialidad.value = especialidad.value.substring(0, 30);
+                        document.formulario.especialidad.focus();
+                        return false;
+                    }else if (direccion.value.length < 0 || direccion.value.length > 44) {
+                        alert("solo puede ingresar 45 caracteres");
+                        direccion.value = direccion.value.substring(0, 45);
+                        document.formulario.direccion.focus();
+                        return false;
+                    }else if (departamento.value.length < 0 || departamento.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        departamento.value = departamento.value.substring(0, 30);
+                        document.formulario.departamento.focus();
+                        return false;
+                    }else if (corteS.value.length < 0 || corteS.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        corteS.value = corteS.value.substring(0, 30);
+                        document.formulario.corteS.focus();
+                        return false;
+                    }else if (distritoJ.value.length < 0 || distritoJ.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        distritoJ.value = distritoJ.value.substring(0, 30);
+                        document.formulario.distritoJ.focus();
+                        return false;
+                    }else if (nombreJ.value.length < 0 || nombreJ.value.length > 44) {
+                        alert("solo puede ingresar 45 caracteres");
+                        nombreJ.value = nombreJ.value.substring(0, 45);
+                        document.formulario.nombreJ.focus();
+                        return false;
+                    }else if (telefono.value.length < 0 || telefono.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        telefono.value = telefono.value.substring(0, 30);
+                        document.formulario.telefono.focus();
+                        return false;
+                    }else if (correo.value.length < 0 || correo.value.length > 39) {
+                        alert("solo puede ingresar 40 caracteres");
+                        correo.value = correo.value.substring(0, 40);
+                        document.formulario.correo.focus();
+                        return false;
+                    }else if (obs.value.length < 0 || obs.value.length > 199) {
+                        alert("solo puede ingresar 200 caracteres");
+                        obs.value = obs.value.substring(0, 200);
+                        document.formulario.obs.focus();
+                        return false;
+                    }
+
+                }
+            </script>
     </body>
 </html>
