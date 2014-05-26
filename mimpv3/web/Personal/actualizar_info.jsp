@@ -9,8 +9,8 @@
     response.setHeader("Pragma", "no-cache");
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
-response.addHeader("Cache-Control", "no-store");
-    
+    response.addHeader("Cache-Control", "no-store");
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -140,35 +140,35 @@ response.addHeader("Cache-Control", "no-store");
                                 <div class="control-group">
                                     <label class="control-label">Correo Trabajo</label>
                                     <div class="controls">
-                                        <input id="full-name" value="<%=u.getCorreoTrabajo()%>" name="correo_trabajo" type="text" class="input-xlarge">
+                                        <input id="correo_trabajo" value="<%=u.getCorreoTrabajo()%>" name="correo_trabajo" type="text" onkeyup="return(limitar());" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Correo Personal</label>
                                     <div class="controls">
-                                        <input id="full-name" value="<%=u.getCorreoPersonal()%>" name="correo_personal" type="text" class="input-xlarge">
+                                        <input id="correo_personal" value="<%=u.getCorreoPersonal()%>" name="correo_personal" type="text" onkeyup="return(limitar());" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Profesión</label>
                                     <div class="controls">
-                                        <input id="full-name" value="<%=u.getProfesion()%>" name="profesion" type="text" class="input-xlarge">
+                                        <input id="profesion" value="<%=u.getProfesion()%>" name="profesion" type="text" onkeyup="return(limitar());" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Grado de instrucción</label>
                                     <div class="controls">
-                                        <input id="full-name" value="<%=u.getGradoInstruccion()%>" name="grado_instruccion" type="text" class="input-xlarge">
+                                        <input id="grado_instruccion" value="<%=u.getGradoInstruccion()%>" name="grado_instruccion" type="text" onkeyup="return(limitar());" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Cargo</label>
                                     <div class="controls">
-                                        <input id="full-name" value="<%=u.getCargo()%>" name="cargo" type="text" class="input-xlarge">
+                                        <input id="cargo" value="<%=u.getCargo()%>" name="cargo" type="text" onkeyup="return(limitar());" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -189,7 +189,7 @@ response.addHeader("Cache-Control", "no-store");
                                 <div class="control-group">
                                     <label class="control-label">Regimen</label>
                                     <div class="controls">
-                                        <input value="<%=u.getRegimen()%>" id="full-name" name="regimen" type="text" class="input-xlarge">
+                                        <input value="<%=u.getRegimen()%>" id="regimen" name="regimen" type="text" onkeyup="return(limitar());" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -203,7 +203,7 @@ response.addHeader("Cache-Control", "no-store");
                                 <div class="control-group">
                                     <label class="control-label">Domicilio</label>
                                     <div class="controls">
-                                        <input id="full-name" value="<%=u.getDomicilio()%>" name="domicilio" type="text" class="input-xlarge">
+                                        <input id="domicilio" value="<%=u.getDomicilio()%>" name="domicilio" type="text" onkeyup="return(limitar());" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -239,5 +239,48 @@ response.addHeader("Cache-Control", "no-store");
                     <p align="center"><h5 class="caption" align="center" style="text-align: center;">MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES<br>Jr. Camaná 616, Lima - Perú<br>Central telefónica: (511) 626-1600</h5></p>
                 </div>
             </div>
+
+            <script type="text/javascript">
+                function limitar()
+                {
+                    var correo_trabajo = document.getElementById('correo_trabajo');
+                    var correo_personal = document.getElementById('correo_personal');
+                    var profesion = document.getElementById('profesion');
+                    var grado_instruccion = document.getElementById('grado_instruccion');
+                    var cargo = document.getElementById('cargo');
+                    var regimen = document.getElementById('regimen');
+                    var domicilio = document.getElementById('domicilio');
+
+                    if (correo_trabajo.value.length < 0 || correo_trabajo.value.length > 100) {
+                        alert("El campo no debe exceder más de 100 caracteres");
+                        correo_trabajo.value = correo_trabajo.value.substring(0, 100);
+                        return false;
+                    } else if (correo_personal.value.length < 0 || correo_personal.value.length > 100) {
+                        alert("El campo no debe exceder más de 100 caracteres");
+                        correo_personal.value = correo_personal.value.substring(0, 100);
+                        return false;
+                    } else if (profesion.value.length < 0 || profesion.value.length > 50) {
+                        alert("El campo no debe exceder más de 50 caracteres");
+                        profesion.value = profesion.value.substring(0, 50);
+                        return false;
+                    } else if (grado_instruccion.value.length < 0 || grado_instruccion.value.length > 30) {
+                        alert("El campo no debe exceder más de 30 caracteres");
+                        grado_instruccion.value = grado_instruccion.value.substring(0, 30);
+                        return false;
+                    } else if (cargo.value.length < 0 || cargo.value.length > 30) {
+                        alert("El campo no debe exceder más de 30 caracteres");
+                        cargo.value = cargo.value.substring(0, 30);
+                        return false;
+                    } else if (regimen.value.length < 0 || regimen.value.length > 50) {
+                        alert("El campo no debe exceder más de 50 caracteres");
+                        regimen.value = regimen.value.substring(0, 50);
+                        return false;
+                    } else if (domicilio.value.length < 0 || domicilio.value.length > 200) {
+                        alert("El campo no debe exceder más de 200 caracteres");
+                        domicilio.value = domicilio.value.substring(0, 200);
+                        return false;
+                    }
+                }
+            </script>
     </body>
 </html>

@@ -117,7 +117,7 @@
                         <c:if test="${personal.getIdpersonal() == null}">     
                             <form action="${pageContext.servletContext.contextPath}/ua" method="post" >
                                 <input hidden name="idUA" id="idUA" value="${idUA}">
-                               <!-- <p align="right"><button type="submit" class="btn btn-default" style="background: black; color: white" class="btn btn-default">Volver</button></p>-->
+                                <!-- <p align="right"><button type="submit" class="btn btn-default" style="background: black; color: white" class="btn btn-default">Volver</button></p>-->
                             </form>
                             <h1 align="center"><strong>Editar Personal</strong></h1>
                             <p style="color: red">${mensaje}</p>
@@ -336,6 +336,48 @@
                                 <script type="text/javascript">
                                     function enter(e) {
                                         if (e.keyCode == 13) {
+                                            return false;
+                                        }
+                                    }
+                                </script>
+                                <script type="text/javascript">
+                                    function limitar()
+                                    {
+                                        var correo_trabajo = document.getElementById('correo_trabajo');
+                                        var correo_personal = document.getElementById('correo_personal');
+                                        var profesion = document.getElementById('profesion');
+                                        var grado_instruccion = document.getElementById('grado_instruccion');
+                                        var cargo = document.getElementById('cargo');
+                                        var regimen = document.getElementById('regimen');
+                                        var domicilio = document.getElementById('domicilio');
+
+                                        if (correo_trabajo.value.length < 0 || correo_trabajo.value.length > 100) {
+                                            alert("El campo no debe exceder más de 100 caracteres");
+                                            correo_trabajo.value = correo_trabajo.value.substring(0, 100);
+                                            return false;
+                                        } else if (correo_personal.value.length < 0 || correo_personal.value.length > 100) {
+                                            alert("El campo no debe exceder más de 100 caracteres");
+                                            correo_personal.value = correo_personal.value.substring(0, 100);
+                                            return false;
+                                        } else if (profesion.value.length < 0 || profesion.value.length > 50) {
+                                            alert("El campo no debe exceder más de 50 caracteres");
+                                            profesion.value = profesion.value.substring(0, 50);
+                                            return false;
+                                        } else if (grado_instruccion.value.length < 0 || grado_instruccion.value.length > 30) {
+                                            alert("El campo no debe exceder más de 30 caracteres");
+                                            grado_instruccion.value = grado_instruccion.value.substring(0, 30);
+                                            return false;
+                                        } else if (cargo.value.length < 0 || cargo.value.length > 30) {
+                                            alert("El campo no debe exceder más de 30 caracteres");
+                                            cargo.value = cargo.value.substring(0, 30);
+                                            return false;
+                                        } else if (regimen.value.length < 0 || regimen.value.length > 50) {
+                                            alert("El campo no debe exceder más de 50 caracteres");
+                                            regimen.value = regimen.value.substring(0, 50);
+                                            return false;
+                                        } else if (domicilio.value.length < 0 || domicilio.value.length > 200) {
+                                            alert("El campo no debe exceder más de 200 caracteres");
+                                            domicilio.value = domicilio.value.substring(0, 200);
                                             return false;
                                         }
                                     }
