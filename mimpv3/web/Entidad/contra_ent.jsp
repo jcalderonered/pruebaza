@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Entidad u = (Entidad) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -80,7 +80,7 @@
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioEnt'"  id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <h1 align="center"><strong>Cambio de contraseña</strong></h1>
                         <br>
-                        <form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/Orgcambiarcontra" method="post">
+                        <form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/Orgcambiarcontra" method="post" onsubmit="return(validar());">
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="control-group">
@@ -91,12 +91,12 @@
                                     <br>
                                     <label class="control-label" for="pass_nuevo">Nueva Contraseña</label>
                                     <div>
-                                        <input id="newpass" name="newpass" type="password" placeholder="" class="input-xlarge">
+                                        <input id="newpass" name="newpass" type="password" placeholder="" onkeyup="return(limitar());" class="input-xlarge">
                                     </div>
                                     <br>
                                     <label class="control-label" for="pass_nuevo2">Reescribir nueva contraseña</label>
                                     <div>
-                                        <input id="newpassconf" name="newpassconf" type="password" placeholder="" class="input-xlarge">
+                                        <input id="newpassconf" name="newpassconf" type="password" placeholder="" onkeyup="return(limitar());" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -127,7 +127,40 @@
         ================================================== -->
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
             <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            <script type="text/javascript">
+                            function limitar()
+                            {
+                                var newpass = document.getElementById('newpass');
+                                var newpassconf = document.getElementById('newpassconf');
 
+                                if (newpass.value.length < 0 || newpass.value.length > 15) {
+                                    alert("la contraseña tiene como máximo 15 caracteres");
+                                    newpass.value = newpass.value.substring(0, 15);
+                                    return false;
+                                } else if (newpassconf.value.length < 0 || newpassconf.value.length > 15) {
+                                    alert("la contraseña tiene como máximo 15 caracteres");
+                                    newpassconf.value = newpassconf.value.substring(0, 15);
+                                    return false;
+                                }
+                            }
+            </script>
+            <script type="text/javascript">
+                function validar()
+                {
+                    var newpass = document.getElementById('newpass');
+                    var newpassconf = document.getElementById('newpassconf');
+
+                    if (newpass.value != newpassconf.value) {
+                        alert("Las contraseñas nuevas no coinciden");
+                        return false;
+                    }
+                    if (newpass.value.length > 0 && newpass.value.length < 5) {
+                        alert("La contraseña debe ser de al menos 5 caracteres");
+                        return false;
+                    }
+                    return(true);
+                }
+            </script>
             <!-- Ubicar al final -->
     </body>
 </html>
