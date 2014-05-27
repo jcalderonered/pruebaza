@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -110,10 +110,10 @@
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inf'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <c:choose>
                             <c:when test="${ taller == null }">
-                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearTaller" method="post">
+                                <form name="formulario" action="${pageContext.servletContext.contextPath}/PersonalCrearTaller" method="post">
                                 </c:when>
                                 <c:otherwise>
-                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateTaller" method="post">
+                                    <form name="formulario" action="${pageContext.servletContext.contextPath}/PersonalUpdateTaller" method="post">
                                         <input hidden name="idTaller" id="idTaller" value="${taller.getIdtaller()}">  
                                     </c:otherwise>
                                 </c:choose>
@@ -124,7 +124,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Nombre del taller:</label>
                                     <div class="controls">
-                                        <input ${taller.getHabilitado() == 0 ? 'disabled' : ''} id="nombre" name="nombre" value="${taller.getNombre()}" type="text" placeholder="Nombre" class="input-xlarge">
+                                        <input onkeyup="return(limitar());" ${taller.getHabilitado() == 0 ? 'disabled' : ''} id="nombre" name="nombre" value="${taller.getNombre()}" type="text" placeholder="Nombre" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -156,7 +156,7 @@
                                                 <c:set var="fechaSesion" value="${sesion.getFecha()}" /> 
                                                 <fmt:formatDate var="yearSesion" value="${fechaSesion}" pattern="y" />  
                                                 <c:if test="${year == yearSesion}">                                                
-                                                        <option value="${sesion.getNSesion()}" ${taller.getNSesion() == sesion.getNSesion() ? 'selected' : ''}> ${sesion.getNSesion()}</option>                                                     
+                                                    <option value="${sesion.getNSesion()}" ${taller.getNSesion() == sesion.getNSesion() ? 'selected' : ''}> ${sesion.getNSesion()}</option>                                                     
                                                 </c:if> 
                                             </c:forEach>
                                         </select>
@@ -252,7 +252,20 @@
                         ================================================== -->
                             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
                             <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+                            <script type="text/javascript">
+                                            function limitar()
+                                            {
+                                                var nombre = document.getElementById('nombre');
 
+                                                if (nombre.value.length < 0 || nombre.value.length > 24)
+                                                {
+                                                    alert("solo puede ingresar 25 caracteres");
+                                                    nombre.value = nombre.value.substring(0, 25);
+                                                    document.formulario.nombre.focus();
+                                                    return false;
+                                                }
+                                            }
+                            </script>
                             <!-- Ubicar al final -->
                             </body>
                             </html>

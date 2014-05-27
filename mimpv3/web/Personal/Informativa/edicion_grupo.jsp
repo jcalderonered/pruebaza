@@ -114,11 +114,11 @@
                         </form>
                         <c:choose>
                             <c:when test="${ grupo == null }">
-                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearGrupo" method="post">
+                                <form name="formulario"  action="${pageContext.servletContext.contextPath}/PersonalCrearGrupo" method="post">
                                 <input hidden name="idTaller" id="idTaller" value="${idTaller}">      
                             </c:when>
                             <c:otherwise>
-                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateGrupo" method="post">
+                                    <form name="formulario"  action="${pageContext.servletContext.contextPath}/PersonalUpdateGrupo" method="post">
                                     <input hidden name="idGrupo" id="idGrupo" value="${grupo.getIdgrupo()}"> 
                                     <input hidden name="idTaller" id="idTaller" value="${idTaller}">
                             </c:otherwise>
@@ -130,7 +130,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Nombre del grupo:</label>
                             <div class="controls">
-                                <input id="nombreGrupo" name="nombreGrupo" value="${grupo.getNombre()}" type="text" placeholder="Nombre" class="input-xlarge">
+                                <input onkeyup="return(limitar());" id="nombreGrupo" name="nombreGrupo" value="${grupo.getNombre()}" type="text" placeholder="Nombre" class="input-xlarge">
                             </div>
                         </div>
                         <br>    
@@ -210,7 +210,20 @@
                     ================================================== -->
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
             <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+            <script type="text/javascript">
+                function limitar()
+                {                    
+                    var nombreGrupo = document.getElementById('nombreGrupo');
 
+                    if (nombreGrupo.value.length < 0 || nombreGrupo.value.length > 24)
+                    {
+                        alert("solo puede ingresar 25 caracteres");
+                        nombreGrupo.value = nombreGrupo.value.substring(0, 25);
+                        document.formulario.nombreGrupo.focus();
+                        return false;
+                    } 
+                }
+            </script>
             <!-- Ubicar al final -->
     </body>
 </html>

@@ -113,10 +113,10 @@
                         <p style="color: red">${mensaje}</p>
                         <br>
                         <c:if test="${autoridad.getIdautoridad() == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editAut" method="post" onsubmit="return(validar());" onkeypress="return enter(event)"> 
+                            <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/editAut" method="post" onsubmit="return(validar());" onkeypress="return enter(event)"> 
                             </c:if>  
                             <c:if test="${autoridad.getIdautoridad() != null}">
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateAut" method="post" onsubmit="return(validar());" onkeypress="return enter(event)"> 
+                                <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateAut" method="post" onsubmit="return(validar());" onkeypress="return enter(event)"> 
                                     <input hidden name="id" id="id" value="${autoridad.getIdautoridad()}">
                                 </c:if>     
 
@@ -125,7 +125,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Nombre</label>
                                         <div class="controls">
-                                            <input id="nombre" name="nombre" type="text" value="${autoridad.getEntidad().getNombre()}" class="input-xlarge">
+                                            <input onkeyup="return(limitar());" id="nombre" name="nombre" type="text" value="${autoridad.getEntidad().getNombre()}" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -142,28 +142,28 @@
                                     <div class="control-group">
                                         <label class="control-label">País</label>
                                         <div class="controls">
-                                            <input id="pais" name="pais" value="${autoridad.getEntidad().getPais()}" type="text" class="input-xlarge">
+                                            <input onkeyup="return(limitar());"  id="pais" name="pais" value="${autoridad.getEntidad().getPais()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Dirección</label>
                                         <div class="controls">
-                                            <input id="direccion" name="direccion" value="${autoridad.getEntidad().getDireccion()}" type="text" class="input-xlarge">
+                                            <input onkeyup="return(limitar());"  id="direccion" name="direccion" value="${autoridad.getEntidad().getDireccion()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Teléfono</label>
                                         <div class="controls">
-                                            <input id="telefono" name="telefono" value="${autoridad.getEntidad().getTelefono()}" type="text" class="input-xlarge">
+                                            <input onkeyup="return(limitar());"  id="telefono" name="telefono" value="${autoridad.getEntidad().getTelefono()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Usuario</label>  
                                         <div class="controls">
-                                            <input id="user" name="user" value="${autoridad.getEntidad().getUser()}" type="text" class="input-xlarge">
+                                            <input onkeyup="return(limitar());"  id="user" name="user" value="${autoridad.getEntidad().getUser()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
 
@@ -171,7 +171,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Contraseña</label>
                                         <div class="controls">
-                                            <input id="pass" name="pass" type="password" class="input-xlarge">
+                                            <input onkeyup="return(limitar());"  id="pass" name="pass" type="password" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -179,7 +179,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Ingresar nuevamente Contraseña</label>
                                         <div class="controls">
-                                            <input id="pass2" name="pass2" type="password" value="" class="input-xlarge">
+                                            <input onkeyup="return(limitar());"  id="pass2" name="pass2" type="password" value="" class="input-xlarge">
                                         </div>
                                     </div>
 
@@ -187,7 +187,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Correo</label>  
                                         <div class="controls">
-                                            <input id="correo" name="correo" value="${autoridad.getEntidad().getCorreo()}" type="text" class="input-xlarge">
+                                            <input onkeyup="return(limitar());"  id="correo" name="correo" value="${autoridad.getEntidad().getCorreo()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
 
@@ -196,7 +196,7 @@
                                         <label class="control-label">Resolución de </label>
                                         <label>autorización</label>
                                         <div class="controls">
-                                            <input id="resol_aut" name="resol_aut" type="text" value="${autoridad.getEntidad().getResolAuto()}" class="input-xlarge">
+                                            <input onkeyup="return(limitar());"  id="resol_aut" name="resol_aut" type="text" value="${autoridad.getEntidad().getResolAuto()}" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -212,7 +212,7 @@
                                         <label class="control-label">Resolución de </label>
                                         <label>renovación</label>
                                         <div class="controls">
-                                            <input id="resol_renov" name="resol_renov" value="${autoridad.getEntidad().getResolRenov()}" type="text" class="input-xlarge">
+                                            <input onkeyup="return(limitar());"  id="resol_renov" name="resol_renov" value="${autoridad.getEntidad().getResolRenov()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -234,7 +234,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Observaciones</label>
                                         <div class="controls">
-                                            <textarea class="input-xlarge" name="obs" id="obs" placeholder="" rows="5" cols="25">${autoridad.getEntidad().getObs()}</textarea>
+                                            <textarea  onkeyup="return(limitar());" class="input-xlarge" name="obs" id="obs" placeholder="" rows="5" cols="25">${autoridad.getEntidad().getObs()}</textarea>
                                         </div>
                                     </div>
                                     <br>
@@ -292,6 +292,81 @@
                     if (e.keyCode == 13) {
                         return false;
                     }
+                }
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {                    
+                    var nombre = document.getElementById('nombre');
+                    var pais = document.getElementById('pais');
+                    var direccion = document.getElementById('direccion');
+                    var telefono = document.getElementById('telefono');
+                    var user = document.getElementById('user');
+                    var pass = document.getElementById('pass');
+                    var pass2 = document.getElementById('pass2');
+                    var correo = document.getElementById('correo');
+                    var resol_aut = document.getElementById('resol_aut');
+                    var resol_renov = document.getElementById('resol_renov');
+                    var obs = document.getElementById('obs');
+
+                    if (nombre.value.length < 0 || nombre.value.length > 39)
+                    {
+                        alert("solo puede ingresar 40 caracteres");
+                        nombre.value = nombre.value.substring(0, 40);
+                        document.formulario.nombre.focus();
+                        return false;
+                    } else if (pais.value.length < 0 || pais.value.length > 14) {
+                        alert("solo puede ingresar 15 caracteres");
+                        pais.value = pais.value.substring(0, 15);
+                        document.formulario.pais.focus();
+                        return false;
+                    }else if (direccion.value.length < 0 || direccion.value.length > 199) {
+                        alert("solo puede ingresar 200 caracteres");
+                        direccion.value = direccion.value.substring(0, 200);
+                        document.formulario.direccion.focus();
+                        return false;
+                    }else if (telefono.value.length < 0 || telefono.value.length > 14) {
+                        alert("solo puede ingresar 15 caracteres");
+                        telefono.value = telefono.value.substring(0, 15);
+                        document.formulario.telefono.focus();
+                        return false;
+                    }else if (user.value.length < 0 || user.value.length > 44) {
+                        alert("solo puede ingresar 45 caracteres");
+                        user.value = user.value.substring(0, 45);
+                        document.formulario.user.focus();
+                        return false;
+                    }else if (pass.value.length < 0 || pass.value.length > 511) {
+                        alert("solo puede ingresar 512 caracteres");
+                        pass.value = pass.value.substring(0, 512);
+                        document.formulario.pass.focus();
+                        return false;
+                    }else if (pass2.value.length < 0 || pass2.value.length > 511) {
+                        alert("solo puede ingresar 512 caracteres");
+                        pass2.value = pass2.value.substring(0, 512);
+                        document.formulario.pass2.focus();
+                        return false;
+                    }else if (correo.value.length < 0 || correo.value.length > 49) {
+                        alert("solo puede ingresar 50 caracteres");
+                        correo.value = correo.value.substring(0, 50);
+                        document.formulario.correo.focus();
+                        return false;
+                    }else if (resol_aut.value.length < 0 || resol_aut.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        resol_aut.value = resol_aut.value.substring(0, 30);
+                        document.formulario.resol_aut.focus();
+                        return false;
+                    }else if (resol_renov.value.length < 0 || resol_renov.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        resol_renov.value = resol_renov.value.substring(0, 30);
+                        document.formulario.resol_renov.focus();
+                        return false;
+                    }else if (obs.value.length < 0 || obs.value.length > 199) {
+                        alert("solo puede ingresar 200 caracteres");
+                        obs.value = obs.value.substring(0, 200);
+                        document.formulario.obs.focus();
+                        return false;
+                    }
+
                 }
             </script>
             <!-- Ubicar al final -->

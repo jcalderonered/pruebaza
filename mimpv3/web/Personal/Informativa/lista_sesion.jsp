@@ -113,17 +113,17 @@
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inf'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         <c:choose>
                             <c:when test="${ sesion == null }">
-                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearSesion" method="post">
+                                <form name="formulario" action="${pageContext.servletContext.contextPath}/PersonalCrearSesion" method="post">
                                 </c:when>
                                 <c:otherwise>
-                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateSesion" method="post">
+                                    <form name="formulario" action="${pageContext.servletContext.contextPath}/PersonalUpdateSesion" method="post">
                                         <input ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">  
                                     </c:otherwise>
                                 </c:choose>
                                 <div class="control-group">
                                     <label class="control-label" for="textinput"><h1>Sesión Informativa</h1></label>
                                     <div class="controls">
-                                        <input ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="numSesion" name="numSesion" value= "${sesion.getNSesion()}" type="text" placeholder="número de sesión" class="input-xlarge">
+                                        <input onkeyup="return(limitar());" ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="numSesion" name="numSesion" value= "${sesion.getNSesion()}" type="text" placeholder="número de sesión" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -156,7 +156,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Duración:</label>
                                     <div class="controls">
-                                        <input ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="duracion" value="${sesion.getDuracion()}" name="duracion" type="text" placeholder="duracion" class="input-xlarge">
+                                        <input onkeyup="return(limitar());" ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="duracion" value="${sesion.getDuracion()}" name="duracion" type="text" placeholder="duracion" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -171,7 +171,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Dirección/Lugar de Sesión Informativa:</label>
                                     <div class="controls">
-                                        <input ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="direccion" value="${sesion.getDireccion()}" name="direccion" type="text" placeholder="direccion" class="input-xlarge">
+                                        <input onkeyup="return(limitar());" ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="direccion" value="${sesion.getDireccion()}" name="direccion" type="text" placeholder="direccion" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -179,7 +179,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="textinput">Facilitador:</label>
                                     <div>
-                                        <textarea ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="capacitador" name="capacitador" cols="20" rows="5">${sesion.getFacilitador()}</textarea>
+                                        <textarea onkeyup="return(limitar());" ${sesion != null && sesion.getHabilitado() == 0 ? 'disabled' : ''} id="capacitador" name="capacitador" cols="20" rows="5">${sesion.getFacilitador()}</textarea>
                                     </div>
                                 </div>
                                 <br>
@@ -293,8 +293,43 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery.timepicker.js"></script>
             <script type="text/javascript">
 
-                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-                            $('.timepicker').timepicker({'timeFormat': 'H:i'});
+                                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                            $('.timepicker').timepicker({'timeFormat': 'H:i'});
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {
+                    var numSesion = document.getElementById('numSesion');
+                    var duracion = document.getElementById('duracion');
+                    var direccion = document.getElementById('direccion');
+                    var capacitador = document.getElementById('capacitador');
+                    
+                    if (numSesion.value.length < 0 || numSesion.value.length > 19)
+                    {
+                        alert("solo puede ingresar 20 caracteres");
+                        numSesion.value = numSesion.value.substring(0, 20);
+                        document.formulario.numSesion.focus();
+                        return false;
+                    } else if (duracion.value.length < 0 || duracion.value.length > 19)
+                    {
+                        alert("solo puede ingresar 20 caracteres");
+                        duracion.value = duracion.value.substring(0, 20);
+                        document.formulario.duracion.focus();
+                        return false;
+                    } else if (direccion.value.length < 0 || direccion.value.length > 199)
+                    {
+                        alert("solo puede ingresar 200 caracteres");
+                        direccion.value = direccion.value.substring(0, 200);
+                        document.formulario.direccion.focus();
+                        return false;
+                    } else if (capacitador.value.length < 0 || capacitador.value.length > 499)
+                    {
+                        alert("solo puede ingresar 500 caracteres");
+                        capacitador.value = capacitador.value.substring(0, 500);
+                        document.formulario.capacitador.focus();
+                        return false;
+                    } 
+                }
             </script>
             <!-- Placed at the end of the document so the pages load faster -->
     </body>
