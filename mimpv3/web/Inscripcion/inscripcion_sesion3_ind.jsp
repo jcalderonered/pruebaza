@@ -716,51 +716,51 @@
 
                     if (nombre.value.length < 0 || nombre.value.length > 29) {
                         alert("solo puede ingresar 30 caracteres");
-                        nombre.value = nombre.value.substring(0, 29);
+                        nombre.value = nombre.value.substring(0, 30);
                         return false;
                     } else if (apellidoP.value.length < 0 || apellidoP.value.length > 29) {
                         alert("solo puede ingresar 30 caracteres");
-                        apellidoP.value = apellidoP.value.substring(0, 29);
+                        apellidoP.value = apellidoP.value.substring(0, 30);
                         return false;
                     } else if (apellidoM.value.length < 0 || apellidoM.value.length > 29) {
                         alert("solo puede ingresar 30 caracteres");
-                        apellidoM.value = apellidoM.value.substring(0, 29);
+                        apellidoM.value = apellidoM.value.substring(0, 30);
                         return false;
                     } else if (numDoc.value.length < 0 || numDoc.value.length > 14) {
                         alert("solo puede ingresar 15 caracteres");
-                        numDoc.value = numDoc.value.substring(0, 14);
+                        numDoc.value = numDoc.value.substring(0, 15);
                         return false;
                     } else if (proNac.value.length < 0 || proNac.value.length > 49) {
                         alert("solo puede ingresar 50 caracteres");
-                        proNac.value = proNac.value.substring(0, 49);
+                        proNac.value = proNac.value.substring(0, 50);
                         return false;
                     } else if (correo.value.length < 0 || correo.value.length > 49) {
                         alert("solo puede ingresar 50 caracteres");
-                        correo.value = correo.value.substring(0, 49);
+                        correo.value = correo.value.substring(0, 50);
                         return false;
                     } else if (profesion.value.length < 0 || profesion.value.length > 49) {
                         alert("solo puede ingresar 50 caracteres");
-                        profesion.value = profesion.value.substring(0, 49);
+                        profesion.value = profesion.value.substring(0, 50);
                         return false;
                     } else if (cel.value.length < 0 || cel.value.length > 14) {
                         alert("solo puede ingresar 15 caracteres");
-                        cel.value = cel.value.substring(0, 14);
+                        cel.value = cel.value.substring(0, 15);
                         return false;
                     } else if (prov.value.length < 0 || prov.value.length > 99) {
                         alert("solo puede ingresar 100 caracteres");
-                        prov.value = prov.value.substring(0, 99);
+                        prov.value = prov.value.substring(0, 100);
                         return false;
                     } else if (dist.value.length < 0 || dist.value.length > 99) {
                         alert("solo puede ingresar 100 caracteres");
-                        dist.value = dist.value.substring(0, 99);
+                        dist.value = dist.value.substring(0, 100);
                         return false;
                     } else if (dir.value.length < 0 || dir.value.length > 199) {
                         alert("solo puede ingresar 200 caracteres");
-                        dir.value = dir.value.substring(0, 199);
+                        dir.value = dir.value.substring(0, 200);
                         return false;
                     } else if (telf.value.length < 0 || telf.value.length > 14) {
                         alert("solo puede ingresar 15 caracteres");
-                        telf.value = telf.value.substring(0, 14);
+                        telf.value = telf.value.substring(0, 15);
                         return false;
                     }
                 }
