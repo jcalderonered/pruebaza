@@ -298,7 +298,7 @@
 
                                                                     <td>
                                                                         <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
-                                                                            <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
+                                                                            <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" onkeyup="return(limitar());" value="${familia.getConstancia()}" type="text" class="input_width">
                                                                             <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
                                                                             <br>
                                                                             <br>
@@ -363,7 +363,7 @@
 
                                                                                 <td>
                                                                                     <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
-                                                                                        <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
+                                                                                        <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" onkeyup="return(limitar());" value="${familia.getConstancia()}" type="text" class="input_width">
                                                                                         <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
                                                                                         <br>
                                                                                         <br>
@@ -424,7 +424,7 @@
 
                                                                                 <td>
                                                                                     <form action="${pageContext.servletContext.contextPath}/ConstanciaInformativa" method="post">
-                                                                                        <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" value="${familia.getConstancia()}" type="text" class="input_width">
+                                                                                        <input ${flag == 1 ? 'disabled' : ''} ${familia.getConstancia() != null ? 'disabled' : ''} name="constancia" id="constancia" onkeyup="return(limitar());" value="${familia.getConstancia()}" type="text" class="input_width">
                                                                                         <input hidden name="idFamilia" id="idFamilia" value="${familia.getIdfamilia()}"  >
                                                                                         <br>
                                                                                         <br>
@@ -563,6 +563,18 @@
             });
 
         </script>
+        <script type="text/javascript">
+                function limitar()
+                {
+                    var constancia = document.getElementById('constancia');
+
+                    if (constancia.value.length < 0 || constancia.value.length > 49) {
+                        alert("El campo no debe exceder más de 50 caracteres");
+                        constancia.value = constancia.value.substring(0, 49);
+                        return false;
+                    }
+                }
+            </script>
         <!-- Placed at the end of the document so the pages load faster -->        
     </body>
 </html>
