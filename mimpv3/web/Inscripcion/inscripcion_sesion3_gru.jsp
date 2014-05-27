@@ -1182,42 +1182,42 @@
             
             if (nombreEl.value.length < 0 || nombreEl.value.length > 29) {
                 alert("solo puede ingresar 30 caracteres");
-                nombreEl.value = nombreEl.value.substring(0, 30);
+                nombreEl.value = nombreEl.value.substring(0, 29);
                 document.formulario.nombreEl.focus();
                 return false;
             } else if (apellidoPEl.value.length < 0 || apellidoPEl.value.length > 29) {
                 alert("solo puede ingresar 30 caracteres");
-                apellidoPEl.value = apellidoPEl.value.substring(0, 30);
+                apellidoPEl.value = apellidoPEl.value.substring(0, 29);
                 document.formulario.apellidoPEl.focus();
                 return false;
             } else if (apellidoMEl.value.length < 0 || apellidoMEl.value.length > 29) {
                 alert("solo puede ingresar 30 caracteres");
-                apellidoMEl.value = apellidoMEl.value.substring(0, 30);
+                apellidoMEl.value = apellidoMEl.value.substring(0, 29);
                 document.formulario.apellidoMEl.focus();
                 return false;
             } else if (numDocEl.value.length < 0 || numDocEl.value.length > 14) {
                 alert("solo puede ingresar 15 caracteres");
-                numDocEl.value = numDocEl.value.substring(0, 15);
+                numDocEl.value = numDocEl.value.substring(0, 14);
                 document.formulario.numDocEl.focus();
                 return false;
             } else if (proNacEl.value.length < 0 || proNacEl.value.length > 49) {
                 alert("solo puede ingresar 50 caracteres");
-                proNacEl.value = proNacEl.value.substring(0, 50);
+                proNacEl.value = proNacEl.value.substring(0, 49);
                 document.formulario.proNacEl.focus();
                 return false;
             } else if (correoEl.value.length < 0 || correoEl.value.length > 49) {
                 alert("solo puede ingresar 50 caracteres");
-                correoEl.value = correoEl.value.substring(0, 50);
+                correoEl.value = correoEl.value.substring(0, 49);
                 document.formulario.correoEl.focus();
                 return false;
             } else if (profesionEl.value.length < 0 || profesionEl.value.length > 49) {
                 alert("solo puede ingresar 50 caracteres");
-                profesionEl.value = profesionEl.value.substring(0, 50);
+                profesionEl.value = profesionEl.value.substring(0, 49);
                 document.formulario.profesionEl.focus();
                 return false;
             } else if (celEl.value.length < 0 || celEl.value.length > 14) {
                 alert("solo puede ingresar 15 caracteres");
-                celEl.value = celEl.value.substring(0, 15);
+                celEl.value = celEl.value.substring(0, 14);
                 document.formulario.celEl.focus();
                 return false;
             }
@@ -1239,42 +1239,42 @@
 
                 if (nombreElla.value.length < 0 || nombreElla.value.length > 29) {
                     alert("solo puede ingresar 30 caracteres");
-                    nombreElla.value = nombreElla.value.substring(0, 30);
+                    nombreElla.value = nombreElla.value.substring(0, 29);
                     document.formulario.nombreElla.focus();
                     return false;
                 } else if (apellidoPElla.value.length < 0 || apellidoPElla.value.length > 29) {
                     alert("solo puede ingresar 30 caracteres");
-                    apellidoPElla.value = apellidoPElla.value.substring(0, 30);
+                    apellidoPElla.value = apellidoPElla.value.substring(0, 29);
                     document.formulario.apellidoPElla.focus();
                     return false;
                 } else if (apellidoMElla.value.length < 0 || apellidoMElla.value.length > 29) {
                     alert("solo puede ingresar 30 caracteres");
-                    apellidoMElla.value = apellidoMElla.value.substring(0, 30);
+                    apellidoMElla.value = apellidoMElla.value.substring(0, 29);
                     document.formulario.apellidoMElla.focus();
                     return false;
                 } else if (numDocElla.value.length < 0 || numDocElla.value.length > 14) {
                     alert("solo puede ingresar 15 caracteres");
-                    numDocElla.value = numDocElla.value.substring(0, 15);
+                    numDocElla.value = numDocElla.value.substring(0, 14);
                     document.formulario.numDocElla.focus();
                     return false;
                 } else if (proNacElla.value.length < 0 || proNacElla.value.length > 49) {
                     alert("solo puede ingresar 50 caracteres");
-                    proNacElla.value = proNacElla.value.substring(0, 50);
+                    proNacElla.value = proNacElla.value.substring(0, 49);
                     document.formulario.proNacElla.focus();
                     return false;
                 } else if (correoElla.value.length < 0 || correoElla.value.length > 49) {
                     alert("solo puede ingresar 50 caracteres");
-                    correoElla.value = correoElla.value.substring(0, 50);
+                    correoElla.value = correoElla.value.substring(0, 49);
                     document.formulario.correoElla.focus();
                     return false;
                 } else if (profesionElla.value.length < 0 || profesionElla.value.length > 49) {
                     alert("solo puede ingresar 50 caracteres");
-                    profesionElla.value = profesionElla.value.substring(0, 50);
+                    profesionElla.value = profesionElla.value.substring(0, 49);
                     document.formulario.profesionElla.focus();
                     return false;
                 } else if (celElla.value.length < 0 || celElla.value.length > 14) {
                     alert("solo puede ingresar 15 caracteres");
-                    celElla.value = celElla.value.substring(0, 15);
+                    celElla.value = celElla.value.substring(0, 14);
                     document.formulario.celElla.focus();
                     return false;
                 }
@@ -1291,22 +1291,22 @@
 
                     if (prov.value.length < 0 || prov.value.length > 99) {
                         alert("solo puede ingresar 100 caracteres");
-                        prov.value = prov.value.substring(0, 100);
+                        prov.value = prov.value.substring(0, 99);
                         document.formulario.prov.focus();
                         return false;
                     } else if (dist.value.length < 0 || dist.value.length > 99) {
                         alert("solo puede ingresar 100 caracteres");
-                        dist.value = dist.value.substring(0, 100);
+                        dist.value = dist.value.substring(0, 99);
                         document.formulario.dist.focus();
                         return false;
                     } else if (dir.value.length < 0 || dir.value.length > 199) {
                         alert("solo puede ingresar 200 caracteres");
-                        dir.value = dir.value.substring(0, 200);
+                        dir.value = dir.value.substring(0, 199);
                         document.formulario.dir.focus();
                         return false;
                     } else if (telf.value.length < 0 || telf.value.length > 14) {
                         alert("solo puede ingresar 15 caracteres");
-                        telf.value = telf.value.substring(0, 15);
+                        telf.value = telf.value.substring(0, 14);
                         document.formulario.telf.focus();
                         return false;
                     }
