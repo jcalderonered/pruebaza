@@ -220,14 +220,14 @@
                             <div class="control-group">
                                 <label class="control-label">Identificación de la revisión</label>
                                 <div class="controls">
-                                    <input id="numero" name="numero" type="text" value="" >
+                                    <input id="numero" name="numero" onkeyup="return(limitar());" type="text" value="" >
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Comentarios</label>
                                 <div class="controls">
-                                    <textarea id="comentarios" name="comentarios" cols="25" rows="5"></textarea>
+                                    <textarea id="comentarios" name="comentarios" onkeyup="return(limitar());" cols="25" rows="5"></textarea>
                                 </div>
                             </div>
                             <br>
@@ -296,6 +296,23 @@
                 return true;
             }
         </script>
+        <script type="text/javascript">
+                function limitar()
+                {
+                    var numero = document.getElementById('numero');
+                    var comentarios = document.getElementById('comentarios');
+
+                    if (numero.value.length < 0 || numero.value.length > 149 ) {
+                        alert("El campo no debe exceder más de 150 caracteres");
+                        numero.value = numero.value.substring(0, 149);
+                        return false;
+                    } else if (comentarios.value.length < 0 || comentarios.value.length > 149) {
+                        alert("El campo no debe exceder más de 150 caracteres");
+                        comentarios.value = comentarios.value.substring(0, 149);
+                        return false;
+                    }
+                }
+            </script>
         <!-- Ubicar al final -->
     </body>
 </html>

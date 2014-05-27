@@ -131,21 +131,21 @@
                                 <div class="control-group">
                                     <label class="control-label">Nombre</label>
                                     <div class="controls">
-                                        <input id="nombre" name="nombre" value="${nna.getNombre()}" type="text" class="input-xlarge">
+                                        <input id="nombre" name="nombre" onkeyup="return(limitar());" value="${nna.getNombre()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Paterno</label>
                                     <div class="controls">
-                                        <input id="apellidoP" value="${nna.getApellidoP()}" name="apellidoP" type="text" class="input-xlarge">
+                                        <input id="apellidoP" value="${nna.getApellidoP()}" name="apellidoP" onkeyup="return(limitar());" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Apellido Materno</label>
                                     <div class="controls">
-                                        <input id="apellidoM" value="${nna.getApellidoM()}" name="apellidoM" type="text" class="input-xlarge">
+                                        <input id="apellidoM" value="${nna.getApellidoM()}" name="apellidoM" onkeyup="return(limitar());" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -169,9 +169,9 @@
                                 <div class="control-group">
                                     <label class="control-label">Edad </label>
                                     <div class="controls">
-                                        <input id="edad" name="edad" type="text" value="${nna.getEdadAnhos()}" placeholder="Años" class="input-xlarge">
+                                        <input id="edad" name="edad" onkeyup="return(limitar());" type="text" value="${nna.getEdadAnhos()}" placeholder="Años" class="input-xlarge">
                                         &nbsp;
-                                        <input id="meses" name="meses" type="text" value="${nna.getEdadMeses()}" placeholder="Meses" class="input-xlarge">
+                                        <input id="meses" name="meses" onkeyup="return(limitar());" type="text" value="${nna.getEdadMeses()}" placeholder="Meses" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -227,21 +227,21 @@
                                 <div class="control-group">
                                     <label class="control-label">Lugar de nacimiento</label>
                                     <div class="controls">
-                                        <input id="dep" name="dep" type="text" placeholder="Departamento" value="${nna.getDepartamentoNacimiento()}" class="input-xlarge">
+                                        <input id="dep" name="dep" onkeyup="return(limitar());" type="text" placeholder="Departamento" value="${nna.getDepartamentoNacimiento()}" class="input-xlarge">
                                         &nbsp;
-                                        <input id="prov" name="prov" type="text" placeholder="Provincia" value="${nna.getProvinciaNacimiento()}" class="input-xlarge">
+                                        <input id="prov" name="prov" onkeyup="return(limitar());" type="text" placeholder="Provincia" value="${nna.getProvinciaNacimiento()}" class="input-xlarge">
                                         &nbsp;
-                                        <input id="dist" name="dist" type="text" placeholder="Distrito" value="${nna.getDistritoNacimiento()}"  class="input-xlarge">
+                                        <input id="dist" name="dist" onkeyup="return(limitar());" type="text" placeholder="Distrito" value="${nna.getDistritoNacimiento()}"  class="input-xlarge">
                                         &nbsp;
                                     </div>
                                     <br>
-                                    <input id="direccion" name="direccion" type="text" value="${nna.getLugarNac()}" placeholder="Dirección" class="input-xlarge">
+                                    <input id="direccion" name="direccion" onkeyup="return(limitar());" type="text" value="${nna.getLugarNac()}" placeholder="Dirección" class="input-xlarge">
                                 </div>
                                 <br>
                                 <div class="control-group">
                                     <label class="control-label">Número de resolución de abandono</label>
                                     <div class="controls">
-                                        <input id="numResolAband" name="numResolAband" value="${nna.getNResolAband()}" type="text" class="input-xlarge">
+                                        <input id="numResolAband" name="numResolAband" onkeyup="return(limitar());" value="${nna.getNResolAband()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -255,7 +255,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Número de resolución consentida</label>
                                     <div class="controls">
-                                        <input id="numResolConsen" name="numResolConsen" value="${nna.getNResolCons()}" type="text" class="input-xlarge">
+                                        <input id="numResolConsen" name="numResolConsen" onkeyup="return(limitar());" value="${nna.getNResolCons()}" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -464,7 +464,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Comentarios</label>
                                     <div class="controls">
-                                        <textarea id="obs" name="obs" cols="25" rows="5">${nna.getObservaciones()}</textarea>
+                                        <textarea id="obs" name="obs" onkeyup="return(limitar());" cols="25" rows="5">${nna.getObservaciones()}</textarea>
                                     </div>
                                 </div>
                                 <br>
@@ -579,6 +579,73 @@
                 function Alerta()
                 {
                      return confirm('Estas seguro(a) de que desas crear/editar el NNA ?');
+                }
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {
+                    var nombre = document.getElementById('nombre');
+                    var apellidoP = document.getElementById('apellidoP');
+                    var apellidoM = document.getElementById('apellidoM');
+                    var edad = document.getElementById('edad');
+                    var meses = document.getElementById('meses');
+                    var dep = document.getElementById('dep');
+                    var prov = document.getElementById('prov');
+                    var dist = document.getElementById('dist');
+                    var direccion = document.getElementById('direccion');
+                    var numResolAband = document.getElementById('numResolAband');
+                    var numResolConsen = document.getElementById('numResolConsen');
+                    var obs = document.getElementById('obs');
+
+                    if (nombre.value.length < 0 || nombre.value.length > 29) {
+                        alert("El campo no debe exceder más de 30 caracteres");
+                        nombre.value = nombre.value.substring(0, 29);
+                        return false;
+                    } else if (apellidoP.value.length < 0 || apellidoP.value.length > 29) {
+                        alert("El campo no debe exceder más de 30 caracteres");
+                        apellidoP.value = apellidoP.value.substring(0, 29);
+                        return false;
+                    } else if (apellidoM.value.length < 0 || apellidoM.value.length > 29) {
+                        alert("El campo no debe exceder más de 30 caracteres");
+                        apellidoM.value = apellidoM.value.substring(0, 29);
+                        return false;
+                    } else if (edad.value.length < 0 || edad.value.length > 2) {
+                        alert("El campo no debe exceder más de 3 caracteres");
+                        edad.value = edad.value.substring(0, 2);
+                        return false;
+                    } else if (meses.value.length < 0 || meses.value.length > 2) {
+                        alert("El campo no debe exceder más de 3 caracteres");
+                        meses.value = meses.value.substring(0, 2);
+                        return false;
+                    } else if (dep.value.length < 0 || dep.value.length > 29) {
+                        alert("El campo no debe exceder más de 30 caracteres");
+                        dep.value = dep.value.substring(0, 29);
+                        return false;
+                    } else if (prov.value.length < 0 || prov.value.length > 99) {
+                        alert("El campo no debe exceder más de 100 caracteres");
+                        prov.value = prov.value.substring(0, 99);
+                        return false;
+                    } else if (dist.value.length < 0 || dist.value.length > 99) {
+                        alert("El campo no debe exceder más de 100 caracteres");
+                        dist.value = dist.value.substring(0, 99);
+                        return false;
+                    } else if (direccion.value.length < 0 || direccion.value.length > 499) {
+                        alert("El campo no debe exceder más de 500 caracteres");
+                        direccion.value = direccion.value.substring(0, 499);
+                        return false;
+                    } else if (numResolAband.value.length < 0 || numResolAband.value.length > 39) {
+                        alert("El campo no debe exceder más de 40 caracteres");
+                        numResolAband.value = numResolAband.value.substring(0, 39);
+                        return false;
+                    } else if (numResolConsen.value.length < 0 || numResolConsen.value.length > 39) {
+                        alert("El campo no debe exceder más de 40 caracteres");
+                        numResolConsen.value = numResolConsen.value.substring(0, 39);
+                        return false;
+                    } else if (obs.value.length < 0 || obs.value.length > 499) {
+                        alert("El campo no debe exceder más de 500 caracteres");
+                        obs.value = obs.value.substring(0, 499);
+                        return false;
+                    }
                 }
             </script>
             <!-- Ubicar al final -->
