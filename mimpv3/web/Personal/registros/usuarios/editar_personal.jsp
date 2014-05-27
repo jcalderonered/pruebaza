@@ -145,42 +145,42 @@
                                         <div class="control-group">
                                             <label class="control-label">Nombre</label>
                                             <div class="controls">
-                                                <input id="nombre" name="nombre" type="text" value="${personal.getNombre()}" class="input-xlarge">
+                                                <input id="nombre" name="nombre" type="text" value="${personal.getNombre()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <label class="control-label">Apellido Paterno</label>
                                             <div class="controls">
-                                                <input id="apellidoP" name="apellidoP" type="text" value="${personal.getApellidoP()}" class="input-xlarge">
+                                                <input id="apellidoP" name="apellidoP" type="text" value="${personal.getApellidoP()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <label class="control-label">Apellido Materno</label>
                                             <div class="controls">
-                                                <input  id="apellidoM" name="apellidoM" type="text" value="${personal.getApellidoM()}" class="input-xlarge">
+                                                <input  id="apellidoM" name="apellidoM" type="text" value="${personal.getApellidoM()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <label class="control-label">Usuario</label>
                                             <div class="controls">
-                                                <input id="user" name="user" type="text" value="${personal.getUser()}" class="input-xlarge">
+                                                <input id="user" name="user" type="text" value="${personal.getUser()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <label class="control-label">Contraseña</label>
                                             <div class="controls">
-                                                <input id="pass" name="pass" type="password" value="" class="input-xlarge">
+                                                <input id="pass" name="pass" type="password" value="" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
 
                                         <div class="control-group">
                                             <label class="control-label">Ingresar nuevamente Contraseña</label>
                                             <div class="controls">
-                                                <input id="pass2" name="pass2" type="password" value="" class="input-xlarge">
+                                                <input id="pass2" name="pass2" type="password" value="" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
 
@@ -188,42 +188,42 @@
                                         <div class="control-group">
                                             <label class="control-label">Correo Trabajo</label>
                                             <div class="controls">
-                                                <input id="correoT" name="correoT" type="text" value="${personal.getCorreoTrabajo()}" class="input-xlarge">
+                                                <input id="correoT" name="correoT" type="text" value="${personal.getCorreoTrabajo()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <label class="control-label">Correo Personal</label>
                                             <div class="controls">
-                                                <input id="correoP" name="correoP" type="text" value="${personal.getCorreoPersonal()}" class="input-xlarge">
+                                                <input id="correoP" name="correoP" type="text" value="${personal.getCorreoPersonal()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <label class="control-label">Profesión</label>
                                             <div class="controls">
-                                                <input id="profesion" name="profesion" type="text" value="${personal.getProfesion()}" class="input-xlarge">
+                                                <input id="profesion" name="profesion" type="text" value="${personal.getProfesion()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <label class="control-label">Grado de instrucción</label>
                                             <div class="controls">
-                                                <input id="grado" name="grado" type="text" value="${personal.getGradoInstruccion()}" class="input-xlarge">
+                                                <input id="grado" name="grado" type="text" value="${personal.getGradoInstruccion()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <label class="control-label">Cargo</label>
                                             <div class="controls">
-                                                <input id="cargo" name="cargo" type="text" value="${personal.getCargo()}" class="input-xlarge">
+                                                <input id="cargo" name="cargo" type="text" value="${personal.getCargo()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <label class="control-label">DNI</label>
                                             <div class="controls">
-                                                <input  id="dni" name="dni" type="text" value="${personal.getDni()}" class="input-xlarge">
+                                                <input  id="dni" name="dni" type="text" value="${personal.getDni()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
@@ -237,7 +237,7 @@
                                         <div class="control-group">
                                             <label class="control-label">Regimen</label>
                                             <div class="controls">
-                                                <input id="regimen" name="regimen" type="text" value="${personal.getRegimen()}" class="input-xlarge">
+                                                <input id="regimen" name="regimen" type="text" value="${personal.getRegimen()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
@@ -251,7 +251,7 @@
                                         <div class="control-group">
                                             <label class="control-label">Domicilio</label>
                                             <div class="controls">
-                                                <input id="domicilio" name="domicilio" type="text" value="${personal.getDomicilio()}" class="input-xlarge">
+                                                <input id="domicilio" name="domicilio" type="text" value="${personal.getDomicilio()}" onkeyup="return(limitar());" class="input-xlarge">
                                             </div>
                                         </div>
                                         <br>
@@ -343,41 +343,76 @@
                                 <script type="text/javascript">
                                     function limitar()
                                     {
-                                        var correo_trabajo = document.getElementById('correo_trabajo');
-                                        var correo_personal = document.getElementById('correo_personal');
+                                        var nombre = document.getElementById('nombre');
+                                        var apellidoP = document.getElementById('apellidoP');
+                                        var apellidoM = document.getElementById('apellidoM');
+                                        var user = document.getElementById('user');
+                                        var pass = document.getElementById('pass');
+                                        var pass2 = document.getElementById('pass2');
+                                        var correoT = document.getElementById('correoT');
+                                        var correoP = document.getElementById('correoP');
                                         var profesion = document.getElementById('profesion');
-                                        var grado_instruccion = document.getElementById('grado_instruccion');
+                                        var grado = document.getElementById('grado');
                                         var cargo = document.getElementById('cargo');
+                                        var dni = document.getElementById('dni');
                                         var regimen = document.getElementById('regimen');
                                         var domicilio = document.getElementById('domicilio');
 
-                                        if (correo_trabajo.value.length < 0 || correo_trabajo.value.length > 100) {
-                                            alert("El campo no debe exceder más de 100 caracteres");
-                                            correo_trabajo.value = correo_trabajo.value.substring(0, 100);
-                                            return false;
-                                        } else if (correo_personal.value.length < 0 || correo_personal.value.length > 100) {
-                                            alert("El campo no debe exceder más de 100 caracteres");
-                                            correo_personal.value = correo_personal.value.substring(0, 100);
-                                            return false;
-                                        } else if (profesion.value.length < 0 || profesion.value.length > 50) {
-                                            alert("El campo no debe exceder más de 50 caracteres");
-                                            profesion.value = profesion.value.substring(0, 50);
-                                            return false;
-                                        } else if (grado_instruccion.value.length < 0 || grado_instruccion.value.length > 30) {
+                                        if (nombre.value.length < 0 || nombre.value.length > 29) {
                                             alert("El campo no debe exceder más de 30 caracteres");
-                                            grado_instruccion.value = grado_instruccion.value.substring(0, 30);
+                                            nombre.value = nombre.value.substring(0, 29);
                                             return false;
-                                        } else if (cargo.value.length < 0 || cargo.value.length > 30) {
+                                        } else if (apellidoP.value.length < 0 || apellidoP.value.length > 29) {
                                             alert("El campo no debe exceder más de 30 caracteres");
-                                            cargo.value = cargo.value.substring(0, 30);
+                                            apellidoP.value = apellidoP.value.substring(0, 29);
                                             return false;
-                                        } else if (regimen.value.length < 0 || regimen.value.length > 50) {
+                                        } else if (apellidoM.value.length < 0 || apellidoM.value.length > 29) {
+                                            alert("El campo no debe exceder más de 30 caracteres");
+                                            apellidoM.value = apellidoM.value.substring(0, 29);
+                                            return false;
+                                        } else if (user.value.length < 0 || user.value.length > 99) {
+                                            alert("El campo no debe exceder más de 100 caracteres");
+                                            user.value = user.value.substring(0, 99);
+                                            return false;
+                                        } else if (pass.value.length < 0 || pass.value.length > 15) {
+                                            alert("El campo no debe exceder más de 15 caracteres");
+                                            pass.value = pass.value.substring(0, 15);
+                                            return false;
+                                        } else if (pass2.value.length < 0 || pass2.value.length > 15) {
+                                            alert("El campo no debe exceder más de 15 caracteres");
+                                            pass2.value = pass2.value.substring(0, 15);
+                                            return false;
+                                        } else if (correoT.value.length < 0 || correoT.value.length > 99) {
+                                            alert("El campo no debe exceder más de 100 caracteres");
+                                            correoT.value = correoT.value.substring(0, 99);
+                                            return false;
+                                        } else if (correoP.value.length < 0 || correoP.value.length > 99) {
+                                            alert("El campo no debe exceder más de 100 caracteres");
+                                            correoP.value = correoP.value.substring(0, 99);
+                                            return false;
+                                        } else if (profesion.value.length < 0 || profesion.value.length > 49) {
                                             alert("El campo no debe exceder más de 50 caracteres");
-                                            regimen.value = regimen.value.substring(0, 50);
+                                            profesion.value = profesion.value.substring(0, 49);
                                             return false;
-                                        } else if (domicilio.value.length < 0 || domicilio.value.length > 200) {
+                                        } else if (grado.value.length < 0 || grado.value.length > 29) {
+                                            alert("El campo no debe exceder más de 30 caracteres");
+                                            grado.value = grado.value.substring(0, 29);
+                                            return false;
+                                        } else if (cargo.value.length < 0 || cargo.value.length > 29) {
+                                            alert("El campo no debe exceder más de 30 caracteres");
+                                            cargo.value = cargo.value.substring(0, 29);
+                                            return false;
+                                        } else if (dni.value.length < 0 || dni.value.length > 9) {
+                                            alert("El campo no debe exceder más de 10 caracteres");
+                                            dni.value = dni.value.substring(0, 9);
+                                            return false;
+                                        } else if (regimen.value.length < 0 || regimen.value.length > 49) {
+                                            alert("El campo no debe exceder más de 50 caracteres");
+                                            regimen.value = regimen.value.substring(0, 49);
+                                            return false;
+                                        } else if (domicilio.value.length < 0 || domicilio.value.length > 199) {
                                             alert("El campo no debe exceder más de 200 caracteres");
-                                            domicilio.value = domicilio.value.substring(0, 200);
+                                            domicilio.value = domicilio.value.substring(0, 199);
                                             return false;
                                         }
                                     }

@@ -10,7 +10,7 @@
     response.addHeader("Cache-Control", "must-revalidate");
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
-    
+
     response.setDateHeader("Expires", 0);
     Personal u = (Personal) request.getSession().getAttribute("usuario");
     if (u == null) {
@@ -119,301 +119,301 @@
                                     <input hidden name="idNna" id="idNna" value="${nna.getIdnna()}">
                                     <input hidden name="idDesig" id="idDesig" value="${idDesig}">
                                 </c:if>     
-                            <fieldset>
-                                <div class="control-group">
-                                    <label class="control-label">Nombre</label>
-                                    <div class="controls">
-                                        <input id="nombre" name="nombre" value="${nna.getNombre()}" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Paterno</label>
-                                    <div class="controls">
-                                        <input id="apellidoP" value="${nna.getApellidoP()}" name="apellidoP" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Apellido Materno</label>
-                                    <div class="controls">
-                                        <input id="apellidoM" value="${nna.getApellidoM()}" name="apellidoM" type="text" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Sexo</label>
-                                    <div class="controls">
-                                        <select id="sexo" name="sexo">
-                                            <option value="masculino" ${nna.getSexo() == 'masculino' ? 'selected' : ''} >Masculino</option>
-                                            <option value="femenino"  ${nna.getSexo() == 'femenino' ? 'selected' : ''}>Femenino</option>
-                                        </select>
-                                    </div>    
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de nacimiento</label>
-                                    <div class="controls">
-                                        <input id="fechaNac" value="${nna.getFechaNacimiento() != null ? df.dateToStringNumeros(nna.getFechaNacimiento()) : ''}" name="fechaNac" type="text" class="datepicker input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Edad </label>
-                                    <div class="controls">
-                                        <input id="edad" name="edad" type="text" value="${nna.getEdadAnhos()}" placeholder="Años" class="input-xlarge">
-                                        &nbsp;
-                                        <input id="meses" name="meses" type="text" value="${nna.getEdadMeses()}" placeholder="Meses" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">País de Nacimiento</label>
-                                    <div class="controls">
-                                        <input id="paisNac" name="paisNac" type="text" value="${nna.getPaisNacimiento()}" class="input-xlarge">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Lugar de nacimiento</label>
-                                    <div class="controls">
-                                        <input id="dep" name="dep" type="text" placeholder="Departamento" value="${nna.getDepartamentoNacimiento()}" class="input-xlarge">
-                                        &nbsp;
-                                        <input id="prov" name="prov" type="text" placeholder="Provincia" value="${nna.getProvinciaNacimiento()}" class="input-xlarge">
-                                        &nbsp;
-                                        <input id="dist" name="dist" type="text" placeholder="Distrito" value="${nna.getDistritoNacimiento()}"  class="input-xlarge">
-                                        &nbsp;
+                                <fieldset>
+                                    <div class="control-group">
+                                        <label class="control-label">Nombre</label>
+                                        <div class="controls">
+                                            <input id="nombre" name="nombre" value="${nna.getNombre()}" type="text" onkeyup="return(limitar());" class="input-xlarge">
+                                        </div>
                                     </div>
                                     <br>
-                                    <input id="direccion" name="direccion" type="text" value="${nna.getLugarNac()}" placeholder="Dirección" class="input-xlarge">
-                                </div>
-                                <br>
-                                <br>
-                            <h3><strong>Antecedentes, condiciones de salud y desarrollo del niño, niña o adolescente adoptado(NNA)</strong></h3>
-                            <br>
-                            <br>
-                            <!-- Text input-->
-                            <div class="row">
-                                <div id="tabla_fam" class="table-responsive">
-                                    <table id="hijos" class="table table-bordered table-striped ">
-                                        <thead>
-                                            <tr>
-                                                <th>Antecedentes</th>
-                                                <th>Si/No</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <h4>Nacido(a) como consecuencia del incesto</h4>
-                                                </td>
-                                                <td>
-                                                    <select id="incesto" name="incesto" >
-                                                        <option value="0" ${nna.getIncesto() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getIncesto() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h4>Padres con enfermedad psiquiátrica (esquizofrenia, paranoia, etc</h4>
-                                                </td>
-                                                <td>
-                                                    <select id="mental" name="mental" >
-                                                        <option value="0" ${nna.getMental() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getMental() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h4>Padres con epilepsia</h4>
-                                                </td>
-                                                <td>
-                                                    <select id="epilepsia" name="epilepsia" >
-                                                        <option value="0" ${nna.getEpilepsia() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getEpilepsia() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h4>Niña, niño o adolescente víctima de abuso sexual</h4>
-                                                </td>
-                                                <td>
-                                                    <select id="abuso" name="abuso" >
-                                                        <option value="0" ${nna.getAbuso() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getAbuso() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h4>Niña, niño o adolescente adolescente actualmente sano, que al nacer fue 
-                                                        diagnosticado/a preliminarmente con sífilis congénita.</h4>
-                                                </td>
-                                                <td>
-                                                    <select id="sifilis" name="sifilis" >
-                                                        <option value="0" ${nna.getSifilis() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getSifilis() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Apellido Paterno</label>
+                                        <div class="controls">
+                                            <input id="apellidoP" value="${nna.getApellidoP()}" name="apellidoP" onkeyup="return(limitar());" type="text" class="input-xlarge">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Apellido Materno</label>
+                                        <div class="controls">
+                                            <input id="apellidoM" value="${nna.getApellidoM()}" name="apellidoM" onkeyup="return(limitar());" type="text" class="input-xlarge">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Sexo</label>
+                                        <div class="controls">
+                                            <select id="sexo" name="sexo">
+                                                <option value="masculino" ${nna.getSexo() == 'masculino' ? 'selected' : ''} >Masculino</option>
+                                                <option value="femenino"  ${nna.getSexo() == 'femenino' ? 'selected' : ''}>Femenino</option>
+                                            </select>
+                                        </div>    
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Fecha de nacimiento</label>
+                                        <div class="controls">
+                                            <input id="fechaNac" value="${nna.getFechaNacimiento() != null ? df.dateToStringNumeros(nna.getFechaNacimiento()) : ''}" name="fechaNac" type="text" class="datepicker input-xlarge">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Edad </label>
+                                        <div class="controls">
+                                            <input id="edad" name="edad" type="text" value="${nna.getEdadAnhos()}" onkeyup="return(limitar());" placeholder="Años" class="input-xlarge">
+                                            &nbsp;
+                                            <input id="meses" name="meses" type="text" value="${nna.getEdadMeses()}" onkeyup="return(limitar());" placeholder="Meses" class="input-xlarge">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">País de Nacimiento</label>
+                                        <div class="controls">
+                                            <input id="paisNac" name="paisNac" type="text" value="${nna.getPaisNacimiento()}" onkeyup="return(limitar());" class="input-xlarge">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Lugar de nacimiento</label>
+                                        <div class="controls">
+                                            <input id="dep" name="dep" type="text" placeholder="Departamento" value="${nna.getDepartamentoNacimiento()}" onkeyup="return(limitar());" class="input-xlarge">
+                                            &nbsp;
+                                            <input id="prov" name="prov" type="text" placeholder="Provincia" value="${nna.getProvinciaNacimiento()}" onkeyup="return(limitar());" class="input-xlarge">
+                                            &nbsp;
+                                            <input id="dist" name="dist" type="text" placeholder="Distrito" value="${nna.getDistritoNacimiento()}" onkeyup="return(limitar());"  class="input-xlarge">
+                                            &nbsp;
+                                        </div>
+                                        <br>
+                                        <input id="direccion" name="direccion" type="text" value="${nna.getLugarNac()}" onkeyup="return(limitar());" placeholder="Dirección" class="input-xlarge">
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <h3><strong>Antecedentes, condiciones de salud y desarrollo del niño, niña o adolescente adoptado(NNA)</strong></h3>
+                                    <br>
+                                    <br>
+                                    <!-- Text input-->
+                                    <div class="row">
+                                        <div id="tabla_fam" class="table-responsive">
+                                            <table id="hijos" class="table table-bordered table-striped ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Antecedentes</th>
+                                                        <th>Si/No</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Nacido(a) como consecuencia del incesto</h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="incesto" name="incesto" >
+                                                                <option value="0" ${nna.getIncesto() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getIncesto() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Padres con enfermedad psiquiátrica (esquizofrenia, paranoia, etc</h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="mental" name="mental" >
+                                                                <option value="0" ${nna.getMental() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getMental() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Padres con epilepsia</h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="epilepsia" name="epilepsia" >
+                                                                <option value="0" ${nna.getEpilepsia() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getEpilepsia() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Niña, niño o adolescente víctima de abuso sexual</h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="abuso" name="abuso" >
+                                                                <option value="0" ${nna.getAbuso() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getAbuso() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Niña, niño o adolescente adolescente actualmente sano, que al nacer fue 
+                                                                diagnosticado/a preliminarmente con sífilis congénita.</h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="sifilis" name="sifilis" >
+                                                                <option value="0" ${nna.getSifilis() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getSifilis() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
 
-                            <div class="row">
-                                <div id="tabla_fam" class="table-responsive">
-                                    <table id="hijos" class="table table-bordered table-striped ">
-                                        <thead>
-                                            <tr>
-                                                <th>Condiciones de salud y desarrollo</th>
-                                                <th>Si/No</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <h4>Salud  estable  que  requiere  seguimiento  médico  (soplo,  hipotiroidismo, 
-                                                        desnutrición crónica, etc.)</h4>
-                                                </td>
-                                                <td>
-                                                    <select id="seguimiento" name="seguimiento" >
-                                                        <option value="0" ${nna.getSeguiMedico() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getSeguiMedico() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h4>Condiciones  de  salud  que  requieran  intervención  quirúrgica  menor 
-                                                        (labio leporino, estrabismo, etc.)</h4>
-                                                </td>
-                                                <td>
-                                                    <select id="operacion" name="operacion" >
-                                                        <option value="0" ${nna.getOperacion() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getOperacion() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h4>Niña,  niño  o  adolescente  con  trastorno  de  déficit  de  atención  e 
-                                                        hiperactividad (TDAH)</h4>
-                                                </td>
-                                                <td>
-                                                    <select id="hiperactivo" name="hiperactivo">
-                                                        <option value="0" ${nna.getHiperactivo() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getHiperactivo() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                    <div class="row">
+                                        <div id="tabla_fam" class="table-responsive">
+                                            <table id="hijos" class="table table-bordered table-striped ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Condiciones de salud y desarrollo</th>
+                                                        <th>Si/No</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Salud  estable  que  requiere  seguimiento  médico  (soplo,  hipotiroidismo, 
+                                                                desnutrición crónica, etc.)</h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="seguimiento" name="seguimiento" >
+                                                                <option value="0" ${nna.getSeguiMedico() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getSeguiMedico() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Condiciones  de  salud  que  requieran  intervención  quirúrgica  menor 
+                                                                (labio leporino, estrabismo, etc.)</h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="operacion" name="operacion" >
+                                                                <option value="0" ${nna.getOperacion() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getOperacion() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Niña,  niño  o  adolescente  con  trastorno  de  déficit  de  atención  e 
+                                                                hiperactividad (TDAH)</h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="hiperactivo" name="hiperactivo">
+                                                                <option value="0" ${nna.getHiperactivo() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getHiperactivo() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
 
-                            <div class="row">
-                                <div id="tabla_fam" class="table-responsive">
-                                    <table id="hijos" class="table table-bordered table-striped ">
-                                        <thead>
-                                            <tr>
-                                                <th>Condiciones prioritarias</th>
-                                                <th>Si/No</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <h4>Niñas, niños y adolescentes con necesidades especiales</h4>
-                                                </td>
-                                                <td>
-                                                    <select id="especial" name="especial">
-                                                        <option value="0" ${nna.getEspecial() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getEspecial() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h4>Niñas, niños y adolescentes con problemas de salud </h4>
-                                                </td>
-                                                <td>
-                                                    <select id="salud" name="salud">
-                                                        <option value="0" ${nna.getEnfermo() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getEnfermo() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h4>Niñas y niños mayores (A partir de 09 años)</h4>
-                                                </td>
-                                                <td>
-                                                    <select id="mayor" name="mayor">
-                                                        <option value="0" ${nna.getMayor() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getMayor() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h4>Adolescentes (De 12 años hasta 17 años 11 meses)</h4>
-                                                </td>
-                                                <td>
-                                                    <select id="adolescente" name="adolescente">
-                                                        <option value="0" ${nna.getAdolescente() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getAdolescente() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h4>Grupos de hermanos </h4>
-                                                </td>
-                                                <td>
-                                                    <select id="hermanos" name="hermanos">
-                                                        <option value="0" ${nna.getHermano() == 0 ? 'selected' : ''} >SI</option>
-                                                        <option value="1" ${nna.getHermano() != 0 ? 'selected' : ''} >NO</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <br>
-                                <div class="control-group">
-                                    <label class="control-label">Fecha de Adopcion</label>
-                                    <div class="controls">
-                                        <input id="fechaAdopcion" value="${fechaAdopcion}" name="fechaAdopcion" type="text" class="datepicker input-xlarge">
+                                    <div class="row">
+                                        <div id="tabla_fam" class="table-responsive">
+                                            <table id="hijos" class="table table-bordered table-striped ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Condiciones prioritarias</th>
+                                                        <th>Si/No</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Niñas, niños y adolescentes con necesidades especiales</h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="especial" name="especial">
+                                                                <option value="0" ${nna.getEspecial() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getEspecial() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Niñas, niños y adolescentes con problemas de salud </h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="salud" name="salud">
+                                                                <option value="0" ${nna.getEnfermo() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getEnfermo() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Niñas y niños mayores (A partir de 09 años)</h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="mayor" name="mayor">
+                                                                <option value="0" ${nna.getMayor() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getMayor() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Adolescentes (De 12 años hasta 17 años 11 meses)</h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="adolescente" name="adolescente">
+                                                                <option value="0" ${nna.getAdolescente() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getAdolescente() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <h4>Grupos de hermanos </h4>
+                                                        </td>
+                                                        <td>
+                                                            <select id="hermanos" name="hermanos">
+                                                                <option value="0" ${nna.getHermano() == 0 ? 'selected' : ''} >SI</option>
+                                                                <option value="1" ${nna.getHermano() != 0 ? 'selected' : ''} >NO</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Identificación de la Adopción</label>
-                                    <div class="controls">
-                                        <input id="numAdopcion" name="numAdopcion" type="text" value="${numAdopcion}" class="input-xlarge">
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Fecha de Adopcion</label>
+                                        <div class="controls">
+                                            <input id="fechaAdopcion" value="${fechaAdopcion}" name="fechaAdopcion" type="text" class="datepicker input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <label class="control-label">Observaciones</label>
-                                    <div class="controls">
-                                        <textarea id="obs" name="obs" cols="25" rows="5">${nna.getObservaciones()}</textarea>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Identificación de la Adopción</label>
+                                        <div class="controls">
+                                            <input id="numAdopcion" name="numAdopcion" type="text" value="${numAdopcion}" onkeyup="return(limitar());" class="input-xlarge">
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar Cambios</button>
-                                      </div>
-                                 </div>   
-                                  </fieldset>
-                                </form>     
-                        </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <label class="control-label">Observaciones</label>
+                                        <div class="controls">
+                                            <textarea id="obs" name="obs" onkeyup="return(limitar());" cols="25" rows="5">${nna.getObservaciones()}</textarea>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button id="singlebutton" name="singlebutton" class="btn btn-default">Guardar Cambios</button>
+                                        </div>
+                                    </div>   
+                                </fieldset>
+                            </form>     
+                    </div>
                 </div>
             </div>
             <!--FIN DE CONTENIDO-->
@@ -433,64 +433,138 @@
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap-datepicker.js"></script>
             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
             <script type="text/javascript">
-              $(document).ready(function(){  
-                $('.datepicker').datepicker({
-                    "format": "dd/mm/yyyy", 
-                    "weekStart": 1, 
-                    "autoclose": true, 
-                    "language": "es"
-                });  
-                  
-                $('#fechaNac').datepicker({
-                    "format": "dd/mm/yyyy", 
-                    "weekStart": 1, 
-                    "autoclose": true, 
-                    "language": "es"
-                }).on('changeDate', function (ev) {
-                    
-                    var nac =  document.getElementById("fechaNac").value;
-                    var edad =  document.getElementById("edad");
-                    var meses =  document.getElementById("meses");
-                    
-                    var today = new Date();
-                    var curr_date = today.getDate();
-                    var curr_month = today.getMonth() + 1;
-                    var curr_year = today.getFullYear();
+                                                $(document).ready(function() {
+                                                    $('.datepicker').datepicker({
+                                                        "format": "dd/mm/yyyy",
+                                                        "weekStart": 1,
+                                                        "autoclose": true,
+                                                        "language": "es"
+                                                    });
 
-                    var pieces = nac.split('/');
-                    var birth_date = pieces[0];
-                    var birth_month = pieces[1];
-                    var birth_year = pieces[2];
-                    
-                    
-                    if (curr_year != birth_year && birth_month > curr_month  ) edad.value = curr_year - birth_year - 1;
-                    if (curr_year != birth_year && birth_month == curr_month  ) edad.value = curr_year - birth_year;
-                    if (curr_year != birth_year && birth_month < curr_month  ) edad.value = curr_year - birth_year;
-                    if (curr_year == birth_year) edad.value = 0;
-                    if (curr_month == birth_month) meses.value = 0;
-                    if (curr_month != birth_month && curr_month > birth_month ) meses.value = curr_month - birth_month;
-                    if (curr_month != birth_month && curr_month <= birth_month ) meses.value = curr_month + 12 - birth_month;
-                     
-                        });
-                        
-                    $("input[type='radio']").click(function()
-                     {
-                        var previousValue = $(this).attr('previousValue');
-                        var name = $(this).attr('name');
+                                                    $('#fechaNac').datepicker({
+                                                        "format": "dd/mm/yyyy",
+                                                        "weekStart": 1,
+                                                        "autoclose": true,
+                                                        "language": "es"
+                                                    }).on('changeDate', function(ev) {
 
-                        if (previousValue == 'checked')
-                        {
-                        $(this).removeAttr('checked');
-                        $(this).attr('previousValue', false);
-                        }
-                        else
-                        {
-                        $("input[name="+name+"]:radio").attr('previousValue', false);
-                        $(this).attr('previousValue', 'checked');
-                        }
-                     });   
-              });
+                                                        var nac = document.getElementById("fechaNac").value;
+                                                        var edad = document.getElementById("edad");
+                                                        var meses = document.getElementById("meses");
 
+                                                        var today = new Date();
+                                                        var curr_date = today.getDate();
+                                                        var curr_month = today.getMonth() + 1;
+                                                        var curr_year = today.getFullYear();
+
+                                                        var pieces = nac.split('/');
+                                                        var birth_date = pieces[0];
+                                                        var birth_month = pieces[1];
+                                                        var birth_year = pieces[2];
+
+
+                                                        if (curr_year != birth_year && birth_month > curr_month)
+                                                            edad.value = curr_year - birth_year - 1;
+                                                        if (curr_year != birth_year && birth_month == curr_month)
+                                                            edad.value = curr_year - birth_year;
+                                                        if (curr_year != birth_year && birth_month < curr_month)
+                                                            edad.value = curr_year - birth_year;
+                                                        if (curr_year == birth_year)
+                                                            edad.value = 0;
+                                                        if (curr_month == birth_month)
+                                                            meses.value = 0;
+                                                        if (curr_month != birth_month && curr_month > birth_month)
+                                                            meses.value = curr_month - birth_month;
+                                                        if (curr_month != birth_month && curr_month <= birth_month)
+                                                            meses.value = curr_month + 12 - birth_month;
+
+                                                    });
+
+                                                    $("input[type='radio']").click(function()
+                                                    {
+                                                        var previousValue = $(this).attr('previousValue');
+                                                        var name = $(this).attr('name');
+
+                                                        if (previousValue == 'checked')
+                                                        {
+                                                            $(this).removeAttr('checked');
+                                                            $(this).attr('previousValue', false);
+                                                        }
+                                                        else
+                                                        {
+                                                            $("input[name=" + name + "]:radio").attr('previousValue', false);
+                                                            $(this).attr('previousValue', 'checked');
+                                                        }
+                                                    });
+                                                });
+
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {
+                    var nombre = document.getElementById('nombre');
+                    var apellidoP = document.getElementById('apellidoP');
+                    var apellidoM = document.getElementById('apellidoM');
+                    var edad = document.getElementById('edad');
+                    var meses = document.getElementById('meses');
+                    var paisNac = document.getElementById('paisNac');
+                    var dep = document.getElementById('dep');
+                    var prov = document.getElementById('prov');
+                    var dist = document.getElementById('dist');
+                    var direccion = document.getElementById('direccion');
+                    var numAdopcion = document.getElementById('numAdopcion');
+                    var obs = document.getElementById('obs');
+
+                    if (nombre.value.length < 0 || nombre.value.length > 29) {
+                        alert("El campo no debe exceder más de 30 caracteres");
+                        nombre.value = nombre.value.substring(0, 29);
+                        return false;
+                    } else if (apellidoP.value.length < 0 || apellidoP.value.length > 29) {
+                        alert("El campo no debe exceder más de 30 caracteres");
+                        apellidoP.value = apellidoP.value.substring(0, 29);
+                        return false;
+                    } else if (apellidoM.value.length < 0 || apellidoM.value.length > 29) {
+                        alert("El campo no debe exceder más de 30 caracteres");
+                        apellidoM.value = apellidoM.value.substring(0, 29);
+                        return false;
+                    } else if (edad.value.length < 0 || edad.value.length > 2) {
+                        alert("El campo no debe exceder más de 3 caracteres");
+                        edad.value = edad.value.substring(0, 2);
+                        return false;
+                    } else if (meses.value.length < 0 || meses.value.length > 2) {
+                        alert("El campo no debe exceder más de 3 caracteres");
+                        meses.value = meses.value.substring(0, 2);
+                        return false;
+                    } else if (paisNac.value.length < 0 || paisNac.value.length > 19) {
+                        alert("El campo no debe exceder más de 20 caracteres");
+                        paisNac.value = paisNac.value.substring(0, 19);
+                        return false;
+                    } else if (dep.value.length < 0 || dep.value.length > 29) {
+                        alert("El campo no debe exceder más de 30 caracteres");
+                        dep.value = dep.value.substring(0, 29);
+                        return false;
+                    } else if (prov.value.length < 0 || prov.value.length > 99) {
+                        alert("El campo no debe exceder más de 100 caracteres");
+                        prov.value = prov.value.substring(0, 99);
+                        return false;
+                    } else if (dist.value.length < 0 || dist.value.length > 99) {
+                        alert("El campo no debe exceder más de 100 caracteres");
+                        dist.value = dist.value.substring(0, 99);
+                        return false;
+                    } else if (direccion.value.length < 0 || direccion.value.length > 499) {
+                        alert("El campo no debe exceder más de 500 caracteres");
+                        direccion.value = direccion.value.substring(0, 499);
+                        return false;
+                    } else if (numAdopcion.value.length < 0 || numAdopcion.value.length > 49) {
+                        alert("El campo no debe exceder más de 50 caracteres");
+                        numAdopcion.value = numAdopcion.value.substring(0, 49);
+                        return false;
+                    } else if (obs.value.length < 0 || obs.value.length > 499) {
+                        alert("El campo no debe exceder más de 500 caracteres");
+                        obs.value = obs.value.substring(0, 499);
+                        return false;
+                    }
+                }
             </script>
             <!-- Ubicar al final -->
     </body>

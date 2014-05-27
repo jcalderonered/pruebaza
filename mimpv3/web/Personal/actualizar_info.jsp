@@ -251,33 +251,33 @@
                     var regimen = document.getElementById('regimen');
                     var domicilio = document.getElementById('domicilio');
 
-                    if (correo_trabajo.value.length < 0 || correo_trabajo.value.length > 100) {
+                    if (correo_trabajo.value.length < 0 || correo_trabajo.value.length > 99) {
                         alert("El campo no debe exceder más de 100 caracteres");
-                        correo_trabajo.value = correo_trabajo.value.substring(0, 100);
+                        correo_trabajo.value = correo_trabajo.value.substring(0, 99);
                         return false;
-                    } else if (correo_personal.value.length < 0 || correo_personal.value.length > 100) {
+                    } else if (correo_personal.value.length < 0 || correo_personal.value.length > 99) {
                         alert("El campo no debe exceder más de 100 caracteres");
-                        correo_personal.value = correo_personal.value.substring(0, 100);
+                        correo_personal.value = correo_personal.value.substring(0, 99);
                         return false;
-                    } else if (profesion.value.length < 0 || profesion.value.length > 50) {
+                    } else if (profesion.value.length < 0 || profesion.value.length > 49) {
                         alert("El campo no debe exceder más de 50 caracteres");
-                        profesion.value = profesion.value.substring(0, 50);
+                        profesion.value = profesion.value.substring(0, 49);
                         return false;
-                    } else if (grado_instruccion.value.length < 0 || grado_instruccion.value.length > 30) {
+                    } else if (grado_instruccion.value.length < 0 || grado_instruccion.value.length > 29) {
                         alert("El campo no debe exceder más de 30 caracteres");
-                        grado_instruccion.value = grado_instruccion.value.substring(0, 30);
+                        grado_instruccion.value = grado_instruccion.value.substring(0, 29);
                         return false;
-                    } else if (cargo.value.length < 0 || cargo.value.length > 30) {
+                    } else if (cargo.value.length < 0 || cargo.value.length > 29) {
                         alert("El campo no debe exceder más de 30 caracteres");
-                        cargo.value = cargo.value.substring(0, 30);
+                        cargo.value = cargo.value.substring(0, 29);
                         return false;
-                    } else if (regimen.value.length < 0 || regimen.value.length > 50) {
+                    } else if (regimen.value.length < 0 || regimen.value.length > 49) {
                         alert("El campo no debe exceder más de 50 caracteres");
-                        regimen.value = regimen.value.substring(0, 50);
+                        regimen.value = regimen.value.substring(0, 49);
                         return false;
-                    } else if (domicilio.value.length < 0 || domicilio.value.length > 200) {
+                    } else if (domicilio.value.length < 0 || domicilio.value.length > 199) {
                         alert("El campo no debe exceder más de 200 caracteres");
-                        domicilio.value = domicilio.value.substring(0, 200);
+                        domicilio.value = domicilio.value.substring(0, 199);
                         return false;
                     }
                 }
