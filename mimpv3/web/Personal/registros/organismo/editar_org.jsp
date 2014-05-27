@@ -450,42 +450,42 @@
                     if (nombre.value.length < 0 || nombre.value.length > 39)
                     {
                         alert("solo puede ingresar 40 caracteres");
-                        nombre.value = nombre.value.substring(0, 40);
+                        nombre.value = nombre.value.substring(0, 39);
                         document.formulario.nombre.focus();
                         return false;
                     } else if (competencia.value.length < 0 || competencia.value.length > 29) {
                         alert("solo puede ingresar 30 caracteres");
-                        competencia.value = competencia.value.substring(0, 30);
+                        competencia.value = competencia.value.substring(0, 29);
                         document.formulario.competencia.focus();
                         return false;
                     }else if (pais.value.length < 0 || pais.value.length > 14) {
                         alert("solo puede ingresar 15 caracteres");
-                        pais.value = pais.value.substring(0, 15);
+                        pais.value = pais.value.substring(0, 14);
                         document.formulario.pais.focus();
                         return false;
                     }else if (direccion.value.length < 0 || direccion.value.length > 199) {
                         alert("solo puede ingresar 200 caracteres");
-                        direccion.value = direccion.value.substring(0, 200);
+                        direccion.value = direccion.value.substring(0, 199);
                         document.formulario.direccion.focus();
                         return false;
                     }else if (telefono.value.length < 0 || telefono.value.length > 14) {
                         alert("solo puede ingresar 15 caracteres");
-                        telefono.value = telefono.value.substring(0, 15);
+                        telefono.value = telefono.value.substring(0, 14);
                         document.formulario.telefono.focus();
                         return false;
                     }else if (resol_aut.value.length < 0 || resol_aut.value.length > 29) {
                         alert("solo puede ingresar 30 caracteres");
-                        resol_aut.value = resol_aut.value.substring(0, 30);
+                        resol_aut.value = resol_aut.value.substring(0, 29);
                         document.formulario.resol_aut.focus();
                         return false;
                     }else if (resol_renov.value.length < 0 || resol_renov.value.length > 29) {
                         alert("solo puede ingresar 30 caracteres");
-                        resol_renov.value = resol_renov.value.substring(0, 30);
+                        resol_renov.value = resol_renov.value.substring(0, 29);
                         document.formulario.resol_renov.focus();
                         return false;
                     }else if (obs.value.length < 0 || obs.value.length > 199) {
                         alert("solo puede ingresar 200 caracteres");
-                        obs.value = obs.value.substring(0, 200);
+                        obs.value = obs.value.substring(0, 199);
                         document.formulario.obs.focus();
                         return false;
                     }
