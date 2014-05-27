@@ -123,12 +123,12 @@
                             <li><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
                         <c:if test="${social == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalCrearEvalSocialNac" method="post"> 
+                            <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalCrearEvalSocialNac" method="post"> 
                                 <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
                                 <input hidden name="origen" id="origen" value="${origen}">
                             </c:if>  
                             <c:if test="${social != null}">
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalUpdateEvalSocialNac" method="post"> 
+                                <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/PersonalUpdateEvalSocialNac" method="post"> 
                                     <input hidden name="idEvalSocial" id="idEvalSocial" value="${social.getIdevaluacion()}">
                                     <input hidden name="origen" id="origen" value="${origen}">
                                 </c:if>  
@@ -178,7 +178,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Número de informe</label>
                                     <div class="controls">
-                                        <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${social.getNumEval()}" >
+                                        <input onkeyup="return(limitar());" id="numEval" name="numEval" type="text" class="input-xlarge" value="${social.getNumEval()}" >
                                     </div>
                                 </div>
                                 <br>    
@@ -192,7 +192,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <textarea id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${social.getObservacion()}</textarea>
+                                        <textarea onkeyup="return(limitar());" id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${social.getObservacion()}</textarea>
                                     </div>
                                 </div>
                                 <br>
@@ -227,6 +227,26 @@
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
             </script>
+              <script type="text/javascript">
+                    function limitar()
+                    {
+                        var numEval = document.getElementById('numEval');
+                        var obs = document.getElementById('obs');
+
+                        if (numEval.value.length < 0 || numEval.value.length > 19)
+                        {
+                            alert("solo puede ingresar 20 caracteres");
+                            numEval.value = numEval.value.substring(0, 20);
+                            document.formulario.numEval.focus();
+                            return false;
+                        } else if (obs.value.length < 0 || obs.value.length > 499) {
+                            alert("solo puede ingresar 500 caracteres");
+                            obs.value = obs.value.substring(0, 500);
+                            document.formulario.obs.focus();
+                            return false;
+                        }
+                    }
+                </script>
             <!-- Ubicar al final -->
     </body>
 </html>

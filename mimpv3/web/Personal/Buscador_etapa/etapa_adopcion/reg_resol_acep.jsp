@@ -129,7 +129,7 @@
                                 <input hidden name="numDesig" id="numDesig" value="${numDesig}">
                             </c:if>  
                             <c:if test="${resolucion.getIdresolucion() != 0}">
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateResolEmpatia" method="post" onsubmit="return confirm('Desea cambiar la resolución?');"> 
+                                <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateResolEmpatia" method="post" onsubmit="return confirm('Desea cambiar la resolución?');"> 
                                     <input hidden name="idResolucion" id="idResolucion" value="${resolucion.getIdresolucion()}">
                                 </c:if> 
                                 <fieldset>
@@ -145,7 +145,7 @@
                                     <div class="control-group">
                                         <label class="control-label">N° de resolución</label>
                                         <div class="controls">
-                                            <input ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="numResol" name="numResol" type="text" value="${resolucion.getNumero()}" class="input-xlarge">
+                                            <input onkeyup="return(limitar());" ${resolucion.getIdresolucion() != 0 ? 'disabled' : ''} id="numResol" name="numResol" type="text" value="${resolucion.getNumero()}" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -243,6 +243,20 @@
                     window.history.forward();
                 }
             </SCRIPT>
+            <script type="text/javascript">
+                    function limitar()
+                    {
+                        var numResol = document.getElementById('numResol');
+
+                        if (numResol.value.length < 0 || numResol.value.length > 44)
+                        {
+                            alert("solo puede ingresar 45 caracteres");
+                            numResol.value = numResol.value.substring(0, 45);
+                            document.formulario.numResol.focus();
+                            return false;
+                        }
+                    }
+                </script>
             <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>

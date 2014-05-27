@@ -122,14 +122,14 @@
                             <div class="control-group">
                                 <label class="control-label">HT Ficha</label>
                                 <div class="controls">
-                                    <input id="ht" name="ht" type="text" class="input-xlarge" >
+                                    <input onkeyup="return(limitar());" id="ht" name="ht" type="text" class="input-xlarge" >
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Número de Ficha</label>
                                 <div class="controls">
-                                    <input id="numeroExp" name="numeroFicha" type="text" class="input-xlarge">
+                                    <input onkeyup="return(limitar());" id="numeroFicha" name="numeroFicha" type="text" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
@@ -192,6 +192,25 @@
 
             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
+        </script>
+        <script type="text/javascript">
+            function limitar()
+            {
+                var ht = document.getElementById('ht');
+                var numeroFicha = document.getElementById('numeroFicha');
+
+                if (ht.value.length < 0 || ht.value.length > 39) {
+                    alert("solo puede ingresar 40 caracteres");
+                    ht.value = ht.value.substring(0, 40);
+                    document.formulario.ht.focus();
+                    return false;
+                } else if (numeroFicha.value.length < 0 || numeroFicha.value.length > 39) {
+                    alert("solo puede ingresar 40 caracteres");
+                    numeroFicha.value = numeroFicha.value.substring(0, 40);
+                    document.formulario.numeroFicha.focus();
+                    return false;
+                }
+            }
         </script>
         <!-- Ubicar al final -->
     </body>

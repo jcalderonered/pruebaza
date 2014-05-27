@@ -128,11 +128,11 @@
                         <div class="row">
                             <div class="col-md-2 col-md-offset-2">
                                 <c:if test="${empatia == null}">
-                                    <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearEvalEmpatia" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)"> 
+                                    <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearEvalEmpatia" method="post" name="formulario" onsubmit="return(validar());" onkeypress="return enter(event)"> 
                                         <input hidden name="idExpediente" id="idExpediente" value="${idExpediente}">
                                     </c:if>  
                                     <c:if test="${empatia != null}">
-                                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateEvalEmpatia" method="post"> 
+                                        <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateEvalEmpatia" method="post"> 
                                             <input hidden name="idEmpatia" id="idEmpatia" value="${empatia.getIdevaluacion()}">
                                         </c:if>  
                                         <fieldset>
@@ -169,7 +169,7 @@
                                             <div class="control-group">
                                                 <label class="control-label">Número de informe</label>
                                                 <div class="controls">
-                                                    <input id="numEval" name="numEval" type="text" class="input-xlarge" value="${empatia.getNumEval()}" >
+                                                    <input onkeyup="return(limitar());" id="numEval" name="numEval" type="text" class="input-xlarge" value="${empatia.getNumEval()}" >
                                                 </div>
                                             </div>
                                             <br> 
@@ -183,7 +183,7 @@
                                             <div class="control-group">
                                                 <label class="control-label">Personas Evaluadas(incluye niño/a)</label>
                                                 <div class="controls">
-                                                    <textarea ${empatia != null ? 'disabled' : ''} id="persInt" name="persInt" type="text" cols="25" rows="5">${empatia.getPersInt()}</textarea>
+                                                    <textarea onkeyup="return(limitar());" ${empatia != null ? 'disabled' : ''} id="persInt" name="persInt" type="text" cols="25" rows="5">${empatia.getPersInt()}</textarea>
                                                 </div>
                                             </div>
                                             <br>
@@ -198,7 +198,7 @@
                                                 <div class="controls">
                                                     <label class="control-label">Comentarios</label>
                                                     <div class="controls">
-                                                        <textarea ${empatia != null ? 'disabled' : ''} id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${empatia.getObservacion()}</textarea>
+                                                        <textarea onkeyup="return(limitar());" ${empatia != null ? 'disabled' : ''} id="obs" name="obs" cols="25" rows="5" class="input-xlarge">${empatia.getObservacion()}</textarea>
                                                     </div>
                                                 </div>
                                             </div>   
@@ -232,7 +232,7 @@
                 <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
                 <script type="text/javascript">
 
-                                $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                                            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
                 </script>
                 <script type="text/javascript">
@@ -275,6 +275,32 @@
                         window.history.forward();
                     }
                 </SCRIPT>
+                <script type="text/javascript">
+                    function limitar()
+                    {
+                        var numEval = document.getElementById('numEval');
+                        var persInt = document.getElementById('persInt');
+                        var obs = document.getElementById('obs');
+
+                        if (numEval.value.length < 0 || numEval.value.length > 19)
+                        {
+                            alert("solo puede ingresar 20 caracteres");
+                            numEval.value = numEval.value.substring(0, 20);
+                            document.formulario.numEval.focus();
+                            return false;
+                        } else if (persInt.value.length < 0 || persInt.value.length > 999) {
+                            alert("solo puede ingresar 1000 caracteres");
+                            persInt.value = persInt.value.substring(0, 1000);
+                            document.formulario.persInt.focus();
+                            return false;
+                        } else if (obs.value.length < 0 || obs.value.length > 499) {
+                            alert("solo puede ingresar 500 caracteres");
+                            obs.value = obs.value.substring(0, 500);
+                            document.formulario.obs.focus();
+                            return false;
+                        }
+                    }
+                </script>
                 <!-- Placed at the end of the document so the pages load faster -->               
                 </body>
                 </html>
