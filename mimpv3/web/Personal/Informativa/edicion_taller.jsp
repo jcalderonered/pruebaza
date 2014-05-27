@@ -260,7 +260,7 @@
                                                 if (nombre.value.length < 0 || nombre.value.length > 24)
                                                 {
                                                     alert("solo puede ingresar 25 caracteres");
-                                                    nombre.value = nombre.value.substring(0, 25);
+                                                    nombre.value = nombre.value.substring(0, 24);
                                                     document.formulario.nombre.focus();
                                                     return false;
                                                 }

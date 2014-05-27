@@ -312,57 +312,57 @@
                     if (nombre.value.length < 0 || nombre.value.length > 39)
                     {
                         alert("solo puede ingresar 40 caracteres");
-                        nombre.value = nombre.value.substring(0, 40);
+                        nombre.value = nombre.value.substring(0, 39);
                         document.formulario.nombre.focus();
                         return false;
                     } else if (pais.value.length < 0 || pais.value.length > 14) {
                         alert("solo puede ingresar 15 caracteres");
-                        pais.value = pais.value.substring(0, 15);
+                        pais.value = pais.value.substring(0, 14);
                         document.formulario.pais.focus();
                         return false;
                     }else if (direccion.value.length < 0 || direccion.value.length > 199) {
                         alert("solo puede ingresar 200 caracteres");
-                        direccion.value = direccion.value.substring(0, 200);
+                        direccion.value = direccion.value.substring(0, 199);
                         document.formulario.direccion.focus();
                         return false;
                     }else if (telefono.value.length < 0 || telefono.value.length > 14) {
                         alert("solo puede ingresar 15 caracteres");
-                        telefono.value = telefono.value.substring(0, 15);
+                        telefono.value = telefono.value.substring(0, 14);
                         document.formulario.telefono.focus();
                         return false;
                     }else if (user.value.length < 0 || user.value.length > 44) {
                         alert("solo puede ingresar 45 caracteres");
-                        user.value = user.value.substring(0, 45);
+                        user.value = user.value.substring(0, 44);
                         document.formulario.user.focus();
                         return false;
                     }else if (pass.value.length < 0 || pass.value.length > 511) {
                         alert("solo puede ingresar 512 caracteres");
-                        pass.value = pass.value.substring(0, 512);
+                        pass.value = pass.value.substring(0, 511);
                         document.formulario.pass.focus();
                         return false;
                     }else if (pass2.value.length < 0 || pass2.value.length > 511) {
                         alert("solo puede ingresar 512 caracteres");
-                        pass2.value = pass2.value.substring(0, 512);
+                        pass2.value = pass2.value.substring(0, 511);
                         document.formulario.pass2.focus();
                         return false;
                     }else if (correo.value.length < 0 || correo.value.length > 49) {
                         alert("solo puede ingresar 50 caracteres");
-                        correo.value = correo.value.substring(0, 50);
+                        correo.value = correo.value.substring(0, 49);
                         document.formulario.correo.focus();
                         return false;
                     }else if (resol_aut.value.length < 0 || resol_aut.value.length > 29) {
                         alert("solo puede ingresar 30 caracteres");
-                        resol_aut.value = resol_aut.value.substring(0, 30);
+                        resol_aut.value = resol_aut.value.substring(0, 29);
                         document.formulario.resol_aut.focus();
                         return false;
                     }else if (resol_renov.value.length < 0 || resol_renov.value.length > 29) {
                         alert("solo puede ingresar 30 caracteres");
-                        resol_renov.value = resol_renov.value.substring(0, 30);
+                        resol_renov.value = resol_renov.value.substring(0, 29);
                         document.formulario.resol_renov.focus();
                         return false;
                     }else if (obs.value.length < 0 || obs.value.length > 199) {
                         alert("solo puede ingresar 200 caracteres");
-                        obs.value = obs.value.substring(0, 200);
+                        obs.value = obs.value.substring(0, 199);
                         document.formulario.obs.focus();
                         return false;
                     }

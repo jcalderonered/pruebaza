@@ -245,7 +245,7 @@
 
                         if (obs.value.length < 0 || obs.value.length > 1999) {
                             alert("solo puede ingresar 2000 caracteres");
-                            obs.value = obs.value.substring(0, 2000);
+                            obs.value = obs.value.substring(0, 1999);
                             document.formulario.obs.focus();
                             return false;
                         }
