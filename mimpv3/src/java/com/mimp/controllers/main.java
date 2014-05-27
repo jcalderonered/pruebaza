@@ -3283,7 +3283,7 @@ public class main {
             } else if (Ella.getApellidoP() != null && !Ella.getApellidoP().equals("")) {
                 expediente.setExpediente(Ella.getApellidoP());
             }
-            servicioEtapa.updateExpedienteFamilia(expediente);
+            if(expediente.getIdexpedienteFamilia() != 0) servicioEtapa.updateExpedienteFamilia(expediente);
 
             String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
                     + "información del adoptante con ID: " + El.getIdadoptante();
@@ -3405,7 +3405,7 @@ public class main {
             } else if (Ella.getApellidoP() != null && !Ella.getApellidoP().equals("")) {
                 expediente.setExpediente(Ella.getApellidoP());
             }
-            servicioEtapa.updateExpedienteFamilia(expediente);
+            if(expediente.getIdexpedienteFamilia() != 0) servicioEtapa.updateExpedienteFamilia(expediente);
 
             String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
                     + "información del adoptante con ID: " + Ella.getIdadoptante();
