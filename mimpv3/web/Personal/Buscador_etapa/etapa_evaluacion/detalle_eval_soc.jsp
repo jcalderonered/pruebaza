@@ -236,12 +236,12 @@
                         if (numEval.value.length < 0 || numEval.value.length > 19)
                         {
                             alert("solo puede ingresar 20 caracteres");
-                            numEval.value = numEval.value.substring(0, 20);
+                            numEval.value = numEval.value.substring(0, 19);
                             document.formulario.numEval.focus();
                             return false;
                         } else if (obs.value.length < 0 || obs.value.length > 499) {
                             alert("solo puede ingresar 500 caracteres");
-                            obs.value = obs.value.substring(0, 500);
+                            obs.value = obs.value.substring(0, 499);
                             document.formulario.obs.focus();
                             return false;
                         }

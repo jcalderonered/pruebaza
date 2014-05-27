@@ -236,7 +236,7 @@
                                                 if (nombreTurno2.value.length < 0 || nombreTurno2.value.length > 24)
                                                 {
                                                     alert("solo puede ingresar 25 caracteres");
-                                                    nombreTurno2.value = nombreTurno2.value.substring(0, 25);
+                                                    nombreTurno2.value = nombreTurno2.value.substring(0, 24);
                                                     document.formulario.nombreTurno2.focus();
                                                     return false;
                                                 }

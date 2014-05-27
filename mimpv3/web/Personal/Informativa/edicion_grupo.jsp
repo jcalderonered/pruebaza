@@ -218,7 +218,7 @@
                     if (nombreGrupo.value.length < 0 || nombreGrupo.value.length > 24)
                     {
                         alert("solo puede ingresar 25 caracteres");
-                        nombreGrupo.value = nombreGrupo.value.substring(0, 25);
+                        nombreGrupo.value = nombreGrupo.value.substring(0, 24);
                         document.formulario.nombreGrupo.focus();
                         return false;
                     } 

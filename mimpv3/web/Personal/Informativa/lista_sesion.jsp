@@ -307,25 +307,25 @@
                     if (numSesion.value.length < 0 || numSesion.value.length > 19)
                     {
                         alert("solo puede ingresar 20 caracteres");
-                        numSesion.value = numSesion.value.substring(0, 20);
+                        numSesion.value = numSesion.value.substring(0, 19);
                         document.formulario.numSesion.focus();
                         return false;
                     } else if (duracion.value.length < 0 || duracion.value.length > 19)
                     {
                         alert("solo puede ingresar 20 caracteres");
-                        duracion.value = duracion.value.substring(0, 20);
+                        duracion.value = duracion.value.substring(0, 19);
                         document.formulario.duracion.focus();
                         return false;
                     } else if (direccion.value.length < 0 || direccion.value.length > 199)
                     {
                         alert("solo puede ingresar 200 caracteres");
-                        direccion.value = direccion.value.substring(0, 200);
+                        direccion.value = direccion.value.substring(0, 199);
                         document.formulario.direccion.focus();
                         return false;
                     } else if (capacitador.value.length < 0 || capacitador.value.length > 499)
                     {
                         alert("solo puede ingresar 500 caracteres");
-                        capacitador.value = capacitador.value.substring(0, 500);
+                        capacitador.value = capacitador.value.substring(0, 499);
                         document.formulario.capacitador.focus();
                         return false;
                     } 

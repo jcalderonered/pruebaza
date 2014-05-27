@@ -251,7 +251,7 @@
                         if (numResol.value.length < 0 || numResol.value.length > 44)
                         {
                             alert("solo puede ingresar 45 caracteres");
-                            numResol.value = numResol.value.substring(0, 45);
+                            numResol.value = numResol.value.substring(0, 44);
                             document.formulario.numResol.focus();
                             return false;
                         }

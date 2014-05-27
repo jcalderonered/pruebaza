@@ -277,19 +277,19 @@
                     if (duracion.value.length < 0 || duracion.value.length > 19)
                     {
                         alert("solo puede ingresar 20 caracteres");
-                        duracion.value = duracion.value.substring(0, 25);
+                        duracion.value = duracion.value.substring(0, 19);
                         document.formulario.duracion.focus();
                         return false;
                     } else if (direccion.value.length < 0 || direccion.value.length > 99)
                     {
                         alert("solo puede ingresar 100 caracteres");
-                        direccion.value = direccion.value.substring(0, 100);
+                        direccion.value = direccion.value.substring(0, 99);
                         document.formulario.direccion.focus();
                         return false;
                     } else if (facilitador.value.length < 0 || facilitador.value.length > 499)
                     {
                         alert("solo puede ingresar 500 caracteres");
-                        facilitador.value = facilitador.value.substring(0, 500);
+                        facilitador.value = facilitador.value.substring(0, 499);
                         document.formulario.facilitador.focus();
                         return false;
                     } 
