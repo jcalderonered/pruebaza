@@ -114,11 +114,11 @@
                         </form>
                         <c:choose>
                             <c:when test="${ turno2 == null }">
-                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearTurno2" method="post">
+                                <form name="formulario" action="${pageContext.servletContext.contextPath}/PersonalCrearTurno2" method="post">
                                     
                                 </c:when>
                                 <c:otherwise>
-                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateTurno2" method="post">
+                                    <form name="formulario" action="${pageContext.servletContext.contextPath}/PersonalUpdateTurno2" method="post">
                                         <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">                                        
                                         
                                     </c:otherwise>
@@ -133,7 +133,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="textinput">Nombre del Turno</label>
                                         <div class="controls">
-                                            <input id="nombreTurno2" name="nombreTurno2" value="${turno2.getNombre()}" type="text" placeholder="nombre" class="input-xlarge">
+                                            <input onkeyup="return(limitar());" id="nombreTurno2" name="nombreTurno2" value="${turno2.getNombre()}" type="text" placeholder="nombre" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -228,7 +228,20 @@
                         ================================================== -->
                             <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script> 
                             <script  type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.js"></script>
+                            <script type="text/javascript">
+                                            function limitar()
+                                            {
+                                                var nombreTurno2 = document.getElementById('nombreTurno2');
 
+                                                if (nombreTurno2.value.length < 0 || nombreTurno2.value.length > 24)
+                                                {
+                                                    alert("solo puede ingresar 25 caracteres");
+                                                    nombreTurno2.value = nombreTurno2.value.substring(0, 25);
+                                                    document.formulario.nombreTurno2.focus();
+                                                    return false;
+                                                }
+                                            }
+                            </script>
                             <!-- Ubicar al final -->
                             </body>
                             </html>

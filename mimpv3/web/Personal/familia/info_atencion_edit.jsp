@@ -136,11 +136,11 @@
                         <br>
                         <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
                         <c:if test="${atencion == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearAtencion" method="post"> 
+                            <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearAtencion" method="post"> 
                                 <input hidden name="volver" id="volver" value="${volver}">
                             </c:if>  
                             <c:if test="${atencion != null}">
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateAtencion" method="post"> 
+                                <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateAtencion" method="post"> 
                                     <input hidden name="idAtencion" id="idAtencion" value="${atencion.getIdatencion()}">
                                     <input hidden name="volver" id="volver" value="${volver}">
                                 </c:if>  
@@ -187,14 +187,14 @@
                                     <div class="control-group">
                                         <label class="control-label">Detalles de la comunicación</label>
                                         <div class="controls">
-                                            <textarea id="detalle" class="input-xlarge" name="detalle" cols="25" rows="5" >${atencion.getDetalle()}</textarea>
+                                            <textarea onkeyup="return(limitar());" id="detalle" class="input-xlarge" name="detalle" cols="25" rows="5" >${atencion.getDetalle()}</textarea>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Observaciones</label>
                                         <div class="controls">
-                                            <textarea id="obs" class="input-xlarge" name="obs" cols="25" rows="5" >${atencion.getObservacion()}</textarea>
+                                            <textarea onkeyup="return(limitar());" id="obs" class="input-xlarge" name="obs" cols="25" rows="5" >${atencion.getObservacion()}</textarea>
                                         </div>
                                     </div>
                                     <br>
@@ -230,6 +230,28 @@
                             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
                             $('.timepicker').timepicker({'timeFormat': 'H:i'});
 
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {                    
+                    var detalle = document.getElementById('detalle');
+                    var obs = document.getElementById('obs');
+                    
+
+                    if (detalle.value.length < 0 || detalle.value.length > 199)
+                    {
+                        alert("solo puede ingresar 200 caracteres");
+                        detalle.value = detalle.value.substring(0, 200);
+                        document.formulario.detalle.focus();
+                        return false;
+                    } else if (obs.value.length < 0 || obs.value.length > 199) {
+                        alert("solo puede ingresar 200 caracteres");
+                        obs.value = obs.value.substring(0, 200);
+                        document.formulario.obs.focus();
+                        return false;
+                    }
+
+                }
             </script>
             <!-- Ubicar al final -->
     </body>

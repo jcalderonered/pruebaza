@@ -118,12 +118,12 @@
                         </form>
                         <c:choose>
                             <c:when test="${ reunion == null }">
-                                <form action="${pageContext.servletContext.contextPath}/PersonalCrearReunion" method="post" name="formulario" onsubmit="return(validar());">
+                                <form name="formulario"  action="${pageContext.servletContext.contextPath}/PersonalCrearReunion" method="post" name="formulario" onsubmit="return(validar());">
                                     <input hidden name="idTurno2" id="idTurno2" value="${turno2.getIdturno2()}">  
                                    
                                 </c:when>
                                 <c:otherwise>
-                                    <form action="${pageContext.servletContext.contextPath}/PersonalUpdateReunion" method="post" name="formulario" onsubmit="return(validar());">
+                                    <form name="formulario"  action="${pageContext.servletContext.contextPath}/PersonalUpdateReunion" method="post" name="formulario" onsubmit="return(validar());">
                                         <input hidden name="idReunion" id="idReunion" value="${reunion.getIdreunion()}">
                                         <input hidden name="idTurno2" id="idTurno2" value="${idTurno2}">
                                  
@@ -155,7 +155,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="textinput">Duracion</label>
                                         <div class="controls">
-                                            <input id="duracion" name="duracion" value="${reunion.getDuracion()}" type="text" class="input-xlarge">                                        
+                                            <input onkeyup="return(limitar());"  id="duracion" name="duracion" value="${reunion.getDuracion()}" type="text" class="input-xlarge">                                        
                                         </div>
                                     </div>
 
@@ -163,7 +163,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="textinput">Direccion</label>
                                         <div class="controls">
-                                            <input id="direccion" name="direccion" value="${reunion.getDireccion()}" type="text" value="Instalaciones del MIMP" class="input-xlarge">                                        
+                                            <input onkeyup="return(limitar());"  id="direccion" name="direccion" value="${reunion.getDireccion()}" type="text" value="Instalaciones del MIMP" class="input-xlarge">                                        
                                         </div>
                                     </div>       
 
@@ -179,7 +179,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="textinput">Facilitador</label>
                                         <div class="controls">
-                                            <textarea id="facilitador" name="facilitador" cols="20" rows="5">${reunion.getFacilitador()}</textarea>
+                                            <textarea onkeyup="return(limitar());"  id="facilitador" name="facilitador" cols="20" rows="5">${reunion.getFacilitador()}</textarea>
                                         </div>
                                     </div>
 
@@ -265,6 +265,34 @@
                         return false;
                     }
                     return true;
+                }
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {                    
+                    var duracion = document.getElementById('duracion');
+                    var direccion = document.getElementById('direccion');
+                    var facilitador = document.getElementById('facilitador');
+                    
+                    if (duracion.value.length < 0 || duracion.value.length > 19)
+                    {
+                        alert("solo puede ingresar 20 caracteres");
+                        duracion.value = duracion.value.substring(0, 25);
+                        document.formulario.duracion.focus();
+                        return false;
+                    } else if (direccion.value.length < 0 || direccion.value.length > 99)
+                    {
+                        alert("solo puede ingresar 100 caracteres");
+                        direccion.value = direccion.value.substring(0, 100);
+                        document.formulario.direccion.focus();
+                        return false;
+                    } else if (facilitador.value.length < 0 || facilitador.value.length > 499)
+                    {
+                        alert("solo puede ingresar 500 caracteres");
+                        facilitador.value = facilitador.value.substring(0, 500);
+                        document.formulario.facilitador.focus();
+                        return false;
+                    } 
                 }
             </script>
             <!-- Placed at the end of the document so the pages load faster -->

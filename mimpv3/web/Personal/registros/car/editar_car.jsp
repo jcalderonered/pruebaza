@@ -112,10 +112,10 @@ response.addHeader("Cache-Control", "no-store");
                         <h1 align="center"><strong>Editar CAR</strong></h1>
                         <br>
                         <c:if test="${car.getIdcar() == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/editCar" method="post"> 
+                            <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/editCar" method="post"> 
                             </c:if>  
                             <c:if test="${car.getIdcar() != null}">
-                                <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateCar" method="post"> 
+                                <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateCar" method="post"> 
                                     <input hidden name="id" id="id" value="${car.getIdcar()}">
                                 </c:if>  
                                 <fieldset>
@@ -124,63 +124,63 @@ response.addHeader("Cache-Control", "no-store");
                                     <div class="control-group">
                                         <label class="control-label">Nombre</label>
                                         <div class="controls">
-                                            <input id="nombre" name="nombre" type="text" value="${car.getNombre()}" class="input-xlarge">
+                                            <input id="nombre" name="nombre" type="text" value="${car.getNombre()}" onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Dirección</label>
                                         <div class="controls">
-                                            <input id="direccion" name="direccion" type="text" value="${car.getDireccion()}" class="input-xlarge">
+                                            <input id="direccion" name="direccion" type="text" value="${car.getDireccion()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Departamento</label>
                                         <div class="controls">
-                                            <input id="departamento" name="departamento" type="text" value="${car.getDepartamento()}" class="input-xlarge">
+                                            <input id="departamento" name="departamento" type="text" value="${car.getDepartamento()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>                                    
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Provincia</label>
                                         <div class="controls">
-                                            <input id="provincia" name="provincia" type="text" value="${car.getProvincia()}" class="input-xlarge">
+                                            <input id="provincia" name="provincia" type="text" value="${car.getProvincia()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>                                    
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Distrito</label>
                                         <div class="controls">
-                                            <input id="distrito" name="distrito" type="text" value="${car.getDistrito()}" class="input-xlarge">
+                                            <input id="distrito" name="distrito" type="text" value="${car.getDistrito()}" onkeyup="return(limitar());"  class="input-xlarge">
                                         </div>
                                     </div>                                    
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Nombre del director</label>
                                         <div class="controls">
-                                            <input id="director" name="director" type="text" value="${car.getDirector()}" class="input-xlarge">
+                                            <input id="director" name="director" type="text" value="${car.getDirector()}" onkeyup="return(limitar());"  class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Correo</label>
                                         <div class="controls">
-                                            <input id="correo" name="correo" type="text"  value="${car.getCorreo()}" class="input-xlarge">
+                                            <input id="correo" name="correo" type="text"  value="${car.getCorreo()}" onkeyup="return(limitar());"  class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>                                    
                                     <div class="control-group">
                                         <label class="control-label">Fax</label>
                                         <div class="controls">
-                                            <input id="fax" name="fax" type="text" value="${car.getFax()}" class="input-xlarge">
+                                            <input id="fax" name="fax" type="text" value="${car.getFax()}"  onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>                                   
                                     <div class="control-group">
                                         <label class="control-label">Celular</label>
                                         <div class="controls">
-                                            <input id="celular" name="celular" type="text" value="${car.getCelular()}" class="input-xlarge">
+                                            <input id="celular" name="celular" type="text" value="${car.getCelular()}" onkeyup="return(limitar());"  class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>                                    
@@ -188,14 +188,14 @@ response.addHeader("Cache-Control", "no-store");
                                     <div class="control-group">
                                         <label class="control-label">Teléfono</label>
                                         <div class="controls">
-                                            <input id="telefono" name="telefono" type="text" value="${car.getTelefono()}" class="input-xlarge">
+                                            <input id="telefono" name="telefono" type="text" value="${car.getTelefono()}" onkeyup="return(limitar());"  class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Observaciones</label>
                                         <div class="controls">
-                                            <textarea class="input-xlarge" name="obs" id="obs" placeholder="Ingrese sus observaciones" rows="5" >${car.getObservaciones()}</textarea>
+                                            <textarea  onkeyup="return(limitar());" class="input-xlarge" name="obs" id="obs" placeholder="Ingrese sus observaciones" rows="5" >${car.getObservaciones()}</textarea>
                                         </div>
                                     </div>                                    
                                     <br>
@@ -232,6 +232,81 @@ response.addHeader("Cache-Control", "no-store");
 
                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {                    
+                    var nombre = document.getElementById('nombre');
+                    var direccion = document.getElementById('direccion');
+                    var departamento = document.getElementById('departamento');
+                    var provincia = document.getElementById('provincia');
+                    var distrito = document.getElementById('distrito');
+                    var director = document.getElementById('director');
+                    var correo = document.getElementById('correo');
+                    var fax = document.getElementById('fax');
+                    var celular = document.getElementById('celular');
+                    var telefono = document.getElementById('telefono');
+                    var obs = document.getElementById('obs');
+
+                    if (nombre.value.length < 0 || nombre.value.length > 29)
+                    {
+                        alert("solo puede ingresar 30 caracteres");
+                        nombre.value = nombre.value.substring(0, 30);
+                        document.formulario.nombre.focus();
+                        return false;
+                    }else if (direccion.value.length < 0 || direccion.value.length > 44) {
+                        alert("solo puede ingresar 45 caracteres");
+                        direccion.value = direccion.value.substring(0, 45);
+                        document.formulario.direccion.focus();
+                        return false;
+                    }else if (departamento.value.length < 0 || departamento.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        departamento.value = departamento.value.substring(0, 30);
+                        document.formulario.departamento.focus();
+                        return false;
+                    }else if (provincia.value.length < 0 || provincia.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        provincia.value = provincia.value.substring(0, 30);
+                        document.formulario.provincia.focus();
+                        return false;
+                    }else if (distrito.value.length < 0 || distrito.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        distrito.value = distrito.value.substring(0, 30);
+                        document.formulario.distrito.focus();
+                        return false;
+                    }else if (director.value.length < 0 || director.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        director.value = director.value.substring(0, 30);
+                        document.formulario.director.focus();
+                        return false;
+                    }else if (fax.value.length < 0 || fax.value.length > 19) {
+                        alert("solo puede ingresar 20 caracteres");
+                        fax.value = fax.value.substring(0, 20);
+                        document.formulario.fax.focus();
+                        return false;
+                    }else if (celular.value.length < 0 || celular.value.length > 19) {
+                        alert("solo puede ingresar 20 caracteres");
+                        celular.value = celular.value.substring(0, 20);
+                        document.formulario.celular.focus();
+                        return false;
+                    }else if (telefono.value.length < 0 || telefono.value.length > 19) {
+                        alert("solo puede ingresar 20 caracteres");
+                        telefono.value = telefono.value.substring(0, 20);
+                        document.formulario.telefono.focus();
+                        return false;
+                    }else if (correo.value.length < 0 || correo.value.length > 29) {
+                        alert("solo puede ingresar 30 caracteres");
+                        correo.value = correo.value.substring(0, 30);
+                        document.formulario.correo.focus();
+                        return false;
+                    }else if (obs.value.length < 0 || obs.value.length > 199) {
+                        alert("solo puede ingresar 200 caracteres");
+                        obs.value = obs.value.substring(0, 200);
+                        document.formulario.obs.focus();
+                        return false;
+                    }
+
+                }
             </script>
             <!-- Ubicar al final -->
     </body>
