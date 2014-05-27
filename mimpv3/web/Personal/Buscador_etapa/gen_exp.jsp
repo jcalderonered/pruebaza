@@ -191,12 +191,12 @@
 
                 if (ht.value.length < 0 || ht.value.length > 39) {
                     alert("solo puede ingresar 40 caracteres");
-                    ht.value = ht.value.substring(0, 40);
+                    ht.value = ht.value.substring(0, 39);
                     document.formulario.ht.focus();
                     return false;
                 } else if (numeroFicha.value.length < 0 || numeroFicha.value.length > 39) {
                     alert("solo puede ingresar 40 caracteres");
-                    numeroFicha.value = numeroFicha.value.substring(0, 40);
+                    numeroFicha.value = numeroFicha.value.substring(0, 39);
                     document.formulario.numeroFicha.focus();
                     return false;
                 }
