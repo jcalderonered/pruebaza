@@ -208,7 +208,7 @@
                             <div class="control-group">
                                 <label class="control-label">Identificación del Estudio de Caso</label>
                                 <div class="controls">
-                                    <input id="orden" name="orden" type="text" value="" >
+                                    <input id="orden" name="orden" onkeyup="return(limitar());" type="text" value="" >
                                 </div>
                             </div>
                             <br>
@@ -274,6 +274,18 @@
                 return true;
             }
         </script>
+        <script type="text/javascript">
+                function limitar()
+                {
+                    var orden = document.getElementById('orden');
+
+                    if (orden.value.length < 0 || orden.value.length > 39) {
+                        alert("El campo no debe exceder más de 40 caracteres");
+                        orden.value = orden.value.substring(0, 39);
+                        return false;
+                    }
+                }
+            </script>
         <!-- Ubicar al final -->
     </body>
 </html>

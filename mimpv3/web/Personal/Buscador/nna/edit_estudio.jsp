@@ -232,7 +232,7 @@
                             <div class="control-group">
                                 <label class="control-label">N° de Designación</label>
                                 <div class="controls">
-                                    <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="numDesig" name="numDesig" type="text" class="span2" value="" id="designacion" >
+                                    <input ${tokenDesig == 'designado' ? 'disabled' : ''} ${token == 'aceptado' ? '' : 'disabled'} id="numDesig" name="numDesig" onkeyup="return(limitar());" type="text" class="span2" value="" id="designacion" >
                                 </div>
                             </div>
                             <br>
@@ -322,6 +322,18 @@
                 //alert(resul.value);
             }
         </script>
+        <script type="text/javascript">
+                function limitar()
+                {
+                    var numDesig = document.getElementById('numDesig');
+
+                    if (numDesig.value.length < 0 || numDesig.value.length > 49) {
+                        alert("El campo no debe exceder más de 50 caracteres");
+                        numDesig.value = numDesig.value.substring(0, 49);
+                        return false;
+                    }
+                }
+            </script>
         <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>
