@@ -157,14 +157,14 @@
                                     <div class="control-group">
                                         <label class="control-label">HT</label>
                                         <div class="controls">
-                                            <input  id="ht" name="ht" value="${expediente.getHt()}" type="text" class="input-xlarge">
+                                            <input  id="ht" name="ht" value="${expediente.getHt()}" onkeyup="return(limitar());" type="text" class="input-xlarge">
                                         </div>
                                     </div>                                                                    
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Número de investigación tutelar</label>
                                         <div class="controls">
-                                            <input id="nInvTutelar" name="nInvTutelar" value="${expediente.getNExpTutelar()}" type="text" class="input-xlarge">
+                                            <input id="nInvTutelar" name="nInvTutelar" onkeyup="return(limitar());" value="${expediente.getNExpTutelar()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -178,7 +178,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Procedencia tutelar</label>
                                         <div class="controls">
-                                            <input id="procTutelar" name="procTutelar" value="${expediente.getProcTutelar()}" type="text" class="input-xlarge">
+                                            <input id="procTutelar" name="procTutelar" onkeyup="return(limitar());" value="${expediente.getProcTutelar()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -329,7 +329,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Código Mayores</label>
                                         <div class="controls">
-                                            <input id="codMayor" name="codMayor" ${expediente.getNna().getMayor() == 0 || nna.getMayor() == 0 ? '' : 'disabled'}  value="${expediente.getNna().getMayor() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
+                                            <input id="codMayor" name="codMayor" onkeyup="return(limitar());" ${expediente.getNna().getMayor() == 0 || nna.getMayor() == 0 ? '' : 'disabled'}  value="${expediente.getNna().getMayor() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -350,7 +350,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Código Adolescente</label>
                                         <div class="controls">
-                                            <input id="codAdoles" name="codAdoles" ${expediente.getNna().getAdolescente() == 0 || nna.getAdolescente() == 0 ? '' : 'disabled'} value="${expediente.getNna().getAdolescente() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
+                                            <input id="codAdoles" name="codAdoles" onkeyup="return(limitar());" ${expediente.getNna().getAdolescente() == 0 || nna.getAdolescente() == 0 ? '' : 'disabled'} value="${expediente.getNna().getAdolescente() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -371,7 +371,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Código Hermano</label>
                                         <div class="controls">
-                                            <input id="codHermano" name="codHermano" ${expediente.getNna().getHermano() == 0 || nna.getHermano() == 0 ? '' : 'disabled'} value="${expediente.getNna().getHermano() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
+                                            <input id="codHermano" name="codHermano" onkeyup="return(limitar());" ${expediente.getNna().getHermano() == 0 || nna.getHermano() == 0 ? '' : 'disabled'} value="${expediente.getNna().getHermano() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -392,7 +392,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Código Problemas de Salud</label>
                                         <div class="controls">
-                                            <input id="codSalud" name="codSalud" ${expediente.getNna().getEnfermo() == 0 || nna.getEnfermo() == 0 ? '' : 'disabled'} value="${expediente.getNna().getEnfermo() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
+                                            <input id="codSalud" name="codSalud" onkeyup="return(limitar());" ${expediente.getNna().getEnfermo() == 0 || nna.getEnfermo() == 0 ? '' : 'disabled'} value="${expediente.getNna().getEnfermo() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -412,21 +412,21 @@
                                     <div class="control-group">
                                         <label class="control-label">Código Necesidades Especiales</label>
                                         <div class="controls">
-                                            <input id="codEspeciales" name="codEspeciales" ${expediente.getNna().getEspecial() == 0 || nna.getEspecial() == 0 ? '' : 'disabled'} value="${expediente.getNna().getEspecial() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
+                                            <input id="codEspeciales" name="codEspeciales" onkeyup="return(limitar());" ${expediente.getNna().getEspecial() == 0 || nna.getEspecial() == 0 ? '' : 'disabled'} value="${expediente.getNna().getEspecial() == 0 ? expediente.getCodigoReferencia() : ''}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Diagnóstico</label>
                                         <div class="controls">
-                                            <textarea id="diagnostico" name="diagnostico" type="text" class="input-xlarge">${expediente.getDiagnostico()}</textarea>
+                                            <textarea id="diagnostico" name="diagnostico" onkeyup="return(limitar());" type="text" class="input-xlarge">${expediente.getDiagnostico()}</textarea>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Observaciones</label>
                                         <div class="controls">
-                                            <textarea id="comentario" name="comentario" type="text" class="input-xlarge">${expediente.getObservaciones()}</textarea>
+                                            <textarea id="comentario" name="comentario" onkeyup="return(limitar());" type="text" class="input-xlarge">${expediente.getObservaciones()}</textarea>
                                         </div>
                                     </div>
                                     <br>
@@ -435,21 +435,21 @@
                                         <div class="control-group">
                                             <label class="control-label">Nombre Actual</label>
                                             <div class="controls">
-                                                <input  id="nombreActual" name="nombreActual" value="${expediente.getNActual()}" type="text" placeholder="" class="input-xlarge" >
+                                                <input  id="nombreActual" name="nombreActual" onkeyup="return(limitar());" value="${expediente.getNActual()}" type="text" placeholder="" class="input-xlarge" >
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <label class="control-label">Apellido Paterno Actual</label>
                                             <div class="controls">
-                                                <input  id="apellidoPActual" name="apellidoPActual" value="${expediente.getApellidopActual()}" type="text" placeholder="" class="input-xlarge" >
+                                                <input  id="apellidoPActual" name="apellidoPActual" onkeyup="return(limitar());" value="${expediente.getApellidopActual()}" type="text" placeholder="" class="input-xlarge" >
                                             </div>
                                         </div>
                                         <br>
                                         <div class="control-group">
                                             <label class="control-label">Apellido Materno Actual</label>
                                             <div class="controls">
-                                                <input  id="apellidoMActual" name="apellidoMActual" value="${expediente.getApellidomActual()}" type="text" placeholder="" class="input-xlarge" >
+                                                <input  id="apellidoMActual" name="apellidoMActual" onkeyup="return(limitar());" value="${expediente.getApellidomActual()}" type="text" placeholder="" class="input-xlarge" >
                                             </div>
                                         </div>
                                         <br>
@@ -600,6 +600,78 @@
                         histEspeciales.disabled = false;
                         especiales.disabled = false;
 
+                    }
+                }
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {
+                    var ht = document.getElementById('ht');
+                    var nInvTutelar = document.getElementById('nInvTutelar');
+                    var procTutelar = document.getElementById('procTutelar');
+                    var codMayor = document.getElementById('codMayor');
+                    var codAdoles = document.getElementById('codAdoles');
+                    var codHermano = document.getElementById('codHermano');
+                    var codSalud = document.getElementById('codSalud');
+                    var codEspeciales = document.getElementById('codEspeciales');
+                    var diagnostico = document.getElementById('diagnostico');
+                    var comentario = document.getElementById('comentario');
+                    var nombreActual = document.getElementById('nombreActual');
+                    var apellidoPActual = document.getElementById('apellidoPActual');
+                    var apellidoMActual = document.getElementById('apellidoMActual');
+
+                    if (ht.value.length < 0 || ht.value.length > 44) {
+                        alert("El campo no debe exceder más de 45 caracteres");
+                        ht.value = ht.value.substring(0, 44);
+                        return false;
+                    } else if (nInvTutelar.value.length < 0 || nInvTutelar.value.length > 44) {
+                        alert("El campo no debe exceder más de 45 caracteres");
+                        nInvTutelar.value = nInvTutelar.value.substring(0, 44);
+                        return false;
+                    } else if (procTutelar.value.length < 0 || procTutelar.value.length > 199) {
+                        alert("El campo no debe exceder más de 200 caracteres");
+                        procTutelar.value = procTutelar.value.substring(0, 199);
+                        return false;
+                    } else if (codMayor.value.length < 0 || codMayor.value.length > 19) {
+                        alert("El campo no debe exceder más de 20 caracteres");
+                        codMayor.value = codMayor.value.substring(0, 19);
+                        return false;
+                    } else if (codAdoles.value.length < 0 || codAdoles.value.length > 19) {
+                        alert("El campo no debe exceder más de 20 caracteres");
+                        codAdoles.value = codAdoles.value.substring(0, 19);
+                        return false;
+                    } else if (codHermano.value.length < 0 || codHermano.value.length > 19) {
+                        alert("El campo no debe exceder más de 20 caracteres");
+                        codHermano.value = codHermano.value.substring(0, 19);
+                        return false;
+                    } else if (codSalud.value.length < 0 || codSalud.value.length > 19) {
+                        alert("El campo no debe exceder más de 20 caracteres");
+                        codSalud.value = codSalud.value.substring(0, 19);
+                        return false;
+                    } else if (codEspeciales.value.length < 0 || codEspeciales.value.length > 19) {
+                        alert("El campo no debe exceder más de 20 caracteres");
+                        codEspeciales.value = codEspeciales.value.substring(0, 19);
+                        return false;
+                    } else if (diagnostico.value.length < 0 || diagnostico.value.length > 199) {
+                        alert("El campo no debe exceder más de 200 caracteres");
+                        diagnostico.value = diagnostico.value.substring(0, 199);
+                        return false;
+                    } else if (comentario.value.length < 0 || comentario.value.length > 499) {
+                        alert("El campo no debe exceder más de 500 caracteres");
+                        comentario.value = comentario.value.substring(0, 499);
+                        return false;
+                    } else if (nombreActual.value.length < 0 || nombreActual.value.length > 99) {
+                        alert("El campo no debe exceder más de 100 caracteres");
+                        nombreActual.value = nombreActual.value.substring(0, 99);
+                        return false;
+                    } else if (apellidoPActual.value.length < 0 || apellidoPActual.value.length > 99) {
+                        alert("El campo no debe exceder más de 100 caracteres");
+                        apellidoPActual.value = apellidoPActual.value.substring(0, 99);
+                        return false;
+                    } else if (apellidoMActual.value.length < 0 || apellidoMActual.value.length > 99) {
+                        alert("El campo no debe exceder más de 100 caracteres");
+                        apellidoMActual.value = apellidoMActual.value.substring(0, 99);
+                        return false;
                     }
                 }
             </script>

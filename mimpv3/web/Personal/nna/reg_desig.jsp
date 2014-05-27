@@ -197,7 +197,7 @@
                             <div class="control-group">
                                 <label class="control-label">N° de Designación</label>
                                 <div class="controls">
-                                    <input type="text" class="span2" value="" id="numDesig" name="numDesig" >
+                                    <input type="text" class="span2" value="" id="numDesig" onkeyup="return(limitar());" name="numDesig" >
                                 </div>
                             </div>
                             <br>
@@ -257,6 +257,18 @@
                 window.history.forward();
             }
         </SCRIPT>
+        <script type="text/javascript">
+                function limitar()
+                {
+                    var numDesig = document.getElementById('numDesig');
+
+                    if (numDesig.value.length < 0 || numDesig.value.length > 49) {
+                        alert("El campo no debe exceder más de 50 caracteres");
+                        numDesig.value = numDesig.value.substring(0, 49);
+                        return false;
+                    }
+                }
+            </script>
         <!-- Ubicar al final -->
     </body>
 </html>

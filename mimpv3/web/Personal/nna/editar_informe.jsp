@@ -133,7 +133,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Número de Informe</label>
                                         <div class="controls">
-                                            <input id="numInf" name="numInf" value="${informe.getNumero()}" type="text" class="input-xlarge">
+                                            <input id="numInf" name="numInf" onkeyup="return(limitar());" value="${informe.getNumero()}" type="text" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -147,14 +147,14 @@
                                     <div class="control-group">
                                         <label class="control-label">Resultado del informe</label>
                                         <div class="controls">
-                                            <textarea id="result" name="result" cols="25" rows="5">${informe.getResultado()}</textarea>
+                                            <textarea id="result" name="result" onkeyup="return(limitar());" cols="25" rows="5">${informe.getResultado()}</textarea>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Observaciones</label>
                                         <div class="controls">
-                                            <textarea id="obs" name="obs" cols="25" rows="5">${informe.getObservaciones()}</textarea>
+                                            <textarea id="obs" name="obs" onkeyup="return(limitar());" cols="25" rows="5">${informe.getObservaciones()}</textarea>
                                         </div>
                                     </div>
                                     <br>
@@ -250,6 +250,28 @@
         });
     });
 
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {
+                    var numInf = document.getElementById('numInf');
+                    var result = document.getElementById('result');
+                    var obs = document.getElementById('obs');
+
+                    if (numInf.value.length < 0 || numInf.value.length > 49) {
+                        alert("El campo no debe exceder más de 50 caracteres");
+                        numInf.value = numInf.value.substring(0, 49);
+                        return false;
+                    } else if (result.value.length < 0 || result.value.length > 999) {
+                        alert("El campo no debe exceder más de 1000 caracteres");
+                        result.value = result.value.substring(0, 999);
+                        return false;
+                    } else if (obs.value.length < 0 || obs.value.length > 999) {
+                        alert("El campo no debe exceder más de 1000 caracteres");
+                        obs.value = obs.value.substring(0, 999);
+                        return false;
+                    }
+                }
             </script>
             <!-- Ubicar al final -->
     </body>

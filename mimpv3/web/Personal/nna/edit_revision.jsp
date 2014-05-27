@@ -244,7 +244,7 @@
                         <form action="${pageContext.servletContext.contextPath}/MainGuardarRevision" method="post">
                             <br>
                             <c:set var="comentarios" value="${listaRevisiones.get(0).getComentarios()}" ></c:set>      
-                            <textarea type="text" id="coments" name="coments" cols="25" rows="5">${comentarios}</textarea>
+                            <textarea type="text" id="coments" name="coments" onkeyup="return(limitar());" cols="25" rows="5">${comentarios}</textarea>
                             <input hidden id="numero" name="numero" value="${numero}" />
                             <br>
                             <br>
@@ -285,6 +285,18 @@
                 //alert(resul.value);
             }
         </script>
+        <script type="text/javascript">
+                function limitar()
+                {
+                    var coments = document.getElementById('coments');
+
+                    if (coments.value.length < 0 || coments.value.length > 149) {
+                        alert("El campo no debe exceder más de 150 caracteres");
+                        coments.value = coments.value.substring(0, 149);
+                        return false;
+                    }
+                }
+            </script>
         <!-- Placed at the end of the document so the pages load faster -->
     </body>
 </html>

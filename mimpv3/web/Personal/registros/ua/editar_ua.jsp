@@ -123,14 +123,14 @@
                                     <div class="control-group">
                                         <label class="control-label">Nombre</label>
                                         <div class="controls">
-                                            <input id="nombre" name="nombre" type="text" value="${ua.getNombre()}" class="input-xlarge">
+                                            <input id="nombre" name="nombre" type="text" value="${ua.getNombre()}" onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Dirección</label>
                                         <div class="controls">
-                                            <input id="direccion" name="direccion" type="text" value="${ua.getDireccion()}" class="input-xlarge">
+                                            <input id="direccion" name="direccion" type="text" value="${ua.getDireccion()}" onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
@@ -179,49 +179,49 @@
                                     <div class="control-group">
                                         <label class="control-label">Provincia</label>
                                         <div class="controls">
-                                            <input id="provincia" name="provincia" type="text" value="${ua.getProvincia()}" class="input-xlarge">
+                                            <input id="provincia" name="provincia" type="text" value="${ua.getProvincia()}" onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>                                    
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Distrito</label>
                                         <div class="controls">
-                                            <input id="distrito" name="distrito" type="text" value="${ua.getDistrito()}" class="input-xlarge">
+                                            <input id="distrito" name="distrito" type="text" value="${ua.getDistrito()}" onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>                                    
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Competencia Regional</label>
                                         <div class="controls">
-                                            <input id="competenciaR" name="competenciaR" type="text" value="${ua.getCompetenciaRegional()}" class="input-xlarge">
+                                            <input id="competenciaR" name="competenciaR" type="text" value="${ua.getCompetenciaRegional()}" onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Correo</label>
                                         <div class="controls">
-                                            <input id="correo" name="correo" type="text" value="${ua.getCorreo()}" class="input-xlarge">
+                                            <input id="correo" name="correo" type="text" value="${ua.getCorreo()}" onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>                                    
                                     <div class="control-group">
                                         <label class="control-label">Teléfono</label>
                                         <div class="controls">
-                                            <input id="telefono" name="telefono" type="text" value="${ua.getTelefono()}" class="input-xlarge">
+                                            <input id="telefono" name="telefono" type="text" value="${ua.getTelefono()}" onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>
                                     <br>                                   
                                     <div class="control-group">
                                         <label class="control-label">Celular</label>
                                         <div class="controls">
-                                            <input id="celular" name="celular" type="text" value="${ua.getCelular()}" class="input-xlarge">
+                                            <input id="celular" name="celular" type="text" value="${ua.getCelular()}" onkeyup="return(limitar());" class="input-xlarge">
                                         </div>
                                     </div>                                    
                                     <br>
                                     <div class="control-group">
                                         <label class="control-label">Observaciones</label>
                                         <div class="controls">
-                                            <textarea class="input-xlarge" id="obs" name="obs" placeholder="Ingrese sus observaciones" rows="5" >${ua.getObs()}</textarea>
+                                            <textarea class="input-xlarge" id="obs" name="obs" placeholder="Ingrese sus observaciones" onkeyup="return(limitar());" rows="5" >${ua.getObs()}</textarea>
                                         </div>
                                     </div>                                    
                                     <br>
@@ -259,6 +259,58 @@
                             $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
             </script>
+            <script type="text/javascript">
+                                    function limitar()
+                                    {
+                                        var nombre = document.getElementById('nombre');
+                                        var direccion = document.getElementById('direccion');
+                                        var provincia = document.getElementById('provincia');
+                                        var distrito = document.getElementById('distrito');
+                                        var competenciaR = document.getElementById('competenciaR');
+                                        var correo = document.getElementById('correo');
+                                        var telefono = document.getElementById('telefono');
+                                        var celular = document.getElementById('celular');
+                                        var obs = document.getElementById('obs');
+
+                                        if (nombre.value.length < 0 || nombre.value.length > 29) {
+                                            alert("El campo no debe exceder más de 30 caracteres");
+                                            nombre.value = nombre.value.substring(0, 29);
+                                            return false;
+                                        } else if (direccion.value.length < 0 || direccion.value.length > 199) {
+                                            alert("El campo no debe exceder más de 200 caracteres");
+                                            direccion.value = direccion.value.substring(0, 199);
+                                            return false;
+                                        } else if (provincia.value.length < 0 || provincia.value.length > 19) {
+                                            alert("El campo no debe exceder más de 20 caracteres");
+                                            provincia.value = provincia.value.substring(0, 19);
+                                            return false;
+                                        } else if (distrito.value.length < 0 || distrito.value.length > 19) {
+                                            alert("El campo no debe exceder más de 20 caracteres");
+                                            distrito.value = distrito.value.substring(0, 19);
+                                            return false;
+                                        } else if (competenciaR.value.length < 0 || competenciaR.value.length > 99) {
+                                            alert("El campo no debe exceder más de 100 caracteres");
+                                            competenciaR.value = competenciaR.value.substring(0, 99);
+                                            return false;
+                                        } else if (correo.value.length < 0 || correo.value.length > 39) {
+                                            alert("El campo no debe exceder más de 40 caracteres");
+                                            correo.value = correo.value.substring(0, 39);
+                                            return false;
+                                        } else if (telefono.value.length < 0 || telefono.value.length > 14) {
+                                            alert("El campo no debe exceder más de 15 caracteres");
+                                            telefono.value = telefono.value.substring(0, 14);
+                                            return false;
+                                        } else if (celular.value.length < 0 || celular.value.length > 14) {
+                                            alert("El campo no debe exceder más de 15 caracteres");
+                                            celular.value = celular.value.substring(0, 14);
+                                            return false;
+                                        } else if (obs.value.length < 0 || obs.value.length > 199) {
+                                            alert("El campo no debe exceder más de 200 caracteres");
+                                            obs.value = obs.value.substring(0, 199);
+                                            return false;
+                                        }
+                                    }
+                                </script>
             <!-- Ubicar al final -->
     </body>
 </html>
