@@ -442,7 +442,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Nombres <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="nombreElla" name="nombreElla" onkeyup="return(limitar());"  type="text" placeholder="Nombres" class="input-xlarge">
+                                <input id="nombreElla" name="nombreElla" onkeyup="return(limitar2());"  type="text" placeholder="Nombres" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -450,7 +450,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Apellido Paterno <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="apellidoPElla" name="apellidoPElla" onkeyup="return(limitar());"  type="text" placeholder="Apellido Paterno" class="input-xlarge">
+                                <input id="apellidoPElla" name="apellidoPElla" onkeyup="return(limitar2());"  type="text" placeholder="Apellido Paterno" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -458,7 +458,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Apellido Materno <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="apellidoMElla" name="apellidoMElla" onkeyup="return(limitar());"  type="text" placeholder="Apellido Materno" class="input-xlarge">
+                                <input id="apellidoMElla" name="apellidoMElla" onkeyup="return(limitar2());"  type="text" placeholder="Apellido Materno" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -735,7 +735,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Provincia de nacimiento <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="proNacElla" name="proNacElla" onkeyup="return(limitar());"  type="text" placeholder="Provincia" class="input-xlarge">
+                                <input id="proNacElla" name="proNacElla" onkeyup="return(limitar2());"  type="text" placeholder="Provincia" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -773,7 +773,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">N° documento <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="numDocElla" name="numDocElla" onkeyup="return(limitar());"  type="text" placeholder="Numero Documento" class="input-xlarge">
+                                <input id="numDocElla" name="numDocElla" onkeyup="return(limitar2());"  type="text" placeholder="Numero Documento" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -781,7 +781,7 @@
                         <div class="control-group">
                             <label class="control-label" for="selectbasic">Profesión/Ocupación <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="profesionElla" name="profesionElla" onkeyup="return(limitar());"  type="text" placeholder="Profesión" class="input-xlarge">
+                                <input id="profesionElla" name="profesionElla" onkeyup="return(limitar2());"  type="text" placeholder="Profesión" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -789,7 +789,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Celular <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="celElla" name="celELla" type="text" onkeyup="return(limitar());"  placeholder="Celular" class="input-xlarge">
+                                <input id="celElla" name="celELla" type="text" onkeyup="return(limitar2());"  placeholder="Celular" class="input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -797,7 +797,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Correo Electrónico (Este correo será usado para futuras comunicaciones)<font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="correoElla" name="correoElla" onkeyup="return(limitar());"  type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
+                                <input id="correoElla" name="correoElla" onkeyup="return(limitar2());"  type="text" placeholder="ejemplo@dominio.com" class="input-xlarge">
                             </div>
                         </div> 
                     </div>
@@ -829,22 +829,22 @@
                         </div>
                         <div class="col-lg-3">
                             <label for="prov">Provincia <font style="color:red">(*)</font></label> 
-                            <input id="prov" name="prov" onkeyup="return(limitar());"  type="text" placeholder="Provincia" class="input-xlarge">
+                            <input id="prov" name="prov" onkeyup="return(limitar3());"  type="text" placeholder="Provincia" class="input-xlarge">
                         </div>
                         <div class="col-lg-3">
                             <label for="dist">Distrito <font style="color:red">(*)</font></label> 
-                            <input id="dist" name="dist" onkeyup="return(limitar());"  type="text" placeholder="Distrito" class="input-xlarge">
+                            <input id="dist" name="dist" onkeyup="return(limitar3());"  type="text" placeholder="Distrito" class="input-xlarge">
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-lg-4">
                             <label for="dir">Dirección domiciliaria <font style="color:red">(*)</font></label> 
-                            <input id="dir" name="dir" onkeyup="return(limitar());"  type="text" placeholder="Dirección Domiciliaria" class="input-xlarge">
+                            <input id="dir" name="dir" onkeyup="return(limitar3());"  type="text" placeholder="Dirección Domiciliaria" class="input-xlarge">
                         </div>
                         <div class="col-lg-4">
                             <label for="telf">Teléfono fijo <font style="color:red">(*)</font></label> 
-                            <input id="telf" name="telf" onkeyup="return(limitar());"  type="text" placeholder="Teléfono fijo" class="input-xlarge">
+                            <input id="telf" name="telf" onkeyup="return(limitar3());"  type="text" placeholder="Teléfono fijo" class="input-xlarge">
                         </div>
                     </div>
                     <br>
@@ -885,23 +885,18 @@
     <script type="text/javascript">
 
                                 $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
-
                                 $('#fechaNacEl').on('changeDate', function(ev) {
 
                                     var nac = document.getElementById("fechaNacEl").value;
                                     var edad = document.getElementById("edadEl");
-
                                     var today = new Date();
                                     var curr_date = today.getDate();
                                     var curr_month = today.getMonth() + 1;
                                     var curr_year = today.getFullYear();
-
                                     var pieces = nac.split('/');
                                     var birth_date = pieces[0];
                                     var birth_month = pieces[1];
                                     var birth_year = pieces[2];
-
-
                                     if (curr_year != birth_year && birth_month > curr_month)
                                         edad.value = curr_year - birth_year - 1;
                                     if (curr_year != birth_year && birth_month == curr_month)
@@ -910,26 +905,19 @@
                                         edad.value = curr_year - birth_year;
                                     if (curr_year == birth_year)
                                         edad.value = 0;
-
-
                                 });
-
                                 $('#fechaNacElla').on('changeDate', function(ev) {
 
                                     var nac = document.getElementById("fechaNacElla").value;
                                     var edad = document.getElementById("edadElla");
-
                                     var today = new Date();
                                     var curr_date = today.getDate();
                                     var curr_month = today.getMonth() + 1;
                                     var curr_year = today.getFullYear();
-
                                     var pieces = nac.split('/');
                                     var birth_date = pieces[0];
                                     var birth_month = pieces[1];
                                     var birth_year = pieces[2];
-
-
                                     if (curr_year != birth_year && birth_month > curr_month)
                                         edad.value = curr_year - birth_year - 1;
                                     if (curr_year != birth_year && birth_month == curr_month)
@@ -938,11 +926,7 @@
                                         edad.value = curr_year - birth_year;
                                     if (curr_year == birth_year)
                                         edad.value = 0;
-
-
-                                });
-
-    </script>
+                                });</script>
     <script type="text/javascript">
 
         function validar()
@@ -1117,7 +1101,7 @@
                 document.formulario.correoElla.focus();
                 return false;
             }
-            
+
             if (document.formulario.correoElla.value != "")
             {
                 if (validateEmail(document.formulario.correoElla.value)) {
@@ -1178,11 +1162,11 @@
         }
     </script>
     <script>
-                function validateEmail(email) {
-                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                    return re.test(email);
-                }
-            </script>
+        function validateEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+    </script>
     <script type="text/javascript">
         function limitar()
         {
@@ -1193,104 +1177,139 @@
             var numDocEl = document.getElementById('numDocEl');
             var profesionEl = document.getElementById('profesionEl');
             var correoEl = document.getElementById('correoEl');
-            var celEl = document.getElementById('cel');
+            var celEl = document.getElementById('celEl');
 
-            var nombreElla = document.getElementById('nombreElla');
-            var apellidoPElla = document.getElementById('apellidoPElla');
-            var apellidoMElla = document.getElementById('apellidoMElla');
-            var proNacElla = document.getElementById('proNacElla');
-            var numDocElla = document.getElementById('numDocElla');
-            var profesionElla = document.getElementById('profesionElla');
-            var correoElla = document.getElementById('correoElla');
-            var celElla = document.getElementById('celElla');
-
-            var prov = document.getElementById('prov');
-            var dist = document.getElementById('dist');
-            var dir = document.getElementById('dir');
-            var telf = document.getElementById('telf');
-
-
+            
             if (nombreEl.value.length < 0 || nombreEl.value.length > 29) {
                 alert("solo puede ingresar 30 caracteres");
-                nombreEl.value = nombreEl.value.substring(0, 29);
+                nombreEl.value = nombreEl.value.substring(0, 30);
+                document.formulario.nombreEl.focus();
                 return false;
             } else if (apellidoPEl.value.length < 0 || apellidoPEl.value.length > 29) {
                 alert("solo puede ingresar 30 caracteres");
-                apellidoPEl.value = apellidoPEl.value.substring(0, 29);
+                apellidoPEl.value = apellidoPEl.value.substring(0, 30);
+                document.formulario.apellidoPEl.focus();
                 return false;
             } else if (apellidoMEl.value.length < 0 || apellidoMEl.value.length > 29) {
                 alert("solo puede ingresar 30 caracteres");
-                apellidoMEl.value = apellidoMEl.value.substring(0, 29);
+                apellidoMEl.value = apellidoMEl.value.substring(0, 30);
+                document.formulario.apellidoMEl.focus();
                 return false;
             } else if (numDocEl.value.length < 0 || numDocEl.value.length > 14) {
                 alert("solo puede ingresar 15 caracteres");
-                numDocEl.value = numDocEl.value.substring(0, 14);
+                numDocEl.value = numDocEl.value.substring(0, 15);
+                document.formulario.numDocEl.focus();
                 return false;
             } else if (proNacEl.value.length < 0 || proNacEl.value.length > 49) {
                 alert("solo puede ingresar 50 caracteres");
-                proNacEl.value = proNacEl.value.substring(0, 49);
+                proNacEl.value = proNacEl.value.substring(0, 50);
+                document.formulario.proNacEl.focus();
                 return false;
             } else if (correoEl.value.length < 0 || correoEl.value.length > 49) {
                 alert("solo puede ingresar 50 caracteres");
-                correoEl.value = correoEl.value.substring(0, 49);
+                correoEl.value = correoEl.value.substring(0, 50);
+                document.formulario.correoEl.focus();
                 return false;
             } else if (profesionEl.value.length < 0 || profesionEl.value.length > 49) {
                 alert("solo puede ingresar 50 caracteres");
-                profesionEl.value = profesionEl.value.substring(0, 49);
+                profesionEl.value = profesionEl.value.substring(0, 50);
+                document.formulario.profesionEl.focus();
                 return false;
             } else if (celEl.value.length < 0 || celEl.value.length > 14) {
                 alert("solo puede ingresar 15 caracteres");
-                celEl.value = celEl.value.substring(0, 14);
-                return false;
-            } else if (nombreElla.value.length < 0 || nombreElla.value.length > 29) {
-                alert("solo puede ingresar 30 caracteres");
-                nombreElla.value = nombreElla.value.substring(0, 29);
-                return false;
-            } else if (apellidoPElla.value.length < 0 || apellidoPElla.value.length > 29) {
-                alert("solo puede ingresar 30 caracteres");
-                apellidoPElla.value = apellidoPElla.value.substring(0, 29);
-                return false;
-            } else if (apellidoMElla.value.length < 0 || apellidoMElla.value.length > 29) {
-                alert("solo puede ingresar 30 caracteres");
-                apellidoMElla.value = apellidoMElla.value.substring(0, 29);
-                return false;
-            } else if (numDocElla.value.length < 0 || numDocElla.value.length > 14) {
-                alert("solo puede ingresar 15 caracteres");
-                numDocElla.value = numDocElla.value.substring(0, 14);
-                return false;
-            } else if (proNacElla.value.length < 0 || proNacElla.value.length > 49) {
-                alert("solo puede ingresar 50 caracteres");
-                proNacElla.value = proNacElla.value.substring(0, 49);
-                return false;
-            } else if (correoElla.value.length < 0 || correoElla.value.length > 49) {
-                alert("solo puede ingresar 50 caracteres");
-                correoElla.value = correoElla.value.substring(0, 49);
-                return false;
-            } else if (profesionElla.value.length < 0 || profesionElla.value.length > 49) {
-                alert("solo puede ingresar 50 caracteres");
-                profesionElla.value = profesionElla.value.substring(0, 49);
-                return false;
-            } else if (celElla.value.length < 0 || celElla.value.length > 14) {
-                alert("solo puede ingresar 15 caracteres");
-                celElla.value = celElla.value.substring(0, 14);
-                return false;
-            } else if (prov.value.length < 0 || prov.value.length > 99) {
-                alert("solo puede ingresar 100 caracteres");
-                prov.value = prov.value.substring(0, 99);
-                return false;
-            } else if (dist.value.length < 0 || dist.value.length > 99) {
-                alert("solo puede ingresar 100 caracteres");
-                dist.value = dist.value.substring(0, 99);
-                return false;
-            } else if (dir.value.length < 0 || dir.value.length > 199) {
-                alert("solo puede ingresar 200 caracteres");
-                dir.value = dir.value.substring(0, 199);
-                return false;
-            } else if (telf.value.length < 0 || telf.value.length > 14) {
-                alert("solo puede ingresar 15 caracteres");
-                telf.value = telf.value.substring(0, 14);
+                celEl.value = celEl.value.substring(0, 15);
+                document.formulario.celEl.focus();
                 return false;
             }
+            
+    }
+    </script>
+
+    <script type="text/javascript">
+            function limitar2()
+            {
+                var nombreElla = document.getElementById('nombreElla');
+                var apellidoPElla = document.getElementById('apellidoPElla');
+                var apellidoMElla = document.getElementById('apellidoMElla');
+                var proNacElla = document.getElementById('proNacElla');
+                var numDocElla = document.getElementById('numDocElla');
+                var profesionElla = document.getElementById('profesionElla');
+                var correoElla = document.getElementById('correoElla');
+                var celElla = document.getElementById('celElla');
+
+                if (nombreElla.value.length < 0 || nombreElla.value.length > 29) {
+                    alert("solo puede ingresar 30 caracteres");
+                    nombreElla.value = nombreElla.value.substring(0, 30);
+                    document.formulario.nombreElla.focus();
+                    return false;
+                } else if (apellidoPElla.value.length < 0 || apellidoPElla.value.length > 29) {
+                    alert("solo puede ingresar 30 caracteres");
+                    apellidoPElla.value = apellidoPElla.value.substring(0, 30);
+                    document.formulario.apellidoPElla.focus();
+                    return false;
+                } else if (apellidoMElla.value.length < 0 || apellidoMElla.value.length > 29) {
+                    alert("solo puede ingresar 30 caracteres");
+                    apellidoMElla.value = apellidoMElla.value.substring(0, 30);
+                    document.formulario.apellidoMElla.focus();
+                    return false;
+                } else if (numDocElla.value.length < 0 || numDocElla.value.length > 14) {
+                    alert("solo puede ingresar 15 caracteres");
+                    numDocElla.value = numDocElla.value.substring(0, 15);
+                    document.formulario.numDocElla.focus();
+                    return false;
+                } else if (proNacElla.value.length < 0 || proNacElla.value.length > 49) {
+                    alert("solo puede ingresar 50 caracteres");
+                    proNacElla.value = proNacElla.value.substring(0, 50);
+                    document.formulario.proNacElla.focus();
+                    return false;
+                } else if (correoElla.value.length < 0 || correoElla.value.length > 49) {
+                    alert("solo puede ingresar 50 caracteres");
+                    correoElla.value = correoElla.value.substring(0, 50);
+                    document.formulario.correoElla.focus();
+                    return false;
+                } else if (profesionElla.value.length < 0 || profesionElla.value.length > 49) {
+                    alert("solo puede ingresar 50 caracteres");
+                    profesionElla.value = profesionElla.value.substring(0, 50);
+                    document.formulario.profesionElla.focus();
+                    return false;
+                } else if (celElla.value.length < 0 || celElla.value.length > 14) {
+                    alert("solo puede ingresar 15 caracteres");
+                    celElla.value = celElla.value.substring(0, 15);
+                    document.formulario.celElla.focus();
+                    return false;
+                }
+				}
+
+    </script>
+    <script type="text/javascript">
+                function limitar3()
+                {
+                    var prov = document.getElementById('prov');
+                    var dist = document.getElementById('dist');
+                    var dir = document.getElementById('dir');
+                    var telf = document.getElementById('telf');
+
+                    if (prov.value.length < 0 || prov.value.length > 99) {
+                        alert("solo puede ingresar 100 caracteres");
+                        prov.value = prov.value.substring(0, 100);
+                        document.formulario.prov.focus();
+                        return false;
+                    } else if (dist.value.length < 0 || dist.value.length > 99) {
+                        alert("solo puede ingresar 100 caracteres");
+                        dist.value = dist.value.substring(0, 100);
+                        document.formulario.dist.focus();
+                        return false;
+                    } else if (dir.value.length < 0 || dir.value.length > 199) {
+                        alert("solo puede ingresar 200 caracteres");
+                        dir.value = dir.value.substring(0, 200);
+                        document.formulario.dir.focus();
+                        return false;
+                    } else if (telf.value.length < 0 || telf.value.length > 14) {
+                        alert("solo puede ingresar 15 caracteres");
+                        telf.value = telf.value.substring(0, 15);
+                        document.formulario.telf.focus();
+                        return false;
+                    }
         }
     </script>
     <!-- Ubicar al final -->
