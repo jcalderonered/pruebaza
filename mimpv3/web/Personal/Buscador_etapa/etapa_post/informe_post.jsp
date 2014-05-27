@@ -119,7 +119,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/InsertarInforme" method="post" > 
+                        <form name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/InsertarInforme" method="post" > 
                             <fieldset>
                                 <input hidden name="idInforme" id="idInforme" value="${informe.getIdinformePostAdoptivo()}">
                                 <input hidden name="num" id="num" value="${num}">
@@ -196,7 +196,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <textarea cols="25" rows="5" ${informe.getEstado() == 'listo' ? 'disabled' : ''} name="obs" type="text" class="input-xlarge" >${informe.getObs()}</textarea>
+                                        <textarea onkeyup="return(limitar());" cols="25" rows="5" ${informe.getEstado() == 'listo' ? 'disabled' : ''} name="obs" type="text" class="input-xlarge" >${informe.getObs()}</textarea>
                                     </div>
                                 </div>
                                 <!-- Button -->
@@ -238,6 +238,19 @@
                     window.history.forward();
                 }
             </SCRIPT>
+            <script type="text/javascript">
+                    function limitar()
+                    {
+                        var obs = document.getElementById('obs');
+
+                        if (obs.value.length < 0 || obs.value.length > 1999) {
+                            alert("solo puede ingresar 2000 caracteres");
+                            obs.value = obs.value.substring(0, 2000);
+                            document.formulario.obs.focus();
+                            return false;
+                        }
+                    }
+                </script>
             <!-- Ubicar al final -->
     </body>
 </html>
