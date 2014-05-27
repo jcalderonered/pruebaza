@@ -143,21 +143,11 @@
                             <div class="control-group">
                                 <label class="control-label">Organismo Acreditado y/o Autoridad Central asociado</label>
                                 <div class="controls">
-                                    <c:if test="${expediente.getFamilia().getEntidad() != null}">
-                                        <select id="entAsoc" name="entAsoc" >
-                                            <c:forEach var="entidad" items="${listaEntidad}" > 
-                                                <option value="${entidad.getIdentidad()}" ${expediente.getFamilia().getEntidad().getIdentidad() == entidad.getIdentidad() ? 'selected' : ''}>${entidad.getNombre()}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </c:if>
-
-                                    <c:if test="${expediente.getFamilia().getEntidad() == null}">
                                         <select id="entAsoc" name="entAsoc" >
                                             <c:forEach var="entidad" items="${listaEntidad}" > 
                                                 <option value="${entidad.getIdentidad()}" >${entidad.getNombre()}</option>
                                             </c:forEach>
                                         </select>
-                                    </c:if>
                                 </div>
                             </div>
                             <br>
