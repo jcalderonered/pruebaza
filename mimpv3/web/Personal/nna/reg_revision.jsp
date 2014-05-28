@@ -302,9 +302,9 @@
                     var numero = document.getElementById('numero');
                     var comentarios = document.getElementById('comentarios');
 
-                    if (numero.value.length < 0 || numero.value.length > 149 ) {
-                        alert("El campo no debe exceder más de 150 caracteres");
-                        numero.value = numero.value.substring(0, 149);
+                    if (numero.value.length < 0 || numero.value.length > 39 ) {
+                        alert("El campo no debe exceder más de 40 caracteres");
+                        numero.value = numero.value.substring(0, 39);
                         return false;
                     } else if (comentarios.value.length < 0 || comentarios.value.length > 149) {
                         alert("El campo no debe exceder más de 150 caracteres");

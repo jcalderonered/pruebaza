@@ -121,7 +121,7 @@
                             <li><a href="${pageContext.servletContext.contextPath}/Reevaluacion" >Reevaluación</a></li>
                             <li class="active"><a href="${pageContext.servletContext.contextPath}/EtapaPostAdopcion" >Post Adopción</a></li>
                         </ul>
-                        <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/EditarExpedientePost" method="post">
+                        <form  name="formulario" class="form-horizontal" action="${pageContext.servletContext.contextPath}/EditarExpedientePost" method="post">
                             <input hidden name="volver" id="volver" value="${volver}">
                             <fieldset>
                                 <!-- <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>  -->
@@ -131,7 +131,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Número de informes</label>
                                     <div class="controls">
-                                        <input value="${post.getNumeroInformes()}" id="numInformes" name="numInformes" type="text" class="input-xlarge">
+                                        <input  onkeyup="return(validar());" value="${post.getNumeroInformes()}" id="numInformes" name="numInformes" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -182,6 +182,22 @@
                     window.history.forward();
                 }
             </SCRIPT>
+            <script type="text/javascript">
+                function validar()
+                {
+                    var numericExpression = /^[0-9]+$/;
+                    
+                    if (!document.formulario.numInformes.value.match(numericExpression))
+                    {
+
+                        alert("El campo debe contener solo números");
+                        document.formulario.numInformes.focus();
+                        return false;
+                    }
+                    
+                    return true;
+                }
+            </script>
             <!-- Ubicar al final -->
     </body>
 </html>

@@ -142,14 +142,14 @@
                             <div class="control-group">
                                 <label class="control-label">HT</label>
                                 <div class="controls">
-                                    <input id="htFicha" name="htFicha" value="${expediente.getHtFicha()}" type="text" class="input-xlarge">
+                                    <input onkeyup="return(limitar());" id="htFicha" name="htFicha" value="${expediente.getHtFicha()}" type="text" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Número de la ficha</label>
                                 <div class="controls">
-                                    <input id="nFicha" name="nFicha" value="${expediente.getnFicha()}" type="text" class="input-xlarge">
+                                    <input onkeyup="return(limitar());" id="nFicha" name="nFicha" value="${expediente.getnFicha()}" type="text" class="input-xlarge">
                                 </div>
                             </div>
                             <br>    
@@ -172,7 +172,7 @@
                             <div class="control-group">
                                 <label class="control-label">HT</label>
                                 <div class="controls">
-                                    <input id="ht" name="ht" value="${expediente.getHt()}" type="text" class="input-xlarge">
+                                    <input onkeyup="return(limitar());" id="ht" name="ht" value="${expediente.getHt()}" type="text" class="input-xlarge">
                                 </div>
                             </div>
                             <br>
@@ -419,6 +419,33 @@
                 function Alerta()
                 {
                      return confirm('Desea generar el número de expediente?');
+                }
+            </script>
+            <script type="text/javascript">
+                function limitar()
+                {                    
+                    var htFicha = document.getElementById('htFicha');
+                    var nFicha = document.getElementById('nFicha');
+                    var ht = document.getElementById('ht');
+
+                    if (htFicha.value.length < 0 || htFicha.value.length > 39)
+                    {
+                        alert("solo puede ingresar 40 caracteres");
+                        htFicha.value = htFicha.value.substring(0, 40);
+                        document.formulario.htFicha.focus();
+                        return false;
+                    } else if (nFicha.value.length < 0 || nFicha.value.length > 39) {
+                        alert("solo puede ingresar 40 caracteres");
+                        nFicha.value = nFicha.value.substring(0, 40);
+                        document.formulario.nFicha.focus();
+                        return false;
+                    } else if (ht.value.length < 0 || ht.value.length > 39) {
+                        alert("solo puede ingresar 40 caracteres");
+                        ht.value = ht.value.substring(0, 39);
+                        document.formulario.ht.focus();
+                        return false;
+                    }
+
                 }
             </script>
             <!-- Ubicar al final -->
