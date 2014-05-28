@@ -233,10 +233,10 @@
                         var numEval = document.getElementById('numEval');
                         var obs = document.getElementById('obs');
 
-                        if (numEval.value.length < 0 || numEval.value.length > 19)
+                        if (numEval.value.length < 0 || numEval.value.length > 39)
                         {
-                            alert("solo puede ingresar 20 caracteres");
-                            numEval.value = numEval.value.substring(0, 19);
+                            alert("solo puede ingresar 40 caracteres");
+                            numEval.value = numEval.value.substring(0, 39);
                             document.formulario.numEval.focus();
                             return false;
                         } else if (obs.value.length < 0 || obs.value.length > 499) {

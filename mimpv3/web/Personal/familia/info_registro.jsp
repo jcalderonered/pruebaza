@@ -424,7 +424,7 @@
                 {                    
                     var htFicha = document.getElementById('htFicha');
                     var nFicha = document.getElementById('nFicha');
-                    var expediente = document.getElementById('expediente');
+                    var ht = document.getElementById('ht');
 
                     if (htFicha.value.length < 0 || htFicha.value.length > 39)
                     {
@@ -437,10 +437,10 @@
                         nFicha.value = nFicha.value.substring(0, 40);
                         document.formulario.nFicha.focus();
                         return false;
-                    } else if (nFicha.value.length < 0 || nFicha.value.length > 19) {
-                        alert("solo puede ingresar 20 caracteres");
-                        nFicha.value = nFicha.value.substring(0, 20);
-                        document.formulario.nFicha.focus();
+                    } else if (ht.value.length < 0 || ht.value.length > 39) {
+                        alert("solo puede ingresar 40 caracteres");
+                        ht.value = ht.value.substring(0, 39);
+                        document.formulario.ht.focus();
                         return false;
                     }
 

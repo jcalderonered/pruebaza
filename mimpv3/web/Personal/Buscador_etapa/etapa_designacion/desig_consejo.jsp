@@ -186,7 +186,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Observaciones</label>
                                     <div class="controls">
-                                        <textarea type="text" name="obs" id="obs" cols="25" rows="5"></textarea>
+                                        <textarea onkeyup="return(limitar());" type="text" name="obs" id="obs" cols="25" rows="5"></textarea>
                                     </div>
                                 </div>
                                 <br>
@@ -254,7 +254,20 @@
             return true;
             }
             </script>
-            
+            <script type="text/javascript">
+                function limitar()
+                {                    
+                    var obs = document.getElementById('obs');
+
+                    if (obs.value.length < 0 || obs.value.length > 1399)
+                    {
+                        alert("solo puede ingresar 1400 caracteres");
+                        obs.value = obs.value.substring(0, 1399);
+                        document.formulario.obs.focus();
+                        return false;
+                    } 
+                }
+            </script>
             <!-- Ubicar al final -->
     </body>
 </html>
