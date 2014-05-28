@@ -188,7 +188,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Departamento de nacimiento</label>
                                     <div class="controls">
-                                        <input value="${El.getDepaNac()}" id="depNac" name="depNac" type="text" class="input-xlarge">
+                                        <input value="${El.getDepaNac()}" id="depNac" name="depNac" onkeyup="return(limitar2());" type="text" class="input-xlarge">
                                     </div>
                                 </div>
                                 <br>
@@ -961,42 +961,58 @@
                     var pasaporte = document.getElementById('pasaporte');
                     var correo = document.getElementById('correo');
                     var celular = document.getElementById('numCel');
+                    var depNac = document.getElementById('depNac');
 
-                    if (address.value.length < 0 || address.value.length > 50)
+                    if (address.value.length < 0 || address.value.length > 99)
                     {
-                        alert("solo puede ingresar 50 caracteres");
-                        address.value = address.value.substring(0, 50);
+                        alert("solo puede ingresar 100 caracteres");
+                        address.value = address.value.substring(0, 99);
                         return false;
-                    } else if (nombre.value.length < 0 || nombre.value.length > 30) {
+                    } else if (nombre.value.length < 0 || nombre.value.length > 29) {
                         alert("solo puede ingresar 30 caracteres");
-                        nombre.value = nombre.value.substring(0, 30);
+                        nombre.value = nombre.value.substring(0, 29);
                         return false;
-                    }else if (apellidoP.value.length < 0 || apellidoP.value.length > 30) {
+                    } else if (apellidoP.value.length < 0 || apellidoP.value.length > 29) {
                         alert("solo puede ingresar 30 caracteres");
-                        apellidoP.value = apellidoP.value.substring(0, 30);
+                        apellidoP.value = apellidoP.value.substring(0, 29);
                         return false;
-                    }else if (apellidoM.value.length < 0 || apellidoM.value.length > 30) {
+                    } else if (apellidoM.value.length < 0 || apellidoM.value.length > 29) {
                         alert("solo puede ingresar 30 caracteres");
-                        apellidoM.value = apellidoM.value.substring(0, 30);
+                        apellidoM.value = apellidoM.value.substring(0, 29);
                         return false;
-                    }else if (numDoc.value.length < 0 || numDoc.value.length > 15) {
+                    } else if (numDoc.value.length < 0 || numDoc.value.length > 14) {
                         alert("solo puede ingresar 15 caracteres");
-                        numDoc.value = numDoc.value.substring(0, 15);
+                        numDoc.value = numDoc.value.substring(0, 14);
                         return false;
-                    }else if (celular.value.length < 0 || celular.value.length > 15) {
+                    } else if (celular.value.length < 0 || celular.value.length > 14) {
                         alert("solo puede ingresar 15 caracteres");
-                        celular.value = celular.value.substring(0, 15);
+                        celular.value = celular.value.substring(0, 14);
                         return false;
-                    }else if (correo.value.length < 0 || correo.value.length > 50) {
+                    } else if (correo.value.length < 0 || correo.value.length > 49) {
                         alert("solo puede ingresar 50 caracteres");
-                        correo.value = correo.value.substring(0, 50);
+                        correo.value = correo.value.substring(0, 49);
                         return false;
-                    }else if (pasaporte.value.length < 0 || pasaporte.value.length > 50) {
+                    } else if (pasaporte.value.length < 0 || pasaporte.value.length > 49) {
                         alert("solo puede ingresar 50 caracteres");
-                        pasaporte.value = pasaporte.value.substring(0, 50);
+                        pasaporte.value = pasaporte.value.substring(0, 49);
+                        return false;
+                    } else if (depNac.value.length < 0 || depNac.value.length > 49) {
+                        alert("solo puede ingresar 50 caracteres");
+                        pasaporte.value = pasaporte.value.substring(0, 49);
                         return false;
                     }
+                }
+            </script>
+            <script type="text/javascript">
+                function limitar2()
+                {
+                    var depNac = document.getElementById('depNac');
 
+                    if (depNac.value.length < 0 || depNac.value.length > 49) {
+                        alert("solo puede ingresar 50 caracteres");
+                        pasaporte.value = pasaporte.value.substring(0, 49);
+                        return false;
+                    }
                 }
             </script>
             <script type="text/javascript">
