@@ -418,6 +418,26 @@
                      return confirm('Desea generar el número de expediente?');
                 }
             </script>
+            <script type="text/javascript">
+                function limitar()
+                {                    
+                    var htFicha = document.getElementById('htFicha');
+                    var nFicha = document.getElementById('nFicha');
+
+                    if (htFicha.value.length < 0 || htFicha.value.length > 39)
+                    {
+                        alert("solo puede ingresar 40 caracteres");
+                        htFicha.value = htFicha.value.substring(0, 40);
+                        document.formulario.htFicha.focus();
+                        return false;
+                    } else if (nFicha.value.length < 0 || nFicha.value.length > 39) {
+                        alert("solo puede ingresar 40 caracteres");
+                        nFicha.value = nFicha.value.substring(0, 40);
+                        document.formulario.nFicha.focus();
+                        return false;
+                    }
+                }
+            </script>
             <!-- Ubicar al final -->
     </body>
 </html>
