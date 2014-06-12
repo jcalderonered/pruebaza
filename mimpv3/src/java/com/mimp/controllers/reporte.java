@@ -6080,6 +6080,7 @@ public class reporte {
                 }
                 if(flag){
                     listaFamiliasPrev = listaFamilias;
+                    n = listaFamiliasPrev.size();
                     flag = false;
                     flag2 = true;
                 }
