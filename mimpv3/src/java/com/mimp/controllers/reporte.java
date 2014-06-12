@@ -6046,20 +6046,47 @@ public class reporte {
             }
 
             ArrayList<InfoFamilia> listaFamilias = new ArrayList<InfoFamilia>();
+            ArrayList<InfoFamilia> listaFamiliasPrev = new ArrayList<InfoFamilia>();
             Long idinfoant = Long.parseLong("0");
             for (AsistenciaFR asist : primeraReu.getAsistenciaFRs()) {
                 Set<InfoFamilia> listafam = asist.getFamilia().getInfoFamilias();
                 for (InfoFamilia famaux : listafam) {
                     if (idinfoant != famaux.getIdinfoFamilia()) {
-                        listaFamilias.add(famaux);
+                        listaFamiliasPrev.add(famaux);
                     }
                     idinfoant = famaux.getIdinfoFamilia();
                 }
             }
-
-            //METODO BUBBLESORT PARA ORDENAR SEGUN EL APELLIDO DE LA ADOPTANTE MUJER
-            int n = listaFamilias.size();
+            
+            //Se retiran los registros repetidos
+            int n = listaFamiliasPrev.size();
+            listaFamilias = listaFamiliasPrev;
             InfoFamilia auxfam;
+            boolean flag = false;
+            boolean flag2 = true;
+            while (flag2) {
+                flag2 = false;
+                for (int k = 0; k < n - 1; k++) {
+                    for (int j = k; j < n - 1; j++) {
+                        if (listaFamiliasPrev.get(k).getIdinfoFamilia() == listaFamiliasPrev.get(j).getIdinfoFamilia()) {
+                            listaFamilias.remove(j);
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (flag) {
+                        break;
+                    }
+                }
+                if(flag){
+                    listaFamiliasPrev = listaFamilias;
+                    flag = false;
+                    flag2 = true;
+                }
+            }
+            
+            //METODO BUBBLESORT PARA ORDENAR SEGUN EL APELLIDO DE LA ADOPTANTE MUJER
+            n = listaFamilias.size();
             for (int k = 0; k < n - 1; k++) {
                 ArrayList<Adoptante> asist_temp = new ArrayList(listaFamilias.get(k).getAdoptantes());
                 for (int j = k; j < n - 1; j++) {
