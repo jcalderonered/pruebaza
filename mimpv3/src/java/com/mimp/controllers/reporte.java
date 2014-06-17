@@ -6068,8 +6068,8 @@ public class reporte {
                 flag2 = false;
                 for (int k = 0; k < n - 1; k++) {
                     for (int j = k; j < n - 1; j++) {
-                        if (listaFamiliasPrev.get(k).getIdinfoFamilia() == listaFamiliasPrev.get(j).getIdinfoFamilia()) {
-                            listaFamilias.remove(j);
+                        if (listaFamiliasPrev.get(k).getIdinfoFamilia() == listaFamiliasPrev.get(j+1).getIdinfoFamilia()) {
+                            listaFamilias.remove(j+1);
                             flag = true;
                             break;
                         }

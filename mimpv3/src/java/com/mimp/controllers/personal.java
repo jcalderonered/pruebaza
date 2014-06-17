@@ -5050,8 +5050,8 @@ public class personal {
             Short habilitado = Short.parseShort("0");
             fam.setHabilitado(habilitado);
 
-            ServicioPersonal.crearCuentaFamilia(fam, fs);
-            hibermail.generateAndSendEmail2(user, pass_plano, user);
+            String newuser = ServicioPersonal.crearCuentaFamilia(fam, fs);
+            hibermail.generateAndSendEmail2(user, pass_plano, newuser);
 
             allFormularios = ServicioPersonal.InscritosSesion(idSesion);
 

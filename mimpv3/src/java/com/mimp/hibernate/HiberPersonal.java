@@ -962,7 +962,7 @@ public class HiberPersonal {
 
     }
 
-    public void crearCuentaFamilia(Familia fam, FormularioSesion fs) {
+    public String crearCuentaFamilia(Familia fam, FormularioSesion fs) {
 
         Familia famrep = getFamilia(fam.getUser());
         String usuariotemp = fam.getUser();
@@ -981,11 +981,14 @@ public class HiberPersonal {
                                 break;
                             }
                         }
+                    } else {
+                        break;
                     }
                     idextra++;
                 }
             }
         }
+        String userFinal = fam.getUser();
 
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -1030,7 +1033,7 @@ public class HiberPersonal {
             ad.setInfoFamilia(infofam);
             session.save(ad);
         }
-
+        return userFinal;
     }
 
     public void updateAsistenciaFR(AsistenciaFR afr) {
