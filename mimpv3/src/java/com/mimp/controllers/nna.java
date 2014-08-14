@@ -1786,21 +1786,28 @@ public class nna {
         }
         tempExp.setEstado(estado);
         tempfecha = tempExp.getFechaEstado();
-        if (fechaEstado != null) {
-            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
-                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
-                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
-                tempExp.setFechaEstado(tempfecha);
-            } else {
-                if (!fechaEstado.equals("")) {
-                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
-                } else {
-                    tempExp.setFechaEstado(null);
-                }
-            }
-        } else {
+//        if (fechaEstado != null) {
+//            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
+//                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
+//                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
+//                tempExp.setFechaEstado(tempfecha);
+//            } else {
+//                if (!fechaEstado.equals("")) {
+//                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+//                } else {
+//                    tempExp.setFechaEstado(null);
+//                }
+//            }
+//        } else {
+//            tempExp.setFechaEstado(null);
+//        }
+        
+        if (fechaEstado != null && !fechaEstado.equals("")) {
+            tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+        } else if (fechaEstado == null || fechaEstado.equals("")) {
             tempExp.setFechaEstado(null);
         }
+        
         tempNna.setClasificacion(clasificacion);
         tempExp.setDiagnostico(diagnostico);
         tempExp.setObservaciones(comentario);
@@ -2189,21 +2196,28 @@ public class nna {
         }
         tempExp.setEstado(estado);
         tempfecha = tempExp.getFechaEstado();
-        if (fechaEstado != null) {
-            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
-                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
-                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
-                tempExp.setFechaEstado(tempfecha);
-            } else {
-                if (!fechaEstado.equals("")) {
-                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
-                } else {
-                    tempExp.setFechaEstado(null);
-                }
-            }
-        } else {
+//        if (fechaEstado != null) {
+//            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
+//                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
+//                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
+//                tempExp.setFechaEstado(tempfecha);
+//            } else {
+//                if (!fechaEstado.equals("")) {
+//                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+//                } else {
+//                    tempExp.setFechaEstado(null);
+//                }
+//            }
+//        } else {
+//            tempExp.setFechaEstado(null);
+//        }
+        
+        if (fechaEstado != null && !fechaEstado.equals("")) {
+            tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+        } else if (fechaEstado == null || fechaEstado.equals("")) {
             tempExp.setFechaEstado(null);
         }
+        
         tempNna.setClasificacion(clasificacion);
         tempExp.setDiagnostico(diagnostico);
         tempExp.setObservaciones(comentario);
@@ -2558,21 +2572,28 @@ public class nna {
         }
         tempExp.setEstado(estado);
         tempfecha = tempExp.getFechaEstado();
-        if (fechaEstado != null) {
-            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
-                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
-                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
-                tempExp.setFechaEstado(tempfecha);
-            } else {
-                if (!fechaEstado.equals("")) {
-                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
-                } else {
-                    tempExp.setFechaEstado(null);
-                }
-            }
-        } else {
+//        if (fechaEstado != null) {
+//            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
+//                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
+//                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
+//                tempExp.setFechaEstado(tempfecha);
+//            } else {
+//                if (!fechaEstado.equals("")) {
+//                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+//                } else {
+//                    tempExp.setFechaEstado(null);
+//                }
+//            }
+//        } else {
+//            tempExp.setFechaEstado(null);
+//        }
+        
+        if (fechaEstado != null && !fechaEstado.equals("")) {
+            tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+        } else if (fechaEstado == null || fechaEstado.equals("")) {
             tempExp.setFechaEstado(null);
         }
+        
         tempNna.setClasificacion(clasificacion);
         tempExp.setDiagnostico(diagnostico);
         tempExp.setObservaciones(comentario);
@@ -2966,21 +2987,28 @@ public class nna {
         }
         tempExp.setEstado(estado);
         tempfecha = tempExp.getFechaEstado();
-        if (fechaEstado != null) {
-            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
-                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
-                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
-                tempExp.setFechaEstado(tempfecha);
-            } else {
-                if (!fechaInvTutelar.equals("")) {
-                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
-                } else {
-                    tempExp.setFechaEstado(null);
-                }
-            }
-        } else {
+//        if (fechaEstado != null) {
+//            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
+//                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
+//                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
+//                tempExp.setFechaEstado(tempfecha);
+//            } else {
+//                if (!fechaInvTutelar.equals("")) {
+//                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+//                } else {
+//                    tempExp.setFechaEstado(null);
+//                }
+//            }
+//        } else {
+//            tempExp.setFechaEstado(null);
+//        }
+        
+        if (fechaEstado != null && !fechaEstado.equals("")) {
+            tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+        } else if (fechaEstado == null || fechaEstado.equals("")) {
             tempExp.setFechaEstado(null);
         }
+        
         tempNna.setClasificacion(clasificacion);
         tempExp.setDiagnostico(diagnostico);
         tempExp.setObservaciones(comentario);
@@ -3357,21 +3385,28 @@ public class nna {
         }
         tempExp.setEstado(estado);
         tempfecha = tempExp.getFechaEstado();
-        if (fechaEstado != null) {
-            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
-                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
-                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
-                tempExp.setFechaEstado(tempfecha);
-            } else {
-                if (!fechaInvTutelar.equals("")) {
-                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
-                } else {
-                    tempExp.setFechaEstado(null);
-                }
-            }
-        } else {
+//        if (fechaEstado != null) {
+//            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
+//                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
+//                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
+//                tempExp.setFechaEstado(tempfecha);
+//            } else {
+//                if (!fechaInvTutelar.equals("")) {
+//                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+//                } else {
+//                    tempExp.setFechaEstado(null);
+//                }
+//            }
+//        } else {
+//            tempExp.setFechaEstado(null);
+//        }
+        
+        if (fechaEstado != null && !fechaEstado.equals("")) {
+            tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+        } else if (fechaEstado == null || fechaEstado.equals("")) {
             tempExp.setFechaEstado(null);
         }
+        
         tempNna.setClasificacion(clasificacion);
         tempExp.setDiagnostico(diagnostico);
         tempExp.setObservaciones(comentario);
@@ -3714,21 +3749,28 @@ public class nna {
         }
         tempExp.setEstado(estado);
         tempfecha = tempExp.getFechaEstado();
-        if (fechaEstado != null) {
-            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
-                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
-                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
-                tempExp.setFechaEstado(tempfecha);
-            } else {
-                if (!fechaInvTutelar.equals("")) {
-                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
-                } else {
-                    tempExp.setFechaEstado(null);
-                }
-            }
-        } else {
+//        if (fechaEstado != null) {
+//            if (fechaEstado.contains("ene") || fechaEstado.contains("feb") || fechaEstado.contains("mar") || fechaEstado.contains("abr")
+//                    || fechaEstado.contains("may") || fechaEstado.contains("jun") || fechaEstado.contains("jul") || fechaEstado.contains("ago")
+//                    || fechaEstado.contains("set") || fechaEstado.contains("oct") || fechaEstado.contains("nov") || fechaEstado.contains("dic")) {
+//                tempExp.setFechaEstado(tempfecha);
+//            } else {
+//                if (!fechaInvTutelar.equals("")) {
+//                    tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+//                } else {
+//                    tempExp.setFechaEstado(null);
+//                }
+//            }
+//        } else {
+//            tempExp.setFechaEstado(null);
+//        }
+        
+        if (fechaEstado != null && !fechaEstado.equals("")) {
+            tempExp.setFechaEstado(df.stringToDate(fechaEstado));
+        } else if (fechaEstado == null || fechaEstado.equals("")) {
             tempExp.setFechaEstado(null);
         }
+        
         tempNna.setClasificacion(clasificacion);
         tempExp.setDiagnostico(diagnostico);
         tempExp.setObservaciones(comentario);
