@@ -5,6 +5,10 @@
  */
 package com.mimp.controllers;
 
+/*
+    CONTROLADOR DESTINADO A CUBRIR LAS FUNCIONES REALIZADAS POR UNA FAMILIA
+*/
+
 import java.util.*;
 import com.mimp.bean.*;
 import com.mimp.hibernate.HiberFamilia;

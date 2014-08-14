@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package com.mimp.controllers;
-
+/*
+    CONTROLADOR USADO PARA CUBRIR DIVERSAS FUNCIONES ENTRE LAS CUALES SE ENCUENTRAN LA INSCRIPCIÓN A 
+    LA SESIÓN INFORMATIVA, VISUALIZACIÓN DE LA INFORMACIÓN DE FAMILIAS DURANTE SU PASO POR LAS ETAPAS DEL PROCESO
+    DE ADOPCIÓN Y EL REGISTRO DE LA REVISIÓN DE EXPEDIENTE Y ESTUDIO DE CASO PARA LOS NNA´s.
+*/
 import java.util.*;
 import com.mimp.bean.*;
 import com.mimp.util.*;
@@ -86,7 +90,7 @@ public class main {
         return "login";
     }
 
-    //LISTO
+    //PROCESO DE LOGEO AL SISTEMA
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login_POST(ModelMap map, @RequestParam(value = "email", required = false) String email, @RequestParam(value = "password", required = false) String pass, HttpSession session) {
 
@@ -170,14 +174,17 @@ public class main {
 
         return new ModelAndView(pagina, map);
     }
-
+    // FIN DEL PROCESO DE LOGEO
+    
+    
+    // INICIO DEL PROCESO DE INSCRIPCIÓN A LA SESIÓN INFORMATIVA
     @RequestMapping("/SesionInfInicioPrev")
     public String SesionInfInicioPrev(ModelMap map) {
         map.put("listaUa", ServicioPersonal.ListaUa());
         return "/Inscripcion/inscripcion_prev";
     }
 
-    //LISTO
+ 
     @RequestMapping(value = "/SesionInfInicio", method = RequestMethod.POST)
     public ModelAndView SesionInfInicio_POST(ModelMap map, @RequestParam("ua") String ua, HttpSession session) {
 
@@ -251,7 +258,7 @@ public class main {
         return new ModelAndView(pagina);
     }
 
-    //LISTO
+    
     @RequestMapping(value = "/SesionInfElegirEstado", method = RequestMethod.POST)
     public ModelAndView SesionInfElegirEstado_POST(ModelMap map, @RequestParam("idTurno") int turno, HttpSession session) {
 
@@ -278,7 +285,7 @@ public class main {
 
     }
 
-    //LISTO
+   
     @RequestMapping(value = "/SesionInfEstado2", method = RequestMethod.POST)
     public ModelAndView SesionInfElegirEstado2_POST(ModelMap map, @RequestParam("estado") String estado, @RequestParam("idTurno") int turno, HttpSession session) {
 
@@ -320,7 +327,7 @@ public class main {
 
     }
 
-    //LISTO
+    
     @RequestMapping(value = "/inscSesInd", method = RequestMethod.POST)
     public ModelAndView inscSesInd_POST(ModelMap map,
             @RequestParam("nombre") String nombre,
@@ -518,7 +525,7 @@ public class main {
         //return new ModelAndView("contacto", map);
     }
 
-    //LISTO
+    
     @RequestMapping(value = "/inscSesGrp", method = RequestMethod.POST)
     public ModelAndView inscSesGrp_POST(ModelMap map,
             @RequestParam("nombreEl") String nombreEl,
@@ -796,11 +803,13 @@ public class main {
         return new ModelAndView("/Inscripcion/inscripcion_sesion1b", map);
     }
 
+    //FIN DEL PROCESO DE INSCRIPCIÓN DE UNA FAMILIA A LA SESIÓN INFORMATIVA
+    
     /**
      * ESTA SECCION ES USADA PARA ACTUALIZAR LOS DATOS DE LA FAMILIA POR PARTE
      * DEL PERSONAL*
      */
-    //LISTO
+    
     @RequestMapping(value = "/IrPersonalFamilia", method = RequestMethod.POST)
     public ModelAndView IrPersonalFamilia_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "estado", required = false) String estado,
@@ -1027,7 +1036,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_ella", map);
     }
 
-    //LISTO
+    
     @RequestMapping(value = "/IrPersonalFamilia2", method = RequestMethod.POST)
     public ModelAndView IrPersonalFamilia2_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "estado", required = false) String estado,
@@ -1301,7 +1310,9 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_ella", map);
     }
 
-    //NO SE HA HECHO CAMBIOS
+    // SECCIÓN DEDICADA AL PROCESO DE HABILITACIÓN/DESHABILITACIÓN DE UNA FAMILIA PARA INGRESAR
+    // AL SISTEMA
+    
     @RequestMapping(value = "/Habilitacion", method = RequestMethod.GET)
     public ModelAndView Habilitacion(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1326,7 +1337,8 @@ public class main {
         return new ModelAndView(pagina, map);
     }
 
-    //LISTO
+    //ENVIA INFORMACIÓN DE EL SOLICITANTE A LA VISTA CORRESPONDIENTE
+    
     @RequestMapping(value = "/elSolicitante", method = RequestMethod.POST)
     public ModelAndView elSolicitante_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1362,7 +1374,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_el", map);
     }
 
-    //LISTO
+    
     @RequestMapping(value = "/elSolicitante2", method = RequestMethod.POST)
     public ModelAndView elSolicitante2_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1439,7 +1451,8 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_el", map);
     }
 
-    //LISTO
+    // ENVIA INFORMACIÓN DE LA SOLICITANTE A LA VISTA CORRESPONDIENTE
+    
     @RequestMapping(value = "/laSolicitante", method = RequestMethod.POST)
     public ModelAndView laSolicitante_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1475,7 +1488,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_ella", map);
     }
 
-    //LISTO
+   
     @RequestMapping(value = "/laSolicitante2", method = RequestMethod.POST)
     public ModelAndView laSolicitante2_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1552,7 +1565,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_ella", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    //ENVÍA INFORMACIÓN DE LA COMPOSICIÓN FAMILIAR A LA VISTA CORRESPONDIENTE
     @RequestMapping(value = "/compFamiliar", method = RequestMethod.GET)
     public ModelAndView compFamiliar(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1568,7 +1581,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_fam", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    //ENVIÍA LA INFORMACIÓN DE LA VIVIENDA A LA VISTA CORRESPONDIENTE
     @RequestMapping(value = "/vivienda", method = RequestMethod.GET)
     public ModelAndView vivienda(ModelMap map, HttpSession session) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -1585,7 +1598,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_vivienda", map);
     }
 
-    //LISTO
+    //ENVÍA LA INFORMACIÓN DEL EXPEDIENTE A LA VISTA CORRESPONDIENTE
     @RequestMapping(value = "/infoExpediente", method = RequestMethod.POST)
     public ModelAndView infoExpediente_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1619,7 +1632,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_registro", map);
     }
 
-    //LISTO
+   
     @RequestMapping(value = "/infoExpediente2", method = RequestMethod.POST)
     public ModelAndView infoExpediente2_POST(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1694,7 +1707,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_registro", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    //ENVÍA INFORMACIÓN DE PROCESO DE ADOPCIÓN A LA VISTA CORRESPONDIENTE
     @RequestMapping(value = "/procesoAdopcion", method = RequestMethod.GET)
     public ModelAndView procesoAdopcion(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1718,7 +1731,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_adop/info_adop", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    
     @RequestMapping(value = "/procesoAdopcion2", method = RequestMethod.GET)
     public ModelAndView procesoAdopcion2(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1753,7 +1766,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_adop/info_adop", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    //ENVÍA INFORMACIÓN SOBRE LOS ANTECEDENTES DEL NNA A LA VISTA CORRESPONDIENTE
     @RequestMapping(value = "/antNna", method = RequestMethod.GET)
     public ModelAndView antNna(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1803,7 +1816,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_ant_nna", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    //ENVÍA INFORMACIÓN DEL NNA ADOPTADO A LA VISTA CORRESPONDIENTE
     @RequestMapping(value = "/nnaAsociado", method = RequestMethod.GET)
     public ModelAndView nnaAsociado(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1825,7 +1838,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_nna", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+
     @RequestMapping(value = "/nnaAsociado2", method = RequestMethod.GET)
     public ModelAndView nnaAsociado2(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1857,7 +1870,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_nna", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    //ENVÍA LA INFORMACIÓN DE LAS ATENCIONES DE LA FAMILIA A LA VISTA CORRESPONDIENTE
     @RequestMapping(value = "/atenciones", method = RequestMethod.GET)
     public ModelAndView atenciones(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver, HttpSession session) {
@@ -1876,7 +1889,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_atencion", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+   
     @RequestMapping(value = "/atenciones2", method = RequestMethod.GET)
     public ModelAndView atenciones2(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -1907,7 +1920,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_atencion", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    //PROCESO PARA AGREGAR UNA NUEVA ATENCIÓN A LA FAMILIA
     @RequestMapping(value = "/agregarAtencion", method = RequestMethod.GET)
     public ModelAndView agregarAtencion(ModelMap map, HttpSession session,
             @RequestParam(value = "volver", required = false) String volver) {
@@ -1926,7 +1939,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_atencion_edit", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    
     @RequestMapping(value = "/agregarAtencion3", method = RequestMethod.POST)
     public ModelAndView agregarAtencion3(ModelMap map, HttpSession session,
             @RequestParam(value = "volver", required = false) String volver) {
@@ -1945,7 +1958,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_atencion_edit", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    
     @RequestMapping(value = "/agregarAtencion2", method = RequestMethod.GET)
     public ModelAndView agregarAtencion2(ModelMap map,
             @RequestParam(value = "expediente", required = false) String expediente2,
@@ -1975,7 +1988,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_atencion_edit", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    //SE MUESTRA LA INFORMACIÓN CORRESPONDIENTE A LA ATENCIÓN DE UNA FAMILIA
     @RequestMapping(value = "/DetalleAtencion", method = RequestMethod.POST)
     public ModelAndView DetalleAtencion(ModelMap map,
             @RequestParam(value = "expediente", required = false) String expediente2,
@@ -2008,7 +2021,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_atencion_edit", map);
     }
 
-    //NO SE HAN HECHO CAMBIOS
+    
     @RequestMapping(value = "/DetalleAtencion2", method = RequestMethod.POST)
     public ModelAndView DetalleAtencion2(ModelMap map,
             @RequestParam(value = "expediente", required = false) String expediente2,
@@ -2041,7 +2054,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_atencion_edit", map);
     }
 
-    //FALTA PARA ETAPA FORMATIVA (CUANDO NO HAY EXPEDIENTE AUN)
+    //PROCESO PARA GUARDAR  UNA ATENCIÓN EN LA BASE DE DATOS
     @RequestMapping(value = "/crearAtencion", method = RequestMethod.POST)
     public ModelAndView crearAtencion_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "personal") long personal,
@@ -2141,7 +2154,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_atencion", map);
     }
 
-    //PROBAR
+   
     @RequestMapping(value = "/crearAtencion2", method = RequestMethod.POST)
     public ModelAndView crearAtencion2_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "personal") long personal,
@@ -2284,7 +2297,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_atencion", map);
     }
 
-    //PROBAR
+    //PROCESO PARA ACTUALIZAR LA INFORMACIÓN DE UNA ATENCIÓN
     @RequestMapping(value = "/updateAtencion", method = RequestMethod.POST)
     public ModelAndView updateAtencion_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "idAtencion") long idAtencion,
@@ -2386,7 +2399,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_atencion", map);
     }
 
-    //PROBAR
+
     @RequestMapping(value = "/updateAtencion2", method = RequestMethod.POST)
     public ModelAndView updateAtencion2_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "idAtencion") long idAtencion,
@@ -2567,6 +2580,7 @@ public class main {
                 "/Personal/Buscador/familia/info_atencion", map);
     }
 
+    //ENVÍA INFORMACIÓN DE LAS SESIONES A LA QUE HA ASISTIDO UNA FAMILIA
     @RequestMapping(value = "/DetalleSesion", method = RequestMethod.POST)
     public ModelAndView DetalleSesion(ModelMap map, HttpSession session,
             @RequestParam(value = "idSesion") long idSesion,
@@ -2588,6 +2602,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_adop/detalle_sesion", map);
     }
 
+    //ENVÍA INFORMACIÓN DE LOS TALLERES A LOS QUE HA ASISTIDO UNA FAMILIA
     @RequestMapping(value = "/DetalleTaller", method = RequestMethod.POST)
     public ModelAndView DetalleTaller(ModelMap map, HttpSession session,
             @RequestParam(value = "idTurno") long idTurno,
@@ -2623,6 +2638,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_adop/detalle_taller", map);
     }
 
+    //ENVÍA INFORMACIÓN DE LAS EVALUACIONES DE UNA FAMILIA
     @RequestMapping(value = "/DetalleEvaluacion", method = RequestMethod.POST)
     public ModelAndView DetalleEvaluacion(ModelMap map, HttpSession session, @RequestParam(value = "idEval") long idEval) {
         Personal usuario = (Personal) session.getAttribute("usuario");
@@ -2641,7 +2657,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_adop/detalle_evaluacion", map);
     }
 
-    //PROBAR
+    //PROCESO PARA ACTUALIZAR LA INFORMACIÓN DE UNA FAMILIA
     @RequestMapping(value = "/ActualizarInfoFamilia", method = RequestMethod.POST)
     public ModelAndView ActualizarInfoFamilia_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "incesto") String incesto,
@@ -2844,7 +2860,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_ant_nna", map);
     }
 
-    //PROBAR
+    //PROCESO PARA ACTUALIZAR LA INFORMACIÓN DE UN EXPEDIENTE
     @RequestMapping(value = "/ActualizarRegistro", method = RequestMethod.POST)
     public ModelAndView ActualizarRegistro_POST(ModelMap map, HttpSession session,
             //@RequestParam(value="numero") long numero,  
@@ -3063,7 +3079,7 @@ public class main {
         return new ModelAndView("/Personal/familia/info_registro", map);
     }
 
-    //PROBAR
+    //PROCESO PARA ACTUALIZAR LA INFORMACIÓN DE UN ADOPTANTE
     @RequestMapping(value = "/ActualizarAdoptante", method = RequestMethod.POST)
     public ModelAndView ActualizarAdoptante_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "adoptante") String adoptante,
@@ -3437,7 +3453,7 @@ public class main {
 
     }
 
-    //CONSTRUCCION
+    //PROCESO PARA ACTUALIZAR LA INFORMACIÓN DE LA VIVIENDA DE LA FAMILIA
     @RequestMapping(value = "/ActualizarVivienda", method = RequestMethod.POST)
     public ModelAndView ActualizarVivienda_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "propiedadVivienda", required = false) String propiedadVivienda,
@@ -3645,7 +3661,7 @@ public class main {
         return "cronograma_prev";
     }
 
-    //LISTO
+    //ENVÍA INFORMACIÓN DEL CRONOGRAMA ANUAL
     @RequestMapping(value = "/CronogramaAnual", method = RequestMethod.POST)
     public ModelAndView CronogramaAnual_GET(ModelMap map, HttpSession session, @RequestParam(value = "ua") String ua) {
 
@@ -3675,6 +3691,7 @@ public class main {
         return new ModelAndView("cronograma", map);
     }
 
+    //GENERA EL EXPEDIENTE DE UNA FAMILIA NACIONAL
     @RequestMapping(value = "/GenerarExpNac", method = RequestMethod.POST)
     public ModelAndView GenerarExpNac(ModelMap map, @RequestParam(value = "idFamilia") long idFamilia,
             @RequestParam(value = "el", required = false) String el,
@@ -3699,7 +3716,7 @@ public class main {
 
     }
 
-    //PROBAR
+    //PROCESO PARA GUARDAR UN EXPEDIENTE NACIONAL EN LA BASE DE DATOS
     @RequestMapping(value = "/CrearExpNac", method = RequestMethod.POST)
     public ModelAndView CrearExpNac_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "idFamilia") long idFamilia,
@@ -3793,6 +3810,7 @@ public class main {
 
     }
 
+    //PROCESO PARA EDITAR LAS CREDENCIALES DE UN USUARIO
     @RequestMapping(value = "/EditUserPass", method = RequestMethod.GET)
     public ModelAndView EditUserPass(ModelMap map,
             @RequestParam(value = "volver", required = false) String volver,
@@ -3846,7 +3864,7 @@ public class main {
         return new ModelAndView("/Personal/Buscador/familia/info_user_pass", map);
     }
 
-    //PROBAR
+    //PROCESO PARA GENERAR UNA NUEVA CONTRASEÑA
     @RequestMapping(value = "/generarContrasenaFam", method = RequestMethod.POST)
     public ModelAndView generarContrasenaFam_POST(ModelMap map, HttpSession session,
             @RequestParam("password2") String newpass,
@@ -3897,6 +3915,7 @@ public class main {
         return new ModelAndView(pagina, map);
     }
 
+    //PROCESO PARA RECORDAR LA CONTRASEÑA
     @RequestMapping(value = "/recordarContra")
     public ModelAndView recordarContra(ModelMap map) {
 
@@ -3904,7 +3923,7 @@ public class main {
         return new ModelAndView(pagina);
     }
 
-    //DEBIDO A QUE SIEMPRE SACA LA INFORMACION DEL USUARIO
+    //ENVÍO DE CORREO PARA RECORDAR LA CONTRASEÑA 
     @RequestMapping(value = "/recordarContraEnvio", method = RequestMethod.POST)
     public ModelAndView recordarContraEnvio(ModelMap map, HttpSession session, @RequestParam("usuario") String user) {
 
@@ -4011,6 +4030,7 @@ public class main {
         return new ModelAndView(pagina, map);
     }
 
+    //LISTA DE NNA´s EXTRANJEROS ADOPTADOS POR UNA FAMILIA
     @RequestMapping(value = "/MainListaNnaAdoptadosExtranjero", method = RequestMethod.POST)
     public ModelAndView MainListaNnaAdoptadosExtranjero(ModelMap map,
             @RequestParam("idExpediente") Long idExpediente,
@@ -4027,6 +4047,7 @@ public class main {
         return new ModelAndView("/Personal/nna_adop_ext/lista_nna", map);
     }
 
+    //PROCESO PARA REGISTRAR UN NNA EXTRANJERO A UNA FAMILIA 
     @RequestMapping(value = "/MainRegistrarAdopcionExtranjero", method = RequestMethod.POST)
     public ModelAndView MainRegistrarAdopcionExtranjero(ModelMap map,
             @RequestParam("idExpediente") Long idExpediente,
@@ -4320,6 +4341,7 @@ public class main {
 
     }
 
+    //PROCESO PARA EDITAR Y ACTUALIZAR LA INFORMACIÓN DE UN NNA EXTRANJERO ADOPTADO
     @RequestMapping(value = "/MainEditarNna", method = RequestMethod.POST)
     public ModelAndView MainEditarNna(ModelMap map,
             @RequestParam("idDesig") Long idDesig,
@@ -4341,7 +4363,7 @@ public class main {
         return new ModelAndView("/Personal/nna_adop_ext/editar_nna", map);
     }
 
-    //PROBAR
+  
     @RequestMapping(value = "/MainUpdateNna", method = RequestMethod.POST)
     public ModelAndView MainUpdateNna_POST(ModelMap map, HttpSession session,
             @RequestParam("idDesig") Long idDesig,
