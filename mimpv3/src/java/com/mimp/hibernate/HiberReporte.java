@@ -63,7 +63,6 @@ public class HiberReporte {
 //        }
 //        return allOrganismos;
 //    }
-
     public ArrayList<Organismo> ReporteOrganismo2() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -215,7 +214,6 @@ public class HiberReporte {
 //
 //        return allPostAdopcion;
 //    }
-
     public ArrayList<PostAdopcion> ReportePostAdopcion2() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -437,7 +435,6 @@ public class HiberReporte {
 //
 //        return tempDesig;
 //    }
-
     public Designacion getDesigNnaFam2(Long idNna, Long idExp) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -565,7 +562,9 @@ public class HiberReporte {
                     tempNna.setApellidoP(rs.getString("APELLIDO_P"));
                     tempNna.setApellidoM(rs.getString("APELLIDO_M"));
                     tempNna.setSexo(rs.getString("SEXO"));
-                    tempNna.setFechaNacimiento(rs.getDate("FECHA_NACIMIENTO"));
+                    if (rs.getDate("FECHA_NACIMIENTO") != null) {
+                        tempNna.setFechaNacimiento(rs.getDate("FECHA_NACIMIENTO"));
+                    }
                     tempNna.setEdadAnhos(rs.getShort("EDAD_ANHOS"));
                     tempNna.setEdadMeses(rs.getShort("EDAD_MESES"));
                     tempNna.setActaNacimiento(rs.getShort("ACTA_NACIMIENTO"));
@@ -693,7 +692,9 @@ public class HiberReporte {
                     tempNna.setApellidoP(rs.getString("APELLIDO_P"));
                     tempNna.setApellidoM(rs.getString("APELLIDO_M"));
                     tempNna.setSexo(rs.getString("SEXO"));
-                    tempNna.setFechaNacimiento(rs.getDate("FECHA_NACIMIENTO"));
+                    if (rs.getDate("FECHA_NACIMIENTO") != null) {
+                        tempNna.setFechaNacimiento(rs.getDate("FECHA_NACIMIENTO"));
+                    }
                     tempNna.setEdadAnhos(rs.getShort("EDAD_ANHOS"));
                     tempNna.setEdadMeses(rs.getShort("EDAD_MESES"));
                     tempNna.setActaNacimiento(rs.getShort("ACTA_NACIMIENTO"));
@@ -935,7 +936,9 @@ public class HiberReporte {
                     tempNna.setApellidoP(rs.getString("APELLIDO_P"));
                     tempNna.setApellidoM(rs.getString("APELLIDO_M"));
                     tempNna.setSexo(rs.getString("SEXO"));
-                    tempNna.setFechaNacimiento(rs.getDate("FECHA_NACIMIENTO"));
+                    if (rs.getDate("FECHA_NACIMIENTO") != null) {
+                        tempNna.setFechaNacimiento(rs.getDate("FECHA_NACIMIENTO"));
+                    }
                     tempNna.setEdadAnhos(rs.getShort("EDAD_ANHOS"));
                     tempNna.setEdadMeses(rs.getShort("EDAD_MESES"));
                     tempNna.setActaNacimiento(rs.getShort("ACTA_NACIMIENTO"));
@@ -1195,7 +1198,6 @@ public class HiberReporte {
 //        return allFamilias;
 //
 //    }
-
     public ArrayList<Familia> getListaFamilias2() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -1522,7 +1524,6 @@ public class HiberReporte {
 //        return allFamilias;
 //
 //    }
-
     public ArrayList<Familia> getListaFamiliasNacionales2() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -1801,7 +1802,6 @@ public class HiberReporte {
 //        return allFamilias;
 //
 //    }
-
     public ArrayList<Familia> getListaFamiliasInternacionales2() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2070,7 +2070,6 @@ public class HiberReporte {
 //        }
 //        return ultimaResol;
 //    }
-
     public Resolucion getUltimaResolucion2(Long expFam) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2214,7 +2213,6 @@ public class HiberReporte {
 //        }
 //        return ultimaResol;
 //    }
-
     public Resolucion getResolucionAptitud2(Long expFam) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2271,7 +2269,6 @@ public class HiberReporte {
 //        }
 //        return ultimaDesig;
 //    }
-
     public Designacion getUltimaDesignacion2(Long expFam) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2326,7 +2323,6 @@ public class HiberReporte {
 //        }
 //        return ultimaDesig;
 //    }
-
     public Designacion getUltimaDesignacionNna2(Long expFam) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2454,7 +2450,6 @@ public class HiberReporte {
 //        return allFamilias;
 //
 //    }
-
     public ArrayList<Familia> getRenad_Parte1() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2699,7 +2694,6 @@ public class HiberReporte {
 //        }
 //        return ultimaDesig;
 //    }
-
     public Designacion getUltimaDesignacionNnaCarJuzExp2(Long expFam) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2719,7 +2713,7 @@ public class HiberReporte {
 
                 ResultSet rs = (ResultSet) statement.getObject(2);
 
-                if (rs.next()){
+                if (rs.next()) {
                     Nna tempNna = new Nna();
                     ExpedienteNna tempExpNna = new ExpedienteNna();
                     Car tempCar = new Car();
@@ -2860,7 +2854,6 @@ public class HiberReporte {
 //        }
 //        return tempEval;
 //    }
-
     public Evaluacion getEvaluacion2(Long expFam, String tipo) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2923,7 +2916,6 @@ public class HiberReporte {
 //        }
 //        return ultimaResol;
 //    }
-
     public Resolucion getResolucionDeEvaluacion2(Long idEval) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -3391,7 +3383,7 @@ public class HiberReporte {
                 while (rs.next()) {
                     Revision tempRev = new Revision();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
-                    
+
                     Long idExpFam = rs.getLong("IDEXPEDIENTE_FAMILIA");
                     if (!rs.wasNull()) {
                         String query2 = "{call HE_GET_EXPEDIENTE_FAMILIA(?,?)}";
@@ -3403,17 +3395,17 @@ public class HiberReporte {
                         while (rs2.next()) {
                             tempEF.setIdexpedienteFamilia(rs2.getLong("IDEXPEDIENTE_FAMILIA"));
                             tempEF.setExpediente(rs2.getString("EXPEDIENTE"));
-                            tempEF.setNacionalidad(rs2.getString("NACIONALIDAD"));                            
+                            tempEF.setNacionalidad(rs2.getString("NACIONALIDAD"));
                         }
                         rs2.close();
                         statement2.close();
                     }
                     tempRev.setExpedienteFamilia(tempEF);
-                    
+
                     tempRev.setFechaRevision(rs.getDate("FECHA_REVISION"));
                     tempRev.setIdEntidad(rs.getLong("IDENTIDAD"));
                     tempRev.setNombre(rs.getString("NOMBRE"));
-                
+
                     listaRev.add(tempRev);
                 }
                 rs.close();
@@ -3446,7 +3438,7 @@ public class HiberReporte {
                 while (rs.next()) {
                     Revision tempRev = new Revision();
                     ExpedienteFamilia tempEF = new ExpedienteFamilia();
-                    
+
                     Long idExpFam = rs.getLong("IDEXPEDIENTE_FAMILIA");
                     if (!rs.wasNull()) {
                         String query2 = "{call HE_GET_EXPEDIENTE_FAMILIA(?,?)}";
@@ -3458,17 +3450,17 @@ public class HiberReporte {
                         while (rs2.next()) {
                             tempEF.setIdexpedienteFamilia(rs2.getLong("IDEXPEDIENTE_FAMILIA"));
                             tempEF.setExpediente(rs2.getString("EXPEDIENTE"));
-                            tempEF.setNacionalidad(rs2.getString("NACIONALIDAD"));                            
+                            tempEF.setNacionalidad(rs2.getString("NACIONALIDAD"));
                         }
                         rs2.close();
                         statement2.close();
                     }
                     tempRev.setExpedienteFamilia(tempEF);
-                    
+
                     tempRev.setFechaRevision(rs.getDate("FECHA_REVISION"));
                     tempRev.setIdEntidad(rs.getLong("IDENTIDAD"));
                     tempRev.setNombre(rs.getString("NOMBRE"));
-                
+
                     listaRev.add(tempRev);
                 }
                 rs.close();
@@ -4770,7 +4762,7 @@ public class HiberReporte {
                         }
                         rs7.close();
                         statement7.close();
-                        
+
                         tempInfo.setAdoptantes(listadop);
 
                         listaInf.add(tempInfo);
