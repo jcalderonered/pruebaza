@@ -522,28 +522,36 @@ public class reporte {
                 cell = row.createCell(6);
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
-                int edad = añoAct - nna.getFechaNacimiento().getYear();
-                int meses = 0;
-                //Revisar cálculo de meses
-                if ((nna.getFechaNacimiento().getMonth()
-                        - fechaAct.getMonth()) > 0) {
-                    meses = nna.getFechaNacimiento().getMonth()
-                            - fechaAct.getMonth();
-                    edad--;
-                } else if ((nna.getFechaNacimiento().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((nna.getFechaNacimiento().getDate()
-                            - fechaAct.getDate()) > 0) {
+                if (nna.getFechaNacimiento() != null) {
+                    int edad = añoAct - nna.getFechaNacimiento().getYear();
+                    int meses = 0;
+                    //Revisar cálculo de meses
+                    if ((nna.getFechaNacimiento().getMonth()
+                            - fechaAct.getMonth()) > 0) {
+                        meses = nna.getFechaNacimiento().getMonth()
+                                - fechaAct.getMonth();
                         edad--;
+                    } else if ((nna.getFechaNacimiento().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((nna.getFechaNacimiento().getDate()
+                                - fechaAct.getDate()) > 0) {
+                            edad--;
+                        } else {
+                            meses = 1;
+                        }
                     } else {
-                        meses = 1;
+                        meses = fechaAct.getMonth() - nna.getFechaNacimiento().getMonth();
                     }
+
+                    cell.setCellValue(edad);
+                    cell = row.createCell(7);
+                    cell.setCellValue(meses);
                 } else {
-                    meses = fechaAct.getMonth() - nna.getFechaNacimiento().getMonth();
+                    cell.setCellValue("");
+                    cell = row.createCell(7);
+                    cell.setCellValue("");
                 }
-                cell.setCellValue(edad);
-                cell = row.createCell(7);
-                cell.setCellValue(meses);
+
                 cell = row.createCell(8);
                 cell.setCellValue(nna.getSexo());
                 cell = row.createCell(9);
@@ -740,28 +748,36 @@ public class reporte {
                 cell = row.createCell(6);
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
-                int edad = añoAct - nna.getFechaNacimiento().getYear();
-                int meses = 0;
-                //Revisar cálculo de meses
-                if ((nna.getFechaNacimiento().getMonth()
-                        - fechaAct.getMonth()) > 0) {
-                    meses = nna.getFechaNacimiento().getMonth()
-                            - fechaAct.getMonth();
-                    edad--;
-                } else if ((nna.getFechaNacimiento().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((nna.getFechaNacimiento().getDate()
-                            - fechaAct.getDate()) > 0) {
+                if (nna.getFechaNacimiento() != null) {
+                    int edad = añoAct - nna.getFechaNacimiento().getYear();
+                    int meses = 0;
+                    //Revisar cálculo de meses
+                    if ((nna.getFechaNacimiento().getMonth()
+                            - fechaAct.getMonth()) > 0) {
+                        meses = nna.getFechaNacimiento().getMonth()
+                                - fechaAct.getMonth();
                         edad--;
+                    } else if ((nna.getFechaNacimiento().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((nna.getFechaNacimiento().getDate()
+                                - fechaAct.getDate()) > 0) {
+                            edad--;
+                        } else {
+                            meses = 1;
+                        }
                     } else {
-                        meses = 1;
+                        meses = fechaAct.getMonth() - nna.getFechaNacimiento().getMonth();
                     }
+
+                    cell.setCellValue(edad);
+                    cell = row.createCell(7);
+                    cell.setCellValue(meses);
                 } else {
-                    meses = fechaAct.getMonth() - nna.getFechaNacimiento().getMonth();
+                    cell.setCellValue("");
+                    cell = row.createCell(7);
+                    cell.setCellValue("");
                 }
-                cell.setCellValue(edad);
-                cell = row.createCell(7);
-                cell.setCellValue(meses);
+
                 cell = row.createCell(8);
                 cell.setCellValue(nna.getSexo());
                 cell = row.createCell(9);
@@ -958,28 +974,35 @@ public class reporte {
                 cell = row.createCell(6);
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
-                int edad = añoAct - nna.getFechaNacimiento().getYear();
-                int meses = 0;
-                //Revisar cálculo de meses
-                if ((nna.getFechaNacimiento().getMonth()
-                        - fechaAct.getMonth()) > 0) {
-                    meses = nna.getFechaNacimiento().getMonth()
-                            - fechaAct.getMonth();
-                    edad--;
-                } else if ((nna.getFechaNacimiento().getMonth()
-                        - fechaAct.getMonth()) == 0) {
-                    if ((nna.getFechaNacimiento().getDate()
-                            - fechaAct.getDate()) > 0) {
+                if (nna.getFechaNacimiento() != null) {
+                    int edad = añoAct - nna.getFechaNacimiento().getYear();
+                    int meses = 0;
+                    //Revisar cálculo de meses
+                    if ((nna.getFechaNacimiento().getMonth()
+                            - fechaAct.getMonth()) > 0) {
+                        meses = nna.getFechaNacimiento().getMonth()
+                                - fechaAct.getMonth();
                         edad--;
+                    } else if ((nna.getFechaNacimiento().getMonth()
+                            - fechaAct.getMonth()) == 0) {
+                        if ((nna.getFechaNacimiento().getDate()
+                                - fechaAct.getDate()) > 0) {
+                            edad--;
+                        } else {
+                            meses = 1;
+                        }
                     } else {
-                        meses = 1;
+                        meses = fechaAct.getMonth() - nna.getFechaNacimiento().getMonth();
                     }
+
+                    cell.setCellValue(edad);
+                    cell = row.createCell(7);
+                    cell.setCellValue(meses);
                 } else {
-                    meses = fechaAct.getMonth() - nna.getFechaNacimiento().getMonth();
+                    cell.setCellValue("");
+                    cell = row.createCell(7);
+                    cell.setCellValue("");
                 }
-                cell.setCellValue(edad);
-                cell = row.createCell(7);
-                cell.setCellValue(meses);
                 cell = row.createCell(8);
                 cell.setCellValue(nna.getSexo());
                 cell = row.createCell(9);
@@ -1225,34 +1248,41 @@ public class reporte {
                 Date fechaAct = new Date();
                 int añoAct = fechaAct.getYear();
                 int mesAct = fechaAct.getMonth();
-                int añoNac = nna.getFechaNacimiento().getYear();
-                int mesNac = nna.getFechaNacimiento().getMonth();
-                int edad = 0;
-                int meses = 0;
-                if (añoAct != añoNac && mesAct > mesNac) {
-                    edad = añoAct - añoNac;
+                if (nna.getFechaNacimiento() != null) {
+                    int añoNac = nna.getFechaNacimiento().getYear();
+                    int mesNac = nna.getFechaNacimiento().getMonth();
+                    int edad = 0;
+                    int meses = 0;
+                    if (añoAct != añoNac && mesAct > mesNac) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac == mesAct) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac > mesAct) {
+                        edad = añoAct - añoNac - 1;
+                    }
+                    if (añoAct == añoNac) {
+                        edad = 0;
+                    }
+                    if (mesAct == mesNac) {
+                        meses = 0;
+                    }
+                    if (mesAct != mesNac && mesAct > mesNac) {
+                        meses = mesAct - mesNac;
+                    }
+                    if (mesAct != mesNac && mesAct <= mesNac) {
+                        meses = mesAct + 12 - mesNac;
+                    }
+                    cell.setCellValue(edad);
+                    cell = row.createCell(7);
+                    cell.setCellValue(meses);
+                } else {
+                    cell.setCellValue("");
+                    cell = row.createCell(7);
+                    cell.setCellValue("");
                 }
-                if (añoAct != añoNac && mesNac == mesAct) {
-                    edad = añoAct - añoNac;
-                }
-                if (añoAct != añoNac && mesNac > mesAct) {
-                    edad = añoAct - añoNac - 1;
-                }
-                if (añoAct == añoNac) {
-                    edad = 0;
-                }
-                if (mesAct == mesNac) {
-                    meses = 0;
-                }
-                if (mesAct != mesNac && mesAct > mesNac) {
-                    meses = mesAct - mesNac;
-                }
-                if (mesAct != mesNac && mesAct <= mesNac) {
-                    meses = mesAct + 12 - mesNac;
-                }
-                cell.setCellValue(edad);
-                cell = row.createCell(7);
-                cell.setCellValue(meses);
+
                 cell = row.createCell(8);
                 cell.setCellValue(nna.getSexo());
                 cell = row.createCell(9);
@@ -1657,34 +1687,42 @@ public class reporte {
                 cell = row.createCell(5);
                 int añoAct = fechaAct.getYear();
                 int mesAct = fechaAct.getMonth();
-                int añoNac = nna.getFechaNacimiento().getYear();
-                int mesNac = nna.getFechaNacimiento().getMonth();
-                int edad = 0;
-                int meses = 0;
-                if (añoAct != añoNac && mesAct > mesNac) {
-                    edad = añoAct - añoNac;
+
+                if (nna.getFechaNacimiento() != null) {
+                    int añoNac = nna.getFechaNacimiento().getYear();
+                    int mesNac = nna.getFechaNacimiento().getMonth();
+                    int edad = 0;
+                    int meses = 0;
+                    if (añoAct != añoNac && mesAct > mesNac) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac == mesAct) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac > mesAct) {
+                        edad = añoAct - añoNac - 1;
+                    }
+                    if (añoAct == añoNac) {
+                        edad = 0;
+                    }
+                    if (mesAct == mesNac) {
+                        meses = 0;
+                    }
+                    if (mesAct != mesNac && mesAct > mesNac) {
+                        meses = mesAct - mesNac;
+                    }
+                    if (mesAct != mesNac && mesAct <= mesNac) {
+                        meses = mesAct + 12 - mesNac;
+                    }
+                    cell.setCellValue(edad);
+                    cell = row.createCell(6);
+                    cell.setCellValue(meses);
+                } else {
+                    cell.setCellValue("");
+                    cell = row.createCell(6);
+                    cell.setCellValue("");
                 }
-                if (añoAct != añoNac && mesNac == mesAct) {
-                    edad = añoAct - mesAct;
-                }
-                if (añoAct != añoNac && mesNac > mesAct) {
-                    edad = añoAct - añoNac - 1;
-                }
-                if (añoAct == añoNac) {
-                    edad = 0;
-                }
-                if (mesAct == mesNac) {
-                    meses = 0;
-                }
-                if (mesAct != mesNac && mesAct > mesNac) {
-                    meses = mesAct - mesNac;
-                }
-                if (mesAct != mesNac && mesAct <= mesNac) {
-                    meses = mesAct + 12 - mesNac;
-                }
-                cell.setCellValue(edad);
-                cell = row.createCell(6);
-                cell.setCellValue(meses);
+
                 cell = row.createCell(7);
                 try {
                     cell.setCellValue(nna.getCar().getNombre());
@@ -1982,34 +2020,42 @@ public class reporte {
                 cell = row.createCell(6);
                 int añoAct = fechaAct.getYear();
                 int mesAct = fechaAct.getMonth();
-                int añoNac = nna.getFechaNacimiento().getYear();
-                int mesNac = nna.getFechaNacimiento().getMonth();
-                int edad = 0;
-                int meses = 0;
-                if (añoAct != añoNac && mesAct > mesNac) {
-                    edad = añoAct - añoNac;
+
+                if (nna.getFechaNacimiento() != null) {
+                    int añoNac = nna.getFechaNacimiento().getYear();
+                    int mesNac = nna.getFechaNacimiento().getMonth();
+                    int edad = 0;
+                    int meses = 0;
+                    if (añoAct != añoNac && mesAct > mesNac) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac == mesAct) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac > mesAct) {
+                        edad = añoAct - añoNac - 1;
+                    }
+                    if (añoAct == añoNac) {
+                        edad = 0;
+                    }
+                    if (mesAct == mesNac) {
+                        meses = 0;
+                    }
+                    if (mesAct != mesNac && mesAct > mesNac) {
+                        meses = mesAct - mesNac;
+                    }
+                    if (mesAct != mesNac && mesAct <= mesNac) {
+                        meses = mesAct + 12 - mesNac;
+                    }
+                    cell.setCellValue(edad);
+                    cell = row.createCell(7);
+                    cell.setCellValue(meses);
+                } else {
+                    cell.setCellValue("");
+                    cell = row.createCell(7);
+                    cell.setCellValue("");
                 }
-                if (añoAct != añoNac && mesNac == mesAct) {
-                    edad = añoAct - añoNac;
-                }
-                if (añoAct != añoNac && mesNac > mesAct) {
-                    edad = añoAct - añoNac - 1;
-                }
-                if (añoAct == añoNac) {
-                    edad = 0;
-                }
-                if (mesAct == mesNac) {
-                    meses = 0;
-                }
-                if (mesAct != mesNac && mesAct > mesNac) {
-                    meses = mesAct - mesNac;
-                }
-                if (mesAct != mesNac && mesAct <= mesNac) {
-                    meses = mesAct + 12 - mesNac;
-                }
-                cell.setCellValue(edad);
-                cell = row.createCell(7);
-                cell.setCellValue(meses);
+
                 cell = row.createCell(8);
                 try {
                     cell.setCellValue(nna.getCar().getNombre());
@@ -2368,34 +2414,42 @@ public class reporte {
                 cell = row.createCell(6);
                 int añoAct = fechaAct.getYear();
                 int mesAct = fechaAct.getMonth();
-                int añoNac = nna.getFechaNacimiento().getYear();
-                int mesNac = nna.getFechaNacimiento().getMonth();
-                int edad = 0;
-                int meses = 0;
-                if (añoAct != añoNac && mesAct > mesNac) {
-                    edad = añoAct - añoNac;
+
+                if (nna.getFechaNacimiento() != null) {
+                    int añoNac = nna.getFechaNacimiento().getYear();
+                    int mesNac = nna.getFechaNacimiento().getMonth();
+                    int edad = 0;
+                    int meses = 0;
+                    if (añoAct != añoNac && mesAct > mesNac) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac == mesAct) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac > mesAct) {
+                        edad = añoAct - añoNac - 1;
+                    }
+                    if (añoAct == añoNac) {
+                        edad = 0;
+                    }
+                    if (mesAct == mesNac) {
+                        meses = 0;
+                    }
+                    if (mesAct != mesNac && mesAct > mesNac) {
+                        meses = mesAct - mesNac;
+                    }
+                    if (mesAct != mesNac && mesAct <= mesNac) {
+                        meses = mesAct + 12 - mesNac;
+                    }
+                    cell.setCellValue(edad);
+                    cell = row.createCell(7);
+                    cell.setCellValue(meses);
+                } else {
+                    cell.setCellValue("");
+                    cell = row.createCell(7);
+                    cell.setCellValue("");
                 }
-                if (añoAct != añoNac && mesNac == mesAct) {
-                    edad = añoAct - añoNac;
-                }
-                if (añoAct != añoNac && mesNac > mesAct) {
-                    edad = añoAct - añoNac - 1;
-                }
-                if (añoAct == añoNac) {
-                    edad = 0;
-                }
-                if (mesAct == mesNac) {
-                    meses = 0;
-                }
-                if (mesAct != mesNac && mesAct > mesNac) {
-                    meses = mesAct - mesNac;
-                }
-                if (mesAct != mesNac && mesAct <= mesNac) {
-                    meses = mesAct + 12 - mesNac;
-                }
-                cell.setCellValue(edad);
-                cell = row.createCell(7);
-                cell.setCellValue(meses);
+
                 cell = row.createCell(8);
                 try {
                     cell.setCellValue(nna.getCar().getNombre());
@@ -2692,34 +2746,42 @@ public class reporte {
                 cell = row.createCell(6);
                 int añoAct = fechaAct.getYear();
                 int mesAct = fechaAct.getMonth();
-                int añoNac = nna.getFechaNacimiento().getYear();
-                int mesNac = nna.getFechaNacimiento().getMonth();
-                int edad = 0;
-                int meses = 0;
-                if (añoAct != añoNac && mesAct > mesNac) {
-                    edad = añoAct - añoNac;
+
+                if (nna.getFechaNacimiento() != null) {
+                    int añoNac = nna.getFechaNacimiento().getYear();
+                    int mesNac = nna.getFechaNacimiento().getMonth();
+                    int edad = 0;
+                    int meses = 0;
+                    if (añoAct != añoNac && mesAct > mesNac) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac == mesAct) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac > mesAct) {
+                        edad = añoAct - añoNac - 1;
+                    }
+                    if (añoAct == añoNac) {
+                        edad = 0;
+                    }
+                    if (mesAct == mesNac) {
+                        meses = 0;
+                    }
+                    if (mesAct != mesNac && mesAct > mesNac) {
+                        meses = mesAct - mesNac;
+                    }
+                    if (mesAct != mesNac && mesAct <= mesNac) {
+                        meses = mesAct + 12 - mesNac;
+                    }
+                    cell.setCellValue(edad);
+                    cell = row.createCell(7);
+                    cell.setCellValue(meses);
+                } else {
+                    cell.setCellValue("");
+                    cell = row.createCell(7);
+                    cell.setCellValue("");
                 }
-                if (añoAct != añoNac && mesNac == mesAct) {
-                    edad = añoAct - añoNac;
-                }
-                if (añoAct != añoNac && mesNac > mesAct) {
-                    edad = añoAct - añoNac - 1;
-                }
-                if (añoAct == añoNac) {
-                    edad = 0;
-                }
-                if (mesAct == mesNac) {
-                    meses = 0;
-                }
-                if (mesAct != mesNac && mesAct > mesNac) {
-                    meses = mesAct - mesNac;
-                }
-                if (mesAct != mesNac && mesAct <= mesNac) {
-                    meses = mesAct + 12 - mesNac;
-                }
-                cell.setCellValue(edad);
-                cell = row.createCell(7);
-                cell.setCellValue(meses);
+
                 cell = row.createCell(8);
                 try {
                     cell.setCellValue(nna.getCar().getNombre());
@@ -3021,34 +3083,42 @@ public class reporte {
                 cell = row.createCell(6);
                 int añoAct = fechaAct.getYear();
                 int mesAct = fechaAct.getMonth();
-                int añoNac = nna.getFechaNacimiento().getYear();
-                int mesNac = nna.getFechaNacimiento().getMonth();
-                int edad = 0;
-                int meses = 0;
-                if (añoAct != añoNac && mesAct > mesNac) {
-                    edad = añoAct - añoNac;
+
+                if (nna.getFechaNacimiento() != null) {
+                    int añoNac = nna.getFechaNacimiento().getYear();
+                    int mesNac = nna.getFechaNacimiento().getMonth();
+                    int edad = 0;
+                    int meses = 0;
+                    if (añoAct != añoNac && mesAct > mesNac) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac == mesAct) {
+                        edad = añoAct - añoNac;
+                    }
+                    if (añoAct != añoNac && mesNac > mesAct) {
+                        edad = añoAct - añoNac - 1;
+                    }
+                    if (añoAct == añoNac) {
+                        edad = 0;
+                    }
+                    if (mesAct == mesNac) {
+                        meses = 0;
+                    }
+                    if (mesAct != mesNac && mesAct > mesNac) {
+                        meses = mesAct - mesNac;
+                    }
+                    if (mesAct != mesNac && mesAct <= mesNac) {
+                        meses = mesAct + 12 - mesNac;
+                    }
+                    cell.setCellValue(edad);
+                    cell = row.createCell(7);
+                    cell.setCellValue(meses);
+                } else {
+                    cell.setCellValue("");
+                    cell = row.createCell(7);
+                    cell.setCellValue("");
                 }
-                if (añoAct != añoNac && mesNac == mesAct) {
-                    edad = añoAct - añoNac;
-                }
-                if (añoAct != añoNac && mesNac > mesAct) {
-                    edad = añoAct - añoNac - 1;
-                }
-                if (añoAct == añoNac) {
-                    edad = 0;
-                }
-                if (mesAct == mesNac) {
-                    meses = 0;
-                }
-                if (mesAct != mesNac && mesAct > mesNac) {
-                    meses = mesAct - mesNac;
-                }
-                if (mesAct != mesNac && mesAct <= mesNac) {
-                    meses = mesAct + 12 - mesNac;
-                }
-                cell.setCellValue(edad);
-                cell = row.createCell(7);
-                cell.setCellValue(meses);
+
                 cell = row.createCell(8);
                 try {
                     cell.setCellValue(nna.getCar().getNombre());
@@ -6057,7 +6127,7 @@ public class reporte {
                     idinfoant = famaux.getIdinfoFamilia();
                 }
             }
-            
+
             //Se retiran los registros repetidos
             int n = listaFamiliasPrev.size();
             listaFamilias = listaFamiliasPrev;
@@ -6068,8 +6138,8 @@ public class reporte {
                 flag2 = false;
                 for (int k = 0; k < n - 1; k++) {
                     for (int j = k; j < n - 1; j++) {
-                        if (listaFamiliasPrev.get(k).getIdinfoFamilia() == listaFamiliasPrev.get(j+1).getIdinfoFamilia()) {
-                            listaFamilias.remove(j+1);
+                        if (listaFamiliasPrev.get(k).getIdinfoFamilia() == listaFamiliasPrev.get(j + 1).getIdinfoFamilia()) {
+                            listaFamilias.remove(j + 1);
                             flag = true;
                             break;
                         }
@@ -6078,14 +6148,14 @@ public class reporte {
                         break;
                     }
                 }
-                if(flag){
+                if (flag) {
                     listaFamiliasPrev = listaFamilias;
                     n = listaFamiliasPrev.size();
                     flag = false;
                     flag2 = true;
                 }
             }
-            
+
             //METODO BUBBLESORT PARA ORDENAR SEGUN EL APELLIDO DE LA ADOPTANTE MUJER
             n = listaFamilias.size();
             for (int k = 0; k < n - 1; k++) {
