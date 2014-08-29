@@ -5003,16 +5003,24 @@ public class reporte {
             ArrayList<Familia> listafam = ServicioReporte.getRenad_Parte1();
             int i = 3;
             for (Familia fam : listafam) {
+                
+                ExpedienteFamilia exp = new ExpedienteFamilia();
+                if (!fam.getExpedienteFamilias().isEmpty()) {
+                    exp = fam.getExpedienteFamilias().iterator().next();
+                }
+                
+                if(exp.getIdexpedienteFamilia() != 0 &&
+                        (exp.getEstado().equals("designado") || 
+                         exp.getEstado().equals("adopcion") || 
+                         exp.getEstado().equals("post"))){
+                
                 Row row = sheet.createRow(i);
 
                 Cell cell = row.createCell(0);
                 cell.setCellValue(i - 2);
                 cell = row.createCell(1);
 //                cell.setCellValue(fam.getIdfamilia());
-                ExpedienteFamilia exp = new ExpedienteFamilia();
-                if (!fam.getExpedienteFamilias().isEmpty()) {
-                    exp = fam.getExpedienteFamilias().iterator().next();
-                }
+                
                 if (exp.getExpediente() != null) {
                     cell.setCellValue(exp.getExpediente());
                 }
@@ -5243,13 +5251,13 @@ public class reporte {
                             edad = 0;
                             int meses = 0;
                             if (añoAct != añoNac && mesAct > mesNac) {
-                                edad = añoAct - añoNac - 1;
+                                edad = añoAct - añoNac;
                             }
                             if (añoAct != añoNac && mesNac == mesAct) {
                                 edad = añoAct - añoNac;
                             }
                             if (añoAct != añoNac && mesNac > mesAct) {
-                                edad = añoAct - añoNac;
+                                edad = añoAct - añoNac - 1;
                             }
                             if (añoAct == añoNac) {
                                 edad = 0;
@@ -5562,6 +5570,9 @@ public class reporte {
                 }
 
                 i++;
+                }else{
+                    //se encuentra en otro estado 
+                };
             }
 //
 //            //Se selecciona la Hoja donde se va a trabajar
