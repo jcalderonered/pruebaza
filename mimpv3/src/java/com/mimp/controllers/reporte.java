@@ -3375,8 +3375,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopNac.xlsx");
-//            InputStream inp = new FileInputStream("/opt/Plantillas/AdopNac.xlsx");
+//            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopNac.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/AdopNac.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
@@ -3770,8 +3770,8 @@ public class reporte {
         try {
             //Se llama a la plantilla localizada en la ruta
 
-            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopInter.xlsx");
-//            InputStream inp = new FileInputStream("/opt/Plantillas/AdopInter.xlsx");
+//            InputStream inp = new FileInputStream("C:\\Plantillas\\AdopInter.xlsx");
+            InputStream inp = new FileInputStream("/opt/Plantillas/AdopInter.xlsx");
 
             wb = WorkbookFactory.create(inp);
             Sheet sheet = wb.getSheetAt(0);
