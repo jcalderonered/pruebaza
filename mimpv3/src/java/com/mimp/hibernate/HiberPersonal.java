@@ -13,6 +13,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import javax.annotation.Resource;
 import oracle.jdbc.OracleTypes;
 import org.hibernate.Hibernate;
@@ -1576,10 +1577,12 @@ public class HiberPersonal {
 
         Log log = new Log();
         Date date = new Date();
-        timeStampFormat st = new timeStampFormat();
+        //timeStampFormat st = new timeStampFormat();
+        Timestamp actual = new Timestamp(date.getTime());
 
         log.setPersonal(personal);
-        log.setFecha(st.stringToTimestamp(date.toString()));
+        //log.setFecha(st.stringToTimestamp(date.toString()));
+        log.setFecha(actual);
         log.setTipoReg(Tipo_registro);
         log.setNReg(Numero_registro);
         log.setIncidencia(mensaje);
