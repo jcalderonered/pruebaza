@@ -143,17 +143,17 @@
                             <div class="control-group">
                                 <label class="control-label">Organismo Acreditado y/o Autoridad Central asociado</label>
                                 <div class="controls">
-                                        <select id="entAsoc" name="entAsoc" >
-                                            <c:forEach var="entidad" items="${listaEntidad}" > 
-                                                <option value="${entidad.getIdentidad()}" >${entidad.getNombre()}</option>
-                                            </c:forEach>
-                                        </select>
+                                    <select id="entAsoc" name="entAsoc" >
+                                        <c:forEach var="entidad" items="${listaEntidad}" > 
+                                            <option value="${entidad.getIdentidad()}" >${entidad.getNombre()}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                             </div>
                             <br>
                             <div class="control-group">
                                 <div class="controls">
-                                    <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                    <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default" onclick="Alerta();">Guardar cambios</button>
                                 </div>
                             </div>
                             <br>
@@ -180,7 +180,7 @@
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/assets/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
 
-            $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
+                                        $('.datepicker').datepicker({"format": "dd/mm/yyyy", "weekStart": 1, "autoclose": true, "language": "es"});
 
         </script>
         <script type="text/javascript">
@@ -200,6 +200,12 @@
                     document.formulario.numeroFicha.focus();
                     return false;
                 }
+            }
+        </script>
+        <script>
+            function Alerta()
+            {
+                return confirm('¿Estas seguro(a) de que desea crear el expediente?');
             }
         </script>
         <!-- Ubicar al final -->
