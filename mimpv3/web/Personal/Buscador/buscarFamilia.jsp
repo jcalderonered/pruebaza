@@ -245,7 +245,7 @@
                                                             <input hidden name="nacionalidad" id="nacionalidad" value="${nacionalidad}">                                                        
                                                             <input hidden name="tipofamilia" id="tipofamilia" value="${tipofamilia}">
                                                             <input hidden name="estado2" id="estado2" value="${estado}">
-                                                            <button type="submit" class="btn btn-default">Ver</button>
+                                                            <button type="submit" class="btn btn-default" onclick="validar();">Ver</button>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -284,7 +284,7 @@
 
                                 if (document.formulario.expediente.value == "" && document.formulario.HT.value == ""
                                         && document.getElementById("nacionalidad").value == "none" && document.getElementById("estado").value == "none"
-                                        && document.getElementById("tipofamilia").value == "none" && document.getElementById("resfamilia").value == "none")
+                                        && document.getElementById("tipofamilia").value == "none")
                                 {
                                     alert("Debe elegir al menos un filtro de búsqueda");
                                     return false;
