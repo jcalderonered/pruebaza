@@ -1393,140 +1393,81 @@ public class HiberPersonal {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
-        String hql = "";
+        String hql = "from ExpedienteFamilia E where E.estado not like :llave";
+        String key = "duplicado";
         Query query = session.createQuery(hql);
-        /*   if (expFam.getEstado().equals("evaluacion") || expFam.getEstado().equals("espera")
-         || expFam.getEstado().equals("estudio") || expFam.getEstado().equals("designado")
-         || expFam.getEstado().equals("adopcion") || expFam.getEstado().equals("reevaluacion")
-         || expFam.getEstado().equals("post") || expFam.getEstado().equals("eliminado")) {
-         hql = "from ExpedienteFamilia E where E.expediente like :exp "
-         + "and E.estado = :estado ";
-         query = session.createQuery(hql);
-         query.setString("exp", '%' + expFam.getExpediente() + '%');
-         query.setString("estado", expFam.getEstado());
-         }
-
-         if (expFam.getTipoFamilia().equals("PP") || expFam.getTipoFamilia().equals("PE")
-         || expFam.getTipoFamilia().equals("MP") || expFam.getTipoFamilia().equals("ME")
-         || expFam.getTipoFamilia().equals("EP") || expFam.getTipoFamilia().equals("EE")) {
-         hql = "from ExpedienteFamilia E where "
-         + " E.tipoFamilia like :tipoFamilia ";
-         query = session.createQuery(hql);
-         query.setString("tipoFamilia", expFam.getTipoFamilia() + '%');
-         } else if (expFam.getTipoFamilia().equals("none")) {
-         hql = "from ExpedienteFamilia E where E.expediente like :exp "
-         + "or E.estado like :estado ";
-         query = session.createQuery(hql);
-         query.setString("exp", '%' + expFam.getExpediente() + '%');
-         query.setString("estado", expFam.getEstado() + '%');
-         }*/
-
-        hql = "from ExpedienteFamilia E where ";
+        query.setString("llave", '%' + key + '%');
 
         if (!(expFam.getExpediente() == "")) {
-            hql = hql + " E.expediente like :exp ";
+            hql = hql + " and E.expediente like :exp ";
 
             query = session.createQuery(hql);
+            query.setString("llave", '%' + key + '%');
             query.setString("exp", '%' + expFam.getExpediente() + '%');
         }
 
         if (!(expFam.getHt() == "")) {
-            if (hql.equals("from ExpedienteFamilia E where ")) {
-                hql = hql + " E.ht like :ht ";
+            hql = hql + " and E.ht like :ht ";
 
-                query = session.createQuery(hql);
-                query.setString("ht", '%' + expFam.getHt() + '%');
-            } else {
-
-                hql = hql + " and E.ht like :ht ";
-
-                query = session.createQuery(hql);
-                if (!(expFam.getExpediente() == "")) {
-                    query.setString("exp", '%' + expFam.getExpediente() + '%');
-                }
-
-                query.setString("ht", '%' + expFam.getHt() + '%');
+            query = session.createQuery(hql);
+            query.setString("llave", '%' + key + '%');
+            if (!(expFam.getExpediente() == "")) {
+                query.setString("exp", '%' + expFam.getExpediente() + '%');
             }
+            query.setString("ht", '%' + expFam.getHt() + '%');
         }
 
         if (!(expFam.getNacionalidad() == "none")) {
-            if (hql.equals("from ExpedienteFamilia E where ")) {
-                hql = hql + " E.nacionalidad = :nacionalidad ";
+            hql = hql + " and E.nacionalidad = :nacionalidad ";
 
-                query = session.createQuery(hql);
-                query.setString("nacionalidad", expFam.getNacionalidad());
-            } else {
-
-                hql = hql + " and E.nacionalidad = :nacionalidad ";
-
-                query = session.createQuery(hql);
-                if (!(expFam.getExpediente() == "")) {
-                    query.setString("exp", '%' + expFam.getExpediente() + '%');
-                }
-                if (!(expFam.getHt() == "")) {
-                    query.setString("ht", '%' + expFam.getHt() + '%');
-                }
-
-                query.setString("nacionalidad", expFam.getNacionalidad());
+            query = session.createQuery(hql);
+            query.setString("llave", '%' + key + '%');
+            if (!(expFam.getExpediente() == "")) {
+                query.setString("exp", '%' + expFam.getExpediente() + '%');
             }
+            if (!(expFam.getHt() == "")) {
+                query.setString("ht", '%' + expFam.getHt() + '%');
+            }
+            query.setString("nacionalidad", expFam.getNacionalidad());
         }
 
         if (!(expFam.getEstado() == "none")) {
-            if (hql.equals("from ExpedienteFamilia E where ")) {
-                hql = hql + " E.estado = :estado ";
+            hql = hql + " and E.estado like :estado ";
 
-                query = session.createQuery(hql);
-                query.setString("estado", expFam.getEstado());
-            } else {
-
-                hql = hql + " and E.estado like :estado ";
-
-                query = session.createQuery(hql);
-                if (!(expFam.getExpediente() == "")) {
-                    query.setString("exp", '%' + expFam.getExpediente() + '%');
-                }
-                if (!(expFam.getHt() == "")) {
-                    query.setString("ht", '%' + expFam.getHt() + '%');
-                }
-
-                if (!(expFam.getNacionalidad() == "none")) {
-                    query.setString("nacionalidad", expFam.getNacionalidad());
-                }
-
-                query.setString("estado", expFam.getEstado());
+            query = session.createQuery(hql);
+            query.setString("llave", '%' + key + '%');
+            if (!(expFam.getExpediente() == "")) {
+                query.setString("exp", '%' + expFam.getExpediente() + '%');
             }
+            if (!(expFam.getHt() == "")) {
+                query.setString("ht", '%' + expFam.getHt() + '%');
+            }
+            if (!(expFam.getNacionalidad() == "none")) {
+                query.setString("nacionalidad", expFam.getNacionalidad());
+            }
+            query.setString("estado", expFam.getEstado());
         }
 
         if (!(expFam.getTipoFamilia() == "none")) {
-            if (hql.equals("from ExpedienteFamilia E where ")) {
-                hql = hql + " E.tipoFamilia = :tipoFamilia ";
+            hql = hql + " and E.tipoFamilia like :tipoFamilia ";
 
-                query = session.createQuery(hql);
-                query.setString("tipoFamilia", expFam.getTipoFamilia());
-            } else {
-
-                hql = hql + " and E.tipoFamilia like :tipoFamilia ";
-
-                query = session.createQuery(hql);
-                if (!(expFam.getExpediente() == "")) {
-                    query.setString("exp", '%' + expFam.getExpediente() + '%');
-                }
-                if (!(expFam.getHt() == "")) {
-                    query.setString("ht", '%' + expFam.getHt() + '%');
-                }
-
-                if (!(expFam.getNacionalidad() == "none")) {
-                    query.setString("nacionalidad", expFam.getNacionalidad());
-                }
-
-                if (!(expFam.getEstado() == "none")) {
-                    query.setString("estado", expFam.getEstado());
-                }
-
-                query.setString("tipoFamilia", expFam.getTipoFamilia());
+            query = session.createQuery(hql);
+            query.setString("llave", '%' + key + '%');
+            if (!(expFam.getExpediente() == "")) {
+                query.setString("exp", '%' + expFam.getExpediente() + '%');
             }
+            if (!(expFam.getHt() == "")) {
+                query.setString("ht", '%' + expFam.getHt() + '%');
+            }
+            if (!(expFam.getNacionalidad() == "none")) {
+                query.setString("nacionalidad", expFam.getNacionalidad());
+            }
+            if (!(expFam.getEstado() == "none")) {
+                query.setString("estado", expFam.getEstado());
+            }
+            query.setString("tipoFamilia", expFam.getTipoFamilia());
         }
-
+        
         ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
         if (!infoFam.getDepRes().equals("none")) {
             //FALTA
@@ -1569,6 +1510,185 @@ public class HiberPersonal {
         return allExpedientes;
     }
 
+//    public ArrayList<ExpedienteFamilia> FiltrarFam(ExpedienteFamilia expFam, InfoFamilia infoFam) {
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//
+//        String hql = "";
+//        Query query = session.createQuery(hql);
+//        /*   if (expFam.getEstado().equals("evaluacion") || expFam.getEstado().equals("espera")
+//         || expFam.getEstado().equals("estudio") || expFam.getEstado().equals("designado")
+//         || expFam.getEstado().equals("adopcion") || expFam.getEstado().equals("reevaluacion")
+//         || expFam.getEstado().equals("post") || expFam.getEstado().equals("eliminado")) {
+//         hql = "from ExpedienteFamilia E where E.expediente like :exp "
+//         + "and E.estado = :estado ";
+//         query = session.createQuery(hql);
+//         query.setString("exp", '%' + expFam.getExpediente() + '%');
+//         query.setString("estado", expFam.getEstado());
+//         }
+//
+//         if (expFam.getTipoFamilia().equals("PP") || expFam.getTipoFamilia().equals("PE")
+//         || expFam.getTipoFamilia().equals("MP") || expFam.getTipoFamilia().equals("ME")
+//         || expFam.getTipoFamilia().equals("EP") || expFam.getTipoFamilia().equals("EE")) {
+//         hql = "from ExpedienteFamilia E where "
+//         + " E.tipoFamilia like :tipoFamilia ";
+//         query = session.createQuery(hql);
+//         query.setString("tipoFamilia", expFam.getTipoFamilia() + '%');
+//         } else if (expFam.getTipoFamilia().equals("none")) {
+//         hql = "from ExpedienteFamilia E where E.expediente like :exp "
+//         + "or E.estado like :estado ";
+//         query = session.createQuery(hql);
+//         query.setString("exp", '%' + expFam.getExpediente() + '%');
+//         query.setString("estado", expFam.getEstado() + '%');
+//         }*/
+//
+//        hql = "from ExpedienteFamilia E where ";
+//
+//        if (!(expFam.getExpediente() == "")) {
+//            hql = hql + " E.expediente like :exp ";
+//
+//            query = session.createQuery(hql);
+//            query.setString("exp", '%' + expFam.getExpediente() + '%');
+//        }
+//
+//        if (!(expFam.getHt() == "")) {
+//            if (hql.equals("from ExpedienteFamilia E where ")) {
+//                hql = hql + " E.ht like :ht ";
+//
+//                query = session.createQuery(hql);
+//                query.setString("ht", '%' + expFam.getHt() + '%');
+//            } else {
+//
+//                hql = hql + " and E.ht like :ht ";
+//
+//                query = session.createQuery(hql);
+//                if (!(expFam.getExpediente() == "")) {
+//                    query.setString("exp", '%' + expFam.getExpediente() + '%');
+//                }
+//
+//                query.setString("ht", '%' + expFam.getHt() + '%');
+//            }
+//        }
+//
+//        if (!(expFam.getNacionalidad() == "none")) {
+//            if (hql.equals("from ExpedienteFamilia E where ")) {
+//                hql = hql + " E.nacionalidad = :nacionalidad ";
+//
+//                query = session.createQuery(hql);
+//                query.setString("nacionalidad", expFam.getNacionalidad());
+//            } else {
+//
+//                hql = hql + " and E.nacionalidad = :nacionalidad ";
+//
+//                query = session.createQuery(hql);
+//                if (!(expFam.getExpediente() == "")) {
+//                    query.setString("exp", '%' + expFam.getExpediente() + '%');
+//                }
+//                if (!(expFam.getHt() == "")) {
+//                    query.setString("ht", '%' + expFam.getHt() + '%');
+//                }
+//
+//                query.setString("nacionalidad", expFam.getNacionalidad());
+//            }
+//        }
+//
+//        if (!(expFam.getEstado() == "none")) {
+//            if (hql.equals("from ExpedienteFamilia E where ")) {
+//                hql = hql + " E.estado = :estado ";
+//
+//                query = session.createQuery(hql);
+//                query.setString("estado", expFam.getEstado());
+//            } else {
+//
+//                hql = hql + " and E.estado like :estado ";
+//
+//                query = session.createQuery(hql);
+//                if (!(expFam.getExpediente() == "")) {
+//                    query.setString("exp", '%' + expFam.getExpediente() + '%');
+//                }
+//                if (!(expFam.getHt() == "")) {
+//                    query.setString("ht", '%' + expFam.getHt() + '%');
+//                }
+//
+//                if (!(expFam.getNacionalidad() == "none")) {
+//                    query.setString("nacionalidad", expFam.getNacionalidad());
+//                }
+//
+//                query.setString("estado", expFam.getEstado());
+//            }
+//        }
+//
+//        if (!(expFam.getTipoFamilia() == "none")) {
+//            if (hql.equals("from ExpedienteFamilia E where ")) {
+//                hql = hql + " E.tipoFamilia = :tipoFamilia ";
+//
+//                query = session.createQuery(hql);
+//                query.setString("tipoFamilia", expFam.getTipoFamilia());
+//            } else {
+//
+//                hql = hql + " and E.tipoFamilia like :tipoFamilia ";
+//
+//                query = session.createQuery(hql);
+//                if (!(expFam.getExpediente() == "")) {
+//                    query.setString("exp", '%' + expFam.getExpediente() + '%');
+//                }
+//                if (!(expFam.getHt() == "")) {
+//                    query.setString("ht", '%' + expFam.getHt() + '%');
+//                }
+//
+//                if (!(expFam.getNacionalidad() == "none")) {
+//                    query.setString("nacionalidad", expFam.getNacionalidad());
+//                }
+//
+//                if (!(expFam.getEstado() == "none")) {
+//                    query.setString("estado", expFam.getEstado());
+//                }
+//
+//                query.setString("tipoFamilia", expFam.getTipoFamilia());
+//            }
+//        }
+//
+//        ArrayList<ExpedienteFamilia> allExpedientes = new ArrayList();
+//        if (!infoFam.getDepRes().equals("none")) {
+//            //FALTA
+//            if (!hql.equals("from ExpedienteFamilia E where ")) {
+//                List expedientes = query.list();
+//                if (!expedientes.isEmpty()) {
+//                    for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+//                        ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+//                        Hibernate.initialize(temp.getFamilia());
+//                        Hibernate.initialize(temp.getUnidad());
+//                        allExpedientes.add(temp);
+//                    }
+//                }
+//            } else {
+//                //FALTA
+//                hql = "FROM INFO_FAMILIA F WHERE F.DEP_RES = :dep";
+//                query = session.createQuery(hql);
+//                query.setString("dep", infoFam.getDepRes());
+//
+//                List listaFamilias = query.list();
+//                ArrayList<InfoFamilia> fami = new ArrayList<InfoFamilia>();
+//                for (Iterator iter = listaFamilias.iterator(); iter.hasNext();) {
+//                    InfoFamilia ifa = (InfoFamilia) iter.next();
+//                    Hibernate.initialize(ifa.getFamilia());
+//                    fami.add(ifa);
+//                }
+//
+//            }
+//        } else {
+//            List expedientes = query.list();
+//            if (!expedientes.isEmpty()) {
+//                for (Iterator iter = expedientes.iterator(); iter.hasNext();) {
+//                    ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
+//                    Hibernate.initialize(temp.getFamilia());
+//                    Hibernate.initialize(temp.getUnidad());
+//                    allExpedientes.add(temp);
+//                }
+//            }
+//        }
+//        return allExpedientes;
+//    }
     public void InsertLog(Personal personal, String Tipo_registro, String Numero_registro, String mensaje) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2088,7 +2208,7 @@ public class HiberPersonal {
 
         return allExpedientes;
     }
-    
+
     public ArrayList<String> listaNumExpActuales() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -2153,7 +2273,7 @@ public class HiberPersonal {
     }
 
     public void EliminarExpedientesNacionales() {
-    Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
 
@@ -2168,16 +2288,13 @@ public class HiberPersonal {
             ExpedienteFamilia temp = (ExpedienteFamilia) iter.next();
             allExpedientes.add(temp);
         }
-        
+
         for (ExpedienteFamilia expedienteFamilia : allExpedientes) {
             session.delete(expedienteFamilia);
         }
-        
-                
+
     }
-    
-    
-    
+
     public boolean VerificarNumExp(String num) {
         Session session = sessionFactory.getCurrentSession();
 
