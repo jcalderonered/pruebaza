@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-md-8">
                         <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}${volver}'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
-                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarRegistro" method="post">
+                        <form onsubmit="return confirm('Desea realizar cambios en el expediente?');" role="form" action="${pageContext.servletContext.contextPath}/ActualizarRegistro" method="post">
                             <input hidden id="volver" name="volver" value="${volver}">
                             <c:if test="${estado != 'formativa'}">
                                 <br>
@@ -174,7 +174,7 @@
                                 </div>
                             </div>
                             <br>
-                            <input ${expediente.getNumeroExpediente() == null ? '' : 'disabled'} type="submit" id="genNumExp" name="genNumExp" value="Generar un número de expediente" class="btn btn-default" onclick="Alerta();" >
+                            <input ${expediente.getNumeroExpediente() == null ? '' : 'disabled'} type="submit" id="genNumExp" name="genNumExp" value="Generar un número de expediente" class="btn btn-default">
                             <br>
                             <br>
                             <div class="control-group">

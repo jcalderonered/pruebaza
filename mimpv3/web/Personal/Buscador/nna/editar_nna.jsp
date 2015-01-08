@@ -112,7 +112,7 @@
                         <h1 align="center"><strong>Editar NNA</strong></h1>
                         <br>
                         <c:if test="${nna == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearNna" method="post"> 
+                            <form onsubmit="return confirm('Desea crear el NNA?');" class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearNna" method="post"> 
                             </c:if>  
                             <c:if test="${nna != null}">
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateNna" method="post"> 

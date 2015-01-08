@@ -111,7 +111,7 @@
                         <form action="${pageContext.servletContext.contextPath}/FiltrarFam?expediente=${expediente2}&HT=${HT}&nacionalidad=${nacionalidad}&estado=${estado2}&tipofamilia=${tipofamilia}" method="post">
                             <p align="right"><button id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                         </form>
-                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarRegistro" method="post">
+                        <form onsubmit="return confirm('Desea realizar cambios en el expediente?');" role="form" action="${pageContext.servletContext.contextPath}/ActualizarRegistro" method="post">
 
                             <c:if test="${estado != 'formativa'}">
                                 <br>
