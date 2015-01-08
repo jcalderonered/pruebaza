@@ -1472,7 +1472,7 @@ public class HiberNna {
                 
                 temp_numero = (ResultSet) statement.getObject(1); 
                 while(temp_numero.next()){
-                numero_last = temp_numero.getString(1);
+                numero_last = temp_numero.getString(2);
                 }
                 temp_numero.close();
                 statement.close();
