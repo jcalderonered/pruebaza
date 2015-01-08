@@ -112,7 +112,7 @@
                         <h1 align="center"><strong>Editar NNA</strong></h1>
                         <br>
                         <c:if test="${nna == null}">
-                            <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearNna" method="post"> 
+                            <form onsubmit="return confirm('Desea crear el NNA?');" class="form-horizontal" action="${pageContext.servletContext.contextPath}/crearNna" method="post"> 
                             </c:if>  
                             <c:if test="${nna != null}">
                                 <form class="form-horizontal" action="${pageContext.servletContext.contextPath}/updateNna" method="post"> 
@@ -472,7 +472,7 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button ${usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default" onclick="Alerta();" >Guardar Cambios</button>
+                                        <button ${usuario.getUnidad().getDepartamento() != 'Lima' ? 'disabled' : ''} id="singlebutton" name="singlebutton" class="btn btn-default" >Guardar Cambios</button>
                                       </div>
                                  </div>   
                                   </fieldset>

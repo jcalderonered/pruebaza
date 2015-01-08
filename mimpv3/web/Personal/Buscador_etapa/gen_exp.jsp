@@ -115,7 +115,7 @@
                         <h3><strong>Datos generales de la Ficha</strong></h3>
                         <br>
                         <br>
-                        <form role="form" action="${pageContext.servletContext.contextPath}/CrearExpNac" method="post">
+                        <form onsubmit="return confirm('Esta seguro de crear el expediente?');" role="form" action="${pageContext.servletContext.contextPath}/CrearExpNac" method="post">
                             <input hidden name="idFamilia" id="idFamilia" value="${idFamilia}"  >  
                             <input hidden name="exp" id="exp" value="${exp}"  >                             
                             <br>
@@ -153,7 +153,7 @@
                             <br>
                             <div class="control-group">
                                 <div class="controls">
-                                    <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default" onclick="Alerta();">Guardar cambios</button>
+                                    <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default" >Guardar cambios</button>
                                 </div>
                             </div>
                             <br>
