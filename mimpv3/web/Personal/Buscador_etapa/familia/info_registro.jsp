@@ -108,7 +108,7 @@
                         </ul>
                     </div>
                     <div class="col-md-8">
-                        <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarRegistro" method="post">
+                        <form onsubmit="return confirm('Desea realizar cambios en el expediente?');" role="form" action="${pageContext.servletContext.contextPath}/ActualizarRegistro" method="post">
                             <p align="right"><button onclick="location.href = '${pageContext.servletContext.contextPath}/inicioper'" id="singlebutton" name="singlebutton" style="background: black; color: white" class="btn btn-default">Volver</button></p>
                             <c:if test="${estado != 'formativa'}">
                                 <br>
@@ -173,7 +173,7 @@
                                 </div>
                             </div>
                             <br>
-                            <input ${expediente.getNumeroExpediente() == null ? '' : 'disabled'} type="submit" id="genNumExp" name="genNumExp" value="Generar un número de expediente" class="btn btn-default" onclick="Alerta();" >
+                            <input ${expediente.getNumeroExpediente() == null ? '' : 'disabled'} type="submit" id="genNumExp" name="genNumExp" value="Generar un número de expediente" class="btn btn-default" >
                             <br>
                             <div class="control-group">
                                 <label class="control-label">Número de Expediente</label>
@@ -415,7 +415,7 @@
             <script>
                 function Alerta()
                 {
-                     return confirm('Desea generar el número de expediente?');
+                    alert('Desea generar el número de expediente?');
                 }
             </script>
             <script type="text/javascript">
