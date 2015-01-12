@@ -2226,9 +2226,15 @@ public class HiberPersonal {
                 statement.execute();
 
                 ResultSet rs = (ResultSet) statement.getObject(1);
-
+                int year = Calendar.getInstance().get(Calendar.YEAR);
+                int anhoAct = 0;
                 while (rs.next()) {
+                    String temp = rs.getString("NUMERO_EXPEDIENTE");
+                    String[] parts = temp.split("-");
+                    anhoAct = Integer.parseInt(parts[1]);
+                    if(anhoAct == year){
                     lista.add(rs.getString("NUMERO_EXPEDIENTE"));
+                    }
                 }
                 rs.close();
                 statement.close();
