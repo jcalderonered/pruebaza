@@ -71,6 +71,7 @@
                                         <th>Inicio Inscripción</th>
                                         <th>Fin Inscripción</th>
                                         <th>Total de vacantes</th>
+                                        <th>Vacantes Disponibles</th>
                                         <th>Registrar</th>
                                     </tr>
                                 </thead>
@@ -81,7 +82,7 @@
                                             <td>${ts.TimeToString(turno.getInicioInscripcion())}</td>
                                             <td>${ts.TimeToString(turno.getFinInscripcion())}</td>
                                             <td>${turno.getVacantes()}</td>
-
+                                            <td>${turno.getVacantes() - turno.getAsistenciaFTs().size()}</td>
 
                                             <td>
                                                 <c:set var="now" value="<%=new java.util.Date()%>" />
