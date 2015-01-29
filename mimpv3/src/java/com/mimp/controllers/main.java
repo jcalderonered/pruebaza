@@ -280,7 +280,11 @@ public class main {
         }
         session.removeAttribute("idTurno");
 
+        
+        Turno tempTurno = new Turno();
+        tempTurno = ServicioMain.getTurno(turno);
         map.addAttribute("idTurno", turno);
+        map.addAttribute("objTurno", tempTurno);
         return new ModelAndView("/Inscripcion/inscripcion_sesion2", map);
 
     }

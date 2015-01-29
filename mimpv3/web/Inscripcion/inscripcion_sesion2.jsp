@@ -62,16 +62,16 @@
                         <!-- Form Name -->
                         <legend>Estado Civil</legend>
                         <!-- Multiple Radios -->
-
+                        <p><strong>En caso se disponga de solo una vacante, la casilla de Casados se deshabilitará</strong></p>
                         <div class="col-md-1 col-md-offset-4">
                             <div class="control-group">
                                 <div class="controls">
                                     <label class="radio" for="radios-0">
-                                        <input type="radio" name="estado" id="radios-0" value="casados" checked="checked">Casados</label>
+                                        <input ${objTurno.getVacantes() - objTurno.getAsistenciaFTs().size() == 1 ? 'disabled' : ''} type="radio" name="estado" id="radios-0" value="casados" >Casados</label>
                                     <label class="radio" for="radios-1">
                                         <input type="radio" name="estado" id="radios-1" value="soltero">Soltero</label>
                                     <label class="radio" for="radios-2">
-                                        <input type="radio" name="estado" id="radios-2" value="soltera">Soltera</label>
+                                        <input type="radio" name="estado" id="radios-2" checked="checked" value="soltera">Soltera</label>
                                     <label class="radio" for="radios-3">
                                         <input type="radio" name="estado" id="radios-3" value="viudo">Viudo</label>
                                     <label class="radio" for="radios-4">
@@ -80,7 +80,7 @@
                                         <input type="radio" name="estado" id="radios-5" value="divorciado">Divorciado</label>
                                     <label class="radio" for="radios-6">
                                         <input type="radio" name="estado" id="radios-6" value="divorciada">Divorciada</label>
-                                </div>
+                                </div>                                    
                             </div>
                             <br>
                             <input hidden id="idTurno" name="idTurno" value="${idTurno}">
