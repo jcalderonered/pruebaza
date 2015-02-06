@@ -7098,4 +7098,137 @@ public class personal {
         return new ModelAndView("/Personal/Informativa/edicion_turno2", map);
     }
 
+//CAMBIOS REALIZADOS EN FEBRERO 2015    
+    
+    @RequestMapping(value = "/PersonalModificarCorreoSesionInf", method = RequestMethod.POST)
+    public ModelAndView PersonalModificarCorreoSesionInf_POST(ModelMap map,
+            @RequestParam("idFormulario") long idFormulario,
+            @RequestParam(value = "idSesion", required = false) long idSesion,
+            @RequestParam("idFamilia") long idFamilia,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        session.setAttribute("idFormulario", idFormulario);
+        session.setAttribute("idSesion", idSesion);
+        session.setAttribute("idFamilia", idFamilia);
+        return new ModelAndView("redirect:/PersonalModificarCorreoSesionInf", map);
+    }
+
+    @RequestMapping(value = "/PersonalModificarCorreoSesionInf", method = RequestMethod.GET)
+    public ModelAndView PersonalModificarCorreoSesionInf_GET(ModelMap map,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        long idFormulario = Long.parseLong(session.getAttribute("idFormulario").toString());
+        long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
+        long idFamilia = Long.parseLong(session.getAttribute("idFamilia").toString());
+        
+        
+        map.addAttribute("idSesion", idSesion);
+        map.addAttribute("idFormulario", idFormulario);
+        map.addAttribute("idFamilia", idFamilia);
+        return new ModelAndView("/Personal/Informativa/edicion_correo", map);
+    }
+    
+     @RequestMapping(value = "/PersonalModificarCorreoSesionInf_2", method = RequestMethod.POST)
+    public ModelAndView PersonalModificarCorreoSesionInf_2_POST(ModelMap map,
+            @RequestParam("idSesion") long idSesion,
+            @RequestParam("idFormulario") long idFormulario,
+            @RequestParam("idFamilia") long idFamilia,
+            @RequestParam("user") String user,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        session.setAttribute("idSesion", idSesion);
+        session.setAttribute("idFormulario", idFormulario);
+        session.setAttribute("idFamilia", idFamilia);
+        session.setAttribute("user", user);
+
+        return new ModelAndView("redirect:/PersonalCrearUsuarioFamilia", map);
+    }
+
+    @RequestMapping(value = "/PersonalModificarCorreoSesionInf_2", method = RequestMethod.GET)
+    public ModelAndView PersonalModificarCorreoSesionInf_2_GET(ModelMap map,
+            HttpSession session) {
+        Personal usuario = (Personal) session.getAttribute("usuario");
+        if (usuario == null) {
+            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+            map.addAttribute("mensaje", mensaje);
+            return new ModelAndView("login", map);
+        }
+
+        long idSesion = Long.parseLong(session.getAttribute("idSesion").toString());
+        long idFormulario = Long.parseLong(session.getAttribute("idFormulario").toString());
+        long idFamilia = Long.parseLong(session.getAttribute("idFamilia").toString());
+        String user = (String) session.getAttribute("user");
+
+        if (session.getAttribute("user") != null) {
+
+            Familia fam = new Familia();
+            fam = ServicioPersonal.getFamilia(idFamilia);
+            Sesion tempSesion = new Sesion();
+
+            ArrayList<FormularioSesion> allFormularios = new ArrayList();
+            String fecha = "";
+            tempSesion = ServicioPersonal.getSesion(idSesion);
+            if (tempSesion.getFecha() != null) {
+                fecha = format.dateToString(tempSesion.getFecha());
+            }
+
+            fam.setUser(user);
+            String pass_plano = ServicioPersonal.generateUniqueToken(8);
+            String pass = DigestUtils.sha512Hex(pass_plano);
+
+            fam.setPass(pass);
+            fam.setCorreo(user);
+            
+            ServicioPersonal.updateFam(fam);
+           
+            hibermail.generateAndSendEmail2(user, pass_plano, user);
+
+            allFormularios = ServicioPersonal.InscritosSesion(idSesion);
+
+            String mensaje_log = "El usuario: " + usuario.getNombre() + " " + usuario.getApellidoP()
+                    + " con ID: " + usuario.getIdpersonal() + ".Modificó las credenciales para la familia con cuenta: " + user + ".";
+
+            String Tipo_registro = "Familia";
+
+            try {
+                String Numero_registro = String.valueOf(usuario.getIdpersonal());
+
+                ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
+            } catch (Exception ex) {
+            }
+
+            map.addAttribute("fecha", fecha);
+            map.put("sesion", tempSesion);
+            map.put("listaFormularios", allFormularios);
+
+        } else {
+
+            session.setAttribute("idSesion", idSesion);
+
+            return new ModelAndView("redirect:/PersonalTomaAsistencia2", map);
+
+        }
+
+        session.removeAttribute("user");
+
+        return new ModelAndView("/Personal/Informativa/toma_asistencia2", map);
+    }
 }
