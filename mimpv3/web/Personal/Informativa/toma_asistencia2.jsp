@@ -238,6 +238,7 @@
                                         <th>Información</th>
                                         <th>Asistencia</th>
                                         <th>Crear usuario</th>
+                                        <th>Modificar correo</th>
                                     </tr>
                                 </thead>
                                 <c:if test="${listaFormularios != null}">
@@ -313,6 +314,14 @@
                                                                 <button ${tempAsis != 0 ? 'disabled' : ''} ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
                                                             </form>
                                                         </td>
+                                                        <td>
+                                                            <form action="${pageContext.servletContext.contextPath}/PersonalModificarCorreoSesionInf" method="post">
+                                                                <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                <input hidden name="idFamilia" id="user" value="${formulario.getFamilia().getIdfamilia()}">                                                                 
+                                                                <button ${tempAsis == 0 && formulario.getFamilia() != null ? '' : 'disabled'} type="submit" class="btn btn-default">Modificar</button>
+                                                            </form>
+                                                        </td>
 
                                                     </c:when>
                                                     <c:when test="${formulario.getAsistentes().size() == 1}">
@@ -359,6 +368,14 @@
                                                                             <button ${tempAsis != 0 ? 'disabled' : ''} ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
                                                                         </form>
                                                                     </td>
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalModificarCorreoSesionInf" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                            <input hidden name="idFamilia" id="user" value="${formulario.getFamilia().getIdfamilia()}"> 
+                                                                            <button ${tempAsis == 0 && formulario.getFamilia() != null ? '' : 'disabled'} type="submit" class="btn btn-default">Modificar</button>
+                                                                        </form>
+                                                                    </td>
                                                                 </c:when>
                                                                 <c:when test="${asistente.getSexo() == 102}">
                                                                     <td>${status.index + 1}</td>
@@ -400,7 +417,15 @@
                                                                             <input hidden name="user" id="user" value="${asistente.getCorreo()}"> 
                                                                             <button ${tempAsis != 0 ? 'disabled' : ''} ${formulario.getFamilia() != null ? 'disabled' : ''} type="submit" class="btn btn-default">Crear</button>
                                                                         </form>
-                                                                    </td>   
+                                                                    </td>  
+                                                                    <td>
+                                                                        <form action="${pageContext.servletContext.contextPath}/PersonalModificarCorreoSesionInf" method="post">
+                                                                            <input hidden name="idFormulario" id="idFormulario" value="${formulario.getIdformularioSesion()}">
+                                                                            <input hidden name="idSesion" id="idSesion" value="${sesion.getIdsesion()}">
+                                                                            <input hidden name="idFamilia" id="user" value="${formulario.getFamilia().getIdfamilia()}"> 
+                                                                            <button ${tempAsis == 0 && formulario.getFamilia() != null ? '' : 'disabled'} type="submit" class="btn btn-default">Modificar</button>
+                                                                        </form>
+                                                                    </td>  
                                                                 </c:when>    
                                                             </c:choose>
                                                         </c:forEach>
