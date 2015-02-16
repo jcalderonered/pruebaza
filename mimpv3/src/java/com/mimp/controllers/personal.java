@@ -5315,45 +5315,45 @@ public class personal {
             return new ModelAndView("login", map);
         }
 
-        String ID = "";
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        
-        //Luego debo generar un nuevo ID
-        ArrayList<String> allExpedientes = new ArrayList();
-        allExpedientes = ServicioPersonal.listaNumExpActuales();
-        if (!allExpedientes.isEmpty()) {
-            int numElem = allExpedientes.size();
-            int cont = 0;
-            int idAct = 0;
-            int idSig = 0;
-
-            for (String expedienteFamilia : allExpedientes) {
-                numElem--;
-                String[] parts = expedienteFamilia.split("-");
-                idAct = Integer.parseInt(parts[0]);
-                cont++;
-                idSig = cont;
-                map.put("idAct", idAct);
-                map.put("idSig", idSig);
-                if (idAct == idSig) {                    
-                    if (numElem == 0) {
-                        cont++;
-                        String idGen = String.format("%04d", cont);
-                        ID = idGen + "-" + year + "-MIMP/DGA-S";
-                        map.put("idGen", idGen);
-                    }
-                } else {
-                    String idGen = String.format("%04d", idSig);
-                    ID = idGen + "-" + year + "-MIMP/DGA-S";
-                    map.put("idGen", idGen);
-                    break;
-                }
-
-            }
-        } else {
-
-            ID = "0001-" + year + "-MIMP/DGA-S";
-        }
+//        String ID = "";
+//        int year = Calendar.getInstance().get(Calendar.YEAR);
+//        
+//        //Luego debo generar un nuevo ID
+//        ArrayList<String> allExpedientes = new ArrayList();
+//        allExpedientes = ServicioPersonal.listaNumExpActuales();
+//        if (!allExpedientes.isEmpty()) {
+//            int numElem = allExpedientes.size();
+//            int cont = 0;
+//            int idAct = 0;
+//            int idSig = 0;
+//
+//            for (String expedienteFamilia : allExpedientes) {
+//                numElem--;
+//                String[] parts = expedienteFamilia.split("-");
+//                idAct = Integer.parseInt(parts[0]);
+//                cont++;
+//                idSig = cont;
+//                map.put("idAct", idAct);
+//                map.put("idSig", idSig);
+//                if (idAct == idSig) {                    
+//                    if (numElem == 0) {
+//                        cont++;
+//                        String idGen = String.format("%04d", cont);
+//                        ID = idGen + "-" + year + "-MIMP/DGA-S";
+//                        map.put("idGen", idGen);
+//                    }
+//                } else {
+//                    String idGen = String.format("%04d", idSig);
+//                    ID = idGen + "-" + year + "-MIMP/DGA-S";
+//                    map.put("idGen", idGen);
+//                    break;
+//                }
+//
+//            }
+//        } else {
+//
+//            ID = "0001-" + year + "-MIMP/DGA-S";
+//        }
 
         Familia tempFam = new Familia();
         ExpedienteFamilia expediente = new ExpedienteFamilia();
@@ -5370,7 +5370,7 @@ public class personal {
         tempFam.setPass(pass);
 
         expediente.setUnidad(usuario.getUnidad());
-        expediente.setNumeroExpediente(ID);
+        //expediente.setNumeroExpediente(ID);
         expediente.setNacionalidad("internacional");
         expediente.setEstado("init");
         expediente.setRnsa(Short.parseShort("0"));
@@ -5379,8 +5379,7 @@ public class personal {
         ServicioPersonal.crearFamInt(tempFam, expediente, infoFam);
         expedienteInt = expediente;
 
-        String mensaje_log = "Se creó nuevo expediente internacional con número: " + expedienteInt.getNumeroExpediente()
-                + " con ID: " + expedienteInt.getIdexpedienteFamilia();
+        String mensaje_log = "Se creó nuevo expediente internacional con ID: " + expedienteInt.getIdexpedienteFamilia();
 
         String Tipo_registro = "Familia";
 
@@ -5506,7 +5505,7 @@ public class personal {
     @RequestMapping(value = "/UpdateRegistroInt", method = RequestMethod.POST)
     public ModelAndView UpdateRegistroInt_POST(ModelMap map, HttpSession session,
             @RequestParam(value = "ht") String ht,
-            @RequestParam(value = "numeroExp") String numeroExp,
+            //@RequestParam(value = "numeroExp") String numeroExp,
             @RequestParam(value = "fechaIngreso") String fechaIngreso,
             @RequestParam(value = "tupa") String tupa,
             @RequestParam(value = "tipoFamilia") String tipoFamilia,
@@ -5521,7 +5520,7 @@ public class personal {
         }
 
         session.setAttribute("ht", ht);
-        session.setAttribute("numeroExp", numeroExp);
+        //session.setAttribute("numeroExp", numeroExp);
         session.setAttribute("fechaIngreso", fechaIngreso);
         session.setAttribute("tupa", tupa);
         session.setAttribute("tipoFamilia", tipoFamilia);
@@ -5542,7 +5541,7 @@ public class personal {
         }
 
         String ht = (String) session.getAttribute("ht");
-        String numeroExp = (String) session.getAttribute("numeroExp");
+        //String numeroExp = (String) session.getAttribute("numeroExp");
         String fechaIngreso = (String) session.getAttribute("fechaIngreso");
         String tupa = (String) session.getAttribute("tupa");
         String tipoFamilia = (String) session.getAttribute("tipoFamilia");
@@ -5551,16 +5550,56 @@ public class personal {
 
         Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
 
-        boolean verificar = ServicioPersonal.VerificarNumExp(numeroExp);
-        if(!verificar){        
-                map.addAttribute("msg","Error, el ID generado ya esta siendo usado por otro usuario. Por favor, ingrese nuevamente los datos");
-                return new ModelAndView("forward:/famint", map);
+//        boolean verificar = ServicioPersonal.VerificarNumExp(numeroExp);
+//        if(!verificar){        
+//                map.addAttribute("msg","Error, el ID generado ya esta siendo usado por otro usuario. Por favor, ingrese nuevamente los datos");
+//                return new ModelAndView("forward:/famint", map);
+//        }
+
+        String ID = "";
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        
+        //Luego debo generar un nuevo ID
+        ArrayList<String> allExpedientes = new ArrayList();
+        allExpedientes = ServicioPersonal.listaNumExpActuales();
+        if (!allExpedientes.isEmpty()) {
+            int numElem = allExpedientes.size();
+            int cont = 0;
+            int idAct = 0;
+            int idSig = 0;
+
+            for (String expedienteFamilia : allExpedientes) {
+                numElem--;
+                String[] parts = expedienteFamilia.split("-");
+                idAct = Integer.parseInt(parts[0]);
+                cont++;
+                idSig = cont;
+                map.put("idAct", idAct);
+                map.put("idSig", idSig);
+                if (idAct == idSig) {                    
+                    if (numElem == 0) {
+                        cont++;
+                        String idGen = String.format("%04d", cont);
+                        ID = idGen + "-" + year + "-MIMP/DGA-S";
+                        map.put("idGen", idGen);
+                    }
+                } else {
+                    String idGen = String.format("%04d", idSig);
+                    ID = idGen + "-" + year + "-MIMP/DGA-S";
+                    map.put("idGen", idGen);
+                    break;
+                }
+
+            }
+        } else {
+
+            ID = "0001-" + year + "-MIMP/DGA-S";
         }
         
         expedienteInt.getFamilia().setEntidad(tempEnt);
         expedienteInt.setHt(ht);
-        expedienteInt.setNumeroExpediente(numeroExp);
-        
+        //expedienteInt.setNumeroExpediente(numeroExp);
+        expedienteInt.setNumeroExpediente(ID);
         expedienteInt.setTipoFamilia(tipoFamilia);
         if (expedienteInt.getEstado().equals("init")) {
             expedienteInt.setEstado("evaluacion");
