@@ -1126,7 +1126,7 @@ public class HiberPersonal {
 
         session.beginTransaction();
 
-        String hql = "FROM ExpedienteFamilia EF WHERE EF.nacionalidad = :nac and EF.estado != :est order by EF.numeroExpediente DESC";
+        String hql = "FROM ExpedienteFamilia EF WHERE EF.nacionalidad = :nac and EF.estado != :est order by EF.idexpedienteFamilia DESC";
         Query query = session.createQuery(hql);
         query.setString("nac", "internacional");
         query.setString("est", "init");
