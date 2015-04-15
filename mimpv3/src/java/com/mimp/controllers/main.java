@@ -251,7 +251,13 @@ public class main {
         if (temp.get(0).getSesion().getHabilitado() == 0) {
             pagina = "/Inscripcion/inscripcion_inicio";
             map.put("ts", ts);
-            map.put("listaTurnos", temp);
+            ArrayList<Turno> turnosSesionesHabilitados = new ArrayList(); //busco turnos de sesiones habilitadas
+            for (Turno turno : temp) {
+                if(turno.getSesion().getHabilitado() == 0){
+                    turnosSesionesHabilitados.add(turno);
+                }
+            }
+            map.put("listaTurnos", turnosSesionesHabilitados);
             return new ModelAndView(pagina, map);
         }
         pagina = "/Inscripcion/no_sesion_prog";
