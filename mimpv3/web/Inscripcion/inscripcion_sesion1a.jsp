@@ -57,7 +57,7 @@
             <!--A PARTIR DE AQUÍ COLOCAR EL CONTENIDO-->
             <h2 align="center">Las inscripciones están cerradas, agradecemos su interés y le informamos que la próxima sesión informativa dará inicio el:</h2>
             <br>
-            <h2 align="center"><b>${ts.DateToString(listaSesiones.get(0).getFecha())} ${ts.HourToString(listaSesiones.get(0).getHora())}</b></h2>
+            <h2 align="center"><b>${ts.DateToString(listaSesiones.get(0).getFecha())} ${(listaSesiones.get(0).getHora())}</b></h2>
             <br>
             <h2 align="center">Los turnos de inscripción para la próxima sesión informativa son según el siguiente cronograma</h2>
             <h2 align="center">Se le invita a inscribirse hasta que se completen las vacantes</h2>
@@ -98,7 +98,7 @@
                 </c:when>
                 <c:otherwise>
                     <c:forEach begin="1" var="sesion" items="${listaSesiones}" varStatus="status">
-                        <p class="text-center"><strong>${ts.DateToString(sesion.getFecha())} ${ts.HourToString(sesion.getHora())}</strong></p>
+                        <p class="text-center"><strong>${ts.DateToString(sesion.getFecha())} ${(sesion.getHora())}</strong></p>
                     </c:forEach>
                 </c:otherwise>
             </c:choose>
