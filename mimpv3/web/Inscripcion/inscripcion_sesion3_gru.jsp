@@ -374,7 +374,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Fecha de nacimiento <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="fechaNacEl" name="fechaNacEl" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
+                                <input id="fechaNacEl" name="fechaNacEl" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge" readonly="readonly" >
                             </div>
                         </div>
                         <br>
@@ -742,7 +742,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Fecha de nacimiento <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="fechaNacElla" name="fechaNacElla" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
+                                <input id="fechaNacElla" name="fechaNacElla" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge" readonly="readonly">
                             </div>
                         </div>
                         <br>
