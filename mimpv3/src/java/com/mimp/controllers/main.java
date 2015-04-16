@@ -186,23 +186,7 @@ public class main {
 
  
     @RequestMapping(value = "/SesionInfInicio", method = RequestMethod.POST)
-    public ModelAndView SesionInfInicio_POST(ModelMap map, @RequestParam("ua") String ua, HttpSession session) {
-
-        session.setAttribute("ua", ua);
-
-        return new ModelAndView("redirect:/SesionInfInicio", map);
-    }
-
-    @RequestMapping(value = "/SesionInfInicio", method = RequestMethod.GET)
-    public ModelAndView SesionInfInicio_GET(ModelMap map, HttpSession session) {
-
-        String ua = "";
-        try {
-            ua = session.getAttribute("ua").toString();
-        } catch (Exception ex) {
-            return new ModelAndView("redirect:/", map);
-        }
-        session.removeAttribute("ua");
+    public ModelAndView SesionInfInicio_POST(ModelMap map, @RequestParam("ua") String ua) {
 
         ArrayList<Turno> temp = new ArrayList();
         ArrayList<Turno> temp2 = new ArrayList();
