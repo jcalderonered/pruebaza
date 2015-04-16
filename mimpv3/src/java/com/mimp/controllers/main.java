@@ -215,7 +215,7 @@ public class main {
             return new ModelAndView(pagina);
         } else {
             for (int i = 0; i < temp.size(); i++) {
-                if (now.after((Date) temp.get(i).getInicioInscripcion()) && now.before((Date) temp.get(i).getFinInscripcion())) {
+                if (now.after((Date) temp.get(i).getInicioInscripcion()) && now.before((Date) temp.get(i).getFinInscripcion()) && temp.get(i).getSesion().getUnidad().equals(ua)) {
                     if (i == temp.size() - 1 && temp.get(i).getAsistenciaFTs().size() >= temp.get(i).getVacantes()) {
                         ArrayList<Sesion> tempSesiones = new ArrayList();
                         tempSesiones = ServicioMain.listaSesionesSiguientes(temp.get(i).getSesion().getFecha(), ua);
