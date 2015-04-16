@@ -377,7 +377,9 @@
                                 <div class="col-lg-4">
                                     <label for="fecha">Fecha de Nacimiento <font style="color:red">(*)</font></label> 
                                     <input id="fechaNac" name="fechaNac" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
-                                </div>
+                                    <br>
+                                    <strong><font style="color:red">Ejemplo: 23/12/1974</font></strong>
+                                </div>                              
                                 <div class="col-lg-4">
                                     <!--<label for="edad">Edad <font style="color:red">(*)</font></label> -->
                                     <input hidden id="edad" name="edad" type="text" placeholder="XY" class="input-xlarge">

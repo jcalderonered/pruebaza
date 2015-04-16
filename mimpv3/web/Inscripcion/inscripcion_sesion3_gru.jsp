@@ -376,6 +376,7 @@
                             <div class="controls">
                                 <input id="fechaNacEl" name="fechaNacEl" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
                             </div>
+                            <strong><font style="color:red">Ejemplo: 23/12/1974</font></strong>
                         </div>
                         <br>
                         <div class="control-group">
@@ -744,6 +745,7 @@
                             <div class="controls">
                                 <input id="fechaNacElla" name="fechaNacElla" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
                             </div>
+                            <strong><font style="color:red">Ejemplo: 23/12/1974</font></strong>
                         </div>
                         <br>
                         <div class="control-group">
