@@ -376,7 +376,7 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <label for="fecha">Fecha de Nacimiento <font style="color:red">(*)</font></label> 
-                                    <input id="fechaNac" name="fechaNac" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge" readonly="readonly">
+                                    <input id="fechaNac" name="fechaNac" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
                                 </div>
                                 <div class="col-lg-4">
                                     <!--<label for="edad">Edad <font style="color:red">(*)</font></label> -->
@@ -599,7 +599,11 @@
                     if (document.formulario.edad.value == "")
                     {
                         alert("Debe ingresar su edad");
-                        document.formulario.edad.focus();
+                        document.formulario.fechaNac.focus();
+                        return false;
+                    } else if (document.formulario.edad.value > 100) {
+                        alert("Ingrese una fecha de nacimiento válida (dd/mm/aaaa)");
+                        document.formulario.fechaNac.focus();
                         return false;
                     }
                     if (document.formulario.doc.value == "")

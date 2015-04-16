@@ -374,7 +374,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Fecha de nacimiento <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="fechaNacEl" name="fechaNacEl" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge" readonly="readonly" >
+                                <input id="fechaNacEl" name="fechaNacEl" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -742,7 +742,7 @@
                         <div class="control-group">
                             <label class="control-label" for="textinput">Fecha de nacimiento <font style="color:red">(*)</font></label>
                             <div class="controls">
-                                <input id="fechaNacElla" name="fechaNacElla" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge" readonly="readonly">
+                                <input id="fechaNacElla" name="fechaNacElla" type="text" placeholder="dd/mm/yyyy" class="datepicker input-xlarge">
                             </div>
                         </div>
                         <br>
@@ -977,7 +977,11 @@
             if (document.formulario.edadEl.value == "")
             {
                 alert("Debe ingresar la edad del asistente");
-                document.formulario.edadEl.focus();
+                document.formulario.fechaNacEl.focus();
+                return false;
+            } else if (document.formulario.edadEl.value > 100) {
+                alert("Ingrese una fecha de nacimiento válida (dd/mm/aaaa)");
+                document.formulario.fechaNacEl.focus();
                 return false;
             }
             if (document.formulario.docEl.value == "")
@@ -1069,6 +1073,10 @@
             {
                 alert("Debe ingresar la edad de la asistente");
                 document.formulario.edadElla.focus();
+                return false;
+            } else if (document.formulario.edadElla.value > 100) {
+                alert("Ingrese una fecha de nacimiento válida (dd/mm/aaaa)");
+                document.formulario.fechaNacElla.focus();
                 return false;
             }
             if (document.formulario.docElla.value == "")
@@ -1179,7 +1187,7 @@
             var correoEl = document.getElementById('correoEl');
             var celEl = document.getElementById('celEl');
 
-            
+
             if (nombreEl.value.length < 0 || nombreEl.value.length > 29) {
                 alert("solo puede ingresar 30 caracteres");
                 nombreEl.value = nombreEl.value.substring(0, 29);
@@ -1221,95 +1229,95 @@
                 document.formulario.celEl.focus();
                 return false;
             }
-            
-    }
+
+        }
     </script>
 
     <script type="text/javascript">
-            function limitar2()
-            {
-                var nombreElla = document.getElementById('nombreElla');
-                var apellidoPElla = document.getElementById('apellidoPElla');
-                var apellidoMElla = document.getElementById('apellidoMElla');
-                var proNacElla = document.getElementById('proNacElla');
-                var numDocElla = document.getElementById('numDocElla');
-                var profesionElla = document.getElementById('profesionElla');
-                var correoElla = document.getElementById('correoElla');
-                var celElla = document.getElementById('celElla');
+        function limitar2()
+        {
+            var nombreElla = document.getElementById('nombreElla');
+            var apellidoPElla = document.getElementById('apellidoPElla');
+            var apellidoMElla = document.getElementById('apellidoMElla');
+            var proNacElla = document.getElementById('proNacElla');
+            var numDocElla = document.getElementById('numDocElla');
+            var profesionElla = document.getElementById('profesionElla');
+            var correoElla = document.getElementById('correoElla');
+            var celElla = document.getElementById('celElla');
 
-                if (nombreElla.value.length < 0 || nombreElla.value.length > 29) {
-                    alert("solo puede ingresar 30 caracteres");
-                    nombreElla.value = nombreElla.value.substring(0, 29);
-                    document.formulario.nombreElla.focus();
-                    return false;
-                } else if (apellidoPElla.value.length < 0 || apellidoPElla.value.length > 29) {
-                    alert("solo puede ingresar 30 caracteres");
-                    apellidoPElla.value = apellidoPElla.value.substring(0, 29);
-                    document.formulario.apellidoPElla.focus();
-                    return false;
-                } else if (apellidoMElla.value.length < 0 || apellidoMElla.value.length > 29) {
-                    alert("solo puede ingresar 30 caracteres");
-                    apellidoMElla.value = apellidoMElla.value.substring(0, 29);
-                    document.formulario.apellidoMElla.focus();
-                    return false;
-                } else if (numDocElla.value.length < 0 || numDocElla.value.length > 14) {
-                    alert("solo puede ingresar 15 caracteres");
-                    numDocElla.value = numDocElla.value.substring(0, 14);
-                    document.formulario.numDocElla.focus();
-                    return false;
-                } else if (proNacElla.value.length < 0 || proNacElla.value.length > 49) {
-                    alert("solo puede ingresar 50 caracteres");
-                    proNacElla.value = proNacElla.value.substring(0, 49);
-                    document.formulario.proNacElla.focus();
-                    return false;
-                } else if (correoElla.value.length < 0 || correoElla.value.length > 49) {
-                    alert("solo puede ingresar 50 caracteres");
-                    correoElla.value = correoElla.value.substring(0, 49);
-                    document.formulario.correoElla.focus();
-                    return false;
-                } else if (profesionElla.value.length < 0 || profesionElla.value.length > 49) {
-                    alert("solo puede ingresar 50 caracteres");
-                    profesionElla.value = profesionElla.value.substring(0, 49);
-                    document.formulario.profesionElla.focus();
-                    return false;
-                } else if (celElla.value.length < 0 || celElla.value.length > 14) {
-                    alert("solo puede ingresar 15 caracteres");
-                    celElla.value = celElla.value.substring(0, 14);
-                    document.formulario.celElla.focus();
-                    return false;
-                }
-				}
+            if (nombreElla.value.length < 0 || nombreElla.value.length > 29) {
+                alert("solo puede ingresar 30 caracteres");
+                nombreElla.value = nombreElla.value.substring(0, 29);
+                document.formulario.nombreElla.focus();
+                return false;
+            } else if (apellidoPElla.value.length < 0 || apellidoPElla.value.length > 29) {
+                alert("solo puede ingresar 30 caracteres");
+                apellidoPElla.value = apellidoPElla.value.substring(0, 29);
+                document.formulario.apellidoPElla.focus();
+                return false;
+            } else if (apellidoMElla.value.length < 0 || apellidoMElla.value.length > 29) {
+                alert("solo puede ingresar 30 caracteres");
+                apellidoMElla.value = apellidoMElla.value.substring(0, 29);
+                document.formulario.apellidoMElla.focus();
+                return false;
+            } else if (numDocElla.value.length < 0 || numDocElla.value.length > 14) {
+                alert("solo puede ingresar 15 caracteres");
+                numDocElla.value = numDocElla.value.substring(0, 14);
+                document.formulario.numDocElla.focus();
+                return false;
+            } else if (proNacElla.value.length < 0 || proNacElla.value.length > 49) {
+                alert("solo puede ingresar 50 caracteres");
+                proNacElla.value = proNacElla.value.substring(0, 49);
+                document.formulario.proNacElla.focus();
+                return false;
+            } else if (correoElla.value.length < 0 || correoElla.value.length > 49) {
+                alert("solo puede ingresar 50 caracteres");
+                correoElla.value = correoElla.value.substring(0, 49);
+                document.formulario.correoElla.focus();
+                return false;
+            } else if (profesionElla.value.length < 0 || profesionElla.value.length > 49) {
+                alert("solo puede ingresar 50 caracteres");
+                profesionElla.value = profesionElla.value.substring(0, 49);
+                document.formulario.profesionElla.focus();
+                return false;
+            } else if (celElla.value.length < 0 || celElla.value.length > 14) {
+                alert("solo puede ingresar 15 caracteres");
+                celElla.value = celElla.value.substring(0, 14);
+                document.formulario.celElla.focus();
+                return false;
+            }
+        }
 
     </script>
     <script type="text/javascript">
-                function limitar3()
-                {
-                    var prov = document.getElementById('prov');
-                    var dist = document.getElementById('dist');
-                    var dir = document.getElementById('dir');
-                    var telf = document.getElementById('telf');
+        function limitar3()
+        {
+            var prov = document.getElementById('prov');
+            var dist = document.getElementById('dist');
+            var dir = document.getElementById('dir');
+            var telf = document.getElementById('telf');
 
-                    if (prov.value.length < 0 || prov.value.length > 99) {
-                        alert("solo puede ingresar 100 caracteres");
-                        prov.value = prov.value.substring(0, 99);
-                        document.formulario.prov.focus();
-                        return false;
-                    } else if (dist.value.length < 0 || dist.value.length > 99) {
-                        alert("solo puede ingresar 100 caracteres");
-                        dist.value = dist.value.substring(0, 99);
-                        document.formulario.dist.focus();
-                        return false;
-                    } else if (dir.value.length < 0 || dir.value.length > 199) {
-                        alert("solo puede ingresar 200 caracteres");
-                        dir.value = dir.value.substring(0, 199);
-                        document.formulario.dir.focus();
-                        return false;
-                    } else if (telf.value.length < 0 || telf.value.length > 14) {
-                        alert("solo puede ingresar 15 caracteres");
-                        telf.value = telf.value.substring(0, 14);
-                        document.formulario.telf.focus();
-                        return false;
-                    }
+            if (prov.value.length < 0 || prov.value.length > 99) {
+                alert("solo puede ingresar 100 caracteres");
+                prov.value = prov.value.substring(0, 99);
+                document.formulario.prov.focus();
+                return false;
+            } else if (dist.value.length < 0 || dist.value.length > 99) {
+                alert("solo puede ingresar 100 caracteres");
+                dist.value = dist.value.substring(0, 99);
+                document.formulario.dist.focus();
+                return false;
+            } else if (dir.value.length < 0 || dir.value.length > 199) {
+                alert("solo puede ingresar 200 caracteres");
+                dir.value = dir.value.substring(0, 199);
+                document.formulario.dir.focus();
+                return false;
+            } else if (telf.value.length < 0 || telf.value.length > 14) {
+                alert("solo puede ingresar 15 caracteres");
+                telf.value = telf.value.substring(0, 14);
+                document.formulario.telf.focus();
+                return false;
+            }
         }
     </script>
     <!-- Ubicar al final -->
