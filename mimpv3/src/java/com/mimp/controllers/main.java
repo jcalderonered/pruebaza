@@ -218,7 +218,7 @@ public class main {
                 if (now.after((Date) temp.get(i).getInicioInscripcion()) && now.before((Date) temp.get(i).getFinInscripcion())) {
                     if (i == temp.size() - 1 && temp.get(i).getAsistenciaFTs().size() >= temp.get(i).getVacantes()) {
                         ArrayList<Sesion> tempSesiones = new ArrayList();
-                        tempSesiones = ServicioMain.listaSesionesSiguientes(temp.get(i).getSesion().getFecha());
+                        tempSesiones = ServicioMain.listaSesionesSiguientes(temp.get(i).getSesion().getFecha(), ua);
                         if (tempSesiones.isEmpty()) {
                             pagina = "/Inscripcion/no_sesion_prog";
                             return new ModelAndView(pagina);
