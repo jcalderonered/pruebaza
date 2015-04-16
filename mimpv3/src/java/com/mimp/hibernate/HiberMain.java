@@ -216,7 +216,7 @@ public class HiberMain {
 
     }
 
-    public ArrayList<Sesion> listaSesionesSiguientes(Date fecha) {
+    public ArrayList<Sesion> listaSesionesSiguientes(Date fecha, String ua) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -228,7 +228,9 @@ public class HiberMain {
         ArrayList<Sesion> allSesiones = new ArrayList();
         for (Iterator iter = asistentes.iterator(); iter.hasNext();) {
             Sesion temp = (Sesion) iter.next();
-            allSesiones.add(temp);
+            if (temp.getUnidad().equals(ua)){
+                allSesiones.add(temp);
+            }
         }
         return allSesiones;
 
