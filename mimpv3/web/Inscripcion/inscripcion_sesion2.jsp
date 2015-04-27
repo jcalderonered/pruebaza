@@ -68,6 +68,8 @@
                                 <div class="controls">
                                     <label class="radio" for="radios-0">
                                         <input ${objTurno.getVacantes() - objTurno.getAsistenciaFTs().size() == 1 ? 'disabled' : ''} type="radio" name="estado" id="radios-0" value="casados" >Casados</label>
+                                    <label class="radio" for="radios-7">
+                                        <input ${objTurno.getVacantes() - objTurno.getAsistenciaFTs().size() == 1 ? 'disabled' : ''} type="radio" name="estado" id="radios-7" value="convivientes" >Convivientes</label>
                                     <label class="radio" for="radios-1">
                                         <input type="radio" name="estado" id="radios-1" value="soltero">Soltero</label>
                                     <label class="radio" for="radios-2">
