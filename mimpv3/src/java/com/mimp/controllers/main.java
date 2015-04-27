@@ -304,7 +304,7 @@ public class main {
 
         Turno temp = ServicioMain.getTurno(turno);
 
-        if (estado.equals("casados")) {
+        if (estado.equals("casados") || estado.equals("convivientes")) {
             map.addAttribute("idTurno", turno);
             map.put("estado", estado);
             map.put("turno", temp);
