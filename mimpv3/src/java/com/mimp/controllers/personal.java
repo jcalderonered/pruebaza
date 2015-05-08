@@ -5314,47 +5314,50 @@ public class personal {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        
+        //Proceso para conocer el siguiente numero de expediente, OJO: no se esta guardando este numero
+        //en la base de datos, solo sirve para una visualizacion via web
+        String ID = "";
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        
+        //Luego debo conocer que ID es el siguiente
+        ArrayList<String> allExpedientes = new ArrayList();
+        allExpedientes = ServicioPersonal.listaNumExpActuales();
+        if (!allExpedientes.isEmpty()) {
+            int numElem = allExpedientes.size();
+            int cont = 0;
+            int idAct = 0;
+            int idSig = 0;
 
-//        String ID = "";
-//        int year = Calendar.getInstance().get(Calendar.YEAR);
-//        
-//        //Luego debo generar un nuevo ID
-//        ArrayList<String> allExpedientes = new ArrayList();
-//        allExpedientes = ServicioPersonal.listaNumExpActuales();
-//        if (!allExpedientes.isEmpty()) {
-//            int numElem = allExpedientes.size();
-//            int cont = 0;
-//            int idAct = 0;
-//            int idSig = 0;
-//
-//            for (String expedienteFamilia : allExpedientes) {
-//                numElem--;
-//                String[] parts = expedienteFamilia.split("-");
-//                idAct = Integer.parseInt(parts[0]);
-//                cont++;
-//                idSig = cont;
-//                map.put("idAct", idAct);
-//                map.put("idSig", idSig);
-//                if (idAct == idSig) {                    
-//                    if (numElem == 0) {
-//                        cont++;
-//                        String idGen = String.format("%04d", cont);
-//                        ID = idGen + "-" + year + "-MIMP/DGA-S";
-//                        map.put("idGen", idGen);
-//                    }
-//                } else {
-//                    String idGen = String.format("%04d", idSig);
-//                    ID = idGen + "-" + year + "-MIMP/DGA-S";
-//                    map.put("idGen", idGen);
-//                    break;
-//                }
-//
-//            }
-//        } else {
-//
-//            ID = "0001-" + year + "-MIMP/DGA-S";
-//        }
+            for (String expedienteFamilia : allExpedientes) {
+                numElem--;
+                String[] parts = expedienteFamilia.split("-");
+                idAct = Integer.parseInt(parts[0]);
+                cont++;
+                idSig = cont;
+                map.put("idAct", idAct);
+                map.put("idSig", idSig);
+                if (idAct == idSig) {                    
+                    if (numElem == 0) {
+                        cont++;
+                        String idGen = String.format("%04d", cont);
+                        ID = idGen + "-" + year + "-MIMP/DGA-S";
+                        map.put("idGen", idGen);
+                    }
+                } else {
+                    String idGen = String.format("%04d", idSig);
+                    ID = idGen + "-" + year + "-MIMP/DGA-S";
+                    map.put("idGen", idGen);
+                    break;
+                }
 
+            }
+        } else {
+
+            ID = "0001-" + year + "-MIMP/DGA-S";
+        }
+        //fin del proceso
+            
         Familia tempFam = new Familia();
         ExpedienteFamilia expediente = new ExpedienteFamilia();
         Entidad tempEnt = ServicioPersonal.ListaEntidades().get(0);
@@ -5391,6 +5394,7 @@ public class personal {
         }
 
         map.put("expediente", expedienteInt);
+        map.put("numExp",ID);
         map.put("listaEntidad", ServicioPersonal.ListaEntidades());
         return new ModelAndView("/Personal/fam_inter/datos_reg", map);
     }
@@ -5599,7 +5603,10 @@ public class personal {
         expedienteInt.getFamilia().setEntidad(tempEnt);
         expedienteInt.setHt(ht);
         //expedienteInt.setNumeroExpediente(numeroExp);
-        expedienteInt.setNumeroExpediente(ID);
+        //Se esta haciendo una validacion previa antes de colocar el numero de expediente nuevo,
+        //si ya se ha guardado un numero de expediente previamente, se esta buscando que no sea reemplazado
+        if(expedienteInt.getNumeroExpediente() == null) expedienteInt.setNumeroExpediente(ID);
+        
         expedienteInt.setTipoFamilia(tipoFamilia);
         if (expedienteInt.getEstado().equals("init")) {
             expedienteInt.setEstado("evaluacion");

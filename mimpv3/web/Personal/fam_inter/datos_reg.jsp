@@ -127,7 +127,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Número de Expediente</label>
                                     <div class="controls">
-                                        <input readonly id="numeroExp" name="numeroExp" type="text" class="input-xlarge" value="${expediente.getNumeroExpediente()}">
+                                        <input readonly id="numeroExp" name="numeroExp" type="text" class="input-xlarge" value="${expediente.getNumeroExpediente() == null ? numExp : expediente.getNumeroExpediente()}">
                                     </div>
                                 </div>
                                 <br>
