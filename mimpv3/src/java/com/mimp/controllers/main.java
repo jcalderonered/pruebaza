@@ -3787,7 +3787,7 @@ public class main {
 
         ServicioMain.crearUpdateExpFam(expediente);
         
-        String mensaje_log = "Se creó nuevo expediente internacional con número: " + expediente.getNumeroExpediente()
+        String mensaje_log = "Se creó nuevo expediente nacional con número: " + expediente.getNumeroExpediente()
                 + " con ID: " + expediente.getIdexpedienteFamilia();
 
         String Tipo_registro = "Familia";
