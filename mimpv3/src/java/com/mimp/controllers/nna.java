@@ -1332,17 +1332,17 @@ public class nna {
         String tempfechaIng = "";
         String tempfechaEst = "";
         try {
-            tempfechaInv = df.dateToString(tempExp.getFechaInvTutelar());
+            tempfechaInv = df.dateToStringNumeros(tempExp.getFechaInvTutelar());
         } catch (Exception ex) {
         }
         map.addAttribute("fechainv", tempfechaInv);
         try {
-            tempfechaIng = df.dateToString(tempExp.getFechaIngreso());
+            tempfechaIng = df.dateToStringNumeros(tempExp.getFechaIngreso());
         } catch (Exception ex) {
         }
         map.addAttribute("fechaing", tempfechaIng);
         try {
-            tempfechaEst = df.dateToString(tempExp.getFechaEstado());
+            tempfechaEst = df.dateToStringNumeros(tempExp.getFechaEstado());
         } catch (Exception ex) {
         }
         map.addAttribute("fechaest", tempfechaEst);
@@ -1370,17 +1370,17 @@ public class nna {
         String tempfechaIng = "";
         String tempfechaEst = "";
         try {
-            tempfechaInv = df.dateToString(tempExp.getFechaInvTutelar());
+            tempfechaInv = df.dateToStringNumeros(tempExp.getFechaInvTutelar());
         } catch (Exception ex) {
         }
         map.addAttribute("fechainv", tempfechaInv);
         try {
-            tempfechaIng = df.dateToString(tempExp.getFechaIngreso());
+            tempfechaIng = df.dateToStringNumeros(tempExp.getFechaIngreso());
         } catch (Exception ex) {
         }
         map.addAttribute("fechaing", tempfechaIng);
         try {
-            tempfechaEst = df.dateToString(tempExp.getFechaEstado());
+            tempfechaEst = df.dateToStringNumeros(tempExp.getFechaEstado());
         } catch (Exception ex) {
         }
         map.addAttribute("fechaest", tempfechaEst);
@@ -1410,17 +1410,17 @@ public class nna {
         String tempfechaIng = "";
         String tempfechaEst = "";
         try {
-            tempfechaInv = df.dateToString(tempExp.getFechaInvTutelar());
+            tempfechaInv = df.dateToStringNumeros(tempExp.getFechaInvTutelar());
         } catch (Exception ex) {
         }
         map.addAttribute("fechainv", tempfechaInv);
         try {
-            tempfechaIng = df.dateToString(tempExp.getFechaIngreso());
+            tempfechaIng = df.dateToStringNumeros(tempExp.getFechaIngreso());
         } catch (Exception ex) {
         }
         map.addAttribute("fechaing", tempfechaIng);
         try {
-            tempfechaEst = df.dateToString(tempExp.getFechaEstado());
+            tempfechaEst = df.dateToStringNumeros(tempExp.getFechaEstado());
         } catch (Exception ex) {
         }
         map.addAttribute("fechaest", tempfechaEst);
@@ -1453,17 +1453,17 @@ public class nna {
         String tempfechaIng = "";
         String tempfechaEst = "";
         try {
-            tempfechaInv = df.dateToString(tempExp.getFechaInvTutelar());
+            tempfechaInv = df.dateToStringNumeros(tempExp.getFechaInvTutelar());
         } catch (Exception ex) {
         }
         map.addAttribute("fechainv", tempfechaInv);
         try {
-            tempfechaIng = df.dateToString(tempExp.getFechaIngreso());
+            tempfechaIng = df.dateToStringNumeros(tempExp.getFechaIngreso());
         } catch (Exception ex) {
         }
         map.addAttribute("fechaing", tempfechaIng);
         try {
-            tempfechaEst = df.dateToString(tempExp.getFechaEstado());
+            tempfechaEst = df.dateToStringNumeros(tempExp.getFechaEstado());
         } catch (Exception ex) {
         }
         map.addAttribute("fechaest", tempfechaEst);
