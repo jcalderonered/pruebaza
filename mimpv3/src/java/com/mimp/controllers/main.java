@@ -870,6 +870,16 @@ public class main {
             //SE INICIALIZA EN NULL EL VALOR DEL EXPEDIENTE PORQUE EN PREPARACION NO SE TIENE UN EXPEDIENTE
             expediente = null;
             map.put("idFamilia", idFam);
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idFamilia_sesion", idFam);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
             
         } else if (estado.equals("evaluacion")) {
             Long idExp = Long.parseLong(idExpediente);
@@ -890,6 +900,18 @@ public class main {
             listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
             listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
 
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+              
         } else if (estado.equals("espera")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -910,6 +932,20 @@ public class main {
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
 
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+              
         } else if (estado.equals("esperainter")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -930,6 +966,20 @@ public class main {
             listaDesignaciones = ServicioMain.getListaNnaAdoptantesAdopcion(tempExp.getIdexpedienteFamilia());
             //listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
 
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              //session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+                        
         } else if (estado.equals("designacion")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -949,6 +999,21 @@ public class main {
             listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+        
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+              
         } else if (estado.equals("adopcion")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -968,6 +1033,21 @@ public class main {
             listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+       
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+              
         } else if (estado.equals("reevaluacion")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -988,6 +1068,20 @@ public class main {
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
 
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+              
         } else if (estado.equals("post")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -1024,15 +1118,31 @@ public class main {
              }
              }
              */
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("listaNnaAdoptados_sesion", listaNnaAdoptados);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
         }
 
         etapaOrigen = estado;
-
+        //
+        session.setAttribute("etapaOrigen_sesion", etapaOrigen);
+        //
         map.put("df", df);
-        map.put("infoFam", infoFam);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
-        map.put("Ella", Ella);
+        map.put("infoFam", session.getAttribute("infoFam_sesion"));
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
+        map.put("Ella", session.getAttribute("ella_sesion"));
         map.addAttribute("volver", volver);
 
         return new ModelAndView("/Personal/familia/info_ella", map);
@@ -1148,6 +1258,18 @@ public class main {
             //CAMBIO DEL 10/06/2015 
             //SE INICIALIZA EN NULL EL VALOR DEL EXPEDIENTE PORQUE EN PREPARACION NO SE TIENE UN EXPEDIENTE
             expediente = null;
+            map.put("idFamilia", idFam);
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idFamilia_sesion", idFam);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+            
         } else if (estado.equals("evaluacion")) {
             Long idExp = Long.parseLong(idExpediente);
             System.out.print(estado);
@@ -1167,6 +1289,18 @@ public class main {
             listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(tempExp.getFamilia().getIdfamilia());
             listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
 
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+              
         } else if (estado.equals("espera")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -1187,6 +1321,20 @@ public class main {
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
 
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+              
         } else if (estado.equals("esperainter")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -1207,6 +1355,20 @@ public class main {
             listaDesignaciones = ServicioMain.getListaNnaAdoptantesAdopcion(tempExp.getIdexpedienteFamilia());
             //listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
 
+             //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              //session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+              
         } else if (estado.equals("designacion")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -1226,6 +1388,21 @@ public class main {
             listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+        
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+              
         } else if (estado.equals("adopcion")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -1245,6 +1422,21 @@ public class main {
             listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
+       
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+              
         } else if (estado.equals("reevaluacion")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -1265,6 +1457,20 @@ public class main {
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
 
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
+              
         } else if (estado.equals("post")) {
             Long idExp = Long.parseLong(idExpediente);
             ExpedienteFamilia tempExp = ServicioMain.getInformacionRegistro(idExp);
@@ -1284,9 +1490,14 @@ public class main {
             listaEvaluaciones = ServicioMain.getListaEvaluacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaDesignaciones = ServicioMain.getListaDesignacionesPorExpediente(tempExp.getIdexpedienteFamilia());
             listaEstudios = ServicioMain.getListaEstudiosPorExpediente(tempExp.getIdexpedienteFamilia());
-            nnaAdoptado = ServicioNna.getNnaPostAdopcion(idNna);
-            expNna = nnaAdoptado.getExpedienteNnas().iterator().next();
-
+            //nnaAdoptado = ServicioNna.getNnaPostAdopcion(idNna);
+            //expNna = nnaAdoptado.getExpedienteNnas().iterator().next();
+            listaNnaAdoptados.clear();
+            for (Designacion tempDesig : listaDesignaciones) {
+                if (tempDesig.getAceptacionConsejo() == 2) {
+                    listaNnaAdoptados.add(tempDesig.getNna());
+                }
+            }
             /*
              for (Designacion desig : listaDesignaciones) {
              if(desig.getAceptacionConsejo() == 2){
@@ -1295,15 +1506,31 @@ public class main {
              }
              }
              */
+            //
+              session.setAttribute("el_sesion", El);
+              session.setAttribute("ella_sesion", Ella);
+              session.setAttribute("idExp_sesion", idExp);
+              session.setAttribute("expediente_sesion", expediente);
+              session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+              session.setAttribute("listaSesiones_sesion", listaSesiones);
+              session.setAttribute("listaAsistenciaReuniones_sesion", listaAsistenciaReuniones);
+              session.setAttribute("listaEvaluaciones_sesion", listaEvaluaciones);
+              session.setAttribute("listaDesignaciones_sesion", listaDesignaciones);
+              session.setAttribute("listaEstudios_sesion", listaEstudios);
+              session.setAttribute("listaNnaAdoptados_sesion", listaNnaAdoptados);
+              session.setAttribute("infoFam_sesion", infoFam);
+            //
         }
 
         etapaOrigen = estado;
-
+        //
+        session.setAttribute("etapaOrigen_sesion", etapaOrigen);
+        //
         map.put("df", df);
-        map.put("infoFam", infoFam);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
-        map.put("Ella", Ella);
+        map.put("infoFam", session.getAttribute("infoFam_sesion"));
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
+        map.put("Ella", session.getAttribute("ella_sesion"));
         map.addAttribute("volver", volver);
 
         map.put("expediente2", expediente2);
@@ -1371,10 +1598,10 @@ public class main {
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
         map.put("df", df);
-        map.put("infoFam", infoFam);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
-        map.put("El", El);
+        map.put("infoFam", session.getAttribute("infoFam_sesion"));
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
+        map.put("El", session.getAttribute("el_sesion"));
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_el", map);
     }
@@ -1442,10 +1669,10 @@ public class main {
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
         map.put("df", df);
-        map.put("infoFam", infoFam);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
-        map.put("El", El);
+        map.put("infoFam", session.getAttribute("infoFam_sesion"));
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
+        map.put("El", session.getAttribute("el_sesion"));
         map.addAttribute("volver", volver);
 
         map.put("expediente2", expediente2);
@@ -1485,10 +1712,10 @@ public class main {
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
         map.put("df", df);
-        map.put("infoFam", infoFam);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
-        map.put("Ella", Ella);
+        map.put("infoFam", session.getAttribute("infoFam_sesion"));
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
+        map.put("Ella", session.getAttribute("ella_sesion"));
         map.put("volver", volver);
         return new ModelAndView("/Personal/familia/info_ella", map);
     }
@@ -1556,10 +1783,10 @@ public class main {
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
         map.put("df", df);
-        map.put("infoFam", infoFam);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
-        map.put("Ella", Ella);
+        map.put("infoFam", session.getAttribute("infoFam_sesion"));
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
+        map.put("Ella", session.getAttribute("ella_sesion"));
         map.put("volver", volver);
 
         map.put("expediente2", expediente2);
@@ -1629,8 +1856,8 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.put("listaUA", ServicioPersonal.ListaUa());
         map.put("listaEntidad", ServicioPersonal.ListaEntidades());
         map.addAttribute("volver", volver);
@@ -1698,8 +1925,8 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.put("listaUA", ServicioPersonal.ListaUa());
         map.put("listaEntidad", ServicioPersonal.ListaEntidades());
         map.addAttribute("volver", volver);
@@ -1725,13 +1952,13 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("listaSesiones", listaSesiones);
-        map.put("listaAsistenciaReuniones", listaAsistenciaReuniones);
-        map.put("listaEvaluaciones", listaEvaluaciones);
-        map.put("listaDesignaciones", listaDesignaciones);
-        map.put("listaEstudios", listaEstudios);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("listaSesiones", session.getAttribute("listaSesiones_sesion"));
+        map.put("listaAsistenciaReuniones", session.getAttribute("listaAsistenciaReuniones_sesion"));
+        map.put("listaEvaluaciones", session.getAttribute("listaEvaluaciones_sesion"));
+        map.put("listaDesignaciones", session.getAttribute("listaDesignaciones_sesion"));
+        map.put("listaEstudios", session.getAttribute("listaEstudios_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_adop/info_adop", map);
     }
@@ -1754,13 +1981,13 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("listaSesiones", listaSesiones);
-        map.put("listaAsistenciaReuniones", listaAsistenciaReuniones);
-        map.put("listaEvaluaciones", listaEvaluaciones);
-        map.put("listaDesignaciones", listaDesignaciones);
-        map.put("listaEstudios", listaEstudios);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("listaSesiones", session.getAttribute("listaSesiones_sesion"));
+        map.put("listaAsistenciaReuniones", session.getAttribute("listaAsistenciaReuniones_sesion"));
+        map.put("listaEvaluaciones", session.getAttribute("listaEvaluaciones_sesion"));
+        map.put("listaDesignaciones", session.getAttribute("listaDesignaciones_sesion"));
+        map.put("listaEstudios", session.getAttribute("listaEstudios_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.addAttribute("volver", volver);
 
         map.put("expediente2", expediente2);
@@ -1784,9 +2011,9 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("infoFam", infoFam);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("infoFam", session.getAttribute("infoFam_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_ant_nna", map);
     }
@@ -1808,9 +2035,9 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("infoFam", infoFam);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("infoFam", session.getAttribute("infoFam_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.addAttribute("volver", volver);
 
         map.put("expediente2", expediente2);
@@ -1834,11 +2061,13 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
-        map.put("listaNna", listaNnaAdoptados);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
+        map.put("listaNna", session.getAttribute("listaNnaAdoptados_sesion"));
         //map.put("exp", expNna);
-        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(expediente.getIdexpedienteFamilia()));
+        ExpedienteFamilia tempExp = new ExpedienteFamilia();
+        tempExp = (ExpedienteFamilia) session.getAttribute("expediente_sesion");
+        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(tempExp.getIdexpedienteFamilia()));
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_nna", map);
     }
@@ -1861,12 +2090,15 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
-        map.put("nna", nnaAdoptado);
-        map.put("exp", expNna);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
+        map.put("listaNna", session.getAttribute("listaNnaAdoptados_sesion"));
+        //map.put("exp", expNna);
+        ExpedienteFamilia tempExp = new ExpedienteFamilia();
+        tempExp = (ExpedienteFamilia) session.getAttribute("expediente_sesion");
+        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(tempExp.getIdexpedienteFamilia()));
         map.addAttribute("volver", volver);
-        map.put("listaDesig", ServicioMain.getListaDesignacionesAdoptantesExtranjero(expediente.getIdexpedienteFamilia()));
+        
         map.put("expediente2", expediente2);
         map.put("HT", HT);
         map.put("nacionalidad", nacionalidad);
@@ -1887,9 +2119,9 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("listaAtenciones", listaAtenciones);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("listaAtenciones", session.getAttribute("listaAtenciones_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_atencion", map);
     }
@@ -1912,9 +2144,9 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("listaAtenciones", listaAtenciones);
-        map.put("expediente", expediente);
+         map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("listaAtenciones", session.getAttribute("listaAtenciones_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.addAttribute("volver", volver);
 
         map.put("expediente2", expediente2);
@@ -1937,8 +2169,8 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_atencion_edit", map);
@@ -1956,8 +2188,8 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_atencion_edit", map);
@@ -1981,8 +2213,8 @@ public class main {
         }
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
 
         map.put("expediente2", expediente2);
@@ -2013,9 +2245,9 @@ public class main {
 
         Atencion temp = ServicioMain.getAtencion(idAtencion);
         map.put("df", df);
-        map.put("estado", etapaOrigen);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.put("atencion", temp);
-        map.put("expediente", expediente);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
 
         map.put("expediente2", expediente2);
@@ -2046,9 +2278,9 @@ public class main {
 
         Atencion temp = ServicioMain.getAtencion(idAtencion);
         map.put("df", df);
-        map.put("estado", etapaOrigen);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.put("atencion", temp);
-        map.put("expediente", expediente);
         map.put("listaPersonal", ServicioPersonal.ListaPersonal());
 
         map.put("expediente2", expediente2);
@@ -2121,7 +2353,11 @@ public class main {
             return new ModelAndView("login", map);
         }
         Atencion tempAtn = new Atencion();
-        Familia tempFam = infoFam.getFamilia();
+        InfoFamilia tempInfoFam = new InfoFamilia();
+        tempInfoFam = (InfoFamilia) session.getAttribute("infoFam_sesion");
+        Familia tempFam = tempInfoFam.getFamilia();
+        
+        
         Personal tempPer = ServicioPersonal.getPersonal(personal);
 
         tempAtn.setFamilia(tempFam);
@@ -2150,11 +2386,14 @@ public class main {
         } catch (Exception ex) {
         }
         listaAtenciones.clear();
-        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(infoFam.getFamilia().getIdfamilia());
+        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempInfoFam.getFamilia().getIdfamilia());
+        //
+        session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+        //
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("listaAtenciones", listaAtenciones);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("listaAtenciones", session.getAttribute("listaAtenciones_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_atencion", map);
     }
@@ -2256,7 +2495,11 @@ public class main {
             return new ModelAndView("login", map);
         }
         Atencion tempAtn = new Atencion();
-        Familia tempFam = infoFam.getFamilia();
+        //Familia tempFam = infoFam.getFamilia();
+        InfoFamilia tempInfoFam = new InfoFamilia();
+        tempInfoFam = (InfoFamilia) session.getAttribute("infoFam_sesion");
+        Familia tempFam = tempInfoFam.getFamilia();
+        
         Personal tempPer = ServicioPersonal.getPersonal(personal);
 
         tempAtn.setFamilia(tempFam);
@@ -2286,11 +2529,14 @@ public class main {
         }
 
         listaAtenciones.clear();
-        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(infoFam.getFamilia().getIdfamilia());
+        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempInfoFam.getFamilia().getIdfamilia());
+        //
+        session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+        //
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("listaAtenciones", listaAtenciones);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("listaAtenciones", session.getAttribute("listaAtenciones_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
 
         map.put("expediente2", expediente2);
         map.put("HT", HT);
@@ -2394,12 +2640,19 @@ public class main {
             ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
         } catch (Exception ex) {
         }
+        //
+        InfoFamilia tempInfoFam = new InfoFamilia();
+        tempInfoFam = (InfoFamilia) session.getAttribute("infoFam_sesion");
+        //
         listaAtenciones.clear();
-        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(infoFam.getFamilia().getIdfamilia());
+        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempInfoFam.getFamilia().getIdfamilia());
+        //
+        session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+        //
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("listaAtenciones", listaAtenciones);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("listaAtenciones", session.getAttribute("listaAtenciones_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.put("volver", volver);
         return new ModelAndView("/Personal/familia/info_atencion", map);
     }
@@ -2557,17 +2810,20 @@ public class main {
             ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
         } catch (Exception ex) {
         }
+         //
+        InfoFamilia tempInfoFam = new InfoFamilia();
+        tempInfoFam = (InfoFamilia) session.getAttribute("infoFam_sesion");
+        //
         listaAtenciones.clear();
-        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(infoFam.getFamilia().getIdfamilia());
-
-        map.put(
-                "df", df);
-        map.put(
-                "estado", etapaOrigen);
-        map.put(
-                "listaAtenciones", listaAtenciones);
-        map.put(
-                "expediente", expediente);
+        listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(tempInfoFam.getFamilia().getIdfamilia());
+        //
+        session.setAttribute("listaAtenciones_sesion", listaAtenciones);
+        //
+        map.put("df", df);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("listaAtenciones", session.getAttribute("listaAtenciones_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
+        map.put("volver", volver);
 
         map.put(
                 "expediente2", expediente2);
@@ -2600,8 +2856,8 @@ public class main {
         Sesion tempSes = ServicioMain.getInfoSesion(idSesion);
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.put("sesion", tempSes);
         map.put("volver", volver);
         return new ModelAndView("/Personal/familia/info_adop/detalle_sesion", map);
@@ -2628,7 +2884,7 @@ public class main {
         ArrayList<String> allAsistencia = new ArrayList();
         allReuniones = ServicioMain.getListaReunionesPorTurno(idTurno);
 
-        map.put("listaAsistencia", listaAsistenciaReuniones);
+        map.put("listaAsistencia", session.getAttribute("listaAsistenciaReuniones_sesion"));
         map.put("listaReuniones", allReuniones);
         map.put("tipoTaller", tipoTaller);
         map.put("nombreTaller", nombreTaller);
@@ -2636,8 +2892,8 @@ public class main {
         map.put("nombreTurno", nombreTurno);
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.put("volver", volver);
 
         return new ModelAndView("/Personal/familia/info_adop/detalle_taller", map);
@@ -2656,8 +2912,8 @@ public class main {
         Evaluacion tempEval = ServicioMain.getEvaluacionJuntoPersonal(idEval);
 
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.put("evaluacion", tempEval);
         return new ModelAndView("/Personal/familia/info_adop/detalle_evaluacion", map);
     }
@@ -2784,70 +3040,74 @@ public class main {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
+        //
+        InfoFamilia tempInfoFam = new InfoFamilia();
+        tempInfoFam = (InfoFamilia) session.getAttribute("infoFam_sesion");
+        //
         if (incesto != null && !incesto.equals("")) {
-            infoFam.setNnaIncesto(Short.parseShort(incesto));
+            tempInfoFam.setNnaIncesto(Short.parseShort(incesto));
         }
         if (mental != null && !mental.equals("")) {
-            infoFam.setNnaMental(Short.parseShort(mental));
+            tempInfoFam.setNnaMental(Short.parseShort(mental));
         }
         if (epilepsia != null && !epilepsia.equals("")) {
-            infoFam.setNnaEpilepsia(Short.parseShort(epilepsia));
+            tempInfoFam.setNnaEpilepsia(Short.parseShort(epilepsia));
         }
         if (abuso != null && !abuso.equals("")) {
-            infoFam.setNnaAbuso(Short.parseShort(abuso));
+            tempInfoFam.setNnaAbuso(Short.parseShort(abuso));
         }
         if (sifilis != null && !sifilis.equals("")) {
-            infoFam.setNnaSifilis(Short.parseShort(sifilis));
+            tempInfoFam.setNnaSifilis(Short.parseShort(sifilis));
         }
         if (seguimiento != null && !seguimiento.equals("")) {
-            infoFam.setNnaSeguiMedico(Short.parseShort(seguimiento));
+            tempInfoFam.setNnaSeguiMedico(Short.parseShort(seguimiento));
         }
         if (operacion != null && !operacion.equals("")) {
-            infoFam.setNnaOperacion(Short.parseShort(operacion));
+            tempInfoFam.setNnaOperacion(Short.parseShort(operacion));
         }
         if (hiperactivo != null && !hiperactivo.equals("")) {
-            infoFam.setNnaHiperactivo(Short.parseShort(hiperactivo));
+            tempInfoFam.setNnaHiperactivo(Short.parseShort(hiperactivo));
         }
         if (especial != null && !especial.equals("")) {
-            infoFam.setNnaEspecial(Short.parseShort(especial));
+            tempInfoFam.setNnaEspecial(Short.parseShort(especial));
         }
         if (salud != null && !salud.equals("")) {
-            infoFam.setNnaEnfermo(Short.parseShort(salud));
+            tempInfoFam.setNnaEnfermo(Short.parseShort(salud));
         }
         if (mayor != null && !mayor.equals("")) {
-            infoFam.setNnaMayor(Short.parseShort(mayor));
+            tempInfoFam.setNnaMayor(Short.parseShort(mayor));
         }
         if (adolescente != null && !adolescente.equals("")) {
-            infoFam.setNnaAdolescente(Short.parseShort(adolescente));
+            tempInfoFam.setNnaAdolescente(Short.parseShort(adolescente));
         }
         if (hermanos != null && !hermanos.equals("")) {
-            infoFam.setNnaHermano(Short.parseShort(hermanos));
+            tempInfoFam.setNnaHermano(Short.parseShort(hermanos));
         }
 
         if (viajar != null && !viajar.equals("")) {
-            infoFam.setPuedeViajar(Short.parseShort(viajar));
+            tempInfoFam.setPuedeViajar(Short.parseShort(viajar));
         }
         if (edadMin != null && !edadMin.equals("")) {
-            infoFam.setExpectativaEdadMin(Short.parseShort(edadMin));
+            tempInfoFam.setExpectativaEdadMin(Short.parseShort(edadMin));
         }
         if (edadMax != null && !edadMax.equals("")) {
-            infoFam.setExpectativaEdadMax(Short.parseShort(edadMax));
+            tempInfoFam.setExpectativaEdadMax(Short.parseShort(edadMax));
         }
         if (genero != null && !genero.equals("")) {
-            infoFam.setExpectativaGenero(genero);
+            tempInfoFam.setExpectativaGenero(genero);
         }
         if (numHijos != null && !numHijos.equals("")) {
-            infoFam.setnHijos(Short.parseShort(numHijos));
+            tempInfoFam.setnHijos(Short.parseShort(numHijos));
         }
         if (nivel != null && !nivel.equals("")) {
             char n = nivel.charAt(0);
-            infoFam.setNivelSocioeconomico(n);
+            tempInfoFam.setNivelSocioeconomico(n);
         }
 
-        ServicioMain.updateInfoFam(infoFam);
+        ServicioMain.updateInfoFam(tempInfoFam);
 
         String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
-                + "información de la familia con ID: " + infoFam.getFamilia().getIdfamilia();
+                + "información de la familia con ID: " + tempInfoFam.getFamilia().getIdfamilia();
         String Tipo_registro = "Personal";
 
         try {
@@ -2856,11 +3116,14 @@ public class main {
             ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
         } catch (Exception ex) {
         }
-
+        
+        //
+        session.setAttribute("infoFam_sesion", tempInfoFam);
+        //
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("infoFam", infoFam);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("infoFam", tempInfoFam);
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.addAttribute("volver", volver);
         return new ModelAndView("/Personal/familia/info_ant_nna", map);
     }
@@ -2961,7 +3224,10 @@ public class main {
             map.addAttribute("mensaje", mensaje);
             return new ModelAndView("login", map);
         }
-
+            //
+                ExpedienteFamilia tempExpFam = new ExpedienteFamilia();
+                tempExpFam = (ExpedienteFamilia) session.getAttribute("expediente_sesion");
+            //
         if (genNumExp != null && !genNumExp.equals("")) {
 
             String ID = "";
@@ -2970,6 +3236,7 @@ public class main {
             //Luego debo generar un nuevo ID
             ArrayList<String> allExpedientes = new ArrayList();
             allExpedientes = ServicioPersonal.listaNumExpActuales();
+            
             if (!allExpedientes.isEmpty()) {
                 int numElem = allExpedientes.size();
                 int cont = 0;
@@ -3004,10 +3271,11 @@ public class main {
                 ID = "0001-" + year + "-MIMP/DGA-S";
             }
 
-            expediente.setNumeroExpediente(ID);
-            ServicioMain.updateExpFam(expediente);
+            
+            tempExpFam.setNumeroExpediente(ID);
+            ServicioMain.updateExpFam(tempExpFam);
             String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
-                    + "información de la familia con ID: " + expediente.getFamilia().getIdfamilia();
+                    + "información de la familia con ID: " + tempExpFam.getFamilia().getIdfamilia();
             String Tipo_registro = "Personal";
 
             try {
@@ -3017,9 +3285,12 @@ public class main {
             } catch (Exception ex) {
             }
 
+            //
+            session.setAttribute("expediente_sesion", tempExpFam);
+            //
             map.put("df", df);
-            map.put("estado", etapaOrigen);
-            map.put("expediente", expediente);
+            map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+            map.put("expediente", tempExpFam);
             map.put("listaUA", ServicioPersonal.ListaUa());
             map.put("listaEntidad", ServicioPersonal.ListaEntidades());
             map.addAttribute("volver", volver);
@@ -3030,42 +3301,42 @@ public class main {
         Entidad tempEnt = ServicioPersonal.getEntidad(entAsoc);
 
         //expediente.setNumero(numero);
-        expediente.setHtFicha(htFicha);
-        expediente.setnFicha(nFicha);
+        tempExpFam.setHtFicha(htFicha);
+        tempExpFam.setnFicha(nFicha);
         if (fechaIngresoFicha != null && !fechaIngresoFicha.equals("")) {
-            expediente.setFechaIngresoFicha(df.stringToDate(fechaIngresoFicha));
+            tempExpFam.setFechaIngresoFicha(df.stringToDate(fechaIngresoFicha));
         }
         if (fechaIngresoFicha == null || fechaIngresoFicha.equals("")) {
-            expediente.setFechaIngresoDga(null);
+            tempExpFam.setFechaIngresoDga(null);
         }
-        expediente.setHt(ht);
-        expediente.setNumeroExpediente(numeroExp);
+        tempExpFam.setHt(ht);
+        tempExpFam.setNumeroExpediente(numeroExp);
         if (fechaIngreso != null && !fechaIngreso.equals("")) {
-            expediente.setFechaIngresoDga(df.stringToDate(fechaIngreso));
+            tempExpFam.setFechaIngresoDga(df.stringToDate(fechaIngreso));
         } else if (fechaIngreso == null || fechaIngreso.equals("")) {
-            expediente.setFechaIngresoDga(null);
+            tempExpFam.setFechaIngresoDga(null);
         }
         if (tupa != null && !tupa.equals("")) {
-            expediente.setTupa(df.stringToDate(tupa));
+            tempExpFam.setTupa(df.stringToDate(tupa));
         } else if (tupa == null || tupa.equals("")) {
-            expediente.setTupa(null);
+            tempExpFam.setTupa(null);
         }
 
-        expediente.setNacionalidad(nacionalidad);
+        tempExpFam.setNacionalidad(nacionalidad);
         //expediente.setRnsa(Short.parseShort(rnsa));
         //expediente.setRnaa(Short.parseShort(rnaa));
 
-        expediente.setTipoFamilia(tipoFamilia);
-        expediente.setTipoListaEspera(tipoEspera);
+        tempExpFam.setTipoFamilia(tipoFamilia);
+        tempExpFam.setTipoListaEspera(tipoEspera);
 
-        expediente.setUnidad(tempUa);
-        expediente.getFamilia().setEntidad(tempEnt);
+        tempExpFam.setUnidad(tempUa);
+        tempExpFam.getFamilia().setEntidad(tempEnt);
 
-        ServicioMain.updateExpFam(expediente);
-        ServicioMain.updateFam(expediente.getFamilia());
+        ServicioMain.updateExpFam(tempExpFam);
+        ServicioMain.updateFam(tempExpFam.getFamilia());
 
         String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
-                + "información de la familia con ID: " + expediente.getFamilia().getIdfamilia();
+                + "información de la familia con ID: " + tempExpFam.getFamilia().getIdfamilia();
         String Tipo_registro = "Personal";
 
         try {
@@ -3075,9 +3346,12 @@ public class main {
         } catch (Exception ex) {
         }
 
+        //
+            session.setAttribute("expediente_sesion", tempExpFam);
+        //
         map.put("df", df);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", tempExpFam);
         map.put("listaUA", ServicioPersonal.ListaUa());
         map.put("listaEntidad", ServicioPersonal.ListaEntidades());
         map.addAttribute("volver", volver);
@@ -3203,34 +3477,45 @@ public class main {
             return new ModelAndView("login", map);
         }
 
+        //
+        Adoptante tempEl = new Adoptante();
+        Adoptante tempElla = new Adoptante();
+        InfoFamilia tempInfoFam = new InfoFamilia();
+        ExpedienteFamilia tempExpFam = new ExpedienteFamilia();
+        
+        tempEl = (Adoptante) session.getAttribute("el_sesion");
+        tempElla = (Adoptante) session.getAttribute("ella_sesion");
+        tempInfoFam = (InfoFamilia) session.getAttribute("infoFam_sesion");
+        tempExpFam = (ExpedienteFamilia) session.getAttribute("expediente_sesion");
+        //
         if (adoptante != null && adoptante.equals("el")) {
-            El.setNombre(nombre);
-            El.setApellidoP(apellidoP);
-            El.setApellidoM(apellidoM);
+            tempEl.setNombre(nombre);
+            tempEl.setApellidoP(apellidoP);
+            tempEl.setApellidoM(apellidoM);
             if (fechaNac != null && !fechaNac.equals("")) {
-                El.setFechaNac(df.stringToDate(fechaNac));
+                tempEl.setFechaNac(df.stringToDate(fechaNac));
             }
             if (fechaNac == null || fechaNac.equals("")) {
-                El.setFechaNac(null);
+                tempEl.setFechaNac(null);
             }
-            El.setLugarNac(lugarNac);
-            El.setDepaNac(depNac);
-            El.setPaisNac(paisNac);
+            tempEl.setLugarNac(lugarNac);
+            tempEl.setDepaNac(depNac);
+            tempEl.setPaisNac(paisNac);
             if (doc != null && !doc.equals("")) {
                 char d = doc.charAt(0);
-                El.setTipoDoc(d);
+                tempEl.setTipoDoc(d);
             }
-            El.setNDoc(numDoc);
-            El.setPasaporte(pasaporte);
-            El.setCelular(numCel);
-            El.setCorreo(correo);
-            infoFam.setEstadoCivil(estadoCivil);
-            if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")) {
-                infoFam.setFechaMatrimonio(df.stringToDate(fechaMat));
+            tempEl.setNDoc(numDoc);
+            tempEl.setPasaporte(pasaporte);
+            tempEl.setCelular(numCel);
+            tempEl.setCorreo(correo);
+            tempInfoFam.setEstadoCivil(estadoCivil);
+            if (tempInfoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")) {
+                tempInfoFam.setFechaMatrimonio(df.stringToDate(fechaMat));
             } else if (fechaMat == null || fechaMat.equals("")) {
-                infoFam.setFechaMatrimonio(null);
+                tempInfoFam.setFechaMatrimonio(null);
             }
-            ServicioMain.updateInfoFam(infoFam);
+            ServicioMain.updateInfoFam(tempInfoFam);
 //            El.setNivelInstruccion(nivelInstruccion);
 //            if (culminoNivel != null && !culminoNivel.equals("")) {
 //                El.setCulminoNivel(Short.parseShort(culminoNivel));
@@ -3296,22 +3581,22 @@ public class main {
 //            }
 //            El.setSaludActual(estadoActual);
 
-            ServicioMain.updateAdoptante(El);
-            if ((El.getApellidoP() != null && !El.getApellidoP().equals("")) 
-                 && (Ella.getApellidoP() != null && !Ella.getApellidoP().equals(""))
-                 && expediente != null    ) {
-                expediente.setExpediente(El.getApellidoP() + " - " + Ella.getApellidoP());
-            } else if (El.getApellidoP() != null && !El.getApellidoP().equals("")
-                  && expediente != null   ) {
-                expediente.setExpediente(El.getApellidoP());
-            } else if (Ella.getApellidoP() != null && !Ella.getApellidoP().equals("")
-                  && expediente != null   ) {
-                expediente.setExpediente(Ella.getApellidoP());
+            ServicioMain.updateAdoptante(tempEl);
+            if ((tempEl.getApellidoP() != null && !tempEl.getApellidoP().equals("")) 
+                 && (tempElla.getApellidoP() != null && !tempElla.getApellidoP().equals(""))
+                 && tempExpFam != null    ) {
+                tempExpFam.setExpediente(tempEl.getApellidoP() + " - " + tempElla.getApellidoP());
+            } else if (tempEl.getApellidoP() != null && !tempEl.getApellidoP().equals("")
+                  && tempExpFam != null   ) {
+                tempExpFam.setExpediente(tempEl.getApellidoP());
+            } else if (tempElla.getApellidoP() != null && !tempElla.getApellidoP().equals("")
+                  && tempExpFam != null   ) {
+                tempExpFam.setExpediente(tempElla.getApellidoP());
             }
-            if(expediente != null && expediente.getIdexpedienteFamilia() != 0) servicioEtapa.updateExpedienteFamilia(expediente);
+            if(tempExpFam != null && tempExpFam.getIdexpedienteFamilia() != 0) servicioEtapa.updateExpedienteFamilia(tempExpFam);
 
             String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
-                    + "información del adoptante con ID: " + El.getIdadoptante();
+                    + "información del adoptante con ID: " + tempEl.getIdadoptante();
             String Tipo_registro = "Personal";
 
             try {
@@ -3321,42 +3606,47 @@ public class main {
             } catch (Exception ex) {
             }
 
+            session.setAttribute("el_sesion", tempEl);
+            session.setAttribute("ella_sesion", tempElla);
+            session.setAttribute("expediente_sesion", tempExpFam);
+            session.setAttribute("infoFam_sesion", tempInfoFam);
+            
             map.put("df", df);
-            map.put("estado", etapaOrigen);
-            map.put("infoFam", infoFam);
-            map.put("expediente", expediente);
+            map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+            map.put("infoFam", tempInfoFam);
+            map.put("expediente", tempExpFam);
             map.addAttribute("volver", volver);
-            map.put("El", El);
+            map.put("El", tempEl);
             return new ModelAndView("/Personal/familia/info_el", map);
         } else if (adoptante != null) {
 
-            Ella.setNombre(nombre);
-            Ella.setApellidoP(apellidoP);
-            Ella.setApellidoM(apellidoM);
+            tempElla.setNombre(nombre);
+            tempElla.setApellidoP(apellidoP);
+            tempElla.setApellidoM(apellidoM);
             if (fechaNac != null && !fechaNac.equals("")) {
-                Ella.setFechaNac(df.stringToDate(fechaNac));
+                tempElla.setFechaNac(df.stringToDate(fechaNac));
             }
             if (fechaNac == null || fechaNac.equals("")) {
-                Ella.setFechaNac(null);
+                tempElla.setFechaNac(null);
             }
-            Ella.setLugarNac(lugarNac);
-            Ella.setDepaNac(depNac);
-            Ella.setPaisNac(paisNac);
+            tempElla.setLugarNac(lugarNac);
+            tempElla.setDepaNac(depNac);
+            tempElla.setPaisNac(paisNac);
             if (doc != null && !doc.equals("")) {
                 char d = doc.charAt(0);
-                Ella.setTipoDoc(d);
+                tempElla.setTipoDoc(d);
             }
-            Ella.setNDoc(numDoc);
-            Ella.setPasaporte(pasaporte);
-            Ella.setCelular(numCel);
-            Ella.setCorreo(correo);
-            infoFam.setEstadoCivil(estadoCivil);
-            if (infoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")) {
-                infoFam.setFechaMatrimonio(df.stringToDate(fechaMat));
+            tempElla.setNDoc(numDoc);
+            tempElla.setPasaporte(pasaporte);
+            tempElla.setCelular(numCel);
+            tempElla.setCorreo(correo);
+            tempInfoFam.setEstadoCivil(estadoCivil);
+            if (tempInfoFam.getEstadoCivil().equals("casados") && fechaMat != null && !fechaMat.equals("")) {
+                tempInfoFam.setFechaMatrimonio(df.stringToDate(fechaMat));
             } else if (fechaMat == null || fechaMat.equals("")) {
-                infoFam.setFechaMatrimonio(null);
+                tempInfoFam.setFechaMatrimonio(null);
             }
-            ServicioMain.updateInfoFam(infoFam);
+            ServicioMain.updateInfoFam(tempInfoFam);
 //            Ella.setNivelInstruccion(nivelInstruccion);
 //            if (culminoNivel != null && !culminoNivel.equals("")) {
 //                Ella.setCulminoNivel(Short.parseShort(culminoNivel));
@@ -3422,22 +3712,22 @@ public class main {
 //            }
 //            Ella.setSaludActual(estadoActual);
 
-            ServicioMain.updateAdoptante(Ella);
-            if ((El.getApellidoP() != null && !El.getApellidoP().equals("")) 
-                 && (Ella.getApellidoP() != null && !Ella.getApellidoP().equals(""))
-                 && expediente != null   ) {
-                expediente.setExpediente(El.getApellidoP() + " - " + Ella.getApellidoP());
-            } else if (El.getApellidoP() != null && !El.getApellidoP().equals("")
-                 && expediente != null   ) {
-                expediente.setExpediente(El.getApellidoP());
-            } else if (Ella.getApellidoP() != null && !Ella.getApellidoP().equals("")
-                 && expediente != null   ) {
-                expediente.setExpediente(Ella.getApellidoP());
+            ServicioMain.updateAdoptante(tempElla);
+            if ((tempEl.getApellidoP() != null && !tempEl.getApellidoP().equals("")) 
+                 && (tempElla.getApellidoP() != null && !tempElla.getApellidoP().equals(""))
+                 && tempExpFam != null   ) {
+                tempExpFam.setExpediente(tempEl.getApellidoP() + " - " + tempElla.getApellidoP());
+            } else if (tempEl.getApellidoP() != null && !tempEl.getApellidoP().equals("")
+                 && tempExpFam != null   ) {
+                tempExpFam.setExpediente(tempEl.getApellidoP());
+            } else if (tempElla.getApellidoP() != null && !tempElla.getApellidoP().equals("")
+                 && tempExpFam != null   ) {
+                tempExpFam.setExpediente(tempElla.getApellidoP());
             }
-            if(expediente != null && expediente.getIdexpedienteFamilia() != 0) servicioEtapa.updateExpedienteFamilia(expediente);
+            if(tempExpFam != null && tempExpFam.getIdexpedienteFamilia() != 0) servicioEtapa.updateExpedienteFamilia(tempExpFam);
 
             String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
-                    + "información del adoptante con ID: " + Ella.getIdadoptante();
+                    + "información del adoptante con ID: " + tempElla.getIdadoptante();
             String Tipo_registro = "Personal";
 
             try {
@@ -3446,20 +3736,25 @@ public class main {
                 ServicioPersonal.InsertLog(usuario, Tipo_registro, Numero_registro, mensaje_log);
             } catch (Exception ex) {
             }
+            session.setAttribute("el_sesion", tempEl);
+            session.setAttribute("ella_sesion", tempElla);
+            session.setAttribute("expediente_sesion", tempExpFam);
+            session.setAttribute("infoFam_sesion", tempInfoFam);
+            
             map.put("df", df);
-            map.put("estado", etapaOrigen);
-            map.put("infoFam", infoFam);
-            map.put("expediente", expediente);
-            map.put("Ella", Ella);
+            map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+            map.put("infoFam", tempInfoFam);
+            map.put("expediente", tempExpFam);
+            map.put("Ella", tempElla);
             map.addAttribute("volver", volver);
             return new ModelAndView("/Personal/familia/info_ella", map);
 
         } else {
             map.put("df", df);
-            map.put("estado", etapaOrigen);
-            map.put("infoFam", infoFam);
-            map.put("expediente", expediente);
-            map.put("Ella", Ella);
+            map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+            map.put("infoFam", tempInfoFam);
+            map.put("expediente", tempExpFam);
+            map.put("Ella", tempElla);
             map.addAttribute("volver", volver);
             return new ModelAndView("/Personal/familia/info_ella", map);
         }
@@ -3837,9 +4132,9 @@ public class main {
 
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
-        map.put("infoFam", infoFam);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        map.put("infoFam", session.getAttribute("infoFam_sesion"));
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.addAttribute("volver", volver);
 
         return new ModelAndView("/Personal/familia/info_user_pass", map);
@@ -3863,9 +4158,9 @@ public class main {
 
         //ArrayList<Familia> allFamilias = new ArrayList();
         //allFamilias = servicioEtapa.getListaFamilias();
-        map.put("infoFam", infoFam);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        map.put("infoFam", session.getAttribute("infoFam_sesion"));
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.addAttribute("volver", volver);
 
         map.put("expediente2", expediente2);
@@ -3904,6 +4199,10 @@ public class main {
 
         Personal usuario = (Personal) session.getAttribute("usuario");
         String mensaje = "";
+        //
+         InfoFamilia tempInfoFam = new InfoFamilia();
+         tempInfoFam = (InfoFamilia) session.getAttribute("infoFam_sesion");
+        //
         if (usuario == null) {
             mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
             map.addAttribute("mensaje", mensaje);
@@ -3911,8 +4210,8 @@ public class main {
         } else {
             if (newpass != null && !newpass.equals("")) {
                 newpass = DigestUtils.sha512Hex(newpass);
-                infoFam.getFamilia().setPass(newpass);
-                servicioEtapa.UpdateFamilia(infoFam.getFamilia());
+                tempInfoFam.getFamilia().setPass(newpass);
+                servicioEtapa.UpdateFamilia(tempInfoFam.getFamilia());
                 mensaje = "La contraseña se ha cambiado con exito.";
             } else {
 
@@ -3920,9 +4219,12 @@ public class main {
             }
         }
         String pagina = "/Personal/familia/info_user_pass";
-        map.put("infoFam", infoFam);
-        map.put("estado", etapaOrigen);
-        map.put("expediente", expediente);
+        //
+        session.setAttribute("infoFam_sesion", tempInfoFam);
+        //
+        map.put("infoFam", tempInfoFam);
+        map.put("estado", session.getAttribute("etapaOrigen_sesion"));
+        map.put("expediente", session.getAttribute("expediente_sesion"));
         map.addAttribute("mensaje", mensaje);
         map.addAttribute("volver", volver);
         return new ModelAndView(pagina, map);
