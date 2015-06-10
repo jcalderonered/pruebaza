@@ -115,7 +115,9 @@
                         <form role="form" action="${pageContext.servletContext.contextPath}/ActualizarAdoptante" method="post" name="formulario" ><!--onsubmit="return(validar());" --> 
                             <input hidden id="adoptante" name="adoptante" value="ella">
                             <input hidden id="volver" name="volver" value="${volver}">
-
+                            <input hidden id="volver" name="volver" value="${idFamilia}">
+                            <input hidden id="volver" name="volver" value="${estado}">
+                            
                             <c:if test="${estado != 'formativa'}">
                                 <br>
                                 <h1 align="center"><strong>Familia "${expediente.getExpediente()}" </strong></h1>
@@ -720,7 +722,7 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button ${Ella.getIdadoptante() == null || Ella.getIdadoptante() == 0 ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        <button ${Ella.getIdadoptante() == null || Ella.getIdadoptante() == 0 || estado == 'formativa' ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>
 
