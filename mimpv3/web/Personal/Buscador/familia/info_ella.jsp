@@ -720,7 +720,7 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button ${Ella.getIdadoptante() == null || Ella.getIdadoptante() == 0 ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        <button ${Ella.getIdadoptante() == null || Ella.getIdadoptante() == 0 || estado == 'formativa' ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>
 

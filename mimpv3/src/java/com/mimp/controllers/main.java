@@ -43,6 +43,9 @@ public class main {
     @Resource(name = "HiberMail")
     private HiberMail hibermail = new HiberMail();
 
+    //CAMBIO DEL 10/06/2015
+    @Resource(name = "HiberFamilia")
+    private HiberFamilia ServicioFamilia = new HiberFamilia();
     /* PARAMETROS A PASAR A FAMILIA DENTRO DE PERSONAL */
     String etapaOrigen;
     Adoptante El = new Adoptante();
@@ -863,6 +866,11 @@ public class main {
             listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(idFam);
             listaSesiones = ServicioMain.getListaSesionesPorFamilia(idFam);
             listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(idFam);
+            //CAMBIO DEL 10/06/2015 
+            //SE INICIALIZA EN NULL EL VALOR DEL EXPEDIENTE PORQUE EN PREPARACION NO SE TIENE UN EXPEDIENTE
+            expediente = null;
+            map.put("idFamilia", idFam);
+            
         } else if (estado.equals("evaluacion")) {
             Long idExp = Long.parseLong(idExpediente);
             System.out.print(estado);
@@ -1137,6 +1145,9 @@ public class main {
             listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(idFam);
             listaSesiones = ServicioMain.getListaSesionesPorFamilia(idFam);
             listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(idFam);
+            //CAMBIO DEL 10/06/2015 
+            //SE INICIALIZA EN NULL EL VALOR DEL EXPEDIENTE PORQUE EN PREPARACION NO SE TIENE UN EXPEDIENTE
+            expediente = null;
         } else if (estado.equals("evaluacion")) {
             Long idExp = Long.parseLong(idExpediente);
             System.out.print(estado);
@@ -3286,14 +3297,18 @@ public class main {
 //            El.setSaludActual(estadoActual);
 
             ServicioMain.updateAdoptante(El);
-            if ((El.getApellidoP() != null && !El.getApellidoP().equals("")) && (Ella.getApellidoP() != null && !Ella.getApellidoP().equals(""))) {
+            if ((El.getApellidoP() != null && !El.getApellidoP().equals("")) 
+                 && (Ella.getApellidoP() != null && !Ella.getApellidoP().equals(""))
+                 && expediente != null    ) {
                 expediente.setExpediente(El.getApellidoP() + " - " + Ella.getApellidoP());
-            } else if (El.getApellidoP() != null && !El.getApellidoP().equals("")) {
+            } else if (El.getApellidoP() != null && !El.getApellidoP().equals("")
+                  && expediente != null   ) {
                 expediente.setExpediente(El.getApellidoP());
-            } else if (Ella.getApellidoP() != null && !Ella.getApellidoP().equals("")) {
+            } else if (Ella.getApellidoP() != null && !Ella.getApellidoP().equals("")
+                  && expediente != null   ) {
                 expediente.setExpediente(Ella.getApellidoP());
             }
-            if(expediente.getIdexpedienteFamilia() != 0) servicioEtapa.updateExpedienteFamilia(expediente);
+            if(expediente != null && expediente.getIdexpedienteFamilia() != 0) servicioEtapa.updateExpedienteFamilia(expediente);
 
             String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
                     + "información del adoptante con ID: " + El.getIdadoptante();
@@ -3408,14 +3423,18 @@ public class main {
 //            Ella.setSaludActual(estadoActual);
 
             ServicioMain.updateAdoptante(Ella);
-            if ((El.getApellidoP() != null && !El.getApellidoP().equals("")) && (Ella.getApellidoP() != null && !Ella.getApellidoP().equals(""))) {
+            if ((El.getApellidoP() != null && !El.getApellidoP().equals("")) 
+                 && (Ella.getApellidoP() != null && !Ella.getApellidoP().equals(""))
+                 && expediente != null   ) {
                 expediente.setExpediente(El.getApellidoP() + " - " + Ella.getApellidoP());
-            } else if (El.getApellidoP() != null && !El.getApellidoP().equals("")) {
+            } else if (El.getApellidoP() != null && !El.getApellidoP().equals("")
+                 && expediente != null   ) {
                 expediente.setExpediente(El.getApellidoP());
-            } else if (Ella.getApellidoP() != null && !Ella.getApellidoP().equals("")) {
+            } else if (Ella.getApellidoP() != null && !Ella.getApellidoP().equals("")
+                 && expediente != null   ) {
                 expediente.setExpediente(Ella.getApellidoP());
             }
-            if(expediente.getIdexpedienteFamilia() != 0) servicioEtapa.updateExpedienteFamilia(expediente);
+            if(expediente != null && expediente.getIdexpedienteFamilia() != 0) servicioEtapa.updateExpedienteFamilia(expediente);
 
             String mensaje_log = "El usuario, " + usuario.getUser() + " con ID: " + usuario.getIdpersonal() + ". Editó la "
                     + "información del adoptante con ID: " + Ella.getIdadoptante();
@@ -5726,4 +5745,90 @@ public class main {
             return new ModelAndView("/Personal/Buscador_etapa/etapa_designacion/etapa_designacion", map);
         }
     }
+    
+    //CAMBIOS 10/06/2015--------------EN EVALUACION
+    
+//    @RequestMapping(value = "/IrVerMainFormativa", method = RequestMethod.POST)
+//    public ModelAndView IrVerMainFormativa(ModelMap map, HttpSession session,
+//            @RequestParam(value = "estado", required = false) String estado,
+//            @RequestParam(value = "idFamilia", required = false) String idFamilia,
+//            @RequestParam(value = "idExpediente", required = false) String idExpediente,
+//            @RequestParam(value = "volver", required = false) String volver
+//    ) {
+//        session.setAttribute("estado", estado);
+//        session.setAttribute("idFamilia", idFamilia);
+//        session.setAttribute("idExpediente", idExpediente);
+//        session.setAttribute("volver", volver);
+//
+//        return new ModelAndView("redirect:/IrVerMainFormativa", map);
+//    }
+//
+//    @RequestMapping(value = "/IrVerMainFormativa", method = RequestMethod.GET)
+//    public ModelAndView IrVerMainFormativa_GET(ModelMap map, HttpSession session) {
+//        String idFamilia = "";
+//        String idExpediente = "";
+//        String volver = "";
+//        String estado = "";
+//
+//        if (session.getAttribute("idFamilia") != null) {
+//            idFamilia = session.getAttribute("idFamilia").toString();
+//        }
+//        if (session.getAttribute("idExpediente") != null) {
+//            idExpediente = session.getAttribute("idExpediente").toString();
+//        }
+//        if (session.getAttribute("volver") != null) {
+//            volver = session.getAttribute("volver").toString();
+//        }
+//        if (session.getAttribute("estado") != null) {
+//            estado = session.getAttribute("estado").toString();
+//        }
+//
+//        Personal usuario = (Personal) session.getAttribute("usuario");
+//        if (usuario == null) {
+//            String mensaje = "La sesión ha finalizado. Favor identificarse nuevamente";
+//            map.addAttribute("mensaje", mensaje);
+//            return new ModelAndView("login", map);
+//        }
+//        /*LIMPIANDO LOS ANTIGUOS VALORES DE LOS ADOPTANTES */
+//        Adoptante EllaLocal = new Adoptante();
+//        Adoptante ElLocal = new Adoptante();
+//
+//        if (estado.equals("formativa")) {
+//            Long idFam = Long.parseLong(idFamilia);
+//            InfoFamilia infoFamLocal = new InfoFamilia();
+//                  infoFamLocal = ServicioMain.getInfoFamPorIdFamilia(idFam);
+//                  map.put("infoFam", infoFamLocal);
+//            for (Adoptante adop : infoFamLocal.getAdoptantes()) {
+//                if (adop.getSexo() == 'f') {
+//                    EllaLocal = adop;
+//                }
+//                if (adop.getSexo() == 'm') {
+//                    ElLocal = adop;
+//                }
+//            }
+//            ArrayList<Atencion> listaAtenciones = ServicioMain.getListaAtencionesPorFamilia(idFam);
+//            ArrayList<Sesion> listaSesiones = ServicioMain.getListaSesionesPorFamilia(idFam);
+//            ArrayList<AsistenciaFR> listaAsistenciaReuniones = ServicioMain.getListaAsistenciaFRPorFamilia(idFam);
+//            //CAMBIO DEL 10/06/2015 
+//            //SE INICIALIZA EN NULL EL VALOR DEL EXPEDIENTE PORQUE EN PREPARACION NO SE TIENE UN EXPEDIENTE            
+//            map.put("idFamilia", idFam);
+//            
+//        } 
+//        String etapaOrigen = estado;
+//
+//        map.put("df", df);
+//        map.put("estado", etapaOrigen);
+//        map.put("Ella", EllaLocal);
+//        map.addAttribute("volver", volver);
+//
+//        return new ModelAndView("/Personal/familia/info_ella", map);
+//    }
+    
+    
+    
+    
+    
+    
+    
+    
 }

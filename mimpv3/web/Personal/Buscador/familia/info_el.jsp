@@ -717,7 +717,7 @@
                                 <br>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button ${El.getIdadoptante() == null || El.getIdadoptante() == 0 ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
+                                        <button ${El.getIdadoptante() == null || El.getIdadoptante() == 0 || estado == 'formativa' ? 'disabled' : '' } type="submit" id="singlebutton" name="singlebutton" class="btn btn-default">Guardar cambios</button>
                                     </div>
                                 </div>
                             </fieldset>
