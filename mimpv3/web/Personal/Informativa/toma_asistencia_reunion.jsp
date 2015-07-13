@@ -387,12 +387,14 @@
                                                                     <input hidden name="turno" id="turno" value="${turno}"> 
                                                                     <input hidden name="idTaller" id="idTaller" value="${idTaller}"> 
                                                                     <input hidden name="historial" id="historial" value="${historial}">
+                                                                    <c:set var="token" value="0" scope="page" />
                                                                     <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
-
                                                                         <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                            <button ${AFR.getAsistencia() == 65 || AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
-                                                                        </c:if>      
-
+                                                                            <c:if test="${token == '0'}">
+                                                                                <button ${AFR.getAsistencia() == 65 || AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
+                                                                                <c:set var="token" value="1" scope="page" />   
+                                                                            </c:if>
+                                                                        </c:if>
                                                                     </c:forEach>   
                                                                 </form>
                                                             </td>
@@ -406,9 +408,13 @@
                                                                     <input hidden name="turno" id="turno" value="${turno}"> 
                                                                     <input hidden name="idTaller" id="idTaller" value="${idTaller}"> 
                                                                     <input hidden name="historial" id="historial" value="${historial}">
+                                                                    <c:set var="token" value="0" scope="page" />
                                                                     <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
                                                                         <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                            <button ${AFR.getInasJus() == 0 || AFR.getAsistencia() == 65 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
+                                                                            <c:if test="${token == '0'}">
+                                                                                <button ${AFR.getInasJus() == 0 || AFR.getAsistencia() == 65 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
+                                                                                <c:set var="token" value="1" scope="page" />   
+                                                                            </c:if> 
                                                                         </c:if>   
                                                                     </c:forEach>   
                                                                 </form>
@@ -448,9 +454,13 @@
                                                                     <input hidden name="turno" id="turno" value="${turno}"> 
                                                                     <input hidden name="idTaller" id="idTaller" value="${idTaller}"> 
                                                                     <input hidden name="historial" id="historial" value="${historial}">
+                                                                    <c:set var="token" value="0" scope="page" />
                                                                     <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
                                                                         <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                            <button ${AFR.getAsistencia() == 65 || AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
+                                                                            <c:if test="${token == '0'}">
+                                                                                <button ${AFR.getAsistencia() == 65 || AFR.getInasJus() == 0 ? 'disabled' : ''}  type="submit" class="btn btn-default">Asistencia</button>
+                                                                                <c:set var="token" value="1" scope="page" />   
+                                                                            </c:if> 
                                                                         </c:if>  
                                                                     </c:forEach>   
                                                                 </form>
@@ -465,9 +475,13 @@
                                                                     <input hidden name="turno" id="turno" value="${turno}"> 
                                                                     <input hidden name="idTaller" id="idTaller" value="${idTaller}"> 
                                                                     <input hidden name="historial" id="historial" value="${historial}">
+                                                                    <c:set var="token" value="0" scope="page" />
                                                                     <c:forEach var="AFR" items="${formulario.getFamilia().getAsistenciaFRs()}" varStatus="status">
                                                                         <c:if test="${AFR.getReunion().getIdreunion() == reunion.getIdreunion()}">
-                                                                            <button ${AFR.getInasJus() == 0 || AFR.getAsistencia() == 65 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
+                                                                            <c:if test="${token == '0'}">
+                                                                                <button ${AFR.getInasJus() == 0 || AFR.getAsistencia() == 65 ? 'disabled' : ''}  type="submit" class="btn btn-default">Justificado</button>
+                                                                                <c:set var="token" value="1" scope="page" />   
+                                                                            </c:if>   
                                                                         </c:if>   
                                                                     </c:forEach>   
                                                                 </form>
